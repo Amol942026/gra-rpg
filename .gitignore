@@ -1,0 +1,9 @@
+tools/
+external/
+dist/
+screenshots/
+*.zip
+benchmark.txt
+smoke-test.txt
+audio-settings.cfg
+audio/music-preview.wav
