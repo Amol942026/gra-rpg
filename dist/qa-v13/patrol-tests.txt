@@ -1,0 +1,14 @@
+PASS: new game has no world items or nearby loot tray entries
+PASS: starting equipment and backpack supplies are preserved
+PASS: ordinary gameplay begins patrols without creating starter loot
+PASS: player can still intentionally drop an inventory item
+PASS: a new expedition clears dropped items and starts empty again
+PASS: every species animates a real patrol leg while the hero is outside sight range
+PASS: patrolling monster retains mouse hover and HUD inspection
+PASS: every species animates a real patrol leg while the hero is outside sight range
+PASS: patrolling monster retains mouse hover and HUD inspection
+PASS: every species animates a real patrol leg while the hero is outside sight range
+PASS: patrolling monster retains mouse hover and HUD inspection
+PASS: every species animates a real patrol leg while the hero is outside sight range
+PASS: patrolling monster retains mouse hover and HUD inspection
+Checks: 13; failures: 0

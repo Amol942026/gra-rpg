@@ -1,0 +1,6 @@
+PASS: packaged executable SHA256 matches build
+PASS: 59 packaged assets match build
+PASS: version 0.16 and default fullscreen instructions included
+PASS: extracted game completed 180 frames in default fullscreen without any audio device
+ZIP bytes: 4700167
+Extraction: C:\Users\Amadeusz\Desktop\Gra RPG\dist\package-v16-check-a78d32e7627040048750e882222d1e72\Emberfall

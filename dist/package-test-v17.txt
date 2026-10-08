@@ -1,0 +1,6 @@
+Version: 0.17
+ZIP bytes: 4703749
+Matched SHA256: 60 files
+Extracted directory: C:\Users\Amadeusz\Desktop\Gra RPG\dist\package-v17-check-41e8777d6642429b9bc187c85709f67f\Emberfall
+Exit code: 0
+Checks: 82; failures: 0

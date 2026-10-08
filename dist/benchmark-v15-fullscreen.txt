@@ -1,0 +1,8 @@
+Frames: 900
+Window: 1920x1080
+Fullscreen: yes
+Native canvas: 1728x1080
+Average FPS: 59.9247
+CPU frame mean (ms): 4.68414
+CPU frame p95 (ms): 5.2701
+Frame p95 (ms): 16.8341

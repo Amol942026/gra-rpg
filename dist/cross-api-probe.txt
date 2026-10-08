@@ -1,0 +1,4 @@
+Mode=0 FPS=47.5821 p95=21.8596 max=22.2907 stage=0.0653269 stage=0.0138546 stage=0.174049 stage=0.132074 reason=Occluded: visible=1 iconic=0 foreground=0 rect=0,0,1920,1080
+Mode=1 FPS=43.6138 p95=23.6245 max=24.0127 stage=0.0297244 stage=0.953289 stage=0.140638 stage=0.141147 reason=Occluded: visible=1 iconic=0 foreground=0 rect=0,0,1920,1080
+Mode=2 FPS=35.7965 p95=28.5003 max=28.9408 stage=0.0722 stage=0.0124118 stage=0.115664 stage=0.108442 reason=Occluded: visible=1 iconic=0 foreground=0 rect=0,0,1920,1080
+Mode=3 FPS=43.5196 p95=23.7522 max=24.177 stage=0.0304857 stage=0.98441 stage=0.14458 stage=0.147276 reason=Occluded: visible=1 iconic=0 foreground=0 rect=0,0,1920,1080

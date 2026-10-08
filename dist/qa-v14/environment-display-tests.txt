@@ -1,0 +1,48 @@
+PASS: tree root and ground shadow remain anchored
+PASS: tree crown changes position with wind
+PASS: trees have spatially staggered sway
+PASS: crown bends more than lower trunk
+Sway scale=0.8, t=0, silhouette mismatches=27/4680
+PASS: animated GPU silhouette and mouse picking agree
+Sway scale=0.8, t=1.1, silhouette mismatches=24/4680
+PASS: animated GPU silhouette and mouse picking agree
+PASS: wind changes the rendered tree across frames
+Sway scale=0.8, t=2.4, silhouette mismatches=24/4680
+PASS: animated GPU silhouette and mouse picking agree
+PASS: wind changes the rendered tree across frames
+Sway scale=0.8, t=4.7, silhouette mismatches=21/4680
+PASS: animated GPU silhouette and mouse picking agree
+PASS: wind changes the rendered tree across frames
+Sway scale=1.4, t=0, silhouette mismatches=87/14280
+PASS: animated GPU silhouette and mouse picking agree
+PASS: wind changes the rendered tree across frames
+Sway scale=1.4, t=1.1, silhouette mismatches=84/14280
+PASS: animated GPU silhouette and mouse picking agree
+PASS: wind changes the rendered tree across frames
+Sway scale=1.4, t=2.4, silhouette mismatches=83/14280
+PASS: animated GPU silhouette and mouse picking agree
+PASS: wind changes the rendered tree across frames
+Sway scale=1.4, t=4.7, silhouette mismatches=85/14280
+PASS: animated GPU silhouette and mouse picking agree
+PASS: wind changes the rendered tree across frames
+Water changed pixels=5634/38220, land changes=38
+PASS: wind visibly animates the rendered water surface
+PASS: water animation does not move or paint over land
+PASS: swaying canopy retains hover and HUD information
+PASS: swaying canopy retains hover and HUD information
+PASS: swaying canopy retains hover and HUD information
+PASS: F11 action is available even in welcome/pause
+PASS: borderless fullscreen covers the monitor at its native resolution
+PASS: display transition cancels item and volume drags
+PASS: display transition preserves open menu and pause state
+PASS: fullscreen viewport preserves aspect ratio within the monitor
+PASS: all 25 inventory cells map correctly in fullscreen
+PASS: fullscreen label fits the always-visible HUD button
+PASS: HUD button returns to windowed mode
+PASS: window dimensions are restored after leaving fullscreen
+PASS: window position is restored
+PASS: ordinary world clicks do not toggle fullscreen
+PASS: fullscreen switches preserve mandatory level allocation and game state
+PASS: maximized window test fixture is active
+PASS: fullscreen returns a previously maximized window to its maximized state
+Checks: 38; failures: 0

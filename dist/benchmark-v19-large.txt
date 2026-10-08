@@ -1,0 +1,23 @@
+Frames: 900
+Window: 1920x1080
+Fullscreen: no
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: DXGI flip / V-sync
+DXGI synchronized presents: 0
+Occluded presentations: 900
+Suppressed native swaps: 900
+Actual presentation interval: 1
+Presentation fallback: 
+Audio device opened: no
+Native canvas: 1688x1055
+Average FPS: 59.9856
+CPU frame mean (ms): 7.82775
+EndDrawing mean (ms): 0.0403175
+Presentation mean (ms): 8.80242
+CPU frame p95 (ms): 8.6293
+CPU frame p99 (ms): 9.5584
+Frame p95 (ms): 17.2126
+Frame p99 (ms): 17.3921
+Frame max (ms): 34.0661
+Frames over 25 ms: 1

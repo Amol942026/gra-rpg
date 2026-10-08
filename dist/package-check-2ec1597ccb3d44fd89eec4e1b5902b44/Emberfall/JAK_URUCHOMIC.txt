@@ -1,0 +1,23 @@
+﻿EMBERFALL — Echa zapomnianych ruin, wersja 0.4
+Gra dla Windows x64. Nie wymaga instalacji ani dodatkowego silnika.
+
+URUCHOMIENIE
+1. Kliknij ZIP prawym przyciskiem i wybierz „Wyodrębnij wszystkie”.
+2. Otwórz wypakowany folder Emberfall.
+3. Uruchom Uruchom.bat lub Emberfall.exe.
+4. Naciśnij Enter albo kliknij „Wyrusz”.
+Folder assets musi pozostać obok pliku Emberfall.exe.
+
+STEROWANIE
+WSAD — chodzenie; kombinacje klawiszy pozwalają iść ukośnie.
+Shift + WSAD — przeturlanie w wybranym kierunku.
+Sam Shift — przeturlanie w ostatnim kierunku ustawienia.
+Spacja — atak. LPM na wrogu — wybór celu i automatyczny atak w zasięgu.
+R — fala żaru (20 many).
+1 / 2 — mikstura zdrowia / many.
+LPM i przeciągnięcie — przenoszenie łupu z ziemi do plecaka lub na ekwipunek.
+PPM na miksturze — wypicie.
+F1 — pomoc. Esc — pauza. Enter po śmierci — nowa wyprawa.
+
+Gra nie ma jeszcze zapisu postępu; zamknięcie kończy bieżącą wyprawę.
+Licencje bibliotek i czcionek: LICENSES.md oraz pliki w assets.

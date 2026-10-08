@@ -1,0 +1,56 @@
+PASS: audio output device initialized
+PASS: all 21 effects and voice banks loaded
+PASS: streaming score loaded, duration over 100 seconds
+PASS: step
+PASS: swing
+PASS: slime-hit
+PASS: wolf-hit
+PASS: bone-hit
+PASS: stone-hit
+PASS: enemy-fall
+PASS: hurt
+PASS: death
+PASS: roll
+PASS: dodge
+PASS: spell
+PASS: potion
+PASS: pickup
+PASS: equip
+PASS: drop
+PASS: level-up
+PASS: victory
+PASS: enemy-attack
+PASS: ui
+PASS: reject
+PASS: mixer produced real nonzero audio samples
+PASS: mixed score and effects stay below digital clipping
+PASS: mute drops events instead of replaying them later
+PASS: mute fades music to silence
+PASS: effects slider at zero mutes effects
+PASS: paused world cannot leak queued combat sounds
+PASS: focus loss suspends music
+PASS: focus regain resumes existing music stream
+PASS: score loops across its actual stream boundary
+PASS: maximum-volume simultaneous effects remain below clipping
+PASS: music button immediately silences only the music channel
+PASS: combat sound still plays with music disabled
+PASS: effects button leaves the music playing
+PASS: disabled effects discard queued events without replaying later
+PASS: both HUD switches off produce actual silence including existing effects
+PASS: channel switches preserve the user's volume levels
+Mixed samples: 542430
+Nonzero samples: 0
+Peak: 0.959925
+PASS: volume and mute settings round trip
+PASS: independent channel states survive settings round trip
+PASS: old three-field settings load without losing volumes or master mute
+PASS: music HUD click works immediately without opening or pausing a menu
+PASS: audio controls cannot select or drop onto terrain behind HUD
+PASS: effects HUD click is independent of the music switch
+PASS: music button after global mute restores only music
+PASS: effects button after global mute restores only effects
+PASS: HUD switches also work while paused without resuming gameplay
+PASS: F2 settings remain available from the HUD
+PASS: settings button can close its own panel
+PASS: pointer outside audio buttons is not consumed
+Checks: 52; failures: 0

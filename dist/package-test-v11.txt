@@ -1,0 +1,5 @@
+Executable SHA256 matches
+Assets matched: 59
+Version and new controls present in packaged instructions
+Extracted game: Checks: 41; failures: 0
+ZIP size: 4661953 bytes

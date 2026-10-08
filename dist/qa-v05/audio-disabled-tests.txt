@@ -1,0 +1,3 @@
+PASS: audio device initialization can be skipped
+PASS: silent fallback still moves and drains sound events
+Checks: 2; failures: 0

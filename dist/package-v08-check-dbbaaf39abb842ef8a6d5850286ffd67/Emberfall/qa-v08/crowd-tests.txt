@@ -1,0 +1,13 @@
+PASS: test pointer is over a monster
+PASS: test pointer is over a monster
+PASS: clicks do not trigger attacks or turn the player
+PASS: moving the pointer away leaves no selected enemy in HUD
+PASS: one Space-equivalent press hits every nearby monster
+PASS: one Space-equivalent press hits every nearby monster
+PASS: one Space-equivalent press hits every nearby monster
+PASS: one Space-equivalent press hits every nearby monster
+PASS: one Space-equivalent press hits every nearby monster
+PASS: one Space-equivalent press hits every nearby monster
+PASS: distant boss is outside the attack area
+PASS: all 14 chasing enemies remain separated during 360 frames
+Checks: 12; failures: 0

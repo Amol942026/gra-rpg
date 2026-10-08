@@ -1,0 +1,19 @@
+Renderer: AMD Radeon (TM) Graphics; compositor=1
+WGL_NV_DX_interop=1
+WGL_NV_DX_interop2=1
+WGL_OML_sync_control=0
+WGL_EXT_swap_control=1
+DX interop entry point=1
+Requested timer resolution=1 ms
+Mode=0; exclusive=0; requested swap=0; actual swap=0
+FPS=60.032; p95=17.3166 ms; p99=17.446 ms; max=17.4891 ms
+Mode=1; exclusive=0; requested swap=1; actual swap=1
+FPS=32.7956; p95=31.3811 ms; p99=31.4496 ms; max=31.7189 ms
+Mode=2; exclusive=0; requested swap=1; actual swap=1
+FPS=30.8211; p95=33.6083 ms; p99=33.7621 ms; max=34.6983 ms
+Mode=3; exclusive=0; requested swap=1; actual swap=1
+FPS=30.0249; p95=34.0827 ms; p99=34.2938 ms; max=34.4954 ms
+Mode=4; exclusive=1; requested swap=1; actual swap=1
+FPS=32.6621; p95=31.4441 ms; p99=31.6656 ms; max=31.911 ms
+Mode=5; exclusive=0; requested swap=1; actual swap=1
+FPS=32.7816; p95=31.1556 ms; p99=31.3399 ms; max=31.5741 ms

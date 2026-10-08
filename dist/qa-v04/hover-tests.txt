@@ -1,0 +1,25 @@
+PASS: exact isometric tile under cursor
+PASS: tile inside edge
+PASS: adjacent tile across edge
+PASS: HUD, minimap and outside viewport do not select terrain
+PASS: HUD, minimap and outside viewport do not select terrain
+PASS: HUD, minimap and outside viewport do not select terrain
+PASS: HUD, minimap and outside viewport do not select terrain
+PASS: HUD, minimap and outside viewport do not select terrain
+PASS: HUD, minimap and outside viewport do not select terrain
+PASS: pause disables world hover
+PASS: welcome disables world hover
+PASS: tree silhouette is selected
+PASS: transparent sprite corner is not selected
+PASS: tree shadow is not treated as solid object
+PASS: rock, bush and column use their opaque masks
+PASS: rock, bush and column use their opaque masks
+PASS: rock, bush and column use their opaque masks
+PASS: foreground tree blocks selection of enemy behind it
+PASS: foreground enemy wins over background tree and keeps stable ID
+PASS: dead enemy cannot be hovered
+PASS: ground loot is highlighted
+PASS: loot drag uses same target as hover
+PASS: occluded loot is not selected through tree
+PASS: player blocks enemy silhouette behind them
+PASS: 24 hover checks

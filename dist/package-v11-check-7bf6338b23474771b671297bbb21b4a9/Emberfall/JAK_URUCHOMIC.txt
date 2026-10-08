@@ -1,0 +1,31 @@
+﻿EMBERFALL - Echa zapomnianych ruin, wersja 0.11
+Gra dla Windows x64. Nie wymaga instalacji ani dodatkowych narzedzi.
+
+URUCHOMIENIE
+1. Kliknij ZIP prawym przyciskiem i wybierz Wyodrebnij wszystkie.
+2. Otworz wypakowany folder Emberfall.
+3. Uruchom Uruchom.bat lub Emberfall.exe, potem nacisnij Enter.
+Folder assets musi pozostac obok pliku Emberfall.exe.
+
+STEROWANIE
+WSAD - chodzenie; kombinacje klawiszy pozwalaja isc ukosnie.
+Przytrzymany Shift + WSAD - bieg o 50% szybszy od chodu.
+Spacja + WSAD - przeturlanie; sama Spacja - unik w kierunku ustawienia.
+LPM na mapie - jeden zamach na klikniecie; trafia wszystkich w promieniu 2,1 pola.
+Przytrzymanie LPM nie powtarza ataku. Nie ma wybierania celu kliknieciem.
+Potwory odpychaja sie i odbijaja od siebie przy zderzeniu.
+Najazd na potwora lub obiekt - informacje w prawym panelu POD KURSOREM.
+PPM na mapie - wybrany czar w strone kursora (Kula ognia: 10 many). 1 / 2 - mikstura zdrowia / many.
+C lub klikniecie kafelka czaru - ksiega i wybor czaru. P - statystyki bohatera.
+Po awansie swiat pauzuje: rozdaj 5 punktow przyciskami + / - i zatwierdz.
+Start: 100 many. Regeneracja: 1 punkt co 5 sekund. Wytrzymalosc +10 HP,
+statystyka Mana +5 maksymalnej many za punkt.
+LPM i przeciagniecie - przenoszenie lupu do plecaka lub na ekwipunek.
+PPM na miksturze w panelu ekwipunku lub lupu - wypicie. F1 - pomoc. Esc - pauza.
+F2 - glosnosc muzyki i efektow. M - wyciszenie / wlaczenie dzwieku.
+MUZYKA / EFEKTY w prawym dolnym rogu HUD - osobne wlaczenie / wylaczenie.
+Przyciski sa stale widoczne, takze podczas pauzy. Zachowuja glosnosc suwakow.
+Enter po smierci - nowa wyprawa.
+
+Gra nie zapisuje postepu wyprawy. Ustawienia dzwieku zapisuja sie przy zamykaniu.
+Licencje: LICENSES.md i pliki w assets.

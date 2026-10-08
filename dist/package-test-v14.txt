@@ -1,0 +1,6 @@
+PASS: packaged executable SHA256 matches build
+PASS: 59 packaged assets match build
+PASS: version 0.14 and fullscreen controls included in instructions
+PASS: extracted game animation/fullscreen QA: Checks: 38; failures: 0
+ZIP bytes: 4688969
+Extraction: C:\Users\Amadeusz\Desktop\Gra RPG\dist\package-v14-check-171d07c7eac44560841dbbbea985b57d\Emberfall

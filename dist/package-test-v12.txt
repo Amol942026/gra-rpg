@@ -1,0 +1,6 @@
+Executable SHA256 matches
+Assets matched: 59
+Version and corpse/C/K instructions confirmed
+Extracted corpse QA: Checks: 40; failures: 0
+Extracted controls QA: Checks: 41; failures: 0
+ZIP size: 4673158 bytes

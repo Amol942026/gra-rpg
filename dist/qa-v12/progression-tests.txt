@@ -1,0 +1,22 @@
+PASS: HUD stats button opens the level-one character sheet
+PASS: character sheet blocks world interactions
+PASS: character sheet can close when no points are pending
+PASS: real kill and XP automatically open five-point level menu
+PASS: confirm cannot bypass unspent level points
+PASS: plus button changes only the allocation preview
+PASS: minus button returns a pending point
+PASS: minus cannot remove points from earlier levels
+PASS: five points are the exact spending limit
+PASS: mandatory menu freezes actual simulation
+PASS: confirm button applies all points and ends mandatory pause
+PASS: HUD values match the committed allocation
+PASS: clicking spell tile opens selection without casting
+PASS: spell selection prevents interaction with the map
+PASS: clicking fireball card equips the chosen spell
+PASS: aiming pointer identifies the visible monster
+PASS: C cast handler spends ten mana
+PASS: fireball aims at monster position even when cursor is over its head
+PASS: projectile hits with allocated magical damage and creates explosion
+PASS: a fireball kill also pauses and opens allocation automatically
+PASS: level fanfare is allowed while mandatory menu pauses combat audio
+Checks: 21; failures: 0

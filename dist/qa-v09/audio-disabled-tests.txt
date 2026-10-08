@@ -1,0 +1,12 @@
+PASS: audio device initialization can be skipped
+PASS: silent fallback still moves and drains sound events
+PASS: music HUD click works immediately without opening or pausing a menu
+PASS: audio controls cannot select or drop onto terrain behind HUD
+PASS: effects HUD click is independent of the music switch
+PASS: music button after global mute restores only music
+PASS: effects button after global mute restores only effects
+PASS: HUD switches also work while paused without resuming gameplay
+PASS: F2 settings remain available from the HUD
+PASS: settings button can close its own panel
+PASS: pointer outside audio buttons is not consumed
+Checks: 11; failures: 0

@@ -1,0 +1,11 @@
+Frames: 900
+Window: 1920x1080
+Fullscreen: yes
+Refresh rate (Hz): 60
+V-sync interval: 1
+Audio device opened: no
+Native canvas: 1728x1080
+Average FPS: 27.5179
+CPU frame mean (ms): 5.7431
+CPU frame p95 (ms): 6.3876
+Frame p95 (ms): 37.4589

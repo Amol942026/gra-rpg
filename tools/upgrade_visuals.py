@@ -1,0 +1,21 @@
+from pathlib import Path
+
+p = Path('src/main.cpp')
+s = p.read_text(encoding='utf-8')
+start = s.index('void hero(float x,float y,float s,bool moving){')
+end = s.index('void drawWorld(bool moving){', start)
+s = s[:start] + '#include "actor_view.hpp"\n' + s[end:]
+s = s.replace('void hero(float x,float y,float s,bool moving=false);', '#include "actor_art.hpp"\nvoid hero(float x,float y,float s,bool portrait=false);')
+s = s.replace('void drawWorld(bool moving){', 'void drawWorld(){')
+s = s.replace('BeginScissorMode(0,0,WorldW,H);', 'clip(0,0,WorldW,H);')
+s = s.replace('hero(pp.x,pp.y,1,moving)', 'hero(pp.x,pp.y,1)')
+s = s.replace('BeginScissorMode(1081,69,61,66);hero(1110,139,.8f);', 'clip(1081,69,61,66);hero(1110,137,.8f,true);')
+s = s.replace('E C H A   Z A P O M N I A N Y C H   R U I N', 'ECHA ZAPOMNIANYCH RUIN')
+s = s.replace('txt("v0.1",', 'txt("v0.2",')
+s = s.replace('center("Echa zapomnianych ruin",720,307,16,Gold)', 'center("Echa zapomnianych ruin",720,307,19,Gold)')
+s = s.replace('txt(keys[i],397,374+i*35,11,Gold);txt(desc[i],555,371+i*35,15,Text);', 'txt(keys[i],384,374+i*36,15,Gold);txt(desc[i],554,371+i*36,19,Text);')
+s = s.replace('center(welcome?"WYRUSZ  →":"WRÓĆ DO GRY  →",720,630,17,Gold,true);', 'center(welcome?"WYRUSZ":"WRÓĆ DO GRY",720,629,21,Text);')
+s = s.replace('center("ENTER  /  F1 — pomoc  /  ESC — pauza",720,686,11,Muted)', 'center("ENTER  /  F1 — pomoc  /  ESC — pauza",720,686,15,Muted)')
+s = s.replace('x=std::min(mouse.x+20,1136.f)', 'x=std::min(mouse.x+20,1106.f)')
+s = s.replace('panel({x,y,282,139}', 'panel({x,y,312,139}')
+p.write_text(s, encoding='utf-8')

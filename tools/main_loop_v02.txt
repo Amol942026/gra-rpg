@@ -1,0 +1,72 @@
+#include "visual_qa.hpp"
+int main(int argc,char**argv) {
+    bool smoke=false,benchmark=false,integration=false,visualQA=false,large=false;
+    int frameLimit=0;
+    for(int i=1;i<argc;i++){
+        std::string arg=argv[i];
+        if(arg=="--smoke"){smoke=true;frameLimit=180;}
+        if(arg=="--benchmark"){benchmark=true;frameLimit=900;}
+        if(arg=="--integration"){integration=true;smoke=true;frameLimit=180;}
+        if(arg=="--visual-qa")visualQA=true;
+        if(arg=="--large")large=true;
+    }
+    fs::path exe=fs::absolute(argv[0]).parent_path();
+    if(fs::exists(exe/"assets"))fs::current_path(exe);
+    else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
+    SetTraceLogLevel(LOG_WARNING);
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_MSAA_4X_HINT|FLAG_WINDOW_HIGHDPI);
+    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.2");
+    SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);SetTargetFPS(60);
+    makeArt();
+    if(smoke||benchmark)welcome=false;
+    if(integration)integrationTests();
+    if(visualQA)exportVisualQA();
+    int frame=0;
+    std::vector<double> cpuTimes,frameTimes;
+    double previous=GetTime();
+    while(!visualQA&&!WindowShouldClose()){
+        double begin=GetTime();double elapsed=begin-previous;previous=begin;
+        float dt=GetFrameTime();
+        prepareCanvas(std::min(GetRenderWidth()/float(W),GetRenderHeight()/float(H)));
+        float dpiX=GetRenderWidth()/float(GetScreenWidth()),dpiY=GetRenderHeight()/float(GetScreenHeight());
+        viewport={std::round((GetRenderWidth()-canvas.texture.width)/2.f)/dpiX,
+                  std::round((GetRenderHeight()-canvas.texture.height)/2.f)/dpiY,
+                  canvas.texture.width/dpiX,canvas.texture.height/dpiY};
+        scale=viewport.width/W;
+        Vector2 raw=GetMousePosition();
+        mouse={(raw.x-viewport.x)*W/viewport.width,(raw.y-viewport.y)*H/viewport.height};
+        if(smoke||benchmark){
+            game.update(1.f/60,{},false);game.hp=game.maxHp();
+            if(benchmark){
+                V next{15+std::sin(frame*.004f)*6,15+std::cos(frame*.004f)*6};
+                game.animation.advance(next.x-game.player.x,next.y-game.player.y,1.f/60);
+                game.player=next;
+                if(frame%32==0)game.attack();
+                if(frame%190==0){game.mana=60;game.spell();}
+            }
+        }else input(dt);
+        renderScene();
+        BeginDrawing();ClearBackground(BLACK);
+        DrawTexturePro(canvas.texture,{0,0,float(canvas.texture.width),-float(canvas.texture.height)},viewport,{0,0},0,WHITE);
+        double cpu=GetTime()-begin;EndDrawing();
+        if(frame>60){cpuTimes.push_back(cpu*1000);frameTimes.push_back(elapsed*1000);}
+        frame++;
+        if((smoke&&frame==120)||(!smoke&&!benchmark&&IsKeyPressed(KEY_F12))){
+            fs::create_directories("screenshots");saveTexture(canvas,"screenshots/emberfall-v02.png");
+        }
+        if(frameLimit&&frame>=frameLimit)break;
+    }
+    if(frameLimit&&!cpuTimes.empty()){
+        std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
+        std::ofstream f(benchmark?(large?"benchmark-v02-large.txt":"benchmark-v02.txt"):"smoke-test-v02.txt");
+        f<<"Frames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
+         <<"\nNative canvas: "<<canvas.texture.width<<"x"<<canvas.texture.height
+         <<"\nAverage FPS: "<<1000/(std::accumulate(frameTimes.begin(),frameTimes.end(),0.0)/frameTimes.size())
+         <<"\nCPU frame mean (ms): "<<std::accumulate(cpuTimes.begin(),cpuTimes.end(),0.0)/cpuTimes.size()
+         <<"\nCPU frame p95 (ms): "<<cpuTimes[size_t(cpuTimes.size()*.95)]
+         <<"\nFrame p95 (ms): "<<frameTimes[size_t(frameTimes.size()*.95)]<<"\n";
+    }
+    for(auto& t:propArt)UnloadRenderTexture(t);
+    UnloadRenderTexture(terrain);if(canvas.id)UnloadRenderTexture(canvas);
+    typography.clear();CloseWindow();return 0;
+}

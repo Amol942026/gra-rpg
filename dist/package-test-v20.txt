@@ -1,0 +1,7 @@
+PASS: EXE SHA256 matches final build
+PASS: SHA256 matches for all 65 assets
+PASS: instructions version 0.20, expanded forest and LOOT.md match
+PASS: packaged game 25/25 forest, species, hover HUD, corpse opening and drag checks; no audio device
+Archive size (bytes): 5320277
+Extracted folder: C:\Users\Amadeusz\Desktop\Gra RPG\dist\package-check-v20-6b86fd4c26264b84b9cc7b7571940885\Emberfall
+Preview: C:\Users\Amadeusz\Desktop\Gra RPG\dist\package-check-v20-6b86fd4c26264b84b9cc7b7571940885\Emberfall\qa-v20\forest-region-5.png

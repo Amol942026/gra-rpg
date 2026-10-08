@@ -1,0 +1,42 @@
+PASS: LPM world press starts a sword swing
+PASS: one LPM press damages every nearby enemy
+PASS: one LPM press damages every nearby enemy
+PASS: one LPM press damages every nearby enemy
+PASS: held mouse without another press never repeats the swing
+PASS: a new LPM press starts another swing after cooldown
+PASS: C casts the selected spell for ten mana without a sword swing
+PASS: C aims at the actual hovered monster position
+PASS: spell cooldown rejects an immediate second click without spending mana
+PASS: C cannot cast with insufficient mana
+PASS: LPM on ground loot begins dragging without attacking
+PASS: C cannot cast while an item is being dragged
+PASS: ground loot still drops into the backpack
+PASS: LPM on a backpack item keeps inventory drag behavior
+PASS: PPM on a backpack potion drinks it without casting
+PASS: empty inventory cells consume clicks without combat
+PASS: PPM on a ground potion at full mana does not cast or consume it
+PASS: action-bar clicks never attack
+PASS: action-bar clicks never cast into the world
+PASS: action-bar clicks never attack
+PASS: action-bar clicks never cast into the world
+PASS: action-bar clicks never attack
+PASS: action-bar clicks never cast into the world
+PASS: action-bar clicks never attack
+PASS: action-bar clicks never cast into the world
+PASS: action-bar clicks never attack
+PASS: action-bar clicks never cast into the world
+PASS: minimap, journal, title and outside-window clicks do not trigger combat
+PASS: minimap, journal, title and outside-window clicks do not trigger combat
+PASS: minimap, journal, title and outside-window clicks do not trigger combat
+PASS: minimap, journal, title and outside-window clicks do not trigger combat
+PASS: each modal state blocks combat and corpse interactions
+PASS: each modal state blocks combat and corpse interactions
+PASS: each modal state blocks combat and corpse interactions
+PASS: each modal state blocks combat and corpse interactions
+PASS: each modal state blocks combat and corpse interactions
+PASS: each modal state blocks combat and corpse interactions
+PASS: mandatory advancement blocks mouse attacks, spells and rolling
+PASS: death blocks both mouse combat buttons
+PASS: the existing roll blocks sword and spell actions
+PASS: holding run leaves roll distance unchanged
+Checks: 41; failures: 0

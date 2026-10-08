@@ -1,0 +1,5 @@
+3.4.0 Win32 WGL Null EGL OSMesa MinGW-w64
+Renderer: AMD Radeon (TM) Graphics
+Mode 0 FPS: 60.0401
+Mode 1 FPS: 60.0637
+Mode 2 FPS: 32.7836

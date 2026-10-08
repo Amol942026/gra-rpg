@@ -1,0 +1,9 @@
+CPU and completed GPU work by stage (diagnostic glFinish barriers, excluding frame pacing)
+Simulation/input/audio: mean=0.0248843 ms; p95=0.0406 ms; max=0.1159 ms
+Pointer picking: mean=0.0238187 ms; p95=0.0371 ms; max=0.0538 ms
+Water: mean=3.84876 ms; p95=4.4488 ms; max=10.1659 ms
+World/actors: mean=2.74445 ms; p95=3.5088 ms; max=11.6107 ms
+HUD: mean=1.6731 ms; p95=2.1512 ms; max=4.9789 ms
+Presentation: mean=2.23031 ms; p95=2.8967 ms; max=11.0378 ms
+World buffer=1890x1620
+Audio device opened=0

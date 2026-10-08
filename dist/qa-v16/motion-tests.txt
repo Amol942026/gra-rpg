@@ -1,0 +1,16 @@
+PASS: launch uses the requested mode (fullscreen by default)
+PASS: development diagnostic has no audio output device
+PASS: presentation synchronization is enabled
+PASS: refresh cadence uses whole monitor cycles
+Monitor: 60 Hz; interval: 1; clock: DXGI flip / V-sync
+PASS: running keeps its intended speed while the camera scrolls
+PASS: rolling keeps its distance while the camera scrolls
+Run/roll frames: mean=16.6521 ms, p95=16.7678 ms, FPS=60.0524
+Final backend=DXGI flip / V-sync; interval=1; accepted presents=303; occluded=0
+PASS: running and rolling maintain the monitor cadence without half-rate stalls
+PASS: world edges are supersampled with a bounded buffer
+Stationary terrain frames for 0.12px camera steps: nearest=7, filtered=0
+PASS: terrain now moves at subpixel precision instead of snapping
+PASS: walk pose interpolates even within one of the old eight pose steps
+PASS: world picking and the camera remain aligned
+Checks: 11; failures: 0

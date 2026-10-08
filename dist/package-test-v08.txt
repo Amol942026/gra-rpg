@@ -1,0 +1,4 @@
+PASS: packaged EXE hash matches build
+PASS: 59 packaged assets match source hashes
+PASS: extracted game crowd QA
+ZIP bytes: 4637255

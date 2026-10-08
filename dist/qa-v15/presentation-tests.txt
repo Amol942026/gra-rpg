@@ -1,0 +1,52 @@
+Native fullscreen=1920x1080, DPI=1.25,1.25, inherited drawing scale=1.25,1.17222
+Old presentation visible corners=0/4
+Mode=0, window=1920x1080, framebuffer=1920x1080, canvas=1728x1080
+PASS: entire game and HUD fit within the framebuffer
+DPI transform=1, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=1.25, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=1.5, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=2, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+PASS: all backpack slots, including the far right and bottom rows, remain clickable
+Mode=1, window=1152x720, framebuffer=1152x720, canvas=1152x720
+PASS: entire game and HUD fit within the framebuffer
+DPI transform=1, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=1.25, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=1.5, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=2, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+PASS: all backpack slots, including the far right and bottom rows, remain clickable
+Mode=2, window=1280x720, framebuffer=1280x720, canvas=1152x720
+PASS: entire game and HUD fit within the framebuffer
+DPI transform=1, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=1.25, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=1.5, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=2, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+PASS: all backpack slots, including the far right and bottom rows, remain clickable
+Mode=3, window=1600x900, framebuffer=1600x900, canvas=1440x900
+PASS: entire game and HUD fit within the framebuffer
+DPI transform=1, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=1.25, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=1.5, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+DPI transform=2, visible corners=4/4
+PASS: all four corners survive actual GPU presentation at this DPI
+PASS: all backpack slots, including the far right and bottom rows, remain clickable
+Tree temporal sample: stationary frames=0, max alpha change=29
+PASS: tree moves in every consecutive 60 FPS frame, including fractional pixels
+PASS: tree edges change gradually instead of jumping between opaque pixels
+Water temporal sample: stationary frames=0, max green change=2
+PASS: water shifts continuously with soft edges and no abrupt flashes
+Checks: 27; failures: 0

@@ -1,0 +1,4 @@
+PASS: packaged EXE matches build
+PASS: all 59 asset hashes match
+PASS: extracted game progression, spell and audio fanfare tests
+ZIP bytes: 4657317

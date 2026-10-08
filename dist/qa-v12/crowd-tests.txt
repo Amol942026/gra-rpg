@@ -1,0 +1,13 @@
+PASS: test pointer is over a monster
+PASS: test pointer is over a monster
+PASS: left click swings without turning or selecting a target
+PASS: moving the pointer away leaves no selected enemy in HUD
+PASS: one left click hits every nearby monster
+PASS: one left click hits every nearby monster
+PASS: one left click hits every nearby monster
+PASS: one left click hits every nearby monster
+PASS: one left click hits every nearby monster
+PASS: one left click hits every nearby monster
+PASS: distant boss is outside the attack area
+PASS: all 14 chasing enemies remain separated during 360 frames
+Checks: 12; failures: 0

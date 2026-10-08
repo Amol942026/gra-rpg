@@ -1,0 +1,13 @@
+PASS: map hit testing finds sword
+PASS: drag begins on nearby ground item
+PASS: map to backpack through pointer handlers
+PASS: backpack to equipment swaps old weapon
+PASS: invalid equipment drop keeps potion
+PASS: backpack to ground through pointer handlers
+PASS: nearby loot tray contains helmet
+PASS: loot tray directly to equipment
+PASS: shield equipped from backpack
+PASS: consume pointed potion
+PASS: potion updates health and stack
+PASS: out-of-range ground drop is cancelled
+PASS: 12 interaction checks

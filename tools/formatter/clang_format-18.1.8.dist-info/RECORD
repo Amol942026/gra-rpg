@@ -1,0 +1,10 @@
+clang_format/__init__.py,sha256=Hu3oi5sC81XsrUchd4On2toCvfw0U2YA79Eu7BkQurQ,330
+clang_format/clang_format_diff.py,sha256=w7FQD9zL_jGojGtblGHf0TPq60_xOsOoPFPAJSXH09I,6270
+clang_format/data/bin/clang-format.exe,sha256=DSyrsLRi4F62LUZHSXLn8lakHjpy1dPRFuq6KYtO9Ko,3004416
+clang_format/git_clang_format.py,sha256=gJfZPMQCF2hSGlkdgQfhHJxZPyJrWAplMj6hfL7WvOQ,25338
+clang_format-18.1.8.dist-info/METADATA,sha256=4ZgmIlyEAR_Vut7VVuqWnVdJhitMNKlh5b8XRb00J1M,4669
+clang_format-18.1.8.dist-info/WHEEL,sha256=0Xph_3YtyszR_7aghL4hHABr0LLiMKW5OaAZXDJdJhs,126
+clang_format-18.1.8.dist-info/entry_points.txt,sha256=b3OvK5yUcTEZU59u1LFoKutGhA9sISVZPFAnj_KJRco,173
+clang_format-18.1.8.dist-info/licenses/COPYING.md,sha256=r71N-pQCeu9g95BmCXNGEsON4HEFmfV_RYXmTkoqhPE,918
+clang_format-18.1.8.dist-info/licenses/LICENSE.md,sha256=3B9dLUPFUx3-Csr06VDqXb4-YeGFDPDpg72n78ENZpM,10464
+clang_format-18.1.8.dist-info/RECORD,,

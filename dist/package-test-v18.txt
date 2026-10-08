@@ -1,0 +1,21 @@
+Version: 0.18
+ZIP bytes: 4708993
+Matched SHA256: 60 files
+Extracted directory: C:\Users\Amadeusz\Desktop\Gra RPG\dist\package-v18-check-889d33ff0de44f2ba3bf044711a20c17\Emberfall
+Exit code: 0
+Frames: 180
+Window: 1920x1080
+Fullscreen: yes
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: Windows compositor (DWM)
+Audio device opened: no
+Native canvas: 1728x1080
+Average FPS: 54.9755
+CPU frame mean (ms): 7.5722
+CPU frame p95 (ms): 6.7224
+CPU frame p99 (ms): 7.1337
+Frame p95 (ms): 16.9517
+Frame p99 (ms): 17.1464
+Frame max (ms): 200.217
+Frames over 25 ms: 1

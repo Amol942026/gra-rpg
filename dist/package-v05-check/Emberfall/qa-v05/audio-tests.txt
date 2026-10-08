@@ -1,0 +1,39 @@
+PASS: audio output device initialized
+PASS: all 21 effects and voice banks loaded
+PASS: streaming score loaded, duration over 100 seconds
+PASS: step
+PASS: swing
+PASS: slime-hit
+PASS: wolf-hit
+PASS: bone-hit
+PASS: stone-hit
+PASS: enemy-fall
+PASS: hurt
+PASS: death
+PASS: roll
+PASS: dodge
+PASS: spell
+PASS: potion
+PASS: pickup
+PASS: equip
+PASS: drop
+PASS: level-up
+PASS: victory
+PASS: enemy-attack
+PASS: ui
+PASS: reject
+PASS: mixer produced real nonzero audio samples
+PASS: mixed score and effects stay below digital clipping
+PASS: mute drops events instead of replaying them later
+PASS: mute fades music to silence
+PASS: effects slider at zero mutes effects
+PASS: paused world cannot leak queued combat sounds
+PASS: focus loss suspends music
+PASS: focus regain resumes existing music stream
+PASS: score loops across its actual stream boundary
+PASS: maximum-volume simultaneous effects remain below clipping
+Mixed samples: 507150
+Nonzero samples: 507100
+Peak: 0.959855
+PASS: volume and mute settings round trip
+Checks: 35; failures: 0

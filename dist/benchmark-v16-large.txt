@@ -1,0 +1,12 @@
+Frames: 900
+Window: 1920x1080
+Fullscreen: no
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: Windows compositor (DWM)
+Audio device opened: no
+Native canvas: 1688x1055
+Average FPS: 59.9865
+CPU frame mean (ms): 4.92811
+CPU frame p95 (ms): 5.4129
+Frame p95 (ms): 17.14

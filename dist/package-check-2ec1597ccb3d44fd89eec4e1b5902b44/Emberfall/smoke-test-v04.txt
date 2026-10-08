@@ -1,0 +1,7 @@
+Frames: 180
+Window: 1440x900
+Native canvas: 1688x1055
+Average FPS: 54.6645
+CPU frame mean (ms): 2.69939
+CPU frame p95 (ms): 3.3763
+Frame p95 (ms): 17.0677

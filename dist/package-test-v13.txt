@@ -1,0 +1,5 @@
+Executable SHA256 matches
+Assets matched: 59
+Version, empty start and patrol instructions confirmed
+Extracted patrol QA: Checks: 13; failures: 0
+ZIP size: 4678798 bytes

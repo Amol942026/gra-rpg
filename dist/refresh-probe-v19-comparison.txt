@@ -1,0 +1,13 @@
+Renderer: AMD Radeon (TM) Graphics; compositor=1
+Mode=0; exclusive=0; requested swap=0; actual swap=0
+FPS=60.0702; p95=17.1419 ms; p99=17.4297 ms; max=17.5186 ms
+Mode=1; exclusive=0; requested swap=1; actual swap=1
+FPS=32.7797; p95=31.2091 ms; p99=31.682 ms; max=31.8579 ms
+Mode=2; exclusive=0; requested swap=1; actual swap=1
+FPS=31.2245; p95=33.0774 ms; p99=33.3883 ms; max=33.8305 ms
+Mode=3; exclusive=0; requested swap=1; actual swap=1
+FPS=30.0285; p95=33.6829 ms; p99=33.7531 ms; max=33.9687 ms
+Mode=4; exclusive=1; requested swap=1; actual swap=1
+FPS=32.681; p95=31.5574 ms; p99=31.7679 ms; max=31.9023 ms
+Mode=5; exclusive=0; requested swap=1; actual swap=1
+FPS=32.6336; p95=31.4806 ms; p99=31.8468 ms; max=31.9974 ms

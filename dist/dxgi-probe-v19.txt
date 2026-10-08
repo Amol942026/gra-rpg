@@ -1,0 +1,5 @@
+Mode=0; FPS=60.0576; p95=17.0492; max=17.3036; occluded=150; foreground=0
+Mode=1; FPS=60.1975; p95=17.7231; max=19.3436; occluded=150; foreground=0
+Mode=2; FPS=60.0287; p95=17.458; max=17.5432; occluded=150; foreground=0
+Fullscreen result=887a0022
+Mode=3; FPS=60.0516; p95=17.0319; max=17.3807; occluded=150; foreground=0

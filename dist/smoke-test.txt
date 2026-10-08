@@ -1,0 +1,6 @@
+Frames: 180
+Resolution: 1440x900
+Average FPS: 57.7204
+CPU frame mean (ms): 0.963344
+CPU frame p95 (ms): 1.2394
+Frame p95 (ms): 16.7864

@@ -1,0 +1,61 @@
+PASS: performance diagnostic has no audio device
+PASS: normal rendering never uses blocking GPU profiling barriers
+Camera=15,15; time=0; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=15,15; time=0.65; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=15,15; time=1.93; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=2,15; time=0; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=2,15; time=0.65; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=2,15; time=1.93; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=45.4,15; time=0; max pixel delta=1; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=45.4,15; time=0.65; max pixel delta=1; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=45.4,15; time=1.93; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=15,2; time=0; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=15,2; time=0.65; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=15,2; time=1.93; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=15,45.4; time=0; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=15,45.4; time=0.65; max pixel delta=1; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=15,45.4; time=1.93; max pixel delta=1; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=1.6,1.6; time=0; max pixel delta=1; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=1.6,1.6; time=0.65; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=1.6,1.6; time=1.93; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=45.4,45.4; time=0; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=45.4,45.4; time=0.65; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=45.4,45.4; time=1.93; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=21,5; time=0; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=21,5; time=0.65; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+Camera=21,5; time=1.93; max pixel delta=0; changes >1=0
+PASS: optimized water retains visible waves, including all shores and corners
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+PASS: first use of combat, hover and menu text does not load font atlases mid-frame
+Checks: 36; failures: 0

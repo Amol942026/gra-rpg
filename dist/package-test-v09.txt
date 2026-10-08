@@ -1,0 +1,4 @@
+PASS: packaged EXE matches build
+PASS: all 59 asset hashes match
+PASS: extracted game audio HUD tests
+ZIP bytes: 4641178
