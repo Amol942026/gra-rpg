@@ -16,7 +16,17 @@ $resourceCompiler = Join-Path (Split-Path -Parent $compiler) 'windres.exe'
 if ($LASTEXITCODE -ne 0) { throw 'Kompilacja manifestu DPI nie powiodła się.' }
 & $compiler '-std=c++17' '-O2' '-DNDEBUG' '-Wall' '-Wextra' '-Wno-misleading-indentation' '-Wno-narrowing' 'src\main.cpp' 'src\sync_present.cpp' 'dist\resources.o' "-I$raylib\include" "-L$raylib\lib" '-lraylib' '-lopengl32' '-lgdi32' '-lwinmm' '-ldwmapi' '-ld3d11' '-ldxgi' '-ld3dcompiler' '-Wl,--wrap=glfwSwapBuffers' '-static' '-mwindows' '-o' 'dist\Emberfall.exe'
 if ($LASTEXITCODE -ne 0) { throw 'Kompilacja gry nie powiodła się.' }
-Copy-Item -LiteralPath 'assets' -Destination 'dist' -Recurse -Force
+# Keep identical assets untouched, including PNGs held by a preview window.
+$sourceAssetRoot = Join-Path $PSScriptRoot 'assets'
+$targetAssetRoot = Join-Path $PSScriptRoot 'dist\assets'
+foreach ($sourceAsset in Get-ChildItem -LiteralPath $sourceAssetRoot -File -Recurse) {
+    $relativeAsset = $sourceAsset.FullName.Substring($sourceAssetRoot.Length + 1)
+    $targetAsset = Join-Path $targetAssetRoot $relativeAsset
+    if ((Test-Path -LiteralPath $targetAsset) -and
+        (Get-FileHash -LiteralPath $sourceAsset.FullName).Hash -eq (Get-FileHash -LiteralPath $targetAsset).Hash) { continue }
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $targetAsset) | Out-Null
+    Copy-Item -LiteralPath $sourceAsset.FullName -Destination $targetAsset -Force
+}
 Copy-Item -LiteralPath 'README.md' -Destination 'dist\README.md' -Force
 Copy-Item -LiteralPath 'LOOT.md' -Destination 'dist\LOOT.md' -Force
 Copy-Item -LiteralPath 'LICENSES.md' -Destination 'dist\LICENSES.md' -Force

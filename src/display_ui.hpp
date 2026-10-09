@@ -5,7 +5,7 @@ struct WindowPlacement { Vector2 position{};int width=W,height=H;bool maximized=
 bool fullScreen(){return IsWindowState(FLAG_BORDERLESS_WINDOWED_MODE)||IsWindowFullscreen();}
 Rectangle displayButton(){return {704,25,181,36};}
 void toggleFullScreen(){
-    dragging={};audioDragging=-1;
+    game.cancelBow();dragging={};audioDragging=-1;
     if(!fullScreen()){
         windowPlacement={GetWindowPosition(),GetScreenWidth(),GetScreenHeight(),IsWindowMaximized()};
         if(windowPlacement.maximized)RestoreWindow();

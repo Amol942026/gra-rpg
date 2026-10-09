@@ -145,9 +145,10 @@ public:
 // species: player, slime, wolf, skeleton, guardian, boar, spider, bandit, treant.
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
-                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1) {
+                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3) {
     bool rolling=species==0&&roll>=0;
-    bool striking=species==0&&!rolling&&(swingProgress>=0||attack>0);
+    bool archer=species==0&&weapon==Kind::Bow;float drawCharge=std::max(0.f,bowDraw);
+    bool striking=species==0&&!archer&&!rolling&&(swingProgress>=0||attack>0);
     float strikeProgress=swingProgress>=0?swingProgress:std::asin(std::clamp(attack,0.f,1.f))/PI;
     float tuck=rolling?std::clamp(std::min(roll,1-roll)/.18f,0.f,1.f):0;
     tuck=tuck*tuck*(3-2*tuck);
@@ -300,11 +301,21 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
                 rig.form({10,-5,55+lift},{9,8,3},rgb(94,139,77));
             }
         }
+        if(archer){
+            rig.form({-7,-17,44+lift},{12,11,31},leather);rig.form({-7,-17,59+lift},{14,12,5},Gold);
+            rig.beam({8,9,54+lift},{-9,-17,32+lift},3,2,leather);
+            for(int a=0;a<std::clamp(quiverArrows,0,3);a++){float r=-10+a*3.f,top=73+a%2*5.f+lift;rig.beam({r,-17,45+lift},{r,-17,top},1.3f,1.3f,rgb(182,134,75));
+                rig.form({r,-17,top-3},{5,2,6},Text);rig.form({r,-17,top-4},{2,5,6},Gold);}
+        }
         for(int i=0;i<2;i++){
             float side=i==0?-1.f:1.f,reach=side>0?attack*18:attack*6;
             float shoulder=side*(golem?24.f:17.f);
             P3 hand{side*(golem?26.f:20.f),3-stride*side*5+reach,32+lift+std::abs(attack)*11};
             P3 elbow{shoulder,1-stride*side*2+reach*.4f,40+lift};
+            if(archer&&!rolling){
+                if(side<0){hand={-10,27,47+lift};elbow={-17,12,44+lift};}
+                else if(bowDraw>=0){hand={4-12*drawCharge,16-23*drawCharge,47+lift};elbow={18,4-9*drawCharge,47+lift};}
+            }
             WeaponPose strike{};
             if(striking&&side>0){strike=forwardStrike(strikeProgress,lift);hand=strike.hand;elbow=strike.elbow;}
             hand=hand+P3{-side*5*tuck,9*tuck,6*tuck};
@@ -315,7 +326,16 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
             rig.box(hand,{golem?13.f:6.f,golem?12.f:6.f,golem?13.f:6.f},skeleton?bone:golem?stone:skin);
             if(!skeleton&&!golem){rig.form(elbow,{9,8,7},body);rig.form(hand+P3{0,-1,5},{7,7,3},leather);
                 rig.beam({shoulder-4,5,53+lift},{shoulder+4,5,53+lift},1.5f,1,Gold);}
-            if(side>0&&!golem){
+            if(archer&&side<0){
+                P3 bottom=hand+P3{0,0,-27},top=hand+P3{0,0,27},previous=bottom;
+                for(int part=1;part<=12;part++){float t=part/12.f;P3 next=hand+P3{0,6*std::sin(t*PI)*(1-.15f*drawCharge),-27+54*t};rig.beam(previous,next,2.8f,2.8f,rgb(153,100,49));previous=next;}
+                P3 string=bowDraw>=0&&!rolling?P3{4-12*drawCharge,16-23*drawCharge,47+lift}:hand;
+                rig.beam(bottom,string,.75f,.75f,Text);rig.beam(string,top,.75f,.75f,Text);
+                rig.box(hand+P3{0,3,0},{5,4,9},leather);
+                if(bowDraw>=0&&!rolling){P3 tip=hand+P3{0,20,0};rig.beam(string-P3{0,3,0},tip,1.4f,1.4f,rgb(190,143,81));
+                    rig.form(tip,{4,7,3},metal);rig.form(string-P3{0,1,0},{5,5,2},Text);}
+            }
+            if(side>0&&!golem&&!archer){
                 P3 base=hand+P3{0,1,-3},tip=hand+P3{0,8+attack*8,31-std::abs(attack)*10};
                 bool dagger=weapon==Kind::Dagger||species==7;
                 if(dagger)tip=hand+(tip-hand)*.65f;
@@ -333,7 +353,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
                 }
                 if(weapon==Kind::Axe)rig.box(tip+P3{5,0,-7},{15,4,14},metal);
             }
-            if(side<0&&shield&&!skeleton&&!golem){
+            if(side<0&&shield&&!skeleton&&!golem&&!archer){
                 P3 p=hand+P3{-2,7,1};
                 rig.form(p,{19,4,27},Gold);rig.form(p+P3{0,2.5f,0},{15,2,22},leather);
                 rig.box(p+P3{0,4,0},{3,2,20},metal);rig.box(p+P3{0,4,2},{15,2,3},metal);

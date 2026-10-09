@@ -22,7 +22,7 @@ public:
     inline static constexpr const char* Names[CueCount]={
         "step","swing","slime-hit","wolf-hit","bone-hit","stone-hit","enemy-fall",
         "hurt","death","roll","dodge","spell","potion","pickup","equip","drop",
-        "level-up","victory","enemy-attack","ui","reject"
+        "level-up","victory","enemy-attack","ui","reject","bow-shot"
     };
     float musicVolume=.42f,effectsVolume=.72f;
     bool muted=false,musicMuted=false,effectsMuted=false,available=false;

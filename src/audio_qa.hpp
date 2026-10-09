@@ -22,7 +22,7 @@ bool runAudioQA(bool disabled) {
         check(game.player.x>15&&game.sounds.empty(),"silent fallback still moves and drains sound events");
     }else{
         check(audioSystem.available,"audio output device initialized");
-        check(audioSystem.loadedEffects==AudioSystem::CueCount,"all 21 effects and voice banks loaded");
+        check(audioSystem.loadedEffects==AudioSystem::CueCount,"all effects and voice banks loaded");
         check(audioSystem.musicReady()&&GetMusicTimeLength(audioSystem.music)>100,"streaming score loaded, duration over 100 seconds");
         if(audioSystem.available){
             AttachAudioMixedProcessor(meterAudio);

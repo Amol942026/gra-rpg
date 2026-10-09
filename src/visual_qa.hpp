@@ -92,13 +92,13 @@ void renderScene() {
     float worldScale=worldSampleScale(renderScale);
     DrawTexturePro(worldCanvas.texture,{0,0,float(worldCanvas.texture.width),-float(worldCanvas.texture.height)},
                    {0,0,worldCanvas.texture.width/worldScale,worldCanvas.texture.height/worldScale},{0,0},0,WHITE);
-    drawUI();drawHoveredName();tooltip();
+    drawUI();drawHoveredName();tooltip();drawBowHud();drawWeaponWheel();
     if(dragging.place!=Place::None){Item* p=game.get(dragging);if(p)icon(*p,mouse.x,mouse.y,.95f,.9f);}
     overlay();
     drawProgression();
     drawAudioPanel();
     drawAudioButton(); // Always visible, including pause/help and the audio panel.
-    drawDisplayButton();
+    drawDisplayButton();drawWeaponWheelButton();
     EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);
 }
 void exportVisualQA() {

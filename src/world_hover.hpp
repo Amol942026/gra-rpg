@@ -40,13 +40,16 @@ std::vector<DrawObject> worldDrawOrder() {
         objects.push_back({game.enemies[i].pos.x+game.enemies[i].pos.y,game.enemies[i].alive?1:4,i});
     objects.push_back({game.player.x+game.player.y,2,0});
     for(int i=0;i<int(game.fireballs.size());i++)objects.push_back({game.fireballs[i].pos.x+game.fireballs[i].pos.y,3,i});
+    for(int i=0;i<int(game.arrows.size());i++)objects.push_back({game.arrows[i].pos.x+game.arrows[i].pos.y,5,i});
     std::stable_sort(objects.begin(),objects.end(),[](const auto& a,const auto& b){return a.depth<b.depth;});
     return objects;
 }
 
 bool worldPointerAllowed(Vector2 p) {
-    if(welcome||help||paused||audioOpen||statsOpen||spellBookOpen||game.allocationRequired||game.dead())return false;
+    if(weaponWheelOpen||welcome||help||paused||audioOpen||statsOpen||spellBookOpen||game.allocationRequired||game.dead())return false;
     if(!CheckCollisionPointRec(p,{0,116,WorldW,678}))return false;
+    if(CheckCollisionPointRec(p,weaponWheelButton()))return false;
+    if(game.equipment[0].kind==Kind::Bow&&CheckCollisionPointRec(p,{195,112,515,36}))return false;
     if(CheckCollisionPointRec(p,{842,133,180,155}))return false; // minimap
     if(CheckCollisionPointRec(p,{22,675,310,119}))return false; // journal
     if(game.messageTime>0){
@@ -74,7 +77,7 @@ WorldHover pickWorld(Vector2 point) {
     // Reverse of the actual drawing order: never select an enemy through a tree.
     auto objects=worldDrawOrder();
     for(auto it=objects.rbegin();it!=objects.rend();++it){
-        if(it->type==3)continue; // Projectiles do not obstruct mouse inspection.
+        if(it->type==3||it->type==5)continue; // Projectiles do not obstruct mouse inspection.
         V position{};bool touched=false;HoverKind kind=HoverKind::None;int id=it->index;
         if(it->type==0){
             const Prop& prop=game.props[it->index];position=prop.pos;
@@ -94,7 +97,7 @@ WorldHover pickWorld(Vector2 point) {
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){
                 float progress=game.swingProgress();float attack=progress>=0?std::sin(progress*PI):0;
-                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind,false,BLANK,&point,game.rollProgress(),progress);
+                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind,false,BLANK,&point,game.rollProgress(),progress,game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount());
             }
         }
         if(touched){

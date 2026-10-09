@@ -8,12 +8,12 @@ Rectangle spellConfirm(){return {540,496,360,46};}
 
 int draftRemaining(){return game.attributePoints-std::accumulate(statDraft.begin(),statDraft.end(),0);}
 void openStats(){
-    statsOpen=true;spellBookOpen=false;statDraft={};draftForLevel=game.level;dragging={};
+    game.cancelBow();weaponWheelOpen=false;statsOpen=true;spellBookOpen=false;statDraft={};draftForLevel=game.level;dragging={};
 }
 void syncAdvancement(){if(game.allocationRequired&&(!statsOpen||draftForLevel!=game.level))openStats();}
 void openSpellBook(){
     if(game.allocationRequired||game.dead())return;
-    spellBookOpen=true;statsOpen=false;dragging={};audioSystem.play(Cue::Ui);
+    game.cancelBow();weaponWheelOpen=false;spellBookOpen=true;statsOpen=false;dragging={};audioSystem.play(Cue::Ui);
 }
 bool castSelectedSpell(){
     V aim{};WorldHover hit=pickWorld(mouse);

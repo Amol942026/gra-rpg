@@ -1,0 +1,8 @@
+Version: 0.23
+ZIP bytes: 7043194
+Final EXE SHA256: PASS
+Assets SHA256: PASS 78
+Packaged bow QA: PASS 65/65
+Packaged mushrooms QA: PASS 16/16
+Audio device opened: no
+Extracted directory: C:\Users\Amadeusz\AppData\Local\Temp\Emberfall-bow-package-ba9df0a8e5784c1cb71f259a5d4f96c3

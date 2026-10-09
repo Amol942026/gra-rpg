@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 Add-Type -AssemblyName System.IO.Compression,System.IO.Compression.FileSystem
 $packagePath = Join-Path $PSScriptRoot 'Emberfall-Windows-x64.zip'
@@ -41,11 +41,21 @@ Nowe ksztalty i tekstury zachowuja osiem kierunkow animacji i wiatr.
 Potwory patroluja okolice respawnu, gdy nie widza bohatera. Wykrycie go
 rozpoczyna poscig; po utracie widoku wracaja do domu. Przeszkody zaslaniaja widok.
 
+Wersja 0.23: Q lub przycisk BRON - kolo broni; startowy miecz i luk.
+LPM na sektorze wybiera bron. Przeciagnij bron z plecaka do sektora,
+aby dodac skrot. PPM usuwa tylko skrot. Q/ESC zamyka kolo; gra w menu stoi.
+Luk: przytrzymaj LPM i pusc, aby wystrzelic. Na start 20 strzal w plecaku.
+Naciag do 1,4 s daje zasieg 2-12 pol i obrazenia 22-34 (miecz: 14).
+Kazdy strzal zuzywa jedna strzale. Menu i unik anuluja naciag bez kosztu.
+Celownik pokazuje kierunek, naciag i zasieg; kolczan jest na plecach.
+Strzala trafia pierwszy cel; drzewa i inne przeszkody ja zatrzymuja.
+
 STEROWANIE
 WSAD - chodzenie; kombinacje klawiszy pozwalaja isc ukosnie.
 Przytrzymany Shift + WSAD - bieg o 50% szybszy od chodu.
 Spacja + WSAD - przeturlanie; sama Spacja - unik w kierunku ustawienia.
-LPM na mapie - jeden zamach na klikniecie; trafia wszystkich w promieniu 2,1 pola.
+LPM z mieczem - zamach na klikniecie; trafia wszystkich w promieniu 2,1 pola.
+LPM z lukiem - przytrzymaj, by naciagac; puszczenie wystrzeliwuje strzale.
 Przytrzymanie LPM nie powtarza ataku. Nie ma wybierania celu kliknieciem.
 Potwory odpychaja sie i odbijaja od siebie przy zderzeniu.
 Najazd na potwora lub obiekt - informacje w prawym panelu POD KURSOREM.

@@ -1,5 +1,22 @@
 # Weryfikacja prototypu
 
+## Wersja 0.23 — koło broni, łuk i strzały
+
+Sprawdzone 9 października 2026 w `C:\Users\Amadeusz\Documents\GitHub\gra-rpg`. Wszystkie uruchomienia gry, testów graficznych i benchmarku miały `--no-audio`. Nie otwierano urządzenia audio ani zmieniano preferencji dźwięku.
+
+- Q lub przycisk BROŃ otwiera ośmiopolowe koło i wstrzymuje grę. Miecz i łuk są przypisane na starcie. LPM wybiera broń, przeciąganie z plecaka lub miejsca broni dodaje skrót, a PPM usuwa sam skrót. Skróty wyszukują faktycznie posiadany rodzaj i poziom rzadkości, więc przełożenie przedmiotu w plecaku ich nie psuje. Porzucona broń nie może zostać skopiowana przez koło. Przełączanie działa przy pełnym plecaku, wymieniając wybraną broń z dotychczasową.
+- Łuk naciąga się przez przytrzymanie LPM, a puszczenie wypuszcza jedną strzałę. Start: **20 strzał**, zliczanych ze stosów w plecaku. Naciąg do **1,4 s** daje **2–12 pól zasięgu**, **12–20 pól/s** i **22–34 bazowe obrażenia** przed obroną (miecz: 14). Przerwanie przez menu, zmianę broni, unik, utratę aktywności okna lub puszczenie nad HUD nie zużywa strzały. Brak amunicji uniemożliwia strzelanie.
+- Kolizja bada odcinek całego ruchu strzały, aby szybki pocisk nie przeskakiwał celu. Trafia pierwszego żywego wroga i stosuje obronę fizyczną. Przeszkody i granice zatrzymują pocisk. Zabójstwo korzysta z dotychczasowych ciał, losowania łupu, doświadczenia i pauzy na awans.
+- Dodano animowany łuk w obu rękach, kołczan na plecach, widoczne strzały zależnie od amunicji, cięciwę i pozę naciągu w ośmiu kierunkach. Celownik, pierścień naciągu, kierunek, zasięg oraz licznik amunicji renderują się przy aktualnym dopasowaniu ekranu. Nowy atlas `items-v23.png` mieści 29 ikon.
+- **1058/1058 testów logiki i animacji**. Nowe testy obejmują rzeczywiste przechowywanie broni, pełny plecak, porzucanie i odzyskiwanie, brak duplikacji, amunicję i stosy, naciąg oraz zasięg, anulowanie, odnowienie, brak ataku mieczem z łuku, niezależność ruchu pocisku od częstotliwości aktualizacji, najbliższy cel, przeszkody, granicę mapy, obrażenia fizyczne i awans po zabójstwie.
+- **65/65 sprawdzeń łuku i koła**: rzeczywiste funkcje wskazywania i przeciągania, neutralne kliknięcie licznika amunicji i plecaka, anulowanie puszczenia nad HUD, trzy skale interfejsu oraz 24 pozy łuku w ośmiu kierunkach z porównaniem niezależnego obrazu GPU i geometrii kursora. Obejrzano koło, przypisywanie, naciąg, strzałę w locie, pełny arkusz kierunków i pusty kołczan. Raport: `dist/qa-v23/bow-tests.txt`.
+- Przeszły także **229 sprawdzeń dotychczasowej grafiki i 29 ikon, 16 grzybów, 41 sterowania, 40 ciał i 82 kursora**. Finalną wersję ponownie sprawdzono w diagnostyce łuku, kursora i sterowania po zmianach w HUD. Pełne `build.ps1 -Test` działa; kopiowanie pomija identyczne zasoby, w tym PNG otwarte w podglądzie.
+- Efekt strzału `bow-shot.wav` wytworzono lokalnie, bez odtwarzania: mono, PCM16, **44 100 Hz**, **0,27 s**, szczyt **0,4308**, bez przepełnienia próbek. Generator: `audio/create_bow_sound.py`. Zdarzenie dźwiękowe jest emitowane po skutecznym wypuszczeniu strzały. Rozgrywka użytkownika zachowuje ustawienia głośności.
+
+**900 klatek, pełny ekran 1920 × 1080, monitor 60 Hz:** **60,0542 FPS**, średnio **10,3606 ms CPU**, P99 klatki **17,4037 ms**, maksimum **19,589 ms**, **0 klatek ponad 25 ms**. Scenariusz obejmuje las, kamerę, AI, miecz, przełączenie na łuk, naciąg i strzały, magię, uniki oraz powrót do miecza. Wszystkie 900 prezentacji przeszło przez DXGI / V-sync z interwałem 1, bez zasłonięć i urządzenia audio. Raport: `dist/benchmark-v23-fullscreen.txt`. Wynik dotyczy tego komputera i scenariusza.
+
+Paczka `Emberfall-Windows-x64.zip`: **7 043 194 bajty** (około **7,04 MB**). Wypakowano do osobnego katalogu i potwierdzono SHA256 finalnego EXE oraz wszystkich **78 zasobów**, w tym nowego atlasu i dźwięku łuku. Instrukcja ma wersję 0.23 i opis 20 strzał oraz koła. Wypakowana gra przeszła **65/65 testów łuku i koła oraz 16/16 grzybów** z `--no-audio`. Raport: `dist/package-test-v23.txt`.
+
 ## Wersja 0.22 — jadalne grzyby
 
 Sprawdzone 9 października 2026 w docelowym projekcie `C:\Users\Amadeusz\Documents\GitHub\gra-rpg`. Wszystkie uruchomienia odbyły się z `--no-audio`; nie otwierano urządzenia audio i nie zmieniano preferencji dźwięku gracza.

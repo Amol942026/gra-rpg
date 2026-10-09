@@ -14,11 +14,13 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "patrol_tests.hpp"
 #include "forest_loot_tests.hpp"
 #include "mushroom_tests.hpp"
+#include "bow_tests.hpp"
 int main(){
  corpseTests();
  patrolTests();
  forestLootTests();
  mushroomTests();
+ bowTests();
  Game g;check(g.ground.empty(),"new game starts without any ground items");
  g.addGround(item(Kind::Sword,1),{7.2f,18.2f});g.addGround(item(Kind::Health,0,2),{8.2f,18.1f});g.addGround(item(Kind::Helmet),{9,18.7f});
  int n=total(g);int id=g.ground[0].id;

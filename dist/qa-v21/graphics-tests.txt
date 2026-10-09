@@ -321,4 +321,6 @@ PASS: detailed item icon is visible and fits inside backpack bounds
 PASS: detailed item icon is visible and fits inside backpack bounds
 PASS: detailed item icon is visible and fits inside backpack bounds
 PASS: detailed item icon is visible and fits inside backpack bounds
-Checks: 227; failures: 0
+PASS: detailed item icon is visible and fits inside backpack bounds
+PASS: detailed item icon is visible and fits inside backpack bounds
+Checks: 229; failures: 0

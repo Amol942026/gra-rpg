@@ -13,6 +13,8 @@
 namespace ember {
 constexpr int MapSize=48, BagSize=25, EquipSize=6;
 constexpr int MushroomCount=36,MushroomHealing=10;
+constexpr int WeaponWheelSize=8;
+constexpr float BowDrawDuration=1.4f,BowMinRange=2,BowMaxRange=12,BowCooldown=.38f;
 constexpr float MapWalkMin=1.6f,MapWalkMax=MapSize-2.6f;
 
 constexpr float WalkSpeed=3.8f, BootsSpeed=4.3f;
@@ -48,6 +50,8 @@ struct Enemy {
 };
 struct Effect { V pos; std::string text; float life; int color; };
 struct Fireball { V pos,velocity;float remaining=FireballRange,damage=0; };
+struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
+struct Arrow {V pos,velocity;float remaining,damage;};
 struct Explosion { V pos;float life=.35f; };
 inline float segmentCircle(V start,V delta,V center,float radius){
  V offset=start-center;float c=offset.x*offset.x+offset.y*offset.y-radius*radius;
@@ -65,6 +69,8 @@ struct Game {
  AnimationState animation{};
  std::array<Item,BagSize> bag{};std::array<Item,EquipSize> equipment{};
  std::vector<Ground> ground,forage;std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Effect> effects;
+ std::array<WeaponBinding,WeaponWheelSize> weaponWheel{};
+ std::vector<Arrow> arrows;bool bowDrawing=false;float bowDrawTime=0,bowReleaseTime=0,lastBowCharge=0;V bowAim{0,-1};
  std::vector<Fireball> fireballs;std::vector<Explosion> explosions;
  Attributes attributes{};int attributePoints=0;bool allocationRequired=false;
  Spell selectedSpell=Spell::Fireball;float manaRegenTime=0;
@@ -77,7 +83,8 @@ struct Game {
  std::string message="Ruiny czekają. PPM na ciele potwora otwiera jego łup.";float messageTime=8;
  explicit Game(unsigned seed=12593):rng(seed){
   equipment[0]=item(Kind::Sword);equipment[3]=item(Kind::Armor);
-  bag[0]=item(Kind::Health,0,5);bag[1]=item(Kind::Mana,0,3);bag[2]=item(Kind::Shield);bag[3]=item(Kind::Boots);
+  bag[0]=item(Kind::Health,0,5);bag[1]=item(Kind::Mana,0,3);bag[2]=item(Kind::Shield);bag[3]=item(Kind::Boots);bag[4]=item(Kind::Bow);bag[5]=item(Kind::Arrow,0,20);
+  weaponWheel[0]={Kind::Sword,0};weaponWheel[1]={Kind::Bow,0};
   const std::array<V,14> loc={V{10,14},V{13,16},V{6,12},V{16,17},V{17,12},V{12,8},V{19,20},V{7,6},V{22,14},V{22,9},V{16,6},V{24,20},V{4,22},V{21,5}};
   auto spawn=[&](int id,int type,V pos){float h=enemyInfo(type).health;enemies.push_back({id,type,pos,pos,h,h});enemies.back().patrolWait=.3f+(hash(id,17)%1000)*.0015f;};
   for(int i=0;i<13;i++)spawn(i,i%3,loc[i]);
@@ -147,7 +154,7 @@ struct Game {
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
   rollDirection=normalized(length(input)>.001f?input:directions[int(animation.direction)]);
   facing=rollDirection;animation.face(facing.x,facing.y);animation.moving=false;
-  rollRemaining=RollDuration;rollCd=RollCooldown;swing=0;sound(Cue::Roll,player);return true;
+  cancelBow();rollRemaining=RollDuration;rollCd=RollCooldown;swing=0;sound(Cue::Roll,player);return true;
  }
  void say(std::string s){message=s;messageTime=4;}
  void addGround(Item i,V p){ground.push_back({nextGround++,i,p});}
@@ -174,10 +181,11 @@ struct Game {
   if(!accepts(to,*a)||!accepts(from,*b)){say("Ten przedmiot nie pasuje do wybranego miejsca.");return false;}
   if(stackable(a->kind)&&a->kind==b->kind&&a->tier==b->tier){int n=std::min(a->count,99-b->count);if(n<=0)return false;b->count+=n;a->count-=n;if(a->count==0)*a={};}
   else std::swap(*a,*b);
+  if((to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0))cancelBow();
   sound(to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
   say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
  }
- bool drop(Slot from,V p){Item* a=get(from);if((from.place==Place::Corpse||from.place==Place::Forage)||dead()||allocationRequired||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
+ bool drop(Slot from,V p){Item* a=get(from);if((from.place==Place::Corpse||from.place==Place::Forage)||dead()||allocationRequired||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0)cancelBow();Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
  bool use(Slot s){if(s.place==Place::Forage){say("Najpierw zbierz grzyb do plecaka.");return false;}Item* a=get(s);if(s.place==Place::Corpse||dead()||allocationRequired||potionCd>0||!a||a->empty()||!reachable(s))return false;
   bool mushroom=a->kind==Kind::Mushroom;
   if(mushroom){if(hp>=maxHp()){say("Zdrowie jest już pełne.");return false;}float restored=std::min(float(MushroomHealing),float(maxHp())-hp);hp+=restored;effects.push_back({player,"+"+std::to_string(int(restored))+" HP",1.3f,1});}
@@ -185,6 +193,7 @@ struct Game {
   else if(a->kind==Kind::Mana){if(mana>=maxMana()){say("Mana jest już pełna.");return false;}mana=std::min(float(maxMana()),mana+35);effects.push_back({player,"+35 MP",1.3f,2});}else return false;
   if(--a->count<=0)*a={};potionCd=.65f;sound(Cue::Potion,player);say(mushroom?"Zjedzono borowika. Odzyskano zdrowie.":"Wypito miksturę.");return true;
  }
+ #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
  bool walkable(V p)const{if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
  void move(V delta){V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(length(delta)>.001f)facing=normalized(delta);}
@@ -195,10 +204,10 @@ struct Game {
   e.loot=rollEnemyLoot(e.type,rng);
   if(e.type==3){bossDead=true;say("Strażnik pokonany! PPM na ciele otwiera legendarny łup.");}
   else say("Przeciwnik pokonany. Otwórz jego ciało prawym przyciskiem myszy.");
-  while(xp>=level*80){xp-=level*80;level++;attributePoints+=PointsPerLevel;allocationRequired=true;hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
+  while(xp>=level*80){xp-=level*80;level++;attributePoints+=PointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
  }
  bool attack(){
-  if(dead()||allocationRequired||rolling()||attackCd>0)return false;
+  if(dead()||allocationRequired||rolling()||attackCd>0||equipment[0].kind==Kind::Bow)return false;
   attackCd=.46f;swing=SwingDuration;sound(Cue::Swing,player);
   // Capture once: a kill can level up the player during this same swing.
   const float amount=float(damage());
@@ -206,7 +215,7 @@ struct Game {
   return true;
  }
  bool spell(V aim={}){
-  if(dead()||allocationRequired||rolling()||spellCd>0)return false;
+  if(dead()||allocationRequired||rolling()||spellCd>0||bowDrawing)return false;
   if(selectedSpell==Spell::None){say("Wybierz czar w księdze (K lub kafelek czaru).");sound(Cue::Reject,player);return false;}
   if(mana<FireballCost){say("Kula ognia wymaga 10 many.");sound(Cue::Reject,player);return false;}
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
@@ -295,10 +304,11 @@ struct Game {
  // attackPressed is a single press event, never a held button.
  void update(float dt,V input,bool attackPressed,bool running=false){
   if(allocationRequired)return;
-  dt=std::clamp(dt,0.f,.05f);time+=dt;auto tick=[dt](float&v){v=std::max(0.f,v-dt);};tick(attackCd);tick(spellCd);tick(potionCd);tick(swing);tick(hurt);tick(messageTime);tick(rollCd);
+  dt=std::clamp(dt,0.f,.05f);time+=dt;auto tick=[dt](float&v){v=std::max(0.f,v-dt);};tick(attackCd);tick(spellCd);tick(potionCd);tick(swing);tick(hurt);tick(messageTime);tick(rollCd);tick(bowReleaseTime);
   for(auto&e:effects)e.life-=dt;effects.erase(std::remove_if(effects.begin(),effects.end(),[](auto&e){return e.life<=0;}),effects.end());
   for(auto& e:explosions)e.life-=dt;explosions.erase(std::remove_if(explosions.begin(),explosions.end(),[](auto& e){return e.life<=0;}),explosions.end());
-  if(dead()){animation.moving=false;rollRemaining=0;closeCorpse();return;}
+  if(dead()){cancelBow();animation.moving=false;rollRemaining=0;closeCorpse();return;}
+  if(bowDrawing){if(equipment[0].kind!=Kind::Bow||ammoCount()<=0)cancelBow();else bowDrawTime=std::min(BowDrawDuration,bowDrawTime+dt);}
   const bool wasRolling=rolling();const float rollElapsed=RollDuration-rollRemaining;
   V before=player;float walkTime=dt;
   if(wasRolling){
@@ -308,11 +318,12 @@ struct Game {
    for(int i=0;i<steps;i++)move(rollDirection*(stepTime*RollSpeed/steps));
    rollRemaining=std::max(0.f,rollRemaining-stepTime);if(rollRemaining<.00001f)rollRemaining=0;
   }
-  const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(running?RunMultiplier:1.f);
+  const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(running?RunMultiplier:1.f)*(bowDrawing?.55f:1.f);
   move(normalized(input)*(walkTime*speed));
   if(openedCorpse>=0&&!corpseReachable(openedCorpse))closeCorpse();
   if(wasRolling){animation.advance(0,0,dt);animation.face(rollDirection.x,rollDirection.y);}
   else animation.advance(player.x-before.x,player.y-before.y,dt);
+  if(bowDrawing)animation.face(bowAim.x,bowAim.y);
   if(!wasRolling){stepDistance+=distance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
   if(mana<maxMana()){
    manaRegenTime+=dt;
@@ -320,6 +331,7 @@ struct Game {
   }else manaRegenTime=0;
   if(attackPressed&&!wasRolling)attack();
   if(allocationRequired)return;
+  updateArrows(dt);if(allocationRequired)return;
   updateFireballs(dt);if(allocationRequired)return;
   std::vector<V> oldPositions,desired(enemies.size());oldPositions.reserve(enemies.size());
   for(size_t i=0;i<enemies.size();i++){auto& e=enemies[i];oldPositions.push_back(e.pos);tick(e.flash);tick(e.attack);tick(e.strike);if(!e.alive){e.animation.moving=false;continue;}float d=distance(player,e.pos);
