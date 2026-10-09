@@ -26,10 +26,14 @@ Inspection inspectWorld(WorldHover hit) {
         const auto& prop=propInfo(game.props[hit.index].type);
         info.source=hit.kind;info.name=prop.name;info.kind=prop.kind;
         info.detail="Przeszkoda terenowa.";info.secondary="Blokuje ruch i przeturlanie.";
+    }else if(hit.kind==HoverKind::Forage){
+        const Item* value=game.get({Place::Forage,hit.index});if(!value||value->empty())return info;
+        info.source=hit.kind;info.name=itemName(*value);info.kind="Grzyb jadalny";info.detail="Po zjedzeniu przywraca 10 HP.";
+        info.secondary=game.reachable({Place::Forage,hit.index})?"Przeciągnij do plecaka; PPM, aby zjeść.":"Podejdź bliżej, aby zebrać.";
     }else if(hit.kind==HoverKind::Ground){
         const Item* value=game.get({Place::Ground,hit.index});if(!value||value->empty())return info;
         info.source=hit.kind;info.name=itemName(*value);
-        info.kind=gearSlot(value->kind)>=0?"Wyposażenie":material(value->kind)?"Materiał / trofeum":value->kind==Kind::Health||value->kind==Kind::Mana?"Mikstura":"Skarb";
+        info.kind=value->kind==Kind::Mushroom?"Grzyb jadalny":gearSlot(value->kind)>=0?"Wyposażenie":material(value->kind)?"Materiał / trofeum":value->kind==Kind::Health||value->kind==Kind::Mana?"Mikstura":"Skarb";
         info.detail=std::string(rarityName(value->tier))+"  ·  Ilość: "+std::to_string(value->count);
         info.secondary=game.reachable({Place::Ground,hit.index})?"Przeciągnij łup do plecaka.":"Podejdź bliżej, aby podnieść.";
     }

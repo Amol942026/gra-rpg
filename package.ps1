@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 Add-Type -AssemblyName System.IO.Compression,System.IO.Compression.FileSystem
 $packagePath = Join-Path $PSScriptRoot 'Emberfall-Windows-x64.zip'
@@ -26,12 +26,18 @@ URUCHOMIENIE
 Folder assets musi pozostac obok pliku Emberfall.exe.
 Gra startuje domyslnie na pelnym ekranie. F11 przywraca tryb okna.
 Synchronizacja z monitorem oraz wygladzanie terenu poprawiaja plynnosc ruchu.
-Nowa gra nie ma przedmiotow na ziemi. Poczatkowy sprzet zostaje w plecaku.
+Poczatkowy sprzet zostaje w plecaku; nie ma rozrzuconych startowych przedmiotow.
+Wersja 0.22: w kazdej wyprawie rosnie 36 borowikow w losowych miejscach.
+Podejdz na 2,5 pola i przeciagnij grzyb z mapy lub panelu W ZASIEGU do plecaka.
+PPM na borowiku w plecaku przywraca 10 HP (do maksimum); stos do 99 sztuk.
+Przy pelnym HP grzyb nie znika. Pelny plecak pozostawia go w lesie.
 Las ma 48 x 48 pol, nowe sciezki, brzozy, deby i grzyby. Na mapie jest
 46 przeciwnikow z 8 gatunkow, w tym dziki, pajaki, rozbojnicy i ozywione drzewa.
 Kazdy gatunek ma wlasny loot: m.in. kiel wilka 75%, siersc wilka 55%.
 Losowania sa niezalezne; dokladne szanse i ilosci znajdziesz w LOOT.md.
 Materialy lacza sie w stosy do 99 sztuk. Nowy sprzet: sztylet, plaszcz, amulet.
+Wersja 0.21 ma bardziej szczegolowe postacie, potwory, drzewa, teren i ikony.
+Nowe ksztalty i tekstury zachowuja osiem kierunkow animacji i wiatr.
 Potwory patroluja okolice respawnu, gdy nie widza bohatera. Wykrycie go
 rozpoczyna poscig; po utracie widoku wracaja do domu. Przeszkody zaslaniaja widok.
 

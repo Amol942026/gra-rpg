@@ -12,6 +12,7 @@
 
 namespace ember {
 constexpr int MapSize=48, BagSize=25, EquipSize=6;
+constexpr int MushroomCount=36,MushroomHealing=10;
 constexpr float MapWalkMin=1.6f,MapWalkMax=MapSize-2.6f;
 
 constexpr float WalkSpeed=3.8f, BootsSpeed=4.3f;
@@ -56,14 +57,14 @@ inline float segmentCircle(V start,V delta,V center,float radius){
  if(discriminant<0)return 2;
  float t=(-b-std::sqrt(discriminant))/a;return t>=0&&t<=1?t:2;
 }
-enum class Place { None,Bag,Equip,Ground,Corpse };
+enum class Place { None,Bag,Equip,Ground,Corpse,Forage };
 struct Slot { Place place=Place::None; int index=-1; int owner=-1; };
 struct Game {
  std::mt19937 rng{12593};
  V player{8,19},facing{0,-1};
  AnimationState animation{};
  std::array<Item,BagSize> bag{};std::array<Item,EquipSize> equipment{};
- std::vector<Ground> ground;std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Effect> effects;
+ std::vector<Ground> ground,forage;std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Effect> effects;
  std::vector<Fireball> fireballs;std::vector<Explosion> explosions;
  Attributes attributes{};int attributePoints=0;bool allocationRequired=false;
  Spell selectedSpell=Spell::Fireball;float manaRegenTime=0;
@@ -98,9 +99,23 @@ struct Game {
    if(h%density!=0||onPath(x,y))continue;V p{(float)x,(float)y};
    if(distance(p,player)<3.5f)continue;bool near=false;for(auto&e:enemies)if(distance(p,e.home)<1.7f)near=true;
    const int varieties[]={0,4,5,0,4,5,1,2,6};
-   if(!near)props.push_back({p,varieties[(h>>8)%9],.8f+(h%6)*.09f});
+   int type=varieties[(h>>8)%9];
+   if(!near&&type!=6)props.push_back({p,type,.8f+(h%6)*.09f});
   }
   props.push_back({{19,4},3,1});props.push_back({{23,4},3,1});props.push_back({{19,7},3,1});props.push_back({{23,7},3,1});
+  plantMushrooms(seed);
+ }
+ void plantMushrooms(unsigned seed){
+  // A separate generator keeps gathering independent from monster drop rolls.
+  std::mt19937 plants(seed^0x6d757368u);std::uniform_real_distribution<float> coordinate(3.f,MapSize-4.f);
+  for(int attempt=0;attempt<10000&&int(forage.size())<MushroomCount;attempt++){
+   V pos{coordinate(plants),coordinate(plants)};
+   if(!walkable(pos)||onPath(int(std::round(pos.x)),int(std::round(pos.y)))||distance(pos,player)<3.5f)continue;
+   bool clear=true;for(const auto& p:props)if(distance(pos,p.pos)<std::max(2.2f,propRadius(p.type)+.8f))clear=false;
+   for(const auto& e:enemies)if(distance(pos,e.home)<1.4f)clear=false;
+   for(const auto& mushroom:forage)if(distance(pos,mushroom.pos)<2.2f)clear=false;
+   if(clear)forage.push_back({int(forage.size())+1,item(Kind::Mushroom),pos});
+  }
  }
  static unsigned hash(int x,int y){unsigned n=unsigned(x)*374761393u+unsigned(y)*668265263u+8713u;n=(n^(n>>13))*1274126177u;return n^(n>>16);}
  static bool onPath(int x,int y){return std::abs(x+y-27)<2||(x>=19&&x<=23&&y>=3&&y<=8)||(x>=7&&x<=10&&y>=17&&y<=20)
@@ -145,14 +160,14 @@ struct Game {
   openedCorpse=id;sound(Cue::Ui,player);return true;
  }
  void closeCorpse(){openedCorpse=-1;}
- Item* get(Slot s){if(s.place==Place::Bag&&s.index>=0&&s.index<BagSize)return &bag[s.index];if(s.place==Place::Equip&&s.index>=0&&s.index<EquipSize)return &equipment[s.index];if(s.place==Place::Ground)for(auto&g:ground)if(g.id==s.index)return &g.value;if(s.place==Place::Corpse&&s.index>=0&&s.index<CorpseLootSize)if(Enemy* e=findCorpse(s.owner))return &e->loot[s.index];return nullptr;}
- bool reachable(Slot s)const{if(s.place==Place::Corpse)return corpseReachable(s.owner);if(s.place!=Place::Ground)return true;for(const auto&g:ground)if(g.id==s.index)return distance(player,g.pos)<=2.5f;return false;}
+ Item* get(Slot s){if(s.place==Place::Bag&&s.index>=0&&s.index<BagSize)return &bag[s.index];if(s.place==Place::Equip&&s.index>=0&&s.index<EquipSize)return &equipment[s.index];if(s.place==Place::Forage)for(auto&g:forage)if(g.id==s.index)return &g.value;if(s.place==Place::Ground)for(auto&g:ground)if(g.id==s.index)return &g.value;if(s.place==Place::Corpse&&s.index>=0&&s.index<CorpseLootSize)if(Enemy* e=findCorpse(s.owner))return &e->loot[s.index];return nullptr;}
+ bool reachable(Slot s)const{if(s.place==Place::Corpse)return corpseReachable(s.owner);if(s.place==Place::Forage){for(const auto&g:forage)if(g.id==s.index)return distance(player,g.pos)<=2.5f;return false;}if(s.place!=Place::Ground)return true;for(const auto&g:ground)if(g.id==s.index)return distance(player,g.pos)<=2.5f;return false;}
  static bool accepts(Slot s,Item i){return s.place!=Place::Equip||i.empty()||gearSlot(i.kind)==s.index;}
  bool transfer(Slot from,Slot to){
-  if(dead()||allocationRequired||(from.place==to.place&&from.index==to.index&&from.owner==to.owner)||to.place==Place::Corpse)return false;
+  if(dead()||allocationRequired||(from.place==to.place&&from.index==to.index&&from.owner==to.owner)||to.place==Place::Corpse||to.place==Place::Forage)return false;
   Item* a=get(from);Item* b=get(to);if(!a||!b||a->empty())return false;
-  if(from.place==Place::Corpse){
-   if(openedCorpse!=from.owner)return false;
+  if(from.place==Place::Corpse||from.place==Place::Forage){
+   if(from.place==Place::Corpse&&openedCorpse!=from.owner)return false;
    if(to.place!=Place::Bag||(!b->empty()&&(!stackable(a->kind)||a->kind!=b->kind||a->tier!=b->tier))){say("Przeciągnij łup na wolne pole plecaka lub pasujący stos.");return false;}
   }
   if(!reachable(from)||!reachable(to)){say("Podejdź bliżej przedmiotu (maks. 2,5 pola).");return false;}
@@ -162,11 +177,13 @@ struct Game {
   sound(to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
   say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
  }
- bool drop(Slot from,V p){Item* a=get(from);if(from.place==Place::Corpse||dead()||allocationRequired||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
- bool use(Slot s){Item* a=get(s);if(s.place==Place::Corpse||dead()||allocationRequired||potionCd>0||!a||a->empty()||!reachable(s))return false;
-  if(a->kind==Kind::Health){if(hp>=maxHp()){say("Zdrowie jest już pełne.");return false;}hp=std::min(float(maxHp()),hp+50);effects.push_back({player,"+50 HP",1.3f,1});}
+ bool drop(Slot from,V p){Item* a=get(from);if((from.place==Place::Corpse||from.place==Place::Forage)||dead()||allocationRequired||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
+ bool use(Slot s){if(s.place==Place::Forage){say("Najpierw zbierz grzyb do plecaka.");return false;}Item* a=get(s);if(s.place==Place::Corpse||dead()||allocationRequired||potionCd>0||!a||a->empty()||!reachable(s))return false;
+  bool mushroom=a->kind==Kind::Mushroom;
+  if(mushroom){if(hp>=maxHp()){say("Zdrowie jest już pełne.");return false;}float restored=std::min(float(MushroomHealing),float(maxHp())-hp);hp+=restored;effects.push_back({player,"+"+std::to_string(int(restored))+" HP",1.3f,1});}
+  else if(a->kind==Kind::Health){if(hp>=maxHp()){say("Zdrowie jest już pełne.");return false;}hp=std::min(float(maxHp()),hp+50);effects.push_back({player,"+50 HP",1.3f,1});}
   else if(a->kind==Kind::Mana){if(mana>=maxMana()){say("Mana jest już pełna.");return false;}mana=std::min(float(maxMana()),mana+35);effects.push_back({player,"+35 MP",1.3f,2});}else return false;
-  if(--a->count<=0)*a={};potionCd=.65f;sound(Cue::Potion,player);say("Wypito miksturę.");return true;
+  if(--a->count<=0)*a={};potionCd=.65f;sound(Cue::Potion,player);say(mushroom?"Zjedzono borowika. Odzyskano zdrowie.":"Wypito miksturę.");return true;
  }
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
  bool walkable(V p)const{if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}

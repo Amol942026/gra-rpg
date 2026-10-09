@@ -1,5 +1,36 @@
 # Weryfikacja prototypu
 
+## Wersja 0.22 — jadalne grzyby
+
+Sprawdzone 9 października 2026 w docelowym projekcie `C:\Users\Amadeusz\Documents\GitHub\gra-rpg`. Wszystkie uruchomienia odbyły się z `--no-audio`; nie otwierano urządzenia audio i nie zmieniano preferencji dźwięku gracza.
+
+- Każda nowa wyprawa losuje **36 borowików** na przechodnim podłożu lasu, poza ścieżkami, drzewami i startem bohatera. Losowanie roślin ma osobny generator, więc nie zmienia szans łupu z potworów. Dawne dekoracyjne kępki zastąpiono zbieranymi grzybami; zachowano układ pozostałych dekoracji.
+- Grzyby wskazuje się i podświetla na mapie. Panel pod kursorem pokazuje nazwę, rodzaj i **10 HP**. LPM przeciąga grzyb z mapy lub panelu W ZASIĘGU do plecaka, bez ataku mieczem. Stosy mieszczą 99 sztuk. Pełny plecak i anulowane lub zbyt dalekie przeciąganie nie usuwają rośliny.
+- **PPM na grzybie w plecaku** leczy o 10 HP do aktualnego maksimum i usuwa jedną sztukę. Pełne HP pozostawia jedzenie, ostatnia sztuka czyści slot, a używanie podlega dotychczasowemu odnowieniu 0,65 s. Zwiększone HP z Wytrzymałości jest uwzględniane.
+- **1022/1022 sprawdzeń logiki i animacji**, w tym miejsca roślin dla 16 ziaren, powtarzalność oraz zmiana pozycji, zachowanie losowania łupu, zakres zbierania, pełny plecak i stos, brak duplikowania, leczenie, odnowienie i maksimum HP.
+- **16/16 nowych sprawdzeń interakcji** poprzez te same funkcje wskazywania i przeciągania co mysz. Raport: `dist/qa-v22/mushroom-tests.txt`. Obejrzano eksporty naturalnego lasu i borowików w plecaku z opisem użycia. Nowy atlas `items-v22.png` ma trzy wiersze dla 27 ikon.
+- Przeszły także **227 sprawdzeń grafiki, 25 lasu, 41 sterowania, 40 ciał i 82 wskazywania kursorem**. Wszystkie raporty mają zero błędów. Gra i testy zostały skompilowane C++17 z dotychczasowymi bibliotekami. Przy kopiowaniu zasobów pominięto pliki o identycznej zawartości, aby nie nadpisywać PNG trzymanego przez podgląd; sprawdzono SHA256 całego zestawu zasobów źródłowych i w dystrybucji.
+
+**900 klatek, pełny ekran 1920 × 1080, monitor 60 Hz:** **60,0545 FPS**, średnio **10,0545 ms CPU**, P99 klatki **17,0073 ms**, maksimum **17,4981 ms**, **0 klatek ponad 25 ms**. Wszystkie 900 prezentacji użyło DXGI / V-sync z interwałem 1, bez zasłonięć i otwarcia urządzenia audio. Raport: `dist/benchmark-v22-fullscreen.txt`. Wynik dotyczy tego komputera i scenariusza diagnostycznego.
+
+Paczka `Emberfall-Windows-x64.zip`: **6 994 353 bajty** (około **6,99 MB**). Potwierdzono SHA256 finalnego EXE i wszystkich **76 zasobów** oraz instrukcję 0.22 z opisem borowików. Wypakowana gra przeszła **16/16 testów grzybów** z `--no-audio`. Raporty: `dist/package-test-v22.txt`, `dist/qa-v22/packaged-mushroom-tests.txt`.
+
+## Wersja 0.21 — odświeżenie grafiki
+
+Sprawdzone 9 października 2026. Każde uruchomienie gry, testu graficznego i benchmarku odbyło się z `--no-audio`, bez otwierania urządzenia audio i bez zmiany preferencji gracza.
+
+- Przebudowano obecne sylwetki bohatera i wszystkich ośmiu gatunków przeciwników: obłe bryły, cieniowanie, detale futra, pancerza, drewna, zbroi, tarczy i płaszczy. Ciała używają tych samych nowych brył. Osiem kierunków, chód, bieg, atak i przewrót są zachowane. Górną granicę wskazywania ożywionego drzewa dopasowano do jego korony; parametry walki pozostały bez zmian.
+- Wszystkie siedem dekoracji otrzymało nowe tekstury: korony z drobnymi liśćmi, pnie, korzenie, mech, pęknięcia, jagody, grzyby i zdobienia kolumn. Teren ma trawę, drobne kamienie, kwiaty i gałązki oraz mniej wyraźną siatkę. Wszystkie 26 ikon mają dodatkowe detale materiałów i miękkie cienie. Ogień ma iskry i dym.
+- Detale terenu i dekoracji są wypiekane do tekstur raz przy starcie. Animowane sylwetki odrzucają tylne powierzchnie zamkniętych brył. Obrysy oraz wskazywanie korzystają z tej samej aktualnej geometrii. Nie wprowadzono odczytu GPU ani blokujących barier do zwykłych klatek rozgrywki.
+- **960/960 sprawdzeń logiki i animacji**. **226/226 nowych sprawdzeń grafiki**: obraz GPU wszystkich dziewięciu sylwetek w ośmiu kierunkach, bohater podczas cięcia oraz dwóch faz przewrotu w ośmiu kierunkach, kompletność części, zgodność wnętrza sylwetki i pustych miejsc z geometrią wskazywania, brak ucięcia siedmiu dekoracji i 26 ikon. Obejrzano arkusz wszystkich kierunków i końcowy obraz gry. Raport: `dist/qa-v21/graphics-tests.txt`; obrazy: `dist/qa-v21/all-actors-8-directions.png`, `dist/screenshots/emberfall-v21.png`.
+- Przeszły także **25 testów nowego lasu i gatunkowego łupu, 40 ciał, 38 środowiska i F11, 82 kursora, 193 synchronizacji, 11 ruchu oraz 27 prezentacji**. Ciała otwierają się PPM, łup przeciąga się do plecaka, korony poruszają się na wietrze, a mysz odpowiada widocznemu obrazowi. Arkusze zamachu i przewrotu wyeksportowano dotychczasowymi narzędziami QA.
+
+**1800 klatek, pełny ekran 1920 × 1080, monitor 60 Hz:** **60,0547 FPS**, średnio 10,0246 ms CPU, P99 klatki **17,0236 ms**, maksimum po rozgrzewce **17,7079 ms**, **0 klatek ponad 25 ms**. DXGI przyjął wszystkie 1800 prezentacji z interwałem 1, bez zasłoniętych prezentacji; pominięto 1800 natywnych przełączeń OpenGL. Scenariusz zawiera przemieszczanie kamery przez las, AI, walkę, magię i uniki. Raport: `dist/benchmark-v21-long.txt`. Wynik dotyczy tego komputera i scenariusza. Eksport PNG wydłuża klatki diagnostyczne, więc liczniki FPS na arkuszach QA nie są pomiarem płynności.
+
+Grafiki są nadal tworzone lokalnie w kodzie projektu. Nie wymagają nowych zależności ani pobierania zasobów przy uruchamianiu. Aktualne eksporty: `assets/generated/terrain-v21.png`, `characters-v21.png`, `items-v21.png`, `prop-v21-0.png`–`prop-v21-6.png`.
+
+Paczka `Emberfall-Windows-x64.zip`: **6 974 500 bajtów**, około **6,97 MB**. Wypakowano do nowego katalogu, potwierdzono SHA256 finalnego EXE i wszystkich **75 zasobów** oraz instrukcję wersji 0.21. Wypakowana gra przeszła **226/226 sprawdzeń grafiki i 25/25 lasu oraz łupu** z `--no-audio`. Obejrzano rzeczywisty końcowy obraz z wypakowanej kopii: `dist/qa-v21/packaged-forest.png`. Raport: `dist/package-test-v21.txt`.
+
 ## Wersja 0.20 — większy las, nowe gatunki i drop rate
 
 Sprawdzone 8 października 2026. Wszystkie uruchomienia gry odbyły się z `--no-audio`, bez otwierania urządzenia dźwiękowego i zmiany zapisanych preferencji gracza.

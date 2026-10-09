@@ -42,12 +42,16 @@ V toWorld(Vector2 p){float x=(p.x-WorldW*.5f)/40+game.player.x-game.player.y,y=(
 Rectangle bagRect(int i){return{1080.f+(i%5)*65,366.f+(i/5)*44,57,40};}
 Rectangle equipRect(int i){return{1080.f+(i%3)*109,207.f+(i/3)*51,98,44};}
 std::vector<int> nearby(){std::vector<int> a;for(auto&g:game.ground)if(!g.value.empty()&&distance(g.pos,game.player)<=2.5f)a.push_back(g.id);return a;}
+std::vector<Slot> nearbySlots(){
+ std::vector<Slot> slots;for(int id:nearby())slots.push_back({Place::Ground,id});
+ for(const auto& plant:game.forage)if(!plant.value.empty()&&distance(plant.pos,game.player)<=2.5f)slots.push_back({Place::Forage,plant.id});return slots;
+}
 Rectangle lootRect(int i){return{1080.f+(i%5)*65,620,57,44};}
 Rectangle corpseCloseRect(){return{1375,590,27,25};}
 Rectangle actionRect(int i){return{343.f+i*77,799,65,63};}
 #include "audio_ui.hpp"
 #include "display_ui.hpp"
-enum class HoverKind { None, Enemy, Prop, Ground, Corpse };
+enum class HoverKind { None, Enemy, Prop, Ground, Corpse, Forage };
 struct WorldHover { bool tileValid=false; V tile{}; HoverKind kind=HoverKind::None; int index=-1; };
 struct DrawObject { float depth; int type,index; };
 WorldHover hovered{};
@@ -56,23 +60,26 @@ bool worldPointerAllowed(Vector2 point);
 Slot hoverSlot(){
  for(int i=0;i<BagSize;i++)if(inside(bagRect(i)))return{Place::Bag,i};for(int i=0;i<EquipSize;i++)if(inside(equipRect(i)))return{Place::Equip,i};
  if(game.findCorpse(game.openedCorpse)){for(int i=0;i<CorpseLootSize;i++)if(inside(lootRect(i)))return{Place::Corpse,i,game.openedCorpse};}
- else {auto n=nearby();for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size()&&inside(lootRect(i)))return{Place::Ground,n[j]};}}
+ else {auto n=nearbySlots();for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size()&&inside(lootRect(i)))return n[j];}}
  WorldHover hit=pickWorld(mouse);if(hit.kind==HoverKind::Ground)return{Place::Ground,hit.index};
+ if(hit.kind==HoverKind::Forage)return{Place::Forage,hit.index};
  return{};
 }
 void beginDrag(Slot s){Item* p=game.get(s);if(!p||p->empty())return;if(game.reachable(s))dragging=s;else game.say("Podejdź bliżej, aby podnieść przedmiot.");}
 void finishDrag(){
  if(dragging.place==Place::None)return;Slot dest=hoverSlot();
  if(dest.place!=Place::None)game.transfer(dragging,dest);
- else if(worldPointerAllowed(mouse)){if(dragging.place==Place::Corpse)game.say("Przeciągnij łup z ciała do plecaka.");else if(!game.drop(dragging,toWorld(mouse)))game.say("Odłóż przedmiot bliżej postaci, na wolne pole.");}
+ else if(worldPointerAllowed(mouse)){if(dragging.place==Place::Corpse||dragging.place==Place::Forage)game.say("Przeciągnij łup z ciała do plecaka.");else if(!game.drop(dragging,toWorld(mouse)))game.say("Odłóż przedmiot bliżej postaci, na wolne pole.");}
  dragging={};
 }
 void icon(Item i,float x,float y,float s=1,float alpha=1){
- auto C=[alpha](Color c){return Fade(c,alpha);};Color edge=C(rgb(12,19,22)),steel=C(rgb(172,195,192)),light=C(rgb(226,233,210)),wood=C(rgb(121,80,46)),gold=C(Gold),tint=C(rarity(i.tier));
+ auto C=[alpha](Color c){return Fade(c,alpha*c.a/255.f);};Color edge=C(rgb(12,19,22)),steel=C(rgb(172,195,192)),light=C(rgb(226,233,210)),wood=C(rgb(121,80,46)),gold=C(Gold),tint=C(rarity(i.tier));
  auto R=[&](float a,float b,float w,float h,Color c){rect(x+a*s,y+b*s,w*s,h*s,c);};
  auto L=[&](float a,float b,float d,float e,Color c,float w){line(x+a*s,y+b*s,x+d*s,y+e*s,c,w*s);};
  auto P=[&](std::initializer_list<Vector2> vs,Color c){std::vector<Vector2> p;for(auto v:vs)p.push_back({x+v.x*s,y+v.y*s});for(size_t j=1;j+1<p.size();j++){Vector2 a=p[0],b=p[j],d=p[j+1];if((b.x-a.x)*(d.y-a.y)-(b.y-a.y)*(d.x-a.x)>0)std::swap(b,d);DrawTriangle(a,b,d,c);}};
  if(i.empty())return;
+ ellipse(x+1*s,y+19*s,16*s,3*s,C(rgb(5,12,16,70)));
+ if(i.tier>0)ellipse(x,y+1*s,18*s,18*s,C(Fade(tint,.09f)));
  switch(i.kind){
  case Kind::Sword:L(-11,15,13,-15,edge,8);L(-9,12,12,-14,steel,5);L(-9,12,12,-14,light,1);L(-13,5,-1,15,gold,4);L(-14,18,-8,11,wood,4);break;
  case Kind::Axe:L(-12,17,11,-15,edge,7);L(-12,17,11,-15,wood,4);P({{0,-13},{10,-19},{20,-9},{11,-1},{4,-5}},steel);L(10,-18,19,-9,light,2);break;
@@ -96,62 +103,65 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
  case Kind::RuneStone:P({{-13,-14},{0,-20},{15,-7},{11,16},{-3,20},{-16,7}},steel);L(-5,12,-5,-9,C(Blue),3);L(-5,-9,7,-3,C(Blue),3);L(7,-3,-5,4,C(Blue),3);break;
  case Kind::Dagger:L(-9,14,8,-10,edge,7);P({{4,-7},{16,-19},{10,-2}},steel);L(7,-9,15,-17,light,2);L(-9,12,-3,3,wood,4);L(-9,0,4,10,gold,3);break;
  case Kind::Cloak:P({{-9,-15},{8,-15},{13,-3},{20,18},{0,13},{-20,18},{-13,-4}},C(rgb(100,130,119)));P({{-8,-14},{0,-20},{9,-14},{7,-6},{-6,-6}},steel);L(-2,-2,-2,12,edge,2);ellipse(x,y-7*s,3*s,3*s,gold);break;
+ case Kind::Mushroom:
+  ellipse(x,y+10*s,9*s,10*s,C(rgb(221,201,156)));
+  P({{-5,1},{5,1},{8,17},{-7,17}},C(rgb(229,211,167)));L(-3,5,-2,14,wood,.8f);L(3,7,4,15,gold,.7f);
+  ellipse(x,y-1*s,19*s,8*s,C(rgb(83,50,28)));
+  P({{-19,-2},{-16,-11},{-8,-17},{3,-19},{13,-14},{19,-5},{20,0},{12,3},{-10,3}},C(rgb(142,82,39)));
+  ellipse(x-4*s,y-9*s,11*s,6*s,C(rgb(183,119,60)));L(-13,-8,-8,-12,C(rgb(222,161,88)),1.4f);
+  ellipse(x+10*s,y-3*s,2*s,s,C(rgb(111,60,29)));break;
  case Kind::Amulet:DrawRing({x,y-3*s},12*s,14*s,200,520,24,gold);P({{0,-6},{10,4},{5,17},{-5,17},{-10,4}},gold);diamond(x,y+6*s,6*s,9*s,C(rgb(226,151,65)));L(-3,1,-2,9,light,2);break;
+ default:break;
+ }
+ // Material-specific fine details stay legible at the actual backpack scale.
+ switch(i.kind){
+ case Kind::Sword:case Kind::Dagger:L(-6,9,9,-10,light,1);L(-11,13,-8,15,gold,1);ellipse(x-12*s,y+16*s,2*s,2*s,gold);break;
+ case Kind::Axe:L(11,-16,17,-10,light,1);L(-8,10,-5,13,gold,1);L(-4,5,-1,8,gold,1);break;
+ case Kind::Helmet:L(-9,-7,-6,-10,light,1);L(6,7,8,4,gold,1);R(-8,7,2,2,gold);break;
+ case Kind::Armor:for(float side:{-1.f,1.f}){L(side*6,-3,side*6,5,light,1);ellipse(x+side*12*s,y-5*s,2*s,2*s,gold);}L(-5,12,5,12,light,1);break;
+ case Kind::Shield:for(float side:{-1.f,1.f}){L(side*8,-6,side*6,3,light,1);ellipse(x+side*9*s,y-7*s,1.3f*s,1.3f*s,steel);}ellipse(x,y-2*s,3*s,3*s,gold);ellipse(x-s,y-3*s,s,s,light);break;
+ case Kind::Boots:L(-12,-1,-5,0,light,1);L(5,1,12,2,light,1);L(-11,2,-6,4,gold,1);L(6,4,11,6,gold,1);break;
+ case Kind::Health:case Kind::Mana:ellipse(x+4*s,y+7*s,2*s,2*s,C(rgb(238,226,189,145)));ellipse(x-2*s,y+12*s,s,s,light);L(-4,-16,4,-16,gold,1);L(4,-5,8,0,light,1);break;
+ case Kind::Gold:ellipseOutline(x-5*s,y+4*s,8*s,3*s,light);ellipseOutline(x+6*s,y-5*s,7*s,3*s,light);L(5,-7,5,-3,wood,1);break;
+ case Kind::Ring:case Kind::Amulet:ellipse(x-9*s,y+2*s,1.6f*s,2.5f*s,light);L(-1,-11,2,-8,light,1);break;
+ case Kind::WolfFang:case Kind::BoarTusk:L(-5,-10,-1,-5,gold,1);L(-4,-6,0,-2,wood,1);L(1,3,-2,13,C(rgb(253,242,198)),1.4f);break;
+ case Kind::WolfFur:case Kind::BoarHide:for(int n=0;n<8;n++){float a=-12+n*3.3f;L(a,-5,a+1,4,light,.7f);L(a+2,6,a,10,wood,.6f);}break;
+ case Kind::SpiderSilk:L(-8,-7,7,-9,light,1);L(-10,1,10,2,light,1);break;
+ case Kind::VenomSac:ellipse(x+2*s,y+7*s,2*s,3*s,C(rgb(191,219,122)));L(-5,-17,4,-15,gold,1);break;
+ case Kind::BoneShard:L(-4,5,4,-6,steel,.8f);L(1,-5,6,-10,wood,.7f);break;
+ case Kind::SlimeGel:ellipse(x+6*s,y+5*s,2*s,3*s,C(rgb(176,216,121)));ellipse(x-1*s,y+8*s,s,s,light);break;
+ case Kind::AncientBark:L(-4,-5,1,-2,edge,1);L(1,-2,2,9,edge,1);L(4,-10,11,-6,gold,.8f);break;
+ case Kind::ForestEssence:L(-4,3,4,-4,light,1);ellipse(x-12*s,y-11*s,s,s,light);ellipse(x+13*s,y+12*s,s,s,light);break;
+ case Kind::BanditBadge:R(-7,-9,2,2,light);R(5,-9,2,2,light);L(-4,9,0,12,light,1);break;
+ case Kind::RuneStone:L(-9,-7,-10,5,light,1);L(7,10,9,1,edge,1);R(-6,-10,2,2,light);break;
+ case Kind::Cloak:L(-8,2,-13,14,light,1);L(8,2,13,14,steel,1);L(-5,-9,5,-9,gold,1);break;
  default:break;
  }
  if(i.tier>0){DrawCircleV({x+18*s,y-17*s},2.5f*s,tint);}
 }
-void tree(float x,float y,float s){
- ellipse(x,y,40*s,15*s,rgb(8,18,18,95));
- poly({{x-8*s,y},{x-5*s,y-94*s},{x+8*s,y-94*s},{x+11*s,y+3*s}},rgb(62,54,42));line(x+4*s,y-3*s,x+3*s,y-94*s,rgb(102,83,53),4*s);
- for(int j=0;j<4;j++){float yy=y-(42+j*29)*s,w=(57-j*10)*s;
-  poly({{x,y-(119+j*18)*s},{x+w,yy},{x+16*s,yy-2*s},{x+31*s,yy+10*s},{x-5*s,yy+18*s},{x-w,yy+3*s}},rgb(23+j*5,51+j*7,45+j*4));
-  poly({{x,y-(119+j*18)*s},{x-5*s,yy+10*s},{x-w,yy+3*s}},rgb(45+j*5,79+j*6,62+j*5));
-  line(x-23*s,yy,x-5*s,yy-12*s,rgb(72,103,75),1.5f*s);
- }
-}
-void rock(float x,float y,float s){ellipse(x,y+1,39*s,14*s,rgb(7,17,17,90));poly({{x-36*s,y-7*s},{x-25*s,y-34*s},{x+5*s,y-45*s},{x+29*s,y-22*s},{x+34*s,y-2*s},{x+7*s,y+9*s}},rgb(68,85,82));poly({{x-36*s,y-7*s},{x-25*s,y-34*s},{x+5*s,y-45*s},{x+8*s,y-17*s}},rgb(106,120,104));poly({{x+8*s,y-17*s},{x+5*s,y-45*s},{x+29*s,y-22*s},{x+34*s,y-2*s}},rgb(85,101,93));line(x-22*s,y-31*s,x+2*s,y-38*s,rgb(148,151,118),2*s);ellipse(x-13*s,y-3*s,14*s,4*s,rgb(78,103,61));}
-void bush(float x,float y,float s){ellipse(x,y,35*s,12*s,rgb(9,22,20,80));for(int i=0;i<7;i++){float dx=(i%4-1.5f)*15*s,dy=(i/4)*12*s;DrawCircle(int(x+dx),int(y-14*s-dy),(11+(i%3))*s,rgb(48+i*3,84+i*3,60+i));}for(int i=0;i<5;i++)DrawCircle(int(x+(i*13%41-20)*s),int(y-(i*17%24+9)*s),2*s,rgb(173,127,81));}
-void column(float x,float y,float s){ellipse(x,y,34*s,12*s,rgb(8,18,19,100));diamond(x,y,35*s,17*s,rgb(96,105,93));poly({{x-21*s,y-8*s},{x-21*s,y-105*s},{x,y-94*s},{x,y+4*s}},rgb(93,108,98));poly({{x,y+4*s},{x,y-94*s},{x+21*s,y-105*s},{x+21*s,y-8*s}},rgb(56,77,75));diamond(x,y-105*s,25*s,12*s,rgb(149,152,127));line(x-12*s,y-20*s,x-12*s,y-90*s,rgb(120,130,110),3*s);line(x+8*s,y-14*s,x+8*s,y-78*s,rgb(40,59,59),2*s);line(x-21*s,y-57*s,x-3*s,y-48*s,rgb(43,63,60),2*s);ellipse(x-15*s,y-4*s,17*s,5*s,rgb(60,98,61));}
-void deciduousTree(float x,float y,float s,bool birch){
- ellipse(x,y,46*s,16*s,rgb(8,18,18,95));Color trunk=birch?rgb(188,196,170):rgb(99,76,46);
- poly({{x-7*s,y},{x-4*s,y-145*s},{x+5*s,y-145*s},{x+10*s,y}},trunk);
- for(int n=0;n<6;n++)line(x-5*s,y-(17+n*19)*s,x+4*s,y-(14+n*19)*s,birch?rgb(65,75,60):rgb(65,52,35),3*s);
- for(float side:{-1.f,1.f})line(x,y-89*s,x+side*34*s,y-129*s,trunk,5*s);
- Color leaf=birch?rgb(103,137,73):rgb(53,100,64);
- for(int n=0;n<10;n++){float a=n*2.4f,xx=x+std::cos(a)*(24+n%3*9)*s,yy=y-(120+n%4*15)*s;
-  ellipse(xx,yy,(birch?23:29)*s,(20+n%3*4)*s,shade(leaf,.82f+n*.035f));
-  line(xx-10*s,yy-8*s,xx+3*s,yy-14*s,shade(leaf,1.3f),2*s);
- }
-}
-void mushrooms(float x,float y,float s){ellipse(x,y,31*s,10*s,rgb(9,22,20,80));for(int n=0;n<5;n++){float xx=x+(n*17%43-21)*s,yy=y-(n%2)*8*s;line(xx,yy,xx,yy-(9+n%3*3)*s,rgb(192,185,136),4*s);ellipse(xx,yy-(10+n%3*3)*s,(7+n%3*2)*s,5*s,rgb(151+n*8,78+n*3,57));DrawCircleV({xx-2*s,yy-(11+n%3*3)*s},1.5f*s,Text);}}
+#include "scenery_art.hpp"
 #include "actor_art.hpp"
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
 void makeArt(){
  terrain=LoadRenderTexture(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
- for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;unsigned h=Game::hash(x,y);bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
+ for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
   if(!land)continue; // The animated water is drawn underneath the land.
-  if(x==MapSize-2||y==MapSize-2){poly({{sx-40,sy},{sx,sy+20},{sx+40,sy},{sx+40,sy+29},{sx,sy+49},{sx-40,sy+29}},rgb(43,53,45));line(sx,sy+21,sx,sy+48,rgb(30,44,40));}
-  bool path=Game::onPath(x,y);Color c=path?rgb(91+h%8,105+h%9,89+h%8):
-   y>=30?(x>=30?rgb(38+h%10,67+h%11,49+h%8):rgb(44+h%10,68+h%11,59+h%8)):
-   y>=26&&x<20?rgb(66+h%10,88+h%11,54+h%8):rgb(49+h%10,76+h%11,57+h%8);diamond(sx,sy,40,20,c);
-  line(sx-40,sy,sx,sy-20,shade(c,1.11f));line(sx,sy+20,sx+40,sy,shade(c,.85f));
-  if(path){line(sx-21,sy-7,sx+12,sy+9,shade(c,.7f));line(sx-3,sy+1,sx+11,sy-6,shade(c,.7f));if(h%3==0)line(sx-18,sy+9,sx-10,sy+5,rgb(138,146,112));}
-  else for(int k=0;k<5;k++){float a=float((h>>(k*3))%47)-23,b=float((h>>(k+2))%17)-8;line(sx+a,sy+b,sx+a-2,sy+b-4,rgb(76+h%13,103+h%15,69+h%12));if((h+k)%11==0)DrawCircle(int(sx+a),int(sy+b-4),1.4f,rgb(168,152,91));}
+  detailedGroundTile(x,y,sx,sy);
  }
  // A broken ritual circle in the northern courtyard.
  float cx=TerrainOriginX+(21-5)*40,cy=90+(21+5)*20;DrawEllipseLines(int(cx),int(cy),91,45,rgb(159,154,111));DrawEllipseLines(int(cx),int(cy),77,38,rgb(141,140,103));
- for(int i=0;i<8;i++){float a=i*PI/4;diamond(cx+std::cos(a)*84,cy+std::sin(a)*42,4,3,Gold);}
+ for(int i=0;i<12;i++){float a=i*PI/6,xx=cx+std::cos(a)*84,yy=cy+std::sin(a)*42;diamond(xx,yy,3,2,rgb(193,182,131));
+  line(xx-3,yy-5,xx+2,yy+3,rgb(173,170,125),1.2f);line(xx-2,yy,xx+4,yy-2,rgb(173,170,125),1.2f);}
  EndTextureMode();
  SetTextureFilter(terrain.texture,TEXTURE_FILTER_BILINEAR);
  for(int i=0;i<PropTypeCount;i++){propArt[i]=LoadRenderTexture(180,230);BeginTextureMode(propArt[i]);ClearBackground(BLANK);if(i==0)tree(90,208,1);if(i==1)rock(90,208,1);if(i==2)bush(90,208,1);if(i==3)column(90,208,1);if(i==4)deciduousTree(90,208,1,true);if(i==5)deciduousTree(90,208,1,false);if(i==6)mushrooms(90,208,1);EndTextureMode();}
  for(auto& art:propArt)SetTextureFilter(art.texture,TEXTURE_FILTER_BILINEAR);
  fs::create_directories("assets/generated");
- if(!FileExists("assets/generated/terrain-v20.png")){Image im=LoadImageFromTexture(terrain.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/terrain-v20.png");UnloadImage(im);}
- for(int i=0;i<PropTypeCount;i++){const char* path=TextFormat("assets/generated/prop-%d.png",i);if(!FileExists(path)){Image im=LoadImageFromTexture(propArt[i].texture);ImageFlipVertical(&im);ExportImage(im,path);UnloadImage(im);}}
- if(!FileExists("assets/generated/items-v20.png")){RenderTexture2D icons=LoadRenderTexture(832,128);BeginTextureMode(icons);ClearBackground(BLANK);for(int i=1;i<ItemKindCount;i++)icon(item(static_cast<Kind>(i)),((i-1)%13)*64.f+32,((i-1)/13)*64.f+32);EndTextureMode();Image im=LoadImageFromTexture(icons.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/items-v20.png");UnloadImage(im);UnloadRenderTexture(icons);}
- if(!FileExists("assets/generated/characters-v20.png")){RenderTexture2D actors=LoadRenderTexture((EnemyTypeCount+1)*144,170);BeginTextureMode(actors);ClearBackground(BLANK);hero(72,153,1);for(int i=0;i<EnemyTypeCount;i++){Enemy e{i,i,{},{},100,100};monster(e,216.f+i*144,153);}EndTextureMode();Image im=LoadImageFromTexture(actors.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/characters-v20.png");UnloadImage(im);UnloadRenderTexture(actors);}
+ if(!FileExists("assets/generated/terrain-v21.png")){Image im=LoadImageFromTexture(terrain.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/terrain-v21.png");UnloadImage(im);}
+ for(int i=0;i<PropTypeCount;i++){const char* path=TextFormat("assets/generated/prop-v21-%d.png",i);if(!FileExists(path)){Image im=LoadImageFromTexture(propArt[i].texture);ImageFlipVertical(&im);ExportImage(im,path);UnloadImage(im);}}
+ if(!FileExists("assets/generated/items-v22.png")){RenderTexture2D icons=LoadRenderTexture(832,64*((ItemKindCount-1+12)/13));BeginTextureMode(icons);ClearBackground(BLANK);for(int i=1;i<ItemKindCount;i++)icon(item(static_cast<Kind>(i)),((i-1)%13)*64.f+32,((i-1)/13)*64.f+32);EndTextureMode();Image im=LoadImageFromTexture(icons.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/items-v22.png");UnloadImage(im);UnloadRenderTexture(icons);}
+ if(!FileExists("assets/generated/characters-v21.png")){RenderTexture2D actors=LoadRenderTexture((EnemyTypeCount+1)*144,170);BeginTextureMode(actors);ClearBackground(BLANK);hero(72,153,1);for(int i=0;i<EnemyTypeCount;i++){Enemy e{i,i,{},{},100,100};monster(e,216.f+i*144,153);}EndTextureMode();Image im=LoadImageFromTexture(actors.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/characters-v21.png");UnloadImage(im);UnloadRenderTexture(actors);}
 }
 #include "actor_view.hpp"
 #include "corpse_art.hpp"
@@ -163,6 +173,11 @@ void drawWorld(){
  for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
  Vector2 pp=screen(game.player);DrawEllipseLines(int(pp.x),int(pp.y+2),25,12,Fade(Gold,.7f));
  drawHoveredTile();
+ for(const auto& plant:game.forage){
+  if(plant.value.empty())continue;Vector2 p=screen(plant.pos);if(p.x<-40||p.x>WorldW+40||p.y<0||p.y>H)continue;
+  if(hovered.kind==HoverKind::Forage&&hovered.index==plant.id){ellipseOutline(p.x,p.y,18,9,Gold);diamond(p.x,p.y,18,9,Fade(Gold,.17f));}
+  if(dragging.place!=Place::Forage||dragging.index!=plant.id)icon(plant.value,p.x,p.y-12,.68f);
+ }
  for(auto&g:game.ground){if(g.value.empty())continue;Vector2 p=screen(g.pos);if(p.x<-50||p.x>WorldW+50||p.y<0||p.y>H)continue;float pulse=.55f+std::sin(game.time*3+g.id)*.2f;if(hovered.kind==HoverKind::Ground&&hovered.index==g.id){DrawEllipseLines(int(p.x),int(p.y),21,10,Gold);diamond(p.x,p.y,20,10,Fade(Gold,.25f));}ellipse(p.x,p.y,18,8,Fade(rarity(g.value.tier),.17f));line(p.x,p.y-9,p.x,p.y-40,Fade(rarity(g.value.tier),pulse*.3f),2);if(dragging.place!=Place::Ground||dragging.index!=g.id)icon(g.value,p.x,p.y-14,.58f);}
  auto objects=worldDrawOrder();
  for(auto obj:objects){if(obj.type==0){auto&p=game.props[obj.index];Vector2 q=screen(p.pos);if(q.x<-130||q.x>WorldW+130||q.y<-50||q.y>H+210)continue;float width=(p.type==4||p.type==5?88:66)*p.size,height=(treeProp(p.type)?205:160)*p.size;float alpha=(std::abs(q.x-pp.x)<width&&q.y>pp.y+4&&q.y-pp.y<height)? .38f:1.f;if(hovered.kind==HoverKind::Prop&&hovered.index==obj.index)drawPropTexture(p,propOutlines[p.type],true,Gold);drawPropTexture(p,propArt[p.type].texture,false,Fade(WHITE,alpha));}
@@ -183,8 +198,8 @@ void bar(float x,float y,float w,float h,float value,float max,Color c){rect(x,y
 void slotDraw(Slot s,Rectangle r,std::string label=""){
  Item* p=game.get(s);bool hot=inside(r);Color border=hot?Gold:Line;bool same=dragging.place==s.place&&dragging.index==s.index&&dragging.owner==s.owner;Color bg=Card;
  if(dragging.place!=Place::None&&hot){
-  Item*a=game.get(dragging);bool allowed=a&&Game::accepts(s,*a)&&s.place!=Place::Corpse;
-  if(a&&dragging.place==Place::Corpse)allowed=s.place==Place::Bag&&p&&(p->empty()||(stackable(a->kind)&&a->kind==p->kind&&a->tier==p->tier&&p->count<99));
+  Item*a=game.get(dragging);bool allowed=a&&Game::accepts(s,*a)&&s.place!=Place::Corpse&&s.place!=Place::Forage;
+  if(a&&(dragging.place==Place::Corpse||dragging.place==Place::Forage))allowed=s.place==Place::Bag&&p&&(p->empty()||(stackable(a->kind)&&a->kind==p->kind&&a->tier==p->tier&&p->count<99));
   border=allowed?Green:rgb(186,83,76);
  }
  DrawRectangleRec(r,bg);DrawRectangleLinesEx(r,1,border);line(r.x+4,r.y+4,r.x+12,r.y+4,Fade(border,.6f));line(r.x+4,r.y+4,r.x+4,r.y+12,Fade(border,.6f));
@@ -238,26 +253,26 @@ void drawUI(){
   int count=0;for(int i=0;i<CorpseLootSize;i++){slotDraw({Place::Corpse,i,corpse->id},lootRect(i));if(!corpse->loot[i].empty())count++;}
   txt(count?"Przeciągnij łup do plecaka.":"Ciało jest puste.",1080,679,14,count?Muted:Green);
  }else{
-  txt("NA ZIEMI",1080,595,10,Gold);auto n=nearby();int pages=std::max(1,(int(n.size())+4)/5);nearbyPage=std::clamp(nearbyPage,0,pages-1);txt(TextFormat("%d  W ZASIĘGU",int(n.size())),1270,595,10,Muted);
-  for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size())slotDraw({Place::Ground,n[j]},lootRect(i));else panel(lootRect(i),rgb(19,29,31));}
-  txt("LPM: przeciągnij · PPM: wypij",1080,679,11,Muted);
+  txt("W ZASIĘGU",1080,595,10,Gold);auto n=nearbySlots();int pages=std::max(1,(int(n.size())+4)/5);nearbyPage=std::clamp(nearbyPage,0,pages-1);txt(TextFormat("%d  W ZASIĘGU",int(n.size())),1270,595,10,Muted);
+  for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size())slotDraw(n[j],lootRect(i));else panel(lootRect(i),rgb(19,29,31));}
+  txt("LPM: zbierz · PPM w plecaku: użyj",1080,679,11,Muted);
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.bossDead?"WYPRAWA UKOŃCZONA":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.20",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.bossDead?"WYPRAWA UKOŃCZONA":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.22",1370,885,10,Muted);
 }
 void tooltip(){if(dragging.place!=Place::None||welcome||help||paused)return;Slot s=hoverSlot();Item*p=game.get(s);if(!p||p->empty())return;float x=std::min(mouse.x+20,1106.f),y=std::min(mouse.y+20,740.f);panel({x,y,312,139},rgb(12,22,25,250));rect(x,y,3,139,rarity(p->tier));txt(rarityName(p->tier),x+17,y+13,10,rarity(p->tier));txt(itemName(*p),x+17,y+34,18,Text);std::string stat;
- if(gearSlot(p->kind)>=0)stat=(gearSlot(p->kind)==0||gearSlot(p->kind)==5?"Atak +":"Pancerz +")+std::to_string(power(*p));else if(p->kind==Kind::Health)stat="Odnawia 50 punktów zdrowia";else if(p->kind==Kind::Mana)stat="Odnawia 35 punktów many";else if(material(p->kind))stat=materialDescription(p->kind);else stat="Skarb znaleziony w ruinach";
- txt(stat,x+17,y+65,13,Gold);txt((s.place==Place::Ground||s.place==Place::Corpse)&&!game.reachable(s)?"Podejdź bliżej, aby podnieść.":s.place==Place::Corpse?"LPM: przeciągnij do plecaka":"LPM: przeciągnij przedmiot",x+17,y+92,12,Muted);
+ if(gearSlot(p->kind)>=0)stat=(gearSlot(p->kind)==0||gearSlot(p->kind)==5?"Atak +":"Pancerz +")+std::to_string(power(*p));else if(p->kind==Kind::Health)stat="Odnawia 50 punktów zdrowia";else if(p->kind==Kind::Mushroom)stat="Po zjedzeniu odnawia 10 HP";else if(p->kind==Kind::Mana)stat="Odnawia 35 punktów many";else if(material(p->kind))stat=materialDescription(p->kind);else stat="Skarb znaleziony w ruinach";
+ txt(stat,x+17,y+65,13,Gold);txt((s.place==Place::Ground||s.place==Place::Corpse||s.place==Place::Forage)&&!game.reachable(s)?"Podejdź bliżej, aby podnieść.":s.place==Place::Corpse?"LPM: przeciągnij do plecaka":"LPM: przeciągnij przedmiot",x+17,y+92,12,Muted);
  if(s.place==Place::Corpse){const Enemy* body=game.findCorpse(s.owner);int chance=body?lootChance(body->type,*p):0;txt(TextFormat("Szansa z tego gatunku: %d%%",chance),x+17,y+112,12,Muted);}
- else txt(material(p->kind)?"Materiał / trofeum · stos do 99":p->kind==Kind::Health||p->kind==Kind::Mana?"PPM: wypij miksturę":"Upuść na mapę, aby odłożyć.",x+17,y+112,12,Muted);
+ else txt(p->kind==Kind::Mushroom?(s.place==Place::Forage?"Przeciągnij do plecaka · stos do 99":"PPM: zjedz borowika (+10 HP)"):material(p->kind)?"Materiał / trofeum · stos do 99":p->kind==Kind::Health||p->kind==Kind::Mana?"PPM: wypij miksturę":"Upuść na mapę, aby odłożyć.",x+17,y+112,12,Muted);
 }
 void overlay(){
  if(!welcome&&!help&&!paused&&!game.dead())return;rect(0,0,W,H,rgb(6,15,18,205));Rectangle r{340,172,760,548};panel(r,rgb(19,31,33));line(370,195,1070,195,Gold);diamond(720,222,6,9,Gold);
  if(game.dead()){center("ŻAR PRZYGASŁ",720,274,39,Text,true);center("Ruiny zatrzymały twoją wyprawę.",720,347,18,Muted);center("Naciśnij ENTER, aby rozpocząć od nowa.",720,411,17,Gold);center("Spróbuj zakładać lepszy sprzęt i unikać zamachów.",720,462,15,Muted);return;}
  center(welcome?"WITAJ W EMBERFALL":help?"PRZEWODNIK WĘDROWCA":"CHWILA ODDECHU",720,258,32,Text,true);
  center("Echa zapomnianych ruin",720,307,19,Gold);line(420,348,1020,348,Line);
- const char* keys[]={"W S A D","SHIFT","SPACJA","LPM","C","PPM","1 / 2","PRZECIĄGNIJ"};const char* desc[]={"W — góra, S — dół, A — lewo, D — prawo.","Przytrzymaj z WSAD, aby biec 50% szybciej.","Przeturlaj się w kierunku ruchu lub ustawienia.","Jedno kliknięcie na mapie — zamach obszarowy.","Rzuć wybrany czar w stronę kursora (10 many).","Otwórz ciało potwora i jego łup w HUD.","Wypij miksturę zdrowia / many z plecaka.","Przenieś łup z okna ciała lub ziemi do plecaka."};
+ const char* keys[]={"W S A D","SHIFT","SPACJA","LPM","C","PPM","1 / 2","PRZECIĄGNIJ"};const char* desc[]={"W — góra, S — dół, A — lewo, D — prawo.","Przytrzymaj z WSAD, aby biec 50% szybciej.","Przeturlaj się w kierunku ruchu lub ustawienia.","Jedno kliknięcie na mapie — zamach obszarowy.","Rzuć wybrany czar w stronę kursora (10 many).","Otwórz ciało; użyj mikstury / grzyba w plecaku.","Wypij miksturę zdrowia / many z plecaka.","Zbierz łup lub grzyb do plecaka."};
  for(int i=0;i<8;i++){txt(keys[i],384,363+i*29,15,Gold);txt(desc[i],554,360+i*29,19,Text);}
  Rectangle b{540,613,360,57};panel(b,inside(b)?rgb(73,82,61):rgb(49,62,51));center(welcome?"WYRUSZ":"WRÓĆ DO GRY",720,629,21,Text);center("ENTER — powrót  /  K — księga  /  P — statystyki  /  F2 — dźwięk  /  ESC — pauza",720,687,14,Muted);
 }
@@ -282,7 +297,7 @@ void input(float dt){
  if(dragging.place==Place::Corpse&&game.openedCorpse!=dragging.owner)dragging={};
 }
 void integrationTests(){
- std::ofstream out("interaction-test-v20.txt");int count=0;
+ std::ofstream out("interaction-test-v22.txt");int count=0;
  auto check=[&](bool result,const char* label){out<<(result?"PASS: ":"FAIL: ")<<label<<"\n";out.flush();count++;if(!result)std::exit(2);};
  auto midpoint=[](Rectangle r){return Vector2{r.x+r.width/2,r.y+r.height/2};};
  check(game.ground.empty(),"normal startup contains no ground loot");
@@ -317,6 +332,8 @@ void integrationTests(){
 #include "performance_qa.hpp"
 #include "refresh_qa.hpp"
 #include "forest_qa.hpp"
+#include "graphics_qa.hpp"
+#include "mushroom_qa.hpp"
 int main(int argc,char**argv) {
     bool smoke=false,benchmark=false,integration=false,visualQA=false,hoverQA=false,rollQA=false,large=false;
     bool audioQA=false,noAudio=false,audioPassed=true;
@@ -333,7 +350,7 @@ int main(int argc,char**argv) {
     bool pointerQA=false,pointerPassed=true;
     bool performanceQA=false,performancePassed=true;
     bool refreshQA=false,refreshPassed=true;
-    bool forestQA=false,forestPassed=true;
+    bool forestQA=false,forestPassed=true,graphicsQA=false,graphicsPassed=true,mushroomQA=false,mushroomPassed=true;
     int frameLimit=0;
     for(int i=1;i<argc;i++){
         std::string arg=argv[i];
@@ -360,6 +377,8 @@ int main(int argc,char**argv) {
         if(arg=="--performance-qa")performanceQA=true;
         if(arg=="--refresh-qa")refreshQA=true;
         if(arg=="--forest-qa")forestQA=true;
+        if(arg=="--graphics-qa")graphicsQA=true;
+        if(arg=="--mushroom-qa")mushroomQA=true;
         if(arg=="--fullscreen")startFullScreen=true;
         if(arg=="--windowed")startFullScreen=false;
         if(arg=="--no-audio")noAudio=true;
@@ -372,14 +391,16 @@ int main(int argc,char**argv) {
     // The offscreen world is antialiased already. Multisampling the final
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
     SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
-    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.20");
+    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.22");
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
-    bool diagnostic=smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA;
-    if(!diagnostic)game.rng.seed(std::random_device{}());
+    bool diagnostic=smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA;
+    if(!diagnostic)game=Game(std::random_device{}());
     makeArt();initHoverArt();
-    audioSystem.init(!noAudio&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA,!(smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA));
+    audioSystem.init(!noAudio&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA,!(smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA));
     if(smoke||benchmark)welcome=false;
+    if(mushroomQA)mushroomPassed=runMushroomQA();
+    if(graphicsQA)graphicsPassed=runGraphicsQA();
     if(forestQA)forestPassed=runForestQA();
     if(refreshQA)refreshPassed=runRefreshQA();
     if(pointerQA)pointerPassed=runPointerQA();
@@ -402,7 +423,7 @@ int main(int argc,char**argv) {
     int frame=0;
     std::vector<double> cpuTimes,frameTimes,endTimes,presentTimes;
     double previous=GetTime();
-    while(!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!WindowShouldClose()){
+    while(!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!WindowShouldClose()){
         double begin=GetTime();double elapsed=begin-previous;previous=begin;
         performance.begin();
         float dt=float(std::clamp(elapsed,0.0,.05));
@@ -434,7 +455,7 @@ int main(int argc,char**argv) {
         presentCanvas();
         if((smoke&&frame==119)||(!smoke&&!benchmark&&IsKeyPressed(KEY_F12))){
             fs::create_directories("screenshots");Image image=presentedImage();
-            ExportImage(image,"screenshots/emberfall-v20.png");UnloadImage(image);
+            ExportImage(image,"screenshots/emberfall-v22.png");UnloadImage(image);
         }
         double submitted=GetTime();double cpu=submitted-begin;EndDrawing();double ended=GetTime();performance.end(RenderStage::Present,true);finishFramePacing();double shown=GetTime();
         if(frameLimit&&frame>60){cpuTimes.push_back(cpu*1000);frameTimes.push_back(elapsed*1000);endTimes.push_back((ended-submitted)*1000);presentTimes.push_back((shown-ended)*1000);}
@@ -443,7 +464,7 @@ int main(int argc,char**argv) {
     }
     if(frameLimit&&!cpuTimes.empty()){
         std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
-        std::ofstream f(benchmark?(startFullScreen?"benchmark-v20-fullscreen.txt":large?"benchmark-v20-large.txt":"benchmark-v20.txt"):"smoke-test-v20.txt");
+        std::ofstream f(benchmark?(startFullScreen?"benchmark-v22-fullscreen.txt":large?"benchmark-v22-large.txt":"benchmark-v22.txt"):"smoke-test-v22.txt");
         f<<"Frames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
          <<"\nFullscreen: "<<(fullScreen()?"yes":"no")
          <<"\nRefresh rate (Hz): "<<refreshHz<<"\nV-sync interval: "<<swapInterval
@@ -472,7 +493,7 @@ int main(int argc,char**argv) {
     unloadHoverArt();
     for(auto& t:propArt)UnloadRenderTexture(t);
     UnloadRenderTexture(terrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
-    typography.clear();CloseWindow();return audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed?0:2;
+    typography.clear();CloseWindow();return audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed?0:2;
 }
 
 

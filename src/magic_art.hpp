@@ -16,12 +16,17 @@ void drawFireball(const Fireball& ball){
     for(int i=5;i>0;i--)DrawCircleV({p.x-direction.x*i*6,p.y-30-direction.y*i*6},7-i*.8f,Fade(rgb(253,149,62),.48f-i*.06f));
     fireIcon(p.x,p.y-30,.65f,game.time*17);
     DrawCircleV({p.x,p.y-25},3,rgb(255,240,180));
+    for(int n=0;n<4;n++){float age=std::fmod(game.time*3+n*.25f,1.f),side=std::sin(n*7.f+game.time*5)*5;
+        Vector2 spark{p.x-direction.x*(8+age*23)-direction.y*side,p.y-30-direction.y*(8+age*23)+direction.x*side-age*6};
+        DrawCircleV(spark,1.4f-age*.7f,Fade(rgb(255,207,112),(1-age)*.7f));}
 }
 void drawExplosion(const Explosion& blast){
     Vector2 p=screen(blast.pos);float age=1-blast.life/.35f;
     float alpha=std::clamp(1-age,0.f,1.f);
     DrawCircleGradient(int(p.x),int(p.y-22),28+age*38,Fade(rgb(254,162,63),alpha*.48f),BLANK);
     ellipseOutline(p.x,p.y,20+age*40,10+age*20,Fade(rgb(255,174,83),alpha));
+    for(int n=0;n<5;n++){float a=n*2.39996f;Vector2 smoke{p.x+std::cos(a)*age*31,p.y-28+std::sin(a)*age*16-age*27};
+        ellipse(smoke.x,smoke.y,5+age*8,4+age*6,Fade(rgb(98,86,65),alpha*age*.45f));}
     for(int i=0;i<12;i++){
         float angle=i*PI/6,radius=12+age*52;
         diamond(p.x+std::cos(angle)*radius,p.y-24+std::sin(angle)*radius*.5f-age*14,2.5f,4,Fade(Gold,alpha));

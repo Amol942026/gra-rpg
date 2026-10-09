@@ -22,6 +22,7 @@ bool rightClickWorldOrInventory(){
     if(worldPointerAllowed(mouse)){
         WorldHover hit=pickWorld(mouse);
         if(hit.kind==HoverKind::Corpse)return game.openCorpse(hit.index);
+        if(hit.kind==HoverKind::Forage)return game.use({Place::Forage,hit.index});
         if(hit.kind==HoverKind::Ground)return game.use({Place::Ground,hit.index});
         return false;
     }

@@ -1,0 +1,7 @@
+Version: 0.22
+ZIP bytes: 6994353
+Final EXE SHA256: PASS
+Assets SHA256: PASS 76
+Packaged mushroom QA: PASS 16/16
+Audio device opened: no
+Extracted directory: C:\Users\Amadeusz\AppData\Local\Temp\Emberfall-mushroom-package-881f4c88dc94442e93b6b8c6b82a7884

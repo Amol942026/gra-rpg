@@ -2,6 +2,20 @@
 
 Grywalny prototyp RPG 2.5D w C++17 i raylib 5.5, przygotowany dla Windows x64. Autorska izometryczna grafika, leśne ruiny, walka w czasie rzeczywistym i ekwipunek obsługiwany myszą. Nie wymaga instalowania silnika ani dodatkowych DLL.
 
+## Wersja 0.22 — zbieranie grzybów
+
+Na początku każdej nowej wyprawy **36 borowików** rośnie w losowych miejscach lasu, na wolnym podłożu poza ścieżkami. Nie blokują ruchu. Podejdź na maksymalnie **2,5 pola** i przeciągnij grzyb z mapy lub panelu **W ZASIĘGU** do plecaka. Grzyby łączą się w stosy do 99 sztuk. Podświetlenie i panel pod kursorem pokazują nazwę, rodzaj oraz leczenie.
+
+**PPM na borowiku w plecaku** zjada jedną sztukę i odnawia **10 HP**, do aktualnego maksimum zdrowia. Przy pełnym HP grzyb nie jest zużywany. Obowiązuje dotychczasowe odnowienie używania przedmiotów (0,65 s). Pełny plecak, niepasujący stos, anulowane przeciąganie lub odejście z zasięgu pozostawiają grzyb w lesie. Zebrane grzyby nie odrastają podczas tej wyprawy; nowa wyprawa losuje nowy zestaw. Rosnące grzyby zastępują wcześniejsze dekoracyjne kępki; początkowych rozrzuconych przedmiotów sprzętu nadal nie ma.
+
+## Wersja 0.21 — bardziej szczegółowa grafika
+
+Odświeżono obecną grafikę, zachowując izometryczny widok i paletę Emberfall. Postacie i potwory mają obłe, cieniowane bryły oraz więcej detali: futro i zęby zwierząt, pancerz pająków, zdobienia zbroi i tarczy, szwy płaszczy, korę i liście ożywionych drzew. Grafiki ciał odpowiadają nowym sylwetkom. Bohater nadal ma osiem kierunków animacji, wysunięte cięcie mieczem i przewrót.
+
+Sosny, brzozy i dęby mają gęstsze korony, drobne liście, gałęzie, korzenie i fakturę pni. Skały, krzewy, grzyby i kolumny otrzymały mech, pęknięcia, jagody i dodatkowe światło. Teren ma mniej widoczną siatkę oraz trawę, kamienie, kwiaty, gałązki i ślady na ścieżkach. Ikony przedmiotów dostały detale materiałów, odbicia szkła i metalu oraz miękkie cienie. Kula ognia zostawia iskry, a wybuch ma drobne obłoki dymu.
+
+Drobne szczegóły lasu są renderowane do tekstur przy starcie. Animowane postacie odrzucają niewidoczne tylne powierzchnie zamkniętych brył, aby ograniczyć koszt nowych detali. Wskazywanie myszy korzysta z aktualnych kształtów; falowanie drzew, dopasowanie pełnego ekranu, loot i sterowanie pozostają zachowane.
+
 ## Wersja 0.20 — rozbudowana knieja i łup gatunkowy
 
 Mapa urosła z **30 × 30 do 48 × 48 pól**. Nowe ścieżki prowadzą do Wilczej kniei, Brzozowej polany, Pajęczych ostępów i Serca Kniei. Las jest gęstszy i bardziej zróżnicowany: oprócz sosen są kołyszące się brzozy i dęby, grzyby oraz odmienne podłoże. Drzewa przed bohaterem stają się półprzezroczyste, aby go nie zasłaniać. Minimapę, granice ruchu, wodę i kolizje dopasowano do większej mapy.
@@ -232,13 +246,15 @@ Start-Process .\dist\Emberfall.exe -ArgumentList '--controls-qa','--no-audio' -W
 Start-Process .\dist\Emberfall.exe -ArgumentList '--corpse-qa','--no-audio' -WindowStyle Hidden -Wait
 Start-Process .\dist\Emberfall.exe -ArgumentList '--patrol-qa','--no-audio' -WindowStyle Hidden -Wait
 Start-Process .\dist\Emberfall.exe -ArgumentList '--forest-qa','--no-audio' -WindowStyle Hidden -Wait
+Start-Process .\dist\Emberfall.exe -ArgumentList '--graphics-qa','--no-audio' -WindowStyle Hidden -Wait
+Start-Process .\dist\Emberfall.exe -ArgumentList '--mushroom-qa','--no-audio' -WindowStyle Hidden -Wait
 ```
 
-Pierwsza komenda renderuje 180 klatek i zapisuje zrzut. Druga wykonuje 13 sprawdzeń interakcji, używając tych samych funkcji wskazywania, rozpoczynania i kończenia przeciągania co mysz; raport zapisuje do `dist/interaction-test-v20.txt`. Nie jest to automatyzacja urządzenia wejściowego systemu Windows. Benchmark uruchamia 900 klatek z ruchem kamery, walką, unikami, podświetlaniem i wiatrem, a `--windowed --large` wybiera okno 1920 × 1080. Raporty mają nazwy `benchmark-v20.txt`, `benchmark-v20-large.txt` i `benchmark-v20-fullscreen.txt`. `--visual-qa` eksportuje arkusze animacji oraz podglądy interfejsu w trzech skalach do `dist/qa-v02`. `--hover-qa` wykonuje 24 sprawdzenia wskazywania i eksportuje podglądy do `dist/qa-v04`. `--roll-qa` zapisuje arkusz przewrotów (8 kierunków × 12 klatek) w `assets/generated/v04/hero-roll.png` obok EXE oraz podglądy w `dist/qa-v04`. Testy w `tests/roll_tests.hpp` sprawdzają szybkość, kierunki uniku, kolizje, ochronę, odnowienie i niezależność od FPS.
+Pierwsza komenda renderuje 180 klatek i zapisuje zrzut. Druga wykonuje 13 sprawdzeń interakcji, używając tych samych funkcji wskazywania, rozpoczynania i kończenia przeciągania co mysz; raport zapisuje do `dist/interaction-test-v22.txt`. Nie jest to automatyzacja urządzenia wejściowego systemu Windows. Benchmark uruchamia 900 klatek z ruchem kamery, walką, unikami, podświetlaniem i wiatrem, a `--windowed --large` wybiera okno 1920 × 1080. Raporty mają nazwy `benchmark-v22.txt`, `benchmark-v22-large.txt` i `benchmark-v22-fullscreen.txt`. `--visual-qa` eksportuje arkusze animacji oraz podglądy interfejsu w trzech skalach do `dist/qa-v02`. `--hover-qa` wykonuje 24 sprawdzenia wskazywania i eksportuje podglądy do `dist/qa-v04`. `--roll-qa` zapisuje arkusz przewrotów (8 kierunków × 12 klatek) w `assets/generated/v04/hero-roll.png` obok EXE oraz podglądy w `dist/qa-v04`. Testy w `tests/roll_tests.hpp` sprawdzają szybkość, kierunki uniku, kolizje, ochronę, odnowienie i niezależność od FPS.
 
 Gra synchronizuje klatki z monitorem, celując w 60 FPS na ekranie 60 Hz; osiągana płynność zależy od komputera i obciążenia systemu. Logika korzysta z rzeczywistego czasu między klatkami. Podłoże i podstawowe grafiki dekoracji są renderowane do tekstur przy starcie, a korony drzew są deformowane podczas rysowania każdej klatki. Fale na wodzie są animowane osobno pod lądem.
 
-W wersji 0.20 aktualne raporty wydajności i ekwipunku mają przyrostek `v20`. Eksporty `--hover-qa` i `--roll-qa` pozostają w `dist/qa-v04`. `--audio-qa` sprawdza rzeczywisty mikser, wszystkie efekty, granicę pętli muzycznej, wyciszanie, utratę aktywności okna, sumowanie efektów i zapis ustawień; raporty oraz podglądy panelu i nowych przycisków HUD zapisuje w `dist/qa-v09`. Nie zmienia ustawień gracza. Wariant `--no-audio` sprawdza działanie z pominiętym urządzeniem audio. `audio/create_audio.py` odtwarza zasoby z syntezy przy użyciu NumPy i SoundFile; nie jest uruchamiany przy starcie ani kompilacji gry.
+W wersji 0.22 aktualne raporty wydajności i ekwipunku mają przyrostek `v22`. Eksporty `--hover-qa` i `--roll-qa` pozostają w `dist/qa-v04`. `--audio-qa` sprawdza rzeczywisty mikser, wszystkie efekty, granicę pętli muzycznej, wyciszanie, utratę aktywności okna, sumowanie efektów i zapis ustawień; raporty oraz podglądy panelu i nowych przycisków HUD zapisuje w `dist/qa-v09`. Nie zmienia ustawień gracza. Wariant `--no-audio` sprawdza działanie z pominiętym urządzeniem audio. `audio/create_audio.py` odtwarza zasoby z syntezy przy użyciu NumPy i SoundFile; nie jest uruchamiany przy starcie ani kompilacji gry.
 
 `--environment-qa` porównuje maskę wskazywania drzewa z jego faktycznie wyrenderowanym, poruszającym się kształtem w ośmiu pozycjach i skalach. Sprawdza zmiany pikseli wody i nieruchomy ląd, podświetlenie i HUD, rzeczywiste przejścia okno–pełny ekran, przywrócenie rozmiaru, pozycji i maksymalizacji, zachowanie menu awansu oraz mapowanie wszystkich pól plecaka. Raport i obrazy są w `dist/qa-v14`. `--fullscreen` pozwala też uruchomić grę lub benchmark bezpośrednio na pełnym ekranie.
 
@@ -275,6 +291,8 @@ Paczka dla znajomych: `powershell -ExecutionPolicy Bypass -File .\package.ps1`. 
 - `src/forest_qa.hpp`, `tests/forest_loot_tests.hpp` — nowy las, osiem gatunków, drop rate, materiały i sprzęt.
 - `src/enemy_ai.hpp` — widoczność, patrolowanie i powrót do miejsca respawnu.
 - `src/main.cpp` — grafika izometryczna, interfejs, wejście, proceduralne ilustracje i pętla gry.
+- `src/scenery_art.hpp` — szczegółowe tekstury terenu, drzew, roślin i ruin.
+- `src/graphics_qa.hpp` — porównanie wyrenderowanych sylwetek z geometrią kursora i eksport nowych grafik.
 - `src/animation.hpp` — osiem kierunków i cykle animacji zależne od pokonanej odległości.
 - `src/actor_art.hpp`, `src/actor_view.hpp` — obracane postacie, kończyny, broń, twarze i animacje.
 - `src/typography.hpp` — kroje pisma rasteryzowane do fizycznego rozmiaru napisów w aktualnym oknie.
@@ -295,3 +313,7 @@ Grafiki mapy, postaci, przeciwników, przedmiotów i dekoracji są zdefiniowane 
 `--refresh-qa --no-audio` porównuje wszystkie piksele świata i HUD z docelowym buforem GPU podczas ruchu, sprawdza zawartość sceny i cztery narożniki, przełączanie F11, zmianę rozmiaru, dodatni interwał synchronizacji i pojedynczą prezentację na klatkę. Raport: `dist/qa-v19/refresh-tests.txt`. Benchmarki odróżniają prezentacje przyjęte przez DXGI od odrzuconych dla zasłoniętego okna (`Occluded presentations`). Wyniki rytmu pracy zasłoniętego okna nie potwierdzają fizycznego odświeżenia ekranu.
 
 `--forest-qa --no-audio` sprawdza wszystkie nowe obszary, cztery nowe gatunki, ich faktyczną grafikę i wskazywanie, HUD ze statystykami i drop rate, ciała otwierane PPM oraz przeciąganie materiałów do prawego pola plecaka. Eksportuje osiem kierunków nowych potworów, las i podgląd kła/sierści wilka do `dist/qa-v20`. `tests/forest_loot_tests.hpp` sprawdza także wszystkie spawny, granice, stosy i nowy sprzęt; wykonuje 30 000 losowań na gatunek, kontrolując szanse, ilości i niezależność dropów.
+
+`--graphics-qa --no-audio` porównuje niezależnie rasteryzowany obraz GPU z geometrią wskazywania wszystkich dziewięciu sylwetek w ośmiu kierunkach oraz bohatera podczas cięcia i przewrotu. Wykrywa znikające lub ucięte części, błędne wnętrza i puste przestrzenie. Sprawdza również pełne tekstury dekoracji oraz wszystkie 26 ikon. Eksportuje arkusz sylwetek i faktycznie wyświetlany obraz lasu do `dist/qa-v21/`. Aktualne grafiki są eksportowane do `assets/generated/*-v21.png` oraz `prop-v21-*.png` obok EXE.
+
+`--mushroom-qa --no-audio` sprawdza rzeczywiste wskazywanie borowików, informacje w HUD, przeciąganie z mapy i panelu do plecaka, zasięg, łączenie stosów oraz zjadanie PPM. Raport i podglądy: `dist/qa-v22/`. Logika losowania, zachowanie pełnego plecaka i leczenie są dodatkowo sprawdzane w `tests/mushroom_tests.hpp`. Nowy atlas przedmiotów `assets/generated/items-v22.png` mieści 27 ikon na trzech wierszach; grafiki terenu, postaci i dekoracji zachowują eksporty `v21`.

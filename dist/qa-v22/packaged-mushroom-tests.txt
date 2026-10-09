@@ -1,0 +1,17 @@
+PASS: mushroom diagnostic opens no audio device
+PASS: real game creates 36 collectible mushrooms
+PASS: visible mushroom can be picked with the real world pointer handler
+PASS: hover HUD identifies edible mushroom and healing amount
+PASS: PPM on growing mushroom asks player to collect it first
+PASS: LPM on mushroom starts dragging without a sword attack
+PASS: walking out of range cancels collection without losing mushroom
+PASS: map-to-backpack drag harvests mushroom without healing immediately
+PASS: uncollected mushrooms appear in the nearby HUD tray
+PASS: nearby HUD slot points to a growing mushroom
+PASS: HUD-to-backpack drag stacks the second harvested mushroom
+PASS: PPM on food heals ten HP and consumes exactly one without magic
+PASS: immediate repeat use is blocked by cooldown
+PASS: full health preserves collected food
+PASS: last mushroom heals up to maximum HP then clears its slot
+PASS: paused game cannot eat food
+Checks: 16; failures: 0

@@ -109,6 +109,12 @@ WorldHover pickWorld(Vector2 point) {
             hit.tile={std::round(it->pos.x),std::round(it->pos.y)};hit.tileValid=true;return hit;
         }
     }
+    for(auto it=game.forage.rbegin();it!=game.forage.rend();++it){
+        Vector2 p=screen(it->pos);
+        if(!it->value.empty()&&CheckCollisionPointRec(point,{p.x-15,p.y-27,30,30})){
+            hit.kind=HoverKind::Forage;hit.index=it->id;hit.tile={std::round(it->pos.x),std::round(it->pos.y)};hit.tileValid=true;return hit;
+        }
+    }
     return hit;
 }
 
@@ -122,7 +128,7 @@ void drawHoveredTile() {
 }
 
 void drawHoveredName() {
-    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse)return;
+    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage)return;
     std::string name;Color color=Gold;
     if(hovered.kind==HoverKind::Enemy){
         Enemy* e=game.findEnemy(hovered.index);if(!e)return;
@@ -131,6 +137,8 @@ void drawHoveredName() {
     }else if(hovered.kind==HoverKind::Corpse){
         Enemy* e=game.findCorpse(hovered.index);if(!e)return;
         name=std::string("Ciało: ")+enemyInfo(e->type).name+" · PPM: otwórz";
+    }else if(hovered.kind==HoverKind::Forage){
+        name="Borowik · +10 HP";color=Green;
     }else{
         name=propInfo(game.props[hovered.index].type).name;
     }

@@ -24,7 +24,7 @@ inline const EnemyInfo& enemyInfo(int type) {
         {"Dzik","Bestia",88,2.25f,15,4,1,DamageType::Physical,.8f,42,1.25f,69},
         {"Leśny pająk","Jadowita bestia",48,2.8f,13,1,3,DamageType::Magic,.86f,38,1.1f,55},
         {"Leśny rozbójnik","Człowiek",96,2.2f,18,4,2,DamageType::Physical,.48f,55,1.1f,92},
-        {"Ożywione drzewo","Duch kniei",170,1.45f,21,6,5,DamageType::Physical,.94f,65,1.6f,143}
+        {"Ożywione drzewo","Duch kniei",170,1.45f,21,6,5,DamageType::Physical,.94f,65,1.6f,164}
     };
     return entries[std::clamp(type,0,EnemyTypeCount-1)];
 }

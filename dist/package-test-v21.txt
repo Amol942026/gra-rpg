@@ -1,0 +1,6 @@
+PASS: destination project C:\Users\Amadeusz\Documents\GitHub\gra-rpg
+PASS: rebuilt game 960 gameplay and animation checks
+PASS: EXE and all 75 asset SHA256 hashes match extracted destination ZIP
+PASS: extracted destination ZIP 226 graphics and 25 forest/loot checks, no audio device
+Archive size (bytes): 6974500
+Extracted folder: C:\Users\Amadeusz\AppData\Local\Temp\Emberfall-target-v21-6b5246f830984a87b8f491ad87b7ed61\Emberfall
