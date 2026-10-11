@@ -5,6 +5,7 @@
 #include <string>
 #include "raylib.h"
 #include "game.hpp"
+#include "startup_log.hpp"
 
 // Preserve headroom when several enemies, a spell and a fanfare overlap.
 // The mixer is stereo float; this callback allocates nothing on the audio thread.
@@ -52,7 +53,9 @@ public:
         savePreferences=preferences;
         if(preferences)loadSettings();
         if(!enabled)return;
+        startupLog.write("Opening audio device");
         InitAudioDevice();deviceOpened=IsAudioDeviceReady();available=deviceOpened;
+        startupLog.write(available?"Audio device ready":"Audio device unavailable");
         if(!available)return; // The game remains playable without an audio device.
         SetMasterVolume(.72f);
         AttachAudioMixedProcessor(limitEmberMix);
@@ -63,6 +66,7 @@ public:
             for(auto& voice:bank.voices)voice=LoadSoundAlias(bank.source);
             loadedEffects++;
         }
+        startupLog.write("Sound effects ready; loading music");
         if(FileExists("assets/audio/echoes-of-the-ruins.ogg")){
             music=LoadMusicStream("assets/audio/echoes-of-the-ruins.ogg");
             if(IsMusicValid(music)){music.looping=true;SetMusicVolume(music,0);PlayMusicStream(music);}

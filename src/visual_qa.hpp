@@ -43,7 +43,7 @@ void presentCanvas(){
     // BeginDrawing() can carry a separate Windows DPI transform (e.g. 150%).
     // This final pass is explicitly one framebuffer pixel per canvas pixel.
     rlDrawRenderBatchActive();rlDisableScissorTest();
-    bool shared=sync_present::begin(GetWindowHandle(),GetRenderWidth(),GetRenderHeight());
+    bool shared=sync_present::begin(GetWindowHandle(),GetRenderWidth(),GetRenderHeight(),swapInterval);
     if(shared){rlEnableFramebuffer(sync_present::framebuffer());rlDisableBackfaceCulling();}
     ClearBackground(BLACK);
     rlViewport(0,0,GetRenderWidth(),GetRenderHeight());

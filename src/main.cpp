@@ -8,6 +8,7 @@
 #include <numeric>
 #include <sstream>
 #include "typography.hpp"
+#include "startup_log.hpp"
 #include "audio.hpp"
 using namespace ember;
 namespace fs=std::filesystem;
@@ -353,7 +354,7 @@ void integrationTests(){
 #include "bow_qa.hpp"
 int main(int argc,char**argv) {
     bool smoke=false,benchmark=false,integration=false,visualQA=false,hoverQA=false,rollQA=false,large=false;
-    bool audioQA=false,noAudio=false,audioPassed=true;
+    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=false;
     bool inspectionQA=false,inspectionPassed=true;
     bool swingQA=false;
     bool crowdQA=false,crowdPassed=true;
@@ -400,22 +401,32 @@ int main(int argc,char**argv) {
         if(arg=="--fullscreen")startFullScreen=true;
         if(arg=="--windowed")startFullScreen=false;
         if(arg=="--no-audio")noAudio=true;
+        if(arg=="--startup-smoke"){startupSmoke=true;frameLimit=180;}
+        if(arg=="--opengl")openGL=true;
         if(arg=="--large")large=true;
     }
     fs::path exe=fs::absolute(argv[0]).parent_path();
     if(fs::exists(exe/"assets"))fs::current_path(exe);
     else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
-    SetTraceLogLevel(LOG_WARNING);
+    startupLog.open();startupLog.write("Emberfall v0.23: startup");
+    SetTraceLogCallback(startupTrace);
+    SetTraceLogLevel(LOG_INFO);
+    if(openGL)sync_present::useOpenGL();
     // The offscreen world is antialiased already. Multisampling the final
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
     SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
+    startupLog.write("Creating graphics window");
     InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.23");
+    if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
+    startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
     bool diagnostic=smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA;
     if(!diagnostic)game=Game(std::random_device{}());
-    makeArt();initHoverArt();
-    audioSystem.init(!noAudio&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA,!(smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA));
+    startupLog.write("Generating world graphics");
+    makeArt();initHoverArt();startupLog.write("World graphics ready");
+    audioSystem.init(!noAudio&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA,!noAudio&&!startupSmoke&&!(smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA));
+    startupLog.write(noAudio?"Audio skipped (--no-audio)":"Audio initialization complete");
     if(smoke||benchmark)welcome=false;
     if(bowQA)bowPassed=runBowQA();
     if(mushroomQA)mushroomPassed=runMushroomQA();
@@ -475,20 +486,22 @@ int main(int argc,char**argv) {
         audioSystem.update(dt,game,welcome||help||paused||audioOpen||statsOpen||spellBookOpen||weaponWheelOpen||game.allocationRequired,smoke||benchmark||IsWindowFocused());
         performance.end(RenderStage::Update);
         renderScene();
+        if(frame==0)startupLog.write("First scene rendered");
         BeginDrawing();
         presentCanvas();
-        if((smoke&&frame==119)||(!smoke&&!benchmark&&IsKeyPressed(KEY_F12))){
+        if(((smoke||startupSmoke)&&frame==119)||(!smoke&&!benchmark&&IsKeyPressed(KEY_F12))){
             fs::create_directories("screenshots");Image image=presentedImage();
-            ExportImage(image,"screenshots/emberfall-v23.png");UnloadImage(image);
+            ExportImage(image,startupSmoke?"screenshots/emberfall-startup.png":"screenshots/emberfall-v23.png");UnloadImage(image);
         }
         double submitted=GetTime();double cpu=submitted-begin;EndDrawing();double ended=GetTime();performance.end(RenderStage::Present,true);finishFramePacing();double shown=GetTime();
+        if(frame==0){startupLog.write("First frame presented");startupLog.write(pacingName());if(*sync_present::error())startupLog.write(sync_present::error());}
         if(frameLimit&&frame>60){cpuTimes.push_back(cpu*1000);frameTimes.push_back(elapsed*1000);endTimes.push_back((ended-submitted)*1000);presentTimes.push_back((shown-ended)*1000);}
         frame++;
         if(frameLimit&&frame>=frameLimit)break;
     }
     if(frameLimit&&!cpuTimes.empty()){
         std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
-        std::ofstream f(benchmark?(startFullScreen?"benchmark-v23-fullscreen.txt":large?"benchmark-v23-large.txt":"benchmark-v23.txt"):"smoke-test-v23.txt");
+        std::ofstream f(startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v23-fullscreen.txt":large?"benchmark-v23-large.txt":"benchmark-v23.txt"):"smoke-test-v23.txt");
         f<<"Frames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
          <<"\nFullscreen: "<<(fullScreen()?"yes":"no")
          <<"\nRefresh rate (Hz): "<<refreshHz<<"\nV-sync interval: "<<swapInterval
@@ -512,7 +525,7 @@ int main(int argc,char**argv) {
          <<"\nFrames over 25 ms: "<<std::count_if(frameTimes.begin(),frameTimes.end(),[](double ms){return ms>25;})<<"\n";
     }
     performance.save();
-    audioSystem.shutdown();
+    startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
     unloadHoverArt();
     for(auto& t:propArt)UnloadRenderTexture(t);

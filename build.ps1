@@ -33,7 +33,7 @@ Copy-Item -LiteralPath 'LICENSES.md' -Destination 'dist\LICENSES.md' -Force
 if ($Test) {
     & $compiler '-std=c++17' '-O2' '-Wall' '-Wextra' '-Wno-misleading-indentation' '-static' 'tests\game_tests.cpp' '-o' 'dist\game_tests.exe'
     if ($LASTEXITCODE -ne 0) { throw 'Kompilacja testów nie powiodła się.' }
-    & '.\dist\game_tests.exe'
+    & '.\dist\game_tests.exe' '--no-audio'
     if ($LASTEXITCODE -ne 0) { throw 'Testy logiki gry nie przeszły.' }
 }
 Write-Host 'Gotowe: dist\Emberfall.exe'

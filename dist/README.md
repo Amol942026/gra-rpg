@@ -2,6 +2,12 @@
 
 Grywalny prototyp RPG 2.5D w C++17 i raylib 5.5, przygotowany dla Windows x64. Autorska izometryczna grafika, leśne ruiny, walka w czasie rzeczywistym i ekwipunek obsługiwany myszą. Nie wymaga instalowania silnika ani dodatkowych DLL.
 
+### Poprawka czarnego ekranu na Windows 11
+
+Przed wybraniem prezentacji DirectX gra sprawdza rzeczywisty piksel przesłany z OpenGL do docelowego bufora. Niektóre sterowniki Intel UHD przyjmują wywołania współdzielenia GPU, lecz zwracają czarny obraz. Gdy kontrola wykryje tę sytuację, gra automatycznie przechodzi na OpenGL z V-sync. Sprawdzenie jest powtarzane po zmianie rozmiaru bufora; nie wymaga zmiany ustawień Windows ani urządzenia audio.
+
+Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje teraz parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza także normalny ekran powitalny i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
+
 ## Wersja 0.23 — koło broni i łuk
 
 **Q** lub przycisk **BROŃ · Q** otwiera ośmiopolowe koło i wstrzymuje rozgrywkę. Na początku ma przypisany miecz oraz łuk; oba są rzeczywistymi przedmiotami — miecz w ręku, łuk w plecaku. **LPM na polu koła** zakłada broń i zamyka menu. Poprzednia broń trafia w miejsce wybranej w plecaku, więc przełączanie działa także przy pełnym plecaku.

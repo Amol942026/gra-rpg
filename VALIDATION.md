@@ -1,5 +1,17 @@
 # Weryfikacja prototypu
 
+## Poprawka czarnego ekranu — 11 października 2026
+
+Sprawdzone w `C:\Users\Amol\Documents\GitHub\gra-rpg` na Windows 11, Intel UHD Graphics ze sterownikiem `30.0.100.9864`, monitor 1920 × 1080 / 144 Hz. Każde uruchomienie miało `--no-audio`.
+
+- Odtworzono problem: inicjalizacja współdzielenia OpenGL–DirectX kończyła się bez błędu, lecz docelowy bufor był czarny. Test całego obrazu miał **96 błędów w 193 sprawdzeniach**, `nonblack=0` i 1 866 240 niezgodnych pikseli sceny na klatkę. Samo powodzenie wywołania `Present` nie potwierdzało poprawnego obrazu.
+- Dodano jednopikselową kontrolę znanego koloru w rzeczywistym buforze DirectX przy tworzeniu i zmianie rozmiaru powierzchni. Błędny transfer wyłącza mostek GPU, przywraca oryginalny kontekst okna i wybiera OpenGL z dotychczasowym dodatnim interwałem V-sync. Normalny start nie wymaga dodatkowego parametru.
+- Po poprawce **129/129 sprawdzeń obrazu i układu**, bez błędów: 32 aktualne klatki, cały świat i HUD zgodny piksel po pikselu, cztery narożniki, pełny ekran, dwa rozmiary okna oraz powrót na pełny ekran. Sprawdzenia właściwe wyłącznie prezentacji DXGI są pomijane w działającym trybie OpenGL, zgodnie z istniejącym testem.
+- **1058/1058 sprawdzeń logiki i animacji** po końcowej kompilacji. Cichy test zwykłego ekranu powitalnego zakończył 180 klatek, zapisał poprawny obraz i wskazał `GPU sharing pixel validation failed`, `OpenGL V-sync`, interwał 2. Skrót SHA-256 istniejących ustawień audio pozostał identyczny.
+- Dodano log etapów startu, `--opengl`, cichy `--startup-smoke` oraz przekazywanie parametrów przez oba launchery BAT. Zaktualizowano EXE i paczkę ZIP. Nie zmieniano konfiguracji sterowników, Windows ani antywirusa. Ścieżka DXGI na innej karcie graficznej nie była sprawdzana na tym komputerze.
+
+Dowody: `dist/qa-startup/refresh-before.txt`, `refresh-after.txt`, `local-startup.log`, `local-startup.txt`, `black-before.png` i `welcome-after.png`. Raport pakietu: `dist/qa-startup/package-startup.txt`.
+
 ## Wersja 0.23 — koło broni, łuk i strzały
 
 Sprawdzone 9 października 2026 w `C:\Users\Amadeusz\Documents\GitHub\gra-rpg`. Wszystkie uruchomienia gry, testów graficznych i benchmarku miały `--no-audio`. Nie otwierano urządzenia audio ani zmieniano preferencji dźwięku.

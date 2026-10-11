@@ -3,7 +3,8 @@
 // The final raylib frame goes directly through a shared GPU surface to DXGI.
 // DXGI owns the visible swap and always presents with a positive V-sync interval.
 namespace sync_present {
-bool begin(void* window,int width,int height);
+void useOpenGL();
+bool begin(void* window,int width,int height,int interval=1);
 unsigned int framebuffer();
 bool end();
 bool present(int interval);

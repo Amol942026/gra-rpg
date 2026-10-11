@@ -91,6 +91,7 @@ bool fail(const char* operation,HRESULT result=E_FAIL){
     release(state.chain);dropShaders();release(state.context);release(state.device);restoreDrawable();
     glfwSwapInterval(state.interval>0?state.interval:1);return false;
 }
+bool validateSurface();
 bool surface(int width,int height){
     dropSurface();
     // A flip buffer must have no GL/driver references when DXGI resizes it.
@@ -124,7 +125,7 @@ bool surface(int width,int height){
     if(!state.unlockObjects(state.bridge,1,&state.object))return fail("Initial surface unlock",HRESULT_FROM_WIN32(GetLastError()));
     state.locked=false;
     if(status!=GL_FRAMEBUFFER_COMPLETE)return fail("Shared framebuffer is incomplete");
-    state.width=width;state.height=height;return true;
+    state.width=width;state.height=height;return validateSurface();
 }
 bool shaders(){
     const char* code="struct V{float4 p:SV_Position;float2 uv:TEXCOORD0;};V vs(uint id:SV_VertexID){V v;v.uv=float2((id<<1)&2,id&2);v.p=float4(v.uv*float2(2,-2)+float2(-1,1),0,1);return v;}Texture2D image:register(t0);SamplerState sampleState:register(s0);float4 ps(V v):SV_Target{return image.Sample(sampleState,v.uv);}";
@@ -145,6 +146,32 @@ void drawFrame(){
     state.context->VSSetShader(state.vertexShader,nullptr,0);state.context->PSSetShader(state.pixelShader,nullptr,0);
     state.context->PSSetShaderResources(0,1,&state.source);state.context->PSSetSamplers(0,1,&state.sampler);state.context->Draw(3,0);
     ID3D11ShaderResourceView* empty=nullptr;state.context->PSSetShaderResources(0,1,&empty);state.context->OMSetRenderTargets(0,nullptr,nullptr);
+}
+bool validateSurface(){
+    // Some drivers advertise interop and accept every registration call, but
+    // deliver black pixels to DirectX. Verify the actual destination before
+    // giving DXGI ownership of the visible window (also after F11/resize).
+    GLfloat clearColor[4];glGetFloatv(GL_COLOR_CLEAR_VALUE,clearColor);
+    if(!state.lockObjects(state.bridge,1,&state.object))return fail("Validation surface lock",HRESULT_FROM_WIN32(GetLastError()));
+    state.locked=true;state.bindFramebuffer(GL_FRAMEBUFFER,state.fbo);
+    glClearColor(51.f/255,102.f/255,153.f/255,1);glClear(GL_COLOR_BUFFER_BIT);glFlush();
+    glClearColor(clearColor[0],clearColor[1],clearColor[2],clearColor[3]);state.bindFramebuffer(GL_FRAMEBUFFER,0);
+    if(!state.unlockObjects(state.bridge,1,&state.object))return fail("Validation surface unlock",HRESULT_FROM_WIN32(GetLastError()));
+    state.locked=false;drawFrame();
+    D3D11_TEXTURE2D_DESC description{};
+    description.Width=description.Height=description.MipLevels=description.ArraySize=1;
+    description.Format=DXGI_FORMAT_R8G8B8A8_UNORM;description.SampleDesc.Count=1;
+    description.Usage=D3D11_USAGE_STAGING;description.CPUAccessFlags=D3D11_CPU_ACCESS_READ;
+    ID3D11Texture2D* sample=nullptr;
+    HRESULT hr=state.device->CreateTexture2D(&description,nullptr,&sample);
+    if(FAILED(hr))return fail("Validation readback texture",hr);
+    D3D11_BOX pixel{0,0,0,1,1,1};state.context->CopySubresourceRegion(sample,0,0,0,0,state.back,0,&pixel);
+    D3D11_MAPPED_SUBRESOURCE mapped{};hr=state.context->Map(sample,0,D3D11_MAP_READ,0,&mapped);
+    if(FAILED(hr)){release(sample);return fail("Validation readback",hr);}
+    const auto* color=static_cast<const unsigned char*>(mapped.pData);
+    bool matches=std::abs(int(color[0])-51)<=1&&std::abs(int(color[1])-102)<=1&&std::abs(int(color[2])-153)<=1&&color[3]==255;
+    state.context->Unmap(sample,0);release(sample);
+    return matches||fail("GPU sharing pixel validation failed");
 }
 bool initialize(HWND window,int width,int height){
     if(!glfwExtensionSupported("WGL_NV_DX_interop2"))return fail("GPU sharing extension is unavailable");
@@ -191,8 +218,10 @@ bool initialize(HWND window,int width,int height){
     state.ready=true;glfwSwapInterval(0);return true;
 }
 }
-bool begin(void* window,int width,int height){
+void useOpenGL(){state.disabled=true;std::snprintf(state.reason,sizeof(state.reason),"OpenGL requested (--opengl)");}
+bool begin(void* window,int width,int height,int interval){
     if(state.disabled||width<=0||height<=0)return false;
+    state.interval=interval<1?1:interval>4?4:interval;
     if(!state.ready&&!initialize(static_cast<HWND>(window),width,height))return false;
     if((state.width!=width||state.height!=height)&&!surface(width,height))return false;
     if(state.locked)return true;
@@ -254,7 +283,8 @@ extern "C" void __wrap_glfwSwapBuffers(GLFWwindow* window){
 }
 #else
 namespace sync_present {
-bool begin(void*,int,int){return false;}unsigned int framebuffer(){return 0;}bool end(){return false;}
+void useOpenGL(){}
+bool begin(void*,int,int,int){return false;}unsigned int framebuffer(){return 0;}bool end(){return false;}
 bool present(int){return false;}bool active(){return false;}unsigned char* readback(int&,int&){return nullptr;}
 void shutdown(){}const char* name(){return "OpenGL V-sync";}const char* error(){return "";}
 unsigned int presentCount(){return 0;}unsigned int suppressedSwaps(){return 0;}int lastSyncInterval(){return 0;}

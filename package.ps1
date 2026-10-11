@@ -25,6 +25,9 @@ URUCHOMIENIE
 3. Uruchom Uruchom.bat lub Emberfall.exe, potem nacisnij Enter.
 Folder assets musi pozostac obok pliku Emberfall.exe.
 Gra startuje domyslnie na pelnym ekranie. F11 przywraca tryb okna.
+Gra sprawdza przesylanie obrazu GPU; przy bledzie sama wybiera OpenGL.
+W razie problemu etapy startu znajdziesz w emberfall-startup.log obok EXE.
+Uruchom.bat --opengl wymusza OpenGL; --windowed uruchamia gre w oknie.
 Synchronizacja z monitorem oraz wygladzanie terenu poprawiaja plynnosc ruchu.
 Poczatkowy sprzet zostaje w plecaku; nie ma rozrzuconych startowych przedmiotow.
 Wersja 0.22: w kazdej wyprawie rosnie 36 borowikow w losowych miejscach.
@@ -86,7 +89,7 @@ Licencje: LICENSES.md i pliki w assets.
     try { $writer.Write($instructions) } finally { $writer.Dispose() }
     $entry = $archive.CreateEntry('Emberfall/Uruchom.bat')
     $writer = New-Object IO.StreamWriter($entry.Open(), [Text.Encoding]::ASCII)
-    try { $writer.Write("@echo off`r`ncd /d `"%~dp0`"`r`nstart `"Emberfall`" `"Emberfall.exe`"`r`n") } finally { $writer.Dispose() }
+    try { $writer.Write("@echo off`r`ncd /d `"%~dp0`"`r`nstart `"Emberfall`" `"Emberfall.exe`" %*`r`n") } finally { $writer.Dispose() }
 } finally { $archive.Dispose() }
 Move-Item -LiteralPath $temporaryPackage -Destination $packagePath -Force
 Write-Output ('Gotowe: {0} ({1:N2} MB)' -f $packagePath, ((Get-Item -LiteralPath $packagePath).Length / 1000000))
