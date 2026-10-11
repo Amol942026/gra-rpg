@@ -1,6 +1,8 @@
 #include "raylib.h"
 #include "rlgl.h"
 #include "game.hpp"
+#include "intro_story.hpp"
+#include "tower_story.hpp"
 #include <cstdio>
 #include <cstdlib>
 #include <filesystem>
@@ -14,9 +16,11 @@ using namespace ember;
 namespace fs=std::filesystem;
 constexpr int W=1440,H=900,WorldW=1050;
 const Color Ink{15,23,25,255},Panel{20,29,31,255},Card{27,38,40,255},Line{52,65,63,255},Gold{224,192,128,255},Text{239,241,230,255},Muted{175,195,188,255},Green{105,176,136,255},Blue{104,167,202,255};
-Typography typography;float renderScale=1;RenderTexture2D canvas{},terrain,worldCanvas{};std::array<RenderTexture2D,PropTypeCount> propArt;Game game;
+Typography typography;float renderScale=1;RenderTexture2D canvas{},terrain,worldCanvas{};Texture2D minimapTerrain{};std::array<RenderTexture2D,PropTypeCount> propArt;Game game;
 constexpr int TerrainWidth=MapSize*80+200,TerrainHeight=MapSize*40+300,TerrainOriginX=TerrainWidth/2;
 AudioSystem audioSystem;
+IntroSequence intro;
+TowerSequence towerStory;
 #include "performance.hpp"
 Vector2 mouse{};Slot dragging{};bool paused=false,help=false,welcome=true;int nearbyPage=0;float scale=1;Rectangle viewport{};
 bool weaponWheelOpen=false;
@@ -43,10 +47,10 @@ Vector2 screen(V p){return{WorldW*.5f+(p.x-p.y-game.player.x+game.player.y)*40,4
 V toWorld(Vector2 p){float x=(p.x-WorldW*.5f)/40+game.player.x-game.player.y,y=(p.y-428)/20+game.player.x+game.player.y;return{(x+y)/2,(y-x)/2};}
 Rectangle bagRect(int i){return{1080.f+(i%5)*65,366.f+(i/5)*44,57,40};}
 Rectangle equipRect(int i){return{1080.f+(i%3)*109,207.f+(i/3)*51,98,44};}
-std::vector<int> nearby(){std::vector<int> a;for(auto&g:game.ground)if(!g.value.empty()&&distance(g.pos,game.player)<=2.5f)a.push_back(g.id);return a;}
+std::vector<int> nearby(){std::vector<int> a;for(auto&g:game.ground)if(g.location==game.location&&!g.value.empty()&&distance(g.pos,game.player)<=2.5f)a.push_back(g.id);return a;}
 std::vector<Slot> nearbySlots(){
  std::vector<Slot> slots;for(int id:nearby())slots.push_back({Place::Ground,id});
- for(const auto& plant:game.forage)if(!plant.value.empty()&&distance(plant.pos,game.player)<=2.5f)slots.push_back({Place::Forage,plant.id});return slots;
+ if(!game.inTower())for(const auto& plant:game.forage)if(!plant.value.empty()&&distance(plant.pos,game.player)<=2.5f)slots.push_back({Place::Forage,plant.id});return slots;
 }
 Rectangle lootRect(int i){return{1080.f+(i%5)*65,620,57,44};}
 Rectangle corpseCloseRect(){return{1375,590,27,25};}
@@ -55,12 +59,13 @@ Rectangle actionRect(int i){return{343.f+i*77,799,65,63};}
 #include "display_ui.hpp"
 Rectangle weaponWheelButton(){return {28,112,158,34};}
 int weaponWheelHit(Vector2 point);
-enum class HoverKind { None, Enemy, Prop, Ground, Corpse, Forage };
+enum class HoverKind { None, Enemy, Prop, Ground, Corpse, Forage, Mage };
 struct WorldHover { bool tileValid=false; V tile{}; HoverKind kind=HoverKind::None; int index=-1; };
 struct DrawObject { float depth; int type,index; };
 WorldHover hovered{};
 WorldHover pickWorld(Vector2 point);
 bool worldPointerAllowed(Vector2 point);
+bool talkToMage();
 Slot hoverSlot(){
  for(int i=0;i<BagSize;i++)if(inside(bagRect(i)))return{Place::Bag,i};for(int i=0;i<EquipSize;i++)if(inside(equipRect(i)))return{Place::Equip,i};
  if(game.findCorpse(game.openedCorpse)){for(int i=0;i<CorpseLootSize;i++)if(inside(lootRect(i)))return{Place::Corpse,i,game.openedCorpse};}
@@ -96,6 +101,11 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
  case Kind::Ring:DrawRing({x,y+2*s},9*s,14*s,0,360,32,gold);diamond(x,y-11*s,7*s,9*s,C(i.tier>0?Green:Blue));break;
  case Kind::Health:case Kind::Mana:{Color liquid=C(i.kind==Kind::Health?rgb(195,71,83):rgb(69,134,197));R(-7,-20,14,7,edge);R(-5,-19,10,6,wood);R(-6,-13,12,10,steel);ellipse(x,y+5*s,14*s,17*s,edge);ellipse(x,y+5*s,11*s,14*s,C(rgb(144,181,182)));ellipse(x,y+8*s,9*s,10*s,liquid);R(-9,0,3,9,light);L(-4,-9,3,-9,light,2);break;}
  case Kind::Crystal:P({{0,-21},{12,-6},{8,14},{-1,21},{-12,5},{-9,-13}},C(rgb(66,142,156)));P({{0,-21},{2,-4},{-1,21},{-12,5},{-9,-13}},C(rgb(137,224,212)));L(0,-18,8,-6,light,2);break;
+ case Kind::DawnShard:
+  ellipse(x,y,20*s,20*s,C(rgb(225,177,87,30)));DrawRing({x,y},15*s,17*s,20,315,32,gold);
+  P({{-2,-21},{12,-8},{8,12},{-1,20},{-13,4},{-9,-13}},C(rgb(221,156,62)));
+  P({{-2,-21},{1,-4},{-1,20},{-13,4},{-9,-13}},C(rgb(255,230,140)));
+  P({{1,-4},{12,-8},{8,12},{-1,20}},C(rgb(252,194,84)));L(-2,-18,1,-4,light,1.5f);L(-6,-7,5,3,light,1.1f);L(5,3,-2,9,light,1.1f);break;
  case Kind::Gold:ellipse(x-5*s,y+8*s,12*s,6*s,wood);ellipse(x-5*s,y+4*s,12*s,6*s,gold);ellipse(x+6*s,y-2*s,11*s,6*s,wood);ellipse(x+6*s,y-5*s,11*s,6*s,gold);L(3,-5,9,-5,light,2);break;
  case Kind::WolfFang:case Kind::BoarTusk:P({{-9,-17},{5,-13},{10,-2},{6,12},{-5,21},{0,5},{-2,-6}},light);L(-8,-14,-2,-7,wood,3);L(5,-8,5,7,steel,1);if(i.kind==Kind::BoarTusk)L(-4,17,10,4,light,4);break;
  case Kind::WolfFur:case Kind::BoarHide:{Color fur=C(i.kind==Kind::WolfFur?rgb(153,165,157):rgb(139,100,66));P({{-16,-14},{-5,-18},{6,-14},{18,-18},{14,-4},{20,8},{10,17},{-4,13},{-16,20},{-19,6},{-13,-3}},fur);for(int n=0;n<6;n++)L(-11+n*5,-9,-15+n*5,9,shade(fur,.7f),2);break;}
@@ -151,6 +161,7 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 }
 #include "scenery_art.hpp"
 #include "actor_art.hpp"
+#include "intro_art.hpp"
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
 void makeArt(){
@@ -163,8 +174,23 @@ void makeArt(){
  float cx=TerrainOriginX+(21-5)*40,cy=90+(21+5)*20;DrawEllipseLines(int(cx),int(cy),91,45,rgb(159,154,111));DrawEllipseLines(int(cx),int(cy),77,38,rgb(141,140,103));
  for(int i=0;i<12;i++){float a=i*PI/6,xx=cx+std::cos(a)*84,yy=cy+std::sin(a)*42;diamond(xx,yy,3,2,rgb(193,182,131));
   line(xx-3,yy-5,xx+2,yy+3,rgb(173,170,125),1.2f);line(xx-2,yy,xx+4,yy-2,rgb(173,170,125),1.2f);}
+ // A second, larger landmark gives the deep forest a recognizable destination.
+ cx=TerrainOriginX+(59-57)*40;cy=90+(59+57)*20;
+ for(int ring=0;ring<3;ring++)ellipseOutline(cx,cy,164-ring*17,82-ring*8.5f,rgb(147-ring*10,151-ring*9,109-ring*6));
+ for(int i=0;i<16;i++){
+  float a=i*PI/8,xx=cx+std::cos(a)*152,yy=cy+std::sin(a)*76;
+  diamond(xx,yy,3,5,rgb(189,184,129));line(xx-5,yy-6,xx+5,yy+6,rgb(134,151,128),1.2f);
+ }
  EndTextureMode();
  SetTextureFilter(terrain.texture,TEXTURE_FILTER_BILINEAR);
+ // Roads never change during a run; baking their minimap avoids thousands of
+ // path-distance calculations and tiny draw calls every frame on the larger map.
+ Image mini=GenImageColor(180,112,BLANK);float mx=78.f/(MapSize-2),my=48.f/(MapSize-2);
+ for(bool paths:{false,true})for(int x=1;x<MapSize-1;x++)for(int y=1;y<MapSize-1;y++){
+  if(Game::onPath(x,y)!=paths)continue;
+  ImageDrawPixel(&mini,int(90+(x-y)*mx),int(6+(x+y-2)*my),paths?rgb(126,132,100):rgb(61,87,69));
+ }
+ minimapTerrain=LoadTextureFromImage(mini);UnloadImage(mini);SetTextureFilter(minimapTerrain,TEXTURE_FILTER_POINT);
  for(int i=0;i<PropTypeCount;i++){propArt[i]=LoadRenderTexture(180,230);BeginTextureMode(propArt[i]);ClearBackground(BLANK);if(i==0)tree(90,208,1);if(i==1)rock(90,208,1);if(i==2)bush(90,208,1);if(i==3)column(90,208,1);if(i==4)deciduousTree(90,208,1,true);if(i==5)deciduousTree(90,208,1,false);if(i==6)mushrooms(90,208,1);EndTextureMode();}
  for(auto& art:propArt)SetTextureFilter(art.texture,TEXTURE_FILTER_BILINEAR);
  fs::create_directories("assets/generated");
@@ -179,7 +205,9 @@ void makeArt(){
 #include "world_hover.hpp"
 #include "magic_art.hpp"
 #include "bow_art.hpp"
+#include "tower_world.hpp"
 void drawWorld(){
+ if(game.inTower()){drawTowerWorld();return;}
  clip(0,0,WorldW,H);ClearBackground(rgb(22,44,47));drawWindWater();performance.end(RenderStage::Water,true);Vector2 o=screen({0,0});DrawTextureRec(terrain.texture,{0,0,float(TerrainWidth),-float(TerrainHeight)},{o.x-TerrainOriginX,o.y-90},WHITE);
  for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
  Vector2 pp=screen(game.player);DrawEllipseLines(int(pp.x),int(pp.y+2),25,12,Fade(Gold,.7f));
@@ -220,20 +248,28 @@ void slotDraw(Slot s,Rectangle r,std::string label=""){
  else if(!label.empty())center(label,r.x+r.width/2,r.y+r.height/2-7,11,Muted);
 }
 void minimap(){Rectangle r{842,133,180,155};panel(r,Fade(Panel,.92f));txt("WIELKA KNIEJA",856,144,11,Gold);
+ if(game.inTower()){
+  rect(r.x+1,r.y+1,r.width-2,r.height-2,rgb(24,23,40));txt("WIEŻA ELDRINA",856,144,11,Gold);
+  ellipse(932,220,68,42,rgb(67,58,85));ellipseOutline(932,220,68,42,Fade(Gold,.5f));
+  auto point=[](V p){return Vector2{932+(p.x-p.y)*6.5f,220+(p.x+p.y-24)*3.25f};};
+  for(const auto& object:TowerFurnishings){Vector2 p=point(object.pos);DrawCircleV(p,2,Muted);}
+  DrawCircleV(point(MagePosition),3,rgb(198,150,250));DrawCircleV(point(game.player),3,Text);txt("MAG",901,268,14,rgb(198,150,250));return;
+ }
  const float sx=78.f/(MapSize-2),sy=48.f/(MapSize-2);
  auto point=[&](V p){return Vector2{932+(p.x-p.y)*sx,176+(p.x+p.y-2)*sy};};
- for(int x=1;x<MapSize-1;x++)for(int y=1;y<MapSize-1;y++){Vector2 p=point({float(x),float(y)});DrawPixel(int(p.x),int(p.y),Game::onPath(x,y)?rgb(126,132,100):rgb(61,87,69));}
+ DrawTexture(minimapTerrain,int(r.x),170,WHITE);
+ for(const auto& glade:ForestGlades){Vector2 p=point(glade.center);diamond(p.x,p.y,2,2,Fade(Gold,.7f));}
  for(auto&e:game.enemies)if(e.alive){Vector2 p=point(e.pos);DrawCircleV(p,e.type==3?3:1.6f,e.type==3?Gold:rgb(166,90,75));}
  DrawCircleV(point(game.player),3,Text);txt("N",925,158,9,Muted);}
 void drawUI(){
  txt("EMBERFALL",28,22,34,Text,true);txt("ECHA ZAPOMNIANYCH RUIN",31,66,10,Gold);line(29,92,308,92,Fade(Gold,.35f));
- txt("01",366,29,24,Gold,true);txt(Game::region(game.player),410,29,20,Text);txt("POGRANICZE  /  STREFA DZIKICH",411,56,10,Muted);
+ txt(game.inTower()?"02":"01",366,29,24,Gold,true);txt(game.inTower()?"Wieża Eldrina":Game::region(game.player),410,29,20,Text);txt(game.inTower()?"OBSERWATORIUM  /  SCHRONIENIE":"POGRANICZE  /  STREFA DZIKICH",411,56,10,Muted);
  DrawCircle(903,39,3,Green);txt(TextFormat("%d FPS",GetFPS()),914,30,13,Green);txt("F1  POMOC",917,56,10,Muted);
  minimap();
  txt("DZIENNIK WYPRAWY",29,680,10,Gold);line(29,701,242,701,Fade(Gold,.3f));
- diamond(36,727,6,6,game.bossDead?Green:Gold);txt(game.bossDead?"Ruiny odzyskane":"Echo w kamieniu",53,714,20,Text,true);
- txt(game.bossDead?"Strażnik upadł. Zbierz jego skarby.":"Pokonaj strażnika północnych ruin.",29,748,13,Muted);
- txt(TextFormat("Pokonani przeciwnicy: %d / %d",game.kills,int(game.enemies.size())),29,771,12,Muted);
+ diamond(36,727,6,6,game.dawnFragments()?Green:Gold);txt("Serce Świtu",53,714,20,Text,true);
+ txt(game.inTower()?"Porozmawiaj z Eldrinem · E / PPM":game.bossDead?"Zbierz część Serca Świtu z ciała.":"Odnajdź Strażnika na północy.",29,748,13,Muted);
+ txt(TextFormat("Odzyskane części: %d / 5",game.dawnFragments()),29,771,12,game.dawnFragments()?Green:Muted);
  txt("WSAD",29,835,10,Gold);txt("ruch",102,833,13,Muted);txt("ESC",166,835,10,Gold);txt("pauza",197,833,13,Muted);
  txt("SHIFT",29,862,10,Gold);txt("bieg (przytrzymaj)",102,860,13,Muted);
  if(game.messageTime>0&&!weaponWheelOpen){float tw=textWidth(game.message,13);float width=std::min(760.f,tw+32);rect(WorldW/2.f-width/2,744,width,29,Fade(Panel,.94f));center(game.message,WorldW/2.f,750,13,Text);}
@@ -264,7 +300,7 @@ void drawUI(){
   txt(std::string("ŁUP: ")+enemyInfo(corpse->type).name,1080,594,14,Gold);
   panel(corpseCloseRect(),inside(corpseCloseRect())?Card:Panel);center("X",1388,594,14,Gold);
   int count=0;for(int i=0;i<CorpseLootSize;i++){slotDraw({Place::Corpse,i,corpse->id},lootRect(i));if(!corpse->loot[i].empty())count++;}
-  txt(count?"Przeciągnij łup do plecaka.":"Ciało jest puste.",1080,679,14,count?Muted:Green);
+  txt(count?(corpse->type==3&&!corpse->loot[4].empty()?"Zebranie części: powrót do wieży.":"Przeciągnij łup do plecaka."):"Ciało jest puste.",1080,679,14,count?Muted:Green);
  }else{
   txt("W ZASIĘGU",1080,595,10,Gold);auto n=nearbySlots();int pages=std::max(1,(int(n.size())+4)/5);nearbyPage=std::clamp(nearbyPage,0,pages-1);txt(TextFormat("%d  W ZASIĘGU",int(n.size())),1270,595,10,Muted);
   for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size())slotDraw(n[j],lootRect(i));else panel(lootRect(i),rgb(19,29,31));}
@@ -272,13 +308,14 @@ void drawUI(){
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.bossDead?"WYPRAWA UKOŃCZONA":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.23",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.26",1370,885,10,Muted);
 }
 void tooltip(){if(dragging.place!=Place::None||welcome||help||paused)return;Slot s=hoverSlot();Item*p=game.get(s);if(!p||p->empty())return;float x=std::min(mouse.x+20,1106.f),y=std::min(mouse.y+20,740.f);panel({x,y,312,139},rgb(12,22,25,250));rect(x,y,3,139,rarity(p->tier));txt(rarityName(p->tier),x+17,y+13,10,rarity(p->tier));txt(itemName(*p),x+17,y+34,18,Text);std::string stat;
- if(gearSlot(p->kind)>=0)stat=(gearSlot(p->kind)==0||gearSlot(p->kind)==5?"Atak +":"Pancerz +")+std::to_string(power(*p));else if(p->kind==Kind::Arrow)stat="Amunicja do łuku · jedna na strzał";else if(p->kind==Kind::Health)stat="Odnawia 50 punktów zdrowia";else if(p->kind==Kind::Mushroom)stat="Po zjedzeniu odnawia 10 HP";else if(p->kind==Kind::Mana)stat="Odnawia 35 punktów many";else if(material(p->kind))stat=materialDescription(p->kind);else stat="Skarb znaleziony w ruinach";
+ if(p->kind==Kind::DawnShard)stat="Artefakt fabularny · część 1 z 5";else if(gearSlot(p->kind)>=0)stat=(gearSlot(p->kind)==0||gearSlot(p->kind)==5?"Atak +":"Pancerz +")+std::to_string(power(*p));else if(p->kind==Kind::Arrow)stat="Amunicja do łuku · jedna na strzał";else if(p->kind==Kind::Health)stat="Odnawia 50 punktów zdrowia";else if(p->kind==Kind::Mushroom)stat="Po zjedzeniu odnawia 10 HP";else if(p->kind==Kind::Mana)stat="Odnawia 35 punktów many";else if(material(p->kind))stat=materialDescription(p->kind);else stat="Skarb znaleziony w ruinach";
  if(p->kind==Kind::Bow)stat+=" · naciąg wydłuża zasięg";
  txt(stat,x+17,y+65,13,Gold);txt((s.place==Place::Ground||s.place==Place::Corpse||s.place==Place::Forage)&&!game.reachable(s)?"Podejdź bliżej, aby podnieść.":s.place==Place::Corpse?"LPM: przeciągnij do plecaka":"LPM: przeciągnij przedmiot",x+17,y+92,12,Muted);
- if(s.place==Place::Corpse){const Enemy* body=game.findCorpse(s.owner);int chance=body?lootChance(body->type,*p):0;txt(TextFormat("Szansa z tego gatunku: %d%%",chance),x+17,y+112,12,Muted);}
+ if(p->kind==Kind::DawnShard)txt(s.place==Place::Corpse?"Zebranie: powrót do wieży Eldrina":"Przedmiot zadania · nie można porzucić",x+17,y+112,12,Gold);
+ else if(s.place==Place::Corpse){const Enemy* body=game.findCorpse(s.owner);int chance=body?lootChance(body->type,*p):0;txt(TextFormat("Szansa z tego gatunku: %d%%",chance),x+17,y+112,12,Muted);}
  else txt(gearSlot(p->kind)==0?"Q: otwórz koło i przeciągnij broń":p->kind==Kind::Arrow?"Łuk zużywa strzały z plecaka":p->kind==Kind::Mushroom?(s.place==Place::Forage?"Przeciągnij do plecaka · stos do 99":"PPM: zjedz borowika (+10 HP)"):material(p->kind)?"Materiał / trofeum · stos do 99":p->kind==Kind::Health||p->kind==Kind::Mana?"PPM: wypij miksturę":"Upuść na mapę, aby odłożyć.",x+17,y+112,12,Muted);
 }
 void overlay(){
@@ -290,31 +327,39 @@ void overlay(){
  for(int i=0;i<8;i++){txt(keys[i],384,363+i*29,15,Gold);txt(desc[i],554,360+i*29,19,Text);}
  Rectangle b{540,613,360,57};panel(b,inside(b)?rgb(73,82,61):rgb(49,62,51));center(welcome?"WYRUSZ":"WRÓĆ DO GRY",720,629,21,Text);center("ENTER — powrót  /  K — księga  /  P — statystyki  /  Q — broń  /  F2 — dźwięk  /  ESC — pauza",720,687,14,Muted);
 }
+#include "intro_scene.hpp"
+#include "tower_scene.hpp"
 void input(float dt){
+ if(intro.active()){introInput(dt);return;}
+ startTowerReturn();if(towerStory.active()){towerInput(dt);return;}
  if(audioInput()){game.cancelBow();if(audioOpen)weaponWheelOpen=false;return;}
  if(progressionInput()){game.cancelBow();weaponWheelOpen=false;return;}
  if(weaponWheelInput())return;
  if(IsKeyPressed(KEY_F1)){game.cancelBow();help=!help;paused=false;welcome=false;dragging={};}
  if(IsKeyPressed(KEY_ESCAPE)){game.cancelBow();if(help||welcome){help=false;welcome=false;}else paused=!paused;dragging={};}
- if(welcome||help||paused){if(IsKeyPressed(KEY_ENTER)||(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside({540,613,360,57}))){welcome=help=paused=false;}return;}
- if(game.dead()){if(IsKeyPressed(KEY_ENTER)){game=Game(std::random_device{}());weaponWheelOpen=false;dragging={};nearbyPage=0;}return;}
+ if(welcome||help||paused){if(IsKeyPressed(KEY_ENTER)||(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside({540,613,360,57}))){if(welcome)startIntro();else help=paused=false;}return;}
+ if(game.dead()){if(IsKeyPressed(KEY_ENTER)){game=Game(std::random_device{}());startIntro();}return;}
  if(!IsWindowFocused()){game.cancelBow();weaponWheelOpen=false;paused=true;dragging={};return;}
+ if(IsKeyPressed(KEY_E)&&game.inTower()){talkToMage();if(towerStory.active())return;}
  V move{};if(IsKeyDown(KEY_D))move=move+V{1,-1};if(IsKeyDown(KEY_A))move=move+V{-1,1};if(IsKeyDown(KEY_S))move=move+V{1,1};if(IsKeyDown(KEY_W))move=move+V{-1,-1};
  if(IsKeyPressed(KEY_SPACE))game.startRoll(move);
  const bool running=IsKeyDown(KEY_LEFT_SHIFT)||IsKeyDown(KEY_RIGHT_SHIFT);
  if(IsKeyPressed(KEY_ONE))game.potion(Kind::Health);if(IsKeyPressed(KEY_TWO))game.potion(Kind::Mana);
  if(IsKeyPressed(KEY_C))castGameplaySpell();
  if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))rightClickWorldOrInventory();
+ if(towerStory.active())return;
  if(game.openedCorpse<0&&mouse.x>WorldW&&mouse.y>=594&&mouse.y<702&&GetMouseWheelMove()!=0){nearbyPage+=GetMouseWheelMove()<0?1:-1;}
  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))leftClickGameplay(move);
+ if(towerStory.active())return;
  if(game.bowDrawing){if(worldPointerAllowed(mouse))game.aimBow(bowAimFromPointer());else game.cancelBow();}
  if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){if(dragging.place!=Place::None)finishDrag();else releaseWorldBow();}
+ startTowerReturn();if(towerStory.active())return;
  if(game.bowDrawing&&!IsMouseButtonDown(MOUSE_BUTTON_LEFT))game.cancelBow();
  if(!statsOpen&&!spellBookOpen)game.update(dt,move,false,running);
  if(dragging.place==Place::Corpse&&game.openedCorpse!=dragging.owner)dragging={};
 }
 void integrationTests(){
- std::ofstream out("interaction-test-v23.txt");int count=0;
+ std::ofstream out("interaction-test-v26.txt");int count=0;
  auto check=[&](bool result,const char* label){out<<(result?"PASS: ":"FAIL: ")<<label<<"\n";out.flush();count++;if(!result)std::exit(2);};
  auto midpoint=[](Rectangle r){return Vector2{r.x+r.width/2,r.y+r.height/2};};
  check(game.ground.empty(),"normal startup contains no ground loot");
@@ -352,9 +397,12 @@ void integrationTests(){
 #include "graphics_qa.hpp"
 #include "mushroom_qa.hpp"
 #include "bow_qa.hpp"
+#include "intro_qa.hpp"
+#include "tower_qa.hpp"
 int main(int argc,char**argv) {
     bool smoke=false,benchmark=false,integration=false,visualQA=false,hoverQA=false,rollQA=false,large=false;
     bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=false;
+    bool introQA=false,introPassed=true,towerQA=false,towerPassed=true;
     bool inspectionQA=false,inspectionPassed=true;
     bool swingQA=false;
     bool crowdQA=false,crowdPassed=true;
@@ -398,6 +446,8 @@ int main(int argc,char**argv) {
         if(arg=="--graphics-qa")graphicsQA=true;
         if(arg=="--mushroom-qa")mushroomQA=true;
         if(arg=="--bow-qa")bowQA=true;
+        if(arg=="--intro-qa")introQA=true;
+        if(arg=="--tower-qa")towerQA=true;
         if(arg=="--fullscreen")startFullScreen=true;
         if(arg=="--windowed")startFullScreen=false;
         if(arg=="--no-audio")noAudio=true;
@@ -408,7 +458,7 @@ int main(int argc,char**argv) {
     fs::path exe=fs::absolute(argv[0]).parent_path();
     if(fs::exists(exe/"assets"))fs::current_path(exe);
     else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
-    startupLog.open();startupLog.write("Emberfall v0.23: startup");
+    startupLog.open();startupLog.write("Emberfall v0.26: startup");
     SetTraceLogCallback(startupTrace);
     SetTraceLogLevel(LOG_INFO);
     if(openGL)sync_present::useOpenGL();
@@ -416,18 +466,20 @@ int main(int argc,char**argv) {
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
     SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
     startupLog.write("Creating graphics window");
-    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.23");
+    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.26");
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
     startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
-    bool diagnostic=smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA;
-    if(!diagnostic)game=Game(std::random_device{}());
+    bool diagnostic=towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA;
+    if(!diagnostic){game=Game(std::random_device{}());startIntro();}
     startupLog.write("Generating world graphics");
     makeArt();initHoverArt();startupLog.write("World graphics ready");
-    audioSystem.init(!noAudio&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA,!noAudio&&!startupSmoke&&!(smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA));
+    audioSystem.init(!noAudio&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA,!noAudio&&!startupSmoke&&!(towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA));
     startupLog.write(noAudio?"Audio skipped (--no-audio)":"Audio initialization complete");
     if(smoke||benchmark)welcome=false;
+    if(towerQA)towerPassed=runTowerQA();
+    if(introQA)introPassed=runIntroQA();
     if(bowQA)bowPassed=runBowQA();
     if(mushroomQA)mushroomPassed=runMushroomQA();
     if(graphicsQA)graphicsPassed=runGraphicsQA();
@@ -453,13 +505,13 @@ int main(int argc,char**argv) {
     int frame=0;
     std::vector<double> cpuTimes,frameTimes,endTimes,presentTimes;
     double previous=GetTime();
-    while(!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!WindowShouldClose()){
+    while(!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!WindowShouldClose()){
         double begin=GetTime();double elapsed=begin-previous;previous=begin;
         performance.begin();
         float dt=float(std::clamp(elapsed,0.0,.05));
         updateFramePacing();
         refreshDisplayLayout();
-        bool displayChanged=displayInput();
+        bool displayChanged=(intro.active()||towerStory.active())?displayAction(IsKeyPressed(KEY_F11),false):displayInput();
         if(displayChanged)refreshDisplayLayout();
         if(smoke||benchmark){
             if(benchmark&&game.allocationRequired){Attributes points{};points[int(Attribute::MagicPower)]=game.attributePoints;game.distribute(points);statsOpen=false;}
@@ -483,7 +535,7 @@ int main(int argc,char**argv) {
                 }
             }
         }else if(!displayChanged)input(dt);
-        audioSystem.update(dt,game,welcome||help||paused||audioOpen||statsOpen||spellBookOpen||weaponWheelOpen||game.allocationRequired,smoke||benchmark||IsWindowFocused());
+        audioSystem.update(dt,game,towerStory.active()||intro.active()||welcome||help||paused||audioOpen||statsOpen||spellBookOpen||weaponWheelOpen||game.allocationRequired,smoke||benchmark||IsWindowFocused());
         performance.end(RenderStage::Update);
         renderScene();
         if(frame==0)startupLog.write("First scene rendered");
@@ -491,7 +543,7 @@ int main(int argc,char**argv) {
         presentCanvas();
         if(((smoke||startupSmoke)&&frame==119)||(!smoke&&!benchmark&&IsKeyPressed(KEY_F12))){
             fs::create_directories("screenshots");Image image=presentedImage();
-            ExportImage(image,startupSmoke?"screenshots/emberfall-startup.png":"screenshots/emberfall-v23.png");UnloadImage(image);
+            ExportImage(image,startupSmoke?"screenshots/emberfall-startup.png":"screenshots/emberfall-v26.png");UnloadImage(image);
         }
         double submitted=GetTime();double cpu=submitted-begin;EndDrawing();double ended=GetTime();performance.end(RenderStage::Present,true);finishFramePacing();double shown=GetTime();
         if(frame==0){startupLog.write("First frame presented");startupLog.write(pacingName());if(*sync_present::error())startupLog.write(sync_present::error());}
@@ -501,7 +553,7 @@ int main(int argc,char**argv) {
     }
     if(frameLimit&&!cpuTimes.empty()){
         std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
-        std::ofstream f(startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v23-fullscreen.txt":large?"benchmark-v23-large.txt":"benchmark-v23.txt"):"smoke-test-v23.txt");
+        std::ofstream f(startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v26-fullscreen.txt":large?"benchmark-v26-large.txt":"benchmark-v26.txt"):"smoke-test-v26.txt");
         f<<"Frames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
          <<"\nFullscreen: "<<(fullScreen()?"yes":"no")
          <<"\nRefresh rate (Hz): "<<refreshHz<<"\nV-sync interval: "<<swapInterval
@@ -529,8 +581,8 @@ int main(int argc,char**argv) {
     sync_present::shutdown();
     unloadHoverArt();
     for(auto& t:propArt)UnloadRenderTexture(t);
-    UnloadRenderTexture(terrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
-    typography.clear();CloseWindow();return audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed?0:2;
+    UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
+    typography.clear();CloseWindow();return towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed?0:2;
 }
 
 

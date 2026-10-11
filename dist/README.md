@@ -6,7 +6,41 @@ Grywalny prototyp RPG 2.5D w C++17 i raylib 5.5, przygotowany dla Windows x64. A
 
 Przed wybraniem prezentacji DirectX gra sprawdza rzeczywisty piksel przesłany z OpenGL do docelowego bufora. Niektóre sterowniki Intel UHD przyjmują wywołania współdzielenia GPU, lecz zwracają czarny obraz. Gdy kontrola wykryje tę sytuację, gra automatycznie przechodzi na OpenGL z V-sync. Sprawdzenie jest powtarzane po zmianie rozmiaru bufora; nie wymaga zmiany ustawień Windows ani urządzenia audio.
 
-Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje teraz parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza także normalny ekran powitalny i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
+Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
+
+## Wersja 0.26 — pierwsza część Serca Świtu i wieża Eldrina
+
+**Kamienny Strażnik** w północnych ruinach zostawia **jedną część Serca Świtu ze szansą 100%**. Pozostaje ona w piątym polu łupu obok monet, legendarnego miecza, pierścienia i esencji. Pokonanie bossa samo nie uruchamia sceny. Podejdź do ciała, otwórz je PPM i przeciągnij fragment do wolnego pola plecaka. Warto wcześniej zebrać pozostałe nagrody: podniesienie fragmentu rozpoczyna powrót. Przy zajętym polu, zbyt dużej odległości lub nierozdanych punktach awansu fragment zostaje w ciele.
+
+Po zebraniu części świat zatrzymuje się, **ekran ciemnieje**, a bohater wraca do obserwatorium Eldrina. Ośmiowypowiedziowa scenka pokazuje powrót z niebieskim efektem teleportacji, sukces Wędrowca, pochwałę maga i zapowiedź teleportu do drugiej krainy, gdy bohater będzie gotowy. Enter / Spacja / LPM odsłaniają tekst i przechodzą dalej; Esc pomija rozmowę, zachowując przejście do wieży. Utrata aktywności okna wstrzymuje scenę, F11 nadal działa.
+
+Po rozmowie **wieża maga staje się grywalną lokacją**: kamienna sala z oknami, kolumnami, księgą, magiczną kulą i kręgiem teleportacji. Można chodzić, biegać, robić uniki oraz korzystać z ekwipunku. Ściany, meble i Eldrin blokują ruch; przeciwnicy z lasu pozostają tam i nie symulują się w schronieniu. Poziom, statystyki, HP, mana i zebrane wyposażenie są zachowane. Fragment pozostaje przedmiotem zadania w plecaku i nie można go porzucić ani zużyć. Dziennik pokazuje **1 / 5 części**.
+
+**Eldrin jest przyjaznym NPC.** Podejdź na maksymalnie 2,7 pola i naciśnij **E** lub kliknij maga **LPM / PPM**, aby porozmawiać ponownie. Dialog kończy się powrotem do swobodnego ruchu; nie resetuje postaci ani nie powtarza zdobycia fragmentu. Druga kraina pozostaje zapowiedziana fabularnie — ten etap kończy się pobytem w wieży.
+
+Cichy test `--tower-qa --no-audio` sprawdza faktyczne przeciąganie fragmentu, ściemnienie, dialog powrotu, ruch w wieży, ponowne rozmowy z NPC i zmianę rozmiaru okna. Raport, transkrypcja i obrazy trafiają do `dist/qa-v26/`.
+
+## Wersja 0.25 — większy Las Mchu i luźniejsze starcia
+
+Las ma teraz **72 × 72 pola**, czyli **2,25 raza większy obszar** niż wcześniej. Rozbudowane trakty łączą Ruiny Mchu, Wilczą knieję, Brzozową polanę, Pajęcze ostępy i Serce Kniei z **Zacisznym zagajnikiem**, **Starym traktem** oraz kamiennym **Zapomnianym kręgiem**. Polany mają więcej kwiatów, brzozy skupiają się na zachodzie, sosny we wschodniej kniei, a dęby w głębokim lesie.
+
+Na mapie pozostaje **46 wrogów z ośmiu gatunków**. Ich miejsca startowe dzieli co najmniej **8 pól**, a patrole odbywają się wokół własnych miejsc. W okolicy przesieki, do której teleportuje Eldrin, przeciwnicy nie zaczynają samoczynnie pościgu. Strażnik nadal czeka w północnych ruinach, zgodnie z prologiem. W większym lesie rosną **64 borowiki**. Minimapę dopasowano do nowych dróg i polan.
+
+Cichy test `--forest-qa --no-audio` zapisuje widoki polan, odległych obszarów, całej mapy i raport w `dist/qa-v25/`. Podgląd układu lasu: `dist/qa-v25/forest-overview.png`.
+
+## Wersja 0.24 — prolog i Serce Świtu
+
+Gra zaczyna się sceną w zrujnowanym obserwatorium. **Mag Eldrin w fioletowych szatach z laską** rozmawia z Wędrowcem o pękającej Pieczęci Popiołu i nadchodzącej inwazji demonów. Świat może ocalić **Serce Świtu**, rozbite na **pięć części**, z których każdej broni osobny strażnik. Pierwszy trop prowadzi do Strażnika ruin w północnej części istniejącego Lasu Mchu. Dziennik wyprawy przypomina ten cel.
+
+Prolog ma 12 wypowiedzi obu postaci, stopniowo pojawiający się polski tekst, animowane postacie, pięć świetlistych odłamków i magiczny portal. Po dokładnych słowach **„Ruszaj więc”** mag rzuca zaklęcie, bohater zostaje przeniesiony do dotychczasowego punktu startowego lasu, a sterowanie wraca po wygaszeniu efektu. Scena odtwarza się również na początku nowej wyprawy po śmierci.
+
+Eldrin ma zaokrągloną sylwetkę, fałdy i złote hafty szat, szczegółową twarz i falującą brodę oraz ozdobną laskę z kryształem. Obserwatorium zdobią kamienny łuk, kolumny z pnączami, grawerowany podest i świece. Przyciski **DALEJ / POKAŻ TEKST** mają taki sam odstęp od prawej ramki jak tekst od lewej. Przybycie do lasu otacza bohatera **niebieskim słupem magii**, z pierścieniami światła i unoszącymi się iskrami; błysk szybko ustępuje, a słup wygasa przez dwie sekundy.
+
+**Wędrowiec ma nowy, zaokrąglony model**: kaptur z widoczną twarzą i włosami, profilowany napierśnik i naramienniki, dłonie, skórzane buty, sprzączki oraz płaszcz z falującymi fałdami i lamówką. Ten sam model pojawia się w lesie, prologu i portrecie. Osiem kierunków, chód, zamach mieczem, naciąganie łuku, kołczan, tarcza, hełm i przewrót korzystają z aktualnej sylwetki. Zbliżenia mają dodatkowe wygładzenie brył. Podgląd postaci i animacji: `dist/qa-v24/hero/poses-8-directions.png`.
+
+Dialog przewija się sam, pozostawiając czas na lekturę. **Enter, Spacja lub LPM** najpierw pokazują resztę bieżącej wypowiedzi, a kolejne naciśnięcie przechodzi dalej. **Esc / POMIŃ** pomija rozmowę, zachowując teleportację. **F11** działa w trakcie sceny. Utrata aktywności okna zatrzymuje scenę; ruch, walka, ekwipunek oraz przeciwnicy są zablokowani do końca przejścia. Obecny las pozostaje pierwszym etapem fabuły; pozostałe krainy i strażnicy są na razie zapowiedziani w dialogu.
+
+Cichy test `--intro-qa --no-audio` zapisuje raport, pełną rozmowę i obrazy do `dist/qa-v24/intro/`. `--startup-smoke --no-audio` sprawdza teraz rzeczywisty start prologu. Testy mechaniki i benchmarki zaczynają się od razu w lesie.
 
 ## Wersja 0.23 — koło broni i łuk
 
@@ -181,7 +215,7 @@ Bohater, szlam, wilk, szkielet i strażnik mają po osiem kierunków: E, SE, S, 
 
 ## Uruchomienie
 
-Kliknij **Uruchom.bat** lub **dist/Emberfall.exe**. W oknie powitalnym kliknij „Wyrusz” albo naciśnij Enter. Folder `assets` musi pozostać obok pliku EXE. Cały folder `dist` jest przenośną wersją gry.
+Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/Emberfall.exe**. Gra zaczyna się prologiem; Enter, Spacja lub LPM przyspieszają dialog, a Esc go pomija. Folder `assets` musi pozostać obok pliku EXE. Cały folder `dist` jest przenośną wersją gry.
 
 ## Sterowanie
 
@@ -271,11 +305,11 @@ Start-Process .\dist\Emberfall.exe -ArgumentList '--mushroom-qa','--no-audio' -W
 Start-Process .\dist\Emberfall.exe -ArgumentList '--bow-qa','--no-audio' -WindowStyle Hidden -Wait
 ```
 
-Pierwsza komenda renderuje 180 klatek i zapisuje zrzut. Druga wykonuje 13 sprawdzeń interakcji, używając tych samych funkcji wskazywania, rozpoczynania i kończenia przeciągania co mysz; raport zapisuje do `dist/interaction-test-v23.txt`. Nie jest to automatyzacja urządzenia wejściowego systemu Windows. Benchmark uruchamia 900 klatek z ruchem kamery, walką, unikami, podświetlaniem i wiatrem, a `--windowed --large` wybiera okno 1920 × 1080. Raporty mają nazwy `benchmark-v23.txt`, `benchmark-v23-large.txt` i `benchmark-v23-fullscreen.txt`. `--visual-qa` eksportuje arkusze animacji oraz podglądy interfejsu w trzech skalach do `dist/qa-v02`. `--hover-qa` wykonuje 24 sprawdzenia wskazywania i eksportuje podglądy do `dist/qa-v04`. `--roll-qa` zapisuje arkusz przewrotów (8 kierunków × 12 klatek) w `assets/generated/v04/hero-roll.png` obok EXE oraz podglądy w `dist/qa-v04`. Testy w `tests/roll_tests.hpp` sprawdzają szybkość, kierunki uniku, kolizje, ochronę, odnowienie i niezależność od FPS.
+Pierwsza komenda renderuje 180 klatek i zapisuje zrzut. Druga wykonuje 13 sprawdzeń interakcji, używając tych samych funkcji wskazywania, rozpoczynania i kończenia przeciągania co mysz; raport zapisuje do `dist/interaction-test-v25.txt`. Nie jest to automatyzacja urządzenia wejściowego systemu Windows. Benchmark uruchamia 900 klatek z ruchem kamery, walką, unikami, podświetlaniem i wiatrem, a `--windowed --large` wybiera okno 1920 × 1080. Raporty mają nazwy `benchmark-v25.txt`, `benchmark-v25-large.txt` i `benchmark-v25-fullscreen.txt`. `--visual-qa` eksportuje arkusze animacji oraz podglądy interfejsu w trzech skalach do `dist/qa-v02`. `--hover-qa` wykonuje 24 sprawdzenia wskazywania i eksportuje podglądy do `dist/qa-v04`. `--roll-qa` zapisuje arkusz przewrotów (8 kierunków × 12 klatek) w `assets/generated/v04/hero-roll.png` obok EXE oraz podglądy w `dist/qa-v04`. Testy w `tests/roll_tests.hpp` sprawdzają szybkość, kierunki uniku, kolizje, ochronę, odnowienie i niezależność od FPS.
 
 Gra synchronizuje klatki z monitorem, celując w 60 FPS na ekranie 60 Hz; osiągana płynność zależy od komputera i obciążenia systemu. Logika korzysta z rzeczywistego czasu między klatkami. Podłoże i podstawowe grafiki dekoracji są renderowane do tekstur przy starcie, a korony drzew są deformowane podczas rysowania każdej klatki. Fale na wodzie są animowane osobno pod lądem.
 
-W wersji 0.23 aktualne raporty wydajności i ekwipunku mają przyrostek `v23`. Eksporty `--hover-qa` i `--roll-qa` pozostają w `dist/qa-v04`. `--audio-qa` sprawdza rzeczywisty mikser, wszystkie efekty, granicę pętli muzycznej, wyciszanie, utratę aktywności okna, sumowanie efektów i zapis ustawień; raporty oraz podglądy panelu i nowych przycisków HUD zapisuje w `dist/qa-v09`. Nie zmienia ustawień gracza. Wariant `--no-audio` sprawdza działanie z pominiętym urządzeniem audio. `audio/create_audio.py` odtwarza zasoby z syntezy przy użyciu NumPy i SoundFile; nie jest uruchamiany przy starcie ani kompilacji gry.
+W wersji 0.25 aktualne raporty wydajności i ekwipunku mają przyrostek `v25`. Eksporty `--hover-qa` i `--roll-qa` pozostają w `dist/qa-v04`. `--audio-qa` sprawdza rzeczywisty mikser, wszystkie efekty, granicę pętli muzycznej, wyciszanie, utratę aktywności okna, sumowanie efektów i zapis ustawień; raporty oraz podglądy panelu i nowych przycisków HUD zapisuje w `dist/qa-v09`. Nie zmienia ustawień gracza. Wariant `--no-audio` sprawdza działanie z pominiętym urządzeniem audio. `audio/create_audio.py` odtwarza zasoby z syntezy przy użyciu NumPy i SoundFile; nie jest uruchamiany przy starcie ani kompilacji gry.
 
 `--environment-qa` porównuje maskę wskazywania drzewa z jego faktycznie wyrenderowanym, poruszającym się kształtem w ośmiu pozycjach i skalach. Sprawdza zmiany pikseli wody i nieruchomy ląd, podświetlenie i HUD, rzeczywiste przejścia okno–pełny ekran, przywrócenie rozmiaru, pozycji i maksymalizacji, zachowanie menu awansu oraz mapowanie wszystkich pól plecaka. Raport i obrazy są w `dist/qa-v14`. `--fullscreen` pozwala też uruchomić grę lub benchmark bezpośrednio na pełnym ekranie.
 

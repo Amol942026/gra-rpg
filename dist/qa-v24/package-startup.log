@@ -1,0 +1,51 @@
+1 ms: Emberfall v0.24: startup
+1 ms: Creating graphics window
+1 ms: Initializing raylib 5.5
+1 ms: Platform backend: DESKTOP (GLFW)
+1 ms: Supported raylib modules:
+1 ms:     > rcore:..... loaded (mandatory)
+1 ms:     > rlgl:...... loaded (mandatory)
+1 ms:     > rshapes:... loaded (optional)
+1 ms:     > rtextures:. loaded (optional)
+1 ms:     > rtext:..... loaded (optional)
+1 ms:     > rmodels:... loaded (optional)
+1 ms:     > raudio:.... loaded (optional)
+129 ms: DISPLAY: Trying to enable VSYNC
+129 ms: DISPLAY: Device initialized successfully
+129 ms:     > Display size: 1920 x 1080
+129 ms:     > Screen size:  1440 x 900
+129 ms:     > Render size:  1440 x 900
+129 ms:     > Viewport offsets: 0, 0
+130 ms: GLAD: OpenGL extensions loaded successfully
+130 ms: GL: Supported extensions count: 241
+130 ms: GL: OpenGL device information:
+130 ms:     > Vendor:   Intel
+130 ms:     > Renderer: Intel(R) UHD Graphics
+130 ms:     > Version:  3.3.0 - Build 30.0.100.9864
+130 ms:     > GLSL:     3.30 - Build 30.0.100.9864
+130 ms: GL: VAO extension detected, VAO functions loaded successfully
+130 ms: GL: NPOT textures extension detected, full NPOT textures supported
+130 ms: GL: DXT compressed textures supported
+130 ms: GL: ETC2/EAC compressed textures supported
+130 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+131 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+131 ms: TEXTURE: [ID 1] Default texture loaded successfully
+131 ms: SHADER: [ID 1] Vertex shader compiled successfully
+132 ms: SHADER: [ID 2] Fragment shader compiled successfully
+144 ms: SHADER: [ID 3] Program shader loaded successfully
+144 ms: SHADER: [ID 3] Default shader loaded successfully
+145 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+146 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+146 ms: RLGL: Default OpenGL state initialized successfully
+149 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+150 ms: FONT: Default font loaded successfully (224 glyphs)
+150 ms: SYSTEM: Working Directory: C:\Users\Amol\Documents\GitHub\gra-rpg\dist\package-v24-check-a86f51753cca4ac8ad2b8bc9a41b9549\Emberfall
+150 ms: Graphics window ready
+153 ms: Generating world graphics
+389 ms: World graphics ready
+389 ms: Audio skipped (--no-audio)
+445 ms: First scene rendered
+607 ms: First frame presented
+607 ms: OpenGL V-sync
+607 ms: GPU sharing pixel validation failed (0x80004005)
+3158 ms: Shutting down

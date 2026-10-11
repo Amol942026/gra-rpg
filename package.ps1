@@ -22,7 +22,7 @@ Gra dla Windows x64. Nie wymaga instalacji ani dodatkowych narzedzi.
 URUCHOMIENIE
 1. Kliknij ZIP prawym przyciskiem i wybierz Wyodrebnij wszystkie.
 2. Otworz wypakowany folder Emberfall.
-3. Uruchom Uruchom.bat lub Emberfall.exe, potem nacisnij Enter.
+3. Uruchom Uruchom.bat lub Emberfall.exe. Gra rozpocznie sie prologiem.
 Folder assets musi pozostac obok pliku Emberfall.exe.
 Gra startuje domyslnie na pelnym ekranie. F11 przywraca tryb okna.
 Gra sprawdza przesylanie obrazu GPU; przy bledzie sama wybiera OpenGL.
@@ -30,11 +30,34 @@ W razie problemu etapy startu znajdziesz w emberfall-startup.log obok EXE.
 Uruchom.bat --opengl wymusza OpenGL; --windowed uruchamia gre w oknie.
 Synchronizacja z monitorem oraz wygladzanie terenu poprawiaja plynnosc ruchu.
 Poczatkowy sprzet zostaje w plecaku; nie ma rozrzuconych startowych przedmiotow.
-Wersja 0.22: w kazdej wyprawie rosnie 36 borowikow w losowych miejscach.
+Wersja 0.24: mag Eldrin w fioletowych szatach opowiada o Sercu Switu.
+Artefakt ma piec czesci, kazdej strzeze osobny straznik. Po slowach
+"Ruszaj wiec" Eldrin teleportuje bohatera do Lasu Mchu.
+Przybycie otacza bohatera niebieskim slupem magii z pierscieniami i iskrami.
+Eldrin ma szczegolowe szaty, hafty, brode i ozdobna laske;
+obserwatorium zdobia kamienny luk, okragly podest, pnacza i swiece.
+Wedrowiec ma oble ksztalty, dokladniejsza twarz i zbroje oraz falujacy plaszcz.
+Nowy wyglad dziala w lesie, prologu i portrecie, przy chodzie, walce i unikach.
+Dialog przewija sie automatycznie. Enter, Spacja lub LPM pokazuja tekst
+i przechodza dalej; ESC pomija rozmowe, zachowujac animacje teleportacji.
+F11 zmienia tryb ekranu. W czasie prologu swiat i walka sa zatrzymane.
+Wersja 0.25: las ma 72 x 72 pola, 2,25 raza wiekszy obszar niz poprzednio.
+46 przeciwnikow jest rozlozonych w odstepach co najmniej 8 pol.
+Przesieka po teleportacji jest spokojna; straznik nadal czeka w starych ruinach.
+Nowe trasy prowadza do Zacisznego zagajnika, Starego traktu i kamiennego kregu.
+W kazdej wyprawie rosna 64 borowiki w losowych miejscach wiekszego lasu.
+Wersja 0.26: Kamienny Straznik zostawia jedna czesc Serca Switu (100%).
+Otworz cialo PPM, zbierz pozostale nagrody, potem przeciagnij czesc do plecaka.
+Zebranie czesci uruchamia sciemnienie i powrot do wiezy Eldrina.
+Bohater zdaje relacje, mag go chwali i zapowiada wyprawe do drugiej krainy.
+Po scence mozna chodzic po wiezy. Podejdz do Eldrina: E, LPM lub PPM - rozmowa.
+Dziennik pokazuje 1/5 czesci; poziom, statystyki i ekwipunek sa zachowane.
+Artefakt zostaje w plecaku; nie mozna go porzucic ani zuzyc.
+Druga kraina jest na razie zapowiedziana w dialogu; wyprawa konczy sie w wiezy.
 Podejdz na 2,5 pola i przeciagnij grzyb z mapy lub panelu W ZASIEGU do plecaka.
 PPM na borowiku w plecaku przywraca 10 HP (do maksimum); stos do 99 sztuk.
 Przy pelnym HP grzyb nie znika. Pelny plecak pozostawia go w lesie.
-Las ma 48 x 48 pol, nowe sciezki, brzozy, deby i grzyby. Na mapie jest
+Las ma 72 x 72 pola, nowe sciezki, brzozy, deby i grzyby. Na mapie jest
 46 przeciwnikow z 8 gatunkow, w tym dziki, pajaki, rozbojnicy i ozywione drzewa.
 Kazdy gatunek ma wlasny loot: m.in. kiel wilka 75%, siersc wilka 55%.
 Losowania sa niezalezne; dokladne szanse i ilosci znajdziesz w LOOT.md.

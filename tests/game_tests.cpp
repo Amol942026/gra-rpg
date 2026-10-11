@@ -15,10 +15,16 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "forest_loot_tests.hpp"
 #include "mushroom_tests.hpp"
 #include "bow_tests.hpp"
+#include "intro_tests.hpp"
+#include "forest_expansion_tests.hpp"
+#include "tower_tests.hpp"
 int main(){
+ towerTests();
+ introTests();
  corpseTests();
  patrolTests();
  forestLootTests();
+ forestExpansionTests();
  mushroomTests();
  bowTests();
  Game g;check(g.ground.empty(),"new game starts without any ground items");

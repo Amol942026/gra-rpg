@@ -34,6 +34,11 @@ void unloadHoverArt(){for(auto texture:propOutlines)if(texture.id)UnloadTexture(
 
 std::vector<DrawObject> worldDrawOrder() {
     std::vector<DrawObject> objects;
+    if(game.inTower()){
+        for(int i=0;i<int(TowerFurnishings.size());i++){V p=TowerFurnishings[i].pos;objects.push_back({p.x+p.y,7,i});}
+        objects.push_back({MagePosition.x+MagePosition.y,6,0});objects.push_back({game.player.x+game.player.y,2,0});
+        std::stable_sort(objects.begin(),objects.end(),[](const auto& a,const auto& b){return a.depth<b.depth;});return objects;
+    }
     objects.reserve(game.props.size()+game.enemies.size()+1);
     for(int i=0;i<int(game.props.size());i++)objects.push_back({game.props[i].pos.x+game.props[i].pos.y,0,i});
     for(int i=0;i<int(game.enemies.size());i++)
@@ -46,7 +51,7 @@ std::vector<DrawObject> worldDrawOrder() {
 }
 
 bool worldPointerAllowed(Vector2 p) {
-    if(weaponWheelOpen||welcome||help||paused||audioOpen||statsOpen||spellBookOpen||game.allocationRequired||game.dead())return false;
+    if(intro.active()||towerStory.active()||game.storyBlocked()||weaponWheelOpen||welcome||help||paused||audioOpen||statsOpen||spellBookOpen||game.allocationRequired||game.dead())return false;
     if(!CheckCollisionPointRec(p,{0,116,WorldW,678}))return false;
     if(CheckCollisionPointRec(p,weaponWheelButton()))return false;
     if(game.equipment[0].kind==Kind::Bow&&CheckCollisionPointRec(p,{195,112,515,36}))return false;
@@ -74,12 +79,20 @@ WorldHover pickWorld(Vector2 point) {
     V world=toWorld(point);
     hit.tile={std::round(world.x),std::round(world.y)};
     hit.tileValid=hit.tile.x>=0&&hit.tile.x<MapSize&&hit.tile.y>=0&&hit.tile.y<MapSize;
+    if(game.inTower())hit.tileValid=game.walkable(hit.tile);
     // Reverse of the actual drawing order: never select an enemy through a tree.
     auto objects=worldDrawOrder();
     for(auto it=objects.rbegin();it!=objects.rend();++it){
         if(it->type==3||it->type==5)continue; // Projectiles do not obstruct mouse inspection.
         V position{};bool touched=false;HoverKind kind=HoverKind::None;int id=it->index;
-        if(it->type==0){
+        if(it->type==6){
+            position=MagePosition;Vector2 p=screen(position);kind=HoverKind::Mage;
+            float dx=(point.x-p.x+4)/30,dy=(point.y-p.y+62)/62;
+            touched=dx*dx+dy*dy<=1||CheckCollisionPointRec(point,{p.x-47,p.y-112,12,112});
+        }else if(it->type==7){
+            position=TowerFurnishings[it->index].pos;Vector2 p=screen(position);int type=TowerFurnishings[it->index].type;
+            touched=CheckCollisionPointRec(point,{p.x-(type==1?49.f:25.f),p.y-(type==0?190.f:type==1?55.f:119.f),type==1?98.f:50.f,type==0?190.f:type==1?78.f:119.f});
+        }else if(it->type==0){
             const Prop& prop=game.props[it->index];position=prop.pos;
             touched=propContains(prop,point);kind=HoverKind::Prop;
         }else if(it->type==1){
@@ -106,6 +119,7 @@ WorldHover pickWorld(Vector2 point) {
         }
     }
     for(auto it=game.ground.rbegin();it!=game.ground.rend();++it){
+        if(it->location!=game.location)continue;
         Vector2 p=screen(it->pos);
         if(!it->value.empty()&&CheckCollisionPointRec(point,{p.x-16,p.y-30,32,34})){
             hit.kind=HoverKind::Ground;hit.index=it->id;
@@ -113,6 +127,7 @@ WorldHover pickWorld(Vector2 point) {
         }
     }
     for(auto it=game.forage.rbegin();it!=game.forage.rend();++it){
+        if(game.inTower())break;
         Vector2 p=screen(it->pos);
         if(!it->value.empty()&&CheckCollisionPointRec(point,{p.x-15,p.y-27,30,30})){
             hit.kind=HoverKind::Forage;hit.index=it->id;hit.tile={std::round(it->pos.x),std::round(it->pos.y)};hit.tileValid=true;return hit;
@@ -131,9 +146,10 @@ void drawHoveredTile() {
 }
 
 void drawHoveredName() {
-    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage)return;
+    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage&&hovered.kind!=HoverKind::Mage)return;
     std::string name;Color color=Gold;
-    if(hovered.kind==HoverKind::Enemy){
+    if(hovered.kind==HoverKind::Mage){name=game.mageReachable()?"Eldrin · E / PPM: porozmawiaj":"Eldrin · podejdź bliżej";}
+    else if(hovered.kind==HoverKind::Enemy){
         Enemy* e=game.findEnemy(hovered.index);if(!e)return;
         name=std::string(enemyInfo(e->type).name)+"  "+std::to_string(int(std::ceil(e->hp)))+" / "+std::to_string(int(e->maxHp))+" HP";
         color=rgb(255,166,132);

@@ -88,6 +88,47 @@ public:
             face(center-P3{0,0,size.z*.5f},p[0][(i+2)%8],p[0][(i+1)%8],p[0][i],col,.6f);
         }
     }
+    void reserve(size_t count){faces.reserve(count);}
+    float surfaceLight(P3 normal)const{
+        return .83f+.18f*(normal.r*rx+normal.f*fx)+.29f*normal.z+.08f*(normal.r*fx-normal.f*rx);
+    }
+    // The hero is seen in close-up as well as on the map. Cached sphere normals
+    // give rounded silhouettes and smooth shading without per-part trig work.
+    template<size_t Sides,size_t Bands>static const auto& unitSphere(){
+        static const auto sphere=[](){
+            std::array<std::array<P3,Sides>,Bands+1> result{};
+            for(size_t j=0;j<=Bands;j++)for(size_t i=0;i<Sides;i++){
+                float a=i*2*PI/Sides,b=-PI/2+j*PI/Bands,r=std::max(0.f,std::cos(b));
+                result[j][i]={std::cos(a)*r,std::sin(a)*r,std::sin(b)};
+            }
+            return result;
+        }();
+        return sphere;
+    }
+    void rounded(P3 center,P3 size,Color col){
+        auto point=[&](P3 p){return center+P3{p.r*size.r*.5f,p.f*size.f*.5f,p.z*size.z*.5f};};
+        auto surface=[&](const auto& sphere){
+            for(size_t j=0;j+1<sphere.size();j++)for(size_t i=0;i<sphere[0].size();i++){
+                size_t n=(i+1)%sphere[0].size();P3 normal=(sphere[j][i]+sphere[j][n]+sphere[j+1][n]+sphere[j+1][i])*.25f;
+                face(point(sphere[j][i]),point(sphere[j][n]),point(sphere[j+1][n]),point(sphere[j+1][i]),col,surfaceLight(normal));
+            }
+        };
+        if(scale>=1.8f)surface(unitSphere<24,10>());else surface(unitSphere<16,8>());
+    }
+    void tapered(P3 a,P3 b,float width,float depth,Color col,float tipScale=1){
+        P3 axis=b-a;float length=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);if(length<.001f)return;
+        axis=axis*(1/length);float flat=std::hypot(axis.r,axis.f);
+        P3 u=flat>.001f?P3{axis.f/flat,-axis.r/flat,0}:P3{1,0,0};
+        P3 v{axis.f*u.z-axis.z*u.f,axis.z*u.r-axis.r*u.z,axis.r*u.f-axis.f*u.r};
+        static const auto ring=[](){std::array<Vector2,16> points{};for(int i=0;i<16;i++)points[i]={std::cos(i*2*PI/16),std::sin(i*2*PI/16)};return points;}();
+        auto radial=[&](int i,float scale){return u*(ring[i].x*width*.5f*scale)+v*(ring[i].y*depth*.5f*scale);};
+        for(int i=0;i<16;i++){
+            int n=(i+1)%16;P3 normal=u*((ring[i].x+ring[n].x)*.5f)+v*((ring[i].y+ring[n].y)*.5f);
+            face(a+radial(i,1),a+radial(n,1),b+radial(n,tipScale),b+radial(i,tipScale),col,surfaceLight(normal));
+            face(a,a+radial(n,1),a+radial(i,1),a,col,surfaceLight(axis*-1));
+            face(b,b+radial(i,tipScale),b+radial(n,tipScale),b,col,surfaceLight(axis));
+        }
+    }
     void spike(P3 base,P3 tip,float width,float depth,Color col) {
         P3 axis=tip-base;float n=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);if(n<.001f)return;
         axis=axis*(1/n);float flat=std::hypot(axis.r,axis.f);
@@ -142,6 +183,8 @@ public:
     }
 };
 
+#include "hero_art.hpp"
+
 // species: player, slime, wolf, skeleton, guardian, boar, spider, bandit, treant.
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
@@ -164,7 +207,9 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     Rig rig(x,y,size*bodyScale,state.direction);
     if(rolling)rig.setRoll(roll,tuck);
 
-    if(species==1){
+    if(species==0){
+        buildHero(rig,lift,stride,cycle,tuck,attack,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows);
+    } else if(species==1){
         float squash=(state.moving?std::sin(cycle):std::sin(state.idleTime*2.5f)*.18f)+attack*1.8f;
         float h=31+squash*4;
         float lean=(state.moving?std::cos(cycle)*3:0)+attack*7;

@@ -1,0 +1,5 @@
+PASS: final hero-renderer EXE matches the ZIP copy (SHA-256)
+PASS: all 78 packaged assets match (SHA-256)
+PASS: extracted executable ran with --no-audio
+Checks: 35; failures: 0
+ZIP bytes: 7233321

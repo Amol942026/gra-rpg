@@ -1,0 +1,167 @@
+PASS: refresh diagnostic opens no audio device
+Mode=0 framebuffer=1920x1080
+Frame=0; full-image mismatches=0; nonblack=1866240; quantized colors=1197
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=1; full-image mismatches=0; nonblack=1866240; quantized colors=1191
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=2; full-image mismatches=0; nonblack=1866240; quantized colors=1207
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=3; full-image mismatches=0; nonblack=1866240; quantized colors=1188
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=4; full-image mismatches=0; nonblack=1866240; quantized colors=1195
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=5; full-image mismatches=0; nonblack=1866240; quantized colors=1184
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=6; full-image mismatches=0; nonblack=1866240; quantized colors=1170
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=7; full-image mismatches=0; nonblack=1866240; quantized colors=1174
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Mode=1 framebuffer=1152x720
+Frame=0; full-image mismatches=0; nonblack=829440; quantized colors=1069
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=1; full-image mismatches=0; nonblack=829440; quantized colors=1071
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=2; full-image mismatches=0; nonblack=829440; quantized colors=1083
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=3; full-image mismatches=0; nonblack=829440; quantized colors=1052
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=4; full-image mismatches=0; nonblack=829440; quantized colors=1066
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=5; full-image mismatches=0; nonblack=829440; quantized colors=1079
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=6; full-image mismatches=0; nonblack=829440; quantized colors=1066
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=7; full-image mismatches=0; nonblack=829440; quantized colors=1079
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Mode=2 framebuffer=1280x720
+Frame=0; full-image mismatches=0; nonblack=829440; quantized colors=1077
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=1; full-image mismatches=0; nonblack=829440; quantized colors=1065
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=2; full-image mismatches=0; nonblack=829440; quantized colors=1088
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=3; full-image mismatches=0; nonblack=829440; quantized colors=1069
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=4; full-image mismatches=0; nonblack=829440; quantized colors=1080
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=5; full-image mismatches=0; nonblack=829440; quantized colors=1079
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=6; full-image mismatches=0; nonblack=829440; quantized colors=1077
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=7; full-image mismatches=0; nonblack=829440; quantized colors=1076
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Mode=3 framebuffer=1920x1080
+Frame=0; full-image mismatches=0; nonblack=1866240; quantized colors=1274
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=1; full-image mismatches=0; nonblack=1866240; quantized colors=1311
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=2; full-image mismatches=0; nonblack=1866240; quantized colors=1312
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=3; full-image mismatches=0; nonblack=1866240; quantized colors=1311
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=4; full-image mismatches=0; nonblack=1866240; quantized colors=1322
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=5; full-image mismatches=0; nonblack=1866240; quantized colors=1319
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=6; full-image mismatches=0; nonblack=1866240; quantized colors=1326
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Frame=7; full-image mismatches=0; nonblack=1866240; quantized colors=1337
+PASS: entire destination frame matches the scene and HUD, not only corner markers
+PASS: destination contains a complete varied scene rather than a black or flat image
+PASS: current moving frame reaches every corner in correct orientation
+PASS: V-sync stays enabled after resize/fullscreen change
+Backend=OpenGL V-sync; accepted presents=0; occluded=0; suppressed swaps=0; fallback=GPU sharing pixel validation failed (0x80004005)
+Checks: 129; failures: 0

@@ -1,4 +1,4 @@
-# Łup z przeciwników — Emberfall 0.20
+# Łup z przeciwników — Emberfall 0.26
 
 Każda pozycja w tabeli jest losowana **niezależnie przy śmierci przeciwnika**. Jeden wilk może zostawić jednocześnie kieł i sierść, tylko jeden z tych materiałów albo żaden. Szansa dotyczy pojawienia się stosu; jego ilość jest następnie losowana z podanego przedziału. 75% nie gwarantuje trzech dropów na każde cztery zabójstwa.
 
@@ -9,7 +9,7 @@ Wszystkie gatunki zostawiają dodatkowo **4–15 złotych monet ze szansą 100%*
 | Szlam | Śluz szlama **80%**, 1–3; Mikstura zdrowia **15%**, 1; Odłamek echa **30%**, 1–2; Bursztynowy amulet **1%**, 1 |
 | Wilk | Kieł wilka **75%**, 1–2; Sierść wilka **55%**, 1–2; Mikstura zdrowia **12%**, 1; Płaszcz z wilczej skóry **3%**, 1, niepospolity |
 | Szkielet | Fragment kości **70%**, 1–3; Sztylet łowcy **8%**, 1; Mikstura many **18%**, 1; Żelazny hełm **5%**, 1, niepospolity |
-| Strażnik ruin | Miecz wędrowca **100%**, 1, legendarny; Pierścień żaru **100%**, 1, legendarny; Esencja kniei **100%**, 1–2, niepospolita; Kamień runiczny **50%**, 1 |
+| Kamienny Strażnik | Miecz wędrowca **100%**, 1, legendarny; Pierścień żaru **100%**, 1, legendarny; Esencja kniei **100%**, 1–2, niepospolita; **Część Serca Świtu 100%**, dokładnie 1, artefakt zadania |
 | Dzik | Kieł dzika **65%**, 1–2; Skóra dzika **80%**, 1; Mikstura zdrowia **10%**, 1; Zbroja zwiadowcy **4%**, 1, niepospolita |
 | Leśny pająk | Pajęcza nić **85%**, 1–3; Woreczek jadu **40%**, 1; Mikstura many **15%**, 1; Bursztynowy amulet **2%**, 1, niepospolity |
 | Leśny rozbójnik | Odznaka rozbójnika **60%**, 1; Sztylet łowcy **12%**, 1, niepospolity; Mikstura zdrowia **25%**, 1–2; Buty podróżnika **8%**, 1, niepospolite |
@@ -20,3 +20,5 @@ Przedmioty bez oznaczenia rzadkości są pospolite. Materiały łączą się w s
 Nowy sprzęt można założyć: sztylet w miejsce broni, płaszcz w miejsce zbroi, amulet w miejsce pierścienia. Ich premie pokazuje podpowiedź przedmiotu. Podpowiedź łupu w ciele pokazuje też dokładną szansę dla tego gatunku, a sekcja **POD KURSOREM** podaje główne materiały przeciwnika i ich szanse.
 
 Normalne wyprawy otrzymują nowe losowe ziarno łupu. Testy korzystają ze stałego ziarna, aby wykrywać błędy powtarzalnie. Tabele i ilości edytuje się w `src/loot.hpp`.
+
+Podniesienie części Serca Świtu do plecaka uruchamia ściemnienie i powrót do wieży Eldrina, dlatego pozostałe nagrody zbierz wcześniej. Artefakt zajmuje miejsce w plecaku, nie łączy się w stosy i nie można go porzucić, zużyć ani założyć. Zajęte pole plecaka nie usuwa fragmentu ani nie uruchamia scenki. Po scenie pozostaje on w plecaku, a dziennik wskazuje 1 / 5 części.

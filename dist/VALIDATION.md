@@ -1,5 +1,55 @@
 # Weryfikacja prototypu
 
+## Wersja 0.26 — fragment Serca Świtu i powrót do wieży
+
+Sprawdzone 12 października 2026 na tym komputerze Windows 11 / Intel UHD. Wszystkie uruchomienia gry i testów miały `--no-audio`; urządzenie audio pozostało zamknięte.
+
+- Kamienny Strażnik zostawia dokładnie jedną część Serca Świtu (100%) w piątym polu łupu. Pozostały łup nadal obejmuje monety, legendarny miecz, pierścień i esencję. Śmierć bossa i zbieranie zwykłych nagród nie uruchamiają powrotu. Zajęte pole, brak otwarcia ciała, zbyt duża odległość i próba założenia fragmentu nie usuwają go ani nie zmieniają zadania.
+- Zebranie fragmentu do plecaka zamraża symulację i rozpoczyna ciemny fade. Dopiero po ściemnieniu następuje przeniesienie do wieży, niebieski efekt przybycia i osiem wypowiedzi bohatera i Eldrina. Mag chwali odzyskanie części i zapowiada drugą wyprawę. Utrata aktywności okna zatrzymuje scenkę i ignoruje wejście; wielokrotne Enter / Esc nie duplikują teleportacji. Po zakończeniu lub pominięciu rozmowy sterowanie wraca w grywalnej wieży.
+- Wieża ma kamienną podłogę, okna, kolumny, stół z księgą, magiczną kulę i krąg. Ruch, bieg i unik respektują granicę sali, meble i postać maga. Eldrin jest przyjaznym NPC, rozmawia po podejściu na 2,7 pola przez E / LPM / PPM. Powtórne rozmowy wracają do ruchu bez teleportu ani ponownego naliczenia fragmentu. Druga kraina pozostaje zapowiedzią fabularną.
+- Przejście zachowuje plecak, założony sprzęt, poziom, XP, statystyki, HP i manę. Zamyka panel ciała i usuwa aktywne pociski. Las pozostaje oddzielony: jego przeciwnicy i pozostały łup nie pojawiają się ani nie symulują w wieży. Przedmioty porzucone w wieży można normalnie odzyskać. Artefakt można przestawiać w plecaku, ale nie zużyć, założyć ani porzucić; oba kierunki zamiany z przedmiotem na ziemi są chronione. Dziennik wskazuje 1 / 5 części.
+- **1273/1273 sprawdzeń logiki i animacji**, w tym **168 nowych**: gwarantowany pojedynczy fragment przy 40 ziarnach, zwykłe gatunki bez fragmentu, rzeczywiste transfery i ich odrzucenia, zachowanie stanu przy zmianie lokacji, kolizje i dojście do NPC, brak symulacji lasu, działanie i pomijanie sceny przy 30/60/144 FPS, automatyczne i powtarzane rozmowy.
+- **50/50 sprawdzeń scenki i wieży**: rzeczywiste wskazanie ciała, PPM, przeciągnięcie widocznego fragmentu do plecaka, fade, zamrożenie świata, focus, osiem wypowiedzi mieszczących się nad przyciskami, prawdziwy bufor ekranu, widoczna sala i fioletowy mag, wskazywanie przyjaznego NPC, PPM / LPM i wspólny handler klawiatury, ponowne rozmowy, pełny ekran i okno 1152 × 720, reset wyprawy. Obejrzano obrazy łupu, sceny powrotu, pochwały Eldrina i nowej wieży. **35/35 sprawdzeń prologu** i **13/13 interakcji** również przeszło.
+- EXE, manifest i paczka ZIP zostały zaktualizowane do **0.26**. Finalny ZIP ma **7 261 493 bajty**. Porównano SHA-256 wszystkich **81 plików** gry z archiwum (EXE, 78 zasobów, licencje i opis łupu), potwierdzono instrukcję fragmentu / wieży i launcher przekazujący parametry bez trwałego wyłączania dźwięku. Raport: `dist/qa-v26/package-tests.txt`. Wszystkie procesy diagnostyczne zostały zakończone.
+
+Raporty, transkrypcja i obrazy: `dist/qa-v26/tower-tests.txt`, `intro-tests.txt`, `interaction-tests.txt`, `dialogue.txt`, `guardian-fragment.png`, `forest-fade.png`, `eldrin-praise.png`, `mage-tower.png`, `eldrin-npc.png`, `npc-conversation.png`, `tower-1152.png`.
+
+## Wersja 0.25 — większy las i rozproszone spotkania
+
+Sprawdzone 12 października 2026 na tym komputerze z Windows 11 / Intel UHD. Wszystkie uruchomienia miały `--no-audio`.
+
+- Mapa ma **72 × 72 pola**, 2,25 raza większy obszar niż 48 × 48. Zachowano **46 przeciwników i osiem gatunków**, ale ich miejsca startowe dzieli co najmniej **8 pól**. Każdy z dziewięciu dużych sektorów mapy zawiera spotkania. Północny Strażnik ruin pozostaje przy dotychczasowym kręgu `{21,5}`. Najbliższy przeciwnik zaczyna ponad 12 pól od przesieki bohatera, poza zasięgiem patrolu i wzroku.
+- Dodano sieć odgałęzień dróg, Zaciszny zagajnik, Stary trakt i Zapomniany krąg z kolumnami w Sercu Kniei. Polany mają kwiaty i jaśniejsze podłoże, a odmiany drzew zależą od części lasu. W większej lokacji rosną **64 borowiki**. Statyczny obraz dróg minimapy jest przygotowywany raz, a pozycje postaci i wrogów pozostają aktualizowane podczas gry.
+- **1105/1105 testów logiki i animacji**, w tym **19 nowych sprawdzeń układu**: odległości i rozmieszczenie wrogów, jeden właściwy strażnik, połączenia polan przez rzeczywistą geometrię przeszkód, przemarsz bohatera po znalezionych trasach, osiągalność każdego spotkania, spokojne przybycie i patrole wokół własnych miejsc bez przenikania przez drzewa.
+- **30/30 sprawdzeń lasu**: poprawne bufory GPU terenu 5960 × 3180 i minimapy, dziewięć rzeczywistych ujęć obejmujących polany, krąg, skrzyżowania i odległe obrzeża; wskazywanie nowych gatunków, informacje HUD, ciała, zbieranie materiałów i animowane drzewa. Obejrzano widoki w grze oraz całą mapę z rozmieszczeniem przeciwników. Przeszły także **35/35 sprawdzeń prologu i teleportacji**, **16/16 grzybów** oraz **129/129 obrazu, skalowania i F11**.
+- Pomiar **900 klatek**, pełny ekran 1920 × 1080, OpenGL po automatycznym fallbacku: średni czas CPU **10,67 ms**, P99 klatki **12,76 ms**, maksimum **13,93 ms**, **0 klatek ponad 25 ms**. Urządzenie audio nie zostało otwarte. Wynik dotyczy tego komputera i scenariusza z ruchem, walką, łukiem i unikami.
+- Zaktualizowano EXE, manifest i instrukcję do wersji 0.25. Finalny ZIP ma **7 239 168 bajtów**; porównano SHA-256 wszystkich **81 plików** po odczycie z archiwum: EXE, 78 zasobów, licencje i opis łupu. Potwierdzono aktualną instrukcję większego lasu i 64 grzybów. Raport: `dist/qa-v25/package-tests.txt`.
+
+Raporty i obrazy: `dist/qa-v25/forest-tests.txt`, `forest-overview.png`, `forest-region-*.png`, `intro-tests.txt`, `mushroom-tests.txt`, `refresh-tests.txt`, `benchmark.txt`.
+
+## Dopracowanie bohatera — 12 października 2026
+
+- Przebudowano model Wędrowca w lesie, prologu i portrecie: obłe głowa, kaptur, twarz, dłonie, nogi, buty i elementy pancerza; cieniowanie, włosy, oczy, nos, skórzane mankiety, sakiewki, klamry, ozdobiony napierśnik, tarcza i kołczan. Płaszcz ma zakrzywioną powierzchnię, fałdy, lamówkę i falowanie podczas chodu. Zbliżenia korzystają z gęstszej siatki zaokrąglonych brył. Postać zachowuje zielony strój i dotychczasową mechanikę gry.
+- **1086/1086 testów logiki**, **229/229 sprawdzeń grafiki**, **65/65 łuku i koła broni** oraz **35/35 sceny prologu**. Sprawdzono brak uciętych części i zgodność faktycznych pikseli GPU z geometrią wskazywania w ośmiu kierunkach, podczas ataku, dwóch faz przewrotu oraz trzech faz łuku. Obejrzano powiększony arkusz pięciu póz w ośmiu kierunkach, bohatera w lesie i przy teleportacji, portret oraz scenę z Eldrinem. Wszystkie uruchomienia miały `--no-audio`.
+- Pomiar **900 klatek**, 1920 × 1080, ten sam komputer Windows 11 / Intel UHD, OpenGL po automatycznym fallbacku: średni czas CPU **12,22 ms**, P99 całej klatki **13,87 ms**, maksimum **14,43 ms**, **0 klatek ponad 25 ms**. Urządzenie audio nie zostało otwarte. Raport: `dist/qa-v24/hero/benchmark.txt`; wyniki dotyczą tego komputera i scenariusza z chodzeniem, walką, łukiem i unikami.
+
+Raporty i podglądy: `dist/qa-v24/hero/graphics-tests.txt`, `bow-tests.txt`, `poses-8-directions.png`, `bow-8-directions.png`, `forest.png`; scena: `dist/qa-v24/intro/`.
+
+## Wersja 0.24 — prolog i Serce Świtu
+
+Sprawdzone 11 października 2026 na tym komputerze z Windows 11 i Intel UHD. Wszystkie uruchomienia miały `--no-audio`.
+
+- Normalny start i nowa wyprawa po śmierci rozpoczynają animowany prolog w obserwatorium. Mag Eldrin ma fioletowe szaty, brodę i laskę ze świecącym kryształem; bohater korzysta z tego samego modelu i sprzętu co w rozgrywce. Pięć świetlistych odłamków ilustruje Serce Świtu. 12 wypowiedzi obu postaci opisuje pękającą Pieczęć Popiołu, inwazję demonów, pięć części artefaktu i osobnego strażnika każdej części. Ostatnia wypowiedź brzmi dokładnie „Ruszaj więc”.
+- Typewriter wyświetla pełne znaki UTF-8. Dialog przewija się automatycznie, a Enter / Spacja / LPM pokazują resztę wypowiedzi lub przechodzą dalej. Esc pomija rozmowę, ale zachowuje portal, przejście obrazu i przybycie do istniejącego punktu startowego `{8,19}`. Utrata aktywności okna zatrzymuje scenę. F11 i dopasowanie obrazu działają bez restartowania rozmowy.
+- Dopracowano grafikę sceny: krzywe szat i kaptura zamiast kanciastych brył, hafty, fałdy, szczegóły twarzy i brody, ozdobna laska; zaokrąglony podest, kamienny łuk, pnącza, świece, księgi i pergamin. Przycisk DALEJ / POKAŻ TEKST ma 34 jednostki odstępu od prawej ramki, zgodnie z lewym marginesem tekstu. Przybycie otacza prawdziwego bohatera przez 2 s niebieskim słupem światła, pierścieniami i iskrami. Rozjaśnienie ustępuje po 0,45 s; rozgrywka wraca po wygaśnięciu efektu.
+- **1086/1086 testów logiki i animacji**, w tym 28 nowych: przebieg automatyczny przy 30/60/144 FPS, każda wypowiedź, polskie znaki, ujawnienie tekstu bez pomijania rozmówcy, szybkie/repetowane wejście, nieprawidłowy czas klatki, pominięcie i dokładnie jeden sygnał teleportacji, ponowny start.
+- **35/35 testów cutscenki**: prawdziwy bufor wyświetlania, widoczna fioletowa postać, cały dialog mieszczący się nad kontrolkami, oba napisy przycisku w oknie 1152 × 720, brak ruchu i utraty HP/many podczas rozmowy, blokowanie ataków/czarów/łupu, zatrzymanie po utracie focusu, teleport rzeczywistego bohatera do lasu, wysoki niebieski słup zweryfikowany w pikselach ekranu i przywrócenie rozgrywki dopiero po przejściu. Obejrzano dialog maga i bohatera, pięć odłamków, „Ruszaj więc”, portal, przybycie, wygasanie słupa i zwykłą rozgrywkę.
+- **13/13 testów interakcji** oraz **129/129 testów zgodności obrazu i zmiany rozmiaru/F11**. Nadal działa automatyczny fallback na OpenGL dla tego sterownika Intel.
+- Zbudowano EXE i paczkę ZIP w wersji 0.24. Nowe krainy, czterej pozostali strażnicy oraz zbieranie fragmentów nie są częścią tej zmiany; prolog wprowadza je do fabuły.
+- Po dopracowaniu grafiki maga i bohatera wypakowano finalny ZIP (**7 233 321 bajtów**), potwierdzono SHA-256 EXE i wszystkich **78 zasobów**. Wypakowana gra przeszła ponownie **35/35 sprawdzeń sceny**, z `--no-audio`. Raport: `dist/package-test-v24.txt`, `dist/qa-v24/packaged-intro-tests.txt`.
+
+Raport i rozmowa: `dist/qa-v24/intro/tests.txt`, `dialogue.txt`; obrazy: `dist/qa-v24/intro/`. Pozostałe raporty: `dist/interaction-test-v24.txt`, `dist/qa-v24/refresh-tests.txt`.
+
 ## Poprawka czarnego ekranu — 11 października 2026
 
 Sprawdzone w `C:\Users\Amol\Documents\GitHub\gra-rpg` na Windows 11, Intel UHD Graphics ze sterownikiem `30.0.100.9864`, monitor 1920 × 1080 / 144 Hz. Każde uruchomienie miało `--no-audio`.

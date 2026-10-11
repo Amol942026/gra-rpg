@@ -87,8 +87,12 @@ void mushrooms(float x,float y,float s){
 }
 void detailedGroundTile(int x,int y,float sx,float sy){
  unsigned h=Game::hash(x,y);bool path=Game::onPath(x,y);
- Color c=path?rgb(88+h%8,99+h%9,78+h%8):y>=30?(x>=30?rgb(40+h%9,67+h%10,47+h%8):rgb(44+h%8,67+h%9,57+h%7)):
-  y>=26&&x<20?rgb(62+h%8,85+h%9,51+h%7):rgb(46+h%8,73+h%9,53+h%7);
+ ForestZone zone=forestZone({float(x),float(y)});
+ bool glade=forestClearing({float(x),float(y)});
+ Color c=path?rgb(88+h%8,99+h%9,78+h%8):zone==ForestZone::Heart?rgb(40+h%9,67+h%10,47+h%8):
+  zone==ForestZone::Spiders?rgb(44+h%8,67+h%9,57+h%7):zone==ForestZone::Birches||zone==ForestZone::Grove?
+  rgb(62+h%8,85+h%9,51+h%7):rgb(46+h%8,73+h%9,53+h%7);
+ if(glade&&!path)c=shade(c,1.14f);
  diamond(sx,sy,40,20,c);
  // Sparse mottling replaces the conspicuous square grid on grass.
  for(int n=0;n<22;n++){unsigned k=Game::hash(x*29+n,y*31);float dx=int(k%71)-35,dy=int((k>>8)%33)-16;
@@ -101,7 +105,7 @@ void detailedGroundTile(int x,int y,float sx,float sy){
    ellipse(sx+dx,sy+dy,3+k%4,1+(k>>5)%2,shade(c,k%2?.87f:1.09f));
    Color grass=rgb(70+k%21,99+k%24,57+k%16);line(sx+dx,sy+dy,sx+dx-1,sy+dy-3-k%3,grass,.75f);
    if(k%3==0)line(sx+dx,sy+dy,sx+dx+2,sy+dy-3,shade(grass,.8f),.7f);
-   if(k%29==0){ellipse(sx+dx,sy+dy-4,1.5f,1,rgb(194,176,111));ellipse(sx+dx+2,sy+dy-3,1,1,rgb(211,193,130));}
+   if(k%(glade?7:29)==0){ellipse(sx+dx,sy+dy-4,1.5f,1,rgb(194,176,111));ellipse(sx+dx+2,sy+dy-3,1,1,rgb(211,193,130));}
   }
  }
  if(!path&&h%5==0){float xx=sx-9,yy=sy+3;ellipse(xx,yy,5,2,rgb(32,52,37));line(xx-5,yy,xx+7,yy-5,rgb(101,83,51),1.5f);line(xx+1,yy-2,xx+1,yy-6,rgb(101,83,51),1);}

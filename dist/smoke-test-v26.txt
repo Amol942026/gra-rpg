@@ -1,0 +1,23 @@
+Frames: 180
+Window: 1920x1080
+Fullscreen: yes
+Refresh rate (Hz): 144
+V-sync interval: 2
+Presentation clock: OpenGL V-sync
+DXGI synchronized presents: 0
+Occluded presentations: 0
+Suppressed native swaps: 0
+Actual presentation interval: 2
+Presentation fallback: GPU sharing pixel validation failed (0x80004005)
+Audio device opened: no
+Native canvas: 1728x1080
+Average FPS: 92.0855
+CPU frame mean (ms): 10.7871
+EndDrawing mean (ms): 0.0868773
+Presentation mean (ms): 0.000104202
+CPU frame p95 (ms): 10.3636
+CPU frame p99 (ms): 11.7017
+Frame p95 (ms): 10.4487
+Frame p99 (ms): 11.8521
+Frame max (ms): 232.732
+Frames over 25 ms: 1

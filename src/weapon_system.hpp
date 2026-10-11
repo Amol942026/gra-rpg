@@ -27,7 +27,7 @@ float arrowDamage(float charge)const{return float(damage())+12*std::clamp(charge
 void cancelBow(){bowDrawing=false;bowDrawTime=0;bowReleaseTime=0;}
 void aimBow(V aim){if(!bowDrawing||length(aim)<.001f)return;bowAim=normalized(aim);facing=bowAim;animation.face(bowAim.x,bowAim.y);}
 bool beginBow(V aim){
- if(dead()||allocationRequired||rolling()||attackCd>0||bowDrawing||equipment[0].kind!=Kind::Bow)return false;
+ if(dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||bowDrawing||equipment[0].kind!=Kind::Bow)return false;
  if(ammoCount()<=0){say("Brak strzał w plecaku.");sound(Cue::Reject,player);return false;}
  bowDrawing=true;bowDrawTime=bowReleaseTime=0;bowAim=normalized(length(aim)>.001f?aim:facing);if(length(bowAim)<.001f)bowAim={0,-1};aimBow(bowAim);return true;
 }

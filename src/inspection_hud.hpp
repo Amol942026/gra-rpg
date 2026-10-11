@@ -8,7 +8,11 @@ struct Inspection {
 };
 Inspection inspectWorld(WorldHover hit) {
     Inspection info;
-    if(hit.kind==HoverKind::Enemy){
+    if(hit.kind==HoverKind::Mage&&game.inTower()){
+        info.source=hit.kind;info.name="Eldrin";info.kind="Mag / przyjazny NPC";
+        info.detail="Strażnik ostatniej pieczęci.";
+        info.secondary=game.mageReachable()?"E / PPM: porozmawiaj.":"Podejdź bliżej, aby porozmawiać.";
+    }else if(hit.kind==HoverKind::Enemy){
         const Enemy* enemy=game.findEnemy(hit.index);if(!enemy)return info;
         const auto& stats=enemyInfo(enemy->type);
         info.source=hit.kind;info.name=stats.name;info.kind=stats.kind;

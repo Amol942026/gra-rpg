@@ -1,4 +1,4 @@
-1 ms: Emberfall v0.23: startup
+1 ms: Emberfall v0.26: startup
 1 ms: Creating graphics window
 1 ms: Initializing raylib 5.5
 1 ms: Platform backend: DESKTOP (GLFW)
@@ -10,42 +10,47 @@
 1 ms:     > rtext:..... loaded (optional)
 1 ms:     > rmodels:... loaded (optional)
 1 ms:     > raudio:.... loaded (optional)
-140 ms: DISPLAY: Trying to enable VSYNC
-140 ms: DISPLAY: Device initialized successfully
-140 ms:     > Display size: 1920 x 1080
-142 ms:     > Screen size:  1440 x 900
-142 ms:     > Render size:  1440 x 900
-142 ms:     > Viewport offsets: 0, 0
-149 ms: GLAD: OpenGL extensions loaded successfully
-149 ms: GL: Supported extensions count: 241
-149 ms: GL: OpenGL device information:
-149 ms:     > Vendor:   Intel
-149 ms:     > Renderer: Intel(R) UHD Graphics
-149 ms:     > Version:  3.3.0 - Build 30.0.100.9864
-149 ms:     > GLSL:     3.30 - Build 30.0.100.9864
-149 ms: GL: VAO extension detected, VAO functions loaded successfully
-149 ms: GL: NPOT textures extension detected, full NPOT textures supported
-149 ms: GL: DXT compressed textures supported
-149 ms: GL: ETC2/EAC compressed textures supported
-149 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
-149 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
-149 ms: TEXTURE: [ID 1] Default texture loaded successfully
-150 ms: SHADER: [ID 1] Vertex shader compiled successfully
-150 ms: SHADER: [ID 2] Fragment shader compiled successfully
-162 ms: SHADER: [ID 3] Program shader loaded successfully
-162 ms: SHADER: [ID 3] Default shader loaded successfully
-162 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
-163 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
-163 ms: RLGL: Default OpenGL state initialized successfully
-167 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
-167 ms: FONT: Default font loaded successfully (224 glyphs)
-167 ms: SYSTEM: Working Directory: C:\Users\Amol\Documents\GitHub\gra-rpg\dist
-167 ms: Graphics window ready
-175 ms: Generating world graphics
-399 ms: World graphics ready
-399 ms: Audio skipped (--no-audio)
-451 ms: First scene rendered
-613 ms: First frame presented
-613 ms: OpenGL V-sync
-613 ms: GPU sharing pixel validation failed (0x80004005)
-3199 ms: Shutting down
+160 ms: DISPLAY: Trying to enable VSYNC
+160 ms: DISPLAY: Device initialized successfully
+160 ms:     > Display size: 1920 x 1080
+160 ms:     > Screen size:  1440 x 900
+160 ms:     > Render size:  1440 x 900
+160 ms:     > Viewport offsets: 0, 0
+165 ms: GLAD: OpenGL extensions loaded successfully
+165 ms: GL: Supported extensions count: 241
+165 ms: GL: OpenGL device information:
+165 ms:     > Vendor:   Intel
+165 ms:     > Renderer: Intel(R) UHD Graphics
+165 ms:     > Version:  3.3.0 - Build 30.0.100.9864
+165 ms:     > GLSL:     3.30 - Build 30.0.100.9864
+165 ms: GL: VAO extension detected, VAO functions loaded successfully
+165 ms: GL: NPOT textures extension detected, full NPOT textures supported
+165 ms: GL: DXT compressed textures supported
+165 ms: GL: ETC2/EAC compressed textures supported
+165 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+165 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+165 ms: TEXTURE: [ID 1] Default texture loaded successfully
+165 ms: SHADER: [ID 1] Vertex shader compiled successfully
+166 ms: SHADER: [ID 2] Fragment shader compiled successfully
+178 ms: SHADER: [ID 3] Program shader loaded successfully
+178 ms: SHADER: [ID 3] Default shader loaded successfully
+179 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+179 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+179 ms: RLGL: Default OpenGL state initialized successfully
+183 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+184 ms: FONT: Default font loaded successfully (224 glyphs)
+184 ms: SYSTEM: Working Directory: C:\Users\Amol\Documents\GitHub\gra-rpg\dist
+184 ms: Graphics window ready
+188 ms: Generating world graphics
+684 ms: World graphics ready
+684 ms: Opening audio device
+1688 ms: Audio device ready
+1697 ms: Sound effects ready; loading music
+1699 ms: Audio initialization complete
+1778 ms: First scene rendered
+2027 ms: First frame presented
+2027 ms: OpenGL V-sync
+2027 ms: GPU sharing pixel validation failed (0x80004005)
+20840 ms: Prologue complete: hero teleported to the forest
+80982 ms: First Dawn shard collected: hero returned to Eldrin's tower
+129307 ms: Shutting down

@@ -2,7 +2,7 @@
 #include <string>
 namespace ember {
 enum class Kind { None,Sword,Axe,Helmet,Armor,Shield,Boots,Ring,Health,Mana,Crystal,Gold,
- WolfFang,WolfFur,BoarTusk,BoarHide,SpiderSilk,VenomSac,BoneShard,SlimeGel,AncientBark,ForestEssence,BanditBadge,RuneStone,Dagger,Cloak,Amulet,Mushroom,Bow,Arrow,Count };
+ WolfFang,WolfFur,BoarTusk,BoarHide,SpiderSilk,VenomSac,BoneShard,SlimeGel,AncientBark,ForestEssence,BanditBadge,RuneStone,Dagger,Cloak,Amulet,Mushroom,Bow,Arrow,DawnShard,Count };
 constexpr int ItemKindCount=int(Kind::Count);
 struct Item { Kind kind=Kind::None; int tier=0,count=0; bool empty()const{return kind==Kind::None||count<=0;} };
 inline Item item(Kind k,int tier=0,int count=1){return{k,tier,count};}
@@ -11,7 +11,7 @@ inline int gearSlot(Kind k){switch(k){case Kind::Sword:case Kind::Axe:case Kind:
 inline bool stackable(Kind k){return k==Kind::Arrow||k==Kind::Mushroom||material(k)||k==Kind::Health||k==Kind::Mana||k==Kind::Crystal||k==Kind::Gold;}
 inline std::string itemName(Item i){
  static constexpr const char* names[]={"","Miecz wędrowca","Topór strażnika","Żelazny hełm","Zbroja zwiadowcy","Tarcza dębowa","Buty podróżnika","Pierścień żaru","Mikstura zdrowia","Mikstura many","Odłamek echa","Złote monety",
- "Kieł wilka","Sierść wilka","Kieł dzika","Skóra dzika","Pajęcza nić","Woreczek jadu","Fragment kości","Śluz szlama","Prastara kora","Esencja kniei","Odznaka rozbójnika","Kamień runiczny","Sztylet łowcy","Płaszcz z wilczej skóry","Bursztynowy amulet","Borowik","Łuk podróżnika","Strzały"};
+ "Kieł wilka","Sierść wilka","Kieł dzika","Skóra dzika","Pajęcza nić","Woreczek jadu","Fragment kości","Śluz szlama","Prastara kora","Esencja kniei","Odznaka rozbójnika","Kamień runiczny","Sztylet łowcy","Płaszcz z wilczej skóry","Bursztynowy amulet","Borowik","Łuk podróżnika","Strzały","Część Serca Świtu"};
  int k=int(i.kind);return k>=0&&k<ItemKindCount?names[k]:"Nieznany przedmiot";
 }
 inline const char* itemShortName(Kind k){switch(k){case Kind::Bow:return "łuk";case Kind::Arrow:return "strzały";case Kind::Sword:return "miecz";case Kind::Axe:return "topór";case Kind::Mushroom:return "borowik";case Kind::WolfFang:return "kieł";case Kind::WolfFur:return "sierść";case Kind::BoarTusk:return "kieł";case Kind::BoarHide:return "skóra";case Kind::SpiderSilk:return "nić";case Kind::VenomSac:return "jad";case Kind::BoneShard:return "kość";case Kind::SlimeGel:return "śluz";case Kind::AncientBark:return "kora";case Kind::ForestEssence:return "esencja";case Kind::BanditBadge:return "odznaka";case Kind::RuneStone:return "runa";case Kind::Crystal:return "odłamek";case Kind::Health:return "mikstura HP";case Kind::Mana:return "mikstura MP";case Kind::Dagger:return "sztylet";case Kind::Cloak:return "płaszcz";case Kind::Amulet:return "amulet";default:return "sprzęt";}}

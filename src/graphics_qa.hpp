@@ -37,6 +37,21 @@ bool runGraphicsQA(){
    actor_art::draw(species,220+d*140.f,230+species*190,1,pose,0,species==0,species==0);}
  }
  EndTextureMode();saveTexture(sheet,"qa-v21/all-actors-8-directions.png");UnloadRenderTexture(sheet);
+ fs::create_directories("qa-v24/hero");
+ RenderTexture2D heroSheet=LoadRenderTexture(1680,1310);BeginTextureMode(heroSheet);ClearBackground(Ink);
+ txt("WĘDROWIEC — NOWA SYLWETKA I ANIMACJE",24,18,25,Gold);
+ const char* poses[]={"KAPTUR","CHÓD","MIECZ / TARCZA","ŁUK","UNIK"};
+ for(int d=0;d<8;d++)center(directions[d],240+d*195.f,67,14,Text);
+ for(int row=0;row<5;row++){
+  txt(poses[row],18,146+row*240,14,Muted);
+  for(int d=0;d<8;d++){
+   AnimationState state;state.direction=static_cast<Direction>(d);state.idleTime=.7f;state.moving=row==1;state.phase=.17f;
+   float x=240+d*195.f,y=286+row*240;ellipse(x,y+2,49,17,rgb(23,34,36));
+   actor_art::draw(0,x,y,1.9f,state,row==2?1:0,row==2,row==2||row==4,row==3?Kind::Bow:Kind::Sword,
+                   false,BLANK,nullptr,row==4?.45f:-1,row==2?.5f:-1,row==3?.85f:-1);
+  }
+ }
+ EndTextureMode();saveTexture(heroSheet,"qa-v24/hero/poses-8-directions.png");UnloadRenderTexture(heroSheet);
  for(int type=0;type<PropTypeCount;type++){
   Image im=LoadImageFromTexture(propArt[type].texture);Color* pixels=LoadImageColors(im);int opaque=0,clipped=0;
   for(int y=0;y<230;y++)for(int x=0;x<180;x++)if(pixels[y*180+x].a>230){opaque++;clipped+=x<2||x>=178||y<2||y>=228;}
@@ -51,6 +66,6 @@ bool runGraphicsQA(){
   UnloadImageColors(pixels);UnloadImage(im);UnloadRenderTexture(itemSample);
  }
  game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;mouse={0,0};dragging={};refreshDisplayLayout();
- game.messageTime=0;renderScene();BeginDrawing();presentCanvas();Image actual=presentedImage();ExportImage(actual,"qa-v21/detailed-forest.png");UnloadImage(actual);EndDrawing();finishFramePacing();
+ game.messageTime=0;renderScene();BeginDrawing();presentCanvas();Image actual=presentedImage();ExportImage(actual,"qa-v21/detailed-forest.png");ExportImage(actual,"qa-v24/hero/forest.png");UnloadImage(actual);EndDrawing();finishFramePacing();
  report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

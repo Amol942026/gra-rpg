@@ -1,7 +1,7 @@
 #pragma once
 
 // The sword tile indicates the world-click attack; UI clicks never swing it.
-bool gameplayInputAllowed(){return !weaponWheelOpen&&!welcome&&!help&&!paused&&!audioOpen&&!statsOpen&&!spellBookOpen&&!game.allocationRequired&&!game.dead();}
+bool gameplayInputAllowed(){return !intro.active()&&!towerStory.active()&&!game.storyBlocked()&&!weaponWheelOpen&&!welcome&&!help&&!paused&&!audioOpen&&!statsOpen&&!spellBookOpen&&!game.allocationRequired&&!game.dead();}
 void activateMouseAction(int index,V movement) {
     if(index==1)openSpellBook();
     if(index==2)game.potion(Kind::Health);
@@ -25,6 +25,7 @@ bool clickWorldOrInventory() {
         return false;
     }
     if(!worldPointerAllowed(mouse))return false;
+    if(pickWorld(mouse).kind==HoverKind::Mage)return talkToMage();
     return game.equipment[0].kind==Kind::Bow?game.beginBow(bowAimFromPointer()):game.attack();
 }
 bool rightClickWorldOrInventory(){
@@ -32,6 +33,7 @@ bool rightClickWorldOrInventory(){
     game.cancelBow();
     if(worldPointerAllowed(mouse)){
         WorldHover hit=pickWorld(mouse);
+        if(hit.kind==HoverKind::Mage)return talkToMage();
         if(hit.kind==HoverKind::Corpse)return game.openCorpse(hit.index);
         if(hit.kind==HoverKind::Forage)return game.use({Place::Forage,hit.index});
         if(hit.kind==HoverKind::Ground)return game.use({Place::Ground,hit.index});

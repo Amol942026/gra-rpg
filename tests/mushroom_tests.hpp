@@ -1,7 +1,7 @@
 #pragma once
 void mushroomTests(){
  for(unsigned seed=0;seed<16;seed++){
-  Game g(seed);check(g.forage.size()==MushroomCount,"each expedition generates 36 mushrooms");
+  Game g(seed);check(g.forage.size()==MushroomCount,"each expedition generates all 64 mushrooms across the larger forest");
   bool valid=true;for(size_t i=0;i<g.forage.size();i++){
    const auto& m=g.forage[i];valid&=m.id==int(i)+1&&m.value.kind==Kind::Mushroom&&m.value.count==1&&g.walkable(m.pos)&&distance(m.pos,g.player)>=3.5f;
    valid&=!Game::onPath(int(std::round(m.pos.x)),int(std::round(m.pos.y)));

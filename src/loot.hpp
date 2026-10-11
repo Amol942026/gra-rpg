@@ -12,7 +12,7 @@ inline const LootTable& enemyLootTable(int type){
   {{{Kind::Gold,100,4,15},{Kind::SlimeGel,80,1,3},{Kind::Health,15},{Kind::Crystal,30,1,2},{Kind::Amulet,1}}},
   {{{Kind::Gold,100,4,15},{Kind::WolfFang,75,1,2},{Kind::WolfFur,55,1,2},{Kind::Health,12},{Kind::Cloak,3,1,1,1}}},
   {{{Kind::Gold,100,4,15},{Kind::BoneShard,70,1,3},{Kind::Dagger,8},{Kind::Mana,18},{Kind::Helmet,5,1,1,1}}},
-  {{{Kind::Gold,100,4,15},{Kind::Sword,100,1,1,2},{Kind::Ring,100,1,1,2},{Kind::ForestEssence,100,1,2,1},{Kind::RuneStone,50}}},
+  {{{Kind::Gold,100,4,15},{Kind::Sword,100,1,1,2},{Kind::Ring,100,1,1,2},{Kind::ForestEssence,100,1,2,1},{Kind::DawnShard,100,1,1,2}}},
   {{{Kind::Gold,100,4,15},{Kind::BoarTusk,65,1,2},{Kind::BoarHide,80},{Kind::Health,10},{Kind::Armor,4,1,1,1}}},
   {{{Kind::Gold,100,4,15},{Kind::SpiderSilk,85,1,3},{Kind::VenomSac,40},{Kind::Mana,15},{Kind::Amulet,2,1,1,1}}},
   {{{Kind::Gold,100,4,15},{Kind::BanditBadge,60},{Kind::Dagger,12,1,1,1},{Kind::Health,25,1,2},{Kind::Boots,8,1,1,1}}},
