@@ -2,7 +2,7 @@
 bool runMushroomQA(){
  fs::create_directories("qa-v22");std::ofstream report("qa-v22/mushroom-tests.txt");int checks=0,failures=0;
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
- game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};nearbyPage=0;game.messageTime=0;
+ game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};nearbyPage=0;game.messageTime=0;
  check(!audioSystem.available,"mushroom diagnostic opens no audio device");
  check(game.forage.size()==MushroomCount,"real game creates all 64 collectible mushrooms");
  V plant=game.forage[0].pos;game.player=plant+V{1,0};refreshDisplayLayout();mouse={0,0};renderScene();saveTexture(canvas,"qa-v22/mushrooms-in-forest.png");

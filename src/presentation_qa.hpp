@@ -4,7 +4,7 @@ bool runPresentationQA(){
     fs::create_directories("qa-v15");std::ofstream report("qa-v15/presentation-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
     auto pump=[](){BeginDrawing();ClearBackground(BLACK);EndDrawing();refreshDisplayLayout();};
-    game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};
+    game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};
     if(fullScreen())toggleFullScreen();pump();
     int initialWidth=GetScreenWidth(),initialHeight=GetScreenHeight();Vector2 initialPosition=GetWindowPosition();
     const Color markers[]={RED,LIME,BLUE,MAGENTA};
@@ -99,6 +99,6 @@ bool runPresentationQA(){
     check(stationaryFrames==0&&maxColorJump<25,"water shifts continuously with soft edges and no abrupt flashes");
     UnloadRenderTexture(sample);
     SetWindowSize(initialWidth,initialHeight);SetWindowPosition(int(initialPosition.x),int(initialPosition.y));pump();
-    game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};
+    game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};
     report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

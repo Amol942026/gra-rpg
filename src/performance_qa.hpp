@@ -58,7 +58,7 @@ bool runPerformanceQA(){
     }
     UnloadRenderTexture(sample);refreshDisplayLayout();size_t prepared=typography.atlasCount();
     for(int scenario=0;scenario<10;scenario++){
-        game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;mouse={0,0};dragging={};
+        game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;mouse={0,0};dragging={};
         if(scenario==1){game.enemies[0].pos=game.player+V{2,-2};Vector2 p=screen(game.enemies[0].pos);mouse={p.x,p.y-18};}
         if(scenario==2){game.hit(game.enemies[0],1000);game.player=game.enemies[0].pos;game.openCorpse(game.enemies[0].id);}
         if(scenario==3){game.attack();game.effects.push_back({game.player,"-120",.8f,4});}
@@ -70,7 +70,7 @@ bool runPerformanceQA(){
         if(scenario==9)game.hp=0;
         renderScene();check(typography.atlasCount()==prepared,"first use of combat, hover and menu text does not load font atlases mid-frame");
     }
-    game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;mouse={0,0};dragging={};refreshDisplayLayout();renderScene();
+    game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;mouse={0,0};dragging={};refreshDisplayLayout();renderScene();
     BeginDrawing();ClearBackground(BLACK);presentCanvas();Image screenshot=presentedImage();ExportImage(screenshot,"qa-v18/optimized-fullscreen.png");UnloadImage(screenshot);EndDrawing();finishFramePacing();
     report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

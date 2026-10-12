@@ -1,0 +1,12 @@
+Release: 0.27
+Archive: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\Emberfall-Windows-x64.zip
+ZIP bytes: 7155564
+Extracted copy: C:\Users\Amadeusz\AppData\Local\Temp\Emberfall-skills-package-7defd41ae97e411597c8ee2c5bb156d9\Emberfall
+SHA-256 verified game files: 81
+Asset count: 78
+Executable / licenses / loot: match
+Skill instructions: match
+Extracted skills QA: 84 checks, 0 failures
+QA launch: --skills-qa --no-audio
+Saved audio settings unchanged: yes
+Audio preference: 0.42 0.72 0 1 1

@@ -24,7 +24,7 @@ bool runPointerQA(){
     check(std::abs(after.x-1746)<.01f&&std::abs(after.y-658)<.01f,"native startup reads unscaled client mouse coordinates");
     auto pump=[](){BeginDrawing();ClearBackground(BLACK);EndDrawing();refreshDisplayLayout();};
     auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};
-        welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};nearbyPage=0;};
+        welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};nearbyPage=0;};
     auto point=[&](Vector2 p){
         int ww,wh,fw,fh;glfwGetWindowSize(window,&ww,&wh);glfwGetFramebufferSize(window,&fw,&fh);
         // Start at the actual presented pixel, then convert to GLFW client units.

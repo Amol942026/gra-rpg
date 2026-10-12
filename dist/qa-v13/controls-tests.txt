@@ -35,8 +35,9 @@ PASS: each modal state blocks combat and corpse interactions
 PASS: each modal state blocks combat and corpse interactions
 PASS: each modal state blocks combat and corpse interactions
 PASS: each modal state blocks combat and corpse interactions
+PASS: each modal state blocks combat and corpse interactions
 PASS: mandatory advancement blocks mouse attacks, spells and rolling
 PASS: death blocks both mouse combat buttons
 PASS: the existing roll blocks sword and spell actions
 PASS: holding run leaves roll distance unchanged
-Checks: 41; failures: 0
+Checks: 42; failures: 0

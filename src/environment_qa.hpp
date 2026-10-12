@@ -5,7 +5,7 @@ bool runEnvironmentQA(){
     fs::create_directories("qa-v14");std::ofstream report("qa-v14/environment-display-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* label){checks++;if(!ok)failures++;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
     auto pump=[](){BeginDrawing();ClearBackground(Ink);EndDrawing();refreshDisplayLayout();};
-    game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};
+    game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};
     prepareCanvas(1);Prop prop{game.player,0,1};
     check(treeShift(prop,208,2)==0&&treeShift(prop,220,7)==0,"tree root and ground shadow remain anchored");
     check(std::abs(treeShift(prop,45,0)-treeShift(prop,45,2))>1,"tree crown changes position with wind");
@@ -86,6 +86,6 @@ bool runEnvironmentQA(){
     displayAction(true,false);pump();displayAction(true,false);pump();
     check(!fullScreen()&&IsWindowMaximized(),"fullscreen returns a previously maximized window to its maximized state");
     RestoreWindow();SetWindowSize(width,height);SetWindowPosition(int(position.x),int(position.y));pump();
-    game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};
+    game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};
     report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

@@ -4,7 +4,7 @@ bool runRefreshQA(){
     fs::create_directories("qa-v19");std::ofstream report("qa-v19/refresh-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
     check(!audioSystem.available,"refresh diagnostic opens no audio device");
-    game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};
+    game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};
     bool startedFull=fullScreen();
     for(int mode=0;mode<4;mode++){
         if(mode==0&&!fullScreen())toggleFullScreen();

@@ -29,7 +29,7 @@ void exportForestOverview(){
 bool runForestQA(){
  fs::create_directories("qa-v25");std::ofstream report("qa-v25/forest-tests.txt");int checks=0,failures=0;
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
- game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};refreshDisplayLayout();
+ game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};refreshDisplayLayout();
  check(!audioSystem.available,"forest diagnostic opens no audio device");
  check(IsRenderTextureValid(terrain)&&terrain.texture.width==TerrainWidth&&IsTextureValid(minimapTerrain),"GPU loads the enlarged terrain and the cached minimap successfully");
  exportForestOverview();

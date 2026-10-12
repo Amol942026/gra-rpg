@@ -65,7 +65,7 @@ bool runGraphicsQA(){
   check(opaque>25&&clipped==0,"detailed item icon is visible and fits inside backpack bounds");
   UnloadImageColors(pixels);UnloadImage(im);UnloadRenderTexture(itemSample);
  }
- game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;mouse={0,0};dragging={};refreshDisplayLayout();
+ game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;mouse={0,0};dragging={};refreshDisplayLayout();
  game.messageTime=0;renderScene();BeginDrawing();presentCanvas();Image actual=presentedImage();ExportImage(actual,"qa-v21/detailed-forest.png");ExportImage(actual,"qa-v24/hero/forest.png");UnloadImage(actual);EndDrawing();finishFramePacing();
  report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

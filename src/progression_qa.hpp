@@ -5,7 +5,7 @@ bool runProgressionQA(){
     auto check=[&](bool ok,const char* label){checks++;if(!ok)failures++;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
     auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
     game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};
-    welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;statDraft={};draftForLevel=-1;dragging={};
+    welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;statDraft={};draftForLevel=-1;dragging={};
     prepareCanvas(1.2f);pointAt(statsButton());
     check(clickProgression()&&statsOpen,"HUD stats button opens the level-one character sheet");
     check(!worldPointerAllowed(mouse),"character sheet blocks world interactions");
@@ -26,7 +26,8 @@ bool runProgressionQA(){
     mouse={0,0};
     for(float factor:{.8f,1.f,1.2f}){prepareCanvas(factor);renderScene();saveTexture(canvas,TextFormat("qa-v13/level-menu-%d.png",int(factor*100)));}
     pointAt(statsConfirm());clickProgression();
-    check(!statsOpen&&!game.allocationRequired&&game.attributePoints==0,"confirm button applies all points and ends mandatory pause");
+    check(!statsOpen&&skillsOpen&&game.skillAllocationPending()&&game.attributePoints==0,"stats confirmation opens skills while mandatory pause remains");
+    adjustSkill(0,true);check(confirmSkills()&&!game.allocationRequired&&!skillsOpen,"skill confirmation applies one point and resumes play");
     check(game.damage()==18&&game.magicDamage()==31&&game.maxHp()==110&&game.maxMana()==105,"HUD values match the committed allocation");
     game.chooseSpell(Spell::None);activateMouseAction(1,{});
     check(spellBookOpen&&!statsOpen&&game.fireballs.empty(),"clicking spell tile opens selection without casting");

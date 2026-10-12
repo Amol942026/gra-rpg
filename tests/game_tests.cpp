@@ -18,7 +18,17 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "intro_tests.hpp"
 #include "forest_expansion_tests.hpp"
 #include "tower_tests.hpp"
+#include "skill_tests.hpp"
+#include "tower_floors_tests.hpp"
+#include "developer_tests.hpp"
+#include "critical_healing_tests.hpp"
+#include "tower_stairs_tests.hpp"
 int main(){
+ towerStairsTests();
+ criticalHealingTests();
+ developerTests();
+ towerFloorsTests();
+ skillTests();
  towerTests();
  introTests();
  corpseTests();

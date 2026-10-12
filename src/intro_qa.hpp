@@ -70,6 +70,6 @@ bool runIntroQA(){
     Image forest=shot("qa-v24/intro/forest-after.png");UnloadImage(forest);
     float before=game.time;game.update(.05f,{1,0},false);check(game.time>before,"world simulation resumes after the prologue");
     startIntro();check(intro.phase==IntroPhase::Opening&&intro.line==0,"new adventure can replay the complete introduction");
-    intro=IntroSequence{};game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=weaponWheelOpen=false;dragging={};mouse={0,0};
+    intro=IntroSequence{};game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;dragging={};mouse={0,0};
     report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

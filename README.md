@@ -8,6 +8,79 @@ Przed wybraniem prezentacji DirectX gra sprawdza rzeczywisty piksel przesłany z
 
 Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
+## Wersja 0.31 — pełnowymiarowe kamienne schody w wieży
+
+Wieża ma teraz schody dopasowane do skali bohatera i izometrycznych osi posadzki. **Schody w górę** to wysoki bieg z **14 stopniami**, spocznikiem, murowanymi bokami, słupkami i kamiennymi poręczami. Stopnie mają osobne podstopnice, jasne krawędzie, fugi i ślady zużycia. **Schody w dół** są otwartym szybem w podłodze: stopnie schodzą poniżej posadzki i znikają w cieniu, a otwór otacza kamienna balustrada z wolnym wejściem.
+
+Kolumnę odsunięto, aby nie zasłaniała biegu. Podpisy obu schodów pozostają czytelne. Mysz wskazuje rzeczywistą sylwetkę kamiennej konstrukcji; najazd dodaje obrys i pokazuje cel w HUD. Kolizje chronią przed przechodzeniem przez podwyższony bieg, poręcze i otwarty szyb. Podejdź do wejścia i użyj **E / LPM / PPM**. Po zmianie piętra postać pojawia się przy bezpiecznym wyjściu. Na parterze nie ma zejścia w dół, na ostatnim piętrze nie ma dalszych schodów w górę.
+
+Grafika schodów jest przygotowywana raz w podwójnej rozdzielczości, a później rysowana z pamięci GPU. Test `--stairs-qa --no-audio` sprawdza proporcje, brak uciętych fragmentów, zgodność grafiki ze wskazywaniem myszą i wejście na piętra. Podgląd z bohaterem obok obu konstrukcji: `dist/qa-v31/stairs-detail.png`. Widoki wieży i raport: `dist/qa-v31/`.
+
+## Wersja 0.30 — krytyczne trafienia i Leczenie
+
+Każdy udany atak bohatera ma **5% szansy na trafienie krytyczne**: zwykły zamach mieczem, strzała z łuku, Kula ognia, Mocne cięcie i Przeszywająca strzała. Krytyk zadaje **150% więcej obrażeń**, czyli **250% zwykłych obrażeń tego ataku po uwzględnieniu obrony przeciwnika**. Losowanie odbywa się raz na zamach lub wypuszczony pocisk; wszyscy trafieni obszarowo lub przeszyci przeciwnicy dzielą jego wynik. Naciąganie, anulowanie oraz zablokowana akcja nie losują krytyka. Losowania ataków nie zmieniają generatora losowego łupu.
+
+Zwykłe obrażenia mają większe jasne cyfry i ciemny obrys. Krytyk pokazuje **duże złote cyfry, napis KRYTYK! i ciemne tło** przez dłuższy czas. Wyniki unoszą się ponad sylwetką danego przeciwnika, również dużego Strażnika.
+
+**Leczenie** można poznać za **1 punkt umiejętności** po rozdaniu statystyk podczas awansu. **V** lub zielony kafelek **LECZENIE** w HUD przywraca **30 HP za 20 many**, do maksymalnego zdrowia. Działa z każdą bronią i w wieży. Zielone pierścienie i krzyżyki pokazują efekt, a napis podaje rzeczywiście odzyskane HP. Przy pełnym zdrowiu lub niewystarczającej manie akcja nie pobiera kosztu. Odnowienie: **1 s**. Leczenie ma jedną rangę; kolejne punkty nadal można wydawać na dwie umiejętności broni. W normalnej nowej wyprawie Leczenie trzeba poznać; zestaw deweloperski zawiera wszystkie trzy umiejętności.
+
+Cichy test `--combat-qa --no-audio` sprawdza oba etapy awansu, naukę Leczenia, używanie z mieczem i łukiem oraz w wieży, koszty i wszystkie pięć rodzajów krytycznych ataków. Menu i efekty są renderowane w skalach 80%, 100% i 120%; raporty oraz podglądy: `dist/qa-v30/`. Testy modelu: `tests/critical_healing_tests.hpp`.
+
+## Wersja 0.29 — tryb deweloperski i szybki start w lokacji
+
+Naciśnij **F3** albo kliknij **DEV · F3**. Wybór działa także podczas prologu, scenki powrotu, pauzy, rozdawania punktów i po śmierci. Dostępnych jest **13 miejsc startu**: osiem punktów w Lesie Mchu (w tym okolice bossa) oraz każde z pięciu pięter wieży. Zaznacz miejsce, następnie wybierz:
+
+- **NOWA SESJA TESTOWA** — resetuje wyprawę, postać i przeciwników, pomija prolog i uruchamia wybraną lokację. ENTER robi to samo.
+- **PRZENIEŚ OBECNĄ POSTAĆ** — zachowuje plecak, założony sprzęt, poziom, XP, statystyki i istniejące rangi. Pozostawione przedmioty i ciała zostają w swojej lokacji; można wrócić po nie.
+
+Każdy start odnawia HP i manę oraz usuwa stary naciąg, unik, pociski, efekty i otwarte menu łupu. Bohater pojawia się w najbliższym bezpiecznym miejscu, poza przeszkodami i ciałami żywych przeciwników. Wieża jest w sesji testowej odblokowana bez walki z bossem; powrót do lasu z zachowaną postacią zachowuje również postęp zadania. **Nowa sesja przy bossie** pozwala ponownie testować zabicie Strażnika, łup i powrót do Eldrina.
+
+Opcjonalny **ZESTAW TESTOWY** uzupełnia do **100 strzał, po 15 borowików i esencji lasu oraz po 10 mikstur zdrowia i many**; odblokowuje wszystkie trzy umiejętności przynajmniej na randze 1. Nie obniża wyższych rang i nie nadpisuje przedmiotów. Powtórne przenoszenie nie powiększa kompletnego zestawu. Przy pełnym plecaku wyświetla informację o ograniczeniu zestawu. Odznacz opcję, aby testować bez dodatkowych przedmiotów i umiejętności.
+
+**ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu bez resetowania wyprawy. Otwarta lista zatrzymuje symulację. Po uruchomieniu testu HUD pokazuje **SESJA TESTOWA**. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. **NOWA ZWYKŁA GRA — PROLOG** kończy tryb testowy i resetuje wyprawę do normalnego startu. Zwykłe uruchomienie nadal zaczyna się prologiem i nie dostaje zestawu testowego.
+
+W folderze projektu i wypakowanej grze są trzy wygodne launchery:
+
+- `Tryb_deweloperski.bat` — od razu otwiera wybór lokacji.
+- `Test_wiezy.bat` — zaczyna na pierwszym piętrze; F3 wybiera kolejne.
+- `Test_bossa.bat` — zaczyna przy Kamiennym Strażniku.
+
+Bezpośredni start z parametrami (Windows CMD, folder projektu lub wypakowana paczka):
+
+```bat
+Uruchom.bat --start tower-3
+Uruchom.bat --start tower-5
+Uruchom.bat --start ruins --no-dev-kit
+Uruchom.bat --dev
+```
+
+Identyfikatory lokacji: `forest`, `ruins` (także `boss`), `birches`, `grove`, `heart`, `trail`, `wolves`, `spiders`, `tower-1` do `tower-5` (`tower` oznacza pierwsze piętro). Obsługiwane jest również `--start=tower-3`. Błędna lub brakująca lokacja otwiera listę z komunikatem. `--no-dev-kit` wyłącza domyślny zestaw testowy. Pozostałe parametry, np. `--windowed`, `--opengl`, `--no-audio`, nadal działają.
+
+`--dev-qa --no-audio` sprawdza rzeczywiste menu i jego interakcje; raport i obrazy trafiają do `dist/qa-v29/`. `--dev-smoke --no-audio` kończy uruchomienie testowe po 180 klatkach, zapisuje faktyczny obraz i stan startu w `dist/dev-startup-v29.txt`. Testy mechaniki i parametrów są w `tests/developer_tests.hpp`.
+
+## Wersja 0.28 — pięć pięter wieży Eldrina
+
+Po dotychczasowym pokonaniu Strażnika i zebraniu części Serca Świtu wracasz na **pierwsze z pięciu pięter**. Wieża jest bezpieczna, a Eldrin nadal rozmawia w sali przybycia. Schody łączą sąsiednie piętra: podejdź na 2,3 pola i użyj **E, LPM lub PPM**. Złote schody prowadzą w górę, niebieskie w dół; HUD i minimapa pokazują aktualne piętro.
+
+1. **Sala przybycia:** kominek z ruchomymi płomieniami, dywan, stół, kryształowe kolumny, Eldrin i źródło odnowy. Źródło przywraca całe HP i manę.
+2. **Biblioteka:** regały z różnymi księgami, pulpit i kroniki z trzema rozdziałami o Pieczęci Popiołu, pierwszym strażniku i wieży. Kliknij regał lub otwartą kronikę.
+3. **Pracownia alchemiczna:** parujący kocioł, zioła i stoły. **3 borowiki → 1 mikstura zdrowia (+50 HP)**; **3 esencje lasu → 1 mikstura many (+35 many)**. Mikstury trafiają do plecaka. Brak składników lub miejsca nie zużywa materiałów; stosy respektują limit 99 sztuk.
+4. **Sala pieczęci:** trzy niezależne kamienie runiczne i magiczne odbicie Serca Świtu. Dotykaj kamieni, aby zapalić ich światło. Gdy świecą wszystkie trzy, promienie stabilizują odbicie. Zdobyty fragment pozostaje w plecaku; projekcja go nie kopiuje ani nie zużywa.
+5. **Obserwatorium:** luneta, ruchome astrolabium, gwiazdy w oknach i trzy mapy nieba do przeglądania. Jedna zapowiada poszukiwania kolejnego strażnika.
+
+Księgi, alchemia i mapy nieba otwierają okna z zatrzymaną grą; **ESC, ENTER lub X** zamyka okno. Schody zachowują sprzęt, materiały, statystyki, umiejętności i aktywowane runy. Porzucone przedmioty pozostają na konkretnym piętrze i można je odzyskać po powrocie. Wyposażenie blokuje ruch i unik. Statyczne podłogi i ornamenty są przygotowywane raz jako tekstury GPU; ogień, para, zioła, runy i astrolabium pozostają animowane.
+
+Cichy test `--tower-floors-qa --no-audio` zapisuje pięć pomieszczeń, księgę, receptury, pieczęci i mapę nieba do `dist/qa-v28/`. `--tower-benchmark --no-audio` mierzy 900 klatek z przemieszczaniem kamery przez wszystkie piętra; raport: `dist/tower-benchmark-v28.txt`. Powrót po bossie nadal sprawdza `--tower-qa --no-audio`.
+
+## Wersja 0.27 — umiejętności i drugi etap awansu
+
+Każdy zdobyty poziom daje **5 punktów statystyk oraz 1 punkt umiejętności**. Po zatwierdzeniu statystyk automatycznie otwiera się okno umiejętności. Gra pozostaje zatrzymana do rozdania i zatwierdzenia wszystkich punktów. Kliknij kartę lub przycisk +, a przyciskiem - popraw wybór. Pierwszy punkt odblokowuje umiejętność; kolejne zwiększają jej rangę. Awans o kilka poziomów jednocześnie zachowuje wszystkie należne punkty.
+
+- **Mocne cięcie — Z albo pierwszy nowy kafelek HUD.** Działa wyłącznie z mieczem i kosztuje **10 many**. Ranga 1 zadaje **150% obrażeń zwykłego ataku**; każda kolejna dodaje 10 punktów procentowych tego mnożnika. Trafia przeciwników w dotychczasowym zasięgu miecza i uwzględnia obronę fizyczną. Ma dłuższy, szerszy zamach z pomarańczową smugą i odnowienie **1,2 s**. Łuk, topór i sztylet blokują tę umiejętność.
+- **Przeszywająca strzała — X albo drugi nowy kafelek HUD.** Działa wyłącznie z łukiem. X przygotowuje następny strzał; następnie **przytrzymaj i puść LPM**, tak jak przy zwykłym strzale. Skuteczne wypuszczenie kosztuje **20 many i 1 strzałę**. Ranga 1 trafia do **3 kolejnych przeciwników**, każda kolejna zwiększa limit o 1. **Obrażenia, zasięg i prędkość są takie same jak dla zwykłej strzały przy tym samym naciągu.** Każdy cel otrzymuje obrażenia tylko raz. Przeszkody i granice mapy nadal zatrzymują pocisk. Ma błękitną cięciwę, smugę, celownik i pierścienie trafień oraz odnowienie **1,5 s**. Ponowne X wyłącza przygotowanie bez kosztu.
+
+**U** lub przycisk **UMIEJĘTNOŚCI** na prawym HUD otwiera podgląd rang. Nieznane umiejętności i umiejętności niewłaściwe dla broni są przygaszone. Najechanie na kafelek wyjaśnia sterowanie, koszt i blokadę. Menu, zmiana broni, unik i anulowanie strzału nie pobierają kosztu przygotowanej strzały. Koszt jest sprawdzany ponownie przed wypuszczeniem. Oba ataki są fizyczne; zabójstwa zachowują dotychczasowy łup, doświadczenie, awans i fabułę. Walka pozostaje zablokowana w wieży Eldrina.
+
 ## Wersja 0.26 — pierwsza część Serca Świtu i wieża Eldrina
 
 **Kamienny Strażnik** w północnych ruinach zostawia **jedną część Serca Świtu ze szansą 100%**. Pozostaje ona w piątym polu łupu obok monet, legendarnego miecza, pierścienia i esencji. Pokonanie bossa samo nie uruchamia sceny. Podejdź do ciała, otwórz je PPM i przeciągnij fragment do wolnego pola plecaka. Warto wcześniej zebrać pozostałe nagrody: podniesienie fragmentu rozpoczyna powrót. Przy zajętym polu, zbyt dużej odległości lub nierozdanych punktach awansu fragment zostaje w ciele.
@@ -226,6 +299,7 @@ Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/E
 | Spacja (pojedyncze naciśnięcie) | Przeturlanie w kierunku ruchu lub ustawienia; odnowienie 1,2 s |
 | LPM na mapie (pojedyncze kliknięcie) | Jeden zamach; wszyscy przeciwnicy w promieniu 2,1 pola |
 | Najazd kursorem na potwora lub obiekt | Informacje w sekcji POD KURSOREM po prawej |
+| V / kafelek LECZENIE | Poznane Leczenie: +30 HP za 20 many |
 | C | Wystrzelenie wybranego czaru w stronę kursora: Kula ognia za 10 many |
 | PPM na ciele potwora | Otwarcie jego łupu w prawym HUD |
 | K / kliknięcie kafelka czaru | Księga czarów i wybór czaru |
@@ -240,7 +314,7 @@ Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/E
 | M | Wyciszenie / włączenie całego dźwięku |
 | Esc | Pauza / powrót |
 | Enter po śmierci | Nowa wyprawa |
-| F12 | Zrzut wyświetlonego obrazu do `screenshots/emberfall-v16.png` obok EXE |
+| F12 | Zrzut wyświetlonego obrazu do `screenshots/emberfall-v31.png` obok EXE |
 
 Klikalne przyciski akcji na dole pozwalają wybierać czar, pić mikstury i robić unik. Ikona miecza jest wskaźnikiem ataku pod LPM. Utrata aktywności okna pauzuje rozgrywkę.
 
@@ -303,9 +377,14 @@ Start-Process .\dist\Emberfall.exe -ArgumentList '--forest-qa','--no-audio' -Win
 Start-Process .\dist\Emberfall.exe -ArgumentList '--graphics-qa','--no-audio' -WindowStyle Hidden -Wait
 Start-Process .\dist\Emberfall.exe -ArgumentList '--mushroom-qa','--no-audio' -WindowStyle Hidden -Wait
 Start-Process .\dist\Emberfall.exe -ArgumentList '--bow-qa','--no-audio' -WindowStyle Hidden -Wait
+Start-Process .\dist\Emberfall.exe -ArgumentList '--skills-qa','--no-audio' -WindowStyle Hidden -Wait
+Start-Process .\dist\Emberfall.exe -ArgumentList '--tower-floors-qa','--no-audio' -WindowStyle Hidden -Wait
+Start-Process .\dist\Emberfall.exe -ArgumentList '--tower-benchmark','--no-audio' -WindowStyle Hidden -Wait
+Start-Process .\dist\Emberfall.exe -ArgumentList '--dev-qa','--no-audio' -WindowStyle Hidden -Wait
+Start-Process .\dist\Emberfall.exe -ArgumentList '--start','tower-3','--dev-smoke','--no-audio' -WindowStyle Hidden -Wait
 ```
 
-Pierwsza komenda renderuje 180 klatek i zapisuje zrzut. Druga wykonuje 13 sprawdzeń interakcji, używając tych samych funkcji wskazywania, rozpoczynania i kończenia przeciągania co mysz; raport zapisuje do `dist/interaction-test-v25.txt`. Nie jest to automatyzacja urządzenia wejściowego systemu Windows. Benchmark uruchamia 900 klatek z ruchem kamery, walką, unikami, podświetlaniem i wiatrem, a `--windowed --large` wybiera okno 1920 × 1080. Raporty mają nazwy `benchmark-v25.txt`, `benchmark-v25-large.txt` i `benchmark-v25-fullscreen.txt`. `--visual-qa` eksportuje arkusze animacji oraz podglądy interfejsu w trzech skalach do `dist/qa-v02`. `--hover-qa` wykonuje 24 sprawdzenia wskazywania i eksportuje podglądy do `dist/qa-v04`. `--roll-qa` zapisuje arkusz przewrotów (8 kierunków × 12 klatek) w `assets/generated/v04/hero-roll.png` obok EXE oraz podglądy w `dist/qa-v04`. Testy w `tests/roll_tests.hpp` sprawdzają szybkość, kierunki uniku, kolizje, ochronę, odnowienie i niezależność od FPS.
+Pierwsza komenda renderuje 180 klatek i zapisuje zrzut. Druga wykonuje 13 sprawdzeń interakcji, używając tych samych funkcji wskazywania, rozpoczynania i kończenia przeciągania co mysz; raport zapisuje do `dist/interaction-test-v29.txt`. Nie jest to automatyzacja urządzenia wejściowego systemu Windows. Benchmark uruchamia 900 klatek z ruchem kamery, walką, unikami, podświetlaniem i wiatrem, a `--windowed --large` wybiera okno 1920 × 1080. Raporty mają nazwy `benchmark-v29.txt`, `benchmark-v29-large.txt` i `benchmark-v29-fullscreen.txt`. `--visual-qa` eksportuje arkusze animacji oraz podglądy interfejsu w trzech skalach do `dist/qa-v02`. `--hover-qa` wykonuje 24 sprawdzenia wskazywania i eksportuje podglądy do `dist/qa-v04`. `--roll-qa` zapisuje arkusz przewrotów (8 kierunków × 12 klatek) w `assets/generated/v04/hero-roll.png` obok EXE oraz podglądy w `dist/qa-v04`. Testy w `tests/roll_tests.hpp` sprawdzają szybkość, kierunki uniku, kolizje, ochronę, odnowienie i niezależność od FPS.
 
 Gra synchronizuje klatki z monitorem, celując w 60 FPS na ekranie 60 Hz; osiągana płynność zależy od komputera i obciążenia systemu. Logika korzysta z rzeczywistego czasu między klatkami. Podłoże i podstawowe grafiki dekoracji są renderowane do tekstur przy starcie, a korony drzew są deformowane podczas rysowania każdej klatki. Fale na wodzie są animowane osobno pod lądem.
 
@@ -374,3 +453,5 @@ Grafiki mapy, postaci, przeciwników, przedmiotów i dekoracji są zdefiniowane 
 `--mushroom-qa --no-audio` sprawdza rzeczywiste wskazywanie borowików, informacje w HUD, przeciąganie z mapy i panelu do plecaka, zasięg, łączenie stosów oraz zjadanie PPM. Raport i podglądy: `dist/qa-v22/`. Logika losowania, zachowanie pełnego plecaka i leczenie są dodatkowo sprawdzane w `tests/mushroom_tests.hpp`. Nowy atlas przedmiotów `assets/generated/items-v22.png` mieści 27 ikon na trzech wierszach; grafiki terenu, postaci i dekoracji zachowują eksporty `v21`.
 
 `--bow-qa --no-audio` sprawdza koło, przypisywanie przedmiotów, zmianę broni, naciąganie i puszczanie LPM, neutralne kliknięcia HUD, amunicję, trzy skale renderowania oraz rasteryzację i wskazywanie łuku z kołczanem w ośmiu kierunkach. Raport i podglądy: `dist/qa-v23/`. Testy modelu są w `tests/bow_tests.hpp`. Nowy atlas `assets/generated/items-v23.png` mieści 29 ikon. `audio/create_bow_sound.py` odtwarza efekt strzału z łuku bez jego odtwarzania; testy rozwoju nadal zawsze korzystają z `--no-audio`. Benchmark 900 klatek obejmuje od teraz także zmianę na łuk, naciąganie, strzały i powrót do miecza.
+
+`--skills-qa --no-audio` sprawdza przejście statystyki → umiejętności → gra, przydzielanie i cofanie punktów, blokady broni, aktywację z HUD, naciąg, koszty, przeszywanie trzech wrogów, anulowanie oraz animacje miecza i łuku w ośmiu kierunkach. Podglądy i raport: `dist/qa-v27/`. Logika jest sprawdzana w `tests/skill_tests.hpp`. Benchmark zawiera obie umiejętności i zapisuje liczbę rzeczywistych cięć oraz wypuszczonych przeszywających strzał.

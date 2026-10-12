@@ -1,0 +1,11 @@
+Release: 0.28
+Archive: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\Emberfall-Windows-x64.zip
+ZIP bytes: 7183723
+Extracted copy: C:\Users\Amadeusz\AppData\Local\Temp\Emberfall-tower-package-bc3076fb62724de3976cfed9762c39b6\Emberfall
+SHA-256 verified game files: 81
+Asset count: 78
+Floor instructions: match
+Extracted tower QA: 116 checks, 0 failures
+QA launch: --tower-floors-qa --no-audio
+Saved audio settings unchanged: yes
+Audio preference SHA-256: 60814AFA1295C661AD8571577F1B5A5682863A303DC6F3D5DB701D3A9EFDFBBC

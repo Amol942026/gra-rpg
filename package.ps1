@@ -76,6 +76,60 @@ Kazdy strzal zuzywa jedna strzale. Menu i unik anuluja naciag bez kosztu.
 Celownik pokazuje kierunek, naciag i zasieg; kolczan jest na plecach.
 Strzala trafia pierwszy cel; drzewa i inne przeszkody ja zatrzymuja.
 
+Wersja 0.27: po awansie rozdaj 5 punktow statystyk, potem 1 punkt umiejetnosci.
+Gra pozostaje zatrzymana do zatwierdzenia obu etapow. U otwiera podglad rang.
+Z - Mocne ciecie: tylko miecz, 10 many, 150% obrazen na randze 1.
+X - przygotuj Przeszywajaca strzale: tylko luk; potem naciagnij i pusc LPM.
+Strzal kosztuje 20 many i jedna strzale; przebija do 3 wrogow na randze 1.
+Zadaje takie same obrazenia jak zwykla strzala przy tym samym naciagu.
+Kolejne punkty wzmacniaja ciecie lub zwiekszaja liczbe przeszywanych celow.
+Umiejetnosci maja osobne animacje, przyciski HUD i blokady niewlasciwej broni.
+
+Wersja 0.28: wieza Eldrina ma 5 pieter polaczonych schodami.
+Podejdz do schodow lub wyposazenia i uzyj E / LPM / PPM.
+Pietro 1 - sala przybycia, Eldrin, kominek i zrodlo odnawiajace cale HP/mane.
+Pietro 2 - biblioteka z regalami i trzema rozdzialami kronik.
+Pietro 3 - alchemia: 3 borowiki -> mikstura zdrowia (+50 HP),
+3 esencje lasu -> mikstura many (+35 many). Brak miejsca nie zuzywa skladnikow.
+Pietro 4 - trzy runiczne kamienie, promienie i odbicie Serca Switu.
+Pietro 5 - obserwatorium z luneta, astrolabium i trzema mapami nieba.
+Przedmioty pozostawione na podlodze zostaja na swoim pietrze.
+Okna ksiegi, alchemii i lunety zamkniesz ESC / ENTER / przyciskiem X.
+
+Wersja 0.29 - TRYB DEWELOPERSKI
+F3 lub przycisk DEV otwiera wybor lokacji, takze w prologu i po smierci.
+Tryb_deweloperski.bat od razu otwiera ten wybor.
+Test_wiezy.bat zaczyna na pierwszym pietrze; Test_bossa.bat przy Strazniku.
+Wybierz obszar lasu lub jedno z 5 pieter wiezy.
+NOWA SESJA TESTOWA resetuje wyprawe i przeciwnikow; PRZENIES OBECNA POSTAC
+zachowuje plecak, poziom i rangi. Start odnawia cale HP i mane.
+Opcjonalny zestaw: wszystkie trzy umiejetnosci, 100 strzal, po 15 borowikow/esencji
+oraz po 10 mikstur zdrowia/many. Nie niszczy przedmiotow przy pelnym plecaku.
+ESC / F3 / X zamyka wybor; ENTER zaczyna nowa sesje w wybranej lokacji.
+Po smierci ENTER rozpoczyna ponownie ten sam test. Sesje oznacza napis SESJA TESTOWA.
+NOWA ZWYKLA GRA - PROLOG resetuje wyprawe i wraca do normalnej rozgrywki.
+Mozesz tez uzyc Uruchom.bat --start tower-3 (alchemia) lub --start ruins (boss).
+Identyfikatory: forest, ruins, birches, grove, heart, trail, wolves, spiders,
+tower-1, tower-2, tower-3, tower-4, tower-5. --no-dev-kit wylacza zestaw testowy.
+Zwykly start bez parametrow nadal rozpoczyna sie prologiem.
+
+Wersja 0.30: kazdy atak bohatera ma 5% szansy na krytyk:
+miecz, luk, Kula ognia, Mocne ciecie i Przeszywajaca strzala.
+Krytyk zadaje 150% wiecej (2,5 raza zwykle obrazenia po uwzglednieniu obrony).
+Jeden zamach/pocisk = jedno losowanie, wspolne dla wszystkich trafionych celow.
+Nad wrogiem widac duze zlote cyfry z napisem KRYTYK! i ciemnym tlem.
+V / zielony kafelek LECZENIE: 20 many -> +30 HP, do maksimum. Odnowienie 1 s.
+Poznaj Leczenie za 1 punkt w menu po awansie (najpierw rozdaj statystyki).
+Leczenie ma jedna range, dziala z kazda bronia i w wiezy.
+Pelne HP nie zuzywa many. Zielone pierscienie i krzyzyki pokazuja efekt.
+
+Wersja 0.31: pelnowymiarowe kamienne schody w wiezy.
+W gore: 14 stopni, spocznik, murowane boki, slupki i kamienne porecze.
+W dol: otwor w posadzce, stopnie znikajace w glebi i balustrada z wolnym wejsciem.
+Fugi, podstopnice, kamienne krawedzie i cienie sa dopasowane do skali bohatera.
+Najazd myszka wskazuje rzeczywista sylwetke. Kolizje chronia przed wejsciem w szyb.
+Podejdz do wejscia i uzyj E / LPM / PPM, aby przejsc na sasiednie pietro.
+
 STEROWANIE
 WSAD - chodzenie; kombinacje klawiszy pozwalaja isc ukosnie.
 Przytrzymany Shift + WSAD - bieg o 50% szybszy od chodu.
@@ -110,6 +164,9 @@ Licencje: LICENSES.md i pliki w assets.
     $entry = $archive.CreateEntry('Emberfall/JAK_URUCHOMIC.txt')
     $writer = New-Object IO.StreamWriter($entry.Open(), (New-Object Text.UTF8Encoding($true)))
     try { $writer.Write($instructions) } finally { $writer.Dispose() }
+    foreach ($launcher in @('Tryb_deweloperski.bat','Test_wiezy.bat','Test_bossa.bat')) {
+        [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $PSScriptRoot ('dist/' + $launcher)), ('Emberfall/' + $launcher), [IO.Compression.CompressionLevel]::Optimal) | Out-Null
+    }
     $entry = $archive.CreateEntry('Emberfall/Uruchom.bat')
     $writer = New-Object IO.StreamWriter($entry.Open(), [Text.Encoding]::ASCII)
     try { $writer.Write("@echo off`r`ncd /d `"%~dp0`"`r`nstart `"Emberfall`" `"Emberfall.exe`" %*`r`n") } finally { $writer.Dispose() }

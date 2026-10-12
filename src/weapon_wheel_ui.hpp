@@ -5,7 +5,7 @@ int weaponWheelHit(Vector2 point){
  float angle=std::atan2(dy,dx)+PI/2+PI/8;if(angle<0)angle+=2*PI;return int(angle/(PI/4))%WeaponWheelSize;
 }
 void closeWeaponWheel(){weaponWheelOpen=false;dragging={};game.cancelBow();}
-void openWeaponWheel(){if(welcome||help||paused||audioOpen||statsOpen||spellBookOpen||game.allocationRequired||game.dead())return;game.cancelBow();weaponWheelOpen=true;game.say("Przeciągnij broń z plecaka do koła.");audioSystem.play(Cue::Ui);}
+void openWeaponWheel(){if(welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||game.allocationRequired||game.dead())return;game.cancelBow();weaponWheelOpen=true;game.say("Przeciągnij broń z plecaka do koła.");audioSystem.play(Cue::Ui);}
 void clickWeaponWheel(){
  int sector=weaponWheelHit(mouse);
  if(sector>=0){if(game.weaponWheel[sector].kind==Kind::None){game.say("Przeciągnij broń z plecaka na puste pole.");return;}
@@ -52,7 +52,7 @@ void drawBowHud(){
  if(game.bowDrawing){bar(335,124,170,8,game.bowCharge(),1,Gold);txt(TextFormat("%.0f%%  ·  ZASIĘG %.1f",game.bowCharge()*100,Game::bowRange(game.bowCharge())),520,119,14,Gold);}
  if(!worldPointerAllowed(mouse)||dragging.place!=Place::None||game.dead())return;
  float charge=game.bowDrawing?game.bowCharge():0;V direction=game.bowDrawing?game.bowAim:normalized(bowAimFromPointer());
- Color color=game.ammoCount()>0?Gold:rgb(236,132,105);clip(0,116,WorldW,678);
+ Color color=game.ammoCount()>0?(game.piercingArrowArmed?rgb(126,215,232):Gold):rgb(236,132,105);clip(0,116,WorldW,678);
  if(game.bowDrawing){float range=Game::bowRange(charge);int dots=std::max(2,int(range*3));
   for(int i=1;i<=dots;i++){Vector2 p=screen(game.player+direction*(range*i/dots));DrawCircleV({p.x,p.y-35},i==dots?4:1.6f,Fade(color,i==dots?.9f:.5f));}
   Vector2 end=screen(game.player+direction*range);DrawCircleLines(int(end.x),int(end.y-35),8,color);

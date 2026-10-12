@@ -4,7 +4,7 @@ bool runCorpseQA(){
     fs::create_directories("qa-v13");std::ofstream report("qa-v13/corpse-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* text){checks++;if(!ok)failures++;report<<(ok?"PASS: ":"FAIL: ")<<text<<'\n';report.flush();};
     auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};
-        welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
+        welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
     auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
     auto pointAtBody=[](int id){
         const Enemy* e=game.findCorpse(id);if(!e)return false;Vector2 p=screen(e->pos);
@@ -19,7 +19,7 @@ bool runCorpseQA(){
         V p=game.player+offsets[type];game.enemies.push_back({101+type,type,p,p,1,100});
         game.enemies.back().animation.direction=static_cast<Direction>(type*2);
         game.hit(game.enemies.back(),30);
-        if(game.allocationRequired){Attributes points{};points[0]=game.attributePoints;game.distribute(points);}
+        if(game.allocationRequired){Attributes points{};points[0]=game.attributePoints;game.distribute(points);SkillRanks learned{};learned[0]=game.skillPoints;game.trainSkills(learned);}
     }
     check(game.ground.empty()&&game.kills==4,"four real kills leave only bodies with no scattered ground loot");
     for(int type=0;type<4;type++){

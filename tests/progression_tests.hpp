@@ -20,7 +20,9 @@ void progressionTests(){
     Attributes partial{1,1,1,0,0,0},negative{-1,0,0,0,0,6},extra{6,0,0,0,0,0};
     check(!start.distribute(partial)&&!start.distribute(negative)&&!start.distribute(extra)&&start.attributePoints==5,
         "incomplete, negative and oversized allocations do not spend points");
-    check(start.distribute({1,1,0,0,2,1})&&!start.allocationRequired&&start.attributePoints==0,"valid five-point allocation resumes the game atomically");
+    check(start.distribute({1,1,0,0,2,1})&&start.skillAllocationPending()&&start.attributePoints==0,"valid attributes advance to mandatory skill allocation");
+    start.update(.05f,{1,0},true);check(start.time==time,"world stays frozen between attribute and skill confirmations");
+    check(start.trainSkills({1,0})&&!start.allocationRequired,"skill confirmation resumes the game atomically");
     check(start.damage()==16&&start.magicDamage()==31&&start.maxHp()==120&&start.maxMana()==105,"allocated attributes change physical damage, magic damage, HP and mana separately");
     check(!start.distribute({5,0,0,0,0,0}),"a confirmed level cannot spend the same points again");
     start.update(.05f,{},false);check(start.time>time&&(start.fireballs.empty()||distance(start.fireballs[0].pos,ball)>0),"projectiles and clocks resume after confirmation");

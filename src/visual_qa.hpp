@@ -84,11 +84,11 @@ void renderWorldLayer(){
 void renderScene() {
     if(intro.chamber()){
         BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
-        drawIntroChamber();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
+        drawIntroChamber();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
     }
     if(towerStory.chamber()){
         BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
-        drawTowerChamber();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
+        drawTowerChamber();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
     }
     hovered=pickWorld(mouse);
     performance.end(RenderStage::Picking);
@@ -101,16 +101,16 @@ void renderScene() {
     DrawTexturePro(worldCanvas.texture,{0,0,float(worldCanvas.texture.width),-float(worldCanvas.texture.height)},
                    {0,0,worldCanvas.texture.width/worldScale,worldCanvas.texture.height/worldScale},{0,0},0,WHITE);
     if(intro.active()){
-        drawUI();drawIntroArrival();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
+        drawUI();drawIntroArrival();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
     }
-    drawUI();drawHoveredName();tooltip();drawBowHud();drawWeaponWheel();
-    if(towerStory.active()){drawTowerStoryOverlay();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;}
+    drawUI();drawHoveredName();tooltip();drawSkillHud();drawBowHud();drawWeaponWheel();
+    if(towerStory.active()){drawTowerStoryOverlay();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;}
     if(dragging.place!=Place::None){Item* p=game.get(dragging);if(p)icon(*p,mouse.x,mouse.y,.95f,.9f);}
     overlay();
-    drawProgression();
+    drawProgression();drawTowerPanel();
     drawAudioPanel();
     drawAudioButton(); // Always visible, including pause/help and the audio panel.
-    drawDisplayButton();drawWeaponWheelButton();
+    drawDisplayButton();drawWeaponWheelButton();drawDeveloperUi();
     EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);
 }
 void exportVisualQA() {

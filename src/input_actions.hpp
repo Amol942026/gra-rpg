@@ -1,7 +1,7 @@
 #pragma once
 
 // The sword tile indicates the world-click attack; UI clicks never swing it.
-bool gameplayInputAllowed(){return !intro.active()&&!towerStory.active()&&!game.storyBlocked()&&!weaponWheelOpen&&!welcome&&!help&&!paused&&!audioOpen&&!statsOpen&&!spellBookOpen&&!game.allocationRequired&&!game.dead();}
+bool gameplayInputAllowed(){return !developerMenuOpen&&!towerPanelOpen&&!intro.active()&&!towerStory.active()&&!game.storyBlocked()&&!weaponWheelOpen&&!welcome&&!help&&!paused&&!audioOpen&&!statsOpen&&!skillsOpen&&!spellBookOpen&&!game.allocationRequired&&!game.dead();}
 void activateMouseAction(int index,V movement) {
     if(index==1)openSpellBook();
     if(index==2)game.potion(Kind::Health);
@@ -25,7 +25,8 @@ bool clickWorldOrInventory() {
         return false;
     }
     if(!worldPointerAllowed(mouse))return false;
-    if(pickWorld(mouse).kind==HoverKind::Mage)return talkToMage();
+    WorldHover hit=pickWorld(mouse);if(hit.kind==HoverKind::Mage)return talkToMage();
+    if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
     return game.equipment[0].kind==Kind::Bow?game.beginBow(bowAimFromPointer()):game.attack();
 }
 bool rightClickWorldOrInventory(){
@@ -34,6 +35,7 @@ bool rightClickWorldOrInventory(){
     if(worldPointerAllowed(mouse)){
         WorldHover hit=pickWorld(mouse);
         if(hit.kind==HoverKind::Mage)return talkToMage();
+        if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
         if(hit.kind==HoverKind::Corpse)return game.openCorpse(hit.index);
         if(hit.kind==HoverKind::Forage)return game.use({Place::Forage,hit.index});
         if(hit.kind==HoverKind::Ground)return game.use({Place::Ground,hit.index});
@@ -42,8 +44,15 @@ bool rightClickWorldOrInventory(){
     return game.use(hoverSlot());
 }
 bool castGameplaySpell(){return gameplayInputAllowed()&&dragging.place==Place::None&&castSelectedSpell();}
+bool activateGameplaySkill(Skill skill){
+ if(!gameplayInputAllowed()||dragging.place!=Place::None)return false;
+ bool used=skill==Skill::StrongCut?game.strongCut():skill==Skill::PiercingArrow?game.preparePiercingArrow():skill==Skill::Healing&&game.heal();
+ if(!used){game.say(game.skillRank(skill)<=0?"Najpierw naucz się tej umiejętności (U).":!game.skillWeaponMatches(skill)?"Ta umiejętność wymaga odpowiedniej broni.":skill==Skill::Healing&&game.hp>=game.maxHp()?"Zdrowie jest już pełne.":"Za mało many, brak strzał lub odnowienie umiejętności.");game.sound(Cue::Reject,game.player);}
+ return used;
+}
 void leftClickGameplay(V movement){
     if(!gameplayInputAllowed()||dragging.place!=Place::None)return;
+    for(int i=0;i<SkillCount;i++)if(inside(skillActionRect(i))){activateGameplaySkill(static_cast<Skill>(i));return;}
     if(game.openedCorpse>=0&&inside(corpseCloseRect())){game.closeCorpse();return;}
     for(int i=0;i<5;i++)if(inside(actionRect(i))){activateMouseAction(i,movement);return;}
     if(game.openedCorpse<0&&mouse.y>=668&&mouse.y<696&&mouse.x>=1290&&mouse.x<1404){nearbyPage+=mouse.x<1340?-1:1;return;}

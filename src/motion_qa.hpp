@@ -9,7 +9,7 @@ bool runMotionQA(bool expectedFullscreen){
     check(intervalForRefresh(60)==1&&intervalForRefresh(120)==2&&intervalForRefresh(144)==2&&intervalForRefresh(240)==4&&intervalForRefresh(360)==4,
           "refresh cadence uses whole monitor cycles");
     report<<"Monitor: "<<refreshHz<<" Hz; interval: "<<swapInterval<<"; clock: "<<pacingName()<<'\n';
-    game=Game{};game.enemies.clear();welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;mouse={0,0};dragging={};
+    game=Game{};game.enemies.clear();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;mouse={0,0};dragging={};
     refreshDisplayLayout();
     std::vector<double> times;double previous=0;V runStart=game.player,rollStart{},rollEnd{},runEnd{};
     for(int frame=0;frame<264;frame++){

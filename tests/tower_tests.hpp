@@ -11,7 +11,7 @@ void towerTests(){
     }
     for(int type=0;type<EnemyTypeCount;type++)if(type!=3){std::mt19937 rng(8);bool clean=true;for(int n=0;n<100;n++)for(const auto& value:rollEnemyLoot(type,rng))clean&=value.kind!=Kind::DawnShard;check(clean,"ordinary monsters never drop the story artifact");}
     Game g;Enemy& boss=g.enemies.back();g.player=boss.pos;g.hit(boss,1000);
-    Attributes points{};points[0]=g.attributePoints;g.distribute(points);
+    Attributes points{};points[0]=g.attributePoints;g.distribute(points);SkillRanks learned{};learned[0]=g.skillPoints;g.trainSkills(learned);
     check(!g.transfer({Place::Corpse,4,boss.id},{Place::Bag,8})&&!g.towerReturnPending,"unopened guardian loot cannot trigger a return");
     g.openCorpse(boss.id);
     check(!g.transfer({Place::Corpse,4,boss.id},{Place::Equip,0})&&!g.towerReturnPending,"attempting to equip the fragment does not collect it");

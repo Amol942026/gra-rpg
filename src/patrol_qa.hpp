@@ -3,7 +3,7 @@
 bool runPatrolQA(){
     fs::create_directories("qa-v13");std::ofstream report("qa-v13/patrol-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* text){checks++;if(!ok)failures++;report<<(ok?"PASS: ":"FAIL: ")<<text<<'\n';report.flush();};
-    auto reset=[](){game=Game{};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
+    auto reset=[](){game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
     reset();prepareCanvas(1.f);
     check(game.ground.empty()&&nearby().empty(),"new game has no world items or nearby loot tray entries");
     check(game.equipment[0].kind==Kind::Sword&&game.equipment[3].kind==Kind::Armor&&game.bag[0].count==5&&game.bag[1].count==3,"starting equipment and backpack supplies are preserved");

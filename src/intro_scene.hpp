@@ -5,7 +5,8 @@ Rectangle introSkipButton(){return {1190,77,170,34};}
 Rectangle introDialogueBox(){return {112,626,1216,222};}
 Rectangle introNextButton(){Rectangle box=introDialogueBox();return {box.x+box.width-34-162,794,162,40};}
 void startIntro(){
-    game.cancelBow();intro.begin();towerStory={};welcome=help=paused=audioOpen=statsOpen=spellBookOpen=weaponWheelOpen=false;
+    developerActive=developerMenuOpen=false;developerError.clear();
+    towerPanelOpen=false;towerPanelObject=-1;towerPage=0;game.cancelBow();intro.begin();towerStory={};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;
     dragging={};audioDragging=-1;nearbyPage=0;hovered={};
 }
 void applyIntroArrival(){

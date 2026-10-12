@@ -1,8 +1,8 @@
 #pragma once
 
 void clearStoryMenus(){
-    game.cancelBow();game.closeCorpse();welcome=help=paused=audioOpen=statsOpen=spellBookOpen=weaponWheelOpen=false;
-    dragging={};audioDragging=-1;nearbyPage=0;hovered={};
+    game.cancelBow();game.closeCorpse();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;
+    towerPanelOpen=false;towerPanelObject=-1;towerPage=0;dragging={};audioDragging=-1;nearbyPage=0;hovered={};
 }
 void startTowerReturn(){if(game.takeTowerReturn()){clearStoryMenus();towerStory.beginReturn();}}
 bool talkToMage(){

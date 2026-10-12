@@ -11,7 +11,7 @@ bool runTowerQA(){
     check(!audioSystem.available,"tower diagnostic opens no audio device");
     game=Game{};intro={};towerStory={};clearStoryMenus();refreshDisplayLayout();
     Enemy& boss=game.enemies.back();game.player=boss.pos;game.hit(boss,1000);
-    Attributes points{};points[int(Attribute::Strength)]=game.attributePoints;game.distribute(points);
+    Attributes points{};points[int(Attribute::Strength)]=game.attributePoints;game.distribute(points);SkillRanks learned{};learned[0]=game.skillPoints;game.trainSkills(learned);
     game.player=boss.pos+V{-1.6f,.8f};
     check(game.bossDead&&game.dawnFragments()==0&&!towerStory.active()&&!game.inTower(),"guardian defeat leaves hero in the forest until the artifact is collected");
     Vector2 bodyPoint=screen(boss.pos);bool found=false;

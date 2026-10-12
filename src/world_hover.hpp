@@ -35,8 +35,10 @@ void unloadHoverArt(){for(auto texture:propOutlines)if(texture.id)UnloadTexture(
 std::vector<DrawObject> worldDrawOrder() {
     std::vector<DrawObject> objects;
     if(game.inTower()){
-        for(int i=0;i<int(TowerFurnishings.size());i++){V p=TowerFurnishings[i].pos;objects.push_back({p.x+p.y,7,i});}
-        objects.push_back({MagePosition.x+MagePosition.y,6,0});objects.push_back({game.player.x+game.player.y,2,0});
+        for(int i=0;i<int(towerFurnishings(game.towerFloor).size());i++){V p=towerFurnishings(game.towerFloor)[i].pos;objects.push_back({p.x+p.y,7,i});}
+        if(game.towerFloor==0)objects.push_back({MagePosition.x+MagePosition.y,6,0});
+        if(game.stairPresent(1))objects.push_back({TowerStairUp.x+TowerStairUp.y,8,1});
+        if(game.stairPresent(-1))objects.push_back({TowerStairDown.x+TowerStairDown.y,8,-1});objects.push_back({game.player.x+game.player.y,2,0});
         std::stable_sort(objects.begin(),objects.end(),[](const auto& a,const auto& b){return a.depth<b.depth;});return objects;
     }
     objects.reserve(game.props.size()+game.enemies.size()+1);
@@ -51,9 +53,9 @@ std::vector<DrawObject> worldDrawOrder() {
 }
 
 bool worldPointerAllowed(Vector2 p) {
-    if(intro.active()||towerStory.active()||game.storyBlocked()||weaponWheelOpen||welcome||help||paused||audioOpen||statsOpen||spellBookOpen||game.allocationRequired||game.dead())return false;
+    if(developerMenuOpen||towerPanelOpen||intro.active()||towerStory.active()||game.storyBlocked()||weaponWheelOpen||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||game.allocationRequired||game.dead())return false;
     if(!CheckCollisionPointRec(p,{0,116,WorldW,678}))return false;
-    if(CheckCollisionPointRec(p,weaponWheelButton()))return false;
+    if(CheckCollisionPointRec(p,weaponWheelButton())||CheckCollisionPointRec(p,developerButton()))return false;
     if(game.equipment[0].kind==Kind::Bow&&CheckCollisionPointRec(p,{195,112,515,36}))return false;
     if(CheckCollisionPointRec(p,{842,133,180,155}))return false; // minimap
     if(CheckCollisionPointRec(p,{22,675,310,119}))return false; // journal
@@ -90,8 +92,14 @@ WorldHover pickWorld(Vector2 point) {
             float dx=(point.x-p.x+4)/30,dy=(point.y-p.y+62)/62;
             touched=dx*dx+dy*dy<=1||CheckCollisionPointRec(point,{p.x-47,p.y-112,12,112});
         }else if(it->type==7){
-            position=TowerFurnishings[it->index].pos;Vector2 p=screen(position);int type=TowerFurnishings[it->index].type;
-            touched=CheckCollisionPointRec(point,{p.x-(type==1?49.f:25.f),p.y-(type==0?190.f:type==1?55.f:119.f),type==1?98.f:50.f,type==0?190.f:type==1?78.f:119.f});
+            position=towerFurnishings(game.towerFloor)[it->index].pos;Vector2 p=screen(position);int type=towerFurnishings(game.towerFloor)[it->index].type;
+            kind=HoverKind::TowerObject;
+            float half=type==0?25:type==1?49:type==5?58:type==3?60:type==10?55:40;
+            float height=type==0?190:type==5?158:type==3?150:type==1?70:type==10?140:120;
+            touched=CheckCollisionPointRec(point,{p.x-half,p.y-height,half*2,height+16});
+        }else if(it->type==8){
+            position=it->index==1?TowerStairUp:TowerStairDown;Vector2 p=screen(position);kind=HoverKind::TowerStair;
+            touched=tower_stairs::contains(it->index,p,point);
         }else if(it->type==0){
             const Prop& prop=game.props[it->index];position=prop.pos;
             touched=propContains(prop,point);kind=HoverKind::Prop;
@@ -110,7 +118,7 @@ WorldHover pickWorld(Vector2 point) {
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){
                 float progress=game.swingProgress();float attack=progress>=0?std::sin(progress*PI):0;
-                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind,false,BLANK,&point,game.rollProgress(),progress,game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount());
+                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind,false,BLANK,&point,game.rollProgress(),progress,game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),game.empoweredPose());
             }
         }
         if(touched){
@@ -119,7 +127,7 @@ WorldHover pickWorld(Vector2 point) {
         }
     }
     for(auto it=game.ground.rbegin();it!=game.ground.rend();++it){
-        if(it->location!=game.location)continue;
+        if(!game.groundVisible(*it))continue;
         Vector2 p=screen(it->pos);
         if(!it->value.empty()&&CheckCollisionPointRec(point,{p.x-16,p.y-30,32,34})){
             hit.kind=HoverKind::Ground;hit.index=it->id;
@@ -146,9 +154,11 @@ void drawHoveredTile() {
 }
 
 void drawHoveredName() {
-    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage&&hovered.kind!=HoverKind::Mage)return;
+    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage&&hovered.kind!=HoverKind::Mage&&hovered.kind!=HoverKind::TowerObject&&hovered.kind!=HoverKind::TowerStair)return;
     std::string name;Color color=Gold;
-    if(hovered.kind==HoverKind::Mage){name=game.mageReachable()?"Eldrin · E / PPM: porozmawiaj":"Eldrin · podejdź bliżej";}
+    if(hovered.kind==HoverKind::TowerStair){name=hovered.index==1?"Schody w górę · E / PPM":"Schody w dół · E / PPM";}
+    else if(hovered.kind==HoverKind::TowerObject){const auto& object=towerFurnishings(game.towerFloor)[hovered.index];name=towerObjectName(object.type);if(towerInteractive(object.type))name+=" · E / PPM";}
+    else if(hovered.kind==HoverKind::Mage){name=game.mageReachable()?"Eldrin · E / PPM: porozmawiaj":"Eldrin · podejdź bliżej";}
     else if(hovered.kind==HoverKind::Enemy){
         Enemy* e=game.findEnemy(hovered.index);if(!e)return;
         name=std::string(enemyInfo(e->type).name)+"  "+std::to_string(int(std::ceil(e->hp)))+" / "+std::to_string(int(e->maxHp))+" HP";

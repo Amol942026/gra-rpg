@@ -16,7 +16,7 @@ void corpseTests(){
         check(!g.transfer({Place::Corpse,0,71},{Place::Bag,8}),"corpse loot requires opening that exact body first");
         if(g.allocationRequired){
             check(!g.openCorpse(71),"a boss level-up requires allocating points before opening its body");
-            Attributes points{};points[0]=g.attributePoints;check(g.distribute(points),"level allocation resumes corpse interaction");
+            Attributes points{};points[0]=g.attributePoints;check(g.distribute(points),"attribute allocation continues to skills");SkillRanks learned{};learned[0]=g.skillPoints;check(g.trainSkills(learned),"skill allocation resumes corpse interaction");
         }
         check(g.openCorpse(71)&&g.openedCorpse==71,"nearby corpse can be opened by stable enemy ID");
         check(g.transfer({Place::Corpse,0,71},{Place::Bag,8})&&body.loot[0].empty()&&g.bag[8].kind==Kind::Gold&&total(g)==before,"taking corpse loot into backpack conserves items exactly");

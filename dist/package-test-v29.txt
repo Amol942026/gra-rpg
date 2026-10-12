@@ -1,0 +1,11 @@
+Release: 0.29
+ZIP bytes: 7200466
+SHA-256 verified game files: 84
+Assets: 78
+EXE, licenses, loot and three developer launchers: match
+Instructions: match
+Extracted developer QA: 52 checks, 0 failures
+Three actual BAT launcher startups: PASS, 180 frames each
+Every game launch: --no-audio
+Saved audio preferences unchanged: 60814AFA1295C661AD8571577F1B5A5682863A303DC6F3D5DB701D3A9EFDFBBC
+Extracted game: C:\Users\Amadeusz\AppData\Local\Temp\Emberfall-dev-package-e356d089a2bb468db158002bb79f4545\Emberfall

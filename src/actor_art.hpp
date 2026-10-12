@@ -10,12 +10,13 @@ struct P3 {
     P3 operator*(float n) const { return {r*n, f*n, z*n}; }
 };
 struct WeaponPose {P3 hand,elbow,blade;};
-inline WeaponPose forwardStrike(float progress,float lift=0) {
-    float p=std::clamp(progress,0.f,1.f),reach=std::sin(p*PI);
-    float angle=(68-136*p)*DEG2RAD;
+inline WeaponPose forwardStrike(float progress,float lift=0,bool heavy=false) {
+    float p=std::clamp(progress,0.f,1.f);if(heavy)p=p<.28f?p*.5f/.28f:.5f+(p-.28f)*.5f/.72f;float reach=std::sin(p*PI);
+    float angle=(heavy?100-200*p:68-136*p)*DEG2RAD;
     P3 hand{20+(12-24*p-20)*reach,3+31*reach,32+lift+14*reach};
     P3 elbow{17-3*reach,1+17*reach,40+lift+8*reach};
     P3 blade=P3{0,8,31}*(1-reach)+P3{std::sin(angle)*43,std::cos(angle)*43,5}*reach;
+    if(heavy){hand.f+=7*reach;hand.z+=7*reach;blade=blade*(1+.14f*reach);}
     return {hand,elbow,blade};
 }
 struct Face {
@@ -188,7 +189,7 @@ public:
 // species: player, slime, wolf, skeleton, guardian, boar, spider, bandit, treant.
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
-                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3) {
+                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false) {
     bool rolling=species==0&&roll>=0;
     bool archer=species==0&&weapon==Kind::Bow;float drawCharge=std::max(0.f,bowDraw);
     bool striking=species==0&&!archer&&!rolling&&(swingProgress>=0||attack>0);
@@ -362,7 +363,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
                 else if(bowDraw>=0){hand={4-12*drawCharge,16-23*drawCharge,47+lift};elbow={18,4-9*drawCharge,47+lift};}
             }
             WeaponPose strike{};
-            if(striking&&side>0){strike=forwardStrike(strikeProgress,lift);hand=strike.hand;elbow=strike.elbow;}
+            if(striking&&side>0){strike=forwardStrike(strikeProgress,lift,empowered);hand=strike.hand;elbow=strike.elbow;}
             hand=hand+P3{-side*5*tuck,9*tuck,6*tuck};
             elbow=elbow+P3{0,7*tuck,-4*tuck};
             rig.limb({shoulder,0,51+lift},elbow,thick,thick,skeleton?bone:body);
@@ -375,10 +376,10 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
                 P3 bottom=hand+P3{0,0,-27},top=hand+P3{0,0,27},previous=bottom;
                 for(int part=1;part<=12;part++){float t=part/12.f;P3 next=hand+P3{0,6*std::sin(t*PI)*(1-.15f*drawCharge),-27+54*t};rig.beam(previous,next,2.8f,2.8f,rgb(153,100,49));previous=next;}
                 P3 string=bowDraw>=0&&!rolling?P3{4-12*drawCharge,16-23*drawCharge,47+lift}:hand;
-                rig.beam(bottom,string,.75f,.75f,Text);rig.beam(string,top,.75f,.75f,Text);
+                rig.beam(bottom,string,empowered?1.3f:.75f,.75f,empowered?rgb(135,226,240):Text);rig.beam(string,top,empowered?1.3f:.75f,.75f,empowered?rgb(135,226,240):Text);
                 rig.box(hand+P3{0,3,0},{5,4,9},leather);
                 if(bowDraw>=0&&!rolling){P3 tip=hand+P3{0,20,0};rig.beam(string-P3{0,3,0},tip,1.4f,1.4f,rgb(190,143,81));
-                    rig.form(tip,{4,7,3},metal);rig.form(string-P3{0,1,0},{5,5,2},Text);}
+                    rig.form(tip,{4,7,3},empowered?rgb(135,226,240):metal);rig.form(string-P3{0,1,0},{5,5,2},Text);}
             }
             if(side>0&&!golem&&!archer){
                 P3 base=hand+P3{0,1,-3},tip=hand+P3{0,8+attack*8,31-std::abs(attack)*10};
@@ -386,14 +387,14 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
                 if(dagger)tip=hand+(tip-hand)*.65f;
                 if(striking){
                     base=hand-strike.blade*.12f;tip=hand+strike.blade*(dagger?.65f:1.f);
-                    rig.beam(base,tip,weapon==Kind::Axe?3:4,2,weapon==Kind::Axe?leather:rgb(201,216,209));
+                    rig.beam(base,tip,weapon==Kind::Axe?3:4,2,weapon==Kind::Axe?leather:empowered?rgb(255,187,109):rgb(201,216,209));
                     rig.beam(base+P3{0,0,1.2f},tip+P3{0,0,1.2f},.9f,.6f,Text);
                     P3 guard=hand+strike.blade*.12f;
                     float flat=std::hypot(strike.blade.r,strike.blade.f);
                     P3 cross{strike.blade.f/flat*7,-strike.blade.r/flat*7,0};
                     rig.beam(guard-cross,guard+cross,3,3,Gold);
                 }else{
-                    rig.limb(base,tip,weapon==Kind::Axe?3:4,2,weapon==Kind::Axe?leather:rgb(201,216,209));
+                    rig.limb(base,tip,weapon==Kind::Axe?3:4,2,weapon==Kind::Axe?leather:empowered?rgb(255,187,109):rgb(201,216,209));
                     rig.box(hand+P3{0,2,4},{14,3,3},Gold);
                 }
                 if(weapon==Kind::Axe)rig.box(tip+P3{5,0,-7},{15,4,14},metal);
@@ -426,15 +427,15 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     if(striking&&strikeProgress>.10f&&strikeProgress<.9f){
         // The ribbon follows recent blade positions in the actor's isometric
         // plane. It stays in front of the body instead of circling its waist.
-        float start=std::max(.06f,strikeProgress-.19f);
+        float start=std::max(.06f,strikeProgress-(empowered?.31f:.19f));
         for(int i=0;i<10;i++){
             float a=start+(strikeProgress-start)*i/10,b=start+(strikeProgress-start)*(i+1)/10;
-            auto first=forwardStrike(a,lift),second=forwardStrike(b,lift);
+            auto first=forwardStrike(a,lift,empowered),second=forwardStrike(b,lift,empowered);
             Vector2 innerA=rig.project(first.hand+first.blade*.52f),outerA=rig.project(first.hand+first.blade*1.04f);
             Vector2 innerB=rig.project(second.hand+second.blade*.52f),outerB=rig.project(second.hand+second.blade*1.04f);
             float opacity=std::sin(strikeProgress*PI)*(.1f+i*.043f);
-            poly({innerA,outerA,outerB,innerB},Fade(Gold,opacity));
-            DrawLineEx(outerA,outerB,1.5f*size,Fade(Text,opacity));
+            poly({innerA,outerA,outerB,innerB},Fade(empowered?rgb(255,155,65):Gold,opacity*(empowered?1.35f:1.f)));
+            DrawLineEx(outerA,outerB,(empowered?3.f:1.5f)*size,Fade(Text,opacity));
         }
     }
     rig.draw(outline);

@@ -8,7 +8,15 @@ struct Inspection {
 };
 Inspection inspectWorld(WorldHover hit) {
     Inspection info;
-    if(hit.kind==HoverKind::Mage&&game.inTower()){
+    if(hit.kind==HoverKind::TowerStair&&game.inTower()){
+        info.source=hit.kind;info.name=hit.index==1?"Schody w górę":"Schody w dół";info.kind="Przejście między piętrami";
+        info.detail=std::string("Cel: ")+TowerFloors[std::clamp(game.towerFloor+hit.index,0,TowerFloorCount-1)].name;
+        info.secondary="Podejdź i użyj E / LPM / PPM.";
+    }else if(hit.kind==HoverKind::TowerObject&&game.inTower()&&hit.index>=0&&hit.index<int(towerFurnishings(game.towerFloor).size())){
+        int type=towerFurnishings(game.towerFloor)[hit.index].type;info.source=hit.kind;info.name=towerObjectName(type);info.kind=TowerFloors[game.towerFloor].name;
+        info.detail=type==4?"Odnawia całe HP i manę.":type==7?"Warzenie mikstur z materiałów.":type==9?"Dotknij, aby zmienić blask runy.":"Wyposażenie wieży Eldrina.";
+        info.secondary=towerInteractive(type)?"Podejdź i użyj E / LPM / PPM.":"Blokuje ruch; element wystroju.";
+    }else if(hit.kind==HoverKind::Mage&&game.inTower()&&game.towerFloor==0){
         info.source=hit.kind;info.name="Eldrin";info.kind="Mag / przyjazny NPC";
         info.detail="Strażnik ostatniej pieczęci.";
         info.secondary=game.mageReachable()?"E / PPM: porozmawiaj.":"Podejdź bliżej, aby porozmawiać.";

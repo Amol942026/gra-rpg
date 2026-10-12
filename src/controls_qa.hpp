@@ -4,7 +4,7 @@ bool runControlsQA(){
     fs::create_directories("qa-v13");std::ofstream report("qa-v13/controls-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* label){checks++;if(!ok)failures++;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
     auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};
-        welcome=help=paused=audioOpen=statsOpen=spellBookOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
+        welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
     auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
     reset();prepareCanvas(1.f);
     for(int i=0;i<3;i++){V p=game.player+V{float(i-1),-.8f};game.enemies.push_back({i,0,p,p,500,500});game.enemies.back().windup=100;}
@@ -52,7 +52,7 @@ bool runControlsQA(){
         mouse=p;leftClickGameplay({});
         check(!rightClickWorldOrInventory()&&game.mana==100&&game.swing==0,"minimap, journal, title and outside-window clicks do not trigger combat");
     }
-    for(bool* blocked:{&welcome,&help,&paused,&audioOpen,&statsOpen,&spellBookOpen}){
+    for(bool* blocked:{&welcome,&help,&paused,&audioOpen,&statsOpen,&skillsOpen,&spellBookOpen}){
         reset();*blocked=true;mouse={650,450};leftClickGameplay({});
         check(!rightClickWorldOrInventory()&&!castGameplaySpell()&&game.swing==0&&game.fireballs.empty(),"each modal state blocks combat and corpse interactions");
     }

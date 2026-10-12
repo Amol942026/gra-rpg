@@ -8,12 +8,17 @@ Rectangle spellConfirm(){return {540,496,360,46};}
 
 int draftRemaining(){return game.attributePoints-std::accumulate(statDraft.begin(),statDraft.end(),0);}
 void openStats(){
-    game.cancelBow();weaponWheelOpen=false;statsOpen=true;spellBookOpen=false;statDraft={};draftForLevel=game.level;dragging={};
+    if(game.skillAllocationPending()){openSkills();return;}
+    game.cancelBow();weaponWheelOpen=false;skillsOpen=false;statsOpen=true;spellBookOpen=false;statDraft={};draftForLevel=game.level;dragging={};
 }
-void syncAdvancement(){if(game.allocationRequired&&(!statsOpen||draftForLevel!=game.level))openStats();}
+void syncAdvancement(){
+ if(!game.allocationRequired)return;
+ if(game.attributePoints>0){if(!statsOpen||draftForLevel!=game.level)openStats();}
+ else if(game.skillAllocationPending()){if(!skillsOpen||skillDraftLevel!=game.level)openSkills();}
+}
 void openSpellBook(){
     if(game.allocationRequired||game.dead())return;
-    game.cancelBow();weaponWheelOpen=false;spellBookOpen=true;statsOpen=false;dragging={};audioSystem.play(Cue::Ui);
+    game.cancelBow();weaponWheelOpen=false;skillsOpen=false;spellBookOpen=true;statsOpen=false;dragging={};audioSystem.play(Cue::Ui);
 }
 bool castSelectedSpell(){
     V aim{};WorldHover hit=pickWorld(mouse);
@@ -28,10 +33,12 @@ bool adjustStat(int row,bool add){
     audioSystem.play(Cue::Ui);return true;
 }
 bool confirmStats(){
-    if(game.allocationRequired&&!game.distribute(statDraft))return false;
-    statsOpen=false;statDraft={};draftForLevel=-1;audioSystem.play(Cue::Ui);return true;
+    bool advancing=game.allocationRequired;
+    if(advancing&&!game.distribute(statDraft))return false;
+    statsOpen=false;statDraft={};draftForLevel=-1;if(advancing&&game.skillAllocationPending())openSkills();audioSystem.play(Cue::Ui);return true;
 }
 bool clickProgression(){
+    if(skillsOpen)return clickSkills();
     if(statsOpen){
         for(int i=0;i<AttributeCount;i++)for(bool add:{false,true})if(inside(statAdjust(i,add))){adjustStat(i,add);return true;}
         if(inside(statsConfirm()))confirmStats();
@@ -41,6 +48,7 @@ bool clickProgression(){
         if(inside(spellChoice())||inside(spellConfirm())){game.chooseSpell(Spell::Fireball);spellBookOpen=false;audioSystem.play(Cue::Ui);}
         return true;
     }
+    if(!welcome&&!help&&!paused&&!game.dead()&&inside(skillsButton())){openSkills();return true;}
     if(!welcome&&!help&&!paused&&!game.dead()&&inside(statsButton())){openStats();return true;}
     return false;
 }
@@ -52,6 +60,12 @@ bool progressionInput(){
         if(!game.allocationRequired&&(IsKeyPressed(KEY_ESCAPE)||IsKeyPressed(KEY_P)))statsOpen=false;
         return true;
     }
+    if(skillsOpen){
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))clickSkills();
+        if(IsKeyPressed(KEY_ENTER))confirmSkills();
+        if(!game.allocationRequired&&(IsKeyPressed(KEY_ESCAPE)||IsKeyPressed(KEY_U)))skillsOpen=false;
+        return true;
+    }
     if(spellBookOpen){
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))clickProgression();
         if(IsKeyPressed(KEY_ENTER)){game.chooseSpell(Spell::Fireball);spellBookOpen=false;}
@@ -59,6 +73,7 @@ bool progressionInput(){
         return true;
     }
     if(!welcome&&!help&&!paused&&!game.dead()){
+        if(IsKeyPressed(KEY_U)){openSkills();return true;}
         if(IsKeyPressed(KEY_P)){openStats();return true;}
         if(IsKeyPressed(KEY_K)){openSpellBook();return true;}
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&clickProgression())return true;
@@ -86,7 +101,7 @@ void drawStatsMenu(){
         game.magicDamage()+statDraft[1]*3,game.maxHp()+statDraft[4]*10,game.maxMana()+statDraft[5]*5),720,630,17,Text);
     Rectangle button=statsConfirm();bool ready=!game.allocationRequired||draftRemaining()==0;
     panel(button,ready&&inside(button)?rgb(53,73,57):Card);
-    center(game.allocationRequired?"ZATWIERDŹ I WRÓĆ DO GRY":"WRÓĆ DO GRY",720,699,18,ready?Gold:Muted);
+    center(game.allocationRequired?"DALEJ — WYBÓR UMIEJĘTNOŚCI":"WRÓĆ DO GRY",720,699,18,ready?Gold:Muted);
     center(game.allocationRequired?"Świat jest zatrzymany. Rozdaj wszystkie punkty i zatwierdź.":"ENTER / ESC / P — wróć do gry",720,742,14,Muted);
 }
 void drawSpellBook(){
@@ -102,4 +117,4 @@ void drawSpellBook(){
     center(TextFormat("Mana: %d / %d   ·   Regeneracja: 1 punkt co 5 s",int(game.mana),game.maxMana()),720,598,15,Blue);
     center("Świat jest zatrzymany. ESC / K — wróć bez zmiany.",720,625,15,Muted);
 }
-void drawProgression(){syncAdvancement();if(statsOpen)drawStatsMenu();else if(spellBookOpen)drawSpellBook();}
+void drawProgression(){syncAdvancement();if(statsOpen)drawStatsMenu();else if(skillsOpen)drawSkillsMenu();else if(spellBookOpen)drawSpellBook();}

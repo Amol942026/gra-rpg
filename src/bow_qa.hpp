@@ -2,7 +2,7 @@
 bool runBowQA(){
  fs::create_directories("qa-v23");std::ofstream report("qa-v23/bow-tests.txt");int checks=0,failures=0;
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
- auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.forage.clear();game.player={15,15};game.messageTime=0;welcome=help=paused=audioOpen=statsOpen=spellBookOpen=weaponWheelOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
+ auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.forage.clear();game.player={15,15};game.messageTime=0;welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
  auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
  auto sector=[](int i){float a=(-90+i*45)*DEG2RAD;return Vector2{WheelCenter.x+std::cos(a)*145,WheelCenter.y+std::sin(a)*145};};
  reset();refreshDisplayLayout();check(!audioSystem.available,"bow diagnostic never opens audio device");

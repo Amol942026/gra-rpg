@@ -8,7 +8,8 @@ PASS: minus button returns a pending point
 PASS: minus cannot remove points from earlier levels
 PASS: five points are the exact spending limit
 PASS: mandatory menu freezes actual simulation
-PASS: confirm button applies all points and ends mandatory pause
+PASS: stats confirmation opens skills while mandatory pause remains
+PASS: skill confirmation applies one point and resumes play
 PASS: HUD values match the committed allocation
 PASS: clicking spell tile opens selection without casting
 PASS: spell selection prevents interaction with the map
@@ -19,4 +20,4 @@ PASS: fireball aims at monster position even when cursor is over its head
 PASS: projectile hits with allocated magical damage and creates explosion
 PASS: a fireball kill also pauses and opens allocation automatically
 PASS: level fanfare is allowed while mandatory menu pauses combat audio
-Checks: 21; failures: 0
+Checks: 22; failures: 0

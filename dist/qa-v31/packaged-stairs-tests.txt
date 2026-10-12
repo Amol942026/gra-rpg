@@ -1,0 +1,19 @@
+PASS: stairs diagnostic opens no audio device
+PASS: full-size cached stone silhouette contains many opaque pixels and has no cut-off edges
+PASS: stair flight and stairwell have architectural proportions relative to the 90-pixel hero
+PASS: mouse silhouette agrees with actual GPU stone geometry and excludes transparent margins
+PASS: full-size cached stone silhouette contains many opaque pixels and has no cut-off edges
+PASS: stair flight and stairwell have architectural proportions relative to the 90-pixel hero
+PASS: mouse silhouette agrees with actual GPU stone geometry and excludes transparent margins
+PASS: real world picking reaches enlarged stairs outside the former miniature rectangle
+PASS: real world picking reaches enlarged stairs outside the former miniature rectangle
+PASS: real world picking reaches enlarged stairs outside the former miniature rectangle
+PASS: real world picking reaches enlarged stairs outside the former miniature rectangle
+PASS: real world picking reaches enlarged stairs outside the former miniature rectangle
+PASS: real world picking reaches enlarged stairs outside the former miniature rectangle
+PASS: real world picking reaches enlarged stairs outside the former miniature rectangle
+PASS: real world picking reaches enlarged stairs outside the former miniature rectangle
+PASS: hovered stone staircase retains inspection HUD information
+PASS: E ascends from the new full-size staircase to a safe landing
+PASS: PPM on recessed stone shaft returns to previous floor at a safe landing
+Checks: 18; failures: 0

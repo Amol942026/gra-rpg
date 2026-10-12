@@ -15,7 +15,7 @@ void hero(float x,float y,float s,bool portrait) {
         }
         if(roll*RollDuration<RollProtection)ellipseOutline(x,y+2*s,28*s,13*s,Fade(Gold,.8f));
     }
-    actor_art::draw(0,x,y,s,state,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind,false,BLANK,nullptr,roll,progress,portrait?-1:game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount());
+    actor_art::draw(0,x,y,s,state,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind,false,BLANK,nullptr,roll,progress,portrait?-1:game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),!portrait&&game.empoweredPose());
 }
 void monster(Enemy& e,float x,float y) {
     if(e.windup>0){
