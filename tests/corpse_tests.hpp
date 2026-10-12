@@ -9,7 +9,7 @@ void corpseTests(){
         check(!body.alive&&body.hp==0&&distance(body.pos,p)==0&&body.windup==0,"death keeps a stationary corpse at the actual monster location");
         int generated=bodyLootCount(body);
         check(g.ground.empty()&&generated>=1&&generated<=CorpseLootSize,"each species keeps its variable loot inside its corpse without overflowing slots");
-        check(body.loot[0].kind==Kind::Gold&&body.loot[0].count>=4&&body.loot[0].count<=15,"corpse preserves the original coin drop range");
+        check(body.loot[0].kind==Kind::Gold&&body.loot[0].count>=enemyLootTable(type)[0].minCount&&body.loot[0].count<=enemyLootTable(type)[0].maxCount,"corpse preserves the coin range configured for its species");
         if(type==3)check(body.loot[1].kind==Kind::Sword&&body.loot[1].tier==2&&body.loot[2].kind==Kind::Ring&&body.loot[2].tier==2,"boss keeps both legendary rewards in its body");
         int before=total(g),kills=g.kills;g.hit(body,200);
         check(g.kills==kills&&total(g)==before&&g.ground.empty(),"hitting a corpse cannot duplicate loot or XP");

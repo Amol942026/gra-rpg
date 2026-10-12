@@ -1,7 +1,7 @@
 #pragma once
 Rectangle developerButton(){return intro.active()||towerStory.active()?Rectangle{1000,77,168,34}:Rectangle{28,155,158,31};}
 Rectangle developerCard(int index){bool tower=index>=8;return {tower?747.f:310.f,231.f+(tower?index-8:index)*49,383,43};}
-Rectangle developerKitButton(){return {751,535,364,75};}
+Rectangle developerKitButton(){return {311,626,806,40};}
 Rectangle developerNewButton(){return {330,674,373,47};}
 Rectangle developerMoveButton(){return {737,674,373,47};}
 Rectangle developerNormalButton(){return {471,743,498,35};}
@@ -40,15 +40,15 @@ void drawDeveloperUi(){
  if(!developerMenuOpen)return;
  rect(0,0,W,H,rgb(6,12,18,224));panel({278,100,880,714},rgb(21,30,36));line(311,122,1063,122,Gold);
  center("TRYB DEWELOPERSKI",720,143,30,Text,true);center("Wybierz lokację i rozpocznij test bez przechodzenia fabuły.",720,186,17,Muted);
- txt("LAS MCHU",315,212,14,Gold);txt("WIEŻA ELDRINA — 5 PIĘTER",753,212,14,Gold);
+ txt("LAS MCHU",315,212,14,Gold);txt("WIEŻA ELDRINA / MORZE PIASKÓW",753,212,14,Gold);
  for(int i=0;i<DeveloperDestinationCount;i++){
   Rectangle card=developerCard(i);bool selected=i==developerSelection;panel(card,selected?rgb(39,53,54):inside(card)?Card:Panel);DrawRectangleLinesEx(card,1,selected?Gold:Line);
   txt(DeveloperDestinations[i].name,card.x+13,card.y+3,18,selected?Text:Muted);txt(DeveloperDestinations[i].hint,card.x+13,card.y+25,14,selected?Gold:Muted);
  }
  Rectangle kit=developerKitButton();panel(kit,inside(kit)?Card:Panel);DrawRectangleLinesEx({kit.x+13,kit.y+12,19,19},1,developerKit?Green:Line);if(developerKit)txt("+",kit.x+16,kit.y+9,18,Green);
  txt("ZESTAW TESTOWY",kit.x+45,kit.y+12,16,developerKit?Green:Muted);
- txt("Wszystkie umiejętności · 100 strzał",kit.x+13,kit.y+37,14,Muted);txt("15 borowików / esencji · 10 mikstur",kit.x+13,kit.y+56,14,Muted);
- center("Start odnawia HP i manę. Wieża omija wymóg pokonania bossa.",720,634,16,Muted);
+ txt("Umiejętności · 100 strzał · 15 składników · 10 mikstur",kit.x+251,kit.y+12,14,Muted);
+
  for(bool reset:{true,false}){Rectangle action=reset?developerNewButton():developerMoveButton();panel(action,inside(action)?Card:Panel);center(reset?"NOWA SESJA TESTOWA":"PRZENIEŚ OBECNĄ POSTAĆ",action.x+action.width/2,action.y+13,17,Gold);}
  center("Nowa sesja resetuje wyprawę; przeniesienie zachowuje plecak, poziom i rangi.",720,726,14,Muted);
  Rectangle normal=developerNormalButton();panel(normal,inside(normal)?Card:Panel);center("NOWA ZWYKŁA GRA — PROLOG",720,normal.y+9,15,Muted);

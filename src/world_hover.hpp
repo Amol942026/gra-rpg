@@ -3,32 +3,14 @@
 std::array<std::vector<unsigned char>,PropTypeCount> propMasks;
 std::array<Texture2D,PropTypeCount> propOutlines{};
 
-void initHoverArt() {
-    for(int type=0;type<PropTypeCount;type++){
-        Image source=LoadImageFromTexture(propArt[type].texture);
-        ImageFlipVertical(&source);
-        Color* pixels=LoadImageColors(source);
-        auto& mask=propMasks[type];mask.resize(180*230);
-        for(int i=0;i<180*230;i++)mask[i]=pixels[i].a>=160?255:0;
-        UnloadImageColors(pixels);UnloadImage(source);
-        // Dilation of the opaque shape excludes transparent margins and shadows.
-        Image border=GenImageColor(180,230,BLANK);
-        Color* out=static_cast<Color*>(border.data);
-        for(int y=0;y<230;y++)for(int x=0;x<180;x++){
-            if(mask[y*180+x])continue;
-            bool edge=false;
-            for(int dy=-3;dy<=3&&!edge;dy++)for(int dx=-3;dx<=3;dx++){
-                int xx=x+dx,yy=y+dy;
-                if(dx*dx+dy*dy<=10&&xx>=0&&xx<180&&yy>=0&&yy<230&&mask[yy*180+xx]){edge=true;break;}
-            }
-            if(edge)out[y*180+x]=WHITE;
-        }
-        propOutlines[type]=LoadTextureFromImage(border);UnloadImage(border);
-        if(treeProp(type)){
-            SetTextureFilter(propArt[type].texture,TEXTURE_FILTER_BILINEAR);
-            SetTextureFilter(propOutlines[type],TEXTURE_FILTER_BILINEAR);
-        }
-    }
+void initHoverArt(){
+ for(int type=0;type<PropTypeCount;type++){
+  Image source=LoadImageFromTexture(propArt[type].texture);ImageFlipVertical(&source);Color* pixels=LoadImageColors(source);int w=source.width,h=source.height,radius=3*w/180;
+  auto& mask=propMasks[type];mask.resize(w*h);for(int i=0;i<w*h;i++)mask[i]=pixels[i].a>=160?255:0;UnloadImageColors(pixels);UnloadImage(source);
+  Image border=GenImageColor(w,h,BLANK);auto* out=static_cast<Color*>(border.data);
+  for(int y=0;y<h;y++)for(int x=0;x<w;x++)if(!mask[y*w+x]){bool edge=false;for(int dy=-radius;dy<=radius&&!edge;dy++)for(int dx=-radius;dx<=radius;dx++){int xx=x+dx,yy=y+dy;if(dx*dx+dy*dy<=radius*radius+1&&xx>=0&&xx<w&&yy>=0&&yy<h&&mask[yy*w+xx]){edge=true;break;}}if(edge)out[y*w+x]=WHITE;}
+  propOutlines[type]=LoadTextureFromImage(border);UnloadImage(border);SetTextureFilter(propArt[type].texture,TEXTURE_FILTER_BILINEAR);SetTextureFilter(propOutlines[type],TEXTURE_FILTER_BILINEAR);
+ }
 }
 void unloadHoverArt(){for(auto texture:propOutlines)if(texture.id)UnloadTexture(texture);}
 
@@ -70,9 +52,9 @@ bool propContains(const Prop& prop,Vector2 point) {
     Vector2 base=screen(prop.pos);
     float sourceY=(point.y-base.y)/prop.size+208;
     float shift=treeProp(prop.type)?treeShift(prop,sourceY,game.time):0;
-    int x=int(std::floor((point.x-base.x)/prop.size+90-shift));
-    int y=int(std::floor(sourceY));
-    return x>=0&&x<180&&y>=0&&y<230&&!propMasks[prop.type].empty()&&propMasks[prop.type][y*180+x];
+    int w=propArt[prop.type].texture.width,h=propArt[prop.type].texture.height;
+    int x=int(std::floor(((point.x-base.x)/prop.size+90-shift)*w/180)),y=int(std::floor(sourceY*h/230));
+    return x>=0&&x<w&&y>=0&&y<h&&!propMasks[prop.type].empty()&&propMasks[prop.type][y*w+x];
 }
 
 WorldHover pickWorld(Vector2 point) {
@@ -104,14 +86,16 @@ WorldHover pickWorld(Vector2 point) {
         }else if(it->type==1){
             const Enemy& e=game.enemies[it->index];position=e.pos;
             Vector2 p=screen(e.pos);kind=HoverKind::Enemy;id=e.id;
-            if(CheckCollisionPointRec(point,{p.x-70,p.y-enemyInfo(e.type).visualHeight,140,enemyInfo(e.type).visualHeight+14})){
+            float half=enemyBoss(e.type)?125:75;
+            if(CheckCollisionPointRec(point,{p.x-half,p.y-enemyInfo(e.type).visualHeight,half*2,enemyInfo(e.type).visualHeight+14})){
                 float attack=e.windup>0?-std::clamp(1-e.windup/.42f,0.f,1.f):e.strike>0?std::sin((1-e.strike/.22f)*PI):0;
                 touched=actor_art::draw(e.type+1,p.x,p.y,1,e.animation,attack,false,false,Kind::Sword,false,BLANK,&point);
             }
         }else if(it->type==4){
             const Enemy& e=game.enemies[it->index];position=e.pos;kind=HoverKind::Corpse;id=e.id;
             Vector2 p=screen(position);
-            if(CheckCollisionPointRec(point,{p.x-68,p.y-52,136,96}))touched=corpseArt(e,p.x,p.y,BLANK,&point);
+            float half=enemyBoss(e.type)?110:68;
+            if(CheckCollisionPointRec(point,{p.x-half,p.y-65,half*2,109}))touched=corpseArt(e,p.x,p.y,BLANK,&point);
         }else{
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){
@@ -167,7 +151,7 @@ void drawHoveredName() {
     }else if(hovered.kind==HoverKind::Forage){
         name="Borowik · +10 HP";color=Green;
     }else{
-        name=propInfo(game.props[hovered.index].type).name;
+        name=propInfo(game.props[hovered.index].type).name;if(game.props[hovered.index].type==13)name+=" · E / PPM";
     }
     float width=textWidth(name,14)+24;
     float x=std::clamp(mouse.x+18,8.f,WorldW-width-8),y=std::clamp(mouse.y+18,118.f,728.f);

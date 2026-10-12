@@ -141,6 +141,26 @@ ksztalt obiektu, dodaje zloty obrys i informacje w HUD. E / LPM / PPM
 nadal otwieraja ksiegi, alchemie, mapy nieba i uruchamiaja pozostale interakcje.
 Grafika jest przygotowywana raz na starcie, w podwojnej rozdzielczosci.
 
+Wersja 0.33: MORZE PIASKOW - DRUGA KRAINA
+Po Kamiennym Strazniku zbierz pierwszy fragment do plecaka i wroc do wiezy.
+Podejdz do Eldrina na pierwszym pietrze: E / LPM / PPM - porozmawiaj.
+Po rozmowie kliknij odpowiedz "Przenies mnie na pustynie.".
+Mozesz zostac w wiezy; czekanie, Enter i Spacja w wyborze nie teleportuja.
+Na pustyni: kaktusy, opuncje, piaskowce, ruiny, palmy i Oaza Bursztynu.
+27 potworow: skorpiony, skarabeusze i kobry; wlasne animacje i ciala z lupem.
+Nowe trofea: zadlo skorpiona 75%, pancerz skarabeusza 85%, luska kobry 80%.
+Drugi boss - Zywa Wydma - czeka na poludniowym wschodzie; 560 HP.
+Jej piaskowe cialo zawiera mocniejszy miecz, esencje piasku, mikstury,
+monety i druga czesc Serca Switu ze szansa 100%. Szczegoly w LOOT.md.
+Otworz cialo PPM i przeciagnij nagrody do plecaka; fragment zbierz na koncu.
+Fragment uruchamia powrot do Eldrina, nowy dialog i postep 2 / 5.
+Brama Eldrina w miejscu przybycia: E / LPM / PPM - powrot do wiezy.
+Krainy zachowuja ciala, pozostawiony lup i stan pokonanych bossow.
+Poziom, statystyki, umiejetnosci, ekwipunek, zdrowie i mana sa zachowane.
+F3 ma teraz 16 lokacji. Test_pustyni.bat zaczyna od razu w drugiej krainie.
+Uruchom.bat --start desert-oasis lub --start desert-boss - test oazy / bossa.
+Zwykly start bez parametrow nadal rozpoczyna sie prologiem.
+
 STEROWANIE
 WSAD - chodzenie; kombinacje klawiszy pozwalaja isc ukosnie.
 Przytrzymany Shift + WSAD - bieg o 50% szybszy od chodu.
@@ -175,7 +195,7 @@ Licencje: LICENSES.md i pliki w assets.
     $entry = $archive.CreateEntry('Emberfall/JAK_URUCHOMIC.txt')
     $writer = New-Object IO.StreamWriter($entry.Open(), (New-Object Text.UTF8Encoding($true)))
     try { $writer.Write($instructions) } finally { $writer.Dispose() }
-    foreach ($launcher in @('Tryb_deweloperski.bat','Test_wiezy.bat','Test_bossa.bat')) {
+    foreach ($launcher in @('Tryb_deweloperski.bat','Test_wiezy.bat','Test_bossa.bat','Test_pustyni.bat')) {
         [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $PSScriptRoot ('dist/' + $launcher)), ('Emberfall/' + $launcher), [IO.Compression.CompressionLevel]::Optimal) | Out-Null
     }
     $entry = $archive.CreateEntry('Emberfall/Uruchom.bat')

@@ -185,6 +185,7 @@ public:
 };
 
 #include "hero_art.hpp"
+#include "desert_actors.hpp"
 
 // species: player, slime, wolf, skeleton, guardian, boar, spider, bandit, treant.
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
@@ -203,13 +204,15 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     const Color skin=flash?Text:rgb(212,180,131),bone=flash?Text:rgb(202,202,166);
     const Color metal=flash?Text:rgb(144,169,159),cloth=species==7?rgb(125,64,48):rgb(49,102,94),leather=rgb(88,68,48);
     const Color stone=flash?Text:rgb(104,133,123),fur=flash?Text:rgb(131,148,140);
-    if(!probe){float w=size*(species==4?35:species==2?28:23),h=size*(species==4?15:11);
+    if(!probe){float w=size*(species==12?78:species==4?35:species==2?28:23),h=size*(species==4?15:11);
         ellipse(x,y+3,w*1.22f,h*1.18f,rgb(4,12,16,22));ellipse(x,y+2,w,h,rgb(4,12,16,45));ellipse(x,y+2,w*.7f,h*.72f,rgb(4,12,16,78));}
     Rig rig(x,y,size*bodyScale,state.direction);
     if(rolling)rig.setRoll(roll,tuck);
 
     if(species==0){
         buildHero(rig,lift,stride,cycle,tuck,attack,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows);
+    } else if(species>=9){
+        buildDesert(rig,species-1,state,attack,flash);
     } else if(species==1){
         float squash=(state.moving?std::sin(cycle):std::sin(state.idleTime*2.5f)*.18f)+attack*1.8f;
         float h=31+squash*4;

@@ -4,7 +4,8 @@
 bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
     actor_art::Rig rig(x,y,1,e.animation.direction);
     const Color bone=rgb(160,159,130),fur=rgb(106,113,108),stone=rgb(79,98,95);
-    if(e.type==0){
+    if(e.type>=8){actor_art::buildDesertCorpse(rig,e.type);}
+    else if(e.type==0){
         rig.blob(26,8,rgb(74,112,66));
         rig.form({-8,13,5},{7,2,2},rgb(32,49,35));rig.form({8,13,5},{7,2,2},rgb(32,49,35));
     }else if(e.type==1){
@@ -51,5 +52,5 @@ bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2*
         rig.form({0,26,18},{31,27,12},leaf);
     }
     if(probe)return rig.contains(*probe);
-    ellipse(x,y+3,e.type==3?52:39,e.type==3?19:14,rgb(8,17,17,105));rig.draw(outline);return false;
+    ellipse(x,y+3,e.type==11?75:e.type==3?52:39,e.type==3?19:14,rgb(8,17,17,105));rig.draw(outline);return false;
 }

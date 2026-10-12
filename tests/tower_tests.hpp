@@ -9,7 +9,7 @@ void towerTests(){
         check(g.dawnFragments()==0&&!g.towerReturnPending&&!g.inTower(),"boss death alone does not collect the fragment or leave the forest");
         int count=total(g);g.hit(boss,1000);check(total(g)==count,"repeated hits on the guardian cannot regenerate a fragment");
     }
-    for(int type=0;type<EnemyTypeCount;type++)if(type!=3){std::mt19937 rng(8);bool clean=true;for(int n=0;n<100;n++)for(const auto& value:rollEnemyLoot(type,rng))clean&=value.kind!=Kind::DawnShard;check(clean,"ordinary monsters never drop the story artifact");}
+    for(int type=0;type<EnemyTypeCount;type++)if(!enemyBoss(type)){std::mt19937 rng(8);bool clean=true;for(int n=0;n<100;n++)for(const auto& value:rollEnemyLoot(type,rng))clean&=value.kind!=Kind::DawnShard;check(clean,"ordinary monsters never drop the story artifact");}
     Game g;Enemy& boss=g.enemies.back();g.player=boss.pos;g.hit(boss,1000);
     Attributes points{};points[0]=g.attributePoints;g.distribute(points);SkillRanks learned{};learned[0]=g.skillPoints;g.trainSkills(learned);
     check(!g.transfer({Place::Corpse,4,boss.id},{Place::Bag,8})&&!g.towerReturnPending,"unopened guardian loot cannot trigger a return");

@@ -41,7 +41,7 @@ PASS: repeat NPC dialogue fits the same readable panel
 PASS: repeat NPC dialogue fits the same readable panel
 PASS: repeat NPC dialogue fits the same readable panel
 PASS: repeat NPC dialogue fits the same readable panel
-PASS: repeat dialogue returns control without duplicating fragments or teleporting
+PASS: choosing to stay returns control without duplicating fragments or teleporting
 PASS: story frame reaches the actual presentation buffer at native dimensions
 PASS: story frame reaches the actual presentation buffer at native dimensions
 PASS: playable tower and NPC dialogue fit the smallest supported window

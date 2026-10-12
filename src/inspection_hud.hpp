@@ -37,7 +37,7 @@ Inspection inspectWorld(WorldHover hit) {
     }else if(hit.kind==HoverKind::Prop&&hit.index>=0&&hit.index<int(game.props.size())){
         const auto& prop=propInfo(game.props[hit.index].type);
         info.source=hit.kind;info.name=prop.name;info.kind=prop.kind;
-        info.detail="Przeszkoda terenowa.";info.secondary="Blokuje ruch i przeturlanie.";
+        info.detail=game.props[hit.index].type==13?"Powrót do wieży Eldrina.":"Przeszkoda terenowa.";info.secondary=game.props[hit.index].type==13?"Podejdź i użyj E / LPM / PPM.":"Blokuje ruch i przeturlanie.";
     }else if(hit.kind==HoverKind::Forage){
         const Item* value=game.get({Place::Forage,hit.index});if(!value||value->empty())return info;
         info.source=hit.kind;info.name=itemName(*value);info.kind="Grzyb jadalny";info.detail="Po zjedzeniu przywraca 10 HP.";

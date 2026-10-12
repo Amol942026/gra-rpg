@@ -27,7 +27,7 @@ void monster(Enemy& e,float x,float y) {
     bool underMouse=hovered.kind==HoverKind::Enemy&&hovered.index==e.id;
     actor_art::draw(e.type+1,x,y,1,e.animation,attack,false,false,Kind::Sword,e.flash>0,underMouse?rgb(255,140,104):BLANK);
     if(e.hp<e.maxHp||underMouse){
-        float w=e.type==3||e.type==7?78:48,yy=y-enemyInfo(e.type).visualHeight;
+        float w=enemyBoss(e.type)||e.type==7?98:48,yy=y-enemyInfo(e.type).visualHeight;
         rect(x-w/2,yy,w,5,Ink);rect(x-w/2,yy,w*std::max(0.f,e.hp)/e.maxHp,5,rgb(175,86,75));
     }
 }

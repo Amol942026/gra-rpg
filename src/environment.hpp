@@ -22,7 +22,7 @@ float treeShift(const Prop& prop,float sourceY,float time){
 void drawPropTexture(const Prop& prop,Texture2D texture,bool upright,Color tint){
     Vector2 base=screen(prop.pos);
     if(!treeProp(prop.type)){
-        DrawTexturePro(texture,{0,0,180,upright?230.f:-230.f},
+        DrawTexturePro(texture,{0,0,float(texture.width),upright?float(texture.height):-float(texture.height)},
             {base.x-90*prop.size,base.y-208*prop.size,180*prop.size,230*prop.size},{0,0},0,tint);
         return;
     }

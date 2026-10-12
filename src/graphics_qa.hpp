@@ -27,7 +27,7 @@ bool runGraphicsQA(){
  for(int species=0;species<=EnemyTypeCount;species++)for(int d=0;d<8;d++)verify(species,d,-1,-1);
  for(int d=0;d<8;d++){verify(0,d,-1,.5f);verify(0,d,.2f,-1);verify(0,d,.65f,-1);}
  UnloadRenderTexture(sample);
- RenderTexture2D sheet=LoadRenderTexture(1300,1810);BeginTextureMode(sheet);ClearBackground(Ink);
+ RenderTexture2D sheet=LoadRenderTexture(1300,(EnemyTypeCount+1)*190+100);BeginTextureMode(sheet);ClearBackground(Ink);
  txt("SZCZEGÓŁOWE SYLWETKI — OSIEM KIERUNKÓW",24,16,24,Gold);
  const char* directions[]={"E","SE","S","SW","W","NW","N","NE"};
  for(int d=0;d<8;d++)center(directions[d],220+d*140.f,56,14,Text);
@@ -54,7 +54,7 @@ bool runGraphicsQA(){
  EndTextureMode();saveTexture(heroSheet,"qa-v24/hero/poses-8-directions.png");UnloadRenderTexture(heroSheet);
  for(int type=0;type<PropTypeCount;type++){
   Image im=LoadImageFromTexture(propArt[type].texture);Color* pixels=LoadImageColors(im);int opaque=0,clipped=0;
-  for(int y=0;y<230;y++)for(int x=0;x<180;x++)if(pixels[y*180+x].a>230){opaque++;clipped+=x<2||x>=178||y<2||y>=228;}
+  for(int y=0;y<im.height;y++)for(int x=0;x<im.width;x++)if(pixels[y*im.width+x].a>230){opaque++;clipped+=x<2||x>=im.width-2||y<2||y>=im.height-2;}
   check(opaque>250&&clipped==0,"baked foliage, stone and ruin detail fits its full texture and pointer mask");
   UnloadImageColors(pixels);UnloadImage(im);
  }

@@ -2,6 +2,7 @@
 // so wandering never changes the random loot awarded for a kill.
 bool clearEnemySegment(V from,V to,float padding)const{
  V delta=to-from;
+ if(inDesert()&&segmentCircle(from,delta,DesertOasis,2.45f+padding)<=1)return false;
  for(const auto& p:props)if(segmentCircle(from,delta,p.pos,propRadius(p.type)+padding)<=1)return false;
  return true;
 }
@@ -9,6 +10,7 @@ bool canSeePlayer(const Enemy& e)const{
  return e.alive&&!dead()&&distance(e.pos,player)<EnemySightRange&&clearEnemySegment(e.pos,player,0);
 }
 bool enemyPositionClear(V p,float radius)const{
+ if(inDesert()&&desertWater(p,radius))return false;
  if(p.x<1.6f+radius||p.y<1.6f+radius||p.x>MapWalkMax-radius||p.y>MapWalkMax-radius)return false;
  for(const auto& prop:props)if(distance(p,prop.pos)<radius+propRadius(prop.type)+.003f)return false;
  return true;

@@ -5,7 +5,7 @@ void forestLootTests(){
  std::array<int,EnemyTypeCount> species{};std::array<bool,PropTypeCount> props{};
  for(const auto& e:forest.enemies){species[e.type]++;check(forest.enemyPositionClear(e.home,e.radius()),"every initial monster has clearance at its spawn");}
  for(const auto& p:forest.props)props[p.type]=true;
- for(int type=0;type<EnemyTypeCount;type++)check(species[type]>0,"all eight species occur in the actual map");
+ for(int type=0;type<ForestEnemyTypeCount;type++)check(species[type]>0,"all eight species occur in the actual map");
  check(props[0]&&props[4]&&props[5]&&!forest.forage.empty(),"forest includes pine, birch, oak and mushrooms");
  check(separatedEnemies(forest)&&enemiesClearOfScenery(forest)&&forest.ground.empty(),"expanded initial world keeps body separation and empty starter ground");
  Game route=emptyArena();route.player={8,19};

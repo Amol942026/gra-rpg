@@ -1,0 +1,16 @@
+{
+  "version": "0.33",
+  "matched_files": 85,
+  "archive_bytes": 7300834,
+  "archive_sha256": "3ea7c8e21b47cf02144becbeeba74f31cbc3d7a166e78593a224d07088025890",
+  "extracted_game": "C:\\Users\\Amadeusz\\AppData\\Local\\Temp\\emberfall-v33-package-niaq_4yn\\Emberfall",
+  "instructions_verified": true,
+  "audio_preferences_unchanged": true,
+  "extracted_desert_checks": 56,
+  "extracted_developer_checks": 58,
+  "extracted_exit_codes": [
+    0,
+    0
+  ],
+  "extracted_audio_settings_created": false
+}

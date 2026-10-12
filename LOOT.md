@@ -1,8 +1,8 @@
-# Łup z przeciwników — Emberfall 0.26
+# Łup z przeciwników — Emberfall 0.33
 
 Każda pozycja w tabeli jest losowana **niezależnie przy śmierci przeciwnika**. Jeden wilk może zostawić jednocześnie kieł i sierść, tylko jeden z tych materiałów albo żaden. Szansa dotyczy pojawienia się stosu; jego ilość jest następnie losowana z podanego przedziału. 75% nie gwarantuje trzech dropów na każde cztery zabójstwa.
 
-Wszystkie gatunki zostawiają dodatkowo **4–15 złotych monet ze szansą 100%**. Łup pozostaje w ciele: podejdź na maksymalnie 2,5 pola, otwórz je **PPM** i przeciągnij przedmioty do plecaka. Ponowne otwarcie ciała nie losuje nowej zawartości.
+Leśne gatunki zostawiają dodatkowo **4–15 złotych monet ze szansą 100%**. Łup pozostaje w ciele: podejdź na maksymalnie 2,5 pola, otwórz je **PPM** i przeciągnij przedmioty do plecaka. Ponowne otwarcie ciała nie losuje nowej zawartości.
 
 | Przeciwnik | Pozostały łup: szansa i ilość |
 |---|---|
@@ -21,4 +21,17 @@ Nowy sprzęt można założyć: sztylet w miejsce broni, płaszcz w miejsce zbro
 
 Normalne wyprawy otrzymują nowe losowe ziarno łupu. Testy korzystają ze stałego ziarna, aby wykrywać błędy powtarzalnie. Tabele i ilości edytuje się w `src/loot.hpp`.
 
-Podniesienie części Serca Świtu do plecaka uruchamia ściemnienie i powrót do wieży Eldrina, dlatego pozostałe nagrody zbierz wcześniej. Artefakt zajmuje miejsce w plecaku, nie łączy się w stosy i nie można go porzucić, zużyć ani założyć. Zajęte pole plecaka nie usuwa fragmentu ani nie uruchamia scenki. Po scenie pozostaje on w plecaku, a dziennik wskazuje 1 / 5 części.
+Podniesienie części Serca Świtu do plecaka uruchamia ściemnienie i powrót do wieży Eldrina, dlatego pozostałe nagrody zbierz wcześniej. Artefakt zajmuje miejsce w plecaku, nie łączy się w stosy i nie można go porzucić, zużyć ani założyć. Zajęte pole plecaka nie usuwa fragmentu ani nie uruchamia scenki. Po scenie pozostaje on w plecaku, a dziennik wskazuje 1 / 5 po pierwszym bossie albo 2 / 5 po Żywej Wydmie.
+
+## Morze Piasków — druga kraina
+
+Każdy zwykły pustynny potwór zostawia monety ze szansą **100%** oraz cztery niezależnie losowane pozycje. Żywa Wydma ma pięć gwarantowanych nagród. Pozostałe zasady ciał, zasięgu i stosów są takie same jak w lesie.
+
+| Przeciwnik | Monety 100% | Pozostały łup: szansa i ilość |
+|---|---|---|
+| Skorpion bursztynowy | 10–24 | Żądło skorpiona **75%**, 1–2; Woreczek jadu **45%**, 1; Mikstura zdrowia **20%**, 1; Mikstura many **15%**, 1 |
+| Skarabeusz miedziany | 8–22 | Pancerz skarabeusza **85%**, 1–3; Odłamek echa **35%**, 1; Żelazny hełm **7%**, 1, legendarny (tier 2); Strzały **35%**, 5–10 |
+| Kobra piaskowa | 8–20 | Łuska kobry **80%**, 1–3; Woreczek jadu **55%**, 1; Mikstura zdrowia **25%**, 1; Pierścień żaru **4%**, 1, legendarny (tier 2) |
+| Żywa Wydma — boss | 60–110 | Miecz wędrowca **100%**, 1, legendarny (tier 3, mocniejszy od nagrody pierwszego bossa); Esencja piasku **100%**, 2–4, niepospolita; Mikstura many **100%**, 3; **druga część Serca Świtu 100%**, dokładnie 1 |
+
+Śmierć Żywej Wydmy pozostawia ciało i nie zbiera fragmentu automatycznie. Otwórz je PPM; zbierz pozostałe nagrody, a następnie przeciągnij część do wolnego miejsca plecaka. Dziennik zapisze **2 / 5**, rozpocznie się powrót do Eldrina. Zajęte miejsce pozostawia przedmiot w ciele. Powrót do pustyni zachowuje puste pola łupu i pokonanego bossa; nagrody nie są ponownie losowane.

@@ -32,6 +32,12 @@ PASS: each location card selects its actual destination without starting acciden
 PASS: destination name and hint fit card without clipping
 PASS: each location card selects its actual destination without starting accidentally
 PASS: destination name and hint fit card without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination name and hint fit card without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination name and hint fit card without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination name and hint fit card without clipping
 PASS: start button skips prologue and return scene and makes the selected observatory playable
 PASS: new test session receives safe position and optional kit
 PASS: developer screen reaches real presentation at current window size
@@ -50,4 +56,4 @@ PASS: normal-game button removes test state and restarts untouched normal prolog
 PASS: developer start interrupts an active return cutscene without leaving ghost dialogue or blocked movement
 PASS: developer screen reaches real presentation at current window size
 PASS: small-window pointer correctly chooses the requested tower floor
-Checks: 52; failures: 0
+Checks: 58; failures: 0

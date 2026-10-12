@@ -27,6 +27,11 @@ foreach ($sourceAsset in Get-ChildItem -LiteralPath $sourceAssetRoot -File -Recu
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $targetAsset) | Out-Null
     Copy-Item -LiteralPath $sourceAsset.FullName -Destination $targetAsset -Force
 }
+# Launchers in the portable build point to the adjacent EXE.
+foreach ($launcher in @('Tryb_deweloperski.bat','Test_wiezy.bat','Test_bossa.bat','Test_pustyni.bat')) {
+    $launcherText = [IO.File]::ReadAllText((Join-Path $PSScriptRoot $launcher)).Replace('"dist\Emberfall.exe"','"Emberfall.exe"')
+    [IO.File]::WriteAllText((Join-Path $PSScriptRoot ('dist/' + $launcher)), $launcherText, [Text.Encoding]::ASCII)
+}
 Copy-Item -LiteralPath 'README.md' -Destination 'dist\README.md' -Force
 Copy-Item -LiteralPath 'LOOT.md' -Destination 'dist\LOOT.md' -Force
 Copy-Item -LiteralPath 'LICENSES.md' -Destination 'dist\LICENSES.md' -Force

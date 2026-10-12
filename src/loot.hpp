@@ -16,8 +16,13 @@ inline const LootTable& enemyLootTable(int type){
   {{{Kind::Gold,100,4,15},{Kind::BoarTusk,65,1,2},{Kind::BoarHide,80},{Kind::Health,10},{Kind::Armor,4,1,1,1}}},
   {{{Kind::Gold,100,4,15},{Kind::SpiderSilk,85,1,3},{Kind::VenomSac,40},{Kind::Mana,15},{Kind::Amulet,2,1,1,1}}},
   {{{Kind::Gold,100,4,15},{Kind::BanditBadge,60},{Kind::Dagger,12,1,1,1},{Kind::Health,25,1,2},{Kind::Boots,8,1,1,1}}},
-  {{{Kind::Gold,100,4,15},{Kind::AncientBark,90,1,3},{Kind::ForestEssence,35},{Kind::RuneStone,8},{Kind::Amulet,4,1,1,1}}}
+  {{{Kind::Gold,100,4,15},{Kind::AncientBark,90,1,3},{Kind::ForestEssence,35},{Kind::RuneStone,8},{Kind::Amulet,4,1,1,1}}},
+  {{{Kind::Gold,100,10,24},{Kind::ScorpionSting,75,1,2},{Kind::VenomSac,45},{Kind::Health,20},{Kind::Mana,15}}},
+  {{{Kind::Gold,100,8,22},{Kind::ScarabShell,85,1,3},{Kind::Crystal,35},{Kind::Helmet,7,1,1,2},{Kind::Arrow,35,5,10}}},
+  {{{Kind::Gold,100,8,20},{Kind::CobraScale,80,1,3},{Kind::VenomSac,55},{Kind::Health,25},{Kind::Ring,4,1,1,2}}},
+  {{{Kind::Gold,100,60,110},{Kind::Sword,100,1,1,3},{Kind::SandEssence,100,2,4,1},{Kind::Mana,100,3,3},{Kind::DawnShard,100,1,1,3}}}
  };
+ static_assert(sizeof(tables)/sizeof(tables[0])==EnemyTypeCount);
  return tables[std::clamp(type,0,EnemyTypeCount-1)];
 }
 inline bool rollDrop(int percent,std::mt19937& rng){return percent>=100||(percent>0&&std::uniform_int_distribution<int>(1,10000)(rng)<=percent*100);}

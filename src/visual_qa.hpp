@@ -65,7 +65,10 @@ Image presentedImage(){
 float worldSampleScale(float pixelsPerUnit){
     // 1.5x per axis keeps fractional motion and smooth silhouettes with 44%
     // fewer world pixels than 2x. The HUD remains at native resolution.
-    return pixelsPerUnit*std::max(1.f,std::min(1.5f,1620.f/(H*pixelsPerUnit)));
+    // Desert obstacles already have 2x textures. 1.25x world sampling keeps
+    // continuous subpixel movement and antialiasing with 31% fewer world pixels.
+    float oversample=game.inDesert()?1.25f:1.5f;
+    return pixelsPerUnit*std::max(1.f,std::min(oversample,1620.f/(H*pixelsPerUnit)));
 }
 void renderWorldLayer(){
     float nativeScale=renderScale;

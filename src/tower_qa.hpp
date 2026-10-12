@@ -76,7 +76,8 @@ bool runTowerQA(){
         auto rows=storyRows(line.text,1140,21);check(rows.size()<=3,"repeat NPC dialogue fits the same readable panel");
     }
     for(int i=0;i<250&&towerStory.active();i++)towerAction(true,false,1.f/60);
-    check(!towerStory.active()&&game.inTower()&&distance(before,game.player)==0&&game.dawnFragments()==1,"repeat dialogue returns control without duplicating fragments or teleporting");
+    if(towerStory.phase==TowerPhase::Choice){mouse={desertStayButton().x+20,desertStayButton().y+20};clickMageTravelChoice();}
+    check(!towerStory.active()&&game.inTower()&&distance(before,game.player)==0&&game.dawnFragments()==1,"choosing to stay returns control without duplicating fragments or teleporting");
     bool startedFull=fullScreen();if(startedFull)toggleFullScreen();SetWindowSize(1152,720);PollInputEvents();refreshDisplayLayout();
     Image small=shot("tower-1152");UnloadImage(small);talkToMage();towerStory.revealed=true;
     Image smallTalk=shot("npc-dialogue-1152");UnloadImage(smallTalk);

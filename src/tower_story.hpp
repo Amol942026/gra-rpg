@@ -17,43 +17,51 @@ inline constexpr std::array<StoryLine,5> TowerTalkDialogue={{
     {false,"Trochę poobijany, ale gotów usłyszeć, co nas czeka. Część Serca Świtu wciąż rozgrzewa mi dłoń."},
     {true,"Strzeż jej. Każda odzyskana część przybliża nas do zamknięcia bramy demonów. Zostały jeszcze cztery."},
     {false,"A kolejna wyprawa? Będzie równie przyjemna jak spotkanie z kamiennym olbrzymem?"},
-    {true,"Obawiam się, że drugi strażnik nie powita cię serdeczniej. Przygotuję przejście do następnej krainy. Tymczasem odpocznij i sprawdź wyposażenie. Zawsze możesz ze mną porozmawiać."}
+    {true,"Obawiam się, że drugi strażnik nie powita cię serdeczniej. Żywa Wydma strzeże drugiej części w Morzu Piasków. Gdy będziesz gotowy, wybierz podróż. W miejscu przybycia zostawię ci bramę powrotną do wieży."}
 }};
-enum class TowerPhase {Finished,FadeOut,Opening,Dialogue,Closing,Reveal};
+inline constexpr std::array<StoryLine,6> DesertReturnDialogue={{{false,"Eldrinie, Żywa Wydma rozsypała się w moich rękach. Mam drugą część Serca Świtu."},{true,"Dwie części! Nie spodziewałem się, że przebijesz się przez to morze rozżarzonego piasku tak szybko. Dobrze się spisałeś."},{false,"Ta wydma naprawdę chodziła. I nie podobało jej się, że pożyczyłem jej serce."},{true,"Teraz jej moc służy Pieczęci. Trzy części wciąż czekają na odnalezienie, ale odzyskane światło jest bezpieczne."},{false,"Zanim ruszę dalej, chcę odpocząć i sprawdzić zdobyty ekwipunek."},{true,"Źródło odnowy jest do twojej dyspozycji. Gdy zechcesz wrócić na pustynię po pozostawiony łup, porozmawiaj ze mną."}}};
+inline constexpr std::array<StoryLine,3> DesertCompletedTalk={{{true,"Druga część jest bezpieczna. Żywa Wydma już nie podniesie się z piasku."},{false,"Może jeszcze wrócę do oazy. Zostało tam kilka miejsc do sprawdzenia."},{true,"Otworzę przejście do Morza Piasków, gdy wybierzesz podróż. Możesz wrócić przez Bramę Eldrina."}}};
+enum class TowerPhase {Finished,FadeOut,Opening,Dialogue,Closing,Reveal,Choice,TravelOut,TravelIn};
 struct TowerSequence {
     TowerPhase phase=TowerPhase::Finished;
     size_t line=0;float age=0,time=0;
-    bool returning=false,revealed=false,arrivalPending=false,completionPending=false;
+    bool returning=false,revealed=false,arrivalPending=false,completionPending=false,offerDesert=false,desertArrivalPending=false;int fragments=1;
     static constexpr float FadeTime=.9f,OpeningTime=1.4f,ClosingTime=.45f,RevealTime=.7f;
     void enter(TowerPhase next){phase=next;age=0;revealed=false;}
-    void beginReturn(){*this={};returning=true;enter(TowerPhase::FadeOut);}
-    void beginTalk(){*this={};enter(TowerPhase::Dialogue);}
+    void beginReturn(int parts=1){*this={};fragments=parts;returning=true;enter(TowerPhase::FadeOut);}
+    void beginTalk(bool offer=false,int parts=1){*this={};offerDesert=offer;fragments=parts;enter(TowerPhase::Dialogue);}
+    bool chooseDesert(){if(phase!=TowerPhase::Choice||!offerDesert)return false;enter(TowerPhase::TravelOut);return true;}
+    bool takeDesertArrival(){bool value=desertArrivalPending;desertArrivalPending=false;return value;}
     bool active()const{return phase!=TowerPhase::Finished;}
     bool chamber()const{return returning&&(phase==TowerPhase::Opening||phase==TowerPhase::Dialogue||phase==TowerPhase::Closing);}
-    size_t lineCount()const{return returning?TowerReturnDialogue.size():TowerTalkDialogue.size();}
-    const StoryLine& current()const{return returning?TowerReturnDialogue[line]:TowerTalkDialogue[line];}
+    size_t lineCount()const{return returning?(fragments>=2?DesertReturnDialogue.size():TowerReturnDialogue.size()):(fragments>=2?DesertCompletedTalk.size():TowerTalkDialogue.size());}
+    const StoryLine& current()const{return returning?(fragments>=2?DesertReturnDialogue[line]:TowerReturnDialogue[line]):(fragments>=2?DesertCompletedTalk[line]:TowerTalkDialogue[line]);}
     float readingTime()const{return std::max(5.f,storyGlyphCount(current().text)/IntroSequence::GlyphsPerSecond+2.8f);}
     bool textComplete()const{return revealed||age*IntroSequence::GlyphsPerSecond>=storyGlyphCount(current().text);}
     std::string visibleText()const{return revealed?current().text:storyPrefix(current().text,size_t(age*IntroSequence::GlyphsPerSecond));}
-    void nextLine(){if(line+1<lineCount()){line++;enter(TowerPhase::Dialogue);}else enter(returning?TowerPhase::Closing:TowerPhase::Finished);}
+    void nextLine(){if(line+1<lineCount()){line++;enter(TowerPhase::Dialogue);}else enter(returning?TowerPhase::Closing:offerDesert?TowerPhase::Choice:TowerPhase::Finished);}
     void advance(){
         if(phase==TowerPhase::Opening){enter(TowerPhase::Dialogue);return;}
         if(phase!=TowerPhase::Dialogue||age<.15f)return;
         if(!textComplete())revealed=true;else nextLine();
     }
-    void skip(){if(phase==TowerPhase::Opening||phase==TowerPhase::Dialogue)enter(returning?TowerPhase::Closing:TowerPhase::Finished);}
+    void skip(){if(phase==TowerPhase::Opening||phase==TowerPhase::Dialogue||phase==TowerPhase::Choice)enter(returning?TowerPhase::Closing:TowerPhase::Finished);}
     void update(float dt){
         if(!active()||!std::isfinite(dt)||dt<=0)return;
         age+=std::min(dt,.1f);time+=std::min(dt,.1f);
         if(phase==TowerPhase::FadeOut&&age>=FadeTime){enter(TowerPhase::Opening);arrivalPending=true;}
         else if(phase==TowerPhase::Opening&&age>=OpeningTime)enter(TowerPhase::Dialogue);
         else if(phase==TowerPhase::Dialogue&&age>=readingTime())nextLine();
+        else if(phase==TowerPhase::TravelOut&&age>=FadeTime){enter(TowerPhase::TravelIn);desertArrivalPending=true;}
+        else if(phase==TowerPhase::TravelIn&&age>=1.2f)enter(TowerPhase::Finished);
         else if(phase==TowerPhase::Closing&&age>=ClosingTime)enter(TowerPhase::Reveal);
         else if(phase==TowerPhase::Reveal&&age>=RevealTime){enter(TowerPhase::Finished);completionPending=true;}
     }
     bool takeArrival(){bool value=arrivalPending;arrivalPending=false;return value;}
     bool takeCompletion(){bool value=completionPending;completionPending=false;return value;}
     float fade()const{
+        if(phase==TowerPhase::TravelOut)return storyEase(age/FadeTime);
+        if(phase==TowerPhase::TravelIn)return 1-storyEase(age/1.2f);
         if(phase==TowerPhase::FadeOut)return storyEase(age/FadeTime);
         if(phase==TowerPhase::Opening)return 1-storyEase(age/.8f);
         if(phase==TowerPhase::Closing)return storyEase(age/ClosingTime);

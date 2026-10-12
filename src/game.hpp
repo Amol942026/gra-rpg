@@ -40,7 +40,8 @@ inline float distance(V a,V b){return length(a-b);}
 inline V normalized(V v){float n=length(v);return n>.001f?v*(1/n):V{};}
 #include "forest_layout.hpp"
 #include "tower_layout.hpp"
-enum class WorldLocation {Forest,MageTower};
+#include "desert_layout.hpp"
+enum class WorldLocation {Forest,MageTower,Desert};
 enum class DawnQuest {Seeking,Returning,AtTower};
 struct Ground { int id; Item value; V pos; WorldLocation location=WorldLocation::Forest; int floor=0; };
 struct Prop { V pos; int type; float size; };
@@ -59,6 +60,7 @@ struct Enemy {
  int magicDefense()const{return enemyInfo(type).magicDefense;}
  DamageType attackType()const{return enemyInfo(type).attackType;}
 };
+struct FieldState {std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Ground> forage;};
 struct Effect { V pos; std::string text; float life; int color; bool damageNumber=false,critical=false;float height=75; };
 struct Fireball { V pos,velocity;float remaining=FireballRange,damage=0;bool critical=false; };
 struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
@@ -99,10 +101,14 @@ struct Game {
  int level=1,xp=0,kills=0,nextGround=1;bool bossDead=false;
  WorldLocation location=WorldLocation::Forest;DawnQuest dawnQuest=DawnQuest::Seeking;
  int towerFloor=0,towerRuneMask=0;
- bool towerReturnPending=false;
+ bool towerReturnPending=false,desertBossDead=false,desertCreated=false;int collectedFragments=0;
+ WorldLocation fieldLocation=WorldLocation::Forest;FieldState forestState,desertState;
  bool inTower()const{return location==WorldLocation::MageTower;}
  bool storyBlocked()const{return dawnQuest==DawnQuest::Returning;}
- int dawnFragments()const{return dawnQuest==DawnQuest::Seeking?0:1;}
+ int dawnFragments()const{return std::max(collectedFragments,dawnQuest==DawnQuest::Seeking?0:1);}
+ bool inDesert()const{return location==WorldLocation::Desert;}
+ const char* currentRegion()const{return inDesert()?desertRegion(player):forestRegion(player);}
+ #include "desert_system.hpp"
  bool mageReachable()const{return inTower()&&towerFloor==0&&!dead()&&!allocationRequired&&!storyBlocked()&&distance(player,MagePosition)<=MageTalkRange;}
  bool takeTowerReturn(){bool pending=towerReturnPending;towerReturnPending=false;return pending;}
  void enterMageTower(){
@@ -194,7 +200,9 @@ struct Game {
  bool transfer(Slot from,Slot to){
   if(dead()||allocationRequired||storyBlocked()||(from.place==to.place&&from.index==to.index&&from.owner==to.owner)||to.place==Place::Corpse||to.place==Place::Forage)return false;
   Item* a=get(from);Item* b=get(to);if(!a||!b||a->empty())return false;
-  const bool collectingShard=a->kind==Kind::DawnShard&&to.place==Place::Bag&&dawnQuest==DawnQuest::Seeking;
+  const Enemy* sourceBody=from.place==Place::Corpse?findCorpse(from.owner):nullptr;
+  const bool collectingShard=a->kind==Kind::DawnShard&&to.place==Place::Bag&&sourceBody&&
+   ((location==WorldLocation::Forest&&sourceBody->type==3&&dawnFragments()<1)||(inDesert()&&sourceBody->type==DesertBossType&&dawnFragments()<2));
   if(from.place==Place::Corpse||from.place==Place::Forage){
    if(from.place==Place::Corpse&&openedCorpse!=from.owner)return false;
    if(to.place!=Place::Bag||(!b->empty()&&(!stackable(a->kind)||a->kind!=b->kind||a->tier!=b->tier))){say("Przeciągnij łup na wolne pole plecaka lub pasujący stos.");return false;}
@@ -205,7 +213,7 @@ struct Game {
   else std::swap(*a,*b);
   if((to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0))cancelBow();
   sound(to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
-  if(collectingShard){dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say("Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");}
+  if(collectingShard){collectedFragments=inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");}
   else say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
  }
  bool drop(Slot from,V p){Item* a=get(from);if(a&&a->kind==Kind::DawnShard){say("Serce Świtu jest zbyt cenne, by je porzucić.");return false;}if((from.place==Place::Corpse||from.place==Place::Forage)||dead()||allocationRequired||storyBlocked()||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0)cancelBow();Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
@@ -220,7 +228,7 @@ struct Game {
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
- bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
+ bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&desertWater(p))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
  void move(V delta){V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(length(delta)>.001f)facing=normalized(delta);}
  Enemy* findEnemy(int id){for(auto&e:enemies)if(e.id==id&&e.alive)return &e;return nullptr;}
  void hit(Enemy& e,float amount,DamageType type=DamageType::Physical,bool critical=false){
@@ -230,10 +238,11 @@ struct Game {
   e.hp-=amount;e.flash=.18f;
   float lift=0;for(const auto& effect:effects)if(effect.damageNumber&&distance(effect.pos,e.pos)<.1f)lift=std::max(lift,effect.height-enemyInfo(e.type).visualHeight+24);
   effects.push_back({e.pos,std::to_string(int(std::round(amount))),critical?1.25f:.95f,0,true,critical,enemyInfo(e.type).visualHeight+18+std::min(lift,90.f)});
-  const Cue materials[]={Cue::SlimeHit,Cue::WolfHit,Cue::BoneHit,Cue::StoneHit,Cue::WolfHit,Cue::SlimeHit,Cue::WolfHit,Cue::StoneHit};sound(materials[std::clamp(e.type,0,EnemyTypeCount-1)],e.pos);
-  if(e.hp>0)return;e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;sound(e.type==3?Cue::Victory:Cue::EnemyFall,e.pos);kills++;xp+=enemyInfo(e.type).experience;
+  const Cue materials[]={Cue::SlimeHit,Cue::WolfHit,Cue::BoneHit,Cue::StoneHit,Cue::WolfHit,Cue::SlimeHit,Cue::WolfHit,Cue::StoneHit};sound(materials[std::clamp(e.type,0,ForestEnemyTypeCount-1)],e.pos);
+  if(e.hp>0)return;e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;sound(enemyBoss(e.type)?Cue::Victory:Cue::EnemyFall,e.pos);kills++;xp+=enemyInfo(e.type).experience;
   e.loot=rollEnemyLoot(e.type,rng);
   if(e.type==3){bossDead=true;say("Kamienny Strażnik pokonany! PPM na ciele: łup i część Serca Świtu.");}
+  else if(e.type==DesertBossType){desertBossDead=true;say("Żywa Wydma rozsypała się! PPM: łup i druga część Serca Świtu.");}
   else say("Przeciwnik pokonany. Otwórz jego ciało prawym przyciskiem myszy.");
   while(xp>=level*80){xp-=level*80;level++;attributePoints+=PointsPerLevel;skillPoints+=SkillPointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
  }
@@ -285,6 +294,7 @@ struct Game {
   e.pos.x=std::clamp(e.pos.x,1.6f+radius,MapWalkMax-radius);
   e.pos.y=std::clamp(e.pos.y,1.6f+radius,MapWalkMax-radius);
   float correction=distance(before,e.pos);
+  if(inDesert()&&desertWater(e.pos,radius)){V d=e.pos-DesertOasis;float n=length(d);float gap=2.45f+radius+.002f;correction=std::max(correction,gap-n);e.pos=DesertOasis+normalized(n>.0001f?d:V{1,0})*gap;}
   for(const auto& p:props){
    V delta=e.pos-p.pos;float d=length(delta),clearance=radius+propRadius(p.type)+.002f;
    if(d<clearance){correction=std::max(correction,clearance-d);V normal=d>.00001f?delta*(1/d):V{1,0};e.pos=p.pos+normal*clearance;}
@@ -369,14 +379,14 @@ struct Game {
   std::vector<V> oldPositions,desired(enemies.size());oldPositions.reserve(enemies.size());
   for(size_t i=0;i<enemies.size();i++){auto& e=enemies[i];oldPositions.push_back(e.pos);tick(e.flash);tick(e.attack);tick(e.strike);if(!e.alive){e.animation.moving=false;continue;}float d=distance(player,e.pos);
    const bool visible=canSeePlayer(e);
-   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(d<1.6f&&visible){
+   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(d<(e.type==DesertBossType?2.15f:1.6f)&&visible){
     if(wasRolling&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead()){float dmg=incomingDamage(float(e.damage()),e.attackType());hp=std::max(0.f,hp-dmg);hurt=.2f;sound(dead()?Cue::Death:Cue::Hurt,player);effects.push_back({player,"-"+std::to_string(int(dmg)),.8f,4});}
    }}continue;}
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
-    if(d<1.25f&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;sound(Cue::EnemyAttack,e.pos);}
-    else if(d>1.05f)desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
+    if(d<(e.type==DesertBossType?1.9f:1.25f)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;sound(Cue::EnemyAttack,e.pos);}
+    else if(d>(e.type==DesertBossType?1.7f:1.05f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
    }else desired[i]=patrolVelocity(e,dt);
   }
   moveEnemies(dt,desired);

@@ -1,0 +1,57 @@
+PASS: desert tests open no audio device
+PASS: second realm terrain and minimap are cached before gameplay
+PASS: desert prop 7: detailed 2x model has no cut-off edges
+PASS: desert prop 7: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 8: detailed 2x model has no cut-off edges
+PASS: desert prop 8: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 9: detailed 2x model has no cut-off edges
+PASS: desert prop 9: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 10: detailed 2x model has no cut-off edges
+PASS: desert prop 10: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 11: detailed 2x model has no cut-off edges
+PASS: desert prop 11: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 12: detailed 2x model has no cut-off edges
+PASS: desert prop 12: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 13: detailed 2x model has no cut-off edges
+PASS: desert prop 13: rich material shades and physical mouse mask agree with GPU pixels
+PASS: enemy 8: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 8: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 8: actual physical rig inspection agrees with GPU body pixels
+PASS: enemy 8: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 8: movement and attack visibly change the pose
+PASS: enemy 9: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 9: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 9: actual physical rig inspection agrees with GPU body pixels
+PASS: enemy 9: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 9: movement and attack visibly change the pose
+PASS: enemy 10: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 10: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 10: actual physical rig inspection agrees with GPU body pixels
+PASS: enemy 10: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 10: movement and attack visibly change the pose
+PASS: enemy 11: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 11: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 11: actual physical rig inspection agrees with GPU body pixels
+PASS: enemy 11: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 11: movement and attack visibly change the pose
+PASS: first fragment returns to Eldrin and opens the actual repeat conversation
+PASS: real dialogue ends in a paused travel choice without teleporting
+PASS: waiting or dialogue advancement never substitutes for selecting travel
+PASS: staying option closes dialogue and retains the tower
+PASS: travel mouse button begins departure fade before changing region
+PASS: lost focus freezes teleport and ignores all controls
+PASS: fade changes to the real desert and keeps the hero and first fragment
+PASS: arrival reveal finishes and restores movement and combat
+PASS: desert gate has accurate picking and an inspection HUD
+PASS: PPM on the gate returns through the same game handler
+PASS: second boss is selectable and exposes its own HP, kind and damage
+PASS: PPM opens the persistent sand corpse loot in the HUD
+PASS: LPM on the actual corpse HUD starts dragging the second fragment
+PASS: dropping the second fragment in the backpack starts its own return scene
+PASS: second return finishes in the tower with both protected fragments
+PASS: desert view 1: actual fullscreen framebuffer has correct dimensions
+PASS: desert view 2: actual fullscreen framebuffer has correct dimensions
+PASS: desert view 3: actual fullscreen framebuffer has correct dimensions
+PASS: desert view 4: actual fullscreen framebuffer has correct dimensions
+PASS: desert view 5: actual fullscreen framebuffer has correct dimensions
+Checks: 56; failures: 0

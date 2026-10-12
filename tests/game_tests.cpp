@@ -23,7 +23,9 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "developer_tests.hpp"
 #include "critical_healing_tests.hpp"
 #include "tower_stairs_tests.hpp"
+#include "desert_tests.hpp"
 int main(){
+ desertTests();
  towerStairsTests();
  criticalHealingTests();
  developerTests();

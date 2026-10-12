@@ -15,7 +15,7 @@ void exportForestOverview(){
  }
  DrawCircleV(point({8,19}),3.5f,Text);
  panel({1060,142,350,520},Panel);txt("MIESZKAŃCY LASU",1083,163,18,Gold);
- for(int type=0;type<EnemyTypeCount;type++){
+ for(int type=0;type<ForestEnemyTypeCount;type++){
   int count=int(std::count_if(game.enemies.begin(),game.enemies.end(),[&](const Enemy& e){return e.type==type;}));
   DrawCircleV({1091,215+type*39.f},4,colors[type]);txt(TextFormat("%s · %d",enemyInfo(type).name,count),1107,204+type*39.f,15,Text);
  }
@@ -47,14 +47,14 @@ bool runForestQA(){
  const char* directions[]={"E","SE","S","SW","W","NW","N","NE"};
  BeginTextureMode(sheet);ClearBackground(Ink);txt("NOWI MIESZKAŃCY KNIEI — OSIEM KIERUNKÓW",24,16,24,Gold);
  for(int d=0;d<8;d++)center(directions[d],220+d*140.f,56,14,Text);
- for(int type=4;type<EnemyTypeCount;type++){
+ for(int type=4;type<ForestEnemyTypeCount;type++){
   txt(enemyInfo(type).name,16,112+(type-4)*155,14,Muted);
   for(int d=0;d<8;d++){AnimationState pose;pose.direction=static_cast<Direction>(d);pose.moving=true;pose.phase=.2f;pose.idleTime=.7f;
    actor_art::draw(type+1,220+d*140.f,225+(type-4)*155,1,pose,.7f,false,false,Kind::Sword);
   }
  }
  EndTextureMode();saveTexture(sheet,"qa-v25/new-monsters-8-directions.png");UnloadRenderTexture(sheet);
- for(int type=4;type<EnemyTypeCount;type++){
+ for(int type=4;type<ForestEnemyTypeCount;type++){
   game=Game{};game.props.clear();game.enemies.clear();game.player={20,20};V pos=game.player+V{1,2};
   game.enemies.push_back({501,type,pos,pos,enemyInfo(type).health,enemyInfo(type).health});auto& e=game.enemies.back();e.animation.direction=Direction::SE;
   bool found=false;Vector2 base=screen(pos);

@@ -33,7 +33,7 @@ void drawTowerWorld(){
         else if(object.type==8)drawTowerStairs(object.index);
         else if(object.type==6){
             Vector2 p=screen(MagePosition);if(hovered.kind==HoverKind::Mage)ellipseOutline(p.x,p.y,31,14,Gold);
-            intro_art::mage(p.x,p.y,1,game.time,0);
+            intro_art::mage(p.x,p.y,1,game.time,towerStory.phase==TowerPhase::TravelOut?storyEase(towerStory.age/.9f):0);
             center("ELDRIN",p.x,p.y-144,15,rgb(205,172,248),true);
             center(game.mageReachable()?"E / PPM · ROZMAWIAJ":"MAG · MENTOR",p.x,p.y-123,14,game.mageReachable()?Gold:Muted);
         }else if(object.type==2){Vector2 p=screen(game.player);ellipseOutline(p.x,p.y+2,25,12,Fade(Gold,.6f));hero(p.x,p.y,1);}

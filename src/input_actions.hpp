@@ -27,6 +27,7 @@ bool clickWorldOrInventory() {
     if(!worldPointerAllowed(mouse))return false;
     WorldHover hit=pickWorld(mouse);if(hit.kind==HoverKind::Mage)return talkToMage();
     if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
+        if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
     return game.equipment[0].kind==Kind::Bow?game.beginBow(bowAimFromPointer()):game.attack();
 }
 bool rightClickWorldOrInventory(){
@@ -36,6 +37,7 @@ bool rightClickWorldOrInventory(){
         WorldHover hit=pickWorld(mouse);
         if(hit.kind==HoverKind::Mage)return talkToMage();
         if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
+        if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
         if(hit.kind==HoverKind::Corpse)return game.openCorpse(hit.index);
         if(hit.kind==HoverKind::Forage)return game.use({Place::Forage,hit.index});
         if(hit.kind==HoverKind::Ground)return game.use({Place::Ground,hit.index});

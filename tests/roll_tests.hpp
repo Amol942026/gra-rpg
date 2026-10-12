@@ -27,7 +27,8 @@ void rollTests() {
     Game runWall=emptyArena();runWall.props.push_back({{15.7f,15},0,1});
     for(int i=0;i<20;i++)runWall.update(.05f,{1,0},false,true);
     check(runWall.walkable(runWall.player)&&runWall.player.x<15.7f,"running respects terrain collisions");
-    const float speeds[]={1.85f,2.6f,1.85f,1.35f,2.25f,2.8f,2.2f,1.45f};
+    const float speeds[]={1.85f,2.6f,1.85f,1.35f,2.25f,2.8f,2.2f,1.45f,2.35f,2.1f,2.7f,1.45f};
+    static_assert(sizeof(speeds)/sizeof(speeds[0])==EnemyTypeCount);
     for(int type=0;type<EnemyTypeCount;type++){
         Game g=emptyArena();g.player={20,15};
         g.enemies.push_back({0,type,{15,15},{15,15},100,100});
