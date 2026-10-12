@@ -1,0 +1,16 @@
+{
+  "version": "0.32",
+  "matched_files": 84,
+  "archive_bytes": 7257280,
+  "archive_sha256": "5d4703b3e79a80db6bd5897f20b4867a42a72ed307d7ae9d26240beda8489d06",
+  "extracted_game": "C:\\Users\\Amadeusz\\AppData\\Local\\Temp\\emberfall-v32-package-zc51delf\\Emberfall",
+  "instructions_verified": true,
+  "audio_preferences_unchanged": true,
+  "extracted_art_checks": 136,
+  "extracted_floor_checks": 116,
+  "extracted_exit_codes": [
+    0,
+    0
+  ],
+  "extracted_audio_settings_created": false
+}

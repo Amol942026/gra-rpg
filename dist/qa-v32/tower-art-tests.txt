@@ -1,0 +1,137 @@
+PASS: furniture diagnostic opens no audio device
+PASS: sprite 0: detailed physical shape has no cut-off edges
+PASS: sprite 0: distinct material and lighting shades survive GPU rendering
+PASS: sprite 0: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 1: detailed physical shape has no cut-off edges
+PASS: sprite 1: distinct material and lighting shades survive GPU rendering
+PASS: sprite 1: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 2: detailed physical shape has no cut-off edges
+PASS: sprite 2: distinct material and lighting shades survive GPU rendering
+PASS: sprite 2: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 3: detailed physical shape has no cut-off edges
+PASS: sprite 3: distinct material and lighting shades survive GPU rendering
+PASS: sprite 3: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 4: detailed physical shape has no cut-off edges
+PASS: sprite 4: distinct material and lighting shades survive GPU rendering
+PASS: sprite 4: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 5: detailed physical shape has no cut-off edges
+PASS: sprite 5: distinct material and lighting shades survive GPU rendering
+PASS: sprite 5: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 6: detailed physical shape has no cut-off edges
+PASS: sprite 6: distinct material and lighting shades survive GPU rendering
+PASS: sprite 6: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 7: detailed physical shape has no cut-off edges
+PASS: sprite 7: distinct material and lighting shades survive GPU rendering
+PASS: sprite 7: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 8: detailed physical shape has no cut-off edges
+PASS: sprite 8: distinct material and lighting shades survive GPU rendering
+PASS: sprite 8: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 9: detailed physical shape has no cut-off edges
+PASS: sprite 9: distinct material and lighting shades survive GPU rendering
+PASS: sprite 9: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 10: detailed physical shape has no cut-off edges
+PASS: sprite 10: distinct material and lighting shades survive GPU rendering
+PASS: sprite 10: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 11: detailed physical shape has no cut-off edges
+PASS: sprite 11: distinct material and lighting shades survive GPU rendering
+PASS: sprite 11: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 12: detailed physical shape has no cut-off edges
+PASS: sprite 12: distinct material and lighting shades survive GPU rendering
+PASS: sprite 12: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 13: detailed physical shape has no cut-off edges
+PASS: sprite 13: distinct material and lighting shades survive GPU rendering
+PASS: sprite 13: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 14: detailed physical shape has no cut-off edges
+PASS: sprite 14: distinct material and lighting shades survive GPU rendering
+PASS: sprite 14: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 15: detailed physical shape has no cut-off edges
+PASS: sprite 15: distinct material and lighting shades survive GPU rendering
+PASS: sprite 15: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 16: detailed physical shape has no cut-off edges
+PASS: sprite 16: distinct material and lighting shades survive GPU rendering
+PASS: sprite 16: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 17: detailed physical shape has no cut-off edges
+PASS: sprite 17: distinct material and lighting shades survive GPU rendering
+PASS: sprite 17: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 18: detailed physical shape has no cut-off edges
+PASS: sprite 18: distinct material and lighting shades survive GPU rendering
+PASS: sprite 18: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 19: detailed physical shape has no cut-off edges
+PASS: sprite 19: distinct material and lighting shades survive GPU rendering
+PASS: sprite 19: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 20: detailed physical shape has no cut-off edges
+PASS: sprite 20: distinct material and lighting shades survive GPU rendering
+PASS: sprite 20: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 21: detailed physical shape has no cut-off edges
+PASS: sprite 21: distinct material and lighting shades survive GPU rendering
+PASS: sprite 21: every physical mask pixel agrees with independent GPU readback
+PASS: object 0: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 0: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 0: physical animation changes visible pixels
+PASS: object 1: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 1: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 1: physical animation changes visible pixels
+PASS: object 2: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 2: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 2: physical animation changes visible pixels
+PASS: object 3: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 3: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 3: physical animation changes visible pixels
+PASS: object 4: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 4: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 5: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 5: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 6: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 6: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 7: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 7: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 8: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 8: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 8: physical animation changes visible pixels
+PASS: object 9: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 9: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 10: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 10: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 11: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 11: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 11: physical animation changes visible pixels
+PASS: object 12: animated physical silhouette matches GPU pixels at time 0.400000
+PASS: object 12: animated physical silhouette matches GPU pixels at time 3.700000
+PASS: object 12: physical animation changes visible pixels
+PASS: floor 1 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 1 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 1 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 1 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 1 / Stół Eldrina: actual shape selects the correct inspection HUD
+PASS: floor 1 / Kula skupienia: actual shape selects the correct inspection HUD
+PASS: floor 1 / Kominek: actual shape selects the correct inspection HUD
+PASS: floor 1 / Źródło odnowy: actual shape selects the correct inspection HUD
+PASS: floor 1: decorated room reaches actual fullscreen framebuffer
+PASS: floor 2 / Regał z księgami: actual shape selects the correct inspection HUD
+PASS: floor 2 / Regał z księgami: actual shape selects the correct inspection HUD
+PASS: floor 2 / Regał z księgami: actual shape selects the correct inspection HUD
+PASS: floor 2 / Otwarta kronika: actual shape selects the correct inspection HUD
+PASS: floor 2 / Stół Eldrina: actual shape selects the correct inspection HUD
+PASS: floor 2 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 2: decorated room reaches actual fullscreen framebuffer
+PASS: floor 3 / Kocioł alchemiczny: actual shape selects the correct inspection HUD
+PASS: floor 3 / Stół Eldrina: actual shape selects the correct inspection HUD
+PASS: floor 3 / Stół Eldrina: actual shape selects the correct inspection HUD
+PASS: floor 3 / Ogród ziół: actual shape selects the correct inspection HUD
+PASS: floor 3 / Ogród ziół: actual shape selects the correct inspection HUD
+PASS: floor 3 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 3: decorated room reaches actual fullscreen framebuffer
+PASS: floor 4 / Kamień pieczęci: actual shape selects the correct inspection HUD
+PASS: floor 4 / Kamień pieczęci: actual shape selects the correct inspection HUD
+PASS: floor 4 / Kamień pieczęci: actual shape selects the correct inspection HUD
+PASS: floor 4 / Serce Świtu: actual shape selects the correct inspection HUD
+PASS: floor 4 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 4 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 4: decorated room reaches actual fullscreen framebuffer
+PASS: floor 5 / Luneta Eldrina: actual shape selects the correct inspection HUD
+PASS: floor 5 / Astrolabium: actual shape selects the correct inspection HUD
+PASS: floor 5 / Otwarta kronika: actual shape selects the correct inspection HUD
+PASS: floor 5 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 5 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 5: decorated room reaches actual fullscreen framebuffer
+Checks: 136; failures: 0

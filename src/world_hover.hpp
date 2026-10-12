@@ -94,9 +94,7 @@ WorldHover pickWorld(Vector2 point) {
         }else if(it->type==7){
             position=towerFurnishings(game.towerFloor)[it->index].pos;Vector2 p=screen(position);int type=towerFurnishings(game.towerFloor)[it->index].type;
             kind=HoverKind::TowerObject;
-            float half=type==0?25:type==1?49:type==5?58:type==3?60:type==10?55:40;
-            float height=type==0?190:type==5?158:type==3?150:type==1?70:type==10?140:120;
-            touched=CheckCollisionPointRec(point,{p.x-half,p.y-height,half*2,height+16});
+            touched=tower_furniture::contains(type,p,point,game.time,game.towerFloor);
         }else if(it->type==8){
             position=it->index==1?TowerStairUp:TowerStairDown;Vector2 p=screen(position);kind=HoverKind::TowerStair;
             touched=tower_stairs::contains(it->index,p,point);

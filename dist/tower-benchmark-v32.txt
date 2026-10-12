@@ -1,0 +1,31 @@
+Frames: 900
+Window: 1920x1080
+Fullscreen: yes
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: DXGI flip / V-sync
+DXGI synchronized presents: 900
+Occluded presentations: 0
+Suppressed native swaps: 900
+Actual presentation interval: 1
+Presentation fallback: 
+Strong cuts performed: 0
+Piercing arrows fired: 0
+Developer mode: 0
+Developer menu open: 0
+Developer destination: forest
+Tower floor: 5
+Intro active: 0
+Developer error: 
+Audio device opened: no
+Native canvas: 1728x1080
+Average FPS: 60.0548
+CPU frame mean (ms): 11.424
+EndDrawing mean (ms): 0.0371187
+Presentation mean (ms): 5.18953
+CPU frame p95 (ms): 13.1363
+CPU frame p99 (ms): 18.1029
+Frame p95 (ms): 16.7742
+Frame p99 (ms): 18.2839
+Frame max (ms): 23.9416
+Frames over 25 ms: 0

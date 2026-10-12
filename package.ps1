@@ -130,6 +130,17 @@ Fugi, podstopnice, kamienne krawedzie i cienie sa dopasowane do skali bohatera.
 Najazd myszka wskazuje rzeczywista sylwetke. Kolizje chronia przed wejsciem w szyb.
 Podejdz do wejscia i uzyj E / LPM / PPM, aby przejsc na sasiednie pietro.
 
+Wersja 0.32: szczegolowe wyposazenie wszystkich pieciu pieter wiezy.
+Rzezbione kolumny i postumenty, kominek z kamiennym lukiem, drewniane meble,
+kolorowe ksiegi ze zloconymi grzbietami, otwarte strony i wstazki.
+Alchemia: fiolki, mozdzierze, kociol z uchwytami i nitami, skrzynie ziol.
+Luneta: trojnog, segmenty tubusu i soczewka; astrolabium: metalowe kregi.
+Okna maja kamienne obramowania, luk, parapet i rombowe szyby.
+Ogien, woda, para, ziola i magia sa animowane. Mysz wskazuje rzeczywisty
+ksztalt obiektu, dodaje zloty obrys i informacje w HUD. E / LPM / PPM
+nadal otwieraja ksiegi, alchemie, mapy nieba i uruchamiaja pozostale interakcje.
+Grafika jest przygotowywana raz na starcie, w podwojnej rozdzielczosci.
+
 STEROWANIE
 WSAD - chodzenie; kombinacje klawiszy pozwalaja isc ukosnie.
 Przytrzymany Shift + WSAD - bieg o 50% szybszy od chodu.

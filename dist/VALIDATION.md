@@ -1,5 +1,19 @@
 # Weryfikacja prototypu
 
+## Wersja 0.32 — szczegółowe obiekty wszystkich pięter wieży
+
+Sprawdzone 12 października 2026 na Windows 11 / AMD Radeon (TM) Graphics. Wszystkie uruchomienia miały `--no-audio`, urządzenie audio nie zostało otwarte. Aktualne ustawienia dźwięku zachowano bajt w bajt: SHA-256 `12BA35CFD8EF37DB138C8A4CC1A40CD35E9E8F17E4E7456D2B3C957E4DBD7CD6`.
+
+- Nowe modele wszystkich **13 rodzajów wyposażenia**, osobny wariant stołu alchemicznego i kamienne okna. Perspektywa 40:20 i światło zgodne ze schodami. Rzeźbiony kamień, drewniane konstrukcje i słoje, księgi z oprawami i dwiema stronami, mosiężne okucia, szkło, fiolki, moździerze, nitowany kocioł, zioła i przyrządy astronomiczne. Otwarte księgi mają jawne warstwy cover/page/text, aby sortowanie średniej głębokości nie zakrywało tylnej strony.
+- **22 tekstury 2×** są przygotowywane raz przed grą: 15 modeli statycznych oraz 7 części animowanych (kula, kryształ, Serce, 3 zioła, płomień). Statyczne tekstury mają 512 × 640, części 192 × 256. Obrys i maskę wskazywania uzyskuje się z fizycznej nieprzezroczystej sylwetki. Dynamiczne części używają tych samych przesunięć i skali w rysowaniu oraz wskazywaniu; poświaty i para nie zasłaniają myszy. Ogień, woda, para, zioła i magia nadal są animowane.
+- **1842/1842** sprawdzeń logiki i animacji. **136/136** sprawdzeń nowych grafik: niezależny odczyt pikseli GPU, maska wszystkich pikseli każdej z 22 tekstur, brak ucięcia, materiały i światło, zgodność fizycznej animacji ze wskazywaniem w dwóch fazach, widoczne zmiany animacji, wybór i właściwe informacje HUD dla wszystkich 31 obiektów na piętrach. Wszystkie piętra renderowano w skalach **80%, 100%, 120%** oraz w rzeczywistym buforze pełnego ekranu. Obejrzano obie galerie szczegółów z bohaterem obok i widoki pomieszczeń.
+- Regresje: **116/116** pięter i interakcji (księgi, przepisy alchemiczne, źródło HP/many, pieczęcie, mapy nieba, E/LPM/PPM), **18/18** kamiennych schodów, **50/50** powrotu do Eldrina i **52/52** trybu deweloperskiego. Wszystkie procesy zakończyły się kodem 0.
+- Benchmark wszystkich pięter: **900 klatek**, pełny ekran **1920 × 1080 / 60 Hz**, bufor **1728 × 1080**, średnio **60,05 FPS**. CPU średnio **11,42 ms**, P95 klatki **16,77 ms**, P99 **18,28 ms**, maksimum **23,94 ms**, **0 klatek ponad 25 ms**. Dotyczy tego komputera i scenariusza; raport `dist/tower-benchmark-v32.txt`.
+
+Finalny ZIP **0.32**: **7 257 280 bajtów** (7,26 MB). Wypakowana kopia przeszła **136/136** sprawdzeń obiektów oraz **116/116** pięter i interakcji, kod 0. SHA-256 wszystkich **84 plików gry** zgadza się z projektem; sprawdzono integralność archiwum, aktualne instrukcje i brak osobistych ustawień audio w paczce. Raporty: `dist/qa-v32/package-verification.json`, `packaged-tower-art-tests.txt`, `packaged-tower-floors-tests.txt`.
+
+Raport: `dist/qa-v32/tower-art-tests.txt`. Galerie: `furniture-detail-1.png`, `furniture-detail-2.png`. Widoki: `floor-1-80.png` do `floor-5-120.png`, `floor-1-display.png` do `floor-5-display.png`, podświetlenia `hover-floor-2-type-6.png`, `hover-floor-3-type-7.png`, `hover-floor-5-type-11.png`.
+
 ## Wersja 0.31 — kamienne schody w rzeczywistych proporcjach
 
 Sprawdzone 12 października 2026 na Windows 11 / AMD Radeon (TM) Graphics. Wszystkie uruchomienia miały `--no-audio`; urządzenie audio pozostało zamknięte. Aktualne preferencje dźwięku zachowano bajt w bajt: SHA-256 `12BA35CFD8EF37DB138C8A4CC1A40CD35E9E8F17E4E7456D2B3C957E4DBD7CD6`.

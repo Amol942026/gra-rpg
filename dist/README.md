@@ -8,6 +8,16 @@ Przed wybraniem prezentacji DirectX gra sprawdza rzeczywisty piksel przesłany z
 
 Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
+## Wersja 0.32 — szczegółowe wyposażenie wszystkich pięter wieży
+
+Dopracowano **wszystkie 13 rodzajów obiektów**: runiczne kolumny, stół Eldrina, kulę skupienia, kominek, źródło odnowy, regały z księgami, otwartą kronikę, kocioł, ogród ziół, kamienie pieczęci, lunetę, astrolabium i Serce Świtu. Mają tę samą perspektywę **40:20** i oświetlenie co kamienne schody. Kolumny i postumenty mają profilowane podstawy, rowki i łączenia; kominek murowany łuk, gzyms, drewno i płomienie. Meble mają drewniane nogi, wsporniki, słoje i mosiężne okucia. Na regałach widać kolorowe oprawy, złocone grzbiety i krawędzie stron; otwarte księgi mają dwie strony, tekst oraz wstążkę.
+
+W alchemii stoły zawierają moździerz, tłuczek, fiolki, notatki i księgę. Metalowy kocioł ma obręcz, uchwyty, nity i trzy nogi, a skrzynie ziół różne liście i kwiaty. Luneta ma trójnóg, segmenty tubusu, pierścienie i szkło; astrolabium mosiężne kręgi z podziałką i orbitujące kule. Kamienne okna mają łuk z osobnych bloków, parapet, szprosy i rombowy wzór szyb.
+
+Płomienie, woda, para, zioła oraz efekty magiczne nadal się poruszają. Modele przygotowuje się raz w **podwójnej rozdzielczości** i przechowuje na GPU. Najazd myszą używa maski rzeczywistej sylwetki, także dla animowanych części; dodaje złoty obrys i właściwe informacje w HUD. Księgi, alchemia, źródło, pieczęcie i luneta zachowują obsługę **E / LPM / PPM**.
+
+Cichy test `--tower-art-qa --no-audio` sprawdza gotowe piksele GPU, brak ucięcia obiektów, zgodność wskazywania myszą z animacją, HUD i pełny ekran. Galerie z bohaterem dla porównania skali: `dist/qa-v32/furniture-detail-1.png` i `furniture-detail-2.png`; widoki pięter w skalach 80%, 100% i 120% oraz raport: `dist/qa-v32/`.
+
 ## Wersja 0.31 — pełnowymiarowe kamienne schody w wieży
 
 Wieża ma teraz schody dopasowane do skali bohatera i izometrycznych osi posadzki. **Schody w górę** to wysoki bieg z **14 stopniami**, spocznikiem, murowanymi bokami, słupkami i kamiennymi poręczami. Stopnie mają osobne podstopnice, jasne krawędzie, fugi i ślady zużycia. **Schody w dół** są otwartym szybem w podłodze: stopnie schodzą poniżej posadzki i znikają w cieniu, a otwór otacza kamienna balustrada z wolnym wejściem.

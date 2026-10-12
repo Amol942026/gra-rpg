@@ -212,6 +212,7 @@ void makeArt(){
 #include "corpse_art.hpp"
 #include "environment.hpp"
 #include "tower_stairs_art.hpp"
+#include "tower_furniture_art.hpp"
 #include "world_hover.hpp"
 #include "magic_art.hpp"
 #include "bow_art.hpp"
@@ -322,7 +323,7 @@ void drawUI(){
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.31",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.32",1370,885,10,Muted);
 }
 void tooltip(){if(dragging.place!=Place::None||welcome||help||paused)return;Slot s=hoverSlot();Item*p=game.get(s);if(!p||p->empty())return;float x=std::min(mouse.x+20,1106.f),y=std::min(mouse.y+20,740.f);panel({x,y,312,139},rgb(12,22,25,250));rect(x,y,3,139,rarity(p->tier));txt(rarityName(p->tier),x+17,y+13,10,rarity(p->tier));txt(itemName(*p),x+17,y+34,18,Text);std::string stat;
  if(p->kind==Kind::DawnShard)stat="Artefakt fabularny · część 1 z 5";else if(gearSlot(p->kind)>=0)stat=(gearSlot(p->kind)==0||gearSlot(p->kind)==5?"Atak +":"Pancerz +")+std::to_string(power(*p));else if(p->kind==Kind::Arrow)stat="Amunicja do łuku · jedna na strzał";else if(p->kind==Kind::Health)stat="Odnawia 50 punktów zdrowia";else if(p->kind==Kind::Mushroom)stat="Po zjedzeniu odnawia 10 HP";else if(p->kind==Kind::Mana)stat="Odnawia 35 punktów many";else if(material(p->kind))stat=materialDescription(p->kind);else stat="Skarb znaleziony w ruinach";
@@ -380,7 +381,7 @@ void input(float dt){
  if(dragging.place==Place::Corpse&&game.openedCorpse!=dragging.owner)dragging={};
 }
 void integrationTests(){
- std::ofstream out("interaction-test-v31.txt");int count=0;
+ std::ofstream out("interaction-test-v32.txt");int count=0;
  auto check=[&](bool result,const char* label){out<<(result?"PASS: ":"FAIL: ")<<label<<"\n";out.flush();count++;if(!result)std::exit(2);};
  auto midpoint=[](Rectangle r){return Vector2{r.x+r.width/2,r.y+r.height/2};};
  check(game.ground.empty(),"normal startup contains no ground loot");
@@ -425,6 +426,7 @@ void integrationTests(){
 #include "developer_qa.hpp"
 #include "critical_healing_qa.hpp"
 #include "tower_stairs_qa.hpp"
+#include "tower_furniture_qa.hpp"
 int main(int argc,char**argv) {
     bool smoke=false,benchmark=false,integration=false,visualQA=false,hoverQA=false,rollQA=false,large=false;
     bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=false;
@@ -443,7 +445,7 @@ int main(int argc,char**argv) {
     bool performanceQA=false,performancePassed=true;
     bool refreshQA=false,refreshPassed=true;
     bool forestQA=false,forestPassed=true,graphicsQA=false,graphicsPassed=true,mushroomQA=false,mushroomPassed=true,bowQA=false,bowPassed=true,skillsQA=false,skillsPassed=true;
-    bool stairsQA=false,stairsPassed=true;
+    bool stairsQA=false,stairsPassed=true,towerArtQA=false,towerArtPassed=true;
     bool combatQA=false,combatPassed=true;
     bool towerBenchmark=false,developerQA=false,developerPassed=true,developerSmoke=false;DeveloperLaunch developerLaunch;
     int frameLimit=0,benchmarkStrongCuts=0,benchmarkPiercingShots=0;
@@ -451,6 +453,7 @@ int main(int argc,char**argv) {
         std::string arg=argv[i];
         if(parseDeveloperArgument(arg,i,argc,argv,developerLaunch))continue;
         if(arg=="--stairs-qa")stairsQA=true;
+        if(arg=="--tower-art-qa")towerArtQA=true;
         if(arg=="--combat-qa")combatQA=true;
         if(arg=="--dev-qa")developerQA=true;
         if(arg=="--dev-smoke"){developerSmoke=true;frameLimit=180;developerLaunch.enabled=true;}
@@ -495,7 +498,7 @@ int main(int argc,char**argv) {
     fs::path exe=fs::absolute(argv[0]).parent_path();
     if(fs::exists(exe/"assets"))fs::current_path(exe);
     else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
-    startupLog.open();startupLog.write("Emberfall v0.31: startup");
+    startupLog.open();startupLog.write("Emberfall v0.32: startup");
     SetTraceLogCallback(startupTrace);
     SetTraceLogLevel(LOG_INFO);
     if(openGL)sync_present::useOpenGL();
@@ -503,16 +506,16 @@ int main(int argc,char**argv) {
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
     SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
     startupLog.write("Creating graphics window");
-    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.31");
+    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.32");
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
     startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
-    bool diagnostic=stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
+    bool diagnostic=towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
     if(!diagnostic){game=Game(std::random_device{}());if(!developerLaunch.enabled)startIntro();}
     startupLog.write("Generating world graphics");
-    makeArt();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();startupLog.write("World graphics ready");
-    audioSystem.init(!stairsQA&&!combatQA&&!noAudio&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA,!stairsQA&&!combatQA&&!noAudio&&!startupSmoke&&!developerQA&&!( towerFloorsQA||towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA));
+    makeArt();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();startupLog.write("World graphics ready");
+    audioSystem.init(!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA,!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!startupSmoke&&!developerQA&&!( towerFloorsQA||towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA));
     startupLog.write(noAudio?"Audio skipped (--no-audio)":"Audio initialization complete");
     if(developerLaunch.enabled&&!diagnostic){
         developerKit=developerLaunch.kit;developerSelection=developerLaunch.destination>=0?developerLaunch.destination:0;
@@ -522,6 +525,7 @@ int main(int argc,char**argv) {
     if(smoke||benchmark)welcome=false;
     if(benchmark)game.skillRanks={1,1};
     if(towerBenchmark){game.enterMageTower();game.dawnQuest=DawnQuest::AtTower;game.messageTime=0;}
+    if(towerArtQA)towerArtPassed=runTowerFurnitureQA();
     if(stairsQA)stairsPassed=runTowerStairsQA();
     if(combatQA)combatPassed=runCriticalHealingQA();
     if(developerQA)developerPassed=runDeveloperQA();
@@ -554,7 +558,7 @@ int main(int argc,char**argv) {
     int frame=0;
     std::vector<double> cpuTimes,frameTimes,endTimes,presentTimes;
     double previous=GetTime();
-    while(!stairsQA&&!combatQA&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA&&!WindowShouldClose()){
+    while(!towerArtQA&&!stairsQA&&!combatQA&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA&&!WindowShouldClose()){
         double begin=GetTime();double elapsed=begin-previous;previous=begin;
         performance.begin();
         float dt=float(std::clamp(elapsed,0.0,.05));
@@ -599,7 +603,7 @@ int main(int argc,char**argv) {
         presentCanvas();
         if(((smoke||startupSmoke||developerSmoke)&&frame==119)||(!smoke&&!benchmark&&IsKeyPressed(KEY_F12))){
             fs::create_directories("screenshots");Image image=presentedImage();
-            ExportImage(image,developerSmoke?"screenshots/emberfall-dev-startup.png":startupSmoke?"screenshots/emberfall-startup.png":"screenshots/emberfall-v31.png");UnloadImage(image);
+            ExportImage(image,developerSmoke?"screenshots/emberfall-dev-startup.png":startupSmoke?"screenshots/emberfall-startup.png":"screenshots/emberfall-v32.png");UnloadImage(image);
         }
         double submitted=GetTime();double cpu=submitted-begin;EndDrawing();double ended=GetTime();performance.end(RenderStage::Present,true);finishFramePacing();double shown=GetTime();
         if(frame==0){startupLog.write("First frame presented");startupLog.write(pacingName());if(*sync_present::error())startupLog.write(sync_present::error());}
@@ -609,7 +613,7 @@ int main(int argc,char**argv) {
     }
     if(frameLimit&&!cpuTimes.empty()){
         std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
-        std::ofstream f(developerSmoke?"dev-startup-v31.txt":towerBenchmark?"tower-benchmark-v31.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v31-fullscreen.txt":large?"benchmark-v31-large.txt":"benchmark-v31.txt"):"smoke-test-v31.txt");
+        std::ofstream f(developerSmoke?"dev-startup-v32.txt":towerBenchmark?"tower-benchmark-v32.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v32-fullscreen.txt":large?"benchmark-v32-large.txt":"benchmark-v32.txt"):"smoke-test-v32.txt");
         f<<"Frames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
          <<"\nFullscreen: "<<(fullScreen()?"yes":"no")
          <<"\nRefresh rate (Hz): "<<refreshHz<<"\nV-sync interval: "<<swapInterval
@@ -637,10 +641,10 @@ int main(int argc,char**argv) {
     performance.save();
     startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
-    unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();
+    unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();
     for(auto& t:propArt)UnloadRenderTexture(t);
     UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
-    typography.clear();CloseWindow();return stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
+    typography.clear();CloseWindow();return towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }
 
 
