@@ -1,0 +1,19 @@
+{
+  "version": "0.37",
+  "archive_entries": 87,
+  "matched_payload_files": 85,
+  "archive_bytes": 7355326,
+  "archive_sha256": "5932267e2640685b0d44cf1265703fab8dfc211b0441c2b6b25783512162148e",
+  "game_sha256": "f9549aae165e7f7e471c7cb996515b54b8ccfc0674ef805c462e8132948f6ebb",
+  "extracted_game": "C:\\Users\\Amadeusz\\AppData\\Local\\Temp\\emberfall-v37-package-_fv8a_so\\Emberfall\\Emberfall.exe",
+  "instructions_verified": true,
+  "audio_preferences_sha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6",
+  "audio_preferences_unchanged": true,
+  "model_checks": 2985,
+  "packaged_checks": {
+    "desert": 95,
+    "graphics": 337
+  },
+  "packaged_exit_code": 0,
+  "packaged_audio_settings_created": false
+}

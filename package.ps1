@@ -59,7 +59,7 @@ PPM na borowiku w plecaku przywraca 10 HP (do maksimum); stos do 99 sztuk.
 Przy pelnym HP grzyb nie znika. Pelny plecak pozostawia go w lesie.
 Las ma 72 x 72 pola, nowe sciezki, brzozy, deby i grzyby. Na mapie jest
 46 przeciwnikow z 8 gatunkow, w tym dziki, pajaki, rozbojnicy i ozywione drzewa.
-Kazdy gatunek ma wlasny loot: m.in. kiel wilka 75%, siersc wilka 55%.
+Kazdy gatunek ma wlasny loot: m.in. kiel wilka 60%, siersc wilka 60%.
 Losowania sa niezalezne; dokladne szanse i ilosci znajdziesz w LOOT.md.
 Materialy lacza sie w stosy do 99 sztuk. Nowy sprzet: sztylet, plaszcz, amulet.
 Wersja 0.21 ma bardziej szczegolowe postacie, potwory, drzewa, teren i ikony.
@@ -148,10 +148,10 @@ Po rozmowie kliknij odpowiedz "Przenies mnie na pustynie.".
 Mozesz zostac w wiezy; czekanie, Enter i Spacja w wyborze nie teleportuja.
 Na pustyni: kaktusy, opuncje, piaskowce, ruiny, palmy i Oaza Bursztynu.
 27 potworow: skorpiony, skarabeusze i kobry; wlasne animacje i ciala z lupem.
-Nowe trofea: zadlo skorpiona 75%, pancerz skarabeusza 85%, luska kobry 80%.
+Nowe trofea: zadlo skorpiona 60%, pancerz skarabeusza 60%, luska kobry 60%.
 Drugi boss - Zywa Wydma - czeka na poludniowym wschodzie; 560 HP.
-Jej piaskowe cialo zawiera mocniejszy miecz, esencje piasku, mikstury,
-monety i druga czesc Serca Switu ze szansa 100%. Szczegoly w LOOT.md.
+Jej piaskowe cialo moze zawierac nowe bronie, esencje, mikstury i monety.
+Druga czesc Serca Switu jest zawsze gwarantowana (100%). Patrz LOOT.md.
 Otworz cialo PPM i przeciagnij nagrody do plecaka; fragment zbierz na koncu.
 Fragment uruchamia powrot do Eldrina, nowy dialog i postep 2 / 5.
 Brama Eldrina w miejscu przybycia: E / LPM / PPM - powrot do wiezy.
@@ -160,6 +160,57 @@ Poziom, statystyki, umiejetnosci, ekwipunek, zdrowie i mana sa zachowane.
 F3 ma teraz 16 lokacji. Test_pustyni.bat zaczyna od razu w drugiej krainie.
 Uruchom.bat --start desert-oasis lub --start desert-boss - test oazy / bossa.
 Zwykly start bez parametrow nadal rozpoczyna sie prologiem.
+
+Wersja 0.34: LAGODNIEJSZE KSZTALTY PUSTYNI
+Potwory i ciala maja zaokraglone czesci i plynne cieniowanie powierzchni.
+Zywa Wydma ma miekki piaskowy grzbiet zamiast ostrych wielokatnych pasow.
+Kaktusy maja wygiete ramiona, piaskowce gladkie krawedzie i faliste warstwy,
+palmy zakrzywione pnie i liscie, a teren plynne grzbiety wydm.
+Luk bramy jest zaokraglony; oaza ma gladki brzeg i wodne kregi.
+Animacje i wskazywanie mysza sa zachowane.
+
+Wersja 0.35: WIATR PUSTYNI I GORY POZA MAPA
+Wiatr niesie drobne ziarna i miekkie smugi pylu blisko ziemi.
+Sila podmuchow zmienia sie plynnie; piasek porusza sie razem z terenem,
+takze podczas biegu i uniku. Drobiny nie pojawiaja sie na wodzie ani HUD.
+Za kazda krawedzia i naroznikiem pustynnej mapy rozciagaja sie pasma gor.
+Ich zbocza maja cieniowanie, slady erozji i warstwy piaskowca.
+Grafika gor jest przygotowywana raz na starcie i przechowywana na GPU.
+Obszar gry, kolizje i mechaniki walki oraz zbierania pozostaja zachowane.
+
+Wersja 0.36: DROGI PUSTYNI I PIASKOWE WIEZIENIE
+Pustynne drogi maja lagodne zakrety, naturalne brzegi, slady stop i koleiny.
+Zywa Wydma co 10 sekund widocznej walki wiezi bohatera w malej wydmie.
+Przez 3 sekundy nie mozna chodzic, biegac, robic uniku ani atakowac.
+Pulapka przerywa naciaganie luku i unik. HUD pokazuje czas do uwolnienia.
+Mikstury i Leczenie pozostaja dostepne. Menu pauzy zatrzymuje czas.
+
+Wersja 0.37: ANIMACJA BIEGU I GORY PRZY PUSTYNI
+Shift podczas ruchu wlacza osobna animacje biegu w osmiu kierunkach.
+Postac pochyla tulow, mocniej pracuje ugietymi ramionami i nogami.
+Miecz, luk, kolczan i peleryna poruszaja sie wraz z postacia.
+Chod i bieg plynnie przechodza jeden w drugi. Predkosc biegu: +50%.
+Piasek za granica mapy laczy sie z podnozem gor na tej samej wysokosci.
+Bliskie zbocza wyrastaja ponad teren i nie sa odcinane linia brzegu.
+Gory przed bohaterem czesciowo zanikaja, aby go nie zaslaniac.
+
+Wersja 0.38: RZADKOSC I LOSOWY LUP
+Pospolity - bialy - 60%; rzadki - niebieski - 15%.
+Bardzo rzadki - zolty - 4%; niezwykle rzadki - fioletowy - 1%.
+Szansa zalezy tylko od rzadkosci. Kazda pozycja losuje sie niezaleznie.
+Fragment Serca Switu: gwarantowane 100% jako wyjatek fabularny.
+28 nowych broni, zbroi, helmow i innych elementow sprzetu.
+Nazwy maja kolory rzadkosci; podpowiedz pokazuje stopien i szanse.
+Cialo ma do 15 pozycji. Zmieniaj strony przez < / > lub rolke myszy.
+Nowe miecze i luki obsluguja kolo broni i odpowiednie umiejetnosci.
+
+Wersja 0.39: BIEG I CIALA BESTII
+Opisy pokazuja samo Pospolity / Rzadki / Bardzo rzadki / Niezwykle rzadki.
+Bieg ma naturalniejsze kolana, podparcie stopy i prace ramion.
+Tulow mniej sie pochyla; miecz jest niesiony za biodrem, peleryna faluje.
+12 gatunkow ma szczegolowe ciala w osmiu kierunkach, pasujace do zywych bestii.
+Gotowe tekstury i maski cial sa przygotowane przed walka.
+PPM otwiera loot; przeciaganie do plecaka i rzadkosci dzialaja bez zmian.
 
 STEROWANIE
 WSAD - chodzenie; kombinacje klawiszy pozwalaja isc ukosnie.

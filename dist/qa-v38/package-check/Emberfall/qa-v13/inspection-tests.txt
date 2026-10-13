@@ -1,0 +1,65 @@
+PASS: pointer finds stable enemy ID for inspection
+PASS: HUD uses actual enemy identity and combat stats
+PASS: HUD health updates immediately after damage
+PASS: left click on a monster starts one area swing
+PASS: monster click swings without selecting a target or starting item drag
+PASS: clicking sword indicator cannot attack
+PASS: dead enemy cannot leave stale details
+PASS: pointer finds stable enemy ID for inspection
+PASS: HUD uses actual enemy identity and combat stats
+PASS: HUD health updates immediately after damage
+PASS: left click on a monster starts one area swing
+PASS: monster click swings without selecting a target or starting item drag
+PASS: clicking sword indicator cannot attack
+PASS: dead enemy cannot leave stale details
+PASS: pointer finds stable enemy ID for inspection
+PASS: HUD uses actual enemy identity and combat stats
+PASS: HUD health updates immediately after damage
+PASS: left click on a monster starts one area swing
+PASS: monster click swings without selecting a target or starting item drag
+PASS: clicking sword indicator cannot attack
+PASS: dead enemy cannot leave stale details
+PASS: pointer finds stable enemy ID for inspection
+PASS: HUD uses actual enemy identity and combat stats
+PASS: HUD health updates immediately after damage
+PASS: left click on a monster starts one area swing
+PASS: monster click swings without selecting a target or starting item drag
+PASS: clicking sword indicator cannot attack
+PASS: dead enemy cannot leave stale details
+PASS: terrain object name and type shown from its actual hovered shape
+PASS: scenery has no invented combat stats
+PASS: terrain object name and type shown from its actual hovered shape
+PASS: scenery has no invented combat stats
+FAIL: terrain object name and type shown from its actual hovered shape
+PASS: scenery has no invented combat stats
+PASS: terrain object name and type shown from its actual hovered shape
+PASS: scenery has no invented combat stats
+PASS: ground loot also has an inspection card
+PASS: moving into HUD clears world inspection
+PASS: pause clears inspection
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+PASS: all 25 compact backpack slots remain clickable
+Checks: 64; failures: 1

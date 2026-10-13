@@ -3,7 +3,7 @@
 bool runInspectionQA() {
     fs::create_directories("qa-v13");std::ofstream report("qa-v13/inspection-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* text){checks++;if(!ok)failures++;report<<(ok?"PASS: ":"FAIL: ")<<text<<'\n';report.flush();};
-    auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();welcome=paused=help=audioOpen=false;dragging={};mouse={0,0};};
+    auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.forage.clear();weaponWheelOpen=false;welcome=paused=help=audioOpen=false;dragging={};mouse={0,0};};
     reset();prepareCanvas(1.2f);
     for(int type=0;type<4;type++){
         reset();const auto& stats=enemyInfo(type);V position=game.player+V{1,-2};
@@ -26,7 +26,13 @@ bool runInspectionQA() {
     }
     for(int type=0;type<4;type++){
         reset();V position=game.player+V{1,-2};game.props.push_back({position,type,1});
-        Vector2 p=screen(position);mouse={p.x,p.y-(type==0?85.f:type==1?17.f:type==2?15.f:55.f)};
+        Vector2 p=screen(position);bool found=false;
+        // Detailed bushes have gaps between their leaves. Inspect an actually
+        // rendered part rather than assuming that the geometric center is opaque.
+        for(int y=-190;y<=5&&!found;y+=2)for(int x=-65;x<=65&&!found;x+=2){
+            Vector2 point{p.x+x,p.y+y};WorldHover candidate=pickWorld(point);
+            if(candidate.kind==HoverKind::Prop&&candidate.index==0){mouse=point;found=true;}
+        }
         WorldHover hit=pickWorld(mouse);Inspection info=inspectWorld(hit);
         check(hit.kind==HoverKind::Prop&&info.name==propInfo(type).name&&info.kind==propInfo(type).kind,"terrain object name and type shown from its actual hovered shape");
         check(info.maxHp==0,"scenery has no invented combat stats");

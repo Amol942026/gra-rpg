@@ -56,7 +56,7 @@ void drawTowerChamber(){
         if(i<game.dawnFragments()){intro_art::glow(x,y,29,29,Fade(Gold,.18f));diamond(x-2,y-3,3,9,rgb(255,240,188));}
     }
     AnimationState pose;pose.direction=Direction::E;pose.idleTime=t;
-    actor_art::draw(0,510,532,2.5f,pose,0,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind);
+    actor_art::draw(0,510,532,2.5f,pose,0,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind));
     drawStoryMage(930,505,2.7f,t,0);
     if(towerStory.phase==TowerPhase::Opening)intro_art::column({510,539},t,1-storyEase(towerStory.age/TowerSequence::OpeningTime));
     rect(0,0,W,55,rgb(5,8,16));rect(0,860,W,40,rgb(5,8,16));

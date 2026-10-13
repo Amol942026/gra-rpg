@@ -3,6 +3,7 @@
 struct Inspection {
     HoverKind source=HoverKind::None;
     std::string name,kind,detail,secondary,loot;
+    Color nameColor=Text;
     float hp=0,maxHp=0,speed=0;
     int attack=0,defense=0,magicDefense=0;DamageType attackType=DamageType::Physical;
 };
@@ -40,13 +41,13 @@ Inspection inspectWorld(WorldHover hit) {
         info.detail=game.props[hit.index].type==13?"Powrót do wieży Eldrina.":"Przeszkoda terenowa.";info.secondary=game.props[hit.index].type==13?"Podejdź i użyj E / LPM / PPM.":"Blokuje ruch i przeturlanie.";
     }else if(hit.kind==HoverKind::Forage){
         const Item* value=game.get({Place::Forage,hit.index});if(!value||value->empty())return info;
-        info.source=hit.kind;info.name=itemName(*value);info.kind="Grzyb jadalny";info.detail="Po zjedzeniu przywraca 10 HP.";
+        info.source=hit.kind;info.name=itemName(*value);info.nameColor=rarity(*value);info.kind="Grzyb jadalny";info.detail="Pospolity · +10 HP.";
         info.secondary=game.reachable({Place::Forage,hit.index})?"Przeciągnij do plecaka; PPM, aby zjeść.":"Podejdź bliżej, aby zebrać.";
     }else if(hit.kind==HoverKind::Ground){
         const Item* value=game.get({Place::Ground,hit.index});if(!value||value->empty())return info;
-        info.source=hit.kind;info.name=itemName(*value);
+        info.source=hit.kind;info.name=itemName(*value);info.nameColor=rarity(*value);
         info.kind=value->kind==Kind::Mushroom?"Grzyb jadalny":gearSlot(value->kind)>=0?"Wyposażenie":material(value->kind)?"Materiał / trofeum":value->kind==Kind::Health||value->kind==Kind::Mana?"Mikstura":"Skarb";
-        info.detail=std::string(rarityName(value->tier))+"  ·  Ilość: "+std::to_string(value->count);
+        info.detail=std::string(rarityName(itemRarity(*value)))+"  ·  Ilość: "+std::to_string(value->count);
         info.secondary=game.reachable({Place::Ground,hit.index})?"Przeciągnij łup do plecaka.":"Podejdź bliżej, aby podnieść.";
     }
     return info;
@@ -60,7 +61,7 @@ void drawInspectionHud() {
         txt("Tutaj zobaczysz jego informacje.",1090,777,14,Muted);
         return;
     }
-    txt(info.name,1090,735,info.name.size()>24?18:22,Text);
+    txt(info.name,1090,735,info.name.size()>24?16:22,info.nameColor);
     txt("Rodzaj: "+info.kind,1090,760,14,Muted);
     if(info.source==HoverKind::Enemy){
         txt(TextFormat("HP  %d / %d",int(std::ceil(info.hp)),int(info.maxHp)),1090,780,14,Text);

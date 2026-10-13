@@ -1,4 +1,5 @@
 #pragma once
+#include "rarity_qa.hpp"
 void exportForestOverview(){
  RenderTexture2D map=LoadRenderTexture(1440,900);BeginTextureMode(map);ClearBackground(Ink);
  txt("LAS MCHU — ROZBUDOWANA KNIEJA",30,25,30,Gold);
@@ -77,6 +78,6 @@ bool runForestQA(){
  game=Game{};game.props.clear();game.enemies.clear();game.player={15,15};V pos=game.player+V{1,2};game.enemies.push_back({802,1,pos,pos,0,54});auto& wolf=game.enemies.back();wolf.alive=false;
  wolf.loot[0]=item(Kind::WolfFang,0,2);wolf.loot[1]=item(Kind::WolfFur);game.openCorpse(802);refreshDisplayLayout();mouse={lootRect(0).x+20,lootRect(0).y+20};renderScene();BeginDrawing();presentCanvas();
  Image actual=presentedImage();ExportImage(actual,"qa-v25/wolf-loot.png");UnloadImage(actual);EndDrawing();finishFramePacing();
- check(lootChance(1,wolf.loot[0])==75&&lootChance(1,wolf.loot[1])==55,"wolf loot tooltips use the configured independent chances");
- game=Game{};mouse={0,0};dragging={};report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
+ check(lootChance(1,wolf.loot[0])==60&&lootChance(1,wolf.loot[1])==60,"wolf loot tooltips use the configured independent chances");
+ game=Game{};mouse={0,0};dragging={};report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return runRarityQA()&&failures==0;
 }

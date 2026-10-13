@@ -24,7 +24,13 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "critical_healing_tests.hpp"
 #include "tower_stairs_tests.hpp"
 #include "desert_tests.hpp"
+#include "sand_prison_tests.hpp"
+#include "sprint_tests.hpp"
+#include "rarity_loot_tests.hpp"
 int main(){
+ rarityLootTests();
+ sprintTests();
+ sandPrisonTests();
  desertTests();
  towerStairsTests();
  criticalHealingTests();
@@ -51,7 +57,7 @@ int main(){
  g.potionCd=0;g.hp=g.maxHp();check(!g.use({Place::Bag,0}),"no waste at full health");
  int oldTotal=total(g);check(g.drop({Place::Bag,2},g.player),"drop inventory item");check(total(g)==oldTotal,"drop conservation");
  check(!g.drop({Place::Bag,3},{0,0}),"reject invalid drop");
- g.player=g.enemies[0].pos;g.enemies[0].hp=1;size_t previousGround=g.ground.size();check(g.attack(),"attack triggers");check(!g.enemies[0].alive&&g.kills==1,"combat kill");check(g.ground.size()==previousGround&&!g.enemies[0].loot[0].empty()&&!g.enemies[0].loot[1].empty(),"kill keeps loot in the body without scattering ground items");
+ g.player=g.enemies[0].pos;g.enemies[0].hp=1;size_t previousGround=g.ground.size();check(g.attack(),"attack triggers");check(!g.enemies[0].alive&&g.kills==1,"combat kill");check(g.ground.size()==previousGround&&g.findCorpse(g.enemies[0].id),"kill keeps loot in the body without scattering ground items");
  check(!g.attack(),"attack cooldown");g.mana=100;check(g.spell(),"spell cast");check(g.mana==90,"spell mana cost");check(!g.spell(),"spell cooldown");
  g.hp=0;check(!g.use({Place::Bag,0}),"dead cannot consume");check(!g.attack(),"dead cannot attack");
  Game a,b;for(int i=0;i<60;i++)a.update(1.f/60,{1,0},false);for(int i=0;i<120;i++)b.update(1.f/120,{1,0},false);check(distance(a.player,b.player)<.002f,"movement independent of frame rate");

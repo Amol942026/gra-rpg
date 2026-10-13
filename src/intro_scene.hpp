@@ -83,7 +83,7 @@ void drawIntroChamber(){
     }
     drawStoryPortal(510,539,1.2f,t,.25f+charge*.75f);
     AnimationState pose;pose.direction=Direction::E;pose.idleTime=t;
-    actor_art::draw(0,510,532-charge*24,2.5f,pose,0,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind);
+    actor_art::draw(0,510,532-charge*24,2.5f,pose,0,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind));
     drawStoryMage(930,505,2.7f,t,charge);
     if(charge>0){
         for(int i=0;i<5;i++)ellipse(510,460-charge*50,58+i*13,90+i*16,Fade(rgb(168,116,242),charge*.025f));

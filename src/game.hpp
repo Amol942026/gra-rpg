@@ -52,6 +52,11 @@ struct Enemy {
  std::array<Item,CorpseLootSize> loot{};
  EnemyBehavior behavior=EnemyBehavior::Idle;
  V patrolGoal{};float patrolWait=0,patrolBlocked=0;unsigned patrolSequence=0;bool patrolGoalActive=false;
+ double sandPrisonCd=SandPrisonInterval;float sandCastPulse=0;int sandPrisonCasts=0;
+ float attackPose()const{
+  float regular=windup>0?-std::clamp(1-windup/.42f,0.f,1.f):strike>0?std::sin((1-strike/.22f)*3.14159265f):0;
+  return sandCastPulse>0?std::sin((1-sandCastPulse/SandCastDuration)*3.14159265f):regular;
+ }
  // Map units sized to the complete body footprint (including a wolf's muzzle
  // and tail), so separated centers also keep the rendered bodies apart.
  float radius()const{return enemyInfo(type).radius;}
@@ -98,6 +103,17 @@ struct Game {
  void sound(Cue cue,V position){if(sounds.size()<64)sounds.push_back({cue,position.x,position.y});}
  float hp=100,mana=100,attackCd=0,spellCd=0,potionCd=0,swing=0,hurt=0,time=0;
  float rollRemaining=0,rollCd=0;V rollDirection{};
+ float sandPrisonRemaining=0;
+ bool sandTrapped()const{return sandPrisonRemaining>0;}
+ void clearSandPrison(){sandPrisonRemaining=0;}
+ void imprisonInSand(Enemy& caster){
+  if(dead()||!inDesert()||!caster.alive||caster.type!=DesertBossType)return;
+  sandPrisonRemaining=SandPrisonDuration;cancelBow();rollRemaining=0;swing=0;swingStrong=false;
+  animation.moving=false;animation.stopSprint();stepDistance=0;
+  caster.sandCastPulse=SandCastDuration;caster.animation.face(player.x-caster.pos.x,player.y-caster.pos.y);
+  caster.sandPrisonCasts++;sound(Cue::EnemyAttack,caster.pos);
+  say("Piaskowe więzienie! Ruch i ataki zablokowane na 3 sekundy.");
+ }
  int level=1,xp=0,kills=0,nextGround=1;bool bossDead=false;
  WorldLocation location=WorldLocation::Forest;DawnQuest dawnQuest=DawnQuest::Seeking;
  int towerFloor=0,towerRuneMask=0;
@@ -112,7 +128,7 @@ struct Game {
  bool mageReachable()const{return inTower()&&towerFloor==0&&!dead()&&!allocationRequired&&!storyBlocked()&&distance(player,MagePosition)<=MageTalkRange;}
  bool takeTowerReturn(){bool pending=towerReturnPending;towerReturnPending=false;return pending;}
  void enterMageTower(){
-  location=WorldLocation::MageTower;towerFloor=0;player=TowerArrival;facing=normalized(MagePosition-player);animation={};animation.face(facing.x,facing.y);
+  clearSandPrison();location=WorldLocation::MageTower;towerFloor=0;player=TowerArrival;facing=normalized(MagePosition-player);animation={};animation.face(facing.x,facing.y);
   cancelBow();closeCorpse();rollRemaining=rollCd=swing=attackCd=spellCd=hurt=stepDistance=0;
   arrows.clear();fireballs.clear();explosions.clear();effects.clear();pierceFlashes.clear();sounds.clear();healingPulse=0;
  }
@@ -177,10 +193,10 @@ struct Game {
  float swingProgress()const{return swing>0?std::clamp(1-swing/meleeDuration,0.f,1.f):-1.f;}
  float rollProgress()const{return rolling()?1-rollRemaining/RollDuration:-1.f;}
  bool startRoll(V input){
-  if(dead()||allocationRequired||storyBlocked()||rolling()||rollCd>0)return false;
+  if(sandTrapped()||dead()||allocationRequired||storyBlocked()||rolling()||rollCd>0)return false;
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
   rollDirection=normalized(length(input)>.001f?input:directions[int(animation.direction)]);
-  facing=rollDirection;animation.face(facing.x,facing.y);animation.moving=false;
+  facing=rollDirection;animation.face(facing.x,facing.y);animation.moving=false;animation.stopSprint();
   cancelBow();rollRemaining=RollDuration;rollCd=RollCooldown;swing=0;sound(Cue::Roll,player);return true;
  }
  void say(std::string s){message=s;messageTime=4;}
@@ -229,7 +245,7 @@ struct Game {
  #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
  bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&desertWater(p))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
- void move(V delta){V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(length(delta)>.001f)facing=normalized(delta);}
+ void move(V delta){if(sandTrapped())return;V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(length(delta)>.001f)facing=normalized(delta);}
  Enemy* findEnemy(int id){for(auto&e:enemies)if(e.id==id&&e.alive)return &e;return nullptr;}
  void hit(Enemy& e,float amount,DamageType type=DamageType::Physical,bool critical=false){
   if(!e.alive)return;
@@ -247,7 +263,7 @@ struct Game {
   while(xp>=level*80){xp-=level*80;level++;attributePoints+=PointsPerLevel;skillPoints+=SkillPointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
  }
  bool attack(){
-  if(dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||equipment[0].kind==Kind::Bow)return false;
+  if(sandTrapped()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)==Kind::Bow)return false;
   attackCd=.46f;meleeDuration=SwingDuration;swingStrong=false;swing=SwingDuration;sound(Cue::Swing,player);
   // Capture once: a kill can level up the player during this same swing.
   const float amount=float(damage());const bool critical=rollCritical();
@@ -255,7 +271,7 @@ struct Game {
   return true;
  }
  bool spell(V aim={}){
-  if(dead()||allocationRequired||storyBlocked()||inTower()||rolling()||spellCd>0||bowDrawing)return false;
+  if(sandTrapped()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||spellCd>0||bowDrawing)return false;
   if(selectedSpell==Spell::None){say("Wybierz czar w księdze (K lub kafelek czaru).");sound(Cue::Reject,player);return false;}
   if(mana<FireballCost){say("Kula ognia wymaga 10 many.");sound(Cue::Reject,player);return false;}
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
@@ -349,10 +365,12 @@ struct Game {
   for(auto& flash:pierceFlashes)flash.life-=dt;pierceFlashes.erase(std::remove_if(pierceFlashes.begin(),pierceFlashes.end(),[](const auto& flash){return flash.life<=0;}),pierceFlashes.end());
   for(auto&e:effects)e.life-=dt;effects.erase(std::remove_if(effects.begin(),effects.end(),[](auto&e){return e.life<=0;}),effects.end());
   for(auto& e:explosions)e.life-=dt;explosions.erase(std::remove_if(explosions.begin(),explosions.end(),[](auto& e){return e.life<=0;}),explosions.end());
-  if(dead()){cancelBow();animation.moving=false;rollRemaining=0;closeCorpse();return;}
-  if(bowDrawing){if(equipment[0].kind!=Kind::Bow||ammoCount()<=0)cancelBow();else bowDrawTime=std::min(BowDrawDuration,bowDrawTime+dt);}
+  if(dead()){clearSandPrison();cancelBow();animation.moving=false;animation.stopSprint();rollRemaining=0;closeCorpse();return;}
+  if(bowDrawing){if(archetype(equipment[0].kind)!=Kind::Bow||ammoCount()<=0)cancelBow();else bowDrawTime=std::min(BowDrawDuration,bowDrawTime+dt);}
+  const float movementDt=std::max(0.f,dt-std::min(dt,sandPrisonRemaining));
+  tick(sandPrisonRemaining);if(sandPrisonRemaining<.00001f)sandPrisonRemaining=0;
   const bool wasRolling=rolling();const float rollElapsed=RollDuration-rollRemaining;
-  V before=player;float walkTime=dt;
+  V before=player;float walkTime=movementDt;
   if(wasRolling){
    float stepTime=std::min(dt,rollRemaining);walkTime-=stepTime;
    // Small collision steps prevent a fast roll from skipping thin obstacles.
@@ -363,8 +381,8 @@ struct Game {
   const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(running?RunMultiplier:1.f)*(bowDrawing?.55f:1.f);
   move(normalized(input)*(walkTime*speed));
   if(openedCorpse>=0&&!corpseReachable(openedCorpse))closeCorpse();
-  if(wasRolling){animation.advance(0,0,dt);animation.face(rollDirection.x,rollDirection.y);}
-  else animation.advance(player.x-before.x,player.y-before.y,dt);
+  if(wasRolling){animation.stopSprint();animation.advance(0,0,dt);animation.face(rollDirection.x,rollDirection.y);}
+  else animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing);
   if(bowDrawing)animation.face(bowAim.x,bowAim.y);
   if(!wasRolling){stepDistance+=distance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
   if(mana<maxMana()){
@@ -378,15 +396,21 @@ struct Game {
   updateFireballs(dt);if(allocationRequired)return;
   std::vector<V> oldPositions,desired(enemies.size());oldPositions.reserve(enemies.size());
   for(size_t i=0;i<enemies.size();i++){auto& e=enemies[i];oldPositions.push_back(e.pos);tick(e.flash);tick(e.attack);tick(e.strike);if(!e.alive){e.animation.moving=false;continue;}float d=distance(player,e.pos);
+   tick(e.sandCastPulse);
    const bool visible=canSeePlayer(e);
+   // Combat time, including ordinary attack windups, advances this independent cooldown.
+   if(inDesert()&&e.type==DesertBossType&&visible){
+    e.sandPrisonCd-=dt;
+    if(e.sandPrisonCd<=.00001f){e.sandPrisonCd+=SandPrisonInterval;imprisonInSand(e);}
+   }
    if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(d<(e.type==DesertBossType?2.15f:1.6f)&&visible){
-    if(wasRolling&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
+    if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead()){float dmg=incomingDamage(float(e.damage()),e.attackType());hp=std::max(0.f,hp-dmg);hurt=.2f;sound(dead()?Cue::Death:Cue::Hurt,player);effects.push_back({player,"-"+std::to_string(int(dmg)),.8f,4});}
    }}continue;}
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
     if(d<(e.type==DesertBossType?1.9f:1.25f)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;sound(Cue::EnemyAttack,e.pos);}
-    else if(d>(e.type==DesertBossType?1.7f:1.05f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
+    else if(e.sandCastPulse<=0&&d>(e.type==DesertBossType?1.7f:1.05f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
    }else desired[i]=patrolVelocity(e,dt);
   }
   moveEnemies(dt,desired);

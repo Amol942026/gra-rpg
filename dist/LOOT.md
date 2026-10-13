@@ -1,37 +1,198 @@
-# Łup z przeciwników — Emberfall 0.33
+# Łup z przeciwników — Emberfall 0.39
 
-Każda pozycja w tabeli jest losowana **niezależnie przy śmierci przeciwnika**. Jeden wilk może zostawić jednocześnie kieł i sierść, tylko jeden z tych materiałów albo żaden. Szansa dotyczy pojawienia się stosu; jego ilość jest następnie losowana z podanego przedziału. 75% nie gwarantuje trzech dropów na każde cztery zabójstwa.
+Szansę wyznacza **wyłącznie rzadkość przedmiotu**. Rodzaj przedmiotu, jego siła, ulepszenie i gatunek bestii nie zmieniają tej szansy. Tabela gatunku określa tylko, jakie przedmioty może on pozostawić i ile sztuk zawiera udany stos.
 
-Leśne gatunki zostawiają dodatkowo **4–15 złotych monet ze szansą 100%**. Łup pozostaje w ciele: podejdź na maksymalnie 2,5 pola, otwórz je **PPM** i przeciągnij przedmioty do plecaka. Ponowne otwarcie ciała nie losuje nowej zawartości.
-
-| Przeciwnik | Pozostały łup: szansa i ilość |
-|---|---|
-| Szlam | Śluz szlama **80%**, 1–3; Mikstura zdrowia **15%**, 1; Odłamek echa **30%**, 1–2; Bursztynowy amulet **1%**, 1 |
-| Wilk | Kieł wilka **75%**, 1–2; Sierść wilka **55%**, 1–2; Mikstura zdrowia **12%**, 1; Płaszcz z wilczej skóry **3%**, 1, niepospolity |
-| Szkielet | Fragment kości **70%**, 1–3; Sztylet łowcy **8%**, 1; Mikstura many **18%**, 1; Żelazny hełm **5%**, 1, niepospolity |
-| Kamienny Strażnik | Miecz wędrowca **100%**, 1, legendarny; Pierścień żaru **100%**, 1, legendarny; Esencja kniei **100%**, 1–2, niepospolita; **Część Serca Świtu 100%**, dokładnie 1, artefakt zadania |
-| Dzik | Kieł dzika **65%**, 1–2; Skóra dzika **80%**, 1; Mikstura zdrowia **10%**, 1; Zbroja zwiadowcy **4%**, 1, niepospolita |
-| Leśny pająk | Pajęcza nić **85%**, 1–3; Woreczek jadu **40%**, 1; Mikstura many **15%**, 1; Bursztynowy amulet **2%**, 1, niepospolity |
-| Leśny rozbójnik | Odznaka rozbójnika **60%**, 1; Sztylet łowcy **12%**, 1, niepospolity; Mikstura zdrowia **25%**, 1–2; Buty podróżnika **8%**, 1, niepospolite |
-| Ożywione drzewo | Prastara kora **90%**, 1–3; Esencja kniei **35%**, 1; Kamień runiczny **8%**, 1; Bursztynowy amulet **4%**, 1, niepospolity |
-
-Przedmioty bez oznaczenia rzadkości są pospolite. Materiały łączą się w stosy do **99 sztuk**. Pełny stos lub plecak nie usuwa nadmiaru — zostaje w ciele. Na razie materiały są zbieranymi trofeami; nie ma jeszcze rzemiosła ani handlu.
-
-Nowy sprzęt można założyć: sztylet w miejsce broni, płaszcz w miejsce zbroi, amulet w miejsce pierścienia. Ich premie pokazuje podpowiedź przedmiotu. Podpowiedź łupu w ciele pokazuje też dokładną szansę dla tego gatunku, a sekcja **POD KURSOREM** podaje główne materiały przeciwnika i ich szanse.
-
-Normalne wyprawy otrzymują nowe losowe ziarno łupu. Testy korzystają ze stałego ziarna, aby wykrywać błędy powtarzalnie. Tabele i ilości edytuje się w `src/loot.hpp`.
-
-Podniesienie części Serca Świtu do plecaka uruchamia ściemnienie i powrót do wieży Eldrina, dlatego pozostałe nagrody zbierz wcześniej. Artefakt zajmuje miejsce w plecaku, nie łączy się w stosy i nie można go porzucić, zużyć ani założyć. Zajęte pole plecaka nie usuwa fragmentu ani nie uruchamia scenki. Po scenie pozostaje on w plecaku, a dziennik wskazuje 1 / 5 po pierwszym bossie albo 2 / 5 po Żywej Wydmie.
-
-## Morze Piasków — druga kraina
-
-Każdy zwykły pustynny potwór zostawia monety ze szansą **100%** oraz cztery niezależnie losowane pozycje. Żywa Wydma ma pięć gwarantowanych nagród. Pozostałe zasady ciał, zasięgu i stosów są takie same jak w lesie.
-
-| Przeciwnik | Monety 100% | Pozostały łup: szansa i ilość |
+| Rzadkość | Kolor nazwy | Szansa na przedmiot |
 |---|---|---|
-| Skorpion bursztynowy | 10–24 | Żądło skorpiona **75%**, 1–2; Woreczek jadu **45%**, 1; Mikstura zdrowia **20%**, 1; Mikstura many **15%**, 1 |
-| Skarabeusz miedziany | 8–22 | Pancerz skarabeusza **85%**, 1–3; Odłamek echa **35%**, 1; Żelazny hełm **7%**, 1, legendarny (tier 2); Strzały **35%**, 5–10 |
-| Kobra piaskowa | 8–20 | Łuska kobry **80%**, 1–3; Woreczek jadu **55%**, 1; Mikstura zdrowia **25%**, 1; Pierścień żaru **4%**, 1, legendarny (tier 2) |
-| Żywa Wydma — boss | 60–110 | Miecz wędrowca **100%**, 1, legendarny (tier 3, mocniejszy od nagrody pierwszego bossa); Esencja piasku **100%**, 2–4, niepospolita; Mikstura many **100%**, 3; **druga część Serca Świtu 100%**, dokładnie 1 |
+| Pospolity | biały | 60% |
+| Rzadki | niebieski | 15% |
+| Bardzo rzadki | żółty | 4% |
+| Niezwykle rzadki | fioletowy | 1% |
 
-Śmierć Żywej Wydmy pozostawia ciało i nie zbiera fragmentu automatycznie. Otwórz je PPM; zbierz pozostałe nagrody, a następnie przeciągnij część do wolnego miejsca plecaka. Dziennik zapisze **2 / 5**, rozpocznie się powrót do Eldrina. Zajęte miejsce pozostawia przedmiot w ciele. Powrót do pustyni zachowuje puste pola łupu i pokonanego bossa; nagrody nie są ponownie losowane.
+Każda pozycja jest losowana **niezależnie raz przy śmierci**. Wilk może pozostawić kieł i sierść jednocześnie: każdy stos ma 60%, a szansa na oba to 36%. Monety i mikstury także są losowe. Możliwe jest puste ciało; otwarcie i zamknięcie nie losuje łupu ponownie.
+
+**Wyjątek fabularny zaakceptowany przez gracza:** Część Serca Świtu jest niezwykle rzadka, ale ma gwarantowany drop 100%. Oba istniejące bossy zawsze pozostawiają dokładnie jeden właściwy fragment. Jest w piątym polu pierwszej strony. Zbierz inne nagrody przed fragmentem: zabranie go rozpoczyna powrót do wieży.
+
+Podejdź do ciała na maksymalnie 2,5 pola i otwórz je PPM. Przeciągnij przedmioty do plecaka. Większy łup ma do trzech stron po pięć kratek: przyciski < / > lub rolka myszy nad oknem ciała. Każdy przedmiot ma kolorową nazwę, opis rzadkości i szansę w podpowiedzi. Stosy materiałów, monet, mikstur i strzał mieszczą do 99 sztuk.
+
+## Szlam
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 4–15 |
+| Śluz szlama | Pospolity | 60% | 1–3 |
+| Mikstura zdrowia | Pospolity | 60% | 1 |
+| Odłamek echa | Rzadki | 15% | 1–2 |
+| Bursztynowy amulet | Rzadki | 15% | 1 |
+| Amulet szmaragdowej kropli | Rzadki | 15% | 1 |
+
+## Wilk
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 4–15 |
+| Kieł wilka | Pospolity | 60% | 1–2 |
+| Sierść wilka | Pospolity | 60% | 1–2 |
+| Mikstura zdrowia | Pospolity | 60% | 1 |
+| Sztylet wilczego kła | Rzadki | 15% | 1 |
+| Płaszcz tropiciela | Rzadki | 15% | 1 |
+| Łuk księżycowego łowcy | Bardzo rzadki | 4% | 1 |
+
+## Szkielet
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 4–15 |
+| Fragment kości | Pospolity | 60% | 1–3 |
+| Sztylet łowcy | Rzadki | 15% | 1 |
+| Mikstura many | Pospolity | 60% | 1 |
+| Hełm kościanej straży | Rzadki | 15% | 1 |
+| Miecz zapomnianej krypty | Bardzo rzadki | 4% | 1 |
+
+## Kamienny Strażnik
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 25–45 |
+| Runiczne ostrze strażnika | Bardzo rzadki | 4% | 1 |
+| Zbroja kamiennego strażnika | Bardzo rzadki | 4% | 1 |
+| Hełm mchu i kamienia | Rzadki | 15% | 1 |
+| Część Serca Świtu | Niezwykle rzadki | 100% (fabuła) | 1 |
+| Esencja kniei | Rzadki | 15% | 1–2 |
+| Kamień runiczny | Bardzo rzadki | 4% | 1 |
+| Pierścień pradawnego echa | Niezwykle rzadki | 1% | 1 |
+| Mikstura zdrowia | Pospolity | 60% | 1–2 |
+| Mikstura many | Pospolity | 60% | 1–2 |
+| Odłamek echa | Rzadki | 15% | 1 |
+
+## Dzik
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 4–15 |
+| Kieł dzika | Pospolity | 60% | 1–2 |
+| Skóra dzika | Pospolity | 60% | 1 |
+| Mikstura zdrowia | Pospolity | 60% | 1 |
+| Pancerz dziczej skóry | Rzadki | 15% | 1 |
+| Topór dziczego kła | Bardzo rzadki | 4% | 1 |
+
+## Leśny pająk
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 4–15 |
+| Pajęcza nić | Pospolity | 60% | 1–3 |
+| Woreczek jadu | Rzadki | 15% | 1 |
+| Mikstura many | Pospolity | 60% | 1 |
+| Buty pajęczego szlaku | Rzadki | 15% | 1 |
+| Kaptur pajęczej nici | Rzadki | 15% | 1 |
+| Pierścień jadowitego splotu | Bardzo rzadki | 4% | 1 |
+
+## Leśny rozbójnik
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 4–15 |
+| Odznaka rozbójnika | Rzadki | 15% | 1 |
+| Sztylet łowcy | Rzadki | 15% | 1 |
+| Mikstura zdrowia | Pospolity | 60% | 1–2 |
+| Łuk leśnego rozbójnika | Rzadki | 15% | 1 |
+| Buty cichego kroku | Rzadki | 15% | 1 |
+| Strzały | Pospolity | 60% | 5–10 |
+
+## Ożywione drzewo
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 4–15 |
+| Prastara kora | Pospolity | 60% | 1–3 |
+| Esencja kniei | Rzadki | 15% | 1 |
+| Kamień runiczny | Bardzo rzadki | 4% | 1 |
+| Tarcza prastarych korzeni | Rzadki | 15% | 1 |
+| Amulet serca kniei | Bardzo rzadki | 4% | 1 |
+
+## Skorpion bursztynowy
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 10–24 |
+| Żądło skorpiona | Pospolity | 60% | 1–2 |
+| Woreczek jadu | Rzadki | 15% | 1 |
+| Mikstura zdrowia | Pospolity | 60% | 1 |
+| Mikstura many | Pospolity | 60% | 1 |
+| Sztylet bursztynowego żądła | Rzadki | 15% | 1 |
+
+## Skarabeusz miedziany
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 8–22 |
+| Pancerz skarabeusza | Pospolity | 60% | 1–3 |
+| Odłamek echa | Rzadki | 15% | 1 |
+| Hełm miedzianego skarabeusza | Rzadki | 15% | 1 |
+| Strzały | Pospolity | 60% | 5–10 |
+| Zbroja pustynnego skarabeusza | Bardzo rzadki | 4% | 1 |
+| Tarcza pustynnego monolitu | Bardzo rzadki | 4% | 1 |
+
+## Kobra piaskowa
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 8–20 |
+| Łuska kobry | Pospolity | 60% | 1–3 |
+| Woreczek jadu | Rzadki | 15% | 1 |
+| Mikstura zdrowia | Pospolity | 60% | 1 |
+| Buty piaskowej kobry | Rzadki | 15% | 1 |
+| Pierścień jadowitego splotu | Bardzo rzadki | 4% | 1 |
+| Łuk pustynnego mirażu | Bardzo rzadki | 4% | 1 |
+
+## Żywa Wydma
+
+| Przedmiot | Rzadkość | Szansa | Liczba sztuk |
+|---|---|---|---|
+| Złote monety | Pospolity | 60% | 60–110 |
+| Ostrze żywej wydmy | Niezwykle rzadki | 1% | 1 |
+| Esencja piasku | Bardzo rzadki | 4% | 2–4 |
+| Mikstura many | Pospolity | 60% | 1–3 |
+| Część Serca Świtu | Niezwykle rzadki | 100% (fabuła) | 1 |
+| Płaszcz piaskowej burzy | Niezwykle rzadki | 1% | 1 |
+| Tarcza pustynnego monolitu | Bardzo rzadki | 4% | 1 |
+| Amulet palącego słońca | Bardzo rzadki | 4% | 1 |
+| Łuk pustynnego mirażu | Bardzo rzadki | 4% | 1 |
+| Mikstura zdrowia | Pospolity | 60% | 1–3 |
+| Odłamek echa | Rzadki | 15% | 1 |
+
+## Nowe wyposażenie
+
+28 nowych przedmiotów korzysta z sześciu zwykłych slotów sprzętu. Bronie można przeciągać z plecaka na koło broni. Wszystkie nowe miecze obsługują Mocne cięcie; wszystkie nowe łuki obsługują naciąg, ograniczoną amunicję, celownik, kołczan i Przeszywającą strzałę. Topory i sztylety działają jako broń do walki wręcz.
+
+| Przedmiot | Slot | Bonus bazowy | Opis |
+|---|---|---|---|
+| Sztylet wilczego kła | broń | atak +12 | Ostrze oprawione w srebrzysty wilczy kieł. |
+| Płaszcz tropiciela | zbroja | pancerz +7 | Ciepły płaszcz z futra leśnych wilków. |
+| Łuk księżycowego łowcy | broń | atak +19 | Łuk z jasnego drewna i wilczej cięciwy. |
+| Pancerz dziczej skóry | zbroja | pancerz +8 | Skórzany pancerz wzmocniony dziczymi kłami. |
+| Topór dziczego kła | broń | atak +17 | Ciężkie ostrze z okuciem w kształcie kła. |
+| Buty pajęczego szlaku | buty | pancerz +5 | Lekkie buty obszyte mocną pajęczą nicią. |
+| Pierścień jadowitego splotu | ozdoba | atak +7 | Srebrny pierścień z zielonym kamieniem. |
+| Kaptur pajęczej nici | hełm | pancerz +6 | Kaptur tkany z nici leśnych pająków. |
+| Hełm kościanej straży | hełm | pancerz +6 | Stalowy hełm z rzeźbionymi okuciami. |
+| Miecz zapomnianej krypty | broń | atak +17 | Stare ostrze pokryte błękitnymi runami. |
+| Łuk leśnego rozbójnika | broń | atak +17 | Krótki łuk ze skóry i ciemnego drewna. |
+| Buty cichego kroku | buty | pancerz +6 | Wysokie buty z miękkiej leśnej skóry. |
+| Tarcza prastarych korzeni | tarcza | pancerz +7 | Splecione korzenie chronią przed ciosami. |
+| Amulet serca kniei | ozdoba | atak +8 | Bursztyn zamknięty w żywych korzeniach. |
+| Amulet szmaragdowej kropli | ozdoba | atak +5 | Zastygła kropla esencji leśnego szlama. |
+| Runiczne ostrze strażnika | broń | atak +19 | Kamienny strażnik chronił runy tego miecza. |
+| Zbroja kamiennego strażnika | zbroja | pancerz +12 | Płyty pancerza z pradawnego kamienia. |
+| Hełm mchu i kamienia | hełm | pancerz +8 | Kamienne okucia oplecione zielonym mchem. |
+| Pierścień pradawnego echa | ozdoba | atak +11 | Fioletowy kryształ pamięta dawne ruiny. |
+| Sztylet bursztynowego żądła | broń | atak +14 | Smukłe ostrze w kształcie żądła skorpiona. |
+| Hełm miedzianego skarabeusza | hełm | pancerz +8 | Miedziany hełm z ornamentem skarabeusza. |
+| Zbroja pustynnego skarabeusza | zbroja | pancerz +11 | Miedziane płytki zachodzą na siebie jak łuski. |
+| Buty piaskowej kobry | buty | pancerz +7 | Giętkie buty ze złocistych łusek kobry. |
+| Łuk pustynnego mirażu | broń | atak +22 | Złocisty łuk zdobiony pustynnymi runami. |
+| Amulet palącego słońca | ozdoba | atak +9 | Bursztynowe słońce w miedzianej oprawie. |
+| Ostrze żywej wydmy | broń | atak +25 | Piasek krąży wokół klingi pustynnego bossa. |
+| Płaszcz piaskowej burzy | zbroja | pancerz +16 | Złote nici migoczą jak nawiewany piasek. |
+| Tarcza pustynnego monolitu | tarcza | pancerz +10 | Kamienna tarcza z ornamentem wydmy. |

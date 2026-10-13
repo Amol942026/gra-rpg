@@ -28,7 +28,7 @@ bool clickWorldOrInventory() {
     WorldHover hit=pickWorld(mouse);if(hit.kind==HoverKind::Mage)return talkToMage();
     if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
         if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
-    return game.equipment[0].kind==Kind::Bow?game.beginBow(bowAimFromPointer()):game.attack();
+    return archetype(game.equipment[0].kind)==Kind::Bow?game.beginBow(bowAimFromPointer()):game.attack();
 }
 bool rightClickWorldOrInventory(){
     if(!gameplayInputAllowed()||dragging.place!=Place::None)return false;
@@ -49,7 +49,7 @@ bool castGameplaySpell(){return gameplayInputAllowed()&&dragging.place==Place::N
 bool activateGameplaySkill(Skill skill){
  if(!gameplayInputAllowed()||dragging.place!=Place::None)return false;
  bool used=skill==Skill::StrongCut?game.strongCut():skill==Skill::PiercingArrow?game.preparePiercingArrow():skill==Skill::Healing&&game.heal();
- if(!used){game.say(game.skillRank(skill)<=0?"Najpierw naucz się tej umiejętności (U).":!game.skillWeaponMatches(skill)?"Ta umiejętność wymaga odpowiedniej broni.":skill==Skill::Healing&&game.hp>=game.maxHp()?"Zdrowie jest już pełne.":"Za mało many, brak strzał lub odnowienie umiejętności.");game.sound(Cue::Reject,game.player);}
+ if(!used){game.say(game.sandTrapped()&&skill!=Skill::Healing?"Piaskowe więzienie blokuje ataki.":game.skillRank(skill)<=0?"Najpierw naucz się tej umiejętności (U).":!game.skillWeaponMatches(skill)?"Ta umiejętność wymaga odpowiedniej broni.":skill==Skill::Healing&&game.hp>=game.maxHp()?"Zdrowie jest już pełne.":"Za mało many, brak strzał lub odnowienie umiejętności.");game.sound(Cue::Reject,game.player);}
  return used;
 }
 void leftClickGameplay(V movement){
@@ -57,6 +57,6 @@ void leftClickGameplay(V movement){
     for(int i=0;i<SkillCount;i++)if(inside(skillActionRect(i))){activateGameplaySkill(static_cast<Skill>(i));return;}
     if(game.openedCorpse>=0&&inside(corpseCloseRect())){game.closeCorpse();return;}
     for(int i=0;i<5;i++)if(inside(actionRect(i))){activateMouseAction(i,movement);return;}
-    if(game.openedCorpse<0&&mouse.y>=668&&mouse.y<696&&mouse.x>=1290&&mouse.x<1404){nearbyPage+=mouse.x<1340?-1:1;return;}
+    if(mouse.y>=668&&mouse.y<696&&mouse.x>=1286&&mouse.x<1404){if(game.findCorpse(game.openedCorpse)){syncCorpsePage();corpsePage=std::clamp(corpsePage+(mouse.x<1344?-1:1),0,corpsePages()-1);}else nearbyPage+=mouse.x<1344?-1:1;return;}
     clickWorldOrInventory();
 }

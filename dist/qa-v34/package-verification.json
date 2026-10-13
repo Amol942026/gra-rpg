@@ -1,0 +1,14 @@
+{
+  "version": "0.34",
+  "matched_files": 85,
+  "archive_entries": 87,
+  "archive_bytes": 7318083,
+  "archive_sha256": "fe28c6fc4687d05910e393310fc3be26665d19265bdf6ba9f5a73a4cc70017f5",
+  "extracted_game": "C:\\Users\\Amadeusz\\AppData\\Local\\Temp\\emberfall-v34-package-evm8nnbs\\Emberfall",
+  "instructions_verified": true,
+  "audio_preferences_unchanged": true,
+  "packaged_desert_checks": 62,
+  "packaged_graphics_checks": 305,
+  "packaged_qa_failures": 0,
+  "packaged_audio_settings_created": false
+}

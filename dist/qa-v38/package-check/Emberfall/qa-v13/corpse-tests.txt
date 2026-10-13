@@ -1,0 +1,41 @@
+PASS: four real kills leave only bodies with no scattered ground loot
+PASS: actual fallen artwork can be picked for every monster species
+PASS: hover HUD identifies the body without living combat stats
+PASS: PPM on the body opens its own loot panel
+PASS: opening bodies never casts or swings a weapon
+PASS: HUD slots bind to the opened corpse by stable ID
+PASS: actual fallen artwork can be picked for every monster species
+PASS: hover HUD identifies the body without living combat stats
+PASS: PPM on the body opens its own loot panel
+PASS: opening bodies never casts or swings a weapon
+PASS: HUD slots bind to the opened corpse by stable ID
+PASS: actual fallen artwork can be picked for every monster species
+PASS: hover HUD identifies the body without living combat stats
+PASS: PPM on the body opens its own loot panel
+PASS: opening bodies never casts or swings a weapon
+PASS: HUD slots bind to the opened corpse by stable ID
+PASS: actual fallen artwork can be picked for every monster species
+PASS: hover HUD identifies the body without living combat stats
+PASS: PPM on the body opens its own loot panel
+PASS: opening bodies never casts or swings a weapon
+PASS: HUD slots bind to the opened corpse by stable ID
+PASS: LPM on corpse loot starts dragging without attacking
+PASS: dragging a corpse item blocks C magic and PPM actions
+PASS: dragging to backpack removes the same item from the corpse
+PASS: PPM inside corpse loot cannot drink uncollected potions
+PASS: partial backpack stacking leaves excess visible in the body
+PASS: corpse weapon must be collected in backpack before equipping
+PASS: dropping on a different occupied bag slot preserves both items
+PASS: dropping corpse loot on the map cancels without scattering it
+PASS: close button preserves uncollected corpse contents
+PASS: body reopens with its remaining contents
+PASS: emptying a body keeps the corpse available on the map
+PASS: PPM on another body switches the HUD to that body
+PASS: leaving loot range closes the panel
+PASS: distant body cannot be opened even when visible under the cursor
+PASS: pause blocks body opening and C magic
+PASS: a foreground tree prevents picking a body through its artwork
+PASS: PPM over a living monster no longer casts magic
+PASS: C handler casts the chosen fireball for ten mana
+PASS: C fireball aims at the actual living monster under the cursor
+Checks: 40; failures: 0

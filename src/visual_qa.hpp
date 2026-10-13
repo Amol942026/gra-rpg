@@ -79,6 +79,7 @@ void renderWorldLayer(){
         worldCanvas=LoadRenderTexture(width,height);
         SetTextureFilter(worldCanvas.texture,TEXTURE_FILTER_BILINEAR);
     }
+    if(game.inDesert())desert_art::renderBackdrop(nativeScale);
     BeginTextureMode(worldCanvas);ClearBackground(Ink);
     renderScale=worldScale;
     BeginMode2D({{0,0},{0,0},0,worldScale});drawWorld();EndMode2D();
@@ -106,7 +107,7 @@ void renderScene() {
     if(intro.active()){
         drawUI();drawIntroArrival();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
     }
-    drawUI();drawHoveredName();tooltip();drawSkillHud();drawBowHud();drawWeaponWheel();
+    drawUI();drawHoveredName();drawSkillHud();drawBowHud();drawWeaponWheel();tooltip();
     if(towerStory.active()){drawTowerStoryOverlay();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;}
     if(dragging.place!=Place::None){Item* p=game.get(dragging);if(p)icon(*p,mouse.x,mouse.y,.95f,.9f);}
     overlay();

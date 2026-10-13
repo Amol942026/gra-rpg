@@ -1,56 +1,57 @@
 #pragma once
-
-// Static fallen rigs use the same geometry for drawing and pointer picking.
+#include "fallen_forest_art.hpp"
+namespace fallen_art {
+constexpr int Width=192,Height=128,Density=2,OriginX=96,OriginY=80;
+struct Sprite {Texture2D body{},edge{};std::vector<unsigned char> mask;};
+inline std::array<std::array<Sprite,8>,EnemyTypeCount> sprites{};
+inline int prepared=0;
+inline void storeSprite(Sprite& sprite,const Image& image){
+ sprite.body=LoadTextureFromImage(image);SetTextureFilter(sprite.body,TEXTURE_FILTER_BILINEAR);
+ Color* pixels=LoadImageColors(image);sprite.mask.resize(image.width*image.height);
+ Image rim=GenImageColor(image.width,image.height,BLANK);
+ for(int y=0;y<image.height;y++)for(int x=0;x<image.width;x++){
+  int n=y*image.width+x;sprite.mask[n]=pixels[n].a>=128;
+  if(sprite.mask[n])continue;bool nearby=false;
+  for(int dy=-3;dy<=3&&!nearby;dy++)for(int dx=-3;dx<=3&&!nearby;dx++)if(dx*dx+dy*dy<=9&&x+dx>=0&&x+dx<image.width&&y+dy>=0&&y+dy<image.height)nearby=pixels[(y+dy)*image.width+x+dx].a>=160;
+  if(nearby)ImageDrawPixel(&rim,x,y,{255,255,255,220});
+ }
+ sprite.edge=LoadTextureFromImage(rim);SetTextureFilter(sprite.edge,TEXTURE_FILTER_BILINEAR);UnloadImage(rim);UnloadImageColors(pixels);prepared++;
+}
+inline void init(){
+ if(prepared)return;
+ const char* path="assets/generated/corpses-v39.png";
+ Image atlas=FileExists(path)?LoadImage(path):Image{};
+ bool baked=atlas.data&&atlas.width==Width*Density*8&&atlas.height==Height*Density*EnemyTypeCount;
+ if(!baked){if(atlas.data)UnloadImage(atlas);atlas=GenImageColor(Width*Density*8,Height*Density*EnemyTypeCount,BLANK);}
+ for(int type=0;type<EnemyTypeCount;type++)for(int direction=0;direction<8;direction++){
+  Rectangle cell{float(direction*Width*Density),float(type*Height*Density),float(Width*Density),float(Height*Density)};
+  Image body{};
+  if(baked)body=ImageFromImage(atlas,cell);
+  else{
+   RenderTexture2D target=LoadRenderTexture(Width*Density,Height*Density);BeginTextureMode(target);ClearBackground(BLANK);
+   actor_art::Rig rig(OriginX*Density,OriginY*Density,Density,Direction(direction));
+   if(type>=8)actor_art::buildDesertCorpse(rig,type);else actor_art::buildFallenForest(rig,type);rig.draw();EndTextureMode();
+   body=LoadImageFromTexture(target.texture);ImageFlipVertical(&body);UnloadRenderTexture(target);
+   ImageDraw(&atlas,body,{0,0,float(body.width),float(body.height)},cell,WHITE);
+  }
+  storeSprite(sprites[type][direction],body);UnloadImage(body);
+ }
+ if(!baked){fs::create_directories("assets/generated");ExportImage(atlas,path);}
+ UnloadImage(atlas);
+}
+inline void unload(){for(auto& species:sprites)for(auto& sprite:species){if(sprite.body.id)UnloadTexture(sprite.body);if(sprite.edge.id)UnloadTexture(sprite.edge);sprite={};}prepared=0;}
+}
 bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
-    actor_art::Rig rig(x,y,1,e.animation.direction);
-    const Color bone=rgb(160,159,130),fur=rgb(106,113,108),stone=rgb(79,98,95);
-    if(e.type>=8){actor_art::buildDesertCorpse(rig,e.type);}
-    else if(e.type==0){
-        rig.blob(26,8,rgb(74,112,66));
-        rig.form({-8,13,5},{7,2,2},rgb(32,49,35));rig.form({8,13,5},{7,2,2},rgb(32,49,35));
-    }else if(e.type==1){
-        rig.form({0,0,7},{20,37,12},fur);rig.form({0,22,5},{15,17,8},rgb(129,133,117));
-        rig.form({0,32,4},{11,12,6},rgb(80,87,82));
-        rig.form({-6,19,12},{5,9,5},fur);rig.form({6,19,12},{5,9,5},fur);
-        for(float side:{-1.f,1.f})for(float f:{-12.f,10.f})rig.beam({side*8,f,5},{side*21,f-7,3},5,5,fur);
-        rig.beam({0,-18,6},{7,-36,3},7,6,fur);
-    }else if(e.type==2){
-        rig.form({0,22,6},{15,16,11},bone);rig.form({-4,29,7},{4,2,4},rgb(43,52,48));rig.form({4,29,7},{4,2,4},rgb(43,52,48));
-        rig.beam({0,15,5},{0,-12,4},4,4,bone);
-        for(float f:{0.f,5.f,10.f})rig.beam({-9,f,5},{9,f,5},3,3,bone);
-        for(float side:{-1.f,1.f}){
-            rig.beam({side*8,11,4},{side*20,-3,3},4,4,bone);
-            rig.beam({side*4,-12,4},{side*13,-32,3},4,4,bone);
-        }
-        rig.beam({-23,-13,3},{-17,27,3},3,3,rgb(109,131,129));
-    }else if(e.type==3){
-        rig.form({0,0,9},{29,28,17},stone);rig.form({0,25,7},{19,20,13},rgb(118,129,110));
-        rig.form({-26,3,5},{18,19,9},stone);rig.form({26,-2,6},{18,23,11},stone);
-        rig.form({-12,-25,5},{16,17,9},stone);rig.form({14,-29,4},{16,17,7},stone);
-        rig.form({0,13,17},{6,7,3},rgb(85,132,129));
-    }else if(e.type==4){
-        Color hide=rgb(112,82,56);rig.form({0,0,9},{29,39,17},hide);rig.form({0,25,7},{24,18,12},hide);
-        for(float side:{-1.f,1.f}){
-            rig.beam({side*8,30,6},{side*14,35,12},4,4,bone);
-            for(float f:{-12.f,12.f})rig.beam({side*10,f,6},{side*24,f-4,3},7,7,shade(hide,.7f));
-        }
-    }else if(e.type==5){
-        Color chitin=rgb(55,68,59);rig.form({0,-8,7},{25,27,13},chitin);rig.form({0,14,5},{20,18,10},chitin);
-        for(int i=0;i<4;i++)for(float side:{-1.f,1.f})rig.beam({side*9,-15+i*10.f,6},{side*28,-20+i*10.f,2},3,3,chitin);
-        rig.form({0,-8,14},{7,15,2},rgb(107,132,60));
-    }else if(e.type==6){
-        Color cloth=rgb(103,58,44);rig.form({0,2,6},{25,30,12},cloth);rig.form({0,26,6},{17,17,11},rgb(186,146,109));
-        rig.form({0,23,12},{20,20,6},cloth);
-        for(float side:{-1.f,1.f}){rig.beam({side*10,12,5},{side*21,-2,3},7,7,cloth);rig.beam({side*6,-12,4},{side*13,-31,3},7,7,rgb(55,61,53));}
-        rig.beam({-22,0,3},{-16,21,3},3,3,rgb(166,180,169));
-    }else{
-        Color bark=rgb(90,74,51),leaf=rgb(55,89,53);rig.form({0,0,10},{29,38,19},bark);rig.form({0,29,9},{23,22,16},bark);
-        for(float side:{-1.f,1.f}){
-            rig.beam({side*12,7,8},{side*35,12,3},9,9,bark);rig.beam({side*8,-17,6},{side*19,-34,3},9,9,bark);
-            rig.form({side*25,8,9},{22,20,11},leaf);
-        }
-        rig.form({0,26,18},{31,27,12},leaf);
-    }
-    if(probe)return rig.contains(*probe);
-    ellipse(x,y+3,e.type==11?75:e.type==3?52:39,e.type==3?19:14,rgb(8,17,17,105));rig.draw(outline);return false;
+ int type=std::clamp(e.type,0,EnemyTypeCount-1),direction=std::clamp(int(e.animation.direction),0,7);
+ const auto& sprite=fallen_art::sprites[type][direction];if(!sprite.body.id)return false;
+ if(probe){
+  int px=int(std::floor((probe->x-x+fallen_art::OriginX)*fallen_art::Density));
+  int py=int(std::floor((probe->y-y+fallen_art::OriginY)*fallen_art::Density));
+  return px>=0&&py>=0&&px<sprite.body.width&&py<sprite.body.height&&sprite.mask[py*sprite.body.width+px];
+ }
+ float w=e.type==11?67:e.type==3?52:e.type==7?49:35,h=e.type==11?28:15;
+ ellipse(x,y+3,w*1.1f,h*1.1f,rgb(5,13,14,25));ellipse(x,y+2,w,h,rgb(5,13,14,64));
+ Rectangle source{0,0,float(sprite.body.width),float(sprite.body.height)},dest{x-fallen_art::OriginX,y-fallen_art::OriginY,float(fallen_art::Width),float(fallen_art::Height)};
+ if(outline.a)DrawTexturePro(sprite.edge,source,dest,{0,0},0,outline);
+ BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);DrawTexturePro(sprite.body,source,dest,{0,0},0,WHITE);EndBlendMode();return false;
 }

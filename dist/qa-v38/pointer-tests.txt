@@ -1,0 +1,110 @@
+PASS: real raylib mouse event callback is available
+PASS: pointer diagnostics never open the audio device
+Native startup: client pointer=1746,658; raylib pointer=1746,658
+After layout: raylib pointer=1746,658
+PASS: native startup reads unscaled client mouse coordinates
+Mode=0, fullscreen=1, window=1920x1080
+Inherited mouse DPI=1
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.25
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.5
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=2
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+PASS: drag from the bottom-right bag cell equips the weapon
+PASS: presented monster hover matches the information HUD
+PASS: fireball aims at the monster under the presented pointer
+PASS: right-click handler opens the body at its presented position
+PASS: presented corpse loot drags into the far-right backpack column
+PASS: terrain picking matches the displayed point
+PASS: fullscreen HUD button uses the corrected pointer
+PASS: black margin stays outside gameplay and inventory
+Mode=1, fullscreen=0, window=1152x720
+Inherited mouse DPI=1
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.25
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.5
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=2
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+PASS: drag from the bottom-right bag cell equips the weapon
+PASS: presented monster hover matches the information HUD
+PASS: fireball aims at the monster under the presented pointer
+PASS: right-click handler opens the body at its presented position
+PASS: presented corpse loot drags into the far-right backpack column
+PASS: terrain picking matches the displayed point
+PASS: fullscreen HUD button uses the corrected pointer
+Mode=2, fullscreen=0, window=1280x720
+Inherited mouse DPI=1
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.25
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.5
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=2
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+PASS: drag from the bottom-right bag cell equips the weapon
+PASS: presented monster hover matches the information HUD
+PASS: fireball aims at the monster under the presented pointer
+PASS: right-click handler opens the body at its presented position
+PASS: presented corpse loot drags into the far-right backpack column
+PASS: terrain picking matches the displayed point
+PASS: fullscreen HUD button uses the corrected pointer
+PASS: black margin stays outside gameplay and inventory
+Mode=3, fullscreen=0, window=1600x900
+Inherited mouse DPI=1
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.25
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.5
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=2
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+PASS: drag from the bottom-right bag cell equips the weapon
+PASS: presented monster hover matches the information HUD
+PASS: fireball aims at the monster under the presented pointer
+PASS: right-click handler opens the body at its presented position
+PASS: presented corpse loot drags into the far-right backpack column
+PASS: terrain picking matches the displayed point
+PASS: fullscreen HUD button uses the corrected pointer
+PASS: black margin stays outside gameplay and inventory
+Mode=4, fullscreen=1, window=1920x1080
+Inherited mouse DPI=1
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.25
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=1.5
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+Inherited mouse DPI=2
+PASS: all 25 presented backpack cells hit through the real input callback
+PASS: all six presented equipment slots hit through the real input callback
+PASS: drag from the bottom-right bag cell equips the weapon
+PASS: presented monster hover matches the information HUD
+PASS: fireball aims at the monster under the presented pointer
+PASS: right-click handler opens the body at its presented position
+PASS: presented corpse loot drags into the far-right backpack column
+PASS: terrain picking matches the displayed point
+PASS: fullscreen HUD button uses the corrected pointer
+PASS: black margin stays outside gameplay and inventory
+Checks: 82; failures: 0

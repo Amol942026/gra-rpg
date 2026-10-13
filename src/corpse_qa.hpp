@@ -29,7 +29,7 @@ bool runCorpseQA(){
         float mana=game.mana;check(rightClickWorldOrInventory()&&game.openedCorpse==id,"PPM on the body opens its own loot panel");
         check(game.mana==mana&&game.fireballs.empty()&&game.swing==0,"opening bodies never casts or swings a weapon");
         pointAt(lootRect(0));Slot slot=hoverSlot();
-        check(slot.place==Place::Corpse&&slot.owner==id&&slot.index==0&&game.get(slot)->kind==Kind::Gold,"HUD slots bind to the opened corpse by stable ID");
+        check(slot.place==Place::Corpse&&slot.owner==id&&slot.index==0&&game.get(slot)==&game.findCorpse(id)->loot[0],"HUD slots bind to the opened corpse by stable ID");
         mouse={0,0};renderScene();saveTexture(canvas,TextFormat("qa-v13/body-%d.png",type));
     }
     // Make one body deterministic to check the complete drag and stacking path.

@@ -1,0 +1,31 @@
+PASS: forest diagnostic opens no audio device
+PASS: GPU loads the enlarged terrain and the cached minimap successfully
+PASS: added forest region renders at a traversable camera location
+PASS: added forest region renders at a traversable camera location
+PASS: added forest region renders at a traversable camera location
+PASS: added forest region renders at a traversable camera location
+PASS: added forest region renders at a traversable camera location
+PASS: added forest region renders at a traversable camera location
+PASS: expanded crossroads and distant border show accessible land beyond the former map
+PASS: expanded crossroads and distant border show accessible land beyond the former map
+PASS: expanded crossroads and distant border show accessible land beyond the former map
+PASS: new species is selectable through its actual rendered geometry
+PASS: new species exposes correct HP, identity and drop-rate summary in HUD
+PASS: new species has a pickable persistent corpse opened by PPM
+PASS: new species material drags from corpse into far-right backpack slot
+PASS: new species is selectable through its actual rendered geometry
+PASS: new species exposes correct HP, identity and drop-rate summary in HUD
+PASS: new species has a pickable persistent corpse opened by PPM
+PASS: new species material drags from corpse into far-right backpack slot
+PASS: new species is selectable through its actual rendered geometry
+PASS: new species exposes correct HP, identity and drop-rate summary in HUD
+PASS: new species has a pickable persistent corpse opened by PPM
+PASS: new species material drags from corpse into far-right backpack slot
+PASS: new species is selectable through its actual rendered geometry
+PASS: new species exposes correct HP, identity and drop-rate summary in HUD
+PASS: new species has a pickable persistent corpse opened by PPM
+PASS: new species material drags from corpse into far-right backpack slot
+PASS: new deciduous trees retain animated crown geometry and matching hit masks
+PASS: new deciduous trees retain animated crown geometry and matching hit masks
+PASS: wolf loot tooltips use the configured independent chances
+Checks: 30; failures: 0

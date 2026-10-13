@@ -1,0 +1,52 @@
+1 ms: Emberfall v0.38: startup
+1 ms: Creating graphics window
+1 ms: Initializing raylib 5.5
+1 ms: Platform backend: DESKTOP (GLFW)
+1 ms: Supported raylib modules:
+2 ms:     > rcore:..... loaded (mandatory)
+2 ms:     > rlgl:...... loaded (mandatory)
+2 ms:     > rshapes:... loaded (optional)
+2 ms:     > rtextures:. loaded (optional)
+2 ms:     > rtext:..... loaded (optional)
+2 ms:     > rmodels:... loaded (optional)
+2 ms:     > raudio:.... loaded (optional)
+132 ms: DISPLAY: Trying to enable VSYNC
+132 ms: DISPLAY: Device initialized successfully
+132 ms:     > Display size: 1920 x 1080
+133 ms:     > Screen size:  1440 x 900
+133 ms:     > Render size:  1800 x 1055
+133 ms:     > Viewport offsets: 0, 0
+137 ms: GLAD: OpenGL extensions loaded successfully
+137 ms: GL: Supported extensions count: 286
+137 ms: GL: OpenGL device information:
+137 ms:     > Vendor:   ATI Technologies Inc.
+137 ms:     > Renderer: AMD Radeon (TM) Graphics
+137 ms:     > Version:  3.3.0 Core Profile Context 23.19.10.04.240321
+137 ms:     > GLSL:     4.60
+137 ms: GL: VAO extension detected, VAO functions loaded successfully
+137 ms: GL: NPOT textures extension detected, full NPOT textures supported
+137 ms: GL: DXT compressed textures supported
+137 ms: GL: ETC2/EAC compressed textures supported
+137 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+137 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+137 ms: TEXTURE: [ID 1] Default texture loaded successfully
+178 ms: SHADER: [ID 1] Vertex shader compiled successfully
+180 ms: SHADER: [ID 2] Fragment shader compiled successfully
+206 ms: SHADER: [ID 3] Program shader loaded successfully
+206 ms: SHADER: [ID 3] Default shader loaded successfully
+206 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+207 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+207 ms: RLGL: Default OpenGL state initialized successfully
+207 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+207 ms: FONT: Default font loaded successfully (224 glyphs)
+207 ms: SYSTEM: Working Directory: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\dist\qa-v38\package-check\Emberfall
+207 ms: Graphics window ready
+211 ms: Generating world graphics
+978 ms: World graphics ready
+979 ms: Audio skipped (--no-audio)
+2102 ms: First Dawn shard collected: hero returned to Eldrin's tower
+2888 ms: Eldrin dialogue choice: hero teleported to the desert
+3462 ms: Eldrin dialogue choice: hero teleported to the desert
+6099 ms: First Dawn shard collected: hero returned to Eldrin's tower
+42317 ms: First Dawn shard collected: hero returned to Eldrin's tower
+121475 ms: Shutting down

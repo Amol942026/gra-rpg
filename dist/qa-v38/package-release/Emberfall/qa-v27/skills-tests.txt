@@ -1,0 +1,85 @@
+PASS: skills diagnostic opens no audio device
+PASS: real level opens attributes first and earns one skill point
+PASS: stats confirmation automatically opens mandatory skill selection without training early
+PASS: skill allocation freezes simulation and mouse gameplay
+PASS: unallocated skill point cannot be skipped by confirmation
+PASS: card selection changes draft only
+PASS: single-point selection can switch to other card before confirmation
+PASS: minus restores pending skill point
+PASS: confirmation trains exactly chosen skill and resumes gameplay
+PASS: HUD strong-cut click uses learned sword skill for ten mana and greater damage
+PASS: sword skill is blocked when bow is equipped and cannot spend mana
+PASS: next level trains second skill through both mandatory menus
+PASS: arrow skill cannot activate with sword equipped
+PASS: HUD piercing click arms shot without early mana or arrow cost
+PASS: normal LPM world input charges prepared piercing shot
+PASS: release spends twenty mana and one arrow while retaining normal charged-shot damage
+PASS: one piercing shot damages three aligned enemies exactly once and animates each hit
+PASS: opening character sheet cancels armed draw with no extra resource cost
+PASS: release over inventory cancels piercing shot without resource cost
+PASS: HUD opens learned skill sheet outside advancement
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: strong-cut animation fits full silhouette in each phase and direction
+PASS: empowered sword GPU silhouette agrees with pointer geometry
+PASS: empowered bow and quiver fit silhouette in all eight directions
+PASS: empowered bow GPU silhouette agrees with pointer geometry
+PASS: empowered bow and quiver fit silhouette in all eight directions
+PASS: empowered bow GPU silhouette agrees with pointer geometry
+PASS: empowered bow and quiver fit silhouette in all eight directions
+PASS: empowered bow GPU silhouette agrees with pointer geometry
+PASS: empowered bow and quiver fit silhouette in all eight directions
+PASS: empowered bow GPU silhouette agrees with pointer geometry
+PASS: empowered bow and quiver fit silhouette in all eight directions
+PASS: empowered bow GPU silhouette agrees with pointer geometry
+PASS: empowered bow and quiver fit silhouette in all eight directions
+PASS: empowered bow GPU silhouette agrees with pointer geometry
+PASS: empowered bow and quiver fit silhouette in all eight directions
+PASS: empowered bow GPU silhouette agrees with pointer geometry
+PASS: empowered bow and quiver fit silhouette in all eight directions
+PASS: empowered bow GPU silhouette agrees with pointer geometry
+Checks: 84; failures: 0

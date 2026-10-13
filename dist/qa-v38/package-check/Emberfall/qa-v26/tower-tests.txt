@@ -1,0 +1,51 @@
+PASS: tower diagnostic opens no audio device
+PASS: guardian defeat leaves hero in the forest until the artifact is collected
+PASS: real corpse pointer and right-click open guardian loot
+PASS: fifth visible corpse slot contains the guaranteed quest artifact
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: real inventory drop starts the dark fade before changing location
+PASS: return cinematic blocks combat and world input immediately after pickup
+PASS: forest darkens while its simulation remains frozen
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: lost focus freezes the return and ignores skip or advance
+PASS: fade reaches the tower exactly once and closes the old loot panel
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: return dialogue fits the shared panel above its padded navigation button
+PASS: return dialogue fits the shared panel above its padded navigation button
+PASS: return dialogue fits the shared panel above its padded navigation button
+PASS: return dialogue fits the shared panel above its padded navigation button
+PASS: return dialogue fits the shared panel above its padded navigation button
+PASS: return dialogue fits the shared panel above its padded navigation button
+PASS: return dialogue fits the shared panel above its padded navigation button
+PASS: return dialogue fits the shared panel above its padded navigation button
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: cutscene ends in playable tower with one of five parts recorded
+PASS: cutscene retains hero health, mana, level, XP and the collected piece
+PASS: no forest simulation or enemy movement occurs behind the cutscene
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: playable destination renders a stone floor, furnishings and visible purple-robed mage
+PASS: NPC cannot be talked to from beyond interaction range
+PASS: normal tower movement reaches the NPC while forest enemies stay inactive
+PASS: pointer picking identifies Eldrin as a friendly NPC
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: right-click on the actual mage starts a repeat NPC conversation
+PASS: NPC dialogue also pauses when the game loses focus
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: ESC closes NPC dialogue without moving the hero
+PASS: left-click on Eldrin speaks instead of swinging or drawing the bow
+PASS: keyboard interaction shares a repeatable NPC conversation handler
+PASS: repeat NPC dialogue fits the same readable panel
+PASS: repeat NPC dialogue fits the same readable panel
+PASS: repeat NPC dialogue fits the same readable panel
+PASS: repeat NPC dialogue fits the same readable panel
+PASS: repeat NPC dialogue fits the same readable panel
+PASS: choosing to stay returns control without duplicating fragments or teleporting
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: playable tower and NPC dialogue fit the smallest supported window
+PASS: F11 and resizing retain tower location and quest state
+PASS: story frame reaches the actual presentation buffer at native dimensions
+PASS: new adventure resets the quest and begins the original prologue
+Checks: 50; failures: 0

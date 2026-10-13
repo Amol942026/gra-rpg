@@ -27,7 +27,7 @@ float arrowDamage(float charge)const{return float(damage())+12*std::clamp(charge
 void cancelBow(){bowDrawing=false;bowDrawTime=0;bowReleaseTime=0;piercingArrowArmed=false;}
 void aimBow(V aim){if(!bowDrawing||length(aim)<.001f)return;bowAim=normalized(aim);facing=bowAim;animation.face(bowAim.x,bowAim.y);}
 bool beginBow(V aim){
- if(dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||bowDrawing||equipment[0].kind!=Kind::Bow)return false;
+ if(sandTrapped()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||bowDrawing||archetype(equipment[0].kind)!=Kind::Bow)return false;
  if(piercingArrowArmed&&mana<PiercingArrowCost){say("Przeszywająca strzała wymaga 20 many.");return false;}
  if(ammoCount()<=0){say("Brak strzał w plecaku.");sound(Cue::Reject,player);return false;}
  bowDrawing=true;bowDrawTime=bowReleaseTime=0;bowAim=normalized(length(aim)>.001f?aim:facing);if(length(bowAim)<.001f)bowAim={0,-1};aimBow(bowAim);return true;
@@ -35,7 +35,7 @@ bool beginBow(V aim){
 bool releaseBow(){
  if(!bowDrawing)return false;
  float charge=bowCharge();V direction=bowAim;bool piercing=piercingArrowArmed;cancelBow();
- if(dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||equipment[0].kind!=Kind::Bow||ammoCount()<=0)return false;
+ if(sandTrapped()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)!=Kind::Bow||ammoCount()<=0)return false;
  if(piercing&&(skillRank(Skill::PiercingArrow)<=0||piercingArrowCd>0||mana<PiercingArrowCost))return false;
  for(auto& value:bag)if(value.kind==Kind::Arrow&&!value.empty()){if(--value.count<=0)value={};break;}
  arrows.push_back({player,direction*(12+8*charge),bowRange(charge),arrowDamage(charge),piercing,piercing?piercingTargets():1,{},rollCritical()});

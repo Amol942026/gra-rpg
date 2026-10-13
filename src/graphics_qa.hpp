@@ -1,9 +1,13 @@
 #pragma once
+#include "sprint_qa.hpp"
+#include "fallen_qa.hpp"
 
 bool runGraphicsQA(){
  fs::create_directories("qa-v21");std::ofstream report("qa-v21/graphics-tests.txt");int checks=0,failures=0;
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
  check(!audioSystem.available,"graphics diagnostic opens no audio device");
+ verifySprintArt(check);
+ verifyFallenArt(check);
  RenderTexture2D sample=LoadRenderTexture(240,260);
  auto verify=[&](int species,int dir,float roll,float strike){
   AnimationState pose;pose.direction=static_cast<Direction>(dir);pose.moving=roll<0;pose.phase=.17f;pose.idleTime=.7f;

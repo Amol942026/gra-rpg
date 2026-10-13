@@ -1,0 +1,66 @@
+PASS: bow diagnostic never opens audio device
+PASS: wheel pauses gameplay and blocks world attacks and inspection
+PASS: clicking bow sector equips actual inventory bow and preserves sword plus ammo
+PASS: clicking ammo counter never starts world bow action
+PASS: dragging backpack weapon onto sector assigns it without consuming or duplicating inventory item
+PASS: assigned weapon sector can switch actual equipment
+PASS: potion drag cannot create weapon shortcut
+PASS: LPM world press draws bow without sword attack or premature shot
+PASS: held LPM accumulates charge without automatic repeat shots
+PASS: LPM release handler launches exactly one arrow and consumes one
+PASS: release over HUD cancels shot without ammunition cost
+PASS: opening wheel cancels drawn shot without ammo loss
+PASS: LPM on ammunition starts inventory drag instead of drawing bow
+PASS: empty quiver cannot fire through real LPM handler
+PASS: weapon assignment works at every supported logical rendering scale
+PASS: weapon assignment works at every supported logical rendering scale
+PASS: weapon assignment works at every supported logical rendering scale
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+PASS: bow, quiver and drawn pose fit full silhouette in each direction
+PASS: bow character GPU pixels match pointer geometry including back equipment
+Checks: 65; failures: 0

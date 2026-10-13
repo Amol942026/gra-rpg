@@ -1,0 +1,130 @@
+{
+  "version": "0.39",
+  "zip_bytes": 8606141,
+  "zip_sha256": "be17c90669a105a69b21c21ed4eebac0c27bc478ef6d98d69486b2f2c0bb21df",
+  "exe_sha256": "15d1a27786c94af9162f1d85873851801a1eeb25da11ea7f6181a99f99fde3ff",
+  "entries": 89,
+  "verified_payload_files": 87,
+  "atlas_sha256": "26955374a60704193bfc928d35902902b7c6a65e0c2163f89f76948b62ad7947",
+  "audio_preferences_sha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6",
+  "package_directory": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-v39\\package-release\\Emberfall",
+  "model_checks": 4659,
+  "model_failures": 0,
+  "packaged_qa": {
+    "graphics": {
+      "checks": 559,
+      "failures": 0
+    },
+    "forest": {
+      "checks": 30,
+      "failures": 0
+    },
+    "rarity": {
+      "checks": 224,
+      "failures": 0
+    },
+    "corpse": {
+      "checks": 40,
+      "failures": 0
+    },
+    "desert": {
+      "checks": 95,
+      "failures": 0
+    },
+    "bow": {
+      "checks": 65,
+      "failures": 0
+    },
+    "controls": {
+      "checks": 42,
+      "failures": 0
+    },
+    "pointer": {
+      "checks": 82,
+      "failures": 0
+    }
+  },
+  "packaged_ui_checks": 1137,
+  "packaged_exit_code": 0,
+  "qa_arguments": "--graphics-qa --forest-qa --corpse-qa --desert-qa --bow-qa --controls-qa --pointer-qa --no-audio",
+  "benchmarks": {
+    "forest": {
+      "Frames": "900",
+      "Window": "1920x1080",
+      "Fullscreen": "yes",
+      "Refresh rate (Hz)": "60",
+      "V-sync interval": "1",
+      "Presentation clock": "DXGI flip / V-sync",
+      "DXGI synchronized presents": "900",
+      "Occluded presentations": "0",
+      "Suppressed native swaps": "900",
+      "Actual presentation interval": "1",
+      "Presentation fallback": "",
+      "Strong cuts performed": "1",
+      "Piercing arrows fired": "2",
+      "Developer mode": "0",
+      "Developer menu open": "0",
+      "Developer destination": "forest",
+      "World location": "forest",
+      "Benchmark scenario": "forest",
+      "Desert areas visited": "0",
+      "Sand prisons cast": "0",
+      "Tower floor": "1",
+      "Intro active": "0",
+      "Developer error": "",
+      "Audio device opened": "no",
+      "Native canvas": "1728x1080",
+      "Desert background buffer": "0x0",
+      "Average FPS": "60.0551",
+      "CPU frame mean (ms)": "12.4322",
+      "EndDrawing mean (ms)": "0.0374689",
+      "Presentation mean (ms)": "4.18113",
+      "CPU frame p95 (ms)": "13.7979",
+      "CPU frame p99 (ms)": "15.9827",
+      "Frame p95 (ms)": "16.7286",
+      "Frame p99 (ms)": "16.8801",
+      "Frame max (ms)": "24.1408",
+      "Frames over 25 ms": "0"
+    },
+    "desert": {
+      "Frames": "900",
+      "Window": "1920x1080",
+      "Fullscreen": "yes",
+      "Refresh rate (Hz)": "60",
+      "V-sync interval": "1",
+      "Presentation clock": "DXGI flip / V-sync",
+      "DXGI synchronized presents": "900",
+      "Occluded presentations": "0",
+      "Suppressed native swaps": "900",
+      "Actual presentation interval": "1",
+      "Presentation fallback": "",
+      "Strong cuts performed": "0",
+      "Piercing arrows fired": "0",
+      "Developer mode": "0",
+      "Developer menu open": "0",
+      "Developer destination": "forest",
+      "World location": "desert",
+      "Benchmark scenario": "desert",
+      "Desert areas visited": "9",
+      "Sand prisons cast": "1",
+      "Tower floor": "1",
+      "Intro active": "0",
+      "Developer error": "",
+      "Audio device opened": "no",
+      "Native canvas": "1728x1080",
+      "Desert background buffer": "908x778",
+      "Average FPS": "60.0624",
+      "CPU frame mean (ms)": "13.2094",
+      "EndDrawing mean (ms)": "0.0380459",
+      "Presentation mean (ms)": "3.40344",
+      "CPU frame p95 (ms)": "16.231",
+      "CPU frame p99 (ms)": "17.2079",
+      "Frame p95 (ms)": "16.7669",
+      "Frame p99 (ms)": "17.2913",
+      "Frame max (ms)": "22.5174",
+      "Frames over 25 ms": "0"
+    }
+  },
+  "audio_preferences_unchanged": true,
+  "packaged_audio_configuration_absent": true
+}

@@ -1,0 +1,225 @@
+PASS: loot diagnostic runs without opening the laptop audio device
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: all item text fits its real tooltip without clipped names or descriptions
+PASS: every item tooltip exposes its actual rarity and central drop chance
+PASS: the GPU renders each item name in the required rarity color
+PASS: a new bow is assignable through the real wheel model
+PASS: hovering a weapon sector resolves the actual named inventory item for its rarity tooltip
+PASS: weapon wheel hover exposes the full item name and rarity
+PASS: real weapon-wheel rendering keeps the item tooltip above the opaque wheel sectors
+PASS: a full body exposes all fifteen slots across three HUD pages
+PASS: first page points to its actual fifth item
+PASS: real next-page mouse handler selects the second corpse page
+PASS: real next-page mouse handler selects the third corpse page
+PASS: next-page button cannot exceed the body page count
+PASS: third-page mouse hit preserves the actual slot and corpse ID
+PASS: last-page loot drags through real pointer handlers into the far-right backpack slot
+PASS: previous-page button restores the second page
+PASS: reopening the body preserves remaining contents
+PASS: reopened corpse page stays within the remaining contents
+PASS: opening a different corpse resets pagination and cannot show another body's items
+PASS: a full body exposes all fifteen slots across three HUD pages
+PASS: first page points to its actual fifth item
+PASS: real next-page mouse handler selects the second corpse page
+PASS: real next-page mouse handler selects the third corpse page
+PASS: next-page button cannot exceed the body page count
+PASS: third-page mouse hit preserves the actual slot and corpse ID
+PASS: last-page loot drags through real pointer handlers into the far-right backpack slot
+PASS: previous-page button restores the second page
+PASS: reopening the body preserves remaining contents
+PASS: reopened corpse page stays within the remaining contents
+PASS: opening a different corpse resets pagination and cannot show another body's items
+PASS: a full body exposes all fifteen slots across three HUD pages
+PASS: first page points to its actual fifth item
+PASS: real next-page mouse handler selects the second corpse page
+PASS: real next-page mouse handler selects the third corpse page
+PASS: next-page button cannot exceed the body page count
+PASS: third-page mouse hit preserves the actual slot and corpse ID
+PASS: last-page loot drags through real pointer handlers into the far-right backpack slot
+PASS: previous-page button restores the second page
+PASS: reopening the body preserves remaining contents
+PASS: reopened corpse page stays within the remaining contents
+PASS: opening a different corpse resets pagination and cannot show another body's items
+Checks: 224; failures: 0

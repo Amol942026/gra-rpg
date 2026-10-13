@@ -1,0 +1,138 @@
+{
+  "version": "0.38",
+  "zipBytes": 7401929,
+  "zipSha256": "2eec97e8768203d08ec4ab400315d057846317bb9fb312ae6400c13864e2c6f1",
+  "entries": 88,
+  "verifiedPayloadFiles": 86,
+  "exeSha256": "b132581bdd25de938d383c431635a267077e60a28333afb7a9b804e4ff46c564",
+  "extractedDirectory": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-v38\\package-release\\Emberfall",
+  "audioSettingsIncluded": false,
+  "modelChecks": 4174,
+  "extractedQaExitCode": 0,
+  "qa": {
+    "rarity": {
+      "checks": 224,
+      "failures": 0
+    },
+    "forest": {
+      "checks": 30,
+      "failures": 0
+    },
+    "graphics": {
+      "checks": 365,
+      "failures": 0
+    },
+    "corpse": {
+      "checks": 40,
+      "failures": 0
+    },
+    "bow": {
+      "checks": 65,
+      "failures": 0
+    },
+    "controls": {
+      "checks": 42,
+      "failures": 0
+    },
+    "desert": {
+      "checks": 95,
+      "failures": 0
+    },
+    "tower": {
+      "checks": 50,
+      "failures": 0
+    },
+    "inspection": {
+      "checks": 64,
+      "failures": 0
+    },
+    "pointer": {
+      "checks": 82,
+      "failures": 0
+    },
+    "skills": {
+      "checks": 84,
+      "failures": 0
+    }
+  },
+  "graphicsAndInterfaceChecks": 1141,
+  "benchmarks": {
+    "desert": {
+      "Frames": "900",
+      "Window": "1920x1080",
+      "Fullscreen": "yes",
+      "Refresh rate (Hz)": "60",
+      "V-sync interval": "1",
+      "Presentation clock": "DXGI flip / V-sync",
+      "DXGI synchronized presents": "900",
+      "Occluded presentations": "0",
+      "Suppressed native swaps": "900",
+      "Actual presentation interval": "1",
+      "Presentation fallback": "",
+      "Strong cuts performed": "0",
+      "Piercing arrows fired": "0",
+      "Developer mode": "0",
+      "Developer menu open": "0",
+      "Developer destination": "forest",
+      "World location": "desert",
+      "Benchmark scenario": "desert",
+      "Desert areas visited": "9",
+      "Sand prisons cast": "1",
+      "Tower floor": "1",
+      "Intro active": "0",
+      "Developer error": "",
+      "Audio device opened": "no",
+      "Native canvas": "1728x1080",
+      "Desert background buffer": "908x778",
+      "Average FPS": "56.7411",
+      "CPU frame mean (ms)": "15.3123",
+      "EndDrawing mean (ms)": "0.0458077",
+      "Presentation mean (ms)": "2.26258",
+      "CPU frame p95 (ms)": "24.7055",
+      "CPU frame p99 (ms)": "26.2456",
+      "Frame p95 (ms)": "24.8765",
+      "Frame p99 (ms)": "26.3842",
+      "Frame max (ms)": "28.5047",
+      "Frames over 25 ms": "39"
+    },
+    "forest": {
+      "Frames": "900",
+      "Window": "1920x1080",
+      "Fullscreen": "yes",
+      "Refresh rate (Hz)": "60",
+      "V-sync interval": "1",
+      "Presentation clock": "DXGI flip / V-sync",
+      "DXGI synchronized presents": "900",
+      "Occluded presentations": "0",
+      "Suppressed native swaps": "900",
+      "Actual presentation interval": "1",
+      "Presentation fallback": "",
+      "Strong cuts performed": "1",
+      "Piercing arrows fired": "2",
+      "Developer mode": "0",
+      "Developer menu open": "0",
+      "Developer destination": "forest",
+      "World location": "forest",
+      "Benchmark scenario": "forest",
+      "Desert areas visited": "0",
+      "Sand prisons cast": "0",
+      "Tower floor": "1",
+      "Intro active": "0",
+      "Developer error": "",
+      "Audio device opened": "no",
+      "Native canvas": "1728x1080",
+      "Desert background buffer": "0x0",
+      "Average FPS": "59.348",
+      "CPU frame mean (ms)": "13.877",
+      "EndDrawing mean (ms)": "0.0550184",
+      "Presentation mean (ms)": "2.91721",
+      "CPU frame p95 (ms)": "21.033",
+      "CPU frame p99 (ms)": "25.3354",
+      "Frame p95 (ms)": "21.2078",
+      "Frame p99 (ms)": "25.6333",
+      "Frame max (ms)": "27.3964",
+      "Frames over 25 ms": "14"
+    }
+  },
+  "audioPreferencesSha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6"
+}

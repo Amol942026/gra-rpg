@@ -26,7 +26,7 @@ std::vector<DrawObject> worldDrawOrder() {
     objects.reserve(game.props.size()+game.enemies.size()+1);
     for(int i=0;i<int(game.props.size());i++)objects.push_back({game.props[i].pos.x+game.props[i].pos.y,0,i});
     for(int i=0;i<int(game.enemies.size());i++)
-        objects.push_back({game.enemies[i].pos.x+game.enemies[i].pos.y,game.enemies[i].alive?1:4,i});
+        objects.push_back({game.enemies[i].pos.x+game.enemies[i].pos.y+(game.enemies[i].alive?0.f:-.03f),game.enemies[i].alive?1:4,i});
     objects.push_back({game.player.x+game.player.y,2,0});
     for(int i=0;i<int(game.fireballs.size());i++)objects.push_back({game.fireballs[i].pos.x+game.fireballs[i].pos.y,3,i});
     for(int i=0;i<int(game.arrows.size());i++)objects.push_back({game.arrows[i].pos.x+game.arrows[i].pos.y,5,i});
@@ -38,7 +38,7 @@ bool worldPointerAllowed(Vector2 p) {
     if(developerMenuOpen||towerPanelOpen||intro.active()||towerStory.active()||game.storyBlocked()||weaponWheelOpen||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||game.allocationRequired||game.dead())return false;
     if(!CheckCollisionPointRec(p,{0,116,WorldW,678}))return false;
     if(CheckCollisionPointRec(p,weaponWheelButton())||CheckCollisionPointRec(p,developerButton()))return false;
-    if(game.equipment[0].kind==Kind::Bow&&CheckCollisionPointRec(p,{195,112,515,36}))return false;
+    if(archetype(game.equipment[0].kind)==Kind::Bow&&CheckCollisionPointRec(p,{195,112,515,36}))return false;
     if(CheckCollisionPointRec(p,{842,133,180,155}))return false; // minimap
     if(CheckCollisionPointRec(p,{22,675,310,119}))return false; // journal
     if(game.messageTime>0){
@@ -88,7 +88,7 @@ WorldHover pickWorld(Vector2 point) {
             Vector2 p=screen(e.pos);kind=HoverKind::Enemy;id=e.id;
             float half=enemyBoss(e.type)?125:75;
             if(CheckCollisionPointRec(point,{p.x-half,p.y-enemyInfo(e.type).visualHeight,half*2,enemyInfo(e.type).visualHeight+14})){
-                float attack=e.windup>0?-std::clamp(1-e.windup/.42f,0.f,1.f):e.strike>0?std::sin((1-e.strike/.22f)*PI):0;
+                float attack=e.attackPose();
                 touched=actor_art::draw(e.type+1,p.x,p.y,1,e.animation,attack,false,false,Kind::Sword,false,BLANK,&point);
             }
         }else if(it->type==4){
@@ -100,7 +100,7 @@ WorldHover pickWorld(Vector2 point) {
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){
                 float progress=game.swingProgress();float attack=progress>=0?std::sin(progress*PI):0;
-                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),game.equipment[0].kind,false,BLANK,&point,game.rollProgress(),progress,game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),game.empoweredPose());
+                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,&point,game.rollProgress(),progress,game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),game.empoweredPose());
             }
         }
         if(touched){
@@ -149,7 +149,7 @@ void drawHoveredName() {
         Enemy* e=game.findCorpse(hovered.index);if(!e)return;
         name=std::string("Ciało: ")+enemyInfo(e->type).name+" · PPM: otwórz";
     }else if(hovered.kind==HoverKind::Forage){
-        name="Borowik · +10 HP";color=Green;
+        name="Borowik · pospolity · +10 HP";color=WHITE;
     }else{
         name=propInfo(game.props[hovered.index].type).name;if(game.props[hovered.index].type==13)name+=" · E / PPM";
     }

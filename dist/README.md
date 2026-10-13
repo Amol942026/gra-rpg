@@ -8,15 +8,67 @@ Przed wybraniem prezentacji DirectX gra sprawdza rzeczywisty piksel przesłany z
 
 Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
+## Wersja 0.39 — naturalniejszy bieg i szczegółowe ciała bestii
+
+Opis przedmiotu pokazuje samo **Pospolity**, **Rzadki**, **Bardzo rzadki** lub **Niezwykle rzadki**, w odpowiadającym kolorze. Usunięto przedrostek z podpowiedzi i informacji o borowiku; szanse na łup pozostają 60/15/4/1%, a fragment fabularny nadal ma 100%.
+
+Bieg z Shiftem ma osobny ruch nóg: stopa podporowa zostaje na ziemi, druga wraca z uniesieniem, a kolano jest wyliczane z dwóch odcinków o stałej długości. Ramiona pracują przeciwnie do nóg; pochylenie tułowia i ruch peleryny są subtelniejsze. Miecz jest niesiony za biodrem. Chód, celowanie z łuku, atak i przeturlanie zachowują swoje pozy.
+
+Wszystkie **12 gatunków** mają nowe, łagodniej cieniowane ciała w **ośmiu kierunkach**: podwinięte łapy wilka, czaszka i żebra szkieletu, kamienny pancerz strażnika, tusze dzików, złożone odnóża pająków i owadów, korzenie drzew oraz łuski kobry i piaskowe grzbiety wydmy. Ciała leżą pod drzewami przy tej samej głębokości sceny. PPM i przeciąganie łupu działają na rzeczywistej sylwetce.
+
+Grafiki i maski wskazywania są przygotowane przed walką. W trakcie gry ciało jest rysowane z gotowej tekstury, bez ponownego tworzenia siatki. Atlas: assets/generated/corpses-v39.png. Podglądy oraz ciche testy: dist/qa-v39/ (--graphics-qa --forest-qa --corpse-qa --no-audio).
+
+## Wersja 0.38 — rzadkość, losowy łup i nowe wyposażenie
+
+Każdy przedmiot ma jedną z czterech rzadkości: **pospolity — biały (60%)**, **rzadki — niebieski (15%)**, **bardzo rzadki — żółty (4%)**, **niezwykle rzadki — fioletowy (1%)**. Szansa zależy tylko od rzadkości: jest identyczna dla monet, materiałów, mikstur i sprzętu tego samego stopnia, niezależnie od gatunku bestii i ulepszenia. Poszczególne pozycje losują się niezależnie. Fragmenty Serca Świtu pozostają gwarantowanym wyjątkiem fabularnym.
+
+Dodano **28 tematycznych elementów wyposażenia** do istniejących bestii i bossów: miecze, łuki, sztylety, topór, zbroje, płaszcze, hełmy, tarcze, buty, pierścienie i amulety. Nowe bronie współpracują z kołem wyboru, zwykłymi atakami i umiejętnościami. Mają osobne nazwy, opisy, bonusy i ozdobione ikony.
+
+Podpowiedź każdego przedmiotu pokazuje kolorową nazwę, rzadkość i szansę. Ciało może przechować 15 pozycji; strony zmienia się strzałkami < / > w panelu lub rolką myszy. Wszystkie przedmioty są przeciągane do plecaka, również z ostatniej strony. Pełny katalog i tabele: [LOOT.md](LOOT.md).
+
+Ciche sprawdzenie interfejsu: --forest-qa --no-audio. Raport rzadkości i galerie: dist/qa-v38/; testy modelu: tests/rarity_loot_tests.hpp.
+
+## Wersja 0.37 — osobna animacja biegu i góry na poziomie pustyni
+
+Przytrzymanie Shift podczas ruchu uruchamia osobną animację biegu w ośmiu kierunkach: tułów pochyla się do przodu, nogi wykonują dłuższy wykrok i wyżej unoszą stopy, ramiona są ugięte i mocniej pracują, a peleryna zostaje za postacią. Postać inaczej niesie miecz i łuk; kołczan porusza się razem z ciałem. Wejście w bieg i powrót do chodu są płynne i niezależne od FPS. Naciąganie łuku, atak i unik korzystają ze swoich właściwych póz. Prędkość biegu pozostaje o 50% większa od chodu.
+
+Za krawędzią Morza Piasków piasek ciągnie się na tej samej wysokości do podnóża gór. Najbliższe pasma wyrastają ponad pustynny teren, więc zbocza i szczyty nie są odcinane linią brzegu mapy. Góry zakrywające bohatera stają się częściowo przezroczyste. Dalsze pasma pozostają za mapą. Obie warstwy są składane w osobnych buforach GPU z dokładnym położeniem kamery.
+
+Ciche testy `--graphics-qa --desert-qa --no-audio` zapisują rendery, fazy biegu, sylwetki ośmiu kierunków, zgodność z myszą oraz widoki wszystkich brzegów w `dist/qa-v37/`. Testy biegu: `tests/sprint_tests.hpp`. Benchmark pustyni obejmuje także nową animację biegu i obie warstwy gór.
+
+## Wersja 0.36 — pustynne szlaki i piaskowe więzienie
+
+Drogi Morza Piasków mają płynne zakręty, nieregularne, miękkie brzegi, koleiny, ślady stóp i drobne kamienie. Teren, minimapa i rozmieszczanie przeszkód korzystają z tych samych krzywych. Grafika dróg jest przygotowywana raz na starcie.
+
+Żywa Wydma co 10 sekund widocznej walki rzuca **Piaskowe więzienie**. Mała wydma wyrasta wokół bohatera i na **3 sekundy** blokuje chodzenie, bieg, unik, miecz, łuk, kulę ognia i umiejętności ataku. Pułapka przerywa trwający unik, zamach i naciąganie łuku. W HUD widać czas do uwolnienia. Leczenie i mikstury pozostają dostępne; wcześniej wystrzelone pociski dalej lecą. Przydział statystyk i menu pauzy zatrzymują czas pułapki.
+
+Pierwsze użycie następuje po 10 sekundach walki; kolejne co 10 sekund od poprzedniego użycia. Boss potrzebuje widzieć bohatera w zasięgu swojej zwykłej aggro. Śmierć oraz zmiana krainy usuwają stan uwięzienia.
+
+Cichy test `--desert-qa --no-audio` sprawdza także faktyczne kliknięcia i klawisze, warstwy wydmy, moment uwolnienia i różne rozdzielczości. Raporty i podglądy: `dist/qa-v36/`. Benchmark pustyni sprawdza dziewięć miejsc i jedno użycie pułapki z przyspieszonym odnowieniem; pełne czasy 10/3 sekundy są sprawdzane przy 30, 60 i 120 aktualizacjach na sekundę w testach logiki.
+
+## Wersja 0.35 — wiatr pustyni i górskie otoczenie
+
+Piasek jest niesiony przy ziemi w miękkich smugach pyłu. Siła podmuchów zmienia się płynnie, drobne ziarna podskakują, a efekt porusza się w przestrzeni świata razem z terenem podczas biegu i uniku. Przezroczystość pyłu zachowuje czytelność obrazu; drobiny nie pojawiają się na wodzie ani na HUD.
+
+Za wszystkimi czterema krawędziami i narożnikami Morza Piasków rozciągają się cieniowane pasma gór. Ich zbocza mają ślady erozji i warstwy piaskowca. Cztery warianty grafiki są przygotowywane raz na starcie i przechowywane na GPU. Góry wypełniają tło za mapą; obszar rozgrywki, kolizje, przeciwnicy i zbieranie łupu pozostają takie same.
+
+`--desert-qa --no-audio` sprawdza także ruch piasku względem kamery, animację, przezroczystość, wszystkie brzegi oraz zasłanianie gór przez teren. Raporty: `dist/qa-v35/`. Benchmark `--desert-benchmark --no-audio` obejmuje 900 klatek i dziewięć miejsc, w tym cztery brzegi oraz narożniki.
+
+## Wersja 0.34 — łagodniejsze kształty pustyni
+
+Pustynne potwory i ich ciała mają zaokrąglone części oraz płynne cieniowanie powierzchni. Żywa Wydma ma miękki piaskowy grzbiet; zniknęły wyraźne wielokątne pasy. Kaktusy mają wygięte ramiona, piaskowce wygładzone krawędzie i faliste warstwy, palmy zakrzywione pnie i liście, a wydmy na ziemi płynne grzbiety. Kamienna brama ma zaokrąglony łuk, a oaza gładki brzeg i wodne kręgi. Detale, osiem kierunków animacji oraz wskazywanie rzeczywistej sylwetki pozostają zachowane.
+
+Teren i dekoracje są przygotowywane raz na starcie. Cichy test `--desert-qa --no-audio` zapisuje aktualne galerie i raport w `dist/qa-v34/`. Pomiar płynności: `--desert-benchmark --no-audio`.
+
 ## Wersja 0.33 — druga kraina: Morze Piasków
 
 Po pokonaniu Kamiennego Strażnika **zbierz pierwszą część Serca Świtu do plecaka** i wróć w scence do wieży. Podejdź do Eldrina na pierwszym piętrze i porozmawiaj przez **E / LPM / PPM**. Po rozmowie pojawia się wybór **„Przenieś mnie na pustynię.”** albo **„Jeszcze zostanę w wieży.”**. Podróż zaczyna się wyłącznie po kliknięciu pierwszej odpowiedzi; czekanie, Enter i Spacja w oknie wyboru nie przenoszą postaci. ESC zostawia bohatera w wieży. Odjazd i przybycie mają ściemnienie oraz animację magicznego słupa.
 
 **Morze Piasków** to oddzielna mapa **72 × 72 pola**: Brama Piasków, Oaza Bursztynu, Ruiny Słońca i Tron Żywej Wydmy. Ciepły piasek ma wydmowe grzbiety, drobiny i łagodne ścieżki. Świecznikowe kaktusy i kwitnące opuncje mają żebra, kolce i kwiaty; skały warstwy piaskowca, obeliski rzeźbienia, palmy pierścienie pnia oraz falujące liście. Oaza ma miękki brzeg, wodne kręgi i rzeczywistą kolizję wody. Nowe dekoracje przygotowuje się raz w **2× rozdzielczości**, wraz z dokładną maską myszy. Teren i minimapa są również przechowywane na GPU.
 
-Na pustyni żyje **27 zwykłych przeciwników**: skorpiony bursztynowe, skarabeusze miedziane i kobry piaskowe. Mają własne modele w **ośmiu kierunkach**, animacje chodu, ataku i bezczynności, patrolowanie oraz rozdzielanie ciał przy zderzeniu. Łup zostaje w ciałach i jest zbierany przez **PPM → przeciągnięcie do plecaka**. Nowe materiały: **żądło skorpiona 75%**, **pancerz skarabeusza 85%**, **łuska kobry 80%** i esencja piasku. Szanse i ilości: `LOOT.md`.
+Na pustyni żyje **27 zwykłych przeciwników**: skorpiony bursztynowe, skarabeusze miedziane i kobry piaskowe. Mają własne modele w **ośmiu kierunkach**, animacje chodu, ataku i bezczynności, patrolowanie oraz rozdzielanie ciał przy zderzeniu. Łup zostaje w ciałach i jest zbierany przez **PPM → przeciągnięcie do plecaka**. Nowe materiały: **żądło skorpiona 60%**, **pancerz skarabeusza 60%**, **łuska kobry 60%** i esencja piasku. Szanse i ilości: `LOOT.md`.
 
-Drugi boss, **Żywa Wydma**, czeka na **południowym wschodzie**. Jest dużą, asymetryczną masą piasku z grzbietem, piaskowymi podporami i smugami ataku. Ma **560 HP**, atak magiczny **31**, obronę **10**, obronę magiczną **7** i doświadczenie **220**. Pozostawia rozsypane piaskowe ciało, mocniejszy legendarny miecz, esencję, mikstury i **drugą część Serca Świtu ze szansą 100%**. Zbierz inne nagrody przed fragmentem; jego przeciągnięcie uruchamia nową scenkę powrotu, dialog o pokonanej wydmie i postęp **2 / 5**. Oba fragmenty są chronione w plecaku.
+Drugi boss, **Żywa Wydma**, czeka na **południowym wschodzie**. Jest dużą, asymetryczną masą piasku z grzbietem, piaskowymi podporami i smugami ataku. Ma **560 HP**, atak magiczny **31**, obronę **10**, obronę magiczną **7** i doświadczenie **220**. Pozostawia rozsypane piaskowe ciało, losowy sprzęt, esencję, mikstury i gwarantowaną **drugą część Serca Świtu (100%)**. Zbierz inne nagrody przed fragmentem; jego przeciągnięcie uruchamia nową scenkę powrotu, dialog o pokonanej wydmie i postęp **2 / 5**. Oba fragmenty są chronione w plecaku.
 
 **Brama Eldrina w miejscu przybycia** pozwala wracać do wieży przez **E / LPM / PPM** z odległości do 2,8 pola. Zdrowie, mana, poziom, umiejętności i ekwipunek są zachowane. Ponowna podróż przywraca stan pustyni: martwe potwory, ciała i pozostawione przedmioty. Las zachowuje swój własny stan i grzyby; łup nie przenika między krainami ani piętrami.
 
@@ -109,7 +161,7 @@ Każdy zdobyty poziom daje **5 punktów statystyk oraz 1 punkt umiejętności**.
 
 ## Wersja 0.26 — pierwsza część Serca Świtu i wieża Eldrina
 
-**Kamienny Strażnik** w północnych ruinach zostawia **jedną część Serca Świtu ze szansą 100%**. Pozostaje ona w piątym polu łupu obok monet, legendarnego miecza, pierścienia i esencji. Pokonanie bossa samo nie uruchamia sceny. Podejdź do ciała, otwórz je PPM i przeciągnij fragment do wolnego pola plecaka. Warto wcześniej zebrać pozostałe nagrody: podniesienie fragmentu rozpoczyna powrót. Przy zajętym polu, zbyt dużej odległości lub nierozdanych punktach awansu fragment zostaje w ciele.
+**Kamienny Strażnik** w północnych ruinach zostawia **jedną część Serca Świtu ze szansą 100%**. Pozostaje ona w piątym polu pierwszej strony łupu; pozostałe nagrody są losowe według rzadkości. Pokonanie bossa samo nie uruchamia sceny. Podejdź do ciała, otwórz je PPM i przeciągnij fragment do wolnego pola plecaka. Warto wcześniej zebrać pozostałe nagrody: podniesienie fragmentu rozpoczyna powrót. Przy zajętym polu, zbyt dużej odległości lub nierozdanych punktach awansu fragment zostaje w ciele.
 
 Po zebraniu części świat zatrzymuje się, **ekran ciemnieje**, a bohater wraca do obserwatorium Eldrina. Ośmiowypowiedziowa scenka pokazuje powrót z niebieskim efektem teleportacji, sukces Wędrowca, pochwałę maga i zapowiedź teleportu do drugiej krainy, gdy bohater będzie gotowy. Enter / Spacja / LPM odsłaniają tekst i przechodzą dalej; Esc pomija rozmowę, zachowując przejście do wieży. Utrata aktywności okna wstrzymuje scenę, F11 nadal działa.
 
@@ -177,7 +229,7 @@ Na mapie jest **46 przeciwników, 8 gatunków**. Do szlamów, wilków, szkielet�
 
 Dodano **12 materiałów**: kieł i sierść wilka, kieł i skórę dzika, pajęczą nić, woreczek jadu, fragment kości, śluz szlama, prastarą korę, esencję kniei, odznakę rozbójnika oraz kamień runiczny. Nowy sprzęt to **sztylet, płaszcz i amulet** — razem 15 nowych rodzajów przedmiotów. Materiały mają własne ikony i opisy, łączą się w stosy do 99 sztuk i na razie służą jako trofea.
 
-Każdy gatunek ma własną tabelę dropów. Pozycje losują się niezależnie: np. **kieł wilka 75%, sierść wilka 55%**, więc oba mogą pojawić się z jednego zabójstwa. Łup pozostaje w ciele otwieranym PPM i jest przeciągany do plecaka. Podpowiedź przedmiotu w ciele pokazuje jego szansę. Pełna tabela: [LOOT.md](LOOT.md).
+Każdy gatunek ma własną tabelę dropów. Pozycje losują się niezależnie: np. **kieł wilka 60%, sierść wilka 60%**, więc oba mogą pojawić się z jednego zabójstwa. Łup pozostaje w ciele otwieranym PPM i jest przeciągany do plecaka. Podpowiedź przedmiotu w ciele pokazuje jego szansę. Pełna tabela: [LOOT.md](LOOT.md).
 
 ## Wersja 0.19 — synchronizacja wyświetlania
 
@@ -229,9 +281,9 @@ Patrole używają ośmiu kierunków animacji i istniejących kolizji: potwory ni
 
 ## Ciała potworów i łup w HUD z wersji 0.12
 
-Pokonany potwór zostawia **ciało z łupem w środku**. Przedmioty z zabójstwa nie pojawiają się na ziemi. **PPM na ciele** otwiera jego zawartość w prawym HUD, zamiast listy przedmiotów na ziemi. Panel pokazuje nazwę potwora i pięć pól na łup. **LPM + przeciągnięcie do plecaka** zabiera przedmiot; nie można użyć go ani założyć przed zebraniem. Pełny lub zajęty plecak nie usuwa łupu; przy częściowym łączeniu stosów reszta pozostaje w ciele.
+Pokonany potwór zostawia **ciało z łupem w środku**. Przedmioty z zabójstwa nie pojawiają się na ziemi. **PPM na ciele** otwiera jego zawartość w prawym HUD, zamiast listy przedmiotów na ziemi. Panel pokazuje nazwę potwora i pięć pól na stronę; ciało mieści do 15 pozycji, dostępnych przez < / > lub rolkę myszy. **LPM + przeciągnięcie do plecaka** zabiera przedmiot; nie można użyć go ani założyć przed zebraniem. Pełny lub zajęty plecak nie usuwa łupu; przy częściowym łączeniu stosów reszta pozostaje w ciele.
 
-Ciała pozostają na mapie również po opróżnieniu. Można zamknąć okienko przyciskiem **X**, wrócić później albo otworzyć inne ciało. Otwarcie i zabieranie przedmiotów wymaga odległości do **2,5 pola**; odejście zamyka panel. Ciała nie blokują ruchu. Szlam, wilk, szkielet i strażnik mają własną grafikę poległej postaci oraz podświetlenie pod kursorem. Strażnik zachowuje oba legendarne przedmioty w swoim ciele.
+Ciała pozostają na mapie również po opróżnieniu. Można zamknąć okienko przyciskiem **X**, wrócić później albo otworzyć inne ciało. Otwarcie i zabieranie przedmiotów wymaga odległości do **2,5 pola**; odejście zamyka panel. Ciała nie blokują ruchu. Szlam, wilk, szkielet i strażnik mają własną grafikę poległej postaci oraz podświetlenie pod kursorem. Strażnik zachowuje gwarantowany fragment oraz wylosowane nagrody w swoim ciele.
 
 **C** rzuca wybrany czar w stronę kursora. **K** lub kliknięcie kafelka czaru otwiera księgę wyboru. **PPM** otwiera ciało i nie rzuca czaru. Spacja, bieg pod Shiftem i pojedynczy zamach LPM pozostają bez zmian. Przedmioty odłożone przez gracza nadal leżą na ziemi i można je przeciągać dotychczasowym sposobem.
 
@@ -352,13 +404,13 @@ Klikalne przyciski akcji na dole pozwalają wybierać czar, pić mikstury i robi
 - Przeciąganie na zajęte miejsce zamienia przedmioty. Nieprawidłowe przeniesienie pozostawia przedmiot na swoim miejscu. Mikstury, skarby i materiały łączą się w stosy do 99 sztuk; reszta zostaje w źródle.
 - Przeciągnij przedmiot z plecaka na wolną ziemię blisko postaci, by go odłożyć. Można także przesuwać łup na ziemi.
 - Jeśli w pobliżu leży więcej niż 5 przedmiotów, przewijaj listę kółkiem myszy lub strzałkami pod nią.
-- Najedź na przedmiot, aby sprawdzić jego nazwę, rzadkość i statystyki. Zielone przedmioty są niepospolite, złote — legendarne.
+- Najedź na przedmiot, aby sprawdzić jego nazwę, rzadkość i statystyki. Nazwy: biały — pospolity, niebieski — rzadki, żółty — bardzo rzadki, fioletowy — niezwykle rzadki.
 - Broń i pierścień zwiększają atak, pozostały sprzęt pancerz. Buty zwiększają również szybkość ruchu.
 - Czerwona mikstura odnawia 50 HP, niebieska 35 many. Pełne zdrowie lub mana nie zużywają mikstury.
 
 ## Wyprawa
 
-Mapa ma 30 × 30 pól. Pokonuj szlamy, wilki i szkielety, zdobywaj doświadczenie oraz ulepszaj sprzęt. Silny kamienny strażnik czeka w północnych ruinach (złoty punkt na minimapie). Upuszcza legendarny miecz i pierścień. Zamach fizyczny sygnalizuje czerwony okrąg, magiczny — niebieski; można od niego odejść lub wykonać unik. Awans odnawia zdrowie i manę oraz daje punkty statystyk.
+Las ma 72 × 72 pola. Pokonuj szlamy, wilki i szkielety, zdobywaj doświadczenie oraz ulepszaj sprzęt. Silny kamienny strażnik czeka w północnych ruinach (złoty punkt na minimapie). Zawsze zostawia fragment Serca Świtu, a pozostały sprzęt losuje według rzadkości. Zamach fizyczny sygnalizuje czerwony okrąg, magiczny — niebieski; można od niego odejść lub wykonać unik. Awans odnawia zdrowie i manę oraz daje punkty statystyk.
 
 To prototyp jednej lokalnej wyprawy. Nie ma jeszcze zapisu stanu wyprawy, handlarzy, multiplayera ani kolejnych map. Złoto i odłamki są zbieralnym łupem; nie mają jeszcze zastosowania u handlarza. Zamknięcie gry kończy bieżącą wyprawę.
 

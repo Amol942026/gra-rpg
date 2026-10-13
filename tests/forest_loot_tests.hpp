@@ -30,11 +30,11 @@ void forestLootTests(){
   }
   check(valid,"all rolled loot belongs to its own species table with valid tier and quantity");
   for(int j=0;j<CorpseLootSize;j++){
-   double chance=table[j].percent/100.0,observed=occurrences[j]/double(trials);
+   double chance=table[j].chance()/100.0,observed=occurrences[j]/double(trials);
    double tolerance=std::max(.004,5*std::sqrt(chance*(1-chance)/trials));
    check(std::abs(observed-chance)<tolerance,"30000 deterministic rolls reproduce each configured drop probability");
   }
-  if(type==1)check(std::abs(wolfBoth/double(trials)-.75*.55)<.02,"wolf fangs and fur roll independently and can drop together");
+  if(type==1)check(std::abs(wolfBoth/double(trials)-.60*.60)<.02,"wolf fangs and fur roll independently and can drop together");
  }
  for(int k=int(Kind::WolfFang);k<=int(Kind::RuneStone);k++){
   Kind kind=static_cast<Kind>(k);Game g=emptyArena();g.bag[6]=item(kind,0,98);

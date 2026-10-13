@@ -39,7 +39,7 @@ void crowdCombatTests() {
     for(int i=0;i<5;i++){V p=kills.player+normalized(directions[i])*1.5f;
         kills.enemies.push_back({i,0,p,p,i==0||i==4?100.f:1.f,100});}
     kills.attack();
-    check(kills.kills==3&&kills.level==2&&kills.ground.empty()&&!kills.enemies[1].loot[0].empty()&&!kills.enemies[2].loot[0].empty()&&!kills.enemies[3].loot[0].empty(),"one swing awards XP and corpse loot for every defeated enemy");
+    check(kills.kills==3&&kills.level==2&&kills.ground.empty()&&kills.findCorpse(kills.enemies[1].id)&&kills.findCorpse(kills.enemies[2].id)&&kills.findCorpse(kills.enemies[3].id),"one swing awards XP and corpse loot for every defeated enemy");
     check(kills.enemies[0].hp==86&&kills.enemies[4].hp==86,"level-up mid-swing cannot change damage for later victims");
 
     Game presses=emptyArena();

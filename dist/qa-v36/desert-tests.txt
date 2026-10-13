@@ -1,0 +1,102 @@
+PASS: desert tests open no audio device
+PASS: second realm terrain and minimap are cached before gameplay
+PASS: mountain variant 0: complete cached silhouette and rich shaded terrain
+PASS: mountain variant 1: complete cached silhouette and rich shaded terrain
+PASS: mountain variant 2: complete cached silhouette and rich shaded terrain
+PASS: mountain variant 3: complete cached silhouette and rich shaded terrain
+Wind: visible=2683; translucent=2683; moving=3112; camera mismatches=0 / 62879
+PASS: wind: visible low-opacity dust veils and small grains remain translucent
+PASS: wind: frozen-time GPU pixels follow a one-tile camera move by exactly 40x20 pixels
+PASS: wind: actual GPU dust coverage evolves naturally over time
+PASS: optimized mountain layer: every GPU pixel is opaque without compositing holes
+PASS: desert prop 7: detailed 2x model has no cut-off edges
+PASS: desert prop 7: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 8: detailed 2x model has no cut-off edges
+PASS: desert prop 8: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 9: detailed 2x model has no cut-off edges
+PASS: desert prop 9: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 10: detailed 2x model has no cut-off edges
+PASS: desert prop 10: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 11: detailed 2x model has no cut-off edges
+PASS: desert prop 11: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 12: detailed 2x model has no cut-off edges
+PASS: desert prop 12: rich material shades and physical mouse mask agree with GPU pixels
+PASS: desert prop 13: detailed 2x model has no cut-off edges
+PASS: desert prop 13: rich material shades and physical mouse mask agree with GPU pixels
+PASS: rounded sand surface: light changes continuously across GPU pixels without flat facet bands
+PASS: intersecting surfaces: the nearer blue surface hides the red rear surface at the actual pixel
+PASS: rounded corpse 8: full GPU silhouette and physical picking agree
+PASS: rounded corpse 9: full GPU silhouette and physical picking agree
+PASS: rounded corpse 10: full GPU silhouette and physical picking agree
+PASS: rounded corpse 11: full GPU silhouette and physical picking agree
+PASS: enemy 8: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 8: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 8: actual physical rig inspection agrees with GPU body pixels
+PASS: enemy 8: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 8: movement and attack visibly change the pose
+PASS: enemy 9: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 9: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 9: actual physical rig inspection agrees with GPU body pixels
+PASS: enemy 9: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 9: movement and attack visibly change the pose
+PASS: enemy 10: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 10: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 10: actual physical rig inspection agrees with GPU body pixels
+PASS: enemy 10: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 10: movement and attack visibly change the pose
+PASS: enemy 11: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 11: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 11: actual physical rig inspection agrees with GPU body pixels
+PASS: enemy 11: idle/walk/attack silhouette renders fully inside its frame
+PASS: enemy 11: movement and attack visibly change the pose
+PASS: first fragment returns to Eldrin and opens the actual repeat conversation
+PASS: real dialogue ends in a paused travel choice without teleporting
+PASS: waiting or dialogue advancement never substitutes for selecting travel
+PASS: staying option closes dialogue and retains the tower
+PASS: travel mouse button begins departure fade before changing region
+PASS: lost focus freezes teleport and ignores all controls
+PASS: fade changes to the real desert and keeps the hero and first fragment
+PASS: arrival reveal finishes and restores movement and combat
+PASS: desert gate has accurate picking and an inspection HUD
+PASS: PPM on the gate returns through the same game handler
+PASS: second boss is selectable and exposes its own HP, kind and damage
+PASS: PPM opens the persistent sand corpse loot in the HUD
+PASS: LPM on the actual corpse HUD starts dragging the second fragment
+PASS: dropping the second fragment in the backpack starts its own return scene
+PASS: second return finishes in the tower with both protected fragments
+PASS: desert view 1: actual fullscreen framebuffer has correct dimensions
+PASS: desert view 2: actual fullscreen framebuffer has correct dimensions
+PASS: desert view 3: actual fullscreen framebuffer has correct dimensions
+PASS: desert view 4: actual fullscreen framebuffer has correct dimensions
+PASS: desert view 5: actual fullscreen framebuffer has correct dimensions
+Border 0: outside samples=20188; mountain pixels=19699
+PASS: map border 0: mountains fill the exterior on GPU
+Border 1: outside samples=14935; mountain pixels=14935
+PASS: map border 1: mountains fill the exterior on GPU
+Border 2: outside samples=28255; mountain pixels=27955
+PASS: map border 2: mountains fill the exterior on GPU
+Border 3: outside samples=16480; mountain pixels=16355
+PASS: map border 3: mountains fill the exterior on GPU
+Border 4: outside samples=21733; mountain pixels=21619
+PASS: map border 4: mountains fill the exterior on GPU
+Border 5: outside samples=16377; mountain pixels=16240
+PASS: map border 5: mountains fill the exterior on GPU
+Border 6: outside samples=28128; mountain pixels=27405
+PASS: map border 6: mountains fill the exterior on GPU
+Border 7: outside samples=14832; mountain pixels=14253
+PASS: map border 7: mountains fill the exterior on GPU
+PASS: mountain background remains behind every opaque pixel of playable desert land
+Road GPU samples: 57; center green: 152.07; nearby sand green: 169.421
+PASS: caravan roads: actual baked path pixels remain fully opaque
+PASS: caravan roads: curved worn sand remains visibly distinct from surrounding terrain
+PASS: sand prison: simulation and inspection remain active while offensive model actions are blocked
+PASS: sand prison: real mouse sword, C spell and skill handlers cannot attack
+PASS: sand prison: real dodge handler and rejected attacks preserve resources
+PASS: sand prison: mouse draw/release and piercing skill handlers cannot shoot
+PASS: sand prison: cached mound layer 0 has detailed soft shading and complete margins
+PASS: sand prison: cached mound layer 1 has detailed soft shading and complete margins
+PASS: sand prison: actual pause menu freezes the trap rather than letting it expire
+PASS: sand prison: boss casting pose uses the same physical mouse picking geometry
+PASS: sand prison: actual game update releases without moving before the three-second boundary
+PASS: sand prison: movement and actual sword click are restored on release
+Checks: 91; failures: 0

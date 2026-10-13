@@ -12,17 +12,17 @@ bool trainSkills(const SkillRanks& points){
 float strongCutMultiplier()const{return 1.5f+.1f*std::max(0,skillRank(Skill::StrongCut)-1);}
 float strongCutDamage()const{return damage()*strongCutMultiplier();}
 int piercingTargets()const{return 2+skillRank(Skill::PiercingArrow);}
-bool skillWeaponMatches(Skill skill)const{if(skill==Skill::Healing)return true;return !equipment[0].empty()&&equipment[0].kind==(skill==Skill::StrongCut?Kind::Sword:Kind::Bow);}
+bool skillWeaponMatches(Skill skill)const{if(skill==Skill::Healing)return true;return !equipment[0].empty()&&archetype(equipment[0].kind)==(skill==Skill::StrongCut?Kind::Sword:Kind::Bow);}
 bool skillAllowed(Skill skill)const{
  if(dead()||allocationRequired||storyBlocked()||rolling()||skillRank(skill)<=0||!skillWeaponMatches(skill))return false;
  if(skill==Skill::Healing)return healingCd<=0&&mana>=HealingCost&&hp<maxHp();
- if(inTower())return false;
+ if(inTower()||sandTrapped())return false;
  if(skill==Skill::StrongCut)return strongCutCd<=0&&attackCd<=0&&mana>=StrongCutCost;
  if(skill==Skill::PiercingArrow)return piercingArrowCd<=0&&mana>=PiercingArrowCost&&ammoCount()>0;
  return false;
 }
 bool strongSwingActive()const{return swingStrong&&swing>0;}
-bool empoweredPose()const{return (equipment[0].kind==Kind::Sword&&strongSwingActive())||(equipment[0].kind==Kind::Bow&&(piercingArrowArmed||(lastBowPiercing&&bowReleaseTime>0)));}
+bool empoweredPose()const{return (archetype(equipment[0].kind)==Kind::Sword&&strongSwingActive())||(archetype(equipment[0].kind)==Kind::Bow&&(piercingArrowArmed||(lastBowPiercing&&bowReleaseTime>0)));}
 bool strongCut(){
  if(!skillAllowed(Skill::StrongCut))return false;
  mana-=StrongCutCost;strongCutCd=StrongCutCooldown;attackCd=.6f;meleeDuration=StrongCutDuration;swing=StrongCutDuration;swingStrong=true;sound(Cue::Swing,player);

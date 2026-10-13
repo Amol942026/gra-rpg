@@ -37,7 +37,7 @@ void drawWeaponWheel(){
   DrawRing(WheelCenter,76,216,start,end,24,i==hot?rgb(50,63,54):active?rgb(30,53,45):rgb(19,32,35));
   DrawRingLines(WheelCenter,76,216,start,end,24,color);
   float angle=(-90+i*45)*DEG2RAD;Vector2 p{WheelCenter.x+std::cos(angle)*147,WheelCenter.y+std::sin(angle)*147};
-  if(ref.kind!=Kind::None){icon(item(ref.kind,ref.tier),p.x,p.y-8,.82f,available?1.f:.28f);center(available?itemShortName(ref.kind):"BRAK",p.x,p.y+23,14,available?Text:Muted);}
+  if(ref.kind!=Kind::None){icon(item(ref.kind,ref.tier),p.x,p.y-8,.82f,available?1.f:.28f);center(available?itemShortName(ref.kind):"BRAK",p.x,p.y+23,14,available?rarity(item(ref.kind,ref.tier)):Muted);}
   else{line(p.x-6,p.y-8,p.x+6,p.y-8,Muted);line(p.x,p.y-14,p.x,p.y-2,Muted);center("dodaj",p.x,p.y+16,14,Muted);}
  }
  DrawCircleV(WheelCenter,71,Panel);DrawCircleLines(int(WheelCenter.x),int(WheelCenter.y),71,Gold);
@@ -47,7 +47,7 @@ void drawWeaponWheel(){
  center(game.message,WheelCenter.x,743,14,Text);
 }
 void drawBowHud(){
- if(game.equipment[0].kind!=Kind::Bow||!gameplayInputAllowed())return;
+ if(archetype(game.equipment[0].kind)!=Kind::Bow||!gameplayInputAllowed())return;
  txt(TextFormat("STRZAŁY  %d",game.ammoCount()),207,119,16,game.ammoCount()>0?Gold:rgb(236,132,105));
  if(game.bowDrawing){bar(335,124,170,8,game.bowCharge(),1,Gold);txt(TextFormat("%.0f%%  ·  ZASIĘG %.1f",game.bowCharge()*100,Game::bowRange(game.bowCharge())),520,119,14,Gold);}
  if(!worldPointerAllowed(mouse)||dragging.place!=Place::None||game.dead())return;

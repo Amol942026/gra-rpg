@@ -1,0 +1,34 @@
+Frames: 900
+Window: 1920x1080
+Fullscreen: yes
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: DXGI flip / V-sync
+DXGI synchronized presents: 900
+Occluded presentations: 0
+Suppressed native swaps: 900
+Actual presentation interval: 1
+Presentation fallback: 
+Strong cuts performed: 0
+Piercing arrows fired: 0
+Developer mode: 0
+Developer menu open: 0
+Developer destination: forest
+World location: desert
+Benchmark scenario: desert
+Desert areas visited: 5
+Tower floor: 1
+Intro active: 0
+Developer error: 
+Audio device opened: no
+Native canvas: 1728x1080
+Average FPS: 59.7697
+CPU frame mean (ms): 13.0805
+EndDrawing mean (ms): 0.0393548
+Presentation mean (ms): 3.61024
+CPU frame p95 (ms): 17.0108
+CPU frame p99 (ms): 18.7108
+Frame p95 (ms): 17.216
+Frame p99 (ms): 18.9858
+Frame max (ms): 22.9533
+Frames over 25 ms: 0

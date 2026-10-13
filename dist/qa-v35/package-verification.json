@@ -1,0 +1,14 @@
+{
+  "version": "0.35",
+  "matched_files": 85,
+  "archive_entries": 87,
+  "archive_bytes": 7330718,
+  "archive_sha256": "d8552c0665bfdcf46886029df465b3e9afbc9b8057f9494420adbaf02546148c",
+  "extracted_game": "C:\\Users\\Amadeusz\\AppData\\Local\\Temp\\emberfall-v35-package-hk11j90c\\Emberfall",
+  "instructions_verified": true,
+  "audio_preferences_unchanged": true,
+  "packaged_desert_checks": 79,
+  "packaged_graphics_checks": 305,
+  "packaged_qa_failures": 0,
+  "packaged_audio_settings_created": false
+}

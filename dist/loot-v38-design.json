@@ -1,0 +1,522 @@
+{
+  "newGear": [
+    [
+      "WolfKnife",
+      "Sztylet wilczego kła",
+      "Dagger",
+      "Rare",
+      12,
+      "Ostrze oprawione w srebrzysty wilczy kieł."
+    ],
+    [
+      "WolfCloak",
+      "Płaszcz tropiciela",
+      "Cloak",
+      "Rare",
+      7,
+      "Ciepły płaszcz z futra leśnych wilków."
+    ],
+    [
+      "MoonBow",
+      "Łuk księżycowego łowcy",
+      "Bow",
+      "VeryRare",
+      19,
+      "Łuk z jasnego drewna i wilczej cięciwy."
+    ],
+    [
+      "BoarArmor",
+      "Pancerz dziczej skóry",
+      "Armor",
+      "Rare",
+      8,
+      "Skórzany pancerz wzmocniony dziczymi kłami."
+    ],
+    [
+      "TuskAxe",
+      "Topór dziczego kła",
+      "Axe",
+      "VeryRare",
+      17,
+      "Ciężkie ostrze z okuciem w kształcie kła."
+    ],
+    [
+      "SilkBoots",
+      "Buty pajęczego szlaku",
+      "Boots",
+      "Rare",
+      5,
+      "Lekkie buty obszyte mocną pajęczą nicią."
+    ],
+    [
+      "VenomRing",
+      "Pierścień jadowitego splotu",
+      "Ring",
+      "VeryRare",
+      7,
+      "Srebrny pierścień z zielonym kamieniem."
+    ],
+    [
+      "WebCowl",
+      "Kaptur pajęczej nici",
+      "Helmet",
+      "Rare",
+      6,
+      "Kaptur tkany z nici leśnych pająków."
+    ],
+    [
+      "BoneHelmet",
+      "Hełm kościanej straży",
+      "Helmet",
+      "Rare",
+      6,
+      "Stalowy hełm z rzeźbionymi okuciami."
+    ],
+    [
+      "CryptSword",
+      "Miecz zapomnianej krypty",
+      "Sword",
+      "VeryRare",
+      17,
+      "Stare ostrze pokryte błękitnymi runami."
+    ],
+    [
+      "BanditBow",
+      "Łuk leśnego rozbójnika",
+      "Bow",
+      "Rare",
+      17,
+      "Krótki łuk ze skóry i ciemnego drewna."
+    ],
+    [
+      "BanditBoots",
+      "Buty cichego kroku",
+      "Boots",
+      "Rare",
+      6,
+      "Wysokie buty z miękkiej leśnej skóry."
+    ],
+    [
+      "RootShield",
+      "Tarcza prastarych korzeni",
+      "Shield",
+      "Rare",
+      7,
+      "Splecione korzenie chronią przed ciosami."
+    ],
+    [
+      "GroveAmulet",
+      "Amulet serca kniei",
+      "Amulet",
+      "VeryRare",
+      8,
+      "Bursztyn zamknięty w żywych korzeniach."
+    ],
+    [
+      "GelAmulet",
+      "Amulet szmaragdowej kropli",
+      "Amulet",
+      "Rare",
+      5,
+      "Zastygła kropla esencji leśnego szlama."
+    ],
+    [
+      "GuardianSword",
+      "Runiczne ostrze strażnika",
+      "Sword",
+      "VeryRare",
+      19,
+      "Kamienny strażnik chronił runy tego miecza."
+    ],
+    [
+      "GuardianArmor",
+      "Zbroja kamiennego strażnika",
+      "Armor",
+      "VeryRare",
+      12,
+      "Płyty pancerza z pradawnego kamienia."
+    ],
+    [
+      "GuardianHelmet",
+      "Hełm mchu i kamienia",
+      "Helmet",
+      "Rare",
+      8,
+      "Kamienne okucia oplecione zielonym mchem."
+    ],
+    [
+      "EchoRing",
+      "Pierścień pradawnego echa",
+      "Ring",
+      "ExtremelyRare",
+      11,
+      "Fioletowy kryształ pamięta dawne ruiny."
+    ],
+    [
+      "StingDagger",
+      "Sztylet bursztynowego żądła",
+      "Dagger",
+      "Rare",
+      14,
+      "Smukłe ostrze w kształcie żądła skorpiona."
+    ],
+    [
+      "ScarabHelmet",
+      "Hełm miedzianego skarabeusza",
+      "Helmet",
+      "Rare",
+      8,
+      "Miedziany hełm z ornamentem skarabeusza."
+    ],
+    [
+      "ScarabArmor",
+      "Zbroja pustynnego skarabeusza",
+      "Armor",
+      "VeryRare",
+      11,
+      "Miedziane płytki zachodzą na siebie jak łuski."
+    ],
+    [
+      "CobraBoots",
+      "Buty piaskowej kobry",
+      "Boots",
+      "Rare",
+      7,
+      "Giętkie buty ze złocistych łusek kobry."
+    ],
+    [
+      "MirageBow",
+      "Łuk pustynnego mirażu",
+      "Bow",
+      "VeryRare",
+      22,
+      "Złocisty łuk zdobiony pustynnymi runami."
+    ],
+    [
+      "SunAmulet",
+      "Amulet palącego słońca",
+      "Amulet",
+      "VeryRare",
+      9,
+      "Bursztynowe słońce w miedzianej oprawie."
+    ],
+    [
+      "DuneBlade",
+      "Ostrze żywej wydmy",
+      "Sword",
+      "ExtremelyRare",
+      25,
+      "Piasek krąży wokół klingi pustynnego bossa."
+    ],
+    [
+      "SandRobe",
+      "Płaszcz piaskowej burzy",
+      "Cloak",
+      "ExtremelyRare",
+      16,
+      "Złote nici migoczą jak nawiewany piasek."
+    ],
+    [
+      "DuneShield",
+      "Tarcza pustynnego monolitu",
+      "Shield",
+      "VeryRare",
+      10,
+      "Kamienna tarcza z ornamentem wydmy."
+    ]
+  ],
+  "tables": [
+    [
+      [
+        "Gold",
+        4,
+        15,
+        0
+      ],
+      [
+        "SlimeGel",
+        1,
+        3,
+        0
+      ],
+      "Health",
+      [
+        "Crystal",
+        1,
+        2,
+        0
+      ],
+      "Amulet",
+      "GelAmulet"
+    ],
+    [
+      [
+        "Gold",
+        4,
+        15,
+        0
+      ],
+      [
+        "WolfFang",
+        1,
+        2,
+        0
+      ],
+      [
+        "WolfFur",
+        1,
+        2,
+        0
+      ],
+      "Health",
+      "WolfKnife",
+      "WolfCloak",
+      "MoonBow"
+    ],
+    [
+      [
+        "Gold",
+        4,
+        15,
+        0
+      ],
+      [
+        "BoneShard",
+        1,
+        3,
+        0
+      ],
+      "Dagger",
+      "Mana",
+      "BoneHelmet",
+      "CryptSword"
+    ],
+    [
+      [
+        "Gold",
+        25,
+        45,
+        0
+      ],
+      "GuardianSword",
+      "GuardianArmor",
+      "GuardianHelmet",
+      [
+        "DawnShard",
+        1,
+        1,
+        2
+      ],
+      [
+        "ForestEssence",
+        1,
+        2,
+        0
+      ],
+      "RuneStone",
+      "EchoRing",
+      [
+        "Health",
+        1,
+        2,
+        0
+      ],
+      [
+        "Mana",
+        1,
+        2,
+        0
+      ],
+      "Crystal"
+    ],
+    [
+      [
+        "Gold",
+        4,
+        15,
+        0
+      ],
+      [
+        "BoarTusk",
+        1,
+        2,
+        0
+      ],
+      "BoarHide",
+      "Health",
+      "BoarArmor",
+      "TuskAxe"
+    ],
+    [
+      [
+        "Gold",
+        4,
+        15,
+        0
+      ],
+      [
+        "SpiderSilk",
+        1,
+        3,
+        0
+      ],
+      "VenomSac",
+      "Mana",
+      "SilkBoots",
+      "WebCowl",
+      "VenomRing"
+    ],
+    [
+      [
+        "Gold",
+        4,
+        15,
+        0
+      ],
+      "BanditBadge",
+      [
+        "Dagger",
+        1,
+        1,
+        1
+      ],
+      [
+        "Health",
+        1,
+        2,
+        0
+      ],
+      "BanditBow",
+      "BanditBoots",
+      [
+        "Arrow",
+        5,
+        10,
+        0
+      ]
+    ],
+    [
+      [
+        "Gold",
+        4,
+        15,
+        0
+      ],
+      [
+        "AncientBark",
+        1,
+        3,
+        0
+      ],
+      "ForestEssence",
+      "RuneStone",
+      "RootShield",
+      "GroveAmulet"
+    ],
+    [
+      [
+        "Gold",
+        10,
+        24,
+        0
+      ],
+      [
+        "ScorpionSting",
+        1,
+        2,
+        0
+      ],
+      "VenomSac",
+      "Health",
+      "Mana",
+      "StingDagger"
+    ],
+    [
+      [
+        "Gold",
+        8,
+        22,
+        0
+      ],
+      [
+        "ScarabShell",
+        1,
+        3,
+        0
+      ],
+      "Crystal",
+      "ScarabHelmet",
+      [
+        "Arrow",
+        5,
+        10,
+        0
+      ],
+      "ScarabArmor",
+      "DuneShield"
+    ],
+    [
+      [
+        "Gold",
+        8,
+        20,
+        0
+      ],
+      [
+        "CobraScale",
+        1,
+        3,
+        0
+      ],
+      "VenomSac",
+      "Health",
+      "CobraBoots",
+      "VenomRing",
+      "MirageBow"
+    ],
+    [
+      [
+        "Gold",
+        60,
+        110,
+        0
+      ],
+      "DuneBlade",
+      [
+        "SandEssence",
+        2,
+        4,
+        0
+      ],
+      [
+        "Mana",
+        1,
+        3,
+        0
+      ],
+      [
+        "DawnShard",
+        1,
+        1,
+        3
+      ],
+      "SandRobe",
+      "DuneShield",
+      "SunAmulet",
+      "MirageBow",
+      [
+        "Health",
+        1,
+        3,
+        0
+      ],
+      "Crystal"
+    ]
+  ],
+  "chances": {
+    "pospolity": 60,
+    "rzadki": 15,
+    "bardzo rzadki": 4,
+    "niezwykle rzadki": 1
+  }
+}

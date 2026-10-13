@@ -78,7 +78,7 @@ void progressionTests(){
     group.enemies.push_back({0,0,{18,15},{18,15},1,36});group.enemies.push_back({1,0,{18.1f,15.5f},{18.1f,15.5f},1,36});
     group.enemies[0].windup=group.enemies[1].windup=100;group.spell({1,0});
     for(int i=0;i<30&&!group.allocationRequired;i++)group.update(.05f,{},false);
-    check(group.kills==2&&group.attributePoints==5&&group.allocationRequired&&group.ground.empty()&&!group.enemies[0].loot[0].empty()&&!group.enemies[1].loot[0].empty(),
+    check(group.kills==2&&group.attributePoints==5&&group.allocationRequired&&group.ground.empty()&&group.findCorpse(group.enemies[0].id)&&group.findCorpse(group.enemies[1].id),
         "fireball explosion finishes all nearby hits and corpse loot before level pause");
 }
 

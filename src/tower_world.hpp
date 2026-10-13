@@ -26,7 +26,7 @@ void drawTowerWorld(){
     if(game.towerFloor==3){for(int i=0;i<3;i++)if(game.towerRuneMask&(1<<i)){Vector2 p=screen(towerFurnishings(3)[i].pos),q=screen({12,11.3f});line(p.x,p.y-90,q.x,q.y-90,Fade(towerAccent(3),.22f),2);}}
     drawHoveredTile();
     for(const auto& item:game.ground)if(game.groundVisible(item)&&!item.value.empty()){
-        Vector2 p=screen(item.pos);ellipse(p.x,p.y,18,8,Fade(rarity(item.value.tier),.18f));icon(item.value,p.x,p.y-14,.58f);
+        Vector2 p=screen(item.pos);ellipse(p.x,p.y,18,8,Fade(rarity(item.value),.18f));icon(item.value,p.x,p.y-14,.58f);
     }
     for(auto object:worldDrawOrder()){
         if(object.type==7)drawTowerFurniture(object.index);

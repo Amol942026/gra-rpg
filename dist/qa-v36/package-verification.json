@@ -1,0 +1,19 @@
+{
+  "version": "0.36",
+  "archive_entries": 87,
+  "matched_payload_files": 85,
+  "archive_bytes": 7344436,
+  "archive_sha256": "bd9ee08b4940ab17730e44ee04a272ddac599d7a4e1dc2b1d0e087ba36630487",
+  "extracted_game": "C:\\Users\\Amadeusz\\AppData\\Local\\Temp\\emberfall-v36-package-wjzid213\\Emberfall\\Emberfall.exe",
+  "instructions_verified": true,
+  "audio_preferences_sha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6",
+  "audio_preferences_unchanged": true,
+  "model_checks": 2967,
+  "packaged_checks": {
+    "desert": 91,
+    "graphics": 305
+  },
+  "packaged_exit_code": 0,
+  "packaged_audio_settings_created": false,
+  "game_sha256": "5d1035e2e82d721467aa67fb0d752388c7fc441c22e5db3158bdc0c023d9ee5e"
+}

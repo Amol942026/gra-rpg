@@ -1,4 +1,6 @@
 #pragma once
+#include <type_traits>
+extern "C" void (*glfwGetProcAddress(const char*))(void);
 
 // Small geometric character rigs: all parts turn in depth, including the face,
 // back, weapon and limbs. A back view is not a mirrored front sprite.
@@ -23,10 +25,14 @@ struct Face {
     std::array<Vector2,4> points;
     float depth;
     Color color;
+    std::array<Color,4> vertexColors{};
+    std::array<float,4> vertexDepth{};
+    bool smooth=false;
 };
 class Rig {
     float x, y, scale, fx, fy, rx, ry;
-    float rollAngle=0, tuck=0;
+    float rollAngle=0, tuck=0,runLean=0,runSin=0,runCos=1;
+    bool smoothSurfaces=false;
     std::vector<Face> faces;
 public:
     Rig(float px,float py,float size,Direction dir):x(px),y(py),scale(size) {
@@ -35,8 +41,15 @@ public:
         float len=std::hypot(fx,fy);fx/=len;fy/=len;rx=fy;ry=-fx;
         faces.reserve(320);
     }
+    void setSmoothSurfaces(){smoothSurfaces=true;}
+    void setRun(float amount){runLean=std::clamp(amount,0.f,1.f)*.12f;runSin=std::sin(runLean);runCos=std::cos(runLean);}
     void setRoll(float progress,float amount) {rollAngle=progress*2*PI;tuck=amount;}
     P3 rollPoint(P3 p) const {
+        if(runLean>0&&p.z>35){
+            float h=p.z-35,f=p.f;
+            p.f=f*runCos+h*runSin;
+            p.z=35+h*runCos-f*runSin;
+        }
         if(tuck<=0)return p;
         float z=(p.z-38)*(1-.32f*tuck),f=p.f;
         return {p.r*(1-.12f*tuck),f*std::cos(rollAngle)+z*std::sin(rollAngle),
@@ -56,6 +69,26 @@ public:
         float depth=0;
         for(P3 p:{a,b,c,d})depth+=(p.r*ry+p.f*fy)*.86f+p.z*.52f;
         faces.push_back({{pa,pb,pc,pd},depth*.25f,shade(col,lighting)});
+        if(smoothSurfaces){int i=0;for(P3 p:{a,b,c,d})faces.back().vertexDepth[i++]=-.5f+((p.r*ry+p.f*fy)*.86f+p.z*.52f)*.001f;}
+
+    }
+    void surfaceQuad(P3 a,P3 b,P3 c,P3 d,Color ca,Color cb,Color cc,Color cd){
+        size_t before=faces.size();face(a,b,c,d,ca);
+        if(faces.size()!=before){auto& f=faces.back();f.smooth=true;f.vertexColors={ca,cb,cc,cd};}
+    }
+    // Continuous skin along a bent path, with shared lighting at each ring.
+    void tube(const std::vector<P3>& path,float width,float depth,Color col){
+        if(path.size()<2)return;constexpr int sides=12;
+        std::vector<std::array<P3,sides>> points(path.size());std::vector<std::array<Color,sides>> colors(path.size());
+        static const auto circle=[](){std::array<P3,sides> result{};for(int i=0;i<sides;i++)result[i]={std::cos(i*2*PI/sides),std::sin(i*2*PI/sides),0};return result;}();
+        for(size_t j=0;j<path.size();j++){
+            P3 axis=path[std::min(j+1,path.size()-1)]-path[j?j-1:0];float len=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);axis=axis*(1/std::max(.001f,len));
+            float flat=std::hypot(axis.r,axis.f);P3 u=flat>.001f?P3{axis.f/flat,-axis.r/flat,0}:P3{1,0,0};
+            P3 v{axis.f*u.z-axis.z*u.f,axis.z*u.r-axis.r*u.z,axis.r*u.f-axis.f*u.r};
+            for(int i=0;i<sides;i++){P3 normal=u*circle[i].r+v*circle[i].f;points[j][i]=path[j]+u*(circle[i].r*width*.5f)+v*(circle[i].f*depth*.5f);colors[j][i]=shade(col,surfaceLight(normal));}
+        }
+        for(size_t j=0;j+1<path.size();j++)for(int i=0;i<sides;i++){int n=(i+1)%sides;surfaceQuad(points[j][i],points[j][n],points[j+1][n],points[j+1][i],colors[j][i],colors[j][n],colors[j+1][n],colors[j+1][i]);}
+        rounded(path.front(),{width,depth,std::min(width,depth)},col);rounded(path.back(),{width,depth,std::min(width,depth)},col);
     }
     void prism(const std::array<P3,8>& p,Color col) {
         // Bottom, back, front, left, right, top, with a fixed world light.
@@ -74,6 +107,7 @@ public:
     // Three octagonal rings give bodies curved shoulders and bevelled edges.
     // The fixed vertices avoid per-frame trigonometry for every body part.
     void form(P3 center,P3 size,Color col) {
+        if(smoothSurfaces){rounded(center,size,col);return;}
         constexpr float ring[8][2]={{1,0},{.7071f,.7071f},{0,1},{-.7071f,.7071f},
                                    {-1,0},{-.7071f,-.7071f},{0,-1},{.7071f,-.7071f}};
         std::array<std::array<P3,8>,3> p;
@@ -109,12 +143,26 @@ public:
     void rounded(P3 center,P3 size,Color col){
         auto point=[&](P3 p){return center+P3{p.r*size.r*.5f,p.f*size.f*.5f,p.z*size.z*.5f};};
         auto surface=[&](const auto& sphere){
+            // Shared vertex normals remove flat facet bands without tessellating
+            // every small animated part. Silhouettes and pointer geometry agree.
+            std::array<std::array<Color,std::tuple_size_v<std::decay_t<decltype(sphere[0])>>>,std::tuple_size_v<std::decay_t<decltype(sphere)>>> colors{};
+            if(smoothSurfaces)for(size_t j=0;j<sphere.size();j++)for(size_t i=0;i<sphere[0].size();i++){
+                P3 n=sphere[j][i];n={n.r/std::max(1.f,size.r),n.f/std::max(1.f,size.f),n.z/std::max(1.f,size.z)};
+                float length=std::sqrt(n.r*n.r+n.f*n.f+n.z*n.z);if(length>0)n=n*(1/length);
+                colors[j][i]=shade(col,surfaceLight(n));
+            }
             for(size_t j=0;j+1<sphere.size();j++)for(size_t i=0;i<sphere[0].size();i++){
                 size_t n=(i+1)%sphere[0].size();P3 normal=(sphere[j][i]+sphere[j][n]+sphere[j+1][n]+sphere[j+1][i])*.25f;
-                face(point(sphere[j][i]),point(sphere[j][n]),point(sphere[j+1][n]),point(sphere[j+1][i]),col,surfaceLight(normal));
+                size_t before=faces.size();face(point(sphere[j][i]),point(sphere[j][n]),point(sphere[j+1][n]),point(sphere[j+1][i]),col,surfaceLight(normal));
+                if(smoothSurfaces&&faces.size()!=before){auto& f=faces.back();f.smooth=true;f.vertexColors={colors[j][i],colors[j][n],colors[j+1][n],colors[j+1][i]};}
             }
         };
-        if(scale>=1.8f)surface(unitSphere<24,10>());else surface(unitSphere<16,8>());
+        if(smoothSurfaces){
+            float extent=std::max({size.r,size.f,size.z});
+            if(extent>70)surface(unitSphere<24,12>());
+            else if(extent>24)surface(unitSphere<16,8>());
+            else surface(unitSphere<12,6>());
+        }else if(scale>=1.8f)surface(unitSphere<24,10>());else surface(unitSphere<16,8>());
     }
     void tapered(P3 a,P3 b,float width,float depth,Color col,float tipScale=1){
         P3 axis=b-a;float length=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);if(length<.001f)return;
@@ -148,6 +196,7 @@ public:
     // A weapon needs a cross-section perpendicular to its blade, including
     // when the sword becomes almost horizontal during the forward cut.
     void beam(P3 a,P3 b,float width,float depth,Color col) {
+        if(smoothSurfaces){tapered(a,b,width,depth,col);return;}
         P3 axis=b-a;float n=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);
         if(n<.001f)return;axis=axis*(1/n);
         float flat=std::hypot(axis.r,axis.f);
@@ -175,12 +224,24 @@ public:
         return false;
     }
     void draw(Color outline=BLANK) {
-        std::stable_sort(faces.begin(),faces.end(),[](const Face&a,const Face&b){return a.depth<b.depth;});
+        if(!smoothSurfaces)std::stable_sort(faces.begin(),faces.end(),[](const Face&a,const Face&b){return a.depth<b.depth;});
         // Outline pass goes behind the entire opaque body, so internal edges
         // are covered by the normal rendering instead of becoming a wireframe.
         if(outline.a)for(const Face& face:faces)for(int i=0;i<4;i++)
             DrawLineEx(face.points[i],face.points[(i+1)%4],4,outline);
-        for(const auto& f:faces)poly({f.points[0],f.points[1],f.points[2],f.points[3]},f.color);
+        // Intersecting organic surfaces need per-pixel depth, not whole-face
+        // painter sorting: that sorting exposes teeth along rounded joins.
+        if(smoothSurfaces){static const auto clear=reinterpret_cast<void(*)(unsigned int)>(glfwGetProcAddress("glClear"));rlDrawRenderBatchActive();if(clear)clear(0x00000100);rlEnableDepthTest();}
+        rlSetTexture(rlGetTextureIdDefault());
+        for(const auto& f:faces){
+            rlCheckRenderBatchLimit(6);rlBegin(RL_TRIANGLES);
+            for(int triangle=0;triangle<2;triangle++){
+                int a=0,b=triangle+1,c=triangle+2;const auto& p=f.points;
+                if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
+                for(int index:{a,b,c}){Color color=f.smooth?f.vertexColors[index]:f.color;rlColor4ub(color.r,color.g,color.b,color.a);rlTexCoord2f(0,0);if(smoothSurfaces)rlVertex3f(p[index].x,p[index].y,f.vertexDepth[index]);else rlVertex2f(p[index].x,p[index].y);}
+            }rlEnd();
+        }rlSetTexture(0);
+        if(smoothSurfaces){rlDrawRenderBatchActive();rlDisableDepthTest();}
     }
 };
 
@@ -199,7 +260,8 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     tuck=tuck*tuck*(3-2*tuck);
     const float cycle=state.phase*(2*PI);
     const float stride=state.moving?std::sin(cycle):0;
-    const float lift=state.moving?std::abs(std::cos(cycle))*1.7f:std::sin(state.idleTime*2.4f)*.6f;
+    const float run=species==0&&!rolling&&!striking&&bowDraw<0?std::clamp(state.runBlend,0.f,1.f):0;
+    const float lift=state.moving?(1-run)*std::abs(std::cos(cycle))*1.7f+run*(1.5f+.9f*std::cos(cycle*2)):std::sin(state.idleTime*2.4f)*.6f;
     const float bodyScale=species==4?1.38f:species==8?1.18f:1.f;
     const Color skin=flash?Text:rgb(212,180,131),bone=flash?Text:rgb(202,202,166);
     const Color metal=flash?Text:rgb(144,169,159),cloth=species==7?rgb(125,64,48):rgb(49,102,94),leather=rgb(88,68,48);
@@ -208,9 +270,10 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
         ellipse(x,y+3,w*1.22f,h*1.18f,rgb(4,12,16,22));ellipse(x,y+2,w,h,rgb(4,12,16,45));ellipse(x,y+2,w*.7f,h*.72f,rgb(4,12,16,78));}
     Rig rig(x,y,size*bodyScale,state.direction);
     if(rolling)rig.setRoll(roll,tuck);
+    if(species==0)rig.setRun(run);
 
     if(species==0){
-        buildHero(rig,lift,stride,cycle,tuck,attack,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows);
+        buildHero(rig,lift,stride,cycle,tuck,attack,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run);
     } else if(species>=9){
         buildDesert(rig,species-1,state,attack,flash);
     } else if(species==1){

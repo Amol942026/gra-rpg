@@ -8,9 +8,12 @@ void corpseTests(){
         Enemy& body=g.enemies[0];
         check(!body.alive&&body.hp==0&&distance(body.pos,p)==0&&body.windup==0,"death keeps a stationary corpse at the actual monster location");
         int generated=bodyLootCount(body);
-        check(g.ground.empty()&&generated>=1&&generated<=CorpseLootSize,"each species keeps its variable loot inside its corpse without overflowing slots");
-        check(body.loot[0].kind==Kind::Gold&&body.loot[0].count>=enemyLootTable(type)[0].minCount&&body.loot[0].count<=enemyLootTable(type)[0].maxCount,"corpse preserves the coin range configured for its species");
-        if(type==3)check(body.loot[1].kind==Kind::Sword&&body.loot[1].tier==2&&body.loot[2].kind==Kind::Ring&&body.loot[2].tier==2,"boss keeps both legendary rewards in its body");
+        check(g.ground.empty()&&generated>=0&&generated<=CorpseLootSize,"each species keeps its variable loot inside its corpse without overflowing slots");
+        bool valid=true;for(const auto& value:body.loot)if(!value.empty())valid&=lootChance(type,value)==itemDropChance(value);
+        check(valid,"every real rolled item uses its rarity chance, including random coins");
+        if(enemyBoss(type))check(body.loot[QuestLootSlot].kind==Kind::DawnShard,"boss retains the guaranteed story fragment in its reserved slot");
+        // The transfer checks use a fixed coin fixture; actual random drops were verified above.
+        body.loot[0]=item(Kind::Gold,0,enemyLootTable(type)[0].minCount);generated=bodyLootCount(body);
         int before=total(g),kills=g.kills;g.hit(body,200);
         check(g.kills==kills&&total(g)==before&&g.ground.empty(),"hitting a corpse cannot duplicate loot or XP");
         check(!g.transfer({Place::Corpse,0,71},{Place::Bag,8}),"corpse loot requires opening that exact body first");

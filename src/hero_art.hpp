@@ -4,7 +4,7 @@
 // same articulated model, including equipment, bow poses and roll transforms.
 inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,float attack,
                       bool helmet,bool shield,Kind weapon,bool flash,bool rolling,bool striking,
-                      float strikeProgress,float bowDraw,int quiverArrows){
+                      float strikeProgress,float bowDraw,int quiverArrows,float run=0){
     rig.reserve(1800);
     const Color skin=flash?Text:rgb(213,177,139),skinLight=flash?Text:rgb(237,206,172);
     const Color metal=flash?Text:rgb(142,165,165),edge=flash?Text:rgb(199,216,208);
@@ -16,8 +16,8 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
     auto capePoint=[&](float u,float down){
         float width=12+6*down,r=(u*2-1)*width;
         float fold=std::cos(u*5*PI)*(.4f+down*1.2f);
-        float sway=std::sin(cycle+u*3)*std::abs(stride)*down*2.5f;
-        return P3{r+sway,-10-down*3-fold,58+lift-down*45+std::sin(u*4*PI)*down*1.2f};
+        float sway=std::sin(cycle-down*2+u*3)*std::abs(stride)*down*(1.7f+run*1.3f);
+        return P3{r+sway,-10-down*(3+run*9)-fold,58+lift-down*(45-run*7)+std::sin(u*4*PI)*down*1.2f};
     };
     for(int row=0;row<7;row++)for(int col=0;col<12;col++){
         float a=col/12.f,b=(col+1)/12.f,top=row/7.f,bottom=(row+1)/7.f;
@@ -28,8 +28,11 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
     for(int i=0;i<24;i++)rig.tapered(capePoint(i/24.f,1),capePoint((i+1)/24.f,1),.65f,.65f,Gold);
     for(float side:{0.f,1.f})for(int i=0;i<12;i++)rig.tapered(capePoint(side,i/12.f),capePoint(side,(i+1)/12.f),.7f,.7f,clothLight);
     for(float side:{-1.f,1.f}){
-        float wave=stride*side,stepLift=std::max(0.f,std::cos(cycle)*side)*std::abs(stride)*7;
-        P3 foot{side*7,wave*7+5*tuck,4+stepLift+12*tuck},knee{side*7,wave*3+14*tuck,17+lift+5*tuck};
+        float wave=stride*side,cosine=std::cos(cycle)*side;
+        float walkLift=std::max(0.f,cosine)*std::abs(stride)*7;
+        RunningLeg leg=run>0?runningLeg(cycle/(2*PI),side,31+lift):RunningLeg{};
+        P3 foot{side*7,wave*7*(1-run)+leg.footForward*run+5*tuck,4+walkLift*(1-run)+(leg.footHeight-4)*run+12*tuck};
+        P3 knee{side*7,wave*3*(1-run)+leg.kneeForward*run+14*tuck,(17+lift)*(1-run)+leg.kneeHeight*run+5*tuck};
         rig.tapered(knee,{side*7,0,31+lift},8,9,pants,1.15f);
         rig.rounded(knee,{8,8,9},pants);
         rig.tapered(foot,knee,7.5f,8,leather,.92f);
@@ -72,10 +75,12 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
     }
     for(float side:{-1.f,1.f}){
         float reach=side>0?attack*18:attack*6;
-        P3 shoulder{side*15,0,53+lift},elbow{side*17,1-stride*side*2+reach*.4f,43+lift};
-        P3 hand{side*20,3-stride*side*5+reach,33+lift+std::abs(attack)*11};
+        RunningLeg armPhase=run>0?runningLeg(cycle/(2*PI),side,31+lift):RunningLeg{};
+        float arm=armPhase.footForward/13;
+        P3 shoulder{side*15,0,53+lift},elbow{side*17,(1-stride*side*2)*(1-run)+(2-arm*8)*run+reach*.4f,43+lift+run*2};
+        P3 hand{side*(20-run*2),(3-stride*side*5)*(1-run)+(3-arm*14)*run+reach,33+lift+run*(5+std::max(0.f,-arm)*3)+std::abs(attack)*11};
         if(archer&&!rolling){
-            if(side<0){hand={-10,27,47+lift};elbow={-17,12,44+lift};}
+            if(side<0){hand={-10-run*5,27*(1-run)+(4-arm*12)*run,47+lift-run*8};elbow={-17,12*(1-run)+(3-arm*6)*run,44+lift};}
             else if(bowDraw>=0){hand={4-12*drawCharge,16-23*drawCharge,47+lift};elbow={18,4-9*drawCharge,47+lift};}
         }
         WeaponPose strike{};
@@ -105,7 +110,7 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
             }
         }
         if(side>0&&!archer){
-            P3 base=hand+P3{0,1,-3},tip=hand+P3{0,8+attack*8,31-std::abs(attack)*10};
+            P3 base=hand+P3{0,1,-3},tip=hand+P3{0,8*(1-run)-20*run+attack*8,31-std::abs(attack)*10-run*55};
             bool dagger=weapon==Kind::Dagger;if(dagger)tip=hand+(tip-hand)*.65f;
             if(striking){
                 base=hand-strike.blade*.12f;tip=hand+strike.blade*(dagger?.65f:1.f);
