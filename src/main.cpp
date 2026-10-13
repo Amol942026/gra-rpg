@@ -3,7 +3,9 @@
 #include "game.hpp"
 #include "intro_story.hpp"
 #include "tower_story.hpp"
+#ifndef EMBERFALL_PLAYER_BUILD
 #include "developer_mode.hpp"
+#endif
 #include <cstdio>
 #include <cstdlib>
 #include <filesystem>
@@ -14,6 +16,11 @@
 #include "startup_log.hpp"
 #include "audio.hpp"
 using namespace ember;
+#ifdef EMBERFALL_PLAYER_BUILD
+constexpr bool PlayerBuild=true;
+#else
+constexpr bool PlayerBuild=false;
+#endif
 namespace fs=std::filesystem;
 constexpr int W=1440,H=900,WorldW=1050;
 const Color Ink{15,23,25,255},Panel{20,29,31,255},Card{27,38,40,255},Line{52,65,63,255},Gold{224,192,128,255},Text{239,241,230,255},Muted{175,195,188,255},Green{105,176,136,255},Blue{104,167,202,255};
@@ -348,7 +355,7 @@ void drawUI(){
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.40",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.41",1370,885,10,Muted);
 }
 struct ItemTooltipText {std::string label,name,stat,description,instruction,chance;Color color;};
 ItemTooltipText itemTooltipText(Item value,Slot source){
@@ -411,7 +418,11 @@ void input(float dt){
  if(IsKeyPressed(KEY_F1)){game.cancelBow();help=!help;paused=false;welcome=false;dragging={};}
  if(IsKeyPressed(KEY_ESCAPE)){game.cancelBow();if(help||welcome){help=false;welcome=false;}else paused=!paused;dragging={};}
  if(welcome||help||paused){if(IsKeyPressed(KEY_ENTER)||(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside({540,613,360,57}))){if(welcome)startIntro();else help=paused=false;}return;}
- if(game.dead()){if(IsKeyPressed(KEY_ENTER)){if(developerActive)startDeveloperSession(true);else{game=Game(std::random_device{}());startIntro();}}return;}
+ if(game.dead()){if(IsKeyPressed(KEY_ENTER)){
+#ifndef EMBERFALL_PLAYER_BUILD
+ if(developerActive)startDeveloperSession(true);else
+#endif
+ {game=Game(std::random_device{}());startIntro();}}return;}
  if(!IsWindowFocused()){game.cancelBow();weaponWheelOpen=false;paused=true;dragging={};return;}
  if(IsKeyPressed(KEY_E)&&game.inDesert()&&game.useDesertPortal()){dragging={};nearbyPage=0;return;}
  if(IsKeyPressed(KEY_E)&&game.inTower()){nearestTowerInteraction();if(towerStory.active()||towerPanelOpen)return;}
@@ -436,7 +447,7 @@ void input(float dt){
  if(dragging.place==Place::Corpse&&game.openedCorpse!=dragging.owner)dragging={};
 }
 void integrationTests(){
- std::ofstream out("interaction-test-v40.txt");int count=0;
+ std::ofstream out("interaction-test-v41.txt");int count=0;
  auto check=[&](bool result,const char* label){out<<(result?"PASS: ":"FAIL: ")<<label<<"\n";out.flush();count++;if(!result)std::exit(2);};
  auto midpoint=[](Rectangle r){return Vector2{r.x+r.width/2,r.y+r.height/2};};
  check(game.ground.empty(),"normal startup contains no ground loot");
@@ -479,7 +490,9 @@ void integrationTests(){
 #include "intro_qa.hpp"
 #include "tower_qa.hpp"
 #include "tower_floors_qa.hpp"
+#ifndef EMBERFALL_PLAYER_BUILD
 #include "developer_qa.hpp"
+#endif
 #include "critical_healing_qa.hpp"
 #include "tower_stairs_qa.hpp"
 #include "tower_furniture_qa.hpp"
@@ -506,10 +519,14 @@ int main(int argc,char**argv) {
     bool shadowQA=false,shadowPassed=true;
     bool stairsQA=false,stairsPassed=true,towerArtQA=false,towerArtPassed=true;
     bool combatQA=false,combatPassed=true;
-    bool desertBenchmark=false,towerBenchmark=false,developerQA=false,developerPassed=true,developerSmoke=false;DeveloperLaunch developerLaunch;
+    bool desertBenchmark=false,towerBenchmark=false,developerQA=false,developerPassed=true,developerSmoke=false;
+#ifndef EMBERFALL_PLAYER_BUILD
+    DeveloperLaunch developerLaunch;
+#endif
     int frameLimit=0,benchmarkStrongCuts=0,benchmarkPiercingShots=0,desertRegionsVisited=0;
     for(int i=1;i<argc;i++){
         std::string arg=argv[i];
+#ifndef EMBERFALL_PLAYER_BUILD
         if(parseDeveloperArgument(arg,i,argc,argv,developerLaunch))continue;
         if(arg=="--shadow-qa")shadowQA=true;
         if(arg=="--desert-qa")desertQA=true;
@@ -550,6 +567,7 @@ int main(int argc,char**argv) {
         if(arg=="--intro-qa")introQA=true;
         if(arg=="--tower-qa")towerQA=true;
         if(arg=="--tower-floors-qa")towerFloorsQA=true;
+#endif
         if(arg=="--fullscreen")startFullScreen=true;
         if(arg=="--windowed")startFullScreen=false;
         if(arg=="--no-audio")noAudio=true;
@@ -560,7 +578,8 @@ int main(int argc,char**argv) {
     fs::path exe=fs::absolute(argv[0]).parent_path();
     if(fs::exists(exe/"assets"))fs::current_path(exe);
     else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
-    startupLog.open();startupLog.write("Emberfall v0.40: startup");
+    startupLog.open();startupLog.write("Emberfall v0.41: startup");
+    startupLog.write(PlayerBuild?"Build edition: player":"Build edition: developer");
     SetTraceLogCallback(startupTrace);
     SetTraceLogLevel(LOG_INFO);
     if(openGL)sync_present::useOpenGL();
@@ -568,22 +587,28 @@ int main(int argc,char**argv) {
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
     SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
     startupLog.write("Creating graphics window");
-    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.40");
+    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.41");
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
     startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
     bool diagnostic=shadowQA||desertQA||towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
-    if(!diagnostic){game=Game(std::random_device{}());if(!developerLaunch.enabled)startIntro();}
+    if(!diagnostic){game=Game(std::random_device{}());
+#ifndef EMBERFALL_PLAYER_BUILD
+        if(!developerLaunch.enabled)
+#endif
+        startIntro();}
     startupLog.write("Generating world graphics");
     makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();startupLog.write("World graphics ready");
     audioSystem.init(!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA,!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!startupSmoke&&!developerQA&&!( towerFloorsQA||towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA));
     startupLog.write(noAudio?"Audio skipped (--no-audio)":"Audio initialization complete");
+#ifndef EMBERFALL_PLAYER_BUILD
     if(developerLaunch.enabled&&!diagnostic){
         developerKit=developerLaunch.kit;developerSelection=developerLaunch.destination>=0?developerLaunch.destination:0;
         if(developerLaunch.destination>=0&&developerLaunch.error.empty())startDeveloperSession(true);
         else{welcome=false;developerActive=true;intro={};openDeveloperMenu();developerError=developerLaunch.error;}
     }
+#endif
     if(smoke||benchmark)welcome=false;
     if(benchmark)game.skillRanks={1,1};
     if(desertBenchmark){game.activateField(WorldLocation::Desert);game.collectedFragments=1;game.dawnQuest=DawnQuest::AtTower;game.player=DesertArrival;game.messageTime=0;}
@@ -593,7 +618,9 @@ int main(int argc,char**argv) {
     if(towerArtQA)towerArtPassed=runTowerFurnitureQA();
     if(stairsQA)stairsPassed=runTowerStairsQA();
     if(combatQA)combatPassed=runCriticalHealingQA();
+#ifndef EMBERFALL_PLAYER_BUILD
     if(developerQA)developerPassed=runDeveloperQA();
+#endif
     if(skillsQA)skillsPassed=runSkillsQA();
     if(towerQA)towerPassed=runTowerQA();
     if(towerFloorsQA)towerFloorsPassed=runTowerFloorsQA();
@@ -687,8 +714,8 @@ int main(int argc,char**argv) {
     }
     if(frameLimit&&!cpuTimes.empty()){
         std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
-        std::ofstream f(developerSmoke?"dev-startup-v40.txt":desertBenchmark?"desert-benchmark-v40.txt":towerBenchmark?"tower-benchmark-v40.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v40-fullscreen.txt":large?"benchmark-v40-large.txt":"benchmark-v40.txt"):"smoke-test-v40.txt");
-        f<<"Frames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
+        std::ofstream f(developerSmoke?"dev-startup-v41.txt":desertBenchmark?"desert-benchmark-v41.txt":towerBenchmark?"tower-benchmark-v41.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v41-fullscreen.txt":large?"benchmark-v41-large.txt":"benchmark-v41.txt"):"smoke-test-v41.txt");
+        f<<"Build edition: "<<(PlayerBuild?"player":"developer")<<"\nFrames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
          <<"\nFullscreen: "<<(fullScreen()?"yes":"no")
          <<"\nRefresh rate (Hz): "<<refreshHz<<"\nV-sync interval: "<<swapInterval
          <<"\nPresentation clock: "<<pacingName()
@@ -698,7 +725,13 @@ int main(int argc,char**argv) {
          <<"\nActual presentation interval: "<<sync_present::lastSyncInterval()
          <<"\nPresentation fallback: "<<sync_present::error()
          <<"\nStrong cuts performed: "<<benchmarkStrongCuts<<"\nPiercing arrows fired: "<<benchmarkPiercingShots
-         <<"\nDeveloper mode: "<<developerActive<<"\nDeveloper menu open: "<<developerMenuOpen<<"\nDeveloper destination: "<<DeveloperDestinations[developerSelection].id<<"\nWorld location: "<<(game.inTower()?"mage-tower":game.inDesert()?"desert":"forest")<<"\nBenchmark scenario: "<<(desertBenchmark?"desert":towerBenchmark?"tower":"forest")<<"\nDesert areas visited: "<<desertRegionsVisited
+         <<"\nDeveloper mode: "<<developerActive<<"\nDeveloper menu open: "<<developerMenuOpen<<"\nDeveloper destination: "
+#ifndef EMBERFALL_PLAYER_BUILD
+         <<DeveloperDestinations[developerSelection].id
+#else
+         <<"unavailable"
+#endif
+         <<"\nWorld location: "<<(game.inTower()?"mage-tower":game.inDesert()?"desert":"forest")<<"\nBenchmark scenario: "<<(desertBenchmark?"desert":towerBenchmark?"tower":"forest")<<"\nDesert areas visited: "<<desertRegionsVisited
          <<"\nSand prisons cast: "<<(game.inDesert()&&game.findEnemy(DesertBossId)?game.findEnemy(DesertBossId)->sandPrisonCasts:0)
          <<"\nTower floor: "<<game.towerFloor+1<<"\nIntro active: "<<intro.active()<<"\nDeveloper error: "<<developerError
          <<"\nAudio device opened: "<<(audioSystem.available?"yes":"no")

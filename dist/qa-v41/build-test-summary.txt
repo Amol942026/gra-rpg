@@ -1,0 +1,4 @@
+PASS: 4691 gameplay and animation checks
+PASS: 13/13 player UI/input checks
+PASS: 58/58 local developer UI checks
+All agent-initiated launches used --no-audio.

@@ -1,5 +1,18 @@
 # Weryfikacja prototypu
 
+## Wersja 0.41 — paczka dla gracza
+
+Sprawdzone 13 października 2026 w Dokumenty/GitHub/gra-rpg. Wszystkie uruchomienia diagnostyczne miały --no-audio. Ustawienia audio zostały zachowane bajt w bajt.
+
+- Kompilacja gracza przez EMBERFALL_PLAYER_BUILD nie zawiera menu, skrótu F3, przycisku DEV, wyboru lokacji ani przyznawania zestawu developerskiego. Parametry sesji testowych oraz diagnostyki scen nie są parsowane. Nie ma niewidocznego przycisku blokującego mysz w dawnym miejscu DEV. Normalny start zachowuje prolog i początkowy ekwipunek.
+- build.ps1 domyślnie zachowuje kompilację developerską w dist/Emberfall.exe. Przełącznik -Player tworzy osobny plik dist/player/Emberfall.exe. package.ps1 zawsze buduje świeży wariant gracza i pakuje wyłącznie jego pliki. Cztery launchery developerskie pozostały lokalnie; nie ma ich w ZIP. Instrukcje paczki opisują wyłącznie grę.
+- 4691/4691 testów mechaniki i animacji. 13/13 testów wersji gracza: rzeczywiste zdarzenie F3 przez callback raylib, brak menu w prologu i świecie, brak przycisku i martwej strefy myszy, zwykły zestaw początkowy, miecz i czar. 58/58 testów lokalnego menu developerskiego.
+- Rozpakowany końcowy ZIP: normalny start oraz start z --dev, obiema postaciami --start, --no-dev-kit, --dev-smoke, --dev-qa, --desert-benchmark i --tower-qa. W obu 180 klatek, pełny ekran, aktywny prolog, tryb i menu developerskie wyłączone, brak otwartego urządzenia audio. Parametry testowe nie przeniosły postaci ani nie uruchomiły diagnostyki. Obejrzano rzeczywisty zrzut prezentacji prologu bez przycisku DEV.
+- ZIP: 8731901 bajtów (8,73 MB), 85 wpisów. 83 pliki EXE, zasobów i dokumentów porównano po SHA-256; wszystkie zgodne. Osobno sprawdzono instrukcje i zwykły launcher. Kod i teksty menu developerskiego oraz jego parametry nie występują w binarnej wersji gracza. EXE gracza różni się od EXE developerskiego. Paczka nie zawiera narzędzi, testów, raportów ani osobistej konfiguracji audio.
+- SHA-256 ZIP: e04777bd18d027d18c1a68dd2345b96992db6cd873160351d5e6c3ecb9769065. EXE gracza: 705181c96797c18addd756c4ebeed64ca8b37e432cbce1b39c153f565b03c56b. Tymczasową kopię rozpakowanej paczki usunięto po zachowaniu raportów i podglądu.
+
+Raporty: dist/qa-v41/package-verification.json, build-test-summary.txt, player-tests.txt, developer-tests.txt, packaged-normal-start.txt, packaged-blocked-dev-start.txt. Podgląd: player-prologue.png.
+
 ## Wersja 0.40 — cienie rzeczywistych sylwetek
 
 Sprawdzone 13 października 2026 w docelowym folderze Dokumenty/GitHub/gra-rpg. Wszystkie uruchomienia gry, testów i pomiarów miały --no-audio. Urządzenie audio pozostało zamknięte, a zapisane preferencje zachowano bajt w bajt (SHA-256 12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6).

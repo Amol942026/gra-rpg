@@ -1,0 +1,14 @@
+PASS: player edition opens no audio during diagnostics
+PASS: normal start preserves the story prologue
+PASS: normal character receives no developer kit or unlocked skills
+PASS: actual raylib keyboard callback is available
+PASS: F3 test reaches the actual raylib input state
+PASS: F3 cannot open a developer menu during the prologue
+PASS: former DEV button area remains usable world space
+PASS: former DEV area does not open a hidden menu
+PASS: no invisible developer button intercepts the mouse
+PASS: F3 cannot enable developer mode in the playable world
+PASS: player HUD renders no DEV button, label or menu
+PASS: ordinary sword combat still works in the player build
+PASS: ordinary spell casting still works in the player build
+Checks: 13; failures: 0

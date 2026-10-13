@@ -1,4 +1,10 @@
 #pragma once
+#ifdef EMBERFALL_PLAYER_BUILD
+// No menu, shortcut handler or hit target is linked into the player edition.
+Rectangle developerButton(){return {-100,-100,0,0};}
+bool developerInput(){return false;}
+void drawDeveloperUi(){}
+#else
 Rectangle developerButton(){return intro.active()||towerStory.active()?Rectangle{1000,77,168,34}:Rectangle{28,155,158,31};}
 Rectangle developerCard(int index){bool tower=index>=8;return {tower?747.f:310.f,231.f+(tower?index-8:index)*49,383,43};}
 Rectangle developerKitButton(){return {311,626,806,40};}
@@ -55,3 +61,5 @@ void drawDeveloperUi(){
  panel(developerCloseButton(),inside(developerCloseButton())?Card:Panel);center("X",1109,123,18,Gold);
  if(!developerError.empty())center(developerError,720,785,15,rgb(244,157,131));
 }
+
+#endif

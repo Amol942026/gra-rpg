@@ -8,6 +8,12 @@ Przed wybraniem prezentacji DirectX gra sprawdza rzeczywisty piksel przesłany z
 
 Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
+## Wersja 0.41 — ZIP dla gracza
+
+Archiwum **Emberfall-Windows-x64.zip** zawiera osobną wersję gry dla gracza: bez przycisku DEV, menu F3, zestawu testowego i wyboru miejsca startu przez parametry. Parametry sesji developerskich i diagnostyki scen nie są obsługiwane w tej kompilacji. Gra rozpoczyna się normalnym prologiem. ZIP zawiera wyłącznie grę, zasoby, zwykły launcher oraz instrukcje i licencje.
+
+**Projekt zachowuje tryb developerski.** Zwykłe uruchomienie **build.ps1** buduje wersję developerską w **dist/Emberfall.exe**. **build.ps1 -Player** buduje wersję gracza w **dist/player/Emberfall.exe**. **package.ps1** zawsze najpierw kompiluje świeżą wersję gracza, a następnie pakuje ją do ZIP. Nie zastępuje przy tym developerskiego EXE. **build.ps1 -Player -Test** sprawdza mechanikę gry i interfejs wersji gracza bez dźwięku.
+
 ## Wersja 0.40 — cienie sylwetek
 
 Bohater, wszystkie 12 gatunków przeciwników i ich ciała, drzewa, skały, krzewy, kaktusy, palmy, portal, zbierane grzyby oraz przedmioty na ziemi rzucają własne cienie. Uwzględnione są też Eldrin, schody i wyposażenie każdego piętra wieży oraz prolog.
