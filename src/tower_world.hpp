@@ -23,6 +23,7 @@ void drawTowerWorld(){
     }
     const auto& floor=towerFloorArt[game.towerFloor];
     if(floor.id)DrawTexturePro(floor.texture,{0,0,1024,-600},{c.x-512,c.y-300,1024,600},{0,0},0,WHITE);else drawTowerGround(c,game.towerFloor);
+    world_shadows::draw();
     if(game.towerFloor==3){for(int i=0;i<3;i++)if(game.towerRuneMask&(1<<i)){Vector2 p=screen(towerFurnishings(3)[i].pos),q=screen({12,11.3f});line(p.x,p.y-90,q.x,q.y-90,Fade(towerAccent(3),.22f),2);}}
     drawHoveredTile();
     for(const auto& item:game.ground)if(game.groundVisible(item)&&!item.value.empty()){

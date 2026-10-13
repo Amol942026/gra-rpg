@@ -2,16 +2,23 @@
 // Full-size masonry projected with the same 40:20 floor axes as the room.
 // Static geometry and exact opaque silhouettes are cached at 2x resolution.
 namespace tower_stairs {
+std::array<shadow_geometry::Sprite,2> groundShadows;
+std::array<shadow_geometry::Polygons,2> shadowMeshes;
 constexpr int ArtWidth=800,ArtHeight=800;constexpr float ArtScale=2,OriginX=174,OriginY=298;
 struct P {float x,y,z;};
 struct Face {std::vector<Vector2> vertices;float depth;Color color;bool clipped=false;int detail=0;};
 struct Mesh {
- float x,y;std::vector<Face> faces;std::vector<Vector2> opening;
+ float x,y;std::vector<Face> faces;std::vector<Vector2> opening;shadow_geometry::Polygons shadowFaces;
  Vector2 project(P p)const{return {x+(p.x-p.y)*40,y+(p.x+p.y)*20-p.z};}
  void face(std::initializer_list<P> points,Color color,bool cut=false,int detail=0){
   Face out;out.color=color;out.clipped=cut;out.detail=detail;out.depth=0;
   for(P p:points){out.vertices.push_back(project(p));out.depth+=(p.x+p.y)*34.6f+p.z*.5f;}
   out.depth/=points.size();faces.push_back(std::move(out));
+  if(std::any_of(points.begin(),points.end(),[](P p){return p.z>0;})){
+   std::vector<Vector2> ground;for(P p:points){auto q=shadow_math::ground((p.x-p.y)*40,(p.x+p.y)*20,p.z);ground.push_back({q.x,q.y});}
+   if(ground.size()==4)shadowFaces.push_back({ground[0],ground[1],ground[2],ground[3]});
+   else for(size_t i=1;i+1<ground.size();i++)shadowFaces.push_back({ground[0],ground[i],ground[i+1],ground[i+1]});
+  }
  }
  void box(float a,float b,float left,float right,float low,float high,Color stone,bool cut=false,bool joints=false){
   face({{b,left,low},{b,right,low},{b,right,high},{b,left,high}},shade(stone,.71f),cut,joints?2:0);
@@ -66,10 +73,10 @@ struct Mesh {
  }
 };
 void model(int direction,float x,float y){
- Mesh m{x,y,{},{}};const float run=TowerStairRun,width=TowerStairWidth*.5f,rise=TowerStairRise,height=rise*TowerStairSteps;
+ Mesh m{x,y,{},{},{}};const float run=TowerStairRun,width=TowerStairWidth*.5f,rise=TowerStairRise,height=rise*TowerStairSteps;
  Color stone=rgb(150,155,153);
  if(direction==1){
-  ellipse(x-45,y-26,107,36,rgb(8,10,16,76));
+
   for(int i=0;i<TowerStairSteps;i++){
    float a=run*i/TowerStairSteps,b=run*(i+1)/TowerStairSteps,h=(i+1)*rise;
    m.box(-b,-a,-width,width,0,h,shade(stone,.93f+(Game::hash(i,91)%12)*.009f),false,true);
@@ -108,6 +115,7 @@ void model(int direction,float x,float y){
   // Entrance threshold remains open and broad enough for the player's footprint.
   m.box(-.18f,0,-width,width,-5,1,rgb(182,186,176));
  }
+ shadowMeshes[direction==1?0:1]=m.shadowFaces;
  m.draw();
 }
 std::array<RenderTexture2D,2> art{};std::array<Texture2D,2> outlines{};
@@ -116,6 +124,7 @@ int index(int direction){return direction==1?0:1;}
 void make(){
  for(int dir:{1,-1}){int i=index(dir);art[i]=LoadRenderTexture(ArtWidth,ArtHeight);
   BeginTextureMode(art[i]);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,ArtScale});model(dir,OriginX,OriginY);EndMode2D();EndTextureMode();
+  groundShadows[i]=shadow_geometry::bake(shadowMeshes[i]);shadowMeshes[i].clear();
   SetTextureFilter(art[i].texture,TEXTURE_FILTER_BILINEAR);
   Image source=LoadImageFromTexture(art[i].texture);ImageFlipVertical(&source);Color* pixels=LoadImageColors(source);
   masks[i].resize(ArtWidth*ArtHeight);for(int n=0;n<ArtWidth*ArtHeight;n++)masks[i][n]=pixels[n].a>=210?255:0;UnloadImageColors(pixels);UnloadImage(source);
@@ -126,7 +135,7 @@ void make(){
   }outlines[i]=LoadTextureFromImage(border);SetTextureFilter(outlines[i],TEXTURE_FILTER_BILINEAR);UnloadImage(border);
  }
 }
-void unload(){for(int i=0;i<2;i++){if(art[i].id)UnloadRenderTexture(art[i]);if(outlines[i].id)UnloadTexture(outlines[i]);art[i]={};outlines[i]={};masks[i].clear();}}
+void unload(){for(int i=0;i<2;i++){shadow_geometry::unload(groundShadows[i]);if(art[i].id)UnloadRenderTexture(art[i]);if(outlines[i].id)UnloadTexture(outlines[i]);art[i]={};outlines[i]={};masks[i].clear();}}
 bool contains(int direction,Vector2 base,Vector2 point){
  int i=index(direction),x=int(std::floor((point.x-base.x+OriginX)*ArtScale)),y=int(std::floor((point.y-base.y+OriginY)*ArtScale));
  return x>=0&&x<ArtWidth&&y>=0&&y<ArtHeight&&!masks[i].empty()&&masks[i][y*ArtWidth+x];

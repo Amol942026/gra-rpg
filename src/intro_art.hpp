@@ -39,7 +39,7 @@ void star(float x,float y,float size,Color color){
     DrawCircleV({x,y},size*.2f,color);
 }
 void pillar(float x,float y,float height){
-    ellipse(x,y+height+12,48,17,rgb(20,20,35));
+
     DrawRectangleGradientH(int(x-28),int(y),56,int(height),rgb(30,31,49),rgb(66,61,82));
     DrawRectangleGradientH(int(x-14),int(y),23,int(height),rgb(73,66,88),rgb(42,40,61));
     for(int i=0;i<6;i++)line(x-21+i*8,y+9,x-21+i*8,y+height-7,Fade(rgb(119,104,131),i%2?.23f:.4f),i%2?1:2);
@@ -61,14 +61,26 @@ void pillar(float x,float y,float height){
     }
 }
 void candle(float x,float y,float time){
-    ellipse(x,y+5,19,6,rgb(17,17,28));ellipse(x,y,13,4,rgb(111,80,59));
+    ellipse(x,y,13,4,rgb(111,80,59));
     rect(x-5,y-26,10,26,rgb(174,153,124));rect(x-4,y-26,3,24,rgb(223,199,157));
     ellipse(x,y-26,5,2,rgb(239,214,170));line(x,y-26,x,y-32,rgb(69,47,39),1.3f);
     float flicker=std::sin(time*8+x)*1.5f;
     glow(x,y-36,48+flicker,58,rgb(250,156,71,34));
     ellipse(x+flicker*.25f,y-36,4,9+flicker,rgb(243,169,80));ellipse(x,y-33,2.5f,5,rgb(255,229,162));
 }
-void observatory(float time){
+void observatoryObjects(float time){
+    pillar(242,181,330);pillar(1200,181,330);
+    candle(329,490,time);candle(1118,494,time+2);
+    // Weathered books and an unfurled parchment beside Eldrin.
+    poly({{998,534},{1028,525},{1053,538},{1022,550}},rgb(49,33,49));
+    poly({{999,530},{1029,521},{1053,533},{1022,545}},rgb(145,126,100));
+    poly({{997,526},{1027,517},{1052,529},{1021,541}},rgb(92,51,72));
+    line(1004,527,1021,536,Fade(Gold,.6f),1.4f);line(1011,523,1028,533,Fade(Gold,.6f));
+    poly({{1061,548},{1090,538},{1104,544},{1075,555}},rgb(186,159,119));
+    for(int i=0;i<4;i++)line(1070+i*5,547-i*1.5f,1075+i*5,549-i*1.5f,rgb(103,80,66),.8f);
+    ellipse(1062,548,3,5,rgb(223,196,149));ellipse(1103,543,3,5,rgb(223,196,149));
+}
+void observatory(float time,bool decorations=true){
     DrawRectangleGradientV(0,0,W,H,rgb(10,13,29),rgb(28,23,43));
     // Deep arched opening, hazy nebulae and fine stars behind the stonework.
     ellipse(720,320,448,248,rgb(22,24,46));
@@ -117,16 +129,7 @@ void observatory(float time){
         float a=i*PI/12;
         line(720+std::cos(a)*124,455+std::sin(a)*42,720+std::cos(a)*137,455+std::sin(a)*47,Fade(Gold,.46f));
     }
-    pillar(242,181,330);pillar(1200,181,330);
-    candle(329,490,time);candle(1118,494,time+2);
-    // Weathered books and an unfurled parchment beside Eldrin.
-    poly({{998,534},{1028,525},{1053,538},{1022,550}},rgb(49,33,49));
-    poly({{999,530},{1029,521},{1053,533},{1022,545}},rgb(145,126,100));
-    poly({{997,526},{1027,517},{1052,529},{1021,541}},rgb(92,51,72));
-    line(1004,527,1021,536,Fade(Gold,.6f),1.4f);line(1011,523,1028,533,Fade(Gold,.6f));
-    poly({{1061,548},{1090,538},{1104,544},{1075,555}},rgb(186,159,119));
-    for(int i=0;i<4;i++)line(1070+i*5,547-i*1.5f,1075+i*5,549-i*1.5f,rgb(103,80,66),.8f);
-    ellipse(1062,548,3,5,rgb(223,196,149));ellipse(1103,543,3,5,rgb(223,196,149));
+    if(decorations)observatoryObjects(time);
     for(int i=0;i<32;i++){
         float px=320+(i*163)%790,py=220+std::fmod(i*31+time*(4+i%3),310.f);
         DrawCircleV({px,py},i%3?1:1.5f,Fade(rgb(201,170,225),.13f+.1f*std::sin(time+i)));
@@ -136,7 +139,7 @@ void mage(float x,float y,float size,float time,float casting){
     float breath=std::sin(time*2)*.55f,lift=casting*13;
     Color purple=rgb(104,65,150),shadow=rgb(55,35,88),light=rgb(155,105,201),gold=rgb(213,177,111);
     Color skin=rgb(211,172,137),skinLight=rgb(239,207,170),silver=rgb(221,218,208);
-    glow(x,y+6,46*size,13*size,rgb(3,5,12,150));
+
     rlPushMatrix();rlTranslatef(x,y,0);rlScalef(size,size,1);
     ellipse(-11,0,9,4,rgb(31,23,29));ellipse(12,1,9,4,rgb(31,23,29));
     // Softly flared skirt, several overlapping panels and a scalloped hem.

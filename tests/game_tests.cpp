@@ -26,8 +26,10 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "desert_tests.hpp"
 #include "sand_prison_tests.hpp"
 #include "sprint_tests.hpp"
+#include "shadow_tests.hpp"
 #include "rarity_loot_tests.hpp"
 int main(){
+ shadowTests();
  rarityLootTests();
  sprintTests();
  sandPrisonTests();

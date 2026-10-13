@@ -1,10 +1,14 @@
 #pragma once
 #include <type_traits>
+#include "shadow_geometry.hpp"
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 
 // Small geometric character rigs: all parts turn in depth, including the face,
 // back, weapon and limbs. A back view is not a mirrored front sprite.
 namespace actor_art {
+inline bool shadowBuilding=false,shadowCull=true,shadowCasting=true;
+inline int shadowCacheKey=-1;
+inline float shadowElevation=0;
 struct P3 {
     float r, f, z;
     P3 operator+(P3 b) const { return {r+b.r, f+b.f, z+b.z}; }
@@ -34,8 +38,11 @@ class Rig {
     float rollAngle=0, tuck=0,runLean=0,runSin=0,runCos=1;
     bool smoothSurfaces=false;
     std::vector<Face> faces;
+    shadow_geometry::Polygons shadowFaces;
+    bool collectShadow=false,closedShadow=false;
+    float shadowLift=shadowElevation;
 public:
-    Rig(float px,float py,float size,Direction dir):x(px),y(py),scale(size) {
+    Rig(float px,float py,float size,Direction dir,bool collect=false):x(px),y(py),scale(size),collectShadow(collect||(shadowBuilding&&shadowCasting)) {
         float angle=int(dir)*PI/4;
         fx=std::cos(angle);fy=std::sin(angle)/.52f;
         float len=std::hypot(fx,fy);fx/=len;fy/=len;rx=fy;ry=-fx;
@@ -58,8 +65,22 @@ public:
     Vector2 project(P3 p) const {
         return {x+(p.r*rx+p.f*fx)*scale,y+((p.r*ry+p.f*fy)*.52f-p.z)*scale};
     }
+    Vector2 groundProject(P3 p) const {
+        auto q=shadow_math::ground(x+(p.r*rx+p.f*fx)*scale,y+(p.r*ry+p.f*fy)*.52f*scale+shadowLift,p.z*scale+shadowLift);
+        return {q.x,q.y};
+    }
+    const shadow_geometry::Polygons& shadows()const{return shadowFaces;}
+    void drawShadow()const{shadow_geometry::raster(shadowFaces);}
     void face(P3 a,P3 b,P3 c,P3 d,Color col,float lighting=1) {
         a=rollPoint(a);b=rollPoint(b);c=rollPoint(c);d=rollPoint(d);
+        // Capture every physical surface, including surfaces hidden from the camera.
+        if(collectShadow&&col.a>=160){
+            std::array<Vector2,4> p={groundProject(a),groundProject(b),groundProject(c),groundProject(d)};
+            float sunArea=(p[1].x-p[0].x)*(p[2].y-p[0].y)-(p[1].y-p[0].y)*(p[2].x-p[0].x)
+                         +(p[2].x-p[0].x)*(p[3].y-p[0].y)-(p[2].y-p[0].y)*(p[3].x-p[0].x);
+            // Closed volumes need only their light-facing skin. Thin sheets stay double sided.
+            if(!closedShadow||!shadowCull||sunArea>.001f)shadowFaces.push_back(p);
+        }
         Vector2 pa=project(a),pb=project(b),pc=project(c),pd=project(d);
         // Opaque closed meshes need only their camera-facing surfaces. This
         // keeps the richer silhouettes inexpensive and matches pointer picking.
@@ -89,8 +110,10 @@ public:
         }
         for(size_t j=0;j+1<path.size();j++)for(int i=0;i<sides;i++){int n=(i+1)%sides;surfaceQuad(points[j][i],points[j][n],points[j+1][n],points[j+1][i],colors[j][i],colors[j][n],colors[j+1][n],colors[j+1][i]);}
         rounded(path.front(),{width,depth,std::min(width,depth)},col);rounded(path.back(),{width,depth,std::min(width,depth)},col);
+
     }
     void prism(const std::array<P3,8>& p,Color col) {
+        bool savedClosed=closedShadow;closedShadow=true;
         // Bottom, back, front, left, right, top, with a fixed world light.
         face(p[0],p[3],p[2],p[1],col,.6f);
         face(p[0],p[1],p[5],p[4],col,.78f+.12f*fx);
@@ -98,6 +121,8 @@ public:
         face(p[0],p[4],p[7],p[3],col,.84f+.13f*rx);
         face(p[1],p[2],p[6],p[5],col,.84f-.13f*rx);
         face(p[4],p[5],p[6],p[7],col,1.13f);
+
+        closedShadow=savedClosed;
     }
     void box(P3 center,P3 size,Color col) {
         float r=size.r/2,f=size.f/2,z=size.z/2;
@@ -141,6 +166,7 @@ public:
         return sphere;
     }
     void rounded(P3 center,P3 size,Color col){
+        bool savedClosed=closedShadow;closedShadow=true;
         auto point=[&](P3 p){return center+P3{p.r*size.r*.5f,p.f*size.f*.5f,p.z*size.z*.5f};};
         auto surface=[&](const auto& sphere){
             // Shared vertex normals remove flat facet bands without tessellating
@@ -163,6 +189,8 @@ public:
             else if(extent>24)surface(unitSphere<16,8>());
             else surface(unitSphere<12,6>());
         }else if(scale>=1.8f)surface(unitSphere<24,10>());else surface(unitSphere<16,8>());
+
+        closedShadow=savedClosed;
     }
     void tapered(P3 a,P3 b,float width,float depth,Color col,float tipScale=1){
         P3 axis=b-a;float length=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);if(length<.001f)return;
@@ -245,6 +273,11 @@ public:
     }
 };
 
+// The shadow pass builds each animated mesh once. The body pass reuses it.
+inline std::vector<std::pair<int,Rig>> frameRigs;
+inline void beginShadowFrame(){frameRigs.clear();shadowBuilding=true;shadowCacheKey=-1;shadowElevation=0;shadowCasting=true;}
+inline void endShadowPreparation(){shadowBuilding=false;shadowCacheKey=-1;}
+inline void finishShadowFrame(){frameRigs.clear();shadowCacheKey=-1;shadowBuilding=false;shadowElevation=0;}
 #include "hero_art.hpp"
 #include "desert_actors.hpp"
 
@@ -266,9 +299,11 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     const Color skin=flash?Text:rgb(212,180,131),bone=flash?Text:rgb(202,202,166);
     const Color metal=flash?Text:rgb(144,169,159),cloth=species==7?rgb(125,64,48):rgb(49,102,94),leather=rgb(88,68,48);
     const Color stone=flash?Text:rgb(104,133,123),fur=flash?Text:rgb(131,148,140);
-    if(!probe){float w=size*(species==12?78:species==4?35:species==2?28:23),h=size*(species==4?15:11);
-        ellipse(x,y+3,w*1.22f,h*1.18f,rgb(4,12,16,22));ellipse(x,y+2,w,h,rgb(4,12,16,45));ellipse(x,y+2,w*.7f,h*.72f,rgb(4,12,16,78));}
-    Rig rig(x,y,size*bodyScale,state.direction);
+    Rig working(x,y,size*bodyScale,state.direction);
+    Rig* cached=nullptr;
+    if(!shadowBuilding&&!probe&&shadowCacheKey>=0)for(auto& entry:frameRigs)if(entry.first==shadowCacheKey){cached=&entry.second;break;}
+    Rig& rig=cached?*cached:working;
+    if(!cached){
     if(rolling)rig.setRoll(roll,tuck);
     if(species==0)rig.setRun(run);
 
@@ -488,6 +523,12 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
             for(int i=0;i<4;i++)rig.box({-5.f+i*3,8.4f,headZ-7},{2,2,3},shade(bone,1.13f));
         }else if(!golem)rig.box({0,10,headZ-2},{3,3,4},shade(skin,.94f));
         if(skeleton){rig.beam({-8,4,headZ+7},{-2,7,headZ+5},1,1,shade(bone,.55f));rig.form({0,8,headZ-5},{12,4,4},shade(bone,.85f));}
+    }
+    }
+    if(shadowBuilding&&!probe){
+        rig.drawShadow();
+        if(shadowCacheKey>=0)frameRigs.emplace_back(shadowCacheKey,std::move(working));
+        return false;
     }
     if(probe)return rig.contains(*probe);
     if(striking&&strikeProgress>.10f&&strikeProgress<.9f){

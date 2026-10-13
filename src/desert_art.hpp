@@ -33,7 +33,7 @@ void softShape(std::initializer_list<Vector2> controls,Color color){
 }
 
 void cactus(float x,float y,bool pads){
- softGroundShadow(x,y,38,13);
+
  auto stem=[&](float xx,float yy,float w,float h){
   softShape({{xx-w*.5f,yy-4},{xx-w*.5f,yy-h+w*.55f},{xx-w*.32f,yy-h},{xx+w*.3f,yy-h},{xx+w*.5f,yy-h+w*.55f},{xx+w*.5f,yy-4},{xx,yy+3}},rgb(74,126,94));
   for(int rib=0;rib<5;rib++){float dx=(rib-2)*w*.19f;curve({xx+dx,yy-5},{xx+dx,yy-h*.45f},{xx+dx,yy-h+w*.2f},{xx+dx*.6f,yy-h+w*.14f},rib%2?rgb(114,161,110):rgb(42,99,78),rib%2?1.3f:.9f);}
@@ -55,7 +55,7 @@ void cactus(float x,float y,bool pads){
  for(int i=0;i<6;i++)oval(x-25+i*10,y+(i%2)*3,4,1.5f,rgb(155,125,78));
 }
 void sandstone(float x,float y){
- softGroundShadow(x,y+2,53,17);
+
  const Color c[]={rgb(181,112,67),rgb(211,144,87),rgb(229,170,107)};
  for(int layer=0;layer<3;layer++){
   float yy=y-layer*18,w=43-layer*8;
@@ -66,7 +66,7 @@ void sandstone(float x,float y){
  for(int i=0;i<10;i++){unsigned h=Game::hash(i,78);float xx=x+int(h%65)-32,yy=y-5-int((h>>8)%28);line(xx,yy,xx+3,yy+1,rgb(133,85,53),.8f);}
 }
 void obelisk(float x,float y){
- softGroundShadow(x,y,33,12);diamond(x,y,34,17,rgb(154,99,63));
+diamond(x,y,34,17,rgb(154,99,63));
  poly({{x-17,y-5},{x-15,y-115},{x-12,y-120},{x-2,y-137},{x,y-137},{x,y+3}},rgb(225,175,111));poly({{x,y+3},{x,y-137},{x+2,y-137},{x+13,y-119},{x+15,y-115},{x+19,y-7},{x+17,y-4}},rgb(160,108,66));
  poly({{x-12,y-120},{x-2,y-137},{x+2,y-137},{x+13,y-119},{x,y-109}},rgb(244,210,146));
  line(x,y-108,x,y+1,rgb(238,192,127),1.6f);
@@ -75,11 +75,11 @@ void obelisk(float x,float y){
  line(x+7,y-64,x+12,y-76,rgb(98,73,50),1.5f);line(x+12,y-76,x+6,y-87,rgb(98,73,50),1);
 }
 void shrub(float x,float y){
- softGroundShadow(x,y,29,9);for(int i=0;i<9;i++){float a=i*2.39996f,xx=x+std::cos(a)*(13+i%3*6),yy=y-25-i%4*5;curve({x,y-2},{x+std::cos(a)*5,y-15},{xx-3,yy+7},{xx,yy},rgb(118,96,64),1.8f);curve({xx,yy},{xx+2,yy-2},{xx+5,yy-5},{xx+5,yy-9},rgb(183,150,91),.9f);curve({xx,yy},{xx-2,yy-3},{xx-5,yy-4},{xx-6,yy-6},rgb(167,128,77),.9f);}
+for(int i=0;i<9;i++){float a=i*2.39996f,xx=x+std::cos(a)*(13+i%3*6),yy=y-25-i%4*5;curve({x,y-2},{x+std::cos(a)*5,y-15},{xx-3,yy+7},{xx,yy},rgb(118,96,64),1.8f);curve({xx,yy},{xx+2,yy-2},{xx+5,yy-5},{xx+5,yy-9},rgb(183,150,91),.9f);curve({xx,yy},{xx-2,yy-3},{xx-5,yy-4},{xx-6,yy-6},rgb(167,128,77),.9f);}
  for(int i=0;i<6;i++)oval(x-17+i*7,y-10-i%2*9,5,2,rgb(195,166,100));
 }
 void palm(float x,float y){
- softGroundShadow(x,y,46,15);
+
  curve({x,y-2},{x-6,y-56},{x+10,y-117},{x+6,y-159},rgb(132,92,50),16);
  curve({x-3,y-2},{x-8,y-56},{x+6,y-117},{x+3,y-158},rgb(205,159,88),4);
  for(int i=0;i<14;i++){float yy=y-7-i*10,xx=x+std::sin(i*.14f)*3;curve({xx-7,yy-2},{xx-3,yy+1},{xx+3,yy-1},{xx+7,yy-4},rgb(83,68,45),1.5f);curve({xx-6,yy-4},{xx-2,yy-1},{xx+2,yy-3},{xx+6,yy-6},rgb(225,179,101),.8f);}
@@ -94,7 +94,7 @@ void palm(float x,float y){
  for(int i=0;i<7;i++)oval(x+4+(i%3)*3,y-143+(i/3)*5,3,4,rgb(150,83,45));
 }
 void portal(float x,float y){
- softGroundShadow(x,y,64,22);diamond(x,y,64,18,rgb(162,113,74));oval(x,y-83,39,63,rgb(65,49,87));oval(x-4,y-83,32,58,rgb(112,88,146));for(int i=0;i<8;i++)oval(x-8,y-89,26-i*2.3f,48-i*3.5f,rgb(164,130,205,18));
+diamond(x,y,64,18,rgb(162,113,74));oval(x,y-83,39,63,rgb(65,49,87));oval(x-4,y-83,32,58,rgb(112,88,146));for(int i=0;i<8;i++)oval(x-8,y-89,26-i*2.3f,48-i*3.5f,rgb(164,130,205,18));
  for(int side:{-1,1})for(int row=0;row<7;row++){float xx=x+side*44,yy=y-row*19;poly({{xx-10,yy},{xx-10,yy-18},{xx+9,yy-22},{xx+13,yy-3}},side<0?rgb(229,184,126):rgb(163,116,79));line(xx-9,yy-18,xx+8,yy-21,rgb(246,208,152),1);}
  for(int i=0;i<54;i++){float a=PI+i*PI/54,b=PI+(i+1)*PI/54;poly({{x+std::cos(a)*53,y-127+std::sin(a)*49},{x+std::cos(b)*53,y-127+std::sin(b)*49},{x+std::cos(b)*35,y-127+std::sin(b)*33},{x+std::cos(a)*35,y-127+std::sin(a)*33}},rgb(220+(i/6)%2*12,173+(i/6)%2*10,113));}
  for(int i=1;i<9;i++){float a=PI+i*PI/9;line(x+std::cos(a)*36,y-127+std::sin(a)*34,x+std::cos(a)*52,y-127+std::sin(a)*48,rgb(157,112,72),.7f);}

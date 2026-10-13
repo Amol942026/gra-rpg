@@ -48,7 +48,7 @@ void drawTowerDialogue(){
     drawStoryDialogue(towerStory.current(),towerStory.line,towerStory.lineCount(),towerStory.visibleText(),towerStory.textComplete(),true);
 }
 void drawTowerChamber(){
-    float t=towerStory.time;intro_art::observatory(t);
+    float t=towerStory.time;intro_art::observatory(t,false);world_shadows::draw();intro_art::observatoryObjects(t);
     // Four pale fragments are only a projection; the recovered piece glows gold.
     for(int i=0;i<5;i++){
         float a=-PI*.5f+i*2*PI/5+t*.12f,x=720+std::cos(a)*83,y=337+std::sin(a)*28+std::sin(t*2+i)*5;
@@ -56,7 +56,9 @@ void drawTowerChamber(){
         if(i<game.dawnFragments()){intro_art::glow(x,y,29,29,Fade(Gold,.18f));diamond(x-2,y-3,3,9,rgb(255,240,188));}
     }
     AnimationState pose;pose.direction=Direction::E;pose.idleTime=t;
+    actor_art::shadowCacheKey=0;
     actor_art::draw(0,510,532,2.5f,pose,0,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind));
+    actor_art::shadowCacheKey=-1;
     drawStoryMage(930,505,2.7f,t,0);
     if(towerStory.phase==TowerPhase::Opening)intro_art::column({510,539},t,1-storyEase(towerStory.age/TowerSequence::OpeningTime));
     rect(0,0,W,55,rgb(5,8,16));rect(0,860,W,40,rgb(5,8,16));

@@ -106,7 +106,6 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
   Color palette[]={rgb(147,174,175),rgb(128,163,120),rgb(183,136,83),rgb(163,178,199),rgb(90,152,151),rgb(218,173,106)};
   Color base=C(palette[(theme/4)%6]);wood=shade(base,.62f);steel=shade(base,1.08f);gold=C(rarity(i));
  }
- ellipse(x+1*s,y+19*s,16*s,3*s,C(rgb(5,12,16,70)));
  if(itemRarity(i)!=Rarity::Common)ellipse(x,y+1*s,18*s,18*s,C(Fade(tint,.09f)));
  switch(archetype(i.kind)){
  case Kind::ScorpionSting:P({{-12,14},{-5,11},{-8,3},{-7,-8},{2,-17},{10,-15},{3,-8},{0,2},{4,10},{-4,16}},C(rgb(203,147,71)));L(-6,4,-5,-7,light,1.3f);P({{3,-12},{16,-7},{6,-19}},C(rgb(89,58,37)));break;
@@ -235,6 +234,7 @@ void makeArt(){
 #include "magic_art.hpp"
 #include "bow_art.hpp"
 #include "combat_feedback.hpp"
+#include "ground_shadows.hpp"
 #include "tower_world.hpp"
 void drawWorld(){
  if(game.inTower()){drawTowerWorld();return;}
@@ -242,6 +242,7 @@ void drawWorld(){
  DrawTextureRec(game.inDesert()?desert_art::terrain.texture:terrain.texture,{0,0,float(TerrainWidth),-float(TerrainHeight)},{o.x-TerrainOriginX,o.y-90},WHITE);
  if(game.inDesert()){EndBlendMode();desert_art::atmosphere();}
  if(!game.inDesert())for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
+ world_shadows::draw();
  Vector2 pp=screen(game.player);DrawEllipseLines(int(pp.x),int(pp.y+2),25,12,Fade(Gold,.7f));
  drawHoveredTile();
  for(const auto& plant:game.forage){
@@ -347,7 +348,7 @@ void drawUI(){
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.39",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.40",1370,885,10,Muted);
 }
 struct ItemTooltipText {std::string label,name,stat,description,instruction,chance;Color color;};
 ItemTooltipText itemTooltipText(Item value,Slot source){
@@ -394,6 +395,7 @@ void overlay(){
  for(int i=0;i<8;i++){txt(keys[i],384,363+i*29,15,Gold);txt(desc[i],554,360+i*29,19,Text);}
  Rectangle b{540,613,360,57};panel(b,inside(b)?rgb(73,82,61):rgb(49,62,51));center(welcome?"WYRUSZ":"WRÓĆ DO GRY",720,629,21,Text);center("Z / X — ataki specjalne  /  V — Leczenie  /  U — umiejętności  /  Q — broń  /  F2 — dźwięk  /  ESC — pauza",720,687,14,Muted);
 }
+namespace world_shadows {void draw();}
 #include "intro_scene.hpp"
 #include "tower_scene.hpp"
 #include "tower_rooms_ui.hpp"
@@ -434,7 +436,7 @@ void input(float dt){
  if(dragging.place==Place::Corpse&&game.openedCorpse!=dragging.owner)dragging={};
 }
 void integrationTests(){
- std::ofstream out("interaction-test-v39.txt");int count=0;
+ std::ofstream out("interaction-test-v40.txt");int count=0;
  auto check=[&](bool result,const char* label){out<<(result?"PASS: ":"FAIL: ")<<label<<"\n";out.flush();count++;if(!result)std::exit(2);};
  auto midpoint=[](Rectangle r){return Vector2{r.x+r.width/2,r.y+r.height/2};};
  check(game.ground.empty(),"normal startup contains no ground loot");
@@ -470,6 +472,7 @@ void integrationTests(){
 #include "refresh_qa.hpp"
 #include "forest_qa.hpp"
 #include "graphics_qa.hpp"
+#include "shadow_qa.hpp"
 #include "mushroom_qa.hpp"
 #include "bow_qa.hpp"
 #include "skills_qa.hpp"
@@ -500,6 +503,7 @@ int main(int argc,char**argv) {
     bool refreshQA=false,refreshPassed=true;
     bool forestQA=false,forestPassed=true,graphicsQA=false,graphicsPassed=true,mushroomQA=false,mushroomPassed=true,bowQA=false,bowPassed=true,skillsQA=false,skillsPassed=true;
     bool desertQA=false,desertPassed=true;
+    bool shadowQA=false,shadowPassed=true;
     bool stairsQA=false,stairsPassed=true,towerArtQA=false,towerArtPassed=true;
     bool combatQA=false,combatPassed=true;
     bool desertBenchmark=false,towerBenchmark=false,developerQA=false,developerPassed=true,developerSmoke=false;DeveloperLaunch developerLaunch;
@@ -507,6 +511,7 @@ int main(int argc,char**argv) {
     for(int i=1;i<argc;i++){
         std::string arg=argv[i];
         if(parseDeveloperArgument(arg,i,argc,argv,developerLaunch))continue;
+        if(arg=="--shadow-qa")shadowQA=true;
         if(arg=="--desert-qa")desertQA=true;
         if(arg=="--stairs-qa")stairsQA=true;
         if(arg=="--tower-art-qa")towerArtQA=true;
@@ -555,7 +560,7 @@ int main(int argc,char**argv) {
     fs::path exe=fs::absolute(argv[0]).parent_path();
     if(fs::exists(exe/"assets"))fs::current_path(exe);
     else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
-    startupLog.open();startupLog.write("Emberfall v0.39: startup");
+    startupLog.open();startupLog.write("Emberfall v0.40: startup");
     SetTraceLogCallback(startupTrace);
     SetTraceLogLevel(LOG_INFO);
     if(openGL)sync_present::useOpenGL();
@@ -563,16 +568,16 @@ int main(int argc,char**argv) {
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
     SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
     startupLog.write("Creating graphics window");
-    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.39");
+    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.40");
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
     startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
-    bool diagnostic=desertQA||towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
+    bool diagnostic=shadowQA||desertQA||towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
     if(!diagnostic){game=Game(std::random_device{}());if(!developerLaunch.enabled)startIntro();}
     startupLog.write("Generating world graphics");
     makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();startupLog.write("World graphics ready");
-    audioSystem.init(!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA,!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!startupSmoke&&!developerQA&&!( towerFloorsQA||towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA));
+    audioSystem.init(!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA,!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!startupSmoke&&!developerQA&&!( towerFloorsQA||towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA));
     startupLog.write(noAudio?"Audio skipped (--no-audio)":"Audio initialization complete");
     if(developerLaunch.enabled&&!diagnostic){
         developerKit=developerLaunch.kit;developerSelection=developerLaunch.destination>=0?developerLaunch.destination:0;
@@ -583,6 +588,7 @@ int main(int argc,char**argv) {
     if(benchmark)game.skillRanks={1,1};
     if(desertBenchmark){game.activateField(WorldLocation::Desert);game.collectedFragments=1;game.dawnQuest=DawnQuest::AtTower;game.player=DesertArrival;game.messageTime=0;}
     if(towerBenchmark){game.enterMageTower();game.dawnQuest=DawnQuest::AtTower;game.messageTime=0;}
+    if(shadowQA)shadowPassed=runShadowQA();
     if(desertQA)desertPassed=runDesertQA();
     if(towerArtQA)towerArtPassed=runTowerFurnitureQA();
     if(stairsQA)stairsPassed=runTowerStairsQA();
@@ -617,7 +623,7 @@ int main(int argc,char**argv) {
     int frame=0;
     std::vector<double> cpuTimes,frameTimes,endTimes,presentTimes;
     double previous=GetTime();
-    while(!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA&&!WindowShouldClose()){
+    while(!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA&&!WindowShouldClose()){
         double begin=GetTime();double elapsed=begin-previous;previous=begin;
         performance.begin();
         float dt=float(std::clamp(elapsed,0.0,.05));
@@ -681,7 +687,7 @@ int main(int argc,char**argv) {
     }
     if(frameLimit&&!cpuTimes.empty()){
         std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
-        std::ofstream f(developerSmoke?"dev-startup-v39.txt":desertBenchmark?"desert-benchmark-v39.txt":towerBenchmark?"tower-benchmark-v39.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v39-fullscreen.txt":large?"benchmark-v39-large.txt":"benchmark-v39.txt"):"smoke-test-v39.txt");
+        std::ofstream f(developerSmoke?"dev-startup-v40.txt":desertBenchmark?"desert-benchmark-v40.txt":towerBenchmark?"tower-benchmark-v40.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v40-fullscreen.txt":large?"benchmark-v40-large.txt":"benchmark-v40.txt"):"smoke-test-v40.txt");
         f<<"Frames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
          <<"\nFullscreen: "<<(fullScreen()?"yes":"no")
          <<"\nRefresh rate (Hz): "<<refreshHz<<"\nV-sync interval: "<<swapInterval
@@ -712,10 +718,10 @@ int main(int argc,char**argv) {
     performance.save();
     startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
-    fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();
+    world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();
     for(auto& t:propArt)UnloadRenderTexture(t);
     UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
-    typography.clear();CloseWindow();return desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
+    typography.clear();CloseWindow();return shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }
 
 

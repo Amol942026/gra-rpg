@@ -7,7 +7,7 @@ constexpr int ObjectCount=13,AlchemyTable=13,Window=14,Orb=15,Crystal=16,Heart=1
 const Color Stone{151,160,163,255},Wood{129,83,51,255},Brass{193,151,81,255},Paper{232,216,176,255};
 Vector2 offset(P p){return {(p.x-p.y)*40,(p.x+p.y)*20-p.z};}
 struct Model: tower_stairs::Mesh {
- Model(float px,float py):Mesh{px,py,{},{}}{}
+ Model(float px,float py):Mesh{px,py,{},{},{}}{}
  void box(float a,float b,float l,float r,float low,float high,Color color,bool detail=false){
   size_t n=faces.size();Mesh::box(a,b,l,r,low,high,color,false,false);for(size_t i=n;i<faces.size();i++)faces[i].detail=detail?1:0;
  }
@@ -186,14 +186,16 @@ void overlay(int id,float x,float y){
 }
 struct Sprite {RenderTexture2D art{};Texture2D outline{};std::vector<unsigned char> mask;int w=0,h=0;float ox=0,oy=0;};
 std::array<Sprite,SpriteCount> sprites{};
+std::array<shadow_geometry::Sprite,SpriteCount> groundShadows;
 void make(){
  for(int id=0;id<SpriteCount;id++){
   auto& s=sprites[id];bool small=id>=Orb;s.w=small?192:512;s.h=small?256:640;s.ox=small?48:128;s.oy=small?80:270;s.art=LoadRenderTexture(s.w,s.h);
+  shadow_geometry::Polygons shadow;
   BeginTextureMode(s.art);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,2});
   if(id>=Orb)overlay(id,s.ox,s.oy);else if(id==Window)window(s.ox,s.oy);else{
    Model m(s.ox,s.oy);switch(id){case 0:column(m);break;case 1:table(m,false);break;case 2:m.pedestal(69,.55f);break;case 3:fireplace(m);break;case 4:m.pedestal(33,.55f);m.frustum(0,0,.53f,.72f,33,51,Stone,false,16);m.ring(0,0,.73f,.58f,52,rgb(206,211,191));m.frustum(0,0,.58f,.58f,49,49.4f,rgb(46,117,141),true,24);break;case 5:shelf(m);break;case 6:lectern(m);break;case 7:cauldron(m);break;case 8:garden(m);break;case 9:rune(m);break;case 10:telescope(m);break;case 11:astrolabe(m);break;case 12:m.pedestal(62,.57f);m.ring(0,0,.46f,.43f,62.2f,Brass,28);break;case AlchemyTable:table(m,true);break;}
-   m.draw();
-  }EndMode2D();EndTextureMode();SetTextureFilter(s.art.texture,TEXTURE_FILTER_BILINEAR);
+   shadow=std::move(m.shadowFaces);m.draw();
+  }EndMode2D();EndTextureMode();groundShadows[id]=shadow_geometry::bake(shadow);SetTextureFilter(s.art.texture,TEXTURE_FILTER_BILINEAR);
   Image source=LoadImageFromTexture(s.art.texture);ImageFlipVertical(&source);Color* pixels=LoadImageColors(source);s.mask.resize(s.w*s.h);int left=s.w,right=0,top=s.h,bottom=0;
   for(int y=0;y<s.h;y++)for(int x=0;x<s.w;x++){bool solid=pixels[y*s.w+x].a>=210;s.mask[y*s.w+x]=solid?255:0;if(solid){left=std::min(left,x);right=std::max(right,x);top=std::min(top,y);bottom=std::max(bottom,y);}}
   UnloadImageColors(pixels);UnloadImage(source);Image border=GenImageColor(s.w,s.h,BLANK);auto* out=static_cast<Color*>(border.data);
@@ -201,7 +203,7 @@ void make(){
   s.outline=LoadTextureFromImage(border);SetTextureFilter(s.outline,TEXTURE_FILTER_BILINEAR);UnloadImage(border);
  }
 }
-void unload(){for(auto& s:sprites){if(s.art.id)UnloadRenderTexture(s.art);if(s.outline.id)UnloadTexture(s.outline);s={};}}
+void unload(){for(auto& s:groundShadows)shadow_geometry::unload(s);for(auto& s:sprites){if(s.art.id)UnloadRenderTexture(s.art);if(s.outline.id)UnloadTexture(s.outline);s={};}}
 struct Part {int id;Vector2 shift{};float scale=1;Color tint=WHITE;};
 struct Parts {std::array<Part,8> values{};int count=0;void add(int id,Vector2 shift={},float scale=1,Color tint=WHITE){if(count<int(values.size()))values[count++]={id,shift,scale,tint};}};
 Parts parts(int type,float time,int floor){
@@ -226,7 +228,7 @@ bool spriteContains(const Part& p,Vector2 base,Vector2 point){
 bool contains(int type,Vector2 base,Vector2 point,float time,int floor){Parts p=parts(type,time,floor);for(int i=p.count-1;i>=0;i--)if(spriteContains(p.values[i],base,point))return true;return false;}
 void draw(int type,Vector2 base,float time,int floor,int index,bool hover){
  float x=base.x,y=base.y;Color accent=floor==0?Gold:floor==2?Green:floor==3?rgb(184,139,248):Blue;
- ellipse(x,y+2,type==1||type==5||type==3?63:38,type==1||type==5||type==3?25:16,rgb(5,10,16,62));
+
  Parts p=parts(type,time,floor);drawSprite(p.values[0].id,base,1,WHITE,hover);
  if(type==0||type==2||type==12){float z=type==0?193:type==2?104:104;intro_art::glow(x,y-z,50,52,Fade(type==12?Gold:Blue,.12f));}
  if(type==3)intro_art::glow(x-3,y-42,85,78,rgb(255,147,48,30));

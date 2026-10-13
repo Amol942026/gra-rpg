@@ -212,6 +212,14 @@ Tulow mniej sie pochyla; miecz jest niesiony za biodrem, peleryna faluje.
 Gotowe tekstury i maski cial sa przygotowane przed walka.
 PPM otwiera loot; przeciaganie do plecaka i rzadkosci dzialaja bez zmian.
 
+Wersja 0.40: CIENIE SYLWETEK
+Bohater, wszystkie bestie i ciala rzucaja cienie zgodne z ich ksztaltem.
+Bron, ekwipunek, bieg, atak i unik zmieniaja cien postaci.
+Drzewa i ich cienie faluja razem na wietrze. Skaly, kaktusy, palmy, portal,
+grzyby, przedmioty, Eldrin, meble i schody tez maja wlasne cienie.
+Wspolny kierunek swiatla, miekkie krawedzie i brak ciemnych szwow.
+Cien lezy pod obiektami; w wiezy nie wychodzi poza posadzke.
+
 STEROWANIE
 WSAD - chodzenie; kombinacje klawiszy pozwalaja isc ukosnie.
 Przytrzymany Shift + WSAD - bieg o 50% szybszy od chodu.

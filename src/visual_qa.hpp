@@ -80,19 +80,22 @@ void renderWorldLayer(){
         SetTextureFilter(worldCanvas.texture,TEXTURE_FILTER_BILINEAR);
     }
     if(game.inDesert())desert_art::renderBackdrop(nativeScale);
+    world_shadows::prepare();
     BeginTextureMode(worldCanvas);ClearBackground(Ink);
     renderScale=worldScale;
     BeginMode2D({{0,0},{0,0},0,worldScale});drawWorld();EndMode2D();
-    renderScale=nativeScale;EndTextureMode();performance.end(RenderStage::World,true);
+    renderScale=nativeScale;EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::World,true);
 }
 void renderScene() {
     if(intro.chamber()){
+        world_shadows::prepare(true);
         BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
-        drawIntroChamber();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
+        drawIntroChamber();drawDeveloperUi();EndMode2D();EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::Hud,true);return;
     }
     if(towerStory.chamber()){
+        world_shadows::prepare(true);
         BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
-        drawTowerChamber();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
+        drawTowerChamber();drawDeveloperUi();EndMode2D();EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::Hud,true);return;
     }
     hovered=pickWorld(mouse);
     performance.end(RenderStage::Picking);

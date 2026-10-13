@@ -8,6 +8,18 @@ Przed wybraniem prezentacji DirectX gra sprawdza rzeczywisty piksel przesłany z
 
 Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
+## Wersja 0.40 — cienie sylwetek
+
+Bohater, wszystkie 12 gatunków przeciwników i ich ciała, drzewa, skały, krzewy, kaktusy, palmy, portal, zbierane grzyby oraz przedmioty na ziemi rzucają własne cienie. Uwzględnione są też Eldrin, schody i wyposażenie każdego piętra wieży oraz prolog.
+
+Jeden kierunek światła prowadzi cienie w dół i w prawo. Postacie i kamienne wyposażenie wykorzystują wysokość fizycznych części modelu; uwzględniane są również powierzchnie ukryte przed kamerą. Rośliny używają rzeczywistej maski sylwetki, odkształconej tym samym wiatrem co korona. Cień postaci obejmuje broń i wyposażenie, podąża za chodem, biegiem, zamachem, naciąganiem łuku i przeturlaniem.
+
+Cienie mają miękkie krawędzie i powstają pod obiektami świata. Nakładające się części nie tworzą ciemnych szwów. Cienie wieży i prologu są ograniczone do posadzki; schody pod powierzchnią nie rzucają cienia na górne piętro. Grafiki ciał, mebli i schodów są przygotowane przy starcie, a żywe postacie współdzielą jedną siatkę dla cienia i widocznego ciała.
+
+Geometria cieni żywych postaci trafia do jednego bufora GPU. Wygładzanie odbywa się w mniejszej teksturze, a części zamkniętych modeli odwrócone od światła pomijamy tylko po potwierdzeniu zgodności z pełnym rzutem. Obiekty poza kadrem są uwzględniane, jeżeli ich cień może wejść na ekran.
+
+Cicha weryfikacja: --shadow-qa --no-audio. Raport i widoki wszystkich lokacji: dist/qa-v40/. Kod: src/ground_shadows.hpp, src/shadow_geometry.hpp i src/shadow_math.hpp.
+
 ## Wersja 0.39 — naturalniejszy bieg i szczegółowe ciała bestii
 
 Opis przedmiotu pokazuje samo **Pospolity**, **Rzadki**, **Bardzo rzadki** lub **Niezwykle rzadki**, w odpowiadającym kolorze. Usunięto przedrostek z podpowiedzi i informacji o borowiku; szanse na łup pozostają 60/15/4/1%, a fragment fabularny nadal ma 100%.

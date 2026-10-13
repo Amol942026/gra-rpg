@@ -2,7 +2,7 @@
 #include "fallen_forest_art.hpp"
 namespace fallen_art {
 constexpr int Width=192,Height=128,Density=2,OriginX=96,OriginY=80;
-struct Sprite {Texture2D body{},edge{};std::vector<unsigned char> mask;};
+struct Sprite {Texture2D body{},edge{};std::vector<unsigned char> mask;shadow_geometry::Sprite ground;};
 inline std::array<std::array<Sprite,8>,EnemyTypeCount> sprites{};
 inline int prepared=0;
 inline void storeSprite(Sprite& sprite,const Image& image){
@@ -35,11 +35,14 @@ inline void init(){
    ImageDraw(&atlas,body,{0,0,float(body.width),float(body.height)},cell,WHITE);
   }
   storeSprite(sprites[type][direction],body);UnloadImage(body);
+  actor_art::Rig mesh(0,0,1,Direction(direction),true);
+  if(type>=8)actor_art::buildDesertCorpse(mesh,type);else actor_art::buildFallenForest(mesh,type);
+  sprites[type][direction].ground=shadow_geometry::bake(mesh.shadows());
  }
  if(!baked){fs::create_directories("assets/generated");ExportImage(atlas,path);}
  UnloadImage(atlas);
 }
-inline void unload(){for(auto& species:sprites)for(auto& sprite:species){if(sprite.body.id)UnloadTexture(sprite.body);if(sprite.edge.id)UnloadTexture(sprite.edge);sprite={};}prepared=0;}
+inline void unload(){for(auto& species:sprites)for(auto& sprite:species){if(sprite.body.id)UnloadTexture(sprite.body);if(sprite.edge.id)UnloadTexture(sprite.edge);shadow_geometry::unload(sprite.ground);sprite={};}prepared=0;}
 }
 bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
  int type=std::clamp(e.type,0,EnemyTypeCount-1),direction=std::clamp(int(e.animation.direction),0,7);
@@ -49,8 +52,6 @@ bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2*
   int py=int(std::floor((probe->y-y+fallen_art::OriginY)*fallen_art::Density));
   return px>=0&&py>=0&&px<sprite.body.width&&py<sprite.body.height&&sprite.mask[py*sprite.body.width+px];
  }
- float w=e.type==11?67:e.type==3?52:e.type==7?49:35,h=e.type==11?28:15;
- ellipse(x,y+3,w*1.1f,h*1.1f,rgb(5,13,14,25));ellipse(x,y+2,w,h,rgb(5,13,14,64));
  Rectangle source{0,0,float(sprite.body.width),float(sprite.body.height)},dest{x-fallen_art::OriginX,y-fallen_art::OriginY,float(fallen_art::Width),float(fallen_art::Height)};
  if(outline.a)DrawTexturePro(sprite.edge,source,dest,{0,0},0,outline);
  BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);DrawTexturePro(sprite.body,source,dest,{0,0},0,WHITE);EndBlendMode();return false;

@@ -75,7 +75,7 @@ void drawIntroDialogue(){
 }
 void drawIntroChamber(){
     float t=intro.time,charge=intro.phase==IntroPhase::Charging?storyEase(intro.age/IntroSequence::ChargeTime):intro.phase==IntroPhase::Departing?1:0;
-    intro_art::observatory(t);
+    intro_art::observatory(t,false);world_shadows::draw();intro_art::observatoryObjects(t);
     for(int i=0;i<5;i++){
         float a=-PI*.5f+i*2*PI/5+t*.12f,x=720+std::cos(a)*83,y=337+std::sin(a)*28+std::sin(t*2+i)*5;
         line(720,351,x,y,Fade(Gold,.18f));ellipse(x,y+12,15,5,Fade(rgb(169,126,216),.12f));
@@ -83,7 +83,9 @@ void drawIntroChamber(){
     }
     drawStoryPortal(510,539,1.2f,t,.25f+charge*.75f);
     AnimationState pose;pose.direction=Direction::E;pose.idleTime=t;
+    actor_art::shadowCacheKey=0;
     actor_art::draw(0,510,532-charge*24,2.5f,pose,0,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind));
+    actor_art::shadowCacheKey=-1;
     drawStoryMage(930,505,2.7f,t,charge);
     if(charge>0){
         for(int i=0;i<5;i++)ellipse(510,460-charge*50,58+i*13,90+i*16,Fade(rgb(168,116,242),charge*.025f));

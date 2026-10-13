@@ -2,9 +2,6 @@
 
 // Static detail is baked once at startup; wind still deforms the finished
 // crown texture and the pointer mask follows exactly the same deformation.
-void softGroundShadow(float x,float y,float w,float h){
- ellipse(x,y+2,w*1.15f,h*1.15f,rgb(5,13,15,25));ellipse(x,y,w,h,rgb(5,13,15,42));ellipse(x,y,w*.7f,h*.7f,rgb(5,13,15,63));
-}
 void leafTuft(float x,float y,float w,float h,Color c,unsigned seed){
  ellipse(x,y,w,h,shade(c,.77f));
  poly({{x-w,y},{x-w*.64f,y-h*.75f},{x-w*.07f,y-h},{x+w*.56f,y-h*.82f},{x+w,y-h*.18f},{x+w*.77f,y+h*.55f},{x+w*.2f,y+h*.85f},{x-w*.58f,y+h*.65f}},c);
@@ -13,7 +10,7 @@ void leafTuft(float x,float y,float w,float h,Color c,unsigned seed){
   line(xx-2,yy+1,xx+1,yy-2,shade(c,i%2?1.32f:.62f),1.2f);}
 }
 void tree(float x,float y,float s){
- softGroundShadow(x,y,49*s,16*s);
+
  poly({{x-9*s,y},{x-5*s,y-164*s},{x+4*s,y-164*s},{x+11*s,y+2*s}},rgb(73,58,40));
  line(x-2*s,y-5*s,x-1*s,y-160*s,rgb(128,92,53),3*s);
  for(int i=0;i<6;i++){float side=i%2?-1.f:1.f;line(x,y-(8+i*11)*s,x+side*(14-i)*s,y-(3+i*9)*s,rgb(79,67,42),3*s);}
@@ -28,7 +25,7 @@ void tree(float x,float y,float s){
  for(int n=0;n<4;n++)ellipse(x+(-15+n*11)*s,y+(n%2)*3*s,6*s,2*s,rgb(58,83,47));
 }
 void deciduousTree(float x,float y,float s,bool birch){
- softGroundShadow(x,y,53*s,18*s);Color trunk=birch?rgb(186,192,166):rgb(102,77,49);
+Color trunk=birch?rgb(186,192,166):rgb(102,77,49);
  poly({{x-10*s,y},{x-5*s,y-140*s},{x+5*s,y-153*s},{x+12*s,y}},shade(trunk,.78f));
  poly({{x-7*s,y},{x-4*s,y-143*s},{x+1*s,y-153*s},{x+3*s,y}},trunk);
  line(x-3*s,y-8*s,x-1*s,y-126*s,shade(trunk,1.25f),2*s);
@@ -49,7 +46,7 @@ void deciduousTree(float x,float y,float s,bool birch){
  for(int i=0;i<5;i++)ellipse(x+(-18+i*9)*s,y+(i%2)*3*s,5*s,1.6f*s,rgb(91,97,53));
 }
 void rock(float x,float y,float s){
- softGroundShadow(x,y+2,41*s,14*s);
+
  poly({{x-36*s,y-8*s},{x-29*s,y-30*s},{x-10*s,y-47*s},{x+12*s,y-42*s},{x+31*s,y-23*s},{x+36*s,y-3*s},{x+13*s,y+9*s},{x-12*s,y+8*s}},rgb(65,80,76));
  poly({{x-36*s,y-8*s},{x-29*s,y-30*s},{x-10*s,y-47*s},{x+12*s,y-42*s},{x+6*s,y-20*s},{x-13*s,y-14*s}},rgb(112,126,110));
  poly({{x+6*s,y-20*s},{x+12*s,y-42*s},{x+31*s,y-23*s},{x+36*s,y-3*s},{x+10*s,y+5*s}},rgb(83,101,96));
@@ -60,14 +57,14 @@ void rock(float x,float y,float s){
  for(int i=0;i<5;i++)line(x+(-22+i*9)*s,y-8*s,x+(-20+i*9)*s,y-4*s,rgb(130,144,113),s);
 }
 void bush(float x,float y,float s){
- softGroundShadow(x,y,36*s,12*s);
+
  for(int n=0;n<12;n++){float dx=((n*13)%51-25)*s,dy=(n%4)*7*s;
   leafTuft(x+dx,y-10*s-dy,(10+n%3)*s,(8+n%2)*s,rgb(49+n%4*8,88+n%3*10,55+n%2*7),n*17);
  }
  for(int n=0;n<7;n++){float xx=x+(n*17%43-21)*s,yy=y-(n*11%28+6)*s;ellipse(xx,yy,2.4f*s,2.5f*s,rgb(186,92,72));ellipse(xx-s*.5f,yy-s*.7f,s*.7f,s*.7f,rgb(226,157,108));}
 }
 void column(float x,float y,float s){
- softGroundShadow(x,y,36*s,12*s);diamond(x,y,35*s,17*s,rgb(83,99,85));
+diamond(x,y,35*s,17*s,rgb(83,99,85));
  poly({{x-22*s,y-8*s},{x-22*s,y-105*s},{x,y-94*s},{x,y+4*s}},rgb(96,111,101));
  poly({{x,y+4*s},{x,y-94*s},{x+22*s,y-105*s},{x+22*s,y-8*s}},rgb(62,81,77));
  diamond(x,y-105*s,27*s,13*s,rgb(162,167,139));diamond(x-2*s,y-105*s,16*s,7*s,rgb(130,143,116));
@@ -78,7 +75,7 @@ void column(float x,float y,float s){
  for(int n=0;n<7;n++)leafTuft(x+(-18+n*5)*s,y-(n%3*9+3)*s,5*s,2.8f*s,rgb(65+n%2*12,105+n%3*6,62),n);
 }
 void mushrooms(float x,float y,float s){
- softGroundShadow(x,y,29*s,10*s);
+
  for(int n=0;n<6;n++){float xx=x+(n*17%43-21)*s,yy=y-(n%2)*8*s,r=(7+n%3*2)*s;
   line(xx,yy,xx,yy-(9+n%3*3)*s,rgb(157,150,108),4*s);line(xx-s,yy-s,xx-s,yy-(8+n%3*3)*s,rgb(231,218,166),1.5f*s);
   ellipse(xx,yy-(10+n%3*3)*s,r,5*s,rgb(109+n*7,51+n*3,39));ellipse(xx,yy-(12+n%3*3)*s,r*.9f,4*s,rgb(180+n*6,89+n*3,54));

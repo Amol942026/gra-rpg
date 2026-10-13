@@ -1,0 +1,36 @@
+PASS: cinematic diagnostic never opens an audio device
+PASS: normal prologue starts without a gameplay menu covering it
+PASS: world, enemies, health and mana remain frozen during the prologue
+PASS: cinematic input cannot leak into combat, spells, loot or world picking
+PASS: losing focus freezes dialogue and ignores keys
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: destination shows the observatory and a visible purple-robed mage rather than a black frame
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: complete dialogue turn fits above its controls without clipping
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: dialogue and cinematic controls fit the smallest supported window
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: teleport places the real hero at the existing safe forest spawn exactly once
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: actual forest arrival shows a tall blue magic column surrounding the real hero
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: blue arrival remains visible after the flash clears and before gameplay resumes
+PASS: arrival restores gameplay only after the transition with no hidden simulation time
+PASS: cinematic reaches the actual presentation buffer at native size
+PASS: world simulation resumes after the prologue
+PASS: new adventure can replay the complete introduction
+Checks: 35; failures: 0

@@ -1,4 +1,4 @@
-# Łup z przeciwników — Emberfall 0.39
+# Łup z przeciwników — Emberfall 0.40
 
 Szansę wyznacza **wyłącznie rzadkość przedmiotu**. Rodzaj przedmiotu, jego siła, ulepszenie i gatunek bestii nie zmieniają tej szansy. Tabela gatunku określa tylko, jakie przedmioty może on pozostawić i ile sztuk zawiera udany stos.
 
