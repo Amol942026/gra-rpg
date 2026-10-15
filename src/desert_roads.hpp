@@ -47,5 +47,5 @@ void drawRoads(){
     nextStone+=.27f;
    }
   }
- }EndBlendMode();
+ }native_world::endBlendMode();
 }

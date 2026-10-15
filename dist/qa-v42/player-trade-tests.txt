@@ -1,0 +1,148 @@
+PASS: trading graphics QA opens no audio device
+PASS: trader exists and can be reached on the alchemy floor
+PASS: actual opaque merchant silhouette can be selected by mouse
+PASS: hover HUD identifies the friendly trader
+PASS: E interaction opens the actual merchant HUD
+PASS: merchant HUD pauses gameplay and blocks world clicks
+PASS: trading cannot leak spells, sword attacks or looting into the world
+PASS: merchant, counter and wares have a complete detailed sprite without cut edges
+PASS: merchant's physical silhouette produces a ground shadow
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: every item tooltip shows unit and stack gold values
+PASS: value and rarity text fit without clipping
+PASS: clicking a backpack item selects a monster material for sale
+PASS: MAX selects the whole owned stack
+PASS: sell button removes only the selected stack and pays its full value
+PASS: repeated sell-button click cannot duplicate currency
+PASS: offer and quantity controls select a two-potion purchase
+PASS: buy button charges the displayed cost and adds the selected quantity
+PASS: stock page buttons reveal remaining equipment
+PASS: second page selects its actual better bow
+PASS: quest protection applies through the real sell HUD
+PASS: close button resumes normal gameplay
+PASS: trader can be reopened normally
+PASS: merchant dialog closes if its context becomes unreachable
+PASS: insufficient funds show an error without removing any item
+PASS: full bag rejects UI purchase without consuming currency
+Checks: 147; failures: 0

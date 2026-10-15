@@ -1,0 +1,69 @@
+{
+  "version": "0.45",
+  "edition": "player",
+  "package_bytes": 8921919,
+  "zip_entries": 85,
+  "verified_payload_files": 83,
+  "zip_sha256": "092a10c9a5f5b2327c755c5087fe3c0ea03b994f10b895bb0360bae0a9ab75d7",
+  "player_exe_sha256": "dd43567e942c6741da442ca903c7a5eac958ac4728eb0704d8ea40790f4ae629",
+  "developer_exe_sha256": "04e3803f6b3f19e8e680e57a7fea6f2de9bacaedd2d2a2e879e43b0a36aaf4bb",
+  "model_checks": 6308,
+  "checks": {
+    "world-pixels.txt": 10,
+    "player-world-pixels.txt": 10,
+    "motion-tests.txt": 11,
+    "labels-tests.txt": 658,
+    "player-labels-tests.txt": 658,
+    "player-build-tests.txt": 17,
+    "player-trade-tests.txt": 147,
+    "player-sword-tests.txt": 440,
+    "pointer-tests.txt": 82,
+    "refresh-tests.txt": 129,
+    "shadow-tests.txt": 490,
+    "combat-tests.txt": 69
+  },
+  "failures": 0,
+  "moving_label_pixel_comparisons_identical": true,
+  "native_scales_tested": [
+    0.8,
+    1,
+    1.2
+  ],
+  "world_camera_samples_per_build": 48,
+  "label_camera_samples_per_build": 128,
+  "final_frame_pixel_comparison_passed": true,
+  "default_backend": "OpenGL V-sync",
+  "world_drawn_directly_to_native_frame": true,
+  "intermediate_world_buffer_absent": true,
+  "all_test_launches_no_audio": true,
+  "audio_preferences_sha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6",
+  "audio_preferences_unchanged": true,
+  "developer_mode_absent": true,
+  "packaged_dev_start_and_qa_arguments_ignored": true,
+  "packaged_start_frames": 180,
+  "packaged_audio_device_opened": false,
+  "extracted_verification_copy_removed": true,
+  "run_roll_mean_ms": 16.762,
+  "run_roll_p95_ms": 18.5868,
+  "run_roll_fps": 59.6587,
+  "critical_feedback_background_removed": true,
+  "critical_label_and_number_preserved": true,
+  "benchmarks": {
+    "forest": {
+      "fps": 58.6786,
+      "p95_ms": 20.6798,
+      "p99_ms": 23.9499,
+      "max_ms": 26.6324,
+      "frames_over_25_ms": 4.0,
+      "frames": 900
+    },
+    "desert": {
+      "fps": 58.5226,
+      "p95_ms": 20.067,
+      "p99_ms": 22.7232,
+      "max_ms": 25.7512,
+      "frames_over_25_ms": 3.0,
+      "frames": 900
+    }
+  }
+}

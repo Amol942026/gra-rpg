@@ -1,0 +1,18 @@
+Capture directory: qa-v45/after-1791992010660566000
+PASS: world-motion QA has no audio device
+PASS: completed world remains opaque without a second alpha multiplication
+PASS: native world is copied one-to-one without image resizing
+One-to-one native copy; buffer=1152x720
+Scale=0.8; pixels=233280; changes>2=0; mean maximum-channel error=3.42936e-05; worst changed fraction=0
+PASS: static architectural edges retain their raster during one-pixel camera translations
+PASS: completed world remains opaque without a second alpha multiplication
+PASS: native world is copied one-to-one without image resizing
+One-to-one native copy; buffer=1440x900
+Scale=1; pixels=364500; changes>2=0; mean maximum-channel error=0; worst changed fraction=0
+PASS: static architectural edges retain their raster during one-pixel camera translations
+PASS: completed world remains opaque without a second alpha multiplication
+PASS: native world is copied one-to-one without image resizing
+One-to-one native copy; buffer=1728x1080
+Scale=1.2; pixels=524880; changes>2=0; mean maximum-channel error=0; worst changed fraction=0
+PASS: static architectural edges retain their raster during one-pixel camera translations
+Checks: 10; failures: 0

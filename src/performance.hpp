@@ -28,6 +28,6 @@ struct PerformanceProbe {
             report<<names[i]<<": mean="<<std::accumulate(values.begin(),values.end(),0.0)/values.size()
                   <<" ms; p95="<<values[size_t(values.size()*.95)]<<" ms; max="<<values.back()<<" ms\n";
         }
-        report<<"World buffer="<<worldCanvas.texture.width<<'x'<<worldCanvas.texture.height<<"\nAudio device opened="<<audioSystem.available<<'\n';
+        report<<"Native frame buffer="<<canvas.texture.width<<'x'<<canvas.texture.height<<"\nAudio device opened="<<audioSystem.available<<'\n';
     }
 } performance;

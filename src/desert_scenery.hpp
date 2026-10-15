@@ -66,12 +66,12 @@ void drawFoothills(){
   auto texture=mountainArt[range.variant].texture;
   unsigned char fade=(unsigned char)(opacity*255);
   DrawTexturePro(texture,{0,0,float(texture.width),-float(texture.height)},{left,top,MountainWidth*size,MountainHeight*size},{0,0},0,{fade,fade,fade,fade});
- }EndBlendMode();
+ }native_world::endBlendMode();
 }
 void drawCachedFoothills(){
  if(!mountainForeground.id){drawFoothills();return;}
  BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);auto texture=mountainForeground.texture;
- DrawTexturePro(texture,{0,0,float(texture.width),-float(texture.height)},{0,0,WorldW,H},{0,0},0,WHITE);EndBlendMode();
+ DrawTexturePro(texture,{0,0,float(texture.width),-float(texture.height)},{0,0,WorldW,H},{0,0},0,WHITE);native_world::endBlendMode();
 }
 void makeScenery(){
  makeOutsideGround();
@@ -103,7 +103,7 @@ void makeScenery(){
     rlCheckRenderBatchLimit(3);rlBegin(RL_TRIANGLES);for(int index:{a,b,c}){auto v=quad[index];rlColor4ub(v.color.r,v.color.g,v.color.b,v.color.a);rlTexCoord2f(0,0);rlVertex3f(v.point.x,v.point.y,v.depth);}rlEnd();
    }
   }
-  rlSetTexture(0);rlDrawRenderBatchActive();rlDisableDepthTest();EndBlendMode();EndMode2D();EndTextureMode();SetTextureFilter(mountainArt[variant].texture,TEXTURE_FILTER_BILINEAR);
+  rlSetTexture(0);rlDrawRenderBatchActive();rlDisableDepthTest();native_world::endBlendMode();EndMode2D();EndTextureMode();SetTextureFilter(mountainArt[variant].texture,TEXTURE_FILTER_BILINEAR);
  }
  Image plume=GenImageColor(192,64,BLANK);Color* pixels=(Color*)plume.data;
  for(int y=0;y<plume.height;y++)for(int x=0;x<plume.width;x++){
@@ -135,7 +135,7 @@ void drawBackdrop(bool mountains=true){
   Color tint=distanceToMap>15?rgb(217,213,203):distanceToMap>7?rgb(238,229,211):WHITE;
   DrawTexturePro(tex,{0,0,float(tex.width),-float(tex.height)},{left,top,MountainWidth*size,MountainHeight*size},{0,0},0,tint);
  }
- EndBlendMode();
+ native_world::endBlendMode();
 }
 // A softer distance layer costs far less fill rate than rendering every
 // overlapping range at the supersampled resolution of the playable world.
@@ -180,5 +180,5 @@ void drawSandWind(){
   if(p.x<0||p.x>WorldW||p.y<0||p.y>H)continue;float opacity=std::sin(age*PI)*(.18f+gust(game.time)*.40f),size=.65f+(seed%4)*.18f;Color color=Fade(seed%2?rgb(249,220,173):rgb(180,130,76),opacity);
   poly({{p.x-size,p.y-.4f},{p.x-size*.6f,p.y+.6f},{p.x+size*1.1f,p.y+.4f},{p.x+size*.8f,p.y-.5f}},color);
  }
- EndBlendMode();
+ native_world::endBlendMode();
 }

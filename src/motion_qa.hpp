@@ -32,10 +32,11 @@ bool runMotionQA(bool expectedFullscreen){
     report<<"Final backend="<<pacingName()<<"; interval="<<sync_present::lastSyncInterval()
           <<"; accepted presents="<<sync_present::presentCount()<<"; occluded="<<sync_present::occludedCount()<<'\n';
     check(mean<nominal*1.12&&p95<nominal*1.5,"running and rolling maintain the monitor cadence without half-rate stalls");
-    check(worldCanvas.texture.height>canvas.texture.height&&worldCanvas.texture.height<=2161,"world edges are supersampled with a bounded buffer");
-    // A slowly moving camera must update filtered terrain each fractional-pixel
-    // step instead of freezing and then snapping to the next texel.
-    game=Game{};game.props.clear();game.enemies.clear();game.player={15,12};game.messageTime=0;
+    check(!worldCanvas.id,
+          "world uses native resolution without repeated rescaling or filtering");
+    // Fractional input must not change static glyph/texture coverage until the
+    // camera advances to another physical pixel. This prevents edge crawling.
+    game=Game{};game.props.clear();game.enemies.clear();game.forage.clear();game.player={15,12};game.messageTime=0;
     prepareCanvas(1.f);
     auto region=[&](){
         Image im=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&im);Color* pixels=LoadImageColors(im);
@@ -43,17 +44,14 @@ bool runMotionQA(bool expectedFullscreen){
         for(int y=400;y<480;y++)for(int x=280;x<430;x++){Color c=pixels[y*im.width+x];sample.insert(sample.end(),{c.r,c.g,c.b});}
         UnloadImageColors(pixels);UnloadImage(im);return sample;
     };
-    int stationary[2]{};
-    for(int mode=0;mode<2;mode++){
-        SetTextureFilter(terrain.texture,mode?TEXTURE_FILTER_BILINEAR:TEXTURE_FILTER_POINT);
-        std::vector<unsigned char> old;
-        for(int frame=0;frame<12;frame++){
-            float offset=frame*.12f/80;game.player={15+offset,12-offset};renderScene();auto pixels=region();
-            if(frame)stationary[mode]+=pixels==old;old=std::move(pixels);
-        }
+    int stable=0,advanced=0,mismatch=0;Vector2 previousCamera{};std::vector<unsigned char> old;
+    for(int frame=0;frame<12;frame++){
+        float offset=frame*.12f/80;game.player={15+offset,12-offset};renderScene();auto pixels=region();Vector2 camera=cameraPixels();
+        if(frame){bool sameCamera=camera.x==previousCamera.x&&camera.y==previousCamera.y;stable+=sameCamera;advanced+=!sameCamera;mismatch+=sameCamera?(pixels!=old):(pixels==old);}
+        previousCamera=camera;old=std::move(pixels);
     }
-    report<<"Stationary terrain frames for 0.12px camera steps: nearest="<<stationary[0]<<", filtered="<<stationary[1]<<'\n';
-    check(stationary[1]==0&&stationary[0]>stationary[1],"terrain now moves at subpixel precision instead of snapping");
+    report<<"Fractional steps: stable native positions="<<stable<<", camera advances="<<advanced<<", coverage mismatches="<<mismatch<<'\n';
+    check(stable>0&&advanced>0&&mismatch==0,"terrain retains sharp stable pixels during fractional camera phases");
     game.player={15,12};game.animation.moving=true;game.animation.phase=.1f;renderScene();
     Image a=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&a);
     game.animation.phase=.11f;renderScene();Image b=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&b);
@@ -63,7 +61,8 @@ bool runMotionQA(bool expectedFullscreen){
     }
     UnloadImage(a);UnloadImage(b);
     check(changed>30,"walk pose interpolates even within one of the old eight pose steps");
-    V target=game.player+V{1.4f,-.6f};check(distance(toWorld(screen(target)),target)<.0001f,"world picking and the camera remain aligned");
+    V target=game.player+V{1.4f,-.6f};Vector2 projected=screen(target),returned=screen(toWorld(projected));
+    check(distance(toWorld(projected),target)<.04f/renderScale&&std::hypot(projected.x-returned.x,projected.y-returned.y)<.0001f,"world picking follows the same rendered pixel anchors as the camera");
     game=Game{};game.player={8,19};game.animation.moving=true;game.animation.phase=.17f;refreshDisplayLayout();renderScene();
     BeginDrawing();ClearBackground(BLACK);presentCanvas();Image screenshot=presentedImage();ExportImage(screenshot,"qa-v16/fullscreen-motion.png");UnloadImage(screenshot);EndDrawing();finishFramePacing();
     report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';game=Game{};return failures==0;

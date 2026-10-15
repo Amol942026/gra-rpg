@@ -1,5 +1,11 @@
 #pragma once
 void sprintTests(){
+ for(int frame=0;frame<60;frame++)for(float side:{-1.f,1.f}){
+  float phase=frame/60.f;auto arm=runningArm(phase,side,53);
+  check(std::abs(std::hypot(arm.elbowForward,arm.elbowHeight-53)-13)<.001f&&std::abs(std::hypot(arm.handForward-arm.elbowForward,arm.handHeight-arm.elbowHeight)-13)<.001f,"free running arms retain both anatomical segment lengths over the full cycle");
+  auto opposite=runningArm(phase+.5f,-side,53);
+  check(std::abs(arm.handForward-opposite.handForward)<.001f&&std::abs(arm.elbowHeight-opposite.elbowHeight)<.001f,"running arms alternate half a cycle apart without an asymmetric weapon carry");
+ }
  for(int frame=0;frame<120;frame++)for(float side:{-1.f,1.f}){
   float phase=frame/120.f,hip=32.5f+.9f*std::cos(phase*4*AnimationPi);RunningLeg leg=runningLeg(phase,side,hip);
   check(std::abs(std::hypot(leg.kneeForward,leg.kneeHeight-hip)-17)<.001f&&std::abs(std::hypot(leg.kneeForward-leg.footForward,leg.kneeHeight-leg.footHeight)-17)<.001f,"running keeps both leg segments at their anatomical length throughout the cycle");

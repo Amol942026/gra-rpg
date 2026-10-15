@@ -271,6 +271,6 @@ void column(Vector2 p,float time,float energy){
     for(int i=0;i<12;i++){
         float a=i*PI/6+time*.3f;star(p.x+std::cos(a)*65,p.y+3+std::sin(a)*22,2.3f,Fade(cyan,energy*.8f));
     }
-    EndBlendMode();
+    native_world::endBlendMode();
 }
 }

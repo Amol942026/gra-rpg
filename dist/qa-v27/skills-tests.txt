@@ -1,4 +1,10 @@
 PASS: skills diagnostic opens no audio device
+PASS: unlearned skill HUD clicks neither activate an effect nor consume resources
+PASS: the same hotkey handler refuses an unlearned skill
+PASS: unlearned skill HUD clicks neither activate an effect nor consume resources
+PASS: the same hotkey handler refuses an unlearned skill
+PASS: unlearned skill HUD clicks neither activate an effect nor consume resources
+PASS: the same hotkey handler refuses an unlearned skill
 PASS: real level opens attributes first and earns one skill point
 PASS: stats confirmation automatically opens mandatory skill selection without training early
 PASS: skill allocation freezes simulation and mouse gameplay
@@ -82,4 +88,4 @@ PASS: empowered bow and quiver fit silhouette in all eight directions
 PASS: empowered bow GPU silhouette agrees with pointer geometry
 PASS: empowered bow and quiver fit silhouette in all eight directions
 PASS: empowered bow GPU silhouette agrees with pointer geometry
-Checks: 84; failures: 0
+Checks: 90; failures: 0

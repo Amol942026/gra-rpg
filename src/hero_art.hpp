@@ -4,13 +4,17 @@
 // same articulated model, including equipment, bow poses and roll transforms.
 inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,float attack,
                       bool helmet,bool shield,Kind weapon,bool flash,bool rolling,bool striking,
-                      float strikeProgress,float bowDraw,int quiverArrows,float run=0){
+                      float strikeProgress,float bowDraw,int quiverArrows,float run=0,bool empowered=false){
     rig.reserve(1800);
     const Color skin=flash?Text:rgb(213,177,139),skinLight=flash?Text:rgb(237,206,172);
     const Color metal=flash?Text:rgb(142,165,165),edge=flash?Text:rgb(199,216,208);
     const Color cloth=flash?Text:rgb(43,103,93),clothLight=flash?Text:rgb(71,131,117);
     const Color leather=flash?Text:rgb(95,65,45),pants=flash?Text:rgb(60,74,66);
     bool archer=weapon==Kind::Bow;float drawCharge=std::max(0.f,bowDraw);
+    bool sheathed=weapon==Kind::Sword&&!rolling&&!striking&&run>.1f;
+    sword_pose::Pose swordPose{};if(striking)swordPose=sword_pose::sample(strikeProgress,lift,empowered);
+    float bodyYaw=striking?swordPose.torsoYaw:0;
+    rig.setBodyYaw(bodyYaw);
     // Cloth hangs in a curved sheet; its scalloped edge and folds move with
     // the walking cycle, while the roll rotates the entire sheet with the body.
     auto capePoint=[&](float u,float down){
@@ -27,6 +31,7 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
     }
     for(int i=0;i<24;i++)rig.tapered(capePoint(i/24.f,1),capePoint((i+1)/24.f,1),.65f,.65f,Gold);
     for(float side:{0.f,1.f})for(int i=0;i<12;i++)rig.tapered(capePoint(side,i/12.f),capePoint(side,(i+1)/12.f),.7f,.7f,clothLight);
+    rig.setBodyYaw(0);
     for(float side:{-1.f,1.f}){
         float wave=stride*side,cosine=std::cos(cycle)*side;
         float walkLift=std::max(0.f,cosine)*std::abs(stride)*7;
@@ -43,6 +48,7 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
         rig.rounded(knee+P3{0,3,0},{7,4,8},metal);
     }
     rig.rounded({0,0,31+lift},{24,17,15},cloth);
+    rig.setBodyYaw(bodyYaw);
     rig.rounded({0,0,46+lift},{27,18,28},metal);
     // Curved breastplate: raised rim, overlapping lower plates and a sun clasp.
     for(float side:{-1.f,1.f})for(int j=0;j<8;j++){
@@ -73,6 +79,28 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
             rig.form({r,-17,top-3},{5,2,6},Text);rig.form({r,-17,top-4},{2,5,6},Gold);
         }
     }
+    if(weapon==Kind::Sword){
+        // The scabbard hangs from the belt at the left hip. Its body follows
+        // the torso, never the pumping hand. A drawn blade leaves it empty.
+        rig.setBodyYaw(0);
+        P3 mouth{-18,-7,37+lift},axis{-.06f,-.44f,-.895991f},tip=mouth+axis*37;
+        Color darkLeather=shade(leather,.62f);
+        rig.tapered({-12,0,33+lift},mouth+P3{0,0,-4},2.1f,2.1f,leather);
+        rig.tapered({-12,-5,32+lift},mouth+axis*7,2,2,leather);
+        rig.tapered(mouth+axis*1.2f,tip,5.7f,3.8f,darkLeather);
+        rig.tapered(mouth, mouth+axis*2,6.6f,6.2f,Gold);
+        rig.tapered(mouth+axis*34.5f,tip,4.3f,3.8f,metal);
+        rig.tapered(mouth+axis*9,mouth+axis*10,5.9f,5.9f,leather);
+        rig.tapered(mouth+axis*23,mouth+axis*24,5.2f,5.2f,leather);
+        if(sheathed){
+            P3 guard=mouth-axis*1.5f,grip=mouth-axis*7.5f;
+            rig.tapered(grip,guard,3.5f,3.5f,leather);
+            for(int band=0;band<3;band++)rig.tapered(mouth-axis*(3+band*1.3f),mouth-axis*(3.4f+band*1.3f),3.8f,3.8f,darkLeather);
+            rig.tapered(guard+P3{-6,0,0},guard+P3{6,0,0},2.5f,2.5f,Gold);
+            rig.rounded(grip-axis*1.2f,{4.5f,4.5f,4.5f},Gold);
+        }
+        rig.setBodyYaw(bodyYaw);
+    }
     for(float side:{-1.f,1.f}){
         float reach=side>0?attack*18:attack*6;
         RunningLeg armPhase=run>0?runningLeg(cycle/(2*PI),side,31+lift):RunningLeg{};
@@ -84,14 +112,26 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
             else if(bowDraw>=0){hand={4-12*drawCharge,16-23*drawCharge,47+lift};elbow={18,4-9*drawCharge,47+lift};}
         }
         WeaponPose strike{};
-        if(striking&&side>0){strike=forwardStrike(strikeProgress,lift);hand=strike.hand;elbow=strike.elbow;}
+        if(striking&&side>0){strike={swordPoint(swordPose.hand),swordPoint(swordPose.elbow),swordPoint(swordPose.blade)};hand=strike.hand;elbow=strike.elbow;}
+        else if(!archer&&!rolling){
+            if(striking&&side<0){float weight=std::pow(std::sin(strikeProgress*PI),2);hand=hand*(1-weight)+P3{-20,-1+4*std::sin(strikeProgress*PI),36+lift}*weight;}
+            if(run>0&&!striking){
+                auto walk=sword_pose::solveArm({shoulder.r,shoulder.f,shoulder.z},{side*20,3-stride*side*5,33+lift},side);
+                auto gait=runningArm(cycle/(2*PI),side,shoulder.z);
+                hand=swordPoint(walk.hand)*(1-run)+P3{shoulder.r,gait.handForward,gait.handHeight}*run;
+                elbow=swordPoint(walk.elbow)*(1-run)+P3{shoulder.r,gait.elbowForward,gait.elbowHeight}*run;
+            }else{
+                auto arm=sword_pose::solveArm({shoulder.r,shoulder.f,shoulder.z},{hand.r,hand.f,hand.z},side);
+                hand=swordPoint(arm.hand);elbow=swordPoint(arm.elbow);
+            }
+        }
         hand=hand+P3{-side*5*tuck,9*tuck,6*tuck};elbow=elbow+P3{0,7*tuck,-4*tuck};
         rig.tapered(elbow,shoulder,8,9,cloth);
         rig.rounded(shoulder,{13,17,10},metal);
         rig.rounded(shoulder+P3{0,5,1},{11,5,3},edge);
         rig.tapered(hand,elbow,6,7,skin,1.15f);
         rig.rounded(elbow,{8,9,8},metal);
-        rig.rounded(hand+P3{0,-1,5},{7,8,7},leather);
+        rig.rounded(!archer&&!rolling?hand+(elbow-hand)*.17f:hand+P3{0,-1,5},{7,8,7},leather);
         rig.rounded(hand,{7,7,8},skin);
         rig.rounded(hand+P3{0,3.2f,1},{5,1.5f,5},skinLight);
         for(int i=0;i<3;i++)rig.tapered(hand+P3{-2+i*2.f,3.8f,-1},hand+P3{-2+i*2.f,4,2},.35f,.35f,shade(skin,.73f));
@@ -109,19 +149,17 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
                 rig.form(tip,{4,7,3},metal);rig.form(string-P3{0,1,0},{5,5,2},Text);
             }
         }
-        if(side>0&&!archer){
-            P3 base=hand+P3{0,1,-3},tip=hand+P3{0,8*(1-run)-20*run+attack*8,31-std::abs(attack)*10-run*55};
-            bool dagger=weapon==Kind::Dagger;if(dagger)tip=hand+(tip-hand)*.65f;
-            if(striking){
-                base=hand-strike.blade*.12f;tip=hand+strike.blade*(dagger?.65f:1.f);
-                rig.beam(base,tip,weapon==Kind::Axe?3:4,2,weapon==Kind::Axe?leather:edge);
-                rig.beam(base+P3{0,0,1.2f},tip+P3{0,0,1.2f},.9f,.6f,Text);
-                P3 guard=hand+strike.blade*.12f;float flat=std::hypot(strike.blade.r,strike.blade.f);
-                P3 cross{strike.blade.f/flat*7,-strike.blade.r/flat*7,0};rig.beam(guard-cross,guard+cross,2.5f,2.5f,Gold);
-            }else{
-                rig.beam(base,tip,weapon==Kind::Axe?3:4,2,weapon==Kind::Axe?leather:edge);
-                rig.tapered(hand+P3{-7,2,4},hand+P3{7,2,4},2.4f,2.4f,Gold);
-            }
+        if(side>0&&!archer&&!sheathed){
+            bool dagger=weapon==Kind::Dagger;
+            P3 blade=striking?strike.blade:swordPoint(sword_pose::idleBlade(run));
+            if(dagger)blade=blade*.65f;
+            P3 base=hand-blade*.12f,tip=hand+blade;
+            rig.beam(base,tip,weapon==Kind::Axe?3:4,2,weapon==Kind::Axe?leather:edge);
+            rig.beam(hand-blade*.20f,hand+blade*.06f,3.5f,3.5f,leather);
+            rig.beam(hand+P3{0,0,.8f},tip+P3{0,0,.8f},.9f,.6f,Text);
+            P3 guard=hand+blade*.10f;float flat=std::max(.001f,std::hypot(blade.r,blade.f));
+            P3 cross{blade.f/flat*7,-blade.r/flat*7,0};
+            rig.beam(guard-cross,guard+cross,2.5f,2.5f,Gold);
             if(weapon==Kind::Axe)rig.form(tip+P3{5,0,-7},{15,4,14},metal);
         }
         if(side<0&&shield&&!archer){
@@ -161,4 +199,5 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,fl
         // A few curved strands show below the open hood rather than a flat cap.
         for(int i=0;i<4;i++)rig.rounded({-5+i*3.f,5.5f,head+7-i%2},{4,4,3},leather);
     }
+    rig.setBodyYaw(0);
 }

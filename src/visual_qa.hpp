@@ -1,4 +1,5 @@
 #pragma once
+#include "native_world.hpp"
 void saveTexture(RenderTexture2D target,const std::string& path) {
     Image im=LoadImageFromTexture(target.texture);
     ImageFlipVertical(&im);
@@ -62,30 +63,6 @@ Image presentedImage(){
     if(auto* pixels=sync_present::readback(width,height))return {pixels,width,height,1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
     return {rlReadScreenPixels(GetRenderWidth(),GetRenderHeight()),GetRenderWidth(),GetRenderHeight(),1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
 }
-float worldSampleScale(float pixelsPerUnit){
-    // 1.5x per axis keeps fractional motion and smooth silhouettes with 44%
-    // fewer world pixels than 2x. The HUD remains at native resolution.
-    // Desert obstacles already have 2x textures. 1.25x world sampling keeps
-    // continuous subpixel movement and antialiasing with 31% fewer world pixels.
-    float oversample=game.inDesert()?1.25f:1.5f;
-    return pixelsPerUnit*std::max(1.f,std::min(oversample,1620.f/(H*pixelsPerUnit)));
-}
-void renderWorldLayer(){
-    float nativeScale=renderScale;
-    float worldScale=worldSampleScale(nativeScale);
-    int width=int(std::ceil(WorldW*double(worldScale)-.001)),height=int(std::ceil(H*double(worldScale)-.001));
-    if(!worldCanvas.id||worldCanvas.texture.width!=width||worldCanvas.texture.height!=height){
-        if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
-        worldCanvas=LoadRenderTexture(width,height);
-        SetTextureFilter(worldCanvas.texture,TEXTURE_FILTER_BILINEAR);
-    }
-    if(game.inDesert())desert_art::renderBackdrop(nativeScale);
-    world_shadows::prepare();
-    BeginTextureMode(worldCanvas);ClearBackground(Ink);
-    renderScale=worldScale;
-    BeginMode2D({{0,0},{0,0},0,worldScale});drawWorld();EndMode2D();
-    renderScale=nativeScale;EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::World,true);
-}
 void renderScene() {
     if(intro.chamber()){
         world_shadows::prepare(true);
@@ -99,14 +76,16 @@ void renderScene() {
     }
     hovered=pickWorld(mouse);
     performance.end(RenderStage::Picking);
-    renderWorldLayer();
+    if(game.inDesert())desert_art::renderBackdrop(renderScale);
+    world_shadows::prepare();
     BeginTextureMode(canvas);
     ClearBackground(Ink);
     Camera2D camera{{0,0},{0,0},0,renderScale};
     BeginMode2D(camera);
-    float worldScale=worldSampleScale(renderScale);
-    DrawTexturePro(worldCanvas.texture,{0,0,float(worldCanvas.texture.width),-float(worldCanvas.texture.height)},
-                   {0,0,worldCanvas.texture.width/worldScale,worldCanvas.texture.height/worldScale},{0,0},0,WHITE);
+    native_world::beginOpaqueFrame();drawWorld();native_world::finishOpaqueBackground();actor_art::finishShadowFrame();performance.end(RenderStage::World,true);
+    // World and text share the final pixel scale. The world is drawn directly
+    // into this frame; there is no resized intermediate scene texture.
+    drawWorldLabels();
     if(intro.active()){
         drawUI();drawIntroArrival();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
     }
@@ -117,7 +96,7 @@ void renderScene() {
     drawProgression();drawTowerPanel();
     drawAudioPanel();
     drawAudioButton(); // Always visible, including pause/help and the audio panel.
-    drawDisplayButton();drawWeaponWheelButton();drawDeveloperUi();
+    drawDisplayButton();if(!towerPanelOpen)drawWeaponWheelButton();drawDeveloperUi();
     EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);
 }
 void exportVisualQA() {

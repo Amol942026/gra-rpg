@@ -31,28 +31,222 @@ PASS: Shift sprint visibly changes the body, arms and legs in every facing and w
 PASS: running sword/bow GPU silhouette and physical mouse geometry agree
 PASS: Shift sprint visibly changes the body, arms and legs in every facing and weapon pose
 PASS: running sword/bow GPU silhouette and physical mouse geometry agree
-Species=0; direction=0; roll=-1; strike=-1; opaque=1956; interior=20; mismatch=0
+PASS: all corpse textures and pointer masks are prepared before combat starts
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: detailed fallen body stays complete and visible in all eight directions
+PASS: actual cached corpse pixels agree with physical hover and looting geometry
+PASS: drawing and probing corpses never rebuilds meshes or uploads textures during combat
+Species=0; direction=0; roll=-1; strike=-1; opaque=2095; interior=18; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=1; roll=-1; strike=-1; opaque=2596; interior=29; mismatch=0
+Species=0; direction=1; roll=-1; strike=-1; opaque=2831; interior=33; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=2; roll=-1; strike=-1; opaque=2910; interior=32; mismatch=0
+Species=0; direction=2; roll=-1; strike=-1; opaque=3101; interior=30; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=3; roll=-1; strike=-1; opaque=2838; interior=35; mismatch=0
+Species=0; direction=3; roll=-1; strike=-1; opaque=2997; interior=39; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=4; roll=-1; strike=-1; opaque=1982; interior=18; mismatch=0
+Species=0; direction=4; roll=-1; strike=-1; opaque=2099; interior=18; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=5; roll=-1; strike=-1; opaque=2700; interior=36; mismatch=0
+Species=0; direction=5; roll=-1; strike=-1; opaque=2999; interior=37; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=6; roll=-1; strike=-1; opaque=2905; interior=40; mismatch=0
+Species=0; direction=6; roll=-1; strike=-1; opaque=3267; interior=43; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=7; roll=-1; strike=-1; opaque=2861; interior=32; mismatch=0
+Species=0; direction=7; roll=-1; strike=-1; opaque=3122; interior=36; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
 Species=1; direction=0; roll=-1; strike=-1; opaque=1441; interior=20; mismatch=0
@@ -343,76 +537,76 @@ PASS: GPU-rasterized body interior and empty space match pointer geometry
 Species=12; direction=7; roll=-1; strike=-1; opaque=15592; interior=277; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=0; roll=-1; strike=0.5; opaque=2495; interior=18; mismatch=0
+Species=0; direction=0; roll=-1; strike=0.5; opaque=2425; interior=25; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=0; roll=0.2; strike=-1; opaque=1693; interior=18; mismatch=0
+Species=0; direction=0; roll=0.2; strike=-1; opaque=1774; interior=21; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=0; roll=0.65; strike=-1; opaque=1690; interior=21; mismatch=0
+Species=0; direction=0; roll=0.65; strike=-1; opaque=1781; interior=22; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=1; roll=-1; strike=0.5; opaque=2635; interior=26; mismatch=0
+Species=0; direction=1; roll=-1; strike=0.5; opaque=2832; interior=34; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=1; roll=0.2; strike=-1; opaque=1316; interior=13; mismatch=0
+Species=0; direction=1; roll=0.2; strike=-1; opaque=1458; interior=13; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=1; roll=0.65; strike=-1; opaque=1259; interior=10; mismatch=0
+Species=0; direction=1; roll=0.65; strike=-1; opaque=1304; interior=10; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=2; roll=-1; strike=0.5; opaque=2769; interior=33; mismatch=0
+Species=0; direction=2; roll=-1; strike=0.5; opaque=2938; interior=36; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=2; roll=0.2; strike=-1; opaque=1332; interior=12; mismatch=0
+Species=0; direction=2; roll=0.2; strike=-1; opaque=1470; interior=12; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=2; roll=0.65; strike=-1; opaque=1295; interior=15; mismatch=0
+Species=0; direction=2; roll=0.65; strike=-1; opaque=1372; interior=15; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=3; roll=-1; strike=0.5; opaque=2949; interior=35; mismatch=0
+Species=0; direction=3; roll=-1; strike=0.5; opaque=2818; interior=34; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=3; roll=0.2; strike=-1; opaque=1357; interior=14; mismatch=0
+Species=0; direction=3; roll=0.2; strike=-1; opaque=1469; interior=14; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=3; roll=0.65; strike=-1; opaque=1269; interior=12; mismatch=0
+Species=0; direction=3; roll=0.65; strike=-1; opaque=1380; interior=13; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=4; roll=-1; strike=0.5; opaque=2505; interior=18; mismatch=0
+Species=0; direction=4; roll=-1; strike=0.5; opaque=2316; interior=25; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=4; roll=0.2; strike=-1; opaque=1681; interior=21; mismatch=0
+Species=0; direction=4; roll=0.2; strike=-1; opaque=1777; interior=22; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=4; roll=0.65; strike=-1; opaque=1670; interior=19; mismatch=0
+Species=0; direction=4; roll=0.65; strike=-1; opaque=1764; interior=20; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=5; roll=-1; strike=0.5; opaque=2755; interior=35; mismatch=0
+Species=0; direction=5; roll=-1; strike=0.5; opaque=2861; interior=37; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=5; roll=0.2; strike=-1; opaque=1654; interior=19; mismatch=0
+Species=0; direction=5; roll=0.2; strike=-1; opaque=1730; interior=19; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=5; roll=0.65; strike=-1; opaque=1784; interior=19; mismatch=0
+Species=0; direction=5; roll=0.65; strike=-1; opaque=1794; interior=19; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=6; roll=-1; strike=0.5; opaque=2732; interior=37; mismatch=0
+Species=0; direction=6; roll=-1; strike=0.5; opaque=3101; interior=38; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=6; roll=0.2; strike=-1; opaque=1642; interior=19; mismatch=0
+Species=0; direction=6; roll=0.2; strike=-1; opaque=1659; interior=19; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=6; roll=0.65; strike=-1; opaque=1647; interior=20; mismatch=0
+Species=0; direction=6; roll=0.65; strike=-1; opaque=1651; interior=20; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=7; roll=-1; strike=0.5; opaque=3010; interior=32; mismatch=0
+Species=0; direction=7; roll=-1; strike=0.5; opaque=2927; interior=36; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=7; roll=0.2; strike=-1; opaque=1726; interior=19; mismatch=0
+Species=0; direction=7; roll=0.2; strike=-1; opaque=1729; interior=19; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=7; roll=0.65; strike=-1; opaque=1665; interior=17; mismatch=0
+Species=0; direction=7; roll=0.65; strike=-1; opaque=1770; interior=17; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
 PASS: baked foliage, stone and ruin detail fits its full texture and pointer mask
@@ -491,4 +685,4 @@ PASS: detailed item icon is visible and fits inside backpack bounds
 PASS: detailed item icon is visible and fits inside backpack bounds
 PASS: detailed item icon is visible and fits inside backpack bounds
 PASS: detailed item icon is visible and fits inside backpack bounds
-Checks: 365; failures: 0
+Checks: 559; failures: 0

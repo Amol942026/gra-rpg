@@ -37,12 +37,12 @@ bool developerInput(){
   if(IsKeyPressed(KEY_ENTER)){startDeveloperSession(true);return true;}
   if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))clickDeveloperMenu();return true;
  }
- if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside(developerButton())){openDeveloperMenu();return true;}
+ if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&!towerPanelOpen&&inside(developerButton())){openDeveloperMenu();return true;}
  return false;
 }
 void drawDeveloperUi(){
- Rectangle button=developerButton();panel(button,inside(button)?Card:Panel);center("DEV · F3",button.x+button.width/2,button.y+8,14,Gold);
- if(developerActive&&!developerMenuOpen&&!intro.active()&&!towerStory.active())txt("SESJA TESTOWA",29,195,14,Gold);
+ if(!towerPanelOpen){Rectangle button=developerButton();panel(button,inside(button)?Card:Panel);center("DEV · F3",button.x+button.width/2,button.y+8,14,Gold);}
+ if(developerActive&&!towerPanelOpen&&!developerMenuOpen&&!intro.active()&&!towerStory.active())txt("SESJA TESTOWA",29,195,14,Gold);
  if(!developerMenuOpen)return;
  rect(0,0,W,H,rgb(6,12,18,224));panel({278,100,880,714},rgb(21,30,36));line(311,122,1063,122,Gold);
  center("TRYB DEWELOPERSKI",720,143,30,Text,true);center("Wybierz lokację i rozpocznij test bez przechodzenia fabuły.",720,186,17,Muted);
@@ -53,7 +53,7 @@ void drawDeveloperUi(){
  }
  Rectangle kit=developerKitButton();panel(kit,inside(kit)?Card:Panel);DrawRectangleLinesEx({kit.x+13,kit.y+12,19,19},1,developerKit?Green:Line);if(developerKit)txt("+",kit.x+16,kit.y+9,18,Green);
  txt("ZESTAW TESTOWY",kit.x+45,kit.y+12,16,developerKit?Green:Muted);
- txt("Umiejętności · 100 strzał · 15 składników · 10 mikstur",kit.x+251,kit.y+12,14,Muted);
+ txt("100 strzał · 15 składników · 10 mikstur",kit.x+251,kit.y+12,14,Muted);
 
  for(bool reset:{true,false}){Rectangle action=reset?developerNewButton():developerMoveButton();panel(action,inside(action)?Card:Panel);center(reset?"NOWA SESJA TESTOWA":"PRZENIEŚ OBECNĄ POSTAĆ",action.x+action.width/2,action.y+13,17,Gold);}
  center("Nowa sesja resetuje wyprawę; przeniesienie zachowuje plecak, poziom i rangi.",720,726,14,Muted);

@@ -4,9 +4,45 @@ Grywalny prototyp RPG 2.5D w C++17 i raylib 5.5, przygotowany dla Windows x64. A
 
 ### Poprawka czarnego ekranu na Windows 11
 
-Przed wybraniem prezentacji DirectX gra sprawdza rzeczywisty piksel przesłany z OpenGL do docelowego bufora. Niektóre sterowniki Intel UHD przyjmują wywołania współdzielenia GPU, lecz zwracają czarny obraz. Gdy kontrola wykryje tę sytuację, gra automatycznie przechodzi na OpenGL z V-sync. Sprawdzenie jest powtarzane po zmianie rozmiaru bufora; nie wymaga zmiany ustawień Windows ani urządzenia audio.
+Domyślnie gra używa bezpośredniej prezentacji OpenGL z V-sync. Opcjonalny parametr --dxgi wybiera prezentację DirectX; przed jej użyciem gra sprawdza rzeczywisty piksel przesłany z OpenGL do docelowego bufora. Niektóre sterowniki Intel UHD przyjmują wywołania współdzielenia GPU, lecz zwracają czarny obraz. Gdy kontrola wykryje tę sytuację, gra automatycznie przechodzi na OpenGL z V-sync. Sprawdzenie jest powtarzane po zmianie rozmiaru bufora; nie wymaga zmiany ustawień Windows ani urządzenia audio.
 
 Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
+
+## Wersja 0.46 — bieg z mieczem w pochwie i nauka umiejętności
+
+Podczas biegu miecz spoczywa w skórzanej pochwie przy lewym biodrze. Ręce pracują naprzemiennie z ugiętymi łokciami i stałą długością obu odcinków ramienia. Pochwa podąża za pasem, a rękojeść pozostaje przy biodrze. Atak mieczem i Mocne cięcie pokazują ostrze w dłoni; chód, łuk, unik, cienie i wskazywanie używają swoich właściwych póz.
+
+**Mocne cięcie (Z), Przeszywająca strzała (X) i Leczenie (V) zaczynają niepoznane.** Odblokowuje je dopiero wydanie i zatwierdzenie punktu w oknie umiejętności po awansie. Samo wybranie karty nie uczy umiejętności. HUD pokazuje kłódkę i ZABLOK. Próba użycia nie zużywa many. Zestaw developerski daje przedmioty, lecz nie przyznaje umiejętności; przeniesienie istniejącej postaci zachowuje wydane punkty.
+
+## Wersja 0.45 — ostrzejszy obraz podczas ruchu
+
+Świat i HUD są rysowane bezpośrednio do końcowej klatki w rozdzielczości ekranu, bez dodatkowego bufora sceny. Domyślna prezentacja OpenGL z V-sync pomija współdzielenie całego obrazu z DirectX. Grafiki zachowują swoje filtrowanie tekstur, a gotowy obraz trafia na ekran piksel w piksel, bez powiększania i późniejszego rozmywania. Pozycje kamery, obiektów i ich cieni korzystają ze wspólnej siatki końcowych pikseli. Zapobiega to zmianom kształtu krawędzi przy przesuwaniu sceny. Usunięto też ponowne nakładanie przezroczystości już złożonego obrazu świata. Ruch postaci i tempo animacji pozostają obliczane w pełnej precyzji.
+
+Usunięto tylko ciemne tło obrażeń krytycznych. Napis **KRYTYK!** i duża złota liczba zachowują wygląd, pozycję i animację.
+
+Ciche kontrole: --world-motion-qa --no-audio (porównanie pikseli architektury) oraz --motion-qa --no-audio (rzeczywisty bieg, unik i synchronizacja). Wyniki porównania przed i po poprawce: dist/qa-v45. Rozpakowany ZIP pozostaje wersją dla gracza bez trybu developerskiego.
+
+## Wersja 0.44 — wyraźne napisy na mapie
+
+Miron ma większą, pogrubioną nazwę i ciemną tabliczkę nad stoiskiem. Nazwy handlarza, maga, schodów oraz liczby obrażeń są rysowane bezpośrednio w natywnej rozdzielczości ekranu. Pozycje tekstu i jego tła są wyrównane do wspólnej siatki pikseli, więc ruch kamery nie zmienia kształtu liter. Świat nadal porusza się płynnie z dotychczasowym filtrowaniem i synchronizacją odświeżania.
+
+Cichy test: --labels-qa --no-audio. Kontroluje rzeczywiste piksele napisów podczas ruchu kamery oraz po zmianie rozdzielczości; wyniki trafiają do dist/qa-v44. ZIP pozostaje wersją dla gracza, bez trybu developerskiego.
+
+## Wersja 0.43 — naturalniejszy zamach mieczem
+
+Animacja ma trzy płynne fazy: przygotowanie przy prawym ramieniu, cięcie przed bohaterem z prawej na lewą i powrót do poprzedniej pozycji. Ostrze zachowuje długość, łokieć i dłoń poruszają się w zasięgu ramienia o stałych proporcjach. Skręt tułowia, tarcza i peleryna podążają za ruchem. Ślad miecza odpowiada jego fizycznej krawędzi i zanika po cięciu.
+
+Zwykły zamach trwa 0,32 s, a Mocne cięcie 0,50 s. Mocne cięcie ma dłuższe przygotowanie i większy skręt ciała; używa tej samej długości ostrza. Jedno kliknięcie nadal oznacza jeden cios, a zasięg, obrażenia i czasy odnowienia zachowują dotychczasowe zasady. Poprawka działa we wszystkich ośmiu kierunkach i w cieniach postaci.
+
+## Wersja 0.42 — złoto i handlarz Miron
+
+Każdy przedmiot pokazuje **Wartość: ... złota**, czyli cenę sprzedaży jednej sztuki; stos pokazuje również sumę. Wyposażenie z ulepszeniem ma wyższą wartość. Saldo złota jest stale widoczne w HUD. Monety z potworów można nadal zbierać do plecaka; handlarz pobiera z nich brakującą część zapłaty.
+
+**Miron czeka na trzecim piętrze wieży, w pracowni alchemicznej.** Podejdź do jego stoiska i użyj **E, LPM lub PPM**. W oknie handlu po lewej wybierz towar do kupienia, a po prawej przedmiot z plecaka lub noszonego ekwipunku do sprzedaży. Ustaw liczbę przyciskami **− / +**, użyj **MAX** dla całego stosu lub maksymalnego zakupu, następnie kliknij **KUP / SPRZEDAJ**. Strony oferty przełączają **WSTECZ / DALEJ**. **X, ENTER albo ESC** zamyka okno; podczas handlu wyprawa jest zatrzymana.
+
+Oferta obejmuje mikstury HP i many, strzały, ulepszone miecze, łuki, zbroje, hełmy, tarcze i buty, płaszcz tropiciela oraz amulet. Miron skupuje wszystkie zwykłe przedmioty, w tym łuski kobry i pozostałe materiały bestii. Cena kupna wynosi dwukrotność wartości sprzedaży, więc handel nie pozwala mnożyć złota. Zakup trafia do plecaka i łączy pasujące stosy do 99 sztuk. Przy braku złota, miejsca albo nieprawidłowym stanie postaci transakcja niczego nie zabiera. Sprzedaż monety zamienia ją na złoto w sakiewce bez dodatkowego zysku. **Serce Świtu ma wartość 0 i jest chronione przed sprzedażą**.
+
+ZIP pozostaje kompilacją dla gracza bez trybu developerskiego. Postęp i złoto należą do bieżącej wyprawy; obecny prototyp nie zapisuje wyprawy.
 
 ## Wersja 0.41 — ZIP dla gracza
 
@@ -118,7 +154,7 @@ Każdy udany atak bohatera ma **5% szansy na trafienie krytyczne**: zwykły zama
 
 Zwykłe obrażenia mają większe jasne cyfry i ciemny obrys. Krytyk pokazuje **duże złote cyfry, napis KRYTYK! i ciemne tło** przez dłuższy czas. Wyniki unoszą się ponad sylwetką danego przeciwnika, również dużego Strażnika.
 
-**Leczenie** można poznać za **1 punkt umiejętności** po rozdaniu statystyk podczas awansu. **V** lub zielony kafelek **LECZENIE** w HUD przywraca **30 HP za 20 many**, do maksymalnego zdrowia. Działa z każdą bronią i w wieży. Zielone pierścienie i krzyżyki pokazują efekt, a napis podaje rzeczywiście odzyskane HP. Przy pełnym zdrowiu lub niewystarczającej manie akcja nie pobiera kosztu. Odnowienie: **1 s**. Leczenie ma jedną rangę; kolejne punkty nadal można wydawać na dwie umiejętności broni. W normalnej nowej wyprawie Leczenie trzeba poznać; zestaw deweloperski zawiera wszystkie trzy umiejętności.
+**Leczenie** można poznać za **1 punkt umiejętności** po rozdaniu statystyk podczas awansu. **V** lub zielony kafelek **LECZENIE** w HUD przywraca **30 HP za 20 many**, do maksymalnego zdrowia. Działa z każdą bronią i w wieży. Zielone pierścienie i krzyżyki pokazują efekt, a napis podaje rzeczywiście odzyskane HP. Przy pełnym zdrowiu lub niewystarczającej manie akcja nie pobiera kosztu. Odnowienie: **1 s**. Leczenie ma jedną rangę; kolejne punkty nadal można wydawać na dwie umiejętności broni. Leczenie trzeba poznać za punkt po awansie, również w nowej sesji developerskiej.
 
 Cichy test `--combat-qa --no-audio` sprawdza oba etapy awansu, naukę Leczenia, używanie z mieczem i łukiem oraz w wieży, koszty i wszystkie pięć rodzajów krytycznych ataków. Menu i efekty są renderowane w skalach 80%, 100% i 120%; raporty oraz podglądy: `dist/qa-v30/`. Testy modelu: `tests/critical_healing_tests.hpp`.
 
@@ -131,7 +167,7 @@ Naciśnij **F3** albo kliknij **DEV · F3**. Wybór działa także podczas prolo
 
 Każdy start odnawia HP i manę oraz usuwa stary naciąg, unik, pociski, efekty i otwarte menu łupu. Bohater pojawia się w najbliższym bezpiecznym miejscu, poza przeszkodami i ciałami żywych przeciwników. Wieża jest w sesji testowej odblokowana bez walki z bossem; powrót do lasu z zachowaną postacią zachowuje również postęp zadania. **Nowa sesja przy bossie** pozwala ponownie testować zabicie Strażnika, łup i powrót do Eldrina.
 
-Opcjonalny **ZESTAW TESTOWY** uzupełnia do **100 strzał, po 15 borowików i esencji lasu oraz po 10 mikstur zdrowia i many**; odblokowuje wszystkie trzy umiejętności przynajmniej na randze 1. Nie obniża wyższych rang i nie nadpisuje przedmiotów. Powtórne przenoszenie nie powiększa kompletnego zestawu. Przy pełnym plecaku wyświetla informację o ograniczeniu zestawu. Odznacz opcję, aby testować bez dodatkowych przedmiotów i umiejętności.
+Opcjonalny **ZESTAW TESTOWY** uzupełnia do **100 strzał, po 15 borowików i esencji lasu oraz po 10 mikstur zdrowia i many**; nie przyznaje umiejętności. Rangi zdobywa się przez rozdanie punktów po awansie; przeniesienie obecnej postaci zachowuje już poznane umiejętności. Zestaw nie nadpisuje przedmiotów. Powtórne przenoszenie nie powiększa kompletnego zestawu. Przy pełnym plecaku wyświetla informację o ograniczeniu zestawu. Odznacz opcję, aby testować bez dodatkowych przedmiotów.
 
 **ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu bez resetowania wyprawy. Otwarta lista zatrzymuje symulację. Po uruchomieniu testu HUD pokazuje **SESJA TESTOWA**. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. **NOWA ZWYKŁA GRA — PROLOG** kończy tryb testowy i resetuje wyprawę do normalnego startu. Zwykłe uruchomienie nadal zaczyna się prologiem i nie dostaje zestawu testowego.
 

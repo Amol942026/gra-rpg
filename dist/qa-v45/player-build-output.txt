@@ -1,0 +1,4 @@
+PASS: 6308 gameplay and animation checks
+Map labels: 658/658 checks passed
+Player edition: 17/17 checks passed
+Gotowe: dist\player\Emberfall.exe

@@ -3,7 +3,7 @@
 // Physical meshes are baked once at 2x; only flame, water and magic move in play.
 namespace tower_furniture {
 using P=tower_stairs::P;
-constexpr int ObjectCount=13,AlchemyTable=13,Window=14,Orb=15,Crystal=16,Heart=17,Herb=18,Flame=21,SpriteCount=22;
+constexpr int ObjectCount=13,AlchemyTable=13,Window=14,Orb=15,Crystal=16,Heart=17,Herb=18,Flame=21,MerchantSprite=22,SpriteCount=23;
 const Color Stone{151,160,163,255},Wood{129,83,51,255},Brass{193,151,81,255},Paper{232,216,176,255};
 Vector2 offset(P p){return {(p.x-p.y)*40,(p.x+p.y)*20-p.z};}
 struct Model: tower_stairs::Mesh {
@@ -189,10 +189,11 @@ std::array<Sprite,SpriteCount> sprites{};
 std::array<shadow_geometry::Sprite,SpriteCount> groundShadows;
 void make(){
  for(int id=0;id<SpriteCount;id++){
-  auto& s=sprites[id];bool small=id>=Orb;s.w=small?192:512;s.h=small?256:640;s.ox=small?48:128;s.oy=small?80:270;s.art=LoadRenderTexture(s.w,s.h);
+  auto& s=sprites[id];bool small=id>=Orb&&id!=MerchantSprite;s.w=small?192:512;s.h=small?256:640;s.ox=small?48:128;s.oy=small?80:270;s.art=LoadRenderTexture(s.w,s.h);
   shadow_geometry::Polygons shadow;
   BeginTextureMode(s.art);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,2});
-  if(id>=Orb)overlay(id,s.ox,s.oy);else if(id==Window)window(s.ox,s.oy);else{
+  if(id==MerchantSprite){auto m=merchant_art::make(s.ox,s.oy);shadow=m.shadows();m.draw();}
+  else if(id>=Orb)overlay(id,s.ox,s.oy);else if(id==Window)window(s.ox,s.oy);else{
    Model m(s.ox,s.oy);switch(id){case 0:column(m);break;case 1:table(m,false);break;case 2:m.pedestal(69,.55f);break;case 3:fireplace(m);break;case 4:m.pedestal(33,.55f);m.frustum(0,0,.53f,.72f,33,51,Stone,false,16);m.ring(0,0,.73f,.58f,52,rgb(206,211,191));m.frustum(0,0,.58f,.58f,49,49.4f,rgb(46,117,141),true,24);break;case 5:shelf(m);break;case 6:lectern(m);break;case 7:cauldron(m);break;case 8:garden(m);break;case 9:rune(m);break;case 10:telescope(m);break;case 11:astrolabe(m);break;case 12:m.pedestal(62,.57f);m.ring(0,0,.46f,.43f,62.2f,Brass,28);break;case AlchemyTable:table(m,true);break;}
    shadow=std::move(m.shadowFaces);m.draw();
   }EndMode2D();EndTextureMode();groundShadows[id]=shadow_geometry::bake(shadow);SetTextureFilter(s.art.texture,TEXTURE_FILTER_BILINEAR);
@@ -207,7 +208,7 @@ void unload(){for(auto& s:groundShadows)shadow_geometry::unload(s);for(auto& s:s
 struct Part {int id;Vector2 shift{};float scale=1;Color tint=WHITE;};
 struct Parts {std::array<Part,8> values{};int count=0;void add(int id,Vector2 shift={},float scale=1,Color tint=WHITE){if(count<int(values.size()))values[count++]={id,shift,scale,tint};}};
 Parts parts(int type,float time,int floor){
- Parts p;p.add(type==1&&floor==2?AlchemyTable:type);
+ Parts p;p.add(type==MerchantObjectType?MerchantSprite:type==1&&floor==2?AlchemyTable:type);
  if(type==0)p.add(Crystal,{0,-193+std::sin(time*1.4f)*2},.85f);
  if(type==1&&floor!=2){Vector2 o=offset({.72f,-.32f,68});p.add(Flame,o,.64f+.04f*std::sin(time*6));}
  if(type==2)p.add(Orb,{0,-104+std::sin(time*1.4f)*2});

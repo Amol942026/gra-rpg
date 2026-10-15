@@ -218,7 +218,7 @@ bool initialize(HWND window,int width,int height){
     state.ready=true;glfwSwapInterval(0);return true;
 }
 }
-void useOpenGL(){state.disabled=true;std::snprintf(state.reason,sizeof(state.reason),"OpenGL requested (--opengl)");}
+void useOpenGL(){state.disabled=true;std::snprintf(state.reason,sizeof(state.reason),"Native OpenGL presentation");}
 bool begin(void* window,int width,int height,int interval){
     if(state.disabled||width<=0||height<=0)return false;
     state.interval=interval<1?1:interval>4?4:interval;

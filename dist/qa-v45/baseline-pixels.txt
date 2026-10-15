@@ -1,0 +1,9 @@
+Capture directory: qa-v45/before-1791987752231648000
+PASS: world-motion QA has no audio device
+Scale=0.8; pixels=233280; changes>2=37880; mean maximum-channel error=1.21497; worst changed fraction=0.304462
+FAIL: static architectural edges retain their raster during one-pixel camera translations
+Scale=1; pixels=364500; changes>2=56139; mean maximum-channel error=1.24055; worst changed fraction=0.288477
+FAIL: static architectural edges retain their raster during one-pixel camera translations
+Scale=1.2; pixels=524880; changes>2=42524; mean maximum-channel error=0.671513; worst changed fraction=0.15192
+FAIL: static architectural edges retain their raster during one-pixel camera translations
+Checks: 4; failures: 3

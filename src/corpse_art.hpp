@@ -54,5 +54,5 @@ bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2*
  }
  Rectangle source{0,0,float(sprite.body.width),float(sprite.body.height)},dest{x-fallen_art::OriginX,y-fallen_art::OriginY,float(fallen_art::Width),float(fallen_art::Height)};
  if(outline.a)DrawTexturePro(sprite.edge,source,dest,{0,0},0,outline);
- BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);DrawTexturePro(sprite.body,source,dest,{0,0},0,WHITE);EndBlendMode();return false;
+ BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);DrawTexturePro(sprite.body,source,dest,{0,0},0,WHITE);native_world::endBlendMode();return false;
 }

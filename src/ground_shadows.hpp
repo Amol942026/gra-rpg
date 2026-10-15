@@ -5,6 +5,7 @@ inline RenderTexture2D mask{},softMask{};
 inline void soften();
 inline bool ready=false,chamberFrame=false;
 inline int visibleCasters=0,preparedActors=0;
+inline float maskScale=.8f;inline Vector2 maskOffset{};
 inline void init(){
  if(maskShader.id)return;
  const char* maskCode=R"GLSL(#version 330
@@ -24,11 +25,10 @@ uniform vec4 receiver;
 uniform vec2 logicalSize;
 out vec4 finalColor;
 void main(){
- vec2 d=texel*1.15;float a=texture(texture0,fragTexCoord).a*.25;
- a+=(texture(texture0,fragTexCoord+vec2(d.x,0)).a+texture(texture0,fragTexCoord-vec2(d.x,0)).a+
-     texture(texture0,fragTexCoord+vec2(0,d.y)).a+texture(texture0,fragTexCoord-vec2(0,d.y)).a)*.125;
- a+=(texture(texture0,fragTexCoord+d).a+texture(texture0,fragTexCoord-d).a+
-     texture(texture0,fragTexCoord+vec2(d.x,-d.y)).a+texture(texture0,fragTexCoord+vec2(-d.x,d.y)).a)*.0625;
+ // Four symmetric bilinear taps keep a soft penumbra with less bandwidth.
+ vec2 d=texel*.76;
+ float a=(texture(texture0,fragTexCoord+d).a+texture(texture0,fragTexCoord-d).a+
+          texture(texture0,fragTexCoord+vec2(d.x,-d.y)).a+texture(texture0,fragTexCoord+vec2(-d.x,d.y)).a)*.25;
  if(receiver.z>0.0){
   vec2 point=vec2(fragTexCoord.x,1.0-fragTexCoord.y)*logicalSize;
   float edge=length((point-receiver.xy)/receiver.zw);
@@ -107,13 +107,20 @@ inline void arrow(const Arrow& shot){
 inline bool near(Vector2 p,float extent=240){return p.x>-extent&&p.x<WorldW+extent&&p.y>-extent*.5f&&p.y<H+extent*.6f;}
 inline void prepare(bool chamber=false){
  init();ready=false;chamberFrame=chamber;visibleCasters=0;preparedActors=0;
- // A softly filtered ground mask needs fewer pixels than the opaque world.
- constexpr float scale=.8f;int width=int((chamber?W:WorldW)*scale),height=int(H*scale);
+ // A half-size mask saves fill and blur work. Its origin advances only on
+ // whole mask pixels; the final quad compensates the remaining native pixel.
+ // This keeps static shadow coverage invariant while the camera scrolls.
+ maskScale=chamber?.8f:renderScale*.5f;maskOffset={};
+ int width=int(std::ceil((chamber?W:WorldW)*double(maskScale)-.001)),height=int(std::ceil(H*double(maskScale)-.001));
+ if(!chamber){
+  Vector2 camera=cameraPixels();float x=std::fmod(camera.x,2.f),y=std::fmod(camera.y,2.f);if(x<0)x+=2;if(y<0)y+=2;
+  maskOffset={(x+2)/renderScale,(y+2)/renderScale};width+=2;height+=2;
+ }
  if(!mask.id||mask.texture.width!=width||mask.texture.height!=height){
   if(mask.id)UnloadRenderTexture(mask);mask=LoadRenderTexture(width,height);SetTextureFilter(mask.texture,TEXTURE_FILTER_BILINEAR);
  }
  if(!mask.id||!IsShaderValid(maskShader)||!IsShaderValid(softShader))return;
- actor_art::beginShadowFrame();shadow_geometry::beginBatch();BeginTextureMode(mask);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,scale});
+ actor_art::beginShadowFrame();shadow_geometry::beginBatch();BeginTextureMode(mask);ClearBackground(BLANK);BeginMode2D({{maskOffset.x*maskScale,maskOffset.y*maskScale},{0,0},0,maskScale});
  BeginShaderMode(maskShader);rlDisableBackfaceCulling();
  if(chamber){
   float time=intro.chamber()?intro.time:towerStory.time;
@@ -172,14 +179,15 @@ inline void soften(){
   if(softMask.id)UnloadRenderTexture(softMask);softMask=LoadRenderTexture(mask.texture.width,mask.texture.height);SetTextureFilter(softMask.texture,TEXTURE_FILTER_BILINEAR);
  }
  BeginTextureMode(softMask);ClearBackground(BLANK);
- float texel[]={1.f/mask.texture.width,1.f/mask.texture.height};
+ // Preserve the previous physical penumbra width at every display scale.
+ float texel[]={1.f/((chamberFrame?W:WorldW)*.8f),1.f/(H*.8f)};
  float strength=chamberFrame?.32f:game.inDesert()?.34f:game.inTower()?.30f:.32f;
  float ink[]={.025f,.04f,.05f};
  SetShaderValue(softShader,GetShaderLocation(softShader,"texel"),texel,SHADER_UNIFORM_VEC2);
  SetShaderValue(softShader,GetShaderLocation(softShader,"strength"),&strength,SHADER_UNIFORM_FLOAT);
  SetShaderValue(softShader,GetShaderLocation(softShader,"ink"),ink,SHADER_UNIFORM_VEC3);
- float logicalSize[]={float(chamberFrame?W:WorldW),float(H)};
- Vector2 floor=screen(TowerCenter);float receiver[]={floor.x,floor.y,game.inTower()?TowerRadius*56.5685f:0.f,TowerRadius*28.2843f};
+ float logicalSize[]={mask.texture.width/maskScale,mask.texture.height/maskScale};
+ Vector2 floor=screen(TowerCenter);float receiver[]={floor.x+maskOffset.x,floor.y+maskOffset.y,game.inTower()?TowerRadius*56.5685f:0.f,TowerRadius*28.2843f};
  if(chamberFrame){receiver[0]=720;receiver[1]=460;receiver[2]=540;receiver[3]=148;}
  SetShaderValue(softShader,GetShaderLocation(softShader,"receiver"),receiver,SHADER_UNIFORM_VEC4);
  SetShaderValue(softShader,GetShaderLocation(softShader,"logicalSize"),logicalSize,SHADER_UNIFORM_VEC2);
@@ -187,14 +195,14 @@ inline void soften(){
  // Preserve the receiver's alpha: shadows darken its colour, not its solidity.
  rlSetBlendFactorsSeparate(RL_SRC_ALPHA,RL_ONE_MINUS_SRC_ALPHA,RL_ONE,RL_ONE_MINUS_SRC_ALPHA,RL_FUNC_ADD,RL_FUNC_ADD);
  BeginBlendMode(BLEND_CUSTOM_SEPARATE);
- DrawTexturePro(mask.texture,{0,0,float(mask.texture.width),-float(mask.texture.height)},{0,0,float(softMask.texture.width),float(softMask.texture.height)},{0,0},0,WHITE);EndBlendMode();EndShaderMode();EndTextureMode();
+ DrawTexturePro(mask.texture,{0,0,float(mask.texture.width),-float(mask.texture.height)},{0,0,float(softMask.texture.width),float(softMask.texture.height)},{0,0},0,WHITE);native_world::endBlendMode();EndShaderMode();EndTextureMode();
 }
 inline void draw(){
  if(!ready||!softMask.id)return;
  // Filtering happens once at mask resolution, not nine times per world pixel.
  BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
  DrawTexturePro(softMask.texture,{0,0,float(softMask.texture.width),-float(softMask.texture.height)},
- {0,0,float(chamberFrame?W:WorldW),float(H)},{0,0},0,WHITE);
- EndBlendMode();
+ {-maskOffset.x,-maskOffset.y,softMask.texture.width/maskScale,softMask.texture.height/maskScale},{0,0},0,WHITE);
+ native_world::endBlendMode();
 }
 }

@@ -28,13 +28,17 @@ Nie trzeba instalowac silnika ani dodatkowych narzedzi.
 Folder assets musi pozostac obok Emberfall.exe.
 Gra zaczyna sie prologiem i wlacza domyslnie pelny ekran.
 F11 przelacza miedzy pelnym ekranem a oknem.
-Opcjonalnie: Uruchom.bat --windowed lub Uruchom.bat --opengl.
+Domyslnie: natywne OpenGL z V-sync i ostry obraz bez powtornego skalowania.
+Opcjonalnie: Uruchom.bat --windowed lub Uruchom.bat --dxgi.
 Etapy uruchamiania sa zapisywane w emberfall-startup.log obok EXE.
 
 STEROWANIE
 W S A D - ruch, rowniez ukosnie przy kombinacji klawiszy.
 Przytrzymany Shift - bieg. Spacja - przeturlanie w kierunku ruchu.
+W biegu miecz jest w pochwie przy biodrze, rece pracuja naprzemiennie.
 LPM z mieczem - jeden zamach na klikniecie; trafia wrogow w zasiegu.
+Miecz: przygotowanie, ciecie przed bohaterem i powrot do pozycji.
+Ruch zachowuje dlugosc ostrza i ramienia; tulow i peleryna podazaja za ciosem.
 LPM z lukiem - przytrzymaj, by naciagac cieciwe, i pusc, by strzelic.
 Dlugosc naciagu zmienia zasieg. Na poczatek masz 20 strzal.
 Q / BRON - kolo wyboru broni. Przeciagnij bron z plecaka na kolo.
@@ -50,7 +54,17 @@ X - Przeszywajaca strzala (luk, 20 many).
 V - Leczenie (30 HP za 20 many).
 U - umiejetnosci. P - statystyki.
 Po awansie rozdaj 5 punktow statystyk i 1 punkt umiejetnosci.
+Umiejetnosci odblokowuje dopiero wydanie i zatwierdzenie punktu po awansie.
 E - interakcja w wiezy lub powrot przez portal na pustyni.
+Miron - handlarz na 3. pietrze wiezy (pracownia alchemiczna).
+Podejdz do stoiska i nacisnij E lub kliknij LPM / PPM.
+Kliknij towar po lewej, aby kupic, lub przedmiot po prawej, aby sprzedac.
+Ustaw liczbe sztuk przez - / + lub MAX i potwierdz KUP / SPRZEDAJ.
+Sprzedasz tez noszone eq i materialy bestii, np. luski kobry.
+Wartosc w opisie oznacza cene sprzedazy sztuki; stos ma rowniez sume.
+Cena kupna jest dwukrotnie wyzsza. Monety w plecaku sluza do placenia.
+Fragmentow Serca Switu nie mozna sprzedac. Saldo zlota widac w HUD.
+Brak miejsca lub zlota nie powoduje utraty przedmiotow ani pieniedzy.
 F1 - pomoc. Esc - pauza. Enter po smierci - nowa wyprawa.
 F2 - glosnosc. MUZYKA / EFEKTY w HUD - osobne wyciszenie.
 F11 / przycisk u gory ekranu - pelny ekran lub okno.

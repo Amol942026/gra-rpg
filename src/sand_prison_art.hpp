@@ -25,7 +25,7 @@ void make(){
    auto p=surface(radius,angle).first;Color color=i%3?rgb(245,205,141,145):rgb(149,105,66,100);
    line(p.x,p.y,p.x+.8f+(h%3)*.3f,p.y-.25f,color,.5f);
   }
-  EndBlendMode();EndMode2D();EndTextureMode();SetTextureFilter(rt.texture,TEXTURE_FILTER_BILINEAR);
+  native_world::endBlendMode();EndMode2D();EndTextureMode();SetTextureFilter(rt.texture,TEXTURE_FILTER_BILINEAR);
  }
 }
 void drawMound(Vector2 position,bool front){
@@ -39,7 +39,7 @@ void drawMound(Vector2 position,bool front){
   for(int i=0;i<30;i++){float a=i*2.39996f+t*3,r=27+std::sin(t*4+i)*10;float z=std::fmod(t*23+i*3,38.f);
    float x=position.x+std::cos(a)*r,y=position.y+std::sin(a)*r*.38f-z;float alpha=fade*(1-z/42)*.65f;
    line(x,y,x+2.3f,y-.8f,Fade(rgb(251,215,154),alpha),1);
-  }EndBlendMode();
+  }native_world::endBlendMode();
  }
 }
 void drawCaster(const Enemy& e,float x,float y){
@@ -49,7 +49,7 @@ void drawCaster(const Enemy& e,float x,float y){
  for(int ring=0;ring<3;ring++)ellipseOutline(x,y,35+phase*44+ring*8,16+phase*20+ring*4,Fade(rgb(255,215,145),(1-phase)*(.7f-ring*.16f)));
  for(int i=0;i<22;i++){float angle=i*2.39996f+phase*7,r=26+phase*43;float xx=x+std::cos(angle)*r,yy=y+std::sin(angle)*r*.45f-phase*45;
   line(xx,yy,xx+2,yy-3,Fade(Gold,1-phase),1.2f);
- }EndBlendMode();
+ }native_world::endBlendMode();
 }
 void drawStatus(){
  if(!game.sandTrapped())return;

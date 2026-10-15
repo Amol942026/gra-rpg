@@ -1,0 +1,33 @@
+{
+  "version": "0.43",
+  "edition": "player",
+  "package_bytes": 8767039,
+  "zip_entries": 85,
+  "verified_payload_files": 83,
+  "zip_sha256": "da572a82f4ed283a8f8e0a957e3a79533e7cb516d78b4e59569fe888f00ab648",
+  "player_exe_sha256": "0297fd7e08b1afb43712a2ac9272c2edefd456cf0ffc5cd65cd4f4352e6465df",
+  "developer_exe_sha256": "aa8090563f51732a556eff132fc93d12f211a81b134bb2e8584f6da7bff5954e",
+  "model_checks": 6308,
+  "checks": {
+    "sword-tests.txt": 440,
+    "player-sword-tests.txt": 440,
+    "player-build-tests.txt": 15,
+    "shadow-tests.txt": 490,
+    "graphics-tests.txt": 559,
+    "controls-tests.txt": 42,
+    "player-trade-tests.txt": 147
+  },
+  "failures": 0,
+  "capture_directory": "dist\\qa-v43\\capture-1791979938666431000",
+  "preview_encoded_frames": 31,
+  "preview_duration_ms": 1166.0,
+  "preview_lossless_native_frames": true,
+  "developer_mode_absent": true,
+  "audio_preferences_unchanged": true,
+  "all_test_launches_no_audio": true,
+  "packaged_start_passed": true,
+  "packaged_dev_and_qa_arguments_ignored": true,
+  "packaged_audio_device_opened": false,
+  "packaged_audio_configuration_created": false,
+  "extracted_verification_copy_removed": true
+}

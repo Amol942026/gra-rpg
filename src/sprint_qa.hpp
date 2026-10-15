@@ -1,6 +1,7 @@
 #pragma once
+#include <chrono>
 template<class Check>void verifySprintArt(Check check){
- fs::create_directories("qa-v39");
+ const fs::path output=fs::path("qa-v46")/("sprint-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));fs::create_directories(output);
  RenderTexture2D rt=LoadRenderTexture(280,270);
  for(Kind weapon:{Kind::Sword,Kind::Bow})for(int direction=0;direction<8;direction++){
   AnimationState state;state.direction=Direction(direction);state.moving=true;state.phase=.17f;
@@ -28,13 +29,13 @@ template<class Check>void verifySprintArt(Check check){
   float x=direction*210.f+135,y=278+row*290;AnimationState pose;pose.direction=Direction(direction);pose.moving=pose.sprinting=true;pose.runBlend=1;pose.phase=.17f;
   actor_art::draw(0,x,y,2,pose,0,true,true,row?Kind::Bow:Kind::Sword,false,BLANK,nullptr,-1,-1,-1,20);
   center(row?"BIEG / ŁUK":"BIEG / MIECZ",x,y+18,14,Muted);
- }EndTextureMode();saveTexture(sheet,"qa-v39/sprint-8-directions.png");UnloadRenderTexture(sheet);
+ }EndTextureMode();saveTexture(sheet,(output/"sprint-8-directions.png").string());UnloadRenderTexture(sheet);
  sheet=LoadRenderTexture(1000,620);
  for(int frame=0;frame<24;frame++){
   BeginTextureMode(sheet);ClearBackground(Ink);txt("CHÓD",210,20,25,Gold);txt("BIEG / SHIFT",650,20,25,Gold);
   for(int row=0;row<2;row++)for(int run=0;run<2;run++){
    AnimationState pose;pose.direction=Direction::SE;pose.phase=frame/24.f;pose.moving=true;pose.sprinting=run;pose.runBlend=float(run);
    actor_art::draw(0,270+run*440.f,290+row*285.f,2.6f,pose,0,true,true,row?Kind::Bow:Kind::Sword,false,BLANK,nullptr,-1,-1,-1,20);
-  }EndTextureMode();saveTexture(sheet,"qa-v39/sprint-frame-"+std::to_string(frame)+".png");
+  }EndTextureMode();saveTexture(sheet,(output/("sprint-frame-"+std::to_string(frame)+".png")).string());
  }UnloadRenderTexture(sheet);
 }

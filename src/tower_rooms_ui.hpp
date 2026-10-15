@@ -11,7 +11,7 @@ bool useTowerTarget(WorldHover hit){
  if(!game.towerObjectReachable(hit.index)){game.say("Podejdź bliżej wyposażenia (2,3 pola).");return false;}
  int type=objects[hit.index].type;
  if(type==4)return game.restAtTower(hit.index);if(type==9)return game.toggleTowerRune(hit.index);
- clearStoryMenus();towerPanelObject=hit.index;towerPage=0;towerPanelOpen=true;game.messageTime=0;game.sound(Cue::Ui,game.player);return true;
+ clearStoryMenus();towerPanelObject=hit.index;towerPage=0;towerPanelOpen=true;if(type==MerchantObjectType)openMerchantSelection();game.messageTime=0;game.sound(Cue::Ui,game.player);return true;
 }
 bool nearestTowerInteraction(){
  if(!gameplayInputAllowed()||!game.inTower())return false;
@@ -27,8 +27,9 @@ bool nearestTowerInteraction(){
 void closeTowerPanel(){towerPanelOpen=false;towerPanelObject=-1;game.sound(Cue::Ui,game.player);}
 bool clickTowerPanel(){
  if(!towerPanelOpen)return false;
- if(inside(towerCloseButton())){closeTowerPanel();return true;}
  int type=towerFurnishings(game.towerFloor)[towerPanelObject].type;
+ if(type==MerchantObjectType)return clickMerchantPanel();
+ if(inside(towerCloseButton())){closeTowerPanel();return true;}
  if(type==7){for(int i=0;i<2;i++)if(inside(towerRecipeButton(i)))game.brewTowerPotion(towerPanelObject,i==0?Kind::Health:Kind::Mana);}
  else for(bool next:{false,true})if(inside(towerPageButton(next)))towerPage=(towerPage+(next?1:2))%3;
  return true;
@@ -36,6 +37,7 @@ bool clickTowerPanel(){
 bool towerPanelInput(){
  if(!towerPanelOpen)return false;
  if(!game.inTower()||towerPanelObject<0||towerPanelObject>=int(towerFurnishings(game.towerFloor).size())||game.allocationRequired||game.dead()){closeTowerPanel();return false;}
+ if(towerFurnishings(game.towerFloor)[towerPanelObject].type==MerchantObjectType&&!game.merchantReachable()){closeTowerPanel();return true;}
  if(!IsWindowFocused())return true;
  if(IsKeyPressed(KEY_ESCAPE)||IsKeyPressed(KEY_ENTER)){closeTowerPanel();return true;}
  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))clickTowerPanel();return true;
@@ -47,7 +49,7 @@ void towerParagraph(const char* text,float x,float y,float width,Color color=Mut
 }
 void drawTowerPanel(){
  if(!towerPanelOpen)return;const auto& objects=towerFurnishings(game.towerFloor);if(towerPanelObject<0||towerPanelObject>=int(objects.size()))return;
- int type=objects[towerPanelObject].type;Color accent=towerAccent(game.towerFloor);
+ int type=objects[towerPanelObject].type;if(type==MerchantObjectType){drawMerchantPanel();return;}Color accent=towerAccent(game.towerFloor);
  rect(0,0,W,H,rgb(7,12,22,208));panel({290,148,860,622},rgb(22,29,38));line(325,171,1039,171,accent);
  center(type==7?"PRACOWNIA ALCHEMICZNA":type==10?"NIEBO NAD WIEŻĄ":type==12?"PIĘĆ CZĘŚCI SERCA ŚWITU":"KRONIKI ELDRINA",720,196,28,Text,true);
  center(TowerFloors[game.towerFloor].name,720,239,17,accent);panel(towerCloseButton(),inside(towerCloseButton())?Card:Panel);center("X",1095,173,20,Gold);

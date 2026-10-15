@@ -1,231 +1,167 @@
 PASS: refresh diagnostic opens no audio device
 Mode=0 framebuffer=1920x1080
-Frame=0; full-image mismatches=0; nonblack=1866240; quantized colors=878
+Frame=0; full-image mismatches=0; nonblack=1866240; quantized colors=1075
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=1; full-image mismatches=0; nonblack=1866240; quantized colors=866
+Frame=1; full-image mismatches=0; nonblack=1866240; quantized colors=1076
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=2; full-image mismatches=0; nonblack=1866240; quantized colors=897
+Frame=2; full-image mismatches=0; nonblack=1866240; quantized colors=1079
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=3; full-image mismatches=0; nonblack=1866240; quantized colors=916
+Frame=3; full-image mismatches=0; nonblack=1866240; quantized colors=1061
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=4; full-image mismatches=0; nonblack=1866240; quantized colors=921
+Frame=4; full-image mismatches=0; nonblack=1866240; quantized colors=1058
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=5; full-image mismatches=0; nonblack=1866240; quantized colors=938
+Frame=5; full-image mismatches=0; nonblack=1866240; quantized colors=1054
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=6; full-image mismatches=0; nonblack=1866240; quantized colors=937
+Frame=6; full-image mismatches=0; nonblack=1866240; quantized colors=1048
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=7; full-image mismatches=0; nonblack=1866240; quantized colors=927
+Frame=7; full-image mismatches=0; nonblack=1866240; quantized colors=1046
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
 Mode=1 framebuffer=1152x720
-Frame=0; full-image mismatches=0; nonblack=829440; quantized colors=836
+Frame=0; full-image mismatches=0; nonblack=829440; quantized colors=950
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=1; full-image mismatches=0; nonblack=829440; quantized colors=817
+Frame=1; full-image mismatches=0; nonblack=829440; quantized colors=962
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=2; full-image mismatches=0; nonblack=829440; quantized colors=801
+Frame=2; full-image mismatches=0; nonblack=829440; quantized colors=961
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=3; full-image mismatches=0; nonblack=829440; quantized colors=790
+Frame=3; full-image mismatches=0; nonblack=829440; quantized colors=972
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=4; full-image mismatches=0; nonblack=829440; quantized colors=802
+Frame=4; full-image mismatches=0; nonblack=829440; quantized colors=976
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=5; full-image mismatches=0; nonblack=829440; quantized colors=786
+Frame=5; full-image mismatches=0; nonblack=829440; quantized colors=995
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=6; full-image mismatches=0; nonblack=829440; quantized colors=795
+Frame=6; full-image mismatches=0; nonblack=829440; quantized colors=1001
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=7; full-image mismatches=0; nonblack=829440; quantized colors=809
+Frame=7; full-image mismatches=0; nonblack=829440; quantized colors=992
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
 Mode=2 framebuffer=1280x720
-Frame=0; full-image mismatches=0; nonblack=829440; quantized colors=802
+Frame=0; full-image mismatches=0; nonblack=829440; quantized colors=993
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=1; full-image mismatches=0; nonblack=829440; quantized colors=800
+Frame=1; full-image mismatches=0; nonblack=829440; quantized colors=1013
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=2; full-image mismatches=0; nonblack=829440; quantized colors=808
+Frame=2; full-image mismatches=0; nonblack=829440; quantized colors=1016
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=3; full-image mismatches=0; nonblack=829440; quantized colors=790
+Frame=3; full-image mismatches=0; nonblack=829440; quantized colors=1018
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=4; full-image mismatches=0; nonblack=829440; quantized colors=805
+Frame=4; full-image mismatches=0; nonblack=829440; quantized colors=1022
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=5; full-image mismatches=0; nonblack=829440; quantized colors=832
+Frame=5; full-image mismatches=0; nonblack=829440; quantized colors=1026
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=6; full-image mismatches=0; nonblack=829440; quantized colors=836
+Frame=6; full-image mismatches=0; nonblack=829440; quantized colors=1022
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=7; full-image mismatches=0; nonblack=829440; quantized colors=839
+Frame=7; full-image mismatches=0; nonblack=829440; quantized colors=1017
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
 Mode=3 framebuffer=1920x1080
-Frame=0; full-image mismatches=0; nonblack=1866240; quantized colors=961
+Frame=0; full-image mismatches=0; nonblack=1866240; quantized colors=1097
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=1; full-image mismatches=0; nonblack=1866240; quantized colors=952
+Frame=1; full-image mismatches=0; nonblack=1866240; quantized colors=1083
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=2; full-image mismatches=0; nonblack=1866240; quantized colors=950
+Frame=2; full-image mismatches=0; nonblack=1866240; quantized colors=1093
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=3; full-image mismatches=0; nonblack=1866240; quantized colors=918
+Frame=3; full-image mismatches=0; nonblack=1866240; quantized colors=1094
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=4; full-image mismatches=0; nonblack=1866240; quantized colors=928
+Frame=4; full-image mismatches=0; nonblack=1866240; quantized colors=1088
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=5; full-image mismatches=0; nonblack=1866240; quantized colors=937
+Frame=5; full-image mismatches=0; nonblack=1866240; quantized colors=1095
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=6; full-image mismatches=0; nonblack=1866240; quantized colors=909
+Frame=6; full-image mismatches=0; nonblack=1866240; quantized colors=1092
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Frame=7; full-image mismatches=0; nonblack=1866240; quantized colors=902
+Frame=7; full-image mismatches=0; nonblack=1866240; quantized colors=1091
 PASS: entire destination frame matches the scene and HUD, not only corner markers
 PASS: destination contains a complete varied scene rather than a black or flat image
 PASS: current moving frame reaches every corner in correct orientation
 PASS: V-sync stays enabled after resize/fullscreen change
-PASS: DXGI uses the monitor's positive synchronized interval
-PASS: one DXGI presentation replaces one native swap without duplicate display clocks
-Backend=DXGI flip / V-sync; accepted presents=38; occluded=0; suppressed swaps=38; fallback=
-Checks: 193; failures: 0
+Backend=OpenGL V-sync; accepted presents=0; occluded=0; suppressed swaps=0; fallback=Native OpenGL presentation
+Checks: 129; failures: 0

@@ -13,7 +13,6 @@ void drawCombatEffect(const Effect& effect,float lift=0){
   float size=effect.critical?39:24,w=std::max(textWidth(effect.text,size,effect.critical),effect.critical?textWidth("KRYTYK!",20,true):0.f);
   float x=std::clamp(p.x,w/2+8,float(WorldW)-w/2-8),y=std::max(112.f,p.y-effect.height-age*34-lift);
   if(effect.critical){
-   rect(x-w/2-7,y-23,w+14,69,Fade(rgb(25,12,7),alpha*.62f));
    outlinedCombatText("KRYTYK!",x,y-21,20,Fade(rgb(255,175,69),alpha),true);
   }
   outlinedCombatText(effect.text,x,y,size,Fade(effect.critical?rgb(255,214,106):rgb(250,249,232),alpha),effect.critical);return;

@@ -36,6 +36,7 @@ PASS: Eldrin is drawn only on the arrival floor
 PASS: Eldrin is drawn only on the arrival floor
 PASS: Eldrin is drawn only on the arrival floor
 PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
 PASS: floor reaches the real display buffer at current window dimensions
 PASS: themed floor has visible architecture and furnishings instead of a black scene
 PASS: static themed floor is cached on the GPU before play
@@ -114,4 +115,4 @@ PASS: nearby HUD excludes loot dropped on another floor
 PASS: floor-local loot cannot be picked through another floor
 PASS: floor reaches the real display buffer at current window dimensions
 PASS: window resize preserves current floor and safe position
-Checks: 116; failures: 0
+Checks: 117; failures: 0

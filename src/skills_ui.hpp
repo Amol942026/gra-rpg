@@ -83,10 +83,16 @@ void drawSkillHud(){
   Skill skill=static_cast<Skill>(i);Rectangle button=skillActionRect(i);bool learned=game.skillRank(skill)>0,weapon=game.skillWeaponMatches(skill),ready=game.skillAllowed(skill),armed=i==1&&game.piercingArrowArmed;
   panel(button,armed?rgb(31,62,66):Panel);DrawRectangleLinesEx(button,1,armed?rgb(126,215,232):ready&&inside(button)?Gold:Line);
   skillIcon(skill,button.x+33,button.y+23,.72f,learned&&weapon?1.f:.3f);
+  if(!learned){
+   float x=button.x+33,y=button.y+23;
+   ellipseOutline(x,y-4,5,6,Muted);
+   rect(x-8,y-3,16,13,Panel);DrawRectangleLinesEx({x-8,y-3,16,13},1,Muted);
+   rect(x-1,y,2,5,Muted);
+  }
   float cooldown=i==0?game.strongCutCd/StrongCutCooldown:i==1?game.piercingArrowCd/PiercingArrowCooldown:game.healingCd/HealingCooldown;
   if(cooldown>0)rect(button.x+1,button.y+1,button.width-2,(button.height-2)*std::clamp(cooldown,0.f,1.f),Fade(Ink,.65f));
   center(keys[i],button.x+32,button.y+46,14,learned&&weapon?Gold:Muted);
-  center(labels[i],button.x+32,870,14,learned&&weapon?Muted:Line);
+  center(learned?labels[i]:"ZABLOK.",button.x+32,870,learned?14:12,Muted);
   if(!inside(button)||welcome||help||paused||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||intro.active()||towerStory.active()||towerPanelOpen||developerMenuOpen)continue;
   float x=button.x,y=635;panel({x,y,356,147},rgb(12,22,25,250));txt(skillName(skill),x+15,y+13,20,Text);
   txt(TextFormat("%s · Koszt %d many",i==2?(learned?"Poznane":"Nieznane"):TextFormat("Ranga %d",game.skillRank(skill)),i==0?10:20),x+15,y+46,15,Gold);

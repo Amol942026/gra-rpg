@@ -1,0 +1,28 @@
+{
+  "version": "0.42",
+  "edition": "player",
+  "package_bytes": 8757737,
+  "zip_entries": 85,
+  "verified_payload_files": 83,
+  "zip_sha256": "b5f6d47830054a86dc6dfab0a1c9ba4db6bb4ef39c8e0fd8ab493e6f0e07eb11",
+  "player_exe_sha256": "f149845df9f64d3f8900bbb999ae96b1d072d0d8a48b478ffc3fa78100302fec",
+  "developer_exe_sha256": "be3f4e39ac464131759cdfb0c8c378111f778e70ff2d326945ecfee974320d93",
+  "model_checks": 4996,
+  "ui_and_graphics_checks": {
+    "player-trade-tests.txt": 147,
+    "player-build-tests.txt": 14,
+    "local-trade-tests.txt": 147,
+    "tower-art-tests.txt": 140,
+    "tower-floors-tests.txt": 117,
+    "shadow-tests.txt": 490
+  },
+  "failures": 0,
+  "developer_mode_absent": true,
+  "audio_preferences_unchanged": true,
+  "all_verification_launches_no_audio": true,
+  "packaged_start_passed": true,
+  "packaged_developer_arguments_ignored": true,
+  "packaged_audio_device_opened": false,
+  "packaged_audio_configuration_created": false,
+  "verification_copies_removed": true
+}

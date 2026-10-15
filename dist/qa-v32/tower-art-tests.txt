@@ -65,6 +65,9 @@ PASS: sprite 20: every physical mask pixel agrees with independent GPU readback
 PASS: sprite 21: detailed physical shape has no cut-off edges
 PASS: sprite 21: distinct material and lighting shades survive GPU rendering
 PASS: sprite 21: every physical mask pixel agrees with independent GPU readback
+PASS: sprite 22: detailed physical shape has no cut-off edges
+PASS: sprite 22: distinct material and lighting shades survive GPU rendering
+PASS: sprite 22: every physical mask pixel agrees with independent GPU readback
 PASS: object 0: animated physical silhouette matches GPU pixels at time 0.400000
 PASS: object 0: animated physical silhouette matches GPU pixels at time 3.700000
 PASS: object 0: physical animation changes visible pixels
@@ -120,6 +123,7 @@ PASS: floor 3 / Stół Eldrina: actual shape selects the correct inspection HUD
 PASS: floor 3 / Ogród ziół: actual shape selects the correct inspection HUD
 PASS: floor 3 / Ogród ziół: actual shape selects the correct inspection HUD
 PASS: floor 3 / Runiczna kolumna: actual shape selects the correct inspection HUD
+PASS: floor 3 / Miron · handlarz: actual shape selects the correct inspection HUD
 PASS: floor 3: decorated room reaches actual fullscreen framebuffer
 PASS: floor 4 / Kamień pieczęci: actual shape selects the correct inspection HUD
 PASS: floor 4 / Kamień pieczęci: actual shape selects the correct inspection HUD
@@ -134,4 +138,4 @@ PASS: floor 5 / Otwarta kronika: actual shape selects the correct inspection HUD
 PASS: floor 5 / Runiczna kolumna: actual shape selects the correct inspection HUD
 PASS: floor 5 / Runiczna kolumna: actual shape selects the correct inspection HUD
 PASS: floor 5: decorated room reaches actual fullscreen framebuffer
-Checks: 136; failures: 0
+Checks: 140; failures: 0

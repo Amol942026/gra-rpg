@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "rlgl.h"
+#include "native_world.hpp"
 #include "game.hpp"
 #include "intro_story.hpp"
 #include "tower_story.hpp"
@@ -55,8 +56,23 @@ bool inside(Rectangle r){return CheckCollisionPointRec(mouse,r);}
 void panel(Rectangle r,Color c=Panel){DrawRectangleRec(r,c);DrawRectangleLinesEx(r,1,Line);}
 Color rarity(Rarity r){switch(r){case Rarity::Common:return WHITE;case Rarity::Rare:return rgb(88,170,255);case Rarity::VeryRare:return rgb(255,220,76);case Rarity::ExtremelyRare:return rgb(194,112,255);}return WHITE;}
 Color rarity(Item value){return rarity(itemRarity(value));}
-Vector2 screen(V p){return{WorldW*.5f+(p.x-p.y-game.player.x+game.player.y)*40,428+(p.x+p.y-game.player.x-game.player.y)*20};}
-V toWorld(Vector2 p){float x=(p.x-WorldW*.5f)/40+game.player.x-game.player.y,y=(p.y-428)/20+game.player.x+game.player.y;return{(x+y)/2,(y-x)/2};}
+Vector2 cameraPixels(){
+ return {float(std::round((double(game.player.x)-game.player.y)*40*renderScale)),
+         float(std::round((double(game.player.x)+game.player.y)*20*renderScale))};
+}
+Vector2 screen(V p){
+ // Quantize anchors in physical pixels before subtracting the camera. Static
+ // geometry keeps exactly the same sampling phase as the camera moves.
+ Vector2 camera=cameraPixels();
+ return {float((std::round(WorldW*.5*renderScale)+std::round((double(p.x)-p.y)*40*renderScale)-camera.x)/renderScale),
+         float((std::round(428.*renderScale)+std::round((double(p.x)+p.y)*20*renderScale)-camera.y)/renderScale)};
+}
+V toWorld(Vector2 p){
+ Vector2 camera=cameraPixels();
+ double x=(double(p.x)*renderScale-std::round(WorldW*.5*renderScale)+camera.x)/(40*renderScale),
+        y=(double(p.y)*renderScale-std::round(428.*renderScale)+camera.y)/(20*renderScale);
+ return {float((x+y)/2),float((y-x)/2)};
+}
 Rectangle bagRect(int i){return{1080.f+(i%5)*65,366.f+(i/5)*44,57,40};}
 Rectangle equipRect(int i){return{1080.f+(i%3)*109,207.f+(i/3)*51,98,44};}
 std::vector<int> nearby(){std::vector<int> a;for(auto&g:game.ground)if(game.groundVisible(g)&&!g.value.empty()&&distance(g.pos,game.player)<=2.5f)a.push_back(g.id);return a;}
@@ -84,6 +100,7 @@ bool worldPointerAllowed(Vector2 point);
 bool talkToMage();
 bool useTowerTarget(WorldHover hit);bool nearestTowerInteraction();bool towerPanelInput();void drawTowerPanel();
 bool towerPanelOpen=false;int towerPanelObject=-1,towerPage=0;
+void openMerchantSelection();bool clickMerchantPanel();void drawMerchantPanel();
 Slot hoverSlot(){
  if(weaponWheelOpen){int sector=weaponWheelHit(mouse);if(sector>=0)return game.weaponSource(sector);}
  for(int i=0;i<BagSize;i++)if(inside(bagRect(i)))return{Place::Bag,i};for(int i=0;i<EquipSize;i++)if(inside(equipRect(i)))return{Place::Equip,i};
@@ -236,6 +253,7 @@ void makeArt(){
 #include "corpse_art.hpp"
 #include "environment.hpp"
 #include "tower_stairs_art.hpp"
+#include "merchant_art.hpp"
 #include "tower_furniture_art.hpp"
 #include "world_hover.hpp"
 #include "magic_art.hpp"
@@ -243,11 +261,12 @@ void makeArt(){
 #include "combat_feedback.hpp"
 #include "ground_shadows.hpp"
 #include "tower_world.hpp"
+#include "map_labels.hpp"
 void drawWorld(){
  if(game.inTower()){drawTowerWorld();return;}
  clip(0,0,WorldW,H);ClearBackground(game.inDesert()?rgb(163,121,74):rgb(22,44,47));if(game.inDesert())desert_art::drawCachedBackdrop();else drawWindWater();performance.end(RenderStage::Water,true);Vector2 o=screen({0,0});if(game.inDesert())BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
  DrawTextureRec(game.inDesert()?desert_art::terrain.texture:terrain.texture,{0,0,float(TerrainWidth),-float(TerrainHeight)},{o.x-TerrainOriginX,o.y-90},WHITE);
- if(game.inDesert()){EndBlendMode();desert_art::atmosphere();}
+ if(game.inDesert()){native_world::endBlendMode();desert_art::atmosphere();}
  if(!game.inDesert())for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
  world_shadows::draw();
  Vector2 pp=screen(game.player);DrawEllipseLines(int(pp.x),int(pp.y+2),25,12,Fade(Gold,.7f));
@@ -269,7 +288,7 @@ void drawWorld(){
  if(game.inDesert())desert_art::drawCachedFoothills();
  for(const auto& flash:game.pierceFlashes){Vector2 p=screen(flash.pos);float age=1-flash.life/.26f;ellipseOutline(p.x,p.y-35,8+age*22,5+age*12,Fade(rgb(137,226,245),1-age));}
  for(const auto& blast:game.explosions)drawExplosion(blast);
- drawHealingAura();drawCombatEffects();
+ drawHealingAura();
  DrawRectangleGradientV(0,0,WorldW,170,game.inDesert()?rgb(52,34,24,215):rgb(9,20,23,238),game.inDesert()?rgb(52,34,24,0):rgb(9,20,23,0));DrawRectangleGradientV(0,680,WorldW,220,game.inDesert()?rgb(52,34,24,0):rgb(9,20,23,0),game.inDesert()?rgb(52,34,24,230):rgb(9,20,23,250));
  if(game.hurt>0)rect(0,0,WorldW,H,Fade(rgb(154,47,40),game.hurt*.3f));EndScissorMode();
 }
@@ -333,6 +352,7 @@ void drawUI(){
  panel(skillsButton(),inside(skillsButton())?Card:Panel);center("UMIEJĘTNOŚCI · U",1153,23,13,Gold);panel(statsButton(),inside(statsButton())?Card:Panel);center("STATYSTYKI · P",1322,23,13,Gold);line(1080,50,1400,50,Line);
  panel({1080,68,63,68},rgb(37,54,51));clip(1081,69,61,66);hero(1110,137,.8f,true);EndScissorMode();
  txt("Wędrowiec",1158,70,25,Text,true);txt(TextFormat("POZIOM %02d  /  STRAŻNIK ŻARU",game.level),1159,105,10,Gold);
+ txt(TextFormat("ZŁOTO  %lld",static_cast<long long>(game.goldBalance())),1159,125,14,Gold);
  txt("ŻYCIE",1080,151,10,Muted);txt(TextFormat("%d / %d",int(game.hp),game.maxHp()),1328,148,12,Text);bar(1139,153,173,9,game.hp,float(game.maxHp()),rgb(153,73,73));
  txt("MANA",1080,175,10,Muted);txt(TextFormat("%d / %d",int(game.mana),game.maxMana()),1328,172,12,Text);bar(1139,177,173,9,game.mana,float(game.maxMana()),rgb(66,127,161));
  const char* names[]={"BROŃ","HEŁM","TARCZA","ZBROJA","BUTY","PIERŚCIEŃ"};for(int i=0;i<EquipSize;i++)slotDraw({Place::Equip,i},equipRect(i),names[i]);
@@ -355,9 +375,9 @@ void drawUI(){
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.41",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.46",1370,885,10,Muted);
 }
-struct ItemTooltipText {std::string label,name,stat,description,instruction,chance;Color color;};
+struct ItemTooltipText {std::string label,name,stat,description,instruction,chance,value;Color color;};
 ItemTooltipText itemTooltipText(Item value,Slot source){
  ItemTooltipText text;Kind shape=archetype(value.kind);int slot=gearSlot(value.kind);
  text.color=rarity(value);text.label=rarityName(itemRarity(value));text.name=itemName(value);
@@ -371,19 +391,20 @@ ItemTooltipText itemTooltipText(Item value,Slot source){
  else text.stat="Skarb znaleziony w ruinach";
  if(shape==Kind::Bow)text.stat+=" · zasięg zależy od naciągu";
  text.description=gearDescription(value.kind);
+ text.value="Wartość: "+std::to_string(itemSellValue(value))+" złota";
+ if(value.count>1)text.value+=" / szt. · stos: "+std::to_string(itemStackValue(value))+" złota";
  bool world=source.place==Place::Ground||source.place==Place::Forage||source.place==Place::Corpse;
  text.instruction=world&&!game.reachable(source)?"Podejdź bliżej, aby podnieść.":source.place==Place::Corpse?"LPM: przeciągnij do plecaka":slot==0?"Przeciągnij na sprzęt lub koło broni (Q)":value.kind==Kind::Health||value.kind==Kind::Mana||value.kind==Kind::Mushroom?"PPM: użyj · LPM: przeciągnij":"LPM: przeciągnij przedmiot";
+ if(value.kind==Kind::DawnShard)text.instruction="Artefakt fabularny · nie na sprzedaż";
  text.chance=value.kind==Kind::DawnShard?"Łup fabularny · gwarantowany (100%)":"Szansa na łup: "+std::to_string(itemDropChance(value))+"% · według rzadkości";
  return text;
 }
 Rectangle tooltipBounds(const ItemTooltipText& text){
- float width=360,height=text.description.empty()?148.f:174.f;
+ float width=std::clamp(std::max({360.f,textWidth(text.value,14)+34,textWidth(text.stat,14)+34,textWidth(text.description,14)+34,textWidth(text.chance,14)+34,textWidth(text.instruction,14)+34}),360.f,560.f),height=text.description.empty()?174.f:200.f;
  return {std::clamp(mouse.x+20,8.f,W-width-12),std::clamp(mouse.y+20,8.f,H-height-14),width,height};
 }
-void tooltip(){
- if(dragging.place!=Place::None||welcome||help||paused)return;
- Slot source=hoverSlot();Item* value=game.get(source);if(!value||value->empty())return;
- ItemTooltipText text=itemTooltipText(*value,source);Rectangle box=tooltipBounds(text);
+void drawItemTooltip(Item value,Slot source,const std::string& instruction=""){
+ ItemTooltipText text=itemTooltipText(value,source);if(!instruction.empty())text.instruction=instruction;Rectangle box=tooltipBounds(text);
  panel(box,rgb(12,22,25,250));rect(box.x,box.y,3,box.height,text.color);
  txt(text.label,box.x+17,box.y+12,14,text.color);
  float nameSize=20;while(nameSize>14&&textWidth(text.name,nameSize)>box.width-34)nameSize--;
@@ -391,7 +412,12 @@ void tooltip(){
  txt(text.stat,box.x+17,box.y+65,14,Gold);
  float row=box.y+90;
  if(!text.description.empty()){txt(text.description,box.x+17,row,14,Muted);row+=26;}
- txt(text.instruction,box.x+17,row,14,Muted);txt(text.chance,box.x+17,row+24,14,value->kind==Kind::DawnShard?Gold:Muted);
+ txt(text.value,box.x+17,row,14,Gold);row+=26;
+ txt(text.instruction,box.x+17,row,14,Muted);txt(text.chance,box.x+17,row+24,14,value.kind==Kind::DawnShard?Gold:Muted);
+}
+void tooltip(){
+ if(towerPanelOpen||dragging.place!=Place::None||welcome||help||paused)return;
+ Slot source=hoverSlot();Item* value=game.get(source);if(value&&!value->empty())drawItemTooltip(*value,source);
 }
 void overlay(){
  if(!welcome&&!help&&!paused&&!game.dead())return;rect(0,0,W,H,rgb(6,15,18,205));Rectangle r{340,172,760,548};panel(r,rgb(19,31,33));line(370,195,1070,195,Gold);diamond(720,222,6,9,Gold);
@@ -406,6 +432,7 @@ namespace world_shadows {void draw();}
 #include "intro_scene.hpp"
 #include "tower_scene.hpp"
 #include "tower_rooms_ui.hpp"
+#include "merchant_ui.hpp"
 #include "developer_ui.hpp"
 void input(float dt){
  if(developerInput())return;
@@ -447,7 +474,7 @@ void input(float dt){
  if(dragging.place==Place::Corpse&&game.openedCorpse!=dragging.owner)dragging={};
 }
 void integrationTests(){
- std::ofstream out("interaction-test-v41.txt");int count=0;
+ std::ofstream out("interaction-test-v43.txt");int count=0;
  auto check=[&](bool result,const char* label){out<<(result?"PASS: ":"FAIL: ")<<label<<"\n";out.flush();count++;if(!result)std::exit(2);};
  auto midpoint=[](Rectangle r){return Vector2{r.x+r.width/2,r.y+r.height/2};};
  check(game.ground.empty(),"normal startup contains no ground loot");
@@ -497,12 +524,15 @@ void integrationTests(){
 #include "tower_stairs_qa.hpp"
 #include "tower_furniture_qa.hpp"
 #include "desert_qa.hpp"
+#include "trade_qa.hpp"
+#include "map_labels_qa.hpp"
+#include "world_motion_qa.hpp"
 int main(int argc,char**argv) {
     bool smoke=false,benchmark=false,integration=false,visualQA=false,hoverQA=false,rollQA=false,large=false;
-    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=false;
+    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=true;
     bool introQA=false,introPassed=true,towerQA=false,towerPassed=true,towerFloorsQA=false,towerFloorsPassed=true;
     bool inspectionQA=false,inspectionPassed=true;
-    bool swingQA=false;
+    bool swingQA=false,swingPassed=true;
     bool crowdQA=false,crowdPassed=true;
     bool progressionQA=false,progressionPassed=true;
     bool controlsQA=false,controlsPassed=true;
@@ -516,7 +546,7 @@ int main(int argc,char**argv) {
     bool refreshQA=false,refreshPassed=true;
     bool forestQA=false,forestPassed=true,graphicsQA=false,graphicsPassed=true,mushroomQA=false,mushroomPassed=true,bowQA=false,bowPassed=true,skillsQA=false,skillsPassed=true;
     bool desertQA=false,desertPassed=true;
-    bool shadowQA=false,shadowPassed=true;
+    bool shadowQA=false,shadowPassed=true,tradeQA=false,tradePassed=true,labelsQA=false,labelsPassed=true,worldMotionQA=false,worldMotionPassed=true;
     bool stairsQA=false,stairsPassed=true,towerArtQA=false,towerArtPassed=true;
     bool combatQA=false,combatPassed=true;
     bool desertBenchmark=false,towerBenchmark=false,developerQA=false,developerPassed=true,developerSmoke=false;
@@ -528,6 +558,9 @@ int main(int argc,char**argv) {
         std::string arg=argv[i];
 #ifndef EMBERFALL_PLAYER_BUILD
         if(parseDeveloperArgument(arg,i,argc,argv,developerLaunch))continue;
+        if(arg=="--trade-qa")tradeQA=true;
+        if(arg=="--labels-qa")labelsQA=true;
+        if(arg=="--world-motion-qa")worldMotionQA=true;
         if(arg=="--shadow-qa")shadowQA=true;
         if(arg=="--desert-qa")desertQA=true;
         if(arg=="--stairs-qa")stairsQA=true;
@@ -573,12 +606,13 @@ int main(int argc,char**argv) {
         if(arg=="--no-audio")noAudio=true;
         if(arg=="--startup-smoke"){startupSmoke=true;frameLimit=180;}
         if(arg=="--opengl")openGL=true;
+        if(arg=="--dxgi")openGL=false;
         if(arg=="--large")large=true;
     }
     fs::path exe=fs::absolute(argv[0]).parent_path();
     if(fs::exists(exe/"assets"))fs::current_path(exe);
     else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
-    startupLog.open();startupLog.write("Emberfall v0.41: startup");
+    startupLog.open();startupLog.write("Emberfall v0.46: startup");
     startupLog.write(PlayerBuild?"Build edition: player":"Build edition: developer");
     SetTraceLogCallback(startupTrace);
     SetTraceLogLevel(LOG_INFO);
@@ -587,12 +621,12 @@ int main(int argc,char**argv) {
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
     SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
     startupLog.write("Creating graphics window");
-    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.41");
+    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.46");
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
     startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
-    bool diagnostic=shadowQA||desertQA||towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
+    bool diagnostic=worldMotionQA||labelsQA||tradeQA||shadowQA||desertQA||towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
     if(!diagnostic){game=Game(std::random_device{}());
 #ifndef EMBERFALL_PLAYER_BUILD
         if(!developerLaunch.enabled)
@@ -600,7 +634,7 @@ int main(int argc,char**argv) {
         startIntro();}
     startupLog.write("Generating world graphics");
     makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();startupLog.write("World graphics ready");
-    audioSystem.init(!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA,!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!startupSmoke&&!developerQA&&!( towerFloorsQA||towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA));
+    audioSystem.init(!worldMotionQA&&!labelsQA&&!tradeQA&&!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA,!worldMotionQA&&!labelsQA&&!tradeQA&&!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!startupSmoke&&!developerQA&&!( towerFloorsQA||towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA));
     startupLog.write(noAudio?"Audio skipped (--no-audio)":"Audio initialization complete");
 #ifndef EMBERFALL_PLAYER_BUILD
     if(developerLaunch.enabled&&!diagnostic){
@@ -613,6 +647,9 @@ int main(int argc,char**argv) {
     if(benchmark)game.skillRanks={1,1};
     if(desertBenchmark){game.activateField(WorldLocation::Desert);game.collectedFragments=1;game.dawnQuest=DawnQuest::AtTower;game.player=DesertArrival;game.messageTime=0;}
     if(towerBenchmark){game.enterMageTower();game.dawnQuest=DawnQuest::AtTower;game.messageTime=0;}
+    if(worldMotionQA)worldMotionPassed=runWorldMotionQA();
+    if(labelsQA)labelsPassed=runMapLabelsQA();
+    if(tradeQA)tradePassed=runTradeQA();
     if(shadowQA)shadowPassed=runShadowQA();
     if(desertQA)desertPassed=runDesertQA();
     if(towerArtQA)towerArtPassed=runTowerFurnitureQA();
@@ -639,7 +676,7 @@ int main(int argc,char**argv) {
     if(rollQA)exportRollQA();
     if(audioQA)audioPassed=runAudioQA(noAudio);
     if(inspectionQA)inspectionPassed=runInspectionQA();
-    if(swingQA)exportSwingQA();
+    if(swingQA)swingPassed=runSwordMotionQA();
     if(crowdQA)crowdPassed=runCrowdQA();
     if(progressionQA)progressionPassed=runProgressionQA();
     if(controlsQA)controlsPassed=runControlsQA();
@@ -650,7 +687,7 @@ int main(int argc,char**argv) {
     int frame=0;
     std::vector<double> cpuTimes,frameTimes,endTimes,presentTimes;
     double previous=GetTime();
-    while(!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA&&!WindowShouldClose()){
+    while(!worldMotionQA&&!labelsQA&&!tradeQA&&!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA&&!WindowShouldClose()){
         double begin=GetTime();double elapsed=begin-previous;previous=begin;
         performance.begin();
         float dt=float(std::clamp(elapsed,0.0,.05));
@@ -714,7 +751,7 @@ int main(int argc,char**argv) {
     }
     if(frameLimit&&!cpuTimes.empty()){
         std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
-        std::ofstream f(developerSmoke?"dev-startup-v41.txt":desertBenchmark?"desert-benchmark-v41.txt":towerBenchmark?"tower-benchmark-v41.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v41-fullscreen.txt":large?"benchmark-v41-large.txt":"benchmark-v41.txt"):"smoke-test-v41.txt");
+        std::ofstream f(developerSmoke?"dev-startup-v43.txt":desertBenchmark?"desert-benchmark-v43.txt":towerBenchmark?"tower-benchmark-v43.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v43-fullscreen.txt":large?"benchmark-v43-large.txt":"benchmark-v43.txt"):"smoke-test-v43.txt");
         f<<"Build edition: "<<(PlayerBuild?"player":"developer")<<"\nFrames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
          <<"\nFullscreen: "<<(fullScreen()?"yes":"no")
          <<"\nRefresh rate (Hz): "<<refreshHz<<"\nV-sync interval: "<<swapInterval
@@ -754,7 +791,7 @@ int main(int argc,char**argv) {
     world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();
     for(auto& t:propArt)UnloadRenderTexture(t);
     UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
-    typography.clear();CloseWindow();return shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
+    typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }
 
 

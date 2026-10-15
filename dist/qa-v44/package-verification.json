@@ -1,0 +1,37 @@
+{
+  "version": "0.44",
+  "edition": "player",
+  "package_bytes": 8918252,
+  "zip_entries": 85,
+  "verified_payload_files": 83,
+  "zip_sha256": "8b8dc4625d0e8b60d3056405e6b6c67c3d30a9f5e9967a51281e0eb300831be6",
+  "player_exe_sha256": "ac7a3d8ebc0c91ad89e9cba568e3f881c47e637aa370087fd54cd77769ce4ea4",
+  "developer_exe_sha256": "15255767ab2f31e1332920346dd68cc767f554e58b2989c648b22705770e5736",
+  "model_checks": 6308,
+  "checks": {
+    "labels-tests.txt": 658,
+    "player-labels-tests.txt": 658,
+    "player-build-tests.txt": 16,
+    "player-trade-tests.txt": 147,
+    "player-sword-tests.txt": 440,
+    "combat-tests.txt": 69
+  },
+  "failures": 0,
+  "moving_label_pixel_comparisons_identical": true,
+  "native_scales_tested": [
+    0.8,
+    1,
+    1.2,
+    1.5
+  ],
+  "camera_samples_per_build": 128,
+  "final_frame_pixel_comparison_passed": true,
+  "all_test_launches_no_audio": true,
+  "audio_preferences_sha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6",
+  "audio_preferences_unchanged": true,
+  "developer_mode_absent": true,
+  "packaged_dev_start_and_qa_arguments_ignored": true,
+  "packaged_start_frames": 180,
+  "packaged_audio_device_opened": false,
+  "extracted_verification_copy_removed": true
+}

@@ -1,0 +1,16 @@
+PASS: launch uses the requested mode (fullscreen by default)
+PASS: development diagnostic has no audio output device
+PASS: presentation synchronization is enabled
+PASS: refresh cadence uses whole monitor cycles
+Monitor: 60 Hz; interval: 1; clock: OpenGL V-sync
+PASS: running keeps its intended speed while the camera scrolls
+PASS: rolling keeps its distance while the camera scrolls
+Run/roll frames: mean=16.762 ms, p95=18.5868 ms, FPS=59.6587
+Final backend=OpenGL V-sync; interval=0; accepted presents=0; occluded=0
+PASS: running and rolling maintain the monitor cadence without half-rate stalls
+PASS: world uses native resolution without repeated rescaling or filtering
+Fractional steps: stable native positions=10, camera advances=1, coverage mismatches=0
+PASS: terrain retains sharp stable pixels during fractional camera phases
+PASS: walk pose interpolates even within one of the old eight pose steps
+PASS: world picking follows the same rendered pixel anchors as the camera
+Checks: 11; failures: 0

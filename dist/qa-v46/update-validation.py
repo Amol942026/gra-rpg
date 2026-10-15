@@ -1,0 +1,25 @@
+from pathlib import Path
+import json
+root=Path(__file__).resolve().parents[2];qa=root/'dist/qa-v46'
+e=json.loads((qa/'package-verification.json').read_text(encoding='utf-8'));c=e['checks']
+section=f"""## Wersja 0.46 — miecz w pochwie podczas biegu i umiejętności za punkty
+
+Sprawdzone 14 października 2026 w Dokumenty/GitHub/gra-rpg. Wszystkie uruchomienia i testy miały --no-audio. Zachowano zapisane preferencje dźwięku.
+
+- W biegu ostrze nie jest rysowane w dłoni. Skórzana pochwa z okuciami, paskami, rękojeścią i jelcem jest zawieszona przy lewym biodrze. Mocowanie podąża za pasem, niezależnie od ruchu ramienia. Przy normalnym chodzie, zwykłym ataku i Mocnym cięciu miecz jest w dłoni, a pochwa pozostaje pusta. Łuk oraz przeturlanie zachowują swoje właściwe pozy. Ten sam model służy obrazowi, cieniom i wskazywaniu myszą.
+- Bieg ma nową pracę ramion w płaszczyźnie przód/tył: ugięte łokcie i naprzemienne fazy oddalone o pół cyklu. Każdy odcinek ma stałą długość 13 jednostek. Dodano 240 sprawdzeń pełnego cyklu pracy ramion; zachowano testy stóp, kolan, przejść chód/bieg, różnych częstotliwości aktualizacji i uniku. Prędkość biegu nie została zmieniona.
+- Przyczyną umiejętności dostępnych od razu w sesji testowej było automatyczne podnoszenie rang przez zestaw developerski. Usunięto to przyznawanie. Nowe sesje zwykłe i developerskie zaczynają z rangami 0/0/0; zestaw nadal daje przedmioty. Przenoszenie istniejącej postaci zachowuje poznane rangi i nie uczy brakującego Leczenia. Dopiero wydanie i zatwierdzenie punktu po awansie odblokowuje umiejętność. Wybór roboczej karty przed zatwierdzeniem nie uczy jej.
+- HUD pokazuje kłódkę i ZABLOK. dla niepoznanych umiejętności. Rzeczywiste kliknięcia HUD oraz wspólny handler skrótów nie uruchamiają ataku, przygotowania strzały ani leczenia i nie pobierają many. Sprawdzono dalsze zdobywanie poziomów, obie fazy rozdania punktów i nauczenie Leczenia za jeden punkt; niepoznane umiejętności nie są przyznawane razem z inną wybraną umiejętnością.
+- {e['model_checks']}/{e['model_checks']} testów mechaniki i animacji. Kompilacja projektu: {c['graphics-tests.txt']}/{c['graphics-tests.txt']} kontroli grafiki, {c['skills-tests.txt']}/{c['skills-tests.txt']} umiejętności, {c['combat-tests.txt']}/{c['combat-tests.txt']} walki i Leczenia, {c['developer-tests.txt']}/{c['developer-tests.txt']} trybu developerskiego oraz {c['shadow-tests.txt']}/{c['shadow-tests.txt']} cieni. Obejrzano bieg w ośmiu kierunkach oraz przeciwne fazy ramion i obraz początkowych blokad HUD.
+- Kompilacja gracza: {c['player-build-tests.txt']}/{c['player-build-tests.txt']} kontroli interfejsu, sylwetki biegu i braku DEV; {c['player-skills-tests.txt']}/{c['player-skills-tests.txt']} umiejętności; {c['player-combat-tests.txt']}/{c['player-combat-tests.txt']} walki i Leczenia; {c['player-world-pixels.txt']}/{c['player-world-pixels.txt']} stabilności obrazu świata; {c['player-labels-tests.txt']}/{c['player-labels-tests.txt']} napisów; {c['player-sword-tests.txt']}/{c['player-sword-tests.txt']} zamachu mieczem i {c['player-trade-tests.txt']}/{c['player-trade-tests.txt']} handlu.
+- Cicha kontrola biegu i uniku: {c['motion-tests.txt']}/{c['motion-tests.txt']}; {e['run_roll_fps']:.2f} FPS, średnia {e['run_roll_mean_ms']:.3f} ms i p95 {e['run_roll_p95_ms']:.3f} ms. Synchronizacja OpenGL V-sync, monitor 60 Hz. Pomiar dotyczy tego scenariusza i komputera.
+- ZIP 0.46 dla gracza: {e['package_bytes']} bajtów ({e['package_bytes']/1000000:.2f} MB), {e['zip_entries']} wpisów. Wszystkie {e['verified_payload_files']} pliki gry, zasobów i dokumentów zgodne po SHA-256. Rozpakowana wersja wykonała 180 klatek normalnego prologu w pełnym ekranie, bez trybu developerskiego i urządzenia audio. Argumenty --dev, --start=desert-boss, --labels-qa i --world-motion-qa nie uruchamiają sesji testowych w paczce. Ustawienia audio i lokalny developerski EXE zostały zachowane podczas pakowania; tymczasową kopię rozpakowaną usunięto.
+- SHA-256 ZIP: {e['zip_sha256']}. EXE gracza: {e['player_exe_sha256']}. Preferencje audio: {e['audio_preferences_sha256']}.
+
+Dowody: dist/qa-v46/package-verification.json, model-tests.txt, graphics-tests.txt, skills-tests.txt, combat-tests.txt, developer-tests.txt, shadow-tests.txt, motion-tests.txt, player-build-output.txt, player-build-tests.txt, player-skills-tests.txt, player-combat-tests.txt, player-world-pixels.txt, player-labels-tests.txt, player-sword-tests.txt, player-trade-tests.txt i packaged-startup.txt. Obraz początkowych blokad: locked-starting-skills.png. Nowe galerie i 24 fazy chodu/biegu są w osobnych katalogach sprint-* w dist/qa-v46 oraz dist/player/qa-v46.
+
+"""
+p=root/'VALIDATION.md';s=p.read_text(encoding='utf-8');assert s.startswith('# Weryfikacja prototypu\n\n') and '## Wersja 0.46' not in s
+s=s.replace('# Weryfikacja prototypu\n\n','# Weryfikacja prototypu\n\n'+section,1)
+p.write_text(s,encoding='utf-8');(root/'dist/VALIDATION.md').write_text(s,encoding='utf-8')
+print('Zapisano weryfikację wersji 0.46.')

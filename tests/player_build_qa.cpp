@@ -15,7 +15,7 @@ int main(int argc,char** argv){
  std::ofstream report("qa-v41/player-tests.txt");int checks=0,failures=0;
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';};
  SetTraceLogLevel(LOG_ERROR);SetConfigFlags(FLAG_WINDOW_HIDDEN);
- InitWindow(W,H,"Emberfall player integration QA");
+ sync_present::useOpenGL();InitWindow(W,H,"Emberfall player integration QA");
  if(!IsWindowReady())return 4;
  audioSystem.init(false,false);
  check(PlayerBuild&&!audioSystem.available,"player edition opens no audio during diagnostics");
@@ -59,7 +59,18 @@ int main(int argc,char** argv){
  check(game.swing>0&&game.enemies[0].hp<500,"ordinary sword combat still works in the player build");
  check(castGameplaySpell()&&game.mana==90&&game.fireballs.size()==1,"ordinary spell casting still works in the player build");
 
- audioSystem.shutdown();CloseWindow();
+ makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();
+ check(runWorldMotionQA(),"player edition retains stable world edges during camera motion");
+ check(runMapLabelsQA(),"player edition keeps moving map labels sharp at every camera phase");
+ check(runSwordMotionQA(),"player edition has correct sword and strong-cut animation in all directions");
+ check(runTradeQA(),"player edition supports the complete merchant UI and value descriptions");
+ verifySprintArt(check);
+ check(runSkillsQA(),"player edition rejects unlearned skill clicks and hotkeys and unlocks only confirmed point allocation");
+ check(runCriticalHealingQA(),"player edition unlocks Healing through advancement and preserves combat feedback");
+ world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();
+ for(auto& texture:propArt)UnloadRenderTexture(texture);
+ UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
+ typography.clear();audioSystem.shutdown();CloseWindow();
  report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';report.close();
  std::printf("Player edition: %d/%d checks passed\n",checks-failures,checks);
  return failures?2:0;

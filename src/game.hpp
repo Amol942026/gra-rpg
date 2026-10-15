@@ -3,6 +3,7 @@
 #include "sound_events.hpp"
 #include "entity_info.hpp"
 #include "loot.hpp"
+#include "commerce.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -20,7 +21,7 @@ constexpr float MapWalkMin=1.6f,MapWalkMax=MapSize-2.6f;
 constexpr float WalkSpeed=3.8f, BootsSpeed=4.3f;
 constexpr float RunMultiplier=1.5f;
 constexpr float EnemySightRange=6.5f,PatrolRadius=2.5f,PatrolSpeedFactor=.6f;
-constexpr float MeleeRange=2.1f, SwingDuration=.24f;
+constexpr float MeleeRange=2.1f, SwingDuration=.32f;
 constexpr float RollDuration=.4f, RollSpeed=7.f, RollCooldown=1.2f, RollProtection=.28f;
 constexpr float FireballCost=10,FireballCooldown=.8f,FireballSpeed=8,FireballRange=8,ManaRegenInterval=5;
 enum class Attribute { Strength,MagicPower,Defense,MagicDefense,Vitality,Mana,Count };
@@ -30,7 +31,7 @@ enum class Spell { None,Fireball };
 enum class Skill { StrongCut,PiercingArrow,Healing,Count };
 constexpr int SkillCount=int(Skill::Count),SkillPointsPerLevel=1;
 using SkillRanks=std::array<int,SkillCount>;
-constexpr float StrongCutCost=10,PiercingArrowCost=20,StrongCutDuration=.42f,StrongCutCooldown=1.2f,PiercingArrowCooldown=1.5f;
+constexpr float StrongCutCost=10,PiercingArrowCost=20,StrongCutDuration=.50f,StrongCutCooldown=1.2f,PiercingArrowCooldown=1.5f;
 constexpr int CriticalChancePercent=5;
 constexpr float CriticalMultiplier=2.5f,HealingCost=20,HealingAmount=30,HealingCooldown=1.f,HealingDuration=.85f;
 inline const char* skillName(Skill skill){switch(skill){case Skill::StrongCut:return "Mocne cięcie";case Skill::PiercingArrow:return "Przeszywająca strzała";case Skill::Healing:return "Leczenie";default:return "";}}
@@ -116,7 +117,7 @@ struct Game {
  }
  int level=1,xp=0,kills=0,nextGround=1;bool bossDead=false;
  WorldLocation location=WorldLocation::Forest;DawnQuest dawnQuest=DawnQuest::Seeking;
- int towerFloor=0,towerRuneMask=0;
+ int towerFloor=0,towerRuneMask=0;std::int64_t gold=0;
  bool towerReturnPending=false,desertBossDead=false,desertCreated=false;int collectedFragments=0;
  WorldLocation fieldLocation=WorldLocation::Forest;FieldState forestState,desertState;
  bool inTower()const{return location==WorldLocation::MageTower;}
@@ -241,6 +242,7 @@ struct Game {
   if(--a->count<=0)*a={};potionCd=.65f;sound(Cue::Potion,player);say(mushroom?"Zjedzono borowika. Odzyskano zdrowie.":"Wypito miksturę.");return true;
  }
  #include "tower_system.hpp"
+ #include "trade_system.hpp"
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}

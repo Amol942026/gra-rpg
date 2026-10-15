@@ -30,11 +30,3 @@ void drawTowerStairs(int direction){
  Vector2 p=screen(towerStairBase(direction));bool hover=hovered.kind==HoverKind::TowerStair&&hovered.index==direction;
  tower_stairs::draw(direction,p,hover);
 }
-void drawTowerStairLabels(){
- for(int direction:{1,-1})if(game.stairPresent(direction)){
-  Vector2 p=screen(towerStairBase(direction));bool hover=hovered.kind==HoverKind::TowerStair&&hovered.index==direction;
-  float x=p.x+(direction==1?-20:TowerStairRun*20),y=p.y+(direction==1?29:92);
-  center(direction==1?"SCHODY W GÓRĘ":"SCHODY W DÓŁ",x,y,14,hover?Text:direction==1?Gold:Blue);
-  if(game.stairReachable(direction))center("E / LPM / PPM",x,y+21,14,Text);
- }
-}

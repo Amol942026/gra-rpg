@@ -14,8 +14,8 @@ Inspection inspectWorld(WorldHover hit) {
         info.detail=std::string("Cel: ")+TowerFloors[std::clamp(game.towerFloor+hit.index,0,TowerFloorCount-1)].name;
         info.secondary="Podejdź i użyj E / LPM / PPM.";
     }else if(hit.kind==HoverKind::TowerObject&&game.inTower()&&hit.index>=0&&hit.index<int(towerFurnishings(game.towerFloor).size())){
-        int type=towerFurnishings(game.towerFloor)[hit.index].type;info.source=hit.kind;info.name=towerObjectName(type);info.kind=TowerFloors[game.towerFloor].name;
-        info.detail=type==4?"Odnawia całe HP i manę.":type==7?"Warzenie mikstur z materiałów.":type==9?"Dotknij, aby zmienić blask runy.":"Wyposażenie wieży Eldrina.";
+        int type=towerFurnishings(game.towerFloor)[hit.index].type;info.source=hit.kind;info.name=towerObjectName(type);info.kind=type==MerchantObjectType?"Handlarz / przyjazny NPC":TowerFloors[game.towerFloor].name;
+        info.detail=type==MerchantObjectType?"Kupuje sprzęt i materiały z bestii.":type==4?"Odnawia całe HP i manę.":type==7?"Warzenie mikstur z materiałów.":type==9?"Dotknij, aby zmienić blask runy.":"Wyposażenie wieży Eldrina.";
         info.secondary=towerInteractive(type)?"Podejdź i użyj E / LPM / PPM.":"Blokuje ruch; element wystroju.";
     }else if(hit.kind==HoverKind::Mage&&game.inTower()&&game.towerFloor==0){
         info.source=hit.kind;info.name="Eldrin";info.kind="Mag / przyjazny NPC";

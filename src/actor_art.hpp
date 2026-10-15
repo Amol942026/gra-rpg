@@ -1,5 +1,6 @@
 #pragma once
 #include <type_traits>
+#include "sword_pose.hpp"
 #include "shadow_geometry.hpp"
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 
@@ -16,15 +17,14 @@ struct P3 {
     P3 operator*(float n) const { return {r*n, f*n, z*n}; }
 };
 struct WeaponPose {P3 hand,elbow,blade;};
-inline WeaponPose forwardStrike(float progress,float lift=0,bool heavy=false) {
-    float p=std::clamp(progress,0.f,1.f);if(heavy)p=p<.28f?p*.5f/.28f:.5f+(p-.28f)*.5f/.72f;float reach=std::sin(p*PI);
-    float angle=(heavy?100-200*p:68-136*p)*DEG2RAD;
-    P3 hand{20+(12-24*p-20)*reach,3+31*reach,32+lift+14*reach};
-    P3 elbow{17-3*reach,1+17*reach,40+lift+8*reach};
-    P3 blade=P3{0,8,31}*(1-reach)+P3{std::sin(angle)*43,std::cos(angle)*43,5}*reach;
-    if(heavy){hand.f+=7*reach;hand.z+=7*reach;blade=blade*(1+.14f*reach);}
-    return {hand,elbow,blade};
+inline P3 swordPoint(sword_pose::Point p){return {p.r,p.f,p.z};}
+inline WeaponPose forwardStrike(float progress,float lift=0,bool heavy=false){
+ auto pose=sword_pose::sample(progress,lift,heavy);
+ return {swordPoint(sword_pose::turn(pose.hand,pose.torsoYaw)),
+         swordPoint(sword_pose::turn(pose.elbow,pose.torsoYaw)),
+         swordPoint(sword_pose::turn(pose.blade,pose.torsoYaw))};
 }
+
 struct Face {
     std::array<Vector2,4> points;
     float depth;
@@ -35,8 +35,8 @@ struct Face {
 };
 class Rig {
     float x, y, scale, fx, fy, rx, ry;
-    float rollAngle=0, tuck=0,runLean=0,runSin=0,runCos=1;
-    bool smoothSurfaces=false;
+    float rollAngle=0, tuck=0,runLean=0,runSin=0,runCos=1,bodySin=0,bodyCos=1;
+    bool smoothSurfaces=false,bodyRotating=false;
     std::vector<Face> faces;
     shadow_geometry::Polygons shadowFaces;
     bool collectShadow=false,closedShadow=false;
@@ -50,6 +50,8 @@ public:
     }
     void setSmoothSurfaces(){smoothSurfaces=true;}
     void setRun(float amount){runLean=std::clamp(amount,0.f,1.f)*.12f;runSin=std::sin(runLean);runCos=std::cos(runLean);}
+    void setBodyYaw(float angle){bodyRotating=angle!=0;if(bodyRotating){bodySin=std::sin(angle);bodyCos=std::cos(angle);}else{bodySin=0;bodyCos=1;}}
+    P3 bodyPoint(P3 p)const{if(!bodyRotating)return p;return {p.r*bodyCos+p.f*bodySin,p.f*bodyCos-p.r*bodySin,p.z};}
     void setRoll(float progress,float amount) {rollAngle=progress*2*PI;tuck=amount;}
     P3 rollPoint(P3 p) const {
         if(runLean>0&&p.z>35){
@@ -72,7 +74,7 @@ public:
     const shadow_geometry::Polygons& shadows()const{return shadowFaces;}
     void drawShadow()const{shadow_geometry::raster(shadowFaces);}
     void face(P3 a,P3 b,P3 c,P3 d,Color col,float lighting=1) {
-        a=rollPoint(a);b=rollPoint(b);c=rollPoint(c);d=rollPoint(d);
+        a=rollPoint(bodyPoint(a));b=rollPoint(bodyPoint(b));c=rollPoint(bodyPoint(c));d=rollPoint(bodyPoint(d));
         // Capture every physical surface, including surfaces hidden from the camera.
         if(collectShadow&&col.a>=160){
             std::array<Vector2,4> p={groundProject(a),groundProject(b),groundProject(c),groundProject(d)};
@@ -150,6 +152,7 @@ public:
     }
     void reserve(size_t count){faces.reserve(count);}
     float surfaceLight(P3 normal)const{
+        normal=bodyPoint(normal);
         return .83f+.18f*(normal.r*rx+normal.f*fx)+.29f*normal.z+.08f*(normal.r*fx-normal.f*rx);
     }
     // The hero is seen in close-up as well as on the map. Cached sphere normals
@@ -308,7 +311,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     if(species==0)rig.setRun(run);
 
     if(species==0){
-        buildHero(rig,lift,stride,cycle,tuck,attack,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run);
+        buildHero(rig,lift,stride,cycle,tuck,attack,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered);
     } else if(species>=9){
         buildDesert(rig,species-1,state,attack,flash);
     } else if(species==1){
@@ -531,18 +534,21 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
         return false;
     }
     if(probe)return rig.contains(*probe);
-    if(striking&&strikeProgress>.10f&&strikeProgress<.9f){
-        // The ribbon follows recent blade positions in the actor's isometric
-        // plane. It stays in front of the body instead of circling its waist.
-        float start=std::max(.06f,strikeProgress-(empowered?.31f:.19f));
+    float trail=striking?sword_pose::trailStrength(strikeProgress,empowered):0;
+    if(trail>0){
+        // One short ribbon follows the exact physical edge during the cut.
+        // Windup and recovery do not draw another apparent hit.
+        float finish=std::min(strikeProgress,sword_pose::cutEnd(empowered));
+        float start=std::max(sword_pose::cutStart(empowered),finish-(empowered?.16f:.13f));
+        float bladeScale=weapon==Kind::Dagger?.65f:1.f;
         for(int i=0;i<10;i++){
-            float a=start+(strikeProgress-start)*i/10,b=start+(strikeProgress-start)*(i+1)/10;
+            float a=start+(finish-start)*i/10,b=start+(finish-start)*(i+1)/10;
             auto first=forwardStrike(a,lift,empowered),second=forwardStrike(b,lift,empowered);
-            Vector2 innerA=rig.project(first.hand+first.blade*.52f),outerA=rig.project(first.hand+first.blade*1.04f);
-            Vector2 innerB=rig.project(second.hand+second.blade*.52f),outerB=rig.project(second.hand+second.blade*1.04f);
-            float opacity=std::sin(strikeProgress*PI)*(.1f+i*.043f);
-            poly({innerA,outerA,outerB,innerB},Fade(empowered?rgb(255,155,65):Gold,opacity*(empowered?1.35f:1.f)));
-            DrawLineEx(outerA,outerB,(empowered?3.f:1.5f)*size,Fade(Text,opacity));
+            Vector2 innerA=rig.project(first.hand+first.blade*(.68f*bladeScale)),outerA=rig.project(first.hand+first.blade*bladeScale);
+            Vector2 innerB=rig.project(second.hand+second.blade*(.68f*bladeScale)),outerB=rig.project(second.hand+second.blade*bladeScale);
+            float opacity=trail*(.025f+i*.023f)*(empowered?1.2f:1.f);
+            poly({innerA,outerA,outerB,innerB},Fade(empowered?rgb(255,155,65):Gold,opacity));
+            DrawLineEx(outerA,outerB,(empowered?2.4f:1.f)*size,Fade(Text,opacity));
         }
     }
     rig.draw(outline);

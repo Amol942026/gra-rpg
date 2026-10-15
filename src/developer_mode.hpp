@@ -52,7 +52,7 @@ inline bool developerStart(Game& current,int destination,bool reset,bool kit,uns
  candidate.arrows.clear();candidate.fireballs.clear();candidate.explosions.clear();candidate.effects.clear();candidate.pierceFlashes.clear();candidate.sounds.clear();
  bool complete=true;
  if(kit){
-  for(auto& rank:candidate.skillRanks)rank=std::max(1,rank);
+  // Supplies do not grant skills: ranks come only from allocated level points.
   for(auto recipe:std::array<std::pair<Kind,int>,5>{{{Kind::Arrow,100},{Kind::Mushroom,15},{Kind::ForestEssence,15},{Kind::Health,10},{Kind::Mana,10}}})complete=developerAddItem(candidate,recipe.first,recipe.second)&&complete;
  }
  candidate.say(complete?std::string("DEV — ")+target.name:"DEV — lokacja gotowa; pełny plecak ograniczył zestaw testowy.");

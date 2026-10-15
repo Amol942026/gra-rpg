@@ -6,6 +6,13 @@ bool runSkillsQA(){
  auto point=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
  auto gain=[](){game.xp=game.level*80-1;Enemy victim{999,0,game.player,game.player,1,1};game.hit(victim,100);syncAdvancement();};
  reset();refreshDisplayLayout();check(!audioSystem.available,"skills diagnostic opens no audio device");
+ game.hp=60;
+ for(int i=0;i<SkillCount;i++){
+  game.selectWeapon(i==1?1:0);point(skillActionRect(i));leftClickGameplay({});
+  check(game.skillRank(Skill(i))==0&&game.hp==60&&game.mana==100&&game.swing==0&&!game.piercingArrowArmed&&game.healingPulse==0,"unlearned skill HUD clicks neither activate an effect nor consume resources");
+  check(!activateGameplaySkill(Skill(i))&&game.hp==60&&game.mana==100,"the same hotkey handler refuses an unlearned skill");
+ }
+ game.selectWeapon(0);game.hp=game.maxHp();mouse={0,0};renderScene();saveTexture(canvas,"qa-v27/locked-starting-skills.png");
  gain();check(statsOpen&&!skillsOpen&&game.attributePoints==5&&game.skillPoints==1,"real level opens attributes first and earns one skill point");
  for(int i:{0,0,0,0,5}){point(statAdjust(i,true));clickProgression();}
  renderScene();saveTexture(canvas,"qa-v27/attributes-before-skills.png");point(statsConfirm());clickProgression();
