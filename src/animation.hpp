@@ -22,13 +22,22 @@ struct AnimationState {
     bool moving = false;
     bool sprinting = false;
     float runBlend = 0;
+    float moveBlend = 0, facingAngle = AnimationPi/4, targetAngle = AnimationPi/4;
+    bool motionInitialized = false, facingInitialized = false;
     void stopSprint(){sprinting=false;runBlend=0;}
 
-    void face(float dx, float dy) { direction = directionFor(dx, dy, direction); }
+    void face(float dx, float dy) {
+        direction = directionFor(dx, dy, direction);
+        targetAngle = int(direction)*(AnimationPi/4);
+        if(!facingInitialized){facingAngle=targetAngle;facingInitialized=true;}
+    }
     void advance(float dx, float dy, float dt, bool sprint = false) {
         float travelled = std::hypot(dx, dy);
         moving = travelled > 0.00001f;
         idleTime += dt;
+        motionInitialized=true;
+        moveBlend=(moving?1.f:0.f)+(moveBlend-(moving?1.f:0.f))*std::exp(-18.f*std::max(0.f,dt));
+        if(moveBlend<.0001f)moveBlend=0;
         sprinting=moving&&sprint;
         float target=sprinting?1.f:0.f;
         float before=runBlend,decay=std::exp(-14.f*std::max(0.f,dt));
@@ -38,10 +47,10 @@ struct AnimationState {
         if(runBlend>.9999f)runBlend=1;
         if (moving) {
             face(dx, dy);
-            phase = std::fmod(phase + travelled * (0.65f-0.20f*meanBlend), 1.0f);
-        } else {
-            phase = 0;
+            phase = std::fmod(phase + travelled * (0.38f-0.07f*meanBlend), 1.0f);
         }
+        float turn=std::remainder(targetAngle-facingAngle,2*AnimationPi);
+        facingAngle+=turn*(1-std::exp(-22.f*std::max(0.f,dt)));
     }
     int walkFrame() const { return moving ? int(phase * 8) % 8 : 0; }
 };

@@ -1,0 +1,26 @@
+from pathlib import Path
+import json
+root=Path(__file__).resolve().parents[2];qa=root/'dist/qa-v47'
+e=json.loads((qa/'package-verification.json').read_text(encoding='utf-8'));c=e['checks']
+section=f"""## Wersja 0.47 — szkielet i klipy animacji z Blendera
+
+Sprawdzone 15 października 2026 w Dokumenty/GitHub/gra-rpg. Wszystkie uruchomienia gry, diagnostyki i Blendera były bez audio. Preferencje dźwięku zachowano bajt w bajt.
+
+- Armatura 17 kości i sześć klipów opracowanych w Blenderze 4.5.7 LTS: Idle, Walk, Run, Slash, Heavy i Roll. Klipy powstają z krzywych Béziera i IK kończyn, następnie są wypiekane do 121 próbek transformacji względem rodzica. C++ interpoluje kwaterniony i pozycje, składa hierarchię FK i przygotowuje macierze skinningu. Cień i wskazywanie korzystają z tego samego szczegółowego modelu co obraz. Nie ma zależności od Blendera w grze ani ZIP.
+- Osobna praca bioder, kręgosłupa, barków i głowy, sztywne długości ramion i nóg, podparcie/wybicie/przeniesienie stóp oraz praca nadgarstka prowadząca ostrze. Płaszcz jest związany z biodrami i kręgosłupem. Podczas biegu miecz pozostaje w pochwie, a tarcza na plecach. Unik ma przygotowanie, zwinięcie kończyn, obrót skulonej postaci i powrót. Zachowano dotychczasowe zasięgi, obrażenia, koszty, prędkości oraz blokady umiejętności za punkty.
+- Faza kroku nie resetuje się przy puszczeniu ruchu; zanika w krótkim przejściu do odpoczynku. Chód/bieg i kierunek płynnie przechodzą przez pozy pośrednie. Portret HUD zachowuje stałe ustawienie. Normale części modelu korzystają tylko z obrotu kości, więc przemieszczenie kości nie zmienia barwy materiału. Obejrzano poprawione, rzeczywiste klatki chodu, biegu, cięcia i uniku.
+- {e['model_checks']}/{e['model_checks']} testów mechaniki i animacji, w tym sztywność wszystkich klipów także pomiędzy próbkami, skończoność i normalizacja transformacji, ciągłość, zamknięcie cykli i przejścia. Kompilacja projektu: {c['graphics-tests.txt']}/{c['graphics-tests.txt']} grafiki i masek myszy, {c['sword-tests.txt']}/{c['sword-tests.txt']} zamachu, {c['shadow-tests.txt']}/{c['shadow-tests.txt']} cieni, {c['bow-tests.txt']}/{c['bow-tests.txt']} łuku oraz {c['intro-tests.txt']}/{c['intro-tests.txt']} prologu.
+- Kompilacja gracza: {c['player-build-tests.txt']}/{c['player-build-tests.txt']} kontroli interfejsu, wszystkich nowych póz, masek i braku DEV; {c['player-skills-tests.txt']}/{c['player-skills-tests.txt']} umiejętności; {c['player-combat-tests.txt']}/{c['player-combat-tests.txt']} walki i Leczenia; {c['player-world-pixels.txt']}/{c['player-world-pixels.txt']} stabilności świata; {c['player-labels-tests.txt']}/{c['player-labels-tests.txt']} napisów; {c['player-sword-tests.txt']}/{c['player-sword-tests.txt']} miecza i {c['player-trade-tests.txt']}/{c['player-trade-tests.txt']} handlu.
+- Niezależnie ponownie otwarto zapisany hero_motion.blend w Blenderze i porównano 12 342 transformacje z tabelami C++. Wszystkie zgodne; największa różnica pozycji poniżej 0,0001 jednostki. Plik źródłowy jest edytowalny i zawiera prawdziwe akcje armatury, model kontrolny oraz metadane czasu.
+- Podgląd APNG pochodzi ze 120 natywnych klatek renderera, ma 900×640, 2 s i nominalne 60 Hz. Każdą zdekodowaną klatkę porównano bezstratnie z oryginałem. Nie zawiera audio. Jest podglądem ruchu, nie pomiarem wydajności.
+- Osobny rzeczywisty test biegu/przeturlania i prezentacji: {c['motion-tests.txt']}/{c['motion-tests.txt']}; {e['run_roll_fps']:.2f} FPS, średnia {e['run_roll_mean_ms']:.3f} ms, p95 {e['run_roll_p95_ms']:.3f} ms. Monitor 60 Hz, OpenGL V-sync. Podczas pomiaru nie trwała kompilacja ani Blender. Wynik dotyczy tego scenariusza i komputera.
+- ZIP 0.47 dla gracza: {e['package_bytes']} bajtów ({e['package_bytes']/1000000:.2f} MB), {e['zip_entries']} wpisów i {e['verified_payload_files']} pliki payload zgodne po SHA-256. Rozpakowana gra wykonała 180 klatek prologu w pełnym ekranie; nie otworzyła audio ani menu developerskiego i zignorowała --dev, --start=desert-boss oraz parametry diagnostyczne. W ZIP nie ma Blendera ani projektu .blend. Zachowano lokalny developerski EXE i preferencje audio, a tymczasową rozpakowaną kopię usunięto.
+- SHA-256 ZIP: {e['zip_sha256']}. EXE gracza: {e['player_exe_sha256']}. Dane animacji: {e['generated_header_sha256']}. Preferencje audio: {e['audio_preferences_sha256']}.
+
+Dowody: dist/qa-v47/package-verification.json, model-tests.txt, graphics-tests.txt, sword-tests.txt, shadow-tests.txt, bow-tests.txt, intro-tests.txt, motion-tests.txt, player-build-output.txt, player-build-tests.txt, player-skills-tests.txt, player-combat-tests.txt, player-world-pixels.txt, player-labels-tests.txt, player-sword-tests.txt, player-trade-tests.txt, blender-source-verification.json, preview-verification.json oraz packaged-startup.txt. Podgląd: hero-animation-preview.png; kierunki: eight-directions-final.png. Źródła: art/animation/hero_motion.blend, build_hero_motion.py, verify_blend.py i bake-report.json.
+
+"""
+p=root/'VALIDATION.md';s=p.read_text(encoding='utf-8');assert s.startswith('# Weryfikacja prototypu\n\n') and '## Wersja 0.47' not in s
+s=s.replace('# Weryfikacja prototypu\n\n','# Weryfikacja prototypu\n\n'+section,1)
+p.write_text(s,encoding='utf-8');(root/'dist/VALIDATION.md').write_text(s,encoding='utf-8')
+print('Zapisano weryfikację wersji 0.47.')

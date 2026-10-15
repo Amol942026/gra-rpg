@@ -1,0 +1,5 @@
+Info: Saved as "hero_motion.blend"
+HERO_MOTION_BAKE_OK 17 6 C:\Users\Amadeusz\Documents\GitHub\gra-rpg\src\generated\hero_motion_data.hpp
+Blender 4.5.7 LTS (hash a9874eeece8d built 2026-02-17 01:33:36)
+
+Blender quit

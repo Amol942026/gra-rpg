@@ -35,7 +35,8 @@ Etapy uruchamiania sa zapisywane w emberfall-startup.log obok EXE.
 STEROWANIE
 W S A D - ruch, rowniez ukosnie przy kombinacji klawiszy.
 Przytrzymany Shift - bieg. Spacja - przeturlanie w kierunku ruchu.
-W biegu miecz jest w pochwie przy biodrze, rece pracuja naprzemiennie.
+W biegu miecz jest w pochwie przy biodrze, tarcza na plecach, rece pracuja naprzemiennie.
+Animacje szkieletowe: plynny chod, bieg, ciecie i skulone przeturlanie.
 LPM z mieczem - jeden zamach na klikniecie; trafia wrogow w zasiegu.
 Miecz: przygotowanie, ciecie przed bohaterem i powrot do pozycji.
 Ruch zachowuje dlugosc ostrza i ramienia; tulow i peleryna podazaja za ciosem.

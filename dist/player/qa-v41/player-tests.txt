@@ -15,6 +15,320 @@ PASS: player edition retains stable world edges during camera motion
 PASS: player edition keeps moving map labels sharp at every camera phase
 PASS: player edition has correct sword and strong-cut animation in all directions
 PASS: player edition supports the complete merchant UI and value descriptions
+PASS: skeletal animation diagnostics open no audio device
+PASS: skeletal normals rotate without bone translation changing the material lighting
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: Blender-driven body and equipment have complete silhouettes in every action and facing
+PASS: skeletal GPU silhouette and mouse geometry use the same animated joints
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
+PASS: native 60-Hz articulated animation preview frame exports
 PASS: Shift sprint visibly changes the body, arms and legs in every facing and weapon pose
 PASS: running sword/bow GPU silhouette and physical mouse geometry agree
 PASS: Shift sprint visibly changes the body, arms and legs in every facing and weapon pose
@@ -49,4 +363,4 @@ PASS: Shift sprint visibly changes the body, arms and legs in every facing and w
 PASS: running sword/bow GPU silhouette and physical mouse geometry agree
 PASS: player edition rejects unlearned skill clicks and hotkeys and unlocks only confirmed point allocation
 PASS: player edition unlocks Healing through advancement and preserves combat feedback
-Checks: 51; failures: 0
+Checks: 365; failures: 0

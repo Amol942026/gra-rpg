@@ -1,0 +1,13 @@
+{
+  "source": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-v47\\capture-1792064998030031000",
+  "rendered_frames": 120,
+  "encoded_frames": 120,
+  "nominal_fps": 60,
+  "duration_ms": 2000.0,
+  "width": 900,
+  "height": 640,
+  "lossless_frame_comparison": true,
+  "preview_is_not_fps_benchmark": true,
+  "audio": false,
+  "sha256": "a58e652c494d29fd67fc5885274c9f258ee5ef0280244bc17bb56d85101a4c96"
+}

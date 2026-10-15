@@ -5,7 +5,7 @@ PASS: refresh cadence uses whole monitor cycles
 Monitor: 60 Hz; interval: 1; clock: OpenGL V-sync
 PASS: running keeps its intended speed while the camera scrolls
 PASS: rolling keeps its distance while the camera scrolls
-Run/roll frames: mean=17.482 ms, p95=21.0557 ms, FPS=57.2018
+Run/roll frames: mean=16.8999 ms, p95=21.4155 ms, FPS=59.1719
 Final backend=OpenGL V-sync; interval=0; accepted presents=0; occluded=0
 PASS: running and rolling maintain the monitor cadence without half-rate stalls
 PASS: world uses native resolution without repeated rescaling or filtering

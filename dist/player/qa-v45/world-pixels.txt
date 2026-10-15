@@ -1,4 +1,4 @@
-Capture directory: qa-v45/after-1791997718445723000
+Capture directory: qa-v45/after-1792065159329607000
 PASS: world-motion QA has no audio device
 PASS: completed world remains opaque without a second alpha multiplication
 PASS: native world is copied one-to-one without image resizing

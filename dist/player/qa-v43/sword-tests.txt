@@ -1,4 +1,4 @@
-Capture directory: qa-v43/capture-1791997725572764000
+Capture directory: qa-v43/capture-1792065164939335000
 PASS: sword animation diagnostics open no audio device
 PASS: animation diagnostics have a valid native game canvas
 PASS: each of eight directions has a complete visible pose without cropped limbs or blade

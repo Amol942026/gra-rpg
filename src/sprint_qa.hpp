@@ -1,6 +1,8 @@
 #pragma once
 #include <chrono>
+#include "hero_motion_qa.hpp"
 template<class Check>void verifySprintArt(Check check){
+ verifyHeroAnimation(check);
  const fs::path output=fs::path("qa-v46")/("sprint-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));fs::create_directories(output);
  RenderTexture2D rt=LoadRenderTexture(280,270);
  for(Kind weapon:{Kind::Sword,Kind::Bow})for(int direction=0;direction<8;direction++){

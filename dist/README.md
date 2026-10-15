@@ -8,6 +8,16 @@ Domyślnie gra używa bezpośredniej prezentacji OpenGL z V-sync. Opcjonalny par
 
 Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
+## Wersja 0.47 — animacje szkieletowe przygotowane w Blenderze
+
+Bohater korzysta z hierarchii **17 kości** i sześciu klipów: odpoczynek, chód, bieg, zwykłe cięcie, Mocne cięcie i przeturlanie. Klipy opracowano i wypieczono w **Blenderze 4.5.7 LTS**; gra interpoluje pozycje i kwaterniony między 121 próbkami każdego klipu. Ręce i nogi zachowują długość przy zgięciach. Biodra, kręgosłup, barki i głowa pracują osobno; stopy dostają fazę podparcia, oderwania i przeniesienia. Płaszcz podąża za biodrami i tułowiem.
+
+Ruszanie, zatrzymywanie, przejścia chód/bieg i obrót mają krótkie, płynne przejścia. Zatrzymanie zachowuje fazę kroku i wygasza ruch. Zamach ma skręt tułowia, zejście ciężarem na nogi, prowadzenie ostrza nadgarstkiem i powrót. Unik ma przygotowanie, skuloną fazę obrotu i wyjście na nogi. W biegu miecz jest w pochwie, a tarcza na plecach; obie ręce są swobodne. Zasięgi, obrażenia, koszty, prędkości i sterowanie zachowano. Umiejętności nadal wymagają wydanych i zatwierdzonych punktów.
+
+Edytowalny projekt: **art/animation/hero_motion.blend**. Skrypt **art/animation/build_hero_motion.py** odtwarza armaturę, klipy i eksport do **src/generated/hero_motion_data.hpp**. Projekt Blendera zawiera model kontrolny; szczegółowe wyposażenie i sylwetkę rysuje model gry podpięty do tych samych kości. Gra i ZIP nie wymagają Blendera ani dodatkowych bibliotek. Instrukcja odtwarzania: art/animation/README.md.
+
+Podgląd z rzeczywistego renderera gry: dist/qa-v47/hero-animation-preview.png (APNG, 60 Hz, bez audio). To podgląd ruchu, nie pomiar wydajności. Ciche testy grafiki i nowych póz: --graphics-qa --no-audio; zamach: --swing-qa --no-audio; płynność całej sceny: --motion-qa --no-audio.
+
 ## Wersja 0.46 — bieg z mieczem w pochwie i nauka umiejętności
 
 Podczas biegu miecz spoczywa w skórzanej pochwie przy lewym biodrze. Ręce pracują naprzemiennie z ugiętymi łokciami i stałą długością obu odcinków ramienia. Pochwa podąża za pasem, a rękojeść pozostaje przy biodrze. Atak mieczem i Mocne cięcie pokazują ostrze w dłoni; chód, łuk, unik, cienie i wskazywanie używają swoich właściwych póz.

@@ -1,0 +1,17 @@
+{
+  "source": "art/animation/hero_motion.blend",
+  "blender": "4.5.7 LTS",
+  "clips": 6,
+  "bones": 17,
+  "frames_per_clip": 121,
+  "checks": 12342,
+  "failures": 0,
+  "max_position_error": 9.137872212379233e-05,
+  "min_rotation_dot": 0.9999998807907104,
+  "actual_reloaded_blend_matches_compiled_pose_data": true,
+  "audio": false
+}
+Blender 4.5.7 LTS (hash a9874eeece8d built 2026-02-17 01:33:36)
+Read blend: "C:\Users\Amadeusz\Documents\GitHub\gra-rpg\art\animation\hero_motion.blend"
+
+Blender quit

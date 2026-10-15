@@ -1,0 +1,661 @@
+Capture directory: qa-v44/capture-1792065161626714000
+PASS: map-label diagnostics never open the audio device
+PASS: only the existing stairs and NPCs get labels on floor 1
+PASS: only the existing stairs and NPCs get labels on floor 2
+PASS: only the existing stairs and NPCs get labels on floor 3
+PASS: only the existing stairs and NPCs get labels on floor 4
+PASS: only the existing stairs and NPCs get labels on floor 5
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: actual scene draws labels after the world resolve at native scale
+PASS: map labels cannot overlap the right-hand HUD
+PASS: export native-resolution label reference
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: actual scene draws labels after the world resolve at native scale
+PASS: map labels cannot overlap the right-hand HUD
+PASS: export native-resolution label reference
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: movement loads no new font atlases
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: actual scene draws labels after the world resolve at native scale
+PASS: map labels cannot overlap the right-hand HUD
+PASS: export native-resolution label reference
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: actual scene draws labels after the world resolve at native scale
+PASS: map labels cannot overlap the right-hand HUD
+PASS: export native-resolution label reference
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: movement loads no new font atlases
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: actual scene draws labels after the world resolve at native scale
+PASS: map labels cannot overlap the right-hand HUD
+PASS: export native-resolution label reference
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: actual scene draws labels after the world resolve at native scale
+PASS: map labels cannot overlap the right-hand HUD
+PASS: export native-resolution label reference
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: movement loads no new font atlases
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: actual scene draws labels after the world resolve at native scale
+PASS: map labels cannot overlap the right-hand HUD
+PASS: export native-resolution label reference
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: ELDRIN
+PASS: subpixel camera motion preserves exact glyph pixels: ELDRIN
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: actual scene draws labels after the world resolve at native scale
+PASS: map labels cannot overlap the right-hand HUD
+PASS: export native-resolution label reference
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: native glyph interiors remain visible: SCHODY W GÓRĘ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W GÓRĘ
+PASS: native glyph interiors remain visible: SCHODY W DÓŁ
+PASS: subpixel camera motion preserves exact glyph pixels: SCHODY W DÓŁ
+PASS: native glyph interiors remain visible: MIRON
+PASS: subpixel camera motion preserves exact glyph pixels: MIRON
+PASS: movement loads no new font atlases
+PASS: reachable Miron uses real Lato Bold at size 20 and retains the trade prompt
+PASS: final presentation uses the current framebuffer resolution
+PASS: final presented scene matches native label pixels without extra scaling or cropping
+PASS: export final displayed frame
+Camera samples: 128
+Checks: 658; failures: 0

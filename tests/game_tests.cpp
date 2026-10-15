@@ -30,7 +30,9 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "rarity_loot_tests.hpp"
 #include "trade_tests.hpp"
 #include "sword_pose_tests.hpp"
+#include "hero_motion_tests.hpp"
 int main(){
+ heroMotionTests();
  swordPoseTests();
  tradeTests();
  shadowTests();

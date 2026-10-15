@@ -1,5 +1,22 @@
 # Weryfikacja prototypu
 
+## Wersja 0.47 — szkielet i klipy animacji z Blendera
+
+Sprawdzone 15 października 2026 w Dokumenty/GitHub/gra-rpg. Wszystkie uruchomienia gry, diagnostyki i Blendera były bez audio. Preferencje dźwięku zachowano bajt w bajt.
+
+- Armatura 17 kości i sześć klipów opracowanych w Blenderze 4.5.7 LTS: Idle, Walk, Run, Slash, Heavy i Roll. Klipy powstają z krzywych Béziera i IK kończyn, następnie są wypiekane do 121 próbek transformacji względem rodzica. C++ interpoluje kwaterniony i pozycje, składa hierarchię FK i przygotowuje macierze skinningu. Cień i wskazywanie korzystają z tego samego szczegółowego modelu co obraz. Nie ma zależności od Blendera w grze ani ZIP.
+- Osobna praca bioder, kręgosłupa, barków i głowy, sztywne długości ramion i nóg, podparcie/wybicie/przeniesienie stóp oraz praca nadgarstka prowadząca ostrze. Płaszcz jest związany z biodrami i kręgosłupem. Podczas biegu miecz pozostaje w pochwie, a tarcza na plecach. Unik ma przygotowanie, zwinięcie kończyn, obrót skulonej postaci i powrót. Zachowano dotychczasowe zasięgi, obrażenia, koszty, prędkości oraz blokady umiejętności za punkty.
+- Faza kroku nie resetuje się przy puszczeniu ruchu; zanika w krótkim przejściu do odpoczynku. Chód/bieg i kierunek płynnie przechodzą przez pozy pośrednie. Portret HUD zachowuje stałe ustawienie. Normale części modelu korzystają tylko z obrotu kości, więc przemieszczenie kości nie zmienia barwy materiału. Obejrzano poprawione, rzeczywiste klatki chodu, biegu, cięcia i uniku.
+- 15238/15238 testów mechaniki i animacji, w tym sztywność wszystkich klipów także pomiędzy próbkami, skończoność i normalizacja transformacji, ciągłość, zamknięcie cykli i przejścia. Kompilacja projektu: 873/873 grafiki i masek myszy, 440/440 zamachu, 490/490 cieni, 65/65 łuku oraz 35/35 prologu.
+- Kompilacja gracza: 365/365 kontroli interfejsu, wszystkich nowych póz, masek i braku DEV; 90/90 umiejętności; 69/69 walki i Leczenia; 10/10 stabilności świata; 658/658 napisów; 440/440 miecza i 147/147 handlu.
+- Niezależnie ponownie otwarto zapisany hero_motion.blend w Blenderze i porównano 12 342 transformacje z tabelami C++. Wszystkie zgodne; największa różnica pozycji poniżej 0,0001 jednostki. Plik źródłowy jest edytowalny i zawiera prawdziwe akcje armatury, model kontrolny oraz metadane czasu.
+- Podgląd APNG pochodzi ze 120 natywnych klatek renderera, ma 900×640, 2 s i nominalne 60 Hz. Każdą zdekodowaną klatkę porównano bezstratnie z oryginałem. Nie zawiera audio. Jest podglądem ruchu, nie pomiarem wydajności.
+- Osobny rzeczywisty test biegu/przeturlania i prezentacji: 11/11; 59.17 FPS, średnia 16.900 ms, p95 21.416 ms. Monitor 60 Hz, OpenGL V-sync. Podczas pomiaru nie trwała kompilacja ani Blender. Wynik dotyczy tego scenariusza i komputera.
+- ZIP 0.47 dla gracza: 9098178 bajtów (9.10 MB), 85 wpisów i 83 pliki payload zgodne po SHA-256. Rozpakowana gra wykonała 180 klatek prologu w pełnym ekranie; nie otworzyła audio ani menu developerskiego i zignorowała --dev, --start=desert-boss oraz parametry diagnostyczne. W ZIP nie ma Blendera ani projektu .blend. Zachowano lokalny developerski EXE i preferencje audio, a tymczasową rozpakowaną kopię usunięto.
+- SHA-256 ZIP: ce3d09328cf8f7593c671ee9886fbf5831d518cd3c382c903a091979eadc8c3d. EXE gracza: 409019590e1232350d688cf27f20323e46fbb051f63793890902a359e5781b56. Dane animacji: 857a16a8e035a933899d16668630f40863deca9a169db72ff5df453fc40643c9. Preferencje audio: 12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6.
+
+Dowody: dist/qa-v47/package-verification.json, model-tests.txt, graphics-tests.txt, sword-tests.txt, shadow-tests.txt, bow-tests.txt, intro-tests.txt, motion-tests.txt, player-build-output.txt, player-build-tests.txt, player-skills-tests.txt, player-combat-tests.txt, player-world-pixels.txt, player-labels-tests.txt, player-sword-tests.txt, player-trade-tests.txt, blender-source-verification.json, preview-verification.json oraz packaged-startup.txt. Podgląd: hero-animation-preview.png; kierunki: eight-directions-final.png. Źródła: art/animation/hero_motion.blend, build_hero_motion.py, verify_blend.py i bake-report.json.
+
 ## Wersja 0.46 — miecz w pochwie podczas biegu i umiejętności za punkty
 
 Sprawdzone 14 października 2026 w Dokumenty/GitHub/gra-rpg. Wszystkie uruchomienia i testy miały --no-audio. Zachowano zapisane preferencje dźwięku.

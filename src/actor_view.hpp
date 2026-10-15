@@ -1,7 +1,7 @@
 #pragma once
 void hero(float x,float y,float s,bool portrait) {
     AnimationState state=game.animation;
-    if(portrait){state.direction=Direction::SE;state.moving=false;state.phase=0;state.stopSprint();}
+    if(portrait){state.direction=Direction::SE;state.moving=false;state.phase=0;state.stopSprint();state.facingInitialized=state.motionInitialized=false;state.moveBlend=0;}
     float progress=portrait?-1:game.swingProgress();
     float attack=progress>=0?std::sin(progress*PI):0;
     float roll=portrait?-1:game.rollProgress();

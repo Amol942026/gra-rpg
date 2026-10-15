@@ -375,7 +375,7 @@ void drawUI(){
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.46",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.47",1370,885,10,Muted);
 }
 struct ItemTooltipText {std::string label,name,stat,description,instruction,chance,value;Color color;};
 ItemTooltipText itemTooltipText(Item value,Slot source){
@@ -612,7 +612,7 @@ int main(int argc,char**argv) {
     fs::path exe=fs::absolute(argv[0]).parent_path();
     if(fs::exists(exe/"assets"))fs::current_path(exe);
     else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
-    startupLog.open();startupLog.write("Emberfall v0.46: startup");
+    startupLog.open();startupLog.write("Emberfall v0.47: startup");
     startupLog.write(PlayerBuild?"Build edition: player":"Build edition: developer");
     SetTraceLogCallback(startupTrace);
     SetTraceLogLevel(LOG_INFO);
@@ -621,7 +621,7 @@ int main(int argc,char**argv) {
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
     SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
     startupLog.write("Creating graphics window");
-    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.46");
+    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.47");
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
     startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);

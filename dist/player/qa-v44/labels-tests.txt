@@ -1,4 +1,4 @@
-Capture directory: qa-v44/capture-1791997721380317000
+Capture directory: qa-v44/capture-1792065161626714000
 PASS: map-label diagnostics never open the audio device
 PASS: only the existing stairs and NPCs get labels on floor 1
 PASS: only the existing stairs and NPCs get labels on floor 2

@@ -1,0 +1,2 @@
+PASS: 15238 gameplay and animation checks
+Gotowe: dist\Emberfall.exe

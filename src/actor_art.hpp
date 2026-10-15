@@ -1,6 +1,7 @@
 #pragma once
 #include <type_traits>
 #include "sword_pose.hpp"
+#include "hero_motion.hpp"
 #include "shadow_geometry.hpp"
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 
@@ -19,10 +20,10 @@ struct P3 {
 struct WeaponPose {P3 hand,elbow,blade;};
 inline P3 swordPoint(sword_pose::Point p){return {p.r,p.f,p.z};}
 inline WeaponPose forwardStrike(float progress,float lift=0,bool heavy=false){
- auto pose=sword_pose::sample(progress,lift,heavy);
- return {swordPoint(sword_pose::turn(pose.hand,pose.torsoYaw)),
-         swordPoint(sword_pose::turn(pose.elbow,pose.torsoYaw)),
-         swordPoint(sword_pose::turn(pose.blade,pose.torsoYaw))};
+ (void)lift;auto pose=hero_motion::evaluate(0,0,0,0,progress,heavy);
+ auto hand=pose.world[hero_motion::data::HandR].p,elbow=pose.world[hero_motion::data::ForearmR].p;
+ auto v=sword_pose::idleBlade(0);auto blade=pose.vector(hero_motion::data::Weapon,{v.r,v.f,v.z});
+ return {{hand.x,hand.y,hand.z},{elbow.x,elbow.y,elbow.z},{blade.x,blade.y,blade.z}};
 }
 
 struct Face {
@@ -37,6 +38,7 @@ class Rig {
     float x, y, scale, fx, fy, rx, ry;
     float rollAngle=0, tuck=0,runLean=0,runSin=0,runCos=1,bodySin=0,bodyCos=1;
     bool smoothSurfaces=false,bodyRotating=false;
+    const hero_motion::Pose* skeleton=nullptr;int skinBone=-1;
     std::vector<Face> faces;
     shadow_geometry::Polygons shadowFaces;
     bool collectShadow=false,closedShadow=false;
@@ -48,10 +50,24 @@ public:
         float len=std::hypot(fx,fy);fx/=len;fy/=len;rx=fy;ry=-fx;
         faces.reserve(320);
     }
+    void setSkeleton(const hero_motion::Pose* pose){skeleton=pose;skinBone=-1;}
+    void setBone(int bone){skinBone=bone;}
+    void setFacing(float angle){
+        fx=std::cos(angle);fy=std::sin(angle)/.52f;
+        float n=std::hypot(fx,fy);fx/=n;fy/=n;rx=fy;ry=-fx;
+    }
     void setSmoothSurfaces(){smoothSurfaces=true;}
     void setRun(float amount){runLean=std::clamp(amount,0.f,1.f)*.12f;runSin=std::sin(runLean);runCos=std::cos(runLean);}
     void setBodyYaw(float angle){bodyRotating=angle!=0;if(bodyRotating){bodySin=std::sin(angle);bodyCos=std::cos(angle);}else{bodySin=0;bodyCos=1;}}
-    P3 bodyPoint(P3 p)const{if(!bodyRotating)return p;return {p.r*bodyCos+p.f*bodySin,p.f*bodyCos-p.r*bodySin,p.z};}
+    P3 bodyPoint(P3 p)const{
+        if(skeleton&&skinBone>=0){auto v=skeleton->point(skinBone,{p.r,p.f,p.z});return {v.x,v.y,v.z};}
+        if(skeleton&&skinBone==-2){
+            float w=std::clamp((p.z-15)/43.f,0.f,1.f);
+            auto v=skeleton->point(hero_motion::data::Pelvis,{p.r,p.f,p.z})*(1-w)+skeleton->point(hero_motion::data::Spine,{p.r,p.f,p.z})*w;
+            return {v.x,v.y,v.z};
+        }
+        if(!bodyRotating)return p;return {p.r*bodyCos+p.f*bodySin,p.f*bodyCos-p.r*bodySin,p.z};
+    }
     void setRoll(float progress,float amount) {rollAngle=progress*2*PI;tuck=amount;}
     P3 rollPoint(P3 p) const {
         if(runLean>0&&p.z>35){
@@ -152,7 +168,10 @@ public:
     }
     void reserve(size_t count){faces.reserve(count);}
     float surfaceLight(P3 normal)const{
-        normal=bodyPoint(normal);
+        if(skeleton&&skinBone!=-1){
+            int bone=skinBone>=0?skinBone:hero_motion::data::Spine;
+            auto n=skeleton->vector(bone,{normal.r,normal.f,normal.z});normal={n.x,n.y,n.z};
+        }else if(bodyRotating)normal={normal.r*bodyCos+normal.f*bodySin,normal.f*bodyCos-normal.r*bodySin,normal.z};
         return .83f+.18f*(normal.r*rx+normal.f*fx)+.29f*normal.z+.08f*(normal.r*fx-normal.f*rx);
     }
     // The hero is seen in close-up as well as on the map. Cached sphere normals
@@ -303,15 +322,14 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     const Color metal=flash?Text:rgb(144,169,159),cloth=species==7?rgb(125,64,48):rgb(49,102,94),leather=rgb(88,68,48);
     const Color stone=flash?Text:rgb(104,133,123),fur=flash?Text:rgb(131,148,140);
     Rig working(x,y,size*bodyScale,state.direction);
+    if(state.facingInitialized)working.setFacing(state.facingAngle);
     Rig* cached=nullptr;
     if(!shadowBuilding&&!probe&&shadowCacheKey>=0)for(auto& entry:frameRigs)if(entry.first==shadowCacheKey){cached=&entry.second;break;}
     Rig& rig=cached?*cached:working;
     if(!cached){
-    if(rolling)rig.setRoll(roll,tuck);
-    if(species==0)rig.setRun(run);
 
     if(species==0){
-        buildHero(rig,lift,stride,cycle,tuck,attack,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered);
+        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll);
     } else if(species>=9){
         buildDesert(rig,species-1,state,attack,flash);
     } else if(species==1){

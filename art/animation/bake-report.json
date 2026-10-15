@@ -1,0 +1,44 @@
+{
+  "blender": "4.5.7 LTS",
+  "bones": 17,
+  "clips": [
+    {
+      "name": "Idle",
+      "duration": 2,
+      "frames": 121,
+      "loop": true
+    },
+    {
+      "name": "Walk",
+      "duration": 0.85,
+      "frames": 121,
+      "loop": true
+    },
+    {
+      "name": "Run",
+      "duration": 0.57,
+      "frames": 121,
+      "loop": true
+    },
+    {
+      "name": "Slash",
+      "duration": 0.32,
+      "frames": 121,
+      "loop": false
+    },
+    {
+      "name": "Heavy",
+      "duration": 0.5,
+      "frames": 121,
+      "loop": false
+    },
+    {
+      "name": "Roll",
+      "duration": 0.4,
+      "frames": 121,
+      "loop": false
+    }
+  ],
+  "audio": "disabled",
+  "runtime": "compiled parent-local quaternion poses; no Blender dependency"
+}
