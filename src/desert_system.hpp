@@ -6,7 +6,7 @@ void buildDesert(){
  float hp=enemyInfo(DesertBossType).health;enemies.push_back({DesertBossId,DesertBossType,DesertBossHome,DesertBossHome,hp,hp});
  for(int x=3;x<MapSize-3;x++)for(int y=3;y<MapSize-3;y++){
   V p{float(x),float(y)};unsigned h=hash(x+91,y+137);
-  if(h%13||desertPath(p)||distance(p,DesertArrival)<6||distance(p,DesertOasis)<5.6f||distance(p,DesertBossHome)<6.8f)continue;
+  if(h%13||desertPath(p)||nearTreasure(p,WorldLocation::Desert)||distance(p,DesertArrival)<6||distance(p,DesertOasis)<5.6f||distance(p,DesertBossHome)<6.8f)continue;
   bool clear=true;for(const auto& e:enemies)if(distance(p,e.home)<e.radius()+2.5f)clear=false;
   if(clear){const int types[]={7,7,8,9,9,11};props.push_back({p,types[(h>>8)%6],.8f+(h%6)*.065f});}
  }
@@ -23,7 +23,7 @@ bool activateField(WorldLocation next){
   enemies=std::move(restore.enemies);props=std::move(restore.props);forage=std::move(restore.forage);
   fieldLocation=next;if(next==WorldLocation::Desert&&!desertCreated)buildDesert();
  }
- if(location!=next)clearSandPrison();location=next;towerFloor=0;return true;
+ if(location!=next){clearSandPrison();closeCorpse();}location=next;towerFloor=0;return true;
 }
 bool canTravelDesert()const{return mageReachable()&&dawnFragments()>=1;}
 bool travelToDesert(){

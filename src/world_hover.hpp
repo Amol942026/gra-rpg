@@ -28,6 +28,7 @@ std::vector<DrawObject> worldDrawOrder() {
     for(int i=0;i<int(game.enemies.size());i++)
         objects.push_back({game.enemies[i].pos.x+game.enemies[i].pos.y+(game.enemies[i].alive?0.f:-.03f),game.enemies[i].alive?1:4,i});
     objects.push_back({game.player.x+game.player.y,2,0});
+    for(int i=0;i<TreasureCount;i++)if(game.chests[i].location==game.location)objects.push_back({game.chests[i].pos.x+game.chests[i].pos.y,9,i});
     for(int i=0;i<int(game.fireballs.size());i++)objects.push_back({game.fireballs[i].pos.x+game.fireballs[i].pos.y,3,i});
     for(int i=0;i<int(game.arrows.size());i++)objects.push_back({game.arrows[i].pos.x+game.arrows[i].pos.y,5,i});
     std::stable_sort(objects.begin(),objects.end(),[](const auto& a,const auto& b){return a.depth<b.depth;});
@@ -69,7 +70,10 @@ WorldHover pickWorld(Vector2 point) {
     for(auto it=objects.rbegin();it!=objects.rend();++it){
         if(it->type==3||it->type==5)continue; // Projectiles do not obstruct mouse inspection.
         V position{};bool touched=false;HoverKind kind=HoverKind::None;int id=it->index;
-        if(it->type==6){
+        if(it->type==9){
+            const auto& chest=game.chests[it->index];position=chest.pos;id=chest.id;kind=HoverKind::Chest;
+            touched=treasureContains(chest,point);
+        }else if(it->type==6){
             position=MagePosition;Vector2 p=screen(position);kind=HoverKind::Mage;
             float dx=(point.x-p.x+4)/30,dy=(point.y-p.y+62)/62;
             touched=dx*dx+dy*dy<=1||CheckCollisionPointRec(point,{p.x-47,p.y-112,12,112});
@@ -100,7 +104,7 @@ WorldHover pickWorld(Vector2 point) {
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){
                 float progress=game.swingProgress();float attack=progress>=0?std::sin(progress*PI):0;
-                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,&point,game.rollProgress(),progress,game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),game.empoweredPose());
+                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,&point,game.rollProgress(),progress,game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),game.empoweredPose(),&game.equipment);
             }
         }
         if(touched){
@@ -139,6 +143,7 @@ void drawHoveredName() {
     if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage&&hovered.kind!=HoverKind::Mage&&hovered.kind!=HoverKind::TowerObject&&hovered.kind!=HoverKind::TowerStair)return;
     std::string name;Color color=Gold;
     if(hovered.kind==HoverKind::TowerStair){name=hovered.index==1?"Schody w górę · E / PPM":"Schody w dół · E / PPM";}
+    else if(hovered.kind==HoverKind::Chest){name="Skrzynia skarbów · E / LPM / PPM";}
     else if(hovered.kind==HoverKind::TowerObject){const auto& object=towerFurnishings(game.towerFloor)[hovered.index];name=towerObjectName(object.type);if(towerInteractive(object.type))name+=" · E / PPM";}
     else if(hovered.kind==HoverKind::Mage){name=game.mageReachable()?"Eldrin · E / PPM: porozmawiaj":"Eldrin · podejdź bliżej";}
     else if(hovered.kind==HoverKind::Enemy){

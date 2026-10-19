@@ -1,0 +1,22 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 701
+Connection: keep-alive
+Date: Fri, 16 Oct 2026 12:49:27 GMT
+x-figma-rest-api-request-id: 76687422-c29a-461e-bd4e-87ec29f4b360
+access-control-allow-origin: *
+access-control-allow-headers: Content-Type, Authorization
+access-control-expose-headers: Retry-After, X-Figma-Plan-Tier, X-Figma-Rate-Limit-Type, X-Figma-Upgrade-Link
+Cache-Control: no-cache, no-store
+access-control-allow-methods: GET, OPTIONS
+ETag: W/"2bd-evIwHxohSzBopp1JF9N7ITSs6Dw"
+x-content-type-options: nosniff
+Vary: X-Figma-Token,Authorization,Accept-Encoding
+X-Cache: Miss from cloudfront
+Via: 1.1 973ba1a14b3ee409c424730df6f1e51c.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: ARN56-P2
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: Sp_I5qEcIeNb3WqewA9TMh5mdj1t2zLi_aX0ckQUGGr9LU6PA9Npiw==
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Server-Timing: cdn-upstream-layer;desc="REC",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=144,proxy;dur=2,cdn-cache-miss,cdn-pop;desc="ARN56-P2",cdn-rid;desc="Sp_I5qEcIeNb3WqewA9TMh5mdj1t2zLi_aX0ckQUGGr9LU6PA9Npiw==",cdn-downstream-fbl;dur=173
+

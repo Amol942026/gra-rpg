@@ -43,6 +43,7 @@ inline V normalized(V v){float n=length(v);return n>.001f?v*(1/n):V{};}
 #include "tower_layout.hpp"
 #include "desert_layout.hpp"
 enum class WorldLocation {Forest,MageTower,Desert};
+#include "treasure.hpp"
 enum class DawnQuest {Seeking,Returning,AtTower};
 struct Ground { int id; Item value; V pos; WorldLocation location=WorldLocation::Forest; int floor=0; };
 struct Prop { V pos; int type; float size; };
@@ -81,9 +82,25 @@ inline float segmentCircle(V start,V delta,V center,float radius){
  if(discriminant<0)return 2;
  float t=(-b-std::sqrt(discriminant))/a;return t>=0&&t<=1?t:2;
 }
-enum class Place { None,Bag,Equip,Ground,Corpse,Forage };
+enum class Place { None,Bag,Equip,Ground,Corpse,Forage,Chest };
 struct Slot { Place place=Place::None; int index=-1; int owner=-1; };
 struct Game {
+ std::array<TreasureChest,TreasureCount> chests{};int openedChest=-1;
+ TreasureChest* findChest(int id){for(auto& c:chests)if(c.id==id&&c.location==location)return &c;return nullptr;}
+ const TreasureChest* findChest(int id)const{for(const auto& c:chests)if(c.id==id&&c.location==location)return &c;return nullptr;}
+ bool chestReachable(int id)const{auto* c=findChest(id);return c&&distance(player,c->pos)<=ChestUseRange;}
+ bool openChest(int id){
+  auto* chest=findChest(id);
+  if(!chest||dead()||allocationRequired||storyBlocked()||rolling()||sandTrapped())return false;
+  if(!chestReachable(id)){say("Podejdź do skrzyni (maks. 2,5 pola).");return false;}
+  cancelBow();openedCorpse=-1;openedChest=id;chest->opened=true;sound(Cue::Ui,player);
+  say("Skrzynia otwarta. Przeciągnij wyposażenie do plecaka.");return true;
+ }
+ bool openNearestChest(){
+  int id=-1;float nearest=ChestUseRange;
+  for(const auto& c:chests)if(c.location==location){float d=distance(player,c.pos);if(d<=nearest){nearest=d;id=c.id;}}
+  return id>=0&&openChest(id);
+ }
  std::mt19937 rng{12593},combatRng{12593};
  // Separate attack rolls from loot: one independent 5% roll per successful attack.
  bool rollCritical(){return std::uniform_int_distribution<int>(1,100)(combatRng)<=CriticalChancePercent;}
@@ -137,6 +154,7 @@ struct Game {
  int openedCorpse=-1;
  std::string message="Ruiny czekają. PPM na ciele potwora otwiera jego łup.";float messageTime=8;
  explicit Game(unsigned seed=12593):rng(seed),combatRng(seed){
+  chests=makeTreasure(seed);
   equipment[0]=item(Kind::Sword);equipment[3]=item(Kind::Armor);
   bag[0]=item(Kind::Health,0,5);bag[1]=item(Kind::Mana,0,3);bag[2]=item(Kind::Shield);bag[3]=item(Kind::Boots);bag[4]=item(Kind::Bow);bag[5]=item(Kind::Arrow,0,20);
   weaponWheel[0]={Kind::Sword,0};weaponWheel[1]={Kind::Bow,0};
@@ -146,7 +164,7 @@ struct Game {
   for(int x=2;x<MapSize-2;x++)for(int y=2;y<MapSize-2;y++){
    unsigned h=hash(x,y);V p{float(x),float(y)};ForestZone zone=forestZone(p);
    int density=zone==ForestZone::Ruins?17:zone==ForestZone::Wolves?14:zone==ForestZone::Heart?10:zone==ForestZone::Trail?16:12;
-   if(h%density!=0||onPath(x,y)||forestClearing(p))continue;
+   if(h%density!=0||onPath(x,y)||forestClearing(p)||nearTreasure(p,WorldLocation::Forest))continue;
    bool near=false;for(auto&e:enemies)if(distance(p,e.home)<2.2f)near=true;
    const int mixed[]={0,4,5,0,4,5,1,2},birches[]={4,4,4,5,4,0,1,2},pines[]={0,0,0,0,5,0,1,2},oaks[]={5,5,0,5,5,4,1,2};
    const int* varieties=zone==ForestZone::Birches||zone==ForestZone::Grove?birches:zone==ForestZone::Wolves?pines:zone==ForestZone::Heart?oaks:mixed;
@@ -162,7 +180,7 @@ struct Game {
   std::mt19937 plants(seed^0x6d757368u);std::uniform_real_distribution<float> coordinate(3.f,MapSize-4.f);
   for(int attempt=0;attempt<10000&&int(forage.size())<MushroomCount;attempt++){
    V pos{coordinate(plants),coordinate(plants)};
-   if(!walkable(pos)||onPath(int(std::round(pos.x)),int(std::round(pos.y)))||distance(pos,player)<3.5f)continue;
+   if(!walkable(pos)||nearTreasure(pos,WorldLocation::Forest,1.5f)||onPath(int(std::round(pos.x)),int(std::round(pos.y)))||distance(pos,player)<3.5f)continue;
    bool clear=true;for(const auto& p:props)if(distance(pos,p.pos)<std::max(2.2f,propRadius(p.type)+.8f))clear=false;
    for(const auto& e:enemies)if(distance(pos,e.home)<1.4f)clear=false;
    for(const auto& mushroom:forage)if(distance(pos,mushroom.pos)<2.2f)clear=false;
@@ -191,6 +209,12 @@ struct Game {
  bool chooseSpell(Spell choice){if(choice!=Spell::Fireball&&choice!=Spell::None)return false;selectedSpell=choice;return true;}
  bool dead()const{return hp<=0;}
  bool rolling()const{return rollRemaining>0;}
+ bool combatFacingActive()const{return bowDrawing||bowReleaseTime>0||swing>0;}
+ void aimMelee(V aim){
+  if(length(aim)<.001f)return;
+  facing=normalized(aim);
+  animation.face(facing.x,facing.y);
+ }
  float swingProgress()const{return swing>0?std::clamp(1-swing/meleeDuration,0.f,1.f):-1.f;}
  float rollProgress()const{return rolling()?1-rollRemaining/RollDuration:-1.f;}
  bool startRoll(V input){
@@ -208,19 +232,22 @@ struct Game {
  bool openCorpse(int id){
   if(dead()||allocationRequired||storyBlocked()||inTower()||!findCorpse(id))return false;
   if(!corpseReachable(id)){say("Podejdź do ciała (maks. 2,5 pola).");return false;}
-  openedCorpse=id;sound(Cue::Ui,player);return true;
+  openedChest=-1;openedCorpse=id;sound(Cue::Ui,player);return true;
  }
- void closeCorpse(){openedCorpse=-1;}
- Item* get(Slot s){if(s.place==Place::Bag&&s.index>=0&&s.index<BagSize)return &bag[s.index];if(s.place==Place::Equip&&s.index>=0&&s.index<EquipSize)return &equipment[s.index];if(s.place==Place::Forage&&!inTower())for(auto&g:forage)if(g.id==s.index)return &g.value;if(s.place==Place::Ground)for(auto&g:ground)if(g.id==s.index&&groundVisible(g))return &g.value;if(s.place==Place::Corpse&&!inTower()&&s.index>=0&&s.index<CorpseLootSize)if(Enemy* e=findCorpse(s.owner))return &e->loot[s.index];return nullptr;}
- bool reachable(Slot s)const{if(s.place==Place::Corpse)return corpseReachable(s.owner);if(s.place==Place::Forage){if(inTower())return false;for(const auto&g:forage)if(g.id==s.index)return distance(player,g.pos)<=2.5f;return false;}if(s.place!=Place::Ground)return true;for(const auto&g:ground)if(g.id==s.index&&groundVisible(g))return distance(player,g.pos)<=2.5f;return false;}
+ void closeCorpse(){openedCorpse=-1;openedChest=-1;}
+ Item* get(Slot s){
+  if(s.place==Place::Chest){auto* c=findChest(s.owner);return c&&c->opened&&s.index>=0&&s.index<ChestLootSize?&c->loot[s.index]:nullptr;}
+  if(s.place==Place::Bag&&s.index>=0&&s.index<BagSize)return &bag[s.index];if(s.place==Place::Equip&&s.index>=0&&s.index<EquipSize)return &equipment[s.index];if(s.place==Place::Forage&&!inTower())for(auto&g:forage)if(g.id==s.index)return &g.value;if(s.place==Place::Ground)for(auto&g:ground)if(g.id==s.index&&groundVisible(g))return &g.value;if(s.place==Place::Corpse&&!inTower()&&s.index>=0&&s.index<CorpseLootSize)if(Enemy* e=findCorpse(s.owner))return &e->loot[s.index];return nullptr;
+ }
+ bool reachable(Slot s)const{if(s.place==Place::Chest)return openedChest==s.owner&&chestReachable(s.owner);if(s.place==Place::Corpse)return corpseReachable(s.owner);if(s.place==Place::Forage){if(inTower())return false;for(const auto&g:forage)if(g.id==s.index)return distance(player,g.pos)<=2.5f;return false;}if(s.place!=Place::Ground)return true;for(const auto&g:ground)if(g.id==s.index&&groundVisible(g))return distance(player,g.pos)<=2.5f;return false;}
  static bool accepts(Slot s,Item i){if(!i.empty()&&i.kind==Kind::DawnShard&&s.place!=Place::Bag&&s.place!=Place::Corpse)return false;return s.place!=Place::Equip||i.empty()||gearSlot(i.kind)==s.index;}
  bool transfer(Slot from,Slot to){
-  if(dead()||allocationRequired||storyBlocked()||(from.place==to.place&&from.index==to.index&&from.owner==to.owner)||to.place==Place::Corpse||to.place==Place::Forage)return false;
+  if(dead()||allocationRequired||storyBlocked()||(from.place==to.place&&from.index==to.index&&from.owner==to.owner)||to.place==Place::Corpse||to.place==Place::Forage||to.place==Place::Chest)return false;
   Item* a=get(from);Item* b=get(to);if(!a||!b||a->empty())return false;
   const Enemy* sourceBody=from.place==Place::Corpse?findCorpse(from.owner):nullptr;
   const bool collectingShard=a->kind==Kind::DawnShard&&to.place==Place::Bag&&sourceBody&&
    ((location==WorldLocation::Forest&&sourceBody->type==3&&dawnFragments()<1)||(inDesert()&&sourceBody->type==DesertBossType&&dawnFragments()<2));
-  if(from.place==Place::Corpse||from.place==Place::Forage){
+  if(from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest){
    if(from.place==Place::Corpse&&openedCorpse!=from.owner)return false;
    if(to.place!=Place::Bag||(!b->empty()&&(!stackable(a->kind)||a->kind!=b->kind||a->tier!=b->tier))){say("Przeciągnij łup na wolne pole plecaka lub pasujący stos.");return false;}
   }
@@ -233,8 +260,8 @@ struct Game {
   if(collectingShard){collectedFragments=inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");}
   else say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
  }
- bool drop(Slot from,V p){Item* a=get(from);if(a&&a->kind==Kind::DawnShard){say("Serce Świtu jest zbyt cenne, by je porzucić.");return false;}if((from.place==Place::Corpse||from.place==Place::Forage)||dead()||allocationRequired||storyBlocked()||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0)cancelBow();Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
- bool use(Slot s){if(s.place==Place::Forage){say("Najpierw zbierz grzyb do plecaka.");return false;}Item* a=get(s);if(s.place==Place::Corpse||dead()||allocationRequired||storyBlocked()||potionCd>0||!a||a->empty()||!reachable(s))return false;
+ bool drop(Slot from,V p){Item* a=get(from);if(a&&a->kind==Kind::DawnShard){say("Serce Świtu jest zbyt cenne, by je porzucić.");return false;}if((from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest)||dead()||allocationRequired||storyBlocked()||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0)cancelBow();Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
+ bool use(Slot s){if(s.place==Place::Forage){say("Najpierw zbierz grzyb do plecaka.");return false;}Item* a=get(s);if(s.place==Place::Corpse||s.place==Place::Chest||dead()||allocationRequired||storyBlocked()||potionCd>0||!a||a->empty()||!reachable(s))return false;
   bool mushroom=a->kind==Kind::Mushroom;
   if(mushroom){if(hp>=maxHp()){say("Zdrowie jest już pełne.");return false;}float restored=std::min(float(MushroomHealing),float(maxHp())-hp);hp+=restored;effects.push_back({player,"+"+std::to_string(int(restored))+" HP",1.3f,1});}
   else if(a->kind==Kind::Health){if(hp>=maxHp()){say("Zdrowie jest już pełne.");return false;}hp=std::min(float(maxHp()),hp+50);effects.push_back({player,"+50 HP",1.3f,1});}
@@ -246,8 +273,8 @@ struct Game {
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
- bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&desertWater(p))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
- void move(V delta){if(sandTrapped())return;V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(length(delta)>.001f)facing=normalized(delta);}
+ bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&desertWater(p))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
+ void move(V delta){if(sandTrapped())return;V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(length(delta)>.001f&&!combatFacingActive())facing=normalized(delta);}
  Enemy* findEnemy(int id){for(auto&e:enemies)if(e.id==id&&e.alive)return &e;return nullptr;}
  void hit(Enemy& e,float amount,DamageType type=DamageType::Physical,bool critical=false){
   if(!e.alive)return;
@@ -264,8 +291,9 @@ struct Game {
   else say("Przeciwnik pokonany. Otwórz jego ciało prawym przyciskiem myszy.");
   while(xp>=level*80){xp-=level*80;level++;attributePoints+=PointsPerLevel;skillPoints+=SkillPointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
  }
- bool attack(){
+ bool attack(V aim={}){
   if(sandTrapped()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)==Kind::Bow)return false;
+  aimMelee(aim);
   attackCd=.46f;meleeDuration=SwingDuration;swingStrong=false;swing=SwingDuration;sound(Cue::Swing,player);
   // Capture once: a kill can level up the player during this same swing.
   const float amount=float(damage());const bool critical=rollCritical();
@@ -383,9 +411,14 @@ struct Game {
   const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(running?RunMultiplier:1.f)*(bowDrawing?.55f:1.f);
   move(normalized(input)*(walkTime*speed));
   if(openedCorpse>=0&&!corpseReachable(openedCorpse))closeCorpse();
-  if(wasRolling){animation.stopSprint();animation.advance(0,0,dt);animation.face(rollDirection.x,rollDirection.y);}
-  else animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing);
-  if(bowDrawing)animation.face(bowAim.x,bowAim.y);
+  if(openedChest>=0&&!chestReachable(openedChest))openedChest=-1;
+  if(wasRolling){animation.stopSprint();animation.face(rollDirection.x,rollDirection.y);animation.advance(0,0,dt);}
+  else {
+   // Resolve combat aim before smoothing; locomotion still advances the gait.
+   const bool aiming=combatFacingActive();
+   if(bowDrawing||bowReleaseTime>0)animation.face(bowAim.x,bowAim.y);
+   animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing,!aiming);
+  }
   if(!wasRolling){stepDistance+=distance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
   if(mana<maxMana()){
    manaRegenTime+=dt;

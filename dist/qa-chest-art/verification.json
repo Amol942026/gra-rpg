@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "fix": "Replaced dark chest panel with transparent original Krita sprite atlas",
+  "states": [
+    "closed",
+    "open_treasure",
+    "open_empty"
+  ],
+  "master": "C:\\AI2D\\sprites\\emberfall_treasure_chests_20261019_v1.kra",
+  "authoring": "Native Krita MCP; 17 layers; no external or paid assets",
+  "gameplayChecks": 74938,
+  "graphicsAndInteractionChecks": 66,
+  "extractedPackageChecks": 66,
+  "startupFrames": 180,
+  "noAudio": true,
+  "audioDeviceOpened": false,
+  "atlas": "assets/sprites/treasure-chests.png",
+  "atlasSHA256": "521EDE05B9B7C03809271D2D6D5A2DB16D95A1C2567E6388C1D3B0561611321A",
+  "packageSHA256": "3CA100C412423CA5055F4E0EEFC1F3CB694E61EDF012513594EBD1AF4A671736",
+  "textureBytes": 786432,
+  "loads": "Once during makeArt; released during shutdown",
+  "visualReview": [
+    "dist/qa-treasure/chest-0-closed.png",
+    "dist/qa-treasure/chest-2-loot.png"
+  ],
+  "regressionCoverage": [
+    "GPU transparency without black panel",
+    "three artwork states",
+    "four chest locations",
+    "loot transfer",
+    "empty persistence",
+    "alpha-aware picking",
+    "foreground tree occlusion"
+  ]
+}

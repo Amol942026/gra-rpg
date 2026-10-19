@@ -57,7 +57,7 @@ void drawTowerChamber(){
     }
     AnimationState pose;pose.direction=Direction::E;pose.idleTime=t;
     actor_art::shadowCacheKey=0;
-    actor_art::draw(0,510,532,2.5f,pose,0,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind));
+    actor_art::draw(0,510,532,2.5f,pose,0,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,nullptr,-1,-1,-1,game.ammoCount(),false,&game.equipment);
     actor_art::shadowCacheKey=-1;
     drawStoryMage(930,505,2.7f,t,0);
     if(towerStory.phase==TowerPhase::Opening)intro_art::column({510,539},t,1-storyEase(towerStory.age/TowerSequence::OpeningTime));

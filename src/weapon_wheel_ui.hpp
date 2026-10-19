@@ -51,7 +51,7 @@ void drawBowHud(){
  txt(TextFormat("STRZAŁY  %d",game.ammoCount()),207,119,16,game.ammoCount()>0?Gold:rgb(236,132,105));
  if(game.bowDrawing){bar(335,124,170,8,game.bowCharge(),1,Gold);txt(TextFormat("%.0f%%  ·  ZASIĘG %.1f",game.bowCharge()*100,Game::bowRange(game.bowCharge())),520,119,14,Gold);}
  if(!worldPointerAllowed(mouse)||dragging.place!=Place::None||game.dead())return;
- float charge=game.bowDrawing?game.bowCharge():0;V direction=game.bowDrawing?game.bowAim:normalized(bowAimFromPointer());
+ float charge=game.bowDrawing?game.bowCharge():0;V direction=game.bowDrawing?game.bowAim:normalized(combatAimFromPointer());
  Color color=game.ammoCount()>0?(game.piercingArrowArmed?rgb(126,215,232):Gold):rgb(236,132,105);clip(0,116,WorldW,678);
  if(game.bowDrawing){float range=Game::bowRange(charge);int dots=std::max(2,int(range*3));
   for(int i=1;i<=dots;i++){Vector2 p=screen(game.player+direction*(range*i/dots));DrawCircleV({p.x,p.y-35},i==dots?4:1.6f,Fade(color,i==dots?.9f:.5f));}

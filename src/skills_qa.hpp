@@ -39,7 +39,7 @@ bool runSkillsQA(){
  check(game.piercingArrowArmed&&game.mana==mana&&game.ammoCount()==ammo,"HUD piercing click arms shot without early mana or arrow cost");
  Vector2 aim=screen(game.enemies[0].pos);mouse={aim.x,aim.y-18};leftClickGameplay({});
  check(game.bowDrawing&&game.piercingArrowArmed,"normal LPM world input charges prepared piercing shot");
- for(int i=0;i<42;i++){game.aimBow(bowAimFromPointer());game.update(1.f/60,{},false);}
+ for(int i=0;i<42;i++){game.aimBow(combatAimFromPointer());game.update(1.f/60,{},false);}
  renderScene();saveTexture(canvas,"qa-v27/piercing-draw.png");float expected=game.arrowDamage(game.bowCharge());
  check(releaseWorldBow()&&game.arrows.size()==1&&game.arrows[0].piercing&&game.arrows[0].damage==expected&&game.mana==mana-20&&game.ammoCount()==ammo-1,"release spends twenty mana and one arrow while retaining normal charged-shot damage");
  game.updateArrows(.04f);renderScene();saveTexture(canvas,"qa-v27/piercing-flight.png");game.updateArrows(.6f);

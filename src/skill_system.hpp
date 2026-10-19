@@ -23,8 +23,9 @@ bool skillAllowed(Skill skill)const{
 }
 bool strongSwingActive()const{return swingStrong&&swing>0;}
 bool empoweredPose()const{return (archetype(equipment[0].kind)==Kind::Sword&&strongSwingActive())||(archetype(equipment[0].kind)==Kind::Bow&&(piercingArrowArmed||(lastBowPiercing&&bowReleaseTime>0)));}
-bool strongCut(){
+bool strongCut(V aim={}){
  if(!skillAllowed(Skill::StrongCut))return false;
+ aimMelee(aim);
  mana-=StrongCutCost;strongCutCd=StrongCutCooldown;attackCd=.6f;meleeDuration=StrongCutDuration;swing=StrongCutDuration;swingStrong=true;sound(Cue::Swing,player);
  // Capture damage before a kill can award a level during this same area cut.
  const float amount=strongCutDamage();const bool critical=rollCritical();

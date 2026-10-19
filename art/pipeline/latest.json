@@ -1,0 +1,131 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-10-19T18:09:10.043459+02:00",
+  "pipeline_report": "C:\\AI2D\\pipeline\\runs\\media_20261019_175901_828feb\\report.json",
+  "acceptance_report": "C:\\AI2D\\pipeline\\acceptance_c6301d9576\\acceptance-report.json",
+  "retention_report": "C:\\AI2D\\pipeline\\close_recovery_412b03e1a6\\report.json",
+  "independent_checks": 15,
+  "retention_checks": 4,
+  "connected_programs": 6,
+  "raylib": {
+    "status": "PASS",
+    "images": 3,
+    "audio_files": 5,
+    "audio_device_opened": false,
+    "game_rebuilt": false
+  },
+  "imported_pack": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb",
+  "runtime_files": 10,
+  "scripts": [
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\asset_tools.py",
+      "sha256": "3a891716de08fbe331a70ada02e40abf067cdb0904bb0cc8c0adb3d43a715f97",
+      "bytes": 6989
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\audio_tools.py",
+      "sha256": "68608395ab347a2e3c068b55fd11c9f67f2eb0ba4817610e4c61bedf8ea20ef2",
+      "bytes": 5756
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\create_krita_sprite.py",
+      "sha256": "40064156b8827fa20fde28c1f1fd09a878eb6973416f77c8871ad1b44ec2289d",
+      "bytes": 5686
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\game_import.py",
+      "sha256": "d1d12f44e067747733f215a68fefe9306559e139f0b61d866d3f2146cb3fd8f0",
+      "bytes": 8609
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\krita_mcp_client.py",
+      "sha256": "81d99950cf33bee5dfe75a9ef3695941ff0bbc9b71df5caeb8e7c17b01162964",
+      "bytes": 7620
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\media_pipeline.py",
+      "sha256": "6e4ca5836b562e43b94eb747a8e3a9495bd856359125e9cabd675dd6cdf923c2",
+      "bytes": 21376
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\offline_audio.py",
+      "sha256": "8d01fb3b1a1d8c30f7e7e31d7b6671c31552100304231a2ced54595e42e33e58",
+      "bytes": 4925
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\test_audacity_close.py",
+      "sha256": "6f1a07a2f9e6e78fa9d587115051fe0426b7ffc7e3fbbe2c5176598c8a48c4e2",
+      "bytes": 2937
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\test_media_pipeline.py",
+      "sha256": "9d4da47b8586eec8d818a0f017c837c46648915184a07ddd22f967d98064af92",
+      "bytes": 7220
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\Run-MediaPipeline.ps1",
+      "sha256": "f19a0affde63b364b533740e77becfd2a200551e898b3b735aec009d5e76ee8c",
+      "bytes": 906
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\runtime_atlas.hpp",
+      "sha256": "be63f0f8212d41a28d98803afdf4fe81ddba48f1b354f4f5e8cf9751cc6c50d3",
+      "bytes": 1338
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\tools\\media\\asset_probe.cpp",
+      "sha256": "0e922a3ef55290aa3eee5e5001151088b7439a2410c88816785e01be67c6b490",
+      "bytes": 1443
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\AGENTS.md",
+      "sha256": "3c612dbfab7336f03227e8a02cb26e533ac1d888bb595374f47a20b7902c35fd",
+      "bytes": 9874
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\STYLE.md",
+      "sha256": "728c6b028d650fc132767d7f83cb68ab0d3b2acd6b7e13e8cf35cbd9ba1fcbba",
+      "bytes": 4243
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\ASSET_PIPELINE.md",
+      "sha256": "ef3c1e19639836f300c1b029d8168ab70c67d28ee9b98a66c46f5e2802a434c6",
+      "bytes": 10407
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\REPORT.md",
+      "sha256": "ba1841fa02bb9aae6f1fbeee0cd9197bc4349130f9613445bfb4b43a5c813b71",
+      "bytes": 6152
+    },
+    {
+      "path": "C:\\AI2D\\audio\\scripts\\audacity_control.py",
+      "sha256": "de7c4ef08b638973b1e3a6a1fc8a735604cdd2e0ebdf7a804375f9219b9e3652",
+      "bytes": 20803
+    },
+    {
+      "path": "C:\\AI2D\\audio\\scripts\\audacity_workflow.py",
+      "sha256": "810cc155d816e54237c9d9429c5bbf98b882f6f89b95a10b16b5ca17573c3bba",
+      "bytes": 15599
+    },
+    {
+      "path": "C:\\AI2D\\audio\\scripts\\audacity_process.py",
+      "sha256": "af3d03e5383465add6f4b452a467181a03048f3ae6b6b4bdb81bf203ac9ff0ee",
+      "bytes": 5961
+    },
+    {
+      "path": "C:\\AI2D\\audio\\scripts\\README-Audacity.md",
+      "sha256": "bf7daf4e0b8e0637bf7b3fcb23de5e2a71332e995e8af2a3bce3d12c60dd7e02",
+      "bytes": 12588
+    }
+  ],
+  "audio_played": false,
+  "game_rebuilt": false,
+  "existing_game_audio_and_executable_unchanged": true,
+  "limits": [
+    "The existing game has no runtime material-map shader: maps are baked offline.",
+    "The atlas adapter is ready; this test does not replace procedural actors or rebuild the game.",
+    "Event deployment was tested in an isolated fixture; production sounds stay unchanged.",
+    "Audacity saved projects are retained to avoid a native project-close crash; excess work uses FFmpeg.",
+    "Technical audio checks were silent; no artistic listening assessment was performed."
+  ]
+}

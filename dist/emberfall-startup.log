@@ -1,48 +1,50 @@
-1 ms: Emberfall v0.47: startup
-1 ms: Build edition: developer
-1 ms: Creating graphics window
-1 ms: Initializing raylib 5.5
-1 ms: Platform backend: DESKTOP (GLFW)
-1 ms: Supported raylib modules:
-1 ms:     > rcore:..... loaded (mandatory)
-1 ms:     > rlgl:...... loaded (mandatory)
-1 ms:     > rshapes:... loaded (optional)
-1 ms:     > rtextures:. loaded (optional)
-1 ms:     > rtext:..... loaded (optional)
-1 ms:     > rmodels:... loaded (optional)
-1 ms:     > raudio:.... loaded (optional)
-150 ms: DISPLAY: Trying to enable VSYNC
-150 ms: DISPLAY: Device initialized successfully
-150 ms:     > Display size: 1920 x 1080
-150 ms:     > Screen size:  1440 x 900
-150 ms:     > Render size:  1800 x 1055
-150 ms:     > Viewport offsets: 0, 0
-159 ms: GLAD: OpenGL extensions loaded successfully
-159 ms: GL: Supported extensions count: 286
-159 ms: GL: OpenGL device information:
-159 ms:     > Vendor:   ATI Technologies Inc.
-159 ms:     > Renderer: AMD Radeon (TM) Graphics
-159 ms:     > Version:  3.3.0 Core Profile Context 23.19.10.04.240321
-159 ms:     > GLSL:     4.60
-159 ms: GL: VAO extension detected, VAO functions loaded successfully
-159 ms: GL: NPOT textures extension detected, full NPOT textures supported
-159 ms: GL: DXT compressed textures supported
-159 ms: GL: ETC2/EAC compressed textures supported
-159 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
-159 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
-159 ms: TEXTURE: [ID 1] Default texture loaded successfully
-193 ms: SHADER: [ID 1] Vertex shader compiled successfully
-194 ms: SHADER: [ID 2] Fragment shader compiled successfully
-194 ms: SHADER: [ID 3] Program shader loaded successfully
-194 ms: SHADER: [ID 3] Default shader loaded successfully
-195 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
-195 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
-195 ms: RLGL: Default OpenGL state initialized successfully
-195 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
-195 ms: FONT: Default font loaded successfully (224 glyphs)
-195 ms: SYSTEM: Working Directory: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\dist
-195 ms: Graphics window ready
-199 ms: Generating world graphics
-1551 ms: World graphics ready
-1551 ms: Audio skipped (--no-audio)
-6767 ms: Shutting down
+2 ms: Emberfall v0.47: startup
+3 ms: Build edition: developer
+3 ms: Creating graphics window
+3 ms: Initializing raylib 5.5
+3 ms: Platform backend: DESKTOP (GLFW)
+3 ms: Supported raylib modules:
+3 ms:     > rcore:..... loaded (mandatory)
+3 ms:     > rlgl:...... loaded (mandatory)
+3 ms:     > rshapes:... loaded (optional)
+3 ms:     > rtextures:. loaded (optional)
+3 ms:     > rtext:..... loaded (optional)
+3 ms:     > rmodels:... loaded (optional)
+3 ms:     > raudio:.... loaded (optional)
+121 ms: DISPLAY: Trying to enable VSYNC
+121 ms: DISPLAY: Device initialized successfully
+121 ms:     > Display size: 1920 x 1080
+121 ms:     > Screen size:  1440 x 900
+121 ms:     > Render size:  1800 x 1055
+121 ms:     > Viewport offsets: 0, 0
+127 ms: GLAD: OpenGL extensions loaded successfully
+127 ms: GL: Supported extensions count: 286
+127 ms: GL: OpenGL device information:
+127 ms:     > Vendor:   ATI Technologies Inc.
+127 ms:     > Renderer: AMD Radeon (TM) Graphics
+127 ms:     > Version:  3.3.0 Core Profile Context 23.19.10.04.240321
+127 ms:     > GLSL:     4.60
+127 ms: GL: VAO extension detected, VAO functions loaded successfully
+127 ms: GL: NPOT textures extension detected, full NPOT textures supported
+127 ms: GL: DXT compressed textures supported
+127 ms: GL: ETC2/EAC compressed textures supported
+127 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+127 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+127 ms: TEXTURE: [ID 1] Default texture loaded successfully
+167 ms: SHADER: [ID 1] Vertex shader compiled successfully
+168 ms: SHADER: [ID 2] Fragment shader compiled successfully
+189 ms: SHADER: [ID 3] Program shader loaded successfully
+189 ms: SHADER: [ID 3] Default shader loaded successfully
+190 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+191 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+191 ms: RLGL: Default OpenGL state initialized successfully
+191 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+191 ms: FONT: Default font loaded successfully (224 glyphs)
+191 ms: SYSTEM: Working Directory: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\dist
+191 ms: Graphics window ready
+191 ms: Generating world graphics
+1659 ms: World graphics ready
+1659 ms: Audio skipped (--no-audio)
+2445 ms: First Dawn shard collected: hero returned to Eldrin's tower
+6050 ms: Prologue complete: hero teleported to the forest
+6563 ms: Shutting down

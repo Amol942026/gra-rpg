@@ -1,0 +1,67 @@
+PASS: treasure QA uses player code and no audio device
+PASS: Krita chest atlas loads once at its expected dimensions
+PASS: GPU rendering preserves background through transparent chest corners, with no black panel
+PASS: each chest state renders a bounded, detailed visible silhouette
+PASS: GPU rendering preserves background through transparent chest corners, with no black panel
+PASS: each chest state renders a bounded, detailed visible silhouette
+PASS: GPU rendering preserves background through transparent chest corners, with no black panel
+PASS: each chest state renders a bounded, detailed visible silhouette
+PASS: untouched chest uses the closed artwork
+PASS: transparent sprite corners do not intercept world clicks
+PASS: each of the four world markers can be picked at its real location
+PASS: hover inspection identifies treasure
+PASS: right click opens treasure without attacking
+PASS: opened treasure reveals the raised lid, coins and gem
+PASS: HUD loot slot refers to the selected chest
+PASS: chest tooltip does not misrepresent monster drop rates
+PASS: left click starts dragging chest gear from the HUD
+PASS: actual drag handler transfers loot into the bag once
+PASS: loot close button closes the chest panel
+PASS: left click reopens the same chest without a weapon swing
+PASS: all three pieces leave an empty persistent chest
+PASS: fully looted chest uses the empty interior artwork
+PASS: untouched chest uses the closed artwork
+PASS: transparent sprite corners do not intercept world clicks
+PASS: each of the four world markers can be picked at its real location
+PASS: hover inspection identifies treasure
+PASS: right click opens treasure without attacking
+PASS: opened treasure reveals the raised lid, coins and gem
+PASS: HUD loot slot refers to the selected chest
+PASS: chest tooltip does not misrepresent monster drop rates
+PASS: left click starts dragging chest gear from the HUD
+PASS: actual drag handler transfers loot into the bag once
+PASS: loot close button closes the chest panel
+PASS: left click reopens the same chest without a weapon swing
+PASS: all three pieces leave an empty persistent chest
+PASS: fully looted chest uses the empty interior artwork
+PASS: untouched chest uses the closed artwork
+PASS: transparent sprite corners do not intercept world clicks
+PASS: each of the four world markers can be picked at its real location
+PASS: hover inspection identifies treasure
+PASS: right click opens treasure without attacking
+PASS: opened treasure reveals the raised lid, coins and gem
+PASS: HUD loot slot refers to the selected chest
+PASS: chest tooltip does not misrepresent monster drop rates
+PASS: left click starts dragging chest gear from the HUD
+PASS: actual drag handler transfers loot into the bag once
+PASS: loot close button closes the chest panel
+PASS: left click reopens the same chest without a weapon swing
+PASS: all three pieces leave an empty persistent chest
+PASS: fully looted chest uses the empty interior artwork
+PASS: untouched chest uses the closed artwork
+PASS: transparent sprite corners do not intercept world clicks
+PASS: each of the four world markers can be picked at its real location
+PASS: hover inspection identifies treasure
+PASS: right click opens treasure without attacking
+PASS: opened treasure reveals the raised lid, coins and gem
+PASS: HUD loot slot refers to the selected chest
+PASS: chest tooltip does not misrepresent monster drop rates
+PASS: left click starts dragging chest gear from the HUD
+PASS: actual drag handler transfers loot into the bag once
+PASS: loot close button closes the chest panel
+PASS: left click reopens the same chest without a weapon swing
+PASS: all three pieces leave an empty persistent chest
+PASS: fully looted chest uses the empty interior artwork
+PASS: unoccluded treasure is selectable
+PASS: a foreground tree blocks picking treasure through its canopy
+Checks: 66; failures: 0

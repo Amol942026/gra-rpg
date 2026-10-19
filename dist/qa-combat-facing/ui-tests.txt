@@ -1,0 +1,48 @@
+PASS: real player code uses no audio device
+PASS: enemy silhouette is selectable in every direction
+PASS: cursor on enemy aims at its world position, independent of body height
+PASS: real sword click attacks and faces the selected enemy
+PASS: rendered sword facing survives opposite sprint input
+PASS: strong-cut input also faces the selected target
+PASS: enemy silhouette is selectable in every direction
+PASS: cursor on enemy aims at its world position, independent of body height
+PASS: real sword click attacks and faces the selected enemy
+PASS: rendered sword facing survives opposite sprint input
+PASS: strong-cut input also faces the selected target
+PASS: enemy silhouette is selectable in every direction
+PASS: cursor on enemy aims at its world position, independent of body height
+PASS: real sword click attacks and faces the selected enemy
+PASS: rendered sword facing survives opposite sprint input
+PASS: strong-cut input also faces the selected target
+PASS: enemy silhouette is selectable in every direction
+PASS: cursor on enemy aims at its world position, independent of body height
+PASS: real sword click attacks and faces the selected enemy
+PASS: rendered sword facing survives opposite sprint input
+PASS: strong-cut input also faces the selected target
+PASS: enemy silhouette is selectable in every direction
+PASS: cursor on enemy aims at its world position, independent of body height
+PASS: real sword click attacks and faces the selected enemy
+PASS: rendered sword facing survives opposite sprint input
+PASS: strong-cut input also faces the selected target
+PASS: enemy silhouette is selectable in every direction
+PASS: cursor on enemy aims at its world position, independent of body height
+PASS: real sword click attacks and faces the selected enemy
+PASS: rendered sword facing survives opposite sprint input
+PASS: strong-cut input also faces the selected target
+PASS: enemy silhouette is selectable in every direction
+PASS: cursor on enemy aims at its world position, independent of body height
+PASS: real sword click attacks and faces the selected enemy
+PASS: rendered sword facing survives opposite sprint input
+PASS: strong-cut input also faces the selected target
+PASS: enemy silhouette is selectable in every direction
+PASS: cursor on enemy aims at its world position, independent of body height
+PASS: real sword click attacks and faces the selected enemy
+PASS: rendered sword facing survives opposite sprint input
+PASS: strong-cut input also faces the selected target
+PASS: HUD click does not become a directed sword attack
+PASS: real world press starts an aimed bow draw
+PASS: moving bow visually tracks the current pointer instead of the movement vector
+PASS: moving bow visually tracks the current pointer instead of the movement vector
+PASS: actual mouse release fires along the visible aim
+PASS: shot recovery retains target facing while moving
+Checks: 47; failures: 0

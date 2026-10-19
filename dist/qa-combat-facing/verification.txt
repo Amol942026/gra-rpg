@@ -1,0 +1,27 @@
+Combat facing fix verification - 2026-10-19
+
+PASS: 74,938 gameplay and animation checks (tests/game_tests.cpp).
+PASS: 47/47 real player input/rendering checks (tests/combat_facing_qa.ps1).
+Coverage: sword and Strong Cut aiming, enemy picking, opposite-direction movement,
+8 directions, walk/sprint, 30/60/120 Hz, moving bow retarget, shot/recovery,
+blocked movement, roll interruption, HUD protection and cooldown behavior.
+
+PASS: development and player builds compiled.
+PASS: player ZIP extracted; executable SHA256 matches dist/player/Emberfall.exe.
+SHA256 player executable: 238523F8855DA443439748E37BBD68FEBEBB4415656745F404D54E664ED9C406
+SHA256 ZIP: 862974FB99D631F836698CA6F5F2093AC04C83373B7839E419BCB82B44C0E0E0
+PASS: no KRA/SIF/MMP/CSD/BLEND masters in player ZIP.
+PASS: extracted player --startup-smoke --no-audio --windowed (180 frames),
+player edition, no developer mode and no audio device. See package-startup.txt.
+The player EXE intentionally ignores developer QA/benchmark flags; those are
+not counted as completed package QA. Focused UI QA compiles the actual player
+input/rendering code into its separate silent test executable.
+
+900-frame forest benchmark, 1440x900 window, native canvas 1688x1055:
+Before: average 56.3149 FPS, CPU mean 11.3802 ms.
+After:  average 56.2127 FPS, CPU mean 11.6106 ms.
+Comparable averages; this does not establish a stable 60 FPS.
+All test/game launches explicitly used --no-audio.
+
+Visual review: bow-moving-35.png and moving-combat-directions.png.
+Pre-change source/executable/ZIP copies retained in backup-20261019-185528.

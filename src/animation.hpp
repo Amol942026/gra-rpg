@@ -31,7 +31,7 @@ struct AnimationState {
         targetAngle = int(direction)*(AnimationPi/4);
         if(!facingInitialized){facingAngle=targetAngle;facingInitialized=true;}
     }
-    void advance(float dx, float dy, float dt, bool sprint = false) {
+    void advance(float dx, float dy, float dt, bool sprint = false, bool faceMovement = true) {
         float travelled = std::hypot(dx, dy);
         moving = travelled > 0.00001f;
         idleTime += dt;
@@ -46,7 +46,7 @@ struct AnimationState {
         if(runBlend<.0001f)runBlend=0;
         if(runBlend>.9999f)runBlend=1;
         if (moving) {
-            face(dx, dy);
+            if(faceMovement)face(dx, dy);
             phase = std::fmod(phase + travelled * (0.38f-0.07f*meanBlend), 1.0f);
         }
         float turn=std::remainder(targetAngle-facingAngle,2*AnimationPi);

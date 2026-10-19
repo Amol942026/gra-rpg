@@ -306,10 +306,12 @@ inline void finishShadowFrame(){frameRigs.clear();shadowCacheKey=-1;shadowBuildi
 // species: player, slime, wolf, skeleton, guardian, boar, spider, bandit, treant.
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
-                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false) {
+                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr) {
+    HeroAppearance appearance;
+    if(species==0){appearance=equipment?heroAppearance(*equipment):legacyHeroAppearance(helmet,shield,weapon);weapon=appearance[0].shape;helmet=appearance[1].present();shield=appearance[2].present();}
     bool rolling=species==0&&roll>=0;
     bool archer=species==0&&weapon==Kind::Bow;float drawCharge=std::max(0.f,bowDraw);
-    bool striking=species==0&&!archer&&!rolling&&(swingProgress>=0||attack>0);
+    bool striking=species==0&&weapon!=Kind::None&&!archer&&!rolling&&(swingProgress>=0||attack>0);
     float strikeProgress=swingProgress>=0?swingProgress:std::asin(std::clamp(attack,0.f,1.f))/PI;
     float tuck=rolling?std::clamp(std::min(roll,1-roll)/.18f,0.f,1.f):0;
     tuck=tuck*tuck*(3-2*tuck);
@@ -329,7 +331,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     if(!cached){
 
     if(species==0){
-        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll);
+        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance);
     } else if(species>=9){
         buildDesert(rig,species-1,state,attack,flash);
     } else if(species==1){

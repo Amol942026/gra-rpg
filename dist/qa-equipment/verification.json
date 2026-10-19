@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "scope": "Exact visible equipment in all six hero slots",
+  "variants": 39,
+  "nativeArt": "Original Krita palettes and inlays",
+  "master": "C:\\AI2D\\sprites\\emberfall_equipment_paints_20261019_v1.kra",
+  "sourceArt": "art/equipment/equipment-paints.png",
+  "sourceArtSHA256": "9113C7395BAE2E88A4557F4E7E1F9DB7BDB9AB24CA8CA5259267AFF88F03C1D3",
+  "generatedData": "src/generated/equipment_paints.hpp",
+  "gameplayChecks": 75142,
+  "graphicAndInventoryChecks": 364,
+  "packageGraphicChecks": 364,
+  "directions": 8,
+  "motions": [
+    "idle",
+    "walk",
+    "sprint",
+    "attack or bow draw",
+    "roll"
+  ],
+  "views": [
+    "world",
+    "portrait",
+    "shadow",
+    "pointer silhouette",
+    "prologue",
+    "mage tower story"
+  ],
+  "bowRegressionChecks": 65,
+  "swordMotionRegressionChecks": 440,
+  "storyRegressions": "prologue and tower passed",
+  "benchmarkFPS": 58.3628,
+  "benchmarkCpuMeanMs": 9.74178,
+  "startupFrames": 180,
+  "allLaunchesNoAudio": true,
+  "audioDeviceOpened": false,
+  "packageExeSHA256": "1308659937AB64F23CCFCC4DBB641D82D49B060FBFD661772273D0A066C1A74A",
+  "packageZipSHA256": "C47912D0583E623CCE2AE04D5C3652084DC52971C470765F568DF24FBE3C1C2C",
+  "nativeMastersExcluded": true
+}

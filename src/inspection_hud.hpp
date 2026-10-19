@@ -35,6 +35,12 @@ Inspection inspectWorld(WorldHover hit) {
         int count=0;for(const auto& value:e->loot)if(!value.empty())count++;
         info.detail=count?"PPM: otwórz łup w HUD.":"Ciało jest puste.";
         info.secondary=game.corpseReachable(e->id)?"Przeciągnij przedmioty do plecaka.":"Podejdź do ciała (maks. 2,5 pola).";
+    }else if(hit.kind==HoverKind::Chest){
+        const auto* c=game.findChest(hit.index);if(!c)return info;
+        info.source=hit.kind;info.name="Skrzynia skarbów";info.kind="Pojemnik z wyposażeniem";
+        int count=0;for(const auto& value:c->loot)count+=!value.empty();
+        info.detail=c->opened&&!count?"Skrzynia jest pusta.":"3 przedmioty: pospolite lub rzadkie.";
+        info.secondary=game.chestReachable(c->id)?"E / LPM / PPM: otwórz łup.":"Podejdź bliżej (maks. 2,5 pola).";
     }else if(hit.kind==HoverKind::Prop&&hit.index>=0&&hit.index<int(game.props.size())){
         const auto& prop=propInfo(game.props[hit.index].type);
         info.source=hit.kind;info.name=prop.name;info.kind=prop.kind;

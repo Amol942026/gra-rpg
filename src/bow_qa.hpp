@@ -17,7 +17,7 @@ bool runBowQA(){
  check(game.weaponWheel[3].kind==Kind::None&&game.bag[0].count==5,"potion drag cannot create weapon shortcut");
  mouse=sector(1);clickWeaponWheel();game.messageTime=0;mouse={720,425};
  leftClickGameplay({});check(game.bowDrawing&&game.arrows.empty()&&game.ammoCount()==20&&game.swing==0,"LPM world press draws bow without sword attack or premature shot");
- for(int i=0;i<42;i++){game.aimBow(bowAimFromPointer());game.update(1.f/60,{},false);}
+ for(int i=0;i<42;i++){game.aimBow(combatAimFromPointer());game.update(1.f/60,{},false);}
  check(std::abs(game.bowCharge()-.5f)<.002f&&game.arrows.empty(),"held LPM accumulates charge without automatic repeat shots");
  renderScene();saveTexture(canvas,"qa-v23/bow-half-draw.png");
  check(releaseWorldBow()&&!game.bowDrawing&&game.arrows.size()==1&&game.ammoCount()==19,"LPM release handler launches exactly one arrow and consumes one");

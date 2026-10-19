@@ -1,0 +1,404 @@
+PASS: equipment QA runs real player code without an audio device
+PASS: real equipment transfer accepts this item
+Item Miecz wędrowca: world pixels=1407, portrait pixels=1407
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Topór strażnika: world pixels=1404, portrait pixels=1404
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Żelazny hełm: world pixels=1418, portrait pixels=1418
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Zbroja zwiadowcy: world pixels=5794, portrait pixels=5794
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Tarcza dębowa: world pixels=1899, portrait pixels=1899
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Buty podróżnika: world pixels=1417, portrait pixels=1417
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Pierścień żaru: world pixels=42, portrait pixels=42
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Sztylet łowcy: world pixels=500, portrait pixels=500
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Płaszcz z wilczej skóry: world pixels=6490, portrait pixels=6490
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Bursztynowy amulet: world pixels=227, portrait pixels=227
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Łuk podróżnika: world pixels=1852, portrait pixels=1852
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Sztylet wilczego kła: world pixels=436, portrait pixels=436
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Płaszcz tropiciela: world pixels=5822, portrait pixels=5822
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Łuk księżycowego łowcy: world pixels=748, portrait pixels=748
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Pancerz dziczej skóry: world pixels=6000, portrait pixels=6000
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Topór dziczego kła: world pixels=1253, portrait pixels=1253
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Buty pajęczego szlaku: world pixels=1417, portrait pixels=1417
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Pierścień jadowitego splotu: world pixels=42, portrait pixels=42
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Kaptur pajęczej nici: world pixels=1399, portrait pixels=1399
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Hełm kościanej straży: world pixels=1711, portrait pixels=1711
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Miecz zapomnianej krypty: world pixels=1328, portrait pixels=1328
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Łuk leśnego rozbójnika: world pixels=697, portrait pixels=697
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Buty cichego kroku: world pixels=1559, portrait pixels=1559
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Tarcza prastarych korzeni: world pixels=1803, portrait pixels=1803
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Amulet serca kniei: world pixels=150, portrait pixels=150
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Amulet szmaragdowej kropli: world pixels=227, portrait pixels=227
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Runiczne ostrze strażnika: world pixels=1372, portrait pixels=1372
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Zbroja kamiennego strażnika: world pixels=6286, portrait pixels=6286
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Hełm mchu i kamienia: world pixels=1309, portrait pixels=1309
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Pierścień pradawnego echa: world pixels=42, portrait pixels=42
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Sztylet bursztynowego żądła: world pixels=484, portrait pixels=484
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Hełm miedzianego skarabeusza: world pixels=1423, portrait pixels=1423
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Zbroja pustynnego skarabeusza: world pixels=3578, portrait pixels=3578
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Buty piaskowej kobry: world pixels=1417, portrait pixels=1417
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Łuk pustynnego mirażu: world pixels=699, portrait pixels=699
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Amulet palącego słońca: world pixels=75, portrait pixels=75
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Ostrze żywej wydmy: world pixels=1341, portrait pixels=1341
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Płaszcz piaskowej burzy: world pixels=8428, portrait pixels=8428
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: real equipment transfer accepts this item
+Item Tarcza pustynnego monolitu: world pixels=1768, portrait pixels=1768
+PASS: exact equipped item visibly changes the GPU-rendered world hero
+PASS: exact equipped item also changes the portrait
+PASS: real removal returns the item to the backpack
+PASS: removing equipment visibly removes it from the hero
+PASS: equipped shield remains visible on the back while a bow occupies both hands
+PASS: equipped shield remains visible on the back while a bow occupies both hands
+PASS: equipped shield remains visible on the back while a bow occupies both hands
+PASS: equipped shield remains visible on the back while a bow occupies both hands
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped hero remains complete in eight directions during idle, walk, sprint, attack/draw and roll
+PASS: equipped appearance participates in the real world shadow pass
+PASS: travel preserves exact visible equipment
+PASS: mage tower story close-up retains the exact equipped items
+PASS: prologue close-up uses the exact equipped items
+Checks: 364; failures: 0
