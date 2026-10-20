@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "changes": [
+    "Chest footprint pivot and native Krita contact shadows corrected",
+    "Direct chest/corpse gear equip with displaced item saved in backpack",
+    "Double click loot to backpack",
+    "Double click backpack gear to its correct equipment slot"
+  ],
+  "gameplayChecks": 75488,
+  "lootUiChecks": 55,
+  "chestGraphicsChecks": 66,
+  "controlsRegression": 42,
+  "corpseRegression": 40,
+  "bowRegression": 65,
+  "packageUiChecks": 55,
+  "playerStartupFrames": 180,
+  "noAudio": true,
+  "audioDeviceOpened": false,
+  "originalKritaMasterPreserved": true,
+  "newKritaMaster": "C:\\AI2D\\sprites\\emberfall_treasure_chests_20261020_grounded_v2.kra",
+  "atlasSHA256": "55FCC5DD480DD0B834AF55EBFC72D701891EBB455B2960F4690FB411C02889EC",
+  "playerExeSHA256": "57A67B2ED6C61307C2422129C2EFB11469DF9B3DB80D0419EC758E95E08A8D00",
+  "packageSHA256": "95299B4437DE5C69C787789F29FE63A868A6A35CF81CC12BB09BDC40B3193903",
+  "coverage": [
+    "all 39 gear kinds from both loot containers",
+    "all four chest locations",
+    "full backpack and empty/occupied equipment slots",
+    "stack overflow retention",
+    "wrong slots",
+    "loot pages",
+    "click timeout and movement",
+    "different items and owners",
+    "menu cancellation",
+    "quest artifact progression",
+    "no accidental attack, potion or arrow"
+  ]
+}

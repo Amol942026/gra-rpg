@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "asset": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\sprites\\hero-paints.png",
+      "sha256": "bad0a8d44f0a14f41999a7c452db4b2e17e3915f20d7979c2bef2a7200f16c00",
+      "master": "art/hero/hero-paints.kra",
+      "master_matches_export": true
+    },
+    {
+      "asset": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\sprites\\forest-bush.png",
+      "sha256": "0c398b624f0e089af4c6e37e8ded8d988a8e095f0215d9a4edad6770da4946a5",
+      "master": "art/scenery/forest-bush.kra",
+      "master_matches_export": true
+    }
+  ],
+  "all_nonface_paint_cells_preserved": true,
+  "face_surface_fully_opaque": true,
+  "no_external_assets": true,
+  "audio": false
+}

@@ -1,0 +1,37 @@
+Build edition: developer
+Frames: 900
+Window: 1440x900
+Fullscreen: no
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: OpenGL V-sync
+DXGI synchronized presents: 0
+Occluded presentations: 0
+Suppressed native swaps: 0
+Actual presentation interval: 0
+Presentation fallback: Native OpenGL presentation
+Strong cuts performed: 1
+Piercing arrows fired: 2
+Developer mode: 0
+Developer menu open: 0
+Developer destination: forest
+World location: forest
+Benchmark scenario: forest
+Desert areas visited: 0
+Sand prisons cast: 0
+Tower floor: 1
+Intro active: 0
+Developer error: 
+Audio device opened: no
+Native canvas: 1688x1055
+Desert background buffer: 0x0
+Average FPS: 59.0113
+CPU frame mean (ms): 9.71589
+EndDrawing mean (ms): 7.22562
+Presentation mean (ms): 0.000668892
+CPU frame p95 (ms): 10.8401
+CPU frame p99 (ms): 11.5843
+Frame p95 (ms): 20.0324
+Frame p99 (ms): 21.8144
+Frame max (ms): 24.7723
+Frames over 25 ms: 0

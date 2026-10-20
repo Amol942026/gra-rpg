@@ -53,7 +53,7 @@ def create(name, logs):
                        fill_style="ForegroundColor",stroke_style="None")
 
             shadow = layer(label + " contact shadow", .25)
-            ellipse(shadow,"#182b2d",35,205,198,35)
+            poly(shadow,"#182b2d",[(34,177),(117,133),(229,186),(141,234)])
             if frame:
                 lid = layer(label + " raised lid")
                 poly(lid,"#233438",[(112,104),(91,26),(99,22),(204,70),(226,150),(216,156)])
@@ -154,7 +154,7 @@ def create(name, logs):
     shutil.copy2(png,destination)
     provenance = {"authoring":"Krita MCP native drawing; original 2D artwork, no external inputs",
                   "master":str(kra),"source_png":str(png),"sha256":hashlib.sha256(png.read_bytes()).hexdigest(),
-                  "size":[768,256],"cell":[256,256],"anchor":[128,226],"scale":0.42,
+                  "size":[768,256],"cell":[256,256],"anchor":[128,183],"scale":0.42,
                   "states":["closed","open_treasure","open_empty"],"layers":len(layers),
                   "compatibility":final_state["runtime_compatibility"],"gpu_bytes":768*256*4}
     destination.with_suffix(".json").write_text(json.dumps(provenance,indent=2),encoding="utf-8")

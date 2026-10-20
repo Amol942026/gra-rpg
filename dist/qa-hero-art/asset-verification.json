@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "synfig_frames": 354,
+  "synfig_clips": [
+    {
+      "name": "heavy",
+      "frames": 48,
+      "unique_pixel_frames": 48
+    },
+    {
+      "name": "idle",
+      "frames": 120,
+      "unique_pixel_frames": 120
+    },
+    {
+      "name": "roll",
+      "frames": 42,
+      "unique_pixel_frames": 42
+    },
+    {
+      "name": "run",
+      "frames": 48,
+      "unique_pixel_frames": 48
+    },
+    {
+      "name": "slash",
+      "frames": 36,
+      "unique_pixel_frames": 36
+    },
+    {
+      "name": "walk",
+      "frames": 60,
+      "unique_pixel_frames": 60
+    }
+  ],
+  "native_renderer_frames": 420,
+  "SIF_to_runtime_exact": true,
+  "preview": "hero-preview.gif",
+  "audio": false
+}

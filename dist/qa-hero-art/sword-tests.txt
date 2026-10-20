@@ -1,0 +1,442 @@
+Capture directory: qa-v43/capture-1792501845688689000
+PASS: sword animation diagnostics open no audio device
+PASS: animation diagnostics have a valid native game canvas
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: each of eight directions has a complete visible pose without cropped limbs or blade
+PASS: the real physical blade matches its pose and mouse silhouette
+PASS: final grip returns to the initial GPU-rendered pose without a snap
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: native 60-Hz preview frame exports successfully
+PASS: real gameplay command starts the chosen sword animation
+PASS: the sword animation renders and exports from the real game scene
+PASS: animated sword continues to participate in the world shadow pass
+PASS: real gameplay command starts the chosen sword animation
+PASS: the sword animation renders and exports from the real game scene
+PASS: animated sword continues to participate in the world shadow pass
+Checks: 440; failures: 0

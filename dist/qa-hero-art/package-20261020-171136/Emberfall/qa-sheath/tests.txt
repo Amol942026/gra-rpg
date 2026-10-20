@@ -1,0 +1,725 @@
+PASS: sword transition QA runs actual player code without audio
+PASS: facial feature cell has no opaque skin patch, cheek outline or temple border
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: actual movement input advances/reverses the weapon gesture without snapping
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: complete hero and rigid sword remain visible without clipped transition frames
+PASS: both physical gestures take multiple frames and finish at the correct carry state
+PASS: clicking attack cancels a partial sheath gesture and keeps combat responsive
+724/724 passed

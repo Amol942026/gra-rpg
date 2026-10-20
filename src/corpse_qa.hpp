@@ -4,7 +4,7 @@ bool runCorpseQA(){
     fs::create_directories("qa-v13");std::ofstream report("qa-v13/corpse-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* text){checks++;if(!ok)failures++;report<<(ok?"PASS: ":"FAIL: ")<<text<<'\n';report.flush();};
     auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};
-        welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};nearbyPage=0;};
+        welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};inventoryClicks.clear();mouse={0,0};nearbyPage=0;};
     auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
     auto pointAtBody=[](int id){
         const Enemy* e=game.findCorpse(id);if(!e)return false;Vector2 p=screen(e->pos);
@@ -44,8 +44,8 @@ bool runCorpseQA(){
     check(!rightClickWorldOrInventory()&&game.hp==20&&body->loot[1].count==count,"PPM inside corpse loot cannot drink uncollected potions");
     game.bag[10]=item(Kind::Health,0,98);leftClickGameplay({});pointAt(bagRect(10));finishDrag();
     check(game.bag[10].count==99&&body->loot[1].count==3,"partial backpack stacking leaves excess visible in the body");
-    pointAt(lootRect(2));leftClickGameplay({});pointAt(equipRect(0));renderScene();saveTexture(canvas,"qa-v13/corpse-invalid-drop.png");finishDrag();
-    check(body->loot[2].kind==Kind::Sword&&game.equipment[0].tier==0,"corpse weapon must be collected in backpack before equipping");
+    pointAt(lootRect(2));leftClickGameplay({});pointAt(equipRect(1));renderScene();saveTexture(canvas,"qa-v13/corpse-invalid-drop.png");finishDrag();
+    check(body->loot[2].kind==Kind::Sword&&game.equipment[0].tier==0,"corpse weapon rejects a mismatched equipment slot");
     pointAt(lootRect(2));leftClickGameplay({});pointAt(bagRect(0));finishDrag();
     check(body->loot[2].kind==Kind::Sword&&game.bag[0].kind==Kind::Health,"dropping on a different occupied bag slot preserves both items");
     pointAt(lootRect(2));leftClickGameplay({});mouse={650,440};finishDrag();

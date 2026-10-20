@@ -3,7 +3,7 @@ PASS: actual fallen artwork can be picked for every monster species
 PASS: hover HUD identifies the body without living combat stats
 PASS: PPM on the body opens its own loot panel
 PASS: opening bodies never casts or swings a weapon
-FAIL: HUD slots bind to the opened corpse by stable ID
+PASS: HUD slots bind to the opened corpse by stable ID
 PASS: actual fallen artwork can be picked for every monster species
 PASS: hover HUD identifies the body without living combat stats
 PASS: PPM on the body opens its own loot panel
@@ -24,7 +24,7 @@ PASS: dragging a corpse item blocks C magic and PPM actions
 PASS: dragging to backpack removes the same item from the corpse
 PASS: PPM inside corpse loot cannot drink uncollected potions
 PASS: partial backpack stacking leaves excess visible in the body
-PASS: corpse weapon must be collected in backpack before equipping
+PASS: corpse weapon rejects a mismatched equipment slot
 PASS: dropping on a different occupied bag slot preserves both items
 PASS: dropping corpse loot on the map cancels without scattering it
 PASS: close button preserves uncollected corpse contents
@@ -38,4 +38,4 @@ PASS: a foreground tree prevents picking a body through its artwork
 PASS: PPM over a living monster no longer casts magic
 PASS: C handler casts the chosen fireball for ten mana
 PASS: C fireball aims at the actual living monster under the cursor
-Checks: 40; failures: 1
+Checks: 40; failures: 0

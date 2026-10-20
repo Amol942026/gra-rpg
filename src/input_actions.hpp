@@ -17,13 +17,19 @@ bool releaseWorldBow(){
  if(!gameplayInputAllowed()||!worldPointerAllowed(mouse)||dragging.place!=Place::None){game.cancelBow();return false;}
  game.aimBow(combatAimFromPointer());return game.releaseBow();
 }
-bool clickWorldOrInventory() {
-    if(!gameplayInputAllowed()||dragging.place!=Place::None)return false;
+bool clickWorldOrInventory(double now=GetTime()) {
+    if(!gameplayInputAllowed()||dragging.place!=Place::None){inventoryClicks.clear();return false;}
     Slot slot=hoverSlot();Item* value=game.get(slot);
     if(slot.place!=Place::None){
-        if(value&&!value->empty())beginDrag(slot);
+        if(value&&!value->empty()){
+            bool quick=slot.place==Place::Corpse||slot.place==Place::Chest||(slot.place==Place::Bag&&gearSlot(value->kind)>=0);
+            if(quick){if(inventoryClicks.press(slot,*value,now,mouse.x,mouse.y))return game.quickTransfer(slot);}
+            else inventoryClicks.clear();
+            beginDrag(slot);
+        }else inventoryClicks.clear();
         return false;
     }
+    inventoryClicks.clear();
     if(!worldPointerAllowed(mouse))return false;
     WorldHover hit=pickWorld(mouse);if(hit.kind==HoverKind::Mage)return talkToMage();
     if(hit.kind==HoverKind::Chest)return game.openChest(hit.index);
@@ -33,6 +39,7 @@ bool clickWorldOrInventory() {
     return archetype(game.equipment[0].kind)==Kind::Bow?game.beginBow(aim):game.attack(aim);
 }
 bool rightClickWorldOrInventory(){
+    inventoryClicks.clear();
     if(!gameplayInputAllowed()||dragging.place!=Place::None)return false;
     game.cancelBow();
     if(worldPointerAllowed(mouse)){
@@ -55,11 +62,11 @@ bool activateGameplaySkill(Skill skill){
  if(!used){game.say(game.sandTrapped()&&skill!=Skill::Healing?"Piaskowe więzienie blokuje ataki.":game.skillRank(skill)<=0?"Najpierw naucz się tej umiejętności (U).":!game.skillWeaponMatches(skill)?"Ta umiejętność wymaga odpowiedniej broni.":skill==Skill::Healing&&game.hp>=game.maxHp()?"Zdrowie jest już pełne.":"Za mało many, brak strzał lub odnowienie umiejętności.");game.sound(Cue::Reject,game.player);}
  return used;
 }
-void leftClickGameplay(V movement){
-    if(!gameplayInputAllowed()||dragging.place!=Place::None)return;
+void leftClickGameplay(V movement,double now=GetTime()){
+    if(!gameplayInputAllowed()||dragging.place!=Place::None){inventoryClicks.clear();return;}
     for(int i=0;i<SkillCount;i++)if(inside(skillActionRect(i))){activateGameplaySkill(static_cast<Skill>(i));return;}
     if((game.openedCorpse>=0||game.openedChest>=0)&&inside(corpseCloseRect())){game.closeCorpse();return;}
     for(int i=0;i<5;i++)if(inside(actionRect(i))){activateMouseAction(i,movement);return;}
     if(mouse.y>=668&&mouse.y<696&&mouse.x>=1286&&mouse.x<1404){if(game.findCorpse(game.openedCorpse)){syncCorpsePage();corpsePage=std::clamp(corpsePage+(mouse.x<1344?-1:1),0,corpsePages()-1);}else nearbyPage+=mouse.x<1344?-1:1;return;}
-    clickWorldOrInventory();
+    clickWorldOrInventory(now);
 }

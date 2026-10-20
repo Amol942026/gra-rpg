@@ -3,6 +3,7 @@
 #include <array>
 #include <cmath>
 #include "generated/hero_motion_data.hpp"
+#include "hero_secondary.hpp"
 namespace ember::hero_motion {
 using Bone=data::Bone;
 struct Vec {
@@ -74,6 +75,22 @@ inline Pose forward(const LocalPose& local){
  }
  out.bind();return out;
 }
+inline Quat axisAngle(Vec axis,float degrees){float half=degrees*.00872664626f,s=std::sin(half);return {std::cos(half),axis.x*s,axis.y*s,axis.z*s};}
+inline void bend(Pose& pose,int pivot,Quat delta){
+ Vec origin=pose.world[pivot].p;
+ for(int b=pivot;b<data::BoneCount;b++){
+  int ancestor=b;while(ancestor>=0&&ancestor!=pivot)ancestor=data::parents[ancestor];
+  if(ancestor<0)continue;
+  auto& world=pose.world[b];world.p=origin+rotate(delta,world.p-origin);world.q=mul(delta,world.q);
+ }
+}
+inline void secondary(Pose& pose,hero_secondary::Key key){
+ bend(pose,data::Spine,mul(axisAngle({0,1,0},key.spineRoll),axisAngle({1,0,0},-key.spinePitch)));
+ bend(pose,data::Head,axisAngle({0,1,0},key.headRoll));
+ bend(pose,data::UpperArmL,axisAngle({1,0,0},key.armSwing));
+ bend(pose,data::UpperArmR,axisAngle({1,0,0},-key.armSwing));
+ pose.bind();
+}
 inline Pose evaluate(float phase,float motion,float run,float idleTime,float attack=-1,bool heavy=false,float roll=-1){
  auto idle=sample(data::IdleClip,idleTime/2);
  auto locomotion=blend(sample(data::WalkClip,phase),sample(data::RunClip,phase),std::clamp(run,0.f,1.f));
@@ -85,7 +102,7 @@ inline Pose evaluate(float phase,float motion,float run,float idleTime,float att
   float weight=ease(attack/.12f)*ease((1-attack)/.20f);
   local=blend(local,sample(heavy?data::HeavyClip:data::SlashClip,attack),weight);
  }
- return forward(local);
+ auto pose=forward(local);secondary(pose,hero_secondary::evaluate(phase,motion,run,idleTime,attack,heavy,roll));return pose;
 }
 inline Pose action(float progress,bool heavy=false){return forward(sample(heavy?data::HeavyClip:data::SlashClip,progress));}
 inline void attach(Pose& pose,int bone,Vec start,Vec end,Vec restEnd){

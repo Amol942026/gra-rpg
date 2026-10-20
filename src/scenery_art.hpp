@@ -1,4 +1,5 @@
 #pragma once
+#include "forest_bush_art.hpp"
 
 // Static detail is baked once at startup; wind still deforms the finished
 // crown texture and the pointer mask follows exactly the same deformation.
@@ -57,7 +58,7 @@ void rock(float x,float y,float s){
  for(int i=0;i<5;i++)line(x+(-22+i*9)*s,y-8*s,x+(-20+i*9)*s,y-4*s,rgb(130,144,113),s);
 }
 void bush(float x,float y,float s){
-
+ if(forest_bush_art::draw(x,y,s))return;
  for(int n=0;n<12;n++){float dx=((n*13)%51-25)*s,dy=(n%4)*7*s;
   leafTuft(x+dx,y-10*s-dy,(10+n%3)*s,(8+n%2)*s,rgb(49+n%4*8,88+n%3*10,55+n%2*7),n*17);
  }

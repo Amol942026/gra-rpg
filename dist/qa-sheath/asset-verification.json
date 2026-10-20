@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "source": "native Krita facial features; Synfig stow/draw curves",
+  "features_only_no_face_border": true,
+  "nonface_cells_unchanged": true,
+  "native_master_matches_png": true,
+  "sif_to_cpp_exact": true,
+  "synfig_frames": 72,
+  "game_frames": 180,
+  "game_duration": 3,
+  "clearance_poses": 485856,
+  "clearance_input_frames": 201600,
+  "clearance_intersections": 0,
+  "eight_direction_stages": 11,
+  "audio": false,
+  "hero_png_sha256": "b9a426d0b76e46c6ae3fbaa22df7b2a5a07465d674098606f5060d3bcc9538e7"
+}

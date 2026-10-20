@@ -1,234 +1,234 @@
 PASS: equipment QA runs real player code without an audio device
 PASS: real equipment transfer accepts this item
-Item Miecz wędrowca: world pixels=1407, portrait pixels=1407
+Item Miecz wędrowca: world pixels=1919, portrait pixels=1919
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Topór strażnika: world pixels=1404, portrait pixels=1404
+Item Topór strażnika: world pixels=1020, portrait pixels=1020
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Żelazny hełm: world pixels=1418, portrait pixels=1418
+Item Żelazny hełm: world pixels=1316, portrait pixels=1316
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Zbroja zwiadowcy: world pixels=5794, portrait pixels=5794
+Item Zbroja zwiadowcy: world pixels=4524, portrait pixels=4524
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Tarcza dębowa: world pixels=1899, portrait pixels=1899
+Item Tarcza dębowa: world pixels=1829, portrait pixels=1829
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Buty podróżnika: world pixels=1417, portrait pixels=1417
+Item Buty podróżnika: world pixels=1486, portrait pixels=1486
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Pierścień żaru: world pixels=42, portrait pixels=42
+Item Pierścień żaru: world pixels=41, portrait pixels=41
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Sztylet łowcy: world pixels=500, portrait pixels=500
+Item Sztylet łowcy: world pixels=367, portrait pixels=367
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Płaszcz z wilczej skóry: world pixels=6490, portrait pixels=6490
+Item Płaszcz z wilczej skóry: world pixels=5157, portrait pixels=5157
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Bursztynowy amulet: world pixels=227, portrait pixels=227
+Item Bursztynowy amulet: world pixels=231, portrait pixels=231
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Łuk podróżnika: world pixels=1852, portrait pixels=1852
+Item Łuk podróżnika: world pixels=1766, portrait pixels=1766
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Sztylet wilczego kła: world pixels=436, portrait pixels=436
+Item Sztylet wilczego kła: world pixels=370, portrait pixels=370
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Płaszcz tropiciela: world pixels=5822, portrait pixels=5822
+Item Płaszcz tropiciela: world pixels=4539, portrait pixels=4539
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Łuk księżycowego łowcy: world pixels=748, portrait pixels=748
+Item Łuk księżycowego łowcy: world pixels=782, portrait pixels=782
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Pancerz dziczej skóry: world pixels=6000, portrait pixels=6000
+Item Pancerz dziczej skóry: world pixels=4681, portrait pixels=4681
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Topór dziczego kła: world pixels=1253, portrait pixels=1253
+Item Topór dziczego kła: world pixels=957, portrait pixels=957
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Buty pajęczego szlaku: world pixels=1417, portrait pixels=1417
+Item Buty pajęczego szlaku: world pixels=1486, portrait pixels=1486
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Pierścień jadowitego splotu: world pixels=42, portrait pixels=42
+Item Pierścień jadowitego splotu: world pixels=41, portrait pixels=41
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Kaptur pajęczej nici: world pixels=1399, portrait pixels=1399
+Item Kaptur pajęczej nici: world pixels=1344, portrait pixels=1344
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Hełm kościanej straży: world pixels=1711, portrait pixels=1711
+Item Hełm kościanej straży: world pixels=1656, portrait pixels=1656
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Miecz zapomnianej krypty: world pixels=1328, portrait pixels=1328
+Item Miecz zapomnianej krypty: world pixels=1186, portrait pixels=1186
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Łuk leśnego rozbójnika: world pixels=697, portrait pixels=697
+Item Łuk leśnego rozbójnika: world pixels=707, portrait pixels=707
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Buty cichego kroku: world pixels=1559, portrait pixels=1559
+Item Buty cichego kroku: world pixels=1614, portrait pixels=1614
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Tarcza prastarych korzeni: world pixels=1803, portrait pixels=1803
+Item Tarcza prastarych korzeni: world pixels=1786, portrait pixels=1786
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Amulet serca kniei: world pixels=150, portrait pixels=150
+Item Amulet serca kniei: world pixels=154, portrait pixels=154
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Amulet szmaragdowej kropli: world pixels=227, portrait pixels=227
+Item Amulet szmaragdowej kropli: world pixels=231, portrait pixels=231
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Runiczne ostrze strażnika: world pixels=1372, portrait pixels=1372
+Item Runiczne ostrze strażnika: world pixels=1086, portrait pixels=1086
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Zbroja kamiennego strażnika: world pixels=6286, portrait pixels=6286
+Item Zbroja kamiennego strażnika: world pixels=4962, portrait pixels=4962
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Hełm mchu i kamienia: world pixels=1309, portrait pixels=1309
+Item Hełm mchu i kamienia: world pixels=1252, portrait pixels=1252
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Pierścień pradawnego echa: world pixels=42, portrait pixels=42
+Item Pierścień pradawnego echa: world pixels=41, portrait pixels=41
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Sztylet bursztynowego żądła: world pixels=484, portrait pixels=484
+Item Sztylet bursztynowego żądła: world pixels=349, portrait pixels=349
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Hełm miedzianego skarabeusza: world pixels=1423, portrait pixels=1423
+Item Hełm miedzianego skarabeusza: world pixels=1373, portrait pixels=1373
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Zbroja pustynnego skarabeusza: world pixels=3578, portrait pixels=3578
+Item Zbroja pustynnego skarabeusza: world pixels=3469, portrait pixels=3469
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Buty piaskowej kobry: world pixels=1417, portrait pixels=1417
+Item Buty piaskowej kobry: world pixels=1486, portrait pixels=1486
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Łuk pustynnego mirażu: world pixels=699, portrait pixels=699
+Item Łuk pustynnego mirażu: world pixels=725, portrait pixels=725
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Amulet palącego słońca: world pixels=75, portrait pixels=75
+Item Amulet palącego słońca: world pixels=77, portrait pixels=77
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Ostrze żywej wydmy: world pixels=1341, portrait pixels=1341
+Item Ostrze żywej wydmy: world pixels=1202, portrait pixels=1202
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Płaszcz piaskowej burzy: world pixels=8428, portrait pixels=8428
+Item Płaszcz piaskowej burzy: world pixels=7269, portrait pixels=7269
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack
 PASS: removing equipment visibly removes it from the hero
 PASS: real equipment transfer accepts this item
-Item Tarcza pustynnego monolitu: world pixels=1768, portrait pixels=1768
+Item Tarcza pustynnego monolitu: world pixels=1828, portrait pixels=1828
 PASS: exact equipped item visibly changes the GPU-rendered world hero
 PASS: exact equipped item also changes the portrait
 PASS: real removal returns the item to the backpack

@@ -43,7 +43,7 @@ void treasureTests(){
    check(g.get(source)&&g.reachable(source),"opened chest exposes reachable loot");
    for(auto& value:g.bag)value=item(Kind::Sword);
    check(!g.transfer(source,{Place::Bag,10})&&c->loot[0].kind==loot[0].kind,"full backpack preserves treasure without swapping gear back");
-   check(!g.transfer(source,{Place::Equip,gearSlot(loot[0].kind)})&&!g.drop(source,g.player)&&!g.use(source),"chest items must first be collected into the bag");
+   check(!g.transfer(source,{Place::Equip,(gearSlot(loot[0].kind)+1)%EquipSize})&&!g.drop(source,g.player)&&!g.use(source),"chest gear rejects a mismatched slot, ground drop and consumption");
    g.bag[10]={};check(g.transfer(source,{Place::Bag,10})&&c->loot[0].empty()&&g.bag[10].kind==loot[0].kind,"collecting transfers the exact piece once");
    check(!g.transfer({Place::Bag,10},source),"items cannot be deposited into treasure slots");
    check(!g.get({Place::Chest,-1,c->id})&&!g.get({Place::Chest,ChestLootSize,c->id}),"invalid chest slots are rejected");

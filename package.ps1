@@ -44,6 +44,10 @@ LPM z lukiem - przytrzymaj, by naciagac cieciwe, i pusc, by strzelic.
 Dlugosc naciagu zmienia zasieg. Na poczatek masz 20 strzal.
 Q / BRON - kolo wyboru broni. Przeciagnij bron z plecaka na kolo.
 PPM na ciele bestii - otworz jego loot. Przeciagnij lup do plecaka.
+2x LPM na lupie w ciele lub skrzyni - przenies do plecaka.
+2x LPM na sprzecie w plecaku - zaloz do odpowiedniego slota.
+Sprzet mozna tez przeciagnac z ciala lub skrzyni wprost na noszone eq.
+Zastepowany przedmiot trafia do plecaka; musi byc na niego miejsce.
 Przeciagnij przedmiot z plecaka na pasujacy slot ekwipunku.
 Najazd na przedmiot - opis i rzadkosc; na obiekt lub bestie - informacje.
 1 / 2 - mikstura zdrowia / many.

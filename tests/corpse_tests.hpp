@@ -34,7 +34,7 @@ void corpseTests(){
     check(g.transfer({Place::Corpse,0,41},{Place::Bag,10})&&g.bag[10].count==99&&g.enemies[0].loot[0].count==7&&total(g)==before,"partial stack keeps excess in the corpse without duplication");
     check(!g.transfer({Place::Corpse,0,41},{Place::Bag,10})&&total(g)==before,"a full destination stack cannot consume corpse loot");
     check(!g.transfer({Place::Corpse,1,41},{Place::Bag,0})&&g.bag[0].kind==Kind::Health&&total(g)==before,"different occupied backpack item is preserved instead of swapped into a corpse");
-    check(!g.transfer({Place::Corpse,1,41},{Place::Equip,0})&&!g.drop({Place::Corpse,1,41},g.player),"loot must enter the backpack before equipping or dropping it");
+    check(!g.transfer({Place::Corpse,1,41},{Place::Equip,1})&&!g.drop({Place::Corpse,1,41},g.player),"corpse sword rejects a mismatched gear slot and ground drop");
     g.hp=10;check(!g.use({Place::Corpse,0,41})&&g.hp==10,"corpse potions cannot be consumed before collection");
     check(!g.transfer({Place::Bag,2},{Place::Corpse,4,41})&&total(g)==before,"backpack items cannot be inserted into corpse loot slots");
     g.openCorpse(83);

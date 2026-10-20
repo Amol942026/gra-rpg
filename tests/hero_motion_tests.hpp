@@ -40,4 +40,18 @@ void heroMotionTests(){
  check(state.phase==phase&&state.moveBlend<weight&&state.moveBlend>0,"stopping preserves gait phase and blends toward rest instead of snapping feet");
  state.face(-1,1);float angle=state.facingAngle;state.advance(0,0,1.f/60);
  check(std::abs(state.facingAngle-angle)<1&&std::abs(state.facingAngle-angle)>.001f,"facing turns through intermediate angles while gameplay keeps its directional state");
+ // Synfig secondary tracks must never lift a planted foot or stretch an arm.
+ for(float phase:{0.f,.13f,.25f,.5f,.73f,.99f})for(float running:{0.f,1.f}){
+  Pose base=forward(sample(running?data::RunClip:data::WalkClip,phase)),p=base;
+  secondary(p,hero_secondary::evaluate(phase,1,running,0));
+  for(int b=data::ThighL;b<=data::FootR;b++)check(length(p.world[b].p-base.world[b].p)<.00001f,"Synfig torso motion preserves exact primary foot contact and leg pose");
+  for(int side=0;side<2;side++){
+   int upper=side?data::UpperArmR:data::UpperArmL,fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;
+   check(std::abs(length(p.world[upper].p-p.world[fore].p)-13)<.003f&&std::abs(length(p.world[fore].p-p.world[hand].p)-13)<.003f,"Synfig follow-through rotates rigid arm chains without stretching");
+  }
+ }
+ for(auto clip:{&hero_secondary::idle,&hero_secondary::walk,&hero_secondary::run}){
+  auto a=hero_secondary::sample(*clip,.99999f),b=hero_secondary::sample(*clip,0);
+  check(std::abs(a.spineRoll-b.spineRoll)+std::abs(a.headRoll-b.headRoll)+std::abs(a.capeSway-b.capeSway)<.01f,"native Synfig cycles close smoothly across the virtual loop endpoint");
+ }
 }

@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "created_in": "Krita native MCP drawing",
+  "original_art": true,
+  "external_assets": [],
+  "kra": "C:\\AI2D\\sprites\\emberfall_forest_bush_20261020_v1\\forest-bush.kra",
+  "png": "C:\\AI2D\\sprites\\emberfall_forest_bush_20261020_v1\\forest-bush.png",
+  "canvas": [
+    360,
+    460
+  ],
+  "anchor": [
+    180,
+    416
+  ],
+  "runtime_scale": 0.5,
+  "layers": [
+    {
+      "id": "9949862c-70f3-4e17-9fb3-334e55711a09",
+      "name": "01 Miękki cień kontaktowy"
+    },
+    {
+      "id": "7e74570a-8fa7-4eab-85a8-20f3ea3dd7c7",
+      "name": "02 Ściółka i nasada pędów"
+    },
+    {
+      "id": "f2032443-01e8-4500-8940-3890e0c1743a",
+      "name": "03 Zdrewniałe pędy od ziemi"
+    },
+    {
+      "id": "0cc609b5-9fe3-478f-9acc-13a8863e329f",
+      "name": "04 Głęboka zieleń podszytu"
+    },
+    {
+      "id": "f39e1a79-2da7-4782-8e1f-6849a8a68329",
+      "name": "05 Liście środkowe i tylne"
+    },
+    {
+      "id": "6b0d66bf-6b95-4f9e-890e-ff9811c06556",
+      "name": "06 Przednie pędy i młode liście"
+    },
+    {
+      "id": "8a24869d-a703-4d05-abdb-a7087f0adf10",
+      "name": "07 Nerwy i rozproszone refleksy"
+    }
+  ],
+  "alpha_bounds": [
+    61,
+    294,
+    312,
+    426
+  ],
+  "sha256": "0c398b624f0e089af4c6e37e8ded8d988a8e095f0215d9a4edad6770da4946a5"
+}

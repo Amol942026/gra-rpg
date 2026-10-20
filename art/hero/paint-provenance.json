@@ -1,0 +1,180 @@
+{
+  "status": "PASS",
+  "authored_in": "Krita 5.3.4.1 native MCP draw tools",
+  "original_art": true,
+  "external_assets": [],
+  "kra": "C:\\AI2D\\sprites\\emberfall_hero_20261020_features_only_v4\\hero-paints.kra",
+  "png": "C:\\AI2D\\sprites\\emberfall_hero_20261020_features_only_v4\\hero-paints.png",
+  "layers": [
+    {
+      "name": "01 Skóra zapewniana przez głowę gry — przezroczysta baza",
+      "id": "d7f34e9e-394b-4907-a6ed-ecf3c67de301",
+      "cell": 0
+    },
+    {
+      "name": "02 Oczy, brwi, nos i usta",
+      "id": "023117d2-5bc5-41a9-95ae-473f5f39347c",
+      "cell": 0
+    },
+    {
+      "name": "03 Czyste policzki i skronie — kolor głowy",
+      "id": "87057233-3336-4549-a84d-afa8e67519b0",
+      "cell": 0
+    },
+    {
+      "name": "04 Włosy — pasma z przodu",
+      "id": "6176acaa-7ff7-42f9-ab27-5b64438398ae",
+      "cell": 1
+    },
+    {
+      "name": "05 Włosy — tył i kark",
+      "id": "11030df9-0ab1-4176-8ee4-b55d4e4ca532",
+      "cell": 2
+    },
+    {
+      "name": "06 Tkanina — szwy, fałdy i obszycie",
+      "id": "8908227e-8c1c-411b-a3ee-30ecc421aab7",
+      "cell": 3
+    },
+    {
+      "name": "07 Skórzane karwasze — szwy i sprzączki",
+      "id": "81a69fab-86ec-4367-b66d-a22c3042a27e",
+      "cell": 4
+    },
+    {
+      "name": "08 Buty — szwy i zużycie",
+      "id": "faaa0419-7027-40ae-bc3a-d3c05ece0c3e",
+      "cell": 5
+    },
+    {
+      "name": "09 Szal — malowane fałdy",
+      "id": "e5658abe-38f3-40a6-9df5-a8908d54ef0d",
+      "cell": 6
+    },
+    {
+      "name": "10 Peleryna wycinanki",
+      "id": "d178dd47-b4f2-4677-a541-0017f0fbf7e1",
+      "cell": 7
+    },
+    {
+      "name": "11 Tułów wycinanki — tunika",
+      "id": "e90b1356-ea09-4d47-8eb4-429723243b1c",
+      "cell": 8
+    },
+    {
+      "name": "12 Ramię wycinanki",
+      "id": "f089f51d-550c-47e1-9f78-b160b49cb07f",
+      "cell": 9
+    },
+    {
+      "name": "13 Noga wycinanki",
+      "id": "80fe0d18-7aa3-4874-a0dc-fd501fff2225",
+      "cell": 10
+    },
+    {
+      "name": "14 Miecz wycinanki",
+      "id": "5eb03204-545e-4eb8-be5e-0f6ff6ad3f73",
+      "cell": 11
+    }
+  ],
+  "parts": [
+    {
+      "name": "face",
+      "cell": 0,
+      "sha256": "1f2574d19e66cbe50cae3f5d3924d37d290f2ebe9e5dd654229182e63bc67163"
+    },
+    {
+      "name": "hair_front",
+      "cell": 1,
+      "sha256": "2eded42c516b404724f4e4fccf03efcf51bf939200f4460a76eb8d64281b7a1e"
+    },
+    {
+      "name": "hair_back",
+      "cell": 2,
+      "sha256": "6a8918db84bbe718b84997ae90f60ea5f01162ae1c2e911694f36097bbb3a9ec"
+    },
+    {
+      "name": "tunic",
+      "cell": 3,
+      "sha256": "76f05fdd6ac92ff7c78b45df2a9bf07386cdf3ecd3d8292365e5ce47fca86b4c"
+    },
+    {
+      "name": "bracer",
+      "cell": 4,
+      "sha256": "c627fada5c43b7707ae9d065d64d0a2a80c9ac2163cf0bcebef6d2a411e1bedc"
+    },
+    {
+      "name": "boot",
+      "cell": 5,
+      "sha256": "1c7d5b4b4f807ad3229e80246dd208d21537fb141c35f8cd9b4fe273f68c269e"
+    },
+    {
+      "name": "scarf",
+      "cell": 6,
+      "sha256": "eff7b94e33e306bea8c5f1bb43f836f288e8a0a12ae840cf102510a12ceaa2ba"
+    },
+    {
+      "name": "cape",
+      "cell": 7,
+      "sha256": "0d1bb7051d5be331fd439037725a6010d2f0400aebfe57ab24d72ec9ff68fe2c"
+    },
+    {
+      "name": "body",
+      "cell": 8,
+      "sha256": "2683bdec60c37ffe04c197d6e037586ea67608ffb127b575dbdde6ef4963513e"
+    },
+    {
+      "name": "arm",
+      "cell": 9,
+      "sha256": "9dfae233af4bcbb7da8fb79a48d3c7dd5c4fef3f5fea67de9aac948ae2bd1ef9"
+    },
+    {
+      "name": "leg",
+      "cell": 10,
+      "sha256": "2eecfe3290dcbea45840ac6925595ccb2d80439aa64b37a123c287cb855fbff8"
+    },
+    {
+      "name": "sword",
+      "cell": 11,
+      "sha256": "36fe4b163662c9a6340ad1a37d59e0788b0273f6c3cdced5db138927cd4c052d"
+    }
+  ],
+  "runtime_compatibility": {
+    "profile_version": 1,
+    "krita_version": "5.3.4.1 (git bd6e8d0)",
+    "krita_base_version": "5.3.4.1",
+    "status": "compatible",
+    "evaluation_complete": true,
+    "validation": "capability_checked",
+    "tested_versions": [
+      "5.3.2.1"
+    ],
+    "capabilities": {
+      "document_lifecycle": true,
+      "document_view": true,
+      "document_projection": true,
+      "document_persistence": true,
+      "stable_layer_tree": true,
+      "layer_creation": true,
+      "native_paint_line": true,
+      "native_paint_path": true,
+      "native_paint_polygon": true,
+      "native_paint_rectangle": true,
+      "native_paint_ellipse": true,
+      "native_brush_state": true,
+      "raster_layer_import": true,
+      "asset_projection": true,
+      "project_palette": true,
+      "selection_editing": true,
+      "transform_masks": true,
+      "direct_layer_transforms": true,
+      "native_history_actions": true,
+      "native_selection_actions": true,
+      "native_canvas_mirror_actions": true,
+      "native_layer_mirror_actions": true
+    },
+    "issues": [],
+    "backend_policy": "native_only_no_silent_pixel_fallback"
+  },
+  "sha256": "b9a426d0b76e46c6ae3fbaa22df7b2a5a07465d674098606f5060d3bcc9538e7"
+}

@@ -1,0 +1,52 @@
+5 ms: Emberfall v0.47: startup
+5 ms: Build edition: player
+6 ms: Creating graphics window
+6 ms: Initializing raylib 5.5
+6 ms: Platform backend: DESKTOP (GLFW)
+6 ms: Supported raylib modules:
+6 ms:     > rcore:..... loaded (mandatory)
+6 ms:     > rlgl:...... loaded (mandatory)
+6 ms:     > rshapes:... loaded (optional)
+6 ms:     > rtextures:. loaded (optional)
+6 ms:     > rtext:..... loaded (optional)
+6 ms:     > rmodels:... loaded (optional)
+6 ms:     > raudio:.... loaded (optional)
+148 ms: DISPLAY: Trying to enable VSYNC
+148 ms: DISPLAY: Device initialized successfully
+149 ms:     > Display size: 1920 x 1080
+150 ms:     > Screen size:  1440 x 900
+150 ms:     > Render size:  1800 x 1055
+150 ms:     > Viewport offsets: 0, 0
+156 ms: GLAD: OpenGL extensions loaded successfully
+156 ms: GL: Supported extensions count: 286
+156 ms: GL: OpenGL device information:
+156 ms:     > Vendor:   ATI Technologies Inc.
+156 ms:     > Renderer: AMD Radeon (TM) Graphics
+156 ms:     > Version:  3.3.0 Core Profile Context 23.19.10.04.240321
+156 ms:     > GLSL:     4.60
+156 ms: GL: VAO extension detected, VAO functions loaded successfully
+156 ms: GL: NPOT textures extension detected, full NPOT textures supported
+156 ms: GL: DXT compressed textures supported
+156 ms: GL: ETC2/EAC compressed textures supported
+156 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+156 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+156 ms: TEXTURE: [ID 1] Default texture loaded successfully
+200 ms: SHADER: [ID 1] Vertex shader compiled successfully
+201 ms: SHADER: [ID 2] Fragment shader compiled successfully
+221 ms: SHADER: [ID 3] Program shader loaded successfully
+221 ms: SHADER: [ID 3] Default shader loaded successfully
+221 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+222 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+222 ms: RLGL: Default OpenGL state initialized successfully
+222 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+222 ms: FONT: Default font loaded successfully (224 glyphs)
+222 ms: SYSTEM: Working Directory: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\dist\qa-hero-art\package-20261020-173744\Emberfall
+222 ms: Graphics window ready
+223 ms: Generating world graphics
+2558 ms: World graphics ready
+2558 ms: Audio skipped (--no-audio)
+2675 ms: First scene rendered
+2711 ms: First frame presented
+2711 ms: OpenGL V-sync
+2711 ms: Native OpenGL presentation
+6122 ms: Shutting down

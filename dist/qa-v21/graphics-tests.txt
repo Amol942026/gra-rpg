@@ -539,28 +539,28 @@ PASS: actual cached corpse pixels agree with physical hover and looting geometry
 PASS: detailed fallen body stays complete and visible in all eight directions
 PASS: actual cached corpse pixels agree with physical hover and looting geometry
 PASS: drawing and probing corpses never rebuilds meshes or uploads textures during combat
-Species=0; direction=0; roll=-1; strike=-1; opaque=2025; interior=25; mismatch=0
+Species=0; direction=0; roll=-1; strike=-1; opaque=2004; interior=17; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=1; roll=-1; strike=-1; opaque=2817; interior=32; mismatch=0
+Species=0; direction=1; roll=-1; strike=-1; opaque=2796; interior=30; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=2; roll=-1; strike=-1; opaque=2874; interior=35; mismatch=0
+Species=0; direction=2; roll=-1; strike=-1; opaque=2850; interior=34; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=3; roll=-1; strike=-1; opaque=2794; interior=38; mismatch=0
+Species=0; direction=3; roll=-1; strike=-1; opaque=2791; interior=38; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=4; roll=-1; strike=-1; opaque=1979; interior=16; mismatch=0
+Species=0; direction=4; roll=-1; strike=-1; opaque=1948; interior=15; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=5; roll=-1; strike=-1; opaque=2928; interior=37; mismatch=0
+Species=0; direction=5; roll=-1; strike=-1; opaque=2908; interior=34; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=6; roll=-1; strike=-1; opaque=3197; interior=41; mismatch=0
+Species=0; direction=6; roll=-1; strike=-1; opaque=3214; interior=40; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=7; roll=-1; strike=-1; opaque=3084; interior=43; mismatch=0
+Species=0; direction=7; roll=-1; strike=-1; opaque=3092; interior=44; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
 Species=1; direction=0; roll=-1; strike=-1; opaque=1441; interior=20; mismatch=0
@@ -851,76 +851,76 @@ PASS: GPU-rasterized body interior and empty space match pointer geometry
 Species=12; direction=7; roll=-1; strike=-1; opaque=15592; interior=277; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=0; roll=-1; strike=0.5; opaque=2294; interior=23; mismatch=0
+Species=0; direction=0; roll=-1; strike=0.5; opaque=2259; interior=22; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=0; roll=0.2; strike=-1; opaque=2029; interior=25; mismatch=0
+Species=0; direction=0; roll=0.2; strike=-1; opaque=2000; interior=24; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=0; roll=0.65; strike=-1; opaque=1995; interior=23; mismatch=0
+Species=0; direction=0; roll=0.65; strike=-1; opaque=1962; interior=22; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=1; roll=-1; strike=0.5; opaque=2820; interior=35; mismatch=0
+Species=0; direction=1; roll=-1; strike=0.5; opaque=2783; interior=32; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=1; roll=0.2; strike=-1; opaque=2165; interior=24; mismatch=0
+Species=0; direction=1; roll=0.2; strike=-1; opaque=2115; interior=23; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=1; roll=0.65; strike=-1; opaque=2229; interior=29; mismatch=0
+Species=0; direction=1; roll=0.65; strike=-1; opaque=2207; interior=27; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=2; roll=-1; strike=0.5; opaque=2846; interior=36; mismatch=0
+Species=0; direction=2; roll=-1; strike=0.5; opaque=2787; interior=32; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=2; roll=0.2; strike=-1; opaque=2095; interior=26; mismatch=0
+Species=0; direction=2; roll=0.2; strike=-1; opaque=2065; interior=25; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=2; roll=0.65; strike=-1; opaque=2245; interior=23; mismatch=0
+Species=0; direction=2; roll=0.65; strike=-1; opaque=2235; interior=23; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=3; roll=-1; strike=0.5; opaque=2805; interior=35; mismatch=0
+Species=0; direction=3; roll=-1; strike=0.5; opaque=2727; interior=32; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=3; roll=0.2; strike=-1; opaque=2121; interior=24; mismatch=0
+Species=0; direction=3; roll=0.2; strike=-1; opaque=2078; interior=23; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=3; roll=0.65; strike=-1; opaque=2256; interior=27; mismatch=0
+Species=0; direction=3; roll=0.65; strike=-1; opaque=2238; interior=25; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=4; roll=-1; strike=0.5; opaque=2290; interior=23; mismatch=0
+Species=0; direction=4; roll=-1; strike=0.5; opaque=2278; interior=25; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=4; roll=0.2; strike=-1; opaque=2055; interior=25; mismatch=0
+Species=0; direction=4; roll=0.2; strike=-1; opaque=2038; interior=24; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=4; roll=0.65; strike=-1; opaque=1946; interior=24; mismatch=0
+Species=0; direction=4; roll=0.65; strike=-1; opaque=1913; interior=23; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=5; roll=-1; strike=0.5; opaque=2886; interior=41; mismatch=0
+Species=0; direction=5; roll=-1; strike=0.5; opaque=2903; interior=39; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=5; roll=0.2; strike=-1; opaque=1760; interior=18; mismatch=0
+Species=0; direction=5; roll=0.2; strike=-1; opaque=1727; interior=14; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=5; roll=0.65; strike=-1; opaque=1699; interior=22; mismatch=0
+Species=0; direction=5; roll=0.65; strike=-1; opaque=1679; interior=22; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=6; roll=-1; strike=0.5; opaque=3009; interior=40; mismatch=0
+Species=0; direction=6; roll=-1; strike=0.5; opaque=3030; interior=41; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=6; roll=0.2; strike=-1; opaque=1534; interior=14; mismatch=0
+Species=0; direction=6; roll=0.2; strike=-1; opaque=1501; interior=14; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=6; roll=0.65; strike=-1; opaque=1605; interior=19; mismatch=0
+Species=0; direction=6; roll=0.65; strike=-1; opaque=1594; interior=20; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=7; roll=-1; strike=0.5; opaque=2828; interior=35; mismatch=0
+Species=0; direction=7; roll=-1; strike=0.5; opaque=2819; interior=32; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=7; roll=0.2; strike=-1; opaque=1601; interior=19; mismatch=0
+Species=0; direction=7; roll=0.2; strike=-1; opaque=1558; interior=15; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
-Species=0; direction=7; roll=0.65; strike=-1; opaque=1838; interior=19; mismatch=0
+Species=0; direction=7; roll=0.65; strike=-1; opaque=1823; interior=19; mismatch=0
 PASS: detailed actor pose has a complete visible silhouette without clipped parts
 PASS: GPU-rasterized body interior and empty space match pointer geometry
 PASS: baked foliage, stone and ruin detail fits its full texture and pointer mask

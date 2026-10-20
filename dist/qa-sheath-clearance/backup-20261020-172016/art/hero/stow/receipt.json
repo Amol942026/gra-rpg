@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "project": "C:\\AI2D\\animations\\emberfall_sword_stow_20261020_v2\\sheathe.sif",
+  "project_sha256": "7464725c4259e4178aa0e9d7e3085220eff8122517aecad27b94ef89d994fda5",
+  "header_sha256": "f376506812658a9fba70d02f88fe821c53ac45db975c1833f1f96a0a0eda586e",
+  "duration": 0.6,
+  "rendered_frames": 72,
+  "reverse_for_draw": true,
+  "source": "Synfig native animated value nodes"
+}

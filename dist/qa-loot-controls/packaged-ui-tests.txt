@@ -1,0 +1,56 @@
+PASS: loot controls use player code with no audio device
+PASS: world collision center lies inside the chest's actual base footprint instead of below it
+PASS: chest opens at its real location
+PASS: one left press still starts ordinary loot dragging
+PASS: real drag equips gear directly from each chest
+PASS: direct chest equip keeps replaced gear in the backpack
+PASS: first click-release leaves loot in place and does not duplicate it
+PASS: second left click collects chest loot into the backpack without auto-equipping
+PASS: backpack double click equips to the correct slot and swaps old gear safely
+PASS: double clicking HUD items never attacks or shoots into the world
+PASS: world collision center lies inside the chest's actual base footprint instead of below it
+PASS: chest opens at its real location
+PASS: one left press still starts ordinary loot dragging
+PASS: real drag equips gear directly from each chest
+PASS: direct chest equip keeps replaced gear in the backpack
+PASS: first click-release leaves loot in place and does not duplicate it
+PASS: second left click collects chest loot into the backpack without auto-equipping
+PASS: backpack double click equips to the correct slot and swaps old gear safely
+PASS: double clicking HUD items never attacks or shoots into the world
+PASS: world collision center lies inside the chest's actual base footprint instead of below it
+PASS: chest opens at its real location
+PASS: one left press still starts ordinary loot dragging
+PASS: real drag equips gear directly from each chest
+PASS: direct chest equip keeps replaced gear in the backpack
+PASS: first click-release leaves loot in place and does not duplicate it
+PASS: second left click collects chest loot into the backpack without auto-equipping
+PASS: backpack double click equips to the correct slot and swaps old gear safely
+PASS: double clicking HUD items never attacks or shoots into the world
+PASS: world collision center lies inside the chest's actual base footprint instead of below it
+PASS: chest opens at its real location
+PASS: one left press still starts ordinary loot dragging
+PASS: real drag equips gear directly from each chest
+PASS: direct chest equip keeps replaced gear in the backpack
+PASS: first click-release leaves loot in place and does not duplicate it
+PASS: second left click collects chest loot into the backpack without auto-equipping
+PASS: backpack double click equips to the correct slot and swaps old gear safely
+PASS: double clicking HUD items never attacks or shoots into the world
+PASS: double click collects the correct real corpse slot on all loot pages
+PASS: corpse loot can be equipped by a second double click in the backpack
+PASS: double click collects the correct real corpse slot on all loot pages
+PASS: corpse loot can be equipped by a second double click in the backpack
+PASS: double click collects the correct real corpse slot on all loot pages
+PASS: corpse loot can be equipped by a second double click in the backpack
+PASS: direct drag from corpse to occupied equipment is also supported
+PASS: full backpack rejects double-click collection without losing loot
+PASS: full backpack rejects replacing worn gear by direct dragging
+PASS: direct dragging to an empty equipment slot works with a full backpack
+PASS: double click fills existing stacks and preserves excess loot in the corpse
+PASS: slow clicks do not equip an item
+PASS: cursor movement resets a pending double click
+PASS: opening a menu invalidates an old click pair
+PASS: clicks on different backpack items cannot form an equip action
+PASS: non-equipment double clicks do not accidentally use potions
+PASS: a drag/drop cannot become the first half of a double click at its destination
+PASS: equipping a bow by double click never draws or releases a shot
+Checks: 55; failures: 0

@@ -2,7 +2,9 @@
 #include <type_traits>
 #include "sword_pose.hpp"
 #include "hero_motion.hpp"
+#include "hero_sheath.hpp"
 #include "shadow_geometry.hpp"
+#include "hero_paint.hpp"
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 
 // Small geometric character rigs: all parts turn in depth, including the face,
@@ -33,6 +35,8 @@ struct Face {
     std::array<Color,4> vertexColors{};
     std::array<float,4> vertexDepth{};
     bool smooth=false;
+    unsigned textureId=0;
+    std::array<Vector2,4> uv{};
 };
 class Rig {
     float x, y, scale, fx, fy, rx, ry;
@@ -115,6 +119,18 @@ public:
         size_t before=faces.size();face(a,b,c,d,ca);
         if(faces.size()!=before){auto& f=faces.back();f.smooth=true;f.vertexColors={ca,cb,cc,cd};}
     }
+    // Paint follows the same articulated surfaces and depth test as equipment.
+    // Decals add no shadow geometry; their silhouette is already in the body.
+    void decal(P3 a,P3 b,P3 c,P3 d,int cell,float u0=0,float v0=0,float u1=1,float v1=1,Color tint=WHITE,bool back=false){
+        if(!hero_paint::atlas.id)return;
+        bool saved=collectShadow;collectShadow=false;size_t before=faces.size();
+        if(back)face(d,c,b,a,tint);else face(a,b,c,d,tint);
+        collectShadow=saved;
+        if(faces.size()==before)return;
+        auto& f=faces.back();f.textureId=hero_paint::atlas.id;
+        std::array<Vector2,4> coords={hero_paint::uv(cell,u0,v0),hero_paint::uv(cell,u1,v0),hero_paint::uv(cell,u1,v1),hero_paint::uv(cell,u0,v1)};
+        f.uv=back?std::array<Vector2,4>{coords[3],coords[2],coords[1],coords[0]}:coords;
+    }
     // Continuous skin along a bent path, with shared lighting at each ring.
     void tube(const std::vector<P3>& path,float width,float depth,Color col){
         if(path.size()<2)return;constexpr int sides=12;
@@ -187,7 +203,7 @@ public:
         }();
         return sphere;
     }
-    void rounded(P3 center,P3 size,Color col){
+    void rounded(P3 center,P3 size,Color col,int paintCell=-1,bool paintBack=false){
         bool savedClosed=closedShadow;closedShadow=true;
         auto point=[&](P3 p){return center+P3{p.r*size.r*.5f,p.f*size.f*.5f,p.z*size.z*.5f};};
         auto surface=[&](const auto& sphere){
@@ -203,6 +219,21 @@ public:
                 size_t n=(i+1)%sphere[0].size();P3 normal=(sphere[j][i]+sphere[j][n]+sphere[j+1][n]+sphere[j+1][i])*.25f;
                 size_t before=faces.size();face(point(sphere[j][i]),point(sphere[j][n]),point(sphere[j+1][n]),point(sphere[j+1][i]),col,surfaceLight(normal));
                 if(smoothSurfaces&&faces.size()!=before){auto& f=faces.back();f.smooth=true;f.vertexColors={colors[j][i],colors[j][n],colors[j+1][n],colors[j+1][i]};}
+                // Paint the original front skin, using its exact vertices.
+                // No second shell, depth offset or protruding rectangular edge.
+                if(paintCell>=0&&hero_paint::atlas.id&&normal.f*(paintBack?-1:1)>.001f&&faces.size()!=before){
+                    // Features and hair paint are transparent. Retain the
+                    // original skin/hair under every painted pixel.
+                    faces.push_back(faces.back());
+                    auto& f=faces.back();f.textureId=hero_paint::atlas.id;
+                    const P3 unit[]={sphere[j][i],sphere[j][n],sphere[j+1][n],sphere[j+1][i]};
+                    for(int k=0;k<4;k++){
+                        f.uv[k]=hero_paint::uv(paintCell,std::clamp((unit[k].r*(paintBack?-1:1)+1)*.5f,.00390625f,.99609375f),std::clamp((1-unit[k].z)*.5f,.00390625f,.99609375f));
+                        P3 normal=unit[k];normal={normal.r/size.r,normal.f/size.f,normal.z/size.z};float len=std::sqrt(normal.r*normal.r+normal.f*normal.f+normal.z*normal.z);
+                        f.vertexColors[k]=shade(WHITE,surfaceLight(normal*(1/std::max(.0001f,len))));
+                    }
+                    f.smooth=true;
+                }
             }
         };
         if(smoothSurfaces){
@@ -268,6 +299,18 @@ public:
     bool contains(Vector2 point) const {
         for (const Face& face : faces) {
             const auto& p = face.points;
+            if(face.textureId){
+                for(int t=0;t<2;t++){
+                    int a=0,b=t+1,c=t+2;
+                    if(!CheckCollisionPointTriangle(point,p[a],p[b],p[c]))continue;
+                    float den=(p[b].y-p[c].y)*(p[a].x-p[c].x)+(p[c].x-p[b].x)*(p[a].y-p[c].y);if(std::abs(den)<.00001f)continue;
+                    float u=((p[b].y-p[c].y)*(point.x-p[c].x)+(p[c].x-p[b].x)*(point.y-p[c].y))/den;
+                    float v=((p[c].y-p[a].y)*(point.x-p[c].x)+(p[a].x-p[c].x)*(point.y-p[c].y))/den;
+                    Vector2 uv{face.uv[a].x*u+face.uv[b].x*v+face.uv[c].x*(1-u-v),face.uv[a].y*u+face.uv[b].y*v+face.uv[c].y*(1-u-v)};
+                    if(hero_paint::opaque(uv))return true;
+                }
+                continue;
+            }
             if (CheckCollisionPointTriangle(point,p[0],p[1],p[2]) ||
                 CheckCollisionPointTriangle(point,p[0],p[2],p[3])) return true;
         }
@@ -282,16 +325,27 @@ public:
         // Intersecting organic surfaces need per-pixel depth, not whole-face
         // painter sorting: that sorting exposes teeth along rounded joins.
         if(smoothSurfaces){static const auto clear=reinterpret_cast<void(*)(unsigned int)>(glfwGetProcAddress("glClear"));rlDrawRenderBatchActive();if(clear)clear(0x00000100);rlEnableDepthTest();}
-        rlSetTexture(rlGetTextureIdDefault());
+        // Finish the opaque skin first. Transparent paint borders must never
+        // hide a body part that has not been drawn yet.
+        static const auto depthFunction=reinterpret_cast<void(*)(unsigned int)>(glfwGetProcAddress("glDepthFunc"));
+        for(int paintPass=0;paintPass<2;paintPass++){
+        // Equal depth is intentional for paint on the original hair surface;
+        // no geometric extrusion or positional bias is needed.
+        if(paintPass&&smoothSurfaces&&depthFunction){rlDrawRenderBatchActive();depthFunction(0x0203);}
         for(const auto& f:faces){
-            rlCheckRenderBatchLimit(6);rlBegin(RL_TRIANGLES);
+            if(bool(f.textureId)!=bool(paintPass))continue;
+            unsigned texture=f.textureId?f.textureId:rlGetTextureIdDefault();
+            // A texture switch opens a default QUADS draw call; changing that
+            // to TRIANGLES resets its texture. Establish both states before
+            // submitting vertices, including after an automatic buffer flush.
+            rlCheckRenderBatchLimit(6);rlSetTexture(texture);rlBegin(RL_TRIANGLES);rlSetTexture(texture);
             for(int triangle=0;triangle<2;triangle++){
                 int a=0,b=triangle+1,c=triangle+2;const auto& p=f.points;
                 if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
-                for(int index:{a,b,c}){Color color=f.smooth?f.vertexColors[index]:f.color;rlColor4ub(color.r,color.g,color.b,color.a);rlTexCoord2f(0,0);if(smoothSurfaces)rlVertex3f(p[index].x,p[index].y,f.vertexDepth[index]);else rlVertex2f(p[index].x,p[index].y);}
+                for(int index:{a,b,c}){Color color=f.smooth?f.vertexColors[index]:f.color;rlColor4ub(color.r,color.g,color.b,color.a);rlTexCoord2f(f.uv[index].x,f.uv[index].y);if(smoothSurfaces)rlVertex3f(p[index].x,p[index].y,f.vertexDepth[index]);else rlVertex2f(p[index].x,p[index].y);}
             }rlEnd();
-        }rlSetTexture(0);
-        if(smoothSurfaces){rlDrawRenderBatchActive();rlDisableDepthTest();}
+        }}rlSetTexture(0);
+        if(smoothSurfaces){rlDrawRenderBatchActive();if(depthFunction)depthFunction(0x0201);rlDisableDepthTest();}
     }
 };
 

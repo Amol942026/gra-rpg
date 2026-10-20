@@ -26,6 +26,7 @@ bool empoweredPose()const{return (archetype(equipment[0].kind)==Kind::Sword&&str
 bool strongCut(V aim={}){
  if(!skillAllowed(Skill::StrongCut))return false;
  aimMelee(aim);
+ animation.swordStow=0;
  mana-=StrongCutCost;strongCutCd=StrongCutCooldown;attackCd=.6f;meleeDuration=StrongCutDuration;swing=StrongCutDuration;swingStrong=true;sound(Cue::Swing,player);
  // Capture damage before a kill can award a level during this same area cut.
  const float amount=strongCutDamage();const bool critical=rollCritical();

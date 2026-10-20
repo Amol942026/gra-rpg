@@ -2,6 +2,7 @@
 #include "rlgl.h"
 #include "native_world.hpp"
 #include "game.hpp"
+#include "inventory_click.hpp"
 #include "intro_story.hpp"
 #include "tower_story.hpp"
 #ifndef EMBERFALL_PLAYER_BUILD
@@ -34,6 +35,7 @@ TowerSequence towerStory;
 bool developerActive=false,developerMenuOpen=false,developerKit=true;int developerSelection=0;std::string developerError;
 Rectangle developerButton();void drawDeveloperUi();
 Vector2 mouse{};Slot dragging{};bool paused=false,help=false,welcome=true;int nearbyPage=0,corpsePage=0,corpsePageOwner=-1;float scale=1;Rectangle viewport{};
+InventoryClicks inventoryClicks;
 bool weaponWheelOpen=false;
 bool statsOpen=false,spellBookOpen=false;Attributes statDraft{};int draftForLevel=-1;
  bool skillsOpen=false;SkillRanks skillDraft{};int skillDraftLevel=-1;
@@ -116,6 +118,7 @@ void finishDrag(){
  if(dragging.place==Place::None)return;
  if(weaponWheelOpen&&weaponWheelHit(mouse)>=0){game.bindWeapon(dragging,weaponWheelHit(mouse));dragging={};return;}
  Slot dest=hoverSlot();
+ if(dest.place!=dragging.place||dest.index!=dragging.index||dest.owner!=dragging.owner)inventoryClicks.clear();
  if(dest.place!=Place::None)game.transfer(dragging,dest);
  else if(worldPointerAllowed(mouse)){if(dragging.place==Place::Corpse||dragging.place==Place::Forage||dragging.place==Place::Chest)game.say("Przeciągnij łup do plecaka.");else if(!game.drop(dragging,toWorld(mouse)))game.say("Odłóż przedmiot bliżej postaci, na wolne pole.");}
  dragging={};
@@ -218,6 +221,8 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
 void makeArt(){
+ hero_paint::load();
+ forest_bush_art::load();
  treasure_art::make();
  terrain=LoadRenderTexture(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
  for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
@@ -245,7 +250,8 @@ void makeArt(){
   ImageDrawPixel(&mini,int(90+(x-y)*mx),int(6+(x+y-2)*my),paths?rgb(126,132,100):rgb(61,87,69));
  }
  minimapTerrain=LoadTextureFromImage(mini);UnloadImage(mini);SetTextureFilter(minimapTerrain,TEXTURE_FILTER_POINT);
- for(int i=0;i<PropTypeCount;i++){int density=i>=ForestPropTypeCount?2:1;propArt[i]=LoadRenderTexture(180*density,230*density);BeginTextureMode(propArt[i]);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,float(density)});if(i==0)tree(90,208,1);if(i==1)rock(90,208,1);if(i==2)bush(90,208,1);if(i==3)column(90,208,1);if(i==4)deciduousTree(90,208,1,true);if(i==5)deciduousTree(90,208,1,false);if(i==6)mushrooms(90,208,1);if(i>=ForestPropTypeCount)desert_art::prop(i,90,208);EndMode2D();EndTextureMode();}
+ for(int i=0;i<PropTypeCount;i++){int density=(i>=ForestPropTypeCount||i==2)?2:1;propArt[i]=LoadRenderTexture(180*density,230*density);BeginTextureMode(propArt[i]);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,float(density)});if(i==0)tree(90,208,1);if(i==1)rock(90,208,1);if(i==2)bush(90,208,1);if(i==3)column(90,208,1);if(i==4)deciduousTree(90,208,1,true);if(i==5)deciduousTree(90,208,1,false);if(i==6)mushrooms(90,208,1);if(i>=ForestPropTypeCount)desert_art::prop(i,90,208);EndMode2D();EndTextureMode();}
+ forest_bush_art::unload();
  for(auto& art:propArt)SetTextureFilter(art.texture,TEXTURE_FILTER_BILINEAR);
  fs::create_directories("assets/generated");
  if(!FileExists("assets/generated/terrain-v21.png")){Image im=LoadImageFromTexture(terrain.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/terrain-v21.png");UnloadImage(im);}
@@ -308,7 +314,10 @@ void slotDraw(Slot s,Rectangle r,std::string label=""){
  Item* p=game.get(s);bool hot=inside(r);Color border=hot?Gold:Line;bool same=dragging.place==s.place&&dragging.index==s.index&&dragging.owner==s.owner;Color bg=Card;
  if(dragging.place!=Place::None&&hot){
   Item*a=game.get(dragging);bool allowed=a&&Game::accepts(s,*a)&&s.place!=Place::Corpse&&s.place!=Place::Forage&&s.place!=Place::Chest;
-  if(a&&(dragging.place==Place::Corpse||dragging.place==Place::Forage||dragging.place==Place::Chest))allowed=s.place==Place::Bag&&p&&(p->empty()||(stackable(a->kind)&&a->kind==p->kind&&a->tier==p->tier&&p->count<99));
+  if(a&&(dragging.place==Place::Corpse||dragging.place==Place::Forage||dragging.place==Place::Chest)){
+   allowed=s.place==Place::Bag&&p&&(p->empty()||(stackable(a->kind)&&a->kind==p->kind&&a->tier==p->tier&&p->count<99));
+   if(dragging.place!=Place::Forage&&s.place==Place::Equip&&p&&Game::accepts(s,*a))allowed=p->empty()||std::any_of(game.bag.begin(),game.bag.end(),[](Item v){return v.empty();});
+  }
   border=allowed?Green:rgb(186,83,76);
  }
  DrawRectangleRec(r,bg);DrawRectangleLinesEx(r,1,border);line(r.x+4,r.y+4,r.x+12,r.y+4,Fade(border,.6f));line(r.x+4,r.y+4,r.x+4,r.y+12,Fade(border,.6f));
@@ -373,7 +382,7 @@ void drawUI(){
   panel(corpseCloseRect(),inside(corpseCloseRect())?Card:Panel);center("X",1388,594,14,Gold);
   int count=0;for(int i=0;i<ChestLootSize;i++){count+=!chest->loot[i].empty();slotDraw({Place::Chest,i,chest->id},lootRect(i));}
   for(int i=ChestLootSize;i<5;i++)panel(lootRect(i),rgb(19,29,31));
-  txt(count?"Przeciągnij do plecaka.":"Skrzynia jest pusta.",1080,679,14,count?Muted:Green);
+  txt(count?"2× LPM: do plecaka":"Skrzynia jest pusta.",1080,679,14,count?Muted:Green);
  }else if(Enemy* corpse=game.findCorpse(game.openedCorpse)){
   panel({1076,584,328,116},rgb(17,29,30));DrawRectangleLinesEx({1076,584,328,116},1,Fade(Green,.6f));
   txt(std::string("ŁUP: ")+enemyInfo(corpse->type).name,1080,594,14,Gold);
@@ -381,7 +390,7 @@ void drawUI(){
   syncCorpsePage();int count=0;for(const auto& value:corpse->loot)count+=!value.empty();
   for(int i=0;i<5;i++)slotDraw({Place::Corpse,corpsePage*5+i,corpse->id},lootRect(i));
   if(corpsePages()>1){panel({1286,668,117,25},Panel);center(TextFormat("<  %d / %d  >",corpsePage+1,corpsePages()),1344,674,14,Gold);}
-  txt(count?"Przeciągnij do plecaka.":"Ciało jest puste.",1080,679,14,count?Muted:Green);
+  txt(count?"2× LPM: do plecaka":"Ciało jest puste.",1080,679,14,count?Muted:Green);
  }else{
   txt("W ZASIĘGU",1080,595,10,Gold);auto n=nearbySlots();int pages=std::max(1,(int(n.size())+4)/5);nearbyPage=std::clamp(nearbyPage,0,pages-1);txt(TextFormat("%d  W ZASIĘGU",int(n.size())),1270,595,10,Muted);
   for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size())slotDraw(n[j],lootRect(i));else panel(lootRect(i),rgb(19,29,31));}
@@ -408,7 +417,7 @@ ItemTooltipText itemTooltipText(Item value,Slot source){
  text.value="Wartość: "+std::to_string(itemSellValue(value))+" złota";
  if(value.count>1)text.value+=" / szt. · stos: "+std::to_string(itemStackValue(value))+" złota";
  bool world=source.place==Place::Ground||source.place==Place::Forage||source.place==Place::Corpse||source.place==Place::Chest;
- text.instruction=world&&!game.reachable(source)?"Podejdź bliżej, aby podnieść.":source.place==Place::Corpse||source.place==Place::Chest?"LPM: przeciągnij do plecaka":slot==0?"Przeciągnij na sprzęt lub koło broni (Q)":value.kind==Kind::Health||value.kind==Kind::Mana||value.kind==Kind::Mushroom?"PPM: użyj · LPM: przeciągnij":"LPM: przeciągnij przedmiot";
+ text.instruction=world&&!game.reachable(source)?"Podejdź bliżej, aby podnieść.":source.place==Place::Corpse||source.place==Place::Chest?"2× LPM: do plecaka · przeciągnij, aby założyć":source.place==Place::Bag&&slot>=0?"2× LPM: załóż · LPM: przeciągnij":slot==0?"Przeciągnij na sprzęt lub koło broni (Q)":value.kind==Kind::Health||value.kind==Kind::Mana||value.kind==Kind::Mushroom?"PPM: użyj · LPM: przeciągnij":"LPM: przeciągnij przedmiot";
  if(value.kind==Kind::DawnShard)text.instruction="Artefakt fabularny · nie na sprzedaż";
  text.chance=value.kind==Kind::DawnShard?"Łup fabularny · gwarantowany (100%)":"Szansa na łup: "+std::to_string(itemDropChance(value))+"% · według rzadkości";
  if(source.place==Place::Chest)text.chance="Skrzynia: 3 przedmioty · pospolite / rzadkie";
@@ -450,6 +459,7 @@ namespace world_shadows {void draw();}
 #include "merchant_ui.hpp"
 #include "developer_ui.hpp"
 void input(float dt){
+ if(!gameplayInputAllowed()||!IsWindowFocused())inventoryClicks.clear();else inventoryClicks.moved(mouse.x,mouse.y);
  if(developerInput())return;
  if(intro.active()){introInput(dt);return;}
  startTowerReturn();if(towerStory.active()){towerInput(dt);return;}
@@ -806,7 +816,7 @@ int main(int argc,char**argv) {
     startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
     world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    for(auto& t:propArt)UnloadRenderTexture(t);
+    hero_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
     UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }

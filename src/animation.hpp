@@ -2,6 +2,7 @@
 #include <cmath>
 #include <algorithm>
 #include "running_gait.hpp"
+#include "sword_stow.hpp"
 
 namespace ember {
 // Clockwise screen directions, not the axes of the isometric map.
@@ -22,6 +23,7 @@ struct AnimationState {
     bool moving = false;
     bool sprinting = false;
     float runBlend = 0;
+    float swordStow = 0; // Reversible Synfig timeline: 0 in hand, 1 in scabbard.
     float moveBlend = 0, facingAngle = AnimationPi/4, targetAngle = AnimationPi/4;
     bool motionInitialized = false, facingInitialized = false;
     void stopSprint(){sprinting=false;runBlend=0;}
@@ -31,7 +33,7 @@ struct AnimationState {
         targetAngle = int(direction)*(AnimationPi/4);
         if(!facingInitialized){facingAngle=targetAngle;facingInitialized=true;}
     }
-    void advance(float dx, float dy, float dt, bool sprint = false, bool faceMovement = true) {
+    void advance(float dx, float dy, float dt, bool sprint = false, bool faceMovement = true,bool allowStow=true) {
         float travelled = std::hypot(dx, dy);
         moving = travelled > 0.00001f;
         idleTime += dt;
@@ -39,6 +41,7 @@ struct AnimationState {
         moveBlend=(moving?1.f:0.f)+(moveBlend-(moving?1.f:0.f))*std::exp(-18.f*std::max(0.f,dt));
         if(moveBlend<.0001f)moveBlend=0;
         sprinting=moving&&sprint;
+        swordStow=sword_stow::advance(swordStow,sprinting&&allowStow,dt);
         float target=sprinting?1.f:0.f;
         float before=runBlend,decay=std::exp(-14.f*std::max(0.f,dt));
         float meanBlend=dt>0?target+(before-target)*(1-decay)/(14.f*dt):before;

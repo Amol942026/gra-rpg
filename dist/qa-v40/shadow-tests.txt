@@ -352,7 +352,7 @@ PASS: overlapping mesh faces produce a single opaque mask without dark seams
 PASS: object shadow follows the actual alpha silhouette and matching wind deformation
 PASS: projected silhouette is present and is not clipped
 PASS: overlapping mesh faces produce a single opaque mask without dark seams
-PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+FAIL: object shadow follows the actual alpha silhouette and matching wind deformation
 PASS: projected silhouette is present and is not clipped
 PASS: overlapping mesh faces produce a single opaque mask without dark seams
 PASS: object shadow follows the actual alpha silhouette and matching wind deformation
@@ -488,4 +488,4 @@ PASS: overlapping silhouettes are composed once with restrained opacity
 PASS: shadow darkens an opaque receiver without changing its opacity
 PASS: story chamber renders the hero, mentor and pillars through the same shadow pass
 PASS: levitating hero keeps the shadow on the floor while its physical height changes
-Checks: 490; failures: 0
+Checks: 490; failures: 1

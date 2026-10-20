@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "source": "Synfig native rotate waypoints",
+  "runtime": "secondary motion layered on primary skeletal clips",
+  "clips": [
+    {
+      "project": "C:\\AI2D\\animations\\emberfall_hero_20261020_v1\\idle.sif",
+      "sha256": "d92aad39803be55edbc9cf90f89195d1f3dd88ae3da8b612d39ba53d4a9d6fb9",
+      "exported_samples": 121,
+      "channels": [
+        "spine_roll",
+        "spine_pitch",
+        "head_roll",
+        "arm_swing",
+        "cape_sway",
+        "cape_lift"
+      ]
+    },
+    {
+      "project": "C:\\AI2D\\animations\\emberfall_hero_20261020_v1\\walk.sif",
+      "sha256": "2994c074e033258edf72d49ddb099dc9f7c563b1fb1906bbaf3c5a35e63c51e4",
+      "exported_samples": 61,
+      "channels": [
+        "spine_roll",
+        "spine_pitch",
+        "head_roll",
+        "arm_swing",
+        "cape_sway",
+        "cape_lift"
+      ]
+    },
+    {
+      "project": "C:\\AI2D\\animations\\emberfall_hero_20261020_v1\\run.sif",
+      "sha256": "3d416b5f44a1d863fef99b26be0dde7a825c6059860562e9dcbd0b43c687edcf",
+      "exported_samples": 49,
+      "channels": [
+        "spine_roll",
+        "spine_pitch",
+        "head_roll",
+        "arm_swing",
+        "cape_sway",
+        "cape_lift"
+      ]
+    },
+    {
+      "project": "C:\\AI2D\\animations\\emberfall_hero_20261020_v1\\slash.sif",
+      "sha256": "111c9e6f30ee6e476e5987776be89dc511426531376dbf2154fa565847a546c4",
+      "exported_samples": 37,
+      "channels": [
+        "spine_roll",
+        "spine_pitch",
+        "head_roll",
+        "arm_swing",
+        "cape_sway",
+        "cape_lift"
+      ]
+    },
+    {
+      "project": "C:\\AI2D\\animations\\emberfall_hero_20261020_v1\\heavy.sif",
+      "sha256": "580aaf11fae69ac1768c6ec5e664423a891cc2a5eb843b93a7ec6974e8baa4fd",
+      "exported_samples": 49,
+      "channels": [
+        "spine_roll",
+        "spine_pitch",
+        "head_roll",
+        "arm_swing",
+        "cape_sway",
+        "cape_lift"
+      ]
+    },
+    {
+      "project": "C:\\AI2D\\animations\\emberfall_hero_20261020_v1\\roll.sif",
+      "sha256": "d9f92c4d4c2f785ef1bbad2d81c544b902668d37bf5c6d3dee89e5faaac28ce5",
+      "exported_samples": 43,
+      "channels": [
+        "spine_roll",
+        "spine_pitch",
+        "head_roll",
+        "arm_swing",
+        "cape_sway",
+        "cape_lift"
+      ]
+    }
+  ],
+  "header_sha256": "11b44fdc619a993a97dd5013be410948840d3d73cc76433a1ff2d977f758ac87"
+}

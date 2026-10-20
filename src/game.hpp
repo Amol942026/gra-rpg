@@ -247,18 +247,42 @@ struct Game {
   const Enemy* sourceBody=from.place==Place::Corpse?findCorpse(from.owner):nullptr;
   const bool collectingShard=a->kind==Kind::DawnShard&&to.place==Place::Bag&&sourceBody&&
    ((location==WorldLocation::Forest&&sourceBody->type==3&&dawnFragments()<1)||(inDesert()&&sourceBody->type==DesertBossType&&dawnFragments()<2));
+  const bool equipLoot=(from.place==Place::Corpse||from.place==Place::Chest)&&to.place==Place::Equip;
   if(from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest){
    if(from.place==Place::Corpse&&openedCorpse!=from.owner)return false;
-   if(to.place!=Place::Bag||(!b->empty()&&(!stackable(a->kind)||a->kind!=b->kind||a->tier!=b->tier))){say("Przeciągnij łup na wolne pole plecaka lub pasujący stos.");return false;}
+   if(!equipLoot&&(to.place!=Place::Bag||(!b->empty()&&(!stackable(a->kind)||a->kind!=b->kind||a->tier!=b->tier)))){say("Przeciągnij łup do plecaka lub na pasujący slot sprzętu.");return false;}
   }
   if(!reachable(from)||!reachable(to)){say("Podejdź bliżej przedmiotu (maks. 2,5 pola).");return false;}
   if(!accepts(to,*a)||!accepts(from,*b)){say("Ten przedmiot nie pasuje do wybranego miejsca.");return false;}
-  if(stackable(a->kind)&&a->kind==b->kind&&a->tier==b->tier){int n=std::min(a->count,99-b->count);if(n<=0)return false;b->count+=n;a->count-=n;if(a->count==0)*a={};}
+  if(equipLoot){
+   int spare=-1;if(!b->empty()){for(int i=0;i<BagSize;i++)if(bag[i].empty()){spare=i;break;}
+    if(spare<0){say("Brak miejsca w plecaku na zdejmowany sprzęt.");return false;}}
+   if(spare>=0)bag[spare]=*b;*b=*a;*a={};
+  }
+  else if(stackable(a->kind)&&a->kind==b->kind&&a->tier==b->tier){int n=std::min(a->count,99-b->count);if(n<=0)return false;b->count+=n;a->count-=n;if(a->count==0)*a={};}
   else std::swap(*a,*b);
   if((to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0))cancelBow();
   sound(to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
   if(collectingShard){collectedFragments=inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");}
   else say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
+ }
+ bool quickTransfer(Slot source){
+  if(dead()||allocationRequired||storyBlocked())return false;
+  Item* value=get(source);if(!value||value->empty())return false;
+  if(source.place==Place::Bag){int slot=gearSlot(value->kind);return slot>=0&&transfer(source,{Place::Equip,slot});}
+  if(source.place!=Place::Corpse&&source.place!=Place::Chest)return false;
+  if(source.place==Place::Corpse&&openedCorpse!=source.owner)return false;
+  if(!reachable(source)){say("Podejdź bliżej, aby podnieść przedmiot.");return false;}
+  bool moved=false;
+  if(stackable(value->kind))for(int i=0;i<BagSize;i++){
+   value=get(source);if(!value||value->empty())return moved;
+   if(!bag[i].empty()&&bag[i].kind==value->kind&&bag[i].tier==value->tier&&bag[i].count<99)moved=transfer(source,{Place::Bag,i})||moved;
+  }
+  for(int i=0;i<BagSize;i++){
+   value=get(source);if(!value||value->empty())return moved;
+   if(bag[i].empty())moved=transfer(source,{Place::Bag,i})||moved;
+  }
+  if(!moved)say("Brak miejsca w plecaku.");return moved;
  }
  bool drop(Slot from,V p){Item* a=get(from);if(a&&a->kind==Kind::DawnShard){say("Serce Świtu jest zbyt cenne, by je porzucić.");return false;}if((from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest)||dead()||allocationRequired||storyBlocked()||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0)cancelBow();Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
  bool use(Slot s){if(s.place==Place::Forage){say("Najpierw zbierz grzyb do plecaka.");return false;}Item* a=get(s);if(s.place==Place::Corpse||s.place==Place::Chest||dead()||allocationRequired||storyBlocked()||potionCd>0||!a||a->empty()||!reachable(s))return false;
@@ -294,7 +318,7 @@ struct Game {
  bool attack(V aim={}){
   if(sandTrapped()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)==Kind::Bow)return false;
   aimMelee(aim);
-  attackCd=.46f;meleeDuration=SwingDuration;swingStrong=false;swing=SwingDuration;sound(Cue::Swing,player);
+  animation.swordStow=0;attackCd=.46f;meleeDuration=SwingDuration;swingStrong=false;swing=SwingDuration;sound(Cue::Swing,player);
   // Capture once: a kill can level up the player during this same swing.
   const float amount=float(damage());const bool critical=rollCritical();
   for(auto&e:enemies)if(e.alive&&distance(player,e.pos)<=MeleeRange+.00001f)hit(e,amount,DamageType::Physical,critical);
@@ -412,12 +436,12 @@ struct Game {
   move(normalized(input)*(walkTime*speed));
   if(openedCorpse>=0&&!corpseReachable(openedCorpse))closeCorpse();
   if(openedChest>=0&&!chestReachable(openedChest))openedChest=-1;
-  if(wasRolling){animation.stopSprint();animation.face(rollDirection.x,rollDirection.y);animation.advance(0,0,dt);}
+  if(wasRolling){animation.stopSprint();animation.face(rollDirection.x,rollDirection.y);animation.advance(0,0,dt);animation.swordStow=1;}
   else {
    // Resolve combat aim before smoothing; locomotion still advances the gait.
    const bool aiming=combatFacingActive();
    if(bowDrawing||bowReleaseTime>0)animation.face(bowAim.x,bowAim.y);
-   animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing,!aiming);
+   animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing,!aiming,swing<=0);
   }
   if(!wasRolling){stepDistance+=distance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
   if(mana<maxMana()){

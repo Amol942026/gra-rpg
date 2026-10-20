@@ -2,7 +2,8 @@
 // Original layered Krita artwork. One atlas upload; no per-frame file I/O.
 namespace treasure_art {
 constexpr int Cell=256,States=3;
-constexpr float Scale=.42f,AnchorX=128,AnchorY=226;
+// World position is the center of the base footprint, not its frontmost corner.
+constexpr float Scale=.42f,AnchorX=128,AnchorY=183;
 inline Texture2D atlas{};
 inline std::array<unsigned char,Cell*Cell*States> alpha{};
 inline int frame(const TreasureChest& chest){

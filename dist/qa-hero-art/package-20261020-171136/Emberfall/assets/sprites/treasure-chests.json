@@ -1,0 +1,64 @@
+{
+  "authoring": "Krita MCP native drawing; original 2D artwork, no external inputs",
+  "master": "C:\\AI2D\\sprites\\emberfall_treasure_chests_20261020_grounded_v2.kra",
+  "source_png": "C:\\AI2D\\sprites\\emberfall_treasure_chests_20261020_grounded_v2.png",
+  "sha256": "55fcc5dd480dd0b834af55ebfc72d701891ebb455b2960f4690fb411c02889ec",
+  "size": [
+    768,
+    256
+  ],
+  "cell": [
+    256,
+    256
+  ],
+  "anchor": [
+    128,
+    183
+  ],
+  "scale": 0.42,
+  "states": [
+    "closed",
+    "open_treasure",
+    "open_empty"
+  ],
+  "layers": 17,
+  "compatibility": {
+    "profile_version": 1,
+    "krita_version": "5.3.4.1 (git bd6e8d0)",
+    "krita_base_version": "5.3.4.1",
+    "status": "compatible",
+    "evaluation_complete": true,
+    "validation": "capability_checked",
+    "tested_versions": [
+      "5.3.2.1"
+    ],
+    "capabilities": {
+      "document_lifecycle": true,
+      "document_view": true,
+      "document_projection": true,
+      "document_persistence": true,
+      "stable_layer_tree": true,
+      "layer_creation": true,
+      "native_paint_line": true,
+      "native_paint_path": true,
+      "native_paint_polygon": true,
+      "native_paint_rectangle": true,
+      "native_paint_ellipse": true,
+      "native_brush_state": true,
+      "raster_layer_import": true,
+      "asset_projection": true,
+      "project_palette": true,
+      "selection_editing": true,
+      "transform_masks": true,
+      "direct_layer_transforms": true,
+      "native_history_actions": true,
+      "native_selection_actions": true,
+      "native_canvas_mirror_actions": true,
+      "native_layer_mirror_actions": true
+    },
+    "issues": [],
+    "backend_policy": "native_only_no_silent_pixel_fallback"
+  },
+  "gpu_bytes": 786432,
+  "ground_contact": "Base-footprint center; contact shadow follows the bottom diamond"
+}

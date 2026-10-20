@@ -85,6 +85,13 @@ Przy poleceniu dodania nowej postaci/obiektu agent podłącza adapter w jej
 konkretnym miejscu renderowania i wykonuje ciche QA. Końcowy test środowiska
 sprawdza zgodność plików bez przebudowy gry.
 
+Produkcyjny bohater ma już integrację malowanych paneli Krity i dodatkowych
+krzywych ruchu Synfiga. Źródła, ponowny eksport i ograniczenia podglądu
+wycinanki opisuje `art/hero/README.md`. Aktualna korekta twarzy i gesty miecza:
+`art/hero/SWORD_CLEARANCE_QA.md`; wcześniejsza weryfikacja: `art/hero/QA.md`.
+Przy kolejnych zmianach zachowuj dynamiczne wyposażenie wszystkich 39
+przedmiotów oraz testuj rzeczywisty renderer, nie sam arkusz lub SIF.
+
 ## Muzyka i efekty
 
     & $mediaPython 'tools\media\media_pipeline.py' --no-audio music new_composition

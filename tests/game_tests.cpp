@@ -26,6 +26,7 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "desert_tests.hpp"
 #include "sand_prison_tests.hpp"
 #include "sprint_tests.hpp"
+#include "sword_stow_tests.hpp"
 #include "shadow_tests.hpp"
 #include "rarity_loot_tests.hpp"
 #include "trade_tests.hpp"
@@ -34,7 +35,9 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "treasure_tests.hpp"
 #include "combat_facing_tests.hpp"
 #include "equipment_appearance_tests.hpp"
+#include "loot_controls_tests.hpp"
 int main(){
+ lootControlsTests();
  equipmentAppearanceTests();
  combatFacingTests();
  treasureTests();
@@ -44,6 +47,7 @@ int main(){
  shadowTests();
  rarityLootTests();
  sprintTests();
+ swordStowTests();
  sandPrisonTests();
  desertTests();
  towerStairsTests();

@@ -1,0 +1,55 @@
+PASS: player code diagnostics do not open an audio device
+PASS: native face and 2x Krita bush resources decode
+PASS: temporary bush source is released after the one-time bake
+Yaw=0 alpha mismatch=0 painted pixels=466
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+Yaw=1 alpha mismatch=0 painted pixels=916
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+PASS: fitted face paint remains visible on the front hemisphere
+Yaw=2 alpha mismatch=0 painted pixels=1175
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+PASS: fitted face paint remains visible on the front hemisphere
+Yaw=3 alpha mismatch=0 painted pixels=1223
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+PASS: fitted face paint remains visible on the front hemisphere
+Yaw=4 alpha mismatch=0 painted pixels=1245
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+PASS: fitted face paint remains visible on the front hemisphere
+Yaw=5 alpha mismatch=0 painted pixels=1214
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+PASS: fitted face paint remains visible on the front hemisphere
+Yaw=6 alpha mismatch=0 painted pixels=1060
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+PASS: fitted face paint remains visible on the front hemisphere
+Yaw=7 alpha mismatch=0 painted pixels=758
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+PASS: fitted face paint remains visible on the front hemisphere
+Yaw=8 alpha mismatch=0 painted pixels=341
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+Yaw=9 alpha mismatch=0 painted pixels=92
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+Yaw=10 alpha mismatch=0 painted pixels=52
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+Yaw=11 alpha mismatch=0 painted pixels=53
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+Yaw=12 alpha mismatch=0 painted pixels=74
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+Yaw=13 alpha mismatch=0 painted pixels=109
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+Yaw=14 alpha mismatch=0 painted pixels=169
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+Yaw=15 alpha mismatch=0 painted pixels=247
+PASS: paint has exactly the head silhouette at every yaw, including both profiles
+PASS: shrub has an unclipped leafy silhouette
+PASS: opaque stems and litter meet the exact root/ground anchor
+PASS: leafy bush is selectable at each game scale
+PASS: transparent space over the bush is not selectable
+PASS: contact shadow does not become a solid hover target
+PASS: leafy bush is selectable at each game scale
+PASS: transparent space over the bush is not selectable
+PASS: contact shadow does not become a solid hover target
+PASS: leafy bush is selectable at each game scale
+PASS: transparent space over the bush is not selectable
+PASS: contact shadow does not become a solid hover target
+PASS: new shrub integrates with real scene sorting and ground shadows
+38/38 passed
