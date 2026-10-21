@@ -43,13 +43,14 @@ bez braków. `C:\AI2D\animations\emberfall_hero_20261020_v1\renders` zawiera
 oryginalne sekwencje, logi i manifesty dekodowania każdej klatki.
 
 Są to warstwy ruchu dodatkowego: ciężar tułowia, oddech, przeciwbalans głowy,
-ramiona i opóźnienie peleryny. Podstawowe istniejące klipy szkieletu pozostają
-zachowane. Synfig nie był używany do odtwarzania lub modyfikowania dawnych
+ramiona i opóźnienie peleryny. Dawne klipy pozostają w źródłach; chód ma od
+21.10.2026 nowy klip główny opisany poniżej. Synfig nie był używany do
+odtwarzania lub modyfikowania dawnych
 źródeł Blendera. Wszystkie nowe krzywe są natywnymi `rotate/animated/waypoint`
 SIF; eksport czyta dokładnie te zapisane wartości do
 `src/generated/hero_secondary_data.hpp`. Gra interpoluje je między próbkami,
 nakłada na bazową pozę i nie wykonuje operacji plikowych w pętli klatki.
-Ruch tułowia nie zmienia pozycji ani kontaktu stóp bazowego chodu.
+Sama warstwa dodatkowa nie zmienia pozycji ani kontaktu stóp klipu głównego.
 
 Ponowny eksport po edycji istniejących SIF:
 
@@ -71,6 +72,42 @@ eq, wszystkie kierunki i animacje oceniamy w rzeczywistym rendererze gry.
 Test `tests/hero_art_qa.ps1` zapisuje pełną postać w ośmiu kierunkach, 420 klatek
 siedmiu stanów i zrzuty lasu/pustyni. Dodatkowo obowiązują testy eq i celowania.
 Każde uruchomienie testowe otrzymuje `--no-audio`.
+
+## Naturalny chód — 21.10.2026
+
+Aktualny master: `C:\AI2D\animations\emberfall_walk_20261021_v1\walk.sif`.
+Przenośna kopia jest w `art/hero/walk`. Natywne węzły Synfiga określają
+kontakty i przetaczanie stóp, tory kolan, przenoszenie ciężaru, ruch bioder,
+przeciwbalans tułowia i dłonie. Pętla ma 61 zapisanych punktów kontrolnych.
+`tools/media/walk_synfig.py` eksportuje z zapisanych węzłów 121 póz dla
+istniejących kości, z IK i stałymi długościami nóg/rąk, do
+`src/generated/hero_walk_data.hpp`. Nie używa Blendera ani nowych modeli.
+
+Gra wykorzystuje nowy klip w `hero_motion::evaluate`, przy zachowanym
+sterowaniu, prędkości i zegarze ruchu. Stary dodatkowy obrót tułowia i ramion
+jest pomijany wyłącznie dla składowej chodu, bo te ruchy zawiera już nowy klip.
+Pozostały ruch peleryny, biegu i ciosów jest nadal osobno mieszany.
+Tablica klipu ma 57 596 bajtów danych, bez odczytów plików w pętli gry.
+
+Nowy master i rzeczywisty render Synfiga:
+
+```powershell
+& $py tools/media/walk_synfig.py --root C:\AI2D\animations\hero_walk_nowy --parts art/hero/motion/parts --header src/generated/hero_walk_data.hpp --render --no-audio
+```
+
+Eksport po ręcznej edycji istniejącego SIF:
+
+```python
+import sys
+from pathlib import Path
+sys.path.insert(0, 'tools/media')
+from walk_synfig import compile_clip
+compile_clip(Path('art/hero/walk/walk.sif'), Path('src/generated/hero_walk_data.hpp'))
+```
+
+Podgląd SIF jest dwuwymiarowym podglądem rigu z częściami Krity; końcową
+postać i wyposażenie oceniamy w rendererze gry. Kontrole, porównanie z poprzednim
+chodem i wydanie gracza: [WALK_QA.md](WALK_QA.md).
 
 ## Chowanie i wyciąganie miecza
 

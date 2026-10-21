@@ -10,8 +10,11 @@ inline Key sample(const Clip& clip,float phase){
  float p=phase*(clip.frames-1);int a=std::min(int(p),clip.frames-2);
  return blend(clip.keys[a],clip.keys[a+1],p-a);
 }
-inline Key evaluate(float phase,float motion,float running,float idleTime,float attack=-1,bool strong=false,float rolling=-1){
- auto base=blend(sample(idle,idleTime/idle.duration),blend(sample(walk,phase),sample(run,phase),std::clamp(running,0.f,1.f)),std::clamp(motion,0.f,1.f));
+inline Key evaluate(float phase,float motion,float running,float idleTime,float attack=-1,bool strong=false,float rolling=-1,bool authoredWalk=false){
+ auto walking=sample(walk,phase);
+ // Native primary walk owns these channels; its cloth still uses this track.
+ if(authoredWalk)walking.spineRoll=walking.spinePitch=walking.headRoll=walking.armSwing=0;
+ auto base=blend(sample(idle,idleTime/idle.duration),blend(walking,sample(run,phase),std::clamp(running,0.f,1.f)),std::clamp(motion,0.f,1.f));
  if(rolling>=0)return sample(roll,rolling);
  if(attack>=0){float w=std::clamp(std::min(attack/.12f,(1-attack)/.20f),0.f,1.f);w=w*w*(3-2*w);return blend(base,sample(strong?heavy:slash,attack),w);}
  return base;

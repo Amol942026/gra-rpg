@@ -1,0 +1,1436 @@
+PASS audio device is closed
+PASS Krita atlas loaded
+PASS hero visual regression / idle / changed pixels=0
+PASS hero visual regression / walk / changed pixels=0
+PASS hero visual regression / run / changed pixels=0
+PASS hero visual regression / slash / changed pixels=0
+PASS native gait loop 0
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS native gait loop 1
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS native gait loop 2
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS native gait loop 3
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS native gait loop 4
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS native gait loop 5
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS finite contact gait
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=0 action=0
+PASS pointer matches visible body type=0 direction=0 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=0 action=1
+PASS pointer matches visible body type=0 direction=0 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=0 action=2
+PASS pointer matches visible body type=0 direction=0 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=1 action=0
+PASS pointer matches visible body type=0 direction=1 action=0 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=1 action=1
+PASS pointer matches visible body type=0 direction=1 action=1 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=1 action=2
+PASS pointer matches visible body type=0 direction=1 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=2 action=0
+PASS pointer matches visible body type=0 direction=2 action=0 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=2 action=1
+PASS pointer matches visible body type=0 direction=2 action=1 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=2 action=2
+PASS pointer matches visible body type=0 direction=2 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=3 action=0
+PASS pointer matches visible body type=0 direction=3 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=3 action=1
+PASS pointer matches visible body type=0 direction=3 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=3 action=2
+PASS pointer matches visible body type=0 direction=3 action=2 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=4 action=0
+PASS pointer matches visible body type=0 direction=4 action=0 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=4 action=1
+PASS pointer matches visible body type=0 direction=4 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=4 action=2
+PASS pointer matches visible body type=0 direction=4 action=2 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=5 action=0
+PASS pointer matches visible body type=0 direction=5 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=5 action=1
+PASS pointer matches visible body type=0 direction=5 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=5 action=2
+PASS pointer matches visible body type=0 direction=5 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=6 action=0
+PASS pointer matches visible body type=0 direction=6 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=6 action=1
+PASS pointer matches visible body type=0 direction=6 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=6 action=2
+PASS pointer matches visible body type=0 direction=6 action=2 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=7 action=0
+PASS pointer matches visible body type=0 direction=7 action=0 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=7 action=1
+PASS pointer matches visible body type=0 direction=7 action=1 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=0 direction=7 action=2
+PASS pointer matches visible body type=0 direction=7 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=0 action=0
+PASS pointer matches visible body type=1 direction=0 action=0 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=0 action=1
+PASS pointer matches visible body type=1 direction=0 action=1 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=0 action=2
+PASS pointer matches visible body type=1 direction=0 action=2 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=1 action=0
+PASS pointer matches visible body type=1 direction=1 action=0 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=1 action=1
+PASS pointer matches visible body type=1 direction=1 action=1 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=1 action=2
+PASS pointer matches visible body type=1 direction=1 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=2 action=0
+PASS pointer matches visible body type=1 direction=2 action=0 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=2 action=1
+PASS pointer matches visible body type=1 direction=2 action=1 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=2 action=2
+PASS pointer matches visible body type=1 direction=2 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=3 action=0
+PASS pointer matches visible body type=1 direction=3 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=3 action=1
+PASS pointer matches visible body type=1 direction=3 action=1 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=3 action=2
+PASS pointer matches visible body type=1 direction=3 action=2 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=4 action=0
+PASS pointer matches visible body type=1 direction=4 action=0 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=4 action=1
+PASS pointer matches visible body type=1 direction=4 action=1 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=4 action=2
+PASS pointer matches visible body type=1 direction=4 action=2 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=5 action=0
+PASS pointer matches visible body type=1 direction=5 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=5 action=1
+PASS pointer matches visible body type=1 direction=5 action=1 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=5 action=2
+PASS pointer matches visible body type=1 direction=5 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=6 action=0
+PASS pointer matches visible body type=1 direction=6 action=0 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=6 action=1
+PASS pointer matches visible body type=1 direction=6 action=1 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=6 action=2
+PASS pointer matches visible body type=1 direction=6 action=2 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=7 action=0
+PASS pointer matches visible body type=1 direction=7 action=0 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=7 action=1
+PASS pointer matches visible body type=1 direction=7 action=1 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=1 direction=7 action=2
+PASS pointer matches visible body type=1 direction=7 action=2 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=0 action=0
+PASS pointer matches visible body type=2 direction=0 action=0 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=0 action=1
+PASS pointer matches visible body type=2 direction=0 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=0 action=2
+PASS pointer matches visible body type=2 direction=0 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=1 action=0
+PASS pointer matches visible body type=2 direction=1 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=1 action=1
+PASS pointer matches visible body type=2 direction=1 action=1 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=1 action=2
+PASS pointer matches visible body type=2 direction=1 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=2 action=0
+PASS pointer matches visible body type=2 direction=2 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=2 action=1
+PASS pointer matches visible body type=2 direction=2 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=2 action=2
+PASS pointer matches visible body type=2 direction=2 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=3 action=0
+PASS pointer matches visible body type=2 direction=3 action=0 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=3 action=1
+PASS pointer matches visible body type=2 direction=3 action=1 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=3 action=2
+PASS pointer matches visible body type=2 direction=3 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=4 action=0
+PASS pointer matches visible body type=2 direction=4 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=4 action=1
+PASS pointer matches visible body type=2 direction=4 action=1 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=4 action=2
+PASS pointer matches visible body type=2 direction=4 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=5 action=0
+PASS pointer matches visible body type=2 direction=5 action=0 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=5 action=1
+PASS pointer matches visible body type=2 direction=5 action=1 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=5 action=2
+PASS pointer matches visible body type=2 direction=5 action=2 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=6 action=0
+PASS pointer matches visible body type=2 direction=6 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=6 action=1
+PASS pointer matches visible body type=2 direction=6 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=6 action=2
+PASS pointer matches visible body type=2 direction=6 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=7 action=0
+PASS pointer matches visible body type=2 direction=7 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=7 action=1
+PASS pointer matches visible body type=2 direction=7 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=2 direction=7 action=2
+PASS pointer matches visible body type=2 direction=7 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=0 action=0
+PASS pointer matches visible body type=3 direction=0 action=0 interior=15 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=0 action=1
+PASS pointer matches visible body type=3 direction=0 action=1 interior=17 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=0 action=2
+PASS pointer matches visible body type=3 direction=0 action=2 interior=22 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=1 action=0
+PASS pointer matches visible body type=3 direction=1 action=0 interior=32 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=1 action=1
+PASS pointer matches visible body type=3 direction=1 action=1 interior=32 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=1 action=2
+PASS pointer matches visible body type=3 direction=1 action=2 interior=32 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=2 action=0
+PASS pointer matches visible body type=3 direction=2 action=0 interior=32 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=2 action=1
+PASS pointer matches visible body type=3 direction=2 action=1 interior=31 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=2 action=2
+PASS pointer matches visible body type=3 direction=2 action=2 interior=33 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=3 action=0
+PASS pointer matches visible body type=3 direction=3 action=0 interior=30 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=3 action=1
+PASS pointer matches visible body type=3 direction=3 action=1 interior=32 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=3 action=2
+PASS pointer matches visible body type=3 direction=3 action=2 interior=32 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=4 action=0
+PASS pointer matches visible body type=3 direction=4 action=0 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=4 action=1
+PASS pointer matches visible body type=3 direction=4 action=1 interior=18 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=4 action=2
+PASS pointer matches visible body type=3 direction=4 action=2 interior=24 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=5 action=0
+PASS pointer matches visible body type=3 direction=5 action=0 interior=25 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=5 action=1
+PASS pointer matches visible body type=3 direction=5 action=1 interior=26 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=5 action=2
+PASS pointer matches visible body type=3 direction=5 action=2 interior=25 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=6 action=0
+PASS pointer matches visible body type=3 direction=6 action=0 interior=22 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=6 action=1
+PASS pointer matches visible body type=3 direction=6 action=1 interior=23 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=6 action=2
+PASS pointer matches visible body type=3 direction=6 action=2 interior=18 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=7 action=0
+PASS pointer matches visible body type=3 direction=7 action=0 interior=28 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=7 action=1
+PASS pointer matches visible body type=3 direction=7 action=1 interior=26 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=3 direction=7 action=2
+PASS pointer matches visible body type=3 direction=7 action=2 interior=22 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=0 action=0
+PASS pointer matches visible body type=4 direction=0 action=0 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=0 action=1
+PASS pointer matches visible body type=4 direction=0 action=1 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=0 action=2
+PASS pointer matches visible body type=4 direction=0 action=2 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=1 action=0
+PASS pointer matches visible body type=4 direction=1 action=0 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=1 action=1
+PASS pointer matches visible body type=4 direction=1 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=1 action=2
+PASS pointer matches visible body type=4 direction=1 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=2 action=0
+PASS pointer matches visible body type=4 direction=2 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=2 action=1
+PASS pointer matches visible body type=4 direction=2 action=1 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=2 action=2
+PASS pointer matches visible body type=4 direction=2 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=3 action=0
+PASS pointer matches visible body type=4 direction=3 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=3 action=1
+PASS pointer matches visible body type=4 direction=3 action=1 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=3 action=2
+PASS pointer matches visible body type=4 direction=3 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=4 action=0
+PASS pointer matches visible body type=4 direction=4 action=0 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=4 action=1
+PASS pointer matches visible body type=4 direction=4 action=1 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=4 action=2
+PASS pointer matches visible body type=4 direction=4 action=2 interior=15 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=5 action=0
+PASS pointer matches visible body type=4 direction=5 action=0 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=5 action=1
+PASS pointer matches visible body type=4 direction=5 action=1 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=5 action=2
+PASS pointer matches visible body type=4 direction=5 action=2 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=6 action=0
+PASS pointer matches visible body type=4 direction=6 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=6 action=1
+PASS pointer matches visible body type=4 direction=6 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=6 action=2
+PASS pointer matches visible body type=4 direction=6 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=7 action=0
+PASS pointer matches visible body type=4 direction=7 action=0 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=7 action=1
+PASS pointer matches visible body type=4 direction=7 action=1 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=4 direction=7 action=2
+PASS pointer matches visible body type=4 direction=7 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=0 action=0
+PASS pointer matches visible body type=5 direction=0 action=0 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=0 action=1
+PASS pointer matches visible body type=5 direction=0 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=0 action=2
+PASS pointer matches visible body type=5 direction=0 action=2 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=1 action=0
+PASS pointer matches visible body type=5 direction=1 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=1 action=1
+PASS pointer matches visible body type=5 direction=1 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=1 action=2
+PASS pointer matches visible body type=5 direction=1 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=2 action=0
+PASS pointer matches visible body type=5 direction=2 action=0 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=2 action=1
+PASS pointer matches visible body type=5 direction=2 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=2 action=2
+PASS pointer matches visible body type=5 direction=2 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=3 action=0
+PASS pointer matches visible body type=5 direction=3 action=0 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=3 action=1
+PASS pointer matches visible body type=5 direction=3 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=3 action=2
+PASS pointer matches visible body type=5 direction=3 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=4 action=0
+PASS pointer matches visible body type=5 direction=4 action=0 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=4 action=1
+PASS pointer matches visible body type=5 direction=4 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=4 action=2
+PASS pointer matches visible body type=5 direction=4 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=5 action=0
+PASS pointer matches visible body type=5 direction=5 action=0 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=5 action=1
+PASS pointer matches visible body type=5 direction=5 action=1 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=5 action=2
+PASS pointer matches visible body type=5 direction=5 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=6 action=0
+PASS pointer matches visible body type=5 direction=6 action=0 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=6 action=1
+PASS pointer matches visible body type=5 direction=6 action=1 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=6 action=2
+PASS pointer matches visible body type=5 direction=6 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=7 action=0
+PASS pointer matches visible body type=5 direction=7 action=0 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=7 action=1
+PASS pointer matches visible body type=5 direction=7 action=1 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=5 direction=7 action=2
+PASS pointer matches visible body type=5 direction=7 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=0 action=0
+PASS pointer matches visible body type=6 direction=0 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=0 action=1
+PASS pointer matches visible body type=6 direction=0 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=0 action=2
+PASS pointer matches visible body type=6 direction=0 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=1 action=0
+PASS pointer matches visible body type=6 direction=1 action=0 interior=14 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=1 action=1
+PASS pointer matches visible body type=6 direction=1 action=1 interior=15 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=1 action=2
+PASS pointer matches visible body type=6 direction=1 action=2 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=2 action=0
+PASS pointer matches visible body type=6 direction=2 action=0 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=2 action=1
+PASS pointer matches visible body type=6 direction=2 action=1 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=2 action=2
+PASS pointer matches visible body type=6 direction=2 action=2 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=3 action=0
+PASS pointer matches visible body type=6 direction=3 action=0 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=3 action=1
+PASS pointer matches visible body type=6 direction=3 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=3 action=2
+PASS pointer matches visible body type=6 direction=3 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=4 action=0
+PASS pointer matches visible body type=6 direction=4 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=4 action=1
+PASS pointer matches visible body type=6 direction=4 action=1 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=4 action=2
+PASS pointer matches visible body type=6 direction=4 action=2 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=5 action=0
+PASS pointer matches visible body type=6 direction=5 action=0 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=5 action=1
+PASS pointer matches visible body type=6 direction=5 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=5 action=2
+PASS pointer matches visible body type=6 direction=5 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=6 action=0
+PASS pointer matches visible body type=6 direction=6 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=6 action=1
+PASS pointer matches visible body type=6 direction=6 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=6 action=2
+PASS pointer matches visible body type=6 direction=6 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=7 action=0
+PASS pointer matches visible body type=6 direction=7 action=0 interior=16 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=7 action=1
+PASS pointer matches visible body type=6 direction=7 action=1 interior=14 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=6 direction=7 action=2
+PASS pointer matches visible body type=6 direction=7 action=2 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=0 action=0
+PASS pointer matches visible body type=7 direction=0 action=0 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=0 action=1
+PASS pointer matches visible body type=7 direction=0 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=0 action=2
+PASS pointer matches visible body type=7 direction=0 action=2 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=1 action=0
+PASS pointer matches visible body type=7 direction=1 action=0 interior=15 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=1 action=1
+PASS pointer matches visible body type=7 direction=1 action=1 interior=17 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=1 action=2
+PASS pointer matches visible body type=7 direction=1 action=2 interior=18 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=2 action=0
+PASS pointer matches visible body type=7 direction=2 action=0 interior=17 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=2 action=1
+PASS pointer matches visible body type=7 direction=2 action=1 interior=17 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=2 action=2
+PASS pointer matches visible body type=7 direction=2 action=2 interior=17 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=3 action=0
+PASS pointer matches visible body type=7 direction=3 action=0 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=3 action=1
+PASS pointer matches visible body type=7 direction=3 action=1 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=3 action=2
+PASS pointer matches visible body type=7 direction=3 action=2 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=4 action=0
+PASS pointer matches visible body type=7 direction=4 action=0 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=4 action=1
+PASS pointer matches visible body type=7 direction=4 action=1 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=4 action=2
+PASS pointer matches visible body type=7 direction=4 action=2 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=5 action=0
+PASS pointer matches visible body type=7 direction=5 action=0 interior=19 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=5 action=1
+PASS pointer matches visible body type=7 direction=5 action=1 interior=19 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=5 action=2
+PASS pointer matches visible body type=7 direction=5 action=2 interior=17 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=6 action=0
+PASS pointer matches visible body type=7 direction=6 action=0 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=6 action=1
+PASS pointer matches visible body type=7 direction=6 action=1 interior=15 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=6 action=2
+PASS pointer matches visible body type=7 direction=6 action=2 interior=13 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=7 action=0
+PASS pointer matches visible body type=7 direction=7 action=0 interior=14 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=7 action=1
+PASS pointer matches visible body type=7 direction=7 action=1 interior=18 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=7 direction=7 action=2
+PASS pointer matches visible body type=7 direction=7 action=2 interior=18 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=0 action=0
+PASS pointer matches visible body type=8 direction=0 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=0 action=1
+PASS pointer matches visible body type=8 direction=0 action=1 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=0 action=2
+PASS pointer matches visible body type=8 direction=0 action=2 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=1 action=0
+PASS pointer matches visible body type=8 direction=1 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=1 action=1
+PASS pointer matches visible body type=8 direction=1 action=1 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=1 action=2
+PASS pointer matches visible body type=8 direction=1 action=2 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=2 action=0
+PASS pointer matches visible body type=8 direction=2 action=0 interior=1 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=2 action=1
+PASS pointer matches visible body type=8 direction=2 action=1 interior=1 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=2 action=2
+PASS pointer matches visible body type=8 direction=2 action=2 interior=1 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=3 action=0
+PASS pointer matches visible body type=8 direction=3 action=0 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=3 action=1
+PASS pointer matches visible body type=8 direction=3 action=1 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=3 action=2
+PASS pointer matches visible body type=8 direction=3 action=2 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=4 action=0
+PASS pointer matches visible body type=8 direction=4 action=0 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=4 action=1
+PASS pointer matches visible body type=8 direction=4 action=1 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=4 action=2
+PASS pointer matches visible body type=8 direction=4 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=5 action=0
+PASS pointer matches visible body type=8 direction=5 action=0 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=5 action=1
+PASS pointer matches visible body type=8 direction=5 action=1 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=5 action=2
+PASS pointer matches visible body type=8 direction=5 action=2 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=6 action=0
+PASS pointer matches visible body type=8 direction=6 action=0 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=6 action=1
+PASS pointer matches visible body type=8 direction=6 action=1 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=6 action=2
+PASS pointer matches visible body type=8 direction=6 action=2 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=7 action=0
+PASS pointer matches visible body type=8 direction=7 action=0 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=7 action=1
+PASS pointer matches visible body type=8 direction=7 action=1 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=8 direction=7 action=2
+PASS pointer matches visible body type=8 direction=7 action=2 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=0 action=0
+PASS pointer matches visible body type=9 direction=0 action=0 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=0 action=1
+PASS pointer matches visible body type=9 direction=0 action=1 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=0 action=2
+PASS pointer matches visible body type=9 direction=0 action=2 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=1 action=0
+PASS pointer matches visible body type=9 direction=1 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=1 action=1
+PASS pointer matches visible body type=9 direction=1 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=1 action=2
+PASS pointer matches visible body type=9 direction=1 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=2 action=0
+PASS pointer matches visible body type=9 direction=2 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=2 action=1
+PASS pointer matches visible body type=9 direction=2 action=1 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=2 action=2
+PASS pointer matches visible body type=9 direction=2 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=3 action=0
+PASS pointer matches visible body type=9 direction=3 action=0 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=3 action=1
+PASS pointer matches visible body type=9 direction=3 action=1 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=3 action=2
+PASS pointer matches visible body type=9 direction=3 action=2 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=4 action=0
+PASS pointer matches visible body type=9 direction=4 action=0 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=4 action=1
+PASS pointer matches visible body type=9 direction=4 action=1 interior=4 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=4 action=2
+PASS pointer matches visible body type=9 direction=4 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=5 action=0
+PASS pointer matches visible body type=9 direction=5 action=0 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=5 action=1
+PASS pointer matches visible body type=9 direction=5 action=1 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=5 action=2
+PASS pointer matches visible body type=9 direction=5 action=2 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=6 action=0
+PASS pointer matches visible body type=9 direction=6 action=0 interior=3 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=6 action=1
+PASS pointer matches visible body type=9 direction=6 action=1 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=6 action=2
+PASS pointer matches visible body type=9 direction=6 action=2 interior=2 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=7 action=0
+PASS pointer matches visible body type=9 direction=7 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=7 action=1
+PASS pointer matches visible body type=9 direction=7 action=1 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=9 direction=7 action=2
+PASS pointer matches visible body type=9 direction=7 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=0 action=0
+PASS pointer matches visible body type=10 direction=0 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=0 action=1
+PASS pointer matches visible body type=10 direction=0 action=1 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=0 action=2
+PASS pointer matches visible body type=10 direction=0 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=1 action=0
+PASS pointer matches visible body type=10 direction=1 action=0 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=1 action=1
+PASS pointer matches visible body type=10 direction=1 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=1 action=2
+PASS pointer matches visible body type=10 direction=1 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=2 action=0
+PASS pointer matches visible body type=10 direction=2 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=2 action=1
+PASS pointer matches visible body type=10 direction=2 action=1 interior=7 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=2 action=2
+PASS pointer matches visible body type=10 direction=2 action=2 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=3 action=0
+PASS pointer matches visible body type=10 direction=3 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=3 action=1
+PASS pointer matches visible body type=10 direction=3 action=1 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=3 action=2
+PASS pointer matches visible body type=10 direction=3 action=2 interior=8 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=4 action=0
+PASS pointer matches visible body type=10 direction=4 action=0 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=4 action=1
+PASS pointer matches visible body type=10 direction=4 action=1 interior=6 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=4 action=2
+PASS pointer matches visible body type=10 direction=4 action=2 interior=5 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=5 action=0
+PASS pointer matches visible body type=10 direction=5 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=5 action=1
+PASS pointer matches visible body type=10 direction=5 action=1 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=5 action=2
+PASS pointer matches visible body type=10 direction=5 action=2 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=6 action=0
+PASS pointer matches visible body type=10 direction=6 action=0 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=6 action=1
+PASS pointer matches visible body type=10 direction=6 action=1 interior=9 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=6 action=2
+PASS pointer matches visible body type=10 direction=6 action=2 interior=12 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=7 action=0
+PASS pointer matches visible body type=10 direction=7 action=0 interior=11 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=7 action=1
+PASS pointer matches visible body type=10 direction=7 action=1 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=10 direction=7 action=2
+PASS pointer matches visible body type=10 direction=7 action=2 interior=10 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=0 action=0
+PASS pointer matches visible body type=11 direction=0 action=0 interior=37 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=0 action=1
+PASS pointer matches visible body type=11 direction=0 action=1 interior=40 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=0 action=2
+PASS pointer matches visible body type=11 direction=0 action=2 interior=42 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=1 action=0
+PASS pointer matches visible body type=11 direction=1 action=0 interior=56 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=1 action=1
+PASS pointer matches visible body type=11 direction=1 action=1 interior=52 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=1 action=2
+PASS pointer matches visible body type=11 direction=1 action=2 interior=53 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=2 action=0
+PASS pointer matches visible body type=11 direction=2 action=0 interior=54 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=2 action=1
+PASS pointer matches visible body type=11 direction=2 action=1 interior=57 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=2 action=2
+PASS pointer matches visible body type=11 direction=2 action=2 interior=60 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=3 action=0
+PASS pointer matches visible body type=11 direction=3 action=0 interior=58 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=3 action=1
+PASS pointer matches visible body type=11 direction=3 action=1 interior=59 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=3 action=2
+PASS pointer matches visible body type=11 direction=3 action=2 interior=60 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=4 action=0
+PASS pointer matches visible body type=11 direction=4 action=0 interior=47 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=4 action=1
+PASS pointer matches visible body type=11 direction=4 action=1 interior=47 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=4 action=2
+PASS pointer matches visible body type=11 direction=4 action=2 interior=48 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=5 action=0
+PASS pointer matches visible body type=11 direction=5 action=0 interior=49 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=5 action=1
+PASS pointer matches visible body type=11 direction=5 action=1 interior=49 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=5 action=2
+PASS pointer matches visible body type=11 direction=5 action=2 interior=49 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=6 action=0
+PASS pointer matches visible body type=11 direction=6 action=0 interior=47 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=6 action=1
+PASS pointer matches visible body type=11 direction=6 action=1 interior=48 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=6 action=2
+PASS pointer matches visible body type=11 direction=6 action=2 interior=46 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=7 action=0
+PASS pointer matches visible body type=11 direction=7 action=0 interior=41 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=7 action=1
+PASS pointer matches visible body type=11 direction=7 action=1 interior=41 mismatch=0
+PASS GPU backend matches original material/depth/color / different pixels=0
+PASS complete silhouette type=11 direction=7 action=2
+PASS pointer matches visible body type=11 direction=7 action=2 interior=40 mismatch=0
+PASS scene depth layers preserve painter order / changed pixels=0
+PASS scene depth layers preserve painter order / changed pixels=1
+PASS all corpse textures and pointer masks are prepared before combat starts
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS detailed fallen body stays complete and visible in all eight directions
+PASS actual cached corpse pixels agree with physical hover and looting geometry
+PASS drawing and probing corpses never rebuilds meshes or uploads textures during combat
+PASS actual corpse opening, item transfer and looting
+PASS physical ground shadows and shared body cache
+PASS every PNG exported
+Checks: 1435; failures: 0

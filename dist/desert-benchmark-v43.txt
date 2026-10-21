@@ -1,7 +1,7 @@
 Build edition: developer
 Frames: 900
-Window: 1920x1080
-Fullscreen: yes
+Window: 1440x900
+Fullscreen: no
 Refresh rate (Hz): 60
 V-sync interval: 1
 Presentation clock: OpenGL V-sync
@@ -23,15 +23,15 @@ Tower floor: 1
 Intro active: 0
 Developer error: 
 Audio device opened: no
-Native canvas: 1728x1080
-Desert background buffer: 908x778
-Average FPS: 58.5226
-CPU frame mean (ms): 10.7092
-EndDrawing mean (ms): 6.37789
-Presentation mean (ms): 0.000392133
-CPU frame p95 (ms): 13.7989
-CPU frame p99 (ms): 14.3208
-Frame p95 (ms): 20.067
-Frame p99 (ms): 22.7232
-Frame max (ms): 25.7512
-Frames over 25 ms: 3
+Native canvas: 1688x1055
+Desert background buffer: 887x760
+Average FPS: 59.4369
+CPU frame mean (ms): 6.3839
+EndDrawing mean (ms): 10.4447
+Presentation mean (ms): 0.000761502
+CPU frame p95 (ms): 9.0143
+CPU frame p99 (ms): 10.6694
+Frame p95 (ms): 18.9001
+Frame p99 (ms): 23.3681
+Frame max (ms): 25.4434
+Frames over 25 ms: 2

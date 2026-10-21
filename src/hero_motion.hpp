@@ -3,6 +3,7 @@
 #include <array>
 #include <cmath>
 #include "generated/hero_motion_data.hpp"
+#include "generated/hero_walk_data.hpp"
 #include "hero_secondary.hpp"
 namespace ember::hero_motion {
 using Bone=data::Bone;
@@ -93,7 +94,7 @@ inline void secondary(Pose& pose,hero_secondary::Key key){
 }
 inline Pose evaluate(float phase,float motion,float run,float idleTime,float attack=-1,bool heavy=false,float roll=-1){
  auto idle=sample(data::IdleClip,idleTime/2);
- auto locomotion=blend(sample(data::WalkClip,phase),sample(data::RunClip,phase),std::clamp(run,0.f,1.f));
+ auto locomotion=blend(sample(walk_synfig::clip,phase),sample(data::RunClip,phase),std::clamp(run,0.f,1.f));
  auto local=blend(idle,locomotion,std::clamp(motion,0.f,1.f));
  if(roll>=0){
   float weight=ease(roll/.10f)*ease((1-roll)/.13f);
@@ -102,7 +103,10 @@ inline Pose evaluate(float phase,float motion,float run,float idleTime,float att
   float weight=ease(attack/.12f)*ease((1-attack)/.20f);
   local=blend(local,sample(heavy?data::HeavyClip:data::SlashClip,attack),weight);
  }
- auto pose=forward(local);secondary(pose,hero_secondary::evaluate(phase,motion,run,idleTime,attack,heavy,roll));return pose;
+ auto pose=forward(local);auto follow=hero_secondary::evaluate(phase,motion,run,idleTime,attack,heavy,roll,true);
+ // The new Synfig walk already authors its complete weight transfer and arm
+ // swing. Keep cloth follow-through, without layering the former wobble on it.
+ secondary(pose,follow);return pose;
 }
 inline Pose action(float progress,bool heavy=false){return forward(sample(heavy?data::HeavyClip:data::SlashClip,progress));}
 inline void attach(Pose& pose,int bone,Vec start,Vec end,Vec restEnd){

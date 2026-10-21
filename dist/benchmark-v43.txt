@@ -25,13 +25,13 @@ Developer error:
 Audio device opened: no
 Native canvas: 1688x1055
 Desert background buffer: 0x0
-Average FPS: 58.2938
-CPU frame mean (ms): 8.04425
-EndDrawing mean (ms): 9.1083
-Presentation mean (ms): 0.000669607
-CPU frame p95 (ms): 9.343
-CPU frame p99 (ms): 10.4779
-Frame p95 (ms): 20.2292
-Frame p99 (ms): 22.3368
-Frame max (ms): 31.0315
-Frames over 25 ms: 5
+Average FPS: 58.7132
+CPU frame mean (ms): 10.6462
+EndDrawing mean (ms): 6.37786
+Presentation mean (ms): 0.000754112
+CPU frame p95 (ms): 13.2751
+CPU frame p99 (ms): 14.1481
+Frame p95 (ms): 20.6625
+Frame p99 (ms): 24.2236
+Frame max (ms): 29.7245
+Frames over 25 ms: 4

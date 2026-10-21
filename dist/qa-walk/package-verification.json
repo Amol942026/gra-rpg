@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "package": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\Emberfall-Windows-x64.zip",
+  "package_sha256": "e516108188018eb26f054986f38f4710881f323b23f06956cfeb2f39e3b70302",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-hero-art\\package-20261021-140454\\Emberfall",
+  "verified_assets": 95,
+  "startup_frames": 180,
+  "renderer_checks": 424,
+  "equipment_checks": 364,
+  "stow_checks": 724,
+  "walk_frames": 120,
+  "walk_directions": 8,
+  "audio_device_opened": false,
+  "native_sources_in_player": false
+}

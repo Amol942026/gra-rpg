@@ -1,0 +1,4687 @@
+{
+  "status": "PASS",
+  "checks": 1165,
+  "native_synfig_frames": 360,
+  "actual_game_frames": 60,
+  "poses": 288,
+  "species_unique_frames": [
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60
+  ],
+  "atlas_sha256": "0fa5055140dbf5ed5432ca639179976639d93ae1b9dc6fc714b3e9c99171395b",
+  "native_kra_sha256": "df56e92aa4ee78f68c9bb2bd4b82db56092178e067a99a3570a9347992896339",
+  "motion_header_sha256": "0b68f91f330b12ed9f2ee7e611bc4ba5b4325b3fe5d0f005a97bbdc61992129c",
+  "audio_played": false,
+  "details": [
+    {
+      "pass": true,
+      "label": "gel: every compiled value equals saved Synfig source"
+    },
+    {
+      "pass": true,
+      "label": "gel: loop closure and foot contact"
+    },
+    {
+      "pass": true,
+      "label": "gel: grounded support for most of stride"
+    },
+    {
+      "pass": true,
+      "label": "gel: unique native render"
+    },
+    {
+      "pass": true,
+      "label": "gel: complete native render of current source"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0000.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0001.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0002.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0003.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0004.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0005.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0006.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0007.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0008.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0009.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0010.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0011.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0012.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0013.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0014.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0015.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0016.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0017.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0018.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0019.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0020.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0021.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0022.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0023.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0024.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0025.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0026.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0027.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0028.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0029.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0030.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0031.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0032.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0033.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0034.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0035.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0036.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0037.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0038.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0039.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0040.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0041.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0042.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0043.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0044.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0045.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0046.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0047.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0048.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0049.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0050.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0051.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0052.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0053.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0054.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0055.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0056.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0057.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0058.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0059.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0000.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0001.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0002.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0003.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0004.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0005.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0006.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0007.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0008.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0009.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0010.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0011.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0012.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0013.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0014.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0015.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0016.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0017.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0018.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0019.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0020.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0021.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0022.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0023.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0024.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0025.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0026.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0027.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0028.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0029.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0030.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0031.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0032.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0033.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0034.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0035.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0036.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0037.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0038.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0039.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0040.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0041.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0042.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0043.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0044.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0045.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0046.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0047.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0048.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0049.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0050.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0051.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0052.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0053.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0054.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0055.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0056.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0057.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0058.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel/frame_0059.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "gel: visible native animation"
+    },
+    {
+      "pass": true,
+      "label": "gel: repository master matches production source"
+    },
+    {
+      "pass": true,
+      "label": "quadruped: every compiled value equals saved Synfig source"
+    },
+    {
+      "pass": true,
+      "label": "quadruped: loop closure and foot contact"
+    },
+    {
+      "pass": true,
+      "label": "quadruped: grounded support for most of stride"
+    },
+    {
+      "pass": true,
+      "label": "quadruped: unique native render"
+    },
+    {
+      "pass": true,
+      "label": "quadruped: complete native render of current source"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0000.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0001.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0002.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0003.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0004.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0005.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0006.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0007.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0008.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0009.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0010.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0011.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0012.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0013.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0014.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0015.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0016.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0017.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0018.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0019.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0020.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0021.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0022.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0023.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0024.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0025.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0026.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0027.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0028.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0029.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0030.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0031.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0032.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0033.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0034.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0035.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0036.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0037.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0038.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0039.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0040.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0041.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0042.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0043.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0044.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0045.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0046.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0047.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0048.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0049.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0050.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0051.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0052.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0053.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0054.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0055.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0056.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0057.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0058.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0059.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0000.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0001.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0002.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0003.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0004.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0005.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0006.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0007.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0008.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0009.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0010.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0011.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0012.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0013.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0014.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0015.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0016.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0017.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0018.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0019.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0020.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0021.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0022.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0023.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0024.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0025.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0026.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0027.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0028.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0029.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0030.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0031.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0032.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0033.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0034.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0035.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0036.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0037.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0038.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0039.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0040.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0041.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0042.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0043.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0044.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0045.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0046.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0047.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0048.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0049.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0050.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0051.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0052.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0053.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0054.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0055.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0056.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0057.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0058.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped/frame_0059.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "quadruped: visible native animation"
+    },
+    {
+      "pass": true,
+      "label": "quadruped: repository master matches production source"
+    },
+    {
+      "pass": true,
+      "label": "humanoid: every compiled value equals saved Synfig source"
+    },
+    {
+      "pass": true,
+      "label": "humanoid: loop closure and foot contact"
+    },
+    {
+      "pass": true,
+      "label": "humanoid: grounded support for most of stride"
+    },
+    {
+      "pass": true,
+      "label": "humanoid: unique native render"
+    },
+    {
+      "pass": true,
+      "label": "humanoid: complete native render of current source"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0000.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0001.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0002.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0003.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0004.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0005.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0006.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0007.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0008.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0009.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0010.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0011.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0012.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0013.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0014.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0015.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0016.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0017.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0018.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0019.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0020.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0021.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0022.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0023.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0024.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0025.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0026.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0027.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0028.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0029.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0030.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0031.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0032.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0033.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0034.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0035.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0036.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0037.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0038.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0039.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0040.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0041.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0042.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0043.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0044.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0045.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0046.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0047.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0048.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0049.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0050.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0051.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0052.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0053.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0054.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0055.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0056.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0057.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0058.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0059.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0000.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0001.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0002.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0003.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0004.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0005.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0006.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0007.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0008.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0009.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0010.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0011.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0012.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0013.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0014.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0015.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0016.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0017.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0018.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0019.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0020.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0021.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0022.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0023.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0024.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0025.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0026.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0027.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0028.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0029.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0030.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0031.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0032.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0033.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0034.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0035.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0036.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0037.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0038.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0039.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0040.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0041.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0042.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0043.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0044.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0045.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0046.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0047.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0048.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0049.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0050.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0051.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0052.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0053.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0054.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0055.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0056.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0057.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0058.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid/frame_0059.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "humanoid: visible native animation"
+    },
+    {
+      "pass": true,
+      "label": "humanoid: repository master matches production source"
+    },
+    {
+      "pass": true,
+      "label": "arachnid: every compiled value equals saved Synfig source"
+    },
+    {
+      "pass": true,
+      "label": "arachnid: loop closure and foot contact"
+    },
+    {
+      "pass": true,
+      "label": "arachnid: grounded support for most of stride"
+    },
+    {
+      "pass": true,
+      "label": "arachnid: unique native render"
+    },
+    {
+      "pass": true,
+      "label": "arachnid: complete native render of current source"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0000.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0001.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0002.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0003.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0004.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0005.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0006.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0007.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0008.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0009.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0010.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0011.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0012.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0013.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0014.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0015.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0016.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0017.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0018.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0019.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0020.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0021.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0022.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0023.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0024.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0025.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0026.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0027.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0028.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0029.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0030.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0031.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0032.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0033.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0034.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0035.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0036.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0037.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0038.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0039.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0040.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0041.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0042.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0043.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0044.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0045.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0046.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0047.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0048.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0049.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0050.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0051.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0052.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0053.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0054.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0055.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0056.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0057.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0058.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0059.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0000.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0001.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0002.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0003.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0004.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0005.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0006.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0007.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0008.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0009.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0010.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0011.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0012.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0013.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0014.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0015.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0016.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0017.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0018.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0019.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0020.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0021.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0022.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0023.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0024.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0025.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0026.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0027.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0028.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0029.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0030.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0031.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0032.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0033.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0034.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0035.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0036.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0037.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0038.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0039.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0040.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0041.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0042.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0043.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0044.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0045.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0046.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0047.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0048.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0049.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0050.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0051.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0052.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0053.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0054.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0055.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0056.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0057.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0058.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid/frame_0059.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "arachnid: visible native animation"
+    },
+    {
+      "pass": true,
+      "label": "arachnid: repository master matches production source"
+    },
+    {
+      "pass": true,
+      "label": "serpent: every compiled value equals saved Synfig source"
+    },
+    {
+      "pass": true,
+      "label": "serpent: loop closure and foot contact"
+    },
+    {
+      "pass": true,
+      "label": "serpent: grounded support for most of stride"
+    },
+    {
+      "pass": true,
+      "label": "serpent: unique native render"
+    },
+    {
+      "pass": true,
+      "label": "serpent: complete native render of current source"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0000.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0001.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0002.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0003.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0004.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0005.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0006.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0007.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0008.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0009.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0010.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0011.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0012.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0013.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0014.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0015.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0016.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0017.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0018.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0019.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0020.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0021.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0022.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0023.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0024.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0025.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0026.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0027.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0028.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0029.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0030.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0031.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0032.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0033.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0034.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0035.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0036.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0037.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0038.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0039.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0040.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0041.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0042.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0043.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0044.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0045.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0046.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0047.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0048.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0049.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0050.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0051.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0052.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0053.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0054.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0055.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0056.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0057.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0058.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0059.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0000.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0001.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0002.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0003.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0004.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0005.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0006.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0007.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0008.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0009.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0010.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0011.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0012.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0013.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0014.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0015.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0016.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0017.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0018.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0019.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0020.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0021.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0022.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0023.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0024.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0025.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0026.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0027.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0028.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0029.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0030.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0031.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0032.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0033.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0034.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0035.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0036.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0037.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0038.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0039.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0040.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0041.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0042.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0043.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0044.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0045.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0046.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0047.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0048.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0049.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0050.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0051.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0052.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0053.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0054.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0055.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0056.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0057.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0058.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent/frame_0059.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "serpent: visible native animation"
+    },
+    {
+      "pass": true,
+      "label": "serpent: repository master matches production source"
+    },
+    {
+      "pass": true,
+      "label": "elemental: every compiled value equals saved Synfig source"
+    },
+    {
+      "pass": true,
+      "label": "elemental: loop closure and foot contact"
+    },
+    {
+      "pass": true,
+      "label": "elemental: grounded support for most of stride"
+    },
+    {
+      "pass": true,
+      "label": "elemental: unique native render"
+    },
+    {
+      "pass": true,
+      "label": "elemental: complete native render of current source"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0000.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0001.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0002.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0003.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0004.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0005.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0006.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0007.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0008.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0009.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0010.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0011.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0012.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0013.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0014.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0015.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0016.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0017.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0018.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0019.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0020.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0021.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0022.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0023.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0024.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0025.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0026.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0027.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0028.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0029.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0030.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0031.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0032.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0033.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0034.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0035.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0036.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0037.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0038.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0039.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0040.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0041.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0042.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0043.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0044.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0045.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0046.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0047.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0048.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0049.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0050.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0051.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0052.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0053.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0054.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0055.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0056.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0057.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0058.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0059.png: native render hash"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0000.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0001.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0002.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0003.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0004.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0005.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0006.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0007.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0008.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0009.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0010.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0011.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0012.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0013.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0014.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0015.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0016.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0017.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0018.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0019.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0020.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0021.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0022.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0023.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0024.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0025.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0026.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0027.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0028.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0029.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0030.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0031.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0032.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0033.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0034.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0035.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0036.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0037.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0038.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0039.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0040.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0041.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0042.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0043.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0044.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0045.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0046.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0047.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0048.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0049.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0050.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0051.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0052.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0053.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0054.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0055.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0056.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0057.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0058.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental/frame_0059.png: PNG decodes"
+    },
+    {
+      "pass": true,
+      "label": "elemental: visible native animation"
+    },
+    {
+      "pass": true,
+      "label": "elemental: repository master matches production source"
+    },
+    {
+      "pass": true,
+      "label": "layered KRA archive is intact"
+    },
+    {
+      "pass": true,
+      "label": "RGBA8 transparent Krita atlas"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 0 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 1 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 2 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 3 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 4 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 5 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 6 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 7 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 8 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 9 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 10 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 11 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 12 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 13 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 14 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "paint cell 15 contains detail"
+    },
+    {
+      "pass": true,
+      "label": "native renderer, pointer, shadows and loot QA passed"
+    },
+    {
+      "pass": true,
+      "label": "all 19 isolated legacy diagnostic PNGs exist"
+    },
+    {
+      "pass": true,
+      "label": "fallen-bestiary.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "body-0.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "body-1.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "body-2.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "body-3.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "corpse-drag-to-bag.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "corpse-invalid-drop.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "empty-body.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "corpse-panel-80.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "corpse-panel-100.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "corpse-panel-120.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "forest-shadows.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "desert-shadows.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "intro-shadows.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "tower-1-shadows.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "tower-2-shadows.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "tower-3-shadows.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "tower-4-shadows.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "tower-5-shadows.png legacy output decodes"
+    },
+    {
+      "pass": true,
+      "label": "qa-v13/corpse-tests.txt full interaction report"
+    },
+    {
+      "pass": true,
+      "label": "qa-v40/shadow-tests.txt full interaction report"
+    },
+    {
+      "pass": true,
+      "label": "all species/directions/actions exported"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-00-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-01-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-02-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-03-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-04-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-05-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-06-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-07-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-08-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-09-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-10-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-0-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-0-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-0-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-1-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-1-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-1-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-2-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-2-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-2-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-3-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-3-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-3-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-4-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-4-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-4-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-5-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-5-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-5-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-6-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-6-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-6-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-7-action-0.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-7-action-1.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "type-11-dir-7-action-2.png decodes"
+    },
+    {
+      "pass": true,
+      "label": "complete actual game motion sequence"
+    },
+    {
+      "pass": true,
+      "label": "frame-00.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-01.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-02.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-03.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-04.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-05.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-06.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-07.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-08.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-09.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-10.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-11.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-12.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-13.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-14.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-15.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-16.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-17.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-18.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-19.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-20.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-21.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-22.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-23.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-24.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-25.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-26.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-27.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-28.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-29.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-30.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-31.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-32.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-33.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-34.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-35.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-36.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-37.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-38.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-39.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-40.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-41.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-42.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-43.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-44.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-45.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-46.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-47.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-48.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-49.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-50.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-51.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-52.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-53.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-54.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-55.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-56.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-57.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-58.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "frame-59.png full image decodes"
+    },
+    {
+      "pass": true,
+      "label": "species 0: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 1: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 2: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 3: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 4: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 5: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 6: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 7: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 8: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 9: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 10: motion is visible in game render"
+    },
+    {
+      "pass": true,
+      "label": "species 11: motion is visible in game render"
+    }
+  ]
+}

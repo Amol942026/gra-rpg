@@ -23,6 +23,15 @@ bool runGraphicsQA(){
    bool hit=actor_art::draw(species,120,215,1,pose,attack,species==0,species==0,Kind::Sword,false,BLANK,&point,roll,strike);
    interior+=solid;mismatch+=solid?!hit:hit;
   }
+  // Curved ribs and thin insect legs can lie entirely between the old 7 px
+  // grid lines. Keep the required interior probes and find real opaque pixels
+  // instead of treating a sparse-grid miss as a picking failure.
+  if(interior<=2)for(int y=6;y<254&&interior<4;y+=3)for(int x=6;x<234&&interior<4;x+=3){
+   bool solid=true;for(int dy:{-2,0,2})for(int dx:{-2,0,2})solid&=pixels[(y+dy)*240+x+dx].a>230;
+   if(!solid)continue;Vector2 point{x+.5f,y+.5f};
+   bool hit=actor_art::draw(species,120,215,1,pose,attack,species==0,species==0,Kind::Sword,false,BLANK,&point,roll,strike);
+   interior++;mismatch+=!hit;
+  }
   report<<"Species="<<species<<"; direction="<<dir<<"; roll="<<roll<<"; strike="<<strike<<"; opaque="<<opaque<<"; interior="<<interior<<"; mismatch="<<mismatch<<'\n';
   check(opaque>130&&clipped==0,"detailed actor pose has a complete visible silhouette without clipped parts");
   check(interior>2&&mismatch==0,"GPU-rasterized body interior and empty space match pointer geometry");

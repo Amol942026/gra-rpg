@@ -221,7 +221,7 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
 void makeArt(){
- hero_paint::load();
+ hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();
  forest_bush_art::load();
  treasure_art::make();
  terrain=LoadRenderTexture(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
@@ -816,7 +816,7 @@ int main(int argc,char**argv) {
     startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
     world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    hero_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
     UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }

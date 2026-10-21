@@ -1,5 +1,12 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+Bestiariusz (12 gatunków): nowe warstwy Krita, sześć rigów kontrolnych Synfig,
+eksport krzywych, integracja renderera i test wersji gracza są opisane w
+[art/creatures/README.md](../creatures/README.md). Wejścia produkcyjne:
+`tools/media/create_creature_paints.py`, `tools/media/creature_synfig.py`;
+kontrole: `tests/creature_qa.ps1`, `tools/media/verify_creatures.py`,
+`tests/creature_package_qa.ps1`. Wszystkie wymagają pracy bez dźwięku.
+
 Konfiguracja dla Windows, C++17/raylib 5.5 i C:\AI2D. Produkcja odbywa się
 lokalnie, bez płatnych API i wysyłania projektu do usług. Zasady wyglądu,
 animacji, audio i wydajności są w STYLE.md. Raport końcowy: REPORT.md.
@@ -91,6 +98,9 @@ wycinanki opisuje `art/hero/README.md`. Aktualna korekta twarzy i gesty miecza:
 `art/hero/SWORD_CLEARANCE_QA.md`; wcześniejsza weryfikacja: `art/hero/QA.md`.
 Przy kolejnych zmianach zachowuj dynamiczne wyposażenie wszystkich 39
 przedmiotów oraz testuj rzeczywisty renderer, nie sam arkusz lub SIF.
+Główny chód od 21.10.2026 także pochodzi z Synfiga: `art/hero/walk/walk.sif`,
+eksporter `tools/media/walk_synfig.py`, klip `src/generated/hero_walk_data.hpp`.
+Procedurę i testy opisują `art/hero/README.md` oraz `art/hero/WALK_QA.md`.
 
 ## Muzyka i efekty
 

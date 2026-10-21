@@ -32,6 +32,7 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "trade_tests.hpp"
 #include "sword_pose_tests.hpp"
 #include "hero_motion_tests.hpp"
+#include "walk_tests.hpp"
 #include "treasure_tests.hpp"
 #include "combat_facing_tests.hpp"
 #include "equipment_appearance_tests.hpp"
@@ -42,6 +43,7 @@ int main(){
  combatFacingTests();
  treasureTests();
  heroMotionTests();
+ walkTests();
  swordPoseTests();
  tradeTests();
  shadowTests();

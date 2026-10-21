@@ -19,7 +19,7 @@ inline void storeSprite(Sprite& sprite,const Image& image){
 }
 inline void init(){
  if(prepared)return;
- const char* path="assets/generated/corpses-v39.png";
+ const char* path="assets/generated/corpses-creatures-v48.png";
  Image atlas=FileExists(path)?LoadImage(path):Image{};
  bool baked=atlas.data&&atlas.width==Width*Density*8&&atlas.height==Height*Density*EnemyTypeCount;
  if(!baked){if(atlas.data)UnloadImage(atlas);atlas=GenImageColor(Width*Density*8,Height*Density*EnemyTypeCount,BLANK);}

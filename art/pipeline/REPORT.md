@@ -1,5 +1,11 @@
 # Raport konfiguracji — 19.10.2026
 
+**Aktualizacja 21.10.2026 — bestiariusz:** do gry i ZIP-a gracza podłączono
+poprawione grafiki i ruch wszystkich 12 gatunków lasu i pustyni, z użyciem
+Krity i Synfiga. [Aktualne wyniki testów i FPS](../creatures/QA.md),
+[źródła i procedury](../creatures/README.md). Poniższa część opisuje
+historyczny test konfiguracji środowiska z 19.10.
+
 **Proces produkcji i importu działa.** Wszystkie sześć narzędzi sprawdzono
 rzeczywistymi operacjami. Audacity ma opisane poniżej obejście awarii zamykania.
 Gra nie była przebudowywana ani uruchamiana. Nie odtwarzano dźwięku, nie użyto

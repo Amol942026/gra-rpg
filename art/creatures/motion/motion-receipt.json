@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "source": "Synfig 1.4.5 native animated vector waypoints",
+  "clips": [
+    {
+      "family": "gel",
+      "sha256": "d45b445433e17b778299af56697e3aa583eca71c84d202649537c5ab976592a5",
+      "samples": 61,
+      "contact_fraction": 0.55
+    },
+    {
+      "family": "quadruped",
+      "sha256": "44a676195813b701660f70abed9efc91407066e107f7e679b6e8421d7b48dad0",
+      "samples": 61,
+      "contact_fraction": 0.63
+    },
+    {
+      "family": "humanoid",
+      "sha256": "0d132dc7eee725f0d414da2eb942ad1db8edc8a359fce147a51c38e62ca3f52f",
+      "samples": 61,
+      "contact_fraction": 0.64
+    },
+    {
+      "family": "arachnid",
+      "sha256": "2b9d528f468fef1ab934645f43c01e7af3d8db7c95a44128dc74b0d3029462e6",
+      "samples": 61,
+      "contact_fraction": 0.68
+    },
+    {
+      "family": "serpent",
+      "sha256": "0c81c04debb47889763be9e9ecdaf2f3ff84006a0e77f4706221553ba9d266c9",
+      "samples": 61,
+      "contact_fraction": 0.75
+    },
+    {
+      "family": "elemental",
+      "sha256": "7480cb2278378a6d979f51f85b56da04d136283bbcb8adfacf6eac6774495ac5",
+      "samples": 61,
+      "contact_fraction": 0.7
+    }
+  ],
+  "header_sha256": "0b68f91f330b12ed9f2ee7e611bc4ba5b4325b3fe5d0f005a97bbdc61992129c"
+}

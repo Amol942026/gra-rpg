@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "project_sha256": "76a755baff01b77b007803f851eb026f9e614550c63feea0b6676c265eefa183",
+  "cpp_controls_max_error": 5.776100000076667e-05,
+  "native_frames": 60,
+  "runtime_frames": 120,
+  "directions": 8,
+  "source_to_cpp_exact": true,
+  "audio": false,
+  "metrics": {
+    "before": {
+      "lowest_boot": -3.36564,
+      "highest_support": -0.145796,
+      "knee_width": 14.0469,
+      "chest_yaw": 6.99717
+    },
+    "after": {
+      "lowest_boot": -0.000469208,
+      "highest_support": 0.00389624,
+      "knee_width": 12.8286,
+      "chest_yaw": 0.5
+    },
+    "audio": false
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "date": "2026-10-21",
+  "gameplay_checks": 87214,
+  "world_graphics_checks": 873,
+  "renderer_checks": 1435,
+  "asset_checks": 1165,
+  "synfig_frames": 360,
+  "game_frames": 60,
+  "poses": 288,
+  "legacy_images": 19,
+  "species": 12,
+  "directions": 8,
+  "benchmarks": [
+    {
+      "scenario": "forest",
+      "frames": 900,
+      "average_fps": 58.7132,
+      "cpu_frame_mean_ms": 10.6462,
+      "audio_device_opened": false
+    },
+    {
+      "scenario": "desert",
+      "frames": 900,
+      "average_fps": 59.4369,
+      "cpu_frame_mean_ms": 6.3839,
+      "audio_device_opened": false
+    }
+  ],
+  "package": {
+    "status": "PASS",
+    "package": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\Emberfall-Windows-x64.zip",
+    "package_sha256": "e3a9b355f7e9b8a592f74b126ce2bb2abc69f41182c99ccd55ae469a0052d6d7",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-creatures\\package-20261021-183843\\Emberfall",
+    "verified_assets": 97,
+    "startup_frames": 180,
+    "renderer_checks": 1435,
+    "poses": 288,
+    "animation_frames": 60,
+    "species": 12,
+    "directions": 8,
+    "audio_device_opened": false,
+    "native_sources_in_player": false
+  },
+  "audio_played": false,
+  "masters": [
+    "art/creatures/creature-paints.kra",
+    "art/creatures/motion/*.sif"
+  ],
+  "source_sha256": {
+    "src/actor_art.hpp": "7f007fcb4f1515f124a59f2f470243fc1c680c65c2a2d6523f9e91e331214f36",
+    "src/forest_creatures.hpp": "1eb10ae04d3fe81552691c83f220463566704f90730f5de31aa9795bed29a201",
+    "src/creature_paint.hpp": "55ff931a1f5ba43c0719f7b8ce67ab2f78407620daeeae25888260602068dbe9",
+    "src/desert_actors.hpp": "d3d3d6754c85472e74bfd49238df1678f7019b8580bf9ac6e3db24196e35e606",
+    "src/corpse_art.hpp": "ca7528d248aba24e467dd7123b2f4cf02b6249fd675a7315e8ef28df6c20cd6c",
+    "src/fallen_forest_art.hpp": "03057a9125ae7e4fe78e4ecb7d24c34dfae062596f3c2873aef6d5d0215b2e4d",
+    "src/main.cpp": "b60968f990494db0cfb3c4e75e7d96977d31887f8667cb40afccd4162f376310",
+    "src/generated/creature_motion_data.hpp": "0b68f91f330b12ed9f2ee7e611bc4ba5b4325b3fe5d0f005a97bbdc61992129c"
+  }
+}

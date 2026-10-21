@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "authoring": "Krita 5.3.4.1 native MCP draw",
+  "layers": 16,
+  "cells": [
+    "slime",
+    "wolf",
+    "bone",
+    "stone",
+    "boar",
+    "spider",
+    "cloth",
+    "bark",
+    "scorpion",
+    "scarab",
+    "scales",
+    "sand",
+    "leaves",
+    "wolf_face",
+    "boar_face",
+    "hood"
+  ],
+  "external_assets": [],
+  "original_art": true,
+  "png_sha256": "0fa5055140dbf5ed5432ca639179976639d93ae1b9dc6fc714b3e9c99171395b",
+  "rgba8_bytes": 1048576
+}

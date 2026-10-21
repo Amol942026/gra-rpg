@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "exe_sha256": "12b84e51ad6ed0b7d25030582cf0831339e32b7c54610064dd3769dfc7d37ba2",
+  "runs": [
+    {
+      "scenario": "forest",
+      "frames": 900,
+      "average_fps": 58.7132,
+      "cpu_frame_mean_ms": 10.6462,
+      "audio_device_opened": false
+    },
+    {
+      "scenario": "desert",
+      "frames": 900,
+      "average_fps": 59.4369,
+      "cpu_frame_mean_ms": 6.3839,
+      "audio_device_opened": false
+    }
+  ]
+}
