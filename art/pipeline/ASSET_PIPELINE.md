@@ -1,5 +1,9 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+Animowane menu leśne: [art/menu/README.md](../menu/README.md),
+`tools/media/create_menu_forest.py` (Krita) i `tools/media/menu_synfig.py`.
+Aktualne wyniki grzybów, chodu entów i menu: [FOREST_QA.md](../menu/FOREST_QA.md).
+
 Bestiariusz (12 gatunków): nowe warstwy Krita, sześć rigów kontrolnych Synfig,
 eksport krzywych, integracja renderera i test wersji gracza są opisane w
 [art/creatures/README.md](../creatures/README.md). Wejścia produkcyjne:

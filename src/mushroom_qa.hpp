@@ -4,7 +4,7 @@ bool runMushroomQA(){
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
  game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};nearbyPage=0;game.messageTime=0;
  check(!audioSystem.available,"mushroom diagnostic opens no audio device");
- check(game.forage.size()==MushroomCount,"real game creates all 64 collectible mushrooms");
+ check(game.forage.size()==MushroomCount,"real game creates 48 collectible mushrooms");
  V plant=game.forage[0].pos;game.player=plant+V{1,0};refreshDisplayLayout();mouse={0,0};renderScene();saveTexture(canvas,"qa-v22/mushrooms-in-forest.png");
  game.props.clear();game.enemies.clear();game.forage.resize(2);game.forage[1].pos=plant+V{0,1};game.hp=40;
  auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};

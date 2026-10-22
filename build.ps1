@@ -47,6 +47,10 @@ if ($Test) {
     if ($LASTEXITCODE -ne 0) { throw 'Kompilacja testów nie powiodła się.' }
     & '.\dist\game_tests.exe' '--no-audio'
     if ($LASTEXITCODE -ne 0) { throw 'Testy logiki gry nie przeszły.' }
+    & $compiler '-std=c++17' '-O2' '-Wall' '-Wextra' '-Wno-misleading-indentation' '-static' 'tests\save_game_tests.cpp' '-o' 'dist\save_game_tests.exe'
+    if ($LASTEXITCODE -ne 0) { throw 'Kompilacja testów zapisu nie powiodła się.' }
+    & '.\dist\save_game_tests.exe' '--no-audio'
+    if ($LASTEXITCODE -ne 0) { throw 'Testy zapisu i odczytu nie przeszły.' }
 }
 if ($Player -and $Test) {
     $qaExecutable = Join-Path $outputDirectory 'player_build_qa.exe'

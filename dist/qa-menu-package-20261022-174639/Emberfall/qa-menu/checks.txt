@@ -1,0 +1,355 @@
+PASS no audio device opened
+PASS uses actual player edition
+PASS native raylib keyboard and focus callbacks available
+PASS real input Enter starts New game
+PASS real input Escape opens pause during prologue
+PASS real Down navigates without advancing story
+PASS real Escape resumes without advancing same frame
+PASS startup menu freezes gameplay before prologue
+PASS screenshot main-80
+PASS nonempty rendered menu main-80
+PASS opaque final menu without double blending main-80
+PASS menu restores render blending main-80
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS screenshot main-100
+PASS nonempty rendered menu main-100
+PASS opaque final menu without double blending main-100
+PASS menu restores render blending main-100
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS screenshot main-120
+PASS nonempty rendered menu main-120
+PASS opaque final menu without double blending main-120
+PASS menu restores render blending main-120
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS keyboard wraps upward
+PASS keyboard wraps downward
+PASS keyboard opens load at startup
+PASS empty save slot metadata
+PASS empty load preserves startup and gives feedback
+PASS screenshot load-empty
+PASS nonempty rendered menu load-empty
+PASS opaque final menu without double blending load-empty
+PASS menu restores render blending load-empty
+PASS Escape returns from submenu
+PASS Escape cannot bypass startup menu
+PASS mouse opens options
+PASS keyboard volume adjustment
+PASS mouse music slider
+PASS mouse toggles music separately
+PASS mouse toggles effects separately
+PASS master mute works
+PASS options switches actual screen mode
+PASS screen mode restores
+PASS screenshot options
+PASS nonempty rendered menu options
+PASS opaque final menu without double blending options
+PASS menu restores render blending options
+PASS credits opens
+PASS screenshot credits
+PASS nonempty rendered menu credits
+PASS opaque final menu without double blending credits
+PASS menu restores render blending credits
+PASS exit requires confirmation
+PASS screenshot exit-startup
+PASS nonempty rendered menu exit-startup
+PASS opaque final menu without double blending exit-startup
+PASS menu restores render blending exit-startup
+PASS cancel exit preserves menu
+PASS new game resets state and starts prologue
+PASS Escape pauses prologue instead of skipping
+PASS dialogue clock frozen under menu
+PASS screenshot pause-prologue
+PASS nonempty rendered menu pause-prologue
+PASS opaque final menu without double blending pause-prologue
+PASS menu restores render blending pause-prologue
+PASS pause has functioning save action
+PASS first slot written through mouse
+PASS screenshot save-prologue
+PASS nonempty rendered menu save-prologue
+PASS opaque final menu without double blending save-prologue
+PASS menu restores render blending save-prologue
+PASS overwrite needs confirmation
+PASS overwrite cancelled
+PASS confirmed overwrite saved state
+PASS in-game load confirms session replacement
+PASS load cancel leaves active game untouched
+PASS load restores dialogue and game atomically
+PASS Escape resumes restored prologue
+PASS forest saved in second slot
+PASS screenshot pause-forest
+PASS nonempty rendered menu pause-forest
+PASS opaque final menu without double blending pause-forest
+PASS menu restores render blending pause-forest
+PASS desert saved in third slot
+PASS screenshot pause-desert
+PASS nonempty rendered menu pause-desert
+PASS opaque final menu without double blending pause-desert
+PASS menu restores render blending pause-desert
+PASS screenshot load-populated
+PASS nonempty rendered menu load-populated
+PASS opaque final menu without double blending load-populated
+PASS menu restores render blending load-populated
+PASS startup load restores actual inventory, enemy, position, chest and gold
+PASS world input blocked by pause
+PASS simulation frozen in pause
+PASS screenshot pause-80
+PASS nonempty rendered menu pause-80
+PASS opaque final menu without double blending pause-80
+PASS menu restores render blending pause-80
+PASS screenshot options-80
+PASS nonempty rendered menu options-80
+PASS opaque final menu without double blending options-80
+PASS menu restores render blending options-80
+PASS screenshot pause-120
+PASS nonempty rendered menu pause-120
+PASS opaque final menu without double blending pause-120
+PASS menu restores render blending pause-120
+PASS screenshot options-120
+PASS nonempty rendered menu options-120
+PASS opaque final menu without double blending options-120
+PASS menu restores render blending options-120
+PASS keyboard resume action
+PASS unconfirmed level points preserved without unlocking skills
+PASS tower floor, runes and travel dialogue roundtrip
+PASS screenshot pause-tower
+PASS nonempty rendered menu pause-tower
+PASS opaque final menu without double blending pause-tower
+PASS menu restores render blending pause-tower
+PASS screenshot pause-death
+PASS nonempty rendered menu pause-death
+PASS opaque final menu without double blending pause-death
+PASS menu restores render blending pause-death
+PASS resume preserves death rather than reviving
+PASS failed load leaves live session byte-for-byte unchanged
+PASS pause exit confirmation
+PASS screenshot exit-ingame
+PASS nonempty rendered menu exit-ingame
+PASS opaque final menu without double blending exit-ingame
+PASS menu restores render blending exit-ingame
+PASS confirmed exit sets actual application loop condition
+PASS no playback during entire diagnostic
+PASS only three slots used
+PASS four original Krita menu layers loaded
+PASS menu texture dimensions within 2048 budget
+PASS menu texture dimensions within 2048 budget
+PASS menu texture dimensions within 2048 budget
+PASS menu texture dimensions within 2048 budget
+PASS background uses 19.8 MiB RGBA8 with no frame atlas
+PASS frame exported: frame-00.png
+PASS frame exported: frame-01.png
+PASS frame exported: frame-02.png
+PASS frame exported: frame-03.png
+PASS frame exported: frame-04.png
+PASS frame exported: frame-05.png
+PASS frame exported: frame-06.png
+PASS frame exported: frame-07.png
+PASS frame exported: frame-08.png
+PASS frame exported: frame-09.png
+PASS frame exported: frame-10.png
+PASS frame exported: frame-11.png
+PASS frame exported: frame-12.png
+PASS frame exported: frame-13.png
+PASS frame exported: frame-14.png
+PASS frame exported: frame-15.png
+PASS frame exported: frame-16.png
+PASS frame exported: frame-17.png
+PASS frame exported: frame-18.png
+PASS frame exported: frame-19.png
+PASS frame exported: frame-20.png
+PASS frame exported: frame-21.png
+PASS frame exported: frame-22.png
+PASS frame exported: frame-23.png
+PASS frame exported: frame-24.png
+PASS frame exported: frame-25.png
+PASS frame exported: frame-26.png
+PASS frame exported: frame-27.png
+PASS frame exported: frame-28.png
+PASS frame exported: frame-29.png
+PASS frame exported: frame-30.png
+PASS frame exported: frame-31.png
+PASS frame exported: frame-32.png
+PASS frame exported: frame-33.png
+PASS frame exported: frame-34.png
+PASS frame exported: frame-35.png
+PASS frame exported: frame-36.png
+PASS frame exported: frame-37.png
+PASS frame exported: frame-38.png
+PASS frame exported: frame-39.png
+PASS frame exported: frame-40.png
+PASS frame exported: frame-41.png
+PASS frame exported: frame-42.png
+PASS frame exported: frame-43.png
+PASS frame exported: frame-44.png
+PASS frame exported: frame-45.png
+PASS frame exported: frame-46.png
+PASS frame exported: frame-47.png
+PASS frame exported: frame-48.png
+PASS frame exported: frame-49.png
+PASS frame exported: frame-50.png
+PASS frame exported: frame-51.png
+PASS frame exported: frame-52.png
+PASS frame exported: frame-53.png
+PASS frame exported: frame-54.png
+PASS frame exported: frame-55.png
+PASS frame exported: frame-56.png
+PASS frame exported: frame-57.png
+PASS frame exported: frame-58.png
+PASS frame exported: frame-59.png
+PASS frame exported: loop-end.png
+PASS animated menu reuses all texture and font allocations
+PASS background animation cannot advance gameplay or prologue
+PASS animated menu restores blend state
+PASS actual load migrates legacy mushrooms without respawn or inventory loss
+PASS frame exported: frame-000.png
+PASS frame exported: frame-001.png
+PASS frame exported: frame-002.png
+PASS frame exported: frame-003.png
+PASS frame exported: frame-004.png
+PASS frame exported: frame-005.png
+PASS frame exported: frame-006.png
+PASS frame exported: frame-007.png
+PASS frame exported: frame-008.png
+PASS frame exported: frame-009.png
+PASS frame exported: frame-010.png
+PASS frame exported: frame-011.png
+PASS frame exported: frame-012.png
+PASS frame exported: frame-013.png
+PASS frame exported: frame-014.png
+PASS frame exported: frame-015.png
+PASS frame exported: frame-016.png
+PASS frame exported: frame-017.png
+PASS frame exported: frame-018.png
+PASS frame exported: frame-019.png
+PASS frame exported: frame-020.png
+PASS frame exported: frame-021.png
+PASS frame exported: frame-022.png
+PASS frame exported: frame-023.png
+PASS frame exported: frame-024.png
+PASS frame exported: frame-025.png
+PASS frame exported: frame-026.png
+PASS frame exported: frame-027.png
+PASS frame exported: frame-028.png
+PASS frame exported: frame-029.png
+PASS frame exported: frame-030.png
+PASS frame exported: frame-031.png
+PASS frame exported: frame-032.png
+PASS frame exported: frame-033.png
+PASS frame exported: frame-034.png
+PASS frame exported: frame-035.png
+PASS frame exported: frame-036.png
+PASS frame exported: frame-037.png
+PASS frame exported: frame-038.png
+PASS frame exported: frame-039.png
+PASS frame exported: frame-040.png
+PASS frame exported: frame-041.png
+PASS frame exported: frame-042.png
+PASS frame exported: frame-043.png
+PASS frame exported: frame-044.png
+PASS frame exported: frame-045.png
+PASS frame exported: frame-046.png
+PASS frame exported: frame-047.png
+PASS frame exported: frame-048.png
+PASS frame exported: frame-049.png
+PASS frame exported: frame-050.png
+PASS frame exported: frame-051.png
+PASS frame exported: frame-052.png
+PASS frame exported: frame-053.png
+PASS frame exported: frame-054.png
+PASS frame exported: frame-055.png
+PASS frame exported: frame-056.png
+PASS frame exported: frame-057.png
+PASS frame exported: frame-058.png
+PASS frame exported: frame-059.png
+PASS frame exported: frame-060.png
+PASS frame exported: frame-061.png
+PASS frame exported: frame-062.png
+PASS frame exported: frame-063.png
+PASS frame exported: frame-064.png
+PASS frame exported: frame-065.png
+PASS frame exported: frame-066.png
+PASS frame exported: frame-067.png
+PASS frame exported: frame-068.png
+PASS frame exported: frame-069.png
+PASS frame exported: frame-070.png
+PASS frame exported: frame-071.png
+PASS frame exported: frame-072.png
+PASS frame exported: frame-073.png
+PASS frame exported: frame-074.png
+PASS frame exported: frame-075.png
+PASS frame exported: frame-076.png
+PASS frame exported: frame-077.png
+PASS frame exported: frame-078.png
+PASS frame exported: frame-079.png
+PASS frame exported: frame-080.png
+PASS frame exported: frame-081.png
+PASS frame exported: frame-082.png
+PASS frame exported: frame-083.png
+PASS frame exported: frame-084.png
+PASS frame exported: frame-085.png
+PASS frame exported: frame-086.png
+PASS frame exported: frame-087.png
+PASS frame exported: frame-088.png
+PASS frame exported: frame-089.png
+PASS frame exported: frame-090.png
+PASS frame exported: frame-091.png
+PASS frame exported: frame-092.png
+PASS frame exported: frame-093.png
+PASS frame exported: frame-094.png
+PASS frame exported: frame-095.png
+PASS frame exported: frame-096.png
+PASS frame exported: frame-097.png
+PASS frame exported: frame-098.png
+PASS frame exported: frame-099.png
+PASS frame exported: frame-100.png
+PASS frame exported: frame-101.png
+PASS frame exported: frame-102.png
+PASS frame exported: frame-103.png
+PASS frame exported: frame-104.png
+PASS frame exported: frame-105.png
+PASS frame exported: frame-106.png
+PASS frame exported: frame-107.png
+PASS frame exported: frame-108.png
+PASS frame exported: frame-109.png
+PASS frame exported: frame-110.png
+PASS frame exported: frame-111.png
+PASS frame exported: frame-112.png
+PASS frame exported: frame-113.png
+PASS frame exported: frame-114.png
+PASS frame exported: frame-115.png
+PASS frame exported: frame-116.png
+PASS frame exported: frame-117.png
+PASS frame exported: frame-118.png
+PASS frame exported: frame-119.png
+PASS treant sequence uses actual chase speed
+PASS all forest and background checks remain silent
+Checks: 351
+Failures: 0
+Audio device opened: no
+Player edition: yes

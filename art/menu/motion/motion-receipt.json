@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "source": "Synfig 1.4.5 native SIF waypoints",
+  "project": "C:\\AI2D\\animations\\emberfall_menu_20261022_v2\\forest-menu.sif",
+  "frames": 240,
+  "fps": 20,
+  "duration": 12,
+  "runtime_samples": 241,
+  "project_sha256": "a74a97fa68a90ee40e553e3071bcfe5720fc66eb454870e304bb26a602b908d5",
+  "header_sha256": "02aef7df3bc40024bb2a6432a6bdc27c5a6e23ac0aca8a1b933df63b6479e841"
+}

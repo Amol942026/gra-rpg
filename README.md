@@ -2,11 +2,31 @@
 
 Grywalny prototyp RPG 2.5D w C++17 i raylib 5.5, przygotowany dla Windows x64. Autorska izometryczna grafika, leśne ruiny, walka w czasie rzeczywistym i ekwipunek obsługiwany myszą. Nie wymaga instalowania silnika ani dodatkowych DLL.
 
+## Animowane menu, grzyby i chód entów — 22.10.2026
+
+Las zawiera teraz **48 grzybów zamiast 64** (o 25% mniej). Zmiana obejmuje też wczytywane starsze wyprawy: nie odnawia zebranych roślin i nie zabiera przedmiotów z plecaka.
+
+Krok ożywionych drzew ma dłuższy wykrok i rytm liczony z rzeczywiście pokonanej drogi, osobno podczas patrolu i pościgu. Stopy w fazie podparcia nadążają za przesunięciem postaci, a kolana zachowują długość kończyn. Szybkość przeciwników i zasady walki są zachowane.
+
+Menu startowe przedstawia **leśną Bramę Świtu**, narysowaną warstwowo w Kricie. Synfig przygotował płynną, 12-sekundową pętlę: paralaksę planów, przesuwającą się mgłę i oddychające światło portalu. W tle unoszą się drobiny; przyciski i napisy pozostają nieruchome. Gra wczytuje tylko cztery gotowe tekstury i interpoluje zapisane krzywe ruchu. Źródła, odtworzenie i aktualne testy: [art/menu/README.md](art/menu/README.md).
+
+## Menu i zapis wyprawy — 22.10.2026
+
+Gra zaczyna się w menu **Nowa gra / Wczytaj grę / Opcje / Twórcy / Wyjdź z gry**. Nowa gra rozpoczyna pełny prolog Eldrina. **Escape** zatrzymuje rozgrywkę i otwiera **Zapisz grę / Wczytaj grę / Opcje / Wyjdź z gry**; przycisk **Wróć do gry** lub ponowne Escape wznawia wyprawę. Menu działa także podczas prologu i rozmów. Pomijanie rozmowy pozostaje dostępne przez jej widoczny przycisk.
+
+Są **trzy ręczne sloty** z datą, poziomem i lokacją. Zapisy znajdują się w **`%LOCALAPPDATA%\Emberfall\saves`**, wspólnie dla kolejnych rozpakowań gry. Zachowują postać, ekwipunek, złoto, przydzielone i niewydane punkty, zadania, oba światy, potwory i ich łup, grzyby, skrzynie, piętra i pieczęcie wieży, aktywne efekty oraz dokładny moment rozmowy. Niezatwierdzone wybory punktów trzeba wybrać ponownie; nie są przydzielane automatycznie. Nadpisanie slotu i wczytanie podczas gry wymagają zatwierdzenia. Wyjście ostrzega o utracie niezapisanego postępu; nie ma automatycznego zapisu przy zamykaniu.
+
+Pliki `.efs` mają wersjonowany format i kontrolę integralności. Zapis używa pliku tymczasowego i atomowej podmiany. Poprzedni poprawny zapis pozostaje w `.bak`; jeśli główny plik jest uszkodzony, wczytywana jest kopia i pojawia się informacja. Po odczycie gra pozostaje w pauzie do wybrania **Wróć do gry**. Uszkodzony odczyt nie podmienia bieżącej wyprawy.
+
+**Opcje**: głośność oraz osobne wyciszanie muzyki i efektów, wyciszenie całości i przełączanie pełnego ekranu/okna. Strzałki lub Tab wybierają pozycję, Enter zatwierdza, Escape wraca. Suwaki działają myszą lub strzałkami lewo/prawo. Poziomy głośności zapisują się przy normalnym zamknięciu; `--no-audio` nadal nie zmienia preferencji użytkownika. Tryb ekranu dotyczy bieżącego uruchomienia.
+
+Oprawa wykorzystuje leśne ruiny, stare złoto i turkusowe światło Serca Świtu. Dokumentacja implementacji i testów: [art/menu/README.md](art/menu/README.md). Cichy test interfejsu: `pwsh -NoProfile -File tests/menu_qa.ps1`; testy zapisu wykonuje też `build.ps1 -Test`.
+
 ### Poprawka czarnego ekranu na Windows 11
 
 Domyślnie gra używa bezpośredniej prezentacji OpenGL z V-sync. Opcjonalny parametr --dxgi wybiera prezentację DirectX; przed jej użyciem gra sprawdza rzeczywisty piksel przesłany z OpenGL do docelowego bufora. Niektóre sterowniki Intel UHD przyjmują wywołania współdzielenia GPU, lecz zwracają czarny obraz. Gdy kontrola wykryje tę sytuację, gra automatycznie przechodzi na OpenGL z V-sync. Sprawdzenie jest powtarzane po zmianie rozmiaru bufora; nie wymaga zmiany ustawień Windows ani urządzenia audio.
 
-Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start prologu i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
+Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start menu głównego i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
 ## Wersja 0.47 — animacje szkieletowe przygotowane w Blenderze
 
@@ -48,15 +68,15 @@ Zwykły zamach trwa 0,32 s, a Mocne cięcie 0,50 s. Mocne cięcie ma dłuższe p
 
 Każdy przedmiot pokazuje **Wartość: ... złota**, czyli cenę sprzedaży jednej sztuki; stos pokazuje również sumę. Wyposażenie z ulepszeniem ma wyższą wartość. Saldo złota jest stale widoczne w HUD. Monety z potworów można nadal zbierać do plecaka; handlarz pobiera z nich brakującą część zapłaty.
 
-**Miron czeka na trzecim piętrze wieży, w pracowni alchemicznej.** Podejdź do jego stoiska i użyj **E, LPM lub PPM**. W oknie handlu po lewej wybierz towar do kupienia, a po prawej przedmiot z plecaka lub noszonego ekwipunku do sprzedaży. Ustaw liczbę przyciskami **− / +**, użyj **MAX** dla całego stosu lub maksymalnego zakupu, następnie kliknij **KUP / SPRZEDAJ**. Strony oferty przełączają **WSTECZ / DALEJ**. **X, ENTER albo ESC** zamyka okno; podczas handlu wyprawa jest zatrzymana.
+**Miron czeka na trzecim piętrze wieży, w pracowni alchemicznej.** Podejdź do jego stoiska i użyj **E, LPM lub PPM**. W oknie handlu po lewej wybierz towar do kupienia, a po prawej przedmiot z plecaka lub noszonego ekwipunku do sprzedaży. Ustaw liczbę przyciskami **− / +**, użyj **MAX** dla całego stosu lub maksymalnego zakupu, następnie kliknij **KUP / SPRZEDAJ**. Strony oferty przełączają **WSTECZ / DALEJ**. **X albo ENTER** zamyka okno; **ESC** otwiera menu pauzy; podczas handlu wyprawa jest zatrzymana.
 
 Oferta obejmuje mikstury HP i many, strzały, ulepszone miecze, łuki, zbroje, hełmy, tarcze i buty, płaszcz tropiciela oraz amulet. Miron skupuje wszystkie zwykłe przedmioty, w tym łuski kobry i pozostałe materiały bestii. Cena kupna wynosi dwukrotność wartości sprzedaży, więc handel nie pozwala mnożyć złota. Zakup trafia do plecaka i łączy pasujące stosy do 99 sztuk. Przy braku złota, miejsca albo nieprawidłowym stanie postaci transakcja niczego nie zabiera. Sprzedaż monety zamienia ją na złoto w sakiewce bez dodatkowego zysku. **Serce Świtu ma wartość 0 i jest chronione przed sprzedażą**.
 
-ZIP pozostaje kompilacją dla gracza bez trybu developerskiego. Postęp i złoto należą do bieżącej wyprawy; obecny prototyp nie zapisuje wyprawy.
+ZIP pozostaje kompilacją dla gracza bez trybu developerskiego. Postęp i złoto można teraz zapisać w trzech slotach z menu Escape.
 
 ## Wersja 0.41 — ZIP dla gracza
 
-Archiwum **Emberfall-Windows-x64.zip** zawiera osobną wersję gry dla gracza: bez przycisku DEV, menu F3, zestawu testowego i wyboru miejsca startu przez parametry. Parametry sesji developerskich i diagnostyki scen nie są obsługiwane w tej kompilacji. Gra rozpoczyna się normalnym prologiem. ZIP zawiera wyłącznie grę, zasoby, zwykły launcher oraz instrukcje i licencje.
+Archiwum **Emberfall-Windows-x64.zip** zawiera osobną wersję gry dla gracza: bez przycisku DEV, menu F3, zestawu testowego i wyboru miejsca startu przez parametry. Parametry sesji developerskich i diagnostyki scen nie są obsługiwane w tej kompilacji. Gra rozpoczyna się menu głównym, a Nowa gra uruchamia pełny prolog. ZIP zawiera wyłącznie grę, zasoby, zwykły launcher oraz instrukcje i licencje.
 
 **Projekt zachowuje tryb developerski.** Zwykłe uruchomienie **build.ps1** buduje wersję developerską w **dist/Emberfall.exe**. **build.ps1 -Player** buduje wersję gracza w **dist/player/Emberfall.exe**. **package.ps1** zawsze najpierw kompiluje świeżą wersję gracza, a następnie pakuje ją do ZIP. Nie zastępuje przy tym developerskiego EXE. **build.ps1 -Player -Test** sprawdza mechanikę gry i interfejs wersji gracza bez dźwięku.
 
@@ -179,7 +199,7 @@ Każdy start odnawia HP i manę oraz usuwa stary naciąg, unik, pociski, efekty 
 
 Opcjonalny **ZESTAW TESTOWY** uzupełnia do **100 strzał, po 15 borowików i esencji lasu oraz po 10 mikstur zdrowia i many**; nie przyznaje umiejętności. Rangi zdobywa się przez rozdanie punktów po awansie; przeniesienie obecnej postaci zachowuje już poznane umiejętności. Zestaw nie nadpisuje przedmiotów. Powtórne przenoszenie nie powiększa kompletnego zestawu. Przy pełnym plecaku wyświetla informację o ograniczeniu zestawu. Odznacz opcję, aby testować bez dodatkowych przedmiotów.
 
-**ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu bez resetowania wyprawy. Otwarta lista zatrzymuje symulację. Po uruchomieniu testu HUD pokazuje **SESJA TESTOWA**. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. **NOWA ZWYKŁA GRA — PROLOG** kończy tryb testowy i resetuje wyprawę do normalnego startu. Zwykłe uruchomienie nadal zaczyna się prologiem i nie dostaje zestawu testowego.
+**ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu bez resetowania wyprawy. Otwarta lista zatrzymuje symulację. Po uruchomieniu testu HUD pokazuje **SESJA TESTOWA**. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. **NOWA ZWYKŁA GRA — PROLOG** kończy tryb testowy i resetuje wyprawę do normalnego startu. Zwykłe uruchomienie zaczyna się menu głównym; Nowa gra uruchamia prolog bez zestawu testowego.
 
 W folderze projektu i wypakowanej grze są trzy wygodne launchery:
 
@@ -210,7 +230,7 @@ Po dotychczasowym pokonaniu Strażnika i zebraniu części Serca Świtu wracasz 
 4. **Sala pieczęci:** trzy niezależne kamienie runiczne i magiczne odbicie Serca Świtu. Dotykaj kamieni, aby zapalić ich światło. Gdy świecą wszystkie trzy, promienie stabilizują odbicie. Zdobyty fragment pozostaje w plecaku; projekcja go nie kopiuje ani nie zużywa.
 5. **Obserwatorium:** luneta, ruchome astrolabium, gwiazdy w oknach i trzy mapy nieba do przeglądania. Jedna zapowiada poszukiwania kolejnego strażnika.
 
-Księgi, alchemia i mapy nieba otwierają okna z zatrzymaną grą; **ESC, ENTER lub X** zamyka okno. Schody zachowują sprzęt, materiały, statystyki, umiejętności i aktywowane runy. Porzucone przedmioty pozostają na konkretnym piętrze i można je odzyskać po powrocie. Wyposażenie blokuje ruch i unik. Statyczne podłogi i ornamenty są przygotowywane raz jako tekstury GPU; ogień, para, zioła, runy i astrolabium pozostają animowane.
+Księgi, alchemia i mapy nieba otwierają okna z zatrzymaną grą; **ENTER lub X** zamyka okno; **ESC** otwiera menu pauzy. Schody zachowują sprzęt, materiały, statystyki, umiejętności i aktywowane runy. Porzucone przedmioty pozostają na konkretnym piętrze i można je odzyskać po powrocie. Wyposażenie blokuje ruch i unik. Statyczne podłogi i ornamenty są przygotowywane raz jako tekstury GPU; ogień, para, zioła, runy i astrolabium pozostają animowane.
 
 Cichy test `--tower-floors-qa --no-audio` zapisuje pięć pomieszczeń, księgę, receptury, pieczęci i mapę nieba do `dist/qa-v28/`. `--tower-benchmark --no-audio` mierzy 900 klatek z przemieszczaniem kamery przez wszystkie piętra; raport: `dist/tower-benchmark-v28.txt`. Powrót po bossie nadal sprawdza `--tower-qa --no-audio`.
 
@@ -227,7 +247,7 @@ Każdy zdobyty poziom daje **5 punktów statystyk oraz 1 punkt umiejętności**.
 
 **Kamienny Strażnik** w północnych ruinach zostawia **jedną część Serca Świtu ze szansą 100%**. Pozostaje ona w piątym polu pierwszej strony łupu; pozostałe nagrody są losowe według rzadkości. Pokonanie bossa samo nie uruchamia sceny. Podejdź do ciała, otwórz je PPM i przeciągnij fragment do wolnego pola plecaka. Warto wcześniej zebrać pozostałe nagrody: podniesienie fragmentu rozpoczyna powrót. Przy zajętym polu, zbyt dużej odległości lub nierozdanych punktach awansu fragment zostaje w ciele.
 
-Po zebraniu części świat zatrzymuje się, **ekran ciemnieje**, a bohater wraca do obserwatorium Eldrina. Ośmiowypowiedziowa scenka pokazuje powrót z niebieskim efektem teleportacji, sukces Wędrowca, pochwałę maga i zapowiedź teleportu do drugiej krainy, gdy bohater będzie gotowy. Enter / Spacja / LPM odsłaniają tekst i przechodzą dalej; Esc pomija rozmowę, zachowując przejście do wieży. Utrata aktywności okna wstrzymuje scenę, F11 nadal działa.
+Po zebraniu części świat zatrzymuje się, **ekran ciemnieje**, a bohater wraca do obserwatorium Eldrina. Ośmiowypowiedziowa scenka pokazuje powrót z niebieskim efektem teleportacji, sukces Wędrowca, pochwałę maga i zapowiedź teleportu do drugiej krainy, gdy bohater będzie gotowy. Enter / Spacja / LPM odsłaniają tekst i przechodzą dalej; Przycisk POMIŃ pomija rozmowę, zachowując przejście do wieży; Esc otwiera pauzę. Utrata aktywności okna wstrzymuje scenę, F11 nadal działa.
 
 Po rozmowie **wieża maga staje się grywalną lokacją**: kamienna sala z oknami, kolumnami, księgą, magiczną kulą i kręgiem teleportacji. Można chodzić, biegać, robić uniki oraz korzystać z ekwipunku. Ściany, meble i Eldrin blokują ruch; przeciwnicy z lasu pozostają tam i nie symulują się w schronieniu. Poziom, statystyki, HP, mana i zebrane wyposażenie są zachowane. Fragment pozostaje przedmiotem zadania w plecaku i nie można go porzucić ani zużyć. Dziennik pokazuje **1 / 5 części**.
 
@@ -253,15 +273,15 @@ Eldrin ma zaokrągloną sylwetkę, fałdy i złote hafty szat, szczegółową tw
 
 **Wędrowiec ma nowy, zaokrąglony model**: kaptur z widoczną twarzą i włosami, profilowany napierśnik i naramienniki, dłonie, skórzane buty, sprzączki oraz płaszcz z falującymi fałdami i lamówką. Ten sam model pojawia się w lesie, prologu i portrecie. Osiem kierunków, chód, zamach mieczem, naciąganie łuku, kołczan, tarcza, hełm i przewrót korzystają z aktualnej sylwetki. Zbliżenia mają dodatkowe wygładzenie brył. Podgląd postaci i animacji: `dist/qa-v24/hero/poses-8-directions.png`.
 
-Dialog przewija się sam, pozostawiając czas na lekturę. **Enter, Spacja lub LPM** najpierw pokazują resztę bieżącej wypowiedzi, a kolejne naciśnięcie przechodzi dalej. **Esc / POMIŃ** pomija rozmowę, zachowując teleportację. **F11** działa w trakcie sceny. Utrata aktywności okna zatrzymuje scenę; ruch, walka, ekwipunek oraz przeciwnicy są zablokowani do końca przejścia. Obecny las pozostaje pierwszym etapem fabuły; pozostałe krainy i strażnicy są na razie zapowiedziani w dialogu.
+Dialog przewija się sam, pozostawiając czas na lekturę. **Enter, Spacja lub LPM** najpierw pokazują resztę bieżącej wypowiedzi, a kolejne naciśnięcie przechodzi dalej. **POMIŃ** pomija rozmowę, zachowując teleportację; **Esc** otwiera pauzę. **F11** działa w trakcie sceny. Utrata aktywności okna zatrzymuje scenę; ruch, walka, ekwipunek oraz przeciwnicy są zablokowani do końca przejścia. Obecny las pozostaje pierwszym etapem fabuły; pozostałe krainy i strażnicy są na razie zapowiedziani w dialogu.
 
-Cichy test `--intro-qa --no-audio` zapisuje raport, pełną rozmowę i obrazy do `dist/qa-v24/intro/`. `--startup-smoke --no-audio` sprawdza teraz rzeczywisty start prologu. Testy mechaniki i benchmarki zaczynają się od razu w lesie.
+Cichy test `--intro-qa --no-audio` zapisuje raport, pełną rozmowę i obrazy do `dist/qa-v24/intro/`. `--startup-smoke --no-audio` sprawdza teraz rzeczywisty start menu głównego. Testy mechaniki i benchmarki zaczynają się od razu w lesie.
 
 ## Wersja 0.23 — koło broni i łuk
 
 **Q** lub przycisk **BROŃ · Q** otwiera ośmiopolowe koło i wstrzymuje rozgrywkę. Na początku ma przypisany miecz oraz łuk; oba są rzeczywistymi przedmiotami — miecz w ręku, łuk w plecaku. **LPM na polu koła** zakłada broń i zamyka menu. Poprzednia broń trafia w miejsce wybranej w plecaku, więc przełączanie działa także przy pełnym plecaku.
 
-Aby dodać broń, otwórz Q i **przeciągnij ją z plecaka lub pola BROŃ na sektor koła**. Możesz też otworzyć Q w trakcie przeciągania. Przypisanie tworzy skrót, bez kopiowania lub usuwania przedmiotu. Obsługuje miecze, łuki, topory i sztylety, także ich poziomy rzadkości. Przenoszenie przedmiotu wewnątrz plecaka nie psuje skrótu. Porzucona broń jest oznaczona BRAK i nie można jej wybrać do czasu odzyskania. **PPM na sektorze** usuwa sam skrót. Q lub ESC zamyka koło.
+Aby dodać broń, otwórz Q i **przeciągnij ją z plecaka lub pola BROŃ na sektor koła**. Możesz też otworzyć Q w trakcie przeciągania. Przypisanie tworzy skrót, bez kopiowania lub usuwania przedmiotu. Obsługuje miecze, łuki, topory i sztylety, także ich poziomy rzadkości. Przenoszenie przedmiotu wewnątrz plecaka nie psuje skrótu. Porzucona broń jest oznaczona BRAK i nie można jej wybrać do czasu odzyskania. **PPM na sektorze** usuwa sam skrót. Q zamyka koło; ESC otwiera menu pauzy.
 
 Po wybraniu łuku **przytrzymaj LPM na świecie**, aby naciągać cięciwę, i **puść LPM**, aby wypuścić jedną strzałę. Celowanie działa w stronę kursora, a po najechaniu na potwora kieruje strzał w jego pozycję, bez trwałego zaznaczania celu. Celownik ma pierścień naciągu i zaznacza przewidywany kierunek oraz maksymalny zasięg. HUD pokazuje liczbę strzał, procent naciągu i zasięg. Ruch podczas naciągania jest wolniejszy; unik przerywa celowanie.
 
@@ -430,7 +450,7 @@ Bohater, szlam, wilk, szkielet i strażnik mają po osiem kierunków: E, SE, S, 
 
 ## Uruchomienie
 
-Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/Emberfall.exe**. Gra zaczyna się prologiem; Enter, Spacja lub LPM przyspieszają dialog, a Esc go pomija. Folder `assets` musi pozostać obok pliku EXE. Cały folder `dist` jest przenośną wersją gry.
+Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/Emberfall.exe**. Gra zaczyna się menu głównym. Nowa gra uruchamia prolog; Enter, Spacja lub LPM przyspieszają dialog, przycisk POMIŃ go pomija, a Escape otwiera menu pauzy. Folder `assets` musi pozostać obok pliku EXE. Cały folder `dist` jest przenośną wersją gry.
 
 ## Sterowanie
 
@@ -476,7 +496,7 @@ Klikalne przyciski akcji na dole pozwalają wybierać czar, pić mikstury i robi
 
 Las ma 72 × 72 pola. Pokonuj szlamy, wilki i szkielety, zdobywaj doświadczenie oraz ulepszaj sprzęt. Silny kamienny strażnik czeka w północnych ruinach (złoty punkt na minimapie). Zawsze zostawia fragment Serca Świtu, a pozostały sprzęt losuje według rzadkości. Zamach fizyczny sygnalizuje czerwony okrąg, magiczny — niebieski; można od niego odejść lub wykonać unik. Awans odnawia zdrowie i manę oraz daje punkty statystyk.
 
-To prototyp jednej lokalnej wyprawy. Nie ma jeszcze zapisu stanu wyprawy, handlarzy, multiplayera ani kolejnych map. Złoto i odłamki są zbieralnym łupem; nie mają jeszcze zastosowania u handlarza. Zamknięcie gry kończy bieżącą wyprawę.
+Prototyp obejmuje las, pustynię i pięć pięter wieży Eldrina z handlarzem Mironem. Wyprawę można zachować w trzech slotach zapisu. Przed wyjściem zapisz postęp z menu Escape; zamknięcie nie tworzy automatycznego zapisu. Multiplayer nie jest dostępny.
 
 ## Kompilacja i testy
 

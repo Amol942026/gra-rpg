@@ -1,0 +1,69 @@
+{
+  "status": "COMPLETE",
+  "date": "2026-10-22",
+  "checkpoint": "art/pipeline/RESUME_FOREST_MENU_20261022.md",
+  "last_completed_test": "87555 gameplay and animation checks; --no-audio",
+  "files": [
+    {
+      "path": "src/game.hpp",
+      "bytes": 36942,
+      "sha256": "c8b1464867796fc26918bcf0562aa1082e75d8597c17c2714f9718539430917a"
+    },
+    {
+      "path": "src/treant_gait.hpp",
+      "bytes": 1321,
+      "sha256": "b4658827e0ed48598bd404615c57998e29aceee18a81e4efdfb8d272492fbbae"
+    },
+    {
+      "path": "src/forest_creatures.hpp",
+      "bytes": 11007,
+      "sha256": "db9939f82899aac6f1b7d7b42f4dd6126e005076a9d1c810fb4bab51b560f263"
+    },
+    {
+      "path": "src/game_menu.hpp",
+      "bytes": 13751,
+      "sha256": "979eaa1bf137ce869395da6b4699b9cd4b54740a75dd30e45ab214633c4ea6dc"
+    },
+    {
+      "path": "src/menu_scene.hpp",
+      "bytes": 1712,
+      "sha256": "76f364449b6f4dc6c9c43db5897d60310ec63bbb824f8c06100118bb24cb8e09"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 70673,
+      "sha256": "71b82724b0708a60fc7bab45d984e02c6b696c4edb25e01cc9819693a8f8f1cb"
+    },
+    {
+      "path": "src/visual_qa.hpp",
+      "bytes": 9493,
+      "sha256": "41479163af5efde074ef71e88cd55c6c7cdf7b2e150ea93827ecb09f4892b784"
+    },
+    {
+      "path": "src/generated/menu_motion_data.hpp",
+      "bytes": 23714,
+      "sha256": "02aef7df3bc40024bb2a6432a6bdc27c5a6e23ac0aca8a1b933df63b6479e841"
+    },
+    {
+      "path": "tests/treant_tests.hpp",
+      "bytes": 2505,
+      "sha256": "6984c974b2e2dbf00357618fef15d4edd1d2335cce5258e1ec6cd3d6010dc2ca"
+    },
+    {
+      "path": "tests/mushroom_tests.hpp",
+      "bytes": 4002,
+      "sha256": "44a3c51c7ca6de28717dd2aaf408e272941ae47563299ea3279eca1049b4fac5"
+    },
+    {
+      "path": "tools/media/create_menu_forest.py",
+      "bytes": 13943,
+      "sha256": "70ab72b3d4e3aaed687eb037d2eb12355831b692163d090742ac74e01935c6e1"
+    },
+    {
+      "path": "tools/media/menu_synfig.py",
+      "bytes": 6053,
+      "sha256": "4e03d1c7c10921ed474f905dff27eba59cd9711eaa7a0d447a0796ff14e54a68"
+    }
+  ],
+  "final_report": "art/menu/FOREST_QA.json"
+}

@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "authoring": "Krita 5.3.4.1 native MCP draw",
+  "layers": {
+    "01 / Ciel\u0119cy zmierzch i \u015bwiat\u0142o ksi\u0119\u017cyca": "cc8b412e-0362-4ee5-ab4f-d8e95298cce6",
+    "02 / Odleg\u0142e grzbiety i warstwy lasu": "f4342e89-7c1a-4933-87d1-2d6a27832ecb",
+    "03 / Sol et sentier des ruines": "dc50a9c2-ec91-46da-96a9-3d6e54753b12",
+    "04 / Int\u00e9rieur lumineux de la porte": "9631a4e3-4f47-4756-8222-92cf7bf1b418",
+    "05 / Arche de pierre, mousse et inscriptions": "d9fbfd28-0cc5-4c05-9a9a-15d477731939",
+    "06 / Feuillage et arbres au premier plan": "4accd6a3-8e05-4647-9476-acdd50f7bd3e",
+    "07 / Brume peinte et nappes de ros\u00e9e": "b548ffc7-c31f-411c-8391-79d4c17a35e2",
+    "08 / Halo de la porte": "edebee9d-d218-420c-9c81-1f21313715f5"
+  },
+  "kra": "C:\\AI2D\\sprites\\emberfall_menu_20261022_v2\\forest-gate.kra",
+  "outputs": {
+    "poster": {
+      "file": "C:\\AI2D\\sprites\\emberfall_menu_20261022_v2\\poster.png",
+      "sha256": "3b1a99320f4331cc37af94032e57cd0566df3acfd495621670b7ff743df7a05e"
+    },
+    "background": {
+      "file": "C:\\AI2D\\sprites\\emberfall_menu_20261022_v2\\background.png",
+      "sha256": "f1834f2e7750ce89d61da7e30ca91f2910c907e0429d2dc160a0a97537af75fd"
+    },
+    "foreground": {
+      "file": "C:\\AI2D\\sprites\\emberfall_menu_20261022_v2\\foreground.png",
+      "sha256": "8cfea92b5ebb3b19b184130d72322c71be0c4a10e0597efbfce0632ab189782b"
+    },
+    "mist": {
+      "file": "C:\\AI2D\\sprites\\emberfall_menu_20261022_v2\\mist.png",
+      "sha256": "26cf971525a6cba08fa959accb0187209aa0519f7b2bf5a279480e4ebcd7892b"
+    },
+    "glow": {
+      "file": "C:\\AI2D\\sprites\\emberfall_menu_20261022_v2\\glow.png",
+      "sha256": "2af6bb301dc6b3273e942727d7f5d6f23e339746e84dc672ce8e0d062413fb50"
+    }
+  },
+  "external_assets": [],
+  "original_art": true
+}

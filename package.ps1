@@ -26,7 +26,8 @@ URUCHOMIENIE
 3. Uruchom Uruchom.bat lub Emberfall.exe.
 Nie trzeba instalowac silnika ani dodatkowych narzedzi.
 Folder assets musi pozostac obok Emberfall.exe.
-Gra zaczyna sie prologiem i wlacza domyslnie pelny ekran.
+Gra zaczyna sie menu glownym i wlacza domyslnie pelny ekran.
+Nowa gra rozpoczyna prolog. Wczytaj gre przywraca zapisana wyprawe.
 F11 przelacza miedzy pelnym ekranem a oknem.
 Domyslnie: natywne OpenGL z V-sync i ostry obraz bez powtornego skalowania.
 Opcjonalnie: Uruchom.bat --windowed lub Uruchom.bat --dxgi.
@@ -70,10 +71,12 @@ Wartosc w opisie oznacza cene sprzedazy sztuki; stos ma rowniez sume.
 Cena kupna jest dwukrotnie wyzsza. Monety w plecaku sluza do placenia.
 Fragmentow Serca Switu nie mozna sprzedac. Saldo zlota widac w HUD.
 Brak miejsca lub zlota nie powoduje utraty przedmiotow ani pieniedzy.
-F1 - pomoc. Esc - pauza. Enter po smierci - nowa wyprawa.
+F1 - pomoc. Esc - menu pauzy z zapisem, odczytem i opcjami.
+Esc w menu pauzy / Wroc do gry - wznow. Enter po smierci - nowa wyprawa.
 F2 - glosnosc. MUZYKA / EFEKTY w HUD - osobne wyciszenie.
 F11 / przycisk u gory ekranu - pelny ekran lub okno.
-W rozmowach Enter, Spacja lub LPM przewija tekst. Esc pomija prolog.
+W rozmowach Enter, Spacja lub LPM przewija tekst. Przycisk POMIN pomija rozmowe.
+Esc pauzuje takze rozmowy i prolog.
 
 WYPRAWA I LUP
 Odkryj las, pokonaj Kamiennego Straznika i dotrzyj do wiezy Eldrina.
@@ -87,7 +90,13 @@ Lup zostaje w cialach. Puste cialo moze nie zawierac przedmiotow.
 PPM otwiera cialo w zasiegu 2,5 pola. Strony lupu: < / > lub rolka.
 Po zwyciestwie mozesz znalezc bronie, zbroje, helmy i materialy bestii.
 
-Gra nie zapisuje postepu wyprawy. Glosnosc zapisuje sie przy zamykaniu.
+Zapisz gre / Wczytaj gre: trzy sloty z data, poziomem i lokacja.
+Zapisy: %LOCALAPPDATA%\Emberfall\saves\slot-1.efs (oraz slot-2 i slot-3).
+Poprzedni poprawny zapis pozostaje w .bak; uszkodzony plik odzyska sie z kopii.
+Po wczytaniu wybierz Wroc do gry. Wyjscie nie zapisuje automatycznie.
+Zapisy obejmuja ekwipunek, zadania, oba swiaty, lup i postep rozmow.
+Opcje: muzyka, efekty, wyciszenie i tryb ekranu.
+Glosnosc zapisuje sie przy zamykaniu. Tryb ekranu dotyczy biezacej sesji.
 Licencje: LICENSES.md i pliki w assets. Tabele lupu: LOOT.md.
 "@
     $entry = $archive.CreateEntry('Emberfall/JAK_URUCHOMIC.txt')

@@ -22,7 +22,7 @@ void introAction(bool advance,bool skip,float dt,bool focused=true){
 }
 void introInput(float dt){
     bool advance=IsKeyPressed(KEY_ENTER)||IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    bool skip=IsKeyPressed(KEY_ESCAPE)||(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside(introSkipButton()));
+    bool skip=IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside(introSkipButton());
     introAction(advance,skip,dt,IsWindowFocused());
 }
 void drawStoryPortal(float x,float y,float size,float time,float energy){
@@ -97,7 +97,7 @@ void drawIntroChamber(){
     if(intro.phase==IntroPhase::Opening){center("Obserwatorium na skraju Otchłani",720,581,22,Text,true);center("Gdy gasną pieczęcie, ktoś musi podtrzymać światło.",720,616,16,Muted);}
     drawIntroDialogue();
     if(intro.phase==IntroPhase::Opening||intro.phase==IntroPhase::Dialogue){
-        Rectangle skip=introSkipButton();panel(skip,inside(skip)?Card:rgb(25,24,38));center("POMIŃ · ESC",skip.x+skip.width/2,skip.y+10,14,Muted);
+        Rectangle skip=introSkipButton();panel(skip,inside(skip)?Card:rgb(25,24,38));center("POMIŃ PROLOG",skip.x+skip.width/2,skip.y+10,14,Muted);
     }
     if(intro.fade()>0)rect(0,0,W,H,Fade(intro.phase==IntroPhase::Opening?rgb(5,8,16):rgb(226,214,249),intro.fade()));
 }

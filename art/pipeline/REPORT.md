@@ -1,5 +1,10 @@
 # Raport konfiguracji — 19.10.2026
 
+**Aktualizacja22.10.2026 — leśne menu i enty:** dodano własną warstwową
+ilustrację Krity i12s animacji Synfig, zsynchronizowano chód entów oraz
+zmniejszono liczbę grzybów do48. Rzeczywiste testy i nowy rozpakowany ZIP
+przeszły kontrolę: [FOREST_QA.md](../menu/FOREST_QA.md).
+
 **Aktualizacja 21.10.2026 — bestiariusz:** do gry i ZIP-a gracza podłączono
 poprawione grafiki i ruch wszystkich 12 gatunków lasu i pustyni, z użyciem
 Krity i Synfiga. [Aktualne wyniki testów i FPS](../creatures/QA.md),

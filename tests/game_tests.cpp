@@ -37,7 +37,9 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "combat_facing_tests.hpp"
 #include "equipment_appearance_tests.hpp"
 #include "loot_controls_tests.hpp"
+#include "treant_tests.hpp"
 int main(){
+ treantTests();
  lootControlsTests();
  equipmentAppearanceTests();
  combatFacingTests();

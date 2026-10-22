@@ -6,6 +6,15 @@ drzewiec korę i liście. Poprawiono także materiały ciał pozostających po w
 Kolory, rozmiary kolizji, statystyki, łupy i mechaniki walki pozostają zgodne
 z dotychczasową grą.
 
+Korekta entów z22.10.2026: `src/treant_gait.hpp` synchronizuje krzywą
+kontaktu z faktycznie pokonaną drogą w projekcji izometrycznej. Wykrok
+zwiększono z7 do22 jednostek lokalnych, uniesienie stopy do9; kolana mają
+rozwiązanie o stałej długości kończyn. Podparcie70% pochodzi nadal z
+natywnej krzywej Synfig `elemental.sif`. Chód zatrzymuje się przy braku
+przemieszczenia. Testy: `tests/treant_tests.hpp`, `tests/forest_menu_checks.hpp`;
+aktualny raport: `art/menu/FOREST_QA.md`. Parametr1.18 w rendererze i
+`treant_gait::Scale` opisują tę samą skalę postaci i muszą być zgodne.
+
 ## Edytowalne źródła
 
 - `creature-paints.kra`: 16 nazwanych warstw narysowanych natywnymi narzędziami

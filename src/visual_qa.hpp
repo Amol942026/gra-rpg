@@ -64,15 +64,24 @@ Image presentedImage(){
     return {rlReadScreenPixels(GetRenderWidth(),GetRenderHeight()),GetRenderWidth(),GetRenderHeight(),1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
 }
 void renderScene() {
+    if(welcome){
+        BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
+        native_world::beginOpaqueFrame();
+        menu_scene::draw(menuClock);drawGameMenu();if(developerMenuOpen)drawDeveloperUi();
+        native_world::finishOpaqueBackground();
+        EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
+    }
     if(intro.chamber()){
         world_shadows::prepare(true);
         BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
-        drawIntroChamber();drawDeveloperUi();EndMode2D();EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::Hud,true);return;
+        if(paused)native_world::beginOpaqueFrame();
+        drawIntroChamber();drawGameMenu();drawDeveloperUi();if(paused)native_world::finishOpaqueBackground();EndMode2D();EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::Hud,true);return;
     }
     if(towerStory.chamber()){
         world_shadows::prepare(true);
         BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
-        drawTowerChamber();drawDeveloperUi();EndMode2D();EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::Hud,true);return;
+        if(paused)native_world::beginOpaqueFrame();
+        drawTowerChamber();drawGameMenu();drawDeveloperUi();if(paused)native_world::finishOpaqueBackground();EndMode2D();EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::Hud,true);return;
     }
     hovered=pickWorld(mouse);
     performance.end(RenderStage::Picking);
@@ -82,21 +91,22 @@ void renderScene() {
     ClearBackground(Ink);
     Camera2D camera{{0,0},{0,0},0,renderScale};
     BeginMode2D(camera);
-    native_world::beginOpaqueFrame();drawWorld();native_world::finishOpaqueBackground();actor_art::finishShadowFrame();performance.end(RenderStage::World,true);
+    native_world::beginOpaqueFrame();drawWorld();if(!paused)native_world::finishOpaqueBackground();actor_art::finishShadowFrame();performance.end(RenderStage::World,true);
     // World and text share the final pixel scale. The world is drawn directly
     // into this frame; there is no resized intermediate scene texture.
     drawWorldLabels();
     if(intro.active()){
-        drawUI();drawIntroArrival();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
+        drawUI();drawIntroArrival();drawGameMenu();drawDeveloperUi();if(paused)native_world::finishOpaqueBackground();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
     }
     drawUI();drawHoveredName();drawSkillHud();drawBowHud();drawWeaponWheel();tooltip();
-    if(towerStory.active()){drawTowerStoryOverlay();drawDeveloperUi();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;}
+    if(towerStory.active()){drawTowerStoryOverlay();drawGameMenu();drawDeveloperUi();if(paused)native_world::finishOpaqueBackground();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;}
     if(dragging.place!=Place::None){Item* p=game.get(dragging);if(p)icon(*p,mouse.x,mouse.y,.95f,.9f);}
     overlay();
     drawProgression();drawTowerPanel();
     drawAudioPanel();
     drawAudioButton(); // Always visible, including pause/help and the audio panel.
-    drawDisplayButton();if(!towerPanelOpen)drawWeaponWheelButton();drawDeveloperUi();
+    drawDisplayButton();if(!towerPanelOpen)drawWeaponWheelButton();drawGameMenu();drawDeveloperUi();
+    if(paused)native_world::finishOpaqueBackground();
     EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);
 }
 void exportVisualQA() {

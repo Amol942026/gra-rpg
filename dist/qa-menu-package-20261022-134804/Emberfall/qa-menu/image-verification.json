@@ -1,0 +1,127 @@
+{
+  "status": "PASS",
+  "checks": 80,
+  "images": [
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\credits.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "4f617631752a8849d06c8d7f2a7147d153ff967f18df12bbd9f73cd5f470a551"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\exit-ingame.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "0a8af31e7a70560570eb3b405cf2c01ff3b842875b6f56ad8adb395342381cc5"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\exit-startup.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "7867cad940fd9cdffcc321d510fa26a76e16980705728716a9221ff2c76fc1c9"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\load-empty.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "7f627cdcfc37d6e51bf966fa489e9498eaff7489561e52cd0219c1d1660c7f85"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\load-populated.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "5c932fefac16cf9128617d6907381f40c4414ed896dda4d5a68156b1714cb39f"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\main-100.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "a53f69eb09ae9f35df1fa04b5a7d1d13af1db42c27ad118c8fcbd9186e5884f6"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\main-120.png",
+      "width": 1728,
+      "height": 1080,
+      "sha256": "a13972c4244d76ef94f23497cc0dccc2bf4d17858bf954bd95596d72f09c60bc"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\main-80.png",
+      "width": 1152,
+      "height": 720,
+      "sha256": "4597f3653630ddc7c85d806d6b2534c02e250dfcc20794c35792d59c92ccfb0b"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\options-120.png",
+      "width": 1728,
+      "height": 1080,
+      "sha256": "88398c1e73b42a1b66de302adeb21c48965d5ae75f3bb4b33fe41fb158637464"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\options-80.png",
+      "width": 1152,
+      "height": 720,
+      "sha256": "e57d18cc11dd551dfd23382f28c14c51eaabd2912cc3d9e91803ff8feee3be24"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\options.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "79d4a438f02ccd558adb6c6edc58b723372959859a2576eb23178837e2e9a77a"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\pause-120.png",
+      "width": 1728,
+      "height": 1080,
+      "sha256": "1d6c2921a49630811fb3bcf76cb23e95f742afc0458e655fc8780977aa1afd93"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\pause-80.png",
+      "width": 1152,
+      "height": 720,
+      "sha256": "8cc4341188a414ec6904b18d51a6fdde1584c85f9e26b0489908fa6953d1cbde"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\pause-death.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "b6de30bbbd382e292ccb38f44ee28eb0c001ba393ca0bade01f8c14cfba80afc"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\pause-desert.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "f975daeb7678a725e55e74e2f45c016e0a9b4d4a17efd10cf9dca7fd9d044850"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\pause-forest.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "9c8fd3e0a3016dc19c86048e2060ce22613b358677106d568e5e2a390a329c3e"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\pause-prologue.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "f120eeca84a5143f9800e431bde1ed1d0aecacebea0109402a20a2e2715aab35"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\pause-tower.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "6b5a6f8332bb3a2a3fd8e6518151f42367cc54f9d7b2c8608b2037ea3fb80a3a"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\qa-menu\\save-prologue.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "218abdee496cae8cd5c9c152905fbd6969a19d2043813a64af8fced40924720c"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134804\\Emberfall\\screenshots\\emberfall-startup.png",
+      "width": 1800,
+      "height": 1055,
+      "sha256": "35a70e1b0a8eb1016f5489fed95a8301cae48d53f499496c96b88f3d75d068ba"
+    }
+  ],
+  "audio_device_opened": false
+}

@@ -22,16 +22,18 @@ Sand prisons cast: 0
 Tower floor: 1
 Intro active: 0
 Developer error: 
+Main menu open: 0
+Pause menu open: 0
 Audio device opened: no
 Native canvas: 1688x1055
 Desert background buffer: 0x0
-Average FPS: 58.7132
-CPU frame mean (ms): 10.6462
-EndDrawing mean (ms): 6.37786
-Presentation mean (ms): 0.000754112
-CPU frame p95 (ms): 13.2751
-CPU frame p99 (ms): 14.1481
-Frame p95 (ms): 20.6625
-Frame p99 (ms): 24.2236
-Frame max (ms): 29.7245
-Frames over 25 ms: 4
+Average FPS: 58.6596
+CPU frame mean (ms): 10.9376
+EndDrawing mean (ms): 6.10638
+Presentation mean (ms): 0.000722408
+CPU frame p95 (ms): 13.8596
+CPU frame p99 (ms): 14.6932
+Frame p95 (ms): 20.472
+Frame p99 (ms): 23.5976
+Frame max (ms): 28.7615
+Frames over 25 ms: 7

@@ -30,8 +30,8 @@ bool clickMageTravelChoice(){
 }
 void towerInput(float dt){
  bool pressed=IsMouseButtonPressed(MOUSE_BUTTON_LEFT),focused=IsWindowFocused();
- if(towerStory.phase==TowerPhase::Choice){if(focused){if(IsKeyPressed(KEY_ESCAPE))towerStory.skip();else if(pressed)clickMageTravelChoice();}towerAction(false,false,dt,focused);return;}
- towerAction(IsKeyPressed(KEY_ENTER)||IsKeyPressed(KEY_SPACE)||pressed,IsKeyPressed(KEY_ESCAPE)||(pressed&&inside(introSkipButton())),dt,focused);
+ if(towerStory.phase==TowerPhase::Choice){if(focused&&pressed)clickMageTravelChoice();towerAction(false,false,dt,focused);return;}
+ towerAction(IsKeyPressed(KEY_ENTER)||IsKeyPressed(KEY_SPACE)||pressed,pressed&&inside(introSkipButton()),dt,focused);
 }
 void drawMageTravelChoice(){
  panel({320,172,800,515},rgb(22,27,39));line(350,199,1090,199,Gold);
@@ -41,7 +41,7 @@ void drawMageTravelChoice(){
  center(TextFormat("Odzyskane części Serca Świtu: %d / 5",game.dawnFragments()),720,443,17,Muted);
  Rectangle travel=desertTravelButton();panel(travel,inside(travel)?rgb(74,61,41):rgb(49,42,34));DrawRectangleLinesEx(travel,1.5f,Gold);center("Przenieś mnie na pustynię.",720,travel.y+19,23,Gold);
  Rectangle stay=desertStayButton();panel(stay,inside(stay)?Card:Panel);center("Jeszcze zostanę w wieży.",720,stay.y+12,18,Muted);
- center("Wybierz odpowiedź myszą · ESC — zostań w wieży",720,652,15,Muted);
+ center("Wybierz odpowiedź myszą · ESC — menu pauzy",720,652,15,Muted);
 }
 void drawTowerDialogue(){
     if(towerStory.phase!=TowerPhase::Dialogue)return;
@@ -66,7 +66,7 @@ void drawTowerChamber(){
     if(towerStory.phase==TowerPhase::Opening){center("Wieża Eldrina",720,581,27,Text,true);center(game.dawnFragments()>=2?"Dwie części odzyskane. Pieczęć nabiera sił.":"Jedna część odzyskana. Nadzieja powraca.",720,616,16,Muted);}
     drawTowerDialogue();
     if(towerStory.phase==TowerPhase::Opening||towerStory.phase==TowerPhase::Dialogue){
-        Rectangle skip=introSkipButton();panel(skip,inside(skip)?Card:rgb(25,24,38));center("POMIŃ · ESC",skip.x+skip.width/2,skip.y+10,14,Muted);
+        Rectangle skip=introSkipButton();panel(skip,inside(skip)?Card:rgb(25,24,38));center("POMIŃ ROZMOWĘ",skip.x+skip.width/2,skip.y+10,14,Muted);
     }
     if(towerStory.fade()>0)rect(0,0,W,H,Fade(BLACK,towerStory.fade()));
 }
@@ -81,6 +81,6 @@ void drawTowerStoryOverlay(){
             if(towerStory.fade()>0)rect(0,0,W,H,Fade(BLACK,towerStory.fade()));return;
         }
         drawTowerDialogue();
-        Rectangle skip=introSkipButton();panel(skip,inside(skip)?Card:rgb(25,24,38));center("ZAKOŃCZ · ESC",skip.x+skip.width/2,skip.y+10,14,Muted);
+        Rectangle skip=introSkipButton();panel(skip,inside(skip)?Card:rgb(25,24,38));center("ZAKOŃCZ",skip.x+skip.width/2,skip.y+10,14,Muted);
     }else if(towerStory.fade()>0)rect(0,0,W,H,Fade(BLACK,towerStory.fade()));
 }

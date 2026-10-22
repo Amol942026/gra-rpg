@@ -217,11 +217,12 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 #include "actor_art.hpp"
 #include "sand_prison_art.hpp"
 #include "intro_art.hpp"
+#include "menu_scene.hpp"
 #include "treasure_art.hpp"
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
 void makeArt(){
- hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();
+ hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
  forest_bush_art::load();
  treasure_art::make();
  terrain=LoadRenderTexture(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
@@ -444,7 +445,7 @@ void tooltip(){
  Slot source=hoverSlot();Item* value=game.get(source);if(value&&!value->empty())drawItemTooltip(*value,source);
 }
 void overlay(){
- if(!welcome&&!help&&!paused&&!game.dead())return;rect(0,0,W,H,rgb(6,15,18,205));Rectangle r{340,172,760,548};panel(r,rgb(19,31,33));line(370,195,1070,195,Gold);diamond(720,222,6,9,Gold);
+ if(welcome||paused||(!help&&!game.dead()))return;rect(0,0,W,H,rgb(6,15,18,205));Rectangle r{340,172,760,548};panel(r,rgb(19,31,33));line(370,195,1070,195,Gold);diamond(720,222,6,9,Gold);
  if(game.dead()){center("ŻAR PRZYGASŁ",720,274,39,Text,true);center("Ruiny zatrzymały twoją wyprawę.",720,347,18,Muted);center("Naciśnij ENTER, aby rozpocząć od nowa.",720,411,17,Gold);center("Spróbuj zakładać lepszy sprzęt i unikać zamachów.",720,462,15,Muted);return;}
  center(welcome?"WITAJ W EMBERFALL":help?"PRZEWODNIK WĘDROWCA":"CHWILA ODDECHU",720,258,32,Text,true);
  center("Echa zapomnianych ruin",720,307,19,Gold);line(420,348,1020,348,Line);
@@ -458,8 +459,11 @@ namespace world_shadows {void draw();}
 #include "tower_rooms_ui.hpp"
 #include "merchant_ui.hpp"
 #include "developer_ui.hpp"
+#include "game_menu.hpp"
 void input(float dt){
  if(!gameplayInputAllowed()||!IsWindowFocused())inventoryClicks.clear();else inventoryClicks.moved(mouse.x,mouse.y);
+ if(developerMenuOpen||IsKeyPressed(KEY_F3)){if(developerInput())return;}
+ if(menuInput(dt))return;
  if(developerInput())return;
  if(intro.active()){introInput(dt);return;}
  startTowerReturn();if(towerStory.active()){towerInput(dt);return;}
@@ -467,9 +471,8 @@ void input(float dt){
  if(towerPanelInput())return;
  if(progressionInput()){game.cancelBow();weaponWheelOpen=false;return;}
  if(weaponWheelInput())return;
- if(IsKeyPressed(KEY_F1)){game.cancelBow();help=!help;paused=false;welcome=false;dragging={};}
- if(IsKeyPressed(KEY_ESCAPE)){game.cancelBow();if(help||welcome){help=false;welcome=false;}else paused=!paused;dragging={};}
- if(welcome||help||paused){if(IsKeyPressed(KEY_ENTER)||(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside({540,613,360,57}))){if(welcome)startIntro();else help=paused=false;}return;}
+ if(IsKeyPressed(KEY_F1)){game.cancelBow();help=!help;dragging={};}
+ if(help){if(IsKeyPressed(KEY_ENTER)||(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside({540,613,360,57})))help=false;return;}
  if(game.dead()){if(IsKeyPressed(KEY_ENTER)){
 #ifndef EMBERFALL_PLAYER_BUILD
  if(developerActive)startDeveloperSession(true);else
@@ -556,7 +559,7 @@ void integrationTests(){
 #include "world_motion_qa.hpp"
 int main(int argc,char**argv) {
     bool smoke=false,benchmark=false,integration=false,visualQA=false,hoverQA=false,rollQA=false,large=false;
-    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=true;
+    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=true,menuBenchmark=false;
     bool introQA=false,introPassed=true,towerQA=false,towerPassed=true,towerFloorsQA=false,towerFloorsPassed=true;
     bool inspectionQA=false,inspectionPassed=true;
     bool swingQA=false,swingPassed=true;
@@ -585,6 +588,7 @@ int main(int argc,char**argv) {
         std::string arg=argv[i];
 #ifndef EMBERFALL_PLAYER_BUILD
         if(parseDeveloperArgument(arg,i,argc,argv,developerLaunch))continue;
+        if(arg=="--menu-benchmark"){menuBenchmark=true;frameLimit=900;}
         if(arg=="--trade-qa")tradeQA=true;
         if(arg=="--labels-qa")labelsQA=true;
         if(arg=="--world-motion-qa")worldMotionQA=true;
@@ -654,11 +658,7 @@ int main(int argc,char**argv) {
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
     bool diagnostic=worldMotionQA||labelsQA||tradeQA||shadowQA||desertQA||towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
-    if(!diagnostic){game=Game(std::random_device{}());
-#ifndef EMBERFALL_PLAYER_BUILD
-        if(!developerLaunch.enabled)
-#endif
-        startIntro();}
+    if(!diagnostic){game=Game(std::random_device{}());intro={};towerStory={};welcome=true;paused=false;menuPageTo(MenuPage::Home);}
     startupLog.write("Generating world graphics");
     makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();startupLog.write("World graphics ready");
     audioSystem.init(!worldMotionQA&&!labelsQA&&!tradeQA&&!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!inspectionQA&&!swingQA&&!crowdQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA,!worldMotionQA&&!labelsQA&&!tradeQA&&!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!noAudio&&!startupSmoke&&!developerQA&&!( towerFloorsQA||towerQA||introQA||smoke||benchmark||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA));
@@ -714,13 +714,13 @@ int main(int argc,char**argv) {
     int frame=0;
     std::vector<double> cpuTimes,frameTimes,endTimes,presentTimes;
     double previous=GetTime();
-    while(!worldMotionQA&&!labelsQA&&!tradeQA&&!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA&&!WindowShouldClose()){
+    while(!exitRequested&&!worldMotionQA&&!labelsQA&&!tradeQA&&!shadowQA&&!desertQA&&!towerArtQA&&!stairsQA&&!combatQA&&!developerQA&&!towerFloorsQA&&!towerQA&&!introQA&&!visualQA&&!hoverQA&&!rollQA&&!audioQA&&!inspectionQA&&!swingQA&&!crowdQA&&!progressionQA&&!controlsQA&&!corpseQA&&!patrolQA&&!environmentQA&&!presentationQA&&!motionQA&&!pointerQA&&!performanceQA&&!refreshQA&&!forestQA&&!graphicsQA&&!mushroomQA&&!bowQA&&!skillsQA&&!WindowShouldClose()){
         double begin=GetTime();double elapsed=begin-previous;previous=begin;
         performance.begin();
         float dt=float(std::clamp(elapsed,0.0,.05));
         updateFramePacing();
         refreshDisplayLayout();
-        bool displayChanged=(intro.active()||towerStory.active())?displayAction(IsKeyPressed(KEY_F11),false):displayInput();
+        bool displayChanged=(gameMenuActive()||intro.active()||towerStory.active())?displayAction(IsKeyPressed(KEY_F11),false):displayInput();
         if(displayChanged)refreshDisplayLayout();
         if(smoke||benchmark){
             if(benchmark&&game.allocationRequired){Attributes points{};points[int(Attribute::MagicPower)]=game.attributePoints;game.distribute(points);SkillRanks learned{};learned[0]=game.skillPoints;game.trainSkills(learned);statsOpen=skillsOpen=false;}
@@ -759,7 +759,8 @@ int main(int argc,char**argv) {
                     if(worldPointerAllowed(p)){mouse=p;break;}
                 }
             }
-        }else if(!displayChanged)input(dt);
+        }else if(menuBenchmark)menuClock+=dt;
+        else if(!displayChanged)input(dt);
         audioSystem.update(dt,game,developerMenuOpen||towerPanelOpen||towerStory.active()||intro.active()||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||game.allocationRequired,smoke||benchmark||IsWindowFocused());
         performance.end(RenderStage::Update);
         renderScene();
@@ -778,7 +779,7 @@ int main(int argc,char**argv) {
     }
     if(frameLimit&&!cpuTimes.empty()){
         std::sort(cpuTimes.begin(),cpuTimes.end());std::sort(frameTimes.begin(),frameTimes.end());
-        std::ofstream f(developerSmoke?"dev-startup-v43.txt":desertBenchmark?"desert-benchmark-v43.txt":towerBenchmark?"tower-benchmark-v43.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v43-fullscreen.txt":large?"benchmark-v43-large.txt":"benchmark-v43.txt"):"smoke-test-v43.txt");
+        std::ofstream f(menuBenchmark?"menu-benchmark.txt":developerSmoke?"dev-startup-v43.txt":desertBenchmark?"desert-benchmark-v43.txt":towerBenchmark?"tower-benchmark-v43.txt":startupSmoke?"startup-smoke.txt":benchmark?(startFullScreen?"benchmark-v43-fullscreen.txt":large?"benchmark-v43-large.txt":"benchmark-v43.txt"):"smoke-test-v43.txt");
         f<<"Build edition: "<<(PlayerBuild?"player":"developer")<<"\nFrames: "<<frame<<"\nWindow: "<<GetScreenWidth()<<"x"<<GetScreenHeight()
          <<"\nFullscreen: "<<(fullScreen()?"yes":"no")
          <<"\nRefresh rate (Hz): "<<refreshHz<<"\nV-sync interval: "<<swapInterval
@@ -798,6 +799,7 @@ int main(int argc,char**argv) {
          <<"\nWorld location: "<<(game.inTower()?"mage-tower":game.inDesert()?"desert":"forest")<<"\nBenchmark scenario: "<<(desertBenchmark?"desert":towerBenchmark?"tower":"forest")<<"\nDesert areas visited: "<<desertRegionsVisited
          <<"\nSand prisons cast: "<<(game.inDesert()&&game.findEnemy(DesertBossId)?game.findEnemy(DesertBossId)->sandPrisonCasts:0)
          <<"\nTower floor: "<<game.towerFloor+1<<"\nIntro active: "<<intro.active()<<"\nDeveloper error: "<<developerError
+         <<"\nMain menu open: "<<welcome<<"\nPause menu open: "<<paused
          <<"\nAudio device opened: "<<(audioSystem.available?"yes":"no")
          <<"\nNative canvas: "<<canvas.texture.width<<"x"<<canvas.texture.height
          <<"\nDesert background buffer: "<<desert_art::mountainBackdrop.texture.width<<'x'<<desert_art::mountainBackdrop.texture.height
@@ -816,7 +818,7 @@ int main(int argc,char**argv) {
     startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
     world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
     UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }

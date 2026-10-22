@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "package_sha256": "ab7740bc37ea2fd5a870dbea62dd1112a9b189e39b04ee6179429f68948b4f75",
+  "exe_sha256": "f58cc365bd76a7e289bf703415539da663ad836dcbec2ae7e17b2b4bb9001096",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-menu-package-20261022-134038\\Emberfall",
+  "verified_assets": 97,
+  "menu_checks": 120,
+  "menu_images": 19,
+  "startup_frames": 180,
+  "startup_menu": true,
+  "startup_intro": false,
+  "menu_fps": 55.4168,
+  "menu_cpu_ms": 4.86893,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_package": false
+}

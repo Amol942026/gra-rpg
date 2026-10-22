@@ -1,7 +1,12 @@
 #pragma once
 void mushroomTests(){
+ {Game legacy;legacy.forage[3].value={};legacy.bag[20]=item(Kind::Mushroom,0,17);auto first=legacy.forage[0].pos;
+  for(int id=49;id<=64;id++)legacy.forage.push_back({id,item(Kind::Mushroom),{30,30}});
+  legacy.limitForestForage();check(legacy.forage.size()==48&&legacy.forage[3].value.empty()&&legacy.bag[20].count==17&&distance(legacy.forage[0].pos,first)<.00001f,"older saves lose only surplus plants without respawn or inventory loss");
+  for(int id=49;id<=64;id++)legacy.forage.push_back({id,item(Kind::Mushroom),{30,30}});
+  legacy.activateField(WorldLocation::Desert);legacy.limitForestForage();check(legacy.forestState.forage.size()==48&&legacy.forage.empty(),"legacy forest is thinned even when saved on another map");}
  for(unsigned seed=0;seed<16;seed++){
-  Game g(seed);check(g.forage.size()==MushroomCount,"each expedition generates all 64 mushrooms across the larger forest");
+  Game g(seed);check(g.forage.size()==48&&MushroomCount==48,"each expedition generates 48 mushrooms, 25% fewer than before");
   bool valid=true;for(size_t i=0;i<g.forage.size();i++){
    const auto& m=g.forage[i];valid&=m.id==int(i)+1&&m.value.kind==Kind::Mushroom&&m.value.count==1&&g.walkable(m.pos)&&distance(m.pos,g.player)>=3.5f;
    valid&=!Game::onPath(int(std::round(m.pos.x)),int(std::round(m.pos.y)));

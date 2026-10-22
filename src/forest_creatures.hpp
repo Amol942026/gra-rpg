@@ -84,7 +84,9 @@ inline void buildForestCreature(Rig& r,int type,const AnimationState& s,float at
  }else if(type==7){
   Color bark=flash?Text:rgb(111,91,58),leaf=flash?Text:rgb(70,113,67);float z=bob;
   for(float side:{-1.f,1.f}){
-   auto k=creature_motion::sample(5,s.phase+(side>0?.5f:0));P3 foot{side*12,k.travel*walk*7,4+k.lift*walk*5},knee{side*10,k.travel*walk*3,23+z};
+   auto k=creature_motion::sample(5,s.phase+(side>0?.5f:0));
+   P3 foot{side*12,k.travel*walk*treant_gait::Stride,4+k.lift*walk*treant_gait::Lift};
+   auto bend=treant_gait::knee(foot.f,40+z,foot.z);P3 knee{side*10,bend.forward,bend.height};
    creatureJoint(r,{side*8,0,40+z},knee,13,bark,.85f);creatureJoint(r,knee,foot,12,bark,.8f);
    for(int root=0;root<3;root++)r.tapered(foot,foot+P3{side*(root-1)*7,10+root*2.f,-3},5,4,bark,.15f);
    P3 elbow{side*26,3,56+z},hand{side*31,6+hit*24-motion.sway*walk*side*4,41+z+hit*7};

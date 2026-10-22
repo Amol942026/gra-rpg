@@ -4,6 +4,7 @@
 #include "entity_info.hpp"
 #include "loot.hpp"
 #include "commerce.hpp"
+#include "treant_gait.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -13,7 +14,7 @@
 
 namespace ember {
 constexpr int MapSize=72, BagSize=25, EquipSize=6;
-constexpr int MushroomCount=64,MushroomHealing=10;
+constexpr int MushroomCount=48,MushroomHealing=10;
 constexpr int WeaponWheelSize=8;
 constexpr float BowDrawDuration=1.4f,BowMinRange=2,BowMaxRange=12,BowCooldown=.38f;
 constexpr float MapWalkMin=1.6f,MapWalkMax=MapSize-2.6f;
@@ -186,6 +187,13 @@ struct Game {
    for(const auto& mushroom:forage)if(distance(pos,mushroom.pos)<2.2f)clear=false;
    if(clear)forage.push_back({int(forage.size())+1,item(Kind::Mushroom),pos});
   }
+ }
+ void limitForestForage(){
+  // Keep the same first 48 seeded plants and their collected state. Existing
+  // saves lose only surplus wild plants, never items in the player's bag.
+  auto trim=[](std::vector<Ground>& plants){plants.erase(std::remove_if(plants.begin(),plants.end(),[](const Ground& g){return g.id>MushroomCount;}),plants.end());};
+  if(fieldLocation==WorldLocation::Forest)trim(forage);
+  trim(forestState.forage);
  }
  static unsigned hash(int x,int y){unsigned n=unsigned(x)*374761393u+unsigned(y)*668265263u+8713u;n=(n^(n>>13))*1274126177u;return n^(n>>16);}
  static bool onPath(int x,int y){return forestPath({float(x),float(y)});}
@@ -480,7 +488,8 @@ struct Game {
     e.patrolBlocked=length(movement)<length(desired[i])*dt*.15f?e.patrolBlocked+dt:0;
     if(e.patrolBlocked>.65f){e.patrolGoalActive=false;e.patrolBlocked=0;}
    }
-   e.animation.advance(movement.x,movement.y,dt);
+   if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
+   else e.animation.advance(movement.x,movement.y,dt);
    if(e.windup>0)e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
   }
  }

@@ -1,0 +1,118 @@
+PASS no audio device opened
+PASS uses actual player edition
+PASS startup menu freezes gameplay before prologue
+PASS screenshot main-80
+PASS nonempty rendered menu main-80
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS screenshot main-100
+PASS nonempty rendered menu main-100
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS screenshot main-120
+FAIL nonempty rendered menu main-120
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS home hit target inside canvas
+PASS full Polish home label fits
+PASS keyboard wraps upward
+PASS keyboard wraps downward
+PASS keyboard opens load at startup
+PASS empty save slot metadata
+PASS empty load preserves startup and gives feedback
+PASS screenshot load-empty
+FAIL nonempty rendered menu load-empty
+PASS Escape returns from submenu
+PASS Escape cannot bypass startup menu
+PASS mouse opens options
+PASS keyboard volume adjustment
+PASS mouse music slider
+PASS mouse toggles music separately
+PASS mouse toggles effects separately
+PASS master mute works
+PASS options switches actual screen mode
+PASS screen mode restores
+PASS screenshot options
+FAIL nonempty rendered menu options
+PASS credits opens
+PASS screenshot credits
+FAIL nonempty rendered menu credits
+PASS exit requires confirmation
+PASS screenshot exit-startup
+FAIL nonempty rendered menu exit-startup
+PASS cancel exit preserves menu
+PASS new game resets state and starts prologue
+PASS Escape pauses prologue instead of skipping
+PASS dialogue clock frozen under menu
+PASS screenshot pause-prologue
+FAIL nonempty rendered menu pause-prologue
+PASS pause has functioning save action
+PASS first slot written through mouse
+PASS screenshot save-prologue
+FAIL nonempty rendered menu save-prologue
+PASS overwrite needs confirmation
+PASS overwrite cancelled
+PASS confirmed overwrite saved state
+PASS in-game load confirms session replacement
+PASS load cancel leaves active game untouched
+PASS load restores dialogue and game atomically
+PASS Escape resumes restored prologue
+PASS forest saved in second slot
+PASS screenshot pause-forest
+PASS nonempty rendered menu pause-forest
+PASS desert saved in third slot
+PASS screenshot pause-desert
+FAIL nonempty rendered menu pause-desert
+PASS screenshot load-populated
+FAIL nonempty rendered menu load-populated
+PASS startup load restores actual inventory, enemy, position, chest and gold
+PASS world input blocked by pause
+PASS simulation frozen in pause
+PASS screenshot pause-80
+PASS nonempty rendered menu pause-80
+PASS screenshot options-80
+FAIL nonempty rendered menu options-80
+PASS screenshot pause-120
+PASS nonempty rendered menu pause-120
+PASS screenshot options-120
+FAIL nonempty rendered menu options-120
+PASS keyboard resume action
+PASS unconfirmed level points preserved without unlocking skills
+PASS tower floor, runes and travel dialogue roundtrip
+PASS screenshot pause-tower
+PASS nonempty rendered menu pause-tower
+PASS screenshot pause-death
+PASS nonempty rendered menu pause-death
+PASS resume preserves death rather than reviving
+PASS pause exit confirmation
+PASS screenshot exit-ingame
+FAIL nonempty rendered menu exit-ingame
+PASS confirmed exit sets actual application loop condition
+PASS no playback during entire diagnostic
+PASS only three slots used
+Checks: 114
+Failures: 12
+Audio device opened: no
+Player edition: yes

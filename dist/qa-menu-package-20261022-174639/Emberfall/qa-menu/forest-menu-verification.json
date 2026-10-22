@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "checks": 1053,
+  "native_frames": 240,
+  "runtime_menu_frames": 60,
+  "runtime_treant_frames": 120,
+  "resident_rgba_bytes": 20736000,
+  "loop_changed_pixels": 0,
+  "audio_device_opened": false
+}

@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "checks": 77,
+  "images": [
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\credits.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "8c7bd5c29d7576aaf7206286d9fd6f5758acbe6457a1f0ca7e0f15efa6ac693a"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\exit-ingame.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "72a84fb32f9db7ce5c41864217d36748ab40524174b2a3ff28d22e36dab458d3"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\exit-startup.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "2e839ad950dadf10c9e6aca717de254aa226e98e598557641f11e0d5706697ef"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\load-empty.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "5694308778595e5c4c21ec202d9e45876dd944d5ef397e7aef9570942988fa30"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\load-populated.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "e4bdf889b979e52500696ce5b9e29274054c4aa9875b077b80d19826291d2027"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\main-100.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "2755b366296d9193a1bddbe315e35131df47c91d160f8b403adfb84eb50b2df1"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\main-120.png",
+      "width": 1728,
+      "height": 1080,
+      "sha256": "062f203bc6d29bcc6d932ecb3590a35840b3efb351772ff1a496e1412a5bf729"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\main-80.png",
+      "width": 1152,
+      "height": 720,
+      "sha256": "2677e0805ab712b3d66932b4ae7649a7f70ce97753dc235cc9008043100bd0a4"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\options-120.png",
+      "width": 1728,
+      "height": 1080,
+      "sha256": "94a02b907f3910edf78dc9d9ee59dfa6a365be90af070331f66a5ee833a38e9d"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\options-80.png",
+      "width": 1152,
+      "height": 720,
+      "sha256": "3806f225748901c65a98a1de4d582bcc4ee9812af0574badbb8940d2c1cbfd0d"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\options.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "b0ffde7339fc3e076980fbff90879604ff1479bc2de75fc300912f5124af09a5"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\pause-120.png",
+      "width": 1728,
+      "height": 1080,
+      "sha256": "502dcefc5f03e1cc907b94ab3ea7d7d7e55e875aa928b091696ccf4fa24dfb72"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\pause-80.png",
+      "width": 1152,
+      "height": 720,
+      "sha256": "603a3ab552a67ad12c615dfdc73c2a726c5ec475575d79538b940d22382b075a"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\pause-death.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "a0441c2e73464cee3d89c3b262b25198bd3fc80cf1754b8e520a0d267dfb9e4a"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\pause-desert.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "61f4f838c3e0057b8d4d7bff7ff72c1ebb033091bd4911d0f73c1cdabe0b7f3c"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\pause-forest.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "942ca5df878d0c4ef88b6a910dad9e2c2b3858f1a8d44cf59555dd6b2d78987b"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\pause-prologue.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "a33c519582c96325a44ec0eca7a25e85c84921f2974e19e2b3255041d471023a"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\pause-tower.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "7eea4d0b93894d43e961f163e1a3252e3d0b62ce86117967d24643f8ec51821d"
+    },
+    {
+      "file": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-forest-menu-20261022-a\\save-prologue.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "309c0643820be937885513eb72531de489de6c9fbd4249ee25987992c81131ae"
+    }
+  ],
+  "audio_device_opened": false
+}

@@ -12,7 +12,7 @@ class Typography {
         if(it==fonts.end()){
             std::vector<int> codes;
             for(int c=32;c<384;c++)codes.push_back(c);
-            for(int c:{8212,8211,8594})codes.push_back(c);
+            for(int c:{8212,8211,8592,8593,8594,8595})codes.push_back(c);
             const char* path=title?"assets/Cinzel.ttf":style==1?"assets/Lato-Bold.ttf":"assets/Lato-Regular.ttf";
             Font f=LoadFontEx(path,pixels,codes.data(),int(codes.size()));
             // Coverage is antialiased in the glyph itself. Sample it one-to-one;
@@ -29,8 +29,8 @@ public:
         // Font atlas creation and GPU upload happen before active rendering,
         // including sizes first used by combat, tooltips and modal menus.
         if(fonts.empty()){
-            for(float size:{14.f,15.f,16.f,17.f,18.f,19.f,20.f,21.f,22.f,24.f})font(size,false);
-            for(float size:{15.f,20.f,24.f,25.f,28.f,30.f,32.f,34.f,39.f})font(size,true);
+            for(float size:{14.f,15.f,16.f,17.f,18.f,19.f,20.f,21.f,22.f,23.f,24.f})font(size,false);
+            for(float size:{14.f,15.f,20.f,23.f,24.f,25.f,27.f,28.f,29.f,30.f,32.f,34.f,39.f,76.f,92.f})font(size,true);
             font(20.f,false,true);
         }
     }
