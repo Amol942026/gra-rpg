@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "package_sha256": "b5e1c177bf9bfb46880d2b2875588bf4fbe9776ad8a4ff9832b1c8afc5657e4c",
+  "exe_sha256": "1092013002da0a895d69136b4ca87a27ad991f0dee5e2f0a17ebd3db1d4f5915",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-typography-package-20261026-164110\\Emberfall",
+  "verified_assets": 112,
+  "tests": {
+    "status": "PASS",
+    "checks": 4074,
+    "failures": [],
+    "text_draws": 3921,
+    "native_scene_captures": 57,
+    "audio_opened": false
+  },
+  "startup_frames": 180,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_player": false
+}

@@ -6,7 +6,7 @@ void buildDesert(){
  float hp=enemyInfo(DesertBossType).health;enemies.push_back({DesertBossId,DesertBossType,DesertBossHome,DesertBossHome,hp,hp});
  for(int x=3;x<MapSize-3;x++)for(int y=3;y<MapSize-3;y++){
   V p{float(x),float(y)};unsigned h=hash(x+91,y+137);
-  if(h%13||desertPath(p)||nearTreasure(p,WorldLocation::Desert)||distance(p,DesertArrival)<6||distance(p,DesertOasis)<5.6f||distance(p,DesertBossHome)<6.8f)continue;
+  if(h%13||nearDesertFountain(p,2.3f)||desertPath(p)||nearTreasure(p,WorldLocation::Desert)||distance(p,DesertArrival)<6||distance(p,DesertOasis)<5.6f||distance(p,DesertBossHome)<6.8f)continue;
   bool clear=true;for(const auto& e:enemies)if(distance(p,e.home)<e.radius()+2.5f)clear=false;
   if(clear){const int types[]={7,7,8,9,9,11};props.push_back({p,types[(h>>8)%6],.8f+(h%6)*.065f});}
  }
@@ -16,6 +16,7 @@ void buildDesert(){
 }
 bool activateField(WorldLocation next){
  if(next!=WorldLocation::Forest&&next!=WorldLocation::Desert)return false;
+ if(location!=next)cancelBoulderAttacks();
  if(next!=fieldLocation){
   auto& saved=fieldLocation==WorldLocation::Forest?forestState:desertState;
   saved.enemies=std::move(enemies);saved.props=std::move(props);saved.forage=std::move(forage);

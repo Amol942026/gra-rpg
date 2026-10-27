@@ -9,7 +9,11 @@ struct Inspection {
 };
 Inspection inspectWorld(WorldHover hit) {
     Inspection info;
-    if(hit.kind==HoverKind::TowerStair&&game.inTower()){
+    if(hit.kind==HoverKind::Fountain&&game.inDesert()&&hit.index>=0&&hit.index<FountainCount){
+        info.source=hit.kind;info.name=fountainName(hit.index);info.nameColor=hit.index==0?Blue:rgb(238,123,123);info.kind="Jednorazowa kapliczka pustyni";
+        info.detail=game.fountainUsed[hit.index]?"Wyczerpane źródło · sucha misa.":hit.index==0?"Odnawia całą manę. Jedno użycie.":"Odnawia całe zdrowie. Jedno użycie.";
+        info.secondary=game.fountainUsed[hit.index]?"Moc źródła została wykorzystana.":"Podejdź i użyj E / LPM / PPM.";
+    }else if(hit.kind==HoverKind::TowerStair&&game.inTower()){
         info.source=hit.kind;info.name=hit.index==1?"Schody w górę":"Schody w dół";info.kind="Przejście między piętrami";
         info.detail=std::string("Cel: ")+TowerFloors[std::clamp(game.towerFloor+hit.index,0,TowerFloorCount-1)].name;
         info.secondary="Podejdź i użyj E / LPM / PPM.";

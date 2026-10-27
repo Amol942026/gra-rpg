@@ -1,0 +1,120 @@
+{
+  "status": "PASS",
+  "implemented": [
+    "faster_throw_and_rise",
+    "live_aim_until_release",
+    "merchant_double_click_buy_sell",
+    "two_persistent_single_use_animated_fountains"
+  ],
+  "logic_checks": 104688,
+  "persistence_checks": 1723,
+  "package": {
+    "status": "PASS",
+    "package_sha256": "f005bd24749f6f7376bd8e1ce42d5574eff1b8bf21c479a339a9517b31979bb1",
+    "exe_sha256": "4e668262b6d3cde63859dde230ecebedcf28b969ccb7b25153f6224616a0da87",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-guardian-package-20261026-150907\\Emberfall",
+    "verified_assets": 110,
+    "renderer_checks": 1163,
+    "independent_checks": 4561,
+    "native_synfig_frames": 114,
+    "compiled_control_samples": 115,
+    "game_frames": 120,
+    "shatter": {
+      "native_frames": 72,
+      "pieces": 6,
+      "control_samples": 438,
+      "game_frames": 60,
+      "duration": 1.2,
+      "runtime_atlas_rgba8_bytes": 221184
+    },
+    "knockback": {
+      "status": "PASS",
+      "onset_frame": 109,
+      "active_frames": 111,
+      "distance": 1.35002,
+      "audio_played": false
+    },
+    "knockdown": {
+      "status": "PASS",
+      "duration": 1.85,
+      "native_synfig_frames": 111,
+      "control_samples": 112,
+      "bones": 17,
+      "pose_views": 72,
+      "equipment_variants": 39,
+      "game_clip_frames": 57,
+      "encounter_frames": 63,
+      "runtime_key_bytes": 53312,
+      "new_textures": 0,
+      "supine_rest_seconds": [
+        0.66,
+        0.8
+      ],
+      "stand_seconds": 1.75
+    },
+    "fountains": {
+      "status": "PASS",
+      "fountains": [
+        {
+          "color": "mana",
+          "native_frames": 48,
+          "game_frames": 48,
+          "atlas_bytes": 3932160,
+          "pool_pixels_full": 1299,
+          "pool_pixels_empty": 0
+        },
+        {
+          "color": "health",
+          "native_frames": 48,
+          "game_frames": 48,
+          "atlas_bytes": 3932160,
+          "pool_pixels_full": 1322,
+          "pool_pixels_empty": 0
+        }
+      ],
+      "total_rgba_bytes": 8028160,
+      "audio_played": false
+    },
+    "startup_frames": 180,
+    "audio_device_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_player": false
+  },
+  "render_timing": {
+    "status": "MEASURED",
+    "audio_opened": false,
+    "presentation_measured": false,
+    "samples": [
+      {
+        "scene": "mana-fountain",
+        "frames": 180,
+        "mean_ms": 8.36441,
+        "p95_ms": 10.2789,
+        "p99_ms": 12.7002,
+        "max_ms": 16.9806,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "health-fountain",
+        "frames": 180,
+        "mean_ms": 8.57778,
+        "p95_ms": 11.3586,
+        "p99_ms": 14.5184,
+        "max_ms": 17.8696,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "guardian",
+        "frames": 180,
+        "mean_ms": 12.6657,
+        "p95_ms": 14.0349,
+        "p99_ms": 14.3233,
+        "max_ms": 14.3825,
+        "render_budget_60hz": true
+      }
+    ]
+  },
+  "presentation_60fps_verified": false,
+  "presentation_limitation": "Hidden/background native OpenGL and DXGI benchmarks blocked in AMD driver presentation. Owned benchmarks interrupted; game audio settings unchanged. Offscreen GPU-complete timing is below 16.67ms p95 in all three tested scenes.",
+  "backup": "art/pipeline/backups/desert-fountains-combat-20261026"
+}

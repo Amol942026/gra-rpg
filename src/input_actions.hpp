@@ -32,6 +32,7 @@ bool clickWorldOrInventory(double now=GetTime()) {
     inventoryClicks.clear();
     if(!worldPointerAllowed(mouse))return false;
     WorldHover hit=pickWorld(mouse);if(hit.kind==HoverKind::Mage)return talkToMage();
+    if(hit.kind==HoverKind::Fountain)return game.useFountain(hit.index);
     if(hit.kind==HoverKind::Chest)return game.openChest(hit.index);
     if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
         if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
@@ -44,7 +45,8 @@ bool rightClickWorldOrInventory(){
     game.cancelBow();
     if(worldPointerAllowed(mouse)){
         WorldHover hit=pickWorld(mouse);
-        if(hit.kind==HoverKind::Chest)return game.openChest(hit.index);
+        if(hit.kind==HoverKind::Fountain)return game.useFountain(hit.index);
+    if(hit.kind==HoverKind::Chest)return game.openChest(hit.index);
         if(hit.kind==HoverKind::Mage)return talkToMage();
         if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
         if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}

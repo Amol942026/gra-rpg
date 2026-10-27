@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "authoring": "Krita native MCP draw",
+  "original_art": true,
+  "external_assets": [],
+  "layers": [
+    {
+      "name": "01 / Uprooted granite silhouette",
+      "uuid": "cdbbdee8-60c4-426f-8422-37888ee04075"
+    },
+    {
+      "name": "02 / Upper left light and weathered planes",
+      "uuid": "a116cf20-1135-4aaf-b2ba-2df6d73b844a"
+    },
+    {
+      "name": "03 / Cracks, moss and mineral flecks",
+      "uuid": "22fde2c6-9bd2-45be-9f1b-fd16465946bb"
+    },
+    {
+      "name": "04 / Soil clods and torn roots",
+      "uuid": "16c66156-aa0c-463d-b081-6f6744f1a4b1"
+    },
+    {
+      "name": "05 / Fine granite fractures and lichen",
+      "uuid": "245a187d-8fdf-4774-971e-55e99e11c40e"
+    },
+    {
+      "name": "06 / Faint guardian rune",
+      "uuid": "37f5bcd6-5468-430f-a4a0-3bcf0d1284c4"
+    }
+  ],
+  "kra_sha256": "ad426614f4dfde00b2ff4e93824242a7eb5a783ba2be6f3b95b821faa9b53c77",
+  "png_sha256": "688d762a398ed86e81fac5f1d78187e29ed81410cc9e729b46503980454cf7f4"
+}

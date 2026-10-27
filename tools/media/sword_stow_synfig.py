@@ -7,7 +7,7 @@ from pathlib import Path
 import argparse, hashlib, json, math, shutil, subprocess, xml.etree.ElementTree as ET
 from hero_synfig import value,group,image,rotate,curve
 
-MOUTH=(-22,8,37)
+MOUTH=(-16,13,36)
 AXIS=(-.08,-.44,-math.sqrt(1-.08**2-.44**2))
 INSERT=[0,0,0,0,.25,.7,1,1,1]
 GRIPS=[tuple(m-a*(37-31.8*v) for m,a in zip(MOUTH,AXIS)) for v in INSERT]

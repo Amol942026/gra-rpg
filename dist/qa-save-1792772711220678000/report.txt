@@ -1,0 +1,2 @@
+PASS: 1382 persistence checks
+Audio device opened: no

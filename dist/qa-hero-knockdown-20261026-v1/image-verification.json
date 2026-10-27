@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "checks": 3653,
+  "native_synfig_frames": 168,
+  "compiled_control_samples": 169,
+  "game_frames": 120,
+  "pose_views": 48,
+  "elbow_flexion_min_deg": 15.81630484821699,
+  "elbow_flexion_max_deg": 116.48503508311033,
+  "minimum_changed_pixels": 6058,
+  "shatter": {
+    "native_frames": 72,
+    "pieces": 6,
+    "control_samples": 438,
+    "game_frames": 60,
+    "duration": 1.2,
+    "runtime_atlas_rgba8_bytes": 221184
+  },
+  "knockback": {
+    "status": "PASS",
+    "onset_frame": 162,
+    "active_frames": 72,
+    "distance": 1.34999,
+    "audio_played": false
+  },
+  "knockdown": {
+    "status": "PASS",
+    "duration": 1.2,
+    "native_synfig_frames": 72,
+    "control_samples": 73,
+    "bones": 17,
+    "pose_views": 72,
+    "equipment_variants": 39,
+    "game_clip_frames": 37,
+    "runtime_key_bytes": 34748,
+    "new_textures": 0
+  },
+  "audio_played": false
+}

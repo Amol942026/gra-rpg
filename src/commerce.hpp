@@ -4,6 +4,7 @@
 #include <algorithm>
 namespace ember {
 inline constexpr std::int64_t GoldLimit=999999999;
+inline constexpr int MerchantArrowCapacity=20;
 inline bool merchantSellable(Item value){
  return !value.empty()&&value.kind>Kind::None&&value.kind<Kind::Count&&value.kind!=Kind::DawnShard;
 }
@@ -35,7 +36,7 @@ inline constexpr std::array<MerchantOffer,12> MerchantOffers{{
 }};
 inline Item merchantOfferItem(int index){return index>=0&&index<int(MerchantOffers.size())?item(MerchantOffers[index].kind,MerchantOffers[index].tier):Item{};}
 inline int itemBuyPrice(Item value){return itemSellValue(value)*2;}
-enum class TradeResult {Success,Unavailable,InvalidItem,InvalidQuantity,NotEnoughGold,NoSpace,GoldLimit,Protected};
+enum class TradeResult {Success,Unavailable,InvalidItem,InvalidQuantity,NotEnoughGold,NoSpace,GoldLimit,Protected,OutOfStock};
 inline const char* tradeMessage(TradeResult result){switch(result){
  case TradeResult::Success:return "Transakcja zakończona.";
  case TradeResult::Unavailable:return "Podejdź do Mirona na 3. piętrze wieży.";
@@ -44,6 +45,7 @@ inline const char* tradeMessage(TradeResult result){switch(result){
  case TradeResult::NotEnoughGold:return "Nie masz wystarczająco dużo złota.";
  case TradeResult::NoSpace:return "Zwolnij miejsce w plecaku lub pasującym stosie.";
  case TradeResult::GoldLimit:return "Nie możesz pomieścić więcej złota.";
+ case TradeResult::OutOfStock:return "Brak strzał w zapasie. Dostawa po pokonaniu Żywej Wydmy.";
  case TradeResult::Protected:return "Fragment Serca Świtu nie jest na sprzedaż.";
  }return "";
 }

@@ -1,0 +1,37 @@
+id	name	shape	rarity	chance	power	beast
+63	Ostrze zielonej kropli	1	0	60	7	0
+64	Kaptur mglistego runa	3	1	15	5	0
+65	Pierścień bursztynowego żelu	7	2	4	6	0
+66	Kaptur szarego wilka	3	0	60	3	1
+67	Buty srebrnego tropu	6	1	15	5	1
+68	Amulet wilczego serca	26	3	1	10	1
+69	Tarcza kościanych odłamków	5	0	60	4	2
+70	Pancerz strażnika grobów	4	1	15	7	2
+71	Łuk milczącej krypty	28	2	4	18	2
+72	Nagolenniki omszałych ruin	6	1	15	8	3
+73	Tarcza pieczęci strażnika	5	2	4	10	3
+74	Topór przebudzonej skały	2	3	1	24	3
+75	Buty dziczej skóry	6	0	60	3	4
+76	Tarcza leśnego odyńca	5	1	15	6	4
+77	Hełm odyńca	3	2	4	9	4
+78	Sztylet leśnego pająka	24	0	60	8	5
+79	Szata tkacza pajęczyn	4	1	15	8	5
+80	Płaszcz nocnego jedwabiu	25	3	1	14	5
+81	Szabla leśnego rabusia	1	0	60	9	6
+82	Hełm z leśnej zasadzki	3	1	15	6	6
+83	Sygnet króla bezdroży	7	2	4	7	6
+84	Hełm starej kory	3	0	60	4	7
+85	Buty splecionych korzeni	6	1	15	6	7
+86	Łuk przebudzonej kniei	28	3	1	23	7
+87	Topór pustynnego żądła	2	0	60	11	8
+88	Tarcza bursztynowego żądła	5	1	15	7	8
+89	Pierścień pustynnego bursztynu	7	2	4	8	8
+90	Buty miedzianego szlaku	6	0	60	4	9
+91	Topór pancernej skorupy	2	1	15	16	9
+92	Sygnet słonecznego skarabeusza	7	3	1	10	9
+93	Płaszcz piaskowych łusek	25	0	60	6	10
+94	Tarcza złocistej kobry	5	1	15	8	10
+95	Amulet władcy węży	26	3	1	11	10
+96	Buty wędrującej wydmy	6	1	15	10	11
+97	Hełm serca pustyni	3	2	4	12	11
+98	Łuk ostatniej jutrzenki	28	3	1	27	11

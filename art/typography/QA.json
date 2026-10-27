@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "date": "2026-10-26",
+  "renderer": {
+    "status": "PASS",
+    "checks": 241,
+    "failures": 0,
+    "scenes": 57,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 4074,
+    "failures": [],
+    "text_draws": 3921,
+    "native_scene_captures": 57,
+    "audio_opened": false
+  },
+  "existing_ui_checks": 552,
+  "timing": {
+    "status": "MEASURED",
+    "audio_opened": false,
+    "presentation_measured": false,
+    "samples": [
+      {
+        "scene": "mana-fountain",
+        "frames": 180,
+        "mean_ms": 7.90307,
+        "p95_ms": 9.2461,
+        "p99_ms": 10.781,
+        "max_ms": 11.1937,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "health-fountain",
+        "frames": 180,
+        "mean_ms": 8.35623,
+        "p95_ms": 9.2879,
+        "p99_ms": 12.8554,
+        "max_ms": 13.0645,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "guardian",
+        "frames": 180,
+        "mean_ms": 12.8572,
+        "p95_ms": 14.0391,
+        "p99_ms": 15.5966,
+        "max_ms": 15.9414,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "fallen-dune",
+        "frames": 180,
+        "mean_ms": 7.16948,
+        "p95_ms": 7.9741,
+        "p99_ms": 10.8609,
+        "max_ms": 12.3063,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "stats-menu",
+        "frames": 180,
+        "mean_ms": 3.90788,
+        "p95_ms": 4.0753,
+        "p99_ms": 4.6958,
+        "max_ms": 5.8491,
+        "render_budget_60hz": true
+      }
+    ]
+  },
+  "package": {
+    "status": "PASS",
+    "package_sha256": "b5e1c177bf9bfb46880d2b2875588bf4fbe9776ad8a4ff9832b1c8afc5657e4c",
+    "exe_sha256": "1092013002da0a895d69136b4ca87a27ad991f0dee5e2f0a17ebd3db1d4f5915",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-typography-package-20261026-164110\\Emberfall",
+    "verified_assets": 112,
+    "tests": {
+      "status": "PASS",
+      "checks": 4074,
+      "failures": [],
+      "text_draws": 3921,
+      "native_scene_captures": 57,
+      "audio_opened": false
+    },
+    "startup_frames": 180,
+    "audio_device_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_player": false
+  },
+  "source_sha256": {
+    "src/main.cpp": "017de179b33ae20c558e533dd128c67ca8aa6f87c41569c28e7baa34ea73986f",
+    "src/typography.hpp": "7ef71084389a6741e4bc6f7de6a9cfc99b2fbb8bb7007d947057cabad6b12b2b",
+    "assets/Cinzel-Bold.ttf": "92fe41dea09a06d43bb68b73f62a0f379d019eff2fe855d2ec33909dc76dcb16",
+    "assets/Lato-Bold.ttf": "8a0aace75d33794eece4b28187bfc1df0bbd2888b5d8a56e01788c8d65d16be1",
+    "tests/typography_qa.cpp": "5c03785c535e0d80133ca665c479562a56a77bd22461adec5702fe8257dcac4a",
+    "tests/typography_qa.ps1": "0d74e863670d2d61d1d8fb9f72f10705e7e361923c4d6e888efd137ab1479a3a",
+    "tests/typography_package_qa.ps1": "07f9822edb58cee825cbcbfbc487b39f56a7840f6b991bc680ad7d33b8927804",
+    "tools/media/prepare_typography.py": "fee5cca2c84a8d4699fe8c79b3bc8119aff701cfca957f6221de99eb94e4603e",
+    "tools/media/verify_typography.py": "850a7bf72836d5164fe6714a50e2263953e9d8a499e316b5da77acb8ef1d6303"
+  }
+}

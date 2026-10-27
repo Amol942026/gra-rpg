@@ -1,0 +1,49 @@
+3 ms: Emberfall v0.47: startup
+4 ms: Build edition: developer
+4 ms: Creating graphics window
+4 ms: Initializing raylib 5.5
+4 ms: Platform backend: DESKTOP (GLFW)
+4 ms: Supported raylib modules:
+4 ms:     > rcore:..... loaded (mandatory)
+4 ms:     > rlgl:...... loaded (mandatory)
+4 ms:     > rshapes:... loaded (optional)
+4 ms:     > rtextures:. loaded (optional)
+4 ms:     > rtext:..... loaded (optional)
+4 ms:     > rmodels:... loaded (optional)
+4 ms:     > raudio:.... loaded (optional)
+159 ms: DISPLAY: Trying to enable VSYNC
+160 ms: DISPLAY: Device initialized successfully
+160 ms:     > Display size: 1920 x 1080
+160 ms:     > Screen size:  1440 x 900
+160 ms:     > Render size:  1800 x 1055
+160 ms:     > Viewport offsets: 0, 0
+168 ms: GLAD: OpenGL extensions loaded successfully
+168 ms: GL: Supported extensions count: 286
+168 ms: GL: OpenGL device information:
+168 ms:     > Vendor:   ATI Technologies Inc.
+168 ms:     > Renderer: AMD Radeon (TM) Graphics
+168 ms:     > Version:  3.3.0 Core Profile Context 23.19.10.04.240321
+168 ms:     > GLSL:     4.60
+168 ms: GL: VAO extension detected, VAO functions loaded successfully
+168 ms: GL: NPOT textures extension detected, full NPOT textures supported
+168 ms: GL: DXT compressed textures supported
+168 ms: GL: ETC2/EAC compressed textures supported
+168 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+168 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+168 ms: TEXTURE: [ID 1] Default texture loaded successfully
+225 ms: SHADER: [ID 1] Vertex shader compiled successfully
+227 ms: SHADER: [ID 2] Fragment shader compiled successfully
+274 ms: SHADER: [ID 3] Program shader loaded successfully
+274 ms: SHADER: [ID 3] Default shader loaded successfully
+275 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+275 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+276 ms: RLGL: Default OpenGL state initialized successfully
+276 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+276 ms: FONT: Default font loaded successfully (224 glyphs)
+276 ms: SYSTEM: Working Directory: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\dist\qa-guardian-prologue-20261023
+276 ms: Graphics window ready
+276 ms: Generating world graphics
+2875 ms: World graphics ready
+2875 ms: Audio skipped (--no-audio)
+4872 ms: Prologue complete: hero teleported to the forest
+5356 ms: Shutting down

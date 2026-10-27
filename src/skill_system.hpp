@@ -14,7 +14,7 @@ float strongCutDamage()const{return damage()*strongCutMultiplier();}
 int piercingTargets()const{return 2+skillRank(Skill::PiercingArrow);}
 bool skillWeaponMatches(Skill skill)const{if(skill==Skill::Healing)return true;return !equipment[0].empty()&&archetype(equipment[0].kind)==(skill==Skill::StrongCut?Kind::Sword:Kind::Bow);}
 bool skillAllowed(Skill skill)const{
- if(dead()||allocationRequired||storyBlocked()||rolling()||skillRank(skill)<=0||!skillWeaponMatches(skill))return false;
+ if(dead()||knockedBack()||allocationRequired||storyBlocked()||rolling()||skillRank(skill)<=0||!skillWeaponMatches(skill))return false;
  if(skill==Skill::Healing)return healingCd<=0&&mana>=HealingCost&&hp<maxHp();
  if(inTower()||sandTrapped())return false;
  if(skill==Skill::StrongCut)return strongCutCd<=0&&attackCd<=0&&mana>=StrongCutCost;

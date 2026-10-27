@@ -13,7 +13,7 @@ void equipmentAppearanceTests(){
   check(look.paint.trim!=upgraded.paint.trim,"upgraded equipment also has a visible trim change");
   check(g.transfer({Place::Equip,slot},{Place::Bag,11})&&!heroAppearance(g.equipment)[slot].present(),"removing gear immediately clears its visual slot");
  }
- check(kinds==39,"all thirty-nine current gear variants are covered");for(bool slot:slots)check(slot,"each of the six equipment slots drives appearance");
+ check(kinds==EquipmentKindCount,"all current gear variants are covered");for(bool slot:slots)check(slot,"each of the six equipment slots drives appearance");
  std::array<Item,6> wrong{};wrong[0]=item(Kind::Armor);wrong[1]=item(Kind::Health);wrong[3]=item(Kind::Boots);
  auto rejected=heroAppearance(wrong);check(!rejected[0].present()&&!rejected[1].present()&&!rejected[3].present(),"invalid slot contents cannot create phantom visual equipment");
  check(!gearAppearance({Kind::Sword,0,0}).present()&&!gearAppearance(item(Kind::None)).present(),"empty slots never display a default sword");

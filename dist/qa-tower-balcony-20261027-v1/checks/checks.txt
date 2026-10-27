@@ -1,0 +1,1338 @@
+PASS actual player renderer has no audio device
+PASS Krita panorama preloads at its native viewport dimensions
+PASS both depth layers preload before game rendering
+PASS all original stair arrival positions remain safe
+PASS only the observatory has a real exterior terrace
+PASS all original stair arrival positions remain safe
+PASS only the observatory has a real exterior terrace
+PASS all original stair arrival positions remain safe
+PASS only the observatory has a real exterior terrace
+PASS all original stair arrival positions remain safe
+PASS only the observatory has a real exterior terrace
+PASS all original stair arrival positions remain safe
+PASS only the observatory has a real exterior terrace
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS walk and sprint cannot cross the far balustrade
+PASS normal movement reaches the outer viewpoint from inside the room
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS each side of the balcony can be approached
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS both side rails stop real running movement
+PASS each side of the balcony can be approached
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS every exterior walkable sample stays inside the painted railing polygon
+PASS save format 7 restores a valid balcony position without migration
+PASS items can be dropped onto the real terrace
+PASS terrace loot is recovered through normal inventory rules
+PASS the hero can return from the balcony to the observatory without a teleport
+PASS normal downstairs remains usable after a terrace visit
+FAIL balcony rendering uses already prepared font atlases
+FAIL real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+FAIL real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+FAIL real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+FAIL real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+FAIL balcony rendering uses already prepared font atlases
+PASS real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+PASS real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+PASS real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+PASS real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+FAIL balcony rendering uses already prepared font atlases
+FAIL real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+FAIL real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+FAIL real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS balcony rendering uses already prepared font atlases
+FAIL real camera keeps the hero centered during exterior movement
+PASS all captured room, threshold, lookout and front-rail positions are valid
+PASS foreground stone rail and ivy are actually composited over the world
+PASS existing five-floor interactions, stairs, crafting, telescope and loot isolation remain functional
+PASS all game diagnostics stayed silent
+Checks: 1337; failures: 11

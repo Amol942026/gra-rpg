@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "date": "2026-10-27",
+  "logic_checks": 108558,
+  "persistence_checks": 1891,
+  "renderer": {
+    "status": "PASS",
+    "checks": 1553,
+    "failures": 0,
+    "contact_samples": 287,
+    "max_slip_px": 0.000213623,
+    "pose_frames": 192,
+    "movement_frames": 360,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 856,
+    "failures": [],
+    "verified_frames": 552,
+    "contact_samples": 287,
+    "max_slip_px": 0.0010000000000331966,
+    "source_sha256": "0d132dc7eee725f0d414da2eb942ad1db8edc8a359fce147a51c38e62ca3f52f",
+    "audio_opened": false
+  },
+  "package": {
+    "status": "PASS",
+    "package_sha256": "9546d291614161d52dc737225fdf9e3409a2204f4dbe4005313d005f2dd58421",
+    "exe_sha256": "d1eeeb042e77eb36ef84c0080702d8f8e43cae4dd0a6ee5a77982e547fc07da9",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-guardian-gait-package-20261027-123309\\Emberfall",
+    "verified_assets": 112,
+    "renderer": {
+      "status": "PASS",
+      "checks": 1553,
+      "failures": 0,
+      "contact_samples": 287,
+      "max_slip_px": 0.000213623,
+      "pose_frames": 192,
+      "movement_frames": 360,
+      "audio_opened": false
+    },
+    "independent": {
+      "status": "PASS",
+      "checks": 856,
+      "failures": [],
+      "verified_frames": 552,
+      "contact_samples": 287,
+      "max_slip_px": 0.0010000000000331966,
+      "source_sha256": "0d132dc7eee725f0d414da2eb942ad1db8edc8a359fce147a51c38e62ca3f52f",
+      "audio_opened": false
+    },
+    "startup_frames": 180,
+    "audio_device_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_player": false
+  },
+  "source_sha256": {
+    "src/guardian_gait.hpp": "1cfcf46389ee90c3a14d95212350009fad8c2751affe298eae69e33ca331e7b5",
+    "src/game.hpp": "a74733f2d1c9645038733adb1f417d0d06baef3405866014ede9bdeda5e7fccd",
+    "src/forest_creatures.hpp": "f3c49d0b3a011ab5cfc1be29a2e557fc79f312ba28d41af7958b29a5d5fb70ed",
+    "tests/guardian_gait_tests.hpp": "e909907f18dc489a24c59e1c4742b061861e645c70f4ebfd9b1cda265d1542a7",
+    "tests/guardian_gait_qa.cpp": "54b612b330f4dc533e411c257681e9b2d026afccd522da825bbb62d52f2a3340",
+    "tests/guardian_gait_qa.ps1": "4015d0486ece9a95b8e2e9f1ce708cd9edcba8f586faccf7132252c1a42112ad",
+    "tests/guardian_gait_package_qa.ps1": "06a69bce01f6e995a2ec882e47bbcfca40edf5c5d68fd078b32f3c0d32ae33cf",
+    "tools/media/verify_guardian_gait.py": "57bda8a322425efb7502616fc70df98bc7711724e87d4b5b6c46c9b8932292ec"
+  }
+}

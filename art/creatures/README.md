@@ -6,6 +6,14 @@ drzewiec korę i liście. Poprawiono także materiały ciał pozostających po w
 Kolory, rozmiary kolizji, statystyki, łupy i mechaniki walki pozostają zgodne
 z dotychczasową grą.
 
+Korekta Kamiennego Strażnika z 27.10.2026: `src/guardian_gait.hpp`
+wiąże fazę kroków z faktyczną drogą po rozstrzygnięciu kolizji. Uwzględnia
+skalę 1,38, projekcję podłoża i 64% podparcia z istniejącego Synfig
+`motion/humanoid.sif`. Wykrok 18 zamiast 7, kolana o stałej długości
+odcinków podczas chodu; pozycja spoczynkowa i rzut zachowują swoje ugięcia.
+Prędkość poruszania się i parametry walki nie zmieniają się. Testy i wynik:
+[chód Strażnika](../gameplay/guardian/gait/QA.md).
+
 Korekta entów z22.10.2026: `src/treant_gait.hpp` synchronizuje krzywą
 kontaktu z faktycznie pokonaną drogą w projekcji izometrycznej. Wykrok
 zwiększono z7 do22 jednostek lokalnych, uniesienie stopy do9; kolana mają

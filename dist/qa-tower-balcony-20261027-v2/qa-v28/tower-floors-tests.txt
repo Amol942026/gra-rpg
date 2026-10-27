@@ -1,0 +1,118 @@
+PASS: five-floor tests open no audio device
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: themed floor has visible architecture and furnishings instead of a black scene
+PASS: static themed floor is cached on the GPU before play
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: themed floor has visible architecture and furnishings instead of a black scene
+PASS: static themed floor is cached on the GPU before play
+PASS: visible downstairs can be selected by its displayed shape
+PASS: stairs expose destination in the inspection HUD
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: themed floor has visible architecture and furnishings instead of a black scene
+PASS: static themed floor is cached on the GPU before play
+PASS: visible downstairs can be selected by its displayed shape
+PASS: stairs expose destination in the inspection HUD
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: themed floor has visible architecture and furnishings instead of a black scene
+PASS: static themed floor is cached on the GPU before play
+PASS: visible downstairs can be selected by its displayed shape
+PASS: stairs expose destination in the inspection HUD
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: Eldrin is drawn only on the arrival floor
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: themed floor has visible architecture and furnishings instead of a black scene
+PASS: static themed floor is cached on the GPU before play
+PASS: visible downstairs can be selected by its displayed shape
+PASS: stairs expose destination in the inspection HUD
+PASS: each themed upper floor differs materially from the arrival room pixels
+PASS: each themed upper floor differs materially from the arrival room pixels
+PASS: each themed upper floor differs materially from the arrival room pixels
+PASS: each themed upper floor differs materially from the arrival room pixels
+PASS: upstairs can be reached through the shared pointer picker
+PASS: right-click on actual stairs changes to exactly the next floor
+PASS: safe arrival cannot immediately chain another upward climb
+PASS: upstairs can be reached through the shared pointer picker
+PASS: right-click on actual stairs changes to exactly the next floor
+PASS: safe arrival cannot immediately chain another upward climb
+PASS: upstairs can be reached through the shared pointer picker
+PASS: right-click on actual stairs changes to exactly the next floor
+PASS: safe arrival cannot immediately chain another upward climb
+PASS: upstairs can be reached through the shared pointer picker
+PASS: right-click on actual stairs changes to exactly the next floor
+PASS: safe arrival cannot immediately chain another upward climb
+PASS: actual downstairs is selectable after return
+PASS: left-click returns to the previous floor without starting combat
+PASS: actual downstairs is selectable after return
+PASS: left-click returns to the previous floor without starting combat
+PASS: actual downstairs is selectable after return
+PASS: left-click returns to the previous floor without starting combat
+PASS: actual downstairs is selectable after return
+PASS: left-click returns to the previous floor without starting combat
+PASS: E interaction shares the nearest reachable stairs handler
+PASS: library lectern is selectable in the actual world
+PASS: opening the book freezes and blocks game input through the real handler
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: library next-page button changes the chapter
+PASS: close button restores control from a themed room menu
+PASS: right-click on cauldron opens the two actual alchemy recipes
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: recipe button consumes ingredients and delivers exactly one health potion
+PASS: second recipe button produces a mana potion
+PASS: each displayed rune is activated through the world pointer
+PASS: each displayed rune is activated through the world pointer
+PASS: each displayed rune is activated through the world pointer
+PASS: all three activated rune stones light the seals floor
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: luneta opens the star chart through its actual visible object
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: telescope can select a different constellation
+PASS: source of renewal is usable through the same E interaction
+PASS: nearby HUD excludes loot dropped on another floor
+PASS: floor-local loot cannot be picked through another floor
+PASS: floor reaches the real display buffer at current window dimensions
+PASS: window resize preserves current floor and safe position
+Checks: 117; failures: 0

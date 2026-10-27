@@ -1,0 +1,70 @@
+PASS: diagnostic opens no audio device
+PASS: real advancement opens mandatory attributes and awards a skill point
+PASS: attributes confirmation opens skills while retaining pause
+PASS: healing card selects draft without learning before confirmation
+PASS: all three skill cards fit above confirmation
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: all three skill cards fit above confirmation
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: all three skill cards fit above confirmation
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: skill controls do not overlap ordinary action controls
+PASS: confirm learns healing through actual allocation UI and resumes game
+PASS: HUD healing restores thirty HP for twenty mana with sword and bow
+PASS: HUD healing restores thirty HP for twenty mana with sword and bow
+PASS: HUD refuses full-health healing without mana loss
+PASS: learned healing sheet cannot spend unearned points
+PASS: clicking already learned healing preserves a pending choice of another skill
+PASS: sword critical marks damage above both large guardian and small slime
+PASS: critical rendering reuses font atlases without first-hit GPU upload
+PASS: critical rendering reuses font atlases without first-hit GPU upload
+PASS: critical rendering reuses font atlases without first-hit GPU upload
+PASS: normal damage has no critical label
+PASS: strong-cut HUD route produces enhanced animation and critical feedback
+PASS: real bow mouse release retains critical and piercing metadata and twenty-mana cost
+PASS: single critical piercing arrow labels all three actual impacts
+PASS: C spell handler keeps critical through cast
+PASS: fireball impact shows critical feedback
+PASS: healing works through gameplay handler in safe tower
+Checks: 69; failures: 0

@@ -37,6 +37,7 @@ Rectangle developerButton();void drawDeveloperUi();
 Vector2 mouse{};Slot dragging{};bool paused=false,help=false,welcome=true;int nearbyPage=0,corpsePage=0,corpsePageOwner=-1;float scale=1;Rectangle viewport{};
 InventoryClicks inventoryClicks;
 bool weaponWheelOpen=false;
+void invalidatePausedWorld();
 bool statsOpen=false,spellBookOpen=false;Attributes statDraft{};int draftForLevel=-1;
  bool skillsOpen=false;SkillRanks skillDraft{};int skillDraftLevel=-1;
  void openSkills();bool clickSkills();bool confirmSkills();void drawSkillsMenu();
@@ -49,7 +50,7 @@ void ellipseOutline(float x,float y,float rx,float ry,Color c){rlPushMatrix();rl
 void poly(std::initializer_list<Vector2> points,Color c){const Vector2* v=points.begin(); // raylib triangles are counterclockwise in screen space
  for(size_t i=1;i+1<points.size();i++){Vector2 a=v[0],b=v[i],d=v[i+1];float cross=(b.x-a.x)*(d.y-a.y)-(b.y-a.y)*(d.x-a.x);if(cross>0)std::swap(b,d);DrawTriangle(a,b,d,c);}}
 void diamond(float x,float y,float rx,float ry,Color c){poly({{x,y-ry},{x+rx,y},{x,y+ry},{x-rx,y}},c);}
-float fontSize(float size,bool title){return title?size:std::max(14.f,size);}
+float fontSize(float size,bool title){return title?size:std::max(15.f,size);}
 void txt(std::string s,float x,float y,float size,Color c=Text,bool title=false){typography.draw(s,x,y,fontSize(size,title),c,title);}
 float textWidth(std::string s,float size,bool title=false){return typography.width(s,fontSize(size,title),title);}
 void clip(float x,float y,float w,float h){BeginScissorMode(int(std::round(x*renderScale)),int(std::round(y*renderScale)),int(std::round(w*renderScale)),int(std::round(h*renderScale)));}
@@ -93,7 +94,7 @@ Rectangle actionRect(int i){return{392.f+i*72,799,65,63};}
 #include "display_ui.hpp"
 Rectangle weaponWheelButton(){return {28,112,158,34};}
 int weaponWheelHit(Vector2 point);
-enum class HoverKind { None, Enemy, Prop, Ground, Corpse, Forage, Mage, TowerObject, TowerStair, Chest };
+enum class HoverKind { None, Enemy, Prop, Ground, Corpse, Forage, Mage, TowerObject, TowerStair, Chest, Fountain };
 struct WorldHover { bool tileValid=false; V tile{}; HoverKind kind=HoverKind::None; int index=-1; };
 struct DrawObject { float depth; int type,index; };
 WorldHover hovered{};
@@ -102,7 +103,7 @@ bool worldPointerAllowed(Vector2 point);
 bool talkToMage();
 bool useTowerTarget(WorldHover hit);bool nearestTowerInteraction();bool towerPanelInput();void drawTowerPanel();
 bool towerPanelOpen=false;int towerPanelObject=-1,towerPage=0;
-void openMerchantSelection();bool clickMerchantPanel();void drawMerchantPanel();
+void openMerchantSelection();bool clickMerchantPanel(double now=GetTime());void drawMerchantPanel();
 Slot hoverSlot(){
  if(weaponWheelOpen){int sector=weaponWheelHit(mouse);if(sector>=0)return game.weaponSource(sector);}
  for(int i=0;i<BagSize;i++)if(inside(bagRect(i)))return{Place::Bag,i};for(int i=0;i<EquipSize;i++)if(inside(equipRect(i)))return{Place::Equip,i};
@@ -215,16 +216,18 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 #include "scenery_art.hpp"
 #include "desert_art.hpp"
 #include "actor_art.hpp"
+#include "guardian_art.hpp"
 #include "sand_prison_art.hpp"
 #include "intro_art.hpp"
 #include "menu_scene.hpp"
 #include "treasure_art.hpp"
+#include "fountain_art.hpp"
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
 void makeArt(){
  hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
- forest_bush_art::load();
- treasure_art::make();
+ forest_bush_art::load();forest_tree_art::load();guardian_art::load();
+ treasure_art::make();fountain_art::load();
  terrain=LoadRenderTexture(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
  for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
   if(!land)continue; // The animated water is drawn underneath the land.
@@ -251,8 +254,8 @@ void makeArt(){
   ImageDrawPixel(&mini,int(90+(x-y)*mx),int(6+(x+y-2)*my),paths?rgb(126,132,100):rgb(61,87,69));
  }
  minimapTerrain=LoadTextureFromImage(mini);UnloadImage(mini);SetTextureFilter(minimapTerrain,TEXTURE_FILTER_POINT);
- for(int i=0;i<PropTypeCount;i++){int density=(i>=ForestPropTypeCount||i==2)?2:1;propArt[i]=LoadRenderTexture(180*density,230*density);BeginTextureMode(propArt[i]);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,float(density)});if(i==0)tree(90,208,1);if(i==1)rock(90,208,1);if(i==2)bush(90,208,1);if(i==3)column(90,208,1);if(i==4)deciduousTree(90,208,1,true);if(i==5)deciduousTree(90,208,1,false);if(i==6)mushrooms(90,208,1);if(i>=ForestPropTypeCount)desert_art::prop(i,90,208);EndMode2D();EndTextureMode();}
- forest_bush_art::unload();
+ for(int i=0;i<PropTypeCount;i++){int density=(i>=ForestPropTypeCount||i==2||forest_tree_art::slot(i)>=0)?2:1;propArt[i]=LoadRenderTexture(180*density,230*density);BeginTextureMode(propArt[i]);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,float(density)});if(i==0)tree(90,208,1);if(i==1)rock(90,208,1);if(i==2)bush(90,208,1);if(i==3)column(90,208,1);if(i==4)deciduousTree(90,208,1,true);if(i==5)deciduousTree(90,208,1,false);if(i==6)mushrooms(90,208,1);if(i>=ForestPropTypeCount)desert_art::prop(i,90,208);EndMode2D();EndTextureMode();}
+ forest_bush_art::unload();forest_tree_art::unload();
  for(auto& art:propArt)SetTextureFilter(art.texture,TEXTURE_FILTER_BILINEAR);
  fs::create_directories("assets/generated");
  if(!FileExists("assets/generated/terrain-v21.png")){Image im=LoadImageFromTexture(terrain.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/terrain-v21.png");UnloadImage(im);}
@@ -283,6 +286,7 @@ void drawWorld(){
  world_shadows::draw();
  Vector2 pp=screen(game.player);DrawEllipseLines(int(pp.x),int(pp.y+2),25,12,Fade(Gold,.7f));
  drawHoveredTile();
+ guardian_art::ground();
  for(const auto& plant:game.forage){
   if(plant.value.empty())continue;Vector2 p=screen(plant.pos);if(p.x<-40||p.x>WorldW+40||p.y<0||p.y>H)continue;
   if(hovered.kind==HoverKind::Forage&&hovered.index==plant.id){ellipseOutline(p.x,p.y,18,9,Gold);diamond(p.x,p.y,18,9,Fade(Gold,.17f));}
@@ -296,6 +300,9 @@ void drawWorld(){
   else if(obj.type==3)drawFireball(game.fireballs[obj.index]);
   else if(obj.type==5)drawArrow(game.arrows[obj.index]);
   else if(obj.type==9)drawTreasureChest(game.chests[obj.index]);
+  else if(obj.type==12)fountain_art::draw(obj.index);
+  else if(obj.type==10)guardian_art::projectile(game.boulders[obj.index]);
+  else if(obj.type==11)guardian_art::fragment(game.boulderImpacts[obj.index/guardian_break::Pieces],obj.index%guardian_break::Pieces);
   else if(!game.dead()||int(game.time*5)%2==0){sand_prison::drawMound(pp,false);hero(pp.x,pp.y,1);sand_prison::drawMound(pp,true);}
  }
  if(game.inDesert())desert_art::drawCachedFoothills();
@@ -328,8 +335,15 @@ void slotDraw(Slot s,Rectangle r,std::string label=""){
 void minimap(){Rectangle r{842,133,180,155};panel(r,Fade(Panel,.92f));txt(game.inDesert()?"MORZE PIASKÓW":"WIELKA KNIEJA",856,144,11,Gold);
  if(game.inTower()){
   rect(r.x+1,r.y+1,r.width-2,r.height-2,rgb(24,23,40));txt("WIEŻA ELDRINA",856,144,11,Gold);
-  ellipse(932,220,68,42,rgb(67,58,85));ellipseOutline(932,220,68,42,Fade(Gold,.5f));
-  auto point=[](V p){return Vector2{932+(p.x-p.y)*6.5f,220+(p.x+p.y-24)*3.25f};};
+  bool balcony=game.towerFloor==TowerBalconyFloor;float cx=balcony?915.f:932.f,sx=balcony?5.5f:6.5f,rx=balcony?57.f:68.f,ry=balcony?35.f:42.f;
+  ellipse(cx,220,rx,ry,rgb(67,58,85));ellipseOutline(cx,220,rx,ry,Fade(Gold,.5f));
+  auto point=[=](V p){return Vector2{cx+(p.x-p.y)*sx,220+(p.x+p.y-24)*sx*.5f};};
+  if(balcony){
+   std::array<V,6> outline={{{6.1f,-2.4f},{10.5f,-2.4f},{11.4f,-1.5f},{11.4f,1.5f},{10.5f,2.4f},{6.1f,2.4f}}};
+   Vector2 a=point(towerBalconyPoint(outline[0].x,outline[0].y));
+   for(int i=1;i<5;i++){Vector2 b=point(towerBalconyPoint(outline[i].x,outline[i].y)),d=point(towerBalconyPoint(outline[i+1].x,outline[i+1].y));poly({a,b,d},rgb(72,90,104));}
+   for(int i=0;i<5;i++){Vector2 b=point(towerBalconyPoint(outline[i].x,outline[i].y)),d=point(towerBalconyPoint(outline[i+1].x,outline[i+1].y));line(b.x,b.y,d.x,d.y,Fade(Gold,.8f));}
+  }
   for(const auto& object:towerFurnishings(game.towerFloor)){Vector2 p=point(object.pos);DrawCircleV(p,2,Muted);}
   if(game.towerFloor==0)DrawCircleV(point(MagePosition),3,rgb(198,150,250));
   if(game.stairPresent(1))DrawCircleV(point(TowerStairUp),3,Gold);if(game.stairPresent(-1))DrawCircleV(point(TowerStairDown),3,Blue);DrawCircleV(point(game.player),3,Text);txt(TextFormat("PIĘTRO %d / 5",game.towerFloor+1),887,268,14,Gold);return;
@@ -373,7 +387,7 @@ void drawUI(){
  txt("ŻYCIE",1080,151,10,Muted);txt(TextFormat("%d / %d",int(game.hp),game.maxHp()),1328,148,12,Text);bar(1139,153,173,9,game.hp,float(game.maxHp()),rgb(153,73,73));
  txt("MANA",1080,175,10,Muted);txt(TextFormat("%d / %d",int(game.mana),game.maxMana()),1328,172,12,Text);bar(1139,177,173,9,game.mana,float(game.maxMana()),rgb(66,127,161));
  const char* names[]={"BROŃ","HEŁM","TARCZA","ZBROJA","BUTY","PIERŚCIEŃ"};for(int i=0;i<EquipSize;i++)slotDraw({Place::Equip,i},equipRect(i),names[i]);
- txt(TextFormat("ATAK  %d",game.damage()),1080,314,11,Gold);txt(TextFormat("PANCERZ  %d",game.defense()),1192,314,11,Muted);txt(TextFormat("PD  %d/%d",game.xp,game.level*80),1302,314,11,Muted);
+ txt(TextFormat("ATAK  %d",game.damage()),1080,314,11,Gold);txt(TextFormat("PANCERZ  %d",game.defense()),1192,314,11,Muted);txt(TextFormat("PD  %lld/%lld",static_cast<long long>(game.xp),static_cast<long long>(experienceForLevel(game.level))),1302,314,11,Muted);
  line(1080,338,1400,338,Line);txt("PLECAK",1080,346,11,Gold);int occupied=0;for(auto&i:game.bag)if(!i.empty())occupied++;txt(TextFormat("%02d / 25",occupied),1348,346,11,Muted);
  for(int i=0;i<BagSize;i++)slotDraw({Place::Bag,i},bagRect(i));
  line(1080,612,1400,612,Line);
@@ -480,6 +494,7 @@ void input(float dt){
  {game=Game(std::random_device{}());startIntro();}}return;}
  if(!IsWindowFocused()){game.cancelBow();weaponWheelOpen=false;paused=true;dragging={};return;}
  if(IsKeyPressed(KEY_E)&&!game.inTower()&&game.openNearestChest()){dragging={};return;}
+ if(IsKeyPressed(KEY_E)&&game.useNearestFountain()){dragging={};return;}
  if(IsKeyPressed(KEY_E)&&game.inDesert()&&game.useDesertPortal()){dragging={};nearbyPage=0;return;}
  if(IsKeyPressed(KEY_E)&&game.inTower()){nearestTowerInteraction();if(towerStory.active()||towerPanelOpen)return;}
  V move{};if(IsKeyDown(KEY_D))move=move+V{1,-1};if(IsKeyDown(KEY_A))move=move+V{-1,1};if(IsKeyDown(KEY_S))move=move+V{1,1};if(IsKeyDown(KEY_W))move=move+V{-1,-1};
@@ -733,7 +748,7 @@ int main(int argc,char**argv) {
             }
             if(desertBenchmark){
                 if(frame%100==0)desertRegionsVisited++;
-                const V views[]={DesertArrival,DesertOasis+V{0,-5},DesertBossHome+V{0,-4},{2,2},{2,35},{35,2},{69,35},{35,69},{69,69}};
+                const V views[]={DesertArrival,DesertOasis+V{0,-5},DesertBossHome+V{0,-4},DesertFountains[0]+V{1.6f,0},DesertFountains[1]+V{1.6f,0},{35,2},{69,35},{35,69},{69,69}};
                 if(frame==205)if(auto* boss=game.findEnemy(DesertBossId))boss->sandPrisonCd=.2f;
                 V center=views[std::min(8,frame/100)];V next=center+V{std::cos(frame*.04f),std::sin(frame*.04f)}*.7f;
                 if(!game.sandTrapped()&&game.walkable(next)){game.animation.advance(next.x-game.player.x,next.y-game.player.y,1.f/60,true);game.player=next;}
@@ -818,8 +833,8 @@ int main(int argc,char**argv) {
     startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
     world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
-    UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
+    fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }
 

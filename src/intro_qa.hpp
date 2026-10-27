@@ -49,7 +49,7 @@ bool runIntroQA(){
     game.player={14,14};intro.skip();intro.phase=IntroPhase::Charging;intro.age=1.3f;
     Image portal=shot("qa-v24/intro/portal.png");UnloadImage(portal);
     for(int i=0;i<200&&intro.phase!=IntroPhase::Arriving;i++)introAction(false,false,1.f/60);
-    check(intro.phase==IntroPhase::Arriving&&distance(game.player,{8,19})==0&&!intro.arrivalPending,
+    check(intro.phase==IntroPhase::Arriving&&distance(game.player,ForestArrival)==0&&!intro.arrivalPending,
           "teleport places the real hero at the existing safe forest spawn exactly once");
     intro.age=.75f;Image arrival=shot("qa-v24/intro/arrival.png");
     pixels=LoadImageColors(arrival);int blue=0;std::array<bool,232> blueRows{};Vector2 hero=screen(game.player);

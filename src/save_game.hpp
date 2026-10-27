@@ -25,6 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
+constexpr int CurrentVersion=7;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -33,8 +34,8 @@ struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string d
 // The version and checksum protect against partial/incompatible files. Reads
 // finish in a private candidate; the live session is only replaced on success.
 struct Archive {
- bool reading;std::string bytes;size_t at=0;
- explicit Archive(bool read,std::string data={}):reading(read),bytes(std::move(data)){}
+ bool reading;std::string bytes;size_t at=0;int version;
+ explicit Archive(bool read,std::string data={},int format=CurrentVersion):reading(read),bytes(std::move(data)),version(format){}
  void raw(void* data,size_t n){if(reading){require(n<=bytes.size()-at);std::memcpy(data,bytes.data()+at,n);at+=n;}else{require(bytes.size()+n<=MaxBytes);bytes.append(static_cast<char*>(data),n);}}
  template<class T>void one(T& v){
   if constexpr(std::is_same_v<T,bool>){unsigned char n=v?1:0;raw(&n,1);require(n<=1);v=n!=0;}
@@ -63,7 +64,11 @@ EF_SAVE(AnimationState,v.direction,v.phase,v.idleTime,v.moving,v.sprinting,v.run
 EF_SAVE(Ground,v.id,v.value,v.pos,v.location,v.floor)
 EF_SAVE(Prop,v.pos,v.type,v.size)
 EF_SAVE(TreasureChest,v.id,v.pos,v.location,v.opened,v.loot)
-EF_SAVE(Enemy,v.id,v.type,v.pos,v.home,v.hp,v.maxHp,v.attack,v.flash,v.windup,v.alive,v.animation,v.strike,v.recoil,v.loot,v.behavior,v.patrolGoal,v.patrolWait,v.patrolBlocked,v.patrolSequence,v.patrolGoalActive,v.sandPrisonCd,v.sandCastPulse,v.sandPrisonCasts)
+inline void visit(Archive& a,Enemy& v){
+ a(v.id,v.type,v.pos,v.home,v.hp,v.maxHp,v.attack,v.flash,v.windup,v.alive,v.animation,v.strike,v.recoil,v.loot,v.behavior,v.patrolGoal,v.patrolWait,v.patrolBlocked,v.patrolSequence,v.patrolGoalActive,v.sandPrisonCd,v.sandCastPulse,v.sandPrisonCasts);
+ if(a.version>=2)a(v.boulderCd,v.boulderWindup,v.boulderRecovery,v.boulderTarget,v.boulderThrows);
+ if(a.reading&&a.version>=2&&a.version<6){v.boulderCd*=BoulderCooldown/4.5f;v.boulderWindup*=BoulderWindup/2.2f;v.boulderRecovery*=BoulderRecovery/.6f;}
+}
 EF_SAVE(FieldState,v.enemies,v.props,v.forage)
 EF_SAVE(Effect,v.pos,v.text,v.life,v.color,v.damageNumber,v.critical,v.height)
 EF_SAVE(Fireball,v.pos,v.velocity,v.remaining,v.damage,v.critical)
@@ -71,10 +76,31 @@ EF_SAVE(WeaponBinding,v.kind,v.tier)
 EF_SAVE(Arrow,v.pos,v.velocity,v.remaining,v.damage,v.piercing,v.maxTargets,v.hitIds,v.critical)
 EF_SAVE(PierceFlash,v.pos,v.life)
 EF_SAVE(Explosion,v.pos,v.life)
+EF_SAVE(Boulder,v.origin,v.target,v.pos,v.age,v.duration,v.height,v.startHeight,v.damage,v.owner)
+EF_SAVE(BoulderImpact,v.pos,v.life)
 EF_SAVE(SoundEvent,v.cue,v.x,v.y)
 EF_SAVE(IntroSequence,v.phase,v.line,v.age,v.time,v.revealed,v.arrivalPending)
 EF_SAVE(TowerSequence,v.phase,v.line,v.age,v.time,v.returning,v.revealed,v.arrivalPending,v.completionPending,v.offerDesert,v.desertArrivalPending,v.fragments)
-EF_SAVE(Game,v.chests,v.openedChest,v.rng,v.combatRng,v.player,v.facing,v.animation,v.bag,v.equipment,v.ground,v.forage,v.enemies,v.props,v.effects,v.weaponWheel,v.arrows,v.bowDrawing,v.bowDrawTime,v.bowReleaseTime,v.lastBowCharge,v.bowAim,v.fireballs,v.explosions,v.attributes,v.attributePoints,v.allocationRequired,v.skillRanks,v.skillPoints,v.healingCd,v.healingPulse,v.strongCutCd,v.piercingArrowCd,v.meleeDuration,v.swingStrong,v.piercingArrowArmed,v.lastBowPiercing,v.pierceFlashes,v.selectedSpell,v.manaRegenTime,v.sounds,v.stepDistance,v.hp,v.mana,v.attackCd,v.spellCd,v.potionCd,v.swing,v.hurt,v.time,v.rollRemaining,v.rollCd,v.rollDirection,v.sandPrisonRemaining,v.level,v.xp,v.kills,v.nextGround,v.bossDead,v.location,v.dawnQuest,v.towerFloor,v.towerRuneMask,v.gold,v.towerReturnPending,v.desertBossDead,v.desertCreated,v.collectedFragments,v.fieldLocation,v.forestState,v.desertState,v.openedCorpse,v.message,v.messageTime)
+inline void visit(Archive& a,Game& v){
+ a(v.chests,v.openedChest,v.rng,v.combatRng,v.player,v.facing,v.animation,v.bag,v.equipment,v.ground,v.forage,v.enemies,v.props,v.effects,v.weaponWheel,v.arrows,v.bowDrawing,v.bowDrawTime,v.bowReleaseTime,v.lastBowCharge,v.bowAim,v.fireballs,v.explosions,v.attributes,v.attributePoints,v.allocationRequired,v.skillRanks,v.skillPoints,v.healingCd,v.healingPulse,v.strongCutCd,v.piercingArrowCd,v.meleeDuration,v.swingStrong,v.piercingArrowArmed,v.lastBowPiercing,v.pierceFlashes,v.selectedSpell,v.manaRegenTime,v.sounds,v.stepDistance,v.hp,v.mana,v.attackCd,v.spellCd,v.potionCd,v.swing,v.hurt,v.time,v.rollRemaining,v.rollCd,v.rollDirection,v.sandPrisonRemaining,v.level,v.xp,v.kills,v.nextGround,v.bossDead,v.location,v.dawnQuest,v.towerFloor,v.towerRuneMask,v.gold,v.towerReturnPending,v.desertBossDead,v.desertCreated,v.collectedFragments,v.fieldLocation,v.forestState,v.desertState,v.openedCorpse,v.message,v.messageTime);
+ if(a.version>=2)a(v.boulders,v.boulderImpacts);
+ if(a.version>=3)a(v.heroKnockback,v.heroKnockbackRemaining);
+ if(a.version>=4)a(v.heroKnockdownRemaining,v.heroKnockdownFacing);
+ if(a.version>=6)a(v.fountainUsed,v.fountainDrain);
+ if(a.version>=7)a(v.merchantArrows);
+ if(a.reading&&a.version<7){
+  require(v.level>=1&&v.level<=100000&&v.xp>=0&&v.xp<std::int64_t(v.level)*80);
+  v.xp=v.xp*experienceForLevel(v.level)/(std::int64_t(v.level)*80); // Keep legacy level and fractional progress.
+ }
+ if(a.reading&&a.version<6){
+  if(a.version==5)v.heroKnockdownRemaining*=HeroKnockdownDuration/2.8f;
+  v.clearFountainSites();
+ }
+ if(a.reading&&a.version<5){
+  if(a.version>=3)v.heroKnockbackRemaining*=BoulderKnockbackDuration/.24f;
+  if(a.version>=4)v.heroKnockdownRemaining*=HeroKnockdownDuration/1.2f;
+ }
+}
 EF_SAVE(Snapshot,v.game,v.intro,v.tower,v.date)
 #undef EF_SAVE
 
@@ -86,13 +112,15 @@ inline void validateGround(const std::vector<Ground>& list,bool unique=true){std
 inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Prop>& props,const std::vector<Ground>& forage){
  std::set<int> ids;
  for(const auto& e:enemies){require(e.id>=0&&ids.insert(e.id).second&&range(e.behavior,4)&&e.type>=0&&e.type<EnemyTypeCount&&e.hp>=0&&e.maxHp>0&&e.hp<=e.maxHp&&e.sandPrisonCasts>=0);validatePos(e.pos);validatePos(e.home);validateAnimation(e.animation);for(auto& i:e.loot)validateItem(i);}
+ for(const auto& e:enemies){require(e.boulderCd>=0&&e.boulderCd<=BoulderCooldown+.001f&&e.boulderWindup>=0&&e.boulderWindup<=BoulderWindup+.001f&&e.boulderRecovery>=0&&e.boulderRecovery<=BoulderRecovery+.001f&&e.boulderThrows>=0);validatePos(e.boulderTarget);}
  for(const auto& p:props){validatePos(p.pos);require(p.type>=0&&p.type<PropTypeCount&&p.size>0&&p.size<=10);}
  validateGround(forage);
 }
 inline void validate(const Snapshot& s){
  const auto& g=s.game;require(range(g.location,3)&&range(g.fieldLocation,3)&&g.fieldLocation!=WorldLocation::MageTower&&range(g.dawnQuest,3)&&range(g.selectedSpell,2));
  require(g.towerFloor>=0&&g.towerFloor<5&&g.towerRuneMask>=0&&g.towerRuneMask<16&&g.collectedFragments>=0&&g.collectedFragments<=5);
- require(g.level>=1&&g.level<=100000&&g.xp>=0&&g.xp<g.level*80&&g.gold>=0&&g.gold<=1000000000000LL&&g.kills>=0&&g.nextGround>=1);
+ require(g.level>=1&&g.level<=100000&&g.xp>=0&&g.xp<experienceForLevel(g.level)&&g.gold>=0&&g.gold<=1000000000000LL&&g.kills>=0&&g.nextGround>=1);
+ require(g.merchantArrows>=0&&g.merchantArrows<=MerchantArrowCapacity);
  for(int n:g.attributes)require(n>=0&&n<=1000000);for(int n:g.skillRanks)require(n>=0&&n<=1000000);
  require(g.attributePoints>=0&&g.attributePoints<=1000000&&g.skillPoints>=0&&g.skillPoints<=1000000&&g.hp>=0&&g.hp<=g.maxHp()&&g.mana>=0&&g.mana<=g.maxMana());
  validatePos(g.player);validateAnimation(g.animation);for(auto& i:g.bag)validateItem(i);
@@ -102,16 +130,28 @@ inline void validate(const Snapshot& s){
  validateGround(g.ground);for(auto& item:g.ground)require(item.id<g.nextGround);
  validateField(g.enemies,g.props,g.forage);validateField(g.forestState.enemies,g.forestState.props,g.forestState.forage);validateField(g.desertState.enemies,g.desertState.props,g.desertState.forage);
  for(auto& e:g.sounds)require(range(e.cue,int(Cue::Count)));for(auto& a:g.arrows)require(a.maxTargets>=1&&a.maxTargets<=1000);
+ require(g.boulders.size()<=MaxBoulders&&g.boulderImpacts.size()<=MaxBoulderImpacts);
+ for(const auto& b:g.boulders){
+  require(g.location==WorldLocation::Forest&&b.age>=0&&b.duration>=BoulderMinFlight&&b.duration<=30&&b.age<=b.duration&&b.height>=0&&b.height<=250&&b.startHeight>=0&&b.startHeight<=200&&b.damage>=0&&b.damage<=1000000);
+  validatePos(b.origin);validatePos(b.target);validatePos(b.pos);
+  require(std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.type==3&&e.alive;}));
+  require(distance(b.pos,b.origin+(b.target-b.origin)*(b.age/b.duration))<.001f);
+ }
+ for(const auto& b:g.boulderImpacts){validatePos(b.pos);require(b.life>=0&&b.life<=.401f);}
+ for(int i=0;i<FountainCount;i++)require(g.fountainDrain[i]>=0&&g.fountainDrain[i]<=FountainDrainDuration&&(!g.fountainDrain[i]||g.fountainUsed[i]));
+ require(g.heroKnockbackRemaining>=0&&g.heroKnockbackRemaining<=BoulderKnockbackDuration+.00001f&&length(g.heroKnockback)<=BoulderKnockbackDistance+.001f);
+ require(!g.knockedBack()||g.location==WorldLocation::Forest);
+ require(g.heroKnockdownRemaining>=0&&g.heroKnockdownRemaining<=HeroKnockdownDuration+.00001f&&std::abs(g.heroKnockdownFacing)<=7);
  require(range(s.intro.phase,6)&&s.intro.line<IntroDialogue.size()&&s.intro.age>=0&&s.intro.time>=0);
  require(range(s.tower.phase,9)&&s.tower.fragments>=0&&s.tower.fragments<=5&&s.tower.line<s.tower.lineCount()&&s.tower.age>=0&&s.tower.time>=0);
  require(!(s.intro.active()&&s.tower.active())&&s.date.size()<=32);
 }
 inline uint64_t checksum(const std::string& data){uint64_t h=14695981039346656037ULL;for(unsigned char c:data){h^=c;h*=1099511628211ULL;}return h;}
 inline std::string encode(Snapshot snapshot){
- validate(snapshot);Archive payload(false);payload(snapshot);Archive out(false);std::string magic="EMBERFALL-SAVE";int version=1;size_t size=payload.bytes.size();uint64_t hash=checksum(payload.bytes);out(magic,version,size,hash);out.bytes+=payload.bytes;return out.bytes;
+ validate(snapshot);Archive payload(false);payload(snapshot);Archive out(false);std::string magic="EMBERFALL-SAVE";int version=CurrentVersion;size_t size=payload.bytes.size();uint64_t hash=checksum(payload.bytes);out(magic,version,size,hash);out.bytes+=payload.bytes;return out.bytes;
 }
 inline Snapshot decode(const std::string& bytes){
- require(bytes.size()<=MaxBytes);Archive in(true,bytes);std::string magic;int version=0;size_t size=0;uint64_t hash=0;in(magic,version,size,hash);require(magic=="EMBERFALL-SAVE"&&version==1&&size==bytes.size()-in.at);std::string payload=bytes.substr(in.at);require(checksum(payload)==hash);Archive data(true,std::move(payload));Snapshot result;data(result);require(data.at==data.bytes.size());validate(result);return result;
+ require(bytes.size()<=MaxBytes);Archive in(true,bytes);std::string magic;int version=0;size_t size=0;uint64_t hash=0;in(magic,version,size,hash);require(magic=="EMBERFALL-SAVE"&&version>=1&&version<=CurrentVersion&&size==bytes.size()-in.at);std::string payload=bytes.substr(in.at);require(checksum(payload)==hash);Archive data(true,std::move(payload),version);Snapshot result;data(result);require(data.at==data.bytes.size());validate(result);return result;
 }
 inline std::string now(){std::time_t t=std::time(nullptr);std::tm local{};
 #ifdef _WIN32

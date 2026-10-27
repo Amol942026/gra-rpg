@@ -3,6 +3,7 @@
 #include "generated/equipment_paints.hpp"
 #include <algorithm>
 namespace ember {
+static_assert(std::size(equipment_paint_data::paints)==ItemKindCount&&std::size(equipment_paint_data::spans)==ItemKindCount,"Every item needs its authored appearance entry");
 struct GearAppearance {
  Item value{};Kind shape=Kind::None;
  equipment_paint_data::Paint paint{};

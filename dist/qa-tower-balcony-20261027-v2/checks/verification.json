@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "checks": 97,
+  "failures": [],
+  "masters": 3,
+  "runtime_rgba_bytes": 5008800,
+  "captures": 12,
+  "audio_opened": false
+}

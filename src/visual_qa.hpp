@@ -63,6 +63,11 @@ Image presentedImage(){
     if(auto* pixels=sync_present::readback(width,height))return {pixels,width,height,1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
     return {rlReadScreenPixels(GetRenderWidth(),GetRenderHeight()),GetRenderWidth(),GetRenderHeight(),1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
 }
+// Native-resolution frozen world for allocation/character sheets only. The
+// normal moving world still draws directly to canvas; no resampling is used.
+struct PausedWorldCache {RenderTexture2D art{};bool ready=false;float time=-1;V player{};WorldLocation location=WorldLocation::Forest;int floor=-1;unsigned builds=0;} pausedWorldCache;
+void invalidatePausedWorld(){pausedWorldCache.ready=false;}
+void unloadPausedWorld(){if(pausedWorldCache.art.id)UnloadRenderTexture(pausedWorldCache.art);pausedWorldCache={};}
 void renderScene() {
     if(welcome){
         BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
@@ -85,13 +90,28 @@ void renderScene() {
     }
     hovered=pickWorld(mouse);
     performance.end(RenderStage::Picking);
-    if(game.inDesert())desert_art::renderBackdrop(renderScale);
-    world_shadows::prepare();
+    const bool freeze=(statsOpen||skillsOpen)&&!intro.active()&&!towerStory.active();
+    bool refresh=!pausedWorldCache.ready||pausedWorldCache.time!=game.time||distance(pausedWorldCache.player,game.player)>0||pausedWorldCache.location!=game.location||pausedWorldCache.floor!=game.towerFloor;
+    if(freeze){
+        if(!pausedWorldCache.art.id||pausedWorldCache.art.texture.width!=canvas.texture.width||pausedWorldCache.art.texture.height!=canvas.texture.height){
+            if(pausedWorldCache.art.id)UnloadRenderTexture(pausedWorldCache.art);
+            pausedWorldCache.art=LoadRenderTexture(canvas.texture.width,canvas.texture.height);SetTextureFilter(pausedWorldCache.art.texture,TEXTURE_FILTER_POINT);refresh=true;
+        }
+        if(refresh){
+            if(game.inDesert())desert_art::renderBackdrop(renderScale);world_shadows::prepare();
+            BeginTextureMode(pausedWorldCache.art);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
+            native_world::beginOpaqueFrame();drawWorld();native_world::finishOpaqueBackground();actor_art::finishShadowFrame();EndMode2D();EndTextureMode();
+            pausedWorldCache.ready=true;pausedWorldCache.time=game.time;pausedWorldCache.player=game.player;pausedWorldCache.location=game.location;pausedWorldCache.floor=game.towerFloor;pausedWorldCache.builds++;
+        }
+    }else{invalidatePausedWorld();if(game.inDesert())desert_art::renderBackdrop(renderScale);world_shadows::prepare();}
     BeginTextureMode(canvas);
     ClearBackground(Ink);
     Camera2D camera{{0,0},{0,0},0,renderScale};
     BeginMode2D(camera);
-    native_world::beginOpaqueFrame();drawWorld();if(!paused)native_world::finishOpaqueBackground();actor_art::finishShadowFrame();performance.end(RenderStage::World,true);
+    if(freeze){
+        DrawTexturePro(pausedWorldCache.art.texture,{0,0,float(pausedWorldCache.art.texture.width),-float(pausedWorldCache.art.texture.height)},{0,0,float(W),float(H)},{0,0},0,WHITE);
+    }else{native_world::beginOpaqueFrame();drawWorld();if(!paused)native_world::finishOpaqueBackground();actor_art::finishShadowFrame();}
+    performance.end(RenderStage::World,true);
     // World and text share the final pixel scale. The world is drawn directly
     // into this frame; there is no resized intermediate scene texture.
     drawWorldLabels();
@@ -106,6 +126,7 @@ void renderScene() {
     drawAudioPanel();
     drawAudioButton(); // Always visible, including pause/help and the audio panel.
     drawDisplayButton();if(!towerPanelOpen)drawWeaponWheelButton();drawGameMenu();drawDeveloperUi();
+    drawAttributeTooltip();
     if(paused)native_world::finishOpaqueBackground();
     EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);
 }

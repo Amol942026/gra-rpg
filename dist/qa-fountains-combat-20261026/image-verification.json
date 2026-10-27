@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "checks": 4561,
+  "native_synfig_frames": 114,
+  "compiled_control_samples": 115,
+  "game_frames": 120,
+  "pose_views": 48,
+  "elbow_flexion_min_deg": 15.81630484821699,
+  "elbow_flexion_max_deg": 111.52082921103644,
+  "minimum_changed_pixels": 6898,
+  "shatter": {
+    "native_frames": 72,
+    "pieces": 6,
+    "control_samples": 438,
+    "game_frames": 60,
+    "duration": 1.2,
+    "runtime_atlas_rgba8_bytes": 221184
+  },
+  "knockback": {
+    "status": "PASS",
+    "onset_frame": 109,
+    "active_frames": 111,
+    "distance": 1.35002,
+    "audio_played": false
+  },
+  "knockdown": {
+    "status": "PASS",
+    "duration": 1.85,
+    "native_synfig_frames": 111,
+    "control_samples": 112,
+    "bones": 17,
+    "pose_views": 72,
+    "equipment_variants": 39,
+    "game_clip_frames": 57,
+    "encounter_frames": 63,
+    "runtime_key_bytes": 53312,
+    "new_textures": 0,
+    "supine_rest_seconds": [
+      0.66,
+      0.8
+    ],
+    "stand_seconds": 1.75
+  },
+  "fountains": {
+    "status": "PASS",
+    "fountains": [
+      {
+        "color": "mana",
+        "native_frames": 48,
+        "game_frames": 48,
+        "atlas_bytes": 3932160,
+        "pool_pixels_full": 1299,
+        "pool_pixels_empty": 0
+      },
+      {
+        "color": "health",
+        "native_frames": 48,
+        "game_frames": 48,
+        "atlas_bytes": 3932160,
+        "pool_pixels_full": 1322,
+        "pool_pixels_empty": 0
+      }
+    ],
+    "total_rgba_bytes": 8028160,
+    "audio_played": false
+  },
+  "audio_played": false
+}

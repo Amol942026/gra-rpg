@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "original_art": "Krita native MCP",
+  "animation": "Synfig native loop and drain, 24 Hz",
+  "external_assets": [],
+  "graphics_master": "C:\\AI2D\\sprites\\emberfall_fountains_20261026",
+  "animation_master": "C:\\AI2D\\animations\\emberfall_fountains_20261026",
+  "atlases": [
+    {
+      "color": "mana",
+      "atlas": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\sprites\\fountain-mana.png",
+      "sha256": "50bd945a59032c52c18ff7bbdc8f50fb5116040bb3cef218b4659cd32fd46a26",
+      "frames": 48,
+      "rgba_bytes": 3932160
+    },
+    {
+      "color": "health",
+      "atlas": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\sprites\\fountain-health.png",
+      "sha256": "f75e23592a35bf5f93ad7d68c8566d83f6a7a0661be6af6d31167f642270518c",
+      "frames": 48,
+      "rgba_bytes": 3932160
+    }
+  ]
+}

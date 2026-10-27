@@ -14,7 +14,7 @@ void exportForestOverview(){
   const auto& glade=ForestGlades[i];Vector2 p=point(glade.center);ellipseOutline(p.x,p.y,7,4,Gold);
   txt(i==0?"START":glade.name,p.x+11,p.y-7,14,i==0?Text:Gold);
  }
- DrawCircleV(point({8,19}),3.5f,Text);
+ DrawCircleV(point(ForestArrival),3.5f,Text);
  panel({1060,142,350,520},Panel);txt("MIESZKAŃCY LASU",1083,163,18,Gold);
  for(int type=0;type<ForestEnemyTypeCount;type++){
   int count=int(std::count_if(game.enemies.begin(),game.enemies.end(),[&](const Enemy& e){return e.type==type;}));

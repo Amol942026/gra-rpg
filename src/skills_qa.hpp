@@ -4,7 +4,7 @@ bool runSkillsQA(){
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
  auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.forage.clear();game.ground.clear();game.player={15,15};game.messageTime=0;intro={};towerStory={};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;statDraft={};skillDraft={};draftForLevel=skillDraftLevel=-1;dragging={};mouse={0,0};};
  auto point=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
- auto gain=[](){game.xp=game.level*80-1;Enemy victim{999,0,game.player,game.player,1,1};game.hit(victim,100);syncAdvancement();};
+ auto gain=[](){game.xp=experienceForLevel(game.level)-1;Enemy victim{999,0,game.player,game.player,1,1};game.hit(victim,100);syncAdvancement();};
  reset();refreshDisplayLayout();check(!audioSystem.available,"skills diagnostic opens no audio device");
  game.hp=60;
  for(int i=0;i<SkillCount;i++){
@@ -22,7 +22,7 @@ bool runSkillsQA(){
  check(!confirmSkills()&&skillsOpen&&game.skillPoints==1,"unallocated skill point cannot be skipped by confirmation");
  point(skillCard(0));clickProgression();check(skillDraft[0]==1&&game.skillRank(Skill::StrongCut)==0,"card selection changes draft only");
  point(skillCard(1));clickProgression();check(skillDraft==SkillRanks{0,1},"single-point selection can switch to other card before confirmation");
- point(skillAdjust(1,false));clickProgression();check(skillDraftRemaining()==1,"minus restores pending skill point");
+ point(skillAdjust(1,false));clickProgression();check(skillDraftRemaining()==1,"COFNIJ restores pending skill point");
  point(skillCard(0));clickProgression();
  for(float scale:{.8f,1.f,1.2f}){prepareCanvas(scale);mouse={0,0};renderScene();saveTexture(canvas,TextFormat("qa-v27/skills-menu-%d.png",int(scale*100)));}
  point(skillsConfirm());clickProgression();check(!skillsOpen&&!game.allocationRequired&&game.skillRank(Skill::StrongCut)==1&&game.skillPoints==0,"confirmation trains exactly chosen skill and resumes gameplay");

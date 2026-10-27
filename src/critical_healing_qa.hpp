@@ -7,7 +7,7 @@ bool runCriticalHealingQA(){
  auto seed=[](bool wanted){for(unsigned s=0;s<1000;s++){std::mt19937 rng(s);if((std::uniform_int_distribution<int>(1,100)(rng)<=CriticalChancePercent)==wanted){game.combatRng.seed(s);return;}}};
  auto shot=[](const char* name){std::string path=std::string("qa-v30/")+name+".png";renderScene();saveTexture(canvas,path.c_str());};
  reset();refreshDisplayLayout();check(!audioSystem.available,"diagnostic opens no audio device");
- game.xp=79;Enemy victim{900,0,game.player,game.player,1,1};game.hit(victim,10);syncAdvancement();check(statsOpen&&game.attributePoints==5&&game.skillPoints==1,"real advancement opens mandatory attributes and awards a skill point");
+ game.xp=experienceForLevel(1)-1;Enemy victim{900,0,game.player,game.player,1,1};game.hit(victim,10);syncAdvancement();check(statsOpen&&game.attributePoints==5&&game.skillPoints==1,"real advancement opens mandatory attributes and awards a skill point");
  for(int i=0;i<5;i++){point(statAdjust(0,true));clickProgression();}point(statsConfirm());clickProgression();check(skillsOpen&&game.skillAllocationPending(),"attributes confirmation opens skills while retaining pause");point(skillCard(2));clickProgression();check(skillDraft==SkillRanks{0,0,1}&&game.skillRank(Skill::Healing)==0,"healing card selects draft without learning before confirmation");
  for(float scale:{.8f,1.f,1.2f}){
   prepareCanvas(scale);mouse={0,0};shot(TextFormat("healing-menu-%d",int(scale*100)));check(skillCard(2).y+skillCard(2).height<skillsConfirm().y,"all three skill cards fit above confirmation");

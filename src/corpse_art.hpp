@@ -23,10 +23,12 @@ inline void init(){
  Image atlas=FileExists(path)?LoadImage(path):Image{};
  bool baked=atlas.data&&atlas.width==Width*Density*8&&atlas.height==Height*Density*EnemyTypeCount;
  if(!baked){if(atlas.data)UnloadImage(atlas);atlas=GenImageColor(Width*Density*8,Height*Density*EnemyTypeCount,BLANK);}
+ Image dune=LoadImage("assets/sprites/dune-fallen.png");bool paintedDune=dune.data&&dune.width==1536&&dune.height==512;
  for(int type=0;type<EnemyTypeCount;type++)for(int direction=0;direction<8;direction++){
   Rectangle cell{float(direction*Width*Density),float(type*Height*Density),float(Width*Density),float(Height*Density)};
   Image body{};
-  if(baked)body=ImageFromImage(atlas,cell);
+  if(type==DesertBossType&&paintedDune){body=ImageFromImage(dune,{float(direction%4*384),float(direction/4*256),384,256});ImageAlphaPremultiply(&body);}
+  else if(baked)body=ImageFromImage(atlas,cell);
   else{
    RenderTexture2D target=LoadRenderTexture(Width*Density,Height*Density);BeginTextureMode(target);ClearBackground(BLANK);
    actor_art::Rig rig(OriginX*Density,OriginY*Density,Density,Direction(direction));
@@ -40,7 +42,7 @@ inline void init(){
   sprites[type][direction].ground=shadow_geometry::bake(mesh.shadows());
  }
  if(!baked){fs::create_directories("assets/generated");ExportImage(atlas,path);}
- UnloadImage(atlas);
+ if(dune.data)UnloadImage(dune);UnloadImage(atlas);
 }
 inline void unload(){for(auto& species:sprites)for(auto& sprite:species){if(sprite.body.id)UnloadTexture(sprite.body);if(sprite.edge.id)UnloadTexture(sprite.edge);shadow_geometry::unload(sprite.ground);sprite={};}prepared=0;}
 }

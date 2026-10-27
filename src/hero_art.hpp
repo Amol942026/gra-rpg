@@ -15,7 +15,7 @@ inline void gearInlay(Rig& rig,const GearAppearance& look,P3 center,float width,
 }
 inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
                       bool helmet,bool shield,Kind weapon,bool flash,bool rolling,bool striking,
-                      float strikeProgress,float bowDraw,int quiverArrows,float run,bool empowered,const AnimationState& state,float rollProgress,const HeroAppearance& appearance){
+                      float strikeProgress,float bowDraw,int quiverArrows,float run,bool empowered,const AnimationState& state,float rollProgress,const HeroAppearance& appearance,float knockdown=-1,float fallR=0,float fallF=-1){
     rig.reserve(1800);
     rig.setSmoothSurfaces();
     const auto& held=appearance[0];const auto& headwear=appearance[1];const auto& ward=appearance[2];
@@ -36,6 +36,11 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     float moving=state.motionInitialized?state.moveBlend:(state.moving?1.f:0.f);
     auto pose=hero_motion::evaluate(state.phase,moving,bowDraw>=0?0:state.runBlend,state.idleTime,striking?strikeProgress:-1,empowered,rollProgress);
     auto stow=weapon==Kind::Sword&&!striking?hero_sheath::apply(pose,stowPhase):sword_stow::sample(0);
+    if(knockdown>=0){
+        pose=hero_knockdown::evaluate(pose,knockdown,{fallR,fallF,0});
+        if(weapon==Kind::Sword&&stowPhase>=.999f)stow=hero_sheath::apply(pose,1);
+        if(knockdown>0&&knockdown<1)rig.setGroundBounded();
+    }
     float exposedBlade=weapon==Kind::Sword?sword_stow::visibleFraction(stow):1;
     if(archer&&bowDraw>=0&&!rolling){
         for(int side=0;side<2;side++){
@@ -172,8 +177,8 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         rig.setBone(hero_motion::data::Pelvis);
         P3 mouth=swordPoint(sword_stow::Mouth),axis=swordPoint(sword_stow::Axis),tip=mouth+axis*37;
         Color darkLeather=shade(weaponGrip,.62f);
-        rig.tapered({-12,0,33+lift},mouth+P3{0,0,-4},2.1f,2.1f,leather);
-        rig.tapered({-12,-5,32+lift},mouth+axis*7,2,2,leather);
+        rig.tapered({-12,7,33+lift},mouth+P3{0,0,-4},2.1f,2.1f,leather);
+        rig.tapered({-12,3,32+lift},mouth+axis*7,2,2,leather);
         rig.tapered(mouth+axis*1.2f,tip,5.7f,3.8f,darkLeather);
         rig.tapered(mouth, mouth+axis*2,6.6f,6.2f,weaponTrim);
         rig.tapered(mouth+axis*34.5f,tip,4.3f,3.8f,metal);

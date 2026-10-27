@@ -32,6 +32,7 @@ void rollTests() {
     for(int type=0;type<EnemyTypeCount;type++){
         Game g=emptyArena();g.player={20,15};
         g.enemies.push_back({0,type,{15,15},{15,15},100,100});
+        g.enemies.back().boulderCd=BoulderCooldown; // Isolate chase speed from the boss's stationary throw windup.
         for(int i=0;i<20;i++)g.update(.05f,{},false);
         check(std::abs(g.enemies[0].pos.x-15-speeds[type])<.001f,"all enemy types have faster movement");
     }

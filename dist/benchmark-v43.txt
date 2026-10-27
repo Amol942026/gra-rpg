@@ -27,13 +27,13 @@ Pause menu open: 0
 Audio device opened: no
 Native canvas: 1688x1055
 Desert background buffer: 0x0
-Average FPS: 58.6596
-CPU frame mean (ms): 10.9376
-EndDrawing mean (ms): 6.10638
-Presentation mean (ms): 0.000722408
-CPU frame p95 (ms): 13.8596
-CPU frame p99 (ms): 14.6932
-Frame p95 (ms): 20.472
-Frame p99 (ms): 23.5976
-Frame max (ms): 28.7615
-Frames over 25 ms: 7
+Average FPS: 55.0261
+CPU frame mean (ms): 11.9857
+EndDrawing mean (ms): 6.18766
+Presentation mean (ms): 0.000756734
+CPU frame p95 (ms): 15.2514
+CPU frame p99 (ms): 16.1516
+Frame p95 (ms): 24.6479
+Frame p99 (ms): 29.6548
+Frame max (ms): 34.7094
+Frames over 25 ms: 39

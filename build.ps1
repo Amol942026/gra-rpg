@@ -38,10 +38,17 @@ if (!$Player) {
         $launcherText = [IO.File]::ReadAllText((Join-Path $PSScriptRoot $launcher)).Replace('"dist\Emberfall.exe"','"Emberfall.exe"')
         [IO.File]::WriteAllText((Join-Path $PSScriptRoot ('dist/' + $launcher)), $launcherText, [Text.Encoding]::ASCII)
     }
-    Copy-Item -LiteralPath 'README.md' -Destination 'dist\README.md' -Force
 }
-Copy-Item -LiteralPath 'LOOT.md' -Destination (Join-Path $outputDirectory 'LOOT.md') -Force
-Copy-Item -LiteralPath 'LICENSES.md' -Destination (Join-Path $outputDirectory 'LICENSES.md') -Force
+# Like assets, identical documents may be mapped by an open preview. Leave them
+# in place instead of needlessly rewriting the same bytes and failing the build.
+$documents = @('LOOT.md','LICENSES.md')
+if (!$Player) { $documents += 'README.md' }
+foreach ($documentName in $documents) {
+    $targetDocument = Join-Path $outputDirectory $documentName
+    if ((Test-Path -LiteralPath $targetDocument) -and
+        (Get-FileHash -LiteralPath $documentName).Hash -eq (Get-FileHash -LiteralPath $targetDocument).Hash) { continue }
+    Copy-Item -LiteralPath $documentName -Destination $targetDocument -Force
+}
 if ($Test) {
     & $compiler '-std=c++17' '-O2' '-Wall' '-Wextra' '-Wno-misleading-indentation' '-static' 'tests\game_tests.cpp' '-o' 'dist\game_tests.exe'
     if ($LASTEXITCODE -ne 0) { throw 'Kompilacja testów nie powiodła się.' }

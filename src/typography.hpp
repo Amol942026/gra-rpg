@@ -4,16 +4,18 @@
 class Typography {
     std::map<std::pair<int,int>,Font> fonts;
     float pixelScale=1;
-    Font& font(float logicalSize,bool title,bool bold=false) {
+    Font& font(float logicalSize,bool title,bool /*bold*/=false) {
         int pixels=std::max(10,int(std::round(logicalSize*pixelScale)));
-        int style=title?2:(bold||logicalSize<=16)?1:0;
+        // Real bold outlines at every size. Body labels and prose share an
+        // atlas, including callers that explicitly request bold nameplates.
+        int style=title?1:0;
         auto key=std::make_pair(style,pixels);
         auto it=fonts.find(key);
         if(it==fonts.end()){
             std::vector<int> codes;
             for(int c=32;c<384;c++)codes.push_back(c);
             for(int c:{8212,8211,8592,8593,8594,8595})codes.push_back(c);
-            const char* path=title?"assets/Cinzel.ttf":style==1?"assets/Lato-Bold.ttf":"assets/Lato-Regular.ttf";
+            const char* path=title?"assets/Cinzel-Bold.ttf":"assets/Lato-Bold.ttf";
             Font f=LoadFontEx(path,pixels,codes.data(),int(codes.size()));
             // Coverage is antialiased in the glyph itself. Sample it one-to-one;
             // do not blur it a second time with bilinear texture filtering.
@@ -30,8 +32,7 @@ public:
         // including sizes first used by combat, tooltips and modal menus.
         if(fonts.empty()){
             for(float size:{14.f,15.f,16.f,17.f,18.f,19.f,20.f,21.f,22.f,23.f,24.f})font(size,false);
-            for(float size:{14.f,15.f,20.f,23.f,24.f,25.f,27.f,28.f,29.f,30.f,32.f,34.f,39.f,76.f,92.f})font(size,true);
-            font(20.f,false,true);
+            for(float size:{14.f,15.f,20.f,23.f,24.f,25.f,27.f,28.f,29.f,30.f,31.f,32.f,34.f,39.f,76.f,92.f})font(size,true);
         }
     }
     size_t atlasCount()const{return fonts.size();}

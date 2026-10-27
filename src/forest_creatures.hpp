@@ -12,7 +12,7 @@ inline void creatureEye(Rig& r,P3 p,float size,Color iris){
  r.rounded(p+P3{.15f,1.8f,.3f},{size*.22f,.7f,size*.6f},Ink);
  r.rounded(p+P3{-.35f,2,.65f},{.7f,.5f,.7f},Text);
 }
-inline void buildForestCreature(Rig& r,int type,const AnimationState& s,float attack,bool flash){
+inline void buildForestCreature(Rig& r,int type,const AnimationState& s,float attack,bool flash,float guardianThrow=-1){
  r.setCreatureSurfaces();r.reserve(1700);
  float walk=creatureWalk(s),t=s.idleTime,hit=std::clamp(attack,-.32f,1.f);
  int family=type==0?0:type==1||type==4?1:type==5?3:type==7?5:2;
@@ -106,15 +106,22 @@ inline void buildForestCreature(Rig& r,int type,const AnimationState& s,float at
  }else{
   bool skeleton=type==2,golem=type==3;Color body=flash?Text:golem?rgb(104,134,123):skeleton?bone:rgb(121,82,58);
   float thick=golem?12:skeleton?3.8f:7,spacing=golem?10:7,lift=bob*(golem?.5f:1);
+  bool throwing=golem&&guardianThrow>=0;auto throwPose=guardian_motion::sample(std::max(0.f,guardianThrow));
+  float lean=throwing?throwPose.bodyForward:0,lower=throwing?throwPose.bodyUp:0;lift+=lower;
+  float gaitHip=golem?guardian_gait::hipHeight(s.phase):31+lift;
+  // Fade the walking support height into idle/crouch with the existing
+  // movement blend, including the first frames of a boulder windup.
+  if(golem)lift+=(gaitHip-31-(lift-lower))*walk;
   Color cloth=flash?Text:rgb(119,62,48),leather=rgb(83,61,44),skin=flash?Text:rgb(204,166,119);
   for(float side:{-1.f,1.f}){
-   auto k=creature_motion::sample(2,s.phase+(side>0?.5f:0));P3 foot{side*spacing,k.travel*walk*7,4+k.lift*walk*6},knee{side*spacing,3+k.travel*walk*3,17+lift};
-   creatureJoint(r,{side*spacing,0,31+lift},knee,thick,skeleton?bone:golem?body:rgb(65,76,66));
+   auto k=creature_motion::sample(2,s.phase+(side>0?.5f:0));P3 foot{side*spacing,k.travel*walk*(golem?guardian_gait::Stride:7.f),4+k.lift*walk*6},knee{side*spacing,3+k.travel*walk*3-lower*.55f,17+lift*(throwing?.45f:1.f)};
+   if(golem){foot.z=4+(guardian_gait::footHeight(s.phase+(side>0?.5f:0),gaitHip)-4)*walk;auto bend=guardian_gait::knee(foot.f-lean*.35f,31+lift,foot.z);knee.f+=(lean*.35f+bend.forward-knee.f)*walk;knee.z+=(bend.height-knee.z)*walk;}
+   creatureJoint(r,{side*spacing,lean*.35f,31+lift},knee,thick,skeleton?bone:golem?body:rgb(65,76,66));
    creatureJoint(r,knee,foot,thick*.85f,skeleton?bone:golem?body:rgb(57,68,62));
    r.rounded(foot+P3{0,3,-1},{thick+2,thick+8,6},skeleton?bone:golem?shade(body,.86f):leather);
    if(skeleton)r.tapered(knee+P3{side*2,0,0},foot+P3{side*2,0,0},1.1f,1.1f,bone,.8f);
   }
-  creatureSkin(r,{0,0,30+lift},{golem?29.f:20.f,14,9},body,golem?3:skeleton?2:6);
+  creatureSkin(r,{0,lean*.35f,30+lift},{golem?29.f:20.f,14,9},body,golem?3:skeleton?2:6);
   if(skeleton){
    for(int i=0;i<7;i++)r.rounded({0,-3,33+i*3.5f+lift},{4.6f,5,3},shade(bone,.92f));
    r.tapered({0,-3,54+lift},{0,0,61+lift},3.5f,3.5f,bone,.85f);
@@ -125,38 +132,39 @@ inline void buildForestCreature(Rig& r,int type,const AnimationState& s,float at
    }
    r.tapered({0,8,38+lift},{0,8,54+lift},2.5f,2,bone);
   }else{
-   creatureSkin(r,{0,0,45+lift},{golem?36.f:26.f,golem?24.f:18.f,29},body,golem?3:6);
+   creatureSkin(r,{0,lean,45+lift},{golem?36.f:26.f,golem?24.f:18.f,29},body,golem?3:6);
    if(!golem){
     creatureSkin(r,{0,-8,40+lift},{27,6,34},cloth,6);
     r.tapered({-10,9,54+lift},{10,10,33+lift},3,2,leather);
     r.rounded({0,0,31+lift},{27,19,5},leather);r.box({0,10,31+lift},{5,2,4},Gold);
     for(float side:{-1.f,1.f})r.rounded({side*11,3,29+lift},{6,8,8},leather);
    }else{
-    r.tube({{-4,12,48+lift},{0,14,53+lift},{4,12,48+lift},{0,14,41+lift},{-4,12,48+lift}},1.8f,1.8f,rgb(219,210,129));
-    for(float side:{-1.f,1.f})creatureSkin(r,{side*12,-3,57+lift},{10,13,8},rgb(87,125,78),12);
+    r.tube({{-4,12+lean,48+lift},{0,14+lean,53+lift},{4,12+lean,48+lift},{0,14+lean,41+lift},{-4,12+lean,48+lift}},1.8f,1.8f,rgb(219,210,129));
+    for(float side:{-1.f,1.f})creatureSkin(r,{side*12,-3+lean,57+lift},{10,13,8},rgb(87,125,78),12);
    }
   }
   for(float side:{-1.f,1.f}){
    float reach=hit*(side>0?24:9),shoulder=side*(golem?23:16);
    P3 elbow{shoulder+side*2,1-motion.sway*walk*side*2+reach*.45f,43+lift+hit*3},hand{side*(golem?27:20),5-motion.sway*walk*side*4+reach,33+lift+hit*11};
-   creatureJoint(r,{shoulder,0,53+lift},elbow,thick,body,.75f);creatureJoint(r,elbow,hand,thick*.85f,skeleton?bone:golem?body:skin,.72f);
-   creatureSkin(r,{shoulder,0,54+lift},{golem?17.f:skeleton?6.f:12.f,13,10},body,golem?3:skeleton?2:6);
+   if(throwing){float bounce=lift-lower;elbow={side*throwPose.elbowSide,throwPose.elbowForward,throwPose.elbowUp+bounce};hand={side*throwPose.handSide,throwPose.handForward,throwPose.handUp+bounce};}
+   creatureJoint(r,{shoulder,lean,53+lift},elbow,thick,body,.75f);creatureJoint(r,elbow,hand,thick*.85f,skeleton?bone:golem?body:skin,.72f);
+   creatureSkin(r,{shoulder,lean,54+lift},{golem?17.f:skeleton?6.f:12.f,13,10},body,golem?3:skeleton?2:6);
    r.rounded(hand,{golem?13.f:6.f,golem?12.f:7.f,golem?13.f:6.f},skeleton?bone:golem?body:skin);
    if(side>0&&!golem){
     P3 tip=hand+P3{hit*-9,3+hit*26,34-hit*30};
     r.tapered(hand,tip,3.5f,2,iron,.3f);r.tapered(hand+P3{-6,2,3},hand+P3{6,2,3},2,2,Gold);
    }
   }
-  float hz=67+lift;r.rounded({0,0,hz},{golem?25.f:skeleton?18.f:18.f,golem?23.f:17.f,golem?23.f:20.f},golem?body:skeleton?bone:skin,golem?103:skeleton?102:-1);
+  float hz=67+lift;r.rounded({0,lean*.8f,hz},{golem?25.f:skeleton?18.f:18.f,golem?23.f:17.f,golem?23.f:20.f},golem?body:skeleton?bone:skin,golem?103:skeleton?102:-1);
   if(skeleton){
    r.rounded({0,4,hz-7},{14,10,6},bone);
    for(float side:{-1.f,1.f})r.rounded({side*4.6f,7,hz+1},{6.2f,4,6},rgb(48,59,50));
    r.rounded({0,9,hz-3},{2.7f,1.2f,3.5f},rgb(74,76,55));
    for(int i=0;i<5;i++)r.rounded({-5+i*2.5f,8.5f,hz-7},{1.7f,2,2.6f},shade(bone,1.1f));
   }else if(golem){for(float side:{-1.f,1.f}){
-   r.rounded({side*5.5f,10.8f,hz+2},{8,3,5},rgb(48,70,63));
-   r.rounded({side*5.5f,12.2f,hz+2},{6,2,2.3f},Gold);
-   r.tapered({side*2,11,hz+6},{side*10,8,hz+8},4,3,body,.7f);
+   r.rounded({side*5.5f,10.8f+lean*.8f,hz+2},{8,3,5},rgb(48,70,63));
+   r.rounded({side*5.5f,12.2f+lean*.8f,hz+2},{6,2,2.3f},Gold);
+   r.tapered({side*2,11+lean*.8f,hz+6},{side*10,8+lean*.8f,hz+8},4,3,body,.7f);
   }}
   else{
    // A fitted hood leaves the face exposed, with cloth folds at the temples.

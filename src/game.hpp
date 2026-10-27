@@ -5,16 +5,21 @@
 #include "loot.hpp"
 #include "commerce.hpp"
 #include "treant_gait.hpp"
+#include "guardian_gait.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
 #include <random>
 #include <string>
 #include <vector>
+#include "generated/guardian_throw_data.hpp"
+#include "generated/guardian_shatter_data.hpp"
+#include "generated/creature_motion_data.hpp"
 
 namespace ember {
 constexpr int MapSize=72, BagSize=25, EquipSize=6;
 constexpr int MushroomCount=48,MushroomHealing=10;
+inline std::int64_t experienceForLevel(int level){std::int64_t n=std::clamp(level,1,100000);return 100*n+2*n*(n-1);}
 constexpr int WeaponWheelSize=8;
 constexpr float BowDrawDuration=1.4f,BowMinRange=2,BowMaxRange=12,BowCooldown=.38f;
 constexpr float MapWalkMin=1.6f,MapWalkMax=MapSize-2.6f;
@@ -25,6 +30,13 @@ constexpr float EnemySightRange=6.5f,PatrolRadius=2.5f,PatrolSpeedFactor=.6f;
 constexpr float MeleeRange=2.1f, SwingDuration=.32f;
 constexpr float RollDuration=.4f, RollSpeed=7.f, RollCooldown=1.2f, RollProtection=.28f;
 constexpr float FireballCost=10,FireballCooldown=.8f,FireballSpeed=8,FireballRange=8,ManaRegenInterval=5;
+constexpr float BoulderWindup=guardian_motion::Windup,BoulderRecovery=guardian_motion::Recovery,BoulderFirstDelay=.5f,BoulderCooldown=3.5f;
+constexpr float BoulderMinRange=2.5f,BoulderMaxRange=EnemySightRange,BoulderSpeed=11.f,BoulderMinFlight=.2f;
+constexpr float BoulderDamage=24,BoulderImpactRadius=.72f,BoulderRadius=.38f,GuardianBodyScale=guardian_gait::Scale,BoulderSpriteSize=76;
+constexpr float BoulderKnockbackRadius=1.6f,BoulderKnockbackDuration=.48f,BoulderKnockbackDistance=1.35f;
+constexpr float HeroKnockdownDuration=1.85f;
+constexpr size_t MaxBoulders=8,MaxBoulderImpacts=24;
+constexpr float BoulderImpactClock=.4f; // Preserve the v2 save clock; phase spans the longer Synfig clip.
 enum class Attribute { Strength,MagicPower,Defense,MagicDefense,Vitality,Mana,Count };
 constexpr int AttributeCount=int(Attribute::Count),PointsPerLevel=5;
 using Attributes=std::array<int,AttributeCount>;
@@ -56,6 +68,13 @@ struct Enemy {
  EnemyBehavior behavior=EnemyBehavior::Idle;
  V patrolGoal{};float patrolWait=0,patrolBlocked=0;unsigned patrolSequence=0;bool patrolGoalActive=false;
  double sandPrisonCd=SandPrisonInterval;float sandCastPulse=0;int sandPrisonCasts=0;
+ float boulderCd=BoulderFirstDelay,boulderWindup=0,boulderRecovery=0;V boulderTarget{};int boulderThrows=0;
+ float boulderProgress()const{
+  if(type!=3)return -1;
+  if(boulderWindup>0)return (BoulderWindup-boulderWindup)/(BoulderWindup+BoulderRecovery);
+  if(boulderRecovery>0)return (BoulderWindup+BoulderRecovery-boulderRecovery)/(BoulderWindup+BoulderRecovery);
+  return -1;
+ }
  float attackPose()const{
   float regular=windup>0?-std::clamp(1-windup/.42f,0.f,1.f):strike>0?std::sin((1-strike/.22f)*3.14159265f):0;
   return sandCastPulse>0?std::sin((1-sandCastPulse/SandCastDuration)*3.14159265f):regular;
@@ -75,6 +94,9 @@ struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
 struct Arrow {V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false;};
 struct PierceFlash {V pos;float life=.26f;};
 struct Explosion { V pos;float life=.35f; };
+struct Boulder {V origin,target,pos;float age=0,duration=1,height=0,startHeight=0,damage=BoulderDamage;int owner=-1;};
+struct BoulderImpact {V pos;float life=BoulderImpactClock;float progress()const{return std::clamp(1-life/BoulderImpactClock,0.f,1.f);}};
+struct BoulderSocket {V ground;float height;};
 inline float segmentCircle(V start,V delta,V center,float radius){
  V offset=start-center;float c=offset.x*offset.x+offset.y*offset.y-radius*radius;
  if(c<=0)return 0;
@@ -102,16 +124,37 @@ struct Game {
   for(const auto& c:chests)if(c.location==location){float d=distance(player,c.pos);if(d<=nearest){nearest=d;id=c.id;}}
   return id>=0&&openChest(id);
  }
+ std::array<bool,FountainCount> fountainUsed{};
+ std::array<float,FountainCount> fountainDrain{};
+ bool useFountain(int id){
+  if(!inDesert()||id<0||id>=FountainCount||dead()||allocationRequired||storyBlocked()||rolling()||sandTrapped()||knockedBack())return false;
+  if(distance(player,DesertFountains[id])>FountainUseRange){say("Podejdź do fontanny (maks. 2,5 pola).");return false;}
+  if(fountainUsed[id]){say("Źródło zostało wyczerpane. Pozostała sucha misa.");return false;}
+  if((id==0?mana:hp)>=(id==0?maxMana():maxHp())){say(id==0?"Mana jest już pełna. Źródło zachowuje moc.":"Zdrowie jest już pełne. Źródło zachowuje moc.");return false;}
+  cancelBow();fountainUsed[id]=true;fountainDrain[id]=FountainDrainDuration;
+  if(id==0){mana=float(maxMana());manaRegenTime=0;}else{hp=float(maxHp());healingPulse=HealingDuration;}
+  sound(Cue::Spell,DesertFountains[id]);say(id==0?"Błękitna Pieczęć odnowiła całą manę. Źródło wyschło.":"Szkarłatny Świt odnowił całe zdrowie. Źródło wyschło.");return true;
+ }
+ bool useNearestFountain(){
+  if(!inDesert())return false;int id=-1;float nearest=FountainUseRange;
+  for(int i=0;i<FountainCount;i++){float d=distance(player,DesertFountains[i]);if(d<=nearest){id=i;nearest=d;}}
+  if(id<0)return false;useFountain(id);return true; // Consume E even on a dry/full source.
+ }
+ void clearFountainSites(){
+  auto clear=[](std::vector<Prop>& list){list.erase(std::remove_if(list.begin(),list.end(),[](const Prop& p){return nearDesertFountain(p.pos,propRadius(p.type)+1.f);}),list.end());};
+  if(fieldLocation==WorldLocation::Desert)clear(props);else clear(desertState.props);
+ }
  std::mt19937 rng{12593},combatRng{12593};
  // Separate attack rolls from loot: one independent 5% roll per successful attack.
  bool rollCritical(){return std::uniform_int_distribution<int>(1,100)(combatRng)<=CriticalChancePercent;}
- V player{8,19},facing{0,-1};
+ V player=ForestArrival,facing{0,-1};
  AnimationState animation{};
  std::array<Item,BagSize> bag{};std::array<Item,EquipSize> equipment{};
  std::vector<Ground> ground,forage;std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Effect> effects;
  std::array<WeaponBinding,WeaponWheelSize> weaponWheel{};
  std::vector<Arrow> arrows;bool bowDrawing=false;float bowDrawTime=0,bowReleaseTime=0,lastBowCharge=0;V bowAim{0,-1};
  std::vector<Fireball> fireballs;std::vector<Explosion> explosions;
+ std::vector<Boulder> boulders;std::vector<BoulderImpact> boulderImpacts;
  Attributes attributes{};int attributePoints=0;bool allocationRequired=false;
  SkillRanks skillRanks{};int skillPoints=0;
  float healingCd=0,healingPulse=0;
@@ -122,6 +165,16 @@ struct Game {
  void sound(Cue cue,V position){if(sounds.size()<64)sounds.push_back({cue,position.x,position.y});}
  float hp=100,mana=100,attackCd=0,spellCd=0,potionCd=0,swing=0,hurt=0,time=0;
  float rollRemaining=0,rollCd=0;V rollDirection{};
+ V heroKnockback{};float heroKnockbackRemaining=0;
+ float heroKnockdownRemaining=0,heroKnockdownFacing=0;
+ bool knockedBack()const{return heroKnockbackRemaining>0||heroKnockdownRemaining>0;}
+ float knockdownProgress()const{return heroKnockdownRemaining>0?std::clamp(1-heroKnockdownRemaining/HeroKnockdownDuration,0.f,1.f):-1;}
+ float knockdownFacingAngle()const{
+  V away=normalized(heroKnockback);if(length(away)<.001f)return heroKnockdownFacing;
+  float target=std::atan2(-(away.x+away.y)*.5f,-(away.x-away.y));
+  float t=std::clamp((HeroKnockdownDuration-heroKnockdownRemaining)/.12f,0.f,1.f);t=t*t*(3-2*t);
+  return heroKnockdownFacing+std::remainder(target-heroKnockdownFacing,6.28318530718f)*t;
+ }
  float sandPrisonRemaining=0;
  bool sandTrapped()const{return sandPrisonRemaining>0;}
  void clearSandPrison(){sandPrisonRemaining=0;}
@@ -133,7 +186,8 @@ struct Game {
   caster.sandPrisonCasts++;sound(Cue::EnemyAttack,caster.pos);
   say("Piaskowe więzienie! Ruch i ataki zablokowane na 3 sekundy.");
  }
- int level=1,xp=0,kills=0,nextGround=1;bool bossDead=false;
+ int level=1;std::int64_t xp=0;int kills=0,nextGround=1;bool bossDead=false;
+ int merchantArrows=MerchantArrowCapacity;
  WorldLocation location=WorldLocation::Forest;DawnQuest dawnQuest=DawnQuest::Seeking;
  int towerFloor=0,towerRuneMask=0;std::int64_t gold=0;
  bool towerReturnPending=false,desertBossDead=false,desertCreated=false;int collectedFragments=0;
@@ -147,6 +201,7 @@ struct Game {
  bool mageReachable()const{return inTower()&&towerFloor==0&&!dead()&&!allocationRequired&&!storyBlocked()&&distance(player,MagePosition)<=MageTalkRange;}
  bool takeTowerReturn(){bool pending=towerReturnPending;towerReturnPending=false;return pending;}
  void enterMageTower(){
+  cancelBoulderAttacks();
   clearSandPrison();location=WorldLocation::MageTower;towerFloor=0;player=TowerArrival;facing=normalized(MagePosition-player);animation={};animation.face(facing.x,facing.y);
   cancelBow();closeCorpse();rollRemaining=rollCd=swing=attackCd=spellCd=hurt=stepDistance=0;
   arrows.clear();fireballs.clear();explosions.clear();effects.clear();pierceFlashes.clear();sounds.clear();healingPulse=0;
@@ -226,7 +281,7 @@ struct Game {
  float swingProgress()const{return swing>0?std::clamp(1-swing/meleeDuration,0.f,1.f):-1.f;}
  float rollProgress()const{return rolling()?1-rollRemaining/RollDuration:-1.f;}
  bool startRoll(V input){
-  if(sandTrapped()||dead()||allocationRequired||storyBlocked()||rolling()||rollCd>0)return false;
+  if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||rolling()||rollCd>0)return false;
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
   rollDirection=normalized(length(input)>.001f?input:directions[int(animation.direction)]);
   facing=rollDirection;animation.face(facing.x,facing.y);animation.moving=false;animation.stopSprint();
@@ -305,8 +360,8 @@ struct Game {
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
- bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&desertWater(p))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
- void move(V delta){if(sandTrapped())return;V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(length(delta)>.001f&&!combatFacingActive())facing=normalized(delta);}
+ bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
+ void move(V delta,bool turn=true){if(sandTrapped())return;V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(turn&&length(delta)>.001f&&!combatFacingActive())facing=normalized(delta);}
  Enemy* findEnemy(int id){for(auto&e:enemies)if(e.id==id&&e.alive)return &e;return nullptr;}
  void hit(Enemy& e,float amount,DamageType type=DamageType::Physical,bool critical=false){
   if(!e.alive)return;
@@ -316,15 +371,17 @@ struct Game {
   float lift=0;for(const auto& effect:effects)if(effect.damageNumber&&distance(effect.pos,e.pos)<.1f)lift=std::max(lift,effect.height-enemyInfo(e.type).visualHeight+24);
   effects.push_back({e.pos,std::to_string(int(std::round(amount))),critical?1.25f:.95f,0,true,critical,enemyInfo(e.type).visualHeight+18+std::min(lift,90.f)});
   const Cue materials[]={Cue::SlimeHit,Cue::WolfHit,Cue::BoneHit,Cue::StoneHit,Cue::WolfHit,Cue::SlimeHit,Cue::WolfHit,Cue::StoneHit};sound(materials[std::clamp(e.type,0,ForestEnemyTypeCount-1)],e.pos);
-  if(e.hp>0)return;e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;sound(enemyBoss(e.type)?Cue::Victory:Cue::EnemyFall,e.pos);kills++;xp+=enemyInfo(e.type).experience;
+  if(e.hp>0)return;e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=e.boulderWindup=e.boulderRecovery=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;
+  boulders.erase(std::remove_if(boulders.begin(),boulders.end(),[&](const Boulder& b){return b.owner==e.id;}),boulders.end());
+  sound(enemyBoss(e.type)?Cue::Victory:Cue::EnemyFall,e.pos);kills++;xp+=enemyInfo(e.type).experience;
   e.loot=rollEnemyLoot(e.type,rng);
   if(e.type==3){bossDead=true;say("Kamienny Strażnik pokonany! PPM na ciele: łup i część Serca Świtu.");}
-  else if(e.type==DesertBossType){desertBossDead=true;say("Żywa Wydma rozsypała się! PPM: łup i druga część Serca Świtu.");}
+  else if(e.type==DesertBossType){if(!desertBossDead)merchantArrows=MerchantArrowCapacity;desertBossDead=true;say("Żywa Wydma rozsypała się! PPM: łup i druga część Serca Świtu.");}
   else say("Przeciwnik pokonany. Otwórz jego ciało prawym przyciskiem myszy.");
-  while(xp>=level*80){xp-=level*80;level++;attributePoints+=PointsPerLevel;skillPoints+=SkillPointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
+  while(xp>=experienceForLevel(level)){xp-=experienceForLevel(level);level++;attributePoints+=PointsPerLevel;skillPoints+=SkillPointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
  }
  bool attack(V aim={}){
-  if(sandTrapped()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)==Kind::Bow)return false;
+  if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)==Kind::Bow)return false;
   aimMelee(aim);
   animation.swordStow=0;attackCd=.46f;meleeDuration=SwingDuration;swingStrong=false;swing=SwingDuration;sound(Cue::Swing,player);
   // Capture once: a kill can level up the player during this same swing.
@@ -333,7 +390,7 @@ struct Game {
   return true;
  }
  bool spell(V aim={}){
-  if(sandTrapped()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||spellCd>0||bowDrawing)return false;
+  if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||spellCd>0||bowDrawing)return false;
   if(selectedSpell==Spell::None){say("Wybierz czar w księdze (K lub kafelek czaru).");sound(Cue::Reject,player);return false;}
   if(mana<FireballCost){say("Kula ognia wymaga 10 many.");sound(Cue::Reject,player);return false;}
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
@@ -351,6 +408,7 @@ struct Game {
    auto& ball=fireballs[i];float travel=std::min(ball.remaining,FireballSpeed*dt);
    V delta=normalized(ball.velocity)*travel;float first=2;
    for(const auto& e:enemies)if(e.alive)first=std::min(first,segmentCircle(ball.pos,delta,e.pos,e.radius()+.18f));
+   if(inDesert())for(V f:DesertFountains)first=std::min(first,segmentCircle(ball.pos,delta,f,FountainRadius+.18f));
    for(const auto& p:props)first=std::min(first,segmentCircle(ball.pos,delta,p.pos,propRadius(p.type)+.18f));
    V end=ball.pos+delta;
    for(int axis=0;axis<2;axis++){
@@ -366,6 +424,7 @@ struct Game {
  }
  float incomingDamage(float amount,DamageType type)const{return damageAfterArmor(amount,type==DamageType::Magic?magicDefense():defense());}
  #include "enemy_ai.hpp"
+ #include "guardian_boulder.hpp"
  float constrainEnemy(Enemy& e){
   const float radius=e.radius();
   V before=e.pos;
@@ -373,6 +432,7 @@ struct Game {
   e.pos.y=std::clamp(e.pos.y,1.6f+radius,MapWalkMax-radius);
   float correction=distance(before,e.pos);
   if(inDesert()&&desertWater(e.pos,radius)){V d=e.pos-DesertOasis;float n=length(d);float gap=2.45f+radius+.002f;correction=std::max(correction,gap-n);e.pos=DesertOasis+normalized(n>.0001f?d:V{1,0})*gap;}
+  if(inDesert())for(V f:DesertFountains){V d=e.pos-f;float n=length(d),gap=FountainRadius+radius+.002f;if(n<gap){correction=std::max(correction,gap-n);e.pos=f+normalized(n>.00001f?d:V{1,0})*gap;}}
   for(const auto& p:props){
    V delta=e.pos-p.pos;float d=length(delta),clearance=radius+propRadius(p.type)+.002f;
    if(d<clearance){correction=std::max(correction,clearance-d);V normal=d>.00001f?delta*(1/d):V{1,0};e.pos=p.pos+normal*clearance;}
@@ -427,12 +487,15 @@ struct Game {
   for(auto& flash:pierceFlashes)flash.life-=dt;pierceFlashes.erase(std::remove_if(pierceFlashes.begin(),pierceFlashes.end(),[](const auto& flash){return flash.life<=0;}),pierceFlashes.end());
   for(auto&e:effects)e.life-=dt;effects.erase(std::remove_if(effects.begin(),effects.end(),[](auto&e){return e.life<=0;}),effects.end());
   for(auto& e:explosions)e.life-=dt;explosions.erase(std::remove_if(explosions.begin(),explosions.end(),[](auto& e){return e.life<=0;}),explosions.end());
-  if(dead()){clearSandPrison();cancelBow();animation.moving=false;animation.stopSprint();rollRemaining=0;closeCorpse();return;}
+  for(auto& e:boulderImpacts)e.life-=dt*(BoulderImpactClock/guardian_break::Duration);boulderImpacts.erase(std::remove_if(boulderImpacts.begin(),boulderImpacts.end(),[](const auto& e){return e.life<=0;}),boulderImpacts.end());
+  if(inDesert())for(auto& drain:fountainDrain)tick(drain);
+  if(dead()){cancelBoulderAttacks();clearSandPrison();cancelBow();animation.moving=false;animation.stopSprint();rollRemaining=0;closeCorpse();return;}
   if(bowDrawing){if(archetype(equipment[0].kind)!=Kind::Bow||ammoCount()<=0)cancelBow();else bowDrawTime=std::min(BowDrawDuration,bowDrawTime+dt);}
   const float movementDt=std::max(0.f,dt-std::min(dt,sandPrisonRemaining));
   tick(sandPrisonRemaining);if(sandPrisonRemaining<.00001f)sandPrisonRemaining=0;
-  const bool wasRolling=rolling();const float rollElapsed=RollDuration-rollRemaining;
+  const bool wasRolling=rolling(),wasKnockedBack=knockedBack();const float rollElapsed=RollDuration-rollRemaining;
   V before=player;float walkTime=movementDt;
+  walkTime=std::max(0.f,walkTime-updateHeroKnockback(dt));
   if(wasRolling){
    float stepTime=std::min(dt,rollRemaining);walkTime-=stepTime;
    // Small collision steps prevent a fast roll from skipping thin obstacles.
@@ -444,23 +507,25 @@ struct Game {
   move(normalized(input)*(walkTime*speed));
   if(openedCorpse>=0&&!corpseReachable(openedCorpse))closeCorpse();
   if(openedChest>=0&&!chestReachable(openedChest))openedChest=-1;
-  if(wasRolling){animation.stopSprint();animation.face(rollDirection.x,rollDirection.y);animation.advance(0,0,dt);animation.swordStow=1;}
+  if(wasKnockedBack){float stow=animation.swordStow;animation.stopSprint();animation.advance(0,0,dt);animation.swordStow=stow;}
+  else if(wasRolling){animation.stopSprint();animation.face(rollDirection.x,rollDirection.y);animation.advance(0,0,dt);animation.swordStow=1;}
   else {
    // Resolve combat aim before smoothing; locomotion still advances the gait.
    const bool aiming=combatFacingActive();
    if(bowDrawing||bowReleaseTime>0)animation.face(bowAim.x,bowAim.y);
    animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing,!aiming,swing<=0);
   }
-  if(!wasRolling){stepDistance+=distance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
+  if(!wasRolling&&!wasKnockedBack){stepDistance+=distance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
   if(mana<maxMana()){
    manaRegenTime+=dt;
    if(manaRegenTime+.00001f>=ManaRegenInterval){mana=std::min(float(maxMana()),mana+1);manaRegenTime=std::max(0.f,manaRegenTime-ManaRegenInterval);}
   }else manaRegenTime=0;
   if(inTower())return; // The forest remains intact but does not simulate in the tower.
-  if(attackPressed&&!wasRolling)attack();
+  if(attackPressed&&!wasRolling&&!wasKnockedBack)attack();
   if(allocationRequired)return;
   updateArrows(dt);if(allocationRequired)return;
   updateFireballs(dt);if(allocationRequired)return;
+  updateBoulders(dt,before,wasRolling,rollElapsed);
   std::vector<V> oldPositions,desired(enemies.size());oldPositions.reserve(enemies.size());
   for(size_t i=0;i<enemies.size();i++){auto& e=enemies[i];oldPositions.push_back(e.pos);tick(e.flash);tick(e.attack);tick(e.strike);if(!e.alive){e.animation.moving=false;continue;}float d=distance(player,e.pos);
    tick(e.sandCastPulse);
@@ -470,6 +535,7 @@ struct Game {
     e.sandPrisonCd-=dt;
     if(e.sandPrisonCd<=.00001f){e.sandPrisonCd+=SandPrisonInterval;imprisonInSand(e);}
    }
+   if(updateGuardianThrow(e,dt,visible,d))continue;
    if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(d<(e.type==DesertBossType?2.15f:1.6f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead()){float dmg=incomingDamage(float(e.damage()),e.attackType());hp=std::max(0.f,hp-dmg);hurt=.2f;sound(dead()?Cue::Death:Cue::Hurt,player);effects.push_back({player,"-"+std::to_string(int(dmg)),.8f,4});}
@@ -488,9 +554,11 @@ struct Game {
     e.patrolBlocked=length(movement)<length(desired[i])*dt*.15f?e.patrolBlocked+dt:0;
     if(e.patrolBlocked>.65f){e.patrolGoalActive=false;e.patrolBlocked=0;}
    }
-   if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
+   if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
+   else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
    else e.animation.advance(movement.x,movement.y,dt);
-   if(e.windup>0)e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
+   if(e.boulderWindup>0||e.boulderRecovery>0)e.animation.face(e.boulderTarget.x-e.pos.x,e.boulderTarget.y-e.pos.y);
+   else if(e.windup>0)e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
   }
  }
 };

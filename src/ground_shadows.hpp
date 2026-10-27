@@ -73,11 +73,12 @@ template<class Draw>inline void billboard(float anchorY,Draw draw){
  rlPushMatrix();rlMultMatrixf(matrix);draw();rlPopMatrix();
 }
 inline void player(Vector2 p,float size=1,const AnimationState* special=nullptr){
- const AnimationState& state=special?*special:game.animation;
+ AnimationState state=special?*special:game.animation;
  float progress=special?-1:game.swingProgress(),attack=progress>=0?std::sin(progress*PI):0;
  actor_art::shadowCacheKey=0;
+ float fall=special?-1:game.knockdownProgress(),fallR=0,fallF=-1;if(fall>=0)actor_art::prepareKnockdown(game,state,fallR,fallF);
  actor_art::draw(0,p.x,p.y,size,state,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,nullptr,
- special?-1:game.rollProgress(),progress,special?-1:game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),!special&&game.empoweredPose(),&game.equipment);
+ special?-1:game.rollProgress(),progress,special?-1:game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),!special&&game.empoweredPose(),&game.equipment,-1,fall,fallR,fallF);
  actor_art::shadowCacheKey=-1;visibleCasters++;
 }
 inline void mage(Vector2 p,float size,float time,float casting){
@@ -149,8 +150,11 @@ inline void prepare(bool chamber=false){
     bool body=p.x>-140&&p.x<WorldW+140&&p.y>-20&&p.y<H+160;
     if(!casts&&!body)continue;
     actor_art::shadowCasting=casts;actor_art::shadowCacheKey=100+e.id;
-    actor_art::draw(e.type+1,p.x,p.y,1,e.animation,e.attackPose(),false,false,Kind::Sword,e.flash>0);
+    actor_art::drawEnemy(e,p.x,p.y);
     actor_art::shadowCacheKey=-1;actor_art::shadowCasting=true;
+   }else if(e.type==DesertBossType){
+    const auto& tex=fallen_art::sprites[e.type][std::clamp(int(e.animation.direction),0,7)].body;
+    if(near(p,200))sprite(tex,{p.x-fallen_art::OriginX,p.y-fallen_art::OriginY,float(fallen_art::Width),float(fallen_art::Height)},p,false);
    }else{
     const auto& shadow=fallen_art::sprites[std::clamp(e.type,0,EnemyTypeCount-1)][std::clamp(int(e.animation.direction),0,7)].ground;
     const auto& tex=shadow.art.texture;
@@ -158,8 +162,17 @@ inline void prepare(bool chamber=false){
     shadow_geometry::draw(shadow,p);
    }
    visibleCasters++;
+   if(e.alive&&e.type==3&&e.boulderWindup>0&&guardian_art::stone.id){
+    auto socket=Game::boulderHand(e,e.boulderProgress());Vector2 p=screen(socket.ground);
+    if(near(p,200))sprite(guardian_art::stone,{p.x-BoulderSpriteSize*.5f,p.y-socket.height-BoulderSpriteSize*.5f,BoulderSpriteSize,BoulderSpriteSize},p,false);
+   }
   }
+  if(game.inDesert())for(int i=0;i<FountainCount;i++){Vector2 p=screen(DesertFountains[i]);if(near(p,200)){billboard(p.y,[&]{fountain_art::draw(i,false);});visibleCasters++;}}
   for(const auto& shot:game.arrows)if(near(screen(shot.pos),70)){arrow(shot);visibleCasters++;}
+  for(const auto& b:game.boulders){Vector2 p=screen(b.pos);if(near(p,200)&&guardian_art::stone.id){sprite(guardian_art::stone,{p.x-BoulderSpriteSize*.5f,p.y-b.height-BoulderSpriteSize*.5f,BoulderSpriteSize,BoulderSpriteSize},p,false);visibleCasters++;}}
+  for(const auto& impact:game.boulderImpacts)if(near(screen(impact.pos),180)&&guardian_art::fragments.id)for(int piece=0;piece<guardian_break::Pieces;piece++){
+   Vector2 p=guardian_art::fragmentGround(impact,piece);billboard(p.y,[&]{guardian_art::fragment(impact,piece);});visibleCasters++;
+  }
   if(!game.dead()||int(game.time*5)%2==0)player(screen(game.player));
   if(game.sandTrapped()){Vector2 p=screen(game.player);billboard(p.y,[&]{sand_prison::drawMound(p,false);sand_prison::drawMound(p,true);});}
   for(const auto& item:game.forage)if(!item.value.empty()&&near(screen(item.pos),40)&&(dragging.place!=Place::Forage||dragging.index!=item.id)){

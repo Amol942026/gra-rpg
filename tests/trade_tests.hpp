@@ -62,5 +62,19 @@ void tradeTests(){
   if(state==3)g.hp=0;if(state==4)g.allocationRequired=true;if(state==5)g.dawnQuest=DawnQuest::Returning;
   check(g.buyMerchantItem(0)==TradeResult::Unavailable&&g.sellMerchantItem({Place::Bag,0})==TradeResult::Unavailable&&same(old,g.bag)&&same(gear,g.equipment)&&g.gold==1000,"wrong location, distance, death and locked story states cannot trade");
  }
+ g=trader();g.gold=10000;g.bag={};beforeGold=g.gold;
+ check(g.merchantArrows==20&&g.buyMerchantItem(2,21)==TradeResult::OutOfStock&&g.gold==beforeGold&&g.bagCount(Kind::Arrow)==0,"arrow shop rejects quantities above its total stock atomically");
+ check(g.buyMerchantItem(2,7)==TradeResult::Success&&g.merchantArrows==13&&g.bagCount(Kind::Arrow)==7,"partial arrow purchase decrements the shared stock");
+ for(int n=0;n<13;n++)check(g.buyMerchantItem(2)==TradeResult::Success,"single purchases consume the same finite arrow stock");
+ old=g.bag;beforeGold=g.gold;
+ check(g.merchantArrows==0&&g.buyMerchantItem(2)==TradeResult::OutOfStock&&same(old,g.bag)&&g.gold==beforeGold,"twenty arrows exhaust stock across separate transactions");
+ check(g.sellMerchantItem({Place::Bag,0},5)==TradeResult::Success&&g.merchantArrows==0,"selling arrows cannot replenish the one-off store supply");
+ g.enterMageTower();g.towerFloor=MerchantFloor;g.player=MerchantPosition+V{-1,0};
+ check(g.merchantArrows==0&&g.buyMerchantItem(2)==TradeResult::OutOfStock,"closing and reopening the store or travelling cannot restock arrows");
+ Enemy forestBoss{13,3,g.player,g.player,1,1};g.hit(forestBoss,1000);check(g.merchantArrows==0,"first boss does not refill the arrow supply");
+ g.activateField(WorldLocation::Desert);auto* dune=g.findEnemy(DesertBossId);g.hit(*dune,10000);
+ check(g.desertBossDead&&g.merchantArrows==20,"actual death of the second boss restores a fresh stock of twenty arrows");
+ g.merchantArrows=3;Enemy duplicate{9999,DesertBossType,g.player,g.player,1,1};g.hit(duplicate,1000);
+ check(g.merchantArrows==3,"repeated death notifications cannot create another arrow shipment");
  g=trader();g.gold=321;g.player=TowerStairDown;check(g.climbTower(-1)&&g.gold==321,"gold survives ordinary floor changes");
 }

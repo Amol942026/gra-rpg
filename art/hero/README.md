@@ -1,5 +1,44 @@
 # Bohater — Krita i Synfig, 20.10.2026
 
+**Aktualizacja 26.10.2026 — szybsze wstawanie:** obecny ruch trwa 1,85 s.
+Zachowano lot obu stóp i kontakt pleców w 0,45 s; odpoczynek skrócono do
+0,66–0,80 s, podparcie bokiem następuje w 1,07 s, kolano w 1,24 s,
+pozycja stojąca w 1,75 s. Natywny SIF ponownie wyrenderowano w Synfigu:
+111 klatek, 112 próbek × 17 kości, 53 312 bajtów kluczy. Nie dodano tekstur
+bohatera. Master: `C:\AI2D\animations\emberfall_backfall_fast_20261026`.
+Źródła w `knockdown/` są aktualne; starsze opisy czasów poniżej są historyczne.
+
+
+## Upadek po uderzeniu głazu — 26.10.2026
+
+Aktualny ruch: odlot do tyłu z obiema stopami nad ziemią, lądowanie na
+plecach, odpoczynek z twarzą i klatką piersiową do góry, obrót na bok,
+podparcie dłonią, pozycja na kolanie i powolne wstawanie. Całość trwa 2,8 s,
+przesunięcie 0,48 s. Sterowanie wraca po wstaniu. Kierunek patrzenia jest
+ustalany przed lotem; leżące ciało nie jest obracane do dowolnego kierunku
+impulsu. Cień korzysta z tej samej pozy. Portret i kamera pozostają normalne.
+
+`knockdown/knockdown.sif`: natywny, edytowalny projekt Synfiga, 169 próbek
+kontroli i 168 rzeczywistych renderów przy 60 Hz. Istniejące części Krity i rig
+bohatera; bez nowych modeli i tekstur. Master i rendery:
+`C:\AI2D\animations\emberfall_backfall_20261026_v3`.
+
+Eksporter: `tools/media/hero_backfall_synfig.py`. Runtime:
+`src/generated/hero_knockdown_data.hpp` i `src/hero_knockdown.hpp`.
+Klip ma 80 444 bajty danych kości oraz 676 bajtów kąta pochylenia.
+Bez odczytów SIF, ładowania tekstur, IK i generowania klatek w pętli gry.
+`verify_hero_knockdown.py` porównuje źródło z eksportem i rzeczywistymi
+pozami w ramach testów Strażnika oraz rozpakowanej paczki gracza.
+
+```powershell
+$py='C:\Users\Amadeusz\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
+& $py tools/media/hero_backfall_synfig.py --root C:\AI2D\animations\hero_upadek_nowy --parts art/hero/motion/parts --header src/generated/hero_knockdown_data.hpp --render --no-audio
+```
+
+Sprawdzaj pauzę, kolizje, unik, zapis podczas leżenia i wstawania,
+osiem kierunków oraz wszystkie 39 elementów wyposażenia.
+[Aktualne wyniki i podgląd](../gameplay/guardian/QA.md).
+
 Nowe malowane detale są faktycznie używane przez renderer bohatera w świecie,
 portrecie i scenach fabularnych. Wyposażenie nadal wybiera własne materiały,
 kształty i insygnia dla wszystkich 39 przedmiotów. Miecz podczas biegu pozostaje

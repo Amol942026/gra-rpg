@@ -1,4 +1,4 @@
-3 ms: Emberfall v0.47: startup
+2 ms: Emberfall v0.47: startup
 3 ms: Build edition: developer
 3 ms: Creating graphics window
 3 ms: Initializing raylib 5.5
@@ -11,42 +11,46 @@
 3 ms:     > rtext:..... loaded (optional)
 3 ms:     > rmodels:... loaded (optional)
 3 ms:     > raudio:.... loaded (optional)
-122 ms: DISPLAY: Trying to enable VSYNC
-122 ms: DISPLAY: Device initialized successfully
-122 ms:     > Display size: 1920 x 1080
-123 ms:     > Screen size:  1440 x 900
-123 ms:     > Render size:  1800 x 1055
-123 ms:     > Viewport offsets: 0, 0
-129 ms: GLAD: OpenGL extensions loaded successfully
-129 ms: GL: Supported extensions count: 286
-129 ms: GL: OpenGL device information:
-129 ms:     > Vendor:   ATI Technologies Inc.
-129 ms:     > Renderer: AMD Radeon (TM) Graphics
-129 ms:     > Version:  3.3.0 Core Profile Context 23.19.10.04.240321
-129 ms:     > GLSL:     4.60
-129 ms: GL: VAO extension detected, VAO functions loaded successfully
-129 ms: GL: NPOT textures extension detected, full NPOT textures supported
-129 ms: GL: DXT compressed textures supported
-129 ms: GL: ETC2/EAC compressed textures supported
-130 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
-130 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
-130 ms: TEXTURE: [ID 1] Default texture loaded successfully
-164 ms: SHADER: [ID 1] Vertex shader compiled successfully
-165 ms: SHADER: [ID 2] Fragment shader compiled successfully
-185 ms: SHADER: [ID 3] Program shader loaded successfully
-185 ms: SHADER: [ID 3] Default shader loaded successfully
-185 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
-186 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
-186 ms: RLGL: Default OpenGL state initialized successfully
-186 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
-186 ms: FONT: Default font loaded successfully (224 glyphs)
-186 ms: SYSTEM: Working Directory: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\dist
-186 ms: Graphics window ready
-186 ms: Generating world graphics
-1741 ms: World graphics ready
-1742 ms: Audio skipped (--no-audio)
-1868 ms: First scene rendered
-1886 ms: First frame presented
-1886 ms: OpenGL V-sync
-1886 ms: Native OpenGL presentation
-17074 ms: Shutting down
+205 ms: DISPLAY: Trying to enable VSYNC
+205 ms: DISPLAY: Device initialized successfully
+205 ms:     > Display size: 1920 x 1080
+205 ms:     > Screen size:  1440 x 900
+205 ms:     > Render size:  1800 x 1055
+205 ms:     > Viewport offsets: 0, 0
+216 ms: GLAD: OpenGL extensions loaded successfully
+216 ms: GL: Supported extensions count: 286
+216 ms: GL: OpenGL device information:
+216 ms:     > Vendor:   ATI Technologies Inc.
+217 ms:     > Renderer: AMD Radeon (TM) Graphics
+217 ms:     > Version:  3.3.0 Core Profile Context 23.19.10.04.240321
+217 ms:     > GLSL:     4.60
+217 ms: GL: VAO extension detected, VAO functions loaded successfully
+217 ms: GL: NPOT textures extension detected, full NPOT textures supported
+217 ms: GL: DXT compressed textures supported
+217 ms: GL: ETC2/EAC compressed textures supported
+217 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+217 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+217 ms: TEXTURE: [ID 1] Default texture loaded successfully
+272 ms: SHADER: [ID 1] Vertex shader compiled successfully
+274 ms: SHADER: [ID 2] Fragment shader compiled successfully
+275 ms: SHADER: [ID 3] Program shader loaded successfully
+275 ms: SHADER: [ID 3] Default shader loaded successfully
+275 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+276 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+276 ms: RLGL: Default OpenGL state initialized successfully
+276 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+276 ms: FONT: Default font loaded successfully (224 glyphs)
+276 ms: SYSTEM: Working Directory: C:\Users\Amadeusz\Documents\GitHub\gra-rpg\dist
+276 ms: Graphics window ready
+284 ms: Generating world graphics
+2464 ms: World graphics ready
+2464 ms: Opening audio device
+2563 ms: Audio device ready
+2582 ms: Sound effects ready; loading music
+2585 ms: Audio initialization complete
+2689 ms: First scene rendered
+2746 ms: First frame presented
+2746 ms: OpenGL V-sync
+2746 ms: Native OpenGL presentation
+12578 ms: Developer session: desert / current character
+65080 ms: Shutting down

@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "package_sha256": "7d8faddbed72c25f384acf6bd63b118515294be598f7dd912731fc3efea87fc6",
+  "exe_sha256": "07568c565463a4cf918352bfb322b607f5b203f7c9af1730788245f19ed1c2df",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-balance-package-20261026-160714\\Emberfall",
+  "verified_assets": 111,
+  "tests": {
+    "status": "PASS",
+    "independent_checks": 48,
+    "integration_checks": 47,
+    "existing_ui_checks": {
+      "qa-v13": 22,
+      "qa-v27": 90
+    },
+    "directions": 8,
+    "cell": [
+      384,
+      256
+    ],
+    "rgba8_bytes": 3145728,
+    "audio_opened": false,
+    "xp_thresholds": [
+      100,
+      204,
+      312,
+      424,
+      540,
+      660,
+      784,
+      912,
+      1044,
+      1180
+    ],
+    "merchant_arrow_capacity": 20,
+    "save_version": 7
+  },
+  "startup_frames": 180,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_player": false
+}

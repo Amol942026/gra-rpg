@@ -1,0 +1,1556 @@
+PASS actual player renderer opens no audio device
+PASS complete guardian silhouette: 0-0.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-1.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-2.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-3.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-4.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-5.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-6.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-7.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-8.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-9.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-10.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-11.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-12.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-13.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-14.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-15.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-16.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-17.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-18.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-19.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-20.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-21.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-22.png
+PASS native frame exported
+PASS complete guardian silhouette: 0-23.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-0.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-1.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-2.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-3.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-4.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-5.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-6.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-7.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-8.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-9.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-10.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-11.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-12.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-13.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-14.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-15.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-16.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-17.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-18.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-19.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-20.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-21.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-22.png
+PASS native frame exported
+PASS complete guardian silhouette: 1-23.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-0.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-1.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-2.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-3.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-4.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-5.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-6.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-7.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-8.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-9.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-10.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-11.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-12.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-13.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-14.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-15.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-16.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-17.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-18.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-19.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-20.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-21.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-22.png
+PASS native frame exported
+PASS complete guardian silhouette: 2-23.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-0.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-1.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-2.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-3.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-4.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-5.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-6.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-7.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-8.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-9.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-10.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-11.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-12.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-13.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-14.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-15.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-16.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-17.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-18.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-19.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-20.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-21.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-22.png
+PASS native frame exported
+PASS complete guardian silhouette: 3-23.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-0.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-1.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-2.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-3.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-4.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-5.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-6.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-7.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-8.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-9.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-10.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-11.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-12.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-13.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-14.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-15.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-16.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-17.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-18.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-19.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-20.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-21.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-22.png
+PASS native frame exported
+PASS complete guardian silhouette: 4-23.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-0.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-1.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-2.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-3.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-4.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-5.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-6.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-7.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-8.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-9.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-10.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-11.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-12.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-13.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-14.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-15.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-16.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-17.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-18.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-19.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-20.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-21.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-22.png
+PASS native frame exported
+PASS complete guardian silhouette: 5-23.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-0.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-1.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-2.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-3.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-4.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-5.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-6.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-7.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-8.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-9.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-10.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-11.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-12.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-13.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-14.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-15.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-16.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-17.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-18.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-19.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-20.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-21.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-22.png
+PASS native frame exported
+PASS complete guardian silhouette: 6-23.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-0.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-1.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-2.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-3.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-4.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-5.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-6.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-7.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-8.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-9.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-10.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-11.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-12.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-13.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-14.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-15.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-16.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-17.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-18.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-19.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-20.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-21.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-22.png
+PASS native frame exported
+PASS complete guardian silhouette: 7-23.png
+PASS native frame exported
+PASS complete guardian silhouette: 0.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 1.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 2.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 3.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 4.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 5.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 6.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 7.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 8.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 9.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 10.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 11.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 12.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 13.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 14.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 15.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 16.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 17.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 18.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 19.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 20.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 21.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 22.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 23.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 24.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 25.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 26.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 27.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 28.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 29.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 30.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 31.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 32.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 33.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 34.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 35.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 36.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 37.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 38.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 39.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 40.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 41.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 42.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 43.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 44.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 45.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 46.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 47.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 48.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 49.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 50.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 51.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 52.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 53.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 54.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 55.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 56.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 57.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 58.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 59.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 60.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 61.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 62.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 63.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 64.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 65.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 66.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 67.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 68.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 69.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 70.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 71.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 72.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 73.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 74.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 75.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 76.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 77.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 78.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 79.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 80.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 81.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 82.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 83.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 84.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 85.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 86.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 87.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 88.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 89.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 90.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 91.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 92.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 93.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 94.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 95.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 96.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 97.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 98.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 99.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 100.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 101.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 102.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 103.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 104.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 105.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 106.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 107.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 108.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 109.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 110.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 111.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 112.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 113.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 114.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 115.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 116.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 117.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 118.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 119.png
+PASS native frame exported
+PASS real AI moves and animates: chase
+PASS complete guardian silhouette: 0.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 1.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 2.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 3.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 4.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 5.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 6.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 7.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 8.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 9.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 10.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 11.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 12.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 13.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 14.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 15.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 16.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 17.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 18.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 19.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 20.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 21.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 22.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 23.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 24.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 25.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 26.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 27.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 28.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 29.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 30.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 31.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 32.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 33.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 34.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 35.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 36.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 37.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 38.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 39.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 40.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 41.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 42.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 43.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 44.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 45.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 46.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 47.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 48.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 49.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 50.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 51.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 52.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 53.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 54.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 55.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 56.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 57.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 58.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 59.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 60.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 61.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 62.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 63.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 64.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 65.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 66.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 67.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 68.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 69.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 70.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 71.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 72.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 73.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 74.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 75.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 76.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 77.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 78.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 79.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 80.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 81.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 82.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 83.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 84.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 85.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 86.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 87.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 88.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 89.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 90.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 91.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 92.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 93.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 94.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 95.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 96.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 97.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 98.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 99.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 100.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 101.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 102.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 103.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 104.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 105.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 106.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 107.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 108.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 109.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 110.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 111.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 112.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 113.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 114.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 115.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 116.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 117.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 118.png
+PASS native frame exported
+PASS real renderer support foot stays fixed over the static ground
+PASS real renderer support foot stays fixed over the static ground
+PASS complete guardian silhouette: 119.png
+PASS native frame exported
+PASS real AI moves and animates: patrol
+PASS complete guardian silhouette: 0.png
+PASS native frame exported
+PASS complete guardian silhouette: 1.png
+PASS native frame exported
+PASS complete guardian silhouette: 2.png
+PASS native frame exported
+PASS complete guardian silhouette: 3.png
+PASS native frame exported
+PASS complete guardian silhouette: 4.png
+PASS native frame exported
+PASS complete guardian silhouette: 5.png
+PASS native frame exported
+PASS complete guardian silhouette: 6.png
+PASS native frame exported
+PASS complete guardian silhouette: 7.png
+PASS native frame exported
+PASS complete guardian silhouette: 8.png
+PASS native frame exported
+PASS complete guardian silhouette: 9.png
+PASS native frame exported
+PASS complete guardian silhouette: 10.png
+PASS native frame exported
+PASS complete guardian silhouette: 11.png
+PASS native frame exported
+PASS complete guardian silhouette: 12.png
+PASS native frame exported
+PASS complete guardian silhouette: 13.png
+PASS native frame exported
+PASS complete guardian silhouette: 14.png
+PASS native frame exported
+PASS complete guardian silhouette: 15.png
+PASS native frame exported
+PASS complete guardian silhouette: 16.png
+PASS native frame exported
+PASS complete guardian silhouette: 17.png
+PASS native frame exported
+PASS complete guardian silhouette: 18.png
+PASS native frame exported
+PASS complete guardian silhouette: 19.png
+PASS native frame exported
+PASS complete guardian silhouette: 20.png
+PASS native frame exported
+PASS complete guardian silhouette: 21.png
+PASS native frame exported
+PASS complete guardian silhouette: 22.png
+PASS native frame exported
+PASS complete guardian silhouette: 23.png
+PASS native frame exported
+PASS complete guardian silhouette: 24.png
+PASS native frame exported
+PASS complete guardian silhouette: 25.png
+PASS native frame exported
+PASS complete guardian silhouette: 26.png
+PASS native frame exported
+PASS complete guardian silhouette: 27.png
+PASS native frame exported
+PASS complete guardian silhouette: 28.png
+PASS native frame exported
+PASS complete guardian silhouette: 29.png
+PASS native frame exported
+PASS complete guardian silhouette: 30.png
+PASS native frame exported
+PASS complete guardian silhouette: 31.png
+PASS native frame exported
+PASS complete guardian silhouette: 32.png
+PASS native frame exported
+PASS complete guardian silhouette: 33.png
+PASS native frame exported
+PASS complete guardian silhouette: 34.png
+PASS native frame exported
+PASS complete guardian silhouette: 35.png
+PASS native frame exported
+PASS complete guardian silhouette: 36.png
+PASS native frame exported
+PASS complete guardian silhouette: 37.png
+PASS native frame exported
+PASS complete guardian silhouette: 38.png
+PASS native frame exported
+PASS complete guardian silhouette: 39.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 40.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 41.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 42.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 43.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 44.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 45.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 46.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 47.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 48.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 49.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 50.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 51.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 52.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 53.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 54.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 55.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 56.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 57.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 58.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 59.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 60.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 61.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 62.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 63.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 64.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 65.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 66.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 67.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 68.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 69.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 70.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 71.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 72.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 73.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 74.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 75.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 76.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 77.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 78.png
+PASS native frame exported
+PASS actual melee pause cannot march or advance the walking clock
+PASS complete guardian silhouette: 79.png
+PASS native frame exported
+PASS complete guardian silhouette: 80.png
+PASS native frame exported
+PASS complete guardian silhouette: 81.png
+PASS native frame exported
+PASS complete guardian silhouette: 82.png
+PASS native frame exported
+PASS complete guardian silhouette: 83.png
+PASS native frame exported
+PASS complete guardian silhouette: 84.png
+PASS native frame exported
+PASS complete guardian silhouette: 85.png
+PASS native frame exported
+PASS complete guardian silhouette: 86.png
+PASS native frame exported
+PASS complete guardian silhouette: 87.png
+PASS native frame exported
+PASS complete guardian silhouette: 88.png
+PASS native frame exported
+PASS complete guardian silhouette: 89.png
+PASS native frame exported
+PASS complete guardian silhouette: 90.png
+PASS native frame exported
+PASS complete guardian silhouette: 91.png
+PASS native frame exported
+PASS complete guardian silhouette: 92.png
+PASS native frame exported
+PASS complete guardian silhouette: 93.png
+PASS native frame exported
+PASS complete guardian silhouette: 94.png
+PASS native frame exported
+PASS complete guardian silhouette: 95.png
+PASS native frame exported
+PASS complete guardian silhouette: 96.png
+PASS native frame exported
+PASS complete guardian silhouette: 97.png
+PASS native frame exported
+PASS complete guardian silhouette: 98.png
+PASS native frame exported
+PASS complete guardian silhouette: 99.png
+PASS native frame exported
+PASS complete guardian silhouette: 100.png
+PASS native frame exported
+PASS complete guardian silhouette: 101.png
+PASS native frame exported
+PASS complete guardian silhouette: 102.png
+PASS native frame exported
+PASS complete guardian silhouette: 103.png
+PASS native frame exported
+PASS complete guardian silhouette: 104.png
+PASS native frame exported
+PASS complete guardian silhouette: 105.png
+PASS native frame exported
+PASS complete guardian silhouette: 106.png
+PASS native frame exported
+PASS complete guardian silhouette: 107.png
+PASS native frame exported
+PASS complete guardian silhouette: 108.png
+PASS native frame exported
+PASS complete guardian silhouette: 109.png
+PASS native frame exported
+PASS complete guardian silhouette: 110.png
+PASS native frame exported
+PASS complete guardian silhouette: 111.png
+PASS native frame exported
+PASS complete guardian silhouette: 112.png
+PASS native frame exported
+PASS complete guardian silhouette: 113.png
+PASS native frame exported
+PASS complete guardian silhouette: 114.png
+PASS native frame exported
+PASS complete guardian silhouette: 115.png
+PASS native frame exported
+PASS complete guardian silhouette: 116.png
+PASS native frame exported
+PASS complete guardian silhouette: 117.png
+PASS native frame exported
+PASS complete guardian silhouette: 118.png
+PASS native frame exported
+PASS complete guardian silhouette: 119.png
+PASS native frame exported
+PASS real AI moves and animates: stop-start
+PASS synchronized planted feet validated from native projected rig points
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS boulder animation keeps both feet at rest
+PASS unchanged real two-handed boulder attack still releases successfully
+PASS all movement and throw diagnostics remained silent
+Checks: 1552
+Failures: 0
+Contact samples: 287
+Max slip px: 0.000213623

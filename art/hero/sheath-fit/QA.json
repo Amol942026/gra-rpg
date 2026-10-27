@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "date": "2026-10-27",
+  "scope": "Closer player scabbard and five-point attribute allocation with cursor descriptions",
+  "silent": true,
+  "native_animation": {
+    "status": "PASS",
+    "project": "C:\\AI2D\\animations\\emberfall_sheath_close_20261027_v1\\sheathe.sif",
+    "project_sha256": "5525d7c3e64fb0caadf9e8f5139965c2d34b76a29b7006e2923d35f5024b757d",
+    "header_sha256": "cacd7461346013b56f80235e5bd495f2f87f5d63ce1aa9189985f21297d90c0c",
+    "duration": 0.6,
+    "rendered_frames": 72,
+    "reverse_for_draw": true,
+    "source": "Synfig native animated value nodes"
+  },
+  "clearance": {
+    "status": "PASS",
+    "poses": 485856,
+    "intersections": 0,
+    "head_minimum": 1.38002,
+    "torso_minimum": 1.00322,
+    "grip_error": 9.40035E-05,
+    "input_frames": 201600,
+    "input_intersections": 0,
+    "input_head_minimum": 1.41214,
+    "input_torso_minimum": 1.00437,
+    "audio": false
+  },
+  "game_logic": {
+    "status": "PASS",
+    "checks": 110661,
+    "binary": "dist/qa-sheath-attributes-20261027-v1/logic.exe",
+    "arguments": [
+      "--no-audio"
+    ]
+  },
+  "renderer": {
+    "status": "PASS",
+    "checks": 301,
+    "failures": 0,
+    "hero_views": 32,
+    "attribute_tooltips": 18,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 233,
+    "failures": [],
+    "native_frames": 72,
+    "hero_views": 32,
+    "attribute_tooltips": 18,
+    "audio_opened": false
+  },
+  "player_package": {
+    "status": "PASS",
+    "package_sha256": "4e2a356f9563528e1ab622716173462e98d2199695e2dd7bad5c56509440a756",
+    "exe_sha256": "ca7a7b866eb4bd09888d815d56894b69630fc28a6b411a8c32904a33fb0224b7",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-sheath-stats-package-20261027-175905\\Emberfall",
+    "verified_assets": 112,
+    "renderer": {
+      "status": "PASS",
+      "checks": 301,
+      "failures": 0,
+      "hero_views": 32,
+      "attribute_tooltips": 18,
+      "audio_opened": false
+    },
+    "independent": {
+      "status": "PASS",
+      "checks": 233,
+      "failures": [],
+      "native_frames": 72,
+      "hero_views": 32,
+      "attribute_tooltips": 18,
+      "audio_opened": false
+    },
+    "startup_frames": 180,
+    "audio_device_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_player": false
+  },
+  "backup": "art/pipeline/backups/sheath-attributes-20261027-174248",
+  "source_sha256": {
+    "src/progression_ui.hpp": "fe62e66f576e1452a5684540c01c6d34bd4cf068d795ab6fd8ab4a23cc93c0e4",
+    "src/hero_art.hpp": "1b29ddfe61d292dde2bc3d1b0ce9da41903d979d30552877c9b2eff7dd6f3970",
+    "src/visual_qa.hpp": "ca2f77138cb7b17563acea64974e7622a7933227b894b7e65c31da13eee92d1b",
+    "src/generated/sword_stow_data.hpp": "cacd7461346013b56f80235e5bd495f2f87f5d63ce1aa9189985f21297d90c0c",
+    "tools/media/sword_stow_synfig.py": "2c10aa39ce3f795c329b369151981e38e155a31e5c93d6abd081a1c3b41606d0",
+    "art/hero/stow/sheathe.sif": "5525d7c3e64fb0caadf9e8f5139965c2d34b76a29b7006e2923d35f5024b757d",
+    "art/hero/stow/draw.sif": "06c7f3cc1e7195efab28333a850d026997abf2b4d8bcc3caa259ed8a303a5e95",
+    "tests/sheath_stats_qa.cpp": "68879eee63cb610548467aae91a94f570d6b1ef717b5460967605142f22e4a77",
+    "tests/sheath_stats_qa.ps1": "fca5484b57fe408c1628bf87babac88a59512bf7b87740b581d66f3db4ec7a21",
+    "tests/sheath_stats_package_qa.ps1": "94a5c5b6b75cefb91a0232679152639201f55b06e0407b6807c00835be1d6cd6",
+    "tools/media/verify_sheath_stats.py": "6596e19a361f3de309548799520bc4b4d1b53611d8cc892a94f62053173c863d"
+  }
+}

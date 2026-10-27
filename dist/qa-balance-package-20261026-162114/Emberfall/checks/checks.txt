@@ -1,0 +1,51 @@
+PASS player code and all diagnostics keep the audio device closed
+PASS existing real stat allocation and spell UI regression suite
+PASS existing real skill unlocking, refund and confirmation regression suite
+PASS paused stat menu reuses one native-resolution world image
+PASS menu cache preserves native pixels without resampling the moving world
+PASS stat sheet has no adjustment buttons or symbols when there are no points
+PASS read-only stat clicks cannot create or spend points
+PASS skill sheet has no disabled plus/minus or editing controls without points
+PASS read-only skill clicks leave every skill locked
+PASS DODAJ previews a point without training it
+PASS COFNIJ returns only a pending point
+PASS text refund action cancels a skill selection
+PASS only explicit confirmation learns the selected skill
+PASS MAX caps arrow purchases at the actual shared stock of twenty
+PASS MAX buys exactly twenty extra arrows and exhausts merchant supply
+PASS double-click cannot bypass exhausted stock or spend gold
+PASS reopening merchant preserves exhausted stock
+PASS on-disk save/load cannot reset arrow stock
+PASS second boss death triggers exactly one replenishment event
+PASS boss XP attributes can be confirmed under the slower curve
+PASS boss XP skill point remains gated until confirmation
+PASS new fallen art remains selectable through real PPM corpse looting
+PASS Krita corpse is complete in facing 0
+PASS premultiplied edges and the cursor mask match the new corpse pixels
+PASS new runtime corpse texture exported
+PASS Krita corpse is complete in facing 1
+PASS premultiplied edges and the cursor mask match the new corpse pixels
+PASS new runtime corpse texture exported
+PASS Krita corpse is complete in facing 2
+PASS premultiplied edges and the cursor mask match the new corpse pixels
+PASS new runtime corpse texture exported
+PASS Krita corpse is complete in facing 3
+PASS premultiplied edges and the cursor mask match the new corpse pixels
+PASS new runtime corpse texture exported
+PASS Krita corpse is complete in facing 4
+PASS premultiplied edges and the cursor mask match the new corpse pixels
+PASS new runtime corpse texture exported
+PASS Krita corpse is complete in facing 5
+PASS premultiplied edges and the cursor mask match the new corpse pixels
+PASS new runtime corpse texture exported
+PASS Krita corpse is complete in facing 6
+PASS premultiplied edges and the cursor mask match the new corpse pixels
+PASS new runtime corpse texture exported
+PASS Krita corpse is complete in facing 7
+PASS premultiplied edges and the cursor mask match the new corpse pixels
+PASS new runtime corpse texture exported
+PASS boss death, remains and replenished arrows survive a real saved game
+PASS the refreshed supply supports double-click purchases after returning to the tower
+PASS all UI, death, loot and trade checks remained silent
+Checks: 49
+Failures: 0

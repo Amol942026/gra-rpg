@@ -2,6 +2,11 @@
 // The second realm has its own populations and landmark routes, on a 72x72 map.
 inline constexpr V DesertArrival{9,19},DesertPortal{8,17},DesertOasis{17,43},DesertBossHome{57,55};
 inline constexpr int DesertBossType=11,DesertBossId=1099;
+inline constexpr int FountainCount=2;
+inline constexpr std::array<V,FountainCount> DesertFountains={{{25,22},{50,37}}};
+inline constexpr float FountainRadius=.9f,FountainUseRange=2.5f,FountainDrainDuration=1.f;
+inline bool nearDesertFountain(V p,float padding=0){for(V f:DesertFountains)if(distance(p,f)<FountainRadius+padding)return true;return false;}
+inline const char* fountainName(int id){return id==0?"Źródło Błękitnej Pieczęci":"Źródło Szkarłatnego Świtu";}
 inline bool desertWater(V p,float padding=0){return distance(p,DesertOasis)<2.45f+padding;}
 inline float desertSegmentDistance(V p,V a,V b){V d=b-a;float n=d.x*d.x+d.y*d.y;float t=n>0?std::clamp(((p.x-a.x)*d.x+(p.y-a.y)*d.y)/n,0.f,1.f):0;return distance(p,a+d*t);}
 inline constexpr float SandPrisonInterval=10.f,SandPrisonDuration=3.f,SandCastDuration=.7f;

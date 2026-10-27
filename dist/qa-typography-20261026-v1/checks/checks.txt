@@ -1,0 +1,244 @@
+PASS player code; audio device remains closed
+PASS true heavier glyph coverage at size 14 scale 0.800000
+PASS true heavier glyph coverage at size 18 scale 0.800000
+PASS true heavier glyph coverage at size 21 scale 0.800000
+PASS true heavier glyph coverage at size 15 scale 0.800000
+PASS true heavier glyph coverage at size 28 scale 0.800000
+PASS true heavier glyph coverage at size 39 scale 0.800000
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS main-menu: no font upload during rendering
+PASS main-menu-80: native framebuffer pixels
+PASS options: no font upload during rendering
+PASS options-80: native framebuffer pixels
+PASS credits: no font upload during rendering
+PASS credits-80: native framebuffer pixels
+PASS load-menu: no font upload during rendering
+PASS load-menu-80: native framebuffer pixels
+PASS forest-hud: no font upload during rendering
+PASS forest-hud-80: native framebuffer pixels
+PASS stats: no font upload during rendering
+PASS stats-80: native framebuffer pixels
+PASS skills: no font upload during rendering
+PASS skills-80: native framebuffer pixels
+PASS spell-book: no font upload during rendering
+PASS spell-book-80: native framebuffer pixels
+PASS stats-allocation: no font upload during rendering
+PASS stats-allocation-80: native framebuffer pixels
+PASS skills-allocation: no font upload during rendering
+PASS skills-allocation-80: native framebuffer pixels
+PASS item-tooltip: no font upload during rendering
+PASS item-tooltip-80: native framebuffer pixels
+PASS help: no font upload during rendering
+PASS help-80: native framebuffer pixels
+PASS pause: no font upload during rendering
+PASS pause-80: native framebuffer pixels
+PASS audio: no font upload during rendering
+PASS audio-80: native framebuffer pixels
+PASS death: no font upload during rendering
+PASS death-80: native framebuffer pixels
+PASS dialogue: no font upload during rendering
+PASS dialogue-80: native framebuffer pixels
+FAIL merchant: no font upload during rendering
+PASS merchant-80: native framebuffer pixels
+PASS merchant-tooltip: no font upload during rendering
+PASS merchant-tooltip-80: native framebuffer pixels
+PASS tower-labels: no font upload during rendering
+PASS tower-labels-80: native framebuffer pixels
+PASS true heavier glyph coverage at size 14 scale 1.000000
+PASS true heavier glyph coverage at size 18 scale 1.000000
+PASS true heavier glyph coverage at size 21 scale 1.000000
+PASS true heavier glyph coverage at size 15 scale 1.000000
+PASS true heavier glyph coverage at size 28 scale 1.000000
+PASS true heavier glyph coverage at size 39 scale 1.000000
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS main-menu: no font upload during rendering
+PASS main-menu-100: native framebuffer pixels
+PASS options: no font upload during rendering
+PASS options-100: native framebuffer pixels
+PASS credits: no font upload during rendering
+PASS credits-100: native framebuffer pixels
+PASS load-menu: no font upload during rendering
+PASS load-menu-100: native framebuffer pixels
+PASS forest-hud: no font upload during rendering
+PASS forest-hud-100: native framebuffer pixels
+PASS stats: no font upload during rendering
+PASS stats-100: native framebuffer pixels
+PASS skills: no font upload during rendering
+PASS skills-100: native framebuffer pixels
+PASS spell-book: no font upload during rendering
+PASS spell-book-100: native framebuffer pixels
+PASS stats-allocation: no font upload during rendering
+PASS stats-allocation-100: native framebuffer pixels
+PASS skills-allocation: no font upload during rendering
+PASS skills-allocation-100: native framebuffer pixels
+PASS item-tooltip: no font upload during rendering
+PASS item-tooltip-100: native framebuffer pixels
+PASS help: no font upload during rendering
+PASS help-100: native framebuffer pixels
+PASS pause: no font upload during rendering
+PASS pause-100: native framebuffer pixels
+PASS audio: no font upload during rendering
+PASS audio-100: native framebuffer pixels
+PASS death: no font upload during rendering
+PASS death-100: native framebuffer pixels
+PASS dialogue: no font upload during rendering
+PASS dialogue-100: native framebuffer pixels
+FAIL merchant: no font upload during rendering
+PASS merchant-100: native framebuffer pixels
+PASS merchant-tooltip: no font upload during rendering
+PASS merchant-tooltip-100: native framebuffer pixels
+PASS tower-labels: no font upload during rendering
+PASS tower-labels-100: native framebuffer pixels
+PASS true heavier glyph coverage at size 14 scale 1.200000
+PASS true heavier glyph coverage at size 18 scale 1.200000
+PASS true heavier glyph coverage at size 21 scale 1.200000
+PASS true heavier glyph coverage at size 15 scale 1.200000
+PASS true heavier glyph coverage at size 28 scale 1.200000
+PASS true heavier glyph coverage at size 39 scale 1.200000
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS full dialogue turn fits its actual text region
+PASS main-menu: no font upload during rendering
+PASS main-menu-120: native framebuffer pixels
+PASS options: no font upload during rendering
+PASS options-120: native framebuffer pixels
+PASS credits: no font upload during rendering
+PASS credits-120: native framebuffer pixels
+PASS load-menu: no font upload during rendering
+PASS load-menu-120: native framebuffer pixels
+PASS forest-hud: no font upload during rendering
+PASS forest-hud-120: native framebuffer pixels
+PASS stats: no font upload during rendering
+PASS stats-120: native framebuffer pixels
+PASS skills: no font upload during rendering
+PASS skills-120: native framebuffer pixels
+PASS spell-book: no font upload during rendering
+PASS spell-book-120: native framebuffer pixels
+PASS stats-allocation: no font upload during rendering
+PASS stats-allocation-120: native framebuffer pixels
+PASS skills-allocation: no font upload during rendering
+PASS skills-allocation-120: native framebuffer pixels
+PASS item-tooltip: no font upload during rendering
+PASS item-tooltip-120: native framebuffer pixels
+PASS help: no font upload during rendering
+PASS help-120: native framebuffer pixels
+PASS pause: no font upload during rendering
+PASS pause-120: native framebuffer pixels
+PASS audio: no font upload during rendering
+PASS audio-120: native framebuffer pixels
+PASS death: no font upload during rendering
+PASS death-120: native framebuffer pixels
+PASS dialogue: no font upload during rendering
+PASS dialogue-120: native framebuffer pixels
+FAIL merchant: no font upload during rendering
+PASS merchant-120: native framebuffer pixels
+PASS merchant-tooltip: no font upload during rendering
+PASS merchant-tooltip-120: native framebuffer pixels
+PASS tower-labels: no font upload during rendering
+PASS tower-labels-120: native framebuffer pixels
+PASS all item names, descriptions and values fit production tooltips
+PASS actual merchant UI and every item value remain functional
+PASS stat allocation and spell UI regression
+PASS actual skill confirmation and input regression
+PASS combat text uses preloaded atlases at every scale
+PASS no audio or developer features enabled by typography
+Checks: 241
+Failures: 3
+Scenes: 57

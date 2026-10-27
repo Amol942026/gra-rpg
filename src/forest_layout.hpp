@@ -2,6 +2,7 @@
 
 // Included inside ember after V. Layout is independent of both loot and plant
 // randomness, so a new expedition keeps its roads and distinct encounters.
+inline constexpr V ForestArrival{MapWalkMin,MapWalkMax};
 enum class ForestZone { Ruins,Wolves,Birches,Spiders,Heart,Grove,Trail };
 inline ForestZone forestZone(V p){
     if(p.x<27&&p.y>=55)return ForestZone::Grove;
@@ -12,6 +13,7 @@ inline ForestZone forestZone(V p){
     return p.x>=27?ForestZone::Wolves:ForestZone::Ruins;
 }
 inline const char* forestRegion(V p){
+    if(distance(p,ForestArrival)<4.2f)return "Przesieka Wędrowca";
     switch(forestZone(p)){
         case ForestZone::Wolves:return "Wilcza knieja";
         case ForestZone::Birches:return "Brzozowa polana";
@@ -23,7 +25,8 @@ inline const char* forestRegion(V p){
     }
 }
 struct ForestTrail {V a,b;};
-inline constexpr std::array<ForestTrail,16> ForestTrails={{
+inline constexpr std::array<ForestTrail,17> ForestTrails={{
+    {ForestArrival,{14,61}},
     {{8,19},{21,6}},{{21,6},{44,8}},{{44,8},{63,8}},
     {{8,19},{35,19}},{{35,19},{55,21}},{{55,21},{66,25}},
     {{8,19},{12,35}},{{12,35},{14,43}},{{14,43},{14,61}},
@@ -31,8 +34,9 @@ inline constexpr std::array<ForestTrail,16> ForestTrails={{
     {{35,42},{59,57}},{{55,21},{59,40}},{{59,40},{59,57}},{{14,61},{39,62}}
 }};
 struct ForestGlade {V center;float radius;const char* name;};
-inline constexpr std::array<ForestGlade,6> ForestGlades={{
-    {{8,19},3.6f,"Przesieka Wędrowca"},{{21,5},3.4f,"Ruiny Mchu"},
+inline constexpr std::array<ForestGlade,7> ForestGlades={{
+    {ForestArrival,3.6f,"Przesieka Wędrowca"},
+    {{8,19},3.6f,"Stara przesieka"},{{21,5},3.4f,"Ruiny Mchu"},
     {{14,43},4.4f,"Brzozowa polana"},{{14,61},5.f,"Zaciszny zagajnik"},
     {{59,57},4.8f,"Zapomniany krąg"},{{39,62},3.5f,"Stary trakt"}
 }};
@@ -55,7 +59,7 @@ inline constexpr std::array<ForestSpawn,45> ForestSpawns={{
     {0,{7.5f,32.5f}},{0,{19.5f,35}},{0,{6,43}},{0,{19.5f,44}},
     {1,{61.5f,5}},{1,{67.5f,10.5f}},{1,{54.5f,12.5f}},{1,{63.5f,17.5f}},
     {1,{52.5f,25}},{1,{60.5f,28}},{1,{67.5f,32}},{1,{53.5f,33}},
-    {1,{57.5f,40}},{1,{66.5f,41}},{1,{10,68}},
+    {1,{57.5f,40}},{1,{66.5f,41}},{1,{12,68}},
     {2,{50.5f,5.5f}},{2,{37.5f,7}},{2,{29.5f,7.5f}},{2,{44,12}},
     {2,{36,17.5f}},{2,{43,25.5f}},{2,{32.5f,27}},
     {4,{26.5f,49}},{4,{9,51}},{4,{18,53}},{4,{25.5f,57.5f}},{4,{6,58.5f}},

@@ -3,11 +3,11 @@
 #include <array>
 namespace ember {
 enum class Kind { None,Sword,Axe,Helmet,Armor,Shield,Boots,Ring,Health,Mana,Crystal,Gold,
- WolfFang,WolfFur,BoarTusk,BoarHide,SpiderSilk,VenomSac,BoneShard,SlimeGel,AncientBark,ForestEssence,BanditBadge,RuneStone,Dagger,Cloak,Amulet,Mushroom,Bow,Arrow,DawnShard,ScorpionSting,ScarabShell,CobraScale,SandEssence,WolfKnife,WolfCloak,MoonBow,BoarArmor,TuskAxe,SilkBoots,VenomRing,WebCowl,BoneHelmet,CryptSword,BanditBow,BanditBoots,RootShield,GroveAmulet,GelAmulet,GuardianSword,GuardianArmor,GuardianHelmet,EchoRing,StingDagger,ScarabHelmet,ScarabArmor,CobraBoots,MirageBow,SunAmulet,DuneBlade,SandRobe,DuneShield,Count };
+ WolfFang,WolfFur,BoarTusk,BoarHide,SpiderSilk,VenomSac,BoneShard,SlimeGel,AncientBark,ForestEssence,BanditBadge,RuneStone,Dagger,Cloak,Amulet,Mushroom,Bow,Arrow,DawnShard,ScorpionSting,ScarabShell,CobraScale,SandEssence,WolfKnife,WolfCloak,MoonBow,BoarArmor,TuskAxe,SilkBoots,VenomRing,WebCowl,BoneHelmet,CryptSword,BanditBow,BanditBoots,RootShield,GroveAmulet,GelAmulet,GuardianSword,GuardianArmor,GuardianHelmet,EchoRing,StingDagger,ScarabHelmet,ScarabArmor,CobraBoots,MirageBow,SunAmulet,DuneBlade,SandRobe,DuneShield,SlimeBlade,SlimeCowl,SlimeRing,WolfHood,WolfBoots,WolfHeartAmulet,BoneShield,BoneArmor,GraveBow,GuardianBoots,GuardianShield,GuardianAxe,BoarBoots,BoarShield,BoarHelm,SpiderDagger,WebRobe,NightSilkCloak,BanditSword,BanditHelm,OutlawRing,BarkHelm,RootBoots,GroveBow,ScorpionAxe,StingShield,AmberRing,ScarabBoots,ScarabAxe,ScarabRing,CobraCloak,ScaleShield,SerpentAmulet,DuneBoots,DuneHelmet,DawnBow,Count };
 constexpr int ItemKindCount=int(Kind::Count);
 enum class Rarity { Common, Rare, VeryRare, ExtremelyRare };
 struct GearDefinition { const char* name; Kind shape; Rarity rarity; int basePower; const char* description; };
-inline constexpr std::array<GearDefinition,28> BeastGear{{
+inline constexpr std::array<GearDefinition,64> BeastGear{{
  {"Sztylet wilczego kła",Kind::Dagger,Rarity::Rare,12,"Ostrze oprawione w srebrzysty wilczy kieł."},
  {"Płaszcz tropiciela",Kind::Cloak,Rarity::Rare,7,"Ciepły płaszcz z futra leśnych wilków."},
  {"Łuk księżycowego łowcy",Kind::Bow,Rarity::VeryRare,19,"Łuk z jasnego drewna i wilczej cięciwy."},
@@ -36,8 +36,45 @@ inline constexpr std::array<GearDefinition,28> BeastGear{{
  {"Ostrze żywej wydmy",Kind::Sword,Rarity::ExtremelyRare,25,"Piasek krąży wokół klingi pustynnego bossa."},
  {"Płaszcz piaskowej burzy",Kind::Cloak,Rarity::ExtremelyRare,16,"Złote nici migoczą jak nawiewany piasek."},
  {"Tarcza pustynnego monolitu",Kind::Shield,Rarity::VeryRare,10,"Kamienna tarcza z ornamentem wydmy."},
+ {"Ostrze zielonej kropli",Kind::Sword,Rarity::Common,7,"Proste ostrze pokryte zaschniętą esencją."},
+ {"Kaptur mglistego runa",Kind::Helmet,Rarity::Rare,5,"Kaptur chroniący przed leśną wilgocią."},
+ {"Pierścień bursztynowego żelu",Kind::Ring,Rarity::VeryRare,6,"Przejrzysta kropla w bursztynowej oprawie."},
+ {"Kaptur szarego wilka",Kind::Helmet,Rarity::Common,3,"Szare futro chroni głowę wędrowca."},
+ {"Buty srebrnego tropu",Kind::Boots,Rarity::Rare,5,"Srebrzysta sierść osłania skórzane cholewy."},
+ {"Amulet wilczego serca",Kind::Amulet,Rarity::ExtremelyRare,10,"Księżycowy kamień w oprawie z kłów."},
+ {"Tarcza kościanych odłamków",Kind::Shield,Rarity::Common,4,"Dębowa tarcza wzmocniona białą kością."},
+ {"Pancerz strażnika grobów",Kind::Armor,Rarity::Rare,7,"Kościane płytki na ciemnej kolczudze."},
+ {"Łuk milczącej krypty",Kind::Bow,Rarity::VeryRare,18,"Kościane ramiona zdobione zimnymi runami."},
+ {"Nagolenniki omszałych ruin",Kind::Boots,Rarity::Rare,8,"Kamienne okucia oplecione młodym mchem."},
+ {"Tarcza pieczęci strażnika",Kind::Shield,Rarity::VeryRare,10,"Runiczna płyta z dawnej bramy ruin."},
+ {"Topór przebudzonej skały",Kind::Axe,Rarity::ExtremelyRare,24,"W kamiennej głowicy pulsuje pradawny żar."},
+ {"Buty dziczej skóry",Kind::Boots,Rarity::Common,3,"Gruba skóra i mocne rzemienie."},
+ {"Tarcza leśnego odyńca",Kind::Shield,Rarity::Rare,6,"Zaokrąglona tarcza okutą parą kłów."},
+ {"Hełm odyńca",Kind::Helmet,Rarity::VeryRare,9,"Dwa jasne kły chronią skronie wojownika."},
+ {"Sztylet leśnego pająka",Kind::Dagger,Rarity::Common,8,"Lekkie ostrze oplecione mocną nicią."},
+ {"Szata tkacza pajęczyn",Kind::Armor,Rarity::Rare,8,"Gęsta pajęcza tkanina i srebrne przeszycia."},
+ {"Płaszcz nocnego jedwabiu",Kind::Cloak,Rarity::ExtremelyRare,14,"Ciemne nici migoczą fioletowym blaskiem."},
+ {"Szabla leśnego rabusia",Kind::Sword,Rarity::Common,9,"Wyszczerbiona klinga z ciemną rękojeścią."},
+ {"Hełm z leśnej zasadzki",Kind::Helmet,Rarity::Rare,6,"Ciemna stal skryta pod skórzanym kapturem."},
+ {"Sygnet króla bezdroży",Kind::Ring,Rarity::VeryRare,7,"Sygnet z bursztynem znalezionym w łupach."},
+ {"Hełm starej kory",Kind::Helmet,Rarity::Common,4,"Twarda kora spięta miedzianymi obręczami."},
+ {"Buty splecionych korzeni",Kind::Boots,Rarity::Rare,6,"Elastyczne korzenie osłaniają stopy."},
+ {"Łuk przebudzonej kniei",Kind::Bow,Rarity::ExtremelyRare,23,"Żywe drewno przechowuje światło starego lasu."},
+ {"Topór pustynnego żądła",Kind::Axe,Rarity::Common,11,"Bursztynowa głowica z twardego pancerza."},
+ {"Tarcza bursztynowego żądła",Kind::Shield,Rarity::Rare,7,"Wygięte płyty osłaniają przed ciosami."},
+ {"Pierścień pustynnego bursztynu",Kind::Ring,Rarity::VeryRare,8,"W złotym bursztynie zastygła kropla jadu."},
+ {"Buty miedzianego szlaku",Kind::Boots,Rarity::Common,4,"Miedziane blaszki na piaskowej skórze."},
+ {"Topór pancernej skorupy",Kind::Axe,Rarity::Rare,16,"Miedziany skarabeusz zdobi szerokie ostrze."},
+ {"Sygnet słonecznego skarabeusza",Kind::Ring,Rarity::ExtremelyRare,10,"Złoty owad strzeże fioletowego kryształu."},
+ {"Płaszcz piaskowych łusek",Kind::Cloak,Rarity::Common,6,"Piaskowa tkanina z warstwą drobnych łusek."},
+ {"Tarcza złocistej kobry",Kind::Shield,Rarity::Rare,8,"Złociste łuski zachodzą na siebie jak płytki."},
+ {"Amulet władcy węży",Kind::Amulet,Rarity::ExtremelyRare,11,"Oko kobry lśni w oprawie z łusek."},
+ {"Buty wędrującej wydmy",Kind::Boots,Rarity::Rare,10,"Piaskowe okucia chronią przed gorącem."},
+ {"Hełm serca pustyni",Kind::Helmet,Rarity::VeryRare,12,"Kamienna korona z rozżarzonym bursztynem."},
+ {"Łuk ostatniej jutrzenki",Kind::Bow,Rarity::ExtremelyRare,27,"Złociste ramiona rozświetla chłodny żar."},
 }};
 inline constexpr bool beastGear(Kind k){return k>=Kind::WolfKnife&&k<Kind::Count;}
+inline constexpr int EquipmentKindCount=11+int(BeastGear.size());
 inline constexpr Kind archetype(Kind k){return beastGear(k)?BeastGear[int(k)-int(Kind::WolfKnife)].shape:k;}
 inline constexpr Rarity itemRarity(Kind k){
  if(beastGear(k))return BeastGear[int(k)-int(Kind::WolfKnife)].rarity;

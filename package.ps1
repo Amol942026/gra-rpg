@@ -60,14 +60,20 @@ X - Przeszywajaca strzala (luk, 20 many).
 V - Leczenie (30 HP za 20 many).
 U - umiejetnosci. P - statystyki.
 Po awansie rozdaj 5 punktow statystyk i 1 punkt umiejetnosci.
+Okna P / U nie maja przyciskow plus/minus; przy awansie uzyj DODAJ / COFNIJ.
+Nowe progi PD do awansu: 100, 204, 312, 424, 540 i coraz wyzsze.
 Umiejetnosci odblokowuje dopiero wydanie i zatwierdzenie punktu po awansie.
-E - interakcja w wiezy lub powrot przez portal na pustyni.
+E - interakcja w wiezy, fontanny lub powrot przez portal na pustyni.
 Miron - handlarz na 3. pietrze wiezy (pracownia alchemiczna).
 Podejdz do stoiska i nacisnij E lub kliknij LPM / PPM.
 Kliknij towar po lewej, aby kupic, lub przedmiot po prawej, aby sprzedac.
+2x LPM na towarze kupuje jedna sztuke; 2x LPM po stronie gracza sprzedaje jedna.
 Ustaw liczbe sztuk przez - / + lub MAX i potwierdz KUP / SPRZEDAJ.
 Sprzedasz tez noszone eq i materialy bestii, np. luski kobry.
 Wartosc w opisie oznacza cene sprzedazy sztuki; stos ma rowniez sume.
+Zapas strzal u Mirona wynosi 20 sztuk, wspolny dla wszystkich zakupow.
+Po pokonaniu Zywej Wydmy pojawia sie nowa partia 20 strzal.
+Sprzedaz, zamkniecie sklepu i wczytanie zapisu nie uzupelniaja zapasu.
 Cena kupna jest dwukrotnie wyzsza. Monety w plecaku sluza do placenia.
 Fragmentow Serca Switu nie mozna sprzedac. Saldo zlota widac w HUD.
 Brak miejsca lub zlota nie powoduje utraty przedmiotow ani pieniedzy.
@@ -82,6 +88,11 @@ WYPRAWA I LUP
 Odkryj las, pokonaj Kamiennego Straznika i dotrzyj do wiezy Eldrina.
 Wieza ma piec tematycznych pieter. Eldrin otwiera droge na pustynie,
 gdzie czeka Zywa Wydma. Rozmowa z magiem pozwala wybrac podroz.
+Na 5. pietrze (Obserwatorium) wyjdz w prawo na balkon z widokiem na Doline Switu.
+Na pustyni niebieska fontanna odnawia cala mane, a czerwona cale HP.
+Kazda ma jedno uzycie (E / LPM / PPM w zasiegu 2,5 pola).
+Po uzyciu woda opada i misa wysycha; zapisy zachowuja zuzycie fontann.
+Przy pelnym zasobie fontanna nie zuzywa swojego jedynego uzycia.
 Pospolity: bialy / 60%; Rzadki: niebieski / 15%.
 Bardzo rzadki: zolty / 4%; Niezwykle rzadki: fioletowy / 1%.
 Kazda pozycja lupu losuje sie niezaleznie, wedlug swojej rzadkosci.

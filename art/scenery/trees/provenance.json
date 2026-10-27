@@ -1,0 +1,183 @@
+{
+  "status": "PASS",
+  "authoring": "Krita native MCP draw",
+  "canvas": [
+    540,
+    690
+  ],
+  "logical_canvas": [
+    180,
+    230
+  ],
+  "logical_anchor": [
+    90,
+    208
+  ],
+  "source_anchor": [
+    270,
+    624
+  ],
+  "original_art": true,
+  "external_assets": [],
+  "trees": [
+    {
+      "species": "spruce",
+      "kra": "C:\\AI2D\\sprites\\emberfall_forest_trees_20261023_v3\\spruce\\forest-spruce.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall_forest_trees_20261023_v3\\spruce\\forest-spruce.png",
+      "layers": [
+        {
+          "name": "T\u0142o",
+          "uuid": "22aecc8d-484d-4e91-aec7-64731ee6cc00"
+        },
+        {
+          "name": "01 / Buttress roots and forest-floor litter",
+          "uuid": "17424c8d-7a2a-4e39-8931-d0dd5b064edc"
+        },
+        {
+          "name": "02 / Trunk, branch structure and forks",
+          "uuid": "23b3880f-9122-4e95-96f1-31ba4ebc9f2d"
+        },
+        {
+          "name": "03 / Deep evergreen boughs",
+          "uuid": "a0a6a125-1579-41fe-b475-471b32f9f24f"
+        },
+        {
+          "name": "04 / Layered needle sprays and broken silhouette",
+          "uuid": "cebbd539-f8e3-4246-b87a-475619cecb13"
+        },
+        {
+          "name": "05 / Fine needles, cones and lichens",
+          "uuid": "f92d1ebc-9104-4dbe-a90c-5d9b5d787312"
+        },
+        {
+          "name": "07 / Root moss, fern shoots and contact detail",
+          "uuid": "1eae5759-b7dc-4006-8c8a-f78713e5292c"
+        },
+        {
+          "name": "08 / Fine foliage, needles and organic edge detail",
+          "uuid": "4f4b190c-2392-452c-a8e1-da90a6061c08"
+        }
+      ],
+      "kra_sha256": "c2de2fc76b9272571b57f945e1aa238e8aa1292d30acd7cd2c7573f6410ba2b1",
+      "png_sha256": "1d27674553048915f09b70763ee81c8a92e0df8b30851a3cbe08a89ddbcd1393",
+      "alpha_bounds": [
+        48,
+        22,
+        484,
+        643
+      ]
+    },
+    {
+      "species": "birch",
+      "kra": "C:\\AI2D\\sprites\\emberfall_forest_trees_20261023_v3\\birch\\forest-birch.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall_forest_trees_20261023_v3\\birch\\forest-birch.png",
+      "layers": [
+        {
+          "name": "T\u0142o",
+          "uuid": "55e35d67-50cf-4a0c-ba0f-6048fac7684d"
+        },
+        {
+          "name": "01 / Buttress roots and forest-floor litter",
+          "uuid": "7685ffcf-e19c-426a-aa65-096df9396b1d"
+        },
+        {
+          "name": "02 / Trunk, branch structure and forks",
+          "uuid": "ef4a726d-dc50-4e52-b5fd-8e0a3075610f"
+        },
+        {
+          "name": "03 / Bark, knots and climbing moss",
+          "uuid": "8e0a8138-1684-4166-8934-bfeefc58bc8e"
+        },
+        {
+          "name": "04 / Backlit canopy masses",
+          "uuid": "00863c20-c1f1-4570-a60e-acdb41cf1b9e"
+        },
+        {
+          "name": "05 / Lit foliage planes and branch windows",
+          "uuid": "4904037c-70c2-4009-b8cc-894e594f744a"
+        },
+        {
+          "name": "06 / Individual leaves, twigs and dappled highlights",
+          "uuid": "36c3d5db-d14e-43b3-b6b3-0f3597cc48f4"
+        },
+        {
+          "name": "07 / Root moss, fern shoots and contact detail",
+          "uuid": "0eb9f807-2ed8-43aa-aeb8-c5fadda992a0"
+        },
+        {
+          "name": "08 / Fine foliage, needles and organic edge detail",
+          "uuid": "9355f314-23cc-4ab3-ac22-6cb7cb03f852"
+        },
+        {
+          "name": "09 / Bark furrows and scattered lichen",
+          "uuid": "e3aff4ad-2c3f-4b02-aff0-fd62dee56918"
+        }
+      ],
+      "kra_sha256": "cfc6422de479253f081269ad66a4c3f362bc827eea310036c9ce6f71c629767d",
+      "png_sha256": "8acab2e22910cc6d8d0cede93b50c91ed032acd8cd05ca016b5f82f6102e4a73",
+      "alpha_bounds": [
+        75,
+        35,
+        485,
+        642
+      ]
+    },
+    {
+      "species": "oak",
+      "kra": "C:\\AI2D\\sprites\\emberfall_forest_trees_20261023_v3\\oak\\forest-oak.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall_forest_trees_20261023_v3\\oak\\forest-oak.png",
+      "layers": [
+        {
+          "name": "T\u0142o",
+          "uuid": "f9a1bea9-07e1-4db5-8c2d-d64c2f742b02"
+        },
+        {
+          "name": "01 / Buttress roots and forest-floor litter",
+          "uuid": "8b8024de-656c-4d2d-b0c4-446fc65a333b"
+        },
+        {
+          "name": "02 / Trunk, branch structure and forks",
+          "uuid": "61b3b3d5-fc2c-405c-a525-513067c595cb"
+        },
+        {
+          "name": "03 / Bark, knots and climbing moss",
+          "uuid": "1d0c07cc-f32a-4095-b053-605c4720f96f"
+        },
+        {
+          "name": "04 / Backlit canopy masses",
+          "uuid": "b9f1efa2-ac74-404a-a401-26e196843427"
+        },
+        {
+          "name": "05 / Lit foliage planes and branch windows",
+          "uuid": "565a9b43-4b18-4dfb-ac65-f40e7d4bd476"
+        },
+        {
+          "name": "06 / Individual leaves, twigs and dappled highlights",
+          "uuid": "20bb696d-d8cf-43f7-a1b4-1df850c7d5f8"
+        },
+        {
+          "name": "07 / Root moss, fern shoots and contact detail",
+          "uuid": "a0db8130-85e8-472f-9231-4c3453a774d7"
+        },
+        {
+          "name": "08 / Fine foliage, needles and organic edge detail",
+          "uuid": "cfab7959-1f24-423a-a5d3-5341ebe23d4d"
+        },
+        {
+          "name": "09 / Bark furrows and scattered lichen",
+          "uuid": "e9dfc247-9a12-485d-9e64-8be3af18ba3c"
+        }
+      ],
+      "kra_sha256": "c9438051112f8c3753e995dc9d03fa5a434fc02339491f7c49b4595536785e28",
+      "png_sha256": "c91b7ed3379006926c1b7913970063b5bc98eb9ae380fdd2dce0a45376d9aba7",
+      "alpha_bounds": [
+        43,
+        51,
+        504,
+        641
+      ]
+    }
+  ],
+  "block_in_provenance": "C:\\AI2D\\sprites\\emberfall_forest_trees_20261023_v1\\provenance.json",
+  "block_in_sha256": "d18c114e982e57a9aecbacc672c36a56dad3a4bc1c34325f56bdf6fab5bcf8fa"
+}

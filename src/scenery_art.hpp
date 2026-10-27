@@ -1,5 +1,6 @@
 #pragma once
 #include "forest_bush_art.hpp"
+#include "forest_tree_art.hpp"
 
 // Static detail is baked once at startup; wind still deforms the finished
 // crown texture and the pointer mask follows exactly the same deformation.
@@ -11,7 +12,7 @@ void leafTuft(float x,float y,float w,float h,Color c,unsigned seed){
   line(xx-2,yy+1,xx+1,yy-2,shade(c,i%2?1.32f:.62f),1.2f);}
 }
 void tree(float x,float y,float s){
-
+ if(forest_tree_art::draw(0,x,y,s))return;
  poly({{x-9*s,y},{x-5*s,y-164*s},{x+4*s,y-164*s},{x+11*s,y+2*s}},rgb(73,58,40));
  line(x-2*s,y-5*s,x-1*s,y-160*s,rgb(128,92,53),3*s);
  for(int i=0;i<6;i++){float side=i%2?-1.f:1.f;line(x,y-(8+i*11)*s,x+side*(14-i)*s,y-(3+i*9)*s,rgb(79,67,42),3*s);}
@@ -26,6 +27,7 @@ void tree(float x,float y,float s){
  for(int n=0;n<4;n++)ellipse(x+(-15+n*11)*s,y+(n%2)*3*s,6*s,2*s,rgb(58,83,47));
 }
 void deciduousTree(float x,float y,float s,bool birch){
+ if(forest_tree_art::draw(birch?4:5,x,y,s))return;
 Color trunk=birch?rgb(186,192,166):rgb(102,77,49);
  poly({{x-10*s,y},{x-5*s,y-140*s},{x+5*s,y-153*s},{x+12*s,y}},shade(trunk,.78f));
  poly({{x-7*s,y},{x-4*s,y-143*s},{x+1*s,y-153*s},{x+3*s,y}},trunk);

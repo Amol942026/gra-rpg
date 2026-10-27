@@ -1,0 +1,23 @@
+PASS: HUD stats button opens the level-one character sheet
+PASS: character sheet blocks world interactions
+PASS: character sheet can close when no points are pending
+PASS: real kill and XP automatically open five-point level menu
+PASS: confirm cannot bypass unspent level points
+PASS: DODAJ action changes only the allocation preview
+PASS: COFNIJ action returns a pending point
+PASS: COFNIJ cannot remove points from earlier levels
+PASS: five points are the exact spending limit
+PASS: mandatory menu freezes actual simulation
+PASS: stats confirmation opens skills while mandatory pause remains
+PASS: skill confirmation applies one point and resumes play
+PASS: HUD values match the committed allocation
+PASS: clicking spell tile opens selection without casting
+PASS: spell selection prevents interaction with the map
+PASS: clicking fireball card equips the chosen spell
+PASS: aiming pointer identifies the visible monster
+PASS: C cast handler spends ten mana
+PASS: fireball aims at monster position even when cursor is over its head
+PASS: projectile hits with allocated magical damage and creates explosion
+PASS: a fireball kill also pauses and opens allocation automatically
+PASS: level fanfare is allowed while mandatory menu pauses combat audio
+Checks: 22; failures: 0

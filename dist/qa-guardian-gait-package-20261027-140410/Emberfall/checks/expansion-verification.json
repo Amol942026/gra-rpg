@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": 438,
+  "failures": [],
+  "new_items": 36,
+  "equipment_variants": 75,
+  "knee_extended_frames": 240,
+  "min_support_knee_degrees": 179.9997252838182,
+  "runtime_textures_added": 0,
+  "audio_opened": false
+}

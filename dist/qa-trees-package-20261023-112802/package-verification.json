@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "package_sha256": "1b2165838c50edcd9f73ae4c5550711a54698e50a0730902d37e0468042d34e5",
+  "exe_sha256": "9c3ece1d5b0862ead5387616d431b303e2b780454c0bf24f0e90a41b1d34c42d",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-trees-package-20261023-112802\\Emberfall",
+  "verified_assets": 104,
+  "renderer_checks": 206,
+  "independent_checks": 121,
+  "startup_frames": 180,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_player": false,
+  "tree_caches": [
+    360,
+    460
+  ],
+  "additional_tree_and_outline_bytes": 2980800
+}

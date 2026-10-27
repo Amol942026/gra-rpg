@@ -1,0 +1,1 @@
+{"audio_opened":false,"presentation_measured":false,"scenes":[{"name":"observatory","frames":120,"p95_ms":11.6027,"mean_ms":8.19528,"within_60hz_render_budget":true},{"name":"valley-lookout","frames":120,"p95_ms":11.77,"mean_ms":8.37067,"within_60hz_render_budget":true}]}

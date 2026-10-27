@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "source": "Synfig native 2D cutout, six original Krita fragments",
+  "frames": 72,
+  "samples_per_piece": 73,
+  "pieces": 6,
+  "duration": 1.2,
+  "master": "C:\\AI2D\\animations\\emberfall_guardian_shatter_20261023",
+  "source_sha256": "24f7854ae414d7931553da13cdd58dc6f28e6fe40cf37111b7ae3bb9fc50c4ce",
+  "header_sha256": "818fe485ccd1350eaa9a16135bfebafb24dc3b2690d58b12a39548cef2f797ab",
+  "atlas_sha256": "8f640f770e1eff147bd2b0c4117acb3a503981fe2b3f9bd0d0e4a0fb5fc2f0ef"
+}

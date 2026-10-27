@@ -14,7 +14,7 @@ void forestExpansionTests(){
     // Flood through actual scenery, checking each segment rather than assuming
     // that an unblocked road endpoint guarantees an open path between tiles.
     std::array<int,MapSize*MapSize> parent;parent.fill(-1);std::vector<int> queue;
-    int start=19*MapSize+8;parent[start]=start;queue.push_back(start);
+    int start=int(std::round(ForestArrival.y))*MapSize+int(std::round(ForestArrival.x));parent[start]=start;queue.push_back(start);
     auto point=[](int cell){return V{float(cell%MapSize),float(cell/MapSize)};};
     for(size_t head=0;head<queue.size();head++){
         int cell=queue[head];V p=point(cell);
@@ -25,7 +25,7 @@ void forestExpansionTests(){
         }
     }
     for(const auto& glade:ForestGlades){
-        int goal=int(glade.center.y)*MapSize+int(glade.center.x);bool reachable=parent[goal]>=0;
+        int goal=int(std::round(glade.center.y))*MapSize+int(std::round(glade.center.x));bool reachable=parent[goal]>=0;
         check(reachable,"every landmark clearing connects to the arrival through traversable forest");
         if(!reachable)continue;
         Game walking=forest;std::vector<int> route;for(int cell=goal;cell!=start;cell=parent[cell])route.push_back(cell);

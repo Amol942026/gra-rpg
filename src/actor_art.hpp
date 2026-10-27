@@ -3,6 +3,7 @@
 #include "sword_pose.hpp"
 #include "hero_motion.hpp"
 #include "hero_sheath.hpp"
+#include "hero_knockdown.hpp"
 #include "shadow_geometry.hpp"
 #include "hero_paint.hpp"
 #include "creature_paint.hpp"
@@ -105,7 +106,7 @@ inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float de
 class Rig {
     float x, y, scale, fx, fy, rx, ry;
     float rollAngle=0, tuck=0,runLean=0,runSin=0,runCos=1,bodySin=0,bodyCos=1;
-    bool smoothSurfaces=false,bodyRotating=false,softBeams=false;
+    bool smoothSurfaces=false,bodyRotating=false,softBeams=false,groundBounded=false;
     const hero_motion::Pose* skeleton=nullptr;int skinBone=-1;
     std::vector<Face> faces;
     shadow_geometry::Polygons shadowFaces;
@@ -127,6 +128,7 @@ public:
     }
     void setSmoothSurfaces(){smoothSurfaces=true;}
     void setCreatureSurfaces(){smoothSurfaces=true;softBeams=true;}
+    void setGroundBounded(){groundBounded=true;}
     void setRun(float amount){runLean=std::clamp(amount,0.f,1.f)*.12f;runSin=std::sin(runLean);runCos=std::cos(runLean);}
     void setBodyYaw(float angle){bodyRotating=angle!=0;if(bodyRotating){bodySin=std::sin(angle);bodyCos=std::cos(angle);}else{bodySin=0;bodyCos=1;}}
     P3 bodyPoint(P3 p)const{
@@ -161,6 +163,7 @@ public:
     void drawShadow()const{shadow_geometry::raster(shadowFaces);}
     void face(P3 a,P3 b,P3 c,P3 d,Color col,float lighting=1) {
         a=rollPoint(bodyPoint(a));b=rollPoint(bodyPoint(b));c=rollPoint(bodyPoint(c));d=rollPoint(bodyPoint(d));
+        if(groundBounded){a.z=std::max(.5f,a.z);b.z=std::max(.5f,b.z);c.z=std::max(.5f,c.z);d.z=std::max(.5f,d.z);}
         // Capture every physical surface, including surfaces hidden from the camera.
         if(collectShadow&&col.a>=160){
             std::array<Vector2,4> p={groundProject(a),groundProject(b),groundProject(c),groundProject(d)};
@@ -491,6 +494,10 @@ inline std::vector<std::pair<int,Rig>> frameRigs;
 inline void beginShadowFrame(){frameRigs.clear();shadowBuilding=true;shadowCacheKey=-1;shadowElevation=0;shadowCasting=true;sceneDepth=false;sceneDepthOrder=0;}
 inline void endShadowPreparation(){shadowBuilding=false;shadowCacheKey=-1;sceneDepth=allowSceneDepth;sceneDepthOrder=0;sceneDepthStep=.8f/std::max(8,int(frameRigs.size())+8);}
 inline void finishShadowFrame(){frameRigs.clear();shadowCacheKey=-1;shadowBuilding=false;shadowElevation=0;sceneDepth=false;sceneDepthOrder=0;}
+inline void prepareKnockdown(const Game& g,AnimationState& state,float& fallR,float& fallF){
+ state.moving=false;state.moveBlend=0;state.stopSprint();state.facingInitialized=true;state.facingAngle=state.targetAngle=g.knockdownFacingAngle();
+ fallR=0;fallF=-1;
+}
 #include "hero_art.hpp"
 #include "desert_actors.hpp"
 #include "forest_creatures.hpp"
@@ -498,7 +505,7 @@ inline void finishShadowFrame(){frameRigs.clear();shadowCacheKey=-1;shadowBuildi
 // species: player, slime, wolf, skeleton, guardian, boar, spider, bandit, treant.
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
-                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr) {
+                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1) {
     HeroAppearance appearance;
     if(species==0){appearance=equipment?heroAppearance(*equipment):legacyHeroAppearance(helmet,shield,weapon);weapon=appearance[0].shape;helmet=appearance[1].present();shield=appearance[2].present();}
     bool rolling=species==0&&roll>=0;
@@ -511,7 +518,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     const float stride=state.moving?std::sin(cycle):0;
     const float run=species==0&&!rolling&&!striking&&bowDraw<0?std::clamp(state.runBlend,0.f,1.f):0;
     const float lift=state.moving?(1-run)*std::abs(std::cos(cycle))*1.7f+run*(1.5f+.9f*std::cos(cycle*2)):std::sin(state.idleTime*2.4f)*.6f;
-    const float bodyScale=species==4?1.38f:species==8?1.18f:1.f;
+    const float bodyScale=species==4?GuardianBodyScale:species==8?1.18f:1.f;
     Rig working(x,y,size*bodyScale,state.direction);
     if(state.facingInitialized)working.setFacing(state.facingAngle);
     Rig* cached=nullptr;
@@ -520,11 +527,11 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     if(!cached){
 
     if(species==0){
-        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance);
+        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF);
     } else if(species>=9){
         buildDesert(rig,species-1,state,attack,flash);
     } else {
-        buildForestCreature(rig,species-1,state,attack,flash);
+        buildForestCreature(rig,species-1,state,attack,flash,guardianThrow);
     }
     }
     if(shadowBuilding&&!probe){
@@ -552,5 +559,8 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     }
     rig.draw(outline);
     return false;
+}
+inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
+ return draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,e.flash>0,outline,probe,-1,-1,-1,3,false,nullptr,e.boulderProgress());
 }
 }

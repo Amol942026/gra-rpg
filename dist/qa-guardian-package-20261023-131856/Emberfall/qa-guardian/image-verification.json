@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "checks": 264,
+  "native_synfig_frames": 84,
+  "compiled_control_samples": 85,
+  "game_frames": 75,
+  "minimum_changed_pixels": 3528,
+  "audio_played": false
+}

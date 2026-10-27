@@ -1,7 +1,11 @@
 #pragma once
 
-void earnLevel(Game& g){g.xp=79;Enemy foe{90,0,g.player,g.player,1,1};g.hit(foe,10);}
+void earnLevel(Game& g){g.xp=experienceForLevel(1)-1;Enemy foe{90,0,g.player,g.player,1,1};g.hit(foe,10);}
 void progressionTests(){
+    check(experienceForLevel(1)==100&&experienceForLevel(2)==204&&experienceForLevel(3)==312&&experienceForLevel(5)==540,"new XP curve is slower with increasing per-level increments");
+    for(int level=1;level<100000;level+=31)check(experienceForLevel(level+1)>experienceForLevel(level)&&experienceForLevel(level)>std::int64_t(level)*80,"XP cost rises and remains above the old curve across the supported save range");
+    Game boundary=emptyArena();boundary.xp=experienceForLevel(1)-enemyInfo(0).experience-1;Enemy first{92,0,boundary.player,boundary.player,1,1};boundary.hit(first,10);
+    check(boundary.level==1&&boundary.xp==experienceForLevel(1)-1&&!boundary.allocationRequired,"one XP below the threshold cannot advance early");
     Game start=emptyArena();
     check(start.mana==100&&start.maxMana()==100&&start.maxHp()==100,"new hero starts with 100 mana and 100 HP");
     check(start.magicDamage()>start.damage(),"initial fireball damage is greater than sword damage");
@@ -27,7 +31,7 @@ void progressionTests(){
     check(!start.distribute({5,0,0,0,0,0}),"a confirmed level cannot spend the same points again");
     start.update(.05f,{},false);check(start.time>time&&(start.fireballs.empty()||distance(start.fireballs[0].pos,ball)>0),"projectiles and clocks resume after confirmation");
 
-    Game multi=emptyArena();multi.xp=250;Enemy foe{90,0,multi.player,multi.player,1,1};multi.hit(foe,10);
+    Game multi=emptyArena();multi.xp=experienceForLevel(1)+experienceForLevel(2)+10;Enemy foe{90,0,multi.player,multi.player,1,1};multi.hit(foe,10);
     check(multi.level==3&&multi.attributePoints==10&&multi.allocationRequired,"two simultaneous level gains provide ten points");
     check(multi.distribute({0,0,0,0,5,5})&&multi.maxHp()==150&&multi.maxMana()==125,"multiple levels preserve exact 10 HP and 5 mana per point");
     for(int index=0;index<AttributeCount;index++){
@@ -74,7 +78,7 @@ void progressionTests(){
     Game far=emptyArena();target={26,15};far.enemies.push_back({0,0,target,target,100,100});far.enemies[0].windup=100;far.spell({1,0});
     for(int i=0;i<30;i++)far.update(.05f,{},false);
     check(far.enemies[0].hp==100&&far.fireballs.empty(),"fireball expires instead of reaching targets beyond its range");
-    Game group=emptyArena();group.xp=75;
+    Game group=emptyArena();group.xp=experienceForLevel(1)-5;
     group.enemies.push_back({0,0,{18,15},{18,15},1,36});group.enemies.push_back({1,0,{18.1f,15.5f},{18.1f,15.5f},1,36});
     group.enemies[0].windup=group.enemies[1].windup=100;group.spell({1,0});
     for(int i=0;i<30&&!group.allocationRequired;i++)group.update(.05f,{},false);

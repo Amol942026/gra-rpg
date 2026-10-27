@@ -33,7 +33,7 @@ void audioEventTests() {
         check(cueCount(e,type==3?Cue::Victory:Cue::EnemyFall)==1,"death or victory cue emitted once");
         auto count=e.sounds.size();e.hit(enemy,10);check(e.sounds.size()==count,"dead enemies cannot emit repeated deaths");
     }
-    Game level=emptyArena();level.xp=79;Enemy enemy{0,0,{15,15},{15,15},1,1};level.hit(enemy,5);
+    Game level=emptyArena();level.xp=experienceForLevel(1)-1;Enemy enemy{0,0,{15,15},{15,15},1,1};level.hit(enemy,5);
     check(cueCount(level,Cue::LevelUp)==1,"level advancement emits fanfare");
     Game spell=emptyArena();spell.spell();check(cueCount(spell,Cue::Spell)==1,"magic emits its own effect");
     spell.sounds.clear();spell.spell();check(spell.sounds.empty(),"magic cooldown does not repeat sound");

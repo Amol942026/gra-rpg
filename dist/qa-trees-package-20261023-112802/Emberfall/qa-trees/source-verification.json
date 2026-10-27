@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checks": 121,
+  "trees": 3,
+  "native_size": [
+    540,
+    690
+  ],
+  "runtime_cache_size": [
+    360,
+    460
+  ],
+  "wind_samples": 36,
+  "actual_forest_views": 4,
+  "hover_views": 3,
+  "cache_rgba8_bytes": 1987200,
+  "added_cache_and_outline_rgba8_bytes": 2980800,
+  "original_art": true,
+  "audio_played": false
+}

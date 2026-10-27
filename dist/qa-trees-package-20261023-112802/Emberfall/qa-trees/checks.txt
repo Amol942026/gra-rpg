@@ -1,0 +1,208 @@
+PASS real player code opens no audio device
+PASS Krita source baked once and released / 0
+PASS Krita source baked once and released / 1
+PASS Krita source baked once and released / 2
+PASS PNG written: tree-lineup.png
+PASS 2x detail cache / type 0
+PASS unclipped detailed silhouette / type 0
+PASS opaque roots meet the world anchor / type 0
+PASS bark and leaf tonal detail / type 0
+PASS cache inspection export
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 0-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 1-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 2-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 3-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 4-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 5-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 6-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 7-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 8-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 9-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 10-wind.png
+PASS wind GPU silhouette agrees with pointer / type 0 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 11-wind.png
+PASS 2x detail cache / type 4
+PASS unclipped detailed silhouette / type 4
+PASS opaque roots meet the world anchor / type 4
+PASS bark and leaf tonal detail / type 4
+PASS cache inspection export
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 12-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 13-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 14-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 15-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 16-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 17-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 18-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 19-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 20-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 21-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 22-wind.png
+PASS wind GPU silhouette agrees with pointer / type 4 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 23-wind.png
+PASS 2x detail cache / type 5
+PASS unclipped detailed silhouette / type 5
+PASS opaque roots meet the world anchor / type 5
+PASS bark and leaf tonal detail / type 5
+PASS cache inspection export
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 24-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 25-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 26-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 27-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 28-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 29-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 30-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 31-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS PNG written: 32-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 33-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 34-wind.png
+PASS wind GPU silhouette agrees with pointer / type 5 mismatch=0
+PASS wind never detaches roots from ground
+PASS transparent corners cannot be selected
+PASS crown visibly sways between actual frames
+PASS PNG written: 35-wind.png
+PASS native trees use real terrain shadows / region 0
+PASS PNG written: forest-0.png
+PASS native trees use real terrain shadows / region 1
+PASS PNG written: forest-1.png
+PASS native trees use real terrain shadows / region 2
+PASS PNG written: forest-2.png
+PASS native trees use real terrain shadows / region 3
+PASS PNG written: forest-3.png
+PASS tree occlusion and hover outline work in foreground / type 0
+PASS PNG written: hover-0.png
+PASS tree occlusion and hover outline work in foreground / type 4
+PASS PNG written: hover-4.png
+PASS tree occlusion and hover outline work in foreground / type 5
+PASS PNG written: hover-5.png
+PASS all graphical diagnostics stayed silent
+Checks: 206
+Failures: 0

@@ -1,0 +1,197 @@
+{
+  "status": "PASS",
+  "date": "2026-10-27",
+  "scope": "Walkable observatory balcony and valley panorama",
+  "silent": true,
+  "master": "C:\\AI2D\\sprites\\emberfall_tower_balcony_20261027_v3",
+  "native_art": {
+    "status": "PASS",
+    "authoring": "Krita native MCP draw",
+    "original_art": true,
+    "external_assets": [],
+    "documents": [
+      {
+        "name": "tower-valley",
+        "layers": [
+          {
+            "name": "01 / Zmierzch turkusowy i zlota poswiata",
+            "uuid": "482c2519-ff58-4d57-b62f-910694f7f6fd"
+          },
+          {
+            "name": "02 / Cienkie obloki nad grzbietami",
+            "uuid": "4f03091b-2101-460d-98b8-d2bcc88c67f6"
+          },
+          {
+            "name": "03 / Odlegle gory i granie",
+            "uuid": "051df0bf-9ffb-472b-a669-1fc10f630674"
+          },
+          {
+            "name": "04 / Dolina, jezioro i wstega rzeki",
+            "uuid": "e5916493-64bb-45f4-bc98-0f71e18ef776"
+          },
+          {
+            "name": "05 / Lasy na zboczach i pasma mgiel",
+            "uuid": "4f4a7b10-226e-4986-972e-57605d604c66"
+          },
+          {
+            "name": "06 / Trakt, most i pradawne ruiny",
+            "uuid": "4a9a7ef3-3b26-4c63-a14b-dc4ca7d1419b"
+          },
+          {
+            "name": "07 / Bliskie urwiska, trawy i lesne szczegoly",
+            "uuid": "f43c7482-5adf-4829-ad34-581cc448cbe6"
+          }
+        ],
+        "size": [
+          1050,
+          900
+        ],
+        "kra_sha256": "df738ece8ac6509f2288d37def5d73d574cf7c526efbd4082268c7099c4cc77a",
+        "png_sha256": "0f560299be17b60dc28bbe2d4e5cd1986b933f989004f26a0b72ce813eded83c"
+      },
+      {
+        "name": "tower-balcony-back",
+        "layers": [
+          {
+            "name": "01 / Podparcie tarasu i kamienne warstwy",
+            "uuid": "063aa3cd-b5ae-424a-a24f-4e72ca42ebdb"
+          },
+          {
+            "name": "02 / Blekitna posadzka i zlote fugi",
+            "uuid": "4564cb3f-1b79-429c-8961-8781f2b6554d"
+          },
+          {
+            "name": "03 / Tylna balustrada i wejscie",
+            "uuid": "58ffeaba-81c1-486e-92c8-1a342e696fd2"
+          }
+        ],
+        "size": [
+          480,
+          320
+        ],
+        "kra_sha256": "20a7311e2d8d90cf0608fcb0a3daa592ef139d22fa37802cf84953fb1c3937e6",
+        "png_sha256": "26f134102ccd75eec60c8082034b88362dfae44f3551b1ce1f7c28fa147f142a"
+      },
+      {
+        "name": "tower-balcony-front",
+        "layers": [
+          {
+            "name": "01 / Przednia balustrada i bezpieczna krawedz",
+            "uuid": "8aa5d135-804b-42a8-b60c-1fee002af8bc"
+          },
+          {
+            "name": "02 / Kamienny slupek przy wejsciu",
+            "uuid": "603471d1-91fc-46a8-bd99-fa57e16856ae"
+          },
+          {
+            "name": "03 / Bluszcz na kamieniu i detale mosiezu",
+            "uuid": "fa3d342f-69c6-4b53-abdc-59ed84dbf49e"
+          }
+        ],
+        "size": [
+          480,
+          320
+        ],
+        "kra_sha256": "d92f80908850d8407cc9ab332e07e7a4a34f874abf60fa26c7d2c4e3605fb719",
+        "png_sha256": "1607a3d1d9f423d9834ce38eea2a643f7d34e6d634594fc5f07493e6702b591a"
+      }
+    ],
+    "runtime_rgba_bytes": 5008800,
+    "balcony_anchor": {
+      "u": 6.1,
+      "v": 0,
+      "pixel": [
+        64,
+        160
+      ]
+    },
+    "floor": 4
+  },
+  "logic": {
+    "status": "PASS",
+    "checks": 110661,
+    "command": "build.ps1 -Test",
+    "arguments": "--no-audio"
+  },
+  "persistence": {
+    "status": "PASS",
+    "checks": 3403,
+    "output": "dist/qa-save-1793124446404203000"
+  },
+  "renderer": {
+    "status": "PASS",
+    "checks": 1337,
+    "failures": 0,
+    "screenshots": 12,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 97,
+    "failures": [],
+    "masters": 3,
+    "runtime_rgba_bytes": 5008800,
+    "captures": 12,
+    "audio_opened": false
+  },
+  "player_package": {
+    "status": "PASS",
+    "package_sha256": "c91a11686b93d2a1c433d75b81d1b787463f3f04961c835481e3e8a720f3e613",
+    "exe_sha256": "dd8e1cc5c077a3a2dbf0221bf207cf917e0137e100d23567b09b1bbefe275b39",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-tower-balcony-package-20261027-190848\\Emberfall",
+    "verified_assets": 115,
+    "renderer": {
+      "status": "PASS",
+      "checks": 1337,
+      "failures": 0,
+      "screenshots": 12,
+      "audio_opened": false
+    },
+    "independent": {
+      "status": "PASS",
+      "checks": 97,
+      "failures": [],
+      "masters": 3,
+      "runtime_rgba_bytes": 5008800,
+      "captures": 12,
+      "audio_opened": false
+    },
+    "render_timing": {
+      "audio_opened": false,
+      "presentation_measured": false,
+      "scenes": [
+        {
+          "name": "observatory",
+          "frames": 120,
+          "p95_ms": 13.3687,
+          "mean_ms": 9.75889,
+          "within_60hz_render_budget": true
+        },
+        {
+          "name": "valley-lookout",
+          "frames": 120,
+          "p95_ms": 13.7542,
+          "mean_ms": 12.617,
+          "within_60hz_render_budget": true
+        }
+      ]
+    },
+    "startup_frames": 180,
+    "audio_device_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_player": false
+  },
+  "backup": "art/pipeline/backups/tower-balcony-20261027-185601",
+  "source_sha256": {
+    "src/tower_layout.hpp": "baf85e0026c4dbe0c25cb16e9aa3d5a391b2f89f67af3c5eb99a1e8f8dfdf159",
+    "src/tower_balcony_art.hpp": "55f93fd412956600e544f625fd0cf4627335835f1380619ca818de889ce268ef",
+    "src/tower_rooms_art.hpp": "c4e142fd2bb039e8d6ad0fff8087daf109162a03f0f18a0a5bca611e2159a732",
+    "src/tower_world.hpp": "49e03ddefbc04c7f7dc1ea44c08a50f32284726558d1e19c1335a6bd40904afd",
+    "src/main.cpp": "2cf2d0acb5c8bc144338eae3140c1c6149c4841186635f5d5389015d5d574dc5",
+    "tests/tower_balcony_qa.cpp": "9d26daacccf6db0c54083927859b6ba29ff8bd2828bd060b2abad53701d55dc6",
+    "tests/tower_balcony_qa.ps1": "f9beb10bc6869c00885dfdd2507fff90729ff4eb398ddb6c6f50149a20719e09",
+    "tests/tower_balcony_package_qa.ps1": "c700da7111f659a7d9a763630bf642354945dfd795d2188a4a7d1358c312f01c",
+    "tools/media/create_tower_balcony.py": "d74b98b6c5c36819b78682d6229c2927865753fea1fc562b7b668545b6545f69",
+    "tools/media/verify_tower_balcony.py": "b1c43da138e16688592f2f150abb68526a73a4802818f2e6c72e48c9c7dd32eb"
+  }
+}

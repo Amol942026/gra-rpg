@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "source": "Synfig 1.4.5 native 2D mirrored cutout and controls",
+  "samples": 115,
+  "frames": 114,
+  "release_frame": 90,
+  "fields": [
+    "handSide",
+    "handForward",
+    "handUp",
+    "elbowSide",
+    "elbowForward",
+    "elbowUp",
+    "rockForward",
+    "rockUp",
+    "bodyForward",
+    "bodyUp"
+  ],
+  "tracks": {
+    "hand": [
+      "handForward",
+      "handUp"
+    ],
+    "elbow": [
+      "elbowForward",
+      "elbowUp"
+    ],
+    "grip": [
+      "handSide",
+      "elbowSide"
+    ],
+    "rock": [
+      "rockForward",
+      "rockUp"
+    ],
+    "body": [
+      "bodyForward",
+      "bodyUp"
+    ]
+  },
+  "master": "C:\\AI2D\\animations\\emberfall_guardian_fast_20261026",
+  "source_sha256": "d964b96fbed1b63ea536a7bdab6bec6d3a833bf91c2eb53f1c84cb5258e89436",
+  "header_sha256": "10d6a5bfe9d9cab8c913ba749252dea4733fa8b65ca937dc5a365602f93bf6c8"
+}

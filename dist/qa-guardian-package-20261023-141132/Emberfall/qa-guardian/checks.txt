@@ -1,0 +1,475 @@
+PASS player code preloads native Krita stone without audio
+PASS actual New Game factory uses western arrival
+PASS render written: forest-start.png
+PASS production New Game menu action starts the prologue at the new spawn
+PASS actual prologue handoff teleports to the new western arrival
+PASS new start stays safe through ten seconds of real patrols
+PASS telegraph target stays committed
+PASS render written: 0.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 1.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 2.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 3.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 4.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 5.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 6.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 7.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 8.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 9.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 10.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 11.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 12.png
+PASS render written: guardian-uproot.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 13.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 14.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 15.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 16.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 17.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 18.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 19.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 20.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 21.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 22.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 23.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 24.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 25.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 26.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 27.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 28.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 29.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 30.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 31.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 32.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 33.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 34.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 35.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 36.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 37.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 38.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 39.png
+PASS render written: guardian-lift.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 40.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 41.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 42.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 43.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 44.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 45.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 46.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 47.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 48.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 49.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 50.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 51.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 52.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 53.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 54.png
+PASS render written: guardian-windup.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 55.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 56.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 57.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 58.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 59.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 60.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 61.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 62.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 63.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 64.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 65.png
+PASS telegraph target stays committed
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS projectile leaves the actual animated hand socket
+PASS render written: 66.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 67.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 68.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 69.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 70.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 71.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 72.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: guardian-flight.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 73.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 74.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 75.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 76.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 77.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 78.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 79.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 80.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 81.png
+PASS render written: 82.png
+PASS render written: 83.png
+PASS render written: 84.png
+PASS render written: 85.png
+PASS render written: 86.png
+PASS render written: 87.png
+PASS render written: guardian-impact.png
+PASS render written: 88.png
+PASS render written: 89.png
+PASS render written: 90.png
+PASS render written: 91.png
+PASS render written: 92.png
+PASS render written: 93.png
+PASS render written: 94.png
+PASS render written: 95.png
+PASS render written: 96.png
+PASS render written: 97.png
+PASS render written: 98.png
+PASS render written: 99.png
+PASS render written: 100.png
+PASS render written: 101.png
+PASS render written: 102.png
+PASS render written: 103.png
+PASS render written: 104.png
+PASS render written: 105.png
+PASS render written: 106.png
+PASS render written: 107.png
+PASS render written: 108.png
+PASS render written: 109.png
+PASS render written: 110.png
+PASS render written: 111.png
+PASS render written: 112.png
+PASS render written: 113.png
+PASS render written: 114.png
+PASS render written: 115.png
+PASS render written: 116.png
+PASS render written: 117.png
+PASS render written: 118.png
+PASS render written: 119.png
+PASS one complete crouch, tear, overhead lift and visible flight really occurred
+PASS actual encounter inflicts exactly one armor-reduced stone hit
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-144.png
+PASS Escape pause freezes the pending boss ability through real input routing
+PASS menu load restores a saved in-progress windup and exact position
+PASS all diagnostics and UI actions stayed silent
+Checks: 473
+Failures: 0

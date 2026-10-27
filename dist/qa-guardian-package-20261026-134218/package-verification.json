@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "package_sha256": "23a579e74f205494383aec0164a9ceae7124caf78108b8a53e1e49cf1ea2eb8a",
+  "exe_sha256": "346fd1546593bbe46d6cebe330459a9476f753d5aa707bd2835bf808b2f48fb4",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-guardian-package-20261026-134218\\Emberfall",
+  "verified_assets": 106,
+  "renderer_checks": 1157,
+  "independent_checks": 5526,
+  "native_synfig_frames": 168,
+  "compiled_control_samples": 169,
+  "game_frames": 120,
+  "shatter": {
+    "native_frames": 72,
+    "pieces": 6,
+    "control_samples": 438,
+    "game_frames": 60,
+    "duration": 1.2,
+    "runtime_atlas_rgba8_bytes": 221184
+  },
+  "knockback": {
+    "status": "PASS",
+    "onset_frame": 162,
+    "active_frames": 168,
+    "distance": 1.35001,
+    "audio_played": false
+  },
+  "knockdown": {
+    "status": "PASS",
+    "duration": 2.8,
+    "native_synfig_frames": 168,
+    "control_samples": 169,
+    "bones": 17,
+    "pose_views": 72,
+    "equipment_variants": 39,
+    "game_clip_frames": 85,
+    "encounter_frames": 93,
+    "runtime_key_bytes": 80444,
+    "new_textures": 0,
+    "supine_rest_seconds": [
+      0.66,
+      1.03
+    ],
+    "stand_seconds": 2.65
+  },
+  "startup_frames": 180,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_player": false
+}

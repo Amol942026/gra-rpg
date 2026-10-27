@@ -1,4 +1,5 @@
 #pragma once
+#include "tower_balcony_art.hpp"
 Color towerAccent(int floor){const Color colors[]={Gold,rgb(157,183,214),rgb(137,207,143),rgb(184,139,248),rgb(118,189,247)};return colors[std::clamp(floor,0,4)];}
 std::array<RenderTexture2D,TowerFloorCount> towerFloorArt{};
 void drawTowerGround(Vector2 c,int floor){
@@ -24,8 +25,8 @@ void drawTowerGround(Vector2 c,int floor){
   for(int i=0;i<16;i++){float a=i*PI/8;intro_art::star(c.x+std::cos(a)*115,c.y+std::sin(a)*57,3,accent);if(i%2==0)line(c.x+std::cos(a)*103,c.y+std::sin(a)*51,c.x+std::cos(a+PI*.5f)*103,c.y+std::sin(a+PI*.5f)*51,Fade(accent,.14f));}
  }
 }
-void makeTowerRoomArt(){for(int i=0;i<TowerFloorCount;i++){towerFloorArt[i]=LoadRenderTexture(1024,600);BeginTextureMode(towerFloorArt[i]);ClearBackground(BLANK);drawTowerGround({512,300},i);EndTextureMode();SetTextureFilter(towerFloorArt[i].texture,TEXTURE_FILTER_BILINEAR);}}
-void unloadTowerRoomArt(){for(auto& target:towerFloorArt)if(target.id)UnloadRenderTexture(target);}
+void makeTowerRoomArt(){tower_balcony::load();for(int i=0;i<TowerFloorCount;i++){towerFloorArt[i]=LoadRenderTexture(1024,600);BeginTextureMode(towerFloorArt[i]);ClearBackground(BLANK);drawTowerGround({512,300},i);EndTextureMode();SetTextureFilter(towerFloorArt[i].texture,TEXTURE_FILTER_BILINEAR);}}
+void unloadTowerRoomArt(){tower_balcony::unload();for(auto& target:towerFloorArt)if(target.id)UnloadRenderTexture(target);}
 void drawTowerStairs(int direction){
  Vector2 p=screen(towerStairBase(direction));bool hover=hovered.kind==HoverKind::TowerStair&&hovered.index==direction;
  tower_stairs::draw(direction,p,hover);

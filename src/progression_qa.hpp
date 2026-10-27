@@ -11,14 +11,14 @@ bool runProgressionQA(){
     check(!worldPointerAllowed(mouse),"character sheet blocks world interactions");
     renderScene();saveTexture(canvas,"qa-v13/character-sheet.png");
     check(confirmStats()&&!statsOpen,"character sheet can close when no points are pending");
-    game.xp=79;Enemy defeated{91,0,{18,15},{18,15},1,36};game.hit(defeated,10);syncAdvancement();
+    game.xp=experienceForLevel(1)-1;Enemy defeated{91,0,{18,15},{18,15},1,36};game.hit(defeated,10);syncAdvancement();
     check(game.level==2&&game.attributePoints==5&&statsOpen,"real kill and XP automatically open five-point level menu");
     check(!confirmStats()&&statsOpen&&game.allocationRequired,"confirm cannot bypass unspent level points");
     pointAt(statAdjust(0,true));clickProgression();
-    check(statDraft[0]==1&&game.attributePoints==5&&game.attribute(Attribute::Strength)==0,"plus button changes only the allocation preview");
+    check(statDraft[0]==1&&game.attributePoints==5&&game.attribute(Attribute::Strength)==0,"DODAJ action changes only the allocation preview");
     pointAt(statAdjust(0,false));clickProgression();
-    check(statDraft[0]==0&&draftRemaining()==5,"minus button returns a pending point");
-    pointAt(statAdjust(0,false));clickProgression();check(statDraft[0]==0,"minus cannot remove points from earlier levels");
+    check(statDraft[0]==0&&draftRemaining()==5,"COFNIJ action returns a pending point");
+    pointAt(statAdjust(0,false));clickProgression();check(statDraft[0]==0,"COFNIJ cannot remove points from earlier levels");
     for(int index:{0,0,1,4,5}){pointAt(statAdjust(index,true));clickProgression();}
     check(draftRemaining()==0&&!adjustStat(2,true),"five points are the exact spending limit");
     float before=game.time;V location=game.player;game.update(.05f,{1,0},true);
@@ -45,7 +45,7 @@ bool runProgressionQA(){
     for(int i=0;i<5;i++)game.update(.05f,{},false);
     check(game.enemies[0].hp==69&&game.fireballs.empty()&&!game.explosions.empty(),"projectile hits with allocated magical damage and creates explosion");
     renderScene();saveTexture(canvas,"qa-v13/fireball-impact.png");
-    game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};game.xp=79;
+    game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};game.xp=experienceForLevel(1)-1;
     V victim=game.player+V{2,-2};game.enemies.push_back({44,0,victim,victim,1,36});game.enemies[0].windup=100;game.spell(victim-game.player);
     for(int i=0;i<30&&!game.allocationRequired;i++)game.update(.05f,{},false);
     syncAdvancement();check(game.allocationRequired&&statsOpen&&game.attributePoints==5,"a fireball kill also pauses and opens allocation automatically");

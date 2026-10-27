@@ -39,7 +39,7 @@ void bowTests(){
  g=arena();g.enemies.push_back({81,1,{19,15},{19,15},500,500});g.beginBow({1,0});g.releaseBow();g.updateArrows(1);
  check(g.arrows.empty()&&g.enemies[0].hp==500,"short draw cannot hit beyond its maximum travel distance");
  g=arena();g.player={45,15};g.beginBow({1,0});g.bowDrawTime=BowDrawDuration;g.releaseBow();g.updateArrows(1);check(g.arrows.empty(),"map edge stops arrow without leaving immortal projectiles");
- g=arena();g.xp=70;g.enemies.push_back({81,0,{17,15},{17,15},1,100});g.beginBow({1,0});g.bowDrawTime=BowDrawDuration;g.releaseBow();g.updateArrows(.4f);
+ g=arena();g.xp=experienceForLevel(1)-10;g.enemies.push_back({81,0,{17,15},{17,15},1,100});g.beginBow({1,0});g.bowDrawTime=BowDrawDuration;g.releaseBow();g.updateArrows(.4f);
  check(g.kills==1&&g.allocationRequired&&g.level==2&&g.ground.empty()&&g.findCorpse(81),"arrow kill uses existing corpse loot and mandatory advancement pause");
  check(!g.beginBow({1,0})&&!g.selectWeapon(0),"mandatory level allocation blocks bow and wheel equipment actions");
 }

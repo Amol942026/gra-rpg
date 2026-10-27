@@ -1,0 +1,3922 @@
+scene	scale	x	y	width	height	text
+main-menu	0.8	96.25	95	428.75	92.5	EMBERFALL
+main-menu	0.8	106.25	232.5	205	18.75	ECHA ZAPOMNIANYCH RUIN
+main-menu	0.8	102.5	722.5	286.25	22.5	PIĘĆ CZĘŚCI. JEDNA NADZIEJA.
+main-menu	0.8	105	767.5	298.75	17.5	Gdy gasną pieczęcie, ktoś musi podtrzymać światło.
+main-menu	0.8	1030	236.25	196.25	25	OSTATNIA PIECZĘĆ
+main-menu	0.8	1038.75	273.75	178.75	16.25	Twoja opowieść zaczyna się tutaj
+main-menu	0.8	963.75	328.75	11.25	13.75	01
+main-menu	0.8	1008.75	326.25	75	22.5	Nowa gra
+main-menu	0.8	963.75	403.75	13.75	13.75	02
+main-menu	0.8	1008.75	401.25	91.25	22.5	Wczytaj grę
+main-menu	0.8	963.75	478.75	12.5	13.75	03
+main-menu	0.8	1008.75	476.25	47.5	22.5	Opcje
+main-menu	0.8	963.75	553.75	13.75	13.75	04
+main-menu	0.8	1008.75	551.25	60	22.5	Twórcy
+main-menu	0.8	963.75	628.75	12.5	13.75	05
+main-menu	0.8	1008.75	626.25	87.5	22.5	Wyjdź z gry
+main-menu	0.8	82.5	867.5	100	15	PIECZĘĆ POPIOŁU
+main-menu	0.8	588.75	867.5	262.5	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+main-menu	0.8	1258.75	867.5	68.75	13.75	EMBERFALL
+options	0.8	620	221.25	201.25	32.5	PRZY OGNISKU
+options	0.8	627.5	267.5	185	16.25	Dostosuj oprawę swojej wyprawy
+options	0.8	410	306.25	51.25	18.75	Muzyka
+options	0.8	580	308.75	21.25	15	WŁ.
+options	0.8	970	307.5	26.25	17.5	42%
+options	0.8	410	377.5	120	18.75	Efekty dźwiękowe
+options	0.8	580	381.25	21.25	15	WŁ.
+options	0.8	970	378.75	26.25	17.5	72%
+options	0.8	410	450	78.75	18.75	Tryb ekranu
+options	0.8	841.25	452.5	65	17.5	Okno · F11
+options	0.8	410	522.5	75	18.75	Wyciszenie
+options	0.8	840	523.75	67.5	17.5	Wyłączone
+options	0.8	567.5	608.75	305	15	Kliknij nazwę, aby przełączyć kanał. Suwak / ← →: głośność.
+options	0.8	597.5	642.5	245	15	F1 podczas gry: przewodnik oraz opis sterowania.
+options	0.8	666.25	728.75	107.5	22.5	Gotowe · ESC
+options	0.8	82.5	867.5	100	15	PIECZĘĆ POPIOŁU
+options	0.8	588.75	867.5	262.5	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+options	0.8	1258.75	867.5	68.75	13.75	EMBERFALL
+credits	0.8	662.5	221.25	116.25	32.5	TWÓRCY
+credits	0.8	606.25	267.5	228.75	16.25	Ludzie i narzędzia, dzięki którym płonie żar
+credits	0.8	520	325	400	22.5	EMBERFALL — ECHA ZAPOMNIANYCH RUIN
+credits	0.8	523.75	372.5	392.5	20	Autorski projekt Amadeusza · realizacja z pomocą Codexa
+credits	0.8	566.25	430	308.75	18.75	Grafika i animacja: Krita · Synfig Studio · Laigter
+credits	0.8	575	466.25	291.25	18.75	Muzyka i dźwięk: LMMS · Csound · Audacity
+credits	0.8	581.25	522.5	277.5	17.5	Silnik: raylib — Ramon Santamaria i współtwórcy
+credits	0.8	576.25	557.5	287.5	17.5	Cinzel — Natanael Gama  ·  Lato — Łukasz Dziedzic
+credits	0.8	592.5	591.25	256.25	17.5	Manrope — Mikhail Sharanda i współtwórcy
+credits	0.8	561.25	650	318.75	15	Pełne informacje o licencjach: LICENSES.md oraz assets/licenses
+credits	0.8	668.75	728.75	102.5	22.5	Wstecz · ESC
+credits	0.8	82.5	867.5	100	15	PIECZĘĆ POPIOŁU
+credits	0.8	588.75	867.5	262.5	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+credits	0.8	1258.75	867.5	68.75	13.75	EMBERFALL
+load-menu	0.8	576.25	221.25	288.75	32.5	POWRÓT DO KRONIKI
+load-menu	0.8	646.25	267.5	148.75	16.25	Wybierz zapisaną wyprawę
+load-menu	0.8	400	322.5	22.5	30	01
+load-menu	0.8	467.5	315	75	22.5	Las Mchu
+load-menu	0.8	467.5	353.75	168.75	16.25	Poziom 1  ·  2026-10-26 16:33
+load-menu	0.8	400	437.5	27.5	30	02
+load-menu	0.8	467.5	431.25	75	22.5	Pusty slot
+load-menu	0.8	467.5	470	131.25	16.25	Brak zapisanej wyprawy
+load-menu	0.8	400	553.75	27.5	30	03
+load-menu	0.8	467.5	547.5	75	22.5	Pusty slot
+load-menu	0.8	467.5	586.25	131.25	16.25	Brak zapisanej wyprawy
+load-menu	0.8	668.75	728.75	102.5	22.5	Wstecz · ESC
+load-menu	0.8	82.5	867.5	100	15	PIECZĘĆ POPIOŁU
+load-menu	0.8	588.75	867.5	262.5	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+load-menu	0.8	1258.75	867.5	68.75	13.75	EMBERFALL
+forest-hud	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+forest-hud	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+forest-hud	0.8	335	28.75	15	20	01
+forest-hud	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+forest-hud	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+forest-hud	0.8	913.75	30	28.75	15	0 FPS
+forest-hud	0.8	917.5	56.25	63.75	15	F1  POMOC
+forest-hud	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+forest-hud	0.8	925	157.5	8.75	15	N
+forest-hud	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+forest-hud	0.8	52.5	713.75	100	20	Serce Świtu
+forest-hud	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+forest-hud	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+forest-hud	0.8	28.75	807.5	63.75	15	WSAD · ruch
+forest-hud	0.8	28.75	835	60	15	SHIFT · bieg
+forest-hud	0.8	28.75	862.5	57.5	15	ESC · pauza
+forest-hud	0.8	411.25	847.5	25	15	LPM
+forest-hud	0.8	492.5	847.5	7.5	15	C
+forest-hud	0.8	565	847.5	6.25	15	1
+forest-hud	0.8	637.5	847.5	6.25	15	2
+forest-hud	0.8	691.25	847.5	41.25	15	SPACJA
+forest-hud	0.8	410	870	30	15	ATAK
+forest-hud	0.8	473.75	870	45	15	CZAR · K
+forest-hud	0.8	541.25	870	55	15	ZDROWIE
+forest-hud	0.8	622.5	870	35	15	MANA
+forest-hud	0.8	698.75	870	27.5	15	UNIK
+forest-hud	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+forest-hud	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+forest-hud	0.8	1157.5	70	120	25	Wędrowiec
+forest-hud	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+forest-hud	0.8	1158.75	125	52.5	15	ZŁOTO  0
+forest-hud	0.8	1080	151.25	31.25	15	ŻYCIE
+forest-hud	0.8	1327.5	147.5	47.5	15	100 / 100
+forest-hud	0.8	1080	175	35	15	MANA
+forest-hud	0.8	1327.5	172.5	47.5	15	100 / 100
+forest-hud	0.8	1221.25	222.5	32.5	15	HEŁM
+forest-hud	0.8	1325	222.5	45	15	TARCZA
+forest-hud	0.8	1222.5	272.5	31.25	15	BUTY
+forest-hud	0.8	1320	272.5	55	15	PIERŚCIEŃ
+forest-hud	0.8	1080	313.75	47.5	15	ATAK  14
+forest-hud	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+forest-hud	0.8	1302.5	313.75	51.25	15	PD  0/100
+forest-hud	0.8	1080	346.25	42.5	15	PLECAK
+forest-hud	0.8	1347.5	346.25	35	15	06 / 25
+forest-hud	0.8	1117.5	387.5	6.25	15	5
+forest-hud	0.8	1182.5	387.5	6.25	15	3
+forest-hud	0.8	1117.5	432.5	12.5	15	20
+forest-hud	0.8	1080	595	62.5	15	W ZASIĘGU
+forest-hud	0.8	1270	595	73.75	15	0  W ZASIĘGU
+forest-hud	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+forest-hud	0.8	1090	713.75	93.75	15	POD KURSOREM
+forest-hud	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+forest-hud	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+forest-hud	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+forest-hud	0.8	1370	885	27.5	15	v0.47
+forest-hud	0.8	175	845	48.75	15	Z · 10 MP
+forest-hud	0.8	175	870	48.75	15	ZABLOK.
+forest-hud	0.8	246.25	845	48.75	15	X · 20 MP
+forest-hud	0.8	246.25	870	48.75	15	ZABLOK.
+forest-hud	0.8	318.75	845	48.75	15	V · 20 MP
+forest-hud	0.8	318.75	870	48.75	15	ZABLOK.
+forest-hud	0.8	830	806.25	50	15	MUZYKA
+forest-hud	0.8	850	825	21.25	15	WŁ.
+forest-hud	0.8	943.75	806.25	41.25	15	EFEKTY
+forest-hud	0.8	960	825	21.25	15	WŁ.
+forest-hud	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+forest-hud	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+forest-hud	0.8	103.75	122.5	51.25	15	BROŃ · Q
+stats	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+stats	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+stats	0.8	335	28.75	15	20	01
+stats	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+stats	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+stats	0.8	913.75	30	28.75	15	0 FPS
+stats	0.8	917.5	56.25	63.75	15	F1  POMOC
+stats	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+stats	0.8	925	157.5	8.75	15	N
+stats	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+stats	0.8	52.5	713.75	100	20	Serce Świtu
+stats	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+stats	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+stats	0.8	28.75	807.5	63.75	15	WSAD · ruch
+stats	0.8	28.75	835	60	15	SHIFT · bieg
+stats	0.8	28.75	862.5	57.5	15	ESC · pauza
+stats	0.8	411.25	847.5	25	15	LPM
+stats	0.8	492.5	847.5	7.5	15	C
+stats	0.8	565	847.5	6.25	15	1
+stats	0.8	637.5	847.5	6.25	15	2
+stats	0.8	691.25	847.5	41.25	15	SPACJA
+stats	0.8	410	870	30	15	ATAK
+stats	0.8	473.75	870	45	15	CZAR · K
+stats	0.8	541.25	870	55	15	ZDROWIE
+stats	0.8	622.5	870	35	15	MANA
+stats	0.8	698.75	870	27.5	15	UNIK
+stats	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+stats	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+stats	0.8	1157.5	70	120	25	Wędrowiec
+stats	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+stats	0.8	1158.75	125	52.5	15	ZŁOTO  0
+stats	0.8	1080	151.25	31.25	15	ŻYCIE
+stats	0.8	1327.5	147.5	47.5	15	100 / 100
+stats	0.8	1080	175	35	15	MANA
+stats	0.8	1327.5	172.5	47.5	15	100 / 100
+stats	0.8	1221.25	222.5	32.5	15	HEŁM
+stats	0.8	1325	222.5	45	15	TARCZA
+stats	0.8	1222.5	272.5	31.25	15	BUTY
+stats	0.8	1320	272.5	55	15	PIERŚCIEŃ
+stats	0.8	1080	313.75	47.5	15	ATAK  14
+stats	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+stats	0.8	1302.5	313.75	51.25	15	PD  0/100
+stats	0.8	1080	346.25	42.5	15	PLECAK
+stats	0.8	1347.5	346.25	35	15	06 / 25
+stats	0.8	1117.5	387.5	6.25	15	5
+stats	0.8	1182.5	387.5	6.25	15	3
+stats	0.8	1117.5	432.5	12.5	15	20
+stats	0.8	1080	595	62.5	15	W ZASIĘGU
+stats	0.8	1270	595	73.75	15	0  W ZASIĘGU
+stats	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+stats	0.8	1090	713.75	93.75	15	POD KURSOREM
+stats	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+stats	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+stats	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+stats	0.8	1370	885	27.5	15	v0.47
+stats	0.8	175	845	48.75	15	Z · 10 MP
+stats	0.8	175	870	48.75	15	ZABLOK.
+stats	0.8	246.25	845	48.75	15	X · 20 MP
+stats	0.8	246.25	870	48.75	15	ZABLOK.
+stats	0.8	318.75	845	48.75	15	V · 20 MP
+stats	0.8	318.75	870	48.75	15	ZABLOK.
+stats	0.8	576.25	147.5	288.75	30	STATYSTYKI BOHATERA
+stats	0.8	613.75	192.5	212.5	17.5	5 punktów za każdy zdobyty poziom
+stats	0.8	588.75	226.25	263.75	18.75	Kolejne punkty zdobędziesz po awansie.
+stats	0.8	336.25	267.5	25	20	Siła
+stats	0.8	336.25	293.75	197.5	15	+2 obrażenia ataku fizycznego za punkt.
+stats	0.8	893.75	278.75	10	22.5	0
+stats	0.8	336.25	323.75	100	20	Moc magiczna
+stats	0.8	336.25	350	161.25	15	+3 obrażenia magiczne za punkt.
+stats	0.8	893.75	335	10	22.5	0
+stats	0.8	336.25	380	51.25	20	Obrona
+stats	0.8	336.25	406.25	142.5	15	+1 obrony fizycznej za punkt.
+stats	0.8	893.75	391.25	10	22.5	0
+stats	0.8	336.25	436.25	120	20	Obrona magiczna
+stats	0.8	336.25	462.5	150	15	+1 obrony magicznej za punkt.
+stats	0.8	893.75	447.5	10	22.5	0
+stats	0.8	336.25	492.5	101.25	20	Wytrzymałość
+stats	0.8	336.25	517.5	165	15	+10 maksymalnego HP za punkt.
+stats	0.8	893.75	502.5	10	22.5	0
+stats	0.8	336.25	547.5	38.75	20	Mana
+stats	0.8	336.25	573.75	161.25	15	+5 maksymalnej many za punkt.
+stats	0.8	893.75	558.75	10	22.5	0
+stats	0.8	591.25	630	258.75	17.5	Atak 14   ·   Magia 28   ·   HP 100   ·   Mana 100
+stats	0.8	671.25	698.75	97.5	17.5	WRÓĆ DO GRY
+stats	0.8	642.5	742.5	156.25	15	ENTER / ESC / P — wróć do gry
+stats	0.8	830	806.25	50	15	MUZYKA
+stats	0.8	850	825	21.25	15	WŁ.
+stats	0.8	943.75	806.25	41.25	15	EFEKTY
+stats	0.8	960	825	21.25	15	WŁ.
+stats	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+stats	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+stats	0.8	103.75	122.5	51.25	15	BROŃ · Q
+skills	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+skills	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+skills	0.8	335	28.75	15	20	01
+skills	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+skills	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+skills	0.8	913.75	30	28.75	15	0 FPS
+skills	0.8	917.5	56.25	63.75	15	F1  POMOC
+skills	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+skills	0.8	925	157.5	8.75	15	N
+skills	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+skills	0.8	52.5	713.75	100	20	Serce Świtu
+skills	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+skills	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+skills	0.8	28.75	807.5	63.75	15	WSAD · ruch
+skills	0.8	28.75	835	60	15	SHIFT · bieg
+skills	0.8	28.75	862.5	57.5	15	ESC · pauza
+skills	0.8	411.25	847.5	25	15	LPM
+skills	0.8	492.5	847.5	7.5	15	C
+skills	0.8	565	847.5	6.25	15	1
+skills	0.8	637.5	847.5	6.25	15	2
+skills	0.8	691.25	847.5	41.25	15	SPACJA
+skills	0.8	410	870	30	15	ATAK
+skills	0.8	473.75	870	45	15	CZAR · K
+skills	0.8	541.25	870	55	15	ZDROWIE
+skills	0.8	622.5	870	35	15	MANA
+skills	0.8	698.75	870	27.5	15	UNIK
+skills	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+skills	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+skills	0.8	1157.5	70	120	25	Wędrowiec
+skills	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+skills	0.8	1158.75	125	52.5	15	ZŁOTO  0
+skills	0.8	1080	151.25	31.25	15	ŻYCIE
+skills	0.8	1327.5	147.5	47.5	15	100 / 100
+skills	0.8	1080	175	35	15	MANA
+skills	0.8	1327.5	172.5	47.5	15	100 / 100
+skills	0.8	1221.25	222.5	32.5	15	HEŁM
+skills	0.8	1325	222.5	45	15	TARCZA
+skills	0.8	1222.5	272.5	31.25	15	BUTY
+skills	0.8	1320	272.5	55	15	PIERŚCIEŃ
+skills	0.8	1080	313.75	47.5	15	ATAK  14
+skills	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+skills	0.8	1302.5	313.75	51.25	15	PD  0/100
+skills	0.8	1080	346.25	42.5	15	PLECAK
+skills	0.8	1347.5	346.25	35	15	06 / 25
+skills	0.8	1117.5	387.5	6.25	15	5
+skills	0.8	1182.5	387.5	6.25	15	3
+skills	0.8	1117.5	432.5	12.5	15	20
+skills	0.8	1080	595	62.5	15	W ZASIĘGU
+skills	0.8	1270	595	73.75	15	0  W ZASIĘGU
+skills	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+skills	0.8	1090	713.75	93.75	15	POD KURSOREM
+skills	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+skills	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+skills	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+skills	0.8	1370	885	27.5	15	v0.47
+skills	0.8	175	845	48.75	15	Z · 10 MP
+skills	0.8	175	870	48.75	15	ZABLOK.
+skills	0.8	246.25	845	48.75	15	X · 20 MP
+skills	0.8	246.25	870	48.75	15	ZABLOK.
+skills	0.8	318.75	845	48.75	15	V · 20 MP
+skills	0.8	318.75	870	48.75	15	ZABLOK.
+skills	0.8	568.75	147.5	302.5	27.5	UMIEJĘTNOŚCI BOHATERA
+skills	0.8	623.75	190	193.75	17.5	1 punkt za każdy zdobyty poziom
+skills	0.8	557.5	212.5	326.25	17.5	Zdobywaj poziomy, aby uczyć się i rozwijać umiejętności.
+skills	0.8	415	243.75	128.75	23.75	Mocne cięcie
+skills	0.8	415	275	96.25	15	Miecz · 10 many · Z
+skills	0.8	415	297.5	265	15	Silniejszy zamach trafia wszystkich w zasięgu miecza.
+skills	0.8	415	320	170	15	Obrażenia: 150% zwykłego ataku
+skills	0.8	415	342.5	238.75	15	Kolejna ranga: +10% obrażeń · odnowienie 1,2 s.
+skills	0.8	1023.75	273.75	48.75	15	RANGA 0
+skills	0.8	415	377.5	233.75	23.75	Przeszywająca strzała
+skills	0.8	415	407.5	138.75	15	Łuk · 20 many + 1 strzała · X
+skills	0.8	415	431.25	217.5	15	Przygotuj X, następnie naciągnij i puść LPM.
+skills	0.8	415	452.5	231.25	15	Przebija do 3 celów · obrażenia zwykłej strzały
+skills	0.8	415	475	196.25	15	Kolejna ranga: +1 cel · odnowienie 1,5 s.
+skills	0.8	1023.75	407.5	48.75	15	RANGA 0
+skills	0.8	415	510	83.75	23.75	Leczenie
+skills	0.8	415	541.25	122.5	15	Każda broń · 20 many · V
+skills	0.8	415	563.75	230	15	Przywraca 30 HP, do maksymalnego zdrowia.
+skills	0.8	415	586.25	218.75	15	Efekt: +30 HP · nie wymaga miecza ani łuku
+skills	0.8	415	607.5	290	15	Jedna ranga · odnowienie 1 s · przy pełnym HP bez kosztu.
+skills	0.8	1020	540	56.25	15	NIEZNANE
+skills	0.8	568.75	647.5	302.5	16.25	U lub ESC zamyka okno. Leczenie wystarczy poznać raz.
+skills	0.8	671.25	690	97.5	17.5	WRÓĆ DO GRY
+skills	0.8	620	748.75	201.25	15	Z / X — umiejętności broni · V — Leczenie
+skills	0.8	830	806.25	50	15	MUZYKA
+skills	0.8	850	825	21.25	15	WŁ.
+skills	0.8	943.75	806.25	41.25	15	EFEKTY
+skills	0.8	960	825	21.25	15	WŁ.
+skills	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+skills	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+skills	0.8	103.75	122.5	51.25	15	BROŃ · Q
+spell-book	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+spell-book	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+spell-book	0.8	335	28.75	15	20	01
+spell-book	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+spell-book	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+spell-book	0.8	913.75	30	28.75	15	0 FPS
+spell-book	0.8	917.5	56.25	63.75	15	F1  POMOC
+spell-book	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+spell-book	0.8	925	157.5	8.75	15	N
+spell-book	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+spell-book	0.8	52.5	713.75	100	20	Serce Świtu
+spell-book	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+spell-book	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+spell-book	0.8	28.75	807.5	63.75	15	WSAD · ruch
+spell-book	0.8	28.75	835	60	15	SHIFT · bieg
+spell-book	0.8	28.75	862.5	57.5	15	ESC · pauza
+spell-book	0.8	411.25	847.5	25	15	LPM
+spell-book	0.8	492.5	847.5	7.5	15	C
+spell-book	0.8	565	847.5	6.25	15	1
+spell-book	0.8	637.5	847.5	6.25	15	2
+spell-book	0.8	691.25	847.5	41.25	15	SPACJA
+spell-book	0.8	410	870	30	15	ATAK
+spell-book	0.8	473.75	870	45	15	CZAR · K
+spell-book	0.8	541.25	870	55	15	ZDROWIE
+spell-book	0.8	622.5	870	35	15	MANA
+spell-book	0.8	698.75	870	27.5	15	UNIK
+spell-book	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+spell-book	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+spell-book	0.8	1157.5	70	120	25	Wędrowiec
+spell-book	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+spell-book	0.8	1158.75	125	52.5	15	ZŁOTO  0
+spell-book	0.8	1080	151.25	31.25	15	ŻYCIE
+spell-book	0.8	1327.5	147.5	47.5	15	100 / 100
+spell-book	0.8	1080	175	35	15	MANA
+spell-book	0.8	1327.5	172.5	47.5	15	100 / 100
+spell-book	0.8	1221.25	222.5	32.5	15	HEŁM
+spell-book	0.8	1325	222.5	45	15	TARCZA
+spell-book	0.8	1222.5	272.5	31.25	15	BUTY
+spell-book	0.8	1320	272.5	55	15	PIERŚCIEŃ
+spell-book	0.8	1080	313.75	47.5	15	ATAK  14
+spell-book	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+spell-book	0.8	1302.5	313.75	51.25	15	PD  0/100
+spell-book	0.8	1080	346.25	42.5	15	PLECAK
+spell-book	0.8	1347.5	346.25	35	15	06 / 25
+spell-book	0.8	1117.5	387.5	6.25	15	5
+spell-book	0.8	1182.5	387.5	6.25	15	3
+spell-book	0.8	1117.5	432.5	12.5	15	20
+spell-book	0.8	1080	595	62.5	15	W ZASIĘGU
+spell-book	0.8	1270	595	73.75	15	0  W ZASIĘGU
+spell-book	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+spell-book	0.8	1090	713.75	93.75	15	POD KURSOREM
+spell-book	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+spell-book	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+spell-book	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+spell-book	0.8	1370	885	27.5	15	v0.47
+spell-book	0.8	175	845	48.75	15	Z · 10 MP
+spell-book	0.8	175	870	48.75	15	ZABLOK.
+spell-book	0.8	246.25	845	48.75	15	X · 20 MP
+spell-book	0.8	246.25	870	48.75	15	ZABLOK.
+spell-book	0.8	318.75	845	48.75	15	V · 20 MP
+spell-book	0.8	318.75	870	48.75	15	ZABLOK.
+spell-book	0.8	618.75	258.75	203.75	30	KSIĘGA CZARÓW
+spell-book	0.8	616.25	302.5	208.75	17.5	Wybierz czar używany klawiszem C
+spell-book	0.8	487.5	347.5	120	25	Kula ognia
+spell-book	0.8	487.5	387.5	247.5	17.5	Obrażenia magiczne: 28   ·   Koszt: 10 many
+spell-book	0.8	487.5	418.75	181.25	16.25	Zasięg: 8 pól   ·   Odnowienie: 0,8 s
+spell-book	0.8	487.5	446.25	212.5	15	Celuj kursorem. Kula wybucha po trafieniu.
+spell-book	0.8	647.5	508.75	145	17.5	WYBIERZ KULĘ OGNIA
+spell-book	0.8	650	568.75	140	16.25	Wybrany czar: Kula ognia
+spell-book	0.8	602.5	597.5	235	15	Mana: 100 / 100   ·   Regeneracja: 1 punkt co 5 s
+spell-book	0.8	593.75	625	252.5	15	Świat jest zatrzymany. ESC / K — wróć bez zmiany.
+spell-book	0.8	830	806.25	50	15	MUZYKA
+spell-book	0.8	850	825	21.25	15	WŁ.
+spell-book	0.8	943.75	806.25	41.25	15	EFEKTY
+spell-book	0.8	960	825	21.25	15	WŁ.
+spell-book	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+spell-book	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+spell-book	0.8	103.75	122.5	51.25	15	BROŃ · Q
+stats-allocation	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+stats-allocation	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+stats-allocation	0.8	335	28.75	15	20	01
+stats-allocation	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+stats-allocation	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+stats-allocation	0.8	913.75	30	28.75	15	0 FPS
+stats-allocation	0.8	917.5	56.25	63.75	15	F1  POMOC
+stats-allocation	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+stats-allocation	0.8	925	157.5	8.75	15	N
+stats-allocation	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+stats-allocation	0.8	52.5	713.75	100	20	Serce Świtu
+stats-allocation	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+stats-allocation	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+stats-allocation	0.8	28.75	807.5	63.75	15	WSAD · ruch
+stats-allocation	0.8	28.75	835	60	15	SHIFT · bieg
+stats-allocation	0.8	28.75	862.5	57.5	15	ESC · pauza
+stats-allocation	0.8	411.25	847.5	25	15	LPM
+stats-allocation	0.8	492.5	847.5	7.5	15	C
+stats-allocation	0.8	565	847.5	6.25	15	1
+stats-allocation	0.8	637.5	847.5	6.25	15	2
+stats-allocation	0.8	691.25	847.5	41.25	15	SPACJA
+stats-allocation	0.8	410	870	30	15	ATAK
+stats-allocation	0.8	473.75	870	45	15	CZAR · K
+stats-allocation	0.8	541.25	870	55	15	ZDROWIE
+stats-allocation	0.8	622.5	870	35	15	MANA
+stats-allocation	0.8	698.75	870	27.5	15	UNIK
+stats-allocation	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+stats-allocation	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+stats-allocation	0.8	1157.5	70	120	25	Wędrowiec
+stats-allocation	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+stats-allocation	0.8	1158.75	125	52.5	15	ZŁOTO  0
+stats-allocation	0.8	1080	151.25	31.25	15	ŻYCIE
+stats-allocation	0.8	1327.5	147.5	47.5	15	100 / 100
+stats-allocation	0.8	1080	175	35	15	MANA
+stats-allocation	0.8	1327.5	172.5	47.5	15	100 / 100
+stats-allocation	0.8	1221.25	222.5	32.5	15	HEŁM
+stats-allocation	0.8	1325	222.5	45	15	TARCZA
+stats-allocation	0.8	1222.5	272.5	31.25	15	BUTY
+stats-allocation	0.8	1320	272.5	55	15	PIERŚCIEŃ
+stats-allocation	0.8	1080	313.75	47.5	15	ATAK  14
+stats-allocation	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+stats-allocation	0.8	1302.5	313.75	51.25	15	PD  0/100
+stats-allocation	0.8	1080	346.25	42.5	15	PLECAK
+stats-allocation	0.8	1347.5	346.25	35	15	06 / 25
+stats-allocation	0.8	1117.5	387.5	6.25	15	5
+stats-allocation	0.8	1182.5	387.5	6.25	15	3
+stats-allocation	0.8	1117.5	432.5	12.5	15	20
+stats-allocation	0.8	1080	595	62.5	15	W ZASIĘGU
+stats-allocation	0.8	1270	595	73.75	15	0  W ZASIĘGU
+stats-allocation	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+stats-allocation	0.8	1090	713.75	93.75	15	POD KURSOREM
+stats-allocation	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+stats-allocation	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+stats-allocation	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+stats-allocation	0.8	1370	885	27.5	15	v0.47
+stats-allocation	0.8	175	845	48.75	15	Z · 10 MP
+stats-allocation	0.8	175	870	48.75	15	ZABLOK.
+stats-allocation	0.8	246.25	845	48.75	15	X · 20 MP
+stats-allocation	0.8	246.25	870	48.75	15	ZABLOK.
+stats-allocation	0.8	318.75	845	48.75	15	V · 20 MP
+stats-allocation	0.8	318.75	870	48.75	15	ZABLOK.
+stats-allocation	0.8	603.75	147.5	233.75	30	AWANS — POZIOM 1
+stats-allocation	0.8	613.75	192.5	212.5	17.5	5 punktów za każdy zdobyty poziom
+stats-allocation	0.8	636.25	226.25	167.5	18.75	Pozostało: 5 / 5 punktów
+stats-allocation	0.8	336.25	267.5	25	20	Siła
+stats-allocation	0.8	336.25	293.75	197.5	15	+2 obrażenia ataku fizycznego za punkt.
+stats-allocation	0.8	893.75	278.75	10	22.5	0
+stats-allocation	0.8	1047.5	282.5	40	15	DODAJ
+stats-allocation	0.8	336.25	323.75	100	20	Moc magiczna
+stats-allocation	0.8	336.25	350	161.25	15	+3 obrażenia magiczne za punkt.
+stats-allocation	0.8	893.75	335	10	22.5	0
+stats-allocation	0.8	1047.5	338.75	40	15	DODAJ
+stats-allocation	0.8	336.25	380	51.25	20	Obrona
+stats-allocation	0.8	336.25	406.25	142.5	15	+1 obrony fizycznej za punkt.
+stats-allocation	0.8	893.75	391.25	10	22.5	0
+stats-allocation	0.8	1047.5	395	40	15	DODAJ
+stats-allocation	0.8	336.25	436.25	120	20	Obrona magiczna
+stats-allocation	0.8	336.25	462.5	150	15	+1 obrony magicznej za punkt.
+stats-allocation	0.8	893.75	447.5	10	22.5	0
+stats-allocation	0.8	1047.5	451.25	40	15	DODAJ
+stats-allocation	0.8	336.25	492.5	101.25	20	Wytrzymałość
+stats-allocation	0.8	336.25	517.5	165	15	+10 maksymalnego HP za punkt.
+stats-allocation	0.8	893.75	502.5	10	22.5	0
+stats-allocation	0.8	1047.5	507.5	40	15	DODAJ
+stats-allocation	0.8	336.25	547.5	38.75	20	Mana
+stats-allocation	0.8	336.25	573.75	161.25	15	+5 maksymalnej many za punkt.
+stats-allocation	0.8	893.75	558.75	10	22.5	0
+stats-allocation	0.8	1047.5	562.5	40	15	DODAJ
+stats-allocation	0.8	591.25	630	258.75	17.5	Atak 14   ·   Magia 28   ·   HP 100   ·   Mana 100
+stats-allocation	0.8	615	698.75	211.25	17.5	DALEJ — WYBÓR UMIEJĘTNOŚCI
+stats-allocation	0.8	571.25	742.5	297.5	15	Świat jest zatrzymany. Rozdaj wszystkie punkty i zatwierdź.
+stats-allocation	0.8	830	806.25	50	15	MUZYKA
+stats-allocation	0.8	850	825	21.25	15	WŁ.
+stats-allocation	0.8	943.75	806.25	41.25	15	EFEKTY
+stats-allocation	0.8	960	825	21.25	15	WŁ.
+stats-allocation	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+stats-allocation	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+stats-allocation	0.8	103.75	122.5	51.25	15	BROŃ · Q
+skills-allocation	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+skills-allocation	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+skills-allocation	0.8	335	28.75	15	20	01
+skills-allocation	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+skills-allocation	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+skills-allocation	0.8	913.75	30	28.75	15	0 FPS
+skills-allocation	0.8	917.5	56.25	63.75	15	F1  POMOC
+skills-allocation	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+skills-allocation	0.8	925	157.5	8.75	15	N
+skills-allocation	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+skills-allocation	0.8	52.5	713.75	100	20	Serce Świtu
+skills-allocation	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+skills-allocation	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+skills-allocation	0.8	28.75	807.5	63.75	15	WSAD · ruch
+skills-allocation	0.8	28.75	835	60	15	SHIFT · bieg
+skills-allocation	0.8	28.75	862.5	57.5	15	ESC · pauza
+skills-allocation	0.8	411.25	847.5	25	15	LPM
+skills-allocation	0.8	492.5	847.5	7.5	15	C
+skills-allocation	0.8	565	847.5	6.25	15	1
+skills-allocation	0.8	637.5	847.5	6.25	15	2
+skills-allocation	0.8	691.25	847.5	41.25	15	SPACJA
+skills-allocation	0.8	410	870	30	15	ATAK
+skills-allocation	0.8	473.75	870	45	15	CZAR · K
+skills-allocation	0.8	541.25	870	55	15	ZDROWIE
+skills-allocation	0.8	622.5	870	35	15	MANA
+skills-allocation	0.8	698.75	870	27.5	15	UNIK
+skills-allocation	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+skills-allocation	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+skills-allocation	0.8	1157.5	70	120	25	Wędrowiec
+skills-allocation	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+skills-allocation	0.8	1158.75	125	52.5	15	ZŁOTO  0
+skills-allocation	0.8	1080	151.25	31.25	15	ŻYCIE
+skills-allocation	0.8	1327.5	147.5	47.5	15	100 / 100
+skills-allocation	0.8	1080	175	35	15	MANA
+skills-allocation	0.8	1327.5	172.5	47.5	15	100 / 100
+skills-allocation	0.8	1221.25	222.5	32.5	15	HEŁM
+skills-allocation	0.8	1325	222.5	45	15	TARCZA
+skills-allocation	0.8	1222.5	272.5	31.25	15	BUTY
+skills-allocation	0.8	1320	272.5	55	15	PIERŚCIEŃ
+skills-allocation	0.8	1080	313.75	47.5	15	ATAK  14
+skills-allocation	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+skills-allocation	0.8	1302.5	313.75	51.25	15	PD  0/100
+skills-allocation	0.8	1080	346.25	42.5	15	PLECAK
+skills-allocation	0.8	1347.5	346.25	35	15	06 / 25
+skills-allocation	0.8	1117.5	387.5	6.25	15	5
+skills-allocation	0.8	1182.5	387.5	6.25	15	3
+skills-allocation	0.8	1117.5	432.5	12.5	15	20
+skills-allocation	0.8	1080	595	62.5	15	W ZASIĘGU
+skills-allocation	0.8	1270	595	73.75	15	0  W ZASIĘGU
+skills-allocation	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+skills-allocation	0.8	1090	713.75	93.75	15	POD KURSOREM
+skills-allocation	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+skills-allocation	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+skills-allocation	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+skills-allocation	0.8	1370	885	27.5	15	v0.47
+skills-allocation	0.8	175	845	48.75	15	Z · 10 MP
+skills-allocation	0.8	175	870	48.75	15	ZABLOK.
+skills-allocation	0.8	246.25	845	48.75	15	X · 20 MP
+skills-allocation	0.8	246.25	870	48.75	15	ZABLOK.
+skills-allocation	0.8	318.75	845	48.75	15	V · 20 MP
+skills-allocation	0.8	318.75	870	48.75	15	ZABLOK.
+skills-allocation	0.8	566.25	147.5	308.75	27.5	UMIEJĘTNOŚCI — POZIOM 1
+skills-allocation	0.8	623.75	190	193.75	17.5	1 punkt za każdy zdobyty poziom
+skills-allocation	0.8	647.5	212.5	145	17.5	Punkty do rozdania: 1 / 1
+skills-allocation	0.8	415	243.75	128.75	23.75	Mocne cięcie
+skills-allocation	0.8	415	275	96.25	15	Miecz · 10 many · Z
+skills-allocation	0.8	415	297.5	265	15	Silniejszy zamach trafia wszystkich w zasięgu miecza.
+skills-allocation	0.8	415	320	170	15	Obrażenia: 150% zwykłego ataku
+skills-allocation	0.8	415	342.5	238.75	15	Kolejna ranga: +10% obrażeń · odnowienie 1,2 s.
+skills-allocation	0.8	1023.75	273.75	48.75	15	RANGA 0
+skills-allocation	0.8	1067.5	320	40	15	DODAJ
+skills-allocation	0.8	415	377.5	233.75	23.75	Przeszywająca strzała
+skills-allocation	0.8	415	407.5	138.75	15	Łuk · 20 many + 1 strzała · X
+skills-allocation	0.8	415	431.25	217.5	15	Przygotuj X, następnie naciągnij i puść LPM.
+skills-allocation	0.8	415	452.5	231.25	15	Przebija do 3 celów · obrażenia zwykłej strzały
+skills-allocation	0.8	415	475	196.25	15	Kolejna ranga: +1 cel · odnowienie 1,5 s.
+skills-allocation	0.8	1023.75	407.5	48.75	15	RANGA 0
+skills-allocation	0.8	1067.5	452.5	40	15	DODAJ
+skills-allocation	0.8	415	510	83.75	23.75	Leczenie
+skills-allocation	0.8	415	541.25	122.5	15	Każda broń · 20 many · V
+skills-allocation	0.8	415	563.75	230	15	Przywraca 30 HP, do maksymalnego zdrowia.
+skills-allocation	0.8	415	586.25	218.75	15	Efekt: +30 HP · nie wymaga miecza ani łuku
+skills-allocation	0.8	415	607.5	290	15	Jedna ranga · odnowienie 1 s · przy pełnym HP bez kosztu.
+skills-allocation	0.8	1020	540	56.25	15	NIEZNANE
+skills-allocation	0.8	1067.5	586.25	40	15	DODAJ
+skills-allocation	0.8	545	647.5	351.25	16.25	Kliknij umiejętność, aby przypisać punkt. COFNIJ anuluje wybór.
+skills-allocation	0.8	626.25	690	187.5	17.5	ZATWIERDŹ I WRÓĆ DO GRY
+skills-allocation	0.8	567.5	748.75	305	15	Gra pozostaje zatrzymana do rozdania punktów umiejętności.
+skills-allocation	0.8	830	806.25	50	15	MUZYKA
+skills-allocation	0.8	850	825	21.25	15	WŁ.
+skills-allocation	0.8	943.75	806.25	41.25	15	EFEKTY
+skills-allocation	0.8	960	825	21.25	15	WŁ.
+skills-allocation	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+skills-allocation	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+skills-allocation	0.8	103.75	122.5	51.25	15	BROŃ · Q
+item-tooltip	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+item-tooltip	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+item-tooltip	0.8	335	28.75	15	20	01
+item-tooltip	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+item-tooltip	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+item-tooltip	0.8	913.75	30	28.75	15	0 FPS
+item-tooltip	0.8	917.5	56.25	63.75	15	F1  POMOC
+item-tooltip	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+item-tooltip	0.8	925	157.5	8.75	15	N
+item-tooltip	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+item-tooltip	0.8	52.5	713.75	100	20	Serce Świtu
+item-tooltip	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+item-tooltip	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+item-tooltip	0.8	28.75	807.5	63.75	15	WSAD · ruch
+item-tooltip	0.8	28.75	835	60	15	SHIFT · bieg
+item-tooltip	0.8	28.75	862.5	57.5	15	ESC · pauza
+item-tooltip	0.8	411.25	847.5	25	15	LPM
+item-tooltip	0.8	492.5	847.5	7.5	15	C
+item-tooltip	0.8	565	847.5	6.25	15	1
+item-tooltip	0.8	637.5	847.5	6.25	15	2
+item-tooltip	0.8	691.25	847.5	41.25	15	SPACJA
+item-tooltip	0.8	410	870	30	15	ATAK
+item-tooltip	0.8	473.75	870	45	15	CZAR · K
+item-tooltip	0.8	541.25	870	55	15	ZDROWIE
+item-tooltip	0.8	622.5	870	35	15	MANA
+item-tooltip	0.8	698.75	870	27.5	15	UNIK
+item-tooltip	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+item-tooltip	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+item-tooltip	0.8	1157.5	70	120	25	Wędrowiec
+item-tooltip	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+item-tooltip	0.8	1158.75	125	52.5	15	ZŁOTO  0
+item-tooltip	0.8	1080	151.25	31.25	15	ŻYCIE
+item-tooltip	0.8	1327.5	147.5	47.5	15	100 / 100
+item-tooltip	0.8	1080	175	35	15	MANA
+item-tooltip	0.8	1327.5	172.5	47.5	15	100 / 100
+item-tooltip	0.8	1221.25	222.5	32.5	15	HEŁM
+item-tooltip	0.8	1325	222.5	45	15	TARCZA
+item-tooltip	0.8	1222.5	272.5	31.25	15	BUTY
+item-tooltip	0.8	1320	272.5	55	15	PIERŚCIEŃ
+item-tooltip	0.8	1080	313.75	47.5	15	ATAK  14
+item-tooltip	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+item-tooltip	0.8	1302.5	313.75	51.25	15	PD  0/100
+item-tooltip	0.8	1080	346.25	42.5	15	PLECAK
+item-tooltip	0.8	1347.5	346.25	35	15	07 / 25
+item-tooltip	0.8	1117.5	387.5	6.25	15	5
+item-tooltip	0.8	1182.5	387.5	6.25	15	3
+item-tooltip	0.8	1117.5	432.5	12.5	15	20
+item-tooltip	0.8	1080	595	62.5	15	W ZASIĘGU
+item-tooltip	0.8	1270	595	73.75	15	0  W ZASIĘGU
+item-tooltip	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+item-tooltip	0.8	1090	713.75	93.75	15	POD KURSOREM
+item-tooltip	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+item-tooltip	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+item-tooltip	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+item-tooltip	0.8	1370	885	27.5	15	v0.47
+item-tooltip	0.8	175	845	48.75	15	Z · 10 MP
+item-tooltip	0.8	175	870	48.75	15	ZABLOK.
+item-tooltip	0.8	246.25	845	48.75	15	X · 20 MP
+item-tooltip	0.8	246.25	870	48.75	15	ZABLOK.
+item-tooltip	0.8	318.75	845	48.75	15	V · 20 MP
+item-tooltip	0.8	318.75	870	48.75	15	ZABLOK.
+item-tooltip	0.8	1085	506.25	67.5	15	Bardzo rzadki
+item-tooltip	0.8	1085	527.5	175	20	Łuk księżycowego łowcy
+item-tooltip	0.8	1085	558.75	173.75	15	Atak +19 · zasięg zależy od naciągu
+item-tooltip	0.8	1085	583.75	192.5	15	Łuk z jasnego drewna i wilczej cięciwy.
+item-tooltip	0.8	1085	610	93.75	15	Wartość: 464 złota
+item-tooltip	0.8	1085	636.25	161.25	15	2× LPM: załóż · LPM: przeciągnij
+item-tooltip	0.8	1085	660	185	15	Szansa na łup: 4% · według rzadkości
+item-tooltip	0.8	830	806.25	50	15	MUZYKA
+item-tooltip	0.8	850	825	21.25	15	WŁ.
+item-tooltip	0.8	943.75	806.25	41.25	15	EFEKTY
+item-tooltip	0.8	960	825	21.25	15	WŁ.
+item-tooltip	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+item-tooltip	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+item-tooltip	0.8	103.75	122.5	51.25	15	BROŃ · Q
+help	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+help	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+help	0.8	335	28.75	15	20	01
+help	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+help	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+help	0.8	913.75	30	28.75	15	0 FPS
+help	0.8	917.5	56.25	63.75	15	F1  POMOC
+help	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+help	0.8	925	157.5	8.75	15	N
+help	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+help	0.8	52.5	713.75	100	20	Serce Świtu
+help	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+help	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+help	0.8	28.75	807.5	63.75	15	WSAD · ruch
+help	0.8	28.75	835	60	15	SHIFT · bieg
+help	0.8	28.75	862.5	57.5	15	ESC · pauza
+help	0.8	411.25	847.5	25	15	LPM
+help	0.8	492.5	847.5	7.5	15	C
+help	0.8	565	847.5	6.25	15	1
+help	0.8	637.5	847.5	6.25	15	2
+help	0.8	691.25	847.5	41.25	15	SPACJA
+help	0.8	410	870	30	15	ATAK
+help	0.8	473.75	870	45	15	CZAR · K
+help	0.8	541.25	870	55	15	ZDROWIE
+help	0.8	622.5	870	35	15	MANA
+help	0.8	698.75	870	27.5	15	UNIK
+help	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+help	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+help	0.8	1157.5	70	120	25	Wędrowiec
+help	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+help	0.8	1158.75	125	52.5	15	ZŁOTO  0
+help	0.8	1080	151.25	31.25	15	ŻYCIE
+help	0.8	1327.5	147.5	47.5	15	100 / 100
+help	0.8	1080	175	35	15	MANA
+help	0.8	1327.5	172.5	47.5	15	100 / 100
+help	0.8	1221.25	222.5	32.5	15	HEŁM
+help	0.8	1325	222.5	45	15	TARCZA
+help	0.8	1222.5	272.5	31.25	15	BUTY
+help	0.8	1320	272.5	55	15	PIERŚCIEŃ
+help	0.8	1080	313.75	47.5	15	ATAK  14
+help	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+help	0.8	1302.5	313.75	51.25	15	PD  0/100
+help	0.8	1080	346.25	42.5	15	PLECAK
+help	0.8	1347.5	346.25	35	15	06 / 25
+help	0.8	1117.5	387.5	6.25	15	5
+help	0.8	1182.5	387.5	6.25	15	3
+help	0.8	1117.5	432.5	12.5	15	20
+help	0.8	1080	595	62.5	15	W ZASIĘGU
+help	0.8	1270	595	73.75	15	0  W ZASIĘGU
+help	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+help	0.8	1090	713.75	93.75	15	POD KURSOREM
+help	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+help	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+help	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+help	0.8	1370	885	27.5	15	v0.47
+help	0.8	175	845	48.75	15	Z · 10 MP
+help	0.8	175	870	48.75	15	ZABLOK.
+help	0.8	246.25	845	48.75	15	X · 20 MP
+help	0.8	246.25	870	48.75	15	ZABLOK.
+help	0.8	318.75	845	48.75	15	V · 20 MP
+help	0.8	318.75	870	48.75	15	ZABLOK.
+help	0.8	546.25	257.5	348.75	32.5	PRZEWODNIK WĘDROWCA
+help	0.8	638.75	307.5	162.5	18.75	Echa zapomnianych ruin
+help	0.8	383.75	362.5	42.5	15	W S A D
+help	0.8	553.75	360	267.5	18.75	W — góra, S — dół, A — lewo, D — prawo.
+help	0.8	383.75	392.5	31.25	15	SHIFT
+help	0.8	553.75	388.75	286.25	18.75	Przytrzymaj z WSAD, aby biec 50% szybciej.
+help	0.8	383.75	421.25	41.25	15	SPACJA
+help	0.8	553.75	417.5	305	18.75	Przeturlaj się w kierunku ruchu lub ustawienia.
+help	0.8	383.75	450	25	15	LPM
+help	0.8	553.75	447.5	242.5	18.75	Miecz: kliknij. Łuk: przytrzymaj i puść.
+help	0.8	383.75	478.75	7.5	15	C
+help	0.8	553.75	476.25	308.75	18.75	Rzuć wybrany czar w stronę kursora (10 many).
+help	0.8	383.75	507.5	26.25	15	PPM
+help	0.8	553.75	505	310	18.75	Otwórz ciało; użyj mikstury / grzyba w plecaku.
+help	0.8	383.75	537.5	22.5	15	1 / 2
+help	0.8	553.75	533.75	272.5	18.75	Wypij miksturę zdrowia / many z plecaka.
+help	0.8	383.75	566.25	71.25	15	PRZECIĄGNIJ
+help	0.8	553.75	562.5	207.5	18.75	Zbierz łup lub grzyb do plecaka.
+help	0.8	658.75	628.75	122.5	21.25	WRÓĆ DO GRY
+help	0.8	465	687.5	510	15	Z / X — ataki specjalne  /  V — Leczenie  /  U — umiejętności  /  Q — broń  /  F2 — dźwięk  /  ESC — pauza
+help	0.8	830	806.25	50	15	MUZYKA
+help	0.8	850	825	21.25	15	WŁ.
+help	0.8	943.75	806.25	41.25	15	EFEKTY
+help	0.8	960	825	21.25	15	WŁ.
+help	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+help	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+help	0.8	103.75	122.5	51.25	15	BROŃ · Q
+pause	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+pause	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+pause	0.8	335	28.75	15	20	01
+pause	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+pause	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+pause	0.8	913.75	30	28.75	15	0 FPS
+pause	0.8	917.5	56.25	63.75	15	F1  POMOC
+pause	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+pause	0.8	925	157.5	8.75	15	N
+pause	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+pause	0.8	52.5	713.75	100	20	Serce Świtu
+pause	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+pause	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+pause	0.8	28.75	807.5	63.75	15	WSAD · ruch
+pause	0.8	28.75	835	60	15	SHIFT · bieg
+pause	0.8	28.75	862.5	57.5	15	ESC · pauza
+pause	0.8	411.25	847.5	25	15	LPM
+pause	0.8	492.5	847.5	7.5	15	C
+pause	0.8	565	847.5	6.25	15	1
+pause	0.8	637.5	847.5	6.25	15	2
+pause	0.8	691.25	847.5	41.25	15	SPACJA
+pause	0.8	410	870	30	15	ATAK
+pause	0.8	473.75	870	45	15	CZAR · K
+pause	0.8	541.25	870	55	15	ZDROWIE
+pause	0.8	622.5	870	35	15	MANA
+pause	0.8	698.75	870	27.5	15	UNIK
+pause	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+pause	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+pause	0.8	1157.5	70	120	25	Wędrowiec
+pause	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+pause	0.8	1158.75	125	52.5	15	ZŁOTO  0
+pause	0.8	1080	151.25	31.25	15	ŻYCIE
+pause	0.8	1327.5	147.5	47.5	15	100 / 100
+pause	0.8	1080	175	35	15	MANA
+pause	0.8	1327.5	172.5	47.5	15	100 / 100
+pause	0.8	1221.25	222.5	32.5	15	HEŁM
+pause	0.8	1325	222.5	45	15	TARCZA
+pause	0.8	1222.5	272.5	31.25	15	BUTY
+pause	0.8	1320	272.5	55	15	PIERŚCIEŃ
+pause	0.8	1080	313.75	47.5	15	ATAK  14
+pause	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+pause	0.8	1302.5	313.75	51.25	15	PD  0/100
+pause	0.8	1080	346.25	42.5	15	PLECAK
+pause	0.8	1347.5	346.25	35	15	06 / 25
+pause	0.8	1117.5	387.5	6.25	15	5
+pause	0.8	1182.5	387.5	6.25	15	3
+pause	0.8	1117.5	432.5	12.5	15	20
+pause	0.8	1080	595	62.5	15	W ZASIĘGU
+pause	0.8	1270	595	73.75	15	0  W ZASIĘGU
+pause	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+pause	0.8	1090	713.75	93.75	15	POD KURSOREM
+pause	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+pause	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+pause	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+pause	0.8	1370	885	27.5	15	v0.47
+pause	0.8	175	845	48.75	15	Z · 10 MP
+pause	0.8	175	870	48.75	15	ZABLOK.
+pause	0.8	246.25	845	48.75	15	X · 20 MP
+pause	0.8	246.25	870	48.75	15	ZABLOK.
+pause	0.8	318.75	845	48.75	15	V · 20 MP
+pause	0.8	318.75	870	48.75	15	ZABLOK.
+pause	0.8	830	806.25	50	15	MUZYKA
+pause	0.8	850	825	21.25	15	WŁ.
+pause	0.8	943.75	806.25	41.25	15	EFEKTY
+pause	0.8	960	825	21.25	15	WŁ.
+pause	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+pause	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+pause	0.8	103.75	122.5	51.25	15	BROŃ · Q
+pause	0.8	607.5	220	226.25	28.75	CHWILA ODDECHU
+pause	0.8	693.75	266.25	53.75	16.25	Las Mchu
+pause	0.8	681.25	302.5	77.5	22.5	Zapisz grę
+pause	0.8	675	381.25	91.25	22.5	Wczytaj grę
+pause	0.8	696.25	458.75	47.5	22.5	Opcje
+pause	0.8	676.25	537.5	87.5	22.5	Wyjdź z gry
+pause	0.8	651.25	728.75	138.75	22.5	Wróć do gry · ESC
+pause	0.8	82.5	867.5	100	15	PIECZĘĆ POPIOŁU
+pause	0.8	588.75	867.5	262.5	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+pause	0.8	1258.75	867.5	68.75	13.75	EMBERFALL
+audio	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+audio	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+audio	0.8	335	28.75	15	20	01
+audio	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+audio	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+audio	0.8	913.75	30	28.75	15	0 FPS
+audio	0.8	917.5	56.25	63.75	15	F1  POMOC
+audio	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+audio	0.8	925	157.5	8.75	15	N
+audio	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+audio	0.8	52.5	713.75	100	20	Serce Świtu
+audio	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+audio	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+audio	0.8	28.75	807.5	63.75	15	WSAD · ruch
+audio	0.8	28.75	835	60	15	SHIFT · bieg
+audio	0.8	28.75	862.5	57.5	15	ESC · pauza
+audio	0.8	411.25	847.5	25	15	LPM
+audio	0.8	492.5	847.5	7.5	15	C
+audio	0.8	565	847.5	6.25	15	1
+audio	0.8	637.5	847.5	6.25	15	2
+audio	0.8	691.25	847.5	41.25	15	SPACJA
+audio	0.8	410	870	30	15	ATAK
+audio	0.8	473.75	870	45	15	CZAR · K
+audio	0.8	541.25	870	55	15	ZDROWIE
+audio	0.8	622.5	870	35	15	MANA
+audio	0.8	698.75	870	27.5	15	UNIK
+audio	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+audio	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+audio	0.8	1157.5	70	120	25	Wędrowiec
+audio	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+audio	0.8	1158.75	125	52.5	15	ZŁOTO  0
+audio	0.8	1080	151.25	31.25	15	ŻYCIE
+audio	0.8	1327.5	147.5	47.5	15	100 / 100
+audio	0.8	1080	175	35	15	MANA
+audio	0.8	1327.5	172.5	47.5	15	100 / 100
+audio	0.8	1221.25	222.5	32.5	15	HEŁM
+audio	0.8	1325	222.5	45	15	TARCZA
+audio	0.8	1222.5	272.5	31.25	15	BUTY
+audio	0.8	1320	272.5	55	15	PIERŚCIEŃ
+audio	0.8	1080	313.75	47.5	15	ATAK  14
+audio	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+audio	0.8	1302.5	313.75	51.25	15	PD  0/100
+audio	0.8	1080	346.25	42.5	15	PLECAK
+audio	0.8	1347.5	346.25	35	15	06 / 25
+audio	0.8	1117.5	387.5	6.25	15	5
+audio	0.8	1182.5	387.5	6.25	15	3
+audio	0.8	1117.5	432.5	12.5	15	20
+audio	0.8	1080	595	62.5	15	W ZASIĘGU
+audio	0.8	1270	595	73.75	15	0  W ZASIĘGU
+audio	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+audio	0.8	1090	713.75	93.75	15	POD KURSOREM
+audio	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+audio	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+audio	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+audio	0.8	1370	885	27.5	15	v0.47
+audio	0.8	175	845	48.75	15	Z · 10 MP
+audio	0.8	175	870	48.75	15	ZABLOK.
+audio	0.8	246.25	845	48.75	15	X · 20 MP
+audio	0.8	246.25	870	48.75	15	ZABLOK.
+audio	0.8	318.75	845	48.75	15	V · 20 MP
+audio	0.8	318.75	870	48.75	15	ZABLOK.
+audio	0.8	637.5	317.5	165	27.5	DŹWIĘKI RUIN
+audio	0.8	602.5	361.25	236.25	16.25	Brak dostępnego urządzenia dźwiękowego.
+audio	0.8	503.75	383.75	50	15	MUZYKA
+audio	0.8	926.25	407.5	25	16.25	42%
+audio	0.8	503.75	456.25	41.25	15	EFEKTY
+audio	0.8	926.25	480	25	16.25	72%
+audio	0.8	652.5	538.75	135	17.5	[ M ]  Wycisz wszystko
+audio	0.8	688.75	595	63.75	17.5	GOTOWE
+audio	0.8	830	806.25	50	15	MUZYKA
+audio	0.8	850	825	21.25	15	WŁ.
+audio	0.8	943.75	806.25	41.25	15	EFEKTY
+audio	0.8	960	825	21.25	15	WŁ.
+audio	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+audio	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+audio	0.8	103.75	122.5	51.25	15	BROŃ · Q
+death	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+death	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+death	0.8	335	28.75	15	20	01
+death	0.8	410	28.75	146.25	20	Przesieka Wędrowca
+death	0.8	411.25	56.25	177.5	15	POGRANICZE  /  STREFA DZIKICH
+death	0.8	913.75	30	28.75	15	0 FPS
+death	0.8	917.5	56.25	63.75	15	F1  POMOC
+death	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+death	0.8	925	157.5	8.75	15	N
+death	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+death	0.8	52.5	713.75	100	20	Serce Świtu
+death	0.8	28.75	747.5	151.25	15	Odnajdź Strażnika na północy.
+death	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+death	0.8	28.75	807.5	63.75	15	WSAD · ruch
+death	0.8	28.75	835	60	15	SHIFT · bieg
+death	0.8	28.75	862.5	57.5	15	ESC · pauza
+death	0.8	411.25	847.5	25	15	LPM
+death	0.8	492.5	847.5	7.5	15	C
+death	0.8	565	847.5	6.25	15	1
+death	0.8	637.5	847.5	6.25	15	2
+death	0.8	691.25	847.5	41.25	15	SPACJA
+death	0.8	410	870	30	15	ATAK
+death	0.8	473.75	870	45	15	CZAR · K
+death	0.8	541.25	870	55	15	ZDROWIE
+death	0.8	622.5	870	35	15	MANA
+death	0.8	698.75	870	27.5	15	UNIK
+death	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+death	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+death	0.8	1157.5	70	120	25	Wędrowiec
+death	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+death	0.8	1158.75	125	52.5	15	ZŁOTO  0
+death	0.8	1080	151.25	31.25	15	ŻYCIE
+death	0.8	1327.5	147.5	35	15	0 / 100
+death	0.8	1080	175	35	15	MANA
+death	0.8	1327.5	172.5	47.5	15	100 / 100
+death	0.8	1221.25	222.5	32.5	15	HEŁM
+death	0.8	1325	222.5	45	15	TARCZA
+death	0.8	1222.5	272.5	31.25	15	BUTY
+death	0.8	1320	272.5	55	15	PIERŚCIEŃ
+death	0.8	1080	313.75	47.5	15	ATAK  14
+death	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+death	0.8	1302.5	313.75	51.25	15	PD  0/100
+death	0.8	1080	346.25	42.5	15	PLECAK
+death	0.8	1347.5	346.25	35	15	06 / 25
+death	0.8	1117.5	387.5	6.25	15	5
+death	0.8	1182.5	387.5	6.25	15	3
+death	0.8	1117.5	432.5	12.5	15	20
+death	0.8	1080	595	62.5	15	W ZASIĘGU
+death	0.8	1270	595	73.75	15	0  W ZASIĘGU
+death	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+death	0.8	1090	713.75	93.75	15	POD KURSOREM
+death	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+death	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+death	0.8	1096.25	885	113.75	15	WYPRAWA W TOKU
+death	0.8	1370	885	27.5	15	v0.47
+death	0.8	175	845	48.75	15	Z · 10 MP
+death	0.8	175	870	48.75	15	ZABLOK.
+death	0.8	246.25	845	48.75	15	X · 20 MP
+death	0.8	246.25	870	48.75	15	ZABLOK.
+death	0.8	318.75	845	48.75	15	V · 20 MP
+death	0.8	318.75	870	48.75	15	ZABLOK.
+death	0.8	602.5	273.75	236.25	38.75	ŻAR PRZYGASŁ
+death	0.8	621.25	347.5	197.5	17.5	Ruiny zatrzymały twoją wyprawę.
+death	0.8	605	411.25	231.25	17.5	Naciśnij ENTER, aby rozpocząć od nowa.
+death	0.8	595	462.5	251.25	15	Spróbuj zakładać lepszy sprzęt i unikać zamachów.
+death	0.8	830	806.25	50	15	MUZYKA
+death	0.8	850	825	21.25	15	WŁ.
+death	0.8	943.75	806.25	41.25	15	EFEKTY
+death	0.8	960	825	21.25	15	WŁ.
+death	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+death	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+death	0.8	103.75	122.5	51.25	15	BROŃ · Q
+dialogue	0.8	78.75	78.75	136.25	28.75	EMBERFALL
+dialogue	0.8	80	121.25	170	15	PROLOG  /  OSTATNIA PIECZĘĆ
+dialogue	0.8	146.25	647.5	71.25	22.5	ELDRIN
+dialogue	0.8	146.25	681.25	126.25	15	Strażnik ostatniej pieczęci
+dialogue	0.8	1222.5	652.5	35	15	07 / 12
+dialogue	0.8	146.25	716.25	1037.5	21.25	Serce rozbito na pięć części i ukryto w odległych krainach. Każdej strzeże osobny strażnik. Musisz zdobyć wszystkie pięć i złączyć je ponownie.
+dialogue	0.8	146.25	811.25	400	15	ENTER / SPACJA / LPM — dalej     ·     Dialog przewija się również automatycznie
+dialogue	0.8	1196.25	803.75	33.75	15	DALEJ
+dialogue	0.8	1228.75	87.5	92.5	15	POMIŃ PROLOG
+merchant	0.8	117.5	368.75	90	13.75	SCHODY W GÓRĘ
+merchant	0.8	485	577.5	82.5	13.75	SCHODY W DÓŁ
+merchant	0.8	491.25	597.5	70	13.75	E / LPM / PPM
+merchant	0.8	538.75	308.75	53.75	20	MIRON
+merchant	0.8	521.25	335	90	13.75	E / PPM · HANDEL
+merchant	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+merchant	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+merchant	0.8	335	28.75	41.25	20	03 / 5
+merchant	0.8	410	28.75	160	20	Pracownia alchemiczna
+merchant	0.8	411.25	56.25	102.5	15	ZIOŁA / MIKSTURY
+merchant	0.8	913.75	30	28.75	15	0 FPS
+merchant	0.8	917.5	56.25	63.75	15	F1  POMOC
+merchant	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+merchant	0.8	856.25	143.75	86.25	15	WIEŻA ELDRINA
+merchant	0.8	887.5	267.5	66.25	15	PIĘTRO 3 / 5
+merchant	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+merchant	0.8	52.5	713.75	100	20	Serce Świtu
+merchant	0.8	28.75	747.5	160	15	Schody i wyposażenie · E / PPM
+merchant	0.8	28.75	771.25	116.25	15	Odzyskane części: 1 / 5
+merchant	0.8	28.75	807.5	63.75	15	WSAD · ruch
+merchant	0.8	28.75	835	60	15	SHIFT · bieg
+merchant	0.8	28.75	862.5	57.5	15	ESC · pauza
+merchant	0.8	411.25	847.5	25	15	LPM
+merchant	0.8	492.5	847.5	7.5	15	C
+merchant	0.8	565	847.5	6.25	15	1
+merchant	0.8	637.5	847.5	6.25	15	2
+merchant	0.8	691.25	847.5	41.25	15	SPACJA
+merchant	0.8	410	870	30	15	ATAK
+merchant	0.8	473.75	870	45	15	CZAR · K
+merchant	0.8	541.25	870	55	15	ZDROWIE
+merchant	0.8	622.5	870	35	15	MANA
+merchant	0.8	698.75	870	27.5	15	UNIK
+merchant	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+merchant	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+merchant	0.8	1157.5	70	120	25	Wędrowiec
+merchant	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+merchant	0.8	1158.75	125	52.5	15	ZŁOTO  0
+merchant	0.8	1080	151.25	31.25	15	ŻYCIE
+merchant	0.8	1327.5	147.5	47.5	15	100 / 100
+merchant	0.8	1080	175	35	15	MANA
+merchant	0.8	1327.5	172.5	47.5	15	100 / 100
+merchant	0.8	1221.25	222.5	32.5	15	HEŁM
+merchant	0.8	1325	222.5	45	15	TARCZA
+merchant	0.8	1222.5	272.5	31.25	15	BUTY
+merchant	0.8	1320	272.5	55	15	PIERŚCIEŃ
+merchant	0.8	1080	313.75	47.5	15	ATAK  14
+merchant	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+merchant	0.8	1302.5	313.75	51.25	15	PD  0/100
+merchant	0.8	1080	346.25	42.5	15	PLECAK
+merchant	0.8	1347.5	346.25	35	15	06 / 25
+merchant	0.8	1117.5	387.5	6.25	15	5
+merchant	0.8	1182.5	387.5	6.25	15	3
+merchant	0.8	1117.5	432.5	12.5	15	20
+merchant	0.8	1080	595	62.5	15	W ZASIĘGU
+merchant	0.8	1270	595	73.75	15	0  W ZASIĘGU
+merchant	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+merchant	0.8	1090	713.75	93.75	15	POD KURSOREM
+merchant	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+merchant	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+merchant	0.8	1096.25	885	125	15	SCHRONIENIE ELDRINA
+merchant	0.8	1370	885	27.5	15	v0.47
+merchant	0.8	175	845	48.75	15	Z · 10 MP
+merchant	0.8	175	870	48.75	15	ZABLOK.
+merchant	0.8	246.25	845	48.75	15	X · 20 MP
+merchant	0.8	246.25	870	48.75	15	ZABLOK.
+merchant	0.8	318.75	845	48.75	15	V · 20 MP
+merchant	0.8	318.75	870	48.75	15	ZABLOK.
+merchant	0.8	133.75	132.5	83.75	31.25	Miron
+merchant	0.8	135	172.5	263.75	15	HANDLARZ WIEŻY · PRACOWNIA ALCHEMICZNA
+merchant	0.8	1061.25	148.75	70	20	ZŁOTO  0
+merchant	0.8	1288.75	135	10	18.75	X
+merchant	0.8	137.5	218.75	111.25	17.5	KUP OD MIRONA
+merchant	0.8	737.5	218.75	256.25	17.5	SPRZEDAJ Z PLECAKA LUB EKWIPUNKU
+merchant	0.8	192.5	252.5	102.5	17.5	Mikstura zdrowia
+merchant	0.8	192.5	275	91.25	15	+50 HP · Pospolity
+merchant	0.8	591.25	263.75	26.25	16.25	24 zł
+merchant	0.8	192.5	302.5	88.75	17.5	Mikstura many
+merchant	0.8	192.5	325	103.75	15	+35 many · Pospolity
+merchant	0.8	591.25	313.75	26.25	16.25	28 zł
+merchant	0.8	192.5	352.5	41.25	17.5	Strzały
+merchant	0.8	192.5	375	218.75	15	Amunicja do łuku · Zapas: 20 / 20 · Pospolity
+merchant	0.8	591.25	363.75	18.75	16.25	2 zł
+merchant	0.8	192.5	402.5	118.75	17.5	Miecz wędrowca +1
+merchant	0.8	192.5	425	92.5	15	Atak +9 · Pospolity
+merchant	0.8	591.25	413.75	33.75	16.25	152 zł
+merchant	0.8	192.5	452.5	107.5	17.5	Łuk podróżnika +1
+merchant	0.8	192.5	475	98.75	15	Atak +17 · Pospolity
+merchant	0.8	591.25	463.75	33.75	16.25	216 zł
+merchant	0.8	192.5	502.5	123.75	17.5	Zbroja zwiadowcy +1
+merchant	0.8	192.5	525	108.75	15	Pancerz +6 · Pospolity
+merchant	0.8	591.25	513.75	33.75	16.25	158 zł
+merchant	0.8	172.5	565	56.25	15	< WSTECZ
+merchant	0.8	596.25	565	42.5	15	DALEJ >
+merchant	0.8	377.5	566.25	70	15	OFERTA 1 / 2
+merchant	0.8	856.25	268.75	32.5	15	HEŁM
+merchant	0.8	942.5	268.75	45	15	TARCZA
+merchant	0.8	1136.25	268.75	31.25	15	BUTY
+merchant	0.8	1226.25	268.75	36.25	15	BIŻUT.
+merchant	0.8	737.5	311.25	201.25	15	PLECAK · 2× LPM: sprzedaj jedną sztukę
+merchant	0.8	812.5	352.5	6.25	15	5
+merchant	0.8	925	352.5	6.25	15	3
+merchant	0.8	812.5	398.75	12.5	15	20
+merchant	0.8	737.5	572.5	227.5	15	Skup: sprzęt, mikstury, amunicja i trofea bestii.
+merchant	0.8	191.25	617.5	117.5	20	Mikstura zdrowia
+merchant	0.8	191.25	647.5	206.25	15	Pospolity · Odnawia 50 punktów zdrowia
+merchant	0.8	191.25	672.5	87.5	15	Wartość: 12 złota
+merchant	0.8	776.25	616.25	78.75	15	LICZBA SZTUK
+merchant	0.8	790	647.5	5	17.5	-
+merchant	0.8	836.25	648.75	7.5	17.5	1
+merchant	0.8	883.75	647.5	7.5	17.5	+
+merchant	0.8	942.5	650	26.25	15	MAX
+merchant	0.8	1136.25	632.5	27.5	17.5	KUP
+merchant	0.8	1127.5	657.5	45	16.25	24 złota
+merchant	0.8	138.75	723.75	176.25	15	Nie masz wystarczająco dużo złota.
+merchant	0.8	503.75	751.25	433.75	15	Gra jest zatrzymana · ENTER / ESC — zamknij · Monety w plecaku też służą do płacenia
+merchant	0.8	830	806.25	50	15	MUZYKA
+merchant	0.8	850	825	21.25	15	WŁ.
+merchant	0.8	943.75	806.25	41.25	15	EFEKTY
+merchant	0.8	960	825	21.25	15	WŁ.
+merchant	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+merchant	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+merchant-tooltip	0.8	117.5	368.75	90	13.75	SCHODY W GÓRĘ
+merchant-tooltip	0.8	485	577.5	82.5	13.75	SCHODY W DÓŁ
+merchant-tooltip	0.8	491.25	597.5	70	13.75	E / LPM / PPM
+merchant-tooltip	0.8	538.75	308.75	53.75	20	MIRON
+merchant-tooltip	0.8	521.25	335	90	13.75	E / PPM · HANDEL
+merchant-tooltip	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+merchant-tooltip	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+merchant-tooltip	0.8	335	28.75	41.25	20	03 / 5
+merchant-tooltip	0.8	410	28.75	160	20	Pracownia alchemiczna
+merchant-tooltip	0.8	411.25	56.25	102.5	15	ZIOŁA / MIKSTURY
+merchant-tooltip	0.8	913.75	30	28.75	15	0 FPS
+merchant-tooltip	0.8	917.5	56.25	63.75	15	F1  POMOC
+merchant-tooltip	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+merchant-tooltip	0.8	856.25	143.75	86.25	15	WIEŻA ELDRINA
+merchant-tooltip	0.8	887.5	267.5	66.25	15	PIĘTRO 3 / 5
+merchant-tooltip	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+merchant-tooltip	0.8	52.5	713.75	100	20	Serce Świtu
+merchant-tooltip	0.8	28.75	747.5	160	15	Schody i wyposażenie · E / PPM
+merchant-tooltip	0.8	28.75	771.25	116.25	15	Odzyskane części: 1 / 5
+merchant-tooltip	0.8	28.75	807.5	63.75	15	WSAD · ruch
+merchant-tooltip	0.8	28.75	835	60	15	SHIFT · bieg
+merchant-tooltip	0.8	28.75	862.5	57.5	15	ESC · pauza
+merchant-tooltip	0.8	411.25	847.5	25	15	LPM
+merchant-tooltip	0.8	492.5	847.5	7.5	15	C
+merchant-tooltip	0.8	565	847.5	6.25	15	1
+merchant-tooltip	0.8	637.5	847.5	6.25	15	2
+merchant-tooltip	0.8	691.25	847.5	41.25	15	SPACJA
+merchant-tooltip	0.8	410	870	30	15	ATAK
+merchant-tooltip	0.8	473.75	870	45	15	CZAR · K
+merchant-tooltip	0.8	541.25	870	55	15	ZDROWIE
+merchant-tooltip	0.8	622.5	870	35	15	MANA
+merchant-tooltip	0.8	698.75	870	27.5	15	UNIK
+merchant-tooltip	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+merchant-tooltip	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+merchant-tooltip	0.8	1157.5	70	120	25	Wędrowiec
+merchant-tooltip	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+merchant-tooltip	0.8	1158.75	125	52.5	15	ZŁOTO  0
+merchant-tooltip	0.8	1080	151.25	31.25	15	ŻYCIE
+merchant-tooltip	0.8	1327.5	147.5	47.5	15	100 / 100
+merchant-tooltip	0.8	1080	175	35	15	MANA
+merchant-tooltip	0.8	1327.5	172.5	47.5	15	100 / 100
+merchant-tooltip	0.8	1221.25	222.5	32.5	15	HEŁM
+merchant-tooltip	0.8	1325	222.5	45	15	TARCZA
+merchant-tooltip	0.8	1222.5	272.5	31.25	15	BUTY
+merchant-tooltip	0.8	1320	272.5	55	15	PIERŚCIEŃ
+merchant-tooltip	0.8	1080	313.75	47.5	15	ATAK  14
+merchant-tooltip	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+merchant-tooltip	0.8	1302.5	313.75	51.25	15	PD  0/100
+merchant-tooltip	0.8	1080	346.25	42.5	15	PLECAK
+merchant-tooltip	0.8	1347.5	346.25	35	15	06 / 25
+merchant-tooltip	0.8	1117.5	387.5	6.25	15	5
+merchant-tooltip	0.8	1182.5	387.5	6.25	15	3
+merchant-tooltip	0.8	1117.5	432.5	12.5	15	20
+merchant-tooltip	0.8	1080	595	62.5	15	W ZASIĘGU
+merchant-tooltip	0.8	1270	595	73.75	15	0  W ZASIĘGU
+merchant-tooltip	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+merchant-tooltip	0.8	1090	713.75	93.75	15	POD KURSOREM
+merchant-tooltip	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+merchant-tooltip	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+merchant-tooltip	0.8	1096.25	885	125	15	SCHRONIENIE ELDRINA
+merchant-tooltip	0.8	1370	885	27.5	15	v0.47
+merchant-tooltip	0.8	175	845	48.75	15	Z · 10 MP
+merchant-tooltip	0.8	175	870	48.75	15	ZABLOK.
+merchant-tooltip	0.8	246.25	845	48.75	15	X · 20 MP
+merchant-tooltip	0.8	246.25	870	48.75	15	ZABLOK.
+merchant-tooltip	0.8	318.75	845	48.75	15	V · 20 MP
+merchant-tooltip	0.8	318.75	870	48.75	15	ZABLOK.
+merchant-tooltip	0.8	133.75	132.5	83.75	31.25	Miron
+merchant-tooltip	0.8	135	172.5	263.75	15	HANDLARZ WIEŻY · PRACOWNIA ALCHEMICZNA
+merchant-tooltip	0.8	1061.25	148.75	70	20	ZŁOTO  0
+merchant-tooltip	0.8	1288.75	135	10	18.75	X
+merchant-tooltip	0.8	137.5	218.75	111.25	17.5	KUP OD MIRONA
+merchant-tooltip	0.8	737.5	218.75	256.25	17.5	SPRZEDAJ Z PLECAKA LUB EKWIPUNKU
+merchant-tooltip	0.8	192.5	252.5	102.5	17.5	Mikstura zdrowia
+merchant-tooltip	0.8	192.5	275	91.25	15	+50 HP · Pospolity
+merchant-tooltip	0.8	591.25	263.75	26.25	16.25	24 zł
+merchant-tooltip	0.8	192.5	302.5	88.75	17.5	Mikstura many
+merchant-tooltip	0.8	192.5	325	103.75	15	+35 many · Pospolity
+merchant-tooltip	0.8	591.25	313.75	26.25	16.25	28 zł
+merchant-tooltip	0.8	192.5	352.5	41.25	17.5	Strzały
+merchant-tooltip	0.8	192.5	375	218.75	15	Amunicja do łuku · Zapas: 20 / 20 · Pospolity
+merchant-tooltip	0.8	591.25	363.75	18.75	16.25	2 zł
+merchant-tooltip	0.8	192.5	402.5	118.75	17.5	Miecz wędrowca +1
+merchant-tooltip	0.8	192.5	425	92.5	15	Atak +9 · Pospolity
+merchant-tooltip	0.8	591.25	413.75	33.75	16.25	152 zł
+merchant-tooltip	0.8	192.5	452.5	107.5	17.5	Łuk podróżnika +1
+merchant-tooltip	0.8	192.5	475	98.75	15	Atak +17 · Pospolity
+merchant-tooltip	0.8	591.25	463.75	33.75	16.25	216 zł
+merchant-tooltip	0.8	192.5	502.5	123.75	17.5	Zbroja zwiadowcy +1
+merchant-tooltip	0.8	192.5	525	108.75	15	Pancerz +6 · Pospolity
+merchant-tooltip	0.8	591.25	513.75	33.75	16.25	158 zł
+merchant-tooltip	0.8	172.5	565	56.25	15	< WSTECZ
+merchant-tooltip	0.8	596.25	565	42.5	15	DALEJ >
+merchant-tooltip	0.8	377.5	566.25	70	15	OFERTA 1 / 2
+merchant-tooltip	0.8	856.25	268.75	32.5	15	HEŁM
+merchant-tooltip	0.8	942.5	268.75	45	15	TARCZA
+merchant-tooltip	0.8	1136.25	268.75	31.25	15	BUTY
+merchant-tooltip	0.8	1226.25	268.75	36.25	15	BIŻUT.
+merchant-tooltip	0.8	737.5	311.25	201.25	15	PLECAK · 2× LPM: sprzedaj jedną sztukę
+merchant-tooltip	0.8	812.5	352.5	6.25	15	5
+merchant-tooltip	0.8	925	352.5	6.25	15	3
+merchant-tooltip	0.8	812.5	398.75	12.5	15	20
+merchant-tooltip	0.8	737.5	572.5	227.5	15	Skup: sprzęt, mikstury, amunicja i trofea bestii.
+merchant-tooltip	0.8	191.25	617.5	117.5	20	Mikstura zdrowia
+merchant-tooltip	0.8	191.25	647.5	206.25	15	Pospolity · Odnawia 50 punktów zdrowia
+merchant-tooltip	0.8	191.25	672.5	87.5	15	Wartość: 12 złota
+merchant-tooltip	0.8	776.25	616.25	78.75	15	LICZBA SZTUK
+merchant-tooltip	0.8	790	647.5	5	17.5	-
+merchant-tooltip	0.8	836.25	648.75	7.5	17.5	1
+merchant-tooltip	0.8	883.75	647.5	7.5	17.5	+
+merchant-tooltip	0.8	942.5	650	26.25	15	MAX
+merchant-tooltip	0.8	1136.25	632.5	27.5	17.5	KUP
+merchant-tooltip	0.8	1127.5	657.5	45	16.25	24 złota
+merchant-tooltip	0.8	138.75	723.75	176.25	15	Nie masz wystarczająco dużo złota.
+merchant-tooltip	0.8	503.75	751.25	433.75	15	Gra jest zatrzymana · ENTER / ESC — zamknij · Monety w plecaku też służą do płacenia
+merchant-tooltip	0.8	446.25	302.5	46.25	15	Pospolity
+merchant-tooltip	0.8	446.25	325	117.5	20	Mikstura zdrowia
+merchant-tooltip	0.8	446.25	356.25	152.5	15	Odnawia 50 punktów zdrowia
+merchant-tooltip	0.8	446.25	381.25	87.5	15	Wartość: 12 złota
+merchant-tooltip	0.8	446.25	407.5	136.25	15	Cena zakupu: 24 złota / szt.
+merchant-tooltip	0.8	446.25	431.25	191.25	15	Szansa na łup: 60% · według rzadkości
+merchant-tooltip	0.8	830	806.25	50	15	MUZYKA
+merchant-tooltip	0.8	850	825	21.25	15	WŁ.
+merchant-tooltip	0.8	943.75	806.25	41.25	15	EFEKTY
+merchant-tooltip	0.8	960	825	21.25	15	WŁ.
+merchant-tooltip	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+merchant-tooltip	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+tower-labels	0.8	61.25	436.25	90	13.75	SCHODY W GÓRĘ
+tower-labels	0.8	422.5	243.75	47.5	15	ELDRIN
+tower-labels	0.8	391.25	265	110	13.75	E / PPM · ROZMAWIAJ
+tower-labels	0.8	27.5	22.5	158.75	33.75	EMBERFALL
+tower-labels	0.8	31.25	66.25	157.5	15	ECHA ZAPOMNIANYCH RUIN
+tower-labels	0.8	335	28.75	38.75	20	01 / 5
+tower-labels	0.8	410	28.75	97.5	20	Sala przybycia
+tower-labels	0.8	411.25	56.25	138.75	15	KOMINEK / SCHRONIENIE
+tower-labels	0.8	913.75	30	28.75	15	0 FPS
+tower-labels	0.8	917.5	56.25	63.75	15	F1  POMOC
+tower-labels	0.8	856.25	143.75	82.5	15	WIELKA KNIEJA
+tower-labels	0.8	856.25	143.75	86.25	15	WIEŻA ELDRINA
+tower-labels	0.8	887.5	267.5	66.25	15	PIĘTRO 1 / 5
+tower-labels	0.8	28.75	680	117.5	15	DZIENNIK WYPRAWY
+tower-labels	0.8	52.5	713.75	100	20	Serce Świtu
+tower-labels	0.8	28.75	747.5	160	15	Schody i wyposażenie · E / PPM
+tower-labels	0.8	28.75	771.25	116.25	15	Odzyskane części: 0 / 5
+tower-labels	0.8	28.75	807.5	63.75	15	WSAD · ruch
+tower-labels	0.8	28.75	835	60	15	SHIFT · bieg
+tower-labels	0.8	28.75	862.5	57.5	15	ESC · pauza
+tower-labels	0.8	411.25	847.5	25	15	LPM
+tower-labels	0.8	492.5	847.5	7.5	15	C
+tower-labels	0.8	565	847.5	6.25	15	1
+tower-labels	0.8	637.5	847.5	6.25	15	2
+tower-labels	0.8	691.25	847.5	41.25	15	SPACJA
+tower-labels	0.8	410	870	30	15	ATAK
+tower-labels	0.8	473.75	870	45	15	CZAR · K
+tower-labels	0.8	541.25	870	55	15	ZDROWIE
+tower-labels	0.8	622.5	870	35	15	MANA
+tower-labels	0.8	698.75	870	27.5	15	UNIK
+tower-labels	0.8	1103.75	22.5	98.75	15	UMIEJĘTNOŚCI · U
+tower-labels	0.8	1281.25	22.5	82.5	15	STATYSTYKI · P
+tower-labels	0.8	1157.5	70	120	25	Wędrowiec
+tower-labels	0.8	1158.75	105	167.5	15	POZIOM 01  /  STRAŻNIK ŻARU
+tower-labels	0.8	1158.75	125	52.5	15	ZŁOTO  0
+tower-labels	0.8	1080	151.25	31.25	15	ŻYCIE
+tower-labels	0.8	1327.5	147.5	47.5	15	100 / 100
+tower-labels	0.8	1080	175	35	15	MANA
+tower-labels	0.8	1327.5	172.5	47.5	15	100 / 100
+tower-labels	0.8	1221.25	222.5	32.5	15	HEŁM
+tower-labels	0.8	1325	222.5	45	15	TARCZA
+tower-labels	0.8	1222.5	272.5	31.25	15	BUTY
+tower-labels	0.8	1320	272.5	55	15	PIERŚCIEŃ
+tower-labels	0.8	1080	313.75	47.5	15	ATAK  14
+tower-labels	0.8	1192.5	313.75	63.75	15	PANCERZ  3
+tower-labels	0.8	1302.5	313.75	51.25	15	PD  0/100
+tower-labels	0.8	1080	346.25	42.5	15	PLECAK
+tower-labels	0.8	1347.5	346.25	35	15	06 / 25
+tower-labels	0.8	1117.5	387.5	6.25	15	5
+tower-labels	0.8	1182.5	387.5	6.25	15	3
+tower-labels	0.8	1117.5	432.5	12.5	15	20
+tower-labels	0.8	1080	595	62.5	15	W ZASIĘGU
+tower-labels	0.8	1270	595	73.75	15	0  W ZASIĘGU
+tower-labels	0.8	1080	678.75	171.25	15	LPM: zbierz · PPM w plecaku: użyj
+tower-labels	0.8	1090	713.75	93.75	15	POD KURSOREM
+tower-labels	0.8	1090	750	165	16.25	Najedź na potwora lub obiekt.
+tower-labels	0.8	1090	777.5	160	15	Tutaj zobaczysz jego informacje.
+tower-labels	0.8	1096.25	885	125	15	SCHRONIENIE ELDRINA
+tower-labels	0.8	1370	885	27.5	15	v0.47
+tower-labels	0.8	175	845	48.75	15	Z · 10 MP
+tower-labels	0.8	175	870	48.75	15	ZABLOK.
+tower-labels	0.8	246.25	845	48.75	15	X · 20 MP
+tower-labels	0.8	246.25	870	48.75	15	ZABLOK.
+tower-labels	0.8	318.75	845	48.75	15	V · 20 MP
+tower-labels	0.8	318.75	870	48.75	15	ZABLOK.
+tower-labels	0.8	830	806.25	50	15	MUZYKA
+tower-labels	0.8	850	825	21.25	15	WŁ.
+tower-labels	0.8	943.75	806.25	41.25	15	EFEKTY
+tower-labels	0.8	960	825	21.25	15	WŁ.
+tower-labels	0.8	865	862.5	88.75	15	GŁOŚNOŚĆ  ·  F2
+tower-labels	0.8	761.25	35	102.5	15	PEŁNY EKRAN · F11
+tower-labels	0.8	103.75	122.5	51.25	15	BROŃ · Q
+main-menu	1	96	95	427	92	EMBERFALL
+main-menu	1	106	233	208	19	ECHA ZAPOMNIANYCH RUIN
+main-menu	1	102	723	288	23	PIĘĆ CZĘŚCI. JEDNA NADZIEJA.
+main-menu	1	105	768	316	18	Gdy gasną pieczęcie, ktoś musi podtrzymać światło.
+main-menu	1	1029	236	199	25	OSTATNIA PIECZĘĆ
+main-menu	1	1038	274	181	16	Twoja opowieść zaczyna się tutaj
+main-menu	1	964	329	11	14	01
+main-menu	1	1009	326	79	23	Nowa gra
+main-menu	1	964	404	13	14	02
+main-menu	1	1009	401	98	23	Wczytaj grę
+main-menu	1	964	479	12	14	03
+main-menu	1	1009	476	48	23	Opcje
+main-menu	1	964	554	13	14	04
+main-menu	1	1009	551	63	23	Twórcy
+main-menu	1	964	629	12	14	05
+main-menu	1	1009	626	95	23	Wyjdź z gry
+main-menu	1	82	867	102	15	PIECZĘĆ POPIOŁU
+main-menu	1	582	867	276	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+main-menu	1	1259	867	68	14	EMBERFALL
+options	1	622	221	196	32	PRZY OGNISKU
+options	1	628	268	184	16	Dostosuj oprawę swojej wyprawy
+options	1	410	306	53	19	Muzyka
+options	1	580	309	21	15	WŁ.
+options	1	970	307	27	17	42%
+options	1	410	378	122	19	Efekty dźwiękowe
+options	1	580	381	21	15	WŁ.
+options	1	970	379	27	17	72%
+options	1	410	450	78	19	Tryb ekranu
+options	1	841	452	66	17	Okno · F11
+options	1	410	522	76	19	Wyciszenie
+options	1	841	524	66	17	Wyłączone
+options	1	562	609	317	15	Kliknij nazwę, aby przełączyć kanał. Suwak / ← →: głośność.
+options	1	590	642	260	15	F1 podczas gry: przewodnik oraz opis sterowania.
+options	1	667	729	107	22	Gotowe · ESC
+options	1	82	867	102	15	PIECZĘĆ POPIOŁU
+options	1	582	867	276	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+options	1	1259	867	68	14	EMBERFALL
+credits	1	663	221	114	32	TWÓRCY
+credits	1	602	268	236	16	Ludzie i narzędzia, dzięki którym płonie żar
+credits	1	517	325	406	23	EMBERFALL — ECHA ZAPOMNIANYCH RUIN
+credits	1	519	373	403	20	Autorski projekt Amadeusza · realizacja z pomocą Codexa
+credits	1	565	430	310	19	Grafika i animacja: Krita · Synfig Studio · Laigter
+credits	1	576	466	288	19	Muzyka i dźwięk: LMMS · Csound · Audacity
+credits	1	572	523	296	18	Silnik: raylib — Ramon Santamaria i współtwórcy
+credits	1	573	558	294	17	Cinzel — Natanael Gama  ·  Lato — Łukasz Dziedzic
+credits	1	590	591	261	17	Manrope — Mikhail Sharanda i współtwórcy
+credits	1	552	650	337	15	Pełne informacje o licencjach: LICENSES.md oraz assets/licenses
+credits	1	669	729	103	22	Wstecz · ESC
+credits	1	82	867	102	15	PIECZĘĆ POPIOŁU
+credits	1	582	867	276	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+credits	1	1259	867	68	14	EMBERFALL
+load-menu	1	578	221	284	32	POWRÓT DO KRONIKI
+load-menu	1	645	268	151	16	Wybierz zapisaną wyprawę
+load-menu	1	400	322	23	30	01
+load-menu	1	467	315	75	22	Las Mchu
+load-menu	1	468	354	165	16	Poziom 1  ·  2026-10-26 16:33
+load-menu	1	400	438	28	30	02
+load-menu	1	467	431	76	22	Pusty slot
+load-menu	1	468	470	132	16	Brak zapisanej wyprawy
+load-menu	1	400	554	27	30	03
+load-menu	1	467	547	76	22	Pusty slot
+load-menu	1	468	586	132	16	Brak zapisanej wyprawy
+load-menu	1	669	729	103	22	Wstecz · ESC
+load-menu	1	82	867	102	15	PIECZĘĆ POPIOŁU
+load-menu	1	582	867	276	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+load-menu	1	1259	867	68	14	EMBERFALL
+forest-hud	1	28	22	160	34	EMBERFALL
+forest-hud	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+forest-hud	1	335	29	15	20	01
+forest-hud	1	410	29	148	20	Przesieka Wędrowca
+forest-hud	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+forest-hud	1	914	30	30	15	0 FPS
+forest-hud	1	917	56	66	15	F1  POMOC
+forest-hud	1	856	144	88	15	WIELKA KNIEJA
+forest-hud	1	925	158	9	15	N
+forest-hud	1	29	680	123	15	DZIENNIK WYPRAWY
+forest-hud	1	53	714	99	20	Serce Świtu
+forest-hud	1	29	748	160	15	Odnajdź Strażnika na północy.
+forest-hud	1	29	771	123	15	Odzyskane części: 0 / 5
+forest-hud	1	29	808	69	15	WSAD · ruch
+forest-hud	1	29	835	63	15	SHIFT · bieg
+forest-hud	1	29	862	61	15	ESC · pauza
+forest-hud	1	412	847	24	15	LPM
+forest-hud	1	492	847	8	15	C
+forest-hud	1	565	847	7	15	1
+forest-hud	1	637	847	7	15	2
+forest-hud	1	691	847	42	15	SPACJA
+forest-hud	1	409	870	31	15	ATAK
+forest-hud	1	473	870	48	15	CZAR · K
+forest-hud	1	540	870	57	15	ZDROWIE
+forest-hud	1	623	870	36	15	MANA
+forest-hud	1	698	870	29	15	UNIK
+forest-hud	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+forest-hud	1	1280	23	84	15	STATYSTYKI · P
+forest-hud	1	1158	70	119	25	Wędrowiec
+forest-hud	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+forest-hud	1	1159	125	53	15	ZŁOTO  0
+forest-hud	1	1080	151	33	15	ŻYCIE
+forest-hud	1	1328	148	53	15	100 / 100
+forest-hud	1	1080	175	36	15	MANA
+forest-hud	1	1328	172	53	15	100 / 100
+forest-hud	1	1222	222	33	15	HEŁM
+forest-hud	1	1324	222	46	15	TARCZA
+forest-hud	1	1222	273	32	15	BUTY
+forest-hud	1	1318	273	58	15	PIERŚCIEŃ
+forest-hud	1	1080	314	51	15	ATAK  14
+forest-hud	1	1192	314	67	15	PANCERZ  3
+forest-hud	1	1302	314	55	15	PD  0/100
+forest-hud	1	1080	346	44	15	PLECAK
+forest-hud	1	1348	346	39	15	06 / 25
+forest-hud	1	1117	388	7	15	5
+forest-hud	1	1182	388	7	15	3
+forest-hud	1	1117	432	14	15	20
+forest-hud	1	1080	595	65	15	W ZASIĘGU
+forest-hud	1	1270	595	78	15	0  W ZASIĘGU
+forest-hud	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+forest-hud	1	1090	714	96	15	POD KURSOREM
+forest-hud	1	1090	750	164	16	Najedź na potwora lub obiekt.
+forest-hud	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+forest-hud	1	1096	885	118	15	WYPRAWA W TOKU
+forest-hud	1	1370	885	29	15	v0.47
+forest-hud	1	174	845	51	15	Z · 10 MP
+forest-hud	1	175	870	49	15	ZABLOK.
+forest-hud	1	245	845	52	15	X · 20 MP
+forest-hud	1	247	870	49	15	ZABLOK.
+forest-hud	1	317	845	52	15	V · 20 MP
+forest-hud	1	319	870	49	15	ZABLOK.
+forest-hud	1	830	806	51	15	MUZYKA
+forest-hud	1	851	825	21	15	WŁ.
+forest-hud	1	942	806	44	15	EFEKTY
+forest-hud	1	960	825	21	15	WŁ.
+forest-hud	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+forest-hud	1	757	35	110	15	PEŁNY EKRAN · F11
+forest-hud	1	102	122	54	15	BROŃ · Q
+stats	1	28	22	160	34	EMBERFALL
+stats	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+stats	1	335	29	15	20	01
+stats	1	410	29	148	20	Przesieka Wędrowca
+stats	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+stats	1	914	30	30	15	0 FPS
+stats	1	917	56	66	15	F1  POMOC
+stats	1	856	144	88	15	WIELKA KNIEJA
+stats	1	925	158	9	15	N
+stats	1	29	680	123	15	DZIENNIK WYPRAWY
+stats	1	53	714	99	20	Serce Świtu
+stats	1	29	748	160	15	Odnajdź Strażnika na północy.
+stats	1	29	771	123	15	Odzyskane części: 0 / 5
+stats	1	29	808	69	15	WSAD · ruch
+stats	1	29	835	63	15	SHIFT · bieg
+stats	1	29	862	61	15	ESC · pauza
+stats	1	412	847	24	15	LPM
+stats	1	492	847	8	15	C
+stats	1	565	847	7	15	1
+stats	1	637	847	7	15	2
+stats	1	691	847	42	15	SPACJA
+stats	1	409	870	31	15	ATAK
+stats	1	473	870	48	15	CZAR · K
+stats	1	540	870	57	15	ZDROWIE
+stats	1	623	870	36	15	MANA
+stats	1	698	870	29	15	UNIK
+stats	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+stats	1	1280	23	84	15	STATYSTYKI · P
+stats	1	1158	70	119	25	Wędrowiec
+stats	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+stats	1	1159	125	53	15	ZŁOTO  0
+stats	1	1080	151	33	15	ŻYCIE
+stats	1	1328	148	53	15	100 / 100
+stats	1	1080	175	36	15	MANA
+stats	1	1328	172	53	15	100 / 100
+stats	1	1222	222	33	15	HEŁM
+stats	1	1324	222	46	15	TARCZA
+stats	1	1222	273	32	15	BUTY
+stats	1	1318	273	58	15	PIERŚCIEŃ
+stats	1	1080	314	51	15	ATAK  14
+stats	1	1192	314	67	15	PANCERZ  3
+stats	1	1302	314	55	15	PD  0/100
+stats	1	1080	346	44	15	PLECAK
+stats	1	1348	346	39	15	06 / 25
+stats	1	1117	388	7	15	5
+stats	1	1182	388	7	15	3
+stats	1	1117	432	14	15	20
+stats	1	1080	595	65	15	W ZASIĘGU
+stats	1	1270	595	78	15	0  W ZASIĘGU
+stats	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+stats	1	1090	714	96	15	POD KURSOREM
+stats	1	1090	750	164	16	Najedź na potwora lub obiekt.
+stats	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+stats	1	1096	885	118	15	WYPRAWA W TOKU
+stats	1	1370	885	29	15	v0.47
+stats	1	174	845	51	15	Z · 10 MP
+stats	1	175	870	49	15	ZABLOK.
+stats	1	245	845	52	15	X · 20 MP
+stats	1	247	870	49	15	ZABLOK.
+stats	1	317	845	52	15	V · 20 MP
+stats	1	319	870	49	15	ZABLOK.
+stats	1	578	147	285	30	STATYSTYKI BOHATERA
+stats	1	612	193	217	17	5 punktów za każdy zdobyty poziom
+stats	1	590	226	261	19	Kolejne punkty zdobędziesz po awansie.
+stats	1	336	268	26	20	Siła
+stats	1	336	294	208	15	+2 obrażenia ataku fizycznego za punkt.
+stats	1	894	279	10	22	0
+stats	1	336	324	101	20	Moc magiczna
+stats	1	336	350	170	15	+3 obrażenia magiczne za punkt.
+stats	1	894	335	10	22	0
+stats	1	336	380	54	20	Obrona
+stats	1	336	406	153	15	+1 obrony fizycznej za punkt.
+stats	1	894	391	10	22	0
+stats	1	336	436	123	20	Obrona magiczna
+stats	1	336	462	160	15	+1 obrony magicznej za punkt.
+stats	1	894	447	10	22	0
+stats	1	336	492	102	20	Wytrzymałość
+stats	1	336	518	171	15	+10 maksymalnego HP za punkt.
+stats	1	894	503	10	22	0
+stats	1	336	548	40	20	Mana
+stats	1	336	574	167	15	+5 maksymalnej many za punkt.
+stats	1	894	559	10	22	0
+stats	1	584	630	272	17	Atak 14   ·   Magia 28   ·   HP 100   ·   Mana 100
+stats	1	669	699	102	18	WRÓĆ DO GRY
+stats	1	637	742	166	15	ENTER / ESC / P — wróć do gry
+stats	1	830	806	51	15	MUZYKA
+stats	1	851	825	21	15	WŁ.
+stats	1	942	806	44	15	EFEKTY
+stats	1	960	825	21	15	WŁ.
+stats	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+stats	1	757	35	110	15	PEŁNY EKRAN · F11
+stats	1	102	122	54	15	BROŃ · Q
+skills	1	28	22	160	34	EMBERFALL
+skills	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+skills	1	335	29	15	20	01
+skills	1	410	29	148	20	Przesieka Wędrowca
+skills	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+skills	1	914	30	30	15	0 FPS
+skills	1	917	56	66	15	F1  POMOC
+skills	1	856	144	88	15	WIELKA KNIEJA
+skills	1	925	158	9	15	N
+skills	1	29	680	123	15	DZIENNIK WYPRAWY
+skills	1	53	714	99	20	Serce Świtu
+skills	1	29	748	160	15	Odnajdź Strażnika na północy.
+skills	1	29	771	123	15	Odzyskane części: 0 / 5
+skills	1	29	808	69	15	WSAD · ruch
+skills	1	29	835	63	15	SHIFT · bieg
+skills	1	29	862	61	15	ESC · pauza
+skills	1	412	847	24	15	LPM
+skills	1	492	847	8	15	C
+skills	1	565	847	7	15	1
+skills	1	637	847	7	15	2
+skills	1	691	847	42	15	SPACJA
+skills	1	409	870	31	15	ATAK
+skills	1	473	870	48	15	CZAR · K
+skills	1	540	870	57	15	ZDROWIE
+skills	1	623	870	36	15	MANA
+skills	1	698	870	29	15	UNIK
+skills	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+skills	1	1280	23	84	15	STATYSTYKI · P
+skills	1	1158	70	119	25	Wędrowiec
+skills	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+skills	1	1159	125	53	15	ZŁOTO  0
+skills	1	1080	151	33	15	ŻYCIE
+skills	1	1328	148	53	15	100 / 100
+skills	1	1080	175	36	15	MANA
+skills	1	1328	172	53	15	100 / 100
+skills	1	1222	222	33	15	HEŁM
+skills	1	1324	222	46	15	TARCZA
+skills	1	1222	273	32	15	BUTY
+skills	1	1318	273	58	15	PIERŚCIEŃ
+skills	1	1080	314	51	15	ATAK  14
+skills	1	1192	314	67	15	PANCERZ  3
+skills	1	1302	314	55	15	PD  0/100
+skills	1	1080	346	44	15	PLECAK
+skills	1	1348	346	39	15	06 / 25
+skills	1	1117	388	7	15	5
+skills	1	1182	388	7	15	3
+skills	1	1117	432	14	15	20
+skills	1	1080	595	65	15	W ZASIĘGU
+skills	1	1270	595	78	15	0  W ZASIĘGU
+skills	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+skills	1	1090	714	96	15	POD KURSOREM
+skills	1	1090	750	164	16	Najedź na potwora lub obiekt.
+skills	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+skills	1	1096	885	118	15	WYPRAWA W TOKU
+skills	1	1370	885	29	15	v0.47
+skills	1	174	845	51	15	Z · 10 MP
+skills	1	175	870	49	15	ZABLOK.
+skills	1	245	845	52	15	X · 20 MP
+skills	1	247	870	49	15	ZABLOK.
+skills	1	317	845	52	15	V · 20 MP
+skills	1	319	870	49	15	ZABLOK.
+skills	1	568	147	304	28	UMIEJĘTNOŚCI BOHATERA
+skills	1	621	190	198	17	1 punkt za każdy zdobyty poziom
+skills	1	554	213	333	17	Zdobywaj poziomy, aby uczyć się i rozwijać umiejętności.
+skills	1	415	244	135	24	Mocne cięcie
+skills	1	415	275	102	15	Miecz · 10 many · Z
+skills	1	415	298	275	15	Silniejszy zamach trafia wszystkich w zasięgu miecza.
+skills	1	415	320	176	15	Obrażenia: 150% zwykłego ataku
+skills	1	415	342	255	15	Kolejna ranga: +10% obrażeń · odnowienie 1,2 s.
+skills	1	1022	274	52	15	RANGA 0
+skills	1	415	377	233	24	Przeszywająca strzała
+skills	1	415	408	148	15	Łuk · 20 many + 1 strzała · X
+skills	1	415	431	229	15	Przygotuj X, następnie naciągnij i puść LPM.
+skills	1	415	453	243	15	Przebija do 3 celów · obrażenia zwykłej strzały
+skills	1	415	475	211	15	Kolejna ranga: +1 cel · odnowienie 1,5 s.
+skills	1	1022	407	52	15	RANGA 0
+skills	1	415	510	88	24	Leczenie
+skills	1	415	541	132	15	Każda broń · 20 many · V
+skills	1	415	564	237	15	Przywraca 30 HP, do maksymalnego zdrowia.
+skills	1	415	586	230	15	Efekt: +30 HP · nie wymaga miecza ani łuku
+skills	1	415	608	306	15	Jedna ranga · odnowienie 1 s · przy pełnym HP bez kosztu.
+skills	1	1019	540	59	15	NIEZNANE
+skills	1	566	647	308	16	U lub ESC zamyka okno. Leczenie wystarczy poznać raz.
+skills	1	669	690	102	18	WRÓĆ DO GRY
+skills	1	612	749	216	15	Z / X — umiejętności broni · V — Leczenie
+skills	1	830	806	51	15	MUZYKA
+skills	1	851	825	21	15	WŁ.
+skills	1	942	806	44	15	EFEKTY
+skills	1	960	825	21	15	WŁ.
+skills	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+skills	1	757	35	110	15	PEŁNY EKRAN · F11
+skills	1	102	122	54	15	BROŃ · Q
+spell-book	1	28	22	160	34	EMBERFALL
+spell-book	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+spell-book	1	335	29	15	20	01
+spell-book	1	410	29	148	20	Przesieka Wędrowca
+spell-book	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+spell-book	1	914	30	30	15	0 FPS
+spell-book	1	917	56	66	15	F1  POMOC
+spell-book	1	856	144	88	15	WIELKA KNIEJA
+spell-book	1	925	158	9	15	N
+spell-book	1	29	680	123	15	DZIENNIK WYPRAWY
+spell-book	1	53	714	99	20	Serce Świtu
+spell-book	1	29	748	160	15	Odnajdź Strażnika na północy.
+spell-book	1	29	771	123	15	Odzyskane części: 0 / 5
+spell-book	1	29	808	69	15	WSAD · ruch
+spell-book	1	29	835	63	15	SHIFT · bieg
+spell-book	1	29	862	61	15	ESC · pauza
+spell-book	1	412	847	24	15	LPM
+spell-book	1	492	847	8	15	C
+spell-book	1	565	847	7	15	1
+spell-book	1	637	847	7	15	2
+spell-book	1	691	847	42	15	SPACJA
+spell-book	1	409	870	31	15	ATAK
+spell-book	1	473	870	48	15	CZAR · K
+spell-book	1	540	870	57	15	ZDROWIE
+spell-book	1	623	870	36	15	MANA
+spell-book	1	698	870	29	15	UNIK
+spell-book	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+spell-book	1	1280	23	84	15	STATYSTYKI · P
+spell-book	1	1158	70	119	25	Wędrowiec
+spell-book	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+spell-book	1	1159	125	53	15	ZŁOTO  0
+spell-book	1	1080	151	33	15	ŻYCIE
+spell-book	1	1328	148	53	15	100 / 100
+spell-book	1	1080	175	36	15	MANA
+spell-book	1	1328	172	53	15	100 / 100
+spell-book	1	1222	222	33	15	HEŁM
+spell-book	1	1324	222	46	15	TARCZA
+spell-book	1	1222	273	32	15	BUTY
+spell-book	1	1318	273	58	15	PIERŚCIEŃ
+spell-book	1	1080	314	51	15	ATAK  14
+spell-book	1	1192	314	67	15	PANCERZ  3
+spell-book	1	1302	314	55	15	PD  0/100
+spell-book	1	1080	346	44	15	PLECAK
+spell-book	1	1348	346	39	15	06 / 25
+spell-book	1	1117	388	7	15	5
+spell-book	1	1182	388	7	15	3
+spell-book	1	1117	432	14	15	20
+spell-book	1	1080	595	65	15	W ZASIĘGU
+spell-book	1	1270	595	78	15	0  W ZASIĘGU
+spell-book	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+spell-book	1	1090	714	96	15	POD KURSOREM
+spell-book	1	1090	750	164	16	Najedź na potwora lub obiekt.
+spell-book	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+spell-book	1	1096	885	118	15	WYPRAWA W TOKU
+spell-book	1	1370	885	29	15	v0.47
+spell-book	1	174	845	51	15	Z · 10 MP
+spell-book	1	175	870	49	15	ZABLOK.
+spell-book	1	245	845	52	15	X · 20 MP
+spell-book	1	247	870	49	15	ZABLOK.
+spell-book	1	317	845	52	15	V · 20 MP
+spell-book	1	319	870	49	15	ZABLOK.
+spell-book	1	619	259	202	30	KSIĘGA CZARÓW
+spell-book	1	616	302	208	17	Wybierz czar używany klawiszem C
+spell-book	1	487	347	119	25	Kula ognia
+spell-book	1	487	388	252	17	Obrażenia magiczne: 28   ·   Koszt: 10 many
+spell-book	1	487	419	189	16	Zasięg: 8 pól   ·   Odnowienie: 0,8 s
+spell-book	1	487	446	226	15	Celuj kursorem. Kula wybucha po trafieniu.
+spell-book	1	644	509	152	18	WYBIERZ KULĘ OGNIA
+spell-book	1	650	569	141	16	Wybrany czar: Kula ognia
+spell-book	1	593	598	255	15	Mana: 100 / 100   ·   Regeneracja: 1 punkt co 5 s
+spell-book	1	589	625	262	15	Świat jest zatrzymany. ESC / K — wróć bez zmiany.
+spell-book	1	830	806	51	15	MUZYKA
+spell-book	1	851	825	21	15	WŁ.
+spell-book	1	942	806	44	15	EFEKTY
+spell-book	1	960	825	21	15	WŁ.
+spell-book	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+spell-book	1	757	35	110	15	PEŁNY EKRAN · F11
+spell-book	1	102	122	54	15	BROŃ · Q
+stats-allocation	1	28	22	160	34	EMBERFALL
+stats-allocation	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+stats-allocation	1	335	29	15	20	01
+stats-allocation	1	410	29	148	20	Przesieka Wędrowca
+stats-allocation	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+stats-allocation	1	914	30	30	15	0 FPS
+stats-allocation	1	917	56	66	15	F1  POMOC
+stats-allocation	1	856	144	88	15	WIELKA KNIEJA
+stats-allocation	1	925	158	9	15	N
+stats-allocation	1	29	680	123	15	DZIENNIK WYPRAWY
+stats-allocation	1	53	714	99	20	Serce Świtu
+stats-allocation	1	29	748	160	15	Odnajdź Strażnika na północy.
+stats-allocation	1	29	771	123	15	Odzyskane części: 0 / 5
+stats-allocation	1	29	808	69	15	WSAD · ruch
+stats-allocation	1	29	835	63	15	SHIFT · bieg
+stats-allocation	1	29	862	61	15	ESC · pauza
+stats-allocation	1	412	847	24	15	LPM
+stats-allocation	1	492	847	8	15	C
+stats-allocation	1	565	847	7	15	1
+stats-allocation	1	637	847	7	15	2
+stats-allocation	1	691	847	42	15	SPACJA
+stats-allocation	1	409	870	31	15	ATAK
+stats-allocation	1	473	870	48	15	CZAR · K
+stats-allocation	1	540	870	57	15	ZDROWIE
+stats-allocation	1	623	870	36	15	MANA
+stats-allocation	1	698	870	29	15	UNIK
+stats-allocation	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+stats-allocation	1	1280	23	84	15	STATYSTYKI · P
+stats-allocation	1	1158	70	119	25	Wędrowiec
+stats-allocation	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+stats-allocation	1	1159	125	53	15	ZŁOTO  0
+stats-allocation	1	1080	151	33	15	ŻYCIE
+stats-allocation	1	1328	148	53	15	100 / 100
+stats-allocation	1	1080	175	36	15	MANA
+stats-allocation	1	1328	172	53	15	100 / 100
+stats-allocation	1	1222	222	33	15	HEŁM
+stats-allocation	1	1324	222	46	15	TARCZA
+stats-allocation	1	1222	273	32	15	BUTY
+stats-allocation	1	1318	273	58	15	PIERŚCIEŃ
+stats-allocation	1	1080	314	51	15	ATAK  14
+stats-allocation	1	1192	314	67	15	PANCERZ  3
+stats-allocation	1	1302	314	55	15	PD  0/100
+stats-allocation	1	1080	346	44	15	PLECAK
+stats-allocation	1	1348	346	39	15	06 / 25
+stats-allocation	1	1117	388	7	15	5
+stats-allocation	1	1182	388	7	15	3
+stats-allocation	1	1117	432	14	15	20
+stats-allocation	1	1080	595	65	15	W ZASIĘGU
+stats-allocation	1	1270	595	78	15	0  W ZASIĘGU
+stats-allocation	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+stats-allocation	1	1090	714	96	15	POD KURSOREM
+stats-allocation	1	1090	750	164	16	Najedź na potwora lub obiekt.
+stats-allocation	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+stats-allocation	1	1096	885	118	15	WYPRAWA W TOKU
+stats-allocation	1	1370	885	29	15	v0.47
+stats-allocation	1	174	845	51	15	Z · 10 MP
+stats-allocation	1	175	870	49	15	ZABLOK.
+stats-allocation	1	245	845	52	15	X · 20 MP
+stats-allocation	1	247	870	49	15	ZABLOK.
+stats-allocation	1	317	845	52	15	V · 20 MP
+stats-allocation	1	319	870	49	15	ZABLOK.
+stats-allocation	1	604	147	232	30	AWANS — POZIOM 1
+stats-allocation	1	612	193	217	17	5 punktów za każdy zdobyty poziom
+stats-allocation	1	637	226	166	19	Pozostało: 5 / 5 punktów
+stats-allocation	1	336	268	26	20	Siła
+stats-allocation	1	336	294	208	15	+2 obrażenia ataku fizycznego za punkt.
+stats-allocation	1	894	279	10	22	0
+stats-allocation	1	1048	283	41	15	DODAJ
+stats-allocation	1	336	324	101	20	Moc magiczna
+stats-allocation	1	336	350	170	15	+3 obrażenia magiczne za punkt.
+stats-allocation	1	894	335	10	22	0
+stats-allocation	1	1048	339	41	15	DODAJ
+stats-allocation	1	336	380	54	20	Obrona
+stats-allocation	1	336	406	153	15	+1 obrony fizycznej za punkt.
+stats-allocation	1	894	391	10	22	0
+stats-allocation	1	1048	395	41	15	DODAJ
+stats-allocation	1	336	436	123	20	Obrona magiczna
+stats-allocation	1	336	462	160	15	+1 obrony magicznej za punkt.
+stats-allocation	1	894	447	10	22	0
+stats-allocation	1	1048	451	41	15	DODAJ
+stats-allocation	1	336	492	102	20	Wytrzymałość
+stats-allocation	1	336	518	171	15	+10 maksymalnego HP za punkt.
+stats-allocation	1	894	503	10	22	0
+stats-allocation	1	1048	507	41	15	DODAJ
+stats-allocation	1	336	548	40	20	Mana
+stats-allocation	1	336	574	167	15	+5 maksymalnej many za punkt.
+stats-allocation	1	894	559	10	22	0
+stats-allocation	1	1048	563	41	15	DODAJ
+stats-allocation	1	584	630	272	17	Atak 14   ·   Magia 28   ·   HP 100   ·   Mana 100
+stats-allocation	1	610	699	220	18	DALEJ — WYBÓR UMIEJĘTNOŚCI
+stats-allocation	1	567	742	307	15	Świat jest zatrzymany. Rozdaj wszystkie punkty i zatwierdź.
+stats-allocation	1	830	806	51	15	MUZYKA
+stats-allocation	1	851	825	21	15	WŁ.
+stats-allocation	1	942	806	44	15	EFEKTY
+stats-allocation	1	960	825	21	15	WŁ.
+stats-allocation	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+stats-allocation	1	757	35	110	15	PEŁNY EKRAN · F11
+stats-allocation	1	102	122	54	15	BROŃ · Q
+skills-allocation	1	28	22	160	34	EMBERFALL
+skills-allocation	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+skills-allocation	1	335	29	15	20	01
+skills-allocation	1	410	29	148	20	Przesieka Wędrowca
+skills-allocation	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+skills-allocation	1	914	30	30	15	0 FPS
+skills-allocation	1	917	56	66	15	F1  POMOC
+skills-allocation	1	856	144	88	15	WIELKA KNIEJA
+skills-allocation	1	925	158	9	15	N
+skills-allocation	1	29	680	123	15	DZIENNIK WYPRAWY
+skills-allocation	1	53	714	99	20	Serce Świtu
+skills-allocation	1	29	748	160	15	Odnajdź Strażnika na północy.
+skills-allocation	1	29	771	123	15	Odzyskane części: 0 / 5
+skills-allocation	1	29	808	69	15	WSAD · ruch
+skills-allocation	1	29	835	63	15	SHIFT · bieg
+skills-allocation	1	29	862	61	15	ESC · pauza
+skills-allocation	1	412	847	24	15	LPM
+skills-allocation	1	492	847	8	15	C
+skills-allocation	1	565	847	7	15	1
+skills-allocation	1	637	847	7	15	2
+skills-allocation	1	691	847	42	15	SPACJA
+skills-allocation	1	409	870	31	15	ATAK
+skills-allocation	1	473	870	48	15	CZAR · K
+skills-allocation	1	540	870	57	15	ZDROWIE
+skills-allocation	1	623	870	36	15	MANA
+skills-allocation	1	698	870	29	15	UNIK
+skills-allocation	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+skills-allocation	1	1280	23	84	15	STATYSTYKI · P
+skills-allocation	1	1158	70	119	25	Wędrowiec
+skills-allocation	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+skills-allocation	1	1159	125	53	15	ZŁOTO  0
+skills-allocation	1	1080	151	33	15	ŻYCIE
+skills-allocation	1	1328	148	53	15	100 / 100
+skills-allocation	1	1080	175	36	15	MANA
+skills-allocation	1	1328	172	53	15	100 / 100
+skills-allocation	1	1222	222	33	15	HEŁM
+skills-allocation	1	1324	222	46	15	TARCZA
+skills-allocation	1	1222	273	32	15	BUTY
+skills-allocation	1	1318	273	58	15	PIERŚCIEŃ
+skills-allocation	1	1080	314	51	15	ATAK  14
+skills-allocation	1	1192	314	67	15	PANCERZ  3
+skills-allocation	1	1302	314	55	15	PD  0/100
+skills-allocation	1	1080	346	44	15	PLECAK
+skills-allocation	1	1348	346	39	15	06 / 25
+skills-allocation	1	1117	388	7	15	5
+skills-allocation	1	1182	388	7	15	3
+skills-allocation	1	1117	432	14	15	20
+skills-allocation	1	1080	595	65	15	W ZASIĘGU
+skills-allocation	1	1270	595	78	15	0  W ZASIĘGU
+skills-allocation	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+skills-allocation	1	1090	714	96	15	POD KURSOREM
+skills-allocation	1	1090	750	164	16	Najedź na potwora lub obiekt.
+skills-allocation	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+skills-allocation	1	1096	885	118	15	WYPRAWA W TOKU
+skills-allocation	1	1370	885	29	15	v0.47
+skills-allocation	1	174	845	51	15	Z · 10 MP
+skills-allocation	1	175	870	49	15	ZABLOK.
+skills-allocation	1	245	845	52	15	X · 20 MP
+skills-allocation	1	247	870	49	15	ZABLOK.
+skills-allocation	1	317	845	52	15	V · 20 MP
+skills-allocation	1	319	870	49	15	ZABLOK.
+skills-allocation	1	565	147	311	28	UMIEJĘTNOŚCI — POZIOM 1
+skills-allocation	1	621	190	198	17	1 punkt za każdy zdobyty poziom
+skills-allocation	1	646	213	148	17	Punkty do rozdania: 1 / 1
+skills-allocation	1	415	244	135	24	Mocne cięcie
+skills-allocation	1	415	275	102	15	Miecz · 10 many · Z
+skills-allocation	1	415	298	275	15	Silniejszy zamach trafia wszystkich w zasięgu miecza.
+skills-allocation	1	415	320	176	15	Obrażenia: 150% zwykłego ataku
+skills-allocation	1	415	342	255	15	Kolejna ranga: +10% obrażeń · odnowienie 1,2 s.
+skills-allocation	1	1022	274	52	15	RANGA 0
+skills-allocation	1	1068	320	41	15	DODAJ
+skills-allocation	1	415	377	233	24	Przeszywająca strzała
+skills-allocation	1	415	408	148	15	Łuk · 20 many + 1 strzała · X
+skills-allocation	1	415	431	229	15	Przygotuj X, następnie naciągnij i puść LPM.
+skills-allocation	1	415	453	243	15	Przebija do 3 celów · obrażenia zwykłej strzały
+skills-allocation	1	415	475	211	15	Kolejna ranga: +1 cel · odnowienie 1,5 s.
+skills-allocation	1	1022	407	52	15	RANGA 0
+skills-allocation	1	1068	453	41	15	DODAJ
+skills-allocation	1	415	510	88	24	Leczenie
+skills-allocation	1	415	541	132	15	Każda broń · 20 many · V
+skills-allocation	1	415	564	237	15	Przywraca 30 HP, do maksymalnego zdrowia.
+skills-allocation	1	415	586	230	15	Efekt: +30 HP · nie wymaga miecza ani łuku
+skills-allocation	1	415	608	306	15	Jedna ranga · odnowienie 1 s · przy pełnym HP bez kosztu.
+skills-allocation	1	1019	540	59	15	NIEZNANE
+skills-allocation	1	1068	586	41	15	DODAJ
+skills-allocation	1	544	647	353	16	Kliknij umiejętność, aby przypisać punkt. COFNIJ anuluje wybór.
+skills-allocation	1	622	690	196	18	ZATWIERDŹ I WRÓĆ DO GRY
+skills-allocation	1	559	749	322	15	Gra pozostaje zatrzymana do rozdania punktów umiejętności.
+skills-allocation	1	830	806	51	15	MUZYKA
+skills-allocation	1	851	825	21	15	WŁ.
+skills-allocation	1	942	806	44	15	EFEKTY
+skills-allocation	1	960	825	21	15	WŁ.
+skills-allocation	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+skills-allocation	1	757	35	110	15	PEŁNY EKRAN · F11
+skills-allocation	1	102	122	54	15	BROŃ · Q
+item-tooltip	1	28	22	160	34	EMBERFALL
+item-tooltip	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+item-tooltip	1	335	29	15	20	01
+item-tooltip	1	410	29	148	20	Przesieka Wędrowca
+item-tooltip	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+item-tooltip	1	914	30	30	15	0 FPS
+item-tooltip	1	917	56	66	15	F1  POMOC
+item-tooltip	1	856	144	88	15	WIELKA KNIEJA
+item-tooltip	1	925	158	9	15	N
+item-tooltip	1	29	680	123	15	DZIENNIK WYPRAWY
+item-tooltip	1	53	714	99	20	Serce Świtu
+item-tooltip	1	29	748	160	15	Odnajdź Strażnika na północy.
+item-tooltip	1	29	771	123	15	Odzyskane części: 0 / 5
+item-tooltip	1	29	808	69	15	WSAD · ruch
+item-tooltip	1	29	835	63	15	SHIFT · bieg
+item-tooltip	1	29	862	61	15	ESC · pauza
+item-tooltip	1	412	847	24	15	LPM
+item-tooltip	1	492	847	8	15	C
+item-tooltip	1	565	847	7	15	1
+item-tooltip	1	637	847	7	15	2
+item-tooltip	1	691	847	42	15	SPACJA
+item-tooltip	1	409	870	31	15	ATAK
+item-tooltip	1	473	870	48	15	CZAR · K
+item-tooltip	1	540	870	57	15	ZDROWIE
+item-tooltip	1	623	870	36	15	MANA
+item-tooltip	1	698	870	29	15	UNIK
+item-tooltip	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+item-tooltip	1	1280	23	84	15	STATYSTYKI · P
+item-tooltip	1	1158	70	119	25	Wędrowiec
+item-tooltip	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+item-tooltip	1	1159	125	53	15	ZŁOTO  0
+item-tooltip	1	1080	151	33	15	ŻYCIE
+item-tooltip	1	1328	148	53	15	100 / 100
+item-tooltip	1	1080	175	36	15	MANA
+item-tooltip	1	1328	172	53	15	100 / 100
+item-tooltip	1	1222	222	33	15	HEŁM
+item-tooltip	1	1324	222	46	15	TARCZA
+item-tooltip	1	1222	273	32	15	BUTY
+item-tooltip	1	1318	273	58	15	PIERŚCIEŃ
+item-tooltip	1	1080	314	51	15	ATAK  14
+item-tooltip	1	1192	314	67	15	PANCERZ  3
+item-tooltip	1	1302	314	55	15	PD  0/100
+item-tooltip	1	1080	346	44	15	PLECAK
+item-tooltip	1	1348	346	39	15	07 / 25
+item-tooltip	1	1117	388	7	15	5
+item-tooltip	1	1182	388	7	15	3
+item-tooltip	1	1117	432	14	15	20
+item-tooltip	1	1080	595	65	15	W ZASIĘGU
+item-tooltip	1	1270	595	78	15	0  W ZASIĘGU
+item-tooltip	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+item-tooltip	1	1090	714	96	15	POD KURSOREM
+item-tooltip	1	1090	750	164	16	Najedź na potwora lub obiekt.
+item-tooltip	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+item-tooltip	1	1096	885	118	15	WYPRAWA W TOKU
+item-tooltip	1	1370	885	29	15	v0.47
+item-tooltip	1	174	845	51	15	Z · 10 MP
+item-tooltip	1	175	870	49	15	ZABLOK.
+item-tooltip	1	245	845	52	15	X · 20 MP
+item-tooltip	1	247	870	49	15	ZABLOK.
+item-tooltip	1	317	845	52	15	V · 20 MP
+item-tooltip	1	319	870	49	15	ZABLOK.
+item-tooltip	1	1085	506	71	15	Bardzo rzadki
+item-tooltip	1	1085	528	173	20	Łuk księżycowego łowcy
+item-tooltip	1	1085	559	183	15	Atak +19 · zasięg zależy od naciągu
+item-tooltip	1	1085	584	203	15	Łuk z jasnego drewna i wilczej cięciwy.
+item-tooltip	1	1085	610	101	15	Wartość: 464 złota
+item-tooltip	1	1085	636	169	15	2× LPM: załóż · LPM: przeciągnij
+item-tooltip	1	1085	660	196	15	Szansa na łup: 4% · według rzadkości
+item-tooltip	1	830	806	51	15	MUZYKA
+item-tooltip	1	851	825	21	15	WŁ.
+item-tooltip	1	942	806	44	15	EFEKTY
+item-tooltip	1	960	825	21	15	WŁ.
+item-tooltip	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+item-tooltip	1	757	35	110	15	PEŁNY EKRAN · F11
+item-tooltip	1	102	122	54	15	BROŃ · Q
+help	1	28	22	160	34	EMBERFALL
+help	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+help	1	335	29	15	20	01
+help	1	410	29	148	20	Przesieka Wędrowca
+help	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+help	1	914	30	30	15	0 FPS
+help	1	917	56	66	15	F1  POMOC
+help	1	856	144	88	15	WIELKA KNIEJA
+help	1	925	158	9	15	N
+help	1	29	680	123	15	DZIENNIK WYPRAWY
+help	1	53	714	99	20	Serce Świtu
+help	1	29	748	160	15	Odnajdź Strażnika na północy.
+help	1	29	771	123	15	Odzyskane części: 0 / 5
+help	1	29	808	69	15	WSAD · ruch
+help	1	29	835	63	15	SHIFT · bieg
+help	1	29	862	61	15	ESC · pauza
+help	1	412	847	24	15	LPM
+help	1	492	847	8	15	C
+help	1	565	847	7	15	1
+help	1	637	847	7	15	2
+help	1	691	847	42	15	SPACJA
+help	1	409	870	31	15	ATAK
+help	1	473	870	48	15	CZAR · K
+help	1	540	870	57	15	ZDROWIE
+help	1	623	870	36	15	MANA
+help	1	698	870	29	15	UNIK
+help	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+help	1	1280	23	84	15	STATYSTYKI · P
+help	1	1158	70	119	25	Wędrowiec
+help	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+help	1	1159	125	53	15	ZŁOTO  0
+help	1	1080	151	33	15	ŻYCIE
+help	1	1328	148	53	15	100 / 100
+help	1	1080	175	36	15	MANA
+help	1	1328	172	53	15	100 / 100
+help	1	1222	222	33	15	HEŁM
+help	1	1324	222	46	15	TARCZA
+help	1	1222	273	32	15	BUTY
+help	1	1318	273	58	15	PIERŚCIEŃ
+help	1	1080	314	51	15	ATAK  14
+help	1	1192	314	67	15	PANCERZ  3
+help	1	1302	314	55	15	PD  0/100
+help	1	1080	346	44	15	PLECAK
+help	1	1348	346	39	15	06 / 25
+help	1	1117	388	7	15	5
+help	1	1182	388	7	15	3
+help	1	1117	432	14	15	20
+help	1	1080	595	65	15	W ZASIĘGU
+help	1	1270	595	78	15	0  W ZASIĘGU
+help	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+help	1	1090	714	96	15	POD KURSOREM
+help	1	1090	750	164	16	Najedź na potwora lub obiekt.
+help	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+help	1	1096	885	118	15	WYPRAWA W TOKU
+help	1	1370	885	29	15	v0.47
+help	1	174	845	51	15	Z · 10 MP
+help	1	175	870	49	15	ZABLOK.
+help	1	245	845	52	15	X · 20 MP
+help	1	247	870	49	15	ZABLOK.
+help	1	317	845	52	15	V · 20 MP
+help	1	319	870	49	15	ZABLOK.
+help	1	548	258	345	32	PRZEWODNIK WĘDROWCA
+help	1	641	307	159	19	Echa zapomnianych ruin
+help	1	384	363	45	15	W S A D
+help	1	554	360	265	19	W — góra, S — dół, A — lewo, D — prawo.
+help	1	384	392	32	15	SHIFT
+help	1	554	389	289	19	Przytrzymaj z WSAD, aby biec 50% szybciej.
+help	1	384	421	42	15	SPACJA
+help	1	554	418	296	19	Przeturlaj się w kierunku ruchu lub ustawienia.
+help	1	384	450	24	15	LPM
+help	1	554	447	243	19	Miecz: kliknij. Łuk: przytrzymaj i puść.
+help	1	384	479	8	15	C
+help	1	554	476	305	19	Rzuć wybrany czar w stronę kursora (10 many).
+help	1	384	508	25	15	PPM
+help	1	554	505	308	19	Otwórz ciało; użyj mikstury / grzyba w plecaku.
+help	1	384	537	25	15	1 / 2
+help	1	554	534	272	19	Wypij miksturę zdrowia / many z plecaka.
+help	1	384	566	74	15	PRZECIĄGNIJ
+help	1	554	563	202	19	Zbierz łup lub grzyb do plecaka.
+help	1	659	629	123	21	WRÓĆ DO GRY
+help	1	448	687	545	15	Z / X — ataki specjalne  /  V — Leczenie  /  U — umiejętności  /  Q — broń  /  F2 — dźwięk  /  ESC — pauza
+help	1	830	806	51	15	MUZYKA
+help	1	851	825	21	15	WŁ.
+help	1	942	806	44	15	EFEKTY
+help	1	960	825	21	15	WŁ.
+help	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+help	1	757	35	110	15	PEŁNY EKRAN · F11
+help	1	102	122	54	15	BROŃ · Q
+pause	1	28	22	160	34	EMBERFALL
+pause	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+pause	1	335	29	15	20	01
+pause	1	410	29	148	20	Przesieka Wędrowca
+pause	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+pause	1	914	30	30	15	0 FPS
+pause	1	917	56	66	15	F1  POMOC
+pause	1	856	144	88	15	WIELKA KNIEJA
+pause	1	925	158	9	15	N
+pause	1	29	680	123	15	DZIENNIK WYPRAWY
+pause	1	53	714	99	20	Serce Świtu
+pause	1	29	748	160	15	Odnajdź Strażnika na północy.
+pause	1	29	771	123	15	Odzyskane części: 0 / 5
+pause	1	29	808	69	15	WSAD · ruch
+pause	1	29	835	63	15	SHIFT · bieg
+pause	1	29	862	61	15	ESC · pauza
+pause	1	412	847	24	15	LPM
+pause	1	492	847	8	15	C
+pause	1	565	847	7	15	1
+pause	1	637	847	7	15	2
+pause	1	691	847	42	15	SPACJA
+pause	1	409	870	31	15	ATAK
+pause	1	473	870	48	15	CZAR · K
+pause	1	540	870	57	15	ZDROWIE
+pause	1	623	870	36	15	MANA
+pause	1	698	870	29	15	UNIK
+pause	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+pause	1	1280	23	84	15	STATYSTYKI · P
+pause	1	1158	70	119	25	Wędrowiec
+pause	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+pause	1	1159	125	53	15	ZŁOTO  0
+pause	1	1080	151	33	15	ŻYCIE
+pause	1	1328	148	53	15	100 / 100
+pause	1	1080	175	36	15	MANA
+pause	1	1328	172	53	15	100 / 100
+pause	1	1222	222	33	15	HEŁM
+pause	1	1324	222	46	15	TARCZA
+pause	1	1222	273	32	15	BUTY
+pause	1	1318	273	58	15	PIERŚCIEŃ
+pause	1	1080	314	51	15	ATAK  14
+pause	1	1192	314	67	15	PANCERZ  3
+pause	1	1302	314	55	15	PD  0/100
+pause	1	1080	346	44	15	PLECAK
+pause	1	1348	346	39	15	06 / 25
+pause	1	1117	388	7	15	5
+pause	1	1182	388	7	15	3
+pause	1	1117	432	14	15	20
+pause	1	1080	595	65	15	W ZASIĘGU
+pause	1	1270	595	78	15	0  W ZASIĘGU
+pause	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+pause	1	1090	714	96	15	POD KURSOREM
+pause	1	1090	750	164	16	Najedź na potwora lub obiekt.
+pause	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+pause	1	1096	885	118	15	WYPRAWA W TOKU
+pause	1	1370	885	29	15	v0.47
+pause	1	174	845	51	15	Z · 10 MP
+pause	1	175	870	49	15	ZABLOK.
+pause	1	245	845	52	15	X · 20 MP
+pause	1	247	870	49	15	ZABLOK.
+pause	1	317	845	52	15	V · 20 MP
+pause	1	319	870	49	15	ZABLOK.
+pause	1	830	806	51	15	MUZYKA
+pause	1	851	825	21	15	WŁ.
+pause	1	942	806	44	15	EFEKTY
+pause	1	960	825	21	15	WŁ.
+pause	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+pause	1	757	35	110	15	PEŁNY EKRAN · F11
+pause	1	102	122	54	15	BROŃ · Q
+pause	1	608	220	224	29	CHWILA ODDECHU
+pause	1	694	266	52	16	Las Mchu
+pause	1	681	303	78	22	Zapisz grę
+pause	1	675	381	91	22	Wczytaj grę
+pause	1	698	459	45	22	Opcje
+pause	1	675	537	90	22	Wyjdź z gry
+pause	1	650	729	140	22	Wróć do gry · ESC
+pause	1	82	867	102	15	PIECZĘĆ POPIOŁU
+pause	1	582	867	276	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+pause	1	1259	867	68	14	EMBERFALL
+audio	1	28	22	160	34	EMBERFALL
+audio	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+audio	1	335	29	15	20	01
+audio	1	410	29	148	20	Przesieka Wędrowca
+audio	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+audio	1	914	30	30	15	0 FPS
+audio	1	917	56	66	15	F1  POMOC
+audio	1	856	144	88	15	WIELKA KNIEJA
+audio	1	925	158	9	15	N
+audio	1	29	680	123	15	DZIENNIK WYPRAWY
+audio	1	53	714	99	20	Serce Świtu
+audio	1	29	748	160	15	Odnajdź Strażnika na północy.
+audio	1	29	771	123	15	Odzyskane części: 0 / 5
+audio	1	29	808	69	15	WSAD · ruch
+audio	1	29	835	63	15	SHIFT · bieg
+audio	1	29	862	61	15	ESC · pauza
+audio	1	412	847	24	15	LPM
+audio	1	492	847	8	15	C
+audio	1	565	847	7	15	1
+audio	1	637	847	7	15	2
+audio	1	691	847	42	15	SPACJA
+audio	1	409	870	31	15	ATAK
+audio	1	473	870	48	15	CZAR · K
+audio	1	540	870	57	15	ZDROWIE
+audio	1	623	870	36	15	MANA
+audio	1	698	870	29	15	UNIK
+audio	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+audio	1	1280	23	84	15	STATYSTYKI · P
+audio	1	1158	70	119	25	Wędrowiec
+audio	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+audio	1	1159	125	53	15	ZŁOTO  0
+audio	1	1080	151	33	15	ŻYCIE
+audio	1	1328	148	53	15	100 / 100
+audio	1	1080	175	36	15	MANA
+audio	1	1328	172	53	15	100 / 100
+audio	1	1222	222	33	15	HEŁM
+audio	1	1324	222	46	15	TARCZA
+audio	1	1222	273	32	15	BUTY
+audio	1	1318	273	58	15	PIERŚCIEŃ
+audio	1	1080	314	51	15	ATAK  14
+audio	1	1192	314	67	15	PANCERZ  3
+audio	1	1302	314	55	15	PD  0/100
+audio	1	1080	346	44	15	PLECAK
+audio	1	1348	346	39	15	06 / 25
+audio	1	1117	388	7	15	5
+audio	1	1182	388	7	15	3
+audio	1	1117	432	14	15	20
+audio	1	1080	595	65	15	W ZASIĘGU
+audio	1	1270	595	78	15	0  W ZASIĘGU
+audio	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+audio	1	1090	714	96	15	POD KURSOREM
+audio	1	1090	750	164	16	Najedź na potwora lub obiekt.
+audio	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+audio	1	1096	885	118	15	WYPRAWA W TOKU
+audio	1	1370	885	29	15	v0.47
+audio	1	174	845	51	15	Z · 10 MP
+audio	1	175	870	49	15	ZABLOK.
+audio	1	245	845	52	15	X · 20 MP
+audio	1	247	870	49	15	ZABLOK.
+audio	1	317	845	52	15	V · 20 MP
+audio	1	319	870	49	15	ZABLOK.
+audio	1	637	317	167	28	DŹWIĘKI RUIN
+audio	1	601	361	239	16	Brak dostępnego urządzenia dźwiękowego.
+audio	1	504	384	51	15	MUZYKA
+audio	1	926	408	24	16	42%
+audio	1	504	456	44	15	EFEKTY
+audio	1	926	480	24	16	72%
+audio	1	653	539	134	17	[ M ]  Wycisz wszystko
+audio	1	689	595	62	17	GOTOWE
+audio	1	830	806	51	15	MUZYKA
+audio	1	851	825	21	15	WŁ.
+audio	1	942	806	44	15	EFEKTY
+audio	1	960	825	21	15	WŁ.
+audio	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+audio	1	757	35	110	15	PEŁNY EKRAN · F11
+audio	1	102	122	54	15	BROŃ · Q
+death	1	28	22	160	34	EMBERFALL
+death	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+death	1	335	29	15	20	01
+death	1	410	29	148	20	Przesieka Wędrowca
+death	1	411	56	186	15	POGRANICZE  /  STREFA DZIKICH
+death	1	914	30	30	15	0 FPS
+death	1	917	56	66	15	F1  POMOC
+death	1	856	144	88	15	WIELKA KNIEJA
+death	1	925	158	9	15	N
+death	1	29	680	123	15	DZIENNIK WYPRAWY
+death	1	53	714	99	20	Serce Świtu
+death	1	29	748	160	15	Odnajdź Strażnika na północy.
+death	1	29	771	123	15	Odzyskane części: 0 / 5
+death	1	29	808	69	15	WSAD · ruch
+death	1	29	835	63	15	SHIFT · bieg
+death	1	29	862	61	15	ESC · pauza
+death	1	412	847	24	15	LPM
+death	1	492	847	8	15	C
+death	1	565	847	7	15	1
+death	1	637	847	7	15	2
+death	1	691	847	42	15	SPACJA
+death	1	409	870	31	15	ATAK
+death	1	473	870	48	15	CZAR · K
+death	1	540	870	57	15	ZDROWIE
+death	1	623	870	36	15	MANA
+death	1	698	870	29	15	UNIK
+death	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+death	1	1280	23	84	15	STATYSTYKI · P
+death	1	1158	70	119	25	Wędrowiec
+death	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+death	1	1159	125	53	15	ZŁOTO  0
+death	1	1080	151	33	15	ŻYCIE
+death	1	1328	148	39	15	0 / 100
+death	1	1080	175	36	15	MANA
+death	1	1328	172	53	15	100 / 100
+death	1	1222	222	33	15	HEŁM
+death	1	1324	222	46	15	TARCZA
+death	1	1222	273	32	15	BUTY
+death	1	1318	273	58	15	PIERŚCIEŃ
+death	1	1080	314	51	15	ATAK  14
+death	1	1192	314	67	15	PANCERZ  3
+death	1	1302	314	55	15	PD  0/100
+death	1	1080	346	44	15	PLECAK
+death	1	1348	346	39	15	06 / 25
+death	1	1117	388	7	15	5
+death	1	1182	388	7	15	3
+death	1	1117	432	14	15	20
+death	1	1080	595	65	15	W ZASIĘGU
+death	1	1270	595	78	15	0  W ZASIĘGU
+death	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+death	1	1090	714	96	15	POD KURSOREM
+death	1	1090	750	164	16	Najedź na potwora lub obiekt.
+death	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+death	1	1096	885	118	15	WYPRAWA W TOKU
+death	1	1370	885	29	15	v0.47
+death	1	174	845	51	15	Z · 10 MP
+death	1	175	870	49	15	ZABLOK.
+death	1	245	845	52	15	X · 20 MP
+death	1	247	870	49	15	ZABLOK.
+death	1	317	845	52	15	V · 20 MP
+death	1	319	870	49	15	ZABLOK.
+death	1	604	274	233	39	ŻAR PRZYGASŁ
+death	1	617	347	207	18	Ruiny zatrzymały twoją wyprawę.
+death	1	600	411	240	17	Naciśnij ENTER, aby rozpocząć od nowa.
+death	1	588	462	265	15	Spróbuj zakładać lepszy sprzęt i unikać zamachów.
+death	1	830	806	51	15	MUZYKA
+death	1	851	825	21	15	WŁ.
+death	1	942	806	44	15	EFEKTY
+death	1	960	825	21	15	WŁ.
+death	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+death	1	757	35	110	15	PEŁNY EKRAN · F11
+death	1	102	122	54	15	BROŃ · Q
+dialogue	1	79	79	137	29	EMBERFALL
+dialogue	1	80	121	175	15	PROLOG  /  OSTATNIA PIECZĘĆ
+dialogue	1	146	647	71	23	ELDRIN
+dialogue	1	146	681	134	15	Strażnik ostatniej pieczęci
+dialogue	1	1222	653	39	15	07 / 12
+dialogue	1	146	716	1046	21	Serce rozbito na pięć części i ukryto w odległych krainach. Każdej strzeże osobny strażnik. Musisz zdobyć wszystkie pięć i złączyć je ponownie.
+dialogue	1	146	811	422	15	ENTER / SPACJA / LPM — dalej     ·     Dialog przewija się również automatycznie
+dialogue	1	1196	804	35	15	DALEJ
+dialogue	1	1229	87	93	15	POMIŃ PROLOG
+merchant	1	116	369	91	14	SCHODY W GÓRĘ
+merchant	1	483	578	84	14	SCHODY W DÓŁ
+merchant	1	489	598	73	14	E / LPM / PPM
+merchant	1	539	310	54	20	MIRON
+merchant	1	520	336	91	14	E / PPM · HANDEL
+merchant	1	28	22	160	34	EMBERFALL
+merchant	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+merchant	1	335	29	42	20	03 / 5
+merchant	1	410	29	165	20	Pracownia alchemiczna
+merchant	1	411	56	105	15	ZIOŁA / MIKSTURY
+merchant	1	914	30	30	15	0 FPS
+merchant	1	917	56	66	15	F1  POMOC
+merchant	1	856	144	88	15	WIELKA KNIEJA
+merchant	1	856	144	91	15	WIEŻA ELDRINA
+merchant	1	887	268	70	15	PIĘTRO 3 / 5
+merchant	1	29	680	123	15	DZIENNIK WYPRAWY
+merchant	1	53	714	99	20	Serce Świtu
+merchant	1	29	748	168	15	Schody i wyposażenie · E / PPM
+merchant	1	29	771	123	15	Odzyskane części: 1 / 5
+merchant	1	29	808	69	15	WSAD · ruch
+merchant	1	29	835	63	15	SHIFT · bieg
+merchant	1	29	862	61	15	ESC · pauza
+merchant	1	412	847	24	15	LPM
+merchant	1	492	847	8	15	C
+merchant	1	565	847	7	15	1
+merchant	1	637	847	7	15	2
+merchant	1	691	847	42	15	SPACJA
+merchant	1	409	870	31	15	ATAK
+merchant	1	473	870	48	15	CZAR · K
+merchant	1	540	870	57	15	ZDROWIE
+merchant	1	623	870	36	15	MANA
+merchant	1	698	870	29	15	UNIK
+merchant	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+merchant	1	1280	23	84	15	STATYSTYKI · P
+merchant	1	1158	70	119	25	Wędrowiec
+merchant	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+merchant	1	1159	125	53	15	ZŁOTO  0
+merchant	1	1080	151	33	15	ŻYCIE
+merchant	1	1328	148	53	15	100 / 100
+merchant	1	1080	175	36	15	MANA
+merchant	1	1328	172	53	15	100 / 100
+merchant	1	1222	222	33	15	HEŁM
+merchant	1	1324	222	46	15	TARCZA
+merchant	1	1222	273	32	15	BUTY
+merchant	1	1318	273	58	15	PIERŚCIEŃ
+merchant	1	1080	314	51	15	ATAK  14
+merchant	1	1192	314	67	15	PANCERZ  3
+merchant	1	1302	314	55	15	PD  0/100
+merchant	1	1080	346	44	15	PLECAK
+merchant	1	1348	346	39	15	06 / 25
+merchant	1	1117	388	7	15	5
+merchant	1	1182	388	7	15	3
+merchant	1	1117	432	14	15	20
+merchant	1	1080	595	65	15	W ZASIĘGU
+merchant	1	1270	595	78	15	0  W ZASIĘGU
+merchant	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+merchant	1	1090	714	96	15	POD KURSOREM
+merchant	1	1090	750	164	16	Najedź na potwora lub obiekt.
+merchant	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+merchant	1	1096	885	132	15	SCHRONIENIE ELDRINA
+merchant	1	1370	885	29	15	v0.47
+merchant	1	174	845	51	15	Z · 10 MP
+merchant	1	175	870	49	15	ZABLOK.
+merchant	1	245	845	52	15	X · 20 MP
+merchant	1	247	870	49	15	ZABLOK.
+merchant	1	317	845	52	15	V · 20 MP
+merchant	1	319	870	49	15	ZABLOK.
+merchant	1	134	133	82	31	Miron
+merchant	1	135	173	275	15	HANDLARZ WIEŻY · PRACOWNIA ALCHEMICZNA
+merchant	1	1061	149	71	20	ZŁOTO  0
+merchant	1	1289	135	10	19	X
+merchant	1	138	219	110	17	KUP OD MIRONA
+merchant	1	737	219	252	17	SPRZEDAJ Z PLECAKA LUB EKWIPUNKU
+merchant	1	192	253	108	18	Mikstura zdrowia
+merchant	1	192	275	98	15	+50 HP · Pospolity
+merchant	1	591	264	27	16	24 zł
+merchant	1	192	303	93	18	Mikstura many
+merchant	1	192	325	111	15	+35 many · Pospolity
+merchant	1	591	314	27	16	28 zł
+merchant	1	192	353	42	18	Strzały
+merchant	1	192	375	237	15	Amunicja do łuku · Zapas: 20 / 20 · Pospolity
+merchant	1	591	364	20	16	2 zł
+merchant	1	192	403	127	18	Miecz wędrowca +1
+merchant	1	192	425	99	15	Atak +9 · Pospolity
+merchant	1	591	414	34	16	152 zł
+merchant	1	192	453	115	18	Łuk podróżnika +1
+merchant	1	192	475	106	15	Atak +17 · Pospolity
+merchant	1	591	464	34	16	216 zł
+merchant	1	192	503	132	18	Zbroja zwiadowcy +1
+merchant	1	192	525	116	15	Pancerz +6 · Pospolity
+merchant	1	591	514	34	16	158 zł
+merchant	1	172	565	58	15	< WSTECZ
+merchant	1	595	565	45	15	DALEJ >
+merchant	1	376	566	75	15	OFERTA 1 / 2
+merchant	1	856	269	33	15	HEŁM
+merchant	1	943	269	46	15	TARCZA
+merchant	1	1136	269	32	15	BUTY
+merchant	1	1227	269	36	15	BIŻUT.
+merchant	1	737	311	211	15	PLECAK · 2× LPM: sprzedaj jedną sztukę
+merchant	1	813	352	7	15	5
+merchant	1	925	352	7	15	3
+merchant	1	813	399	14	15	20
+merchant	1	737	572	239	15	Skup: sprzęt, mikstury, amunicja i trofea bestii.
+merchant	1	191	617	123	20	Mikstura zdrowia
+merchant	1	191	647	220	15	Pospolity · Odnawia 50 punktów zdrowia
+merchant	1	191	673	94	15	Wartość: 12 złota
+merchant	1	776	616	80	15	LICZBA SZTUK
+merchant	1	791	647	5	18	-
+merchant	1	836	649	8	17	1
+merchant	1	884	647	8	18	+
+merchant	1	942	650	27	15	MAX
+merchant	1	1135	632	30	18	KUP
+merchant	1	1128	657	44	16	24 złota
+merchant	1	139	724	184	15	Nie masz wystarczająco dużo złota.
+merchant	1	492	751	456	15	Gra jest zatrzymana · ENTER / ESC — zamknij · Monety w plecaku też służą do płacenia
+merchant	1	830	806	51	15	MUZYKA
+merchant	1	851	825	21	15	WŁ.
+merchant	1	942	806	44	15	EFEKTY
+merchant	1	960	825	21	15	WŁ.
+merchant	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+merchant	1	757	35	110	15	PEŁNY EKRAN · F11
+merchant-tooltip	1	116	369	91	14	SCHODY W GÓRĘ
+merchant-tooltip	1	483	578	84	14	SCHODY W DÓŁ
+merchant-tooltip	1	489	598	73	14	E / LPM / PPM
+merchant-tooltip	1	539	310	54	20	MIRON
+merchant-tooltip	1	520	336	91	14	E / PPM · HANDEL
+merchant-tooltip	1	28	22	160	34	EMBERFALL
+merchant-tooltip	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+merchant-tooltip	1	335	29	42	20	03 / 5
+merchant-tooltip	1	410	29	165	20	Pracownia alchemiczna
+merchant-tooltip	1	411	56	105	15	ZIOŁA / MIKSTURY
+merchant-tooltip	1	914	30	30	15	0 FPS
+merchant-tooltip	1	917	56	66	15	F1  POMOC
+merchant-tooltip	1	856	144	88	15	WIELKA KNIEJA
+merchant-tooltip	1	856	144	91	15	WIEŻA ELDRINA
+merchant-tooltip	1	887	268	70	15	PIĘTRO 3 / 5
+merchant-tooltip	1	29	680	123	15	DZIENNIK WYPRAWY
+merchant-tooltip	1	53	714	99	20	Serce Świtu
+merchant-tooltip	1	29	748	168	15	Schody i wyposażenie · E / PPM
+merchant-tooltip	1	29	771	123	15	Odzyskane części: 1 / 5
+merchant-tooltip	1	29	808	69	15	WSAD · ruch
+merchant-tooltip	1	29	835	63	15	SHIFT · bieg
+merchant-tooltip	1	29	862	61	15	ESC · pauza
+merchant-tooltip	1	412	847	24	15	LPM
+merchant-tooltip	1	492	847	8	15	C
+merchant-tooltip	1	565	847	7	15	1
+merchant-tooltip	1	637	847	7	15	2
+merchant-tooltip	1	691	847	42	15	SPACJA
+merchant-tooltip	1	409	870	31	15	ATAK
+merchant-tooltip	1	473	870	48	15	CZAR · K
+merchant-tooltip	1	540	870	57	15	ZDROWIE
+merchant-tooltip	1	623	870	36	15	MANA
+merchant-tooltip	1	698	870	29	15	UNIK
+merchant-tooltip	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+merchant-tooltip	1	1280	23	84	15	STATYSTYKI · P
+merchant-tooltip	1	1158	70	119	25	Wędrowiec
+merchant-tooltip	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+merchant-tooltip	1	1159	125	53	15	ZŁOTO  0
+merchant-tooltip	1	1080	151	33	15	ŻYCIE
+merchant-tooltip	1	1328	148	53	15	100 / 100
+merchant-tooltip	1	1080	175	36	15	MANA
+merchant-tooltip	1	1328	172	53	15	100 / 100
+merchant-tooltip	1	1222	222	33	15	HEŁM
+merchant-tooltip	1	1324	222	46	15	TARCZA
+merchant-tooltip	1	1222	273	32	15	BUTY
+merchant-tooltip	1	1318	273	58	15	PIERŚCIEŃ
+merchant-tooltip	1	1080	314	51	15	ATAK  14
+merchant-tooltip	1	1192	314	67	15	PANCERZ  3
+merchant-tooltip	1	1302	314	55	15	PD  0/100
+merchant-tooltip	1	1080	346	44	15	PLECAK
+merchant-tooltip	1	1348	346	39	15	06 / 25
+merchant-tooltip	1	1117	388	7	15	5
+merchant-tooltip	1	1182	388	7	15	3
+merchant-tooltip	1	1117	432	14	15	20
+merchant-tooltip	1	1080	595	65	15	W ZASIĘGU
+merchant-tooltip	1	1270	595	78	15	0  W ZASIĘGU
+merchant-tooltip	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+merchant-tooltip	1	1090	714	96	15	POD KURSOREM
+merchant-tooltip	1	1090	750	164	16	Najedź na potwora lub obiekt.
+merchant-tooltip	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+merchant-tooltip	1	1096	885	132	15	SCHRONIENIE ELDRINA
+merchant-tooltip	1	1370	885	29	15	v0.47
+merchant-tooltip	1	174	845	51	15	Z · 10 MP
+merchant-tooltip	1	175	870	49	15	ZABLOK.
+merchant-tooltip	1	245	845	52	15	X · 20 MP
+merchant-tooltip	1	247	870	49	15	ZABLOK.
+merchant-tooltip	1	317	845	52	15	V · 20 MP
+merchant-tooltip	1	319	870	49	15	ZABLOK.
+merchant-tooltip	1	134	133	82	31	Miron
+merchant-tooltip	1	135	173	275	15	HANDLARZ WIEŻY · PRACOWNIA ALCHEMICZNA
+merchant-tooltip	1	1061	149	71	20	ZŁOTO  0
+merchant-tooltip	1	1289	135	10	19	X
+merchant-tooltip	1	138	219	110	17	KUP OD MIRONA
+merchant-tooltip	1	737	219	252	17	SPRZEDAJ Z PLECAKA LUB EKWIPUNKU
+merchant-tooltip	1	192	253	108	18	Mikstura zdrowia
+merchant-tooltip	1	192	275	98	15	+50 HP · Pospolity
+merchant-tooltip	1	591	264	27	16	24 zł
+merchant-tooltip	1	192	303	93	18	Mikstura many
+merchant-tooltip	1	192	325	111	15	+35 many · Pospolity
+merchant-tooltip	1	591	314	27	16	28 zł
+merchant-tooltip	1	192	353	42	18	Strzały
+merchant-tooltip	1	192	375	237	15	Amunicja do łuku · Zapas: 20 / 20 · Pospolity
+merchant-tooltip	1	591	364	20	16	2 zł
+merchant-tooltip	1	192	403	127	18	Miecz wędrowca +1
+merchant-tooltip	1	192	425	99	15	Atak +9 · Pospolity
+merchant-tooltip	1	591	414	34	16	152 zł
+merchant-tooltip	1	192	453	115	18	Łuk podróżnika +1
+merchant-tooltip	1	192	475	106	15	Atak +17 · Pospolity
+merchant-tooltip	1	591	464	34	16	216 zł
+merchant-tooltip	1	192	503	132	18	Zbroja zwiadowcy +1
+merchant-tooltip	1	192	525	116	15	Pancerz +6 · Pospolity
+merchant-tooltip	1	591	514	34	16	158 zł
+merchant-tooltip	1	172	565	58	15	< WSTECZ
+merchant-tooltip	1	595	565	45	15	DALEJ >
+merchant-tooltip	1	376	566	75	15	OFERTA 1 / 2
+merchant-tooltip	1	856	269	33	15	HEŁM
+merchant-tooltip	1	943	269	46	15	TARCZA
+merchant-tooltip	1	1136	269	32	15	BUTY
+merchant-tooltip	1	1227	269	36	15	BIŻUT.
+merchant-tooltip	1	737	311	211	15	PLECAK · 2× LPM: sprzedaj jedną sztukę
+merchant-tooltip	1	813	352	7	15	5
+merchant-tooltip	1	925	352	7	15	3
+merchant-tooltip	1	813	399	14	15	20
+merchant-tooltip	1	737	572	239	15	Skup: sprzęt, mikstury, amunicja i trofea bestii.
+merchant-tooltip	1	191	617	123	20	Mikstura zdrowia
+merchant-tooltip	1	191	647	220	15	Pospolity · Odnawia 50 punktów zdrowia
+merchant-tooltip	1	191	673	94	15	Wartość: 12 złota
+merchant-tooltip	1	776	616	80	15	LICZBA SZTUK
+merchant-tooltip	1	791	647	5	18	-
+merchant-tooltip	1	836	649	8	17	1
+merchant-tooltip	1	884	647	8	18	+
+merchant-tooltip	1	942	650	27	15	MAX
+merchant-tooltip	1	1135	632	30	18	KUP
+merchant-tooltip	1	1128	657	44	16	24 złota
+merchant-tooltip	1	139	724	184	15	Nie masz wystarczająco dużo złota.
+merchant-tooltip	1	492	751	456	15	Gra jest zatrzymana · ENTER / ESC — zamknij · Monety w plecaku też służą do płacenia
+merchant-tooltip	1	446	303	49	15	Pospolity
+merchant-tooltip	1	446	325	123	20	Mikstura zdrowia
+merchant-tooltip	1	446	356	162	15	Odnawia 50 punktów zdrowia
+merchant-tooltip	1	446	381	94	15	Wartość: 12 złota
+merchant-tooltip	1	446	407	144	15	Cena zakupu: 24 złota / szt.
+merchant-tooltip	1	446	431	203	15	Szansa na łup: 60% · według rzadkości
+merchant-tooltip	1	830	806	51	15	MUZYKA
+merchant-tooltip	1	851	825	21	15	WŁ.
+merchant-tooltip	1	942	806	44	15	EFEKTY
+merchant-tooltip	1	960	825	21	15	WŁ.
+merchant-tooltip	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+merchant-tooltip	1	757	35	110	15	PEŁNY EKRAN · F11
+tower-labels	1	60	437	91	14	SCHODY W GÓRĘ
+tower-labels	1	422	244	48	15	ELDRIN
+tower-labels	1	387	265	117	14	E / PPM · ROZMAWIAJ
+tower-labels	1	28	22	160	34	EMBERFALL
+tower-labels	1	31	66	164	15	ECHA ZAPOMNIANYCH RUIN
+tower-labels	1	335	29	39	20	01 / 5
+tower-labels	1	410	29	100	20	Sala przybycia
+tower-labels	1	411	56	146	15	KOMINEK / SCHRONIENIE
+tower-labels	1	914	30	30	15	0 FPS
+tower-labels	1	917	56	66	15	F1  POMOC
+tower-labels	1	856	144	88	15	WIELKA KNIEJA
+tower-labels	1	856	144	91	15	WIEŻA ELDRINA
+tower-labels	1	887	268	70	15	PIĘTRO 1 / 5
+tower-labels	1	29	680	123	15	DZIENNIK WYPRAWY
+tower-labels	1	53	714	99	20	Serce Świtu
+tower-labels	1	29	748	168	15	Schody i wyposażenie · E / PPM
+tower-labels	1	29	771	123	15	Odzyskane części: 0 / 5
+tower-labels	1	29	808	69	15	WSAD · ruch
+tower-labels	1	29	835	63	15	SHIFT · bieg
+tower-labels	1	29	862	61	15	ESC · pauza
+tower-labels	1	412	847	24	15	LPM
+tower-labels	1	492	847	8	15	C
+tower-labels	1	565	847	7	15	1
+tower-labels	1	637	847	7	15	2
+tower-labels	1	691	847	42	15	SPACJA
+tower-labels	1	409	870	31	15	ATAK
+tower-labels	1	473	870	48	15	CZAR · K
+tower-labels	1	540	870	57	15	ZDROWIE
+tower-labels	1	623	870	36	15	MANA
+tower-labels	1	698	870	29	15	UNIK
+tower-labels	1	1102	23	103	15	UMIEJĘTNOŚCI · U
+tower-labels	1	1280	23	84	15	STATYSTYKI · P
+tower-labels	1	1158	70	119	25	Wędrowiec
+tower-labels	1	1159	105	173	15	POZIOM 01  /  STRAŻNIK ŻARU
+tower-labels	1	1159	125	53	15	ZŁOTO  0
+tower-labels	1	1080	151	33	15	ŻYCIE
+tower-labels	1	1328	148	53	15	100 / 100
+tower-labels	1	1080	175	36	15	MANA
+tower-labels	1	1328	172	53	15	100 / 100
+tower-labels	1	1222	222	33	15	HEŁM
+tower-labels	1	1324	222	46	15	TARCZA
+tower-labels	1	1222	273	32	15	BUTY
+tower-labels	1	1318	273	58	15	PIERŚCIEŃ
+tower-labels	1	1080	314	51	15	ATAK  14
+tower-labels	1	1192	314	67	15	PANCERZ  3
+tower-labels	1	1302	314	55	15	PD  0/100
+tower-labels	1	1080	346	44	15	PLECAK
+tower-labels	1	1348	346	39	15	06 / 25
+tower-labels	1	1117	388	7	15	5
+tower-labels	1	1182	388	7	15	3
+tower-labels	1	1117	432	14	15	20
+tower-labels	1	1080	595	65	15	W ZASIĘGU
+tower-labels	1	1270	595	78	15	0  W ZASIĘGU
+tower-labels	1	1080	679	178	15	LPM: zbierz · PPM w plecaku: użyj
+tower-labels	1	1090	714	96	15	POD KURSOREM
+tower-labels	1	1090	750	164	16	Najedź na potwora lub obiekt.
+tower-labels	1	1090	777	168	15	Tutaj zobaczysz jego informacje.
+tower-labels	1	1096	885	132	15	SCHRONIENIE ELDRINA
+tower-labels	1	1370	885	29	15	v0.47
+tower-labels	1	174	845	51	15	Z · 10 MP
+tower-labels	1	175	870	49	15	ZABLOK.
+tower-labels	1	245	845	52	15	X · 20 MP
+tower-labels	1	247	870	49	15	ZABLOK.
+tower-labels	1	317	845	52	15	V · 20 MP
+tower-labels	1	319	870	49	15	ZABLOK.
+tower-labels	1	830	806	51	15	MUZYKA
+tower-labels	1	851	825	21	15	WŁ.
+tower-labels	1	942	806	44	15	EFEKTY
+tower-labels	1	960	825	21	15	WŁ.
+tower-labels	1	863	862	93	15	GŁOŚNOŚĆ  ·  F2
+tower-labels	1	757	35	110	15	PEŁNY EKRAN · F11
+tower-labels	1	102	122	54	15	BROŃ · Q
+main-menu	1.2	95.8333	95	423.333	91.6667	EMBERFALL
+main-menu	1.2	105.833	233.333	212.5	19.1667	ECHA ZAPOMNIANYCH RUIN
+main-menu	1.2	101.667	723.333	290.833	23.3333	PIĘĆ CZĘŚCI. JEDNA NADZIEJA.
+main-menu	1.2	105	768.333	330	18.3333	Gdy gasną pieczęcie, ktoś musi podtrzymać światło.
+main-menu	1.2	1030.83	235.833	195	25	OSTATNIA PIECZĘĆ
+main-menu	1.2	1037.5	274.167	181.667	15.8333	Twoja opowieść zaczyna się tutaj
+main-menu	1.2	964.167	329.167	10.8333	14.1667	01
+main-menu	1.2	1009.17	325.833	79.1667	23.3333	Nowa gra
+main-menu	1.2	964.167	404.167	13.3333	14.1667	02
+main-menu	1.2	1009.17	400.833	98.3333	23.3333	Wczytaj grę
+main-menu	1.2	964.167	479.167	13.3333	14.1667	03
+main-menu	1.2	1009.17	475.833	49.1667	23.3333	Opcje
+main-menu	1.2	964.167	554.167	13.3333	14.1667	04
+main-menu	1.2	1009.17	550.833	63.3333	23.3333	Twórcy
+main-menu	1.2	964.167	629.167	12.5	14.1667	05
+main-menu	1.2	1009.17	625.833	96.6667	23.3333	Wyjdź z gry
+main-menu	1.2	81.6667	866.667	103.333	15	PIECZĘĆ POPIOŁU
+main-menu	1.2	585.833	866.667	269.167	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+main-menu	1.2	1259.17	866.667	67.5	14.1667	EMBERFALL
+options	1.2	622.5	220.833	195.833	31.6667	PRZY OGNISKU
+options	1.2	627.5	268.333	185	15.8333	Dostosuj oprawę swojej wyprawy
+options	1.2	410	305.833	54.1667	19.1667	Muzyka
+options	1.2	580	309.167	21.6667	15	WŁ.
+options	1.2	970	306.667	25.8333	16.6667	42%
+options	1.2	410	378.333	125.833	19.1667	Efekty dźwiękowe
+options	1.2	580	380.833	21.6667	15	WŁ.
+options	1.2	970	379.167	25.8333	16.6667	72%
+options	1.2	410	450	81.6667	19.1667	Tryb ekranu
+options	1.2	841.667	451.667	65	16.6667	Okno · F11
+options	1.2	410	521.667	77.5	19.1667	Wyciszenie
+options	1.2	840.833	524.167	65.8333	16.6667	Wyłączone
+options	1.2	565	609.167	310	15	Kliknij nazwę, aby przełączyć kanał. Suwak / ← →: głośność.
+options	1.2	594.167	641.667	252.5	15	F1 podczas gry: przewodnik oraz opis sterowania.
+options	1.2	667.5	729.167	105.833	21.6667	Gotowe · ESC
+options	1.2	81.6667	866.667	103.333	15	PIECZĘĆ POPIOŁU
+options	1.2	585.833	866.667	269.167	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+options	1.2	1259.17	866.667	67.5	14.1667	EMBERFALL
+credits	1.2	664.167	220.833	112.5	31.6667	TWÓRCY
+credits	1.2	603.333	268.333	233.333	15.8333	Ludzie i narzędzia, dzięki którym płonie żar
+credits	1.2	515.833	325	408.333	23.3333	EMBERFALL — ECHA ZAPOMNIANYCH RUIN
+credits	1.2	518.333	373.333	404.167	20	Autorski projekt Amadeusza · realizacja z pomocą Codexa
+credits	1.2	563.333	430	313.333	19.1667	Grafika i animacja: Krita · Synfig Studio · Laigter
+credits	1.2	571.667	465.833	296.667	19.1667	Muzyka i dźwięk: LMMS · Csound · Audacity
+credits	1.2	565	523.333	310	18.3333	Silnik: raylib — Ramon Santamaria i współtwórcy
+credits	1.2	572.5	558.333	295	16.6667	Cinzel — Natanael Gama  ·  Lato — Łukasz Dziedzic
+credits	1.2	590	590.833	260	16.6667	Manrope — Mikhail Sharanda i współtwórcy
+credits	1.2	554.167	650	331.667	15	Pełne informacje o licencjach: LICENSES.md oraz assets/licenses
+credits	1.2	670	729.167	100.833	21.6667	Wstecz · ESC
+credits	1.2	81.6667	866.667	103.333	15	PIECZĘĆ POPIOŁU
+credits	1.2	585.833	866.667	269.167	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+credits	1.2	1259.17	866.667	67.5	14.1667	EMBERFALL
+load-menu	1.2	578.333	220.833	283.333	31.6667	POWRÓT DO KRONIKI
+load-menu	1.2	645	268.333	150	15.8333	Wybierz zapisaną wyprawę
+load-menu	1.2	400	321.667	23.3333	30	01
+load-menu	1.2	466.667	315	74.1667	21.6667	Las Mchu
+load-menu	1.2	468.333	354.167	170	15.8333	Poziom 1  ·  2026-10-26 16:33
+load-menu	1.2	400	438.333	28.3333	30	02
+load-menu	1.2	466.667	430.833	76.6667	21.6667	Pusty slot
+load-menu	1.2	468.333	470	132.5	15.8333	Brak zapisanej wyprawy
+load-menu	1.2	400	554.167	27.5	30	03
+load-menu	1.2	466.667	546.667	76.6667	21.6667	Pusty slot
+load-menu	1.2	468.333	585.833	132.5	15.8333	Brak zapisanej wyprawy
+load-menu	1.2	670	729.167	100.833	21.6667	Wstecz · ESC
+load-menu	1.2	81.6667	866.667	103.333	15	PIECZĘĆ POPIOŁU
+load-menu	1.2	585.833	866.667	269.167	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+load-menu	1.2	1259.17	866.667	67.5	14.1667	EMBERFALL
+forest-hud	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+forest-hud	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+forest-hud	1.2	335	29.1667	15	20	01
+forest-hud	1.2	410	29.1667	150	20	Przesieka Wędrowca
+forest-hud	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+forest-hud	1.2	914.167	30	30	15	0 FPS
+forest-hud	1.2	916.667	55.8333	65	15	F1  POMOC
+forest-hud	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+forest-hud	1.2	925	158.333	9.16667	15	N
+forest-hud	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+forest-hud	1.2	53.3333	714.167	100	20	Serce Świtu
+forest-hud	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+forest-hud	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+forest-hud	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+forest-hud	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+forest-hud	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+forest-hud	1.2	411.667	846.667	25	15	LPM
+forest-hud	1.2	492.5	846.667	7.5	15	C
+forest-hud	1.2	565	846.667	6.66667	15	1
+forest-hud	1.2	636.667	846.667	6.66667	15	2
+forest-hud	1.2	690	846.667	43.3333	15	SPACJA
+forest-hud	1.2	408.333	870	32.5	15	ATAK
+forest-hud	1.2	472.5	870	47.5	15	CZAR · K
+forest-hud	1.2	540	870	56.6667	15	ZDROWIE
+forest-hud	1.2	621.667	870	37.5	15	MANA
+forest-hud	1.2	697.5	870	30	15	UNIK
+forest-hud	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+forest-hud	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+forest-hud	1.2	1158.33	70	117.5	25	Wędrowiec
+forest-hud	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+forest-hud	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+forest-hud	1.2	1080	150.833	32.5	15	ŻYCIE
+forest-hud	1.2	1328.33	148.333	50	15	100 / 100
+forest-hud	1.2	1080	175	37.5	15	MANA
+forest-hud	1.2	1328.33	171.667	50	15	100 / 100
+forest-hud	1.2	1220.83	221.667	34.1667	15	HEŁM
+forest-hud	1.2	1323.33	221.667	46.6667	15	TARCZA
+forest-hud	1.2	1222.5	273.333	31.6667	15	BUTY
+forest-hud	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+forest-hud	1.2	1080	314.167	50.8333	15	ATAK  14
+forest-hud	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+forest-hud	1.2	1301.67	314.167	53.3333	15	PD  0/100
+forest-hud	1.2	1080	345.833	44.1667	15	PLECAK
+forest-hud	1.2	1348.33	345.833	36.6667	15	06 / 25
+forest-hud	1.2	1116.67	388.333	6.66667	15	5
+forest-hud	1.2	1181.67	388.333	6.66667	15	3
+forest-hud	1.2	1116.67	431.667	13.3333	15	20
+forest-hud	1.2	1080	595	65	15	W ZASIĘGU
+forest-hud	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+forest-hud	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+forest-hud	1.2	1090	714.167	96.6667	15	POD KURSOREM
+forest-hud	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+forest-hud	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+forest-hud	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+forest-hud	1.2	1370	885	28.3333	15	v0.47
+forest-hud	1.2	173.333	845	50.8333	15	Z · 10 MP
+forest-hud	1.2	174.167	870	50	15	ZABLOK.
+forest-hud	1.2	245	845	51.6667	15	X · 20 MP
+forest-hud	1.2	245.833	870	50	15	ZABLOK.
+forest-hud	1.2	317.5	845	51.6667	15	V · 20 MP
+forest-hud	1.2	318.333	870	50	15	ZABLOK.
+forest-hud	1.2	829.167	805.833	52.5	15	MUZYKA
+forest-hud	1.2	850	825	21.6667	15	WŁ.
+forest-hud	1.2	942.5	805.833	43.3333	15	EFEKTY
+forest-hud	1.2	959.167	825	21.6667	15	WŁ.
+forest-hud	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+forest-hud	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+forest-hud	1.2	102.5	121.667	52.5	15	BROŃ · Q
+stats	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+stats	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+stats	1.2	335	29.1667	15	20	01
+stats	1.2	410	29.1667	150	20	Przesieka Wędrowca
+stats	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+stats	1.2	914.167	30	30	15	0 FPS
+stats	1.2	916.667	55.8333	65	15	F1  POMOC
+stats	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+stats	1.2	925	158.333	9.16667	15	N
+stats	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+stats	1.2	53.3333	714.167	100	20	Serce Świtu
+stats	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+stats	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+stats	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+stats	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+stats	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+stats	1.2	411.667	846.667	25	15	LPM
+stats	1.2	492.5	846.667	7.5	15	C
+stats	1.2	565	846.667	6.66667	15	1
+stats	1.2	636.667	846.667	6.66667	15	2
+stats	1.2	690	846.667	43.3333	15	SPACJA
+stats	1.2	408.333	870	32.5	15	ATAK
+stats	1.2	472.5	870	47.5	15	CZAR · K
+stats	1.2	540	870	56.6667	15	ZDROWIE
+stats	1.2	621.667	870	37.5	15	MANA
+stats	1.2	697.5	870	30	15	UNIK
+stats	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+stats	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+stats	1.2	1158.33	70	117.5	25	Wędrowiec
+stats	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+stats	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+stats	1.2	1080	150.833	32.5	15	ŻYCIE
+stats	1.2	1328.33	148.333	50	15	100 / 100
+stats	1.2	1080	175	37.5	15	MANA
+stats	1.2	1328.33	171.667	50	15	100 / 100
+stats	1.2	1220.83	221.667	34.1667	15	HEŁM
+stats	1.2	1323.33	221.667	46.6667	15	TARCZA
+stats	1.2	1222.5	273.333	31.6667	15	BUTY
+stats	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+stats	1.2	1080	314.167	50.8333	15	ATAK  14
+stats	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+stats	1.2	1301.67	314.167	53.3333	15	PD  0/100
+stats	1.2	1080	345.833	44.1667	15	PLECAK
+stats	1.2	1348.33	345.833	36.6667	15	06 / 25
+stats	1.2	1116.67	388.333	6.66667	15	5
+stats	1.2	1181.67	388.333	6.66667	15	3
+stats	1.2	1116.67	431.667	13.3333	15	20
+stats	1.2	1080	595	65	15	W ZASIĘGU
+stats	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+stats	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+stats	1.2	1090	714.167	96.6667	15	POD KURSOREM
+stats	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+stats	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+stats	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+stats	1.2	1370	885	28.3333	15	v0.47
+stats	1.2	173.333	845	50.8333	15	Z · 10 MP
+stats	1.2	174.167	870	50	15	ZABLOK.
+stats	1.2	245	845	51.6667	15	X · 20 MP
+stats	1.2	245.833	870	50	15	ZABLOK.
+stats	1.2	317.5	845	51.6667	15	V · 20 MP
+stats	1.2	318.333	870	50	15	ZABLOK.
+stats	1.2	576.667	146.667	286.667	30	STATYSTYKI BOHATERA
+stats	1.2	614.167	193.333	211.667	16.6667	5 punktów za każdy zdobyty poziom
+stats	1.2	585.833	225.833	268.333	19.1667	Kolejne punkty zdobędziesz po awansie.
+stats	1.2	335.833	268.333	25.8333	20	Siła
+stats	1.2	335.833	294.167	203.333	15	+2 obrażenia ataku fizycznego za punkt.
+stats	1.2	894.167	279.167	10	21.6667	0
+stats	1.2	335.833	324.167	101.667	20	Moc magiczna
+stats	1.2	335.833	350	165.833	15	+3 obrażenia magiczne za punkt.
+stats	1.2	894.167	335	10	21.6667	0
+stats	1.2	335.833	380	55	20	Obrona
+stats	1.2	335.833	405.833	148.333	15	+1 obrony fizycznej za punkt.
+stats	1.2	894.167	390.833	10	21.6667	0
+stats	1.2	335.833	435.833	125	20	Obrona magiczna
+stats	1.2	335.833	461.667	155	15	+1 obrony magicznej za punkt.
+stats	1.2	894.167	446.667	10	21.6667	0
+stats	1.2	335.833	491.667	103.333	20	Wytrzymałość
+stats	1.2	335.833	518.333	168.333	15	+10 maksymalnego HP za punkt.
+stats	1.2	894.167	503.333	10	21.6667	0
+stats	1.2	335.833	548.333	40.8333	20	Mana
+stats	1.2	335.833	574.167	163.333	15	+5 maksymalnej many za punkt.
+stats	1.2	894.167	559.167	10	21.6667	0
+stats	1.2	583.333	630	273.333	16.6667	Atak 14   ·   Magia 28   ·   HP 100   ·   Mana 100
+stats	1.2	667.5	699.167	105	18.3333	WRÓĆ DO GRY
+stats	1.2	640	741.667	160.833	15	ENTER / ESC / P — wróć do gry
+stats	1.2	829.167	805.833	52.5	15	MUZYKA
+stats	1.2	850	825	21.6667	15	WŁ.
+stats	1.2	942.5	805.833	43.3333	15	EFEKTY
+stats	1.2	959.167	825	21.6667	15	WŁ.
+stats	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+stats	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+stats	1.2	102.5	121.667	52.5	15	BROŃ · Q
+skills	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+skills	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+skills	1.2	335	29.1667	15	20	01
+skills	1.2	410	29.1667	150	20	Przesieka Wędrowca
+skills	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+skills	1.2	914.167	30	30	15	0 FPS
+skills	1.2	916.667	55.8333	65	15	F1  POMOC
+skills	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+skills	1.2	925	158.333	9.16667	15	N
+skills	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+skills	1.2	53.3333	714.167	100	20	Serce Świtu
+skills	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+skills	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+skills	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+skills	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+skills	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+skills	1.2	411.667	846.667	25	15	LPM
+skills	1.2	492.5	846.667	7.5	15	C
+skills	1.2	565	846.667	6.66667	15	1
+skills	1.2	636.667	846.667	6.66667	15	2
+skills	1.2	690	846.667	43.3333	15	SPACJA
+skills	1.2	408.333	870	32.5	15	ATAK
+skills	1.2	472.5	870	47.5	15	CZAR · K
+skills	1.2	540	870	56.6667	15	ZDROWIE
+skills	1.2	621.667	870	37.5	15	MANA
+skills	1.2	697.5	870	30	15	UNIK
+skills	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+skills	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+skills	1.2	1158.33	70	117.5	25	Wędrowiec
+skills	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+skills	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+skills	1.2	1080	150.833	32.5	15	ŻYCIE
+skills	1.2	1328.33	148.333	50	15	100 / 100
+skills	1.2	1080	175	37.5	15	MANA
+skills	1.2	1328.33	171.667	50	15	100 / 100
+skills	1.2	1220.83	221.667	34.1667	15	HEŁM
+skills	1.2	1323.33	221.667	46.6667	15	TARCZA
+skills	1.2	1222.5	273.333	31.6667	15	BUTY
+skills	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+skills	1.2	1080	314.167	50.8333	15	ATAK  14
+skills	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+skills	1.2	1301.67	314.167	53.3333	15	PD  0/100
+skills	1.2	1080	345.833	44.1667	15	PLECAK
+skills	1.2	1348.33	345.833	36.6667	15	06 / 25
+skills	1.2	1116.67	388.333	6.66667	15	5
+skills	1.2	1181.67	388.333	6.66667	15	3
+skills	1.2	1116.67	431.667	13.3333	15	20
+skills	1.2	1080	595	65	15	W ZASIĘGU
+skills	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+skills	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+skills	1.2	1090	714.167	96.6667	15	POD KURSOREM
+skills	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+skills	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+skills	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+skills	1.2	1370	885	28.3333	15	v0.47
+skills	1.2	173.333	845	50.8333	15	Z · 10 MP
+skills	1.2	174.167	870	50	15	ZABLOK.
+skills	1.2	245	845	51.6667	15	X · 20 MP
+skills	1.2	245.833	870	50	15	ZABLOK.
+skills	1.2	317.5	845	51.6667	15	V · 20 MP
+skills	1.2	318.333	870	50	15	ZABLOK.
+skills	1.2	568.333	146.667	303.333	28.3333	UMIEJĘTNOŚCI BOHATERA
+skills	1.2	623.333	190	193.333	16.6667	1 punkt za każdy zdobyty poziom
+skills	1.2	554.167	213.333	332.5	16.6667	Zdobywaj poziomy, aby uczyć się i rozwijać umiejętności.
+skills	1.2	415	244.167	133.333	24.1667	Mocne cięcie
+skills	1.2	415	275	100	15	Miecz · 10 many · Z
+skills	1.2	415	298.333	269.167	15	Silniejszy zamach trafia wszystkich w zasięgu miecza.
+skills	1.2	415	320	172.5	15	Obrażenia: 150% zwykłego ataku
+skills	1.2	415	341.667	247.5	15	Kolejna ranga: +10% obrażeń · odnowienie 1,2 s.
+skills	1.2	1022.5	274.167	50.8333	15	RANGA 0
+skills	1.2	415	376.667	233.333	24.1667	Przeszywająca strzała
+skills	1.2	415	408.333	143.333	15	Łuk · 20 many + 1 strzała · X
+skills	1.2	415	430.833	223.333	15	Przygotuj X, następnie naciągnij i puść LPM.
+skills	1.2	415	453.333	236.667	15	Przebija do 3 celów · obrażenia zwykłej strzały
+skills	1.2	415	475	204.167	15	Kolejna ranga: +1 cel · odnowienie 1,5 s.
+skills	1.2	1022.5	406.667	50.8333	15	RANGA 0
+skills	1.2	415	510	88.3333	24.1667	Leczenie
+skills	1.2	415	540.833	127.5	15	Każda broń · 20 many · V
+skills	1.2	415	564.167	233.333	15	Przywraca 30 HP, do maksymalnego zdrowia.
+skills	1.2	415	585.833	224.167	15	Efekt: +30 HP · nie wymaga miecza ani łuku
+skills	1.2	415	608.333	299.167	15	Jedna ranga · odnowienie 1 s · przy pełnym HP bez kosztu.
+skills	1.2	1018.33	540	60	15	NIEZNANE
+skills	1.2	568.333	646.667	303.333	15.8333	U lub ESC zamyka okno. Leczenie wystarczy poznać raz.
+skills	1.2	667.5	690	105	18.3333	WRÓĆ DO GRY
+skills	1.2	614.167	749.167	211.667	15	Z / X — umiejętności broni · V — Leczenie
+skills	1.2	829.167	805.833	52.5	15	MUZYKA
+skills	1.2	850	825	21.6667	15	WŁ.
+skills	1.2	942.5	805.833	43.3333	15	EFEKTY
+skills	1.2	959.167	825	21.6667	15	WŁ.
+skills	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+skills	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+skills	1.2	102.5	121.667	52.5	15	BROŃ · Q
+spell-book	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+spell-book	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+spell-book	1.2	335	29.1667	15	20	01
+spell-book	1.2	410	29.1667	150	20	Przesieka Wędrowca
+spell-book	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+spell-book	1.2	914.167	30	30	15	0 FPS
+spell-book	1.2	916.667	55.8333	65	15	F1  POMOC
+spell-book	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+spell-book	1.2	925	158.333	9.16667	15	N
+spell-book	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+spell-book	1.2	53.3333	714.167	100	20	Serce Świtu
+spell-book	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+spell-book	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+spell-book	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+spell-book	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+spell-book	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+spell-book	1.2	411.667	846.667	25	15	LPM
+spell-book	1.2	492.5	846.667	7.5	15	C
+spell-book	1.2	565	846.667	6.66667	15	1
+spell-book	1.2	636.667	846.667	6.66667	15	2
+spell-book	1.2	690	846.667	43.3333	15	SPACJA
+spell-book	1.2	408.333	870	32.5	15	ATAK
+spell-book	1.2	472.5	870	47.5	15	CZAR · K
+spell-book	1.2	540	870	56.6667	15	ZDROWIE
+spell-book	1.2	621.667	870	37.5	15	MANA
+spell-book	1.2	697.5	870	30	15	UNIK
+spell-book	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+spell-book	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+spell-book	1.2	1158.33	70	117.5	25	Wędrowiec
+spell-book	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+spell-book	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+spell-book	1.2	1080	150.833	32.5	15	ŻYCIE
+spell-book	1.2	1328.33	148.333	50	15	100 / 100
+spell-book	1.2	1080	175	37.5	15	MANA
+spell-book	1.2	1328.33	171.667	50	15	100 / 100
+spell-book	1.2	1220.83	221.667	34.1667	15	HEŁM
+spell-book	1.2	1323.33	221.667	46.6667	15	TARCZA
+spell-book	1.2	1222.5	273.333	31.6667	15	BUTY
+spell-book	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+spell-book	1.2	1080	314.167	50.8333	15	ATAK  14
+spell-book	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+spell-book	1.2	1301.67	314.167	53.3333	15	PD  0/100
+spell-book	1.2	1080	345.833	44.1667	15	PLECAK
+spell-book	1.2	1348.33	345.833	36.6667	15	06 / 25
+spell-book	1.2	1116.67	388.333	6.66667	15	5
+spell-book	1.2	1181.67	388.333	6.66667	15	3
+spell-book	1.2	1116.67	431.667	13.3333	15	20
+spell-book	1.2	1080	595	65	15	W ZASIĘGU
+spell-book	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+spell-book	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+spell-book	1.2	1090	714.167	96.6667	15	POD KURSOREM
+spell-book	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+spell-book	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+spell-book	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+spell-book	1.2	1370	885	28.3333	15	v0.47
+spell-book	1.2	173.333	845	50.8333	15	Z · 10 MP
+spell-book	1.2	174.167	870	50	15	ZABLOK.
+spell-book	1.2	245	845	51.6667	15	X · 20 MP
+spell-book	1.2	245.833	870	50	15	ZABLOK.
+spell-book	1.2	317.5	845	51.6667	15	V · 20 MP
+spell-book	1.2	318.333	870	50	15	ZABLOK.
+spell-book	1.2	619.167	259.167	202.5	30	KSIĘGA CZARÓW
+spell-book	1.2	616.667	301.667	207.5	16.6667	Wybierz czar używany klawiszem C
+spell-book	1.2	486.667	346.667	118.333	25	Kula ognia
+spell-book	1.2	486.667	388.333	252.5	16.6667	Obrażenia magiczne: 28   ·   Koszt: 10 many
+spell-book	1.2	486.667	419.167	185	15.8333	Zasięg: 8 pól   ·   Odnowienie: 0,8 s
+spell-book	1.2	486.667	445.833	220.833	15	Celuj kursorem. Kula wybucha po trafieniu.
+spell-book	1.2	641.667	509.167	157.5	18.3333	WYBIERZ KULĘ OGNIA
+spell-book	1.2	650.833	569.167	139.167	15.8333	Wybrany czar: Kula ognia
+spell-book	1.2	598.333	598.333	244.167	15	Mana: 100 / 100   ·   Regeneracja: 1 punkt co 5 s
+spell-book	1.2	591.667	625	257.5	15	Świat jest zatrzymany. ESC / K — wróć bez zmiany.
+spell-book	1.2	829.167	805.833	52.5	15	MUZYKA
+spell-book	1.2	850	825	21.6667	15	WŁ.
+spell-book	1.2	942.5	805.833	43.3333	15	EFEKTY
+spell-book	1.2	959.167	825	21.6667	15	WŁ.
+spell-book	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+spell-book	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+spell-book	1.2	102.5	121.667	52.5	15	BROŃ · Q
+stats-allocation	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+stats-allocation	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+stats-allocation	1.2	335	29.1667	15	20	01
+stats-allocation	1.2	410	29.1667	150	20	Przesieka Wędrowca
+stats-allocation	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+stats-allocation	1.2	914.167	30	30	15	0 FPS
+stats-allocation	1.2	916.667	55.8333	65	15	F1  POMOC
+stats-allocation	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+stats-allocation	1.2	925	158.333	9.16667	15	N
+stats-allocation	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+stats-allocation	1.2	53.3333	714.167	100	20	Serce Świtu
+stats-allocation	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+stats-allocation	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+stats-allocation	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+stats-allocation	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+stats-allocation	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+stats-allocation	1.2	411.667	846.667	25	15	LPM
+stats-allocation	1.2	492.5	846.667	7.5	15	C
+stats-allocation	1.2	565	846.667	6.66667	15	1
+stats-allocation	1.2	636.667	846.667	6.66667	15	2
+stats-allocation	1.2	690	846.667	43.3333	15	SPACJA
+stats-allocation	1.2	408.333	870	32.5	15	ATAK
+stats-allocation	1.2	472.5	870	47.5	15	CZAR · K
+stats-allocation	1.2	540	870	56.6667	15	ZDROWIE
+stats-allocation	1.2	621.667	870	37.5	15	MANA
+stats-allocation	1.2	697.5	870	30	15	UNIK
+stats-allocation	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+stats-allocation	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+stats-allocation	1.2	1158.33	70	117.5	25	Wędrowiec
+stats-allocation	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+stats-allocation	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+stats-allocation	1.2	1080	150.833	32.5	15	ŻYCIE
+stats-allocation	1.2	1328.33	148.333	50	15	100 / 100
+stats-allocation	1.2	1080	175	37.5	15	MANA
+stats-allocation	1.2	1328.33	171.667	50	15	100 / 100
+stats-allocation	1.2	1220.83	221.667	34.1667	15	HEŁM
+stats-allocation	1.2	1323.33	221.667	46.6667	15	TARCZA
+stats-allocation	1.2	1222.5	273.333	31.6667	15	BUTY
+stats-allocation	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+stats-allocation	1.2	1080	314.167	50.8333	15	ATAK  14
+stats-allocation	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+stats-allocation	1.2	1301.67	314.167	53.3333	15	PD  0/100
+stats-allocation	1.2	1080	345.833	44.1667	15	PLECAK
+stats-allocation	1.2	1348.33	345.833	36.6667	15	06 / 25
+stats-allocation	1.2	1116.67	388.333	6.66667	15	5
+stats-allocation	1.2	1181.67	388.333	6.66667	15	3
+stats-allocation	1.2	1116.67	431.667	13.3333	15	20
+stats-allocation	1.2	1080	595	65	15	W ZASIĘGU
+stats-allocation	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+stats-allocation	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+stats-allocation	1.2	1090	714.167	96.6667	15	POD KURSOREM
+stats-allocation	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+stats-allocation	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+stats-allocation	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+stats-allocation	1.2	1370	885	28.3333	15	v0.47
+stats-allocation	1.2	173.333	845	50.8333	15	Z · 10 MP
+stats-allocation	1.2	174.167	870	50	15	ZABLOK.
+stats-allocation	1.2	245	845	51.6667	15	X · 20 MP
+stats-allocation	1.2	245.833	870	50	15	ZABLOK.
+stats-allocation	1.2	317.5	845	51.6667	15	V · 20 MP
+stats-allocation	1.2	318.333	870	50	15	ZABLOK.
+stats-allocation	1.2	603.333	146.667	233.333	30	AWANS — POZIOM 1
+stats-allocation	1.2	614.167	193.333	211.667	16.6667	5 punktów za każdy zdobyty poziom
+stats-allocation	1.2	635	225.833	170.833	19.1667	Pozostało: 5 / 5 punktów
+stats-allocation	1.2	335.833	268.333	25.8333	20	Siła
+stats-allocation	1.2	335.833	294.167	203.333	15	+2 obrażenia ataku fizycznego za punkt.
+stats-allocation	1.2	894.167	279.167	10	21.6667	0
+stats-allocation	1.2	1047.5	283.333	41.6667	15	DODAJ
+stats-allocation	1.2	335.833	324.167	101.667	20	Moc magiczna
+stats-allocation	1.2	335.833	350	165.833	15	+3 obrażenia magiczne za punkt.
+stats-allocation	1.2	894.167	335	10	21.6667	0
+stats-allocation	1.2	1047.5	339.167	41.6667	15	DODAJ
+stats-allocation	1.2	335.833	380	55	20	Obrona
+stats-allocation	1.2	335.833	405.833	148.333	15	+1 obrony fizycznej za punkt.
+stats-allocation	1.2	894.167	390.833	10	21.6667	0
+stats-allocation	1.2	1047.5	395	41.6667	15	DODAJ
+stats-allocation	1.2	335.833	435.833	125	20	Obrona magiczna
+stats-allocation	1.2	335.833	461.667	155	15	+1 obrony magicznej za punkt.
+stats-allocation	1.2	894.167	446.667	10	21.6667	0
+stats-allocation	1.2	1047.5	450.833	41.6667	15	DODAJ
+stats-allocation	1.2	335.833	491.667	103.333	20	Wytrzymałość
+stats-allocation	1.2	335.833	518.333	168.333	15	+10 maksymalnego HP za punkt.
+stats-allocation	1.2	894.167	503.333	10	21.6667	0
+stats-allocation	1.2	1047.5	506.667	41.6667	15	DODAJ
+stats-allocation	1.2	335.833	548.333	40.8333	20	Mana
+stats-allocation	1.2	335.833	574.167	163.333	15	+5 maksymalnej many za punkt.
+stats-allocation	1.2	894.167	559.167	10	21.6667	0
+stats-allocation	1.2	1047.5	563.333	41.6667	15	DODAJ
+stats-allocation	1.2	583.333	630	273.333	16.6667	Atak 14   ·   Magia 28   ·   HP 100   ·   Mana 100
+stats-allocation	1.2	606.667	699.167	226.667	18.3333	DALEJ — WYBÓR UMIEJĘTNOŚCI
+stats-allocation	1.2	569.167	741.667	302.5	15	Świat jest zatrzymany. Rozdaj wszystkie punkty i zatwierdź.
+stats-allocation	1.2	829.167	805.833	52.5	15	MUZYKA
+stats-allocation	1.2	850	825	21.6667	15	WŁ.
+stats-allocation	1.2	942.5	805.833	43.3333	15	EFEKTY
+stats-allocation	1.2	959.167	825	21.6667	15	WŁ.
+stats-allocation	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+stats-allocation	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+stats-allocation	1.2	102.5	121.667	52.5	15	BROŃ · Q
+skills-allocation	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+skills-allocation	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+skills-allocation	1.2	335	29.1667	15	20	01
+skills-allocation	1.2	410	29.1667	150	20	Przesieka Wędrowca
+skills-allocation	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+skills-allocation	1.2	914.167	30	30	15	0 FPS
+skills-allocation	1.2	916.667	55.8333	65	15	F1  POMOC
+skills-allocation	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+skills-allocation	1.2	925	158.333	9.16667	15	N
+skills-allocation	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+skills-allocation	1.2	53.3333	714.167	100	20	Serce Świtu
+skills-allocation	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+skills-allocation	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+skills-allocation	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+skills-allocation	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+skills-allocation	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+skills-allocation	1.2	411.667	846.667	25	15	LPM
+skills-allocation	1.2	492.5	846.667	7.5	15	C
+skills-allocation	1.2	565	846.667	6.66667	15	1
+skills-allocation	1.2	636.667	846.667	6.66667	15	2
+skills-allocation	1.2	690	846.667	43.3333	15	SPACJA
+skills-allocation	1.2	408.333	870	32.5	15	ATAK
+skills-allocation	1.2	472.5	870	47.5	15	CZAR · K
+skills-allocation	1.2	540	870	56.6667	15	ZDROWIE
+skills-allocation	1.2	621.667	870	37.5	15	MANA
+skills-allocation	1.2	697.5	870	30	15	UNIK
+skills-allocation	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+skills-allocation	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+skills-allocation	1.2	1158.33	70	117.5	25	Wędrowiec
+skills-allocation	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+skills-allocation	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+skills-allocation	1.2	1080	150.833	32.5	15	ŻYCIE
+skills-allocation	1.2	1328.33	148.333	50	15	100 / 100
+skills-allocation	1.2	1080	175	37.5	15	MANA
+skills-allocation	1.2	1328.33	171.667	50	15	100 / 100
+skills-allocation	1.2	1220.83	221.667	34.1667	15	HEŁM
+skills-allocation	1.2	1323.33	221.667	46.6667	15	TARCZA
+skills-allocation	1.2	1222.5	273.333	31.6667	15	BUTY
+skills-allocation	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+skills-allocation	1.2	1080	314.167	50.8333	15	ATAK  14
+skills-allocation	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+skills-allocation	1.2	1301.67	314.167	53.3333	15	PD  0/100
+skills-allocation	1.2	1080	345.833	44.1667	15	PLECAK
+skills-allocation	1.2	1348.33	345.833	36.6667	15	06 / 25
+skills-allocation	1.2	1116.67	388.333	6.66667	15	5
+skills-allocation	1.2	1181.67	388.333	6.66667	15	3
+skills-allocation	1.2	1116.67	431.667	13.3333	15	20
+skills-allocation	1.2	1080	595	65	15	W ZASIĘGU
+skills-allocation	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+skills-allocation	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+skills-allocation	1.2	1090	714.167	96.6667	15	POD KURSOREM
+skills-allocation	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+skills-allocation	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+skills-allocation	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+skills-allocation	1.2	1370	885	28.3333	15	v0.47
+skills-allocation	1.2	173.333	845	50.8333	15	Z · 10 MP
+skills-allocation	1.2	174.167	870	50	15	ZABLOK.
+skills-allocation	1.2	245	845	51.6667	15	X · 20 MP
+skills-allocation	1.2	245.833	870	50	15	ZABLOK.
+skills-allocation	1.2	317.5	845	51.6667	15	V · 20 MP
+skills-allocation	1.2	318.333	870	50	15	ZABLOK.
+skills-allocation	1.2	565.833	146.667	309.167	28.3333	UMIEJĘTNOŚCI — POZIOM 1
+skills-allocation	1.2	623.333	190	193.333	16.6667	1 punkt za każdy zdobyty poziom
+skills-allocation	1.2	646.667	213.333	147.5	16.6667	Punkty do rozdania: 1 / 1
+skills-allocation	1.2	415	244.167	133.333	24.1667	Mocne cięcie
+skills-allocation	1.2	415	275	100	15	Miecz · 10 many · Z
+skills-allocation	1.2	415	298.333	269.167	15	Silniejszy zamach trafia wszystkich w zasięgu miecza.
+skills-allocation	1.2	415	320	172.5	15	Obrażenia: 150% zwykłego ataku
+skills-allocation	1.2	415	341.667	247.5	15	Kolejna ranga: +10% obrażeń · odnowienie 1,2 s.
+skills-allocation	1.2	1022.5	274.167	50.8333	15	RANGA 0
+skills-allocation	1.2	1067.5	320	41.6667	15	DODAJ
+skills-allocation	1.2	415	376.667	233.333	24.1667	Przeszywająca strzała
+skills-allocation	1.2	415	408.333	143.333	15	Łuk · 20 many + 1 strzała · X
+skills-allocation	1.2	415	430.833	223.333	15	Przygotuj X, następnie naciągnij i puść LPM.
+skills-allocation	1.2	415	453.333	236.667	15	Przebija do 3 celów · obrażenia zwykłej strzały
+skills-allocation	1.2	415	475	204.167	15	Kolejna ranga: +1 cel · odnowienie 1,5 s.
+skills-allocation	1.2	1022.5	406.667	50.8333	15	RANGA 0
+skills-allocation	1.2	1067.5	453.333	41.6667	15	DODAJ
+skills-allocation	1.2	415	510	88.3333	24.1667	Leczenie
+skills-allocation	1.2	415	540.833	127.5	15	Każda broń · 20 many · V
+skills-allocation	1.2	415	564.167	233.333	15	Przywraca 30 HP, do maksymalnego zdrowia.
+skills-allocation	1.2	415	585.833	224.167	15	Efekt: +30 HP · nie wymaga miecza ani łuku
+skills-allocation	1.2	415	608.333	299.167	15	Jedna ranga · odnowienie 1 s · przy pełnym HP bez kosztu.
+skills-allocation	1.2	1018.33	540	60	15	NIEZNANE
+skills-allocation	1.2	1067.5	585.833	41.6667	15	DODAJ
+skills-allocation	1.2	547.5	646.667	345	15.8333	Kliknij umiejętność, aby przypisać punkt. COFNIJ anuluje wybór.
+skills-allocation	1.2	619.167	690	201.667	18.3333	ZATWIERDŹ I WRÓĆ DO GRY
+skills-allocation	1.2	563.333	749.167	313.333	15	Gra pozostaje zatrzymana do rozdania punktów umiejętności.
+skills-allocation	1.2	829.167	805.833	52.5	15	MUZYKA
+skills-allocation	1.2	850	825	21.6667	15	WŁ.
+skills-allocation	1.2	942.5	805.833	43.3333	15	EFEKTY
+skills-allocation	1.2	959.167	825	21.6667	15	WŁ.
+skills-allocation	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+skills-allocation	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+skills-allocation	1.2	102.5	121.667	52.5	15	BROŃ · Q
+item-tooltip	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+item-tooltip	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+item-tooltip	1.2	335	29.1667	15	20	01
+item-tooltip	1.2	410	29.1667	150	20	Przesieka Wędrowca
+item-tooltip	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+item-tooltip	1.2	914.167	30	30	15	0 FPS
+item-tooltip	1.2	916.667	55.8333	65	15	F1  POMOC
+item-tooltip	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+item-tooltip	1.2	925	158.333	9.16667	15	N
+item-tooltip	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+item-tooltip	1.2	53.3333	714.167	100	20	Serce Świtu
+item-tooltip	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+item-tooltip	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+item-tooltip	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+item-tooltip	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+item-tooltip	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+item-tooltip	1.2	411.667	846.667	25	15	LPM
+item-tooltip	1.2	492.5	846.667	7.5	15	C
+item-tooltip	1.2	565	846.667	6.66667	15	1
+item-tooltip	1.2	636.667	846.667	6.66667	15	2
+item-tooltip	1.2	690	846.667	43.3333	15	SPACJA
+item-tooltip	1.2	408.333	870	32.5	15	ATAK
+item-tooltip	1.2	472.5	870	47.5	15	CZAR · K
+item-tooltip	1.2	540	870	56.6667	15	ZDROWIE
+item-tooltip	1.2	621.667	870	37.5	15	MANA
+item-tooltip	1.2	697.5	870	30	15	UNIK
+item-tooltip	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+item-tooltip	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+item-tooltip	1.2	1158.33	70	117.5	25	Wędrowiec
+item-tooltip	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+item-tooltip	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+item-tooltip	1.2	1080	150.833	32.5	15	ŻYCIE
+item-tooltip	1.2	1328.33	148.333	50	15	100 / 100
+item-tooltip	1.2	1080	175	37.5	15	MANA
+item-tooltip	1.2	1328.33	171.667	50	15	100 / 100
+item-tooltip	1.2	1220.83	221.667	34.1667	15	HEŁM
+item-tooltip	1.2	1323.33	221.667	46.6667	15	TARCZA
+item-tooltip	1.2	1222.5	273.333	31.6667	15	BUTY
+item-tooltip	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+item-tooltip	1.2	1080	314.167	50.8333	15	ATAK  14
+item-tooltip	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+item-tooltip	1.2	1301.67	314.167	53.3333	15	PD  0/100
+item-tooltip	1.2	1080	345.833	44.1667	15	PLECAK
+item-tooltip	1.2	1348.33	345.833	36.6667	15	07 / 25
+item-tooltip	1.2	1116.67	388.333	6.66667	15	5
+item-tooltip	1.2	1181.67	388.333	6.66667	15	3
+item-tooltip	1.2	1116.67	431.667	13.3333	15	20
+item-tooltip	1.2	1080	595	65	15	W ZASIĘGU
+item-tooltip	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+item-tooltip	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+item-tooltip	1.2	1090	714.167	96.6667	15	POD KURSOREM
+item-tooltip	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+item-tooltip	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+item-tooltip	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+item-tooltip	1.2	1370	885	28.3333	15	v0.47
+item-tooltip	1.2	173.333	845	50.8333	15	Z · 10 MP
+item-tooltip	1.2	174.167	870	50	15	ZABLOK.
+item-tooltip	1.2	245	845	51.6667	15	X · 20 MP
+item-tooltip	1.2	245.833	870	50	15	ZABLOK.
+item-tooltip	1.2	317.5	845	51.6667	15	V · 20 MP
+item-tooltip	1.2	318.333	870	50	15	ZABLOK.
+item-tooltip	1.2	1085	505.833	69.1667	15	Bardzo rzadki
+item-tooltip	1.2	1085	528.333	175	20	Łuk księżycowego łowcy
+item-tooltip	1.2	1085	559.167	177.5	15	Atak +19 · zasięg zależy od naciągu
+item-tooltip	1.2	1085	584.167	198.333	15	Łuk z jasnego drewna i wilczej cięciwy.
+item-tooltip	1.2	1085	610	96.6667	15	Wartość: 464 złota
+item-tooltip	1.2	1085	635.833	164.167	15	2× LPM: załóż · LPM: przeciągnij
+item-tooltip	1.2	1085	660	189.167	15	Szansa na łup: 4% · według rzadkości
+item-tooltip	1.2	829.167	805.833	52.5	15	MUZYKA
+item-tooltip	1.2	850	825	21.6667	15	WŁ.
+item-tooltip	1.2	942.5	805.833	43.3333	15	EFEKTY
+item-tooltip	1.2	959.167	825	21.6667	15	WŁ.
+item-tooltip	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+item-tooltip	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+item-tooltip	1.2	102.5	121.667	52.5	15	BROŃ · Q
+help	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+help	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+help	1.2	335	29.1667	15	20	01
+help	1.2	410	29.1667	150	20	Przesieka Wędrowca
+help	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+help	1.2	914.167	30	30	15	0 FPS
+help	1.2	916.667	55.8333	65	15	F1  POMOC
+help	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+help	1.2	925	158.333	9.16667	15	N
+help	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+help	1.2	53.3333	714.167	100	20	Serce Świtu
+help	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+help	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+help	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+help	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+help	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+help	1.2	411.667	846.667	25	15	LPM
+help	1.2	492.5	846.667	7.5	15	C
+help	1.2	565	846.667	6.66667	15	1
+help	1.2	636.667	846.667	6.66667	15	2
+help	1.2	690	846.667	43.3333	15	SPACJA
+help	1.2	408.333	870	32.5	15	ATAK
+help	1.2	472.5	870	47.5	15	CZAR · K
+help	1.2	540	870	56.6667	15	ZDROWIE
+help	1.2	621.667	870	37.5	15	MANA
+help	1.2	697.5	870	30	15	UNIK
+help	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+help	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+help	1.2	1158.33	70	117.5	25	Wędrowiec
+help	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+help	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+help	1.2	1080	150.833	32.5	15	ŻYCIE
+help	1.2	1328.33	148.333	50	15	100 / 100
+help	1.2	1080	175	37.5	15	MANA
+help	1.2	1328.33	171.667	50	15	100 / 100
+help	1.2	1220.83	221.667	34.1667	15	HEŁM
+help	1.2	1323.33	221.667	46.6667	15	TARCZA
+help	1.2	1222.5	273.333	31.6667	15	BUTY
+help	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+help	1.2	1080	314.167	50.8333	15	ATAK  14
+help	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+help	1.2	1301.67	314.167	53.3333	15	PD  0/100
+help	1.2	1080	345.833	44.1667	15	PLECAK
+help	1.2	1348.33	345.833	36.6667	15	06 / 25
+help	1.2	1116.67	388.333	6.66667	15	5
+help	1.2	1181.67	388.333	6.66667	15	3
+help	1.2	1116.67	431.667	13.3333	15	20
+help	1.2	1080	595	65	15	W ZASIĘGU
+help	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+help	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+help	1.2	1090	714.167	96.6667	15	POD KURSOREM
+help	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+help	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+help	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+help	1.2	1370	885	28.3333	15	v0.47
+help	1.2	173.333	845	50.8333	15	Z · 10 MP
+help	1.2	174.167	870	50	15	ZABLOK.
+help	1.2	245	845	51.6667	15	X · 20 MP
+help	1.2	245.833	870	50	15	ZABLOK.
+help	1.2	317.5	845	51.6667	15	V · 20 MP
+help	1.2	318.333	870	50	15	ZABLOK.
+help	1.2	550	258.333	340	31.6667	PRZEWODNIK WĘDROWCA
+help	1.2	639.167	306.667	161.667	19.1667	Echa zapomnianych ruin
+help	1.2	384.167	363.333	44.1667	15	W S A D
+help	1.2	554.167	360	277.5	19.1667	W — góra, S — dół, A — lewo, D — prawo.
+help	1.2	384.167	391.667	33.3333	15	SHIFT
+help	1.2	554.167	389.167	296.667	19.1667	Przytrzymaj z WSAD, aby biec 50% szybciej.
+help	1.2	384.167	420.833	43.3333	15	SPACJA
+help	1.2	554.167	418.333	307.5	19.1667	Przeturlaj się w kierunku ruchu lub ustawienia.
+help	1.2	384.167	450	25	15	LPM
+help	1.2	554.167	446.667	248.333	19.1667	Miecz: kliknij. Łuk: przytrzymaj i puść.
+help	1.2	384.167	479.167	7.5	15	C
+help	1.2	554.167	475.833	318.333	19.1667	Rzuć wybrany czar w stronę kursora (10 many).
+help	1.2	384.167	508.333	26.6667	15	PPM
+help	1.2	554.167	505	318.333	19.1667	Otwórz ciało; użyj mikstury / grzyba w plecaku.
+help	1.2	384.167	536.667	23.3333	15	1 / 2
+help	1.2	554.167	534.167	278.333	19.1667	Wypij miksturę zdrowia / many z plecaka.
+help	1.2	384.167	565.833	74.1667	15	PRZECIĄGNIJ
+help	1.2	554.167	563.333	209.167	19.1667	Zbierz łup lub grzyb do plecaka.
+help	1.2	660	629.167	120.833	20.8333	WRÓĆ DO GRY
+help	1.2	456.667	686.667	526.667	15	Z / X — ataki specjalne  /  V — Leczenie  /  U — umiejętności  /  Q — broń  /  F2 — dźwięk  /  ESC — pauza
+help	1.2	829.167	805.833	52.5	15	MUZYKA
+help	1.2	850	825	21.6667	15	WŁ.
+help	1.2	942.5	805.833	43.3333	15	EFEKTY
+help	1.2	959.167	825	21.6667	15	WŁ.
+help	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+help	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+help	1.2	102.5	121.667	52.5	15	BROŃ · Q
+pause	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+pause	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+pause	1.2	335	29.1667	15	20	01
+pause	1.2	410	29.1667	150	20	Przesieka Wędrowca
+pause	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+pause	1.2	914.167	30	30	15	0 FPS
+pause	1.2	916.667	55.8333	65	15	F1  POMOC
+pause	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+pause	1.2	925	158.333	9.16667	15	N
+pause	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+pause	1.2	53.3333	714.167	100	20	Serce Świtu
+pause	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+pause	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+pause	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+pause	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+pause	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+pause	1.2	411.667	846.667	25	15	LPM
+pause	1.2	492.5	846.667	7.5	15	C
+pause	1.2	565	846.667	6.66667	15	1
+pause	1.2	636.667	846.667	6.66667	15	2
+pause	1.2	690	846.667	43.3333	15	SPACJA
+pause	1.2	408.333	870	32.5	15	ATAK
+pause	1.2	472.5	870	47.5	15	CZAR · K
+pause	1.2	540	870	56.6667	15	ZDROWIE
+pause	1.2	621.667	870	37.5	15	MANA
+pause	1.2	697.5	870	30	15	UNIK
+pause	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+pause	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+pause	1.2	1158.33	70	117.5	25	Wędrowiec
+pause	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+pause	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+pause	1.2	1080	150.833	32.5	15	ŻYCIE
+pause	1.2	1328.33	148.333	50	15	100 / 100
+pause	1.2	1080	175	37.5	15	MANA
+pause	1.2	1328.33	171.667	50	15	100 / 100
+pause	1.2	1220.83	221.667	34.1667	15	HEŁM
+pause	1.2	1323.33	221.667	46.6667	15	TARCZA
+pause	1.2	1222.5	273.333	31.6667	15	BUTY
+pause	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+pause	1.2	1080	314.167	50.8333	15	ATAK  14
+pause	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+pause	1.2	1301.67	314.167	53.3333	15	PD  0/100
+pause	1.2	1080	345.833	44.1667	15	PLECAK
+pause	1.2	1348.33	345.833	36.6667	15	06 / 25
+pause	1.2	1116.67	388.333	6.66667	15	5
+pause	1.2	1181.67	388.333	6.66667	15	3
+pause	1.2	1116.67	431.667	13.3333	15	20
+pause	1.2	1080	595	65	15	W ZASIĘGU
+pause	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+pause	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+pause	1.2	1090	714.167	96.6667	15	POD KURSOREM
+pause	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+pause	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+pause	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+pause	1.2	1370	885	28.3333	15	v0.47
+pause	1.2	173.333	845	50.8333	15	Z · 10 MP
+pause	1.2	174.167	870	50	15	ZABLOK.
+pause	1.2	245	845	51.6667	15	X · 20 MP
+pause	1.2	245.833	870	50	15	ZABLOK.
+pause	1.2	317.5	845	51.6667	15	V · 20 MP
+pause	1.2	318.333	870	50	15	ZABLOK.
+pause	1.2	829.167	805.833	52.5	15	MUZYKA
+pause	1.2	850	825	21.6667	15	WŁ.
+pause	1.2	942.5	805.833	43.3333	15	EFEKTY
+pause	1.2	959.167	825	21.6667	15	WŁ.
+pause	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+pause	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+pause	1.2	102.5	121.667	52.5	15	BROŃ · Q
+pause	1.2	606.667	220	227.5	29.1667	CHWILA ODDECHU
+pause	1.2	694.167	265.833	51.6667	15.8333	Las Mchu
+pause	1.2	681.667	303.333	77.5	21.6667	Zapisz grę
+pause	1.2	674.167	380.833	91.6667	21.6667	Wczytaj grę
+pause	1.2	697.5	459.167	45.8333	21.6667	Opcje
+pause	1.2	675	536.667	90	21.6667	Wyjdź z gry
+pause	1.2	650	729.167	140	21.6667	Wróć do gry · ESC
+pause	1.2	81.6667	866.667	103.333	15	PIECZĘĆ POPIOŁU
+pause	1.2	585.833	866.667	269.167	15	↑ ↓ / TAB — wybierz    ·    ENTER / LPM — zatwierdź
+pause	1.2	1259.17	866.667	67.5	14.1667	EMBERFALL
+audio	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+audio	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+audio	1.2	335	29.1667	15	20	01
+audio	1.2	410	29.1667	150	20	Przesieka Wędrowca
+audio	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+audio	1.2	914.167	30	30	15	0 FPS
+audio	1.2	916.667	55.8333	65	15	F1  POMOC
+audio	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+audio	1.2	925	158.333	9.16667	15	N
+audio	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+audio	1.2	53.3333	714.167	100	20	Serce Świtu
+audio	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+audio	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+audio	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+audio	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+audio	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+audio	1.2	411.667	846.667	25	15	LPM
+audio	1.2	492.5	846.667	7.5	15	C
+audio	1.2	565	846.667	6.66667	15	1
+audio	1.2	636.667	846.667	6.66667	15	2
+audio	1.2	690	846.667	43.3333	15	SPACJA
+audio	1.2	408.333	870	32.5	15	ATAK
+audio	1.2	472.5	870	47.5	15	CZAR · K
+audio	1.2	540	870	56.6667	15	ZDROWIE
+audio	1.2	621.667	870	37.5	15	MANA
+audio	1.2	697.5	870	30	15	UNIK
+audio	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+audio	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+audio	1.2	1158.33	70	117.5	25	Wędrowiec
+audio	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+audio	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+audio	1.2	1080	150.833	32.5	15	ŻYCIE
+audio	1.2	1328.33	148.333	50	15	100 / 100
+audio	1.2	1080	175	37.5	15	MANA
+audio	1.2	1328.33	171.667	50	15	100 / 100
+audio	1.2	1220.83	221.667	34.1667	15	HEŁM
+audio	1.2	1323.33	221.667	46.6667	15	TARCZA
+audio	1.2	1222.5	273.333	31.6667	15	BUTY
+audio	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+audio	1.2	1080	314.167	50.8333	15	ATAK  14
+audio	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+audio	1.2	1301.67	314.167	53.3333	15	PD  0/100
+audio	1.2	1080	345.833	44.1667	15	PLECAK
+audio	1.2	1348.33	345.833	36.6667	15	06 / 25
+audio	1.2	1116.67	388.333	6.66667	15	5
+audio	1.2	1181.67	388.333	6.66667	15	3
+audio	1.2	1116.67	431.667	13.3333	15	20
+audio	1.2	1080	595	65	15	W ZASIĘGU
+audio	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+audio	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+audio	1.2	1090	714.167	96.6667	15	POD KURSOREM
+audio	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+audio	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+audio	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+audio	1.2	1370	885	28.3333	15	v0.47
+audio	1.2	173.333	845	50.8333	15	Z · 10 MP
+audio	1.2	174.167	870	50	15	ZABLOK.
+audio	1.2	245	845	51.6667	15	X · 20 MP
+audio	1.2	245.833	870	50	15	ZABLOK.
+audio	1.2	317.5	845	51.6667	15	V · 20 MP
+audio	1.2	318.333	870	50	15	ZABLOK.
+audio	1.2	638.333	316.667	164.167	28.3333	DŹWIĘKI RUIN
+audio	1.2	601.667	360.833	236.667	15.8333	Brak dostępnego urządzenia dźwiękowego.
+audio	1.2	504.167	384.167	52.5	15	MUZYKA
+audio	1.2	925.833	408.333	25	15.8333	42%
+audio	1.2	504.167	455.833	43.3333	15	EFEKTY
+audio	1.2	925.833	480	25	15.8333	72%
+audio	1.2	653.333	539.167	134.167	16.6667	[ M ]  Wycisz wszystko
+audio	1.2	689.167	595	61.6667	16.6667	GOTOWE
+audio	1.2	829.167	805.833	52.5	15	MUZYKA
+audio	1.2	850	825	21.6667	15	WŁ.
+audio	1.2	942.5	805.833	43.3333	15	EFEKTY
+audio	1.2	959.167	825	21.6667	15	WŁ.
+audio	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+audio	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+audio	1.2	102.5	121.667	52.5	15	BROŃ · Q
+death	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+death	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+death	1.2	335	29.1667	15	20	01
+death	1.2	410	29.1667	150	20	Przesieka Wędrowca
+death	1.2	410.833	55.8333	185	15	POGRANICZE  /  STREFA DZIKICH
+death	1.2	914.167	30	30	15	0 FPS
+death	1.2	916.667	55.8333	65	15	F1  POMOC
+death	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+death	1.2	925	158.333	9.16667	15	N
+death	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+death	1.2	53.3333	714.167	100	20	Serce Świtu
+death	1.2	29.1667	748.333	155	15	Odnajdź Strażnika na północy.
+death	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+death	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+death	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+death	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+death	1.2	411.667	846.667	25	15	LPM
+death	1.2	492.5	846.667	7.5	15	C
+death	1.2	565	846.667	6.66667	15	1
+death	1.2	636.667	846.667	6.66667	15	2
+death	1.2	690	846.667	43.3333	15	SPACJA
+death	1.2	408.333	870	32.5	15	ATAK
+death	1.2	472.5	870	47.5	15	CZAR · K
+death	1.2	540	870	56.6667	15	ZDROWIE
+death	1.2	621.667	870	37.5	15	MANA
+death	1.2	697.5	870	30	15	UNIK
+death	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+death	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+death	1.2	1158.33	70	117.5	25	Wędrowiec
+death	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+death	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+death	1.2	1080	150.833	32.5	15	ŻYCIE
+death	1.2	1328.33	148.333	36.6667	15	0 / 100
+death	1.2	1080	175	37.5	15	MANA
+death	1.2	1328.33	171.667	50	15	100 / 100
+death	1.2	1220.83	221.667	34.1667	15	HEŁM
+death	1.2	1323.33	221.667	46.6667	15	TARCZA
+death	1.2	1222.5	273.333	31.6667	15	BUTY
+death	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+death	1.2	1080	314.167	50.8333	15	ATAK  14
+death	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+death	1.2	1301.67	314.167	53.3333	15	PD  0/100
+death	1.2	1080	345.833	44.1667	15	PLECAK
+death	1.2	1348.33	345.833	36.6667	15	06 / 25
+death	1.2	1116.67	388.333	6.66667	15	5
+death	1.2	1181.67	388.333	6.66667	15	3
+death	1.2	1116.67	431.667	13.3333	15	20
+death	1.2	1080	595	65	15	W ZASIĘGU
+death	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+death	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+death	1.2	1090	714.167	96.6667	15	POD KURSOREM
+death	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+death	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+death	1.2	1095.83	885	116.667	15	WYPRAWA W TOKU
+death	1.2	1370	885	28.3333	15	v0.47
+death	1.2	173.333	845	50.8333	15	Z · 10 MP
+death	1.2	174.167	870	50	15	ZABLOK.
+death	1.2	245	845	51.6667	15	X · 20 MP
+death	1.2	245.833	870	50	15	ZABLOK.
+death	1.2	317.5	845	51.6667	15	V · 20 MP
+death	1.2	318.333	870	50	15	ZABLOK.
+death	1.2	603.333	274.167	234.167	39.1667	ŻAR PRZYGASŁ
+death	1.2	612.5	346.667	215.833	18.3333	Ruiny zatrzymały twoją wyprawę.
+death	1.2	601.667	410.833	237.5	16.6667	Naciśnij ENTER, aby rozpocząć od nowa.
+death	1.2	590.833	461.667	258.333	15	Spróbuj zakładać lepszy sprzęt i unikać zamachów.
+death	1.2	829.167	805.833	52.5	15	MUZYKA
+death	1.2	850	825	21.6667	15	WŁ.
+death	1.2	942.5	805.833	43.3333	15	EFEKTY
+death	1.2	959.167	825	21.6667	15	WŁ.
+death	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+death	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+death	1.2	102.5	121.667	52.5	15	BROŃ · Q
+dialogue	1.2	79.1667	79.1667	137.5	29.1667	EMBERFALL
+dialogue	1.2	80	120.833	174.167	15	PROLOG  /  OSTATNIA PIECZĘĆ
+dialogue	1.2	145.833	646.667	72.5	23.3333	ELDRIN
+dialogue	1.2	145.833	680.833	132.5	15	Strażnik ostatniej pieczęci
+dialogue	1.2	1221.67	653.333	36.6667	15	07 / 12
+dialogue	1.2	145.833	715.833	1045	20.8333	Serce rozbito na pięć części i ukryto w odległych krainach. Każdej strzeże osobny strażnik. Musisz zdobyć wszystkie pięć i złączyć je ponownie.
+dialogue	1.2	145.833	810.833	410	15	ENTER / SPACJA / LPM — dalej     ·     Dialog przewija się również automatycznie
+dialogue	1.2	1195.83	804.167	35	15	DALEJ
+dialogue	1.2	1228.33	86.6667	93.3333	15	POMIŃ PROLOG
+merchant	1.2	113.333	369.167	95	14.1667	SCHODY W GÓRĘ
+merchant	1.2	480.833	578.333	86.6667	14.1667	SCHODY W DÓŁ
+merchant	1.2	486.667	598.333	74.1667	14.1667	E / LPM / PPM
+merchant	1.2	537.5	310.833	55	20	MIRON
+merchant	1.2	518.333	336.667	93.3333	14.1667	E / PPM · HANDEL
+merchant	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+merchant	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+merchant	1.2	335	29.1667	41.6667	20	03 / 5
+merchant	1.2	410	29.1667	165.833	20	Pracownia alchemiczna
+merchant	1.2	410.833	55.8333	107.5	15	ZIOŁA / MIKSTURY
+merchant	1.2	914.167	30	30	15	0 FPS
+merchant	1.2	916.667	55.8333	65	15	F1  POMOC
+merchant	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+merchant	1.2	855.833	144.167	90.8333	15	WIEŻA ELDRINA
+merchant	1.2	886.667	268.333	68.3333	15	PIĘTRO 3 / 5
+merchant	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+merchant	1.2	53.3333	714.167	100	20	Serce Świtu
+merchant	1.2	29.1667	748.333	165	15	Schody i wyposażenie · E / PPM
+merchant	1.2	29.1667	770.833	120	15	Odzyskane części: 1 / 5
+merchant	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+merchant	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+merchant	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+merchant	1.2	411.667	846.667	25	15	LPM
+merchant	1.2	492.5	846.667	7.5	15	C
+merchant	1.2	565	846.667	6.66667	15	1
+merchant	1.2	636.667	846.667	6.66667	15	2
+merchant	1.2	690	846.667	43.3333	15	SPACJA
+merchant	1.2	408.333	870	32.5	15	ATAK
+merchant	1.2	472.5	870	47.5	15	CZAR · K
+merchant	1.2	540	870	56.6667	15	ZDROWIE
+merchant	1.2	621.667	870	37.5	15	MANA
+merchant	1.2	697.5	870	30	15	UNIK
+merchant	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+merchant	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+merchant	1.2	1158.33	70	117.5	25	Wędrowiec
+merchant	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+merchant	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+merchant	1.2	1080	150.833	32.5	15	ŻYCIE
+merchant	1.2	1328.33	148.333	50	15	100 / 100
+merchant	1.2	1080	175	37.5	15	MANA
+merchant	1.2	1328.33	171.667	50	15	100 / 100
+merchant	1.2	1220.83	221.667	34.1667	15	HEŁM
+merchant	1.2	1323.33	221.667	46.6667	15	TARCZA
+merchant	1.2	1222.5	273.333	31.6667	15	BUTY
+merchant	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+merchant	1.2	1080	314.167	50.8333	15	ATAK  14
+merchant	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+merchant	1.2	1301.67	314.167	53.3333	15	PD  0/100
+merchant	1.2	1080	345.833	44.1667	15	PLECAK
+merchant	1.2	1348.33	345.833	36.6667	15	06 / 25
+merchant	1.2	1116.67	388.333	6.66667	15	5
+merchant	1.2	1181.67	388.333	6.66667	15	3
+merchant	1.2	1116.67	431.667	13.3333	15	20
+merchant	1.2	1080	595	65	15	W ZASIĘGU
+merchant	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+merchant	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+merchant	1.2	1090	714.167	96.6667	15	POD KURSOREM
+merchant	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+merchant	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+merchant	1.2	1095.83	885	131.667	15	SCHRONIENIE ELDRINA
+merchant	1.2	1370	885	28.3333	15	v0.47
+merchant	1.2	173.333	845	50.8333	15	Z · 10 MP
+merchant	1.2	174.167	870	50	15	ZABLOK.
+merchant	1.2	245	845	51.6667	15	X · 20 MP
+merchant	1.2	245.833	870	50	15	ZABLOK.
+merchant	1.2	317.5	845	51.6667	15	V · 20 MP
+merchant	1.2	318.333	870	50	15	ZABLOK.
+merchant	1.2	134.167	133.333	82.5	30.8333	Miron
+merchant	1.2	135	173.333	275	15	HANDLARZ WIEŻY · PRACOWNIA ALCHEMICZNA
+merchant	1.2	1060.83	149.167	70.8333	20	ZŁOTO  0
+merchant	1.2	1289.17	135	10	19.1667	X
+merchant	1.2	138.333	219.167	109.167	16.6667	KUP OD MIRONA
+merchant	1.2	736.667	219.167	252.5	16.6667	SPRZEDAJ Z PLECAKA LUB EKWIPUNKU
+merchant	1.2	191.667	253.333	111.667	18.3333	Mikstura zdrowia
+merchant	1.2	191.667	275	95	15	+50 HP · Pospolity
+merchant	1.2	590.833	264.167	27.5	15.8333	24 zł
+merchant	1.2	191.667	303.333	96.6667	18.3333	Mikstura many
+merchant	1.2	191.667	325	106.667	15	+35 many · Pospolity
+merchant	1.2	590.833	314.167	27.5	15.8333	28 zł
+merchant	1.2	191.667	353.333	45	18.3333	Strzały
+merchant	1.2	191.667	375	226.667	15	Amunicja do łuku · Zapas: 20 / 20 · Pospolity
+merchant	1.2	590.833	364.167	20	15.8333	2 zł
+merchant	1.2	191.667	403.333	128.333	18.3333	Miecz wędrowca +1
+merchant	1.2	191.667	425	96.6667	15	Atak +9 · Pospolity
+merchant	1.2	590.833	414.167	35	15.8333	152 zł
+merchant	1.2	191.667	453.333	118.333	18.3333	Łuk podróżnika +1
+merchant	1.2	191.667	475	103.333	15	Atak +17 · Pospolity
+merchant	1.2	590.833	464.167	35	15.8333	216 zł
+merchant	1.2	191.667	503.333	136.667	18.3333	Zbroja zwiadowcy +1
+merchant	1.2	191.667	525	113.333	15	Pancerz +6 · Pospolity
+merchant	1.2	590.833	514.167	35	15.8333	158 zł
+merchant	1.2	171.667	565	57.5	15	< WSTECZ
+merchant	1.2	595.833	565	44.1667	15	DALEJ >
+merchant	1.2	376.667	565.833	72.5	15	OFERTA 1 / 2
+merchant	1.2	855.833	269.167	34.1667	15	HEŁM
+merchant	1.2	942.5	269.167	46.6667	15	TARCZA
+merchant	1.2	1135.83	269.167	31.6667	15	BUTY
+merchant	1.2	1225.83	269.167	37.5	15	BIŻUT.
+merchant	1.2	736.667	310.833	208.333	15	PLECAK · 2× LPM: sprzedaj jedną sztukę
+merchant	1.2	813.333	351.667	6.66667	15	5
+merchant	1.2	925	351.667	6.66667	15	3
+merchant	1.2	813.333	399.167	13.3333	15	20
+merchant	1.2	736.667	571.667	235.833	15	Skup: sprzęt, mikstury, amunicja i trofea bestii.
+merchant	1.2	190.833	616.667	124.167	20	Mikstura zdrowia
+merchant	1.2	190.833	646.667	212.5	15	Pospolity · Odnawia 50 punktów zdrowia
+merchant	1.2	190.833	673.333	90	15	Wartość: 12 złota
+merchant	1.2	775.833	615.833	81.6667	15	LICZBA SZTUK
+merchant	1.2	790.833	646.667	5	18.3333	-
+merchant	1.2	836.667	649.167	7.5	16.6667	1
+merchant	1.2	884.167	646.667	8.33333	18.3333	+
+merchant	1.2	940.833	650	28.3333	15	MAX
+merchant	1.2	1135	631.667	30	18.3333	KUP
+merchant	1.2	1127.5	656.667	45.8333	15.8333	24 złota
+merchant	1.2	139.167	724.167	179.167	15	Nie masz wystarczająco dużo złota.
+merchant	1.2	498.333	750.833	444.167	15	Gra jest zatrzymana · ENTER / ESC — zamknij · Monety w plecaku też służą do płacenia
+merchant	1.2	829.167	805.833	52.5	15	MUZYKA
+merchant	1.2	850	825	21.6667	15	WŁ.
+merchant	1.2	942.5	805.833	43.3333	15	EFEKTY
+merchant	1.2	959.167	825	21.6667	15	WŁ.
+merchant	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+merchant	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+merchant-tooltip	1.2	113.333	369.167	95	14.1667	SCHODY W GÓRĘ
+merchant-tooltip	1.2	480.833	578.333	86.6667	14.1667	SCHODY W DÓŁ
+merchant-tooltip	1.2	486.667	598.333	74.1667	14.1667	E / LPM / PPM
+merchant-tooltip	1.2	537.5	310.833	55	20	MIRON
+merchant-tooltip	1.2	518.333	336.667	93.3333	14.1667	E / PPM · HANDEL
+merchant-tooltip	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+merchant-tooltip	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+merchant-tooltip	1.2	335	29.1667	41.6667	20	03 / 5
+merchant-tooltip	1.2	410	29.1667	165.833	20	Pracownia alchemiczna
+merchant-tooltip	1.2	410.833	55.8333	107.5	15	ZIOŁA / MIKSTURY
+merchant-tooltip	1.2	914.167	30	30	15	0 FPS
+merchant-tooltip	1.2	916.667	55.8333	65	15	F1  POMOC
+merchant-tooltip	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+merchant-tooltip	1.2	855.833	144.167	90.8333	15	WIEŻA ELDRINA
+merchant-tooltip	1.2	886.667	268.333	68.3333	15	PIĘTRO 3 / 5
+merchant-tooltip	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+merchant-tooltip	1.2	53.3333	714.167	100	20	Serce Świtu
+merchant-tooltip	1.2	29.1667	748.333	165	15	Schody i wyposażenie · E / PPM
+merchant-tooltip	1.2	29.1667	770.833	120	15	Odzyskane części: 1 / 5
+merchant-tooltip	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+merchant-tooltip	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+merchant-tooltip	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+merchant-tooltip	1.2	411.667	846.667	25	15	LPM
+merchant-tooltip	1.2	492.5	846.667	7.5	15	C
+merchant-tooltip	1.2	565	846.667	6.66667	15	1
+merchant-tooltip	1.2	636.667	846.667	6.66667	15	2
+merchant-tooltip	1.2	690	846.667	43.3333	15	SPACJA
+merchant-tooltip	1.2	408.333	870	32.5	15	ATAK
+merchant-tooltip	1.2	472.5	870	47.5	15	CZAR · K
+merchant-tooltip	1.2	540	870	56.6667	15	ZDROWIE
+merchant-tooltip	1.2	621.667	870	37.5	15	MANA
+merchant-tooltip	1.2	697.5	870	30	15	UNIK
+merchant-tooltip	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+merchant-tooltip	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+merchant-tooltip	1.2	1158.33	70	117.5	25	Wędrowiec
+merchant-tooltip	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+merchant-tooltip	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+merchant-tooltip	1.2	1080	150.833	32.5	15	ŻYCIE
+merchant-tooltip	1.2	1328.33	148.333	50	15	100 / 100
+merchant-tooltip	1.2	1080	175	37.5	15	MANA
+merchant-tooltip	1.2	1328.33	171.667	50	15	100 / 100
+merchant-tooltip	1.2	1220.83	221.667	34.1667	15	HEŁM
+merchant-tooltip	1.2	1323.33	221.667	46.6667	15	TARCZA
+merchant-tooltip	1.2	1222.5	273.333	31.6667	15	BUTY
+merchant-tooltip	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+merchant-tooltip	1.2	1080	314.167	50.8333	15	ATAK  14
+merchant-tooltip	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+merchant-tooltip	1.2	1301.67	314.167	53.3333	15	PD  0/100
+merchant-tooltip	1.2	1080	345.833	44.1667	15	PLECAK
+merchant-tooltip	1.2	1348.33	345.833	36.6667	15	06 / 25
+merchant-tooltip	1.2	1116.67	388.333	6.66667	15	5
+merchant-tooltip	1.2	1181.67	388.333	6.66667	15	3
+merchant-tooltip	1.2	1116.67	431.667	13.3333	15	20
+merchant-tooltip	1.2	1080	595	65	15	W ZASIĘGU
+merchant-tooltip	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+merchant-tooltip	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+merchant-tooltip	1.2	1090	714.167	96.6667	15	POD KURSOREM
+merchant-tooltip	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+merchant-tooltip	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+merchant-tooltip	1.2	1095.83	885	131.667	15	SCHRONIENIE ELDRINA
+merchant-tooltip	1.2	1370	885	28.3333	15	v0.47
+merchant-tooltip	1.2	173.333	845	50.8333	15	Z · 10 MP
+merchant-tooltip	1.2	174.167	870	50	15	ZABLOK.
+merchant-tooltip	1.2	245	845	51.6667	15	X · 20 MP
+merchant-tooltip	1.2	245.833	870	50	15	ZABLOK.
+merchant-tooltip	1.2	317.5	845	51.6667	15	V · 20 MP
+merchant-tooltip	1.2	318.333	870	50	15	ZABLOK.
+merchant-tooltip	1.2	134.167	133.333	82.5	30.8333	Miron
+merchant-tooltip	1.2	135	173.333	275	15	HANDLARZ WIEŻY · PRACOWNIA ALCHEMICZNA
+merchant-tooltip	1.2	1060.83	149.167	70.8333	20	ZŁOTO  0
+merchant-tooltip	1.2	1289.17	135	10	19.1667	X
+merchant-tooltip	1.2	138.333	219.167	109.167	16.6667	KUP OD MIRONA
+merchant-tooltip	1.2	736.667	219.167	252.5	16.6667	SPRZEDAJ Z PLECAKA LUB EKWIPUNKU
+merchant-tooltip	1.2	191.667	253.333	111.667	18.3333	Mikstura zdrowia
+merchant-tooltip	1.2	191.667	275	95	15	+50 HP · Pospolity
+merchant-tooltip	1.2	590.833	264.167	27.5	15.8333	24 zł
+merchant-tooltip	1.2	191.667	303.333	96.6667	18.3333	Mikstura many
+merchant-tooltip	1.2	191.667	325	106.667	15	+35 many · Pospolity
+merchant-tooltip	1.2	590.833	314.167	27.5	15.8333	28 zł
+merchant-tooltip	1.2	191.667	353.333	45	18.3333	Strzały
+merchant-tooltip	1.2	191.667	375	226.667	15	Amunicja do łuku · Zapas: 20 / 20 · Pospolity
+merchant-tooltip	1.2	590.833	364.167	20	15.8333	2 zł
+merchant-tooltip	1.2	191.667	403.333	128.333	18.3333	Miecz wędrowca +1
+merchant-tooltip	1.2	191.667	425	96.6667	15	Atak +9 · Pospolity
+merchant-tooltip	1.2	590.833	414.167	35	15.8333	152 zł
+merchant-tooltip	1.2	191.667	453.333	118.333	18.3333	Łuk podróżnika +1
+merchant-tooltip	1.2	191.667	475	103.333	15	Atak +17 · Pospolity
+merchant-tooltip	1.2	590.833	464.167	35	15.8333	216 zł
+merchant-tooltip	1.2	191.667	503.333	136.667	18.3333	Zbroja zwiadowcy +1
+merchant-tooltip	1.2	191.667	525	113.333	15	Pancerz +6 · Pospolity
+merchant-tooltip	1.2	590.833	514.167	35	15.8333	158 zł
+merchant-tooltip	1.2	171.667	565	57.5	15	< WSTECZ
+merchant-tooltip	1.2	595.833	565	44.1667	15	DALEJ >
+merchant-tooltip	1.2	376.667	565.833	72.5	15	OFERTA 1 / 2
+merchant-tooltip	1.2	855.833	269.167	34.1667	15	HEŁM
+merchant-tooltip	1.2	942.5	269.167	46.6667	15	TARCZA
+merchant-tooltip	1.2	1135.83	269.167	31.6667	15	BUTY
+merchant-tooltip	1.2	1225.83	269.167	37.5	15	BIŻUT.
+merchant-tooltip	1.2	736.667	310.833	208.333	15	PLECAK · 2× LPM: sprzedaj jedną sztukę
+merchant-tooltip	1.2	813.333	351.667	6.66667	15	5
+merchant-tooltip	1.2	925	351.667	6.66667	15	3
+merchant-tooltip	1.2	813.333	399.167	13.3333	15	20
+merchant-tooltip	1.2	736.667	571.667	235.833	15	Skup: sprzęt, mikstury, amunicja i trofea bestii.
+merchant-tooltip	1.2	190.833	616.667	124.167	20	Mikstura zdrowia
+merchant-tooltip	1.2	190.833	646.667	212.5	15	Pospolity · Odnawia 50 punktów zdrowia
+merchant-tooltip	1.2	190.833	673.333	90	15	Wartość: 12 złota
+merchant-tooltip	1.2	775.833	615.833	81.6667	15	LICZBA SZTUK
+merchant-tooltip	1.2	790.833	646.667	5	18.3333	-
+merchant-tooltip	1.2	836.667	649.167	7.5	16.6667	1
+merchant-tooltip	1.2	884.167	646.667	8.33333	18.3333	+
+merchant-tooltip	1.2	940.833	650	28.3333	15	MAX
+merchant-tooltip	1.2	1135	631.667	30	18.3333	KUP
+merchant-tooltip	1.2	1127.5	656.667	45.8333	15.8333	24 złota
+merchant-tooltip	1.2	139.167	724.167	179.167	15	Nie masz wystarczająco dużo złota.
+merchant-tooltip	1.2	498.333	750.833	444.167	15	Gra jest zatrzymana · ENTER / ESC — zamknij · Monety w plecaku też służą do płacenia
+merchant-tooltip	1.2	445.833	303.333	47.5	15	Pospolity
+merchant-tooltip	1.2	445.833	325	124.167	20	Mikstura zdrowia
+merchant-tooltip	1.2	445.833	355.833	156.667	15	Odnawia 50 punktów zdrowia
+merchant-tooltip	1.2	445.833	380.833	90	15	Wartość: 12 złota
+merchant-tooltip	1.2	445.833	406.667	139.167	15	Cena zakupu: 24 złota / szt.
+merchant-tooltip	1.2	445.833	430.833	195.833	15	Szansa na łup: 60% · według rzadkości
+merchant-tooltip	1.2	829.167	805.833	52.5	15	MUZYKA
+merchant-tooltip	1.2	850	825	21.6667	15	WŁ.
+merchant-tooltip	1.2	942.5	805.833	43.3333	15	EFEKTY
+merchant-tooltip	1.2	959.167	825	21.6667	15	WŁ.
+merchant-tooltip	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+merchant-tooltip	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+tower-labels	1.2	57.5	437.5	95	14.1667	SCHODY W GÓRĘ
+tower-labels	1.2	420.833	244.167	47.5	15	ELDRIN
+tower-labels	1.2	385.833	265	117.5	14.1667	E / PPM · ROZMAWIAJ
+tower-labels	1.2	28.3333	21.6667	159.167	34.1667	EMBERFALL
+tower-labels	1.2	30.8333	65.8333	165	15	ECHA ZAPOMNIANYCH RUIN
+tower-labels	1.2	335	29.1667	38.3333	20	01 / 5
+tower-labels	1.2	410	29.1667	100	20	Sala przybycia
+tower-labels	1.2	410.833	55.8333	146.667	15	KOMINEK / SCHRONIENIE
+tower-labels	1.2	914.167	30	30	15	0 FPS
+tower-labels	1.2	916.667	55.8333	65	15	F1  POMOC
+tower-labels	1.2	855.833	144.167	88.3333	15	WIELKA KNIEJA
+tower-labels	1.2	855.833	144.167	90.8333	15	WIEŻA ELDRINA
+tower-labels	1.2	886.667	268.333	68.3333	15	PIĘTRO 1 / 5
+tower-labels	1.2	29.1667	680	122.5	15	DZIENNIK WYPRAWY
+tower-labels	1.2	53.3333	714.167	100	20	Serce Świtu
+tower-labels	1.2	29.1667	748.333	165	15	Schody i wyposażenie · E / PPM
+tower-labels	1.2	29.1667	770.833	120	15	Odzyskane części: 0 / 5
+tower-labels	1.2	29.1667	808.333	68.3333	15	WSAD · ruch
+tower-labels	1.2	29.1667	835	63.3333	15	SHIFT · bieg
+tower-labels	1.2	29.1667	861.667	59.1667	15	ESC · pauza
+tower-labels	1.2	411.667	846.667	25	15	LPM
+tower-labels	1.2	492.5	846.667	7.5	15	C
+tower-labels	1.2	565	846.667	6.66667	15	1
+tower-labels	1.2	636.667	846.667	6.66667	15	2
+tower-labels	1.2	690	846.667	43.3333	15	SPACJA
+tower-labels	1.2	408.333	870	32.5	15	ATAK
+tower-labels	1.2	472.5	870	47.5	15	CZAR · K
+tower-labels	1.2	540	870	56.6667	15	ZDROWIE
+tower-labels	1.2	621.667	870	37.5	15	MANA
+tower-labels	1.2	697.5	870	30	15	UNIK
+tower-labels	1.2	1100.83	23.3333	104.167	15	UMIEJĘTNOŚCI · U
+tower-labels	1.2	1278.33	23.3333	86.6667	15	STATYSTYKI · P
+tower-labels	1.2	1158.33	70	117.5	25	Wędrowiec
+tower-labels	1.2	1159.17	105	174.167	15	POZIOM 01  /  STRAŻNIK ŻARU
+tower-labels	1.2	1159.17	125	53.3333	15	ZŁOTO  0
+tower-labels	1.2	1080	150.833	32.5	15	ŻYCIE
+tower-labels	1.2	1328.33	148.333	50	15	100 / 100
+tower-labels	1.2	1080	175	37.5	15	MANA
+tower-labels	1.2	1328.33	171.667	50	15	100 / 100
+tower-labels	1.2	1220.83	221.667	34.1667	15	HEŁM
+tower-labels	1.2	1323.33	221.667	46.6667	15	TARCZA
+tower-labels	1.2	1222.5	273.333	31.6667	15	BUTY
+tower-labels	1.2	1317.5	273.333	58.3333	15	PIERŚCIEŃ
+tower-labels	1.2	1080	314.167	50.8333	15	ATAK  14
+tower-labels	1.2	1191.67	314.167	65.8333	15	PANCERZ  3
+tower-labels	1.2	1301.67	314.167	53.3333	15	PD  0/100
+tower-labels	1.2	1080	345.833	44.1667	15	PLECAK
+tower-labels	1.2	1348.33	345.833	36.6667	15	06 / 25
+tower-labels	1.2	1116.67	388.333	6.66667	15	5
+tower-labels	1.2	1181.67	388.333	6.66667	15	3
+tower-labels	1.2	1116.67	431.667	13.3333	15	20
+tower-labels	1.2	1080	595	65	15	W ZASIĘGU
+tower-labels	1.2	1270	595	76.6667	15	0  W ZASIĘGU
+tower-labels	1.2	1080	679.167	175.833	15	LPM: zbierz · PPM w plecaku: użyj
+tower-labels	1.2	1090	714.167	96.6667	15	POD KURSOREM
+tower-labels	1.2	1090	750	162.5	15.8333	Najedź na potwora lub obiekt.
+tower-labels	1.2	1090	776.667	164.167	15	Tutaj zobaczysz jego informacje.
+tower-labels	1.2	1095.83	885	131.667	15	SCHRONIENIE ELDRINA
+tower-labels	1.2	1370	885	28.3333	15	v0.47
+tower-labels	1.2	173.333	845	50.8333	15	Z · 10 MP
+tower-labels	1.2	174.167	870	50	15	ZABLOK.
+tower-labels	1.2	245	845	51.6667	15	X · 20 MP
+tower-labels	1.2	245.833	870	50	15	ZABLOK.
+tower-labels	1.2	317.5	845	51.6667	15	V · 20 MP
+tower-labels	1.2	318.333	870	50	15	ZABLOK.
+tower-labels	1.2	829.167	805.833	52.5	15	MUZYKA
+tower-labels	1.2	850	825	21.6667	15	WŁ.
+tower-labels	1.2	942.5	805.833	43.3333	15	EFEKTY
+tower-labels	1.2	959.167	825	21.6667	15	WŁ.
+tower-labels	1.2	863.333	861.667	91.6667	15	GŁOŚNOŚĆ  ·  F2
+tower-labels	1.2	757.5	35	108.333	15	PEŁNY EKRAN · F11
+tower-labels	1.2	102.5	121.667	52.5	15	BROŃ · Q

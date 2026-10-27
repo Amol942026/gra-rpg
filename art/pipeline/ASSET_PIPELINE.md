@@ -1,5 +1,29 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+Balkon obserwatorium i Dolina Świtu: [art/scenery/tower-balcony/README.md](../scenery/tower-balcony/README.md).
+`create_tower_balcony.py` rysuje trzy warstwowe źródła Krita; kontrola:
+`tests/tower_balcony_qa.ps1 -NoAudio`, `verify_tower_balcony.py` i
+`tests/tower_balcony_package_qa.ps1 -NoAudio`.
+
+Zachodni start i rzut Kamiennego Strażnika:
+[art/gameplay/guardian/README.md](../gameplay/guardian/README.md).
+`create_guardian_stone.py` (Krita), `guardian_throw_synfig.py` (Synfig),
+`tests/guardian_qa.ps1 -NoAudio` i `guardian_package_qa.ps1 -NoAudio`.
+Serializator zapisuje format 7 (skończony zapas strzał, nowa krzywa PD) i czyta formaty 1–6.
+Rozpad głazu: `guardian_fragments.py` (Krita) i `guardian_shatter_synfig.py`
+(Synfig), źródła w `art/gameplay/guardian/shatter/`. Weryfikator
+`verify_guardian_shatter.py` działa w ramach tych samych testów gry i ZIP-a.
+Upadek i wstawanie: `hero_backfall_synfig.py` (Synfig), master w
+`art/hero/knockdown`, deformacja istniejącego bohatera w `hero_knockdown.hpp`.
+`verify_hero_knockdown.py` sprawdza źródło, eksport, 72 ujęcia pozy i wszystkie
+wariantów wyposażenia. Nie dodaje tekstur runtime ani modeli.
+
+Leśne drzewa: [art/scenery/README.md](../scenery/README.md),
+`tools/media/create_forest_trees.py` i `refine_forest_trees.py` (natywne Krita
+MCP, edytowalne KRA i przezroczyste PNG). Rzeczywisty renderer i rozpakowaną
+paczkę kontrolują `tests/forest_trees_qa.ps1` i `forest_trees_package_qa.ps1`
+z `-NoAudio`; niezależny odczyt KRA/PNG: `verify_forest_trees.py`.
+
 Animowane menu leśne: [art/menu/README.md](../menu/README.md),
 `tools/media/create_menu_forest.py` (Krita) i `tools/media/menu_synfig.py`.
 Aktualne wyniki grzybów, chodu entów i menu: [FOREST_QA.md](../menu/FOREST_QA.md).
@@ -100,7 +124,7 @@ Produkcyjny bohater ma już integrację malowanych paneli Krity i dodatkowych
 krzywych ruchu Synfiga. Źródła, ponowny eksport i ograniczenia podglądu
 wycinanki opisuje `art/hero/README.md`. Aktualna korekta twarzy i gesty miecza:
 `art/hero/SWORD_CLEARANCE_QA.md`; wcześniejsza weryfikacja: `art/hero/QA.md`.
-Przy kolejnych zmianach zachowuj dynamiczne wyposażenie wszystkich 39
+Przy kolejnych zmianach zachowuj dynamiczne wyposażenie wszystkich 75
 przedmiotów oraz testuj rzeczywisty renderer, nie sam arkusz lub SIF.
 Główny chód od 21.10.2026 także pochodzi z Synfiga: `art/hero/walk/walk.sif`,
 eksporter `tools/media/walk_synfig.py`, klip `src/generated/hero_walk_data.hpp`.
@@ -202,3 +226,52 @@ Nowy pełny test używa nowego ID. Testy uruchomienia gry zawsze --no-audio.
 - [Csound CLI](https://csound.com/docs/manual/CommandFlags.html)
 - [Audacity scripting](https://manual.audacityteam.org/man/scripting.html)
 - [Audacity Close crash](https://github.com/audacity/audacity/issues/9705)
+
+## Fontanny pustyni i ponowne tempo animacji (26.10.2026)
+
+`tools/media/desert_fountains.py --source <nowy-katalog-w-C:\AI2D\sprites>
+--animation <nowy-katalog-w-C:\AI2D\animations> --no-audio` tworzy natywne
+KRA i wyeksportowane części przez istniejący Krita MCP, a następnie natywne
+pętle/opróżnianie w Synfigu. Zachowuje logi oraz źródła; dostarcza dwa atlasy
+1024×960 i obrazy suchych mis. Szczegóły i bieżący receipt:
+`art/gameplay/fountains/`. Oryginalne pliki nie są nadpisywane; wybierz świeże
+foldery dla kolejnej produkcji. `src/fountain_art.hpp` ładuje obrazy raz,
+a `Game` przechowuje jednorazowe użycie i zegar opróżniania.
+
+Przy zmianie tempa animacji modyfikuj SIF i ponownie wyrenderuj Synfig,
+zamiast zmieniać jedynie zegar gry. Rzut: `guardian_throw_synfig.py`, ruch
+na plecy: `hero_backfall_synfig.py`. Kontroluj wspólne gniazda obu dłoni,
+pocisku, cienia i znaczników oraz migrację starszych faz zapisu.
+
+Test rzeczywistego silnika, handlarza i fontann:
+`pwsh -NoProfile -File tests/guardian_qa.ps1 -NoAudio`.
+Niezależna kontrola wszystkich źródeł/klatek:
+`verify_guardian.py --qa <folder> --previews --no-audio`.
+Nowa paczka: `tests/guardian_package_qa.ps1 -NoAudio`.
+Benchmark `--desert-benchmark --windowed --no-audio` obejmuje oba nowe źródła.
+
+## Okna rozwoju, zapas strzał i szczątki Żywej Wydmy (26.10.2026)
+
+`tools/media/create_dune_corpse.py` rysuje natywnie w Kricie ośmiokierunkową
+warstwową grafikę pokonanego drugiego bossa. Źródła i receipt są w
+`art/gameplay/dune-fallen/`. Runtime wczytuje PNG do ośmiu komórek przy starcie,
+wykonując premultiplikację alfa. Cień i maska kursora odpowiadają nowym pikselom.
+Pozostałe działające ciała i stary atlas pozostają niezmienione.
+
+Regresje logiki: `build.ps1 -Test` (wywołuje testy z --no-audio).
+Interfejs, handel, prawdziwa śmierć bossa i zapis:
+`pwsh -NoProfile -File tests/balance_qa.ps1 -NoAudio`.
+Niezależne obrazy/KRA: `verify_balance.py --qa <katalog-checks> --no-audio`.
+Paczka gracza: `tests/balance_package_qa.ps1 -NoAudio`.
+Przy zmianie progu PD aktualizuj funkcję experienceForLevel, a fixture testów
+ustawiaj względem bieżącego progu, nie liczby 79 z pierwotnego balansu.
+Zachowuj poziomy i procent postępu starszych zapisów. Zapas merchantArrows
+jest wspólny dla MAX, zwykłego zakupu i dwukliku; odnawia się tylko przy
+pierwszej śmierci Żywej Wydmy, nie przy sprzedaży czy otwarciu okna.
+
+Okna statystyk i umiejętności używają PausedWorldCache w visual_qa.hpp.
+To kopia nieruchomego świata w natywnej rozdzielczości; nie zmienia toru
+rysowania zwykłej rozgrywki ani worldCanvas. openStats/openSkills unieważniają
+cache, podobnie jak zmiana czasu, lokacji, pozycji i rozmiaru bufora. Przy
+nowych wejściach do tych okien pamiętaj o invalidatePausedWorld(). Benchmark
+resource_performance_qa musi respektować produkcyjną pauzę pod menu.

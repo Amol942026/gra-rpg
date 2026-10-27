@@ -32,12 +32,13 @@ bool runRarityQA(){
  }
  BeginTextureMode(sheet);
  for(int n=0;n<int(BeastGear.size());n++){
-  int col=n%4,row=n/4;float x=28+col*374.f,y=310+row*110.f;Item value=item(static_cast<Kind>(int(Kind::WolfKnife)+n));
+  if(n>0&&n%28==0){EndTextureMode();saveTexture(sheet,n==28?"qa-v39/new-gear-and-rarities.png":TextFormat("qa-v39/new-gear-page-%d.png",n/28));BeginTextureMode(sheet);ClearBackground(Ink);txt("ŁUP — DALSZE WYPOSAŻENIE",28,22,28,Gold);}
+  int col=n%4,row=(n%28)/4;float x=28+col*374.f,y=310+row*110.f;Item value=item(static_cast<Kind>(int(Kind::WolfKnife)+n));
   panel({x,y,358,96},Panel);icon(value,x+28,y+40,.92f);txt(itemName(value),x+59,y+10,14,rarity(value));
   txt(std::string(rarityName(itemRarity(value)))+" · "+std::to_string(itemDropChance(value))+"%",x+59,y+37,14,Muted);
   txt(std::string(gearSlot(value.kind)==0||gearSlot(value.kind)==5?"Atak +":"Pancerz +")+std::to_string(power(value)),x+59,y+63,14,Gold);
  }
- EndTextureMode();saveTexture(sheet,"qa-v39/new-gear-and-rarities.png");UnloadRenderTexture(sheet);UnloadRenderTexture(sample);
+ EndTextureMode();saveTexture(sheet,BeastGear.size()<=28?"qa-v39/new-gear-and-rarities.png":TextFormat("qa-v39/new-gear-page-%d.png",int(BeastGear.size()-1)/28+1));UnloadRenderTexture(sheet);UnloadRenderTexture(sample);
  reset();prepareCanvas(1.f);game.bag[10]=item(Kind::MoonBow);check(game.bindWeapon({Place::Bag,10},0),"a new bow is assignable through the real wheel model");
  weaponWheelOpen=true;mouse={WheelCenter.x,WheelCenter.y-147};Slot wheelSource=hoverSlot();
  check(wheelSource.place==Place::Bag&&wheelSource.index==10&&game.get(wheelSource)->kind==Kind::MoonBow,"hovering a weapon sector resolves the actual named inventory item for its rarity tooltip");

@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checks": 2083,
+  "native_synfig_frames": 168,
+  "compiled_control_samples": 169,
+  "game_frames": 120,
+  "pose_views": 48,
+  "elbow_flexion_min_deg": 15.81630484821699,
+  "elbow_flexion_max_deg": 116.48503508311033,
+  "minimum_changed_pixels": 6058,
+  "shatter": {
+    "native_frames": 72,
+    "pieces": 6,
+    "control_samples": 438,
+    "game_frames": 60,
+    "duration": 1.2,
+    "runtime_atlas_rgba8_bytes": 221184
+  },
+  "audio_played": false
+}

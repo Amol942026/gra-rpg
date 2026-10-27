@@ -8,6 +8,7 @@ TradeResult merchantPurchasePlan(int index,int quantity,std::array<Item,BagSize>
  if(!merchantReachable())return TradeResult::Unavailable;
  Item offer=merchantOfferItem(index);if(offer.empty())return TradeResult::InvalidItem;
  if(quantity<1||quantity>99||(!stackable(offer.kind)&&quantity!=1))return TradeResult::InvalidQuantity;
+ if(offer.kind==Kind::Arrow&&quantity>merchantArrows)return TradeResult::OutOfStock;
  std::int64_t cost=std::int64_t(itemBuyPrice(offer))*quantity;
  if(cost>goldBalance())return TradeResult::NotEnoughGold;
  result=bag;std::int64_t fromWallet=std::min(gold,cost);wallet=gold-fromWallet;cost-=fromWallet;
@@ -24,7 +25,7 @@ TradeResult merchantPurchasePlan(int index,int quantity,std::array<Item,BagSize>
 TradeResult buyMerchantItem(int index,int quantity=1){
  std::array<Item,BagSize> result{};std::int64_t wallet=0;TradeResult status=merchantPurchasePlan(index,quantity,result,wallet);
  if(status!=TradeResult::Success){say(tradeMessage(status));sound(Cue::Reject,player);return status;}
- Item bought=merchantOfferItem(index);bag=result;gold=wallet;cancelBow();sound(Cue::Pickup,player);
+ Item bought=merchantOfferItem(index);bag=result;gold=wallet;if(bought.kind==Kind::Arrow)merchantArrows-=quantity;cancelBow();sound(Cue::Pickup,player);
  say("Kupiono: "+itemName(bought)+" × "+std::to_string(quantity)+".");return status;
 }
 TradeResult merchantSaleStatus(Slot source,int quantity)const{

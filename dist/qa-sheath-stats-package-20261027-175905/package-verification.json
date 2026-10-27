@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "package_sha256": "4e2a356f9563528e1ab622716173462e98d2199695e2dd7bad5c56509440a756",
+  "exe_sha256": "ca7a7b866eb4bd09888d815d56894b69630fc28a6b411a8c32904a33fb0224b7",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-sheath-stats-package-20261027-175905\\Emberfall",
+  "verified_assets": 112,
+  "renderer": {
+    "status": "PASS",
+    "checks": 301,
+    "failures": 0,
+    "hero_views": 32,
+    "attribute_tooltips": 18,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 233,
+    "failures": [],
+    "native_frames": 72,
+    "hero_views": 32,
+    "attribute_tooltips": 18,
+    "audio_opened": false
+  },
+  "startup_frames": 180,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_player": false
+}

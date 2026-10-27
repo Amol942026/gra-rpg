@@ -11,7 +11,7 @@ void startIntro(){
 }
 void applyIntroArrival(){
     if(!intro.takeArrival())return;
-    game.player={8,19};game.animation=AnimationState{};game.cancelBow();dragging={};mouse={0,0};
+    game.player=ForestArrival;game.animation=AnimationState{};game.cancelBow();dragging={};mouse={0,0};
     game.say("Serce Świtu: znajdź Kamiennego Strażnika na północy Lasu Mchu.");
     startupLog.write("Prologue complete: hero teleported to the forest");
 }

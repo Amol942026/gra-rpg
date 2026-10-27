@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "checks": 856,
+  "failures": [],
+  "verified_frames": 552,
+  "contact_samples": 287,
+  "max_slip_px": 0.0010000000000331966,
+  "source_sha256": "0d132dc7eee725f0d414da2eb942ad1db8edc8a359fce147a51c38e62ca3f52f",
+  "audio_opened": false
+}

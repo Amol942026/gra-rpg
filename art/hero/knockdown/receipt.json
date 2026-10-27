@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "source": "native Synfig 2D backfall/contact targets; existing original Krita cutout parts",
+  "project": "C:\\AI2D\\animations\\emberfall_backfall_fast_20261026\\knockdown.sif",
+  "project_sha256": "b4206dd6257177f80218bc62d36a1775d9456633ba417056bdac07ae55aeefac",
+  "header_sha256": "eefbe4bbf8b1bf123d10acec99178e1b02262b00d97f4b97b44c644c1e0c1e8a",
+  "control_samples": 112,
+  "bone_count": 17,
+  "duration": 1.85,
+  "rendered_frames": 111,
+  "external_assets": [],
+  "stages_seconds": {
+    "takeoff": 0.1,
+    "airborne": 0.24,
+    "back_contact": 0.45,
+    "supine_rest": [
+      0.66,
+      0.8
+    ],
+    "side_brace": 1.07,
+    "kneel": 1.24,
+    "stand": 1.75,
+    "end": 1.85
+  }
+}

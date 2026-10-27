@@ -1,6 +1,33 @@
 # Emberfall — Echa zapomnianych ruin
 
+Aktualizacja 27.10.2026: Strażnik prostuje nogę podporową w chodzie, zachowując
+zgranie stóp z ruchem. Dodano 36 nowych przedmiotów z bestii, łącznie 75
+elementów wyposażenia. Każdy gatunek ma trzy nowe pozycje łupu, nadal losowane
+niezależnie według 60% / 15% / 4% / 1%. Stare zapisy i już wylosowane łupy
+pozostają zachowane. Katalog, źródła Krity i testy: `art/items/expansion/README.md`.
+
 Grywalny prototyp RPG 2.5D w C++17 i raylib 5.5, przygotowany dla Windows x64. Autorska izometryczna grafika, leśne ruiny, walka w czasie rzeczywistym i ekwipunek obsługiwany myszą. Nie wymaga instalowania silnika ani dodatkowych DLL.
+
+## Zachodni start i rzut kamieniem — 23.10.2026
+
+Nowa wyprawa i teleport po prologu rozpoczynają się przy skrajnie lewym,
+południowo-zachodnim narożniku lasu. Bezpieczna przesieka łączy się ścieżką
+z zagajnikiem. Kamienny Strażnik pozostaje w ruinach, ponad 65 pól dalej.
+
+Pierwszy boss przykuca, wyrywa duży głaz z ziemi i podnosi go obiema rękami
+nad głowę. Przygotowanie trwa 2,2 s i oznacza cel na ziemi; potem głaz leci
+po łuku i uderza w oznaczone
+miejsce. Można zejść z celu, skorzystać z uniku lub osłony. Blisko bohatera
+Strażnik nadal walczy wręcz. Zapis formatu 2 zachowuje rzut i lot kamienia;
+starszy format 1 nadal się wczytuje, zachowując dotychczasową pozycję postaci.
+Szczegóły i testy: [art/gameplay/guardian/README.md](art/gameplay/guardian/README.md).
+
+## Drzewa leśne — 23.10.2026
+
+Świerki, brzozy i dęby mają nowe warstwowe grafiki z Krity: nieregularne korony,
+drobne liście i igły, szczegółową korę, rozwidlenia, mech oraz korzenie.
+Zachowują wiatr, cienie i zaznaczanie według sylwetki. Gotowe tekstury są
+buforowane raz przy uruchomieniu. Źródła i testy: [art/scenery/README.md](art/scenery/README.md).
 
 ## Animowane menu, grzyby i chód entów — 22.10.2026
 
@@ -591,7 +618,7 @@ Paczka dla znajomych: `powershell -ExecutionPolicy Bypass -File .\package.ps1`. 
 - `src/graphics_qa.hpp` — porównanie wyrenderowanych sylwetek z geometrią kursora i eksport nowych grafik.
 - `src/animation.hpp` — osiem kierunków i cykle animacji zależne od pokonanej odległości.
 - `src/actor_art.hpp`, `src/actor_view.hpp` — obracane postacie, kończyny, broń, twarze i animacje.
-- `src/typography.hpp` — kroje pisma rasteryzowane do fizycznego rozmiaru napisów w aktualnym oknie.
+- `src/typography.hpp` — pogrubione Lato i Cinzel (waga 700), minimum 15 dla drobnego tekstu interfejsu; rasteryzacja w fizycznym rozmiarze napisów. Źródła i testy: `art/typography/README.md`.
 - `src/visual_qa.hpp` — renderowanie w natywnej rozdzielczości i eksport podglądów.
 - `src/world_hover.hpp`, `src/hover_qa.hpp` — wykrywanie wskazanego pola i obiektu, obrysy oraz testy zasłaniania.
 - `src/roll_qa.hpp`, `tests/roll_tests.hpp` — podglądy przewrotów i testy mechaniki uniku.
@@ -617,3 +644,31 @@ Grafiki mapy, postaci, przeciwników, przedmiotów i dekoracji są zdefiniowane 
 `--bow-qa --no-audio` sprawdza koło, przypisywanie przedmiotów, zmianę broni, naciąganie i puszczanie LPM, neutralne kliknięcia HUD, amunicję, trzy skale renderowania oraz rasteryzację i wskazywanie łuku z kołczanem w ośmiu kierunkach. Raport i podglądy: `dist/qa-v23/`. Testy modelu są w `tests/bow_tests.hpp`. Nowy atlas `assets/generated/items-v23.png` mieści 29 ikon. `audio/create_bow_sound.py` odtwarza efekt strzału z łuku bez jego odtwarzania; testy rozwoju nadal zawsze korzystają z `--no-audio`. Benchmark 900 klatek obejmuje od teraz także zmianę na łuk, naciąganie, strzały i powrót do miecza.
 
 `--skills-qa --no-audio` sprawdza przejście statystyki → umiejętności → gra, przydzielanie i cofanie punktów, blokady broni, aktywację z HUD, naciąg, koszty, przeszywanie trzech wrogów, anulowanie oraz animacje miecza i łuku w ośmiu kierunkach. Podglądy i raport: `dist/qa-v27/`. Logika jest sprawdzana w `tests/skill_tests.hpp`. Benchmark zawiera obie umiejętności i zapisuje liczbę rzeczywistych cięć oraz wypuszczonych przeszywających strzał.
+
+### Fontanny pustyni i szybki handel
+
+Na pustyni szukaj niebieskiej fontanny many i czerwonej fontanny życia.
+E / LPM / PPM przy fontannie odnawia cały odpowiedni zasób i zużywa źródło
+na resztę gry. Pełny zasób nie zużywa fontanny. Woda po użyciu opada i znika;
+zapis gry zachowuje oba źródła. U Mirona 2× LPM na towarze kupuje jedną
+sztukę, a 2× LPM na własnym przedmiocie sprzedaje jedną sztukę. Do handlu
+całym stosem nadal służą przyciski liczby sztuk i MAX.
+
+Strażnik śledzi pozycję bohatera podczas wyrywania i podnoszenia głazu.
+Cel ustala w momencie wypuszczenia; po wypuszczeniu kamień leci ustalonym
+torem. Przygotowanie rzutu: 1,5 s, lot: 11 pól/s, odnowienie: 3,5 s.
+Po upadku na plecy sterowanie wraca po 1,85 s.
+
+### Rozwój bohatera i zapas strzał
+
+P otwiera statystyki, U — umiejętności. Bez punktów do wydania okna służą
+do przeglądania. Podczas awansu tekstowe DODAJ / COFNIJ zastępują symbole
+plus/minus; punkty są stosowane dopiero po zatwierdzeniu.
+
+Miron ma wspólny zapas 20 strzał. Zakupy pojedyncze, dwuklik i MAX zużywają
+tę samą partię. Sprzedaż strzał, ponowne otwarcie sklepu ani zapis i odczyt
+nie odnawiają zapasu. Pokonanie Żywej Wydmy jednorazowo przywraca zapas do 20.
+
+Awans wymaga `100 × poziom + 2 × poziom × (poziom − 1)` PD. Pierwsze progi:
+100, 204, 312, 424, 540 PD. Nagrody za bestie pozostają takie same. Starsze
+zapisy zachowują zdobyte poziomy, statystyki i procent postępu bieżącego awansu.

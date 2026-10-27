@@ -1,0 +1,95 @@
+{
+  "status": "PASS",
+  "date": "2026-10-27",
+  "logic_checks": 110661,
+  "persistence_checks": 3403,
+  "renderer": {
+    "status": "PASS",
+    "checks": 1844,
+    "failures": 0,
+    "contact_samples": 287,
+    "max_slip_px": 0.000213623,
+    "pose_frames": 192,
+    "movement_frames": 360,
+    "audio_opened": false
+  },
+  "expanded_loot": {
+    "status": "PASS",
+    "checks": 438,
+    "failures": [],
+    "new_items": 36,
+    "equipment_variants": 75,
+    "knee_extended_frames": 240,
+    "min_support_knee_degrees": 179.9997252838182,
+    "runtime_textures_added": 0,
+    "audio_opened": false
+  },
+  "gait": {
+    "status": "PASS",
+    "checks": 856,
+    "failures": [],
+    "verified_frames": 552,
+    "contact_samples": 287,
+    "max_slip_px": 0.0010000000000331966,
+    "source_sha256": "0d132dc7eee725f0d414da2eb942ad1db8edc8a359fce147a51c38e62ca3f52f",
+    "audio_opened": false
+  },
+  "package": {
+    "status": "PASS",
+    "package_sha256": "a2845557924588718efd84a4dbef4043352910308f53677b9ad0e3385cc1bc3e",
+    "exe_sha256": "2cb3f3d0d77eec3dd3495c447c9308311ba0ad698f39a3ad6742e1a186a58cb5",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-guardian-gait-package-20261027-140410\\Emberfall",
+    "verified_assets": 112,
+    "renderer": {
+      "status": "PASS",
+      "checks": 1844,
+      "failures": 0,
+      "contact_samples": 287,
+      "max_slip_px": 0.000213623,
+      "pose_frames": 192,
+      "movement_frames": 360,
+      "audio_opened": false
+    },
+    "independent": {
+      "status": "PASS",
+      "checks": 856,
+      "failures": [],
+      "verified_frames": 552,
+      "contact_samples": 287,
+      "max_slip_px": 0.0010000000000331966,
+      "source_sha256": "0d132dc7eee725f0d414da2eb942ad1db8edc8a359fce147a51c38e62ca3f52f",
+      "audio_opened": false
+    },
+    "startup_frames": 180,
+    "audio_device_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_player": false,
+    "expansion": {
+      "status": "PASS",
+      "checks": 438,
+      "failures": [],
+      "new_items": 36,
+      "equipment_variants": 75,
+      "knee_extended_frames": 240,
+      "min_support_knee_degrees": 179.9997252838182,
+      "runtime_textures_added": 0,
+      "audio_opened": false
+    }
+  },
+  "source_sha256": {
+    "src/items.hpp": "86a6c1545692ed10990bae0acc8028d34e9ea8c990346b039a707fa6c0c8e530",
+    "src/loot.hpp": "0e10e7424bf0cc7634f80c5734501f35109da81896b3686a70d2e27c6c849fa3",
+    "src/guardian_gait.hpp": "a24f50886a65dfcc16a8a174567cc500689776defb593d41555d4411d351b9bd",
+    "src/forest_creatures.hpp": "f41aafc3a121edcec9aaeef29c094b02a398ec09e92e2e3e2685132c7a509946",
+    "src/generated/equipment_paints.hpp": "0b87122f4f3192c0401b9ee7d6c9ebf4c5c3039a5a4b1e784509616350900277",
+    "src/equipment_appearance.hpp": "ef4cd8e454a54474ac3857a6df7b009707861376bcd4a788c2a061f525dd2c6d",
+    "src/rarity_qa.hpp": "0ea5373b9fbe6a36b6066dc273f67f9a58b9e94e6deed0a94660f517c4612710",
+    "tests/expanded_loot_tests.hpp": "a63c07910bd67ea8a0c20a847f6541a8ce221cd07c392865f51d46dfdf726cac",
+    "tests/expanded_loot_qa.hpp": "602cf1b9af5a9efe103b718eec10056479ca0b345a06387c2b93dbfda04bb606",
+    "tests/guardian_gait_tests.hpp": "b475da64cbf9c2c8296c8894ce9299c924bf63c542efebe4af31aaf3dc8cf727",
+    "tests/guardian_gait_qa.cpp": "ac8fe5407d10829fdd3c12c455a351a651d1b13d927a7b25fd752502385f05b4",
+    "tests/save_game_tests.cpp": "53e3f96ca0289ec86987ec507f1810a9cdda674b7aaf110873d58c06e8150127",
+    "LOOT.md": "07764e2af64b038dacbe3cbe2fd273fbda0ddcae92585cc48d6b4795e8db6bda",
+    "art/items/expansion/catalog.json": "feb20984153a3bad81e8f47b8b1358e4e97c9038f9f8661752cc2b4bed6ef886"
+  }
+}

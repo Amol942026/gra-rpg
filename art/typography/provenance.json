@@ -1,0 +1,11 @@
+{
+  "source": "assets/Cinzel.ttf",
+  "output": "assets/Cinzel-Bold.ttf",
+  "source_sha256": "f4d83d34d1f6c741193e4acf4b3dff9531e5a67b6aa65228d00a7db72a4e0f34",
+  "output_sha256": "92fe41dea09a06d43bb68b73f62a0f379d019eff2fe855d2ec33909dc76dcb16",
+  "weight": 700,
+  "license": "assets/Cinzel-LICENSE.txt (SIL OFL 1.1)",
+  "method": "fontTools 4.60.1 varLib.instancer; genuine static outlines",
+  "polish_glyphs": "ĄĆĘŁŃÓŚŹŻąćęłńóśźż",
+  "external_assets": false
+}

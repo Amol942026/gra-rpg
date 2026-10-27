@@ -1,9 +1,10 @@
 #pragma once
 Rectangle skillCard(int index){return {312,237.f+index*133,816,126};}
-Rectangle skillAdjust(int index,bool add){Rectangle card=skillCard(index);return {add?1064.f:1014.f,card.y+71,42,36};}
+Rectangle skillAdjust(int index,bool add){Rectangle card=skillCard(index);return {add?1056.f:984.f,card.y+74,64,32};}
 Rectangle skillsConfirm(){return {492,677,456,46};}
 int skillDraftRemaining(){return game.skillPoints-std::accumulate(skillDraft.begin(),skillDraft.end(),0);}
 void openSkills(){
+ invalidatePausedWorld();
  if(game.dead())return;
  if(game.allocationRequired&&game.attributePoints>0){openStats();return;}
  game.cancelBow();weaponWheelOpen=statsOpen=spellBookOpen=false;skillsOpen=true;skillDraft={};skillDraftLevel=game.level;dragging={};
@@ -70,9 +71,9 @@ void drawSkillsMenu(){
   txt(i==0?TextFormat("Obrażenia: %.0f%% zwykłego ataku",(1.5f+.1f*std::max(0,rank-1))*100):i==1?TextFormat("Przebija do %d celów · obrażenia zwykłej strzały",2+std::max(1,rank)):"Efekt: +30 HP · nie wymaga miecza ani łuku",415,card.y+83,15,i==2?rgb(136,239,158):Gold);
   txt(details[i],415,card.y+105,14,Muted);
   center(i==2?(rank?"POZNANE":"NIEZNANE"):TextFormat("RANGA %d",rank),1048,card.y+37,15,skillDraft[i]?Green:rank?Gold:Muted);
-  for(bool add:{false,true}){Rectangle button=skillAdjust(i,add);bool enabled=game.skillAllocationPending()&&(add?skillDraftRemaining()>0&&(i!=2||rank<1):skillDraft[i]>0);panel(button,enabled&&inside(button)?Card:Panel);center(add?"+":"-",button.x+button.width/2,button.y+5,24,enabled?Gold:Line);}
+  for(bool add:{false,true}){Rectangle button=skillAdjust(i,add);bool enabled=game.skillAllocationPending()&&(add?skillDraftRemaining()>0&&(i!=2||rank<1):skillDraft[i]>0);if(enabled){panel(button,inside(button)?Card:Panel);center(add?"DODAJ":"COFNIJ",button.x+button.width/2,button.y+9,13,Gold);}}
  }
- center(game.skillAllocationPending()?"Kliknij umiejętność lub +, aby przypisać punkt.":"U lub ESC zamyka okno. Leczenie wystarczy poznać raz.",720,647,16,Muted);
+ center(game.skillAllocationPending()?"Kliknij umiejętność, aby przypisać punkt. COFNIJ anuluje wybór.":"U lub ESC zamyka okno. Leczenie wystarczy poznać raz.",720,647,16,Muted);
  bool ready=!game.skillAllocationPending()||skillDraftRemaining()==0;panel(skillsConfirm(),ready&&inside(skillsConfirm())?rgb(53,73,57):Card);
  center(game.skillAllocationPending()?"ZATWIERDŹ I WRÓĆ DO GRY":"WRÓĆ DO GRY",720,690,18,ready?Gold:Muted);
  center(game.skillAllocationPending()?"Gra pozostaje zatrzymana do rozdania punktów umiejętności.":"Z / X — umiejętności broni · V — Leczenie",720,749,14,Muted);

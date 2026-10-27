@@ -1,0 +1,1159 @@
+PASS player code preloads native Krita stone without audio
+PASS six native Krita cutouts are preloaded once in the player renderer
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-27.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0-168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-27.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1-168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-27.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2-168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-27.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3-168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-27.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4-168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-27.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5-168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-27.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6-168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-27.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7-168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 0.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 8.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 10.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 12.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 14.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 16.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 18.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 20.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 22.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 24.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 26.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 28.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 30.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 32.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 34.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 36.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 38.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 40.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 42.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 44.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 46.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 50.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 52.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 54.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 56.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 58.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 60.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 62.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 64.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 66.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 68.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 70.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 72.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 74.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 76.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 78.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 80.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 82.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 84.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 86.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 88.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 90.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 92.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 94.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 96.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 98.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 100.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 102.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 104.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 106.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 108.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 110.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 112.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 114.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 116.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 118.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 120.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 122.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 124.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 126.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 128.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 130.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 132.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 134.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 136.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 138.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 140.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 142.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 144.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 146.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 148.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 150.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 152.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 154.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 156.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 158.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 160.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 162.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 164.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 166.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 168.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 1.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 2.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 3.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 4.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 5.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 6.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 7.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 24.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 25.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 26.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 28.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 35.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 36.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 37.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 38.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 39.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 40.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 41.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 42.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 43.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 44.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 45.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 46.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 47.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 48.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 49.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 50.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 51.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 52.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 53.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 54.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 55.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 56.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 57.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 58.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 59.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 60.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 61.png
+PASS equipped falling/getting-up hero remains complete inside the frame
+PASS knockdown render written: 62.png
+PASS all 39 equipment items stay visible and supported by the same fall renderer
+PASS actual New Game factory uses western arrival
+PASS render written: forest-start.png
+PASS production New Game menu action starts the prologue at the new spawn
+PASS actual prologue handoff teleports to the new western arrival
+PASS new start stays safe through ten seconds of real patrols
+PASS telegraph target stays committed
+PASS render written: 0.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 1.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 2.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 3.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 4.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 5.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 6.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 7.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 8.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 9.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 10.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 11.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 12.png
+PASS render written: guardian-uproot.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 13.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 14.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 15.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 16.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 17.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 18.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 19.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 20.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 21.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 22.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 23.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 24.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 25.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 26.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 27.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 28.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 29.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 30.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 31.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 32.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 33.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 34.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 35.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 36.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 37.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 38.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 39.png
+PASS render written: guardian-lift.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 40.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 41.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 42.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 43.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 44.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 45.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 46.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 47.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 48.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 49.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 50.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 51.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 52.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 53.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 54.png
+PASS render written: guardian-windup.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 55.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 56.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 57.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 58.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 59.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 60.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 61.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 62.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 63.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 64.png
+PASS telegraph target stays committed
+PASS telegraph target stays committed
+PASS render written: 65.png
+PASS telegraph target stays committed
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS projectile leaves the actual animated hand socket
+PASS render written: 66.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 67.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 68.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 69.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 70.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 71.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 72.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: guardian-flight.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 73.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 74.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 75.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 76.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 77.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 78.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 79.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS render written: 80.png
+PASS actual elevated stone flies to the marker
+PASS stone participates once in world depth sorting
+PASS actual pause menu freezes the hero mid-fall
+PASS real on-disk save restores the exact mid-knockback game state
+PASS render written: 0.png
+PASS render written: 81.png
+PASS render written: 2.png
+PASS render written: 82.png
+PASS render written: 4.png
+PASS render written: 83.png
+PASS render written: 6.png
+PASS render written: 84.png
+PASS render written: guardian-knockback.png
+PASS render written: 8.png
+PASS render written: 85.png
+PASS render written: 10.png
+PASS render written: 86.png
+PASS render written: 12.png
+PASS render written: 87.png
+PASS render written: guardian-impact.png
+PASS render written: 14.png
+PASS render written: 88.png
+PASS render written: 16.png
+PASS render written: 89.png
+PASS render written: 18.png
+PASS render written: 90.png
+PASS render written: 20.png
+PASS render written: 91.png
+PASS render written: 22.png
+PASS render written: 92.png
+PASS render written: 24.png
+PASS render written: 93.png
+PASS render written: 26.png
+PASS render written: 94.png
+PASS render written: 28.png
+PASS render written: 95.png
+PASS render written: 30.png
+PASS render written: 96.png
+PASS render written: 32.png
+PASS render written: 97.png
+PASS render written: 34.png
+PASS render written: 98.png
+PASS render written: 36.png
+PASS render written: 99.png
+PASS render written: 38.png
+PASS render written: 100.png
+PASS render written: 40.png
+PASS render written: 101.png
+PASS render written: 42.png
+PASS render written: 102.png
+PASS render written: 44.png
+PASS render written: 103.png
+PASS render written: 46.png
+PASS render written: 104.png
+PASS render written: guardian-knockdown-ground.png
+PASS render written: 48.png
+PASS render written: 105.png
+PASS render written: 50.png
+PASS render written: 106.png
+PASS render written: 52.png
+PASS render written: 107.png
+PASS render written: 54.png
+PASS render written: 108.png
+PASS render written: 56.png
+PASS render written: 109.png
+PASS render written: 58.png
+PASS render written: 110.png
+PASS render written: 60.png
+PASS render written: 111.png
+PASS render written: 62.png
+PASS render written: 112.png
+PASS render written: 64.png
+PASS render written: 113.png
+PASS render written: 66.png
+PASS render written: 114.png
+PASS render written: 68.png
+PASS render written: 115.png
+PASS render written: 70.png
+PASS render written: 116.png
+PASS render written: 72.png
+PASS render written: 117.png
+PASS render written: 74.png
+PASS render written: 118.png
+PASS render written: 76.png
+PASS render written: 119.png
+PASS render written: 78.png
+PASS render written: 80.png
+PASS render written: 82.png
+PASS render written: guardian-knockdown-brace.png
+PASS render written: 84.png
+PASS render written: 86.png
+PASS render written: 88.png
+PASS render written: 90.png
+PASS render written: 92.png
+PASS render written: 94.png
+PASS render written: 96.png
+PASS render written: 98.png
+PASS render written: 100.png
+PASS render written: 102.png
+PASS render written: 104.png
+PASS render written: 106.png
+PASS render written: 108.png
+PASS render written: 110.png
+PASS render written: 112.png
+PASS render written: 114.png
+PASS render written: 116.png
+PASS render written: 118.png
+PASS render written: 120.png
+PASS render written: 122.png
+PASS render written: 124.png
+PASS render written: 126.png
+PASS render written: 128.png
+PASS render written: 130.png
+PASS render written: 132.png
+PASS render written: 134.png
+PASS render written: 136.png
+PASS render written: guardian-knockdown-rise.png
+PASS render written: 138.png
+PASS render written: 140.png
+PASS render written: 142.png
+PASS render written: 144.png
+PASS render written: 146.png
+PASS render written: 148.png
+PASS render written: 150.png
+PASS render written: 152.png
+PASS render written: 154.png
+PASS render written: 156.png
+PASS render written: 158.png
+PASS render written: 160.png
+PASS render written: 162.png
+PASS render written: 164.png
+PASS render written: 166.png
+PASS render written: 168.png
+PASS render written: guardian-knockdown-recovered.png
+PASS render written: 170.png
+PASS render written: 172.png
+PASS render written: 174.png
+PASS render written: 176.png
+PASS render written: 178.png
+PASS render written: 180.png
+PASS render written: 182.png
+PASS render written: 184.png
+PASS one complete crouch, tear, overhead lift and visible flight really occurred
+PASS actual encounter inflicts exactly one armor-reduced stone hit
+PASS one real ground hit knocks the hero down, keeps control locked and returns it after getting up
+PASS hero visibly travels away from the actual falling rock
+PASS no fracture appears before the thrown boulder lands
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 0.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 1.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 2.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 3.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 4.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 5.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 6.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 7.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 8.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 9.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 10.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 11.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 12.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 13.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 14.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: guardian-break-contact.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 15.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 16.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 17.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 18.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS production pause freezes the fracture animation
+PASS render written: 19.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 20.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: guardian-break-burst.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 21.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 22.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 23.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 24.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 25.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 26.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 27.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 28.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 29.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 30.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 31.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: guardian-break-bounce.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 32.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 33.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 34.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 35.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 36.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 37.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 38.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 39.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 40.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 41.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 42.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 43.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 44.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 45.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: guardian-break-settled.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 46.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 47.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 48.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 49.png
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS six separately depth-sorted pieces replace the intact stone at impact
+PASS render written: 50.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 51.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 52.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 53.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 54.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 55.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 56.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 57.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 58.png
+PASS no fragments are drawn before impact or after expiry
+PASS no fragments are drawn before impact or after expiry
+PASS render written: 59.png
+PASS no fragments are drawn before impact or after expiry
+PASS actual ground fracture persists through its full 72-frame Synfig clip and expires
+PASS rolling away avoids the hit and cosmetic fragments cause no extra damage
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 0-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 1-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 2-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 3-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 4-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 5-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 6-144.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-24.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-42.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-78.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-108.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-131.png
+PASS both physical grip projections match shared sockets in every facing
+PASS both physical grip projections match shared sockets in every facing
+PASS render written: 7-144.png
+PASS Escape pause freezes the pending boss ability through real input routing
+PASS menu load restores a saved in-progress windup and exact position
+PASS all diagnostics and UI actions stayed silent
+Checks: 1157
+Failures: 0

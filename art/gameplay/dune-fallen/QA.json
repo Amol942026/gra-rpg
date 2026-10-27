@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "logic_checks": 107937,
+  "persistence_checks": 1891,
+  "package": {
+    "status": "PASS",
+    "package_sha256": "2c071a7775beb780b73685474608f8429711560d5eb73a140ed7c28cd75bd97d",
+    "exe_sha256": "a106d11016b2758fc7d8c4641d00c3283cb9183b176d1915a4075bfea327e3c8",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-balance-package-20261026-162114\\Emberfall",
+    "verified_assets": 111,
+    "tests": {
+      "status": "PASS",
+      "independent_checks": 48,
+      "integration_checks": 49,
+      "existing_ui_checks": {
+        "qa-v13": 22,
+        "qa-v27": 90
+      },
+      "directions": 8,
+      "cell": [
+        384,
+        256
+      ],
+      "rgba8_bytes": 3145728,
+      "audio_opened": false,
+      "xp_thresholds": [
+        100,
+        204,
+        312,
+        424,
+        540,
+        660,
+        784,
+        912,
+        1044,
+        1180
+      ],
+      "merchant_arrow_capacity": 20,
+      "save_version": 7
+    },
+    "startup_frames": 180,
+    "audio_device_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_player": false
+  },
+  "render_timing": {
+    "status": "MEASURED",
+    "audio_opened": false,
+    "presentation_measured": false,
+    "samples": [
+      {
+        "scene": "mana-fountain",
+        "frames": 180,
+        "mean_ms": 8.36475,
+        "p95_ms": 9.8936,
+        "p99_ms": 13.5192,
+        "max_ms": 13.7155,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "health-fountain",
+        "frames": 180,
+        "mean_ms": 8.45876,
+        "p95_ms": 9.9334,
+        "p99_ms": 11.605,
+        "max_ms": 15.5695,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "guardian",
+        "frames": 180,
+        "mean_ms": 12.1162,
+        "p95_ms": 13.0342,
+        "p99_ms": 14.7886,
+        "max_ms": 14.9344,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "fallen-dune",
+        "frames": 180,
+        "mean_ms": 7.15785,
+        "p95_ms": 7.8336,
+        "p99_ms": 8.2512,
+        "max_ms": 8.9506,
+        "render_budget_60hz": true
+      },
+      {
+        "scene": "stats-menu",
+        "frames": 180,
+        "mean_ms": 4.04481,
+        "p95_ms": 4.4362,
+        "p99_ms": 5.2328,
+        "max_ms": 6.0446,
+        "render_budget_60hz": true
+      }
+    ]
+  },
+  "backup": "art/pipeline/backups/progression-shop-corpse-20261026",
+  "note": "GPU-complete render timing; does not certify display presentation FPS."
+}

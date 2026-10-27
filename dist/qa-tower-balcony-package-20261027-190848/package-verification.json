@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "package_sha256": "c91a11686b93d2a1c433d75b81d1b787463f3f04961c835481e3e8a720f3e613",
+  "exe_sha256": "dd8e1cc5c077a3a2dbf0221bf207cf917e0137e100d23567b09b1bbefe275b39",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-tower-balcony-package-20261027-190848\\Emberfall",
+  "verified_assets": 115,
+  "renderer": {
+    "status": "PASS",
+    "checks": 1337,
+    "failures": 0,
+    "screenshots": 12,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 97,
+    "failures": [],
+    "masters": 3,
+    "runtime_rgba_bytes": 5008800,
+    "captures": 12,
+    "audio_opened": false
+  },
+  "render_timing": {
+    "audio_opened": false,
+    "presentation_measured": false,
+    "scenes": [
+      {
+        "name": "observatory",
+        "frames": 120,
+        "p95_ms": 13.3687,
+        "mean_ms": 9.75889,
+        "within_60hz_render_budget": true
+      },
+      {
+        "name": "valley-lookout",
+        "frames": 120,
+        "p95_ms": 13.7542,
+        "mean_ms": 12.617,
+        "within_60hz_render_budget": true
+      }
+    ]
+  },
+  "startup_frames": 180,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_player": false
+}

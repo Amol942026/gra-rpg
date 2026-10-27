@@ -12,6 +12,47 @@ int main(int argc,char** argv){
   fs::path root=argc>2?fs::path(argv[2]):fs::path("dist")/("qa-save-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
   check(!fs::exists(root),"fresh isolated test directory");fs::create_directories(root);
   saves::Snapshot s;roundtrip(s);
+  for(int k=int(Kind::SlimeBlade);k<ItemKindCount;k++){
+   auto extra=s;extra.game.bag[10]=item(Kind(k),2);extra.game.equipment[gearSlot(Kind(k))]=item(Kind(k),1);
+   extra.game.enemies[0].alive=false;extra.game.enemies[0].hp=0;extra.game.enemies[0].loot[14]=item(Kind(k));roundtrip(extra);
+   check(saves::decode(saves::encode(extra)).game.bag[10].kind==Kind(k),"every new item ID persists in bags, equipment and corpse loot");
+  }
+  auto legacy=saves::read("art/gameplay/guardian/fixtures/legacy-v1.efs");
+  check(distance(legacy.game.player,{8,19})==0&&legacy.game.hp==57&&legacy.game.gold==123&&legacy.game.bag[8].kind==Kind::GuardianSword,"real pre-change v1 save preserves existing position and inventory");
+  check(legacy.game.boulders.empty()&&legacy.game.enemies.back().boulderCd==BoulderFirstDelay,"v1 saves receive safe default boss timers");roundtrip(legacy);
+  auto legacy2=saves::read("art/gameplay/guardian/fixtures/legacy-v2.efs");
+  check(legacy2.game.enemies[0].boulderWindup>0&&!legacy2.game.knockedBack()&&length(legacy2.game.heroKnockback)==0,"real previous v2 player save retains its pending throw with safe recoil defaults");roundtrip(legacy2);
+  auto legacy3=saves::read("art/gameplay/guardian/fixtures/legacy-v3.efs");
+  check(legacy3.game.knockedBack()&&legacy3.game.heroKnockbackRemaining>0&&legacy3.game.knockdownProgress()<0,"real v3 mid-slide save loads with no invented fall progress");roundtrip(legacy3);
+  auto legacy4=saves::read("art/gameplay/guardian/fixtures/legacy-v4.efs");
+  check(legacy4.game.knockedBack()&&legacy4.game.heroKnockdownRemaining>HeroKnockdownDuration-.1f&&legacy4.game.heroKnockbackRemaining>.45f,"real v4 save migrates normalized fall and slide clocks into the current clip");roundtrip(legacy4);
+  auto legacy5=saves::read("art/gameplay/guardian/fixtures/legacy-v5.efs");
+  check(legacy5.game.knockedBack()&&legacy5.game.heroKnockdownRemaining<=HeroKnockdownDuration&&legacy5.game.fountainUsed==std::array<bool,FountainCount>{},"v5 fall migrates into faster recovery and unused fountains");roundtrip(legacy5);
+  auto legacy6=saves::read("art/gameplay/guardian/fixtures/legacy-v6.efs");check(legacy6.game.fountainUsed[0]&&legacy6.game.fountainUsed[1]&&legacy6.game.merchantArrows==20,"real v6 save preserves exhausted fountains and adds finite shop stock");roundtrip(legacy6);
+  auto throwing=s;throwing.game.props.clear();throwing.game.player=ForestGuardian+V{4,0};auto& guardian=throwing.game.enemies.back();guardian.boulderCd=0;
+  for(auto& e:throwing.game.enemies)if(e.type!=3)e.alive=false;
+  throwing.game.update(.05f,{},false);check(guardian.boulderWindup>0,"save fixture contains an actual pending boss throw");roundtrip(throwing);
+  while(throwing.game.boulders.empty())throwing.game.update(.05f,{},false);
+  throwing.game.update(.05f,{},false);roundtrip(throwing);
+  auto continued=saves::decode(saves::encode(throwing));
+  auto shattering=throwing;while(shattering.game.boulderImpacts.empty())shattering.game.update(.05f,{},false);
+  check(shattering.game.knockedBack(),"actual throw creates a live impulse before saving");roundtrip(shattering);
+  auto recoilRestored=saves::decode(saves::encode(shattering));auto fractureSnapshot=shattering;
+  for(float elapsed:{.7f,1.4f}){
+   auto fallen=shattering;for(int i=0;i<int(elapsed/.05f+.1f);i++)fallen.game.update(.05f,{},false);
+   check(fallen.game.knockedBack()&&fallen.game.heroKnockbackRemaining==0,"save fixture is lying or standing up after the slide");roundtrip(fallen);
+   auto restored=saves::decode(saves::encode(fallen));for(int i=0;i<30;i++){fallen.game.update(.05f,{},false);restored.game.update(.05f,{},false);}
+   check(saves::encode(fallen)==saves::encode(restored),"mid-lying and mid-get-up saves continue identically through restored control");
+  }
+  for(int i=0;i<172;i++){shattering.game.update(1.f/60,{},false);recoilRestored.game.update(1.f/60,{},false);}
+  check(saves::encode(shattering)==saves::encode(recoilRestored)&&!shattering.game.knockedBack(),"v6 resumes the backfall and quicker get-up, health and RNG");
+  shattering=fractureSnapshot;for(int i=0;i<4;i++)shattering.game.update(.05f,{},false);
+  check(shattering.game.boulderImpacts.size()==1&&shattering.game.boulderImpacts[0].progress()>0,"save fixture contains an actual mid-fracture animation");roundtrip(shattering);
+  auto fragmentsRestored=saves::decode(saves::encode(shattering));
+  for(int i=0;i<30;i++){shattering.game.update(.05f,{},false);fragmentsRestored.game.update(.05f,{},false);}
+  check(saves::encode(shattering)==saves::encode(fragmentsRestored),"current save resumes identical fragment phase, expiry, health and RNG");
+  for(int i=0;i<30;i++){throwing.game.update(.05f,{},false);continued.game.update(.05f,{},false);}
+  check(saves::encode(throwing)==saves::encode(continued),"midair save resumes the identical trajectory, damage, knockback and cooldown");
   s.game.level=5;s.game.xp=47;s.game.gold=567;s.game.attributePoints=5;s.game.skillPoints=1;s.game.allocationRequired=true;
   s.game.bag[8]=item(Kind::GuardianSword,2);s.game.equipment[1]=item(Kind::GuardianHelmet);s.game.hp=37;s.game.mana=42;
   s.game.chests[0].opened=true;s.game.chests[0].loot[0]={};s.game.hit(s.game.enemies[1],10000);s.game.forage[0].value={};
@@ -37,8 +78,25 @@ int main(int argc,char** argv){
   invalid=s;invalid.game.player.x=std::numeric_limits<float>::quiet_NaN();rejects([&]{saves::encode(invalid);},"nonfinite position rejected");
   invalid=s;invalid.game.enemies.push_back(invalid.game.enemies[0]);rejects([&]{saves::encode(invalid);},"duplicate enemy ID rejected");
   invalid=s;invalid.game.equipment[0]=item(Kind::Boots);rejects([&]{saves::encode(invalid);},"wrong equipment slot rejected");
-  auto envelope=[](saves::Snapshot snapshot,int version){saves::Archive payload(false);payload(snapshot);saves::Archive file(false);std::string magic="EMBERFALL-SAVE";size_t size=payload.bytes.size();uint64_t hash=saves::checksum(payload.bytes);file(magic,version,size,hash);return file.bytes+payload.bytes;};
-  rejects([&]{saves::decode(envelope(s,2));},"unknown future version refused");
+  auto envelope=[](saves::Snapshot snapshot,int version){saves::Archive payload(false,{},std::min(version,saves::CurrentVersion));payload(snapshot);saves::Archive file(false);std::string magic="EMBERFALL-SAVE";size_t size=payload.bytes.size();uint64_t hash=saves::checksum(payload.bytes);file(magic,version,size,hash);return file.bytes+payload.bytes;};
+  auto oldDesert=s;oldDesert.game=Game{};oldDesert.game.activateField(WorldLocation::Desert);oldDesert.game.player=DesertArrival;
+  oldDesert.game.props.clear();oldDesert.game.props.push_back({DesertFountains[0],7,1});oldDesert.game.props.push_back({{35,35},8,1});
+  auto migrated=saves::decode(envelope(oldDesert,5));
+  check(migrated.game.fountainUsed==std::array<bool,FountainCount>{}&&migrated.game.props.size()==1&&distance(migrated.game.props[0].pos,{35,35})==0,"legacy desert save gains unused fountains and removes only overlapping scenery");roundtrip(migrated);
+  auto fountains=migrated;fountains.game.player=DesertFountains[0]+V{1.6f,0};fountains.game.mana=7;check(fountains.game.useFountain(0),"save fixture uses actual mana fountain");roundtrip(fountains);
+  fountains.game.update(.05f,{},false);roundtrip(fountains);
+  auto badFountain=fountains;badFountain.game.fountainUsed[0]=false;rejects([&]{saves::encode(badFountain);},"draining unused fountain rejected");
+  badFountain=fountains;badFountain.game.fountainDrain[0]=1.1f;rejects([&]{saves::encode(badFountain);},"oversized drain clock rejected");
+  badFountain=fountains;badFountain.game.fountainDrain[0]=-.01f;rejects([&]{saves::encode(badFountain);},"negative drain clock rejected");
+  auto oldProgress=s;oldProgress.game=Game{};oldProgress.game.level=5;oldProgress.game.xp=200;oldProgress.game.attributes[0]=12;
+  auto oldProgressLoaded=saves::decode(envelope(oldProgress,6));
+  check(oldProgressLoaded.game.level==5&&oldProgressLoaded.game.xp==experienceForLevel(5)/2&&oldProgressLoaded.game.attributes[0]==12,"legacy saves retain earned levels, allocated stats and proportional XP progress");roundtrip(oldProgressLoaded);
+  auto scarce=s;scarce.game.merchantArrows=7;roundtrip(scarce);scarce.game.merchantArrows=0;scarce.game.desertBossDead=true;roundtrip(scarce);
+  auto badStock=s;badStock.game.merchantArrows=-1;rejects([&]{saves::encode(badStock);},"negative shop stock rejected");badStock.game.merchantArrows=21;rejects([&]{saves::encode(badStock);},"oversized shop stock rejected");
+  rejects([&]{saves::decode(envelope(s,saves::CurrentVersion+1));},"unknown future version refused");
+  invalid=s;invalid.game.heroKnockback={100,0};rejects([&]{saves::encode(invalid);},"oversized knockback vector rejected");
+  invalid=s;invalid.game.heroKnockbackRemaining=BoulderKnockbackDuration+.1f;rejects([&]{saves::encode(invalid);},"oversized knockback timer rejected");
+  invalid=s;invalid.game.heroKnockdownRemaining=HeroKnockdownDuration+.1f;rejects([&]{saves::encode(invalid);},"oversized fall/get-up timer rejected");
   invalid=s;invalid.intro.line=999;rejects([&]{saves::decode(envelope(invalid,1));},"valid checksum cannot bypass dialogue bounds");
   invalid=s;invalid.game.location=WorldLocation(999);rejects([&]{saves::decode(envelope(invalid,1));},"valid checksum cannot bypass location bounds");
   saves::Store store(root/fs::u8path(u8"Zapisy-żółć"));for(int i=0;i<3;i++){check(!store.inspect(i).exists,"empty slots reported");store.save(i,s);check(store.inspect(i).valid&&store.load(i).game.gold==567,"slot saved and loaded from Unicode directory");}

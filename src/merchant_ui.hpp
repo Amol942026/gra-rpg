@@ -2,6 +2,7 @@
 bool merchantBuying=true;int merchantOffer=0,merchantPage=0,merchantQuantity=1;
 Slot merchantSale{};Item merchantSaleSnapshot{};std::string merchantNotice;
 constexpr int MerchantRows=6;
+InventoryClicks merchantClicks;
 Rectangle merchantCloseRect(){return {1273,128,42,36};}
 Rectangle merchantOfferRect(int row){return {137,248.f+row*50,544,46};}
 Rectangle merchantBagRect(int index){return {737.f+(index%5)*112,328.f+(index/5)*47,103,40};}
@@ -18,13 +19,13 @@ Item merchantSelectedItem(){
 int merchantQuantityLimit(){
  Item value=merchantSelectedItem();if(value.empty()||!stackable(value.kind))return 1;
  if(!merchantBuying)return std::max(1,value.count);
- return int(std::clamp(game.goldBalance()/std::max(1,itemBuyPrice(value)),std::int64_t(1),std::int64_t(99)));
+ return int(std::clamp(game.goldBalance()/std::max(1,itemBuyPrice(value)),std::int64_t(1),std::int64_t(value.kind==Kind::Arrow?std::max(1,game.merchantArrows):99)));
 }
 void syncMerchantSelection(){
  if(!merchantBuying){Item value=merchantSelectedItem();if(value.kind!=merchantSaleSnapshot.kind||value.tier!=merchantSaleSnapshot.tier){merchantSale={};merchantSaleSnapshot={};merchantQuantity=1;}}
  merchantQuantity=std::clamp(merchantQuantity,1,merchantQuantityLimit());
 }
-void openMerchantSelection(){merchantBuying=true;merchantOffer=merchantPage=0;merchantQuantity=1;merchantSale={};merchantSaleSnapshot={};merchantNotice.clear();}
+void openMerchantSelection(){merchantClicks.clear();merchantBuying=true;merchantOffer=merchantPage=0;merchantQuantity=1;merchantSale={};merchantSaleSnapshot={};merchantNotice.clear();}
 void selectMerchantSale(Slot source){
  Item* value=game.get(source);if(!value||value->empty())return;
  merchantBuying=false;merchantSale=source;merchantSaleSnapshot=*value;merchantQuantity=1;merchantNotice.clear();
@@ -34,21 +35,32 @@ TradeResult selectedMerchantStatus(){
  if(!merchantBuying)return game.merchantSaleStatus(merchantSale,merchantQuantity);
  std::array<Item,BagSize> result{};std::int64_t wallet=0;return game.merchantPurchasePlan(merchantOffer,merchantQuantity,result,wallet);
 }
-bool clickMerchantPanel(){
+void executeMerchantTrade(int quantity){
+ TradeResult status=merchantBuying?game.buyMerchantItem(merchantOffer,quantity):game.sellMerchantItem(merchantSale,quantity);
+ merchantClicks.clear();merchantNotice=game.message;if(status==TradeResult::Success)syncMerchantSelection();
+}
+void clickMerchantSale(Slot source,double now){
+ Item* value=game.get(source);if(!value||value->empty()){merchantClicks.clear();return;}
+ bool quick=merchantClicks.press(source,*value,now,mouse.x,mouse.y);selectMerchantSale(source);if(quick)executeMerchantTrade(1);
+}
+bool clickMerchantPanel(double now){
  syncMerchantSelection();
- if(inside(merchantCloseRect())){closeTowerPanel();return true;}
- for(bool next:{false,true})if(inside(merchantPageRect(next))){merchantPage=std::clamp(merchantPage+(next?1:-1),0,int(MerchantOffers.size()-1)/MerchantRows);return true;}
+ if(inside(merchantCloseRect())){merchantClicks.clear();closeTowerPanel();return true;}
+ for(bool next:{false,true})if(inside(merchantPageRect(next))){merchantClicks.clear();merchantPage=std::clamp(merchantPage+(next?1:-1),0,int(MerchantOffers.size()-1)/MerchantRows);return true;}
  for(int row=0;row<MerchantRows;row++)if(inside(merchantOfferRect(row))){
-  int index=merchantPage*MerchantRows+row;if(index<int(MerchantOffers.size())){merchantBuying=true;merchantOffer=index;merchantQuantity=1;merchantNotice.clear();}return true;
+  int index=merchantPage*MerchantRows+row;if(index<int(MerchantOffers.size())){
+   bool quick=merchantClicks.press({Place::None,index,-2},merchantOfferItem(index),now,mouse.x,mouse.y);
+   merchantBuying=true;merchantOffer=index;merchantQuantity=1;merchantNotice.clear();if(quick)executeMerchantTrade(1);
+  }return true;
  }
- for(int i=0;i<EquipSize;i++)if(inside(merchantEquipRect(i))){selectMerchantSale({Place::Equip,i});return true;}
- for(int i=0;i<BagSize;i++)if(inside(merchantBagRect(i))){selectMerchantSale({Place::Bag,i});return true;}
+ for(int i=0;i<EquipSize;i++)if(inside(merchantEquipRect(i))){clickMerchantSale({Place::Equip,i},now);return true;}
+ for(int i=0;i<BagSize;i++)if(inside(merchantBagRect(i))){clickMerchantSale({Place::Bag,i},now);return true;}
+ merchantClicks.clear();
  if(inside(merchantMinusRect())){merchantQuantity=std::max(1,merchantQuantity-1);return true;}
  if(inside(merchantPlusRect())){merchantQuantity=std::min(merchantQuantityLimit(),merchantQuantity+1);return true;}
  if(inside(merchantMaxRect())){merchantQuantity=merchantQuantityLimit();return true;}
  if(inside(merchantTradeRect())){
-  TradeResult status=merchantBuying?game.buyMerchantItem(merchantOffer,merchantQuantity):game.sellMerchantItem(merchantSale,merchantQuantity);
-  merchantNotice=game.message;if(status==TradeResult::Success)syncMerchantSelection();return true;
+  executeMerchantTrade(merchantQuantity);return true;
  }
  return true;
 }
@@ -81,6 +93,7 @@ void drawMerchantPanel(){
   merchantTextFit(name,r.x+55,r.y+5,342,18,rarity(value));
   std::string detail=gearSlot(value.kind)>=0?std::string(gearSlot(value.kind)==0||gearSlot(value.kind)==5?"Atak +":"Pancerz +")+std::to_string(power(value)):
    value.kind==Kind::Health?"+50 HP":value.kind==Kind::Mana?"+35 many":"Amunicja do łuku";
+  if(value.kind==Kind::Arrow)detail+=" · Zapas: "+std::to_string(game.merchantArrows)+" / 20";
   txt(detail+" · "+rarityName(itemRarity(value)),r.x+55,r.y+27,14,Muted);
   txt(std::to_string(itemBuyPrice(value))+" zł",r.x+r.width-90,r.y+16,16,Gold);
  }
@@ -88,7 +101,7 @@ void drawMerchantPanel(){
  center(TextFormat("OFERTA %d / %d",merchantPage+1,int(MerchantOffers.size()+MerchantRows-1)/MerchantRows),413,566,14,Muted);
  const char* slots[]={"BROŃ","HEŁM","TARCZA","ZBROJA","BUTY","BIŻUT."};
  for(int i=0;i<EquipSize;i++)drawMerchantSlot({Place::Equip,i},merchantEquipRect(i),slots[i]);
- txt("PLECAK · kliknij przedmiot do sprzedaży",737,311,14,Muted);
+ txt("PLECAK · 2× LPM: sprzedaj jedną sztukę",737,311,14,Muted);
  for(int i=0;i<BagSize;i++)drawMerchantSlot({Place::Bag,i},merchantBagRect(i));
  txt("Skup: sprzęt, mikstury, amunicja i trofea bestii.",737,572,14,Muted);
  panel({129,603,1180,109},rgb(13,23,26));
@@ -108,7 +121,7 @@ void drawMerchantPanel(){
  DrawRectangleLinesEx(action,1,available?Gold:Line);center(merchantBuying?"KUP":"SPRZEDAJ",action.x+action.width/2,action.y+10,18,available?Text:Muted);
  std::int64_t amount=std::int64_t(merchantBuying?itemBuyPrice(selected):itemSellValue(selected))*merchantQuantity;
  center(std::to_string(amount)+" złota",action.x+action.width/2,action.y+35,16,available?Gold:Muted);
- std::string notice=!merchantNotice.empty()?merchantNotice:status!=TradeResult::Success?tradeMessage(status):"Kliknij towar lub przedmiot, wybierz ilość i zatwierdź.";
+ std::string notice=!merchantNotice.empty()?merchantNotice:status!=TradeResult::Success?tradeMessage(status):"2× LPM: kup / sprzedaj jedną sztukę. Przyciski ilości pozwalają handlować całym stosem.";
  merchantTextFit(notice,139,724,1170,15,status==TradeResult::Success?Green:Gold);
  center("Gra jest zatrzymana · ENTER / ESC — zamknij · Monety w plecaku też służą do płacenia",720,751,14,Muted);
 
@@ -117,6 +130,6 @@ void drawMerchantPanel(){
   Item value=merchantOfferItem(merchantPage*MerchantRows+row);
   if(!value.empty())drawItemTooltip(value,{},"Cena zakupu: "+std::to_string(itemBuyPrice(value))+" złota / szt.");return;
  }
- for(int i=0;i<BagSize;i++)if(inside(merchantBagRect(i))){Item* value=game.get({Place::Bag,i});if(value&&!value->empty())drawItemTooltip(*value,{Place::Bag,i},value->kind==Kind::DawnShard?"Artefakt fabularny · nie na sprzedaż":"Kliknij, aby wybrać do sprzedaży.");return;}
- for(int i=0;i<EquipSize;i++)if(inside(merchantEquipRect(i))){Item* value=game.get({Place::Equip,i});if(value&&!value->empty())drawItemTooltip(*value,{Place::Equip,i},"Kliknij, aby sprzedać noszony sprzęt.");return;}
+ for(int i=0;i<BagSize;i++)if(inside(merchantBagRect(i))){Item* value=game.get({Place::Bag,i});if(value&&!value->empty())drawItemTooltip(*value,{Place::Bag,i},value->kind==Kind::DawnShard?"Artefakt fabularny · nie na sprzedaż":"2× LPM: sprzedaj jedną sztukę.");return;}
+ for(int i=0;i<EquipSize;i++)if(inside(merchantEquipRect(i))){Item* value=game.get({Place::Equip,i});if(value&&!value->empty())drawItemTooltip(*value,{Place::Equip,i},"2× LPM: sprzedaj noszony sprzęt.");return;}
 }

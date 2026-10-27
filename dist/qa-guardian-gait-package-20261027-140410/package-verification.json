@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "package_sha256": "a2845557924588718efd84a4dbef4043352910308f53677b9ad0e3385cc1bc3e",
+  "exe_sha256": "2cb3f3d0d77eec3dd3495c447c9308311ba0ad698f39a3ad6742e1a186a58cb5",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-guardian-gait-package-20261027-140410\\Emberfall",
+  "verified_assets": 112,
+  "renderer": {
+    "status": "PASS",
+    "checks": 1844,
+    "failures": 0,
+    "contact_samples": 287,
+    "max_slip_px": 0.000213623,
+    "pose_frames": 192,
+    "movement_frames": 360,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 856,
+    "failures": [],
+    "verified_frames": 552,
+    "contact_samples": 287,
+    "max_slip_px": 0.0010000000000331966,
+    "source_sha256": "0d132dc7eee725f0d414da2eb942ad1db8edc8a359fce147a51c38e62ca3f52f",
+    "audio_opened": false
+  },
+  "startup_frames": 180,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_player": false,
+  "expansion": {
+    "status": "PASS",
+    "checks": 438,
+    "failures": [],
+    "new_items": 36,
+    "equipment_variants": 75,
+    "knee_extended_frames": 240,
+    "min_support_knee_degrees": 179.9997252838182,
+    "runtime_textures_added": 0,
+    "audio_opened": false
+  }
+}

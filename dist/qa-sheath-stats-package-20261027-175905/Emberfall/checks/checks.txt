@@ -1,0 +1,303 @@
+PASS real player renderer keeps audio closed
+PASS DODAJ 5 previews exactly five points without committing: 0
+PASS bulk cannot overspend the earned pool
+PASS COFNIJ refunds one point from a bulk preview
+PASS bulk cannot spend five when only one remains
+PASS hover preview matches the precise attribute formula
+PASS confirmation applies bulk and keeps skills unlearned until their own confirmation
+PASS normal skill confirmation resumes gameplay after bulk attributes
+PASS DODAJ 5 previews exactly five points without committing: 1
+PASS bulk cannot overspend the earned pool
+PASS COFNIJ refunds one point from a bulk preview
+PASS bulk cannot spend five when only one remains
+PASS hover preview matches the precise attribute formula
+PASS confirmation applies bulk and keeps skills unlearned until their own confirmation
+PASS normal skill confirmation resumes gameplay after bulk attributes
+PASS DODAJ 5 previews exactly five points without committing: 2
+PASS bulk cannot overspend the earned pool
+PASS COFNIJ refunds one point from a bulk preview
+PASS bulk cannot spend five when only one remains
+PASS hover preview matches the precise attribute formula
+PASS confirmation applies bulk and keeps skills unlearned until their own confirmation
+PASS normal skill confirmation resumes gameplay after bulk attributes
+PASS DODAJ 5 previews exactly five points without committing: 3
+PASS bulk cannot overspend the earned pool
+PASS COFNIJ refunds one point from a bulk preview
+PASS bulk cannot spend five when only one remains
+PASS hover preview matches the precise attribute formula
+PASS confirmation applies bulk and keeps skills unlearned until their own confirmation
+PASS normal skill confirmation resumes gameplay after bulk attributes
+PASS DODAJ 5 previews exactly five points without committing: 4
+PASS bulk cannot overspend the earned pool
+PASS COFNIJ refunds one point from a bulk preview
+PASS bulk cannot spend five when only one remains
+PASS hover preview matches the precise attribute formula
+PASS confirmation applies bulk and keeps skills unlearned until their own confirmation
+PASS normal skill confirmation resumes gameplay after bulk attributes
+PASS DODAJ 5 previews exactly five points without committing: 5
+PASS bulk cannot overspend the earned pool
+PASS COFNIJ refunds one point from a bulk preview
+PASS bulk cannot spend five when only one remains
+PASS hover preview matches the precise attribute formula
+PASS confirmation applies bulk and keeps skills unlearned until their own confirmation
+PASS normal skill confirmation resumes gameplay after bulk attributes
+PASS two earned levels allow two separate batches of five
+PASS incomplete pool cannot make an unauthorized five-point batch
+PASS invalid bulk requests cannot change the draft
+PASS read-only character sheet cannot allocate unearned points
+PASS UI uses preloaded fonts: allocation-80
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-0-80
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-1-80
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-2-80
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-3-80
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-4-80
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-5-80
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS UI uses preloaded fonts: readonly-80
+PASS UI uses preloaded fonts: allocation-100
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-0-100
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-1-100
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-2-100
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-3-100
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-4-100
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-5-100
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS UI uses preloaded fonts: readonly-100
+PASS UI uses preloaded fonts: allocation-120
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-0-120
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-1-120
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-2-120
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-3-120
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-4-120
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS all controls fit inside their attribute row
+PASS bulk, single and undo hit targets do not overlap
+PASS hover identifies the real attribute row
+PASS whole attribute explanation fits its cursor tooltip and screen
+PASS attribute tooltip stays away from its cursor
+PASS UI uses preloaded fonts: tooltip-5-120
+PASS cursor tooltip is drawn on top of the HUD, including its bottom edge
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS hover near right-side batch button keeps tooltip on screen
+PASS UI uses preloaded fonts: readonly-120
+PASS UI uses preloaded fonts: five-strength-preview
+PASS existing single-point, undo, spell and advancement UI remains functional
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS complete closer scabbard and sword visible in each facing and gait
+PASS hero close-up exported
+PASS actual renderer and grip use the closer Synfig scabbard socket
+PASS all diagnostics remained silent
+Checks: 301
+Failures: 0

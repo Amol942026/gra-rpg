@@ -23,14 +23,20 @@ std::vector<DrawObject> worldDrawOrder() {
         if(game.stairPresent(-1))objects.push_back({TowerStairDown.x+TowerStairDown.y,8,-1});objects.push_back({game.player.x+game.player.y,2,0});
         std::stable_sort(objects.begin(),objects.end(),[](const auto& a,const auto& b){return a.depth<b.depth;});return objects;
     }
-    objects.reserve(game.props.size()+game.enemies.size()+1);
+    objects.reserve(game.props.size()+game.enemies.size()+1+game.boulderImpacts.size()*guardian_break::Pieces);
     for(int i=0;i<int(game.props.size());i++)objects.push_back({game.props[i].pos.x+game.props[i].pos.y,0,i});
     for(int i=0;i<int(game.enemies.size());i++)
         objects.push_back({game.enemies[i].pos.x+game.enemies[i].pos.y+(game.enemies[i].alive?0.f:-.03f),game.enemies[i].alive?1:4,i});
     objects.push_back({game.player.x+game.player.y,2,0});
     for(int i=0;i<TreasureCount;i++)if(game.chests[i].location==game.location)objects.push_back({game.chests[i].pos.x+game.chests[i].pos.y,9,i});
+    if(game.inDesert())for(int i=0;i<FountainCount;i++)objects.push_back({DesertFountains[i].x+DesertFountains[i].y,12,i});
     for(int i=0;i<int(game.fireballs.size());i++)objects.push_back({game.fireballs[i].pos.x+game.fireballs[i].pos.y,3,i});
     for(int i=0;i<int(game.arrows.size());i++)objects.push_back({game.arrows[i].pos.x+game.arrows[i].pos.y,5,i});
+    for(int i=0;i<int(game.boulders.size());i++)objects.push_back({game.boulders[i].pos.x+game.boulders[i].pos.y,10,i});
+    for(int i=0;i<int(game.boulderImpacts.size());i++)for(int piece=0;piece<guardian_break::Pieces;piece++){
+        const auto& impact=game.boulderImpacts[i];auto q=guardian_break::sample(piece,impact.progress());
+        if(q.alpha>0)objects.push_back({impact.pos.x+impact.pos.y+q.y/20,11,i*guardian_break::Pieces+piece});
+    }
     std::stable_sort(objects.begin(),objects.end(),[](const auto& a,const auto& b){return a.depth<b.depth;});
     return objects;
 }
@@ -68,9 +74,12 @@ WorldHover pickWorld(Vector2 point) {
     // Reverse of the actual drawing order: never select an enemy through a tree.
     auto objects=worldDrawOrder();
     for(auto it=objects.rbegin();it!=objects.rend();++it){
+        if(it->type==10||it->type==11)continue; // Stones and fragments are not inventory/hover targets.
         if(it->type==3||it->type==5)continue; // Projectiles do not obstruct mouse inspection.
         V position{};bool touched=false;HoverKind kind=HoverKind::None;int id=it->index;
-        if(it->type==9){
+        if(it->type==12){
+            position=DesertFountains[it->index];kind=HoverKind::Fountain;touched=fountain_art::contains(it->index,point);
+        }else if(it->type==9){
             const auto& chest=game.chests[it->index];position=chest.pos;id=chest.id;kind=HoverKind::Chest;
             touched=treasureContains(chest,point);
         }else if(it->type==6){
@@ -92,8 +101,7 @@ WorldHover pickWorld(Vector2 point) {
             Vector2 p=screen(e.pos);kind=HoverKind::Enemy;id=e.id;
             float half=enemyBoss(e.type)?125:75;
             if(CheckCollisionPointRec(point,{p.x-half,p.y-enemyInfo(e.type).visualHeight,half*2,enemyInfo(e.type).visualHeight+14})){
-                float attack=e.attackPose();
-                touched=actor_art::draw(e.type+1,p.x,p.y,1,e.animation,attack,false,false,Kind::Sword,false,BLANK,&point);
+                touched=actor_art::drawEnemy(e,p.x,p.y,BLANK,&point);
             }
         }else if(it->type==4){
             const Enemy& e=game.enemies[it->index];position=e.pos;kind=HoverKind::Corpse;id=e.id;
@@ -140,9 +148,10 @@ void drawHoveredTile() {
 }
 
 void drawHoveredName() {
-    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage&&hovered.kind!=HoverKind::Mage&&hovered.kind!=HoverKind::TowerObject&&hovered.kind!=HoverKind::TowerStair)return;
+    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage&&hovered.kind!=HoverKind::Mage&&hovered.kind!=HoverKind::TowerObject&&hovered.kind!=HoverKind::TowerStair&&hovered.kind!=HoverKind::Chest&&hovered.kind!=HoverKind::Fountain)return;
     std::string name;Color color=Gold;
-    if(hovered.kind==HoverKind::TowerStair){name=hovered.index==1?"Schody w górę · E / PPM":"Schody w dół · E / PPM";}
+    if(hovered.kind==HoverKind::Fountain){name=std::string(fountainName(hovered.index))+(game.fountainUsed[hovered.index]?" · wyczerpane":" · E / LPM / PPM");color=hovered.index==0?Blue:rgb(238,123,123);}
+    else if(hovered.kind==HoverKind::TowerStair){name=hovered.index==1?"Schody w górę · E / PPM":"Schody w dół · E / PPM";}
     else if(hovered.kind==HoverKind::Chest){name="Skrzynia skarbów · E / LPM / PPM";}
     else if(hovered.kind==HoverKind::TowerObject){const auto& object=towerFurnishings(game.towerFloor)[hovered.index];name=towerObjectName(object.type);if(towerInteractive(object.type))name+=" · E / PPM";}
     else if(hovered.kind==HoverKind::Mage){name=game.mageReachable()?"Eldrin · E / PPM: porozmawiaj":"Eldrin · podejdź bliżej";}

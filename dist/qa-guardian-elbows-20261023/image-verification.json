@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "checks": 867,
+  "native_synfig_frames": 168,
+  "compiled_control_samples": 169,
+  "game_frames": 120,
+  "pose_views": 48,
+  "elbow_flexion_min_deg": 15.81630484821699,
+  "elbow_flexion_max_deg": 116.48503508311033,
+  "minimum_changed_pixels": 6058,
+  "audio_played": false
+}

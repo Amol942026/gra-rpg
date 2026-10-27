@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "authoring": "Krita native MCP polygons and brush paths",
+  "original_art": true,
+  "external_assets": [],
+  "master": "C:\\AI2D\\sprites\\emberfall_dune_fallen_20261026_v2",
+  "layers": {
+    "01": "eb2da98b-c34f-41aa-a659-292cd6222fc4",
+    "02": "27072569-ad7f-4537-966d-4c90692a94c2",
+    "03": "164e7198-a039-4cbe-a580-612ffe2e02d2",
+    "04": "700423b6-7579-4bd7-8e7c-65e50ef69093",
+    "05": "431d8d74-c548-4ec4-958e-4733419240b6"
+  },
+  "cell": [
+    384,
+    256
+  ],
+  "directions": 8,
+  "foot_anchor": [
+    192,
+    160
+  ],
+  "kra_sha256": "1ac2c6bc56e7e112aed5c099a8c2e27f873fef86a9f630cc71dcb801a54a522f",
+  "png_sha256": "cd9c5d20280e97e02f4509bc00b1da79e8c5309c51c15f56c0a0cde277fd5c7b",
+  "rgba_bytes": 3145728
+}

@@ -8,9 +8,9 @@ void skillTests(){
  check(!start.trainSkills({0,0})&&!start.trainSkills({-1,2})&&!start.trainSkills({1,1}),"zero, negative and excessive skill drafts cannot bypass allocation");
  check(start.trainSkills({1,0})&&start.skillRank(Skill::StrongCut)==1&&start.skillRank(Skill::PiercingArrow)==0&&!start.allocationRequired,"one point learns chosen skill and resumes after both stages");
  check(!start.trainSkills({1,0}),"same level cannot spend its skill point twice");
- start.xp=start.level*80-1;Enemy next{901,0,start.player,start.player,1,1};start.hit(next,10);start.distribute({5,0,0,0,0,0});
+ start.xp=experienceForLevel(start.level)-1;Enemy next{901,0,start.player,start.player,1,1};start.hit(next,10);start.distribute({5,0,0,0,0,0});
  check(start.skillPoints==1&&start.trainSkills({0,1})&&start.skillRanks==SkillRanks{1,1},"next level supplies one new point and can unlock other skill");
- Game multi=emptyArena();multi.xp=250;Enemy fake{900,0,multi.player,multi.player,1,1};multi.hit(fake,10);
+ Game multi=emptyArena();multi.xp=experienceForLevel(1)+experienceForLevel(2)+10;Enemy fake{900,0,multi.player,multi.player,1,1};multi.hit(fake,10);
  check(multi.skillPoints==2&&multi.attributePoints==10,"multiple simultaneous advances retain one skill point per gained level");multi.distribute({10,0,0,0,0,0});
  check(multi.trainSkills({2,0})&&multi.skillRank(Skill::StrongCut)==2&&!multi.allocationRequired,"multiple earned points may increase chosen skill rank without deadlocking");
  auto ready=[](){Game g=emptyArena();g.skillRanks={1,1};return g;};
@@ -44,7 +44,7 @@ void skillTests(){
  g=ready();g.selectWeapon(1);V p=g.player+V{1,0};g.enemies.push_back({100,1,p,p,500,500});g.preparePiercingArrow();g.beginBow({1,0});g.bowDrawTime=BowDrawDuration;g.releaseBow();g.updateArrows(.02f);float after=g.enemies[0].hp;
  for(int i=0;i<5;i++)g.updateArrows(.02f);check(g.enemies[0].hp==after&&after<500,"same enemy cannot be hit again while arrow passes through its body across frames");
  for(int steps:{10,40,100}){g=line();g.preparePiercingArrow();g.beginBow({1,0});g.bowDrawTime=BowDrawDuration;g.releaseBow();for(int i=0;i<steps;i++)g.updateArrows(1.f/steps);check(g.enemies[0].hp<500&&g.enemies[2].hp<500&&g.enemies[3].hp==500,"piercing target count and hits are independent of update frequency");}
- g=line();g.xp=79;for(int i=0;i<3;i++)g.enemies[i].hp=1;g.preparePiercingArrow();g.beginBow({1,0});g.bowDrawTime=BowDrawDuration;g.releaseBow();g.updateArrows(1);
+ g=line();g.xp=experienceForLevel(1)-1;for(int i=0;i<3;i++)g.enemies[i].hp=1;g.preparePiercingArrow();g.beginBow({1,0});g.bowDrawTime=BowDrawDuration;g.releaseBow();g.updateArrows(1);
  check(g.kills==3&&g.allocationRequired&&g.skillPoints>=1&&g.findCorpse(100)&&g.findCorpse(102)&&g.ground.empty(),"piercing segment completes its hits, corpse loot and XP before level pause");
  g=ready();g.hp=0;check(!g.strongCut()&&!g.preparePiercingArrow(),"dead hero cannot activate skills");
  g=ready();g.enterMageTower();check(!g.strongCut()&&!g.preparePiercingArrow(),"safe tower blocks both combat skills");

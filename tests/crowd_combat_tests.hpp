@@ -35,7 +35,7 @@ void crowdCombatTests() {
     check(cueCount(area,Cue::Swing)==1&&area.animation.direction==Direction::NW,"one swing sound and no automatic turn toward a target");
     check(!area.attack()&&area.enemies[0].hp==86,"cooldown prevents repeated group damage");
 
-    Game kills=emptyArena();kills.xp=75;
+    Game kills=emptyArena();kills.xp=experienceForLevel(1)-5;
     for(int i=0;i<5;i++){V p=kills.player+normalized(directions[i])*1.5f;
         kills.enemies.push_back({i,0,p,p,i==0||i==4?100.f:1.f,100});}
     kills.attack();
