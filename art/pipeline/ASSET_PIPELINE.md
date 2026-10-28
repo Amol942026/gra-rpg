@@ -1,5 +1,10 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+Optymalizacja renderera, testy ukryte i rozdzielczość świata/HUD:
+[raport 28.10.2026](../performance/20261028/README.md).
+`--no-audio --background-test` ukrywa rzeczywisty EXE; helpery renderera
+używają ukrytych okien. Nie przywracać ich bez polecenia użytkownika.
+
 Dopasowanie istniejących schodów, kolizje i bezpieczne wczytywanie pozycji:
 [art/scenery/tower-stairs-fit/README.md](../scenery/tower-stairs-fit/README.md).
 `tests/tower_stairs_fit_qa.ps1 -NoAudio`, `verify_tower_stairs_fit.py` oraz
@@ -14,7 +19,10 @@ Zachodni start i rzut Kamiennego Strażnika:
 [art/gameplay/guardian/README.md](../gameplay/guardian/README.md).
 `create_guardian_stone.py` (Krita), `guardian_throw_synfig.py` (Synfig),
 `tests/guardian_qa.ps1 -NoAudio` i `guardian_package_qa.ps1 -NoAudio`.
-Serializator zapisuje format 7 (skończony zapas strzał, nowa krzywa PD) i czyta formaty 1–6.
+Serializator zapisuje format 8 (także szarże dzików) i czyta formaty 1–7.
+Szarża korzysta z istniejących póz dzika, chodu zależnego od drogi i lokalnych
+efektów. Testy: `tests/boar_charge_qa.ps1 -NoAudio` oraz
+`tests/boar_charge_package_qa.ps1 -NoAudio -HelperRoot <katalog helpera>`.
 Rozpad głazu: `guardian_fragments.py` (Krita) i `guardian_shatter_synfig.py`
 (Synfig), źródła w `art/gameplay/guardian/shatter/`. Weryfikator
 `verify_guardian_shatter.py` działa w ramach tych samych testów gry i ZIP-a.

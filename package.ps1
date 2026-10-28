@@ -87,6 +87,9 @@ Esc pauzuje takze rozmowy i prolog.
 
 WYPRAWA I LUP
 Odkryj las, pokonaj Kamiennego Straznika i dotrzyj do wiezy Eldrina.
+Lesne dziki przygotowuja szarze przez 0,55 s, potem biegna prosto w cel.
+Stratowanie zadaje jednorazowo podwojne obrazenia; odnowienie wynosi 4,5 s.
+Zejdz z toru, uzyj uniku lub skorzystaj z oslony terenowej.
 Wieza ma piec tematycznych pieter. Eldrin otwiera droge na pustynie,
 gdzie czeka Zywa Wydma. Rozmowa z magiem pozwala wybrac podroz.
 Na 5. pietrze (Obserwatorium) wyjdz w prawo na balkon z widokiem na Doline Switu.

@@ -13,6 +13,39 @@ float treeBend(const Prop& prop,float sourceY,float time){
     return height*height*windGust(prop.pos,time)*sway
         +height*height*std::sin(time*2.6f+phase+height*6.f)*.45f;
 }
+namespace tree_wind {
+inline bool cached=true,shared=true;
+struct Samples {
+ std::array<float,47> bends{};
+ Samples()=default;
+ Samples(const Prop& prop,float time){
+  if(!cached)return;
+  const float phase=prop.pos.x*.71f+prop.pos.y*.43f;
+  const float sway=3.f+5.f*std::sin(time*1.05f+phase)+1.6f*std::sin(time*1.73f+phase*.7f);
+  const float gust=windGust(prop.pos,time);
+  for(int i=0;i<47;i++){
+   const float height=std::clamp((200-i*5.f)/165.f,0.f,1.21f);
+   bends[i]=height*height*gust*sway+height*height*std::sin(time*2.6f+phase+height*6.f)*.45f;
+  }
+ }
+};
+struct Entry {V position;float time;Samples samples;};
+inline std::vector<Entry> frameSamples;
+inline void init(){frameSamples.reserve(256);}
+inline void beginFrame(){frameSamples.clear();}
+inline const Samples& samples(const Prop& prop,float time){
+ if(cached&&shared){
+  for(const auto& entry:frameSamples)if(entry.position.x==prop.pos.x&&entry.position.y==prop.pos.y&&entry.time==time)return entry.samples;
+  if(frameSamples.size()<256){
+   if(frameSamples.capacity()<256)init();
+   frameSamples.push_back({prop.pos,time,Samples(prop,time)});return frameSamples.back().samples;
+  }
+ }
+ // Reference rendering and unusually crowded views keep identical behaviour
+ // without letting the frame cache grow beyond its fixed budget.
+ static Samples fallback;fallback=Samples(prop,time);return fallback;
+}
+}
 // Hit testing uses the exact piecewise-linear deformation of the drawn mesh.
 float treeShift(const Prop& prop,float sourceY,float time){
     float y=std::clamp(sourceY,0.f,230.f),a=std::floor(y/5)*5,b=std::min(a+5,230.f);
@@ -27,11 +60,12 @@ void drawPropTexture(const Prop& prop,Texture2D texture,bool upright,Color tint)
         return;
     }
     // Filtered, connected quads preserve fractional-pixel movement of the crown.
+    const auto& wind=tree_wind::samples(prop,game.time);
     rlSetTexture(texture.id);rlBegin(RL_QUADS);rlColor4ub(tint.r,tint.g,tint.b,tint.a);
     for(int y=0;y<230;y+=5){
         float top=base.y+(y-208)*prop.size,bottom=top+5*prop.size;
-        float left0=base.x+(-90+treeBend(prop,float(y),game.time))*prop.size;
-        float left1=base.x+(-90+treeBend(prop,float(y+5),game.time))*prop.size;
+        float left0=base.x+(-90+(tree_wind::cached?wind.bends[y/5]:treeBend(prop,float(y),game.time)))*prop.size;
+        float left1=base.x+(-90+(tree_wind::cached?wind.bends[y/5+1]:treeBend(prop,float(y+5),game.time)))*prop.size;
         float v0=y/230.f,v1=(y+5)/230.f;if(!upright){v0=1-v0;v1=1-v1;}
         rlTexCoord2f(0,v0);rlVertex2f(left0,top);
         rlTexCoord2f(0,v1);rlVertex2f(left1,bottom);

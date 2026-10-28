@@ -9,6 +9,12 @@ benchmark, smoke test, and graphical/audio diagnostic must pass `--no-audio`.
 Do not play game audio through the laptop speakers or change the user's saved
 audio preferences to achieve this. Normal launches by the user retain audio.
 
+Game tests must also stay hidden or minimized (user preference, 28.10.2026).
+Use `--no-audio --background-test` for the actual game executable, and hidden
+windows in QA helpers. Do not focus or restore test windows. A minimized or
+hidden window cannot validate displayed FPS: report completed render time
+separately and do not claim it proves foreground frame pacing.
+
 # Audacity automation
 
 Local audio editing is configured through Audacity 3.7.9 and its enabled

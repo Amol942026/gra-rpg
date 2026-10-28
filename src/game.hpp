@@ -27,6 +27,10 @@ constexpr float MapWalkMin=1.6f,MapWalkMax=MapSize-2.6f;
 constexpr float WalkSpeed=3.8f, BootsSpeed=4.3f;
 constexpr float RunMultiplier=1.5f;
 constexpr float EnemySightRange=6.5f,PatrolRadius=2.5f,PatrolSpeedFactor=.6f;
+constexpr int BoarType=4;
+constexpr float BoarChargeFirstDelay=.65f,BoarChargeCooldown=4.5f,BoarChargeWindup=.55f;
+constexpr float BoarChargeDuration=.7f,BoarChargeRecovery=.6f,BoarChargeSpeed=9.5f;
+constexpr float BoarChargeMinRange=2.2f,BoarChargeDamageMultiplier=2.f,HeroBodyRadius=.28f;
 constexpr float MeleeRange=2.1f, SwingDuration=.32f;
 constexpr float RollDuration=.4f, RollSpeed=7.f, RollCooldown=1.2f, RollProtection=.28f;
 constexpr float FireballCost=10,FireballCooldown=.8f,FireballSpeed=8,FireballRange=8,ManaRegenInterval=5;
@@ -69,6 +73,9 @@ struct Enemy {
  V patrolGoal{};float patrolWait=0,patrolBlocked=0;unsigned patrolSequence=0;bool patrolGoalActive=false;
  double sandPrisonCd=SandPrisonInterval;float sandCastPulse=0;int sandPrisonCasts=0;
  float boulderCd=BoulderFirstDelay,boulderWindup=0,boulderRecovery=0;V boulderTarget{};int boulderThrows=0;
+ float boarChargeCd=BoarChargeFirstDelay,boarWindup=0,boarRush=0,boarRecovery=0;
+ V boarAim{},boarDirection{};bool boarHit=false;int boarCharges=0;
+ bool boarBusy()const{return type==BoarType&&(boarWindup>0||boarRush>0||boarRecovery>0);}
  float boulderProgress()const{
   if(type!=3)return -1;
   if(boulderWindup>0)return (BoulderWindup-boulderWindup)/(BoulderWindup+BoulderRecovery);
@@ -76,6 +83,12 @@ struct Enemy {
   return -1;
  }
  float attackPose()const{
+  // Reuse the existing boar attack pose and distance-driven locomotion.
+  if(type==BoarType){
+   if(boarWindup>0)return .7f*(1-boarWindup/BoarChargeWindup);
+   if(boarRush>0)return .9f;
+   if(boarRecovery>0)return .9f*boarRecovery/BoarChargeRecovery;
+  }
   float regular=windup>0?-std::clamp(1-windup/.42f,0.f,1.f):strike>0?std::sin((1-strike/.22f)*3.14159265f):0;
   return sandCastPulse>0?std::sin((1-sandCastPulse/SandCastDuration)*3.14159265f):regular;
  }
@@ -379,6 +392,7 @@ struct Game {
   effects.push_back({e.pos,std::to_string(int(std::round(amount))),critical?1.25f:.95f,0,true,critical,enemyInfo(e.type).visualHeight+18+std::min(lift,90.f)});
   const Cue materials[]={Cue::SlimeHit,Cue::WolfHit,Cue::BoneHit,Cue::StoneHit,Cue::WolfHit,Cue::SlimeHit,Cue::WolfHit,Cue::StoneHit};sound(materials[std::clamp(e.type,0,ForestEnemyTypeCount-1)],e.pos);
   if(e.hp>0)return;e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=e.boulderWindup=e.boulderRecovery=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;
+  e.boarWindup=e.boarRush=e.boarRecovery=0;e.boarDirection=e.boarAim={};e.boarHit=false;
   boulders.erase(std::remove_if(boulders.begin(),boulders.end(),[&](const Boulder& b){return b.owner==e.id;}),boulders.end());
   sound(enemyBoss(e.type)?Cue::Victory:Cue::EnemyFall,e.pos);kills++;xp+=enemyInfo(e.type).experience;
   e.loot=rollEnemyLoot(e.type,rng);
@@ -431,6 +445,7 @@ struct Game {
  }
  float incomingDamage(float amount,DamageType type)const{return damageAfterArmor(amount,type==DamageType::Magic?magicDefense():defense());}
  #include "enemy_ai.hpp"
+ #include "boar_charge.hpp"
  #include "guardian_boulder.hpp"
  float constrainEnemy(Enemy& e){
   const float radius=e.radius();
@@ -446,15 +461,17 @@ struct Game {
   }
   return correction;
  }
- void moveEnemies(float dt,const std::vector<V>& desired){
+ void moveEnemies(float dt,const std::vector<V>& desired,const V* heroBefore=nullptr,bool wasRolling=false,float rollElapsed=0){
   // Short steps stop fast enemies passing through one another between frames.
   const int steps=std::max(1,int(std::ceil(dt*120)));
   const float step=dt/steps;
+  const V heroFrom=heroBefore?*heroBefore:player,heroEnd=player;
   for(int sub=0;sub<steps;sub++){
    for(size_t i=0;i<enemies.size();i++){
     auto& e=enemies[i];if(!e.alive)continue;
     e.recoil=e.recoil*std::exp(-10.f*step);
-    e.pos=e.pos+(desired[i]+e.recoil)*step;
+    if(location==WorldLocation::Forest&&e.boarBusy())advanceBoarCharge(e,step,heroFrom+(heroEnd-heroFrom)*(float(sub)/steps),heroFrom+(heroEnd-heroFrom)*(float(sub+1)/steps),wasRolling,rollElapsed+sub*step);
+    else e.pos=e.pos+(desired[i]+e.recoil)*step;
     constrainEnemy(e);
    }
    // Resolve the whole crowd, including stationary/winding-up enemies. Recheck
@@ -543,6 +560,7 @@ struct Game {
     if(e.sandPrisonCd<=.00001f){e.sandPrisonCd+=SandPrisonInterval;imprisonInSand(e);}
    }
    if(updateGuardianThrow(e,dt,visible,d))continue;
+   if(prepareBoarCharge(e,dt,visible,d))continue;
    if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(d<(e.type==DesertBossType?2.15f:1.6f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead()){float dmg=incomingDamage(float(e.damage()),e.attackType());hp=std::max(0.f,hp-dmg);hurt=.2f;sound(dead()?Cue::Death:Cue::Hurt,player);effects.push_back({player,"-"+std::to_string(int(dmg)),.8f,4});}
@@ -553,7 +571,7 @@ struct Game {
     else if(e.sandCastPulse<=0&&d>(e.type==DesertBossType?1.7f:1.05f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
    }else desired[i]=patrolVelocity(e,dt);
   }
-  moveEnemies(dt,desired);
+  moveEnemies(dt,desired,&before,wasRolling,rollElapsed);
   for(size_t i=0;i<enemies.size();i++){
    auto& e=enemies[i];if(!e.alive)continue;
    V movement=e.pos-oldPositions[i];
@@ -563,7 +581,8 @@ struct Game {
    }
    if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
-   else e.animation.advance(movement.x,movement.y,dt);
+   else e.animation.advance(movement.x,movement.y,dt,false,!e.boarBusy());
+   if(e.boarBusy())faceBoarCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);
    if(e.boulderWindup>0||e.boulderRecovery>0)e.animation.face(e.boulderTarget.x-e.pos.x,e.boulderTarget.y-e.pos.y);
    else if(e.windup>0)e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
   }

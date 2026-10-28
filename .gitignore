@@ -2,3 +2,6 @@
 # Keep reproducible tests and curated reports in Git, not these duplicates.
 /dist/qa-performance60-*/
 /dist/qa-render-optimization-*/
+/dist/qa-boar-charge-*/
+/dist/qa-boar-package-*/
+/dist/qa-save-*/

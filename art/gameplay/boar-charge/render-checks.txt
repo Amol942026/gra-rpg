@@ -1,0 +1,163 @@
+PASS real scene decoded / warning-0
+PASS saved integrated frame / warning-0
+PASS test window stays hidden / warning-0
+PASS real scene decoded / rush-0
+PASS saved integrated frame / rush-0
+PASS test window stays hidden / rush-0
+PASS real scene decoded / hit-0
+PASS saved integrated frame / hit-0
+PASS test window stays hidden / hit-0
+PASS real scene decoded / recovery-0
+PASS saved integrated frame / recovery-0
+PASS test window stays hidden / recovery-0
+PASS actual rendered gameplay includes all four charge phases / 0
+PASS actual rendered gameplay includes all four charge phases / 0
+PASS actual rendered gameplay includes all four charge phases / 0
+PASS actual rendered gameplay includes all four charge phases / 0
+PASS rendered charge deals one stronger hit / 0
+PASS rendered charge respects its cooldown / 0
+PASS real scene decoded / warning-1
+PASS saved integrated frame / warning-1
+PASS test window stays hidden / warning-1
+PASS real scene decoded / rush-1
+PASS saved integrated frame / rush-1
+PASS test window stays hidden / rush-1
+PASS real scene decoded / hit-1
+PASS saved integrated frame / hit-1
+PASS test window stays hidden / hit-1
+PASS real scene decoded / recovery-1
+PASS saved integrated frame / recovery-1
+PASS test window stays hidden / recovery-1
+PASS actual rendered gameplay includes all four charge phases / 1
+PASS actual rendered gameplay includes all four charge phases / 1
+PASS actual rendered gameplay includes all four charge phases / 1
+PASS actual rendered gameplay includes all four charge phases / 1
+PASS rendered charge deals one stronger hit / 1
+PASS rendered charge respects its cooldown / 1
+PASS real scene decoded / warning-2
+PASS saved integrated frame / warning-2
+PASS test window stays hidden / warning-2
+PASS real scene decoded / rush-2
+PASS saved integrated frame / rush-2
+PASS test window stays hidden / rush-2
+PASS real scene decoded / hit-2
+PASS saved integrated frame / hit-2
+PASS test window stays hidden / hit-2
+PASS real scene decoded / recovery-2
+PASS saved integrated frame / recovery-2
+PASS test window stays hidden / recovery-2
+PASS actual rendered gameplay includes all four charge phases / 2
+PASS actual rendered gameplay includes all four charge phases / 2
+PASS actual rendered gameplay includes all four charge phases / 2
+PASS actual rendered gameplay includes all four charge phases / 2
+PASS rendered charge deals one stronger hit / 2
+PASS rendered charge respects its cooldown / 2
+PASS real scene decoded / warning-3
+PASS saved integrated frame / warning-3
+PASS test window stays hidden / warning-3
+PASS real scene decoded / rush-3
+PASS saved integrated frame / rush-3
+PASS test window stays hidden / rush-3
+PASS real scene decoded / hit-3
+PASS saved integrated frame / hit-3
+PASS test window stays hidden / hit-3
+PASS real scene decoded / recovery-3
+PASS saved integrated frame / recovery-3
+PASS test window stays hidden / recovery-3
+PASS actual rendered gameplay includes all four charge phases / 3
+PASS actual rendered gameplay includes all four charge phases / 3
+PASS actual rendered gameplay includes all four charge phases / 3
+PASS actual rendered gameplay includes all four charge phases / 3
+PASS rendered charge deals one stronger hit / 3
+PASS rendered charge respects its cooldown / 3
+PASS real scene decoded / warning-4
+PASS saved integrated frame / warning-4
+PASS test window stays hidden / warning-4
+PASS real scene decoded / rush-4
+PASS saved integrated frame / rush-4
+PASS test window stays hidden / rush-4
+PASS real scene decoded / hit-4
+PASS saved integrated frame / hit-4
+PASS test window stays hidden / hit-4
+PASS real scene decoded / recovery-4
+PASS saved integrated frame / recovery-4
+PASS test window stays hidden / recovery-4
+PASS actual rendered gameplay includes all four charge phases / 4
+PASS actual rendered gameplay includes all four charge phases / 4
+PASS actual rendered gameplay includes all four charge phases / 4
+PASS actual rendered gameplay includes all four charge phases / 4
+PASS rendered charge deals one stronger hit / 4
+PASS rendered charge respects its cooldown / 4
+PASS real scene decoded / warning-5
+PASS saved integrated frame / warning-5
+PASS test window stays hidden / warning-5
+PASS real scene decoded / rush-5
+PASS saved integrated frame / rush-5
+PASS test window stays hidden / rush-5
+PASS real scene decoded / hit-5
+PASS saved integrated frame / hit-5
+PASS test window stays hidden / hit-5
+PASS real scene decoded / recovery-5
+PASS saved integrated frame / recovery-5
+PASS test window stays hidden / recovery-5
+PASS actual rendered gameplay includes all four charge phases / 5
+PASS actual rendered gameplay includes all four charge phases / 5
+PASS actual rendered gameplay includes all four charge phases / 5
+PASS actual rendered gameplay includes all four charge phases / 5
+PASS rendered charge deals one stronger hit / 5
+PASS rendered charge respects its cooldown / 5
+PASS real scene decoded / warning-6
+PASS saved integrated frame / warning-6
+PASS test window stays hidden / warning-6
+PASS real scene decoded / rush-6
+PASS saved integrated frame / rush-6
+PASS test window stays hidden / rush-6
+PASS real scene decoded / hit-6
+PASS saved integrated frame / hit-6
+PASS test window stays hidden / hit-6
+PASS real scene decoded / recovery-6
+PASS saved integrated frame / recovery-6
+PASS test window stays hidden / recovery-6
+PASS actual rendered gameplay includes all four charge phases / 6
+PASS actual rendered gameplay includes all four charge phases / 6
+PASS actual rendered gameplay includes all four charge phases / 6
+PASS actual rendered gameplay includes all four charge phases / 6
+PASS rendered charge deals one stronger hit / 6
+PASS rendered charge respects its cooldown / 6
+PASS real scene decoded / warning-7
+PASS saved integrated frame / warning-7
+PASS test window stays hidden / warning-7
+PASS real scene decoded / rush-7
+PASS saved integrated frame / rush-7
+PASS test window stays hidden / rush-7
+PASS real scene decoded / hit-7
+PASS saved integrated frame / hit-7
+PASS test window stays hidden / hit-7
+PASS real scene decoded / recovery-7
+PASS saved integrated frame / recovery-7
+PASS test window stays hidden / recovery-7
+PASS actual rendered gameplay includes all four charge phases / 7
+PASS actual rendered gameplay includes all four charge phases / 7
+PASS actual rendered gameplay includes all four charge phases / 7
+PASS actual rendered gameplay includes all four charge phases / 7
+PASS rendered charge deals one stronger hit / 7
+PASS rendered charge respects its cooldown / 7
+PASS real body picking selects the boar for inspection
+PASS boar inspection explains its special ability
+PASS real scene decoded / inspection
+PASS saved integrated frame / inspection
+PASS test window stays hidden / inspection
+PASS rendering preserves the actual boar inspection target
+PASS charge description fits existing HUD
+PASS real forest has a valid charge encounter with its original trees and creatures
+PASS real scene decoded / forest-warning
+PASS saved integrated frame / forest-warning
+PASS test window stays hidden / forest-warning
+PASS boar launches and moves in the unmodified forest encounter
+PASS real scene decoded / forest-rush
+PASS saved integrated frame / forest-rush
+PASS test window stays hidden / forest-rush
+PASS charges reuse the preloaded creature buffer
+PASS charge effects do not grow shadow storage
+PASS integrated QA uses player edition without developer mode
+PASS all game and charge tests opened no audio and played no effects

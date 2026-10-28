@@ -6,7 +6,7 @@
 int main(int argc,char** argv){
  if(argc!=3||std::string(argv[1])!="--no-audio")return 3;
  fs::current_path(fs::absolute(argv[0]).parent_path());fs::path root=argv[2];if(fs::exists(root))return 4;fs::create_directories(root);
- SetTraceLogLevel(LOG_ERROR);SetConfigFlags(FLAG_WINDOW_HIDDEN);sync_present::useOpenGL();InitWindow(W,H,"Emberfall renderer equivalence --no-audio");if(!IsWindowReady())return 5;
+ SetTraceLogLevel(LOG_ERROR);SetConfigFlags(FLAG_WINDOW_HIDDEN|FLAG_WINDOW_ALWAYS_RUN);sync_present::useOpenGL();InitWindow(W,H,"Emberfall renderer equivalence --no-audio");if(!IsWindowReady())return 5;
  audioSystem.init(false,false);makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  int checks=0,failures=0,pairs=0,maxDifference=0;std::ofstream log(root/"checks.txt");
  auto check=[&](bool ok,const std::string& label){checks++;failures+=!ok;log<<(ok?"PASS ":"FAIL ")<<label<<'\n';log.flush();};
@@ -14,7 +14,7 @@ int main(int argc,char** argv){
  auto reset=[](){game=Game{};intro={};towerStory={};clearTransientUi();welcome=help=paused=false;mouse={0,0};game.messageTime=0;};
  check(terrain.depth.id==0&&desert_art::terrain.depth.id==0,"both static terrain textures omit unused depth attachments");
  check(render_targets::omittedDepthPixels>=std::uint64_t(TerrainWidth)*TerrainHeight*2,"large static maps avoid redundant depth storage");
- RenderTexture2D sample=LoadRenderTexture(480,480);int capacity=actor_art::creatureCapacity;
+ RenderTexture2D sample=LoadRenderTexture(480,480);int capacity=actor_art::creatureCapacity;unsigned shadowAllocations=shadow_geometry::allocations;
  auto pair=[&](const std::string& label,auto draw){
   actor_art::finishShadowFrame();actor_art::gpuCreatureDraw=false;BeginTextureMode(sample);ClearBackground(BLANK);draw();EndTextureMode();Image reference=LoadImageFromTexture(sample.texture);
   actor_art::gpuCreatureDraw=true;BeginTextureMode(sample);ClearBackground(BLANK);draw();EndTextureMode();Image actual=LoadImageFromTexture(sample.texture);
@@ -67,6 +67,38 @@ int main(int argc,char** argv){
  check(difference(nativeHud,balancedHud)==0,"entire equipment and statistics HUD stays pixel-identical at native display resolution");
  UnloadImage(nativeHud);UnloadImage(balancedHud);ImageFlipVertical(&native);ImageFlipVertical(&balanced);ExportImage(native,(root/"desert-native.png").string().c_str());ExportImage(balanced,(root/"desert-balanced.png").string().c_str());UnloadImage(native);UnloadImage(balanced);
  check(actor_art::recycledRigs.size()<=64,"retained actor storage is bounded");
+ const struct {const char* name;V at;bool desert;} costViews[]={{"forest-north",{24,41},false},{"forest-dense",{40,25},false},{"forest-boss",{21,8},false},{"forest-edge",{2,2},false},{"desert-oasis",DesertOasis+V{0,-5},true},{"desert-boss",DesertBossHome+V{0,-4},true}};
+ auto finish=reinterpret_cast<void(*)()>(glfwGetProcAddress("glFinish"));
+ auto percentile=[](std::vector<double> values){std::sort(values.begin(),values.end());return values[(values.size()-1)*95/100];};
+ std::ofstream cost(root/"render-cost.json");cost<<"{\"hidden\":true,\"audio_opened\":false,\"presentation_measured\":false,\"scenes\":[";bool costComma=false;
+ for(const auto& view:costViews){
+  reset();if(view.desert)game.activateField(WorldLocation::Desert);game.player=view.at;game.messageTime=0;game.time=2.3f;
+  tree_wind::shared=false;actor_art::fastPacking=false;renderScene();Image before=LoadImageFromTexture(canvas.texture);
+  tree_wind::shared=true;actor_art::fastPacking=true;renderScene();Image after=LoadImageFromTexture(canvas.texture);
+  check(difference(before,after)==0,std::string("shared wind and direct packing preserve every pixel / ")+view.name);UnloadImage(before);UnloadImage(after);
+  Game initial=game;
+  std::array<std::vector<double>,2> measurements;
+  for(int trial=0;trial<3;trial++)for(int order=0;order<2;order++){
+   bool optimized=(order+trial)%2;game=initial;
+   tree_wind::shared=optimized;actor_art::fastPacking=optimized;
+   for(int frame=0;frame<100;frame++){
+    game.time=frame/60.f;game.animation.advance(.015f,.005f,1.f/60,true);
+    for(auto& e:game.enemies)e.animation.advance(.01f,.005f,1.f/60);
+    double start=GetTime();renderScene();rlDrawRenderBatchActive();if(finish)finish();
+    if(frame>=20)measurements[optimized].push_back((GetTime()-start)*1000);
+   }
+  }
+  for(int optimized=0;optimized<2;optimized++){
+   const auto& elapsed=measurements[optimized];
+   if(costComma)cost<<',';costComma=true;
+   cost<<"{\"name\":\""<<view.name<<"\",\"optimized\":"<<(optimized?"true":"false")<<",\"trials\":3,\"frames\":"<<elapsed.size()<<",\"completed_render_mean_ms\":"<<std::accumulate(elapsed.begin(),elapsed.end(),0.)/elapsed.size()<<",\"completed_render_p95_ms\":"<<percentile(elapsed)<<",\"shadow_casters\":"<<world_shadows::visibleCasters<<",\"prepared_actors\":"<<world_shadows::preparedActors<<"}";cost.flush();
+  }
+ }
+ tree_wind::shared=true;actor_art::fastPacking=true;cost<<"]}";
+ check(tree_wind::frameSamples.size()<=256&&tree_wind::frameSamples.capacity()==256,"shared wind cache stays within its preloaded budget");
+ check(actor_art::creatureCapacity==capacity&&actor_art::creatureVertices.size()==size_t(capacity)*3,"direct packing reuses preloaded actor storage");
+ check(shadow_geometry::allocations==shadowAllocations,"all scenes reuse shadow buffers allocated during loading");
+ check(IsWindowHidden(),"all renderer and cost tests kept their window hidden");
  check(!audioSystem.available&&audioSystem.playedEffects==0,"all tests remained silent");
  std::ofstream out(root/"summary.json");out<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"actor_pairs\":"<<pairs<<",\"max_changed_actor_pixels\":"<<maxDifference<<",\"equipment_variants\":"<<equipmentCount<<",\"pointer_probes\":"<<probes<<",\"audio_opened\":false}";
  std::cout<<"Renderer equivalence: "<<checks<<" checks, "<<failures<<" failures\n";CloseWindow();return failures?2:0;

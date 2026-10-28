@@ -1,5 +1,21 @@
 # Raport konfiguracji — 19.10.2026
 
+**Dalsza optymalizacja 28.10.2026:** bezpośrednie pakowanie wierzchołków,
+wspólne próbki wiatru korony/cienia/obrysu, cache parametrów shaderów
+i wstępna alokacja cieni. W ukrytym pomiarze A/B wypakowanej paczki średni
+czas renderowania sześciu scen spadł o 13,03%. 813 kontroli renderera,
+logika, zapisy oraz ZIP — PASS. Ten pomiar nie potwierdza FPS na ekranie.
+[Aktualny raport i paczka](../performance/20261028/round2/README.md).
+
+**Aktualizacja 28.10.2026 — optymalizacja wydajności:** bufory GPU modeli
+i obrysów, ponowne używanie geometrii i pamięci, cache portretu, odrzucanie
+zasłoniętego tła, usunięcie zbędnej głębi statycznych map oraz wspólne obliczenia
+wiatru koron i cieni. Pustynia we wcześniejszych pomiarach ekranu: 46,17 →
+58,45–59,91 FPS. Końcowe testy, zgodnie z nowym poleceniem, są ukryte i ciche;
+ich czasy renderowania nie dowodzą stałych FPS wyświetlania. HUD pozostaje
+natywny, świat otwarty przy 1080p korzysta z mniejszego bufora.
+[Raport, porównania i ograniczenia](../performance/20261028/README.md).
+
 **Aktualizacja 28.10.2026 — schody wewnątrz mapy i pełna kolizja:**
 oba biegi na wszystkich piętrach przesunięto w głąb sali; wszystkie piksele
 grafiki i 4320 kontrolowanych wierzchołków mieszczą się w obrysie podłogi.

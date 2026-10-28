@@ -2,6 +2,8 @@
 namespace world_shadows {
 inline Shader maskShader{},softShader{};
 inline RenderTexture2D mask{},softMask{};
+struct Uniforms {int texel=-1,strength=-1,ink=-1,receiver=-1,logicalSize=-1;};
+inline Uniforms uniforms{};
 inline void soften();
 inline bool ready=false,chamberFrame=false;
 inline int visibleCasters=0,preparedActors=0;
@@ -38,8 +40,10 @@ void main(){
 }
 )GLSL";
  maskShader=LoadShaderFromMemory(nullptr,maskCode);softShader=LoadShaderFromMemory(nullptr,softCode);
+ shadow_geometry::prepareBatch();
+ uniforms={GetShaderLocation(softShader,"texel"),GetShaderLocation(softShader,"strength"),GetShaderLocation(softShader,"ink"),GetShaderLocation(softShader,"receiver"),GetShaderLocation(softShader,"logicalSize")};
 }
-inline void unload(){shadow_geometry::unloadBatch();if(mask.id)UnloadRenderTexture(mask);if(softMask.id)UnloadRenderTexture(softMask);softMask={};if(maskShader.id)UnloadShader(maskShader);if(softShader.id)UnloadShader(softShader);mask={};maskShader={};softShader={};ready=false;}
+inline void unload(){shadow_geometry::unloadBatch();if(mask.id)UnloadRenderTexture(mask);if(softMask.id)UnloadRenderTexture(softMask);softMask={};if(maskShader.id)UnloadShader(maskShader);if(softShader.id)UnloadShader(softShader);mask={};maskShader={};softShader={};uniforms={};ready=false;}
 inline void quad(Texture2D texture,const std::array<Vector2,4>& p,const std::array<Vector2,4>& uv){
  const bool reverse=(p[1].x-p[0].x)*(p[2].y-p[0].y)-(p[1].y-p[0].y)*(p[2].x-p[0].x)>0;
  const int normal[]={0,1,2,3},flipped[]={0,3,2,1};const int* order=reverse?flipped:normal;
@@ -57,10 +61,11 @@ inline void prop(const Prop& value){
  Vector2 base=screen(value.pos);Texture2D texture=propArt[value.type].texture;visibleCasters++;
  if(!treeProp(value.type)){sprite(texture,{base.x-90*value.size,base.y-208*value.size,180*value.size,230*value.size},base);return;}
  // Use the exact same connected wind strips as the crown artwork.
+ const auto& wind=tree_wind::samples(value,game.time);
  for(int y=0;y<230;y+=5){
   float top=base.y+(y-208)*value.size,bottom=top+5*value.size;
-  float left0=base.x+(-90+treeBend(value,float(y),game.time))*value.size;
-  float left1=base.x+(-90+treeBend(value,float(y+5),game.time))*value.size;
+  float left0=base.x+(-90+(tree_wind::cached?wind.bends[y/5]:treeBend(value,float(y),game.time)))*value.size;
+  float left1=base.x+(-90+(tree_wind::cached?wind.bends[y/5+1]:treeBend(value,float(y+5),game.time)))*value.size;
   std::array<Vector2,4> p={projected({left0,top},base.y),projected({left1,bottom},base.y),
       projected({left1+180*value.size,bottom},base.y),projected({left0+180*value.size,top},base.y)};
   quad(texture,p,{{{0,1-y/230.f},{0,1-(y+5)/230.f},{1,1-(y+5)/230.f},{1,1-y/230.f}}});
@@ -107,6 +112,7 @@ inline void arrow(const Arrow& shot){
 }
 inline bool near(Vector2 p,float extent=240){return p.x>-extent&&p.x<WorldW+extent&&p.y>-extent*.5f&&p.y<H+extent*.6f;}
 inline void prepare(bool chamber=false){
+ tree_wind::beginFrame();
  init();ready=false;chamberFrame=chamber;visibleCasters=0;preparedActors=0;
  // A half-size mask saves fill and blur work. Its origin advances only on
  // whole mask pixels; the final quad compensates the remaining native pixel.
@@ -196,14 +202,14 @@ inline void soften(){
  float texel[]={1.f/((chamberFrame?W:WorldW)*.8f),1.f/(H*.8f)};
  float strength=chamberFrame?.32f:game.inDesert()?.34f:game.inTower()?.30f:.32f;
  float ink[]={.025f,.04f,.05f};
- SetShaderValue(softShader,GetShaderLocation(softShader,"texel"),texel,SHADER_UNIFORM_VEC2);
- SetShaderValue(softShader,GetShaderLocation(softShader,"strength"),&strength,SHADER_UNIFORM_FLOAT);
- SetShaderValue(softShader,GetShaderLocation(softShader,"ink"),ink,SHADER_UNIFORM_VEC3);
+ SetShaderValue(softShader,uniforms.texel,texel,SHADER_UNIFORM_VEC2);
+ SetShaderValue(softShader,uniforms.strength,&strength,SHADER_UNIFORM_FLOAT);
+ SetShaderValue(softShader,uniforms.ink,ink,SHADER_UNIFORM_VEC3);
  float logicalSize[]={mask.texture.width/maskScale,mask.texture.height/maskScale};
  Vector2 floor=screen(TowerCenter);float receiver[]={floor.x+maskOffset.x,floor.y+maskOffset.y,game.inTower()?TowerRadius*56.5685f:0.f,TowerRadius*28.2843f};
  if(chamberFrame){receiver[0]=720;receiver[1]=460;receiver[2]=540;receiver[3]=148;}
- SetShaderValue(softShader,GetShaderLocation(softShader,"receiver"),receiver,SHADER_UNIFORM_VEC4);
- SetShaderValue(softShader,GetShaderLocation(softShader,"logicalSize"),logicalSize,SHADER_UNIFORM_VEC2);
+ SetShaderValue(softShader,uniforms.receiver,receiver,SHADER_UNIFORM_VEC4);
+ SetShaderValue(softShader,uniforms.logicalSize,logicalSize,SHADER_UNIFORM_VEC2);
  BeginShaderMode(softShader);
  // Preserve the receiver's alpha: shadows darken its colour, not its solidity.
  rlSetBlendFactorsSeparate(RL_SRC_ALPHA,RL_ONE_MINUS_SRC_ALPHA,RL_ONE,RL_ONE_MINUS_SRC_ALPHA,RL_FUNC_ADD,RL_FUNC_ADD);

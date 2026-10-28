@@ -23,6 +23,26 @@ void hero(float x,float y,float s,bool portrait) {
 }
 void monster(Enemy& e,float x,float y) {
     sand_prison::drawCaster(e,x,y);
+    if(e.type==BoarType&&e.boarWindup>0){
+        float progress=1-e.boarWindup/BoarChargeWindup;
+        Color warning=Fade(rgb(244,154,73),.4f+.5f*progress);
+        V direction=normalized(e.boarAim-e.pos),side{-direction.y,direction.x};
+        V end=e.pos+direction*std::min(distance(e.pos,e.boarAim),BoarChargeSpeed*BoarChargeDuration);
+        auto a=screen(e.pos+side*.55f),b=screen(end+side*.55f),c=screen(end-side*.55f),d=screen(e.pos-side*.55f);
+        poly({a,b,c,d},Fade(warning,.1f+.08f*progress));
+        line(a.x,a.y,b.x,b.y,warning,2);line(d.x,d.y,c.x,c.y,warning,2);
+        auto tip=screen(end),left=screen(end-direction*.45f+side*.4f),right=screen(end-direction*.45f-side*.4f);
+        line(left.x,left.y,tip.x,tip.y,warning,2);line(right.x,right.y,tip.x,tip.y,warning,2);
+        ellipseOutline(x,y,34+progress*5,17+progress*2,warning);
+    }
+    if(e.type==BoarType&&e.boarRush>0){
+        // Bounded ground dust; existing creature gait still follows actual travel.
+        for(int i=0;i<3;i++){
+            auto p=screen(e.pos-e.boarDirection*(.5f+i*.35f));
+            float pulse=.5f+.5f*std::sin(game.time*26-i*1.7f);
+            ellipse(p.x,p.y,5+i*2+pulse*2,2+i,Fade(rgb(161,139,99),.27f-i*.06f));
+        }
+    }
     if(e.windup>0){
         Color warning=e.attackType()==DamageType::Magic?Blue:rgb(215,109,84);
         ellipseOutline(x,y,36,18,warning);

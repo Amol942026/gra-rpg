@@ -1,0 +1,813 @@
+PASS both static terrain textures omit unused depth attachments
+PASS large static maps avoid redundant depth storage
+PASS hero-0-0 GPU vs original / changed=0
+PASS hero-0-1 GPU vs original / changed=0
+PASS hero-0-2 GPU vs original / changed=0
+PASS hero-0-3 GPU vs original / changed=0
+PASS hero-0-4 GPU vs original / changed=0
+PASS hero-0-5 GPU vs original / changed=0
+PASS hero-1-0 GPU vs original / changed=0
+PASS hero-1-1 GPU vs original / changed=0
+PASS hero-1-2 GPU vs original / changed=0
+PASS hero-1-3 GPU vs original / changed=0
+PASS hero-1-4 GPU vs original / changed=0
+PASS hero-1-5 GPU vs original / changed=0
+PASS hero-2-0 GPU vs original / changed=0
+PASS hero-2-1 GPU vs original / changed=0
+PASS hero-2-2 GPU vs original / changed=0
+PASS hero-2-3 GPU vs original / changed=0
+PASS hero-2-4 GPU vs original / changed=0
+PASS hero-2-5 GPU vs original / changed=0
+PASS hero-3-0 GPU vs original / changed=0
+PASS hero-3-1 GPU vs original / changed=0
+PASS hero-3-2 GPU vs original / changed=0
+PASS hero-3-3 GPU vs original / changed=0
+PASS hero-3-4 GPU vs original / changed=0
+PASS hero-3-5 GPU vs original / changed=0
+PASS hero-4-0 GPU vs original / changed=0
+PASS hero-4-1 GPU vs original / changed=0
+PASS hero-4-2 GPU vs original / changed=0
+PASS hero-4-3 GPU vs original / changed=0
+PASS hero-4-4 GPU vs original / changed=0
+PASS hero-4-5 GPU vs original / changed=0
+PASS hero-5-0 GPU vs original / changed=0
+PASS hero-5-1 GPU vs original / changed=0
+PASS hero-5-2 GPU vs original / changed=0
+PASS hero-5-3 GPU vs original / changed=0
+PASS hero-5-4 GPU vs original / changed=0
+PASS hero-5-5 GPU vs original / changed=0
+PASS hero-6-0 GPU vs original / changed=0
+PASS hero-6-1 GPU vs original / changed=0
+PASS hero-6-2 GPU vs original / changed=0
+PASS hero-6-3 GPU vs original / changed=0
+PASS hero-6-4 GPU vs original / changed=0
+PASS hero-6-5 GPU vs original / changed=0
+PASS hero-7-0 GPU vs original / changed=0
+PASS hero-7-1 GPU vs original / changed=0
+PASS hero-7-2 GPU vs original / changed=0
+PASS hero-7-3 GPU vs original / changed=0
+PASS hero-7-4 GPU vs original / changed=0
+PASS hero-7-5 GPU vs original / changed=0
+PASS gear-1 GPU vs original / changed=0
+PASS gear-2 GPU vs original / changed=0
+PASS gear-3 GPU vs original / changed=0
+PASS gear-4 GPU vs original / changed=0
+PASS gear-5 GPU vs original / changed=0
+PASS gear-6 GPU vs original / changed=0
+PASS gear-7 GPU vs original / changed=0
+PASS gear-24 GPU vs original / changed=0
+PASS gear-25 GPU vs original / changed=0
+PASS gear-26 GPU vs original / changed=0
+PASS gear-28 GPU vs original / changed=0
+PASS gear-35 GPU vs original / changed=0
+PASS gear-36 GPU vs original / changed=0
+PASS gear-37 GPU vs original / changed=0
+PASS gear-38 GPU vs original / changed=0
+PASS gear-39 GPU vs original / changed=0
+PASS gear-40 GPU vs original / changed=0
+PASS gear-41 GPU vs original / changed=0
+PASS gear-42 GPU vs original / changed=0
+PASS gear-43 GPU vs original / changed=0
+PASS gear-44 GPU vs original / changed=0
+PASS gear-45 GPU vs original / changed=0
+PASS gear-46 GPU vs original / changed=0
+PASS gear-47 GPU vs original / changed=0
+PASS gear-48 GPU vs original / changed=0
+PASS gear-49 GPU vs original / changed=0
+PASS gear-50 GPU vs original / changed=0
+PASS gear-51 GPU vs original / changed=0
+PASS gear-52 GPU vs original / changed=0
+PASS gear-53 GPU vs original / changed=0
+PASS gear-54 GPU vs original / changed=0
+PASS gear-55 GPU vs original / changed=0
+PASS gear-56 GPU vs original / changed=0
+PASS gear-57 GPU vs original / changed=0
+PASS gear-58 GPU vs original / changed=0
+PASS gear-59 GPU vs original / changed=0
+PASS gear-60 GPU vs original / changed=0
+PASS gear-61 GPU vs original / changed=0
+PASS gear-62 GPU vs original / changed=0
+PASS gear-63 GPU vs original / changed=0
+PASS gear-64 GPU vs original / changed=0
+PASS gear-65 GPU vs original / changed=0
+PASS gear-66 GPU vs original / changed=0
+PASS gear-67 GPU vs original / changed=0
+PASS gear-68 GPU vs original / changed=0
+PASS gear-69 GPU vs original / changed=0
+PASS gear-70 GPU vs original / changed=0
+PASS gear-71 GPU vs original / changed=0
+PASS gear-72 GPU vs original / changed=0
+PASS gear-73 GPU vs original / changed=0
+PASS gear-74 GPU vs original / changed=0
+PASS gear-75 GPU vs original / changed=0
+PASS gear-76 GPU vs original / changed=0
+PASS gear-77 GPU vs original / changed=0
+PASS gear-78 GPU vs original / changed=0
+PASS gear-79 GPU vs original / changed=0
+PASS gear-80 GPU vs original / changed=0
+PASS gear-81 GPU vs original / changed=0
+PASS gear-82 GPU vs original / changed=0
+PASS gear-83 GPU vs original / changed=0
+PASS gear-84 GPU vs original / changed=0
+PASS gear-85 GPU vs original / changed=0
+PASS gear-86 GPU vs original / changed=0
+PASS gear-87 GPU vs original / changed=0
+PASS gear-88 GPU vs original / changed=0
+PASS gear-89 GPU vs original / changed=0
+PASS gear-90 GPU vs original / changed=0
+PASS gear-91 GPU vs original / changed=0
+PASS gear-92 GPU vs original / changed=0
+PASS gear-93 GPU vs original / changed=0
+PASS gear-94 GPU vs original / changed=0
+PASS gear-95 GPU vs original / changed=0
+PASS gear-96 GPU vs original / changed=0
+PASS gear-97 GPU vs original / changed=0
+PASS gear-98 GPU vs original / changed=0
+PASS creature-0-0 GPU vs original / changed=0
+PASS creature-0-1 GPU vs original / changed=0
+PASS creature-0-2 GPU vs original / changed=0
+PASS creature-0-3 GPU vs original / changed=0
+PASS creature-0-4 GPU vs original / changed=0
+PASS creature-0-5 GPU vs original / changed=0
+PASS creature-0-6 GPU vs original / changed=0
+PASS creature-0-7 GPU vs original / changed=0
+PASS creature-1-0 GPU vs original / changed=0
+PASS creature-1-1 GPU vs original / changed=0
+PASS creature-1-2 GPU vs original / changed=0
+PASS creature-1-3 GPU vs original / changed=0
+PASS creature-1-4 GPU vs original / changed=0
+PASS creature-1-5 GPU vs original / changed=0
+PASS creature-1-6 GPU vs original / changed=0
+PASS creature-1-7 GPU vs original / changed=0
+PASS creature-2-0 GPU vs original / changed=0
+PASS creature-2-1 GPU vs original / changed=0
+PASS creature-2-2 GPU vs original / changed=0
+PASS creature-2-3 GPU vs original / changed=0
+PASS creature-2-4 GPU vs original / changed=0
+PASS creature-2-5 GPU vs original / changed=0
+PASS creature-2-6 GPU vs original / changed=0
+PASS creature-2-7 GPU vs original / changed=0
+PASS creature-3-0 GPU vs original / changed=0
+PASS creature-3-1 GPU vs original / changed=0
+PASS creature-3-2 GPU vs original / changed=0
+PASS creature-3-3 GPU vs original / changed=0
+PASS creature-3-4 GPU vs original / changed=0
+PASS creature-3-5 GPU vs original / changed=0
+PASS creature-3-6 GPU vs original / changed=0
+PASS creature-3-7 GPU vs original / changed=0
+PASS creature-4-0 GPU vs original / changed=0
+PASS creature-4-1 GPU vs original / changed=0
+PASS creature-4-2 GPU vs original / changed=0
+PASS creature-4-3 GPU vs original / changed=0
+PASS creature-4-4 GPU vs original / changed=0
+PASS creature-4-5 GPU vs original / changed=0
+PASS creature-4-6 GPU vs original / changed=0
+PASS creature-4-7 GPU vs original / changed=0
+PASS creature-5-0 GPU vs original / changed=0
+PASS creature-5-1 GPU vs original / changed=0
+PASS creature-5-2 GPU vs original / changed=0
+PASS creature-5-3 GPU vs original / changed=0
+PASS creature-5-4 GPU vs original / changed=0
+PASS creature-5-5 GPU vs original / changed=0
+PASS creature-5-6 GPU vs original / changed=0
+PASS creature-5-7 GPU vs original / changed=0
+PASS creature-6-0 GPU vs original / changed=0
+PASS creature-6-1 GPU vs original / changed=0
+PASS creature-6-2 GPU vs original / changed=0
+PASS creature-6-3 GPU vs original / changed=0
+PASS creature-6-4 GPU vs original / changed=0
+PASS creature-6-5 GPU vs original / changed=0
+PASS creature-6-6 GPU vs original / changed=0
+PASS creature-6-7 GPU vs original / changed=0
+PASS creature-7-0 GPU vs original / changed=0
+PASS creature-7-1 GPU vs original / changed=0
+PASS creature-7-2 GPU vs original / changed=0
+PASS creature-7-3 GPU vs original / changed=0
+PASS creature-7-4 GPU vs original / changed=0
+PASS creature-7-5 GPU vs original / changed=0
+PASS creature-7-6 GPU vs original / changed=0
+PASS creature-7-7 GPU vs original / changed=0
+PASS creature-8-0 GPU vs original / changed=0
+PASS creature-8-1 GPU vs original / changed=0
+PASS creature-8-2 GPU vs original / changed=0
+PASS creature-8-3 GPU vs original / changed=0
+PASS creature-8-4 GPU vs original / changed=0
+PASS creature-8-5 GPU vs original / changed=0
+PASS creature-8-6 GPU vs original / changed=0
+PASS creature-8-7 GPU vs original / changed=0
+PASS creature-9-0 GPU vs original / changed=0
+PASS creature-9-1 GPU vs original / changed=0
+PASS creature-9-2 GPU vs original / changed=0
+PASS creature-9-3 GPU vs original / changed=0
+PASS creature-9-4 GPU vs original / changed=0
+PASS creature-9-5 GPU vs original / changed=0
+PASS creature-9-6 GPU vs original / changed=0
+PASS creature-9-7 GPU vs original / changed=0
+PASS creature-10-0 GPU vs original / changed=0
+PASS creature-10-1 GPU vs original / changed=0
+PASS creature-10-2 GPU vs original / changed=0
+PASS creature-10-3 GPU vs original / changed=0
+PASS creature-10-4 GPU vs original / changed=0
+PASS creature-10-5 GPU vs original / changed=0
+PASS creature-10-6 GPU vs original / changed=0
+PASS creature-10-7 GPU vs original / changed=0
+PASS creature-11-0 GPU vs original / changed=0
+PASS creature-11-1 GPU vs original / changed=0
+PASS creature-11-2 GPU vs original / changed=0
+PASS creature-11-3 GPU vs original / changed=0
+PASS creature-11-4 GPU vs original / changed=0
+PASS creature-11-5 GPU vs original / changed=0
+PASS creature-11-6 GPU vs original / changed=0
+PASS creature-11-7 GPU vs original / changed=0
+PASS body and outline buffers stay within their preloaded capacity
+PASS unchanged portrait is not regenerated during regular frames
+PASS portrait pixels match direct rendering for gear 1 / changed=0
+PASS portrait pixels match direct rendering for gear 2 / changed=0
+PASS portrait pixels match direct rendering for gear 3 / changed=0
+PASS portrait pixels match direct rendering for gear 4 / changed=0
+PASS portrait pixels match direct rendering for gear 5 / changed=0
+PASS portrait pixels match direct rendering for gear 6 / changed=0
+PASS portrait pixels match direct rendering for gear 7 / changed=0
+PASS portrait pixels match direct rendering for gear 24 / changed=0
+PASS portrait pixels match direct rendering for gear 25 / changed=0
+PASS portrait pixels match direct rendering for gear 26 / changed=0
+PASS portrait pixels match direct rendering for gear 28 / changed=0
+PASS portrait pixels match direct rendering for gear 35 / changed=0
+PASS portrait pixels match direct rendering for gear 36 / changed=0
+PASS portrait pixels match direct rendering for gear 37 / changed=0
+PASS portrait pixels match direct rendering for gear 38 / changed=0
+PASS portrait pixels match direct rendering for gear 39 / changed=0
+PASS portrait pixels match direct rendering for gear 40 / changed=0
+PASS portrait pixels match direct rendering for gear 41 / changed=0
+PASS portrait pixels match direct rendering for gear 42 / changed=0
+PASS portrait pixels match direct rendering for gear 43 / changed=0
+PASS portrait pixels match direct rendering for gear 44 / changed=0
+PASS portrait pixels match direct rendering for gear 45 / changed=0
+PASS portrait pixels match direct rendering for gear 46 / changed=0
+PASS portrait pixels match direct rendering for gear 47 / changed=0
+PASS portrait pixels match direct rendering for gear 48 / changed=0
+PASS portrait pixels match direct rendering for gear 49 / changed=0
+PASS portrait pixels match direct rendering for gear 50 / changed=0
+PASS portrait pixels match direct rendering for gear 51 / changed=0
+PASS portrait pixels match direct rendering for gear 52 / changed=0
+PASS portrait pixels match direct rendering for gear 53 / changed=0
+PASS portrait pixels match direct rendering for gear 54 / changed=0
+PASS portrait pixels match direct rendering for gear 55 / changed=0
+PASS portrait pixels match direct rendering for gear 56 / changed=0
+PASS portrait pixels match direct rendering for gear 57 / changed=0
+PASS portrait pixels match direct rendering for gear 58 / changed=0
+PASS portrait pixels match direct rendering for gear 59 / changed=0
+PASS portrait pixels match direct rendering for gear 60 / changed=0
+PASS portrait pixels match direct rendering for gear 61 / changed=0
+PASS portrait pixels match direct rendering for gear 62 / changed=0
+PASS portrait pixels match direct rendering for gear 63 / changed=0
+PASS portrait pixels match direct rendering for gear 64 / changed=0
+PASS portrait pixels match direct rendering for gear 65 / changed=0
+PASS portrait pixels match direct rendering for gear 66 / changed=0
+PASS portrait pixels match direct rendering for gear 67 / changed=0
+PASS portrait pixels match direct rendering for gear 68 / changed=0
+PASS portrait pixels match direct rendering for gear 69 / changed=0
+PASS portrait pixels match direct rendering for gear 70 / changed=0
+PASS portrait pixels match direct rendering for gear 71 / changed=0
+PASS portrait pixels match direct rendering for gear 72 / changed=0
+PASS portrait pixels match direct rendering for gear 73 / changed=0
+PASS portrait pixels match direct rendering for gear 74 / changed=0
+PASS portrait pixels match direct rendering for gear 75 / changed=0
+PASS portrait pixels match direct rendering for gear 76 / changed=0
+PASS portrait pixels match direct rendering for gear 77 / changed=0
+PASS portrait pixels match direct rendering for gear 78 / changed=0
+PASS portrait pixels match direct rendering for gear 79 / changed=0
+PASS portrait pixels match direct rendering for gear 80 / changed=0
+PASS portrait pixels match direct rendering for gear 81 / changed=0
+PASS portrait pixels match direct rendering for gear 82 / changed=0
+PASS portrait pixels match direct rendering for gear 83 / changed=0
+PASS portrait pixels match direct rendering for gear 84 / changed=0
+PASS portrait pixels match direct rendering for gear 85 / changed=0
+PASS portrait pixels match direct rendering for gear 86 / changed=0
+PASS portrait pixels match direct rendering for gear 87 / changed=0
+PASS portrait pixels match direct rendering for gear 88 / changed=0
+PASS portrait pixels match direct rendering for gear 89 / changed=0
+PASS portrait pixels match direct rendering for gear 90 / changed=0
+PASS portrait pixels match direct rendering for gear 91 / changed=0
+PASS portrait pixels match direct rendering for gear 92 / changed=0
+PASS portrait pixels match direct rendering for gear 93 / changed=0
+PASS portrait pixels match direct rendering for gear 94 / changed=0
+PASS portrait pixels match direct rendering for gear 95 / changed=0
+PASS portrait pixels match direct rendering for gear 96 / changed=0
+PASS portrait pixels match direct rendering for gear 97 / changed=0
+PASS portrait pixels match direct rendering for gear 98 / changed=0
+PASS unchanged portrait is not regenerated during regular frames
+PASS portrait pixels match direct rendering for gear 1 / changed=0
+PASS portrait pixels match direct rendering for gear 2 / changed=0
+PASS portrait pixels match direct rendering for gear 3 / changed=0
+PASS portrait pixels match direct rendering for gear 4 / changed=0
+PASS portrait pixels match direct rendering for gear 5 / changed=0
+PASS portrait pixels match direct rendering for gear 6 / changed=0
+PASS portrait pixels match direct rendering for gear 7 / changed=0
+PASS portrait pixels match direct rendering for gear 24 / changed=0
+PASS portrait pixels match direct rendering for gear 25 / changed=0
+PASS portrait pixels match direct rendering for gear 26 / changed=0
+PASS portrait pixels match direct rendering for gear 28 / changed=0
+PASS portrait pixels match direct rendering for gear 35 / changed=0
+PASS portrait pixels match direct rendering for gear 36 / changed=0
+PASS portrait pixels match direct rendering for gear 37 / changed=0
+PASS portrait pixels match direct rendering for gear 38 / changed=0
+PASS portrait pixels match direct rendering for gear 39 / changed=0
+PASS portrait pixels match direct rendering for gear 40 / changed=0
+PASS portrait pixels match direct rendering for gear 41 / changed=0
+PASS portrait pixels match direct rendering for gear 42 / changed=0
+PASS portrait pixels match direct rendering for gear 43 / changed=0
+PASS portrait pixels match direct rendering for gear 44 / changed=0
+PASS portrait pixels match direct rendering for gear 45 / changed=0
+PASS portrait pixels match direct rendering for gear 46 / changed=0
+PASS portrait pixels match direct rendering for gear 47 / changed=0
+PASS portrait pixels match direct rendering for gear 48 / changed=0
+PASS portrait pixels match direct rendering for gear 49 / changed=0
+PASS portrait pixels match direct rendering for gear 50 / changed=0
+PASS portrait pixels match direct rendering for gear 51 / changed=0
+PASS portrait pixels match direct rendering for gear 52 / changed=0
+PASS portrait pixels match direct rendering for gear 53 / changed=0
+PASS portrait pixels match direct rendering for gear 54 / changed=0
+PASS portrait pixels match direct rendering for gear 55 / changed=0
+PASS portrait pixels match direct rendering for gear 56 / changed=0
+PASS portrait pixels match direct rendering for gear 57 / changed=0
+PASS portrait pixels match direct rendering for gear 58 / changed=0
+PASS portrait pixels match direct rendering for gear 59 / changed=0
+PASS portrait pixels match direct rendering for gear 60 / changed=0
+PASS portrait pixels match direct rendering for gear 61 / changed=0
+PASS portrait pixels match direct rendering for gear 62 / changed=0
+PASS portrait pixels match direct rendering for gear 63 / changed=0
+PASS portrait pixels match direct rendering for gear 64 / changed=0
+PASS portrait pixels match direct rendering for gear 65 / changed=0
+PASS portrait pixels match direct rendering for gear 66 / changed=0
+PASS portrait pixels match direct rendering for gear 67 / changed=0
+PASS portrait pixels match direct rendering for gear 68 / changed=0
+PASS portrait pixels match direct rendering for gear 69 / changed=0
+PASS portrait pixels match direct rendering for gear 70 / changed=0
+PASS portrait pixels match direct rendering for gear 71 / changed=0
+PASS portrait pixels match direct rendering for gear 72 / changed=0
+PASS portrait pixels match direct rendering for gear 73 / changed=0
+PASS portrait pixels match direct rendering for gear 74 / changed=0
+PASS portrait pixels match direct rendering for gear 75 / changed=0
+PASS portrait pixels match direct rendering for gear 76 / changed=0
+PASS portrait pixels match direct rendering for gear 77 / changed=0
+PASS portrait pixels match direct rendering for gear 78 / changed=0
+PASS portrait pixels match direct rendering for gear 79 / changed=0
+PASS portrait pixels match direct rendering for gear 80 / changed=0
+PASS portrait pixels match direct rendering for gear 81 / changed=0
+PASS portrait pixels match direct rendering for gear 82 / changed=0
+PASS portrait pixels match direct rendering for gear 83 / changed=0
+PASS portrait pixels match direct rendering for gear 84 / changed=0
+PASS portrait pixels match direct rendering for gear 85 / changed=0
+PASS portrait pixels match direct rendering for gear 86 / changed=0
+PASS portrait pixels match direct rendering for gear 87 / changed=0
+PASS portrait pixels match direct rendering for gear 88 / changed=0
+PASS portrait pixels match direct rendering for gear 89 / changed=0
+PASS portrait pixels match direct rendering for gear 90 / changed=0
+PASS portrait pixels match direct rendering for gear 91 / changed=0
+PASS portrait pixels match direct rendering for gear 92 / changed=0
+PASS portrait pixels match direct rendering for gear 93 / changed=0
+PASS portrait pixels match direct rendering for gear 94 / changed=0
+PASS portrait pixels match direct rendering for gear 95 / changed=0
+PASS portrait pixels match direct rendering for gear 96 / changed=0
+PASS portrait pixels match direct rendering for gear 97 / changed=0
+PASS portrait pixels match direct rendering for gear 98 / changed=0
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=0 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=1 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=2 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=3 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=4 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=5 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=6 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=7 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=8 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=9 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=10 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=11 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=12 changed=0
+PASS stationary camera reuses both distant layers
+PASS occlusion/camera backdrop cache preserves final desert pixels / view=13 changed=0
+PASS stationary camera reuses both distant layers
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS prepared current-frame actor retains exact pointer geometry
+PASS desert render cap preserves native final canvas and scale
+PASS only desert scenery uses the smaller world buffer
+PASS entire equipment and statistics HUD stays pixel-identical at native display resolution
+PASS retained actor storage is bounded
+PASS shared wind and direct packing preserve every pixel / forest-north
+PASS shared wind and direct packing preserve every pixel / forest-dense
+PASS shared wind and direct packing preserve every pixel / forest-boss
+PASS shared wind and direct packing preserve every pixel / forest-edge
+PASS shared wind and direct packing preserve every pixel / desert-oasis
+PASS shared wind and direct packing preserve every pixel / desert-boss
+PASS shared wind cache stays within its preloaded budget
+PASS direct packing reuses preloaded actor storage
+PASS all scenes reuse shadow buffers allocated during loading
+PASS all renderer and cost tests kept their window hidden
+PASS all tests remained silent

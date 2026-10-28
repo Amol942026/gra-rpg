@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "package_sha256": "3a14ef9a79d7c0af8a2520f575f62a2d2089ce377b994859c743cc8f73308769",
+  "exe_sha256": "93e36d00525f5a1310583000a506458aa0dd85a33250eb6d51f461961ca3f2b2",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-boar-package-20261028-180221\\Emberfall",
+  "verified_assets": 115,
+  "startup_frames": 180,
+  "boar": {
+    "status": "PASS",
+    "checks": 163,
+    "failures": 0,
+    "directions": 8,
+    "captured_frames": 35,
+    "original_forest_encounter": true,
+    "hidden": true,
+    "audio_opened": false,
+    "presentation_measured": false,
+    "completed_render_mean_ms": 3.63766,
+    "completed_render_p95_ms": 4.3667
+  },
+  "audio_preferences_unchanged": true,
+  "native_sources_in_zip": false
+}

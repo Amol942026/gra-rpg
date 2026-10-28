@@ -226,7 +226,11 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 #include "fountain_art.hpp"
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
+namespace tree_wind {inline void init();}
+namespace world_shadows {inline void init();}
 void makeArt(){
+ tree_wind::init();
+ world_shadows::init();
  hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
  forest_bush_art::load();forest_tree_art::load();guardian_art::load();
  treasure_art::make();fountain_art::load();
@@ -577,7 +581,7 @@ void integrationTests(){
 #include "world_motion_qa.hpp"
 int main(int argc,char**argv) {
     bool smoke=false,benchmark=false,integration=false,visualQA=false,hoverQA=false,rollQA=false,large=false;
-    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=false,menuBenchmark=false;
+    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=false,menuBenchmark=false,backgroundTest=false;
     bool introQA=false,introPassed=true,towerQA=false,towerPassed=true,towerFloorsQA=false,towerFloorsPassed=true;
     bool inspectionQA=false,inspectionPassed=true;
     bool swingQA=false,swingPassed=true;
@@ -653,12 +657,15 @@ int main(int argc,char**argv) {
         if(arg=="--fullscreen")startFullScreen=true;
         if(arg=="--windowed")startFullScreen=false;
         if(arg=="--no-audio")noAudio=true;
+        if(arg=="--background-test")backgroundTest=true;
         if(arg=="--startup-smoke"){startupSmoke=true;frameLimit=180;}
         if(arg=="--opengl")openGL=true;
         if(arg=="--dxgi")openGL=false;
         if(arg=="--native-world")nativeWorldRendering=true;
         if(arg=="--large")large=true;
     }
+    if(backgroundTest&&!noAudio)return 3;
+    if(backgroundTest)startFullScreen=false;
     fs::path exe=fs::absolute(argv[0]).parent_path();
     if(fs::exists(exe/"assets"))fs::current_path(exe);
     else if(fs::exists(exe.parent_path()/"assets"))fs::current_path(exe.parent_path());
@@ -669,9 +676,9 @@ int main(int argc,char**argv) {
     if(openGL)sync_present::useOpenGL();
     // The offscreen world is antialiased already. Multisampling the final
     // pixel-aligned fullscreen texture only adds an unnecessary resolve pass.
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT);
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_WINDOW_HIGHDPI|FLAG_VSYNC_HINT|(backgroundTest?(FLAG_WINDOW_HIDDEN|FLAG_WINDOW_ALWAYS_RUN|FLAG_WINDOW_UNDECORATED):0));
     startupLog.write("Creating graphics window");
-    InitWindow(large?1920:W,large?1080:H,"Emberfall - Echa zapomnianych ruin | v0.47");
+    InitWindow((large||backgroundTest)?1920:W,(large||backgroundTest)?1080:H,"Emberfall - Echa zapomnianych ruin | v0.47");
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
     startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
@@ -822,7 +829,9 @@ int main(int argc,char**argv) {
          <<"\nAudio device opened: "<<(audioSystem.available?"yes":"no")
          <<"\nNative canvas: "<<canvas.texture.width<<"x"<<canvas.texture.height
          <<"\nDesert background buffer: "<<desert_art::mountainBackdrop.texture.width<<'x'<<desert_art::mountainBackdrop.texture.height
-         <<"\nAverage FPS: "<<1000/(std::accumulate(frameTimes.begin(),frameTimes.end(),0.0)/frameTimes.size())
+         <<"\nHidden background diagnostic: "<<(backgroundTest?"yes":"no")
+         <<"\nWindow hidden: "<<(IsWindowHidden()?"yes":"no")
+         <<(backgroundTest?"\nDiagnostic loop rate (not foreground FPS): ":"\nAverage FPS: ")<<1000/(std::accumulate(frameTimes.begin(),frameTimes.end(),0.0)/frameTimes.size())
          <<"\nCPU frame mean (ms): "<<std::accumulate(cpuTimes.begin(),cpuTimes.end(),0.0)/cpuTimes.size()
          <<"\nEndDrawing mean (ms): "<<std::accumulate(endTimes.begin(),endTimes.end(),0.0)/endTimes.size()
          <<"\nPresentation mean (ms): "<<std::accumulate(presentTimes.begin(),presentTimes.end(),0.0)/presentTimes.size()

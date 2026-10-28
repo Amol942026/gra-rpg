@@ -1,6 +1,7 @@
-param([switch]$NoAudio,[Parameter(Mandatory)][string]$RendererHelperRoot,[Parameter(Mandatory)][string]$PerformanceHelperRoot,[switch]$Present,[switch]$Dxgi)
+param([switch]$NoAudio,[Parameter(Mandatory)][string]$RendererHelperRoot,[string]$PerformanceHelperRoot,[switch]$Present,[switch]$Dxgi)
 $ErrorActionPreference='Stop'
 if(!$NoAudio){throw 'Package verification requires -NoAudio'}
+if($Present -and !$PerformanceHelperRoot){throw 'A presentation check requires a compiled performance helper'}
 Set-Location -LiteralPath (Split-Path -Parent $PSScriptRoot)
 $output=Join-Path $PWD ('dist/qa-performance60-package-'+[DateTime]::Now.ToString('yyyyMMdd-HHmmss'))
 Expand-Archive -LiteralPath 'Emberfall-Windows-x64.zip' -DestinationPath $output
@@ -19,9 +20,9 @@ function Invoke-SilentCheck([string]$Program,[string[]]$RunArguments,[int]$Timeo
  if(!$job.WaitForExit($Timeout*1000)){$job.Kill();throw 'Owned silent package test timed out'}
  if($job.ExitCode -ne 0){throw ('Package test failed: '+$job.ExitCode)}
 }
-Invoke-SilentCheck $exe @('--startup-smoke','--windowed','--no-audio')
+Invoke-SilentCheck $exe @('--startup-smoke','--windowed','--no-audio','--background-test')
 $startup=Get-Content -LiteralPath (Join-Path $gameRoot 'startup-smoke.txt') -Raw
-foreach($expected in @('Build edition: player','Frames: 180','Audio device opened: no','Developer mode: 0','Main menu open: 1')){if(!$startup.Contains($expected)){throw "Startup mismatch: $expected"}}
+foreach($expected in @('Build edition: player','Frames: 180','Audio device opened: no','Developer mode: 0','Main menu open: 1','Window hidden: yes')){if(!$startup.Contains($expected)){throw "Startup mismatch: $expected"}}
 Copy-Item -LiteralPath (Join-Path $RendererHelperRoot 'render_optimization_qa.exe') -Destination (Join-Path $gameRoot 'render_optimization_qa.exe')
 Invoke-SilentCheck (Join-Path $gameRoot 'render_optimization_qa.exe') @('--no-audio','renderer-checks') 120
 if($Present){
@@ -31,6 +32,7 @@ if($Present){
 }
 if((Get-FileHash -LiteralPath $settings).Hash -ne $settingsHash){throw 'Silent checks changed audio preferences'}
 $report=[ordered]@{status='PASS';package_sha256=(Get-FileHash -LiteralPath 'Emberfall-Windows-x64.zip').Hash.ToLowerInvariant();exe_sha256=(Get-FileHash -LiteralPath $exe).Hash.ToLowerInvariant();extracted=$gameRoot;verified_assets=$count;startup_frames=180;renderer=(Get-Content -LiteralPath (Join-Path $gameRoot 'renderer-checks/summary.json') -Raw | ConvertFrom-Json);presentation_measured=[bool]$Present;audio_device_opened=$false;audio_preferences_unchanged=$true;native_sources_in_zip=$false}
+$report['render_cost']=Get-Content -LiteralPath (Join-Path $gameRoot 'renderer-checks/render-cost.json') -Raw | ConvertFrom-Json
 if($Present){$report.performance=Get-Content -LiteralPath (Join-Path $gameRoot 'performance-checks/timing.json') -Raw | ConvertFrom-Json}
 $report | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $output 'package-verification.json') -Encoding utf8
 $report | ConvertTo-Json -Depth 8

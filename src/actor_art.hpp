@@ -49,7 +49,7 @@ struct Face {
 };
 // Reuse one bounded dynamic GPU buffer across live creature draws. The meshes
 // still come from the same CPU rig used for picking and physical shadows.
-inline bool gpuCreatureDraw=true,gpuHeroDraw=true;
+inline bool gpuCreatureDraw=true,gpuHeroDraw=true,fastPacking=true;
 inline Mesh creatureMesh{};inline Material creatureMaterial{};inline int creatureCapacity=0;
 inline std::vector<float> creatureVertices,creatureUV;
 inline std::vector<unsigned char> creatureColors;
@@ -66,11 +66,11 @@ inline void prepareCreatureBatch(int count=196608){
  creatureMesh.colors=static_cast<unsigned char*>(MemAlloc(creatureCapacity*4));
  std::fill_n(creatureMesh.vertices,creatureCapacity*3,0.f);std::fill_n(creatureMesh.texcoords,creatureCapacity*2,0.f);std::fill_n(creatureMesh.colors,creatureCapacity*4,255);
  UploadMesh(&creatureMesh,true);
- creatureVertices.reserve(creatureCapacity*3);creatureUV.reserve(creatureCapacity*2);creatureColors.reserve(creatureCapacity*4);
+ creatureVertices.resize(creatureCapacity*3);creatureUV.resize(creatureCapacity*2);creatureColors.resize(creatureCapacity*4);
  if(!creatureMaterial.maps)creatureMaterial=LoadMaterialDefault();
 }
-inline void submitActorBatch(unsigned texture){
- int count=int(creatureVertices.size()/3);if(!count)return;
+inline void submitActorBatch(unsigned texture,int count=-1){
+ if(count<0)count=int(creatureVertices.size()/3);if(!count)return;
  if(count>creatureCapacity)prepareCreatureBatch(count);
  rlDrawRenderBatchActive();
  static const auto stream=reinterpret_cast<void(*)(unsigned,std::ptrdiff_t,const void*,unsigned)>(glfwGetProcAddress("glBufferData"));
@@ -89,7 +89,7 @@ inline void submitActorBatch(unsigned texture){
  Material material=creatureMaterial;material.maps[MATERIAL_MAP_DIFFUSE].texture={texture,1,1,1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
  Matrix identity{};identity.m0=identity.m5=identity.m10=identity.m15=1;DrawMesh(drawing,material,identity);
 }
-inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale){
+inline void drawCreatureFacesLegacy(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale){
  creatureVertices.clear();creatureUV.clear();creatureColors.clear();unsigned texture=rlGetTextureIdDefault();
  for(const auto& f:faces){
   if(bool(f.textureId)!=paint)continue;if(f.textureId)texture=f.textureId;
@@ -106,7 +106,7 @@ inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float de
  }
  submitActorBatch(texture);
 }
-inline void drawActorOutline(const std::vector<Face>& faces,Color color){
+inline void drawActorOutlineLegacy(const std::vector<Face>& faces,Color color){
  creatureVertices.clear();creatureUV.clear();creatureColors.clear();
  for(const auto& f:faces)for(int edge=0;edge<4;edge++){
   Vector2 a=f.points[edge],b=f.points[(edge+1)%4],d{b.x-a.x,b.y-a.y};float len=std::hypot(d.x,d.y);if(len<.00001f)continue;
@@ -116,6 +116,49 @@ inline void drawActorOutline(const std::vector<Face>& faces,Color color){
   }
  }
  submitActorBatch(rlGetTextureIdDefault());
+}
+inline void beginPacking(int maximum){
+ if(maximum>creatureCapacity)prepareCreatureBatch(maximum);
+ // Sizes stay at their preloaded capacity during normal rendering. Switching
+ // to the reference path in QA may shrink them; restore once, before packing.
+ if(creatureVertices.size()<size_t(creatureCapacity)*3)creatureVertices.resize(creatureCapacity*3);
+ if(creatureUV.size()<size_t(creatureCapacity)*2)creatureUV.resize(creatureCapacity*2);
+ if(creatureColors.size()<size_t(creatureCapacity)*4)creatureColors.resize(creatureCapacity*4);
+}
+inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale){
+ if(!fastPacking){drawCreatureFacesLegacy(faces,paint,depthBase,depthScale);return;}
+ beginPacking(int(faces.size())*6);int count=0;unsigned texture=rlGetTextureIdDefault();
+ float* vertices=creatureVertices.data();float* uv=creatureUV.data();unsigned char* colors=creatureColors.data();
+ for(const auto& f:faces){
+  if(bool(f.textureId)!=paint)continue;if(f.textureId)texture=f.textureId;
+  for(int triangle=0;triangle<2;triangle++){
+   int a=0,b=triangle+1,c=triangle+2;const auto& p=f.points;
+   if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
+   for(int i:{a,b,c}){
+    float z=sceneDepth?depthBase+(f.vertexDepth[i]+.5f)*depthScale:f.vertexDepth[i];
+    *vertices++=p[i].x;*vertices++=p[i].y;*vertices++=z;
+    *uv++=f.uv[i].x;*uv++=f.uv[i].y;Color color=f.smooth?f.vertexColors[i]:f.color;
+    *colors++=color.r;*colors++=color.g;*colors++=color.b;*colors++=color.a;count++;
+   }
+  }
+ }
+ submitActorBatch(texture,count);
+}
+inline void drawActorOutline(const std::vector<Face>& faces,Color color){
+ if(!fastPacking){drawActorOutlineLegacy(faces,color);return;}
+ beginPacking(int(faces.size())*24);int count=0;
+ float* vertices=creatureVertices.data();float* uv=creatureUV.data();unsigned char* colors=creatureColors.data();
+ for(const auto& f:faces)for(int edge=0;edge<4;edge++){
+  Vector2 a=f.points[edge],b=f.points[(edge+1)%4],d{b.x-a.x,b.y-a.y};float len=std::hypot(d.x,d.y);if(len<.00001f)continue;
+  Vector2 r{-d.y*2/len,d.x*2/len};std::array<Vector2,4> p={{{a.x-r.x,a.y-r.y},{a.x+r.x,a.y+r.y},{b.x+r.x,b.y+r.y},{b.x-r.x,b.y-r.y}}};
+  for(int tri=0;tri<2;tri++){int i=0,j=tri+1,k=tri+2;if((p[j].x-p[i].x)*(p[k].y-p[i].y)-(p[j].y-p[i].y)*(p[k].x-p[i].x)>0)std::swap(j,k);
+   for(int n:{i,j,k}){
+    *vertices++=p[n].x;*vertices++=p[n].y;*vertices++=0;*uv++=0;*uv++=0;
+    *colors++=color.r;*colors++=color.g;*colors++=color.b;*colors++=color.a;count++;
+   }
+  }
+ }
+ submitActorBatch(rlGetTextureIdDefault(),count);
 }
 class Rig {
     float x, y, scale, fx, fy, rx, ry;

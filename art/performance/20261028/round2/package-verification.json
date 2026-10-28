@@ -1,0 +1,149 @@
+{
+  "status": "PASS",
+  "package_sha256": "42f30cfeaa14a42b40ba905106fd378a49388c4e89733f464c9038bfdd38373c",
+  "exe_sha256": "9c1111a61d2419de604bfbb3707cedd998ab62ec302bb632cdc16f3fa11ce9b1",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-performance60-package-20261028-163846\\Emberfall",
+  "verified_assets": 115,
+  "startup_frames": 180,
+  "renderer": {
+    "status": "PASS",
+    "checks": 813,
+    "failures": 0,
+    "actor_pairs": 219,
+    "max_changed_actor_pixels": 0,
+    "equipment_variants": 75,
+    "pointer_probes": 396,
+    "audio_opened": false
+  },
+  "presentation_measured": false,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_zip": false,
+  "render_cost": {
+    "hidden": true,
+    "audio_opened": false,
+    "presentation_measured": false,
+    "scenes": [
+      {
+        "name": "forest-north",
+        "optimized": false,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 7.08309,
+        "completed_render_p95_ms": 7.9086,
+        "shadow_casters": 56,
+        "prepared_actors": 9
+      },
+      {
+        "name": "forest-north",
+        "optimized": true,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 5.97812,
+        "completed_render_p95_ms": 6.6532,
+        "shadow_casters": 56,
+        "prepared_actors": 9
+      },
+      {
+        "name": "forest-dense",
+        "optimized": false,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 8.64595,
+        "completed_render_p95_ms": 9.0955,
+        "shadow_casters": 59,
+        "prepared_actors": 10
+      },
+      {
+        "name": "forest-dense",
+        "optimized": true,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 6.96877,
+        "completed_render_p95_ms": 7.3141,
+        "shadow_casters": 59,
+        "prepared_actors": 10
+      },
+      {
+        "name": "forest-boss",
+        "optimized": false,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 8.40044,
+        "completed_render_p95_ms": 9.046,
+        "shadow_casters": 40,
+        "prepared_actors": 8
+      },
+      {
+        "name": "forest-boss",
+        "optimized": true,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 7.3837,
+        "completed_render_p95_ms": 7.9629,
+        "shadow_casters": 40,
+        "prepared_actors": 8
+      },
+      {
+        "name": "forest-edge",
+        "optimized": false,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 10.8024,
+        "completed_render_p95_ms": 11.2856,
+        "shadow_casters": 16,
+        "prepared_actors": 4
+      },
+      {
+        "name": "forest-edge",
+        "optimized": true,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 10.2451,
+        "completed_render_p95_ms": 10.9198,
+        "shadow_casters": 16,
+        "prepared_actors": 4
+      },
+      {
+        "name": "desert-oasis",
+        "optimized": false,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 6.6102,
+        "completed_render_p95_ms": 7.0811,
+        "shadow_casters": 67,
+        "prepared_actors": 7
+      },
+      {
+        "name": "desert-oasis",
+        "optimized": true,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 5.7962,
+        "completed_render_p95_ms": 6.0971,
+        "shadow_casters": 67,
+        "prepared_actors": 7
+      },
+      {
+        "name": "desert-boss",
+        "optimized": false,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 6.22484,
+        "completed_render_p95_ms": 6.9277,
+        "shadow_casters": 33,
+        "prepared_actors": 5
+      },
+      {
+        "name": "desert-boss",
+        "optimized": true,
+        "trials": 3,
+        "frames": 240,
+        "completed_render_mean_ms": 5.16999,
+        "completed_render_p95_ms": 5.776,
+        "shadow_casters": 33,
+        "prepared_actors": 5
+      }
+    ]
+  }
+}

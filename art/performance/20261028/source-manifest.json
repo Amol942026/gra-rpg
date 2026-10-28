@@ -1,0 +1,94 @@
+[
+  {
+    "path": "src/main.cpp",
+    "sha256": "54382aa5116b0bc48d9a4bc0ce6e3140f6ebeb5c37c0d5c00ad796f7da92c162"
+  },
+  {
+    "path": "src/actor_art.hpp",
+    "sha256": "952848572d6ccadffbf6adcfd69c12bc7b467ee67ae352231f2f1e4ead1efe9d"
+  },
+  {
+    "path": "src/actor_view.hpp",
+    "sha256": "2d433d1796cf2a7237fc0f48afbb84b7e7d1ddf3ee5bcd1f6480a60b4a0f6ef0"
+  },
+  {
+    "path": "src/desert_art.hpp",
+    "sha256": "9deae0b520a3308aafe5705b4e786ea24ade0cd1eaeeac30ddc4159837c60255"
+  },
+  {
+    "path": "src/desert_scenery.hpp",
+    "sha256": "2559c813c9b723aaf42f2e3d31d9589e344b9a581b82cc92952c029b19cc098b"
+  },
+  {
+    "path": "src/environment.hpp",
+    "sha256": "331faff2bcc26be7c4ba260cc8956cb5f0934864c9275ace1e1e32e3104290bb"
+  },
+  {
+    "path": "src/ground_shadows.hpp",
+    "sha256": "3d0e40d48d22258a113ad131406a4b76325b675698819a9079fa95103122e5e5"
+  },
+  {
+    "path": "src/enemy_ai.hpp",
+    "sha256": "cc1390455e0e4d7928d246ec22ecfab02bc5de1f63c84749aee07d8d2184768d"
+  },
+  {
+    "path": "src/game.hpp",
+    "sha256": "db823de50eeacf8077bd87992f384b16f73260f87b418e9c625be6bd8590e9be"
+  },
+  {
+    "path": "src/performance.hpp",
+    "sha256": "e848c432fb1cf144022f5153eb45b53f7855a44893e9f508a817d36325883653"
+  },
+  {
+    "path": "src/shadow_geometry.hpp",
+    "sha256": "22d212e6391d949360419dfb25cbe06810a12b6670053a3fc7d2ee974663fe42"
+  },
+  {
+    "path": "src/visual_qa.hpp",
+    "sha256": "87e9df9ad4ec2d4b573cdace6714df8d966f41bd661826d1c18ece6f1e977c5f"
+  },
+  {
+    "path": "src/portrait_cache.hpp",
+    "sha256": "fb32d8a1acbf998dc7edc88c22b998ab1435427b87275ab60267ffa157ff953b"
+  },
+  {
+    "path": "src/render_targets.hpp",
+    "sha256": "ad344557e6c43557bb606a030f96ab4406909540b079f3e2bfdbd96fc39b45f8"
+  },
+  {
+    "path": "src/sync_present.cpp",
+    "sha256": "873e29c9e93809ca154fa67470af97b62ea167e826b667d206566e740022f382"
+  },
+  {
+    "path": "src/sync_present.hpp",
+    "sha256": "92bca44125f72ed73f801b2e091807cfb1792f20eca45d514c2c22e50c524376"
+  },
+  {
+    "path": "build.ps1",
+    "sha256": "04056871949a233b1e1a039289969261048b3bb29070a90347737105734bd8cc"
+  },
+  {
+    "path": "package.ps1",
+    "sha256": "c4d9e3c78755c096b38185e87b8409d13de449747b56c1b3b00dad72b3b38e08"
+  },
+  {
+    "path": "tests/render_optimization_qa.cpp",
+    "sha256": "0890577285e9a4ba383d8f71b2177bed54ecd962d9e124be430d10a93eb114ca"
+  },
+  {
+    "path": "tests/render_optimization_qa.ps1",
+    "sha256": "3fd031c57831560906c472c0e9a01434449584b2f044154dc63e7ad3d6590874"
+  },
+  {
+    "path": "tests/performance60_package_qa.ps1",
+    "sha256": "30df8da581785b920b0f8c9388f57c7788befb2367f66e2ba4a615069583ab16"
+  },
+  {
+    "path": "tests/performance_collision_tests.hpp",
+    "sha256": "87d5365645355b65e2d46f6eb8605f87b5aaf66366f45514c85bf6749599b771"
+  },
+  {
+    "path": "AGENTS.md",
+    "sha256": "7d4fa6607c77891f2686eb356bee368a70d860a913474e14da9252087d5688f7"
+  }
+]

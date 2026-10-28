@@ -32,6 +32,7 @@ Inspection inspectWorld(WorldHover hit) {
         info.hp=std::clamp(enemy->hp,0.f,enemy->maxHp);info.maxHp=enemy->maxHp;
         info.attack=enemy->damage();info.defense=enemy->defense();info.speed=stats.speed;
         info.magicDefense=enemy->magicDefense();info.attackType=enemy->attackType();
+        if(enemy->type==BoarType)info.secondary="Szarża: 2× obrażenia · co 4,5 s";
         info.loot=lootHint(enemy->type);
     }else if(hit.kind==HoverKind::Corpse){
         const Enemy* e=game.findCorpse(hit.index);if(!e)return info;
@@ -78,7 +79,7 @@ void drawInspectionHud() {
         bar(1090,801,301,6,info.hp,info.maxHp,rgb(181,86,73));
         txt(TextFormat(info.attackType==DamageType::Magic?"MAGIA  %d":"ATAK  %d",info.attack),1090,817,14,Gold);
         txt(TextFormat("OBRONA  %d",info.defense),1242,817,14,Gold);
-        txt(TextFormat("Obr. mag.: %d  ·  Ruch: %.2f",info.magicDefense,info.speed),1090,837,14,Muted);
+        txt(info.secondary.empty()?TextFormat("Obr. mag.: %d  ·  Ruch: %.2f",info.magicDefense,info.speed):info.secondary,1090,837,14,Muted);
         txt(info.loot,1090,857,14,Green);
     }else{
         txt(info.detail,1090,796,14,Gold);txt(info.secondary,1090,826,14,Muted);

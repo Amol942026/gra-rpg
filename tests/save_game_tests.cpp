@@ -6,11 +6,13 @@ int checks=0;
 void check(bool ok,const char* label){checks++;if(!ok)throw std::runtime_error(label);}
 template<class F>void rejects(F fn,const char* label){bool rejected=false;try{fn();}catch(...){rejected=true;}check(rejected,label);}
 void roundtrip(const saves::Snapshot& snapshot){auto bytes=saves::encode(snapshot);auto restored=saves::decode(bytes);check(saves::encode(restored)==bytes,"all serialized fields roundtrip exactly");auto a=snapshot.game.rng,b=restored.game.rng,c=snapshot.game.combatRng,d=restored.game.combatRng;for(int i=0;i<40;i++)check(a()==b()&&c()==d(),"both random streams continue exactly");}
+#include "boar_save_tests.hpp"
 int main(int argc,char** argv){
  if(argc<2||std::string(argv[1])!="--no-audio")return 3;
  try{
   fs::path root=argc>2?fs::path(argv[2]):fs::path("dist")/("qa-save-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
   check(!fs::exists(root),"fresh isolated test directory");fs::create_directories(root);
+  boarSaveTests();
   saves::Snapshot s;roundtrip(s);
   for(int k=int(Kind::SlimeBlade);k<ItemKindCount;k++){
    auto extra=s;extra.game.bag[10]=item(Kind(k),2);extra.game.equipment[gearSlot(Kind(k))]=item(Kind(k),1);

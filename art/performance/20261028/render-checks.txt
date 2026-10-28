@@ -800,4 +800,11 @@ PASS desert render cap preserves native final canvas and scale
 PASS only desert scenery uses the smaller world buffer
 PASS entire equipment and statistics HUD stays pixel-identical at native display resolution
 PASS retained actor storage is bounded
+PASS cached tree wind preserves every pixel / forest-north
+PASS cached tree wind preserves every pixel / forest-dense
+PASS cached tree wind preserves every pixel / forest-boss
+PASS cached tree wind preserves every pixel / forest-edge
+PASS cached tree wind preserves every pixel / desert-oasis
+PASS cached tree wind preserves every pixel / desert-boss
+PASS all renderer and cost tests kept their window hidden
 PASS all tests remained silent

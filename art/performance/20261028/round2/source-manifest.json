@@ -1,0 +1,42 @@
+[
+  {
+    "path": "src/actor_art.hpp",
+    "sha256": "d2b3382cbb3779fb99f336a3dd3be30f052695e7710a67fd6da08951b5907f59"
+  },
+  {
+    "path": "src/environment.hpp",
+    "sha256": "277553f848f549221b4031145d52b1ce841b525593e7a4076b57bc99c8197aba"
+  },
+  {
+    "path": "src/ground_shadows.hpp",
+    "sha256": "812a1fed10c98aa03a1e7d755e26845ed727c66562adf9581068fe92ef77912d"
+  },
+  {
+    "path": "src/shadow_geometry.hpp",
+    "sha256": "b03325c65f2dffcde6bb306a279070f2759f8fd7e4cfdba5fed5200b40ab631c"
+  },
+  {
+    "path": "src/main.cpp",
+    "sha256": "ccece89ec5f88fb9492cff85b901b60d32fc0c9253723bbd3297ca15ebfcdf29"
+  },
+  {
+    "path": "tests/render_optimization_qa.cpp",
+    "sha256": "8df7d3682f0c62991aa0b4f1529eb66d86351427b7405f44cdb4c99e03bf4a63"
+  },
+  {
+    "path": "tests/render_optimization_qa.ps1",
+    "sha256": "3fd031c57831560906c472c0e9a01434449584b2f044154dc63e7ad3d6590874"
+  },
+  {
+    "path": "tests/performance60_package_qa.ps1",
+    "sha256": "30df8da581785b920b0f8c9388f57c7788befb2367f66e2ba4a615069583ab16"
+  },
+  {
+    "path": "build.ps1",
+    "sha256": "04056871949a233b1e1a039289969261048b3bb29070a90347737105734bd8cc"
+  },
+  {
+    "path": "package.ps1",
+    "sha256": "c4d9e3c78755c096b38185e87b8409d13de449747b56c1b3b00dad72b3b38e08"
+  }
+]

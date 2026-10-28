@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=7;
+constexpr int CurrentVersion=8;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -67,6 +67,8 @@ EF_SAVE(TreasureChest,v.id,v.pos,v.location,v.opened,v.loot)
 inline void visit(Archive& a,Enemy& v){
  a(v.id,v.type,v.pos,v.home,v.hp,v.maxHp,v.attack,v.flash,v.windup,v.alive,v.animation,v.strike,v.recoil,v.loot,v.behavior,v.patrolGoal,v.patrolWait,v.patrolBlocked,v.patrolSequence,v.patrolGoalActive,v.sandPrisonCd,v.sandCastPulse,v.sandPrisonCasts);
  if(a.version>=2)a(v.boulderCd,v.boulderWindup,v.boulderRecovery,v.boulderTarget,v.boulderThrows);
+ if(a.version>=8)a(v.boarChargeCd,v.boarWindup,v.boarRush,v.boarRecovery,v.boarAim,v.boarDirection,v.boarHit,v.boarCharges);
+ else if(a.reading){v.boarChargeCd=BoarChargeFirstDelay;v.boarWindup=v.boarRush=v.boarRecovery=0;v.boarAim=v.boarDirection={};v.boarHit=false;v.boarCharges=0;}
  if(a.reading&&a.version>=2&&a.version<6){v.boulderCd*=BoulderCooldown/4.5f;v.boulderWindup*=BoulderWindup/2.2f;v.boulderRecovery*=BoulderRecovery/.6f;}
 }
 EF_SAVE(FieldState,v.enemies,v.props,v.forage)
@@ -113,6 +115,12 @@ inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Pr
  std::set<int> ids;
  for(const auto& e:enemies){require(e.id>=0&&ids.insert(e.id).second&&range(e.behavior,4)&&e.type>=0&&e.type<EnemyTypeCount&&e.hp>=0&&e.maxHp>0&&e.hp<=e.maxHp&&e.sandPrisonCasts>=0);validatePos(e.pos);validatePos(e.home);validateAnimation(e.animation);for(auto& i:e.loot)validateItem(i);}
  for(const auto& e:enemies){require(e.boulderCd>=0&&e.boulderCd<=BoulderCooldown+.001f&&e.boulderWindup>=0&&e.boulderWindup<=BoulderWindup+.001f&&e.boulderRecovery>=0&&e.boulderRecovery<=BoulderRecovery+.001f&&e.boulderThrows>=0);validatePos(e.boulderTarget);}
+ for(const auto& e:enemies){
+  require(e.boarChargeCd>=0&&e.boarChargeCd<=BoarChargeCooldown+.001f&&e.boarWindup>=0&&e.boarWindup<=BoarChargeWindup+.001f&&e.boarRush>=0&&e.boarRush<=BoarChargeDuration+.001f&&e.boarRecovery>=0&&e.boarRecovery<=BoarChargeRecovery+.001f&&e.boarCharges>=0);
+  int phases=(e.boarWindup>0)+(e.boarRush>0)+(e.boarRecovery>0);require(phases<=1&&(!phases||(e.type==BoarType&&e.alive)));
+  validatePos(e.boarAim);require(length(e.boarDirection)<=1.001f&&(!e.boarRush||std::abs(length(e.boarDirection)-1)<.001f));
+  require(!e.boarHit||(e.type==BoarType&&e.alive&&(e.boarRush>0||e.boarRecovery>0)));
+ }
  for(const auto& p:props){validatePos(p.pos);require(p.type>=0&&p.type<PropTypeCount&&p.size>0&&p.size<=10);}
  validateGround(forage);
 }

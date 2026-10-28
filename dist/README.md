@@ -1,5 +1,13 @@
 # Emberfall — Echa zapomnianych ruin
 
+Aktualizacja 28.10.2026: leśne dziki mają szarżę. Przez 0,55 s opuszczają łeb
+i pokazują kierunek ataku, po czym pędzą prosto z prędkością 9,5 pola/s.
+Stratowanie zadaje jednorazowo 2× obrażenia zwykłego ataku. Można zejść z toru,
+zrobić unik lub schować się za przeszkodą. Odnowienie: 4,5 s od ruszenia,
+potem kolejne przygotowanie. Blisko gracza nadal używają zwykłego ataku.
+Zapis v8 zachowuje wszystkie fazy szarży i odczytuje wcześniejsze v1–v7.
+Szczegóły: [art/gameplay/boar-charge/README.md](art/gameplay/boar-charge/README.md).
+
 Aktualizacja 27.10.2026: Strażnik prostuje nogę podporową w chodzie, zachowując
 zgranie stóp z ruchem. Dodano 36 nowych przedmiotów z bestii, łącznie 75
 elementów wyposażenia. Każdy gatunek ma trzy nowe pozycje łupu, nadal losowane
@@ -53,7 +61,7 @@ Oprawa wykorzystuje leśne ruiny, stare złoto i turkusowe światło Serca Świt
 
 Domyślnie gra używa prezentacji DXGI z V-sync; przed jej użyciem sprawdza rzeczywisty piksel przesłany z OpenGL do docelowego bufora. Niektóre sterowniki Intel UHD przyjmują wywołania współdzielenia GPU, lecz zwracają czarny obraz. Gdy kontrola wykryje tę sytuację, gra automatycznie przechodzi na OpenGL z V-sync. Sprawdzenie jest powtarzane po zmianie rozmiaru bufora; nie wymaga zmiany ustawień Windows ani urządzenia audio.
 
-Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start menu głównego i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
+Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio --background-test` sprawdza normalny start menu głównego i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
 ## Wersja 0.47 — animacje szkieletowe przygotowane w Blenderze
 
@@ -302,7 +310,7 @@ Eldrin ma zaokrągloną sylwetkę, fałdy i złote hafty szat, szczegółową tw
 
 Dialog przewija się sam, pozostawiając czas na lekturę. **Enter, Spacja lub LPM** najpierw pokazują resztę bieżącej wypowiedzi, a kolejne naciśnięcie przechodzi dalej. **POMIŃ** pomija rozmowę, zachowując teleportację; **Esc** otwiera pauzę. **F11** działa w trakcie sceny. Utrata aktywności okna zatrzymuje scenę; ruch, walka, ekwipunek oraz przeciwnicy są zablokowani do końca przejścia. Obecny las pozostaje pierwszym etapem fabuły; pozostałe krainy i strażnicy są na razie zapowiedziani w dialogu.
 
-Cichy test `--intro-qa --no-audio` zapisuje raport, pełną rozmowę i obrazy do `dist/qa-v24/intro/`. `--startup-smoke --no-audio` sprawdza teraz rzeczywisty start menu głównego. Testy mechaniki i benchmarki zaczynają się od razu w lesie.
+Cichy test `--intro-qa --no-audio` zapisuje raport, pełną rozmowę i obrazy do `dist/qa-v24/intro/`. `--startup-smoke --no-audio --background-test` sprawdza teraz rzeczywisty start menu głównego. Testy mechaniki i benchmarki zaczynają się od razu w lesie.
 
 ## Wersja 0.23 — koło broni i łuk
 

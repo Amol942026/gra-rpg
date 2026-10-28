@@ -8,18 +8,22 @@ inline std::vector<float> packed;
 inline Mesh gpuMesh{};
 inline Material gpuMaterial{};
 inline int capacity=0;
+inline unsigned allocations=0;
 inline void beginBatch(){recording=true;packed.clear();}
 inline void unloadBatch(){if(gpuMesh.vaoId)UnloadMesh(gpuMesh);if(gpuMaterial.maps)MemFree(gpuMaterial.maps);gpuMesh={};gpuMaterial={};capacity=0;packed.clear();recording=false;}
-inline void flushBatch(Shader shader){
- recording=false;if(packed.empty())return;
- int count=int(packed.size()/3);
+inline void prepareBatch(int count=98304){
  if(count>capacity){
-  if(gpuMesh.vaoId)UnloadMesh(gpuMesh);gpuMesh={};capacity=std::max(count,48000);
+  if(gpuMesh.vaoId)UnloadMesh(gpuMesh);gpuMesh={};capacity=std::max(count,capacity*2);allocations++;
   gpuMesh.vertexCount=capacity;gpuMesh.triangleCount=capacity/3;
   gpuMesh.vertices=static_cast<float*>(MemAlloc(capacity*3*sizeof(float)));
   std::fill(gpuMesh.vertices,gpuMesh.vertices+capacity*3,0.f);UploadMesh(&gpuMesh,true);
  }
  if(!gpuMaterial.maps)gpuMaterial=LoadMaterialDefault();
+ if(packed.capacity()<size_t(capacity)*3)packed.reserve(size_t(capacity)*3);
+}
+inline void flushBatch(Shader shader){
+ recording=false;if(packed.empty())return;
+ int count=int(packed.size()/3);if(count>capacity)prepareBatch(count);
  rlDrawRenderBatchActive();
  static const auto stream=reinterpret_cast<void(*)(unsigned,std::ptrdiff_t,const void*,unsigned)>(glfwGetProcAddress("glBufferData"));
  if(stream){rlEnableVertexBuffer(gpuMesh.vboId[0]);stream(0x8892,packed.size()*sizeof(float),packed.data(),0x88E0);rlDisableVertexBuffer();}
