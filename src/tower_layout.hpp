@@ -4,7 +4,7 @@ inline constexpr int TowerFloorCount=5;
 inline constexpr V TowerCenter{12,12},TowerArrival{12,14},MagePosition{12,10};
 inline constexpr int MerchantFloor=2,MerchantObjectType=13;
 inline constexpr V MerchantPosition{16,12.4f};
-inline constexpr V TowerStairUp{8.5f,14.5f},TowerStairDown{15.8f,14.5f};
+inline constexpr V TowerStairUp{12,16.5f},TowerStairDown{14.5f,14.2f};
 inline constexpr float TowerRadius=7.2f,MageTalkRange=2.7f,TowerUseRange=2.3f;
 inline constexpr int TowerBalconyFloor=TowerFloorCount-1;
 // Radial terrace on the observatory's east side; coordinates match the Krita
@@ -15,11 +15,19 @@ inline bool towerBalconyDeck(V p){V q=towerBalconyLocal(p);return q.x>=6.1f&&q.x
 inline constexpr int TowerStairSteps=14;
 inline constexpr float TowerStairWidth=1.7f,TowerStairRun=2.6f,TowerStairRise=8.5f;
 inline V towerStairBase(int direction){return direction==1?TowerStairUp:TowerStairDown;}
+inline V towerStairApproach(int direction){return towerStairBase(direction)+V{direction==1?1.05f:-1.05f,direction==1?-1.f:0.f};}
+inline constexpr float TowerStairPlayerRadius=.3f;
+struct TowerStairFootprint {float left,right,halfWidth;};
+inline TowerStairFootprint towerStairFootprint(int direction){
+ // Includes the landing, post caps, coping and nosings of the cached artwork.
+ return direction==1?TowerStairFootprint{-TowerStairRun-.3f,.18f,TowerStairWidth*.5f+.28f}:
+                     TowerStairFootprint{-.18f,TowerStairRun+.18f,TowerStairWidth*.5f+.28f};
+}
 inline bool towerStairBlocked(V p,int direction){
- V offset=p-towerStairBase(direction);float along=offset.x*(direction==1?-1.f:1.f),across=std::abs(offset.y);
- // The entrance remains walkable; the raised flight and open shaft are solid boundaries.
- return (along>.18f&&along<TowerStairRun+.25f&&across<TowerStairWidth*.5f+.2f)||
-        (along>-.25f&&along<TowerStairRun+.25f&&across>TowerStairWidth*.5f-.1f&&across<TowerStairWidth*.5f+.24f);
+ V q=p-towerStairBase(direction);auto bounds=towerStairFootprint(direction);
+ float dx=std::max({bounds.left-q.x,0.f,q.x-bounds.right}),dy=std::max(0.f,std::abs(q.y)-bounds.halfWidth);
+ // A swept player's footprint stays outside every solid face and the shaft.
+ return dx*dx+dy*dy<=TowerStairPlayerRadius*TowerStairPlayerRadius;
 }
 struct TowerFloorInfo {const char* name;const char* theme;};
 inline constexpr std::array<TowerFloorInfo,TowerFloorCount> TowerFloors={{{"Sala przybycia","KOMINEK / SCHRONIENIE"},{"Biblioteka","KRONIKI / WIEDZA"},{"Pracownia alchemiczna","ZIOŁA / MIKSTURY"},{"Sala pieczęci","RUNY / SERCE ŚWITU"},{"Obserwatorium","GWIAZDY / BALKON DOLINY ŚWITU"}}};

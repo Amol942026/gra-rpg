@@ -21,15 +21,15 @@ void towerFloorsTests(){
   if(floor<4)check(accessible(TowerStairUp,1.4f),"upstairs can be approached through real floor collisions");
   if(floor>0)check(accessible(TowerStairDown,1.4f),"downstairs can be approached through real floor collisions");
   for(const auto& object:towerFurnishings(floor))if(towerInteractive(object.type))check(accessible(object.pos,TowerUseRange),"every interactive themed object has an accessible approach");
-  if(floor<4){g.player=TowerStairUp;check(g.climbTower(1),"climbing to each next floor uses the same stairs mechanic");}
+  if(floor<4){g.player=towerStairApproach(1);check(g.climbTower(1),"climbing to each next floor uses the same stairs mechanic");}
  }
  check(!g.climbTower(1)&&g.towerFloor==4,"top floor cannot leave the five-floor range");
- for(int i=4;i>0;i--){g.player=TowerStairDown;check(g.climbTower(-1)&&g.towerFloor==i-1,"all floors support a round trip back downstairs");}
+ for(int i=4;i>0;i--){g.player=towerStairApproach(-1);check(g.climbTower(-1)&&g.towerFloor==i-1,"all floors support a round trip back downstairs");}
  check(same(g.bag,inventory)&&same(g.equipment,gear)&&g.skillRanks==SkillRanks{2,3}&&g.hp==73&&g.mana==62&&g.xp==xp&&g.towerRuneMask==5,"stairs preserve inventory, equipment, stats, skills, resources and activated runes");
- for(int block=0;block<4;block++){g=tower();g.player=TowerStairUp;if(block==0)g.hp=0;if(block==1)g.allocationRequired=true;if(block==2)g.dawnQuest=DawnQuest::Returning;if(block==3)g.rollRemaining=.2f;check(!g.climbTower(1)&&g.towerFloor==0,"death, allocation, story and rolling block stair teleportation");}
- g=tower();g.player=TowerStairUp;g.bag[10]=item(Kind::Health);check(g.drop({Place::Bag,10},g.player),"dropping item tags it with its actual tower floor");int first=g.ground.back().id;g.climbTower(1);g.player=TowerStairUp;
+ for(int block=0;block<4;block++){g=tower();g.player=towerStairApproach(1);if(block==0)g.hp=0;if(block==1)g.allocationRequired=true;if(block==2)g.dawnQuest=DawnQuest::Returning;if(block==3)g.rollRemaining=.2f;check(!g.climbTower(1)&&g.towerFloor==0,"death, allocation, story and rolling block stair teleportation");}
+ g=tower();g.player=towerStairApproach(1);g.bag[10]=item(Kind::Health);check(g.drop({Place::Bag,10},g.player),"dropping item tags it with its actual tower floor");int first=g.ground.back().id;g.climbTower(1);g.player=towerStairApproach(1);
  check(!g.get({Place::Ground,first})&&!g.reachable({Place::Ground,first})&&!g.transfer({Place::Ground,first},{Place::Bag,10}),"same coordinates on another floor cannot expose or collect old loot");
- g.bag[10]=item(Kind::Mana);g.drop({Place::Bag,10},g.player);int second=g.ground.back().id;g.player=TowerStairDown;g.climbTower(-1);g.player=TowerStairUp;
+ g.bag[10]=item(Kind::Mana);g.drop({Place::Bag,10},g.player);int second=g.ground.back().id;g.player=towerStairApproach(-1);g.climbTower(-1);g.player=towerStairApproach(1);
  check(g.get({Place::Ground,first})&&!g.get({Place::Ground,second})&&g.transfer({Place::Ground,first},{Place::Bag,10})&&g.bag[10].kind==Kind::Health,"returning recovers only loot from that floor without deleting other floor loot");
  g=tower();g.hp=4;g.mana=2;int font=7;g.player=towerFurnishings(0)[font].pos+V{1,0};check(g.restAtTower(font)&&g.hp==g.maxHp()&&g.mana==g.maxMana(),"arrival fountain fully restores HP and mana");
  g=tower();g.towerFloor=2;g.player={12,12};int health=g.bag[0].count,mana=g.bag[1].count;

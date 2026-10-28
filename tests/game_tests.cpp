@@ -41,7 +41,9 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "guardian_boulder_tests.hpp"
 #include "guardian_gait_tests.hpp"
 #include "expanded_loot_tests.hpp"
+#include "performance_collision_tests.hpp"
 int main(){
+ performanceCollisionTests();
  expandedLootTests();
  guardianGaitTests();
  guardianBoulderTests();

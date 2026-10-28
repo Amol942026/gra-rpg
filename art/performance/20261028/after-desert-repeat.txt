@@ -1,0 +1,39 @@
+Build edition: developer
+Frames: 900
+Window: 1920x1080
+Fullscreen: yes
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: DXGI flip / V-sync
+DXGI synchronized presents: 900
+Occluded presentations: 0
+Suppressed native swaps: 900
+Actual presentation interval: 1
+Presentation fallback: 
+Strong cuts performed: 0
+Piercing arrows fired: 0
+Developer mode: 0
+Developer menu open: 0
+Developer destination: forest
+World location: desert
+Benchmark scenario: desert
+Desert areas visited: 9
+Sand prisons cast: 1
+Tower floor: 1
+Intro active: 0
+Developer error: 
+Main menu open: 0
+Pause menu open: 0
+Audio device opened: no
+Native canvas: 1728x1080
+Desert background buffer: 840x720
+Average FPS: 58.4539
+CPU frame mean (ms): 15.1625
+EndDrawing mean (ms): 0.168893
+Presentation mean (ms): 1.77534
+CPU frame p95 (ms): 18.6583
+CPU frame p99 (ms): 22.0907
+Frame p95 (ms): 19.1026
+Frame p99 (ms): 23.7836
+Frame max (ms): 37.3276
+Frames over 25 ms: 7

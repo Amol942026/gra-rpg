@@ -6,10 +6,20 @@ bool stairPresent(int direction)const{return direction==1?towerFloor<TowerFloorC
 bool stairReachable(int direction)const{return towerUseAllowed()&&stairPresent(direction)&&distance(player,direction==1?TowerStairUp:TowerStairDown)<=TowerUseRange;}
 bool climbTower(int direction){
  if(!stairReachable(direction))return false;
- towerFloor+=direction;player=direction==1?V{14.7f,14.5f}:V{9.6f,14.5f};
+ towerFloor+=direction;player=towerStairApproach(-direction);
  cancelBow();closeCorpse();swing=rollRemaining=stepDistance=0;animation={};effects.clear();arrows.clear();fireballs.clear();explosions.clear();pierceFlashes.clear();
  facing=direction==1?V{-1,0}:V{1,0};animation.face(facing.x,facing.y);sound(Cue::Ui,player);
  say(std::string("Piętro ")+std::to_string(towerFloor+1)+" / 5 — "+TowerFloors[towerFloor].name);return true;
+}
+void ensureTowerPosition(){
+ if(!inTower()||walkable(player))return;
+ // Old saves may place the hero where an inward-shifted flight now stands.
+ V before=player;
+ for(int ring=1;ring<=50;ring++)for(int angle=0;angle<64;angle++){
+  float a=angle*6.28318530718f/64;V point=before+V{std::cos(a),std::sin(a)}*(ring*.05f);
+  if(walkable(point)){player=point;cancelBow();rollRemaining=swing=0;animation={};animation.face(facing.x,facing.y);return;}
+ }
+ player=TowerArrival;cancelBow();rollRemaining=swing=0;animation={};animation.face(facing.x,facing.y);
 }
 bool towerObjectReachable(int index)const{
  const auto& objects=towerFurnishings(towerFloor);

@@ -1,6 +1,8 @@
 #pragma once
 // Included inside desert_art. Geometry is rasterized once; weather stays in world space.
 std::array<RenderTexture2D,4> mountainArt{};Texture2D sandPlume{};RenderTexture2D mountainBackdrop{},mountainForeground{};Shader outsideGroundShader{};Texture2D groundPixel{};int groundOriginLocation=-1;
+bool optimizeBackdrop=true,backdropDrawn=true,foregroundDrawn=true,backdropReady=false;
+V backdropCamera{};float backdropScale=-1;unsigned backdropBuilds=0;
 constexpr float MountainWidth=600,MountainHeight=440,MountainFoot=360,MountainSpacing=4.4f;
 void beginTransparentLayer(){
  // Straight RGB, accumulated coverage for alpha. Dust over opaque soil must
@@ -69,6 +71,7 @@ void drawFoothills(){
  }native_world::endBlendMode();
 }
 void drawCachedFoothills(){
+ if(!foregroundDrawn)return;
  if(!mountainForeground.id){drawFoothills();return;}
  BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);auto texture=mountainForeground.texture;
  DrawTexturePro(texture,{0,0,float(texture.width),-float(texture.height)},{0,0,WorldW,H},{0,0},0,WHITE);native_world::endBlendMode();
@@ -113,7 +116,7 @@ void makeScenery(){
  }
  sandPlume=LoadTextureFromImage(plume);UnloadImage(plume);SetTextureFilter(sandPlume,TEXTURE_FILTER_BILINEAR);
 }
-void unloadScenery(){if(mountainForeground.id)UnloadRenderTexture(mountainForeground);mountainForeground={};if(outsideGroundShader.id)UnloadShader(outsideGroundShader);outsideGroundShader={};if(groundPixel.id)UnloadTexture(groundPixel);groundPixel={};if(mountainBackdrop.id)UnloadRenderTexture(mountainBackdrop);mountainBackdrop={};for(auto& texture:mountainArt){if(texture.id)UnloadRenderTexture(texture);texture={};}if(sandPlume.id)UnloadTexture(sandPlume);sandPlume={};}
+void unloadScenery(){backdropReady=false;backdropScale=-1;backdropDrawn=foregroundDrawn=true;if(mountainForeground.id)UnloadRenderTexture(mountainForeground);mountainForeground={};if(outsideGroundShader.id)UnloadShader(outsideGroundShader);outsideGroundShader={};if(groundPixel.id)UnloadTexture(groundPixel);groundPixel={};if(mountainBackdrop.id)UnloadRenderTexture(mountainBackdrop);mountainBackdrop={};for(auto& texture:mountainArt){if(texture.id)UnloadRenderTexture(texture);texture={};}if(sandPlume.id)UnloadTexture(sandPlume);sandPlume={};}
 struct WorldBounds{float minX,maxX,minY,maxY;};
 WorldBounds visibleBounds(float margin){
  auto a=toWorld({0,0}),b=toWorld({WorldW,0}),c=toWorld({0,H}),d=toWorld({WorldW,H});
@@ -141,16 +144,33 @@ void drawBackdrop(bool mountains=true){
 // overlapping range at the supersampled resolution of the playable world.
 void renderBackdrop(float pixelsPerUnit){
  float resolution=std::clamp(pixelsPerUnit*.72f,.8f,1.2f);int width=int(std::ceil(WorldW*resolution)),height=int(std::ceil(H*resolution));
+ if(optimizeBackdrop&&backdropReady&&backdropScale==resolution&&backdropCamera.x==game.player.x&&backdropCamera.y==game.player.y)return;
+ backdropCamera=game.player;backdropScale=resolution;backdropReady=true;backdropBuilds++;
+ // Opaque interior terrain completely covers the distant background. Keep
+ // a generous tile inset so filtered map edges and shores still render it.
+ bool covered=optimizeBackdrop;
+ for(Vector2 corner:{Vector2{0,0},Vector2{WorldW,0},Vector2{0,H},Vector2{WorldW,H}}){V p=toWorld(corner);covered&=p.x>1.75f&&p.y>1.75f&&p.x<MapSize-2.75f&&p.y<MapSize-2.75f;}
+ backdropDrawn=!covered;
+ foregroundDrawn=!optimizeBackdrop;
+ if(optimizeBackdrop)for(const auto& range:foothillRanges()){
+  Vector2 p=screen(range.pos);float left=p.x-MountainWidth*.5f*range.size,top=p.y-MountainFoot*range.size;
+  if(left+MountainWidth*range.size>=0&&left<=WorldW&&top+MountainHeight*range.size>=0&&top<=H){foregroundDrawn=true;break;}
+ }
+ if(backdropDrawn){
  if(!mountainBackdrop.id||mountainBackdrop.texture.width!=width||mountainBackdrop.texture.height!=height){
-  if(mountainBackdrop.id)UnloadRenderTexture(mountainBackdrop);mountainBackdrop=LoadRenderTexture(width,height);SetTextureFilter(mountainBackdrop.texture,TEXTURE_FILTER_BILINEAR);
+  if(mountainBackdrop.id)UnloadRenderTexture(mountainBackdrop);mountainBackdrop=render_targets::colorOnly(width,height);SetTextureFilter(mountainBackdrop.texture,TEXTURE_FILTER_BILINEAR);
  }
  BeginTextureMode(mountainBackdrop);ClearBackground(rgb(211,170,112));BeginMode2D({{0,0},{0,0},0,resolution});drawBackdrop();EndMode2D();EndTextureMode();
+ }
+ if(foregroundDrawn){
  if(!mountainForeground.id||mountainForeground.texture.width!=width||mountainForeground.texture.height!=height){
-  if(mountainForeground.id)UnloadRenderTexture(mountainForeground);mountainForeground=LoadRenderTexture(width,height);SetTextureFilter(mountainForeground.texture,TEXTURE_FILTER_BILINEAR);
+  if(mountainForeground.id)UnloadRenderTexture(mountainForeground);mountainForeground=render_targets::colorOnly(width,height);SetTextureFilter(mountainForeground.texture,TEXTURE_FILTER_BILINEAR);
  }
  BeginTextureMode(mountainForeground);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,resolution});drawFoothills();EndMode2D();EndTextureMode();
+ }
 }
 void drawCachedBackdrop(){
+ if(!backdropDrawn)return;
  if(!mountainBackdrop.id){drawBackdrop();return;}auto tex=mountainBackdrop.texture;DrawTexturePro(tex,{0,0,float(tex.width),-float(tex.height)},{0,0,WorldW,H},{0,0},0,WHITE);
 }
 float gust(float time){return .53f+.22f*std::sin(time*.43f)+.14f*std::sin(time*.19f+1.7f)+.10f*std::sin(time*.83f+.6f);}

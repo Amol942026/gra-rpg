@@ -4,15 +4,16 @@
 namespace tower_stairs {
 std::array<shadow_geometry::Sprite,2> groundShadows;
 std::array<shadow_geometry::Polygons,2> shadowMeshes;
+std::array<std::vector<V>,2> footprints;
 constexpr int ArtWidth=800,ArtHeight=800;constexpr float ArtScale=2,OriginX=174,OriginY=298;
 struct P {float x,y,z;};
 struct Face {std::vector<Vector2> vertices;float depth;Color color;bool clipped=false;int detail=0;};
 struct Mesh {
- float x,y;std::vector<Face> faces;std::vector<Vector2> opening;shadow_geometry::Polygons shadowFaces;
+ float x,y;std::vector<Face> faces;std::vector<Vector2> opening;shadow_geometry::Polygons shadowFaces;std::vector<V> groundVertices{};
  Vector2 project(P p)const{return {x+(p.x-p.y)*40,y+(p.x+p.y)*20-p.z};}
  void face(std::initializer_list<P> points,Color color,bool cut=false,int detail=0){
   Face out;out.color=color;out.clipped=cut;out.detail=detail;out.depth=0;
-  for(P p:points){out.vertices.push_back(project(p));out.depth+=(p.x+p.y)*34.6f+p.z*.5f;}
+  for(P p:points){out.vertices.push_back(project(p));out.depth+=(p.x+p.y)*34.6f+p.z*.5f;groundVertices.push_back({p.x,p.y});}
   out.depth/=points.size();faces.push_back(std::move(out));
   if(std::any_of(points.begin(),points.end(),[](P p){return p.z>0;})){
    std::vector<Vector2> ground;for(P p:points){auto q=shadow_math::ground((p.x-p.y)*40,(p.x+p.y)*20,p.z);ground.push_back({q.x,q.y});}
@@ -73,7 +74,7 @@ struct Mesh {
  }
 };
 void model(int direction,float x,float y){
- Mesh m{x,y,{},{},{}};const float run=TowerStairRun,width=TowerStairWidth*.5f,rise=TowerStairRise,height=rise*TowerStairSteps;
+ Mesh m{x,y,{},{},{},{}};const float run=TowerStairRun,width=TowerStairWidth*.5f,rise=TowerStairRise,height=rise*TowerStairSteps;
  Color stone=rgb(150,155,153);
  if(direction==1){
 
@@ -116,6 +117,7 @@ void model(int direction,float x,float y){
   m.box(-.18f,0,-width,width,-5,1,rgb(182,186,176));
  }
  shadowMeshes[direction==1?0:1]=m.shadowFaces;
+ footprints[direction==1?0:1]=std::move(m.groundVertices);
  m.draw();
 }
 std::array<RenderTexture2D,2> art{};std::array<Texture2D,2> outlines{};

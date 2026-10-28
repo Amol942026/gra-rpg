@@ -68,7 +68,12 @@ Image presentedImage(){
 struct PausedWorldCache {RenderTexture2D art{};bool ready=false;float time=-1;V player{};WorldLocation location=WorldLocation::Forest;int floor=-1;unsigned builds=0;} pausedWorldCache;
 void invalidatePausedWorld(){pausedWorldCache.ready=false;}
 void unloadPausedWorld(){if(pausedWorldCache.art.id)UnloadRenderTexture(pausedWorldCache.art);pausedWorldCache={};}
+void prepareLiveWorld(){
+ if(game.inDesert())desert_art::renderBackdrop(renderScale);performance.end(RenderStage::Backdrop,true);
+ world_shadows::prepare();performance.end(RenderStage::Shadows,true);
+}
 void renderScene() {
+    if(!welcome)hero_portrait::prepare();
     if(welcome){
         BeginTextureMode(canvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
         native_world::beginOpaqueFrame();
@@ -88,9 +93,19 @@ void renderScene() {
         if(paused)native_world::beginOpaqueFrame();
         drawTowerChamber();drawGameMenu();drawDeveloperUi();if(paused)native_world::finishOpaqueBackground();EndMode2D();EndTextureMode();actor_art::finishShadowFrame();performance.end(RenderStage::Hud,true);return;
     }
-    hovered=pickWorld(mouse);
-    performance.end(RenderStage::Picking);
     const bool freeze=(statsOpen||skillsOpen)&&!intro.active()&&!towerStory.active();
+    const float nativeScale=renderScale;
+    // Keep text at native display resolution. At 1080p the scenery uses 75%
+    // of the linear resolution; the HUD and labels remain fully native.
+    const bool separateWorld=!game.inTower()&&!freeze&&!nativeWorldRendering&&nativeScale>1.001f;
+    if(separateWorld){
+        constexpr float worldScale=.9f;constexpr int width=945,height=810;
+        if(!worldCanvas.id||worldCanvas.texture.width!=width||worldCanvas.texture.height!=height){
+            if(worldCanvas.id)UnloadRenderTexture(worldCanvas);worldCanvas=LoadRenderTexture(width,height);SetTextureFilter(worldCanvas.texture,TEXTURE_FILTER_BILINEAR);
+        }
+        renderScale=worldScale;
+    }
+    if(freeze)hovered={};
     bool refresh=!pausedWorldCache.ready||pausedWorldCache.time!=game.time||distance(pausedWorldCache.player,game.player)>0||pausedWorldCache.location!=game.location||pausedWorldCache.floor!=game.towerFloor;
     if(freeze){
         if(!pausedWorldCache.art.id||pausedWorldCache.art.texture.width!=canvas.texture.width||pausedWorldCache.art.texture.height!=canvas.texture.height){
@@ -98,22 +113,32 @@ void renderScene() {
             pausedWorldCache.art=LoadRenderTexture(canvas.texture.width,canvas.texture.height);SetTextureFilter(pausedWorldCache.art.texture,TEXTURE_FILTER_POINT);refresh=true;
         }
         if(refresh){
-            if(game.inDesert())desert_art::renderBackdrop(renderScale);world_shadows::prepare();
+            prepareLiveWorld();
             BeginTextureMode(pausedWorldCache.art);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
             native_world::beginOpaqueFrame();drawWorld();native_world::finishOpaqueBackground();actor_art::finishShadowFrame();EndMode2D();EndTextureMode();
             pausedWorldCache.ready=true;pausedWorldCache.time=game.time;pausedWorldCache.player=game.player;pausedWorldCache.location=game.location;pausedWorldCache.floor=game.towerFloor;pausedWorldCache.builds++;
         }
-    }else{invalidatePausedWorld();if(game.inDesert())desert_art::renderBackdrop(renderScale);world_shadows::prepare();}
+    }else{invalidatePausedWorld();prepareLiveWorld();}
+    actor_art::pickingFromPreparedFrame=!freeze||refresh;hovered=pickWorld(mouse);actor_art::pickingFromPreparedFrame=false;
+    performance.end(RenderStage::Picking);
+    if(separateWorld){
+        BeginTextureMode(worldCanvas);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
+        native_world::beginOpaqueFrame();drawWorld();if(!paused)native_world::finishOpaqueBackground();actor_art::finishShadowFrame();
+        EndMode2D();EndTextureMode();renderScale=nativeScale;
+    }
     BeginTextureMode(canvas);
     ClearBackground(Ink);
     Camera2D camera{{0,0},{0,0},0,renderScale};
     BeginMode2D(camera);
     if(freeze){
         DrawTexturePro(pausedWorldCache.art.texture,{0,0,float(pausedWorldCache.art.texture.width),-float(pausedWorldCache.art.texture.height)},{0,0,float(W),float(H)},{0,0},0,WHITE);
+    }else if(separateWorld){
+        rlSetBlendFactors(RL_ONE,RL_ZERO,RL_FUNC_ADD);BeginBlendMode(BLEND_CUSTOM);
+        DrawTexturePro(worldCanvas.texture,{0,0,float(worldCanvas.texture.width),-float(worldCanvas.texture.height)},{0,0,float(WorldW),float(H)},{0,0},0,WHITE);EndBlendMode();
+        if(paused)native_world::beginOpaqueFrame();
     }else{native_world::beginOpaqueFrame();drawWorld();if(!paused)native_world::finishOpaqueBackground();actor_art::finishShadowFrame();}
     performance.end(RenderStage::World,true);
-    // World and text share the final pixel scale. The world is drawn directly
-    // into this frame; there is no resized intermediate scene texture.
+    // Labels and the complete HUD always use the native final pixel scale.
     drawWorldLabels();
     if(intro.active()){
         drawUI();drawIntroArrival();drawGameMenu();drawDeveloperUi();if(paused)native_world::finishOpaqueBackground();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;

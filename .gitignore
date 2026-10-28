@@ -1,0 +1,4 @@
+# Local performance/equivalence runs copy the complete runtime asset folder.
+# Keep reproducible tests and curated reports in Git, not these duplicates.
+/dist/qa-performance60-*/
+/dist/qa-render-optimization-*/

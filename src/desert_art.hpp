@@ -114,7 +114,7 @@ void groundTile(int x,int y,float sx,float sy){
 }
 void make(){
  makeScenery();
- terrain=LoadRenderTexture(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
+ terrain=render_targets::colorOnly(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
  for(int sum=0;sum<MapSize*2;sum++)for(int x=1;x<MapSize-1;x++){int y=sum-x;if(y<1||y>=MapSize-1)continue;groundTile(x,y,TerrainOriginX+(x-y)*40,90+(x+y)*20);}
  drawRoads();
  // Large smooth ridges are baked across tile boundaries; no square sand grid.

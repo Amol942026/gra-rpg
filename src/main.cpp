@@ -1,5 +1,7 @@
 #include "raylib.h"
 #include "rlgl.h"
+#include <cstdint>
+#include "render_targets.hpp"
 #include "native_world.hpp"
 #include "game.hpp"
 #include "inventory_click.hpp"
@@ -32,7 +34,7 @@ AudioSystem audioSystem;
 IntroSequence intro;
 TowerSequence towerStory;
 #include "performance.hpp"
-bool developerActive=false,developerMenuOpen=false,developerKit=true;int developerSelection=0;std::string developerError;
+bool developerActive=false,developerMenuOpen=false,developerKit=true,nativeWorldRendering=false;int developerSelection=0;std::string developerError;
 Rectangle developerButton();void drawDeveloperUi();
 Vector2 mouse{};Slot dragging{};bool paused=false,help=false,welcome=true;int nearbyPage=0,corpsePage=0,corpsePageOwner=-1;float scale=1;Rectangle viewport{};
 InventoryClicks inventoryClicks;
@@ -228,7 +230,7 @@ void makeArt(){
  hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
  forest_bush_art::load();forest_tree_art::load();guardian_art::load();
  treasure_art::make();fountain_art::load();
- terrain=LoadRenderTexture(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
+ terrain=render_targets::colorOnly(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
  for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
   if(!land)continue; // The animated water is drawn underneath the land.
   detailedGroundTile(x,y,sx,sy);
@@ -264,6 +266,7 @@ void makeArt(){
  if(!FileExists("assets/generated/characters-v21.png")){RenderTexture2D actors=LoadRenderTexture((EnemyTypeCount+1)*144,170);BeginTextureMode(actors);ClearBackground(BLANK);hero(72,153,1);for(int i=0;i<EnemyTypeCount;i++){Enemy e{i,i,{},{},100,100};monster(e,216.f+i*144,153);}EndTextureMode();Image im=LoadImageFromTexture(actors.texture);ImageFlipVertical(&im);ExportImage(im,"assets/generated/characters-v21.png");UnloadImage(im);UnloadRenderTexture(actors);}
 }
 #include "actor_view.hpp"
+#include "portrait_cache.hpp"
 #include "corpse_art.hpp"
 #include "environment.hpp"
 #include "tower_stairs_art.hpp"
@@ -381,7 +384,7 @@ void drawUI(){
  const char* labels[]={"ATAK","CZAR · K","ZDROWIE","MANA","UNIK"};for(int i=0;i<5;i++){Rectangle button=actionRect(i);center(labels[i],button.x+button.width/2,870,14,Muted);}
  rect(WorldW,0,W-WorldW,H,Panel);line(WorldW,0,WorldW,H,Gold);rect(WorldW+1,0,4,H,rgb(32,42,41));
  panel(skillsButton(),inside(skillsButton())?Card:Panel);center("UMIEJĘTNOŚCI · U",1153,23,13,Gold);panel(statsButton(),inside(statsButton())?Card:Panel);center("STATYSTYKI · P",1322,23,13,Gold);line(1080,50,1400,50,Line);
- panel({1080,68,63,68},rgb(37,54,51));clip(1081,69,61,66);hero(1110,137,.8f,true);EndScissorMode();
+ panel({1080,68,63,68},rgb(37,54,51));clip(1081,69,61,66);hero_portrait::draw();EndScissorMode();
  txt("Wędrowiec",1158,70,25,Text,true);txt(TextFormat("POZIOM %02d  /  STRAŻNIK ŻARU",game.level),1159,105,10,Gold);
  txt(TextFormat("ZŁOTO  %lld",static_cast<long long>(game.goldBalance())),1159,125,14,Gold);
  txt("ŻYCIE",1080,151,10,Muted);txt(TextFormat("%d / %d",int(game.hp),game.maxHp()),1328,148,12,Text);bar(1139,153,173,9,game.hp,float(game.maxHp()),rgb(153,73,73));
@@ -574,7 +577,7 @@ void integrationTests(){
 #include "world_motion_qa.hpp"
 int main(int argc,char**argv) {
     bool smoke=false,benchmark=false,integration=false,visualQA=false,hoverQA=false,rollQA=false,large=false;
-    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=true,menuBenchmark=false;
+    bool audioQA=false,noAudio=false,audioPassed=true,startupSmoke=false,openGL=false,menuBenchmark=false;
     bool introQA=false,introPassed=true,towerQA=false,towerPassed=true,towerFloorsQA=false,towerFloorsPassed=true;
     bool inspectionQA=false,inspectionPassed=true;
     bool swingQA=false,swingPassed=true;
@@ -653,6 +656,7 @@ int main(int argc,char**argv) {
         if(arg=="--startup-smoke"){startupSmoke=true;frameLimit=180;}
         if(arg=="--opengl")openGL=true;
         if(arg=="--dxgi")openGL=false;
+        if(arg=="--native-world")nativeWorldRendering=true;
         if(arg=="--large")large=true;
     }
     fs::path exe=fs::absolute(argv[0]).parent_path();
@@ -833,7 +837,7 @@ int main(int argc,char**argv) {
     startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
     world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    hero_portrait::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
     unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }

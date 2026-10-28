@@ -1,5 +1,21 @@
 # Raport konfiguracji — 19.10.2026
 
+**Aktualizacja 28.10.2026 — schody wewnątrz mapy i pełna kolizja:**
+oba biegi na wszystkich piętrach przesunięto w głąb sali; wszystkie piksele
+grafiki i 4320 kontrolowanych wierzchołków mieszczą się w obrysie podłogi.
+Kolizja obejmuje stopnie, szyb, spoczniki i balustrady wraz z marginesem stóp.
+Ruch w wieży ma podkroki zapobiegające przeskakiwaniu kolizji. Przejścia
+prowadzą na wolne podejścia, a wczytywanie bezpiecznie naprawia pozycję
+starszego zapisu wewnątrz przesuniętej konstrukcji. Bez zmiany formatu v7.
+110 661 kontroli logiki/animacji, 3403 zapisów, 17 920 renderera i mechanik
+oraz 46 niezależnych — PASS. 8100 klatek ruchu i 23 widoki bez dźwięku.
+Nie dodano tekstur ani geometrii rysowanej w pętli gry. Pomiar GPU w tym
+przebiegu przekraczał 16,67 ms; pełnych 60 FPS nie potwierdzono.
+[Źródła, testy i wyniki](../scenery/tower-stairs-fit/README.md).
+Końcowy ZIP również sprawdzony: 115 zgodnych zasobów, 180 klatek startu,
+ponowione 17 920 + 46 kontroli — PASS. Audio zamknięte, preferencje zachowane,
+brak DEV i źródeł natywnych. Czasy GPU zapisano bez deklaracji 60 FPS.
+
 **Aktualizacja 27.10.2026 — balkon i panorama Doliny Świtu:** na piątym
 piętrze obserwatorium dodano otwarty taras z fizyczną balustradą. Chód i bieg
 prowadzą z sali na balkon i z powrotem bez teleportu. Trzy oryginalne,

@@ -20,7 +20,10 @@ inline void flushBatch(Shader shader){
   std::fill(gpuMesh.vertices,gpuMesh.vertices+capacity*3,0.f);UploadMesh(&gpuMesh,true);
  }
  if(!gpuMaterial.maps)gpuMaterial=LoadMaterialDefault();
- rlDrawRenderBatchActive();UpdateMeshBuffer(gpuMesh,0,packed.data(),int(packed.size()*sizeof(float)),0);
+ rlDrawRenderBatchActive();
+ static const auto stream=reinterpret_cast<void(*)(unsigned,std::ptrdiff_t,const void*,unsigned)>(glfwGetProcAddress("glBufferData"));
+ if(stream){rlEnableVertexBuffer(gpuMesh.vboId[0]);stream(0x8892,packed.size()*sizeof(float),packed.data(),0x88E0);rlDisableVertexBuffer();}
+ else UpdateMeshBuffer(gpuMesh,0,packed.data(),int(packed.size()*sizeof(float)),0);
  Mesh drawing=gpuMesh;drawing.vertexCount=count;drawing.triangleCount=count/3;
  Material material=gpuMaterial;material.shader=shader;
  Matrix identity{};identity.m0=identity.m5=identity.m10=identity.m15=1;

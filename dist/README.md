@@ -51,7 +51,7 @@ Oprawa wykorzystuje leśne ruiny, stare złoto i turkusowe światło Serca Świt
 
 ### Poprawka czarnego ekranu na Windows 11
 
-Domyślnie gra używa bezpośredniej prezentacji OpenGL z V-sync. Opcjonalny parametr --dxgi wybiera prezentację DirectX; przed jej użyciem gra sprawdza rzeczywisty piksel przesłany z OpenGL do docelowego bufora. Niektóre sterowniki Intel UHD przyjmują wywołania współdzielenia GPU, lecz zwracają czarny obraz. Gdy kontrola wykryje tę sytuację, gra automatycznie przechodzi na OpenGL z V-sync. Sprawdzenie jest powtarzane po zmianie rozmiaru bufora; nie wymaga zmiany ustawień Windows ani urządzenia audio.
+Domyślnie gra używa prezentacji DXGI z V-sync; przed jej użyciem sprawdza rzeczywisty piksel przesłany z OpenGL do docelowego bufora. Niektóre sterowniki Intel UHD przyjmują wywołania współdzielenia GPU, lecz zwracają czarny obraz. Gdy kontrola wykryje tę sytuację, gra automatycznie przechodzi na OpenGL z V-sync. Sprawdzenie jest powtarzane po zmianie rozmiaru bufora; nie wymaga zmiany ustawień Windows ani urządzenia audio.
 
 Uruchamiaj grę zwykłym `Uruchom.bat`. Opcjonalne `Uruchom.bat --opengl` wymusza OpenGL, a `--windowed` zaczyna w oknie. Launcher przekazuje parametry do gry. Etapy uruchamiania i używany sterownik są zapisywane w `dist/emberfall-startup.log` (w paczce ZIP: obok EXE). Log jest odświeżany przy każdym starcie. Cichy test `--startup-smoke --no-audio` sprawdza normalny start menu głównego i zapisuje `startup-smoke.txt` oraz `screenshots/emberfall-startup.png`. Parametr `--no-audio` nie zapisuje ustawień dźwięku.
 
@@ -73,7 +73,7 @@ Podczas biegu miecz spoczywa w skórzanej pochwie przy lewym biodrze. Ręce prac
 
 ## Wersja 0.45 — ostrzejszy obraz podczas ruchu
 
-Świat i HUD są rysowane bezpośrednio do końcowej klatki w rozdzielczości ekranu, bez dodatkowego bufora sceny. Domyślna prezentacja OpenGL z V-sync pomija współdzielenie całego obrazu z DirectX. Grafiki zachowują swoje filtrowanie tekstur, a gotowy obraz trafia na ekran piksel w piksel, bez powiększania i późniejszego rozmywania. Pozycje kamery, obiektów i ich cieni korzystają ze wspólnej siatki końcowych pikseli. Zapobiega to zmianom kształtu krawędzi przy przesuwaniu sceny. Usunięto też ponowne nakładanie przezroczystości już złożonego obrazu świata. Ruch postaci i tempo animacji pozostają obliczane w pełnej precyzji.
+HUD, napisy i etykiety są rysowane w natywnej rozdzielczości ekranu. Przy większym pełnym ekranie las i pustynia używają bufora sceny 945 × 810 px, powiększanego filtrem biliniowym; na ekranie 1920 × 1080 ogranicza to liczbę pikseli świata o około 44%. Jest to świadomy kompromis ostrości scenerii na rzecz płynności na zintegrowanym Radeonie. Parametr `--native-world` przywraca pełną rozdzielczość świata. Wieża, prolog i ekran menu zachowują dotychczasowy przebieg renderowania. Pozycje kamery, obiektów i ich cieni korzystają ze wspólnej siatki pikseli danego bufora. Gotowy obraz jest kopiowany bez ponownego nakładania przezroczystości. Ruch postaci i tempo animacji pozostają obliczane w pełnej precyzji. Wyniki i testy: [optymalizacja 28.10.2026](art/performance/20261028/README.md).
 
 Usunięto tylko ciemne tło obrażeń krytycznych. Napis **KRYTYK!** i duża złota liczba zachowują wygląd, pozycję i animację.
 

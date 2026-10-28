@@ -1,5 +1,10 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+Dopasowanie istniejących schodów, kolizje i bezpieczne wczytywanie pozycji:
+[art/scenery/tower-stairs-fit/README.md](../scenery/tower-stairs-fit/README.md).
+`tests/tower_stairs_fit_qa.ps1 -NoAudio`, `verify_tower_stairs_fit.py` oraz
+`tests/tower_stairs_fit_package_qa.ps1 -NoAudio` sprawdzają obrys i mechaniki.
+
 Balkon obserwatorium i Dolina Świtu: [art/scenery/tower-balcony/README.md](../scenery/tower-balcony/README.md).
 `create_tower_balcony.py` rysuje trzy warstwowe źródła Krita; kontrola:
 `tests/tower_balcony_qa.ps1 -NoAudio`, `verify_tower_balcony.py` i

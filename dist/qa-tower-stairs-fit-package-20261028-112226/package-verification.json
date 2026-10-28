@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "package_sha256": "d7c5579d95f861ec8a2fe5da1155db3289c2c2e8f9f62b5a375227f0a69d222a",
+  "exe_sha256": "12638c45cd84b6d643cfcc0995902e6d0afdd94730081f53568e377035fda3a0",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-tower-stairs-fit-package-20261028-112226\\Emberfall",
+  "verified_assets": 115,
+  "renderer": {
+    "status": "PASS",
+    "checks": 17920,
+    "failures": 0,
+    "motion_cases": 30,
+    "motion_frames": 8100,
+    "images": 23,
+    "max_ground_radius": 6.27896,
+    "max_silhouette_ellipse": 0.912304,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 46,
+    "failures": [],
+    "flights": 8,
+    "ground_vertices": 4320,
+    "max_ground_radius": 6.278956919743915,
+    "max_silhouette_ellipse": 0.9123041600356865,
+    "renders": 23,
+    "audio_opened": false,
+    "all_floors_within_60hz_render_budget": false
+  },
+  "render_timing": {
+    "audio_opened": false,
+    "presentation_measured": false,
+    "scenes": [
+      {
+        "floor": 1,
+        "frames": 120,
+        "mean_ms": 51.7262,
+        "p95_ms": 77.4767
+      },
+      {
+        "floor": 2,
+        "frames": 120,
+        "mean_ms": 22.8838,
+        "p95_ms": 29.998
+      },
+      {
+        "floor": 3,
+        "frames": 120,
+        "mean_ms": 20.4506,
+        "p95_ms": 24.5674
+      },
+      {
+        "floor": 4,
+        "frames": 120,
+        "mean_ms": 23.7327,
+        "p95_ms": 30.9423
+      },
+      {
+        "floor": 5,
+        "frames": 120,
+        "mean_ms": 18.5694,
+        "p95_ms": 22.322
+      }
+    ]
+  },
+  "startup_frames": 180,
+  "audio_device_opened": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_player": false
+}

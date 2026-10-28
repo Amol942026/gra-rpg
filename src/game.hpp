@@ -105,6 +105,8 @@ inline float segmentCircle(V start,V delta,V center,float radius){
  if(discriminant<0)return 2;
  float t=(-b-std::sqrt(discriminant))/a;return t>=0&&t<=1?t:2;
 }
+// Conservative broad phase: keep the original exact circle test near edges.
+inline bool outsideCircleBounds(V delta,float radius){return std::abs(delta.x)>radius+.0001f||std::abs(delta.y)>radius+.0001f;}
 enum class Place { None,Bag,Equip,Ground,Corpse,Forage,Chest };
 struct Slot { Place place=Place::None; int index=-1; int owner=-1; };
 struct Game {
@@ -360,8 +362,13 @@ struct Game {
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
- bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props)if(distance(p,q.pos)<propRadius(q.type))return false;return true;}
- void move(V delta,bool turn=true){if(sandTrapped())return;V p=player+delta;if(walkable(p))player=p;else{p={player.x+delta.x,player.y};if(walkable(p))player=p;p={player.x,player.y+delta.y};if(walkable(p))player=p;}if(turn&&length(delta)>.001f&&!combatFacingActive())facing=normalized(delta);}
+ bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
+ void move(V delta,bool turn=true){
+  if(sandTrapped())return;
+  int steps=inTower()?std::max(1,int(std::ceil(length(delta)/.08f))):1;V step=delta*(1.f/steps);
+  for(int i=0;i<steps;i++){V p=player+step;if(walkable(p))player=p;else{p={player.x+step.x,player.y};if(walkable(p))player=p;p={player.x,player.y+step.y};if(walkable(p))player=p;}}
+  if(turn&&length(delta)>.001f&&!combatFacingActive())facing=normalized(delta);
+ }
  Enemy* findEnemy(int id){for(auto&e:enemies)if(e.id==id&&e.alive)return &e;return nullptr;}
  void hit(Enemy& e,float amount,DamageType type=DamageType::Physical,bool critical=false){
   if(!e.alive)return;
@@ -434,7 +441,7 @@ struct Game {
   if(inDesert()&&desertWater(e.pos,radius)){V d=e.pos-DesertOasis;float n=length(d);float gap=2.45f+radius+.002f;correction=std::max(correction,gap-n);e.pos=DesertOasis+normalized(n>.0001f?d:V{1,0})*gap;}
   if(inDesert())for(V f:DesertFountains){V d=e.pos-f;float n=length(d),gap=FountainRadius+radius+.002f;if(n<gap){correction=std::max(correction,gap-n);e.pos=f+normalized(n>.00001f?d:V{1,0})*gap;}}
   for(const auto& p:props){
-   V delta=e.pos-p.pos;float d=length(delta),clearance=radius+propRadius(p.type)+.002f;
+   V delta=e.pos-p.pos;float clearance=radius+propRadius(p.type)+.002f;if(outsideCircleBounds(delta,clearance))continue;float d=length(delta);
    if(d<clearance){correction=std::max(correction,clearance-d);V normal=d>.00001f?delta*(1/d):V{1,0};e.pos=p.pos+normal*clearance;}
   }
   return correction;

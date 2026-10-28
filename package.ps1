@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 & (Join-Path $PSScriptRoot 'build.ps1') -Player
 Add-Type -AssemblyName System.IO.Compression,System.IO.Compression.FileSystem
@@ -29,8 +29,9 @@ Folder assets musi pozostac obok Emberfall.exe.
 Gra zaczyna sie menu glownym i wlacza domyslnie pelny ekran.
 Nowa gra rozpoczyna prolog. Wczytaj gre przywraca zapisana wyprawe.
 F11 przelacza miedzy pelnym ekranem a oknem.
-Domyslnie: natywne OpenGL z V-sync i ostry obraz bez powtornego skalowania.
-Opcjonalnie: Uruchom.bat --windowed lub Uruchom.bat --dxgi.
+Domyslnie: DXGI z V-sync; automatyczny powrot do OpenGL przy braku obslugi.
+Napisy i HUD w natywnej rozdzielczosci; las i pustynia maja oszczedniejszy bufor sceny.
+Opcjonalnie: Uruchom.bat --windowed, --opengl lub --native-world (pelna rozdzielczosc sceny).
 Etapy uruchamiania sa zapisywane w emberfall-startup.log obok EXE.
 
 STEROWANIE

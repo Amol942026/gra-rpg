@@ -13,7 +13,7 @@ extern "C" void (*glfwGetProcAddress(const char*))(void);
 // Small geometric character rigs: all parts turn in depth, including the face,
 // back, weapon and limbs. A back view is not a mirrored front sprite.
 namespace actor_art {
-inline bool shadowBuilding=false,shadowCull=true,shadowCasting=true;
+inline bool shadowBuilding=false,shadowCull=true,shadowCasting=true,pickingFromPreparedFrame=false;
 inline int shadowCacheKey=-1;
 inline float shadowElevation=0;
 // ClearBackground starts one depth buffer per scene. Disjoint actor ranges
@@ -49,7 +49,7 @@ struct Face {
 };
 // Reuse one bounded dynamic GPU buffer across live creature draws. The meshes
 // still come from the same CPU rig used for picking and physical shadows.
-inline bool gpuCreatureDraw=true;
+inline bool gpuCreatureDraw=true,gpuHeroDraw=true;
 inline Mesh creatureMesh{};inline Material creatureMaterial{};inline int creatureCapacity=0;
 inline std::vector<float> creatureVertices,creatureUV;
 inline std::vector<unsigned char> creatureColors;
@@ -57,7 +57,7 @@ inline void unloadCreatureBatch(){
  if(creatureMesh.vaoId)UnloadMesh(creatureMesh);if(creatureMaterial.maps)MemFree(creatureMaterial.maps);
  creatureMesh={};creatureMaterial={};creatureCapacity=0;creatureVertices.clear();creatureUV.clear();creatureColors.clear();
 }
-inline void prepareCreatureBatch(int count=49152){
+inline void prepareCreatureBatch(int count=196608){
  if(count<=creatureCapacity)return;
  if(creatureMesh.vaoId)UnloadMesh(creatureMesh);creatureMesh={};creatureCapacity=((count+4095)/4096)*4096;
  creatureMesh.vertexCount=creatureCapacity;creatureMesh.triangleCount=creatureCapacity/3;
@@ -69,21 +69,7 @@ inline void prepareCreatureBatch(int count=49152){
  creatureVertices.reserve(creatureCapacity*3);creatureUV.reserve(creatureCapacity*2);creatureColors.reserve(creatureCapacity*4);
  if(!creatureMaterial.maps)creatureMaterial=LoadMaterialDefault();
 }
-inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale){
- creatureVertices.clear();creatureUV.clear();creatureColors.clear();unsigned texture=rlGetTextureIdDefault();
- for(const auto& f:faces){
-  if(bool(f.textureId)!=paint)continue;if(f.textureId)texture=f.textureId;
-  for(int triangle=0;triangle<2;triangle++){
-   int a=0,b=triangle+1,c=triangle+2;const auto& p=f.points;
-   if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
-   for(int i:{a,b,c}){
-    float z=sceneDepth?depthBase+(f.vertexDepth[i]+.5f)*depthScale:f.vertexDepth[i];
-    creatureVertices.insert(creatureVertices.end(),{p[i].x,p[i].y,z});
-    creatureUV.insert(creatureUV.end(),{f.uv[i].x,f.uv[i].y});Color color=f.smooth?f.vertexColors[i]:f.color;
-    creatureColors.insert(creatureColors.end(),{color.r,color.g,color.b,color.a});
-   }
-  }
- }
+inline void submitActorBatch(unsigned texture){
  int count=int(creatureVertices.size()/3);if(!count)return;
  if(count>creatureCapacity)prepareCreatureBatch(count);
  rlDrawRenderBatchActive();
@@ -103,6 +89,34 @@ inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float de
  Material material=creatureMaterial;material.maps[MATERIAL_MAP_DIFFUSE].texture={texture,1,1,1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
  Matrix identity{};identity.m0=identity.m5=identity.m10=identity.m15=1;DrawMesh(drawing,material,identity);
 }
+inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale){
+ creatureVertices.clear();creatureUV.clear();creatureColors.clear();unsigned texture=rlGetTextureIdDefault();
+ for(const auto& f:faces){
+  if(bool(f.textureId)!=paint)continue;if(f.textureId)texture=f.textureId;
+  for(int triangle=0;triangle<2;triangle++){
+   int a=0,b=triangle+1,c=triangle+2;const auto& p=f.points;
+   if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
+   for(int i:{a,b,c}){
+    float z=sceneDepth?depthBase+(f.vertexDepth[i]+.5f)*depthScale:f.vertexDepth[i];
+    creatureVertices.insert(creatureVertices.end(),{p[i].x,p[i].y,z});
+    creatureUV.insert(creatureUV.end(),{f.uv[i].x,f.uv[i].y});Color color=f.smooth?f.vertexColors[i]:f.color;
+    creatureColors.insert(creatureColors.end(),{color.r,color.g,color.b,color.a});
+   }
+  }
+ }
+ submitActorBatch(texture);
+}
+inline void drawActorOutline(const std::vector<Face>& faces,Color color){
+ creatureVertices.clear();creatureUV.clear();creatureColors.clear();
+ for(const auto& f:faces)for(int edge=0;edge<4;edge++){
+  Vector2 a=f.points[edge],b=f.points[(edge+1)%4],d{b.x-a.x,b.y-a.y};float len=std::hypot(d.x,d.y);if(len<.00001f)continue;
+  Vector2 r{-d.y*2/len,d.x*2/len};std::array<Vector2,4> p={{{a.x-r.x,a.y-r.y},{a.x+r.x,a.y+r.y},{b.x+r.x,b.y+r.y},{b.x-r.x,b.y-r.y}}};
+  for(int tri=0;tri<2;tri++){int i=0,j=tri+1,k=tri+2;if((p[j].x-p[i].x)*(p[k].y-p[i].y)-(p[j].y-p[i].y)*(p[k].x-p[i].x)>0)std::swap(j,k);
+   for(int n:{i,j,k}){creatureVertices.insert(creatureVertices.end(),{p[n].x,p[n].y,0});creatureUV.insert(creatureUV.end(),{0,0});creatureColors.insert(creatureColors.end(),{color.r,color.g,color.b,color.a});}
+  }
+ }
+ submitActorBatch(rlGetTextureIdDefault());
+}
 class Rig {
     float x, y, scale, fx, fy, rx, ry;
     float rollAngle=0, tuck=0,runLean=0,runSin=0,runCos=1,bodySin=0,bodyCos=1;
@@ -118,9 +132,9 @@ public:
         float angle=int(dir)*PI/4;
         fx=std::cos(angle);fy=std::sin(angle)/.52f;
         float len=std::hypot(fx,fy);fx/=len;fy/=len;rx=fy;ry=-fx;
-        faces.reserve(320);
     }
     void setSkeleton(const hero_motion::Pose* pose){skeleton=pose;skinBone=-1;}
+    void reuseStorage(Rig& other){faces.swap(other.faces);faces.clear();shadowFaces.swap(other.shadowFaces);shadowFaces.clear();}
     void setBone(int bone){skinBone=bone;}
     void setFacing(float angle){
         fx=std::cos(angle);fy=std::sin(angle)/.52f;
@@ -451,8 +465,8 @@ public:
         if(!smoothSurfaces)std::stable_sort(faces.begin(),faces.end(),[](const Face&a,const Face&b){return a.depth<b.depth;});
         // Outline pass goes behind the entire opaque body, so internal edges
         // are covered by the normal rendering instead of becoming a wireframe.
-        if(outline.a)for(const Face& face:faces)for(int i=0;i<4;i++)
-            DrawLineEx(face.points[i],face.points[(i+1)%4],4,outline);
+        if(outline.a){if(gpuCreatureDraw&&smoothSurfaces)drawActorOutline(faces,outline);else for(const Face& face:faces)for(int i=0;i<4;i++)
+            DrawLineEx(face.points[i],face.points[(i+1)%4],4,outline);}
         // Intersecting organic surfaces need per-pixel depth, not whole-face
         // painter sorting: that sorting exposes teeth along rounded joins.
         if(smoothSurfaces){static const auto clear=reinterpret_cast<void(*)(unsigned int)>(glfwGetProcAddress("glClear"));rlDrawRenderBatchActive();if(!sceneDepth)clearDepth(clear);rlEnableDepthTest();}
@@ -463,7 +477,7 @@ public:
         // Equal depth is intentional for paint on the original hair surface;
         // no geometric extrusion or positional bias is needed.
         if(paintPass&&smoothSurfaces&&depthFunction){rlDrawRenderBatchActive();depthFunction(0x0203);}
-        if(softBeams&&gpuCreatureDraw){drawCreatureFaces(faces,paintPass!=0,depthBase,depthScale);continue;}
+        if(smoothSurfaces&&(softBeams||gpuHeroDraw)&&gpuCreatureDraw){drawCreatureFaces(faces,paintPass!=0,depthBase,depthScale);continue;}
         unsigned activeTexture=0;int remaining=0;
         for(const auto& f:faces){
             if(bool(f.textureId)!=bool(paintPass))continue;
@@ -491,9 +505,16 @@ public:
 
 // The shadow pass builds each animated mesh once. The body pass reuses it.
 inline std::vector<std::pair<int,Rig>> frameRigs;
-inline void beginShadowFrame(){frameRigs.clear();shadowBuilding=true;shadowCacheKey=-1;shadowElevation=0;shadowCasting=true;sceneDepth=false;sceneDepthOrder=0;}
+inline std::vector<Rig> recycledRigs;
+inline void recycleFrameRigs(){
+ // Retain bounded vector storage, not old poses or cached picking results.
+ // Both shadow and body passes still use newly evaluated animation each frame.
+ for(auto& entry:frameRigs)if(recycledRigs.size()<64)recycledRigs.push_back(std::move(entry.second));
+ frameRigs.clear();
+}
+inline void beginShadowFrame(){recycleFrameRigs();shadowBuilding=true;shadowCacheKey=-1;shadowElevation=0;shadowCasting=true;sceneDepth=false;sceneDepthOrder=0;}
 inline void endShadowPreparation(){shadowBuilding=false;shadowCacheKey=-1;sceneDepth=allowSceneDepth;sceneDepthOrder=0;sceneDepthStep=.8f/std::max(8,int(frameRigs.size())+8);}
-inline void finishShadowFrame(){frameRigs.clear();shadowCacheKey=-1;shadowBuilding=false;shadowElevation=0;sceneDepth=false;sceneDepthOrder=0;}
+inline void finishShadowFrame(){recycleFrameRigs();shadowCacheKey=-1;shadowBuilding=false;shadowElevation=0;sceneDepth=false;sceneDepthOrder=0;}
 inline void prepareKnockdown(const Game& g,AnimationState& state,float& fallR,float& fallF){
  state.moving=false;state.moveBlend=0;state.stopSprint();state.facingInitialized=true;state.facingAngle=state.targetAngle=g.knockdownFacingAngle();
  fallR=0;fallF=-1;
@@ -522,9 +543,11 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     Rig working(x,y,size*bodyScale,state.direction);
     if(state.facingInitialized)working.setFacing(state.facingAngle);
     Rig* cached=nullptr;
-    if(!shadowBuilding&&!probe&&shadowCacheKey>=0)for(auto& entry:frameRigs)if(entry.first==shadowCacheKey){cached=&entry.second;break;}
+    int cacheKey=shadowCacheKey;if(probe&&pickingFromPreparedFrame&&species==0)cacheKey=0;
+    if(!shadowBuilding&&(!probe||pickingFromPreparedFrame)&&cacheKey>=0)for(auto& entry:frameRigs)if(entry.first==cacheKey){cached=&entry.second;break;}
     Rig& rig=cached?*cached:working;
     if(!cached){
+    if(shadowBuilding&&!recycledRigs.empty()){working.reuseStorage(recycledRigs.back());recycledRigs.pop_back();}
 
     if(species==0){
         buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF);
@@ -561,6 +584,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     return false;
 }
 inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
- return draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,e.flash>0,outline,probe,-1,-1,-1,3,false,nullptr,e.boulderProgress());
+ int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;
+ bool hit=draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,e.flash>0,outline,probe,-1,-1,-1,3,false,nullptr,e.boulderProgress());shadowCacheKey=previous;return hit;
 }
 }

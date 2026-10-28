@@ -30,8 +30,8 @@ bool runTowerStairsQA(){
  game.towerFloor=1;game.player={12,15};Vector2 p=screen(TowerStairUp);bool found=false;
  for(int y=-190;y<0&&!found;y+=3)for(int x=-140;x<35;x+=3){Vector2 point{p.x+x,p.y+y};auto hit=pickWorld(point);if(hit.kind==HoverKind::TowerStair&&hit.index==1){mouse=point;found=true;break;}}
  check(found&&inspectWorld(pickWorld(mouse)).name=="Schody w górę","hovered stone staircase retains inspection HUD information");shot("upstairs-hover");
- game.player=TowerStairUp+V{1,0};check(nearestTowerInteraction()&&game.towerFloor==2&&game.walkable(game.player),"E ascends from the new full-size staircase to a safe landing");
- game.player=TowerStairDown+V{-1,0};p=screen(TowerStairDown);found=false;
+ game.player=towerStairApproach(1);check(nearestTowerInteraction()&&game.towerFloor==2&&game.walkable(game.player),"E ascends from the new full-size staircase to a safe landing");
+ game.player=towerStairApproach(-1);p=screen(TowerStairDown);found=false;
  for(int y=-45;y<80&&!found;y+=3)for(int x=-40;x<145;x+=3){Vector2 point{p.x+x,p.y+y};auto hit=pickWorld(point);if(hit.kind==HoverKind::TowerStair&&hit.index==-1){mouse=point;found=true;break;}}
  check(found&&rightClickWorldOrInventory()&&game.towerFloor==1&&game.walkable(game.player),"PPM on recessed stone shaft returns to previous floor at a safe landing");
  reset();refreshDisplayLayout();report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;

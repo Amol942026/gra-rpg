@@ -1,0 +1,127 @@
+{
+  "functional_status": "PASS",
+  "date": "2026-10-28",
+  "scope": "Existing tower stair fit and collisions on all floors",
+  "silent": true,
+  "logic": {
+    "status": "PASS",
+    "checks": 110661,
+    "command": "build.ps1 -Test",
+    "arguments": "--no-audio"
+  },
+  "persistence": {
+    "status": "PASS",
+    "checks": 3403,
+    "output": "dist/qa-save-1793182818600852000"
+  },
+  "renderer": {
+    "status": "PASS",
+    "checks": 17920,
+    "failures": 0,
+    "motion_cases": 30,
+    "motion_frames": 8100,
+    "images": 23,
+    "max_ground_radius": 6.27896,
+    "max_silhouette_ellipse": 0.912304,
+    "audio_opened": false
+  },
+  "independent": {
+    "status": "PASS",
+    "checks": 46,
+    "failures": [],
+    "flights": 8,
+    "ground_vertices": 4320,
+    "max_ground_radius": 6.278956919743915,
+    "max_silhouette_ellipse": 0.9123041600356865,
+    "renders": 23,
+    "audio_opened": false,
+    "all_floors_within_60hz_render_budget": false
+  },
+  "player_package": {
+    "status": "PASS",
+    "package_sha256": "d7c5579d95f861ec8a2fe5da1155db3289c2c2e8f9f62b5a375227f0a69d222a",
+    "exe_sha256": "12638c45cd84b6d643cfcc0995902e6d0afdd94730081f53568e377035fda3a0",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-tower-stairs-fit-package-20261028-112226\\Emberfall",
+    "verified_assets": 115,
+    "renderer": {
+      "status": "PASS",
+      "checks": 17920,
+      "failures": 0,
+      "motion_cases": 30,
+      "motion_frames": 8100,
+      "images": 23,
+      "max_ground_radius": 6.27896,
+      "max_silhouette_ellipse": 0.912304,
+      "audio_opened": false
+    },
+    "independent": {
+      "status": "PASS",
+      "checks": 46,
+      "failures": [],
+      "flights": 8,
+      "ground_vertices": 4320,
+      "max_ground_radius": 6.278956919743915,
+      "max_silhouette_ellipse": 0.9123041600356865,
+      "renders": 23,
+      "audio_opened": false,
+      "all_floors_within_60hz_render_budget": false
+    },
+    "render_timing": {
+      "audio_opened": false,
+      "presentation_measured": false,
+      "scenes": [
+        {
+          "floor": 1,
+          "frames": 120,
+          "mean_ms": 51.7262,
+          "p95_ms": 77.4767
+        },
+        {
+          "floor": 2,
+          "frames": 120,
+          "mean_ms": 22.8838,
+          "p95_ms": 29.998
+        },
+        {
+          "floor": 3,
+          "frames": 120,
+          "mean_ms": 20.4506,
+          "p95_ms": 24.5674
+        },
+        {
+          "floor": 4,
+          "frames": 120,
+          "mean_ms": 23.7327,
+          "p95_ms": 30.9423
+        },
+        {
+          "floor": 5,
+          "frames": 120,
+          "mean_ms": 18.5694,
+          "p95_ms": 22.322
+        }
+      ]
+    },
+    "startup_frames": 180,
+    "audio_device_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_player": false
+  },
+  "performance_status": "60Hz GPU render budget not met in measured runs; presentation FPS not measured",
+  "backup": "art/pipeline/backups/tower-stairs-20261028-110640",
+  "source_sha256": {
+    "src/game.hpp": "b94e5d14dc4eba053e2474a28369ba9ed4d8d2b2caab59e4143d898f19b8a803",
+    "src/game_menu.hpp": "fbfd23d800107a443dd0e5eed4432f37070b207c802bc5162994fedb4f2f5a0c",
+    "src/tower_layout.hpp": "4ccdcf142f21be5e0b538387ed5bddf881844901c800290ea3abc8d943f245cf",
+    "src/tower_system.hpp": "789d65f3266036225fd824e1213098d9b29ed01943f7e479f4f455d9a0ccae08",
+    "src/tower_stairs_art.hpp": "3a9475812439eac89187c1e588f46fca195ee2955aef8af1138af24ac4444684",
+    "src/tower_floors_qa.hpp": "2685d3777130b6b72593d76064e8611ffb2bc1d11c40d794dbb0791da48223c0",
+    "src/tower_stairs_qa.hpp": "6e1ab7cfd5a1e4149350604743660b534371ab2ef8a5bb8648e535494a2ef512",
+    "tests/tower_floors_tests.hpp": "f2c50a7331728323b91212c690f57229432c23edbb199f905b2f5fbd376ac75f",
+    "tests/tower_stairs_tests.hpp": "d325a20ec4264bc5bd559723d10ecf916d53530e270a9e658054c724c5e72705",
+    "tests/tower_stairs_fit_qa.cpp": "1dabbff781d5877523b1d517eeea607b5197bdb4a7cd74dd9aa23b5d11d3f5f9",
+    "tests/tower_stairs_fit_qa.ps1": "ef2f051569af4adb78ee439d32fb8450db9a46ffa893b3c182f02e0827b00e8d",
+    "tests/tower_stairs_fit_package_qa.ps1": "dabfc464f4042070ba53696c012bd0b89640c998914796ec00916775281f88f3",
+    "tools/media/verify_tower_stairs_fit.py": "f247918f4c3b72eb707bfaa4d5177521055beabe568d41bdaed67e8c3e4ba3dd"
+  }
+}

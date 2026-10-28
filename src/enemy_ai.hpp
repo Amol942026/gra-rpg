@@ -13,7 +13,7 @@ bool canSeePlayer(const Enemy& e)const{
 bool enemyPositionClear(V p,float radius)const{
  if(inDesert()&&(desertWater(p,radius)||nearDesertFountain(p,radius)))return false;
  if(p.x<1.6f+radius||p.y<1.6f+radius||p.x>MapWalkMax-radius||p.y>MapWalkMax-radius)return false;
- for(const auto& prop:props)if(distance(p,prop.pos)<radius+propRadius(prop.type)+.003f)return false;
+ for(const auto& prop:props){float gap=radius+propRadius(prop.type)+.003f;if(!outsideCircleBounds(p-prop.pos,gap)&&distance(p,prop.pos)<gap)return false;}
  return true;
 }
 // Direct return is cheap. A blocked return uses a small map-grid search, only

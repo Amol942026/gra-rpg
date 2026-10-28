@@ -30,7 +30,7 @@ void menuSave(){
 }
 void menuLoad(){
  try{
-  bool backup=false;auto saved=menuStore().load(menuSlot,&backup);saved.game.limitForestForage();
+  bool backup=false;auto saved=menuStore().load(menuSlot,&backup);saved.game.limitForestForage();saved.game.ensureTowerPosition();
   clearTransientUi();game=std::move(saved.game);intro=saved.intro;towerStory=saved.tower;
   // Never replay queued sound events from the frame before saving.
   game.sounds.clear();developerActive=developerMenuOpen=false;developerError.clear();welcome=false;paused=true;menuPageTo(MenuPage::Home);

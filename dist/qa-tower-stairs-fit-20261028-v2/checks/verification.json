@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "checks": 46,
+  "failures": [],
+  "flights": 8,
+  "ground_vertices": 4320,
+  "max_ground_radius": 6.278956919743915,
+  "max_silhouette_ellipse": 0.9123041600356865,
+  "renders": 23,
+  "audio_opened": false,
+  "all_floors_within_60hz_render_budget": false
+}
