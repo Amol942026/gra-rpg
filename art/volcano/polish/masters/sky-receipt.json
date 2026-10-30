@@ -1,0 +1,12 @@
+{
+  "name": "sky",
+  "layers": [
+    "Distant caldera air",
+    "Ash ridge 0",
+    "Ash ridge 1",
+    "Ash ridge 2",
+    "Volcanic glow and suspended ash"
+  ],
+  "kra_sha256": "7faf6fa5934e33c5d0831a09f8727629fac41f60c629c16d3c166e0f0074cff0",
+  "png_sha256": "89fd72282baae3e601c8a9730166a154a70691ef1bc640949930927e2b3489d9"
+}

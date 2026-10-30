@@ -1,0 +1,122 @@
+{
+  "status": "PASS",
+  "external_assets": [],
+  "cloud_processing": false,
+  "paid_tools": false,
+  "source_roots": [
+    "C:/AI2D/sprites/emberfall-volcano-20261029",
+    "C:/AI2D/animations/emberfall-volcano-20261029"
+  ],
+  "assets": [
+    {
+      "path": "assets/volcano/ash-wraith.png",
+      "sha256": "4f5e53944493721408b717f4fcd93268f0fe056be7c31bbbdbf89f27c2e14652",
+      "size": [
+        1024,
+        768
+      ],
+      "source": "Krita ash-wraith.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/ember-drake.png",
+      "sha256": "9cc1e8b16f776877c82fb6a237c9c1b7b67c7e20a89bc9566f0df18b50ca6d58",
+      "size": [
+        1024,
+        768
+      ],
+      "source": "Krita ember-drake.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/fire-imp.png",
+      "sha256": "b6913d745eb8a8c00a8a27b125c62f45c770a39e937e86300a2a932103a5e1e8",
+      "size": [
+        1024,
+        768
+      ],
+      "source": "Krita fire-imp.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/lava-flow.png",
+      "sha256": "aca2b71fdae6693bf0a6fc5914e9ce82997770053d9e365ed9906afc085243d0",
+      "size": [
+        1536,
+        96
+      ],
+      "source": "Synfig lava/lava.sif (Krita source tiles)",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/lava-salamander.png",
+      "sha256": "6b4f80475d0b8524e3caa20836213ea9e2a8e1bc439a2300f95561090ccf3e5e",
+      "size": [
+        1024,
+        768
+      ],
+      "source": "Krita lava-salamander.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/obsidian-sentinel.png",
+      "sha256": "9a307457aa82dd26766b0742200799ab410e6a307db07603cfc3415ce2ae803d",
+      "size": [
+        1024,
+        768
+      ],
+      "source": "Krita obsidian-sentinel.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/scenery.png",
+      "sha256": "a549c8b07507d853ec54a0315d83c9e98916223e4a96a0604e917788bb4798c7",
+      "size": [
+        1440,
+        460
+      ],
+      "source": "Krita scenery.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/sky.png",
+      "sha256": "ea592232aa516c509fbc57d041039577b7015520d84e802a21d6683fe4fdfc4f",
+      "size": [
+        1600,
+        700
+      ],
+      "source": "Krita sky.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/slag-crawler.png",
+      "sha256": "ae25fb7e4bc3a072b7f1e70a36b49dcea57fc97a34ff41f51d42fc038943de8a",
+      "size": [
+        1024,
+        768
+      ],
+      "source": "Krita slag-crawler.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/terrain.png",
+      "sha256": "3a0460fd015aa7261d3c54bd65dfa2d377a9d554a3a9d3cd56ee90cf506daba2",
+      "size": [
+        768,
+        96
+      ],
+      "source": "Krita terrain-refined.kra",
+      "original_art": true
+    },
+    {
+      "path": "assets/volcano/varkhor.png",
+      "sha256": "f117d2e9b656004fe62b9683f50ed40e3a078747c8eab41371cf5e39bbbe9f83",
+      "size": [
+        1536,
+        1152
+      ],
+      "source": "Krita varkhor.kra",
+      "original_art": true
+    }
+  ]
+}

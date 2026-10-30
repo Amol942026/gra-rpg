@@ -1,0 +1,13 @@
+{
+  "name": "varkhor",
+  "layers": [
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right"
+  ],
+  "kra_sha256": "82370b7febdec32317ae979d612a7a1e9b43d9b990e7ebd9711a1af482f99342",
+  "png_sha256": "46db732b9540c717d18d5504b69f7f64537088759922b0961b2c926e2929458b"
+}

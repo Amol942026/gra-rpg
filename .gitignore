@@ -5,3 +5,9 @@
 /dist/qa-boar-charge-*/
 /dist/qa-boar-package-*/
 /dist/qa-save-*/
+/dist/qa-volcano-*/
+
+# Generated .NET plugin build intermediates; sources remain versioned.
+/tools/narrative/Emberfall.DialogueBridge/bin/
+/tools/narrative/Emberfall.DialogueBridge/obj/
+/tools/narrative/__pycache__/

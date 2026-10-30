@@ -26,4 +26,14 @@ void developerTests(){
  launch=parse({"game","--start","--no-audio"});check(launch.enabled&&launch.destination==-1&&!launch.error.empty(),"missing location does not consume a following option or silently pick a wrong room");
  launch=parse({"game","--start","tower-6"});check(launch.enabled&&launch.destination==-1&&!launch.error.empty(),"invalid floor requests return to picker with an explicit error");
  check(developerDestination("TOWER-3")==10&&developerDestination("tower")==8&&developerDestination("boss")==1&&developerDestination("")==-1,"location aliases, case normalization and unknown input are predictable");
+ check(developerDestination("volcano")==16&&developerDestination("volcano-forges")==17&&developerDestination("volcano-boss")==18&&developerDestination("KALDERA")==16&&developerDestination("varkhor")==18,"third realm and boss have stable developer destinations and aliases");
+ launch=parse({"game","--start=volcano-boss","--no-audio"});check(launch.enabled&&launch.destination==18&&launch.error.empty(),"CLI supports direct start at Varkhor");
+ check(developerStart(g,16,true,false)&&g.inVolcano()&&g.dawnFragments()==2&&g.desertBossDead&&!g.volcanoBossDead&&g.findEnemy(VolcanoBossId)&&g.bagCount(Kind::DawnShard)==0,"fresh volcanic session bypasses earlier story gates without granting gear or defeating Varkhor");
+ auto equipment=g.equipment;auto inventory=g.bag;g.level=9;g.xp=35;g.attributes={3,2,4,1,5,6};g.skillRanks={2,1,0};g.hp=float(g.maxHp());g.mana=float(g.maxMana());
+ auto* boss=g.findEnemy(VolcanoBossId);boss->hp-=23;float bossHp=boss->hp;boss->eruptionWindup=.8f;
+ g.cinders.push_back({g.player,{7.5f,0},7,20,2002});g.fissures.push_back({g.player,0,.95f,48,VolcanoBossId,false});g.heroKnockdownRemaining=.5f;g.heroKnockbackRemaining=.2f;g.sandPrisonRemaining=1;g.openedChest=4;
+ check(developerStart(g,18,false,false)&&g.inVolcano()&&developerSpawnSafe(g,g.player)&&distance(g.player,VolcanoBossHome)<6,"current character can move directly to the volcanic boss safely");
+ check(same(g.bag,inventory)&&same(g.equipment,equipment)&&g.level==9&&g.xp==35&&g.attributes==Attributes{3,2,4,1,5,6}&&g.skillRanks==SkillRanks{2,1,0}&&g.findEnemy(VolcanoBossId)->hp==bossHp,"same-realm developer warp preserves character and enemy progress");
+ check(g.cinders.empty()&&g.fissures.empty()&&g.findEnemy(VolcanoBossId)->eruptionWindup==0&&!g.knockedBack()&&!g.sandTrapped()&&g.openedChest==-1,"same-realm warp cancels eruptions, projectiles, old knockdown and open loot");
+ g.player=VolcanoPortal;check(g.useVolcanoPortal()&&g.inTower(),"volcanic developer session can return through the ordinary portal");g.player=MagePosition;check(g.canTravelVolcano(),"developer story setup permits returning to the third realm through Eldrin");
 }

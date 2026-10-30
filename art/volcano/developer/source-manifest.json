@@ -1,0 +1,30 @@
+[
+  {
+    "path": "src/developer_mode.hpp",
+    "sha256": "dcf86c5f01fdc354f58b68fe1f0f8b95936f49660f633d1417291a8e81edb0ca"
+  },
+  {
+    "path": "src/developer_ui.hpp",
+    "sha256": "b27490350b5faa8cb326e7a3e9971cfcc0571304287f9767dc8333919f99af0d"
+  },
+  {
+    "path": "src/main.cpp",
+    "sha256": "27f55fddf3bac07b7daa7f6e38168df5473ed9799694489aaf3d586a4b09ada9"
+  },
+  {
+    "path": "tests/developer_tests.hpp",
+    "sha256": "ba0be2781acc4a874976d3061e7cf57d8fd5930e483eaca422eeff09c40338d4"
+  },
+  {
+    "path": "tests/developer_volcano_qa.cpp",
+    "sha256": "829a54ac241d6b5d830e75092be559ca51261a97f35adfe7a19fad359574512f"
+  },
+  {
+    "path": "tests/developer_volcano_package_qa.ps1",
+    "sha256": "ac866d38634178ded6d39b973f2bb2713b70c2c81eec0e1c25ea51634ebe05d7"
+  },
+  {
+    "path": "package-dev.ps1",
+    "sha256": "1b59cb488468e6e511032fb79d0c827248c48aaa458155e40e37ed1a158efe8d"
+  }
+]

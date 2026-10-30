@@ -26,6 +26,13 @@ inline const LootTable& enemyLootTable(int type){
   {{{Kind::Gold,8,22,0},{Kind::ScarabShell,1,3,0},{Kind::Crystal},{Kind::ScarabHelmet},{Kind::Arrow,5,10,0},{Kind::ScarabArmor},{Kind::DuneShield},{Kind::ScarabBoots},{Kind::ScarabAxe},{Kind::ScarabRing}}},
   {{{Kind::Gold,8,20,0},{Kind::CobraScale,1,3,0},{Kind::VenomSac},{Kind::Health},{Kind::CobraBoots},{Kind::VenomRing},{Kind::MirageBow},{Kind::CobraCloak},{Kind::ScaleShield},{Kind::SerpentAmulet}}},
   {{{Kind::Gold,60,110,0},{Kind::DuneBlade},{Kind::SandEssence,2,4,0},{Kind::Mana,1,3,0},{Kind::DawnShard,1,1,3},{Kind::SandRobe},{Kind::DuneShield},{Kind::SunAmulet},{Kind::MirageBow},{Kind::Health,1,3,0},{Kind::Crystal},{Kind::DuneBoots},{Kind::DuneHelmet},{Kind::DawnBow}}},
+  {{{Kind::Gold,16,30},{Kind::Crystal},{Kind::RuneStone},{Kind::Armor,1,1,2},{Kind::Shield,1,1,2},{Kind::GuardianBoots}}},
+  {{{Kind::Gold,14,28},{Kind::Crystal},{Kind::Health},{Kind::Boots,1,1,2},{Kind::Dagger,1,1,2},{Kind::SunAmulet}}},
+  {{{Kind::Gold,18,32},{Kind::Mana,1,2},{Kind::Crystal},{Kind::Ring,1,1,2},{Kind::Cloak,1,1,2},{Kind::GuardianAxe}}},
+  {{{Kind::Gold,18,34},{Kind::Mana},{Kind::RuneStone},{Kind::Helmet,1,1,2},{Kind::Amulet,1,1,2},{Kind::EchoRing}}},
+  {{{Kind::Gold,22,40},{Kind::Sword,1,1,2},{Kind::Armor,1,1,2},{Kind::Helmet,1,1,2},{Kind::RuneStone},{Kind::GuardianShield}}},
+  {{{Kind::Gold,20,36},{Kind::Crystal,1,2},{Kind::Health},{Kind::Bow,1,1,2},{Kind::Boots,1,1,2},{Kind::DawnBow}}},
+  {{{Kind::Gold,120,190},{Kind::GuardianAxe,1,1,2},{Kind::GuardianArmor,1,1,2},{Kind::Mana,2,3},{Kind::DawnShard,1,1,4},{Kind::RuneStone,2,4},{Kind::SunAmulet,1,1,2},{Kind::EchoRing,1,1,2},{Kind::Health,2,3},{Kind::Crystal,2,4},{Kind::DuneHelmet,1,1,2},{Kind::GuardianBoots,1,1,2}}},
  };
  static_assert(sizeof(tables)/sizeof(tables[0])==EnemyTypeCount);
  return tables[std::clamp(type,0,EnemyTypeCount-1)];

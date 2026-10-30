@@ -15,6 +15,7 @@ static BoulderSocket boulderHand(const Enemy& e,float progress){
  auto pose=guardian_motion::sample(progress);return guardianSocket(e,0,pose.rockForward,pose.rockUp);
 }
 void cancelBoulderAttacks(){
+ cancelVolcanoAttacks();
  cancelBoarCharges();
  boulders.clear();boulderImpacts.clear();
  heroKnockback={};heroKnockbackRemaining=heroKnockdownRemaining=0;heroKnockdownFacing=0;

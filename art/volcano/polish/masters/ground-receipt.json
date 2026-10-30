@@ -1,0 +1,10 @@
+{
+  "name": "ground",
+  "layers": [
+    "Base mineral colour",
+    "Painted soft strata and weathering",
+    "Fine grains, fissures and exposed edges"
+  ],
+  "kra_sha256": "ff7e8c428f89fd91cd895aa16098f64c143bdc417b1a31f8f0b220a1c9392d62",
+  "png_sha256": "bf1098c8e4175d296887f29512f68cf4a43c87f7714d039384f02b5e2f865782"
+}

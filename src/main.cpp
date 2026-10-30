@@ -217,6 +217,7 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 }
 #include "scenery_art.hpp"
 #include "desert_art.hpp"
+#include "volcano_art.hpp"
 #include "actor_art.hpp"
 #include "guardian_art.hpp"
 #include "sand_prison_art.hpp"
@@ -233,7 +234,7 @@ void makeArt(){
  world_shadows::init();
  hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
  forest_bush_art::load();forest_tree_art::load();guardian_art::load();
- treasure_art::make();fountain_art::load();
+ treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();
  terrain=render_targets::colorOnly(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
  for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
   if(!land)continue; // The animated water is drawn underneath the land.
@@ -260,7 +261,7 @@ void makeArt(){
   ImageDrawPixel(&mini,int(90+(x-y)*mx),int(6+(x+y-2)*my),paths?rgb(126,132,100):rgb(61,87,69));
  }
  minimapTerrain=LoadTextureFromImage(mini);UnloadImage(mini);SetTextureFilter(minimapTerrain,TEXTURE_FILTER_POINT);
- for(int i=0;i<PropTypeCount;i++){int density=(i>=ForestPropTypeCount||i==2||forest_tree_art::slot(i)>=0)?2:1;propArt[i]=LoadRenderTexture(180*density,230*density);BeginTextureMode(propArt[i]);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,float(density)});if(i==0)tree(90,208,1);if(i==1)rock(90,208,1);if(i==2)bush(90,208,1);if(i==3)column(90,208,1);if(i==4)deciduousTree(90,208,1,true);if(i==5)deciduousTree(90,208,1,false);if(i==6)mushrooms(90,208,1);if(i>=ForestPropTypeCount)desert_art::prop(i,90,208);EndMode2D();EndTextureMode();}
+ for(int i=0;i<PropTypeCount;i++){int density=(i>=ForestPropTypeCount||i==2||forest_tree_art::slot(i)>=0)?2:1;propArt[i]=LoadRenderTexture(180*density,230*density);BeginTextureMode(propArt[i]);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,float(density)});if(i==0)tree(90,208,1);if(i==1)rock(90,208,1);if(i==2)bush(90,208,1);if(i==3)column(90,208,1);if(i==4)deciduousTree(90,208,1,true);if(i==5)deciduousTree(90,208,1,false);if(i==6)mushrooms(90,208,1);if(i>=14)volcano_art::prop(i,90,208);else if(i>=ForestPropTypeCount)desert_art::prop(i,90,208);EndMode2D();EndTextureMode();}
  forest_bush_art::unload();forest_tree_art::unload();
  for(auto& art:propArt)SetTextureFilter(art.texture,TEXTURE_FILTER_BILINEAR);
  fs::create_directories("assets/generated");
@@ -286,14 +287,15 @@ void makeArt(){
 #include "map_labels.hpp"
 void drawWorld(){
  if(game.inTower()){drawTowerWorld();return;}
- clip(0,0,WorldW,H);ClearBackground(game.inDesert()?rgb(163,121,74):rgb(22,44,47));if(game.inDesert())desert_art::drawCachedBackdrop();else drawWindWater();performance.end(RenderStage::Water,true);Vector2 o=screen({0,0});if(game.inDesert())BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
- DrawTextureRec(game.inDesert()?desert_art::terrain.texture:terrain.texture,{0,0,float(TerrainWidth),-float(TerrainHeight)},{o.x-TerrainOriginX,o.y-90},WHITE);
+ clip(0,0,WorldW,H);ClearBackground(game.inVolcano()?rgb(43,33,48):game.inDesert()?rgb(163,121,74):rgb(22,44,47));if(game.inVolcano())volcano_art::backdrop();else if(game.inDesert())desert_art::drawCachedBackdrop();else drawWindWater();performance.end(RenderStage::Water,true);Vector2 o=screen({0,0});if(game.inDesert())BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
+ DrawTextureRec(game.inVolcano()?volcano_art::terrain.texture:game.inDesert()?desert_art::terrain.texture:terrain.texture,{0,0,float(TerrainWidth),-float(TerrainHeight)},{o.x-TerrainOriginX,o.y-90},WHITE);
  if(game.inDesert()){native_world::endBlendMode();desert_art::atmosphere();}
- if(!game.inDesert())for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
+ if(game.inVolcano())volcano_art::flow();
+ if(!game.inDesert()&&!game.inVolcano())for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
  world_shadows::draw();
  Vector2 pp=screen(game.player);DrawEllipseLines(int(pp.x),int(pp.y+2),25,12,Fade(Gold,.7f));
  drawHoveredTile();
- guardian_art::ground();
+ guardian_art::ground();if(game.inVolcano())volcano_art::groundAttacks();
  for(const auto& plant:game.forage){
   if(plant.value.empty())continue;Vector2 p=screen(plant.pos);if(p.x<-40||p.x>WorldW+40||p.y<0||p.y>H)continue;
   if(hovered.kind==HoverKind::Forage&&hovered.index==plant.id){ellipseOutline(p.x,p.y,18,9,Gold);diamond(p.x,p.y,18,9,Fade(Gold,.17f));}
@@ -308,6 +310,7 @@ void drawWorld(){
   else if(obj.type==5)drawArrow(game.arrows[obj.index]);
   else if(obj.type==9)drawTreasureChest(game.chests[obj.index]);
   else if(obj.type==12)fountain_art::draw(obj.index);
+  else if(obj.type==14)volcano_art::bolt(game.cinders[obj.index]);
   else if(obj.type==10)guardian_art::projectile(game.boulders[obj.index]);
   else if(obj.type==11)guardian_art::fragment(game.boulderImpacts[obj.index/guardian_break::Pieces],obj.index%guardian_break::Pieces);
   else if(!game.dead()||int(game.time*5)%2==0){sand_prison::drawMound(pp,false);hero(pp.x,pp.y,1);sand_prison::drawMound(pp,true);}
@@ -339,7 +342,7 @@ void slotDraw(Slot s,Rectangle r,std::string label=""){
  if(p&&!p->empty()&&!same){rect(r.x+1,r.y+r.height-3,r.width-2,2,Fade(rarity(*p),.85f));icon(*p,r.x+r.width*.5f,r.y+r.height*.48f,.78f);if(p->count>1)txt(std::to_string(p->count),r.x+r.width-20,r.y+r.height-18,12,Text);}
  else if(!label.empty())center(label,r.x+r.width/2,r.y+r.height/2-7,11,Muted);
 }
-void minimap(){Rectangle r{842,133,180,155};panel(r,Fade(Panel,.92f));txt(game.inDesert()?"MORZE PIASKÓW":"WIELKA KNIEJA",856,144,11,Gold);
+void minimap(){Rectangle r{842,133,180,155};panel(r,Fade(Panel,.92f));txt(game.inVolcano()?"KALDERA POPIOŁU":game.inDesert()?"MORZE PIASKÓW":"WIELKA KNIEJA",856,144,11,Gold);
  if(game.inTower()){
   rect(r.x+1,r.y+1,r.width-2,r.height-2,rgb(24,23,40));txt("WIEŻA ELDRINA",856,144,11,Gold);
   bool balcony=game.towerFloor==TowerBalconyFloor;float cx=balcony?915.f:932.f,sx=balcony?5.5f:6.5f,rx=balcony?57.f:68.f,ry=balcony?35.f:42.f;
@@ -357,20 +360,20 @@ void minimap(){Rectangle r{842,133,180,155};panel(r,Fade(Panel,.92f));txt(game.i
  }
  const float sx=78.f/(MapSize-2),sy=48.f/(MapSize-2);
  auto point=[&](V p){return Vector2{932+(p.x-p.y)*sx,176+(p.x+p.y-2)*sy};};
- DrawTexture(game.inDesert()?desert_art::minimap:minimapTerrain,int(r.x),170,WHITE);
- if(!game.inDesert())for(const auto& glade:ForestGlades){Vector2 p=point(glade.center);diamond(p.x,p.y,2,2,Fade(Gold,.7f));}
+ DrawTexture(game.inVolcano()?volcano_art::minimap:game.inDesert()?desert_art::minimap:minimapTerrain,int(r.x),170,WHITE);
+ if(!game.inDesert()&&!game.inVolcano())for(const auto& glade:ForestGlades){Vector2 p=point(glade.center);diamond(p.x,p.y,2,2,Fade(Gold,.7f));}
  for(auto&e:game.enemies)if(e.alive){Vector2 p=point(e.pos);DrawCircleV(p,enemyBoss(e.type)?3:1.6f,enemyBoss(e.type)?Gold:rgb(166,90,75));}
  for(const auto& c:game.chests)if(c.location==game.location)diamond(point(c.pos).x,point(c.pos).y,2.8f,2.8f,c.opened?Muted:Gold);
- if(game.inDesert()){DrawCircleV(point(DesertPortal),3,rgb(192,153,240));DrawCircleV(point(DesertOasis),2,Blue);}DrawCircleV(point(game.player),3,Text);txt("N",925,158,9,Muted);}
+ if(game.inVolcano()){DrawCircleV(point(VolcanoPortal),3,rgb(192,153,240));for(int i=0;i<2;i++)DrawCircleV(point(VolcanoFountains[i]),2,i==0?Blue:rgb(238,123,123));}if(game.inDesert()){DrawCircleV(point(DesertPortal),3,rgb(192,153,240));DrawCircleV(point(DesertOasis),2,Blue);}DrawCircleV(point(game.player),3,Text);txt("N",925,158,9,Muted);}
 void drawUI(){
  sand_prison::drawStatus();
  txt("EMBERFALL",28,22,34,Text,true);txt("ECHA ZAPOMNIANYCH RUIN",31,66,10,Gold);line(29,92,308,92,Fade(Gold,.35f));
- txt(game.inTower()?TextFormat("%02d / 5",game.towerFloor+1):game.inDesert()?"02":"01",335,29,20,Gold,true);txt(game.inTower()?TowerFloors[game.towerFloor].name:game.currentRegion(),410,29,20,Text);txt(game.inTower()?TowerFloors[game.towerFloor].theme:game.inDesert()?"DRUGA KRAINA / SZLAK ŻYWEJ WYDMY":"POGRANICZE  /  STREFA DZIKICH",411,56,10,Muted);
+ txt(game.inTower()?TextFormat("%02d / 5",game.towerFloor+1):game.inVolcano()?"03":game.inDesert()?"02":"01",335,29,20,Gold,true);txt(game.inTower()?TowerFloors[game.towerFloor].name:game.currentRegion(),410,29,20,Text);txt(game.inTower()?TowerFloors[game.towerFloor].theme:game.inVolcano()?"TRZECIA KRAINA / PIEŚŃ KALDERY":game.inDesert()?"DRUGA KRAINA / SZLAK ŻYWEJ WYDMY":"POGRANICZE  /  STREFA DZIKICH",411,56,10,Muted);
  DrawCircle(903,39,3,Green);txt(TextFormat("%d FPS",GetFPS()),914,30,13,Green);txt("F1  POMOC",917,56,10,Muted);
  minimap();
  txt("DZIENNIK WYPRAWY",29,680,10,Gold);line(29,701,242,701,Fade(Gold,.3f));
  diamond(36,727,6,6,game.dawnFragments()?Green:Gold);txt("Serce Świtu",53,714,20,Text,true);
- txt(game.inTower()?"Schody i wyposażenie · E / PPM":game.inDesert()?(game.dawnFragments()>=2?"Dwie części bezpieczne. Wróć do maga.":game.desertBossDead?"Zbierz fragment z ciała Żywej Wydmy.":"Żywa Wydma: południowy wschód."):game.bossDead?"Zbierz część Serca Świtu z ciała.":"Odnajdź Strażnika na północy.",29,748,13,Muted);
+ txt(game.inTower()?"Schody i wyposażenie · E / PPM":game.inVolcano()?(game.dawnFragments()>=3?"Trzy części bezpieczne. Wróć do maga.":game.volcanoBossDead?"Zbierz fragment z ciała Varkhora.":"Varkhor: północny wschód kaldery."):game.inDesert()?(game.dawnFragments()>=2?"Dwie części bezpieczne. Wróć do maga.":game.desertBossDead?"Zbierz fragment z ciała Żywej Wydmy.":"Żywa Wydma: południowy wschód."):game.bossDead?"Zbierz część Serca Świtu z ciała.":"Odnajdź Strażnika na północy.",29,748,13,Muted);
  txt(TextFormat("Odzyskane części: %d / 5",game.dawnFragments()),29,771,12,game.dawnFragments()?Green:Muted);
  txt("WSAD · ruch",29,808,13,Muted);txt("SHIFT · bieg",29,835,13,Muted);
  txt("ESC · pauza",29,862,13,Muted);
@@ -420,7 +423,7 @@ void drawUI(){
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.47",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inVolcano()?"WYPRAWA DO KALDERY":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.47",1370,885,10,Muted);
 }
 struct ItemTooltipText {std::string label,name,stat,description,instruction,chance,value;Color color;};
 ItemTooltipText itemTooltipText(Item value,Slot source){
@@ -502,6 +505,7 @@ void input(float dt){
  if(!IsWindowFocused()){game.cancelBow();weaponWheelOpen=false;paused=true;dragging={};return;}
  if(IsKeyPressed(KEY_E)&&!game.inTower()&&game.openNearestChest()){dragging={};return;}
  if(IsKeyPressed(KEY_E)&&game.useNearestFountain()){dragging={};return;}
+ if(IsKeyPressed(KEY_E)&&game.inVolcano()&&game.useVolcanoPortal()){dragging={};nearbyPage=0;return;}
  if(IsKeyPressed(KEY_E)&&game.inDesert()&&game.useDesertPortal()){dragging={};nearbyPage=0;return;}
  if(IsKeyPressed(KEY_E)&&game.inTower()){nearestTowerInteraction();if(towerStory.active()||towerPanelOpen)return;}
  V move{};if(IsKeyDown(KEY_D))move=move+V{1,-1};if(IsKeyDown(KEY_A))move=move+V{-1,1};if(IsKeyDown(KEY_S))move=move+V{1,1};if(IsKeyDown(KEY_W))move=move+V{-1,-1};
@@ -822,7 +826,7 @@ int main(int argc,char**argv) {
 #else
          <<"unavailable"
 #endif
-         <<"\nWorld location: "<<(game.inTower()?"mage-tower":game.inDesert()?"desert":"forest")<<"\nBenchmark scenario: "<<(desertBenchmark?"desert":towerBenchmark?"tower":"forest")<<"\nDesert areas visited: "<<desertRegionsVisited
+         <<"\nWorld location: "<<(game.inTower()?"mage-tower":game.inVolcano()?"volcano":game.inDesert()?"desert":"forest")<<"\nBenchmark scenario: "<<(desertBenchmark?"desert":towerBenchmark?"tower":"forest")<<"\nDesert areas visited: "<<desertRegionsVisited
          <<"\nSand prisons cast: "<<(game.inDesert()&&game.findEnemy(DesertBossId)?game.findEnemy(DesertBossId)->sandPrisonCasts:0)
          <<"\nTower floor: "<<game.towerFloor+1<<"\nIntro active: "<<intro.active()<<"\nDeveloper error: "<<developerError
          <<"\nMain menu open: "<<welcome<<"\nPause menu open: "<<paused
@@ -846,7 +850,7 @@ int main(int argc,char**argv) {
     startupLog.write("Shutting down");audioSystem.shutdown();
     sync_present::shutdown();
     world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    hero_portrait::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    hero_portrait::unload();volcano_actors::unload();volcano_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
     unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }

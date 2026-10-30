@@ -2,6 +2,7 @@
 // so wandering never changes the random loot awarded for a kill.
 bool clearEnemySegment(V from,V to,float padding)const{
  V delta=to-from;
+ if(inVolcano()){int steps=std::max(1,int(std::ceil(length(delta)/.35f)));for(int i=0;i<=steps;i++)if(volcanoLava(from+delta*(float(i)/steps),padding))return false;for(V f:VolcanoFountains)if(segmentCircle(from,delta,f,FountainRadius+padding)<=1)return false;}
  if(inDesert()&&segmentCircle(from,delta,DesertOasis,2.45f+padding)<=1)return false;
  if(inDesert())for(V f:DesertFountains)if(segmentCircle(from,delta,f,FountainRadius+padding)<=1)return false;
  for(const auto& p:props)if(segmentCircle(from,delta,p.pos,propRadius(p.type)+padding)<=1)return false;
@@ -11,6 +12,7 @@ bool canSeePlayer(const Enemy& e)const{
  return e.alive&&!dead()&&distance(e.pos,player)<EnemySightRange&&clearEnemySegment(e.pos,player,0);
 }
 bool enemyPositionClear(V p,float radius)const{
+ if(inVolcano()&&(volcanoLava(p,radius)||nearVolcanoFountain(p,radius)))return false;
  if(inDesert()&&(desertWater(p,radius)||nearDesertFountain(p,radius)))return false;
  if(p.x<1.6f+radius||p.y<1.6f+radius||p.x>MapWalkMax-radius||p.y>MapWalkMax-radius)return false;
  for(const auto& prop:props){float gap=radius+propRadius(prop.type)+.003f;if(!outsideCircleBounds(p-prop.pos,gap)&&distance(p,prop.pos)<gap)return false;}

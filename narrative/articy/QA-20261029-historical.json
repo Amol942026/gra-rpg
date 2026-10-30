@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "overall": "paused_by_user_after_first_native_import",
+  "offline_tests": {
+    "passed": 28,
+    "failures": 0,
+    "errors": 0,
+    "transport_fixture": "simulated, not a live articy connection"
+  },
+  "cpp_staging_fixture": {
+    "compiled": true,
+    "executed_hidden_silent": true,
+    "production_headers_untouched": true
+  },
+  "mcp_config": "recognized by codex mcp get emberfall_articy --json",
+  "plugin": {
+    "compiled": true,
+    "installed": "C:\\Users\\Amadeusz\\AppData\\Roaming\\Articy Software\\articy\\4.x\\Plugins\\Local\\Emberfall.DialogueBridge\\1.0.0\\Emberfall.DialogueBridge.dll",
+    "sha256": "d1f72add97ad416ccd55cce13f82852431e66a6fbe4997d2ac82be10bcb3c699",
+    "live_loaded": true,
+    "archive": "C:\\AI2D\\narrative\\Emberfall.DialogueBridge_1.0.0_20261029-192933-023.mdk",
+    "archive_sha256": "54cf5986488bd0a48192facfe08a334b07d251131959b07ced066b0c46926dca"
+  },
+  "real_status": {
+    "job_id": "90a5bbaee4364541aa80ef46758f0998",
+    "id": "90a5bbaee4364541aa80ef46758f0998",
+    "ok": true,
+    "operation": "status",
+    "completedUtc": "2026-10-29T19:28:14.9685809Z",
+    "result": {
+      "bridge": "Emberfall.DialogueBridge",
+      "version": "1.0.0",
+      "utc": "2026-10-29T19:28:14.9635172Z",
+      "processId": 7868,
+      "projectOpen": true,
+      "projectGuid": "cb99e03a-ae90-4443-b79f-7f8da1539c34",
+      "projectName": "Emberfall Dialogues",
+      "transport": "local-file-ipc",
+      "articyApi": "public client MDK",
+      "paidApiUsed": false,
+      "licenseLimitsChanged": false,
+      "freePublishedMaximum": 700
+    }
+  },
+  "source_manifest_sha256": "ecd905c31e4602af1cb2f6dae1f39a86f1db71d116b7e267cdef21dd54b1589a",
+  "native_project_import": {
+    "state": "prologue saved; readback failed; not retried",
+    "job_id": "75dc4970985443b59b3bb70a471f30a8",
+    "error": "Unsupported native flow child; extend the game adapter before exporting",
+    "remaining_dialogues": "not imported",
+    "full_round_trip_verified": false
+  },
+  "next_steps": [
+    "Resume only when user requests",
+    "Follow narrative/articy/RESUME.md; fix structural child handling before any retry",
+    "Verify actual saved prologue; then remaining imports and edit/save/reopen/export",
+    "Stage and validate game integration"
+  ],
+  "startup_helper_existing_client_guard": "verified: refused a second instance without closing the existing client",
+  "production_source_hashes_match_plans": true,
+  "client_activation": {
+    "verified": true,
+    "evidence": "Real FREE project selector observed in activated client on 2026-10-29; no key captured or stored"
+  },
+  "desktop_setup": {
+    "state": "native project created successfully; owned client left open in Flow view",
+    "project_files_created": true
+  },
+  "native_project": {
+    "name": "Emberfall Dialogues",
+    "guid": "cb99e03a-ae90-4443-b79f-7f8da1539c34",
+    "path": "C:/AI2D/narrative/EmberfallDialogues/ProjectInfo.aph"
+  },
+  "native_free_allocations_before_import": {
+    "flow_documents": {
+      "used": 0,
+      "limit": 500
+    },
+    "entities": {
+      "used": 0,
+      "limit": 50
+    },
+    "assets": {
+      "used": 0,
+      "limit": 140
+    },
+    "locations": {
+      "used": 0,
+      "limit": 10
+    }
+  },
+  "native_blank_backup": "C:/AI2D/narrative/blank-native-project-backup-20261029.zip"
+}

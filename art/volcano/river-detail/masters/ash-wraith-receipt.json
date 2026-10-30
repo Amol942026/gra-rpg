@@ -1,0 +1,23 @@
+{
+  "name": "ash-wraith",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right"
+  ],
+  "kra_sha256": "cf5c220e0d479197b51795feb5a4b27ab9060cdce3797ff9951a0481afc0629e",
+  "png_sha256": "da8eedb87ccb50bc1b8cde0203aa9e2cf76b30e68e78802997d16e7753d4e419",
+  "retained_saved_document_id": "7be72e43-ed5c-4e0c-9495-0e5ea4e1e6bc",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "original_kra_sha256": "bdf13357572a5367c14a64cda96c8c63344e04fd9bfdb03138621653fd6f9266"
+}

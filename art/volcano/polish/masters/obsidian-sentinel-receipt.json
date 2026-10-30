@@ -1,0 +1,13 @@
+{
+  "name": "obsidian-sentinel",
+  "layers": [
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right"
+  ],
+  "kra_sha256": "f8af654270e4af3832bbde5010ef735584d306c652f7de4402412bc8bb0c02e0",
+  "png_sha256": "ce525d72683421b0dea333867d10f0fed9546c701a905d07bc55f26ac507bc2b"
+}

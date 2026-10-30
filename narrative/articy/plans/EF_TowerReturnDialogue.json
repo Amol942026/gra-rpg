@@ -1,0 +1,41 @@
+{
+  "id": "EF_TowerReturnDialogue",
+  "title": "Powrót z Lasu Mchu",
+  "array": "TowerReturnDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+  "lines": [
+    {
+      "speaker": "Wanderer",
+      "text": "Eldrinie! Kamienny Strażnik padł. Zdobyłem pierwszą część Serca Świtu. Spójrz — jeszcze bije w niej światło."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Wróciłeś... i przyniosłeś nadzieję. Dobra robota, Wędrowcze. Wielu odwróciłoby się na widok tego strażnika. Ty wytrwałeś."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Nie było łatwo. Przez chwilę sądziłem, że jego kamienna pięść odeśle mnie tutaj w kawałkach."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "A jednak stoisz przede mną. Pierwsza z pięciu części jest bezpieczna. Czuję, jak jej blask osłabia szczeliny, przez które próbują przedostać się demony."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Czy to wystarczy, by powstrzymać inwazję?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Jeszcze nie. Zostały cztery części i czterej strażnicy. Ale dziś udowodniłeś, że Pieczęć Popiołu nie musi zgasnąć."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Daj mi chwilę na oddech. Potem opowiesz mi, dokąd prowadzi następna droga."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Oczywiście. Moja wieża jest teraz twoim schronieniem. Gdy będziesz gotowy, porozmawiaj ze mną — teleportuję cię do drugiej krainy. Odpocznij, zasłużyłeś."
+    }
+  ]
+}

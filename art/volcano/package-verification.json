@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "package_sha256": "31844fdca6e7623e6e93bb7259c316161dda9860c3e7e4803477aa04b66a5a01",
+  "exe_sha256": "7bc95041e179fe4f2ad6fe624c61acac6444910898d780658938b3841256a600",
+  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-package-20261029-131421\\Emberfall",
+  "verified_assets": 126,
+  "startup_frames": 180,
+  "volcano": {
+    "status": "PASS",
+    "checks": 515,
+    "failures": 0,
+    "species": 7,
+    "directions": 8,
+    "pose_views": 224,
+    "hidden": true,
+    "audio_opened": false,
+    "presentation_measured": false,
+    "completed_render_mean_ms": 4.28762,
+    "completed_render_p95_ms": 4.6649
+  },
+  "audio_preferences_unchanged": true,
+  "native_sources_in_zip": false
+}

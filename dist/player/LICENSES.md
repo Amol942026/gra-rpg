@@ -7,6 +7,12 @@
   `assets/Cinzel-Bold.ttf` to lokalnie utrwalona odmiana o wadze 700 z dołączonego fontu zmiennego, na tej samej licencji OFL. Proces i hashe: `art/typography/provenance.json`.
 - **w64devkit 2.0.0 / MinGW-w64** — narzędzia kompilacji, osobne licencje w folderze `tools/w64devkit`. Licencje runtime dystrybuowanego z plikiem EXE znajdują się w `assets/licenses/`.
 - Grafiki i kod gry Emberfall powstały dla tego projektu. Nie zawierają grafik z Tibii.
+- Dopracowane grafiki Kaldery w `assets/volcano/` są oryginalnymi ilustracjami
+  2D wykonanymi w Kricie dla Emberfall. Animacje pochodzą z lokalnego Synfiga.
+  Bez zewnętrznych obrazów, modeli i płatnych usług; można rozpowszechniać
+  z grą. Bieżące detale, dodatkowa scenografia i płynąca lawa:
+  `art/volcano/river-detail/README.md`; poprzednia warstwa:
+  `art/volcano/polish/README.md`.
 - Odłamki `assets/sprites/guardian-fragments.png` powstały jako sześć oryginalnych warstw Krity; ich rozpad, obroty i odbicia opracowano w natywnym projekcie Synfig. Źródła i pochodzenie: `art/gameplay/guardian/shatter/`. Bez zewnętrznych grafik, modeli i płatnych usług.
 - Duży głaz Strażnika `assets/sprites/guardian-stone.png` to własna sześciowarstwowa grafika z Krity, z ziemią i korzeniami; wyrwanie i oburęczny rzut znad głowy opracowano w natywnym projekcie 2D Synfig. Źródła i pochodzenie: `art/gameplay/guardian/`. Bez zewnętrznych grafik, modeli i płatnych usług.
 - Ilustracja leśnej Bramy Świtu w `assets/menu/` została narysowana w Kricie dla Emberfall, a animacja warstw opracowana w Synfig Studio. Własne kształty i kolory, bez zewnętrznych obrazów, modeli, sampli i płatnych usług. Edytowalne źródła i pochodzenie: `art/menu/README.md`, `art/menu/forest/provenance.json`.

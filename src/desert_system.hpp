@@ -15,16 +15,16 @@ void buildDesert(){
  props.push_back({DesertPortal,13,1});desertCreated=true;
 }
 bool activateField(WorldLocation next){
- if(next!=WorldLocation::Forest&&next!=WorldLocation::Desert)return false;
+ if(next!=WorldLocation::Forest&&next!=WorldLocation::Desert&&next!=WorldLocation::Volcano)return false;
  if(location!=next)cancelBoulderAttacks();
  if(next!=fieldLocation){
-  auto& saved=fieldLocation==WorldLocation::Forest?forestState:desertState;
+  auto& saved=storedField(fieldLocation);
   saved.enemies=std::move(enemies);saved.props=std::move(props);saved.forage=std::move(forage);
-  auto& restore=next==WorldLocation::Forest?forestState:desertState;
+  auto& restore=storedField(next);
   enemies=std::move(restore.enemies);props=std::move(restore.props);forage=std::move(restore.forage);
-  fieldLocation=next;if(next==WorldLocation::Desert&&!desertCreated)buildDesert();
+  fieldLocation=next;if(next==WorldLocation::Desert&&!desertCreated)buildDesert();if(next==WorldLocation::Volcano&&!volcanoCreated)buildVolcano();
  }
- if(location!=next){clearSandPrison();closeCorpse();}location=next;towerFloor=0;return true;
+ if(location!=next){clearSandPrison();closeCorpse();}location=next;towerFloor=0;refreshVolcanoScenery();return true;
 }
 bool canTravelDesert()const{return mageReachable()&&dawnFragments()>=1;}
 bool travelToDesert(){

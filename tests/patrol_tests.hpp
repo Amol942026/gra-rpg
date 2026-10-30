@@ -15,7 +15,7 @@ void patrolTests(){
     }
     for(int type=0;type<EnemyTypeCount;type++)for(int fps:{30,60,120}){
         Game g=emptyArena();g.player={2,2};g.enemies.push_back({7,type,{15,15},{15,15},100,100});
-        auto& e=g.enemies[0];e.behavior=EnemyBehavior::Patrol;e.patrolGoal={16.8f,15};e.patrolGoalActive=true;
+        auto& e=g.enemies[0];e.behavior=EnemyBehavior::Patrol;e.patrolGoal={17.4f,15};e.patrolGoalActive=true;
         for(int i=0;i<fps;i++)g.update(1.f/fps,{},false);
         check(std::abs(e.pos.x-15-enemySpeed(type)*PatrolSpeedFactor)<.002f,"patrol speed uses 60% of chase speed independently of FPS for every species");
     }

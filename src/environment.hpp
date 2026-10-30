@@ -53,6 +53,7 @@ float treeShift(const Prop& prop,float sourceY,float time){
     return treeBend(prop,a,time)*(1-fraction)+treeBend(prop,b,time)*fraction;
 }
 void drawPropTexture(const Prop& prop,Texture2D texture,bool upright,Color tint){
+    if(prop.type>=14){volcano_art::drawProp(prop,upright,tint);return;}
     Vector2 base=screen(prop.pos);
     if(!treeProp(prop.type)){
         DrawTexturePro(texture,{0,0,float(texture.width),upright?float(texture.height):-float(texture.height)},

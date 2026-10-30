@@ -1,0 +1,33 @@
+{
+  "id": "EF_DesertReturnDialogue",
+  "title": "Powrót z Morza Piasków",
+  "array": "DesertReturnDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+  "lines": [
+    {
+      "speaker": "Wanderer",
+      "text": "Eldrinie, Żywa Wydma rozsypała się w moich rękach. Mam drugą część Serca Świtu."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Dwie części! Nie spodziewałem się, że przebijesz się przez to morze rozżarzonego piasku tak szybko. Dobrze się spisałeś."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Ta wydma naprawdę chodziła. I nie podobało jej się, że pożyczyłem jej serce."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Teraz jej moc służy Pieczęci. Trzy części wciąż czekają na odnalezienie, ale odzyskane światło jest bezpieczne."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Zanim ruszę dalej, chcę odpocząć i sprawdzić zdobyty ekwipunek."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Źródło odnowy jest do twojej dyspozycji. Gdy odpoczniesz, porozmawiaj ze mną — otworzę drogę do Kaldery Popiołu, gdzie czeka trzeci strażnik. Możesz też wrócić na pustynię po pozostawiony łup."
+    }
+  ]
+}

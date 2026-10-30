@@ -1,0 +1,23 @@
+{
+  "name": "obsidian-sentinel",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right"
+  ],
+  "kra_sha256": "9c739f73b8b8c329e0442b16a5d38a5014452c82779b9e95b952f8174e7328de",
+  "png_sha256": "eacd296dedc07f312890c33c36c871750fb2da5954fa61e60eced23144d2b0e5",
+  "retained_saved_document_id": "ec355ef9-fcc9-4b69-ae26-debec7e342a7",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "original_kra_sha256": "f8af654270e4af3832bbde5010ef735584d306c652f7de4402412bc8bb0c02e0"
+}

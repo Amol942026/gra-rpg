@@ -1,0 +1,13 @@
+{
+  "name": "ember-drake",
+  "layers": [
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right"
+  ],
+  "kra_sha256": "334bd9924b75d19caad0ac415479ea7b4d88fdaacec73cedb1ab2f038bfdd628",
+  "png_sha256": "4508b332769593197ca5bff0803041082d8577376c85f723334fc91a9976cf42"
+}

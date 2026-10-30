@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PluginManifest Type="MacroPlugin">
+  <Name>Emberfall.DialogueBridge</Name>
+  <Title>Emberfall — local dialogue bridge</Title>
+  <Version>1.0.1</Version>
+  <MinimumArticyVersion>4.4.0</MinimumArticyVersion>
+  <Developer>Emberfall project</Developer>
+  <Description>Local file IPC for dialogue authoring via the free MDK. No paid API, AI services or license modifications.</Description>
+  <Properties>
+    <Property Name="MultiUser" Value="false" />
+    <Property Name="SingleUser" Value="true" />
+    <Property Name="API" Value="false" />
+  </Properties>
+</PluginManifest>

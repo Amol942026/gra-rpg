@@ -1,0 +1,8 @@
+{
+  "sdk": "10.0.403",
+  "url": "https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.403/dotnet-sdk-10.0.403-win-x64.zip",
+  "sha512": "7a114c318fa7f1d9822991b534b2814d0e78386ceda816b371f5141acefe741d87ccb606ede06cadac8f9ac5070e32b708a67bbd1619ff5e5a7858a27874ef48",
+  "mdk": "2.5.0",
+  "mdk_url": "https://api.nuget.org/v3-flatcontainer/articy.mdk/2.5.0/articy.mdk.2.5.0.nupkg",
+  "mdk_sha256": "5cdd6f9ea4792761ecaac4a5b4a8c4171a179525bc0644a4cf382c0431a30b05"
+}

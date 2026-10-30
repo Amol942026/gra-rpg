@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "checks": 1133,
+  "actors": 7,
+  "directions": 8,
+  "native_synfig_clips": 14,
+  "rendered_actor_frames": 840,
+  "lava_frames": 12,
+  "original_2d": true,
+  "external_assets": [],
+  "runtime_texture_rgba8_bytes": 33966592
+}

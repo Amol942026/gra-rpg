@@ -1,0 +1,65 @@
+{
+  "slag-crawler": {
+    "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\replacement-stage\\assets\\volcano\\slag-crawler.png",
+    "size": [
+      1536,
+      1152
+    ],
+    "cell": 192,
+    "bytes": 23406
+  },
+  "lava-salamander": {
+    "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\replacement-stage\\assets\\volcano\\lava-salamander.png",
+    "size": [
+      1536,
+      1152
+    ],
+    "cell": 192,
+    "bytes": 21494
+  },
+  "fire-imp": {
+    "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\replacement-stage\\assets\\volcano\\fire-imp.png",
+    "size": [
+      1536,
+      1152
+    ],
+    "cell": 192,
+    "bytes": 15646
+  },
+  "ash-wraith": {
+    "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\replacement-stage\\assets\\volcano\\ash-wraith.png",
+    "size": [
+      1536,
+      1152
+    ],
+    "cell": 192,
+    "bytes": 13901
+  },
+  "obsidian-sentinel": {
+    "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\replacement-stage\\assets\\volcano\\obsidian-sentinel.png",
+    "size": [
+      1536,
+      1152
+    ],
+    "cell": 192,
+    "bytes": 15197
+  },
+  "ember-drake": {
+    "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\replacement-stage\\assets\\volcano\\ember-drake.png",
+    "size": [
+      1536,
+      1152
+    ],
+    "cell": 192,
+    "bytes": 23797
+  },
+  "varkhor": {
+    "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\replacement-stage\\assets\\volcano\\varkhor.png",
+    "size": [
+      2048,
+      1536
+    ],
+    "cell": 256,
+    "bytes": 28104
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "gameplay_checks": 192848,
+  "save_checks": 4078,
+  "package": {
+    "status": "PASS",
+    "zip_sha256": "59e18ff5264296dbb082861a0829e8ea193cd783e6815c47af8208bfb64f70e1",
+    "exe_sha256": "f24db44a6782daa6ef1f88bf7759835ea80e8460cf12c70653eea7a6a86920d4",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-dev-package-20261029-151428\\Emberfall-DEV",
+    "verified_assets": 126,
+    "startup_destinations": 3,
+    "startup_frames": 540,
+    "audio_preferences_unchanged": true,
+    "native_masters_in_zip": false,
+    "ui": {
+      "status": "PASS",
+      "checks": 257,
+      "failures": 0,
+      "destinations": 19,
+      "volcanic_destinations": 3,
+      "hidden": true,
+      "audio_opened": false
+    }
+  },
+  "player_release_sha256": "31844fdca6e7623e6e93bb7259c316161dda9860c3e7e4803477aa04b66a5a01",
+  "player_release_unchanged": true
+}

@@ -149,3 +149,78 @@ Installed tools (recheck with `doctor` after updates):
 - Target 60 fps on Ryzen 5 7530U / 16 GB / integrated Radeon: preload atlases,
   avoid generation/file I/O in frame loops, bound textures/voices and run heavy
   production stages sequentially. A 60 Hz export is not an in-game FPS benchmark.
+
+# Narrative authoring — articy:draft X FREE
+
+Standing user preference (30.10.2026): plan Emberfall's story, lore, characters,
+quests and dialogues in **articy:draft X FREE**, operating in the background.
+Use the native project as the main narrative workspace and read its current
+content before proposing changes. Preserve established canon; distinguish
+draft ideas from approved/implemented facts. Save actual native changes and
+verify readback rather than treating chat text or a loose JSON as articy work.
+Export and validate approved gameplay changes through the documented pipeline.
+The current MCP covers dialogues/speakers. When a lore task needs other native
+object types, extend the existing free MDK bridge appropriately; do not claim
+those objects were saved through tools that cannot create them.
+
+Read `narrative/articy/README.md` and `narrative/articy/QA.json` first. As of
+2026-10-30 the real native integration works: plugin 1.0.1, all nine MCP tools
+exercised, seven conversations / 41 lines / two speakers / 34 connections saved.
+Structural Connection children are handled correctly. `RESUME.md` is historical;
+do not repeat its failed import or interpret the old pause as current.
+
+- Client 4.4.0.43891: `C:\Program Files\articy draft X\bin`. The installed
+  `ArticyDraft.dll` can be invoked by `C:\Program Files\dotnet\dotnet.exe`;
+  the legacy EXE bootstrap produced no window during setup.
+- Free official client MDK 2.5.0, .NET10 x64. Source:
+  `tools/narrative/Emberfall.DialogueBridge`. Build/install:
+  `pwsh -NoProfile -File tools/narrative/Install-ArticyBridge.ps1`.
+  Portable SDK10.0.403 is in `C:\AI2D\Tools\articy-dev\dotnet-sdk-10`.
+- Start helper: `tools/narrative/Start-ArticyBridge.ps1`, public DebugManifest
+  option and minimized launch, no forced closure/termination. **Keep articy in
+  the background** (user request, 30.10.2026). After a fresh process, the user
+  selects `Emberfall Dialogues` once; no supported single-user auto-open command
+  was verified. Native OpenProject is a multi-user/server API, not a free SU
+  workaround. A hidden watcher then minimizes the verified owned window.
+  `articy_background.py` can minimize an already open worker without input or
+  focus. Human enters activation key only when required; never capture/store it.
+- Project MCP: `.codex/config.toml`, `emberfall_articy`; Python STDIO server
+  `tools/narrative/articy_mcp.py`. Direct CLI `articy_cli.py` uses the same IPC.
+  A Codex restart may be needed to expose registered MCP tools in a new chat.
+- Start with `articy_status` (must return an actual queued native response).
+  Heartbeat/requests/responses are local under
+  `%LOCALAPPDATA%\Emberfall\ArticyBridge`; no network listener or paid API.
+- Only mutate explicitly identified `Emberfall*` projects with matching GUID,
+  `EF_` IDs and revision/expected-text checks. No blind retry after timeout;
+  inspect `articy_job_status` and native project. JSON snapshots before writes
+  supplement normal native project backups; partial failures need inspection.
+- FREE has no time limit, but has 700 objects/project split into categories.
+  Respect the native object counter and category limits. Do not bypass limits,
+  use paid Articy API licenses, paid AI extensions or upload project content.
+- `story_sync.py extract <new-dir>` snapshots current C++ texts;
+  `import-plans <plans-dir> --output <new-json>` deliberately imports via native
+  MDK only, skips identical existing content, and refuses native/source conflicts;
+  `stage <native-export.json> <new-dir>` validates native data and generates
+  review copies of `intro_story.hpp`/`tower_story.hpp`; `apply <native-export.json>
+  <new-dir>` compiles a hidden/silent C++ probe, preserves BOM/newlines, backs up
+  originals, checks hashes, and replaces changed sources only. Current native
+  export reproduces both game headers byte for byte, so no game change was needed.
+  Source snapshots must never be labelled native exports. Do not overwrite
+  native edits with old plans. Preserve current lore, UTF-8 Polish, quest gates
+  and gameplay. Current runtime is linear: branches/cycles are rejected.
+- Native create/edit/CAS-conflict/restore/save/export, original-prologue reopen,
+  duplicate prevention and exact source comparison passed. Apply future edits
+  through the mapped export, then run relevant game checks silently/hidden.
+  Six newly imported dialogues were not subjected to a second full client
+  restart in the finishing session; do not claim that extra restart was tested.
+- Repeat offline checks with the supplied Python runtime and
+  `tools/narrative/test_articy_bridge.py` (32 passing checks). These include
+  simulated transport and real C++ compilation; live evidence is separately in
+  QA.json and exports/. Game logic passed 194309 checks, hidden and silent.
+  Keep native masters in `C:\AI2D\narrative`.
+- Native project: `C:\AI2D\narrative\EmberfallDialogues\ProjectInfo.aph`, name
+  `Emberfall Dialogues`. Recheck GUID against the checkpoint before writes.
+  Use the background native MCP rather than GUI automation for ordinary work.
+  Maintenance-only CLI `shutdown_owned` saves and gracefully stops only the
+  exact background-owned GUID/path; never use it on a manual user session.
+  No automatic retry after native mutation errors/timeouts.

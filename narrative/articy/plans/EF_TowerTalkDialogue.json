@@ -1,0 +1,29 @@
+{
+  "id": "EF_TowerTalkDialogue",
+  "title": "Eldrin — droga do Morza Piasków",
+  "array": "TowerTalkDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Dobrze cię widzieć, Wędrowcze. Jak się czujesz po walce z Kamiennym Strażnikiem?"
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Trochę poobijany, ale gotów usłyszeć, co nas czeka. Część Serca Świtu wciąż rozgrzewa mi dłoń."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Strzeż jej. Każda odzyskana część przybliża nas do zamknięcia bramy demonów. Zostały jeszcze cztery."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "A kolejna wyprawa? Będzie równie przyjemna jak spotkanie z kamiennym olbrzymem?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Obawiam się, że drugi strażnik nie powita cię serdeczniej. Żywa Wydma strzeże drugiej części w Morzu Piasków. Gdy będziesz gotowy, wybierz podróż. W miejscu przybycia zostawię ci bramę powrotną do wieży."
+    }
+  ]
+}

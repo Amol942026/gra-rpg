@@ -59,7 +59,8 @@ inline V normalized(V v){float n=length(v);return n>.001f?v*(1/n):V{};}
 #include "forest_layout.hpp"
 #include "tower_layout.hpp"
 #include "desert_layout.hpp"
-enum class WorldLocation {Forest,MageTower,Desert};
+#include "volcano_layout.hpp"
+enum class WorldLocation {Forest,MageTower,Desert,Volcano};
 #include "treasure.hpp"
 enum class DawnQuest {Seeking,Returning,AtTower};
 struct Ground { int id; Item value; V pos; WorldLocation location=WorldLocation::Forest; int floor=0; };
@@ -76,6 +77,7 @@ struct Enemy {
  float boarChargeCd=BoarChargeFirstDelay,boarWindup=0,boarRush=0,boarRecovery=0;
  V boarAim{},boarDirection{};bool boarHit=false;int boarCharges=0;
  bool boarBusy()const{return type==BoarType&&(boarWindup>0||boarRush>0||boarRecovery>0);}
+ float eruptionCd=2.8f,eruptionWindup=0;int eruptions=0;
  float boulderProgress()const{
   if(type!=3)return -1;
   if(boulderWindup>0)return (BoulderWindup-boulderWindup)/(BoulderWindup+BoulderRecovery);
@@ -107,6 +109,8 @@ struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
 struct Arrow {V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false;};
 struct PierceFlash {V pos;float life=.26f;};
 struct Explosion { V pos;float life=.35f; };
+struct CinderBolt {V pos,velocity;float remaining=7,damage=0;int owner=0;};
+struct LavaFissure {V pos;float age=0,delay=.95f,damage=48;int owner=VolcanoBossId;bool struck=false;};
 struct Boulder {V origin,target,pos;float age=0,duration=1,height=0,startHeight=0,damage=BoulderDamage;int owner=-1;};
 struct BoulderImpact {V pos;float life=BoulderImpactClock;float progress()const{return std::clamp(1-life/BoulderImpactClock,0.f,1.f);}};
 struct BoulderSocket {V ground;float height;};
@@ -141,18 +145,24 @@ struct Game {
  }
  std::array<bool,FountainCount> fountainUsed{};
  std::array<float,FountainCount> fountainDrain{};
+ std::array<bool,FountainCount> volcanoFountainUsed{};
+ std::array<float,FountainCount> volcanoFountainDrain{};
+ bool hasFountains()const{return inDesert()||inVolcano();}
+ const auto& fountains()const{return inVolcano()?VolcanoFountains:DesertFountains;}
+ bool fountainSpent(int id)const{return (inVolcano()?volcanoFountainUsed:fountainUsed)[id];}
+ float fountainDraining(int id)const{return (inVolcano()?volcanoFountainDrain:fountainDrain)[id];}
  bool useFountain(int id){
-  if(!inDesert()||id<0||id>=FountainCount||dead()||allocationRequired||storyBlocked()||rolling()||sandTrapped()||knockedBack())return false;
-  if(distance(player,DesertFountains[id])>FountainUseRange){say("Podejdź do fontanny (maks. 2,5 pola).");return false;}
-  if(fountainUsed[id]){say("Źródło zostało wyczerpane. Pozostała sucha misa.");return false;}
+  if(!hasFountains()||id<0||id>=FountainCount||dead()||allocationRequired||storyBlocked()||rolling()||sandTrapped()||knockedBack())return false;
+  if(distance(player,fountains()[id])>FountainUseRange){say("Podejdź do fontanny (maks. 2,5 pola).");return false;}
+  if(fountainSpent(id)){say("Źródło zostało wyczerpane. Pozostała sucha misa.");return false;}
   if((id==0?mana:hp)>=(id==0?maxMana():maxHp())){say(id==0?"Mana jest już pełna. Źródło zachowuje moc.":"Zdrowie jest już pełne. Źródło zachowuje moc.");return false;}
-  cancelBow();fountainUsed[id]=true;fountainDrain[id]=FountainDrainDuration;
+  cancelBow();(inVolcano()?volcanoFountainUsed:fountainUsed)[id]=true;(inVolcano()?volcanoFountainDrain:fountainDrain)[id]=FountainDrainDuration;
   if(id==0){mana=float(maxMana());manaRegenTime=0;}else{hp=float(maxHp());healingPulse=HealingDuration;}
-  sound(Cue::Spell,DesertFountains[id]);say(id==0?"Błękitna Pieczęć odnowiła całą manę. Źródło wyschło.":"Szkarłatny Świt odnowił całe zdrowie. Źródło wyschło.");return true;
+  sound(Cue::Spell,fountains()[id]);say(id==0?"Błękitna Pieczęć odnowiła całą manę. Źródło wyschło.":"Szkarłatny Świt odnowił całe zdrowie. Źródło wyschło.");return true;
  }
  bool useNearestFountain(){
-  if(!inDesert())return false;int id=-1;float nearest=FountainUseRange;
-  for(int i=0;i<FountainCount;i++){float d=distance(player,DesertFountains[i]);if(d<=nearest){id=i;nearest=d;}}
+  if(!hasFountains())return false;int id=-1;float nearest=FountainUseRange;
+  for(int i=0;i<FountainCount;i++){float d=distance(player,fountains()[i]);if(d<=nearest){id=i;nearest=d;}}
   if(id<0)return false;useFountain(id);return true; // Consume E even on a dry/full source.
  }
  void clearFountainSites(){
@@ -206,12 +216,17 @@ struct Game {
  WorldLocation location=WorldLocation::Forest;DawnQuest dawnQuest=DawnQuest::Seeking;
  int towerFloor=0,towerRuneMask=0;std::int64_t gold=0;
  bool towerReturnPending=false,desertBossDead=false,desertCreated=false;int collectedFragments=0;
- WorldLocation fieldLocation=WorldLocation::Forest;FieldState forestState,desertState;
+ WorldLocation fieldLocation=WorldLocation::Forest;FieldState forestState,desertState,volcanoState;
+ bool volcanoCreated=false,volcanoBossDead=false;
+ int volcanoSceneryVersion=0;
+ std::vector<CinderBolt> cinders;std::vector<LavaFissure> fissures;
  bool inTower()const{return location==WorldLocation::MageTower;}
  bool storyBlocked()const{return dawnQuest==DawnQuest::Returning;}
  int dawnFragments()const{return std::max(collectedFragments,dawnQuest==DawnQuest::Seeking?0:1);}
  bool inDesert()const{return location==WorldLocation::Desert;}
- const char* currentRegion()const{return inDesert()?desertRegion(player):forestRegion(player);}
+ bool inVolcano()const{return location==WorldLocation::Volcano;}
+ const char* currentRegion()const{return inVolcano()?volcanoRegion(player):inDesert()?desertRegion(player):forestRegion(player);}
+ #include "volcano_system.hpp"
  #include "desert_system.hpp"
  bool mageReachable()const{return inTower()&&towerFloor==0&&!dead()&&!allocationRequired&&!storyBlocked()&&distance(player,MagePosition)<=MageTalkRange;}
  bool takeTowerReturn(){bool pending=towerReturnPending;towerReturnPending=false;return pending;}
@@ -324,7 +339,7 @@ struct Game {
   Item* a=get(from);Item* b=get(to);if(!a||!b||a->empty())return false;
   const Enemy* sourceBody=from.place==Place::Corpse?findCorpse(from.owner):nullptr;
   const bool collectingShard=a->kind==Kind::DawnShard&&to.place==Place::Bag&&sourceBody&&
-   ((location==WorldLocation::Forest&&sourceBody->type==3&&dawnFragments()<1)||(inDesert()&&sourceBody->type==DesertBossType&&dawnFragments()<2));
+   ((location==WorldLocation::Forest&&sourceBody->type==3&&dawnFragments()<1)||(inDesert()&&sourceBody->type==DesertBossType&&dawnFragments()<2)||(inVolcano()&&sourceBody->type==VolcanoBossType&&dawnFragments()<3));
   const bool equipLoot=(from.place==Place::Corpse||from.place==Place::Chest)&&to.place==Place::Equip;
   if(from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest){
    if(from.place==Place::Corpse&&openedCorpse!=from.owner)return false;
@@ -341,7 +356,7 @@ struct Game {
   else std::swap(*a,*b);
   if((to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0))cancelBow();
   sound(to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
-  if(collectingShard){collectedFragments=inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");}
+  if(collectingShard){collectedFragments=inVolcano()?3:inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inVolcano()?"Trzecia część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");}
   else say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
  }
  bool quickTransfer(Slot source){
@@ -375,7 +390,7 @@ struct Game {
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
- bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
+ bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inVolcano()&&(volcanoLava(p)||nearVolcanoFountain(p)))return false;if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
  void move(V delta,bool turn=true){
   if(sandTrapped())return;
   int steps=inTower()?std::max(1,int(std::ceil(length(delta)/.08f))):1;V step=delta*(1.f/steps);
@@ -392,12 +407,15 @@ struct Game {
   effects.push_back({e.pos,std::to_string(int(std::round(amount))),critical?1.25f:.95f,0,true,critical,enemyInfo(e.type).visualHeight+18+std::min(lift,90.f)});
   const Cue materials[]={Cue::SlimeHit,Cue::WolfHit,Cue::BoneHit,Cue::StoneHit,Cue::WolfHit,Cue::SlimeHit,Cue::WolfHit,Cue::StoneHit};sound(materials[std::clamp(e.type,0,ForestEnemyTypeCount-1)],e.pos);
   if(e.hp>0)return;e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=e.boulderWindup=e.boulderRecovery=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;
-  e.boarWindup=e.boarRush=e.boarRecovery=0;e.boarDirection=e.boarAim={};e.boarHit=false;
+  e.boarWindup=e.boarRush=e.boarRecovery=0;e.boarDirection=e.boarAim={};e.boarHit=false;e.eruptionWindup=0;
+  cinders.erase(std::remove_if(cinders.begin(),cinders.end(),[&](const auto& b){return b.owner==e.id;}),cinders.end());
+  fissures.erase(std::remove_if(fissures.begin(),fissures.end(),[&](const auto& b){return b.owner==e.id;}),fissures.end());
   boulders.erase(std::remove_if(boulders.begin(),boulders.end(),[&](const Boulder& b){return b.owner==e.id;}),boulders.end());
   sound(enemyBoss(e.type)?Cue::Victory:Cue::EnemyFall,e.pos);kills++;xp+=enemyInfo(e.type).experience;
   e.loot=rollEnemyLoot(e.type,rng);
   if(e.type==3){bossDead=true;say("Kamienny Strażnik pokonany! PPM na ciele: łup i część Serca Świtu.");}
   else if(e.type==DesertBossType){if(!desertBossDead)merchantArrows=MerchantArrowCapacity;desertBossDead=true;say("Żywa Wydma rozsypała się! PPM: łup i druga część Serca Świtu.");}
+  else if(e.type==VolcanoBossType){volcanoBossDead=true;say("Varkhor pokonany! PPM na ciele: trzecia część Serca Świtu.");}
   else say("Przeciwnik pokonany. Otwórz jego ciało prawym przyciskiem myszy.");
   while(xp>=experienceForLevel(level)){xp-=experienceForLevel(level);level++;attributePoints+=PointsPerLevel;skillPoints+=SkillPointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
  }
@@ -429,7 +447,7 @@ struct Game {
    auto& ball=fireballs[i];float travel=std::min(ball.remaining,FireballSpeed*dt);
    V delta=normalized(ball.velocity)*travel;float first=2;
    for(const auto& e:enemies)if(e.alive)first=std::min(first,segmentCircle(ball.pos,delta,e.pos,e.radius()+.18f));
-   if(inDesert())for(V f:DesertFountains)first=std::min(first,segmentCircle(ball.pos,delta,f,FountainRadius+.18f));
+   if(hasFountains())for(V f:fountains())first=std::min(first,segmentCircle(ball.pos,delta,f,FountainRadius+.18f));
    for(const auto& p:props)first=std::min(first,segmentCircle(ball.pos,delta,p.pos,propRadius(p.type)+.18f));
    V end=ball.pos+delta;
    for(int axis=0;axis<2;axis++){
@@ -454,10 +472,14 @@ struct Game {
   e.pos.y=std::clamp(e.pos.y,1.6f+radius,MapWalkMax-radius);
   float correction=distance(before,e.pos);
   if(inDesert()&&desertWater(e.pos,radius)){V d=e.pos-DesertOasis;float n=length(d);float gap=2.45f+radius+.002f;correction=std::max(correction,gap-n);e.pos=DesertOasis+normalized(n>.0001f?d:V{1,0})*gap;}
-  if(inDesert())for(V f:DesertFountains){V d=e.pos-f;float n=length(d),gap=FountainRadius+radius+.002f;if(n<gap){correction=std::max(correction,gap-n);e.pos=f+normalized(n>.00001f?d:V{1,0})*gap;}}
+  if(hasFountains())for(V f:fountains()){V d=e.pos-f;float n=length(d),gap=FountainRadius+radius+.002f;if(n<gap){correction=std::max(correction,gap-n);e.pos=f+normalized(n>.00001f?d:V{1,0})*gap;}}
   for(const auto& p:props){
    V delta=e.pos-p.pos;float clearance=radius+propRadius(p.type)+.002f;if(outsideCircleBounds(delta,clearance))continue;float d=length(delta);
    if(d<clearance){correction=std::max(correction,clearance-d);V normal=d>.00001f?delta*(1/d):V{1,0};e.pos=p.pos+normal*clearance;}
+  }
+  if(inVolcano()&&volcanoLava(e.pos,radius)){
+   V at=e.pos;bool found=false;for(int ring=1;ring<=30&&!found;ring++)for(int angle=0;angle<24;angle++){float a=angle*6.2831853f/24;V p=at+V{std::cos(a),std::sin(a)}*(ring*.1f);if(enemyPositionClear(p,radius)){e.pos=p;found=true;break;}}
+   correction=std::max(correction,distance(at,e.pos));
   }
   return correction;
  }
@@ -469,9 +491,11 @@ struct Game {
   for(int sub=0;sub<steps;sub++){
    for(size_t i=0;i<enemies.size();i++){
     auto& e=enemies[i];if(!e.alive)continue;
+    V beforeStep=e.pos;
     e.recoil=e.recoil*std::exp(-10.f*step);
     if(location==WorldLocation::Forest&&e.boarBusy())advanceBoarCharge(e,step,heroFrom+(heroEnd-heroFrom)*(float(sub)/steps),heroFrom+(heroEnd-heroFrom)*(float(sub+1)/steps),wasRolling,rollElapsed+sub*step);
     else e.pos=e.pos+(desired[i]+e.recoil)*step;
+    if(inVolcano()&&volcanoLava(e.pos,e.radius()))e.pos=beforeStep;
     constrainEnemy(e);
    }
    // Resolve the whole crowd, including stationary/winding-up enemies. Recheck
@@ -513,6 +537,7 @@ struct Game {
   for(auto& e:explosions)e.life-=dt;explosions.erase(std::remove_if(explosions.begin(),explosions.end(),[](auto& e){return e.life<=0;}),explosions.end());
   for(auto& e:boulderImpacts)e.life-=dt*(BoulderImpactClock/guardian_break::Duration);boulderImpacts.erase(std::remove_if(boulderImpacts.begin(),boulderImpacts.end(),[](const auto& e){return e.life<=0;}),boulderImpacts.end());
   if(inDesert())for(auto& drain:fountainDrain)tick(drain);
+  if(inVolcano())for(auto& drain:volcanoFountainDrain)tick(drain);
   if(dead()){cancelBoulderAttacks();clearSandPrison();cancelBow();animation.moving=false;animation.stopSprint();rollRemaining=0;closeCorpse();return;}
   if(bowDrawing){if(archetype(equipment[0].kind)!=Kind::Bow||ammoCount()<=0)cancelBow();else bowDrawTime=std::min(BowDrawDuration,bowDrawTime+dt);}
   const float movementDt=std::max(0.f,dt-std::min(dt,sandPrisonRemaining));
@@ -550,6 +575,7 @@ struct Game {
   updateArrows(dt);if(allocationRequired)return;
   updateFireballs(dt);if(allocationRequired)return;
   updateBoulders(dt,before,wasRolling,rollElapsed);
+  updateVolcanoAttacks(dt,before,wasRolling,rollElapsed);
   std::vector<V> oldPositions,desired(enemies.size());oldPositions.reserve(enemies.size());
   for(size_t i=0;i<enemies.size();i++){auto& e=enemies[i];oldPositions.push_back(e.pos);tick(e.flash);tick(e.attack);tick(e.strike);if(!e.alive){e.animation.moving=false;continue;}float d=distance(player,e.pos);
    tick(e.sandCastPulse);
@@ -561,14 +587,16 @@ struct Game {
    }
    if(updateGuardianThrow(e,dt,visible,d))continue;
    if(prepareBoarCharge(e,dt,visible,d))continue;
-   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(d<(e.type==DesertBossType?2.15f:1.6f)&&visible){
+   if(prepareEruption(e,dt,visible))continue;
+   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(inVolcano()&&volcanoRanged(e.type)){if(visible&&d<EnemySightRange)launchCinder(e);}
+   else if(d<(e.type==DesertBossType||e.type==VolcanoBossType?2.15f:1.6f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead()){float dmg=incomingDamage(float(e.damage()),e.attackType());hp=std::max(0.f,hp-dmg);hurt=.2f;sound(dead()?Cue::Death:Cue::Hurt,player);effects.push_back({player,"-"+std::to_string(int(dmg)),.8f,4});}
    }}continue;}
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
-    if(d<(e.type==DesertBossType?1.9f:1.25f)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;sound(Cue::EnemyAttack,e.pos);}
-    else if(e.sandCastPulse<=0&&d>(e.type==DesertBossType?1.7f:1.05f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
+    if(d<(inVolcano()&&volcanoRanged(e.type)?4.5f:e.type==DesertBossType||e.type==VolcanoBossType?1.9f:1.25f)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;sound(Cue::EnemyAttack,e.pos);}
+    else if(e.sandCastPulse<=0&&d>(inVolcano()&&volcanoRanged(e.type)?3.5f:e.type==DesertBossType||e.type==VolcanoBossType?1.7f:1.05f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
    }else desired[i]=patrolVelocity(e,dt);
   }
   moveEnemies(dt,desired,&before,wasRolling,rollElapsed);
@@ -579,7 +607,8 @@ struct Game {
     e.patrolBlocked=length(movement)<length(desired[i])*dt*.15f?e.patrolBlocked+dt:0;
     if(e.patrolBlocked>.65f){e.patrolGoalActive=false;e.patrolBlocked=0;}
    }
-   if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
+   if(e.type>=VolcanoFirstType)advanceVolcanoAnimation(e,movement,dt);
+   else if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
    else e.animation.advance(movement.x,movement.y,dt,false,!e.boarBusy());
    if(e.boarBusy())faceBoarCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);

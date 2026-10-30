@@ -1,0 +1,23 @@
+{
+  "name": "fire-imp",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right"
+  ],
+  "kra_sha256": "5f53eaf68790a2de6550e058f5b4fd0cf14c6ee025dbc6cd8ca2b6ae8ea67a54",
+  "png_sha256": "0a7972e334af48b677d3decc2b6d18dc7b598af49d4fca6c6289c97f1e53f484",
+  "retained_saved_document_id": "d66fc23f-512c-4406-841b-723ac5e3edc8",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "original_kra_sha256": "7885d5654f1797295191c1755af2d2e6116ea8deb6972c51e1df20b5bcd01d72"
+}

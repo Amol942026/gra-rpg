@@ -1,0 +1,23 @@
+{
+  "name": "ember-drake",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right"
+  ],
+  "kra_sha256": "59f4f07873ffd8f73c0d80e04d2d7e4a8fd991b562261b3a7f02d87ac37ad9f1",
+  "png_sha256": "f5bf7a24c4fa6467d5156f0a3cfa39bc54b3a70fe053e45392757cd8fcea1d9f",
+  "retained_saved_document_id": "6ab63b9f-b26d-4a81-948e-07f28c3bdf4b",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "original_kra_sha256": "334bd9924b75d19caad0ac415479ea7b4d88fdaacec73cedb1ab2f038bfdd628"
+}

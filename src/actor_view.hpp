@@ -23,6 +23,7 @@ void hero(float x,float y,float s,bool portrait) {
 }
 void monster(Enemy& e,float x,float y) {
     sand_prison::drawCaster(e,x,y);
+    if(e.eruptionWindup>0)ellipseOutline(x,y,62,30,Fade(rgb(255,159,88),.7f));
     if(e.type==BoarType&&e.boarWindup>0){
         float progress=1-e.boarWindup/BoarChargeWindup;
         Color warning=Fade(rgb(244,154,73),.4f+.5f*progress);

@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "date": "2026-10-29",
+  "gameplay_checks": 194277,
+  "persistence_checks": 4086,
+  "assets": {
+    "status": "PASS",
+    "checks": 1200,
+    "native_kra_masters": 16,
+    "scenery_variants": 16,
+    "actors": 7,
+    "directions": 8,
+    "rendered_actor_frames": 840,
+    "effect_frames": 96,
+    "original_local_2d": true,
+    "external_assets": [],
+    "runtime_rgba8_bytes": 110349312
+  },
+  "player": {
+    "status": "PASS",
+    "package_sha256": "25e3bdd68ea39ebbd526b3ae5f3716e4b6fdecf4abe57e6681afad248cb9a34f",
+    "exe_sha256": "288f23dc7585d12d692e42426fb622f276fb19b596bcb4d0a4b05db12bc73bb6",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-package-20261029-170519\\Emberfall",
+    "verified_assets": 135,
+    "startup_frames": 180,
+    "volcano": {
+      "status": "PASS",
+      "checks": 548,
+      "failures": 0,
+      "species": 7,
+      "directions": 8,
+      "pose_views": 224,
+      "hidden": true,
+      "audio_opened": false,
+      "presentation_measured": false,
+      "completed_render_mean_ms": 6.29617,
+      "completed_render_p95_ms": 8.3224
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  "developer": {
+    "status": "PASS",
+    "zip_sha256": "cae970a91d189c4b1cd4c0b11ef3f41d9bdf366934eedfc930ae77875acc802f",
+    "exe_sha256": "f63bcf3f1d165bd28358d8e1b8045471c6929dcff6eb6b09436290c9e9e007a6",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-dev-package-20261029-170543\\Emberfall-DEV",
+    "verified_assets": 135,
+    "startup_destinations": 3,
+    "startup_frames": 540,
+    "audio_preferences_unchanged": true,
+    "native_masters_in_zip": false,
+    "ui": {
+      "status": "PASS",
+      "checks": 257,
+      "failures": 0,
+      "destinations": 19,
+      "volcanic_destinations": 3,
+      "hidden": true,
+      "audio_opened": false
+    }
+  },
+  "legacy_v9_fixture": "fixtures/legacy-v9.efs",
+  "legacy_migration_preserves_non_scenery_bytes": true,
+  "visual_review": [
+    "arrival",
+    "bridge and lava river",
+    "central fumaroles and obsidian clusters",
+    "boss encounter and corpse",
+    "Representative idle, walking, attacking and corpse samples for all seven eight-direction actor sets"
+  ],
+  "presentation_measured": false,
+  "audio_preferences_unchanged": true,
+  "native_sources_retained": true,
+  "sources_uploaded": false,
+  "paid_services": false
+}

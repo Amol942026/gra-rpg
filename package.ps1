@@ -92,6 +92,15 @@ Stratowanie zadaje jednorazowo podwojne obrazenia; odnowienie wynosi 4,5 s.
 Zejdz z toru, uzyj uniku lub skorzystaj z oslony terenowej.
 Wieza ma piec tematycznych pieter. Eldrin otwiera droge na pustynie,
 gdzie czeka Zywa Wydma. Rozmowa z magiem pozwala wybrac podroz.
+Po pokonaniu Zywej Wydmy Eldrin otwiera droge do Kaldery Popiolu.
+Wybierz "Przenies mnie do Kaldery Popiolu." w rozmowie z magiem.
+Szesc nowych bestii strzeze bazaltowych sciezek i mostow nad lawa.
+Varkhor, Serce Kaldery, pilnuje trzeciej czesci Serca Switu na polnocnym wschodzie.
+Zejdz z oznaczonych stref przed erupcja. Oslony zatrzymuja pociski magow.
+W kalderze sa dwie skrzynie i dwie jednorazowe kapliczki HP / many.
+Ich zuzycie jest niezalezne od kapliczek pustyni i zapisuje sie w slocie.
+Brama Eldrina przy miejscu przybycia pozwala wrocic do wiezy.
+Mag nadal umozliwia powrot na pustynie po pozostawiony lup.
 Na 5. pietrze (Obserwatorium) wyjdz w prawo na balkon z widokiem na Doline Switu.
 Na pustyni niebieska fontanna odnawia cala mane, a czerwona cale HP.
 Kazda ma jedno uzycie (E / LPM / PPM w zasiegu 2,5 pola).

@@ -1,0 +1,114 @@
+{
+  "authoring": "Original local 2D Krita 5.3.4.1 / authenticated native MCP 0.2.0; Synfig 1.4.5",
+  "external_assets": [],
+  "paid_services": false,
+  "project_uploads": false,
+  "native_paints": "C:\\AI2D\\sprites\\emberfall-volcano-polish-v2-20261029",
+  "native_motion": "C:\\AI2D\\animations\\emberfall-volcano-polish-20261029",
+  "retained_sources": "art/volcano/polish/masters and motion",
+  "legacy_terrain_png": "Retained as backup-compatible historical export; current renderer uses continuous surfaces",
+  "backup": "art/pipeline/backups/volcano-polish-20261029",
+  "files": [
+    {
+      "runtime": "assets/volcano/ash-wraith.png",
+      "sha256": "b6ef0185223aa04195e73fa0d173c6d3803c6bc7e0c450e1f613e8284978ba29",
+      "bytes": 66932
+    },
+    {
+      "runtime": "assets/volcano/bank.png",
+      "sha256": "aabb3b23dad59965497525d676c92d41b464cf3f87f2d4d31923b526365db82d",
+      "bytes": 43694
+    },
+    {
+      "runtime": "assets/volcano/bridge.png",
+      "sha256": "344dd63fcfd8e640ba7d8d5591b014748e81ab0793d2c44acc28748ef700c2a0",
+      "bytes": 76352
+    },
+    {
+      "runtime": "assets/volcano/ember-drake.png",
+      "sha256": "c12960a7237326cff5973ca16ca54b098ec41104c471924dfdc4c4de000c7ad2",
+      "bytes": 239542
+    },
+    {
+      "runtime": "assets/volcano/fire-imp.png",
+      "sha256": "b78d4870753270e8819e5d825a2093287f0b509ec1186e2598c9697dbe12ae7d",
+      "bytes": 71097
+    },
+    {
+      "runtime": "assets/volcano/ground.png",
+      "sha256": "2cf014e5f48beda88640cb0b55b3a07255dfe222c50eca48bdbe8303e4de99c4",
+      "bytes": 67698
+    },
+    {
+      "runtime": "assets/volcano/lava-flow.png",
+      "sha256": "2d89834d9065d123b08a2c0df8361973e0769017f3b3d440327a77cd6ba49bbf",
+      "bytes": 3087169
+    },
+    {
+      "runtime": "assets/volcano/lava-salamander.png",
+      "sha256": "f8ad3e4f5d08497125fef4c905c23774acebeaab561a9f0b866c3132581e4ef4",
+      "bytes": 170574
+    },
+    {
+      "runtime": "assets/volcano/lava-surface.png",
+      "sha256": "99d54beead3629f0340ee06a31d724e1427bf9a86178424e9d5d2a7d9eb481a2",
+      "bytes": 153940
+    },
+    {
+      "runtime": "assets/volcano/macro.png",
+      "sha256": "de10b0cdaa5fab9ddc176715f2284a527a844989482a93e51e86c5b01b1070a4",
+      "bytes": 214685
+    },
+    {
+      "runtime": "assets/volcano/obsidian-sentinel.png",
+      "sha256": "5c84b3df973012dcd74b5ca6d9746fb9e1da8af76169570ee601e56ea224bdd0",
+      "bytes": 92800
+    },
+    {
+      "runtime": "assets/volcano/road.png",
+      "sha256": "88e6736fe562d39642543b48aae7157c8422e610e1e3171390370af274d46b1a",
+      "bytes": 29381
+    },
+    {
+      "runtime": "assets/volcano/scenery-edge.png",
+      "sha256": "7b7b629af35e251fafb0bf4fdf33e41f1d1a5c1d31d2c3653236838b1638f799",
+      "bytes": 155765
+    },
+    {
+      "runtime": "assets/volcano/scenery.png",
+      "sha256": "8f71d38bae63fe449eda6eb6e0ef7e49e740c7968920632d8f24c93795048a02",
+      "bytes": 374112
+    },
+    {
+      "runtime": "assets/volcano/sky.png",
+      "sha256": "4e960f1c3f8d53c812892f641374f67ff48d8694a974bcdbb0638dae7fc916b0",
+      "bytes": 84743
+    },
+    {
+      "runtime": "assets/volcano/slag-crawler.png",
+      "sha256": "49f2a37a1d2387e5e07cfd1c79331171bf70f9aa5e5dec2050c11709bcabba25",
+      "bytes": 167618
+    },
+    {
+      "runtime": "assets/volcano/steam-flow.png",
+      "sha256": "72cda282220f9e2930e19e596980d4e8ce2540921fbee48bf4f70c40ee1ab2e8",
+      "bytes": 41962
+    },
+    {
+      "runtime": "assets/volcano/steam.png",
+      "sha256": "13e98b7682d4d9f40f61e11337aa6f4c8b28a7cbf2790c4ba3ef205c2f9a3db0",
+      "bytes": 32869
+    },
+    {
+      "runtime": "assets/volcano/terrain.png",
+      "sha256": "3a0460fd015aa7261d3c54bd65dfa2d377a9d554a3a9d3cd56ee90cf506daba2",
+      "bytes": 33704
+    },
+    {
+      "runtime": "assets/volcano/varkhor.png",
+      "sha256": "48ade68ed4ac0f78c5a9f0e646ff5953c7df66205d50d4719ecb50303597a309",
+      "bytes": 98362
+    }
+  ],
+  "curated_masters_verified": true
+}

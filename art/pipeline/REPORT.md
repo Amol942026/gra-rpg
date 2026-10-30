@@ -1,5 +1,39 @@
 # Raport konfiguracji — 19.10.2026
 
+**Aktualizacja 29.10.2026 — przepływ lawy i detal Kaldery:** 8 nowych
+natywnych KRA, 15 SIF, dodatkowe 16 grafik dekoracji oraz detale wszystkich
+sześciu gatunków i Varkhora w ośmiu kierunkach. Lawa faktycznie przesuwa się
+o pełny kafel w zamkniętej pętli; renderer interpoluje i grupuje gotowe próbki.
+Format zapisu nadal v10, rewizja scenografii 3; prawdziwy fixture v10 dowodzi
+zachowania pozostałych pól. PASS: 194309 kontroli logiki/animacji, 4090
+zapisów, 1102 źródeł/eksportów, 624 renderera i 257 DEV. Oba końcowe ZIP-y
+wypakowano i uruchomiono w ukryciu bez audio, sprawdzono po 137 zasobów
+i niezmienione preferencje dźwięku. Źródła, podgląd animacji i pełne wyniki:
+`../volcano/river-detail/README.md` oraz `../volcano/river-detail/QA.json`.
+Krita jest używana z zachowaniem zapisanych własnych dokumentów: po wykrytej
+awarii zamykania KRA wznowienie sprawdza SHA i nie ponawia gotowych edycji.
+
+**Aktualizacja 29.10.2026 — dopracowanie Kaldery:** bieżąca wersja zastępuje
+poniższe pierwsze grafiki tej lokacji. 16 natywnych masterów Krita i 16
+projektów Synfig, 16 wariantów dekoracji, siedem zestawów postaci w ośmiu
+kierunkach, ciągłe podłoże/lawa i skupiska otoczenia z wolnymi szlakami.
+Źródła, pochodzenie, migracja v9→v10 i wyniki: `../volcano/polish/README.md`
+oraz `../volcano/polish/QA.json`. PASS: 194277 kontroli logiki/animacji,
+4086 zapisów, 1200 źródeł/eksportów, 548 renderera i 257 DEV. Oba końcowe
+ZIP-y wypakowano i uruchomiono w ukryciu bez audio; zweryfikowano 135
+zasobów każdej paczki i niezmienione preferencje audio. Ukryty ukończony
+render: średnio 6,30 ms / P95 8,32 ms; prezentacja obrazu nie była mierzona.
+
+**Aktualizacja 29.10.2026 — Kaldera Popiołu:** trzecia grywalna kraina,
+sześć nowych gatunków i Varkhor, Serce Kaldery. 11 warstwowych źródeł Krita,
+14 klipów Synfig / 840 klatek oraz 12 klatek lawy. Grafika jest wycinanką
+2D; bez nowego modelowania 3D i usług zewnętrznych. Dwie skrzynie i dwie
+osobne jednorazowe kapliczki, podróż od Eldrina po zabiciu drugiego bossa,
+powrót do wieży i trzeci fragment. Zapis v9 odczytuje v1–v8. 192804 kontrole
+logiki/animacji i 4078 zapisów — PASS; 1133 kontroli źródeł i 515 integracji
+renderera. Testy pozostają ukryte i ciche; ukończony render nie dowodzi
+FPS wyświetlania. [Źródła, procedury i końcowe raporty](../volcano/README.md).
+
 **Dalsza optymalizacja 28.10.2026:** bezpośrednie pakowanie wierzchołków,
 wspólne próbki wiatru korony/cienia/obrysu, cache parametrów shaderów
 i wstępna alokacja cieni. W ukrytym pomiarze A/B wypakowanej paczki średni

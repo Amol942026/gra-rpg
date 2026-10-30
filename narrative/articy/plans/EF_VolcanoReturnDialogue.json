@@ -1,0 +1,25 @@
+{
+  "id": "EF_VolcanoReturnDialogue",
+  "title": "Powrót z Kaldery Popiołu",
+  "array": "VolcanoReturnDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+  "lines": [
+    {
+      "speaker": "Wanderer",
+      "text": "Varkhor pokonany. Trzecia część Serca Świtu przetrwała ogień kaldery."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Trzy blaski połączyły się z Pieczęcią. Zostały dwa, Wędrowcze. Dziś nawet wulkan oddał nam swoją nadzieję."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Odpocznę w wieży. W kuźniach zostały jeszcze rzeczy warte obejrzenia."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Możesz wrócić do Kaldery Popiołu albo Morza Piasków. Bramy pozostaną otwarte."
+    }
+  ]
+}

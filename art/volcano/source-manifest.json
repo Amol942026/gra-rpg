@@ -1,0 +1,607 @@
+{
+  "source_files": [
+    {
+      "path": "src/actor_art.hpp",
+      "sha256": "4af0e402ec1f1e97d444878f42417cb14ba700b4ef74a4927c131ee4a2043f2e"
+    },
+    {
+      "path": "src/actor_view.hpp",
+      "sha256": "1928e1cd3afe926e6f9cb278d375e6c6a74473fa7a8fb557f08878c71001372f"
+    },
+    {
+      "path": "src/animation.hpp",
+      "sha256": "7990a444782b2d292ab8b1331db0b7da3a33bd5e77e1027283dbe641d80df2a0"
+    },
+    {
+      "path": "src/audio_qa.hpp",
+      "sha256": "5eeb912d48be268ba9755c89fe4ca08d9e58e19746e292c909c42ae6ac1ca4e7"
+    },
+    {
+      "path": "src/audio_ui.hpp",
+      "sha256": "b6a1e9d351184eca0572ed2b604ada10978c0bd8282cf8e97d40d8eaab5628f4"
+    },
+    {
+      "path": "src/audio.hpp",
+      "sha256": "eb410544e5319969a246413bcdffc8c6da86a26d93459be2e2cf9b89f8123f28"
+    },
+    {
+      "path": "src/boar_charge.hpp",
+      "sha256": "190637ad7daf362fee3ac54e46fd9120b762e62880afe38aa5ecf79f11afefa3"
+    },
+    {
+      "path": "src/bow_art.hpp",
+      "sha256": "bcae47f68ef141297a8816355b7187b0652b92fdfc2b6f1c16c95ca1fb4d74b1"
+    },
+    {
+      "path": "src/bow_qa.hpp",
+      "sha256": "49ef0d1f1708f40c318010be345692f7fa745fd534a599c0285ae1cc24ccc25b"
+    },
+    {
+      "path": "src/combat_feedback.hpp",
+      "sha256": "7d6580323c7f6662d11358229f23868a6678bf50f59e65085c871114fac1027d"
+    },
+    {
+      "path": "src/commerce.hpp",
+      "sha256": "68c5f95da207243ae36213ff673498d8fe7b5e43cfdeb76ee1f49d767ade5960"
+    },
+    {
+      "path": "src/controls_qa.hpp",
+      "sha256": "560ab43148382bdeb117f3eb4f7d293a4cd2493cd142b181d7eaf13a4fb1a1f3"
+    },
+    {
+      "path": "src/corpse_art.hpp",
+      "sha256": "090b5346e5f564534be0303fd9e651f607ec7129c79263c49b8bdcee850ba6ce"
+    },
+    {
+      "path": "src/corpse_qa.hpp",
+      "sha256": "2036a4fc77b2c6315c11f0d401819a7ef3fca2a38296e88ea9cb20a37ebbb497"
+    },
+    {
+      "path": "src/creature_paint.hpp",
+      "sha256": "55ff931a1f5ba43c0719f7b8ce67ab2f78407620daeeae25888260602068dbe9"
+    },
+    {
+      "path": "src/critical_healing_qa.hpp",
+      "sha256": "d9b369837634450571cea3c68863dae5f991f6a74b887739ec2c3a3520dc9c9a"
+    },
+    {
+      "path": "src/crowd_qa.hpp",
+      "sha256": "10426fa2ff69c13460032b74e33fe16276fa756c280393b847de74fe6bcd4cda"
+    },
+    {
+      "path": "src/desert_actors.hpp",
+      "sha256": "d3d3d6754c85472e74bfd49238df1678f7019b8580bf9ac6e3db24196e35e606"
+    },
+    {
+      "path": "src/desert_art.hpp",
+      "sha256": "9deae0b520a3308aafe5705b4e786ea24ade0cd1eaeeac30ddc4159837c60255"
+    },
+    {
+      "path": "src/desert_layout.hpp",
+      "sha256": "615f25b75772781af22b98633b59971a1ab4b9b0f80c129c6ccd61dc45233772"
+    },
+    {
+      "path": "src/desert_qa.hpp",
+      "sha256": "8b154cab56d89d0df3b0cc9818de4747f9c060cd3495d6c4a28e098c3cd98e58"
+    },
+    {
+      "path": "src/desert_roads.hpp",
+      "sha256": "7cf12dd1ad55dfe0f2fed51c0253ba552d5bd76ddae437aa8e94e45bdf1b0388"
+    },
+    {
+      "path": "src/desert_scenery.hpp",
+      "sha256": "2559c813c9b723aaf42f2e3d31d9589e344b9a581b82cc92952c029b19cc098b"
+    },
+    {
+      "path": "src/desert_system.hpp",
+      "sha256": "68302a3f4180db1563de7ac02a72b6092e577db1c8f574c5c1620e3fc931241c"
+    },
+    {
+      "path": "src/developer_mode.hpp",
+      "sha256": "3a72ee3b49c562d09789178ddb18c0f9848753992c1edefc06a60de63c9bff04"
+    },
+    {
+      "path": "src/developer_qa.hpp",
+      "sha256": "a0042b029eb1d71f3f7f1a7e19d3c33b15f76c39fa3d5ef27a9cdf612eb65ae8"
+    },
+    {
+      "path": "src/developer_ui.hpp",
+      "sha256": "dbbee70d9fc359551f808627a4114f652f07b4a602fabfe47f4c049ee174782f"
+    },
+    {
+      "path": "src/display_ui.hpp",
+      "sha256": "b5b7ba920d4ad3691e9f847fd33abce3bb48b3137c82918a1a0f935d1efd5c5b"
+    },
+    {
+      "path": "src/enemy_ai.hpp",
+      "sha256": "e5cb4f7d50a579369219921bc6ec0f1833c2be55920ddad1d5160a30d84ef195"
+    },
+    {
+      "path": "src/entity_info.hpp",
+      "sha256": "178a002b39a09a1a068989120d39c7a08799f0b1d2abf1c9ae97b052d15e944a"
+    },
+    {
+      "path": "src/environment_qa.hpp",
+      "sha256": "30f808f59d8f611cecac805439fb13864d2c902afd83c4a35fc3a13ae456aa98"
+    },
+    {
+      "path": "src/environment.hpp",
+      "sha256": "277553f848f549221b4031145d52b1ce841b525593e7a4076b57bc99c8197aba"
+    },
+    {
+      "path": "src/equipment_appearance.hpp",
+      "sha256": "ef4cd8e454a54474ac3857a6df7b009707861376bcd4a788c2a061f525dd2c6d"
+    },
+    {
+      "path": "src/equipment_art.hpp",
+      "sha256": "d8e043ad52662573279f672280b1fa19b53700070a72b3fdde93ac6c2c322694"
+    },
+    {
+      "path": "src/fallen_forest_art.hpp",
+      "sha256": "03057a9125ae7e4fe78e4ecb7d24c34dfae062596f3c2873aef6d5d0215b2e4d"
+    },
+    {
+      "path": "src/fallen_qa.hpp",
+      "sha256": "e58ee69bf3e6f6e14ed9cb5f3bb4124cd69a3d05338169ce0677142a14a57fac"
+    },
+    {
+      "path": "src/forest_bush_art.hpp",
+      "sha256": "d4c945a3a8795b68d7476715205975658aa331cc82a8d0a36f26669aee5cc1d3"
+    },
+    {
+      "path": "src/forest_creatures.hpp",
+      "sha256": "f41aafc3a121edcec9aaeef29c094b02a398ec09e92e2e3e2685132c7a509946"
+    },
+    {
+      "path": "src/forest_layout.hpp",
+      "sha256": "ec7bc9c1b53e73577bfc30f8fe50bbd8821a46a282cc81d79560c1f40a61ff27"
+    },
+    {
+      "path": "src/forest_qa.hpp",
+      "sha256": "e5cdd7b36fadb0de16461cedbcf62355c8da44d8827a41348d13ca9342d90fa6"
+    },
+    {
+      "path": "src/forest_tree_art.hpp",
+      "sha256": "3ddf86d98d5203b0900bfc41ef35732c81ec253fbda948f61545248824b337bd"
+    },
+    {
+      "path": "src/fountain_art.hpp",
+      "sha256": "744f4e3703972dab98fab536e8e8e9e3c371543a09e7bd53b76ade44caa9376d"
+    },
+    {
+      "path": "src/frame_pacing.hpp",
+      "sha256": "703df33e5e5cce5254c82aeacc55f3c794f1cbdcba8b0752915303fa56954ef7"
+    },
+    {
+      "path": "src/game_menu.hpp",
+      "sha256": "fbfd23d800107a443dd0e5eed4432f37070b207c802bc5162994fedb4f2f5a0c"
+    },
+    {
+      "path": "src/game.hpp",
+      "sha256": "bbb23fe4d0461df72c10ffead49b8dfce59ce26c36ec96d6deff05ab7e279f0a"
+    },
+    {
+      "path": "src/generated/creature_motion_data.hpp",
+      "sha256": "0b68f91f330b12ed9f2ee7e611bc4ba5b4325b3fe5d0f005a97bbdc61992129c"
+    },
+    {
+      "path": "src/generated/equipment_paints.hpp",
+      "sha256": "0b87122f4f3192c0401b9ee7d6c9ebf4c5c3039a5a4b1e784509616350900277"
+    },
+    {
+      "path": "src/generated/guardian_shatter_data.hpp",
+      "sha256": "818fe485ccd1350eaa9a16135bfebafb24dc3b2690d58b12a39548cef2f797ab"
+    },
+    {
+      "path": "src/generated/guardian_throw_data.hpp",
+      "sha256": "10d6a5bfe9d9cab8c913ba749252dea4733fa8b65ca937dc5a365602f93bf6c8"
+    },
+    {
+      "path": "src/generated/hero_knockdown_data.hpp",
+      "sha256": "eefbe4bbf8b1bf123d10acec99178e1b02262b00d97f4b97b44c644c1e0c1e8a"
+    },
+    {
+      "path": "src/generated/hero_motion_data.hpp",
+      "sha256": "857a16a8e035a933899d16668630f40863deca9a169db72ff5df453fc40643c9"
+    },
+    {
+      "path": "src/generated/hero_secondary_data.hpp",
+      "sha256": "11b44fdc619a993a97dd5013be410948840d3d73cc76433a1ff2d977f758ac87"
+    },
+    {
+      "path": "src/generated/hero_walk_data.hpp",
+      "sha256": "6f9092f5dc570506b82f9d39e8dbad414456b670552fbbb27eebc97491693fcf"
+    },
+    {
+      "path": "src/generated/menu_motion_data.hpp",
+      "sha256": "02aef7df3bc40024bb2a6432a6bdc27c5a6e23ac0aca8a1b933df63b6479e841"
+    },
+    {
+      "path": "src/generated/sword_stow_data.hpp",
+      "sha256": "cacd7461346013b56f80235e5bd495f2f87f5d63ce1aa9189985f21297d90c0c"
+    },
+    {
+      "path": "src/generated/volcano_motion.hpp",
+      "sha256": "fef88e53dfab064c25f8c1129ddca09bd396d5145ccd8abe5b2eabfd672e528f"
+    },
+    {
+      "path": "src/graphics_qa.hpp",
+      "sha256": "7a1892cc97ce822f82143696513c473123556a6ea92068e5f769da9b85ee53a2"
+    },
+    {
+      "path": "src/ground_shadows.hpp",
+      "sha256": "f972abfb7fe08aa787272c7c0e0026abc4845cde6999d41b3b5e6b8ed3863c65"
+    },
+    {
+      "path": "src/guardian_art.hpp",
+      "sha256": "2ebeef9975dd219c011a055977d71b965de6cbfc383c8ede59436c0a9ad6e331"
+    },
+    {
+      "path": "src/guardian_boulder.hpp",
+      "sha256": "8f3cb49c686f345cf6af70620b3ace493908fa9a1ebb0ea46405c67edb89572a"
+    },
+    {
+      "path": "src/guardian_gait.hpp",
+      "sha256": "a24f50886a65dfcc16a8a174567cc500689776defb593d41555d4411d351b9bd"
+    },
+    {
+      "path": "src/hero_art.hpp",
+      "sha256": "1b29ddfe61d292dde2bc3d1b0ce9da41903d979d30552877c9b2eff7dd6f3970"
+    },
+    {
+      "path": "src/hero_knockdown.hpp",
+      "sha256": "ffb8bd7614ee6fdb6911de2d51767d31ef7f5f00c8e3b19e9aed85db9e17479b"
+    },
+    {
+      "path": "src/hero_motion_qa.hpp",
+      "sha256": "4e3d13ce894d45e28f695cc0bd70beb4db109e43e1f1f673ef14a99e4cb78166"
+    },
+    {
+      "path": "src/hero_motion.hpp",
+      "sha256": "80085f1d2399b3f75e94390c3debadf68ff54118568e72b2da0cff02d66761cb"
+    },
+    {
+      "path": "src/hero_paint.hpp",
+      "sha256": "e1525b181924188ab90d0a61969ea290118dfc2e1135fe197f3a01860d88d3f9"
+    },
+    {
+      "path": "src/hero_secondary.hpp",
+      "sha256": "c1e493806c053c0703f7a553cbbdce06d0ceeabc7388982c17a0961d20f02d30"
+    },
+    {
+      "path": "src/hero_sheath.hpp",
+      "sha256": "15131d15297ca5820aa812ac717af06a3410699e464b52d9c5a7c71208d53825"
+    },
+    {
+      "path": "src/hover_qa.hpp",
+      "sha256": "1b173c3382259fbf10e351956a2161b2e3b4c58cd5af1f402af5439f1337f0a0"
+    },
+    {
+      "path": "src/input_actions.hpp",
+      "sha256": "10be2e8c890687a1d310c3ebc8bce7919b305db20ec75dc0eee195f2d48a21c3"
+    },
+    {
+      "path": "src/inspection_hud.hpp",
+      "sha256": "5c8b5a7ba0a5d0f1606e0b487e056ebcc4073b07c099277139d2deeeeda60aa2"
+    },
+    {
+      "path": "src/inspection_qa.hpp",
+      "sha256": "ce2e4405951f5216af65fca9f8b0e46c1f160ded6e603b7002f2615b32359871"
+    },
+    {
+      "path": "src/intro_art.hpp",
+      "sha256": "1bdd1283b6dbc99161eb69864fc8be365ea3d4dbcd40f2b15848baa499f14cb3"
+    },
+    {
+      "path": "src/intro_qa.hpp",
+      "sha256": "c0ed9f0c09d3c44a805f8b8aeddba4535a72b1078e8685c9771153e9be850645"
+    },
+    {
+      "path": "src/intro_scene.hpp",
+      "sha256": "5cf0e0fc7d921bbd3e35baececb97fe82c51cd92a71bdc7008dac789df37771c"
+    },
+    {
+      "path": "src/intro_story.hpp",
+      "sha256": "90cefeeb6ba88ae18d98d871203428b9800ebcd7aaf4975d288a18982b55e372"
+    },
+    {
+      "path": "src/inventory_click.hpp",
+      "sha256": "96f985e161c8ca541033c8c8feda5100e990ba4e7cb2da46983451b3bcc9a3a3"
+    },
+    {
+      "path": "src/items.hpp",
+      "sha256": "86a6c1545692ed10990bae0acc8028d34e9ea8c990346b039a707fa6c0c8e530"
+    },
+    {
+      "path": "src/loot.hpp",
+      "sha256": "7175a87948bff0fdd74a2deb5c27fcc3bae39de75e150aa8f2f25b2bb2146555"
+    },
+    {
+      "path": "src/magic_art.hpp",
+      "sha256": "3540c0aa9e67db56f6619bc9e21b451e84845898b2e2b94d3ece94109689522e"
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256": "4e8321fe519d54a8b29bb46322425d15cd4d1ef0bc67961d2718f27c00bf54d5"
+    },
+    {
+      "path": "src/map_labels_qa.hpp",
+      "sha256": "389a7cf2a5ef78f20e0aa35ca934e76ecd636137305eb1dfb7219f0c36c02ac3"
+    },
+    {
+      "path": "src/map_labels.hpp",
+      "sha256": "66b8014c3c832d172c787e54526a231156bfdfeb3229acdab9e4531bcedc46bb"
+    },
+    {
+      "path": "src/menu_scene.hpp",
+      "sha256": "76f364449b6f4dc6c9c43db5897d60310ec63bbb824f8c06100118bb24cb8e09"
+    },
+    {
+      "path": "src/merchant_art.hpp",
+      "sha256": "11568461494ab0886b933ad3189fa7c67cc6960dec6a80a7c64d7c4df16dd9f2"
+    },
+    {
+      "path": "src/merchant_ui.hpp",
+      "sha256": "d29377a4085d653510ef3d95b9ba9074e59936ddc354f30c0fd1a592f2b239c3"
+    },
+    {
+      "path": "src/motion_qa.hpp",
+      "sha256": "7b9b8dcff39f5ee1d8267b9d10a0383bd86dcdca82c1a8b8436310b4738c50e7"
+    },
+    {
+      "path": "src/mushroom_qa.hpp",
+      "sha256": "5a8a37dba010d027cd42984afb3d2ae3b75d5e9d542e98c210ebe15038cc00fd"
+    },
+    {
+      "path": "src/native_world.hpp",
+      "sha256": "1021bdcf26b226782cca7061138188f0cb39341b479b810d496c33ca12cb345b"
+    },
+    {
+      "path": "src/patrol_qa.hpp",
+      "sha256": "11354668ecc5f30fd3cfab8271546310e7228581471df59cb991462d8b5e0795"
+    },
+    {
+      "path": "src/performance_qa.hpp",
+      "sha256": "6954c60d1733ce2e4a921b09ca8bc57ecc17adf8efdd2e8e21e3a5a3bf13755f"
+    },
+    {
+      "path": "src/performance.hpp",
+      "sha256": "e848c432fb1cf144022f5153eb45b53f7855a44893e9f508a817d36325883653"
+    },
+    {
+      "path": "src/pointer_qa.hpp",
+      "sha256": "3ef54d2d2a84dc294a3f378ff9f1e50977e4782fd72cc309193c20f6a64c8af0"
+    },
+    {
+      "path": "src/portrait_cache.hpp",
+      "sha256": "fb32d8a1acbf998dc7edc88c22b998ab1435427b87275ab60267ffa157ff953b"
+    },
+    {
+      "path": "src/presentation_qa.hpp",
+      "sha256": "39c4ec7e7bbd2567f02c1eaf3299a5280297c02d5081774d182e0108f518d4bd"
+    },
+    {
+      "path": "src/progression_qa.hpp",
+      "sha256": "8b694bbc4c99d6a82026ec99b6c6c012a196fa2f966a953d44e16ae0621e2ca6"
+    },
+    {
+      "path": "src/progression_ui.hpp",
+      "sha256": "fe62e66f576e1452a5684540c01c6d34bd4cf068d795ab6fd8ab4a23cc93c0e4"
+    },
+    {
+      "path": "src/rarity_qa.hpp",
+      "sha256": "0ea5373b9fbe6a36b6066dc273f67f9a58b9e94e6deed0a94660f517c4612710"
+    },
+    {
+      "path": "src/refresh_qa.hpp",
+      "sha256": "eaa407786b0539ae9f6ac1c87bff4ce862dd121f3ff38da5ff18ab5229827b99"
+    },
+    {
+      "path": "src/render_targets.hpp",
+      "sha256": "ad344557e6c43557bb606a030f96ab4406909540b079f3e2bfdbd96fc39b45f8"
+    },
+    {
+      "path": "src/roll_qa.hpp",
+      "sha256": "a5dd77dd0b6c14d44a371356faffdf38c7524f61ae85cf92dc4b87b345cc5c4d"
+    },
+    {
+      "path": "src/running_gait.hpp",
+      "sha256": "26374f21807ad68db0aecee710f8384abe5589a48c3d564a44bd0bf50d499e5f"
+    },
+    {
+      "path": "src/sand_prison_art.hpp",
+      "sha256": "a468addb90570c80e47506d60153735c8b66277042b4b2f9f2b2eca00f93bb85"
+    },
+    {
+      "path": "src/save_game.hpp",
+      "sha256": "dba560a8f73d5cc128eb28b604ad414a6de984c45de439d8e6e9ce63b8e61b78"
+    },
+    {
+      "path": "src/scenery_art.hpp",
+      "sha256": "ed0b7f30d0fe4a28153cbfbea6cc31af78181464d5b1de0bb3bee7478c2ae8a9"
+    },
+    {
+      "path": "src/shadow_geometry.hpp",
+      "sha256": "b03325c65f2dffcde6bb306a279070f2759f8fd7e4cfdba5fed5200b40ab631c"
+    },
+    {
+      "path": "src/shadow_math.hpp",
+      "sha256": "03f7ca44c6186988825bcba9029bbf5e4d9fa09517f226ddfd8a5710bb6be087"
+    },
+    {
+      "path": "src/shadow_qa.hpp",
+      "sha256": "ed9f08a0b7e8cd74e624c93f419fd3528e637333f570777d1972fa69020d12c0"
+    },
+    {
+      "path": "src/skill_system.hpp",
+      "sha256": "453d3b4cc7aeaace84424f42e235ff630d3af30d0fec5a1b5f0bd796dfb40748"
+    },
+    {
+      "path": "src/skills_qa.hpp",
+      "sha256": "cd0590028b7c35933e83473a6be16eae549b7a711fa961e74065fbcdaf75147e"
+    },
+    {
+      "path": "src/skills_ui.hpp",
+      "sha256": "f3d6cda3d4a27dc3c98834d0f8fd816593d33f7a9b76a19653d8b383800a9fe0"
+    },
+    {
+      "path": "src/sound_events.hpp",
+      "sha256": "805ab825e6f62260f19d4ec680608a5014980adac4f5f2c0f2ba3e72e7327d16"
+    },
+    {
+      "path": "src/sprint_qa.hpp",
+      "sha256": "0382527523de85c8b8e2407640c73c9c35b6a3fbcf084b40704774adc2c83ce5"
+    },
+    {
+      "path": "src/startup_log.hpp",
+      "sha256": "34e84df6b4abfac26602ca3e9b2b7134f82ffa7a94c21d77d0ec1fcf3f9961cc"
+    },
+    {
+      "path": "src/swing_qa.hpp",
+      "sha256": "b01cdf3d08d8b37f256fc55c2b5c4a676fcf75eac4c764902f002213c059d9af"
+    },
+    {
+      "path": "src/sword_pose.hpp",
+      "sha256": "9a2855e2363c906872dd256090d0b9f61117fbc47ccf72b67b606536e9c9ce70"
+    },
+    {
+      "path": "src/sword_stow.hpp",
+      "sha256": "16fe9ee4bc53899a4241a2da28d45d5e5947256daaf00c55e56a80185090162e"
+    },
+    {
+      "path": "src/sync_present.cpp",
+      "sha256": "873e29c9e93809ca154fa67470af97b62ea167e826b667d206566e740022f382"
+    },
+    {
+      "path": "src/sync_present.hpp",
+      "sha256": "92bca44125f72ed73f801b2e091807cfb1792f20eca45d514c2c22e50c524376"
+    },
+    {
+      "path": "src/tower_balcony_art.hpp",
+      "sha256": "55f93fd412956600e544f625fd0cf4627335835f1380619ca818de889ce268ef"
+    },
+    {
+      "path": "src/tower_floors_qa.hpp",
+      "sha256": "2685d3777130b6b72593d76064e8611ffb2bc1d11c40d794dbb0791da48223c0"
+    },
+    {
+      "path": "src/tower_furniture_art.hpp",
+      "sha256": "23e27bd70cf7f59aea72fb9d1dd823df7150ff66af97d0db8fc89135a895e9c0"
+    },
+    {
+      "path": "src/tower_furniture_qa.hpp",
+      "sha256": "c1a168f3c6112c74beffb3652212d9c9f7b28209ef777005181d734e22289558"
+    },
+    {
+      "path": "src/tower_layout.hpp",
+      "sha256": "4ccdcf142f21be5e0b538387ed5bddf881844901c800290ea3abc8d943f245cf"
+    },
+    {
+      "path": "src/tower_qa.hpp",
+      "sha256": "446b701dd4c2115676a4ed87ed03cad0ee443f12bbf8916a7ec04e854cf35965"
+    },
+    {
+      "path": "src/tower_rooms_art.hpp",
+      "sha256": "c4e142fd2bb039e8d6ad0fff8087daf109162a03f0f18a0a5bca611e2159a732"
+    },
+    {
+      "path": "src/tower_rooms_ui.hpp",
+      "sha256": "7d8a2301f5ba1ef2c42d1699a220e5dfbb214b461f05fc34c54031c2f5815462"
+    },
+    {
+      "path": "src/tower_scene.hpp",
+      "sha256": "78fa1ebbe52cdbb8259d3032b75a5a559332e7574a8b2bcdefb3613bd16020ba"
+    },
+    {
+      "path": "src/tower_stairs_art.hpp",
+      "sha256": "3a9475812439eac89187c1e588f46fca195ee2955aef8af1138af24ac4444684"
+    },
+    {
+      "path": "src/tower_stairs_qa.hpp",
+      "sha256": "6e1ab7cfd5a1e4149350604743660b534371ab2ef8a5bb8648e535494a2ef512"
+    },
+    {
+      "path": "src/tower_story.hpp",
+      "sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05"
+    },
+    {
+      "path": "src/tower_system.hpp",
+      "sha256": "789d65f3266036225fd824e1213098d9b29ed01943f7e479f4f455d9a0ccae08"
+    },
+    {
+      "path": "src/tower_world.hpp",
+      "sha256": "49e03ddefbc04c7f7dc1ea44c08a50f32284726558d1e19c1335a6bd40904afd"
+    },
+    {
+      "path": "src/trade_qa.hpp",
+      "sha256": "3e8ef62f4a084ae87628d915ffe08491eb645add0dc1aac8956ae957844dfcef"
+    },
+    {
+      "path": "src/trade_system.hpp",
+      "sha256": "41c5ca67cc35dbccdec9da1a7c14da8dbc457e0e46c4e72dac0173f8f070d37c"
+    },
+    {
+      "path": "src/treant_gait.hpp",
+      "sha256": "b4658827e0ed48598bd404615c57998e29aceee18a81e4efdfb8d272492fbbae"
+    },
+    {
+      "path": "src/treasure_art.hpp",
+      "sha256": "eda04368acfeeba20787df7647100a1200f4f003ce83a955ca1a32b00eed0b56"
+    },
+    {
+      "path": "src/treasure_ui.hpp",
+      "sha256": "6bdabce369b64fd265e7414e7712424417ce9d8a8bf2593bb29e98780dc8aead"
+    },
+    {
+      "path": "src/treasure.hpp",
+      "sha256": "b5a4fbc2cbdd6d9e337e6c809cdaa9875e123e8bef2dc747bbdc4dbf6b0d0571"
+    },
+    {
+      "path": "src/typography.hpp",
+      "sha256": "7ef71084389a6741e4bc6f7de6a9cfc99b2fbb8bb7007d947057cabad6b12b2b"
+    },
+    {
+      "path": "src/visual_qa.hpp",
+      "sha256": "87e9df9ad4ec2d4b573cdace6714df8d966f41bd661826d1c18ece6f1e977c5f"
+    },
+    {
+      "path": "src/volcano_actors.hpp",
+      "sha256": "836fa5b19fe19c14efadbfa7908bf2124929f40ba79aaac64ca17e7db3cb8a94"
+    },
+    {
+      "path": "src/volcano_art.hpp",
+      "sha256": "db84917b24eef3d4aeffa5e7930290704bf59a515efe5b8528e6661a3bced644"
+    },
+    {
+      "path": "src/volcano_layout.hpp",
+      "sha256": "f86252566e5ab2619a4f9c3cbfbef98e772b61c291e871fbce333f6d96ee3a3e"
+    },
+    {
+      "path": "src/volcano_system.hpp",
+      "sha256": "6940fb8c9b76a0f9554336a4e27f9359de76b8cd93d03cda642eb976e5596339"
+    },
+    {
+      "path": "src/weapon_system.hpp",
+      "sha256": "8072d16a6982d9f6ec08df89824738bd4ff0deea71adf1af526b00d0d9676657"
+    },
+    {
+      "path": "src/weapon_wheel_ui.hpp",
+      "sha256": "820404b99e6fbecc4b7bdd9662b0fd0985d8d58e76e05949db414c309c18f7a1"
+    },
+    {
+      "path": "src/world_hover.hpp",
+      "sha256": "44556b24d17dbb39303ed8fb6c02da3f30bee9099fefc3e332046b7476cedd70"
+    },
+    {
+      "path": "src/world_motion_qa.hpp",
+      "sha256": "ac30cbe9799b669efd78a77137f2f7c2f0fb44defa7c32939a6020991f6b61eb"
+    }
+  ],
+  "save_version": 9,
+  "gameplay_checks": 192804,
+  "save_checks": 4078,
+  "graphics_checks": 515,
+  "native_asset_checks": 1133,
+  "audio_opened": false,
+  "test_windows_hidden": true
+}

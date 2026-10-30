@@ -29,8 +29,9 @@ std::vector<DrawObject> worldDrawOrder() {
         objects.push_back({game.enemies[i].pos.x+game.enemies[i].pos.y+(game.enemies[i].alive?0.f:-.03f),game.enemies[i].alive?1:4,i});
     objects.push_back({game.player.x+game.player.y,2,0});
     for(int i=0;i<TreasureCount;i++)if(game.chests[i].location==game.location)objects.push_back({game.chests[i].pos.x+game.chests[i].pos.y,9,i});
-    if(game.inDesert())for(int i=0;i<FountainCount;i++)objects.push_back({DesertFountains[i].x+DesertFountains[i].y,12,i});
+    if(game.hasFountains())for(int i=0;i<FountainCount;i++)objects.push_back({game.fountains()[i].x+game.fountains()[i].y,12,i});
     for(int i=0;i<int(game.fireballs.size());i++)objects.push_back({game.fireballs[i].pos.x+game.fireballs[i].pos.y,3,i});
+    for(int i=0;i<int(game.cinders.size());i++)objects.push_back({game.cinders[i].pos.x+game.cinders[i].pos.y,14,i});
     for(int i=0;i<int(game.arrows.size());i++)objects.push_back({game.arrows[i].pos.x+game.arrows[i].pos.y,5,i});
     for(int i=0;i<int(game.boulders.size());i++)objects.push_back({game.boulders[i].pos.x+game.boulders[i].pos.y,10,i});
     for(int i=0;i<int(game.boulderImpacts.size());i++)for(int piece=0;piece<guardian_break::Pieces;piece++){
@@ -56,6 +57,7 @@ bool worldPointerAllowed(Vector2 p) {
 }
 
 bool propContains(const Prop& prop,Vector2 point) {
+    if(prop.type>=14)return volcano_art::propContains(prop,point);
     Vector2 base=screen(prop.pos);
     float sourceY=(point.y-base.y)/prop.size+208;
     float shift=treeProp(prop.type)?treeShift(prop,sourceY,game.time):0;
@@ -75,10 +77,10 @@ WorldHover pickWorld(Vector2 point) {
     auto objects=worldDrawOrder();
     for(auto it=objects.rbegin();it!=objects.rend();++it){
         if(it->type==10||it->type==11)continue; // Stones and fragments are not inventory/hover targets.
-        if(it->type==3||it->type==5)continue; // Projectiles do not obstruct mouse inspection.
+        if(it->type==3||it->type==5||it->type==14)continue; // Projectiles do not obstruct mouse inspection.
         V position{};bool touched=false;HoverKind kind=HoverKind::None;int id=it->index;
         if(it->type==12){
-            position=DesertFountains[it->index];kind=HoverKind::Fountain;touched=fountain_art::contains(it->index,point);
+            position=game.fountains()[it->index];kind=HoverKind::Fountain;touched=fountain_art::contains(it->index,point);
         }else if(it->type==9){
             const auto& chest=game.chests[it->index];position=chest.pos;id=chest.id;kind=HoverKind::Chest;
             touched=treasureContains(chest,point);
@@ -106,7 +108,7 @@ WorldHover pickWorld(Vector2 point) {
         }else if(it->type==4){
             const Enemy& e=game.enemies[it->index];position=e.pos;kind=HoverKind::Corpse;id=e.id;
             Vector2 p=screen(position);
-            float half=enemyBoss(e.type)?110:68;
+            float half=e.type==VolcanoBossType?170:enemyBoss(e.type)?110:85;
             if(CheckCollisionPointRec(point,{p.x-half,p.y-65,half*2,109}))touched=corpseArt(e,p.x,p.y,BLANK,&point);
         }else{
             position=game.player;Vector2 p=screen(position);

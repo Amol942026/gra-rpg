@@ -59,6 +59,8 @@ inline void sprite(Texture2D texture,Rectangle bounds,Vector2 base,bool inverted
 }
 inline void prop(const Prop& value){
  Vector2 base=screen(value.pos);Texture2D texture=propArt[value.type].texture;visibleCasters++;
+ if(value.type>=14){Rectangle s=volcano_art::source(value);auto t=volcano_art::propTexture(value);float x=base.x-90*value.size,y=base.y-208*value.size,w=180*value.size,h=230*value.size;
+  quad(t,{{projected({x,y},base.y),projected({x,y+h},base.y),projected({x+w,y+h},base.y),projected({x+w,y},base.y)}},{{{s.x/t.width,s.y/t.height},{s.x/t.width,(s.y+s.height)/t.height},{(s.x+s.width)/t.width,(s.y+s.height)/t.height},{(s.x+s.width)/t.width,s.y/t.height}}});return;}
  if(!treeProp(value.type)){sprite(texture,{base.x-90*value.size,base.y-208*value.size,180*value.size,230*value.size},base);return;}
  // Use the exact same connected wind strips as the crown artwork.
  const auto& wind=tree_wind::samples(value,game.time);
@@ -158,6 +160,8 @@ inline void prepare(bool chamber=false){
     actor_art::shadowCasting=casts;actor_art::shadowCacheKey=100+e.id;
     actor_art::drawEnemy(e,p.x,p.y);
     actor_art::shadowCacheKey=-1;actor_art::shadowCasting=true;
+   }else if(e.type>=VolcanoFirstType){
+    if(near(p,200))billboard(p.y,[&]{corpseArt(e,p.x,p.y);});
    }else if(e.type==DesertBossType){
     const auto& tex=fallen_art::sprites[e.type][std::clamp(int(e.animation.direction),0,7)].body;
     if(near(p,200))sprite(tex,{p.x-fallen_art::OriginX,p.y-fallen_art::OriginY,float(fallen_art::Width),float(fallen_art::Height)},p,false);
@@ -173,7 +177,7 @@ inline void prepare(bool chamber=false){
     if(near(p,200))sprite(guardian_art::stone,{p.x-BoulderSpriteSize*.5f,p.y-socket.height-BoulderSpriteSize*.5f,BoulderSpriteSize,BoulderSpriteSize},p,false);
    }
   }
-  if(game.inDesert())for(int i=0;i<FountainCount;i++){Vector2 p=screen(DesertFountains[i]);if(near(p,200)){billboard(p.y,[&]{fountain_art::draw(i,false);});visibleCasters++;}}
+  if(game.hasFountains())for(int i=0;i<FountainCount;i++){Vector2 p=screen(game.fountains()[i]);if(near(p,200)){billboard(p.y,[&]{fountain_art::draw(i,false);});visibleCasters++;}}
   for(const auto& shot:game.arrows)if(near(screen(shot.pos),70)){arrow(shot);visibleCasters++;}
   for(const auto& b:game.boulders){Vector2 p=screen(b.pos);if(near(p,200)&&guardian_art::stone.id){sprite(guardian_art::stone,{p.x-BoulderSpriteSize*.5f,p.y-b.height-BoulderSpriteSize*.5f,BoulderSpriteSize,BoulderSpriteSize},p,false);visibleCasters++;}}
   for(const auto& impact:game.boulderImpacts)if(near(screen(impact.pos),180)&&guardian_art::fragments.id)for(int piece=0;piece<guardian_break::Pieces;piece++){

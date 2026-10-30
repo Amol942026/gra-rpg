@@ -1,0 +1,97 @@
+{
+  "authoring": "Krita native MCP 0.2.0",
+  "original_2d": true,
+  "external_assets": [],
+  "assets": [
+    {
+      "name": "slag-crawler",
+      "kra_sha256": "739f689338dadb3aa80be3650a9968c01b4fc09a8d44a3a77a6dd7b0eba5d597",
+      "png_sha256": "1a34bd4ccb721184e556d2bda19dcb40425f540eecca6f77e3ea6c3bff4a1bf9",
+      "native_size": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "name": "lava-salamander",
+      "kra_sha256": "49b911432523e5e4cae51882266ae74e6a4b875f28738b1b53adc973c855bdd5",
+      "png_sha256": "efe41b7a67c2827e2b22fe725c54c1068e3c2ef7e242d0fa35d1f07a32477df6",
+      "native_size": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "name": "fire-imp",
+      "kra_sha256": "0f6903763080409431a58fb98622a01c9997db87da62abadef517e5f04556310",
+      "png_sha256": "b00dbb03763ea870393338a6b825a9b88ac1142b89bd40fac414e82dd8d58b2e",
+      "native_size": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "name": "ash-wraith",
+      "kra_sha256": "f658a7eb0f418dbd388ee244b8152675d3ab62a35a895623f798f75090173f37",
+      "png_sha256": "1a8d4cd4594278fd63af28448dba873817bc64c9e5710fc6083550f7ec34c644",
+      "native_size": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "name": "obsidian-sentinel",
+      "kra_sha256": "ef0e9715fd2ad4cf2a08b7f8a7a29894b838185be16c6bd0b235c78c0aa59813",
+      "png_sha256": "86c403df79a082bcbf69030fb6f54b5fdad349685ce1875df907df47b2365242",
+      "native_size": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "name": "ember-drake",
+      "kra_sha256": "88b2a4d5ce6b55392bbf3ad2ebed7a44c5c3f1163085282b7aa267f088753fb4",
+      "png_sha256": "541ee0998bf32248d8210cff7a1cfccdfed423736f9f10ee0ebc243d3df80684",
+      "native_size": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "name": "varkhor",
+      "kra_sha256": "f0aa2711a9c77dfc0bd08445038b53c795468e32469e99ca4794259db2108baf",
+      "png_sha256": "e1839ad679346d1dd0517b9fc0b7fb0e028436d02039a9c3fd3703d04e3d6731",
+      "native_size": [
+        1536,
+        1152
+      ]
+    },
+    {
+      "name": "terrain",
+      "kra_sha256": "57e285475e524833de0067976d6cc95a1c240aa9b70570224047f141fabe9abc",
+      "png_sha256": "a88f6eb2ad59062b2cfaa52f951fc6c25a3bd51072319faacce701feacc44757",
+      "native_size": [
+        768,
+        96
+      ]
+    },
+    {
+      "name": "scenery",
+      "kra_sha256": "2c38c40eb55112301d0b23b200fc506eee383acb66efb6e477de6439f93111c8",
+      "png_sha256": "a549c8b07507d853ec54a0315d83c9e98916223e4a96a0604e917788bb4798c7",
+      "native_size": [
+        1440,
+        460
+      ]
+    },
+    {
+      "name": "sky",
+      "kra_sha256": "75f052961de683998a29a0af86cf6123cb3e01daab167956bfa97953255d05a8",
+      "png_sha256": "ea592232aa516c509fbc57d041039577b7015520d84e802a21d6683fe4fdfc4f",
+      "native_size": [
+        1600,
+        700
+      ]
+    }
+  ]
+}

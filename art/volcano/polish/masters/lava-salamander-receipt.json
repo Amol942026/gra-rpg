@@ -1,0 +1,13 @@
+{
+  "name": "lava-salamander",
+  "layers": [
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right"
+  ],
+  "kra_sha256": "adc0309401666dee233941ba3d8eaa76106a71dbede18b6100d71259f5988580",
+  "png_sha256": "260e7d97cd3e79335918b9724a6a3474af3aba42d18e33dad14028c1d15a12a1"
+}

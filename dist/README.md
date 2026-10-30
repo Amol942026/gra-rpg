@@ -1,5 +1,15 @@
 # Emberfall — Echa zapomnianych ruin
 
+Aktualizacja 29.10.2026: dodano trzecią krainę, **Kalderę Popiołu**.
+Po pokonaniu Żywej Wydmy porozmawiaj z Eldrinem i wybierz podróż do kaldery.
+Nadal można wracać na pustynię. Nowy poziom ma rzeki animowanej lawy,
+bazaltowe przejścia, 6 nowych gatunków (po 5 osobników), bossa
+**Varkhora, Serce Kaldery**, dwie skrzynie i osobne jednorazowe kapliczki
+many/HP. Varkhor ostrzega przed erupcjami; chochliki i upiory rzucają pociski.
+Trzeci fragment Serca Świtu uruchamia powrót do wieży. Format zapisu v9
+zachowuje wszystkie trzy światy i czyta v1–v8. Źródła Krita/Synfig i testy:
+[art/volcano/README.md](art/volcano/README.md).
+
 Aktualizacja 28.10.2026: leśne dziki mają szarżę. Przez 0,55 s opuszczają łeb
 i pokazują kierunek ataku, po czym pędzą prosto z prędkością 9,5 pola/s.
 Stratowanie zadaje jednorazowo 2× obrażenia zwykłego ataku. Można zejść z toru,
@@ -191,7 +201,7 @@ Drugi boss, **Żywa Wydma**, czeka na **południowym wschodzie**. Jest dużą, a
 
 **Brama Eldrina w miejscu przybycia** pozwala wracać do wieży przez **E / LPM / PPM** z odległości do 2,8 pola. Zdrowie, mana, poziom, umiejętności i ekwipunek są zachowane. Ponowna podróż przywraca stan pustyni: martwe potwory, ciała i pozostawione przedmioty. Las zachowuje swój własny stan i grzyby; łup nie przenika między krainami ani piętrami.
 
-**Szybki test:** `Test_pustyni.bat` albo **F3 → Pustynia**. Lista ma teraz **16 miejsc**. Parametry: `--start desert`, `--start desert-oasis`, `--start desert-boss`; `--no-dev-kit` wyłącza dodatkowy zestaw. Zwykłe uruchomienie wciąż zaczyna się prologiem.
+**Szybki test:** `Test_pustyni.bat` albo **F3 → Pustynia**. Lista ma teraz **19 miejsc**, w tym trzy punkty Kaldery Popiołu. Parametry: `--start desert`, `--start desert-oasis`, `--start desert-boss`; `--no-dev-kit` wyłącza dodatkowy zestaw. Zwykłe uruchomienie wciąż zaczyna się prologiem.
 
 Cichy test `--desert-qa --no-audio` sprawdza faktyczne przyciski dialogowe, teleportację, powrót przez bramę, otwieranie ciała bossa, przeciąganie fragmentu i drugi powrót do Eldrina, grafiki GPU, wskazywanie oraz trzy skale i pełny ekran. `--desert-benchmark --no-audio` mierzy 900 klatek w pięciu obszarach pustyni. Raporty i galerie: `dist/qa-v33/`. Testy modelu: `tests/desert_tests.hpp`. Cała grafika powstaje z kodu; gra nie pobiera zasobów z sieci.
 
@@ -225,7 +235,7 @@ Cichy test `--combat-qa --no-audio` sprawdza oba etapy awansu, naukę Leczenia, 
 
 ## Wersja 0.29 — tryb deweloperski i szybki start w lokacji
 
-Naciśnij **F3** albo kliknij **DEV · F3**. Wybór działa także podczas prologu, scenki powrotu, pauzy, rozdawania punktów i po śmierci. Dostępnych jest **13 miejsc startu**: osiem punktów w Lesie Mchu (w tym okolice bossa) oraz każde z pięciu pięter wieży. Zaznacz miejsce, następnie wybierz:
+Naciśnij **F3** albo kliknij **DEV · F3**. Wybór działa także podczas prologu, scenki powrotu, pauzy, rozdawania punktów i po śmierci. Dostępnych jest **19 miejsc startu**: osiem punktów lasu, pięć pięter wieży, trzy punkty pustyni i trzy Kaldery Popiołu. Zaznacz miejsce, następnie wybierz:
 
 - **NOWA SESJA TESTOWA** — resetuje wyprawę, postać i przeciwników, pomija prolog i uruchamia wybraną lokację. ENTER robi to samo.
 - **PRZENIEŚ OBECNĄ POSTAĆ** — zachowuje plecak, założony sprzęt, poziom, XP, statystyki i istniejące rangi. Pozostawione przedmioty i ciała zostają w swojej lokacji; można wrócić po nie.
@@ -236,19 +246,32 @@ Opcjonalny **ZESTAW TESTOWY** uzupełnia do **100 strzał, po 15 borowików i es
 
 **ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu bez resetowania wyprawy. Otwarta lista zatrzymuje symulację. Po uruchomieniu testu HUD pokazuje **SESJA TESTOWA**. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. **NOWA ZWYKŁA GRA — PROLOG** kończy tryb testowy i resetuje wyprawę do normalnego startu. Zwykłe uruchomienie zaczyna się menu głównym; Nowa gra uruchamia prolog bez zestawu testowego.
 
-W folderze projektu i wypakowanej grze są trzy wygodne launchery:
+W folderze projektu są poniższe launchery. Osobna paczka
+**Emberfall-DEV-Windows-x64.zip** zawiera menu DEV oraz skróty do kaldery i Varkhora:
 
 - `Tryb_deweloperski.bat` — od razu otwiera wybór lokacji.
 - `Test_wiezy.bat` — zaczyna na pierwszym piętrze; F3 wybiera kolejne.
 - `Test_bossa.bat` — zaczyna przy Kamiennym Strażniku.
+- `Test_kaldery.bat` — zaczyna przy Bramie Popiołu.
+- `Test_Varkhora.bat` — zaczyna przy trzecim bossie.
 
-Bezpośredni start z parametrami (Windows CMD, folder projektu lub wypakowana paczka):
+Prawa kolumna menu F3 obejmuje Bramę Popiołu, Obsydianowe Kuźnie i Varkhora.
+Przeniesienie postaci zachowuje wyposażenie, poziom, punkty i postęp walki,
+czyszcząc aktywne pociski, erupcje i przewrócenie. Start DEV w kalderze
+przygotowuje testowy postęp wcześniejszych aktów, aby działał powrót przez
+Eldrina; nie przyznaje rang umiejętności. Testy i instrukcje paczki:
+[art/volcano/developer/README.md](art/volcano/developer/README.md).
+
+Bezpośredni start w projekcie (Windows CMD). W wypakowanej paczce DEV użyj
+`Emberfall.exe` zamiast `dist\Emberfall.exe`:
 
 ```bat
-Uruchom.bat --start tower-3
-Uruchom.bat --start tower-5
-Uruchom.bat --start ruins --no-dev-kit
-Uruchom.bat --dev
+dist\Emberfall.exe --start tower-3
+dist\Emberfall.exe --start tower-5
+dist\Emberfall.exe --start ruins --no-dev-kit
+Test_kaldery.bat
+Test_Varkhora.bat --no-dev-kit
+dist\Emberfall.exe --dev
 ```
 
 Identyfikatory lokacji: `forest`, `ruins` (także `boss`), `birches`, `grove`, `heart`, `trail`, `wolves`, `spiders`, `tower-1` do `tower-5` (`tower` oznacza pierwsze piętro). Obsługiwane jest również `--start=tower-3`. Błędna lub brakująca lokacja otwiera listę z komunikatem. `--no-dev-kit` wyłącza domyślny zestaw testowy. Pozostałe parametry, np. `--windowed`, `--opengl`, `--no-audio`, nadal działają.
@@ -578,7 +601,7 @@ Start-Process .\dist\Emberfall.exe -ArgumentList '--skills-qa','--no-audio' -Win
 Start-Process .\dist\Emberfall.exe -ArgumentList '--tower-floors-qa','--no-audio' -WindowStyle Hidden -Wait
 Start-Process .\dist\Emberfall.exe -ArgumentList '--tower-benchmark','--no-audio' -WindowStyle Hidden -Wait
 Start-Process .\dist\Emberfall.exe -ArgumentList '--dev-qa','--no-audio' -WindowStyle Hidden -Wait
-Start-Process .\dist\Emberfall.exe -ArgumentList '--start','tower-3','--dev-smoke','--no-audio' -WindowStyle Hidden -Wait
+Start-Process .\dist\Emberfall.exe -ArgumentList '--start','tower-3','--dev-smoke','--no-audio','--background-test' -WindowStyle Hidden -Wait
 ```
 
 Pierwsza komenda renderuje 180 klatek i zapisuje zrzut. Druga wykonuje 13 sprawdzeń interakcji, używając tych samych funkcji wskazywania, rozpoczynania i kończenia przeciągania co mysz; raport zapisuje do `dist/interaction-test-v29.txt`. Nie jest to automatyzacja urządzenia wejściowego systemu Windows. Benchmark uruchamia 900 klatek z ruchem kamery, walką, unikami, podświetlaniem i wiatrem, a `--windowed --large` wybiera okno 1920 × 1080. Raporty mają nazwy `benchmark-v29.txt`, `benchmark-v29-large.txt` i `benchmark-v29-fullscreen.txt`. `--visual-qa` eksportuje arkusze animacji oraz podglądy interfejsu w trzech skalach do `dist/qa-v02`. `--hover-qa` wykonuje 24 sprawdzenia wskazywania i eksportuje podglądy do `dist/qa-v04`. `--roll-qa` zapisuje arkusz przewrotów (8 kierunków × 12 klatek) w `assets/generated/v04/hero-roll.png` obok EXE oraz podglądy w `dist/qa-v04`. Testy w `tests/roll_tests.hpp` sprawdzają szybkość, kierunki uniku, kolizje, ochronę, odnowienie i niezależność od FPS.

@@ -1,0 +1,166 @@
+{
+  "schema": 2,
+  "date": "2026-10-30",
+  "overall": "working_native_mcp_in_background",
+  "nativeProject": {
+    "name": "Emberfall Dialogues",
+    "guid": "cb99e03a-ae90-4443-b79f-7f8da1539c34",
+    "path": "C:/AI2D/narrative/EmberfallDialogues/ProjectInfo.aph"
+  },
+  "nativeStatus": {
+    "bridge": "Emberfall.DialogueBridge",
+    "version": "1.0.1",
+    "utc": "2026-10-30T11:50:54.395966Z",
+    "processId": 5704,
+    "projectOpen": true,
+    "projectGuid": "cb99e03a-ae90-4443-b79f-7f8da1539c34",
+    "projectName": "Emberfall Dialogues",
+    "projectPath": "C:\\AI2D\\narrative\\EmberfallDialogues\\",
+    "backgroundSession": true,
+    "minimized": true,
+    "objectCounts": {
+      "dialogues": 7,
+      "fragments": 41,
+      "entities": 2,
+      "connections": 34
+    },
+    "transport": "local-file-ipc",
+    "articyApi": "public client MDK",
+    "paidApiUsed": false,
+    "licenseLimitsChanged": false,
+    "freePublishedMaximum": 700
+  },
+  "nativeChecks": [
+    {
+      "check": "native_edit",
+      "job": "a98227f65325446c8a3a116b51c6abb7",
+      "pass": true
+    },
+    {
+      "check": "native_compare_and_set_conflict_rejected",
+      "pass": true
+    },
+    {
+      "check": "native_original_restored",
+      "job": "4cae6e625a6146e0b87dd64bc84282c2",
+      "pass": true
+    },
+    {
+      "check": "native_existing_connection_idempotent",
+      "job": "8574989d015d40b88cf92f614d095362",
+      "pass": true
+    },
+    {
+      "check": "native_existing_dialogue_idempotent_with_connections",
+      "job": "c538f20ed8aa48ce944860dea35edbf2",
+      "pass": true,
+      "counts": {
+        "dialogues": 7,
+        "fragments": 41,
+        "entities": 2,
+        "connections": 34
+      }
+    },
+    {
+      "check": "native_save",
+      "job": "08f37787a0744a0882b7ba13c1934ee1",
+      "pass": true
+    },
+    {
+      "check": "historical_failed_job_inspectable",
+      "pass": true
+    }
+  ],
+  "importedThisSession": [
+    {
+      "id": "EF_TowerReturnDialogue",
+      "job_id": "364cd982ca4942a6a2a44cdea45f6f28",
+      "lines": 8
+    },
+    {
+      "id": "EF_TowerTalkDialogue",
+      "job_id": "64517de9accb430092596f631e694068",
+      "lines": 5
+    },
+    {
+      "id": "EF_DesertReturnDialogue",
+      "job_id": "94ba080772ac4c8a93a9bd3ca05afaf1",
+      "lines": 6
+    },
+    {
+      "id": "EF_DesertCompletedTalk",
+      "job_id": "e60a87beb6df45ac8f449e9ed7c7df40",
+      "lines": 3
+    },
+    {
+      "id": "EF_VolcanoReturnDialogue",
+      "job_id": "e90349ff87204ce2917d0d790d9866d3",
+      "lines": 4
+    },
+    {
+      "id": "EF_VolcanoTalkDialogue",
+      "job_id": "cf302b79dc934a6faf7026b5abebbafd",
+      "lines": 3
+    }
+  ],
+  "existingPrologueReimported": false,
+  "offlineTests": {
+    "passed": 32,
+    "failures": 0,
+    "errors": 0,
+    "includesFixtureTransport": true,
+    "nativeChecksSeparate": true
+  },
+  "currentNativeExport": "exports/2026-10-30-verified-story.json",
+  "gameIntegration": {
+    "nativeTextsSpeakersAndConnectionsMatch": true,
+    "dialogues": 7,
+    "lines": 41,
+    "connections": 34,
+    "stagedCppCompiled": true,
+    "sourceHeadersByteIdentical": true,
+    "productionSourcesModified": false,
+    "receipt": "C:/AI2D/narrative/final-game-export-20261030/apply-receipt.json"
+  },
+  "gameLogic": {
+    "checks": 194309,
+    "passed": true,
+    "hidden": true,
+    "no_audio": true,
+    "report": "C:/AI2D/narrative/game-story-qa-20261030.json",
+    "displayed_fps_verified": false
+  },
+  "persistence": {
+    "originalPrologueSavedAndReopened": true,
+    "newSixDialoguesSavedAndRead": true,
+    "anotherFullClientRestartAfterImport": false
+  },
+  "background": {
+    "minimizedVerified": true,
+    "focusOrRestoreByAgent": false,
+    "projectSelectionByUser": true,
+    "ordinaryAuthoringViaMcp": true,
+    "ready_watcher_tested_on_open_client": true
+  },
+  "limitations": [
+    "After a fresh articy process, select the existing local project once; no supported SU auto-open CLI was verified.",
+    "Only linear mapped dialogues are supported by the current game exporter; branches/conditions require a separate game adapter.",
+    "FREE license limits remain in force; no paid API or cloud authoring was used."
+  ],
+  "nextUse": [
+    "Read native status; ensure correct GUID/path and minimized worker",
+    "Edit through native MCP with expected text/revision",
+    "Export; story_sync.py apply into a fresh receipt/backups folder; run appropriate silent hidden game checks"
+  ],
+  "completed_native_backup": {
+    "path": "C:\\AI2D\\narrative\\completed-native-project-20261030.zip",
+    "sha256": "9608068d095fa0c587843fb60a138e20ca1a00d7bfa635406a93922e1f097df0",
+    "files_verified": 12
+  },
+  "plugin": {
+    "version": "1.0.1",
+    "compiled_without_errors": true,
+    "path": "C:\\Users\\Amadeusz\\AppData\\Roaming\\Articy Software\\articy\\4.x\\Plugins\\Local\\Emberfall.DialogueBridge\\1.0.1\\Emberfall.DialogueBridge.dll",
+    "sha256": "fef85f582d1564ee24a744b0d8bd686a1c9976f23936abdc957c91ab2595ac30"
+  }
+}

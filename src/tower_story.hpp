@@ -19,27 +19,31 @@ inline constexpr std::array<StoryLine,5> TowerTalkDialogue={{
     {false,"A kolejna wyprawa? Będzie równie przyjemna jak spotkanie z kamiennym olbrzymem?"},
     {true,"Obawiam się, że drugi strażnik nie powita cię serdeczniej. Żywa Wydma strzeże drugiej części w Morzu Piasków. Gdy będziesz gotowy, wybierz podróż. W miejscu przybycia zostawię ci bramę powrotną do wieży."}
 }};
-inline constexpr std::array<StoryLine,6> DesertReturnDialogue={{{false,"Eldrinie, Żywa Wydma rozsypała się w moich rękach. Mam drugą część Serca Świtu."},{true,"Dwie części! Nie spodziewałem się, że przebijesz się przez to morze rozżarzonego piasku tak szybko. Dobrze się spisałeś."},{false,"Ta wydma naprawdę chodziła. I nie podobało jej się, że pożyczyłem jej serce."},{true,"Teraz jej moc służy Pieczęci. Trzy części wciąż czekają na odnalezienie, ale odzyskane światło jest bezpieczne."},{false,"Zanim ruszę dalej, chcę odpocząć i sprawdzić zdobyty ekwipunek."},{true,"Źródło odnowy jest do twojej dyspozycji. Gdy zechcesz wrócić na pustynię po pozostawiony łup, porozmawiaj ze mną."}}};
+inline constexpr std::array<StoryLine,6> DesertReturnDialogue={{{false,"Eldrinie, Żywa Wydma rozsypała się w moich rękach. Mam drugą część Serca Świtu."},{true,"Dwie części! Nie spodziewałem się, że przebijesz się przez to morze rozżarzonego piasku tak szybko. Dobrze się spisałeś."},{false,"Ta wydma naprawdę chodziła. I nie podobało jej się, że pożyczyłem jej serce."},{true,"Teraz jej moc służy Pieczęci. Trzy części wciąż czekają na odnalezienie, ale odzyskane światło jest bezpieczne."},{false,"Zanim ruszę dalej, chcę odpocząć i sprawdzić zdobyty ekwipunek."},{true,"Źródło odnowy jest do twojej dyspozycji. Gdy odpoczniesz, porozmawiaj ze mną — otworzę drogę do Kaldery Popiołu, gdzie czeka trzeci strażnik. Możesz też wrócić na pustynię po pozostawiony łup."}}};
 inline constexpr std::array<StoryLine,3> DesertCompletedTalk={{{true,"Druga część jest bezpieczna. Żywa Wydma już nie podniesie się z piasku."},{false,"Może jeszcze wrócę do oazy. Zostało tam kilka miejsc do sprawdzenia."},{true,"Otworzę przejście do Morza Piasków, gdy wybierzesz podróż. Możesz wrócić przez Bramę Eldrina."}}};
+inline constexpr std::array<StoryLine,4> VolcanoReturnDialogue={{{false,"Varkhor pokonany. Trzecia część Serca Świtu przetrwała ogień kaldery."},{true,"Trzy blaski połączyły się z Pieczęcią. Zostały dwa, Wędrowcze. Dziś nawet wulkan oddał nam swoją nadzieję."},{false,"Odpocznę w wieży. W kuźniach zostały jeszcze rzeczy warte obejrzenia."},{true,"Możesz wrócić do Kaldery Popiołu albo Morza Piasków. Bramy pozostaną otwarte."}}};
+inline constexpr std::array<StoryLine,3> VolcanoTalkDialogue={{{true,"Żywa Wydma została pokonana. Jej upadek otworzył drogę do trzeciej krainy — Kaldery Popiołu."},{false,"Za piaskami czeka ogień?"},{true,"Bazaltowe mosty przeprowadzą cię nad lawą. Varkhor, Serce Kaldery, strzeże trzeciej części. Uważaj na oznaczone miejsca erupcji. Zostawię ci też bramę powrotu, a kapliczki odnowią twoje siły."}}};
+
 enum class TowerPhase {Finished,FadeOut,Opening,Dialogue,Closing,Reveal,Choice,TravelOut,TravelIn};
 struct TowerSequence {
     TowerPhase phase=TowerPhase::Finished;
     size_t line=0;float age=0,time=0;
-    bool returning=false,revealed=false,arrivalPending=false,completionPending=false,offerDesert=false,desertArrivalPending=false;int fragments=1;
+    bool returning=false,revealed=false,arrivalPending=false,completionPending=false,offerDesert=false,desertArrivalPending=false;int fragments=1;bool offerVolcano=false,travelVolcano=false;
     static constexpr float FadeTime=.9f,OpeningTime=1.4f,ClosingTime=.45f,RevealTime=.7f;
     void enter(TowerPhase next){phase=next;age=0;revealed=false;}
     void beginReturn(int parts=1){*this={};fragments=parts;returning=true;enter(TowerPhase::FadeOut);}
-    void beginTalk(bool offer=false,int parts=1){*this={};offerDesert=offer;fragments=parts;enter(TowerPhase::Dialogue);}
-    bool chooseDesert(){if(phase!=TowerPhase::Choice||!offerDesert)return false;enter(TowerPhase::TravelOut);return true;}
+    void beginTalk(bool offer=false,int parts=1,bool volcano=false){*this={};offerDesert=offer;offerVolcano=volcano;fragments=parts;enter(TowerPhase::Dialogue);}
+    bool chooseVolcano(){if(phase!=TowerPhase::Choice||!offerVolcano)return false;travelVolcano=true;enter(TowerPhase::TravelOut);return true;}
+    bool chooseDesert(){if(phase!=TowerPhase::Choice||!offerDesert)return false;travelVolcano=false;enter(TowerPhase::TravelOut);return true;}
     bool takeDesertArrival(){bool value=desertArrivalPending;desertArrivalPending=false;return value;}
     bool active()const{return phase!=TowerPhase::Finished;}
     bool chamber()const{return returning&&(phase==TowerPhase::Opening||phase==TowerPhase::Dialogue||phase==TowerPhase::Closing);}
-    size_t lineCount()const{return returning?(fragments>=2?DesertReturnDialogue.size():TowerReturnDialogue.size()):(fragments>=2?DesertCompletedTalk.size():TowerTalkDialogue.size());}
-    const StoryLine& current()const{return returning?(fragments>=2?DesertReturnDialogue[line]:TowerReturnDialogue[line]):(fragments>=2?DesertCompletedTalk[line]:TowerTalkDialogue[line]);}
+    size_t lineCount()const{if(fragments>=3)return VolcanoReturnDialogue.size();if(!returning&&offerVolcano)return VolcanoTalkDialogue.size();return returning?(fragments>=2?DesertReturnDialogue.size():TowerReturnDialogue.size()):(fragments>=2?DesertCompletedTalk.size():TowerTalkDialogue.size());}
+    const StoryLine& current()const{if(fragments>=3)return VolcanoReturnDialogue[line];if(!returning&&offerVolcano)return VolcanoTalkDialogue[line];return returning?(fragments>=2?DesertReturnDialogue[line]:TowerReturnDialogue[line]):(fragments>=2?DesertCompletedTalk[line]:TowerTalkDialogue[line]);}
     float readingTime()const{return std::max(5.f,storyGlyphCount(current().text)/IntroSequence::GlyphsPerSecond+2.8f);}
     bool textComplete()const{return revealed||age*IntroSequence::GlyphsPerSecond>=storyGlyphCount(current().text);}
     std::string visibleText()const{return revealed?current().text:storyPrefix(current().text,size_t(age*IntroSequence::GlyphsPerSecond));}
-    void nextLine(){if(line+1<lineCount()){line++;enter(TowerPhase::Dialogue);}else enter(returning?TowerPhase::Closing:offerDesert?TowerPhase::Choice:TowerPhase::Finished);}
+    void nextLine(){if(line+1<lineCount()){line++;enter(TowerPhase::Dialogue);}else enter(returning?TowerPhase::Closing:(offerDesert||offerVolcano)?TowerPhase::Choice:TowerPhase::Finished);}
     void advance(){
         if(phase==TowerPhase::Opening){enter(TowerPhase::Dialogue);return;}
         if(phase!=TowerPhase::Dialogue||age<.15f)return;

@@ -1,0 +1,562 @@
+{
+  "job_id": "aa7646f502124162a467de65a657d7a6",
+  "id": "aa7646f502124162a467de65a657d7a6",
+  "ok": true,
+  "operation": "export_story",
+  "completedUtc": "2026-10-30T11:44:28.2236311Z",
+  "result": {
+    "schema": 1,
+    "producer": "articy-mdk-live",
+    "projectGuid": "cb99e03a-ae90-4443-b79f-7f8da1539c34",
+    "dialogues": [
+      {
+        "id": "EF_IntroDialogue",
+        "title": "Prolog — Pieczęć Popiołu",
+        "objectId": "100000000000126",
+        "revision": "83ed66c22641c7b0e31d53f79bfefd51ed786c810a908d190c206ba3407f02e7",
+        "childTypes": {
+          "DialogueFragment": 12,
+          "Connection": 11
+        },
+        "connections": [
+          {
+            "source": "EF_IntroDialogue_L0000",
+            "target": "EF_IntroDialogue_L0001"
+          },
+          {
+            "source": "EF_IntroDialogue_L0001",
+            "target": "EF_IntroDialogue_L0002"
+          },
+          {
+            "source": "EF_IntroDialogue_L0002",
+            "target": "EF_IntroDialogue_L0003"
+          },
+          {
+            "source": "EF_IntroDialogue_L0003",
+            "target": "EF_IntroDialogue_L0004"
+          },
+          {
+            "source": "EF_IntroDialogue_L0004",
+            "target": "EF_IntroDialogue_L0005"
+          },
+          {
+            "source": "EF_IntroDialogue_L0005",
+            "target": "EF_IntroDialogue_L0006"
+          },
+          {
+            "source": "EF_IntroDialogue_L0006",
+            "target": "EF_IntroDialogue_L0007"
+          },
+          {
+            "source": "EF_IntroDialogue_L0007",
+            "target": "EF_IntroDialogue_L0008"
+          },
+          {
+            "source": "EF_IntroDialogue_L0008",
+            "target": "EF_IntroDialogue_L0009"
+          },
+          {
+            "source": "EF_IntroDialogue_L0009",
+            "target": "EF_IntroDialogue_L0010"
+          },
+          {
+            "source": "EF_IntroDialogue_L0010",
+            "target": "EF_IntroDialogue_L0011"
+          }
+        ],
+        "lines": [
+          {
+            "id": "EF_IntroDialogue_L0000",
+            "text": "Wędrowcze... dobrze, że dotarłeś. Spójrz na niebo. Te czerwone blizny nie są zwiastunem burzy.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_IntroDialogue_L0001"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0001",
+            "text": "Widziałem je nad wioską. Zwierzęta uciekają z lasu, a nocą ktoś woła spośród ruin. Co się dzieje?",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_IntroDialogue_L0002"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0002",
+            "text": "Pęka Pieczęć Popiołu. Po drugiej stronie czeka armia demonów. Gdy brama się otworzy, żaden mur nie ochroni naszego świata.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_IntroDialogue_L0003"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0003",
+            "text": "Jesteś magiem, Eldrinie. Nie możesz jej zamknąć?",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_IntroDialogue_L0004"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0004",
+            "text": "Moja magia jedynie opóźnia ich nadejście. Potrzebujemy Serca Świtu — artefaktu, który kiedyś oddzielił nasz świat od Otchłani.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_IntroDialogue_L0005"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0005",
+            "text": "Powiedz, gdzie go znajdę. Jeśli istnieje choć cień szansy, spróbuję.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_IntroDialogue_L0006"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0006",
+            "text": "Serce rozbito na pięć części i ukryto w odległych krainach. Każdej strzeże osobny strażnik. Musisz zdobyć wszystkie pięć i złączyć je ponownie.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_IntroDialogue_L0007"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0007",
+            "text": "Pięciu strażników przeciw jednemu wędrowcowi... Mam nadzieję, że nie wybrałeś mnie tylko dlatego, że byłem najbliżej.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_IntroDialogue_L0008"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0008",
+            "text": "Wybrałem cię, bo mimo strachu przyszedłeś pomóc. Pierwszej części strzeże Kamienny Strażnik, w północnej części Lasu Mchu.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_IntroDialogue_L0009"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0009",
+            "text": "Zacznę od lasu. A kiedy wrócę, będziesz mi winien długą opowieść... i porządny posiłek.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_IntroDialogue_L0010"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0010",
+            "text": "Umowa stoi. Otworzę ci drogę. Pamiętaj: nie musisz dziś ocalić całego świata. Musisz tylko zrobić pierwszy krok.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_IntroDialogue_L0011"
+            ]
+          },
+          {
+            "id": "EF_IntroDialogue_L0011",
+            "text": "Ruszaj więc",
+            "speaker": "Eldrin",
+            "next": []
+          }
+        ]
+      },
+      {
+        "id": "EF_TowerReturnDialogue",
+        "title": "Powrót z Lasu Mchu",
+        "objectId": "100000000000189",
+        "revision": "27dd50b8a9e5315756fcee0b73a9eac913125ed5cec8dfdb1d9f345d6a3e0639",
+        "childTypes": {
+          "DialogueFragment": 8,
+          "Connection": 7
+        },
+        "connections": [
+          {
+            "source": "EF_TowerReturnDialogue_L0000",
+            "target": "EF_TowerReturnDialogue_L0001"
+          },
+          {
+            "source": "EF_TowerReturnDialogue_L0001",
+            "target": "EF_TowerReturnDialogue_L0002"
+          },
+          {
+            "source": "EF_TowerReturnDialogue_L0002",
+            "target": "EF_TowerReturnDialogue_L0003"
+          },
+          {
+            "source": "EF_TowerReturnDialogue_L0003",
+            "target": "EF_TowerReturnDialogue_L0004"
+          },
+          {
+            "source": "EF_TowerReturnDialogue_L0004",
+            "target": "EF_TowerReturnDialogue_L0005"
+          },
+          {
+            "source": "EF_TowerReturnDialogue_L0005",
+            "target": "EF_TowerReturnDialogue_L0006"
+          },
+          {
+            "source": "EF_TowerReturnDialogue_L0006",
+            "target": "EF_TowerReturnDialogue_L0007"
+          }
+        ],
+        "lines": [
+          {
+            "id": "EF_TowerReturnDialogue_L0000",
+            "text": "Eldrinie! Kamienny Strażnik padł. Zdobyłem pierwszą część Serca Świtu. Spójrz — jeszcze bije w niej światło.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_TowerReturnDialogue_L0001"
+            ]
+          },
+          {
+            "id": "EF_TowerReturnDialogue_L0001",
+            "text": "Wróciłeś... i przyniosłeś nadzieję. Dobra robota, Wędrowcze. Wielu odwróciłoby się na widok tego strażnika. Ty wytrwałeś.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_TowerReturnDialogue_L0002"
+            ]
+          },
+          {
+            "id": "EF_TowerReturnDialogue_L0002",
+            "text": "Nie było łatwo. Przez chwilę sądziłem, że jego kamienna pięść odeśle mnie tutaj w kawałkach.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_TowerReturnDialogue_L0003"
+            ]
+          },
+          {
+            "id": "EF_TowerReturnDialogue_L0003",
+            "text": "A jednak stoisz przede mną. Pierwsza z pięciu części jest bezpieczna. Czuję, jak jej blask osłabia szczeliny, przez które próbują przedostać się demony.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_TowerReturnDialogue_L0004"
+            ]
+          },
+          {
+            "id": "EF_TowerReturnDialogue_L0004",
+            "text": "Czy to wystarczy, by powstrzymać inwazję?",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_TowerReturnDialogue_L0005"
+            ]
+          },
+          {
+            "id": "EF_TowerReturnDialogue_L0005",
+            "text": "Jeszcze nie. Zostały cztery części i czterej strażnicy. Ale dziś udowodniłeś, że Pieczęć Popiołu nie musi zgasnąć.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_TowerReturnDialogue_L0006"
+            ]
+          },
+          {
+            "id": "EF_TowerReturnDialogue_L0006",
+            "text": "Daj mi chwilę na oddech. Potem opowiesz mi, dokąd prowadzi następna droga.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_TowerReturnDialogue_L0007"
+            ]
+          },
+          {
+            "id": "EF_TowerReturnDialogue_L0007",
+            "text": "Oczywiście. Moja wieża jest teraz twoim schronieniem. Gdy będziesz gotowy, porozmawiaj ze mną — teleportuję cię do drugiej krainy. Odpocznij, zasłużyłeś.",
+            "speaker": "Eldrin",
+            "next": []
+          }
+        ]
+      },
+      {
+        "id": "EF_TowerTalkDialogue",
+        "title": "Eldrin — droga do Morza Piasków",
+        "objectId": "1000000000001c6",
+        "revision": "b816606d24dba9247263ceb63c41b8278a52ed5618bbf4cb8bfc849e3bba6553",
+        "childTypes": {
+          "DialogueFragment": 5,
+          "Connection": 4
+        },
+        "connections": [
+          {
+            "source": "EF_TowerTalkDialogue_L0000",
+            "target": "EF_TowerTalkDialogue_L0001"
+          },
+          {
+            "source": "EF_TowerTalkDialogue_L0001",
+            "target": "EF_TowerTalkDialogue_L0002"
+          },
+          {
+            "source": "EF_TowerTalkDialogue_L0002",
+            "target": "EF_TowerTalkDialogue_L0003"
+          },
+          {
+            "source": "EF_TowerTalkDialogue_L0003",
+            "target": "EF_TowerTalkDialogue_L0004"
+          }
+        ],
+        "lines": [
+          {
+            "id": "EF_TowerTalkDialogue_L0000",
+            "text": "Dobrze cię widzieć, Wędrowcze. Jak się czujesz po walce z Kamiennym Strażnikiem?",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_TowerTalkDialogue_L0001"
+            ]
+          },
+          {
+            "id": "EF_TowerTalkDialogue_L0001",
+            "text": "Trochę poobijany, ale gotów usłyszeć, co nas czeka. Część Serca Świtu wciąż rozgrzewa mi dłoń.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_TowerTalkDialogue_L0002"
+            ]
+          },
+          {
+            "id": "EF_TowerTalkDialogue_L0002",
+            "text": "Strzeż jej. Każda odzyskana część przybliża nas do zamknięcia bramy demonów. Zostały jeszcze cztery.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_TowerTalkDialogue_L0003"
+            ]
+          },
+          {
+            "id": "EF_TowerTalkDialogue_L0003",
+            "text": "A kolejna wyprawa? Będzie równie przyjemna jak spotkanie z kamiennym olbrzymem?",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_TowerTalkDialogue_L0004"
+            ]
+          },
+          {
+            "id": "EF_TowerTalkDialogue_L0004",
+            "text": "Obawiam się, że drugi strażnik nie powita cię serdeczniej. Żywa Wydma strzeże drugiej części w Morzu Piasków. Gdy będziesz gotowy, wybierz podróż. W miejscu przybycia zostawię ci bramę powrotną do wieży.",
+            "speaker": "Eldrin",
+            "next": []
+          }
+        ]
+      },
+      {
+        "id": "EF_DesertReturnDialogue",
+        "title": "Powrót z Morza Piasków",
+        "objectId": "1000000000001ee",
+        "revision": "c2bdca45db4cb3d688ef151e357eb15658b22057cd5349a7819dcfc7e8683f4c",
+        "childTypes": {
+          "DialogueFragment": 6,
+          "Connection": 5
+        },
+        "connections": [
+          {
+            "source": "EF_DesertReturnDialogue_L0000",
+            "target": "EF_DesertReturnDialogue_L0001"
+          },
+          {
+            "source": "EF_DesertReturnDialogue_L0001",
+            "target": "EF_DesertReturnDialogue_L0002"
+          },
+          {
+            "source": "EF_DesertReturnDialogue_L0002",
+            "target": "EF_DesertReturnDialogue_L0003"
+          },
+          {
+            "source": "EF_DesertReturnDialogue_L0003",
+            "target": "EF_DesertReturnDialogue_L0004"
+          },
+          {
+            "source": "EF_DesertReturnDialogue_L0004",
+            "target": "EF_DesertReturnDialogue_L0005"
+          }
+        ],
+        "lines": [
+          {
+            "id": "EF_DesertReturnDialogue_L0000",
+            "text": "Eldrinie, Żywa Wydma rozsypała się w moich rękach. Mam drugą część Serca Świtu.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_DesertReturnDialogue_L0001"
+            ]
+          },
+          {
+            "id": "EF_DesertReturnDialogue_L0001",
+            "text": "Dwie części! Nie spodziewałem się, że przebijesz się przez to morze rozżarzonego piasku tak szybko. Dobrze się spisałeś.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_DesertReturnDialogue_L0002"
+            ]
+          },
+          {
+            "id": "EF_DesertReturnDialogue_L0002",
+            "text": "Ta wydma naprawdę chodziła. I nie podobało jej się, że pożyczyłem jej serce.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_DesertReturnDialogue_L0003"
+            ]
+          },
+          {
+            "id": "EF_DesertReturnDialogue_L0003",
+            "text": "Teraz jej moc służy Pieczęci. Trzy części wciąż czekają na odnalezienie, ale odzyskane światło jest bezpieczne.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_DesertReturnDialogue_L0004"
+            ]
+          },
+          {
+            "id": "EF_DesertReturnDialogue_L0004",
+            "text": "Zanim ruszę dalej, chcę odpocząć i sprawdzić zdobyty ekwipunek.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_DesertReturnDialogue_L0005"
+            ]
+          },
+          {
+            "id": "EF_DesertReturnDialogue_L0005",
+            "text": "Źródło odnowy jest do twojej dyspozycji. Gdy odpoczniesz, porozmawiaj ze mną — otworzę drogę do Kaldery Popiołu, gdzie czeka trzeci strażnik. Możesz też wrócić na pustynię po pozostawiony łup.",
+            "speaker": "Eldrin",
+            "next": []
+          }
+        ]
+      },
+      {
+        "id": "EF_DesertCompletedTalk",
+        "title": "Eldrin — powrót do oazy",
+        "objectId": "10000000000021d",
+        "revision": "a15183615a7d82ddaea98072a8578f934894e0b1cfe78b8c8087168e54424a21",
+        "childTypes": {
+          "DialogueFragment": 3,
+          "Connection": 2
+        },
+        "connections": [
+          {
+            "source": "EF_DesertCompletedTalk_L0000",
+            "target": "EF_DesertCompletedTalk_L0001"
+          },
+          {
+            "source": "EF_DesertCompletedTalk_L0001",
+            "target": "EF_DesertCompletedTalk_L0002"
+          }
+        ],
+        "lines": [
+          {
+            "id": "EF_DesertCompletedTalk_L0000",
+            "text": "Druga część jest bezpieczna. Żywa Wydma już nie podniesie się z piasku.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_DesertCompletedTalk_L0001"
+            ]
+          },
+          {
+            "id": "EF_DesertCompletedTalk_L0001",
+            "text": "Może jeszcze wrócę do oazy. Zostało tam kilka miejsc do sprawdzenia.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_DesertCompletedTalk_L0002"
+            ]
+          },
+          {
+            "id": "EF_DesertCompletedTalk_L0002",
+            "text": "Otworzę przejście do Morza Piasków, gdy wybierzesz podróż. Możesz wrócić przez Bramę Eldrina.",
+            "speaker": "Eldrin",
+            "next": []
+          }
+        ]
+      },
+      {
+        "id": "EF_VolcanoReturnDialogue",
+        "title": "Powrót z Kaldery Popiołu",
+        "objectId": "100000000000237",
+        "revision": "f0f146c57a722907cb5b3bf6759af5cdf0272763e5cbd509f8fff870108d5e50",
+        "childTypes": {
+          "DialogueFragment": 4,
+          "Connection": 3
+        },
+        "connections": [
+          {
+            "source": "EF_VolcanoReturnDialogue_L0000",
+            "target": "EF_VolcanoReturnDialogue_L0001"
+          },
+          {
+            "source": "EF_VolcanoReturnDialogue_L0001",
+            "target": "EF_VolcanoReturnDialogue_L0002"
+          },
+          {
+            "source": "EF_VolcanoReturnDialogue_L0002",
+            "target": "EF_VolcanoReturnDialogue_L0003"
+          }
+        ],
+        "lines": [
+          {
+            "id": "EF_VolcanoReturnDialogue_L0000",
+            "text": "Varkhor pokonany. Trzecia część Serca Świtu przetrwała ogień kaldery.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_VolcanoReturnDialogue_L0001"
+            ]
+          },
+          {
+            "id": "EF_VolcanoReturnDialogue_L0001",
+            "text": "Trzy blaski połączyły się z Pieczęcią. Zostały dwa, Wędrowcze. Dziś nawet wulkan oddał nam swoją nadzieję.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_VolcanoReturnDialogue_L0002"
+            ]
+          },
+          {
+            "id": "EF_VolcanoReturnDialogue_L0002",
+            "text": "Odpocznę w wieży. W kuźniach zostały jeszcze rzeczy warte obejrzenia.",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_VolcanoReturnDialogue_L0003"
+            ]
+          },
+          {
+            "id": "EF_VolcanoReturnDialogue_L0003",
+            "text": "Możesz wrócić do Kaldery Popiołu albo Morza Piasków. Bramy pozostaną otwarte.",
+            "speaker": "Eldrin",
+            "next": []
+          }
+        ]
+      },
+      {
+        "id": "EF_VolcanoTalkDialogue",
+        "title": "Eldrin — droga do Kaldery Popiołu",
+        "objectId": "100000000000258",
+        "revision": "8d0f1e55c15d0a1aa5e3cad065d12275fe4020f9ae5b615e2c4dab21c9dbf560",
+        "childTypes": {
+          "DialogueFragment": 3,
+          "Connection": 2
+        },
+        "connections": [
+          {
+            "source": "EF_VolcanoTalkDialogue_L0000",
+            "target": "EF_VolcanoTalkDialogue_L0001"
+          },
+          {
+            "source": "EF_VolcanoTalkDialogue_L0001",
+            "target": "EF_VolcanoTalkDialogue_L0002"
+          }
+        ],
+        "lines": [
+          {
+            "id": "EF_VolcanoTalkDialogue_L0000",
+            "text": "Żywa Wydma została pokonana. Jej upadek otworzył drogę do trzeciej krainy — Kaldery Popiołu.",
+            "speaker": "Eldrin",
+            "next": [
+              "EF_VolcanoTalkDialogue_L0001"
+            ]
+          },
+          {
+            "id": "EF_VolcanoTalkDialogue_L0001",
+            "text": "Za piaskami czeka ogień?",
+            "speaker": "Wanderer",
+            "next": [
+              "EF_VolcanoTalkDialogue_L0002"
+            ]
+          },
+          {
+            "id": "EF_VolcanoTalkDialogue_L0002",
+            "text": "Bazaltowe mosty przeprowadzą cię nad lawą. Varkhor, Serce Kaldery, strzeże trzeciej części. Uważaj na oznaczone miejsca erupcji. Zostawię ci też bramę powrotu, a kapliczki odnowią twoje siły.",
+            "speaker": "Eldrin",
+            "next": []
+          }
+        ]
+      }
+    ]
+  }
+}

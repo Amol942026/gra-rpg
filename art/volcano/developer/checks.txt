@@ -1,0 +1,257 @@
+PASS developer edition exposes all nineteen destinations
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS location card stays inside picker above controls
+PASS location name and hint fit the actual bold font
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS destination cards never overlap
+PASS actual card click selects the corresponding destination
+PASS real developer UI render / picker-80
+PASS test window remains hidden / picker-80
+PASS real developer UI render / picker-100
+PASS test window remains hidden / picker-100
+PASS real developer UI render / picker-120
+PASS test window remains hidden / picker-120
+PASS actual New Session button accepts each volcanic destination
+PASS new volcanic session arrives safely with working controls
+PASS fresh volcanic test keeps skills locked and boss alive
+PASS real developer UI render / volcano-new
+PASS test window remains hidden / volcano-new
+PASS actual New Session button accepts each volcanic destination
+PASS new volcanic session arrives safely with working controls
+PASS fresh volcanic test keeps skills locked and boss alive
+PASS real developer UI render / volcano-forges-new
+PASS test window remains hidden / volcano-forges-new
+PASS actual New Session button accepts each volcanic destination
+PASS new volcanic session arrives safely with working controls
+PASS fresh volcanic test keeps skills locked and boss alive
+PASS real developer UI render / volcano-boss-new
+PASS test window remains hidden / volcano-boss-new
+PASS actual Move Character button reaches the volcanic forges
+PASS move preserves real character and clears pending attacks
+PASS real developer UI render / forges-current-character
+PASS test window remains hidden / forges-current-character
+PASS real developer UI render / picker-varkhor-selected
+PASS test window remains hidden / picker-varkhor-selected
+PASS entire developer QA remained silent and hidden

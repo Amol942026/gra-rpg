@@ -1,0 +1,13 @@
+{
+  "name": "scenery-extra",
+  "layers": [
+    "Cracked volcanic boulders",
+    "Burnt stumps and ash grass",
+    "Sulphur craters",
+    "Runic basalt monoliths"
+  ],
+  "kra_sha256": "e3dd8ea0a0580e3cc9ca6679d3a2d11181d6dce997cacb2501b9e6c63abf7b1a",
+  "png_sha256": "4b04256d81d764a8166ebd1c59d8db52a8845ef10f8921b9cd76aa664cb18118",
+  "retained_saved_document_id": "1d9a7a35-7b5d-47ce-854e-33f0bd5873b5",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

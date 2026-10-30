@@ -1,5 +1,13 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+Aktualna Kaldera: [płynąca lawa, dodatkowe otoczenie i detale](../volcano/river-detail/README.md).
+Produkcja natywna: `volcano_river_detail.py` (Krita), `volcano_river_motion.py`
+(Synfig); niezależny odbiór: `verify_volcano_river_detail.py`.
+Pierwsza wersja i mechaniki: [Kaldera Popiołu](../volcano/README.md).
+`tests/volcano_qa.ps1 -NoAudio` oraz
+`tests/volcano_package_qa.ps1 -NoAudio -HelperRoot <katalog helpera>`.
+Serializator zapisuje v10, zachowując odczyt v1–v9; rewizja scenografii 3.
+
 Optymalizacja renderera, testy ukryte i rozdzielczość świata/HUD:
 [raport 28.10.2026](../performance/20261028/README.md).
 `--no-audio --background-test` ukrywa rzeczywisty EXE; helpery renderera
@@ -19,7 +27,7 @@ Zachodni start i rzut Kamiennego Strażnika:
 [art/gameplay/guardian/README.md](../gameplay/guardian/README.md).
 `create_guardian_stone.py` (Krita), `guardian_throw_synfig.py` (Synfig),
 `tests/guardian_qa.ps1 -NoAudio` i `guardian_package_qa.ps1 -NoAudio`.
-Serializator zapisuje format 8 (także szarże dzików) i czyta formaty 1–7.
+Serializator zapisuje format 10 (szarże dzików, trzecią krainę i rewizję scenografii) i czyta formaty 1–9.
 Szarża korzysta z istniejących póz dzika, chodu zależnego od drogi i lokalnych
 efektów. Testy: `tests/boar_charge_qa.ps1 -NoAudio` oraz
 `tests/boar_charge_package_qa.ps1 -NoAudio -HelperRoot <katalog helpera>`.

@@ -1,0 +1,13 @@
+{
+  "name": "fire-imp",
+  "layers": [
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right"
+  ],
+  "kra_sha256": "7885d5654f1797295191c1755af2d2e6116ea8deb6972c51e1df20b5bcd01d72",
+  "png_sha256": "aa5c888941bf5934f499b5ea16e89a5ab7e17f43056e35f0bceb87a64427c143"
+}

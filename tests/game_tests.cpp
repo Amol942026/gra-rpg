@@ -43,7 +43,9 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "expanded_loot_tests.hpp"
 #include "performance_collision_tests.hpp"
 #include "boar_charge_tests.hpp"
+#include "volcano_tests.hpp"
 int main(){
+ volcanoTests();
  boarChargeTests();
  performanceCollisionTests();
  expandedLootTests();

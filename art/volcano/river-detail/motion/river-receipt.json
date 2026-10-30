@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "source_sha256": "d13a350e1b1951b4b650ff223099036c490b20e0f4a30e198d5096cb7d38b561",
+  "frames": 60,
+  "fps": 30,
+  "displacement_pixels": 256,
+  "half_period_translation_error": 0.2520955403645833,
+  "half_period_static_error": 26.109466552734375,
+  "loop_seam_mean_difference": 14.598770141601562,
+  "adjacent_mean_difference": 14.606170654296875,
+  "source": "native Synfig translate waypoints",
+  "runtime_interpolation": true
+}

@@ -1,0 +1,10 @@
+{
+  "name": "bridge",
+  "layers": [
+    "Base mineral colour",
+    "Painted soft strata and weathering",
+    "Fine grains, fissures and exposed edges"
+  ],
+  "kra_sha256": "4b9582d9eb7eaebc7aa23c65886016bfaf6be626cf4fac1ed67e3fbff83d8113",
+  "png_sha256": "3caeae7b7f5e8c1caa6f7c09d61f592e9fb568787bea6299ab424cf0410dc3cb"
+}

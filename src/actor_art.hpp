@@ -5,6 +5,7 @@
 #include "hero_sheath.hpp"
 #include "hero_knockdown.hpp"
 #include "shadow_geometry.hpp"
+#include "volcano_actors.hpp"
 #include "hero_paint.hpp"
 #include "creature_paint.hpp"
 #include "generated/creature_motion_data.hpp"
@@ -570,6 +571,7 @@ inline void prepareKnockdown(const Game& g,AnimationState& state,float& fallR,fl
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
                  Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1) {
+    if(species>VolcanoFirstType){if(shadowBuilding&&!shadowCasting)return false;return volcano_actors::draw(species-1,x,y,size,state,attack!=0?std::clamp(std::abs(attack)*.7f,0.f,1.f):-1,outline,probe,shadowBuilding,false,flash);}
     HeroAppearance appearance;
     if(species==0){appearance=equipment?heroAppearance(*equipment):legacyHeroAppearance(helmet,shield,weapon);weapon=appearance[0].shape;helmet=appearance[1].present();shield=appearance[2].present();}
     bool rolling=species==0&&roll>=0;
@@ -627,6 +629,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     return false;
 }
 inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
+ if(e.type>=VolcanoFirstType){if(shadowBuilding&&!shadowCasting)return false;float action=e.eruptionWindup>0?1-e.eruptionWindup/.95f:e.windup>0?.45f*(1-e.windup/.42f):e.strike>0?.45f+.55f*(1-e.strike/.22f):-1;return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,probe,shadowBuilding,false,e.flash>0);}
  int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;
  bool hit=draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,e.flash>0,outline,probe,-1,-1,-1,3,false,nullptr,e.boulderProgress());shadowCacheKey=previous;return hit;
 }

@@ -2,7 +2,7 @@
 void expandedLootTests(){
  static_assert(int(Kind::DawnShard)==30&&int(Kind::DuneShield)==62&&int(Kind::SlimeBlade)==63,"old save item IDs must never move");
  check(ItemKindCount==99&&EquipmentKindCount==75,"catalogue includes 36 new equippable items alongside all original IDs");
- for(int type=0;type<EnemyTypeCount;type++){
+ for(int type=0;type<LegacyEnemyTypeCount;type++){
   int added=0,count=0;for(const auto& rule:enemyLootTable(type)){count+=rule.kind!=Kind::None;added+=rule.kind>=Kind::SlimeBlade;}
   check(added==3&&count<=CorpseLootSize,"each beast gains three loot entries without overflowing its corpse");
  }

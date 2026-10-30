@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=8;
+constexpr int CurrentVersion=10;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -67,6 +67,7 @@ EF_SAVE(TreasureChest,v.id,v.pos,v.location,v.opened,v.loot)
 inline void visit(Archive& a,Enemy& v){
  a(v.id,v.type,v.pos,v.home,v.hp,v.maxHp,v.attack,v.flash,v.windup,v.alive,v.animation,v.strike,v.recoil,v.loot,v.behavior,v.patrolGoal,v.patrolWait,v.patrolBlocked,v.patrolSequence,v.patrolGoalActive,v.sandPrisonCd,v.sandCastPulse,v.sandPrisonCasts);
  if(a.version>=2)a(v.boulderCd,v.boulderWindup,v.boulderRecovery,v.boulderTarget,v.boulderThrows);
+ if(a.version>=9)a(v.eruptionCd,v.eruptionWindup,v.eruptions);
  if(a.version>=8)a(v.boarChargeCd,v.boarWindup,v.boarRush,v.boarRecovery,v.boarAim,v.boarDirection,v.boarHit,v.boarCharges);
  else if(a.reading){v.boarChargeCd=BoarChargeFirstDelay;v.boarWindup=v.boarRush=v.boarRecovery=0;v.boarAim=v.boarDirection={};v.boarHit=false;v.boarCharges=0;}
  if(a.reading&&a.version>=2&&a.version<6){v.boulderCd*=BoulderCooldown/4.5f;v.boulderWindup*=BoulderWindup/2.2f;v.boulderRecovery*=BoulderRecovery/.6f;}
@@ -80,16 +81,21 @@ EF_SAVE(PierceFlash,v.pos,v.life)
 EF_SAVE(Explosion,v.pos,v.life)
 EF_SAVE(Boulder,v.origin,v.target,v.pos,v.age,v.duration,v.height,v.startHeight,v.damage,v.owner)
 EF_SAVE(BoulderImpact,v.pos,v.life)
+EF_SAVE(CinderBolt,v.pos,v.velocity,v.remaining,v.damage,v.owner)
+EF_SAVE(LavaFissure,v.pos,v.age,v.delay,v.damage,v.owner,v.struck)
 EF_SAVE(SoundEvent,v.cue,v.x,v.y)
 EF_SAVE(IntroSequence,v.phase,v.line,v.age,v.time,v.revealed,v.arrivalPending)
-EF_SAVE(TowerSequence,v.phase,v.line,v.age,v.time,v.returning,v.revealed,v.arrivalPending,v.completionPending,v.offerDesert,v.desertArrivalPending,v.fragments)
+inline void visit(Archive& a,TowerSequence& v){a(v.phase,v.line,v.age,v.time,v.returning,v.revealed,v.arrivalPending,v.completionPending,v.offerDesert,v.desertArrivalPending,v.fragments);if(a.version>=9)a(v.offerVolcano,v.travelVolcano);}
 inline void visit(Archive& a,Game& v){
- a(v.chests,v.openedChest,v.rng,v.combatRng,v.player,v.facing,v.animation,v.bag,v.equipment,v.ground,v.forage,v.enemies,v.props,v.effects,v.weaponWheel,v.arrows,v.bowDrawing,v.bowDrawTime,v.bowReleaseTime,v.lastBowCharge,v.bowAim,v.fireballs,v.explosions,v.attributes,v.attributePoints,v.allocationRequired,v.skillRanks,v.skillPoints,v.healingCd,v.healingPulse,v.strongCutCd,v.piercingArrowCd,v.meleeDuration,v.swingStrong,v.piercingArrowArmed,v.lastBowPiercing,v.pierceFlashes,v.selectedSpell,v.manaRegenTime,v.sounds,v.stepDistance,v.hp,v.mana,v.attackCd,v.spellCd,v.potionCd,v.swing,v.hurt,v.time,v.rollRemaining,v.rollCd,v.rollDirection,v.sandPrisonRemaining,v.level,v.xp,v.kills,v.nextGround,v.bossDead,v.location,v.dawnQuest,v.towerFloor,v.towerRuneMask,v.gold,v.towerReturnPending,v.desertBossDead,v.desertCreated,v.collectedFragments,v.fieldLocation,v.forestState,v.desertState,v.openedCorpse,v.message,v.messageTime);
+ if(a.version>=9)a(v.chests);else for(int i=0;i<4;i++)a(v.chests[i]);
+ a(v.openedChest,v.rng,v.combatRng,v.player,v.facing,v.animation,v.bag,v.equipment,v.ground,v.forage,v.enemies,v.props,v.effects,v.weaponWheel,v.arrows,v.bowDrawing,v.bowDrawTime,v.bowReleaseTime,v.lastBowCharge,v.bowAim,v.fireballs,v.explosions,v.attributes,v.attributePoints,v.allocationRequired,v.skillRanks,v.skillPoints,v.healingCd,v.healingPulse,v.strongCutCd,v.piercingArrowCd,v.meleeDuration,v.swingStrong,v.piercingArrowArmed,v.lastBowPiercing,v.pierceFlashes,v.selectedSpell,v.manaRegenTime,v.sounds,v.stepDistance,v.hp,v.mana,v.attackCd,v.spellCd,v.potionCd,v.swing,v.hurt,v.time,v.rollRemaining,v.rollCd,v.rollDirection,v.sandPrisonRemaining,v.level,v.xp,v.kills,v.nextGround,v.bossDead,v.location,v.dawnQuest,v.towerFloor,v.towerRuneMask,v.gold,v.towerReturnPending,v.desertBossDead,v.desertCreated,v.collectedFragments,v.fieldLocation,v.forestState,v.desertState,v.openedCorpse,v.message,v.messageTime);
  if(a.version>=2)a(v.boulders,v.boulderImpacts);
  if(a.version>=3)a(v.heroKnockback,v.heroKnockbackRemaining);
  if(a.version>=4)a(v.heroKnockdownRemaining,v.heroKnockdownFacing);
  if(a.version>=6)a(v.fountainUsed,v.fountainDrain);
  if(a.version>=7)a(v.merchantArrows);
+ if(a.version>=9)a(v.volcanoCreated,v.volcanoBossDead,v.volcanoState,v.volcanoFountainUsed,v.volcanoFountainDrain,v.cinders,v.fissures);
+ if(a.version>=10)a(v.volcanoSceneryVersion);
  if(a.reading&&a.version<7){
   require(v.level>=1&&v.level<=100000&&v.xp>=0&&v.xp<std::int64_t(v.level)*80);
   v.xp=v.xp*experienceForLevel(v.level)/(std::int64_t(v.level)*80); // Keep legacy level and fractional progress.
@@ -110,7 +116,7 @@ template<class E>inline bool range(E value,int count){return int(value)>=0&&int(
 inline void validateItem(const Item& i){require(range(i.kind,int(Kind::Count))&&i.tier>=0&&i.tier<=100&&i.count>=0&&i.count<=1000000);}
 inline void validateAnimation(const AnimationState& a){require(range(a.direction,8)&&a.phase>=0&&a.phase<=1&&a.runBlend>=0&&a.runBlend<=1&&a.swordStow>=0&&a.swordStow<=1&&a.moveBlend>=0&&a.moveBlend<=1);}
 inline void validatePos(V p){require(p.x>=-10&&p.x<=MapSize+10&&p.y>=-10&&p.y<=MapSize+10);}
-inline void validateGround(const std::vector<Ground>& list,bool unique=true){std::set<int> ids;for(auto& g:list){validateItem(g.value);validatePos(g.pos);require(range(g.location,3)&&g.floor>=0&&g.floor<5&&g.id>=0);if(unique)require(ids.insert(g.id).second);}}
+inline void validateGround(const std::vector<Ground>& list,bool unique=true){std::set<int> ids;for(auto& g:list){validateItem(g.value);validatePos(g.pos);require(range(g.location,4)&&g.floor>=0&&g.floor<5&&g.id>=0);if(unique)require(ids.insert(g.id).second);}}
 inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Prop>& props,const std::vector<Ground>& forage){
  std::set<int> ids;
  for(const auto& e:enemies){require(e.id>=0&&ids.insert(e.id).second&&range(e.behavior,4)&&e.type>=0&&e.type<EnemyTypeCount&&e.hp>=0&&e.maxHp>0&&e.hp<=e.maxHp&&e.sandPrisonCasts>=0);validatePos(e.pos);validatePos(e.home);validateAnimation(e.animation);for(auto& i:e.loot)validateItem(i);}
@@ -121,11 +127,12 @@ inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Pr
   validatePos(e.boarAim);require(length(e.boarDirection)<=1.001f&&(!e.boarRush||std::abs(length(e.boarDirection)-1)<.001f));
   require(!e.boarHit||(e.type==BoarType&&e.alive&&(e.boarRush>0||e.boarRecovery>0)));
  }
+ for(const auto& e:enemies)require(e.eruptionCd>=0&&e.eruptionCd<=6.001f&&e.eruptionWindup>=0&&e.eruptionWindup<=.951f&&e.eruptions>=0&&(!e.eruptionWindup||(e.type==VolcanoBossType&&e.alive)));
  for(const auto& p:props){validatePos(p.pos);require(p.type>=0&&p.type<PropTypeCount&&p.size>0&&p.size<=10);}
  validateGround(forage);
 }
 inline void validate(const Snapshot& s){
- const auto& g=s.game;require(range(g.location,3)&&range(g.fieldLocation,3)&&g.fieldLocation!=WorldLocation::MageTower&&range(g.dawnQuest,3)&&range(g.selectedSpell,2));
+ const auto& g=s.game;require(range(g.location,4)&&range(g.fieldLocation,4)&&g.fieldLocation!=WorldLocation::MageTower&&range(g.dawnQuest,3)&&range(g.selectedSpell,2));
  require(g.towerFloor>=0&&g.towerFloor<5&&g.towerRuneMask>=0&&g.towerRuneMask<16&&g.collectedFragments>=0&&g.collectedFragments<=5);
  require(g.level>=1&&g.level<=100000&&g.xp>=0&&g.xp<experienceForLevel(g.level)&&g.gold>=0&&g.gold<=1000000000000LL&&g.kills>=0&&g.nextGround>=1);
  require(g.merchantArrows>=0&&g.merchantArrows<=MerchantArrowCapacity);
@@ -137,6 +144,12 @@ inline void validate(const Snapshot& s){
  for(int n=0;n<TreasureCount;n++){const auto& c=g.chests[n];require(c.id==n&&c.location==TreasureLayout[n].location&&c.pos.x==TreasureLayout[n].pos.x&&c.pos.y==TreasureLayout[n].pos.y);for(auto& i:c.loot)validateItem(i);}
  validateGround(g.ground);for(auto& item:g.ground)require(item.id<g.nextGround);
  validateField(g.enemies,g.props,g.forage);validateField(g.forestState.enemies,g.forestState.props,g.forestState.forage);validateField(g.desertState.enemies,g.desertState.props,g.desertState.forage);
+ validateField(g.volcanoState.enemies,g.volcanoState.props,g.volcanoState.forage);
+ require(!g.inVolcano()||g.volcanoCreated);require(g.cinders.size()<=24&&g.fissures.size()<=12);
+ require(g.volcanoSceneryVersion>=0&&g.volcanoSceneryVersion<=VolcanoSceneryRevision);
+ for(const auto& b:g.cinders){validatePos(b.pos);require(g.inVolcano()&&std::abs(length(b.velocity)-7.5f)<.01f&&b.remaining>0&&b.remaining<=7&&b.damage>=0&&b.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.alive&&Game::volcanoRanged(e.type);}));}
+ for(const auto& f:g.fissures){validatePos(f.pos);require(g.inVolcano()&&f.age>=0&&f.delay>=.9f&&f.delay<=1.5f&&f.age<=f.delay+.651f&&f.damage>=0&&f.damage<=1000&&f.struck==(f.age>=f.delay)&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==f.owner&&e.alive&&e.type==VolcanoBossType;}));}
+ for(int i=0;i<FountainCount;i++)require(g.volcanoFountainDrain[i]>=0&&g.volcanoFountainDrain[i]<=FountainDrainDuration&&(!g.volcanoFountainDrain[i]||g.volcanoFountainUsed[i]));
  for(auto& e:g.sounds)require(range(e.cue,int(Cue::Count)));for(auto& a:g.arrows)require(a.maxTargets>=1&&a.maxTargets<=1000);
  require(g.boulders.size()<=MaxBoulders&&g.boulderImpacts.size()<=MaxBoulderImpacts);
  for(const auto& b:g.boulders){
@@ -159,7 +172,7 @@ inline std::string encode(Snapshot snapshot){
  validate(snapshot);Archive payload(false);payload(snapshot);Archive out(false);std::string magic="EMBERFALL-SAVE";int version=CurrentVersion;size_t size=payload.bytes.size();uint64_t hash=checksum(payload.bytes);out(magic,version,size,hash);out.bytes+=payload.bytes;return out.bytes;
 }
 inline Snapshot decode(const std::string& bytes){
- require(bytes.size()<=MaxBytes);Archive in(true,bytes);std::string magic;int version=0;size_t size=0;uint64_t hash=0;in(magic,version,size,hash);require(magic=="EMBERFALL-SAVE"&&version>=1&&version<=CurrentVersion&&size==bytes.size()-in.at);std::string payload=bytes.substr(in.at);require(checksum(payload)==hash);Archive data(true,std::move(payload),version);Snapshot result;data(result);require(data.at==data.bytes.size());validate(result);return result;
+ require(bytes.size()<=MaxBytes);Archive in(true,bytes);std::string magic;int version=0;size_t size=0;uint64_t hash=0;in(magic,version,size,hash);require(magic=="EMBERFALL-SAVE"&&version>=1&&version<=CurrentVersion&&size==bytes.size()-in.at);std::string payload=bytes.substr(in.at);require(checksum(payload)==hash);Archive data(true,std::move(payload),version);Snapshot result;data(result);require(data.at==data.bytes.size());validate(result);result.game.refreshVolcanoScenery();validate(result);return result;
 }
 inline std::string now(){std::time_t t=std::time(nullptr);std::tm local{};
 #ifdef _WIN32
@@ -199,7 +212,7 @@ struct Store {
   if(backup)*backup=false;try{return read(path(slot));}catch(...){fs::path b=path(slot);b+=L".bak";if(!fs::exists(b))throw;if(backup)*backup=true;return read(b);}
  }
  Entry inspect(int slot)const{
-  Entry entry;try{entry.exists=fs::exists(path(slot))||fs::exists(fs::path(path(slot).wstring()+L".bak"));if(!entry.exists)return entry;auto s=load(slot,&entry.backup);entry.valid=true;entry.date=s.date;entry.level=s.game.level;entry.location=s.intro.active()?"Prolog":s.game.inTower()?"Wieża Eldrina · piętro "+std::to_string(s.game.towerFloor+1):s.game.inDesert()?"Morze Piasków":"Las Mchu";}catch(...){entry.exists=true;entry.error="Nie można odczytać zapisu";}return entry;
+  Entry entry;try{entry.exists=fs::exists(path(slot))||fs::exists(fs::path(path(slot).wstring()+L".bak"));if(!entry.exists)return entry;auto s=load(slot,&entry.backup);entry.valid=true;entry.date=s.date;entry.level=s.game.level;entry.location=s.intro.active()?"Prolog":s.game.inTower()?"Wieża Eldrina · piętro "+std::to_string(s.game.towerFloor+1):s.game.inVolcano()?"Kaldera Popiołu":s.game.inDesert()?"Morze Piasków":"Las Mchu";}catch(...){entry.exists=true;entry.error="Nie można odczytać zapisu";}return entry;
  }
  void save(int slot,Snapshot snapshot)const{
   snapshot.date=now();std::string bytes=encode(std::move(snapshot));fs::create_directories(root);auto target=path(slot);

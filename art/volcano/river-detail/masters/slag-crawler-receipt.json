@@ -1,0 +1,21 @@
+{
+  "name": "slag-crawler",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right"
+  ],
+  "kra_sha256": "b1bd9d7a9abdeb35cc169edbd65905231a29163df0a276555330807449b7c248",
+  "png_sha256": "997b333f7f2c688db0f70d3ef5e4c035c80c9ef6872e328e67b62d12149a6066",
+  "original_kra_sha256": "dd2f81cd261a123ed7e1697c281338bf41c52aba7074ec1cc10652656fd8a837"
+}

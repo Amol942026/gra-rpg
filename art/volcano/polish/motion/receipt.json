@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "authoring": "Synfig 1.4.5",
+  "clips": [
+    {
+      "name": "slag-crawler",
+      "action": "walk",
+      "sha256": "7229a2f6f2e2824635ccf9f50a57da8c3bba3e6be5fbe0936dada2843fbc6e4d",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "slag-crawler",
+      "action": "attack",
+      "sha256": "7e055ccdb8c95daf9d117b0560e5e19876b01bf98944ca4234ad9256e703cd7b",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "lava-salamander",
+      "action": "walk",
+      "sha256": "162547c3a792a8c711a18da0fdad4f49315a5f5c0720e0b3d61b48004a0f4195",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "lava-salamander",
+      "action": "attack",
+      "sha256": "6222e9399975c7ff342f0041003004181898e0f0b3c4a818560598aca4923a0f",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "fire-imp",
+      "action": "walk",
+      "sha256": "2ff08d19cdbc34e8ca108e6d9e9be224f51f648ce89b9f931e1325d72d8c20ae",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "fire-imp",
+      "action": "attack",
+      "sha256": "2ee5535f52ef2899e286dce24844e450bc464ab4c0e78f238ff083ef6cfdc174",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "ash-wraith",
+      "action": "walk",
+      "sha256": "79f59748c12825757aea0589fc70cf945cdadeeb0ce01d0a30cb2483cddb4d91",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "ash-wraith",
+      "action": "attack",
+      "sha256": "b13044c9787d3028a793062b81acb8e03f3d389cbeb98f0ea57478b38a135fdc",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "obsidian-sentinel",
+      "action": "walk",
+      "sha256": "70c4ccf9e00f69c577d0069ad90f85103c8bd5b6ad62c10afcd58eeddb949d60",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "obsidian-sentinel",
+      "action": "attack",
+      "sha256": "aa3ada3b547bb17bd36023a849441c1847c645028bb9a36eaca070df164e1999",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "ember-drake",
+      "action": "walk",
+      "sha256": "eda0d59a1e1067cb26f7cbff40bcfda9db407e25472843af45bfcf15ab9eec98",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "ember-drake",
+      "action": "attack",
+      "sha256": "01fb8dacb54484da3770b31ca7f8c15870b156f24eb9d3a3b1e9209e3e7bdec1",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "varkhor",
+      "action": "walk",
+      "sha256": "48fa9dfcf658ad658ad51282457048fa061bbb19a8cda9822fa7e68c053eb046",
+      "samples": 61,
+      "rendered_frames": 60
+    },
+    {
+      "name": "varkhor",
+      "action": "attack",
+      "sha256": "64a9548a79688745d6dc77b0a84821ea74e48d37377ba691f5d7059b6c7ecd88",
+      "samples": 61,
+      "rendered_frames": 60
+    }
+  ],
+  "lava_frames": 0,
+  "header_sha256": "fef88e53dfab064c25f8c1129ddca09bd396d5145ccd8abe5b2eabfd672e528f"
+}

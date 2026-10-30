@@ -1,0 +1,224 @@
+{
+  "before": {
+    "job_id": "adc803e7bcfe4db6801fa98cce370490",
+    "id": "adc803e7bcfe4db6801fa98cce370490",
+    "ok": true,
+    "operation": "status",
+    "completedUtc": "2026-10-30T11:44:24.1695075Z",
+    "result": {
+      "bridge": "Emberfall.DialogueBridge",
+      "version": "1.0.1",
+      "utc": "2026-10-30T11:44:24.167334Z",
+      "processId": 5704,
+      "projectOpen": true,
+      "projectGuid": "cb99e03a-ae90-4443-b79f-7f8da1539c34",
+      "projectName": "Emberfall Dialogues",
+      "projectPath": "C:\\AI2D\\narrative\\EmberfallDialogues\\",
+      "backgroundSession": true,
+      "minimized": true,
+      "objectCounts": {
+        "dialogues": 1,
+        "fragments": 12,
+        "entities": 2,
+        "connections": 11
+      },
+      "transport": "local-file-ipc",
+      "articyApi": "public client MDK",
+      "paidApiUsed": false,
+      "licenseLimitsChanged": false,
+      "freePublishedMaximum": 700
+    }
+  },
+  "introReadBeforeImport": {
+    "job_id": "7b51d7e4cd974731966ff4eeba5ed533",
+    "id": "7b51d7e4cd974731966ff4eeba5ed533",
+    "ok": true,
+    "operation": "read_dialogue",
+    "completedUtc": "2026-10-30T11:44:24.3919751Z",
+    "result": {
+      "id": "EF_IntroDialogue",
+      "title": "Prolog — Pieczęć Popiołu",
+      "objectId": "100000000000126",
+      "revision": "83ed66c22641c7b0e31d53f79bfefd51ed786c810a908d190c206ba3407f02e7",
+      "childTypes": {
+        "DialogueFragment": 12,
+        "Connection": 11
+      },
+      "connections": [
+        {
+          "source": "EF_IntroDialogue_L0000",
+          "target": "EF_IntroDialogue_L0001"
+        },
+        {
+          "source": "EF_IntroDialogue_L0001",
+          "target": "EF_IntroDialogue_L0002"
+        },
+        {
+          "source": "EF_IntroDialogue_L0002",
+          "target": "EF_IntroDialogue_L0003"
+        },
+        {
+          "source": "EF_IntroDialogue_L0003",
+          "target": "EF_IntroDialogue_L0004"
+        },
+        {
+          "source": "EF_IntroDialogue_L0004",
+          "target": "EF_IntroDialogue_L0005"
+        },
+        {
+          "source": "EF_IntroDialogue_L0005",
+          "target": "EF_IntroDialogue_L0006"
+        },
+        {
+          "source": "EF_IntroDialogue_L0006",
+          "target": "EF_IntroDialogue_L0007"
+        },
+        {
+          "source": "EF_IntroDialogue_L0007",
+          "target": "EF_IntroDialogue_L0008"
+        },
+        {
+          "source": "EF_IntroDialogue_L0008",
+          "target": "EF_IntroDialogue_L0009"
+        },
+        {
+          "source": "EF_IntroDialogue_L0009",
+          "target": "EF_IntroDialogue_L0010"
+        },
+        {
+          "source": "EF_IntroDialogue_L0010",
+          "target": "EF_IntroDialogue_L0011"
+        }
+      ],
+      "lines": [
+        {
+          "id": "EF_IntroDialogue_L0000",
+          "text": "Wędrowcze... dobrze, że dotarłeś. Spójrz na niebo. Te czerwone blizny nie są zwiastunem burzy.",
+          "speaker": "Eldrin",
+          "next": [
+            "EF_IntroDialogue_L0001"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0001",
+          "text": "Widziałem je nad wioską. Zwierzęta uciekają z lasu, a nocą ktoś woła spośród ruin. Co się dzieje?",
+          "speaker": "Wanderer",
+          "next": [
+            "EF_IntroDialogue_L0002"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0002",
+          "text": "Pęka Pieczęć Popiołu. Po drugiej stronie czeka armia demonów. Gdy brama się otworzy, żaden mur nie ochroni naszego świata.",
+          "speaker": "Eldrin",
+          "next": [
+            "EF_IntroDialogue_L0003"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0003",
+          "text": "Jesteś magiem, Eldrinie. Nie możesz jej zamknąć?",
+          "speaker": "Wanderer",
+          "next": [
+            "EF_IntroDialogue_L0004"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0004",
+          "text": "Moja magia jedynie opóźnia ich nadejście. Potrzebujemy Serca Świtu — artefaktu, który kiedyś oddzielił nasz świat od Otchłani.",
+          "speaker": "Eldrin",
+          "next": [
+            "EF_IntroDialogue_L0005"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0005",
+          "text": "Powiedz, gdzie go znajdę. Jeśli istnieje choć cień szansy, spróbuję.",
+          "speaker": "Wanderer",
+          "next": [
+            "EF_IntroDialogue_L0006"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0006",
+          "text": "Serce rozbito na pięć części i ukryto w odległych krainach. Każdej strzeże osobny strażnik. Musisz zdobyć wszystkie pięć i złączyć je ponownie.",
+          "speaker": "Eldrin",
+          "next": [
+            "EF_IntroDialogue_L0007"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0007",
+          "text": "Pięciu strażników przeciw jednemu wędrowcowi... Mam nadzieję, że nie wybrałeś mnie tylko dlatego, że byłem najbliżej.",
+          "speaker": "Wanderer",
+          "next": [
+            "EF_IntroDialogue_L0008"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0008",
+          "text": "Wybrałem cię, bo mimo strachu przyszedłeś pomóc. Pierwszej części strzeże Kamienny Strażnik, w północnej części Lasu Mchu.",
+          "speaker": "Eldrin",
+          "next": [
+            "EF_IntroDialogue_L0009"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0009",
+          "text": "Zacznę od lasu. A kiedy wrócę, będziesz mi winien długą opowieść... i porządny posiłek.",
+          "speaker": "Wanderer",
+          "next": [
+            "EF_IntroDialogue_L0010"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0010",
+          "text": "Umowa stoi. Otworzę ci drogę. Pamiętaj: nie musisz dziś ocalić całego świata. Musisz tylko zrobić pierwszy krok.",
+          "speaker": "Eldrin",
+          "next": [
+            "EF_IntroDialogue_L0011"
+          ]
+        },
+        {
+          "id": "EF_IntroDialogue_L0011",
+          "text": "Ruszaj więc",
+          "speaker": "Eldrin",
+          "next": []
+        }
+      ]
+    }
+  },
+  "created": [
+    {
+      "id": "EF_TowerReturnDialogue",
+      "job_id": "364cd982ca4942a6a2a44cdea45f6f28",
+      "lines": 8
+    },
+    {
+      "id": "EF_TowerTalkDialogue",
+      "job_id": "64517de9accb430092596f631e694068",
+      "lines": 5
+    },
+    {
+      "id": "EF_DesertReturnDialogue",
+      "job_id": "94ba080772ac4c8a93a9bd3ca05afaf1",
+      "lines": 6
+    },
+    {
+      "id": "EF_DesertCompletedTalk",
+      "job_id": "e60a87beb6df45ac8f449e9ed7c7df40",
+      "lines": 3
+    },
+    {
+      "id": "EF_VolcanoReturnDialogue",
+      "job_id": "e90349ff87204ce2917d0d790d9866d3",
+      "lines": 4
+    },
+    {
+      "id": "EF_VolcanoTalkDialogue",
+      "job_id": "cf302b79dc934a6faf7026b5abebbafd",
+      "lines": 3
+    }
+  ],
+  "existingIntroReimported": false
+}

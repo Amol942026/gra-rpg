@@ -1,0 +1,8 @@
+# Project-local, free MDK bridge. No credentials, no external endpoint.
+[mcp_servers.emberfall_articy]
+command = 'C:\Users\Amadeusz\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
+args = ['C:\Users\Amadeusz\Documents\GitHub\gra-rpg\tools\narrative\articy_mcp.py']
+cwd = 'C:\Users\Amadeusz\Documents\GitHub\gra-rpg'
+enabled = true
+startup_timeout_sec = 15
+tool_timeout_sec = 25

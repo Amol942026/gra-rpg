@@ -1,0 +1,624 @@
+PASS third terrain and Synfig lava are preloaded without unused depth
+PASS continuous lava ribbons and native steam loop preloaded
+PASS new boulders, stumps, craters and monoliths preloaded with alpha
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS deterministic scenery variant available
+PASS variant picking follows actual opaque pixels and rejects empty surroundings
+PASS actual Krita cutouts and picking masks loaded / 12
+PASS actual cutout body/corpse can be selected / 12 / 0 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 0 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 0 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 0 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 1 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 1 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 1 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 1 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 2 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 2 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 2 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 2 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 3 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 3 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 3 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 3 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 4 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 4 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 4 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 4 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 5 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 5 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 5 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 5 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 6 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 6 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 6 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 6 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 7 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 7 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 7 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 12 / 7 / 3
+PASS transparent surroundings reject mouse selection
+PASS eight-direction idle, locomotion, attack and corpse sheet
+PASS actual Krita cutouts and picking masks loaded / 13
+PASS actual cutout body/corpse can be selected / 13 / 0 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 0 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 0 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 0 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 1 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 1 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 1 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 1 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 2 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 2 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 2 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 2 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 3 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 3 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 3 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 3 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 4 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 4 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 4 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 4 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 5 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 5 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 5 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 5 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 6 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 6 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 6 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 6 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 7 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 7 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 7 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 13 / 7 / 3
+PASS transparent surroundings reject mouse selection
+PASS eight-direction idle, locomotion, attack and corpse sheet
+PASS actual Krita cutouts and picking masks loaded / 14
+PASS actual cutout body/corpse can be selected / 14 / 0 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 0 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 0 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 0 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 1 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 1 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 1 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 1 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 2 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 2 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 2 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 2 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 3 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 3 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 3 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 3 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 4 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 4 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 4 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 4 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 5 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 5 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 5 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 5 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 6 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 6 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 6 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 6 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 7 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 7 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 7 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 14 / 7 / 3
+PASS transparent surroundings reject mouse selection
+PASS eight-direction idle, locomotion, attack and corpse sheet
+PASS actual Krita cutouts and picking masks loaded / 15
+PASS actual cutout body/corpse can be selected / 15 / 0 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 0 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 0 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 0 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 1 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 1 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 1 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 1 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 2 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 2 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 2 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 2 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 3 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 3 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 3 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 3 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 4 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 4 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 4 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 4 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 5 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 5 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 5 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 5 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 6 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 6 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 6 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 6 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 7 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 7 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 7 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 15 / 7 / 3
+PASS transparent surroundings reject mouse selection
+PASS eight-direction idle, locomotion, attack and corpse sheet
+PASS actual Krita cutouts and picking masks loaded / 16
+PASS actual cutout body/corpse can be selected / 16 / 0 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 0 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 0 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 0 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 1 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 1 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 1 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 1 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 2 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 2 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 2 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 2 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 3 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 3 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 3 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 3 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 4 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 4 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 4 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 4 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 5 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 5 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 5 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 5 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 6 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 6 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 6 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 6 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 7 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 7 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 7 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 16 / 7 / 3
+PASS transparent surroundings reject mouse selection
+PASS eight-direction idle, locomotion, attack and corpse sheet
+PASS actual Krita cutouts and picking masks loaded / 17
+PASS actual cutout body/corpse can be selected / 17 / 0 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 0 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 0 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 0 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 1 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 1 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 1 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 1 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 2 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 2 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 2 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 2 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 3 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 3 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 3 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 3 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 4 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 4 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 4 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 4 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 5 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 5 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 5 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 5 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 6 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 6 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 6 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 6 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 7 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 7 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 7 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 17 / 7 / 3
+PASS transparent surroundings reject mouse selection
+PASS eight-direction idle, locomotion, attack and corpse sheet
+PASS actual Krita cutouts and picking masks loaded / 18
+PASS actual cutout body/corpse can be selected / 18 / 0 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 0 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 0 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 0 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 1 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 1 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 1 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 1 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 2 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 2 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 2 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 2 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 3 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 3 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 3 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 3 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 4 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 4 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 4 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 4 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 5 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 5 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 5 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 5 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 6 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 6 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 6 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 6 / 3
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 7 / 0
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 7 / 1
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 7 / 2
+PASS transparent surroundings reject mouse selection
+PASS actual cutout body/corpse can be selected / 18 / 7 / 3
+PASS transparent surroundings reject mouse selection
+PASS eight-direction idle, locomotion, attack and corpse sheet
+PASS actual isolated river surface visibly flows without actors or ambient particles
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS actual game river preview frame
+PASS additional scenery family actually placed in the playable field
+PASS integrated screenshot / extra-scenery-14
+PASS window remains hidden / extra-scenery-14
+PASS additional scenery family actually placed in the playable field
+PASS integrated screenshot / extra-scenery-15
+PASS window remains hidden / extra-scenery-15
+PASS additional scenery family actually placed in the playable field
+PASS integrated screenshot / extra-scenery-16
+PASS window remains hidden / extra-scenery-16
+PASS additional scenery family actually placed in the playable field
+PASS integrated screenshot / extra-scenery-17
+PASS window remains hidden / extra-scenery-17
+PASS actual mage UI does not expose locked third realm
+PASS actual mage UI offers third realm after second boss death
+PASS dialogue reaches a choice without automatic teleport
+PASS integrated screenshot / mage-choice
+PASS window remains hidden / mage-choice
+PASS clicking the actual volcanic button chooses the third realm
+PASS fade transition arrives in the real third field
+PASS integrated screenshot / arrival
+PASS window remains hidden / arrival
+PASS integrated screenshot / mana-full
+PASS window remains hidden / mana-full
+PASS actual third shrine restores and begins draining
+PASS integrated screenshot / mana-empty
+PASS window remains hidden / mana-empty
+PASS actual third shrine becomes dry and cannot refill
+PASS integrated screenshot / health-full
+PASS window remains hidden / health-full
+PASS actual third shrine restores and begins draining
+PASS integrated screenshot / health-empty
+PASS window remains hidden / health-empty
+PASS actual third shrine becomes dry and cannot refill
+PASS actual third chest can be opened
+PASS integrated screenshot / chest-4
+PASS window remains hidden / chest-4
+PASS actual third chest can be opened
+PASS integrated screenshot / chest-5
+PASS window remains hidden / chest-5
+PASS real third boss telegraphs three eruption zones
+PASS integrated screenshot / boss-warning
+PASS window remains hidden / boss-warning
+PASS integrated screenshot / boss-eruption
+PASS window remains hidden / boss-eruption
+PASS real eruption displays its impact after the warning
+PASS actual third boss corpse opens
+PASS integrated screenshot / boss-fallen
+PASS window remains hidden / boss-fallen
+PASS actual corpse transfers third fragment into backpack
+PASS third fragment starts the correct return scene
+PASS integrated screenshot / landscape-0
+PASS window remains hidden / landscape-0
+PASS integrated screenshot / landscape-1
+PASS window remains hidden / landscape-1
+PASS integrated screenshot / landscape-2
+PASS window remains hidden / landscape-2
+PASS integrated screenshot / landscape-3
+PASS window remains hidden / landscape-3
+PASS integrated screenshot / landscape-4
+PASS window remains hidden / landscape-4
+PASS integrated screenshot / landscape-5
+PASS window remains hidden / landscape-5
+PASS entire integration run remains hidden and silent
+PASS actual player renderer without developer mode

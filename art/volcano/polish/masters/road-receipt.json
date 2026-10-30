@@ -1,0 +1,10 @@
+{
+  "name": "road",
+  "layers": [
+    "Base mineral colour",
+    "Painted soft strata and weathering",
+    "Fine grains, fissures and exposed edges"
+  ],
+  "kra_sha256": "f4dc9bd8a44c3bd2f6eb8d4e3232daadd0a70d254a02d4ab408c05766f3bf8c9",
+  "png_sha256": "8da4eedea6ab49a2cc6d828e5fddcca201eaa3369cb693aa77cba3c9e3581209"
+}

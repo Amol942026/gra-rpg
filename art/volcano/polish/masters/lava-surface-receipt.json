@@ -1,0 +1,10 @@
+{
+  "name": "lava-surface",
+  "layers": [
+    "Molten rock beneath crust",
+    "Fractured basalt cooling plates",
+    "Fine mineral grain"
+  ],
+  "kra_sha256": "8ee07b5731ae8d7945a956c62657c05b05b1d352f179f9b88fa339e61507c99e",
+  "png_sha256": "4326866bc7b7f0aefee002f6bc1485a4452e2ebbaa413d708f54ca2fe33ecd29"
+}

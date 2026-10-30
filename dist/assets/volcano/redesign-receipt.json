@@ -1,0 +1,33 @@
+{
+  "status": "APPLIED",
+  "files": {
+    "slag-crawler": {
+      "sha256": "2f5dc907ab908206283e4f56d590f37c532dd83af172cc00249fc8247237f037",
+      "bytes": 23406
+    },
+    "lava-salamander": {
+      "sha256": "f0890860a46e3ad13e77f3f5194621b5b0ae9b7e84a6af241d132c14ad1c08ca",
+      "bytes": 21494
+    },
+    "fire-imp": {
+      "sha256": "565f71bd8c2f61b10bc68589cc99bc5b79234775a3c5af26df7dd8b8a858c7dd",
+      "bytes": 15646
+    },
+    "ash-wraith": {
+      "sha256": "ad532dcb40648796e8cb94c14ac1c1a75fd0228b6808c3aa73e3197ecabac047",
+      "bytes": 13901
+    },
+    "obsidian-sentinel": {
+      "sha256": "fb5bbb07292ebf69944d59aeea37775bd83bf4e0712cbdeb0403e0aa61e63622",
+      "bytes": 15197
+    },
+    "ember-drake": {
+      "sha256": "1dea0234cc86918dba8b86fa256540ace85e71b3471c08452fb048339a54e4f9",
+      "bytes": 23797
+    },
+    "varkhor": {
+      "sha256": "f9ee8405b28f868313b15cf58be2679fe59d40d3e16a89b5402942e89e22d7c0",
+      "bytes": 28104
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "steam",
+  "layers": [
+    "Base mineral colour",
+    "Painted soft strata and weathering"
+  ],
+  "kra_sha256": "470fa4e02923086e82a6254f0c84e43f547af0a00d568ac5a0a887d952432ca1",
+  "png_sha256": "df94fa57e9b0fe6feb757a966c554b31eea3b7b1853c6083b4470c01230211f6"
+}

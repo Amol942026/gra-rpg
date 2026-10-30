@@ -1,0 +1,21 @@
+{
+  "id": "EF_VolcanoTalkDialogue",
+  "title": "Eldrin — droga do Kaldery Popiołu",
+  "array": "VolcanoTalkDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Żywa Wydma została pokonana. Jej upadek otworzył drogę do trzeciej krainy — Kaldery Popiołu."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Za piaskami czeka ogień?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Bazaltowe mosty przeprowadzą cię nad lawą. Varkhor, Serce Kaldery, strzeże trzeciej części. Uważaj na oznaczone miejsca erupcji. Zostawię ci też bramę powrotu, a kapliczki odnowią twoje siły."
+    }
+  ]
+}

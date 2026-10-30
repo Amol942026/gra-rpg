@@ -1,0 +1,57 @@
+{
+  "id": "EF_IntroDialogue",
+  "title": "Prolog — Pieczęć Popiołu",
+  "array": "IntroDialogue",
+  "source": "src/intro_story.hpp",
+  "source_sha256": "90cefeeb6ba88ae18d98d871203428b9800ebcd7aaf4975d288a18982b55e372",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Wędrowcze... dobrze, że dotarłeś. Spójrz na niebo. Te czerwone blizny nie są zwiastunem burzy."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Widziałem je nad wioską. Zwierzęta uciekają z lasu, a nocą ktoś woła spośród ruin. Co się dzieje?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Pęka Pieczęć Popiołu. Po drugiej stronie czeka armia demonów. Gdy brama się otworzy, żaden mur nie ochroni naszego świata."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Jesteś magiem, Eldrinie. Nie możesz jej zamknąć?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Moja magia jedynie opóźnia ich nadejście. Potrzebujemy Serca Świtu — artefaktu, który kiedyś oddzielił nasz świat od Otchłani."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Powiedz, gdzie go znajdę. Jeśli istnieje choć cień szansy, spróbuję."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Serce rozbito na pięć części i ukryto w odległych krainach. Każdej strzeże osobny strażnik. Musisz zdobyć wszystkie pięć i złączyć je ponownie."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Pięciu strażników przeciw jednemu wędrowcowi... Mam nadzieję, że nie wybrałeś mnie tylko dlatego, że byłem najbliżej."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Wybrałem cię, bo mimo strachu przyszedłeś pomóc. Pierwszej części strzeże Kamienny Strażnik, w północnej części Lasu Mchu."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Zacznę od lasu. A kiedy wrócę, będziesz mi winien długą opowieść... i porządny posiłek."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Umowa stoi. Otworzę ci drogę. Pamiętaj: nie musisz dziś ocalić całego świata. Musisz tylko zrobić pierwszy krok."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Ruszaj więc"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ash-wraith",
+  "layers": [
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right"
+  ],
+  "kra_sha256": "bdf13357572a5367c14a64cda96c8c63344e04fd9bfdb03138621653fd6f9266",
+  "png_sha256": "824fc1ba9974dc10dd611a213d1ac86ed638ef3ef99296a166f5f3bcb7f82465",
+  "recovered_after_read_only_preview_disconnect": true
+}

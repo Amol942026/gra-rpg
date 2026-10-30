@@ -21,10 +21,10 @@ inline void init(){
  if(prepared)return;
  const char* path="assets/generated/corpses-creatures-v48.png";
  Image atlas=FileExists(path)?LoadImage(path):Image{};
- bool baked=atlas.data&&atlas.width==Width*Density*8&&atlas.height==Height*Density*EnemyTypeCount;
- if(!baked){if(atlas.data)UnloadImage(atlas);atlas=GenImageColor(Width*Density*8,Height*Density*EnemyTypeCount,BLANK);}
+ bool baked=atlas.data&&atlas.width==Width*Density*8&&atlas.height==Height*Density*LegacyEnemyTypeCount;
+ if(!baked){if(atlas.data)UnloadImage(atlas);atlas=GenImageColor(Width*Density*8,Height*Density*LegacyEnemyTypeCount,BLANK);}
  Image dune=LoadImage("assets/sprites/dune-fallen.png");bool paintedDune=dune.data&&dune.width==1536&&dune.height==512;
- for(int type=0;type<EnemyTypeCount;type++)for(int direction=0;direction<8;direction++){
+ for(int type=0;type<LegacyEnemyTypeCount;type++)for(int direction=0;direction<8;direction++){
   Rectangle cell{float(direction*Width*Density),float(type*Height*Density),float(Width*Density),float(Height*Density)};
   Image body{};
   if(type==DesertBossType&&paintedDune){body=ImageFromImage(dune,{float(direction%4*384),float(direction/4*256),384,256});ImageAlphaPremultiply(&body);}
@@ -47,6 +47,7 @@ inline void init(){
 inline void unload(){for(auto& species:sprites)for(auto& sprite:species){if(sprite.body.id)UnloadTexture(sprite.body);if(sprite.edge.id)UnloadTexture(sprite.edge);shadow_geometry::unload(sprite.ground);sprite={};}prepared=0;}
 }
 bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
+ if(e.type>=VolcanoFirstType)return volcano_actors::draw(e.type,x,y,1,e.animation,-1,outline,probe,false,true,false);
  int type=std::clamp(e.type,0,EnemyTypeCount-1),direction=std::clamp(int(e.animation.direction),0,7);
  const auto& sprite=fallen_art::sprites[type][direction];if(!sprite.body.id)return false;
  if(probe){

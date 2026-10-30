@@ -8,6 +8,8 @@ import argparse, copy, datetime, json, os, re, shutil, subprocess, sys, uuid
 from pathlib import Path
 from asset_tools import sha,write_json,bake_lighting,make_synfig_cutout,pack_atlas
 from game_import import REPO,cue_names,import_pack,bind_audio,restore_bindings
+from laigter_cli import generate_maps as laigter_generate
+from synfig_cli import render as synfig_render, canvas_info as synfig_info
 
 BASE=Path(r"C:\AI2D")
 PYTHON=Path(sys.executable)
@@ -105,28 +107,23 @@ def doctor(directory):
 
 
 def generate_maps(sprite,directory):
-    run([POWERSHELL,"-NoProfile","-ExecutionPolicy","Bypass","-File",BASE/"Tools/Generate-LaigterMaps.ps1",
-         "-ImagePath",sprite],directory,"laigter")
-    manifests=sorted((BASE/"maps").glob(Path(sprite).stem+"_*/maps-manifest.json"),key=lambda p:p.stat().st_mtime)
-    if not manifests:raise RuntimeError("Laigter returned no manifest.")
-    result=json.loads(manifests[-1].read_text(encoding="utf-8-sig"))
+    result=laigter_generate(sprite)
     if result["Status"]!="PASS" or result["SourceSha256"]!=sha(sprite):raise RuntimeError("Invalid Laigter result.")
-    return manifests[-1]
+    manifest_path=Path(result["OutputDirectory"])/"maps-manifest.json"
+    return manifest_path
 
 
 def animate(sprite,project,directory):
     setup=make_synfig_cutout(sprite,project)
     render_root=Path(directory)/"renders"
-    run([POWERSHELL,"-NoProfile","-ExecutionPolicy","Bypass","-File",BASE/"animations/Render-Synfig.ps1",
-         "-ProjectPath",project,"-OutputRoot",render_root,"-ExpectedFrames","60","-Threads","2","-RequireMotion"],directory,"synfig")
-    manifests=list(render_root.glob("*/render-manifest.json"))
-    if len(manifests)!=1:raise RuntimeError("Ambiguous Synfig output.")
-    result=json.loads(manifests[0].read_text(encoding="utf-8-sig"))
+    render_root.mkdir(parents=True,exist_ok=True)
+    result=synfig_render(project,output_root=render_root,threads=2,expected_frames=60,require_motion=True)
     folder=Path(result["OutputDirectory"])
-    frames=[folder/x["Name"] for x in result["Frames"]]
-    if any(sha(p)!=x["Sha256"] for p,x in zip(frames,result["Frames"])):raise ValueError("Frame hash mismatch.")
+    frames=[folder/x["name"] for x in result["Frames"]]
+    if any(sha(p)!=x["sha256"] for p,x in zip(frames,result["Frames"])):raise ValueError("Frame hash mismatch.")
     atlas=pack_atlas(frames,Path(directory)/"crystal_atlas.png")
-    return {"setup":setup,"render_manifest":str(manifests[0]),"atlas":atlas}
+    manifest_path=folder/"render-manifest.json"
+    return {"setup":setup,"render_manifest":str(manifest_path),"atlas":atlas}
 
 
 def compose_music(name,directory):

@@ -1,0 +1,11 @@
+{
+  "name": "scenery",
+  "layers": [
+    "Layered weathered basalt",
+    "Splintered burned trees",
+    "Sulphur fumaroles",
+    "Fractured obsidian"
+  ],
+  "kra_sha256": "4e4e12f5f1bfc14cdc1f4e8b364c425991a5f3adab985dc0cdf760f04da7edea",
+  "png_sha256": "4832e6a6e806c5ddf40599765f3362012fe496913fab6ab82be7eedf653a2d5a"
+}

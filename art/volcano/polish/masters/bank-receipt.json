@@ -1,0 +1,10 @@
+{
+  "name": "bank",
+  "layers": [
+    "Base mineral colour",
+    "Painted soft strata and weathering",
+    "Fine grains, fissures and exposed edges"
+  ],
+  "kra_sha256": "d2b9501b0b0c7571ae1c6f51aa3f4f066ff0a6ec0d53ef6bce05c6cc050163ec",
+  "png_sha256": "3cf2cca102cb6b4ebe87d6c6cc82d6642f866d2dab9a53cd975ccb701d5252d4"
+}

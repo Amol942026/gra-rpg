@@ -35,7 +35,7 @@ bool clickWorldOrInventory(double now=GetTime()) {
     if(hit.kind==HoverKind::Fountain)return game.useFountain(hit.index);
     if(hit.kind==HoverKind::Chest)return game.openChest(hit.index);
     if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
-        if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
+        if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.inVolcano()?game.useVolcanoPortal():game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
     V aim=combatAimFromPointer();
     return archetype(game.equipment[0].kind)==Kind::Bow?game.beginBow(aim):game.attack(aim);
 }
@@ -49,7 +49,7 @@ bool rightClickWorldOrInventory(){
     if(hit.kind==HoverKind::Chest)return game.openChest(hit.index);
         if(hit.kind==HoverKind::Mage)return talkToMage();
         if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
-        if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
+        if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.inVolcano()?game.useVolcanoPortal():game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
         if(hit.kind==HoverKind::Corpse)return game.openCorpse(hit.index);
         if(hit.kind==HoverKind::Forage)return game.use({Place::Forage,hit.index});
         if(hit.kind==HoverKind::Ground)return game.use({Place::Ground,hit.index});

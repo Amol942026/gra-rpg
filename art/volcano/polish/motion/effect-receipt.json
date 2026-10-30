@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "effects": [
+    {
+      "name": "lava",
+      "frames": 60,
+      "cell": 256,
+      "source_sha256": "d4351b8407bd37fa97a012a40458562da5404f4f9e71740cb25fd1ef04125293",
+      "unique_frames": 60
+    },
+    {
+      "name": "steam",
+      "frames": 36,
+      "cell": 128,
+      "source_sha256": "f8229561d87b48249b6e9bd334ec880ac3d61f0ffcff7e7816ef7d88375c0a6f",
+      "unique_frames": 36
+    }
+  ]
+}

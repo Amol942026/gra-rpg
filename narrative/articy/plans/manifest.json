@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "producer": "existing-game-source-snapshot",
+  "native_articy_imported": false,
+  "dialogues": [
+    {
+      "id": "EF_IntroDialogue",
+      "title": "Prolog — Pieczęć Popiołu",
+      "array": "IntroDialogue",
+      "source": "src/intro_story.hpp",
+      "source_sha256": "90cefeeb6ba88ae18d98d871203428b9800ebcd7aaf4975d288a18982b55e372",
+      "line_count": 12
+    },
+    {
+      "id": "EF_TowerReturnDialogue",
+      "title": "Powrót z Lasu Mchu",
+      "array": "TowerReturnDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+      "line_count": 8
+    },
+    {
+      "id": "EF_TowerTalkDialogue",
+      "title": "Eldrin — droga do Morza Piasków",
+      "array": "TowerTalkDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+      "line_count": 5
+    },
+    {
+      "id": "EF_DesertReturnDialogue",
+      "title": "Powrót z Morza Piasków",
+      "array": "DesertReturnDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+      "line_count": 6
+    },
+    {
+      "id": "EF_DesertCompletedTalk",
+      "title": "Eldrin — powrót do oazy",
+      "array": "DesertCompletedTalk",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+      "line_count": 3
+    },
+    {
+      "id": "EF_VolcanoReturnDialogue",
+      "title": "Powrót z Kaldery Popiołu",
+      "array": "VolcanoReturnDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+      "line_count": 4
+    },
+    {
+      "id": "EF_VolcanoTalkDialogue",
+      "title": "Eldrin — droga do Kaldery Popiołu",
+      "array": "VolcanoTalkDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "446e8a02091c8ba40f3e82fef1263de27965596a055833d1613cf3968a881a05",
+      "line_count": 3
+    }
+  ],
+  "total_lines": 41
+}

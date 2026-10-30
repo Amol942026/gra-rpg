@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "checks": 1200,
+  "native_kra_masters": 16,
+  "scenery_variants": 16,
+  "actors": 7,
+  "directions": 8,
+  "rendered_actor_frames": 840,
+  "effect_frames": 96,
+  "original_local_2d": true,
+  "external_assets": [],
+  "runtime_rgba8_bytes": 110349312
+}
