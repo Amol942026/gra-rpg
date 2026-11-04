@@ -1,0 +1,21 @@
+PASS native failure probes run away from the user's input desktop
+PASS fixture window remains hidden on the private desktop
+PASS fixture reproduces the missing native HCURSOR
+PASS fallback class cursor is the user's Windows IDC_ARROW
+PASS client cursor event repairs NULL with a visible native Windows arrow
+PASS selected handle is a real Windows cursor, not game-rendered graphics
+PASS negative Win32 visibility counter is reproduced in isolation
+PASS native cursor repair restores a negative visibility counter
+PASS 500 repeated updates do not inflate the Windows display counter
+PASS hidden or unfocused window never takes ownership of the desktop cursor
+PASS next client event restores the native arrow after window state change
+PASS hidden or unfocused window never takes ownership of the desktop cursor
+PASS next client event restores the native arrow after window state change
+PASS hidden or unfocused window never takes ownership of the desktop cursor
+PASS next client event restores the native arrow after window state change
+PASS hidden or unfocused window never takes ownership of the desktop cursor
+PASS next client event restores the native arrow after window state change
+PASS non-client cursor handling stays with the original window procedure
+PASS shutdown restores the original procedure and class cursor after repeated install
+PASS native handling can be installed again without stale state
+PASS original test-thread desktop restored without switching the user's input desktop

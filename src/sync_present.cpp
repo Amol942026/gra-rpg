@@ -13,6 +13,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include "native_cursor_win32.inl"
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 extern "C" int glfwExtensionSupported(const char*);
 extern "C" void glfwSwapInterval(int);
@@ -282,6 +283,7 @@ extern "C" void __wrap_glfwSwapBuffers(GLFWwindow* window){
     if(sync_present::active())sync_present::countSuppressedSwap();else __real_glfwSwapBuffers(window);
 }
 #else
+namespace native_cursor {void install(void*){}void refresh(){}void uninstall(){}}
 namespace sync_present {
 void useOpenGL(){}
 bool begin(void*,int,int,int){return false;}unsigned int framebuffer(){return 0;}bool end(){return false;}

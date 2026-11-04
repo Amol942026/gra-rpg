@@ -1,0 +1,97 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "DreamShaper_8_pruned.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "caldera-comfy-20261104/obsidian-sentinel-0.png"
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted 2D isometric dark fantasy RPG creature sprite, detailed material illustration, sculpted painted shading, crisp edges, fine surface texture, copper orange rim light from lava below, cool blue violet shadows, dramatic readable volumes, full body, centered, isolated on plain dark grey background, preserve pose and silhouette, obsidian sentinel warrior, heavy engraved black steel armor, volcanic helmet, layered shoulder guards, battered shield and long sword, warm gold runes, right three-quarter view"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "photograph, realistic photo, 3d model, scenery, landscape, text, logo, letters, watermark, frame, border, extra limbs, extra heads, additional weapons, blurry, noisy, flat shading, low detail, plastic, adorable, chibi"
+    }
+  },
+  "5": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "2",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "3",
+        0
+      ],
+      "negative": [
+        "4",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ],
+      "seed": 202611080,
+      "steps": 28,
+      "cfg": 6.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "7": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "6",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "8": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "7",
+        0
+      ],
+      "filename_prefix": "caldera-comfy-20261104/obsidian-sentinel-0"
+    }
+  }
+}

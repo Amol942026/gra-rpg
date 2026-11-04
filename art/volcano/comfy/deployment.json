@@ -1,0 +1,42 @@
+{
+  "files": [
+    {
+      "path": "assets\\volcano\\slag-crawler.png",
+      "before": "c4ccf895f41beff50bba29531491f9cc525e7970ac494e5e7f290f7434064af2",
+      "after": "ee10acb25003d7b7aadb38a9fb1fe17333ebf6ead3f353d23f8f3a0395756c7e"
+    },
+    {
+      "path": "assets\\volcano\\lava-salamander.png",
+      "before": "29c4ac2b641c1f628a20c60ce3dfe4ce1dfd900b9cbbf4d59c49049278a6b851",
+      "after": "198f3cc489f857822a6baaceef387d92b6c9a8b389f09976ff7caa174e77f1c1"
+    },
+    {
+      "path": "assets\\volcano\\fire-imp.png",
+      "before": "65545e84d7ecbb6ce0056c93853b040dcbf067bf88bde9176c01b36041c15835",
+      "after": "8af024ec08007baf0e075bb564014be3946c3432a3e9fb8ce4b1729d4095d938"
+    },
+    {
+      "path": "assets\\volcano\\ash-wraith.png",
+      "before": "046c5bf716f43b0c1e4974e532b249f308af65f0bf52153535f371dda677ef7c",
+      "after": "22674659dce9b2e6381a22c4be460f4acb435bfbb1ab78b2bf46a9407237df1a"
+    },
+    {
+      "path": "assets\\volcano\\obsidian-sentinel.png",
+      "before": "63acf12e6792c949df1f43eea67eed5fa62737f3e6c9f9ad285e486fbe63563f",
+      "after": "dfc3a99fe3e685293be157ab73a3a62ac8fa703be6afefeb6e38d40b6db90bca"
+    },
+    {
+      "path": "assets\\volcano\\ember-drake.png",
+      "before": "1ad8d8501730153f6671d1b2f345a6cb14f88999cbc024f6fe61878070774e61",
+      "after": "21947dc6a87258faf0abeb4e72ac2d42613ae1206a7f43ef444b828c125ba928"
+    },
+    {
+      "path": "assets\\volcano\\varkhor.png",
+      "before": "b058c37d885776fc206f2fd20ed580ec39237d27f0847b067dae2884bbbe9a93",
+      "after": "e45372efc0b5689928e3b9e6b2a7875e3042aba85b6693e2e33ce0b039f4a52a"
+    }
+  ],
+  "status": "APPLIED",
+  "local_only": true,
+  "alpha_unchanged": true
+}

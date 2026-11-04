@@ -11,46 +11,46 @@
 1 ms:     > rtext:..... loaded (optional)
 1 ms:     > rmodels:... loaded (optional)
 1 ms:     > raudio:.... loaded (optional)
-231 ms: DISPLAY: Trying to enable VSYNC
-231 ms: DISPLAY: Device initialized successfully
-231 ms:     > Display size: 1920 x 1080
-231 ms:     > Screen size:  1440 x 900
-231 ms:     > Render size:  1440 x 900
-231 ms:     > Viewport offsets: 0, 0
-236 ms: GLAD: OpenGL extensions loaded successfully
-236 ms: GL: Supported extensions count: 241
-236 ms: GL: OpenGL device information:
-236 ms:     > Vendor:   Intel
-236 ms:     > Renderer: Intel(R) UHD Graphics
-236 ms:     > Version:  3.3.0 - Build 30.0.100.9864
-236 ms:     > GLSL:     3.30 - Build 30.0.100.9864
-236 ms: GL: VAO extension detected, VAO functions loaded successfully
-236 ms: GL: NPOT textures extension detected, full NPOT textures supported
-236 ms: GL: DXT compressed textures supported
-236 ms: GL: ETC2/EAC compressed textures supported
-236 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
-237 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
-237 ms: TEXTURE: [ID 1] Default texture loaded successfully
-237 ms: SHADER: [ID 1] Vertex shader compiled successfully
-238 ms: SHADER: [ID 2] Fragment shader compiled successfully
-252 ms: SHADER: [ID 3] Program shader loaded successfully
-252 ms: SHADER: [ID 3] Default shader loaded successfully
-253 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
-254 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
-254 ms: RLGL: Default OpenGL state initialized successfully
-259 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
-259 ms: FONT: Default font loaded successfully (224 glyphs)
-259 ms: SYSTEM: Working Directory: C:\Users\Amol\Documents\GitHub\gra-rpg\dist
-259 ms: Graphics window ready
-262 ms: Generating world graphics
-3478 ms: World graphics ready
-3479 ms: Opening audio device
-4552 ms: Audio device ready
-4575 ms: Sound effects ready; loading music
-4578 ms: Audio initialization complete
-4711 ms: First scene rendered
-4944 ms: First frame presented
-4944 ms: OpenGL V-sync
-4944 ms: GPU sharing pixel validation failed (0x80004005)
-10391 ms: Developer session: volcano-boss / current character
-24066 ms: Shutting down
+166 ms: DISPLAY: Trying to enable VSYNC
+166 ms: DISPLAY: Device initialized successfully
+166 ms:     > Display size: 1920 x 1080
+166 ms:     > Screen size:  1440 x 900
+166 ms:     > Render size:  1440 x 900
+166 ms:     > Viewport offsets: 0, 0
+170 ms: GLAD: OpenGL extensions loaded successfully
+170 ms: GL: Supported extensions count: 241
+170 ms: GL: OpenGL device information:
+170 ms:     > Vendor:   Intel
+170 ms:     > Renderer: Intel(R) UHD Graphics
+170 ms:     > Version:  3.3.0 - Build 30.0.100.9864
+170 ms:     > GLSL:     3.30 - Build 30.0.100.9864
+170 ms: GL: VAO extension detected, VAO functions loaded successfully
+170 ms: GL: NPOT textures extension detected, full NPOT textures supported
+170 ms: GL: DXT compressed textures supported
+170 ms: GL: ETC2/EAC compressed textures supported
+170 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+170 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+170 ms: TEXTURE: [ID 1] Default texture loaded successfully
+171 ms: SHADER: [ID 1] Vertex shader compiled successfully
+171 ms: SHADER: [ID 2] Fragment shader compiled successfully
+184 ms: SHADER: [ID 3] Program shader loaded successfully
+184 ms: SHADER: [ID 3] Default shader loaded successfully
+184 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+185 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+185 ms: RLGL: Default OpenGL state initialized successfully
+189 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+189 ms: FONT: Default font loaded successfully (224 glyphs)
+190 ms: SYSTEM: Working Directory: C:\Users\Amol\Documents\GitHub\gra-rpg\dist
+190 ms: Graphics window ready; native Windows cursor enabled
+194 ms: Generating world graphics
+2895 ms: World graphics ready
+2895 ms: Opening audio device
+3477 ms: Audio device ready
+3488 ms: Sound effects ready; loading music
+3490 ms: Audio initialization complete
+3634 ms: First scene rendered
+3832 ms: First frame presented
+3832 ms: OpenGL V-sync
+3832 ms: GPU sharing pixel validation failed (0x80004005)
+8178 ms: Developer session: volcano-forges / new character
+39640 ms: Shutting down

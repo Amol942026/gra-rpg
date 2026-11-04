@@ -1,0 +1,14 @@
+[
+  {
+    "archive": "Emberfall-Windows-x64.zip",
+    "assets_verified": 143,
+    "exe_matches": true,
+    "sha256": "9742c7907aa219bae0adf1dca16d0a3ad782e882d71118d9b74a4bad3a9edcc2"
+  },
+  {
+    "archive": "Emberfall-DEV-Windows-x64.zip",
+    "assets_verified": 143,
+    "exe_matches": true,
+    "sha256": "d4054ee3fe65c1bd4e2046d91848b4a03397876655800737461e13c8ed2c8f0c"
+  }
+]

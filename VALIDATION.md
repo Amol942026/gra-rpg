@@ -1,5 +1,57 @@
 # Weryfikacja prototypu
 
+## Natywny kursor Windows — 04.11.2026
+
+Na życzenie użytkownika usunięto wcześniejszy rysowany wskaźnik oraz całą
+logikę ukrywania kursora systemowego. Gra ustawia normalny tryb GLFW przez
+raylib ShowCursor i wybiera DEFAULT, czyli strzałkę z ustawień Windows.
+Nie używa EnableCursor, ponieważ raylib 5.5 przesuwa w nim mysz na środek.
+
+Obsługa WM_SETCURSOR jawnie ustawia natywny IDC_ARROW i naprawia ujemny
+licznik widoczności Win32. Dodatni licznik nie rośnie przy kolejnych
+wywołaniach. Klasa okna ma systemowy kursor zapasowy. Zdarzenia nieklienckie
+pozostają w oryginalnej procedurze okna; okresowe odświeżanie działa tylko,
+gdy aktywne, widoczne okno gry faktycznie znajduje się pod wskaźnikiem.
+Zamknięcie usuwa własną obsługę i przywraca poprzednią klasę/procedurę.
+Brak rysowania kursora, tekstur, przechwytywania, centrowania, zmiany schematu
+Windows lub ustawień gracza.
+
+Test natywnych funkcji Windows używa osobnego, nieaktywnego pulpitu i
+ukrytego okna; nigdy nie przełącza pulpitu wejściowego użytkownika. Odtwarza
+pusty HCURSOR i licznik -3, a następnie sprawdza przywrócenie rzeczywistej
+strzałki Windows. Sprawdza też 500 aktualizacji bez wzrostu licznika,
+nieprzejmowanie wskaźnika przez ukryte okno, zdarzenia focusu / stylu / rozmiaru,
+przekazanie obsługi nieklienckiej i poprawne odpinanie procedury. To testy
+mechanizmów API; pierwotnego zaniku na widocznym pełnym ekranie nie odtwarzano.
+
+Drugi test używa rzeczywistego raylib i końcowego bufora GL, trzech rozmiarów
+ukrytego okna oraz trzech położeń myszy. Sprawdza normalny tryb natywnego
+kursora, współrzędne kliknięć oraz identyczność obrazu przed/po prezentacji:
+w obrazie gry nie pojawia się żaden rysowany wskaźnik. Tryb automatyczny
+wybrał na tej karcie fallback OpenGL, więc nie deklarujemy testu aktywnego
+DXGI ani obserwacji fizycznego kursora na pierwszym planie.
+
+Przeszło **79/79 sprawdzeń**: 21 natywnego API oraz po 29 w dwóch
+uruchomieniach renderera (automatycznym i wymuszonym OpenGL), łącznie
+18 końcowych ramek. Rzeczywisty natywny uchwyt Windows zweryfikowano przez
+GetCursor i GetIconInfo, a nie obecność rysunku w obrazie gry.
+
+Test: `pwsh -NoProfile -File tests/game_cursor_qa.ps1 -NoAudio`.
+Raporty: `tests/reports/native-cursor-20261104/` i
+`dist/qa-cursor-native-20261104-final/`. Każdy proces miał `--no-audio
+--background-test` i ukryte okno. Rysowana wersja kursora została wycofana;
+jej wcześniejsze wyniki nie są wynikami obecnej poprawki.
+
+Finalne EXE dewelopera i gracza przebudowano z natywną obsługą kursora.
+Oba przeszły po 180 klatek startu w ukryciu bez dźwięku; preferencje audio
+zachowały hash. W obu końcowych ZIP-ach potwierdzono zgodność EXE oraz
+wszystkich 143 zasobów, w tym wcześniejszych grafik ComfyUI. Wyniki i hashe
+archiwów: `tests/reports/native-cursor-20261104/package.json`.
+
+Dokumentacja użytych mechanizmów:
+https://learn.microsoft.com/en-us/windows/win32/menurc/wm-setcursor ,
+https://raw.githubusercontent.com/glfw/glfw/3.4/src/win32_window.c oraz
+https://raw.githubusercontent.com/raysan5/raylib/5.5/src/platforms/rcore_desktop_glfw.c .
 ## Wersja 0.47 — szkielet i klipy animacji z Blendera
 
 Sprawdzone 15 października 2026 w Dokumenty/GitHub/gra-rpg. Wszystkie uruchomienia gry, diagnostyki i Blendera były bez audio. Preferencje dźwięku zachowano bajt w bajt.

@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "backups": "C:\\AI2D\\sprites\\emberfall-caldera-comfy-20261104\\delivery-backup",
+  "checks": [
+    {
+      "runtime": "dist",
+      "exe_unchanged": true,
+      "exe_sha256": "f4dcb80e6d6bd1805575961baac97048954bb66b18389dc8d839f175587b4208",
+      "changed_files": 9
+    },
+    {
+      "runtime": "dist/player",
+      "exe_unchanged": true,
+      "exe_sha256": "439346a899bc6b23ff11a2c9130ec56b883f5c8ca19e5e36f3f3347232bf0028",
+      "changed_files": 9
+    },
+    {
+      "archive": "Emberfall-Windows-x64.zip",
+      "sha256": "3ff1eacfe9120adb4cd988dffcea30f4d4c7acc904c2b8ade3a3a6254b9be68d",
+      "bytes": 25385096,
+      "replaced_entries": 9,
+      "all_other_entries_byte_identical": true,
+      "native_masters_included": false
+    },
+    {
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "sha256": "22a1226ee092290e1d553cfc19da34aa933067ce8a2350512ea28f14fa098a63",
+      "bytes": 25400877,
+      "replaced_entries": 9,
+      "all_other_entries_byte_identical": true,
+      "native_masters_included": false
+    }
+  ]
+}

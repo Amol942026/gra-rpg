@@ -1,0 +1,120 @@
+PASS active client draws software pointer
+PASS focus loss restores system pointer
+PASS hidden and minimized games never hide the user's desktop pointer
+PASS leaving client restores system pointer
+PASS hotspots at both client edges remain eligible
+PASS actual raylib pointer callback available
+PASS startup explicitly enables the uncaptured native cursor
+PASS resized test stays hidden and never hides the native pointer
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS resized test stays hidden and never hides the native pointer
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS resized test stays hidden and never hides the native pointer
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS click hotspot matches final cursor coordinates through resize/DPI/letterboxing
+PASS filled and outlined cursor survives the actual final GL/DXGI copy on top of opaque UI
+PASS rendering never captures, hides or focuses the hardware pointer in a background test
+PASS shutdown releases cursor state
+PASS entire diagnostic stays silent and hidden

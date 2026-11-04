@@ -1,5 +1,10 @@
 # Kaldera Popiołu — przeciwnicy i materiały otoczenia
 
+**Nowsze malowanie przeciwników:** [ComfyUI](../comfy/README.md) zastępuje
+siedem poniższych atlasów postaci. Osiem kierunków, części, alfa i animacje
+pozostają zachowane. Pozostałe materiały otoczenia opisane tutaj nadal
+są używane; wyniki postaci poniżej dotyczą wcześniejszego malowania.
+
 **Nowsze podłoże:** [portal i ciągły teren](../gateway/README.md) zastępują
 opisane poniżej `ground.png` i `macro.png`. Przy odtwarzaniu tej produkcji
 zachowaj te dwa aktualne eksporty z `gateway`; profil AO dla sprite'ów

@@ -1,5 +1,12 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+Nowsze malowanie siedmiu przeciwników Kaldery, zamówione przez użytkownika
+w ComfyUI: [lokalny img2img i istniejące rigi](../volcano/comfy/README.md).
+Workflow zachowuje osiem kierunków, sześć części, dokładną alfę i animacje
+Synfig. Źródła ComfyUI oraz warstwowe master OpenRaster pozostają w C:\AI2D;
+model nie jest częścią paczki gracza. Poprzednie KRA/Laigter poniżej nadal
+opisują otoczenie i historyczne malowanie postaci.
+
 Aktualny portal i ciągłe podłoże Kaldery oraz ostrość prezentacji:
 [Krita/Synfig, natywny obraz i 60 Hz](../volcano/gateway/README.md).
 Produkcja: `caldera_gateway_art.py`, `caldera_gateway_synfig.py`;

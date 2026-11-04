@@ -1,0 +1,52 @@
+1 ms: Emberfall v0.47: startup
+1 ms: Build edition: player
+1 ms: Creating graphics window
+1 ms: Initializing raylib 5.5
+1 ms: Platform backend: DESKTOP (GLFW)
+1 ms: Supported raylib modules:
+1 ms:     > rcore:..... loaded (mandatory)
+1 ms:     > rlgl:...... loaded (mandatory)
+1 ms:     > rshapes:... loaded (optional)
+1 ms:     > rtextures:. loaded (optional)
+1 ms:     > rtext:..... loaded (optional)
+1 ms:     > rmodels:... loaded (optional)
+1 ms:     > raudio:.... loaded (optional)
+122 ms: DISPLAY: Trying to enable VSYNC
+122 ms: DISPLAY: Device initialized successfully
+122 ms:     > Display size: 1920 x 1080
+122 ms:     > Screen size:  1920 x 1080
+122 ms:     > Render size:  1920 x 1080
+122 ms:     > Viewport offsets: 0, 0
+123 ms: GLAD: OpenGL extensions loaded successfully
+123 ms: GL: Supported extensions count: 241
+123 ms: GL: OpenGL device information:
+123 ms:     > Vendor:   Intel
+123 ms:     > Renderer: Intel(R) UHD Graphics
+123 ms:     > Version:  3.3.0 - Build 30.0.100.9864
+123 ms:     > GLSL:     3.30 - Build 30.0.100.9864
+123 ms: GL: VAO extension detected, VAO functions loaded successfully
+123 ms: GL: NPOT textures extension detected, full NPOT textures supported
+123 ms: GL: DXT compressed textures supported
+123 ms: GL: ETC2/EAC compressed textures supported
+123 ms: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+123 ms: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+123 ms: TEXTURE: [ID 1] Default texture loaded successfully
+124 ms: SHADER: [ID 1] Vertex shader compiled successfully
+124 ms: SHADER: [ID 2] Fragment shader compiled successfully
+137 ms: SHADER: [ID 3] Program shader loaded successfully
+137 ms: SHADER: [ID 3] Default shader loaded successfully
+137 ms: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+138 ms: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+138 ms: RLGL: Default OpenGL state initialized successfully
+142 ms: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+142 ms: FONT: Default font loaded successfully (224 glyphs)
+142 ms: SYSTEM: Working Directory: C:\Users\Amol\Documents\GitHub\gra-rpg\dist\player
+142 ms: Graphics window ready; native Windows cursor enabled
+142 ms: Generating world graphics
+2565 ms: World graphics ready
+2565 ms: Audio skipped (--no-audio)
+2670 ms: First scene rendered
+2737 ms: First frame presented
+2737 ms: OpenGL V-sync
+2737 ms: GPU sharing pixel validation failed (0x80004005)
+5420 ms: Shutting down

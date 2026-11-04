@@ -19,6 +19,7 @@
 #include "typography.hpp"
 #include "startup_log.hpp"
 #include "audio.hpp"
+#include "game_cursor.hpp"
 using namespace ember;
 #ifdef EMBERFALL_PLAYER_BUILD
 constexpr bool PlayerBuild=true;
@@ -684,7 +685,8 @@ int main(int argc,char**argv) {
     startupLog.write("Creating graphics window");
     InitWindow((large||backgroundTest)?1920:W,(large||backgroundTest)?1080:H,"Emberfall - Echa zapomnianych ruin | v0.47");
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
-    startupLog.write("Graphics window ready");SetTraceLogLevel(LOG_WARNING);
+    game_cursor::initialize();
+    startupLog.write("Graphics window ready; native Windows cursor enabled");SetTraceLogLevel(LOG_WARNING);
     SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
     bool diagnostic=worldMotionQA||labelsQA||tradeQA||shadowQA||desertQA||towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
@@ -847,7 +849,7 @@ int main(int argc,char**argv) {
          <<"\nFrames over 25 ms: "<<std::count_if(frameTimes.begin(),frameTimes.end(),[](double ms){return ms>25;})<<"\n";
     }
     performance.save();
-    startupLog.write("Shutting down");audioSystem.shutdown();
+    startupLog.write("Shutting down");game_cursor::shutdown();audioSystem.shutdown();
     sync_present::shutdown();
     world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
     hero_portrait::unload();volcano_actors::unload();volcano_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);

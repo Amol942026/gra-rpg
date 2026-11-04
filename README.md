@@ -1,5 +1,10 @@
 # Emberfall — Echa zapomnianych ruin
 
+**Kursor myszy Windows (04.11.2026):** gra używa zwykłej strzałki z ustawień
+Windows. Przywraca normalny tryb myszy, natywny uchwyt kursora i jego licznik
+widoczności przy wejściu nad okno oraz po zmianie aktywności lub trybu ekranu.
+Nie rysuje własnego kursora, nie przechwytuje myszy ani jej nie centruje.
+
 Aktualizacja 29.10.2026: dodano trzecią krainę, **Kalderę Popiołu**.
 Po pokonaniu Żywej Wydmy porozmawiaj z Eldrinem i wybierz podróż do kaldery.
 Nadal można wracać na pustynię. Nowy poziom ma rzeki animowanej lawy,

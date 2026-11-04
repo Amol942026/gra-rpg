@@ -1,5 +1,27 @@
 # Raport konfiguracji — 19.10.2026
 
+**Aktualizacja 04.11.2026 — przeciwnicy Kaldery / ComfyUI:** na wyraźne
+zamówienie użytkownika i po potwierdzeniu lokalnego lekkiego modelu wykonano
+56 rzeczywistych generacji img2img w ComfyUI 0.41.3 / DreamShaper 8.
+Nowe malowanie wszystkich sześciu gatunków i Varkhora jest rzutowane na
+istniejące części animowane przez Synfig. Osiem kierunków, dokładna alfa,
+kotwice i stan rozgrywki są zachowane. Widoczne detale obejmują rysy twarzy,
+łuski, błony skrzydeł, pancerze, fałdy szat i żar kamiennych szczelin.
+PASS: 728 kontroli źródeł, grafów, wejść i atlasów oraz 787 renderera,
+w tym 224 ujęcia chodu / bezruchu / ataku / szczątków. Testy pozostały
+ukryte i ciche. Ukończony render: średnia 4,03 ms / p95 5,55 ms;
+nie jest to pomiar foreground FPS. Atlasowe RGBA8 nadal 55 050 240 bajtów,
+bez dodatkowych tekstur lub odczytu plików w klatce.
+Zaktualizowano obie aktywne kopie zasobów i oba ZIP-y; każdy inny wpis
+archiwum pozostał identyczny bajtowo, w tym oba pliki EXE. Rzeczywisty
+EXE gracza przeszedł 180 klatek startu z zamkniętym audio i ukrytym oknem.
+Źródła ComfyUI, oryginały i siedem warstwowych plików OpenRaster są
+w `C:\AI2D\sprites\emberfall-caldera-comfy-20261104`. Na tym PC Krity
+ani jej bridge nie ma, mimo historycznego opisu; nie deklarujemy zapisów KRA.
+Pochodzenie modelu, komercyjne uprawnienia do obrazów, hashe, backupy,
+workflow i wyniki: [ComfyUI](../volcano/comfy/README.md),
+`../volcano/comfy/QA.json`. Nie użyto chmury ani płatnych węzłów.
+
 **Aktualizacja 04.11.2026 — portal, ciągły grunt i ostrość:** cztery nowe
 warstwowe KRA oraz natywny SIF. Kamienna brama ma runy i wirujący rdzeń,
 120 klatek / 60 Hz / pętla 2 s. Grunt jest zawiniętą fakturą bez ciemnych

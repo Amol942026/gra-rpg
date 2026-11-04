@@ -1,0 +1,29 @@
+PASS startup uses normal unhidden Windows cursor mode
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS native click coordinates remain correct through resizing and margins
+PASS final framebuffer contains only the game image and no drawn pointer
+PASS hidden renderer retains normal native cursor mode without focusing or capturing
+PASS shutdown remains hidden and silent with native cursor enabled

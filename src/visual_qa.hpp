@@ -39,6 +39,7 @@ void refreshDisplayLayout(){
     SetMouseOffset(0,0);
     SetMouseScale(1,1);
     mouse=pointerToGame(GetMousePosition());
+    game_cursor::update();
 }
 void presentCanvas(){
     // BeginDrawing() can carry a separate Windows DPI transform (e.g. 150%).

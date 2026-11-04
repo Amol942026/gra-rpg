@@ -1,0 +1,9 @@
+{
+  "bytes": 2132625894,
+  "source": "https://huggingface.co/Lykon/DreamShaper",
+  "license": "https://civitai.com/api/v1/models/4384",
+  "download_transport": "PowerShell TLS using system certificate store",
+  "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+  "model": "C:\\Users\\Amol\\AppData\\Local\\Comfy-Desktop\\ComfyUI-Installs\\Amol\\ComfyUI\\models\\checkpoints\\DreamShaper_8_pruned.safetensors",
+  "comfy_cli_download": "certificate validation failed before data transfer"
+}

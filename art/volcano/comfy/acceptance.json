@@ -1,0 +1,163 @@
+{
+  "status": "PASS",
+  "checks": 728,
+  "files": [
+    {
+      "name": "slag-crawler",
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "sha256": "ee10acb25003d7b7aadb38a9fb1fe17333ebf6ead3f353d23f8f3a0395756c7e",
+      "original_sha256": "c4ccf895f41beff50bba29531491f9cc525e7970ac494e5e7f290f7434064af2",
+      "changed_opaque_pixels_by_direction": [
+        5510,
+        5516,
+        4420,
+        5464,
+        5417,
+        5382,
+        4270,
+        5720
+      ],
+      "alpha_identical": true
+    },
+    {
+      "name": "lava-salamander",
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "sha256": "198f3cc489f857822a6baaceef387d92b6c9a8b389f09976ff7caa174e77f1c1",
+      "original_sha256": "29c4ac2b641c1f628a20c60ce3dfe4ce1dfd900b9cbbf4d59c49049278a6b851",
+      "changed_opaque_pixels_by_direction": [
+        5285,
+        5145,
+        3663,
+        4837,
+        5171,
+        5039,
+        3615,
+        5139
+      ],
+      "alpha_identical": true
+    },
+    {
+      "name": "fire-imp",
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "sha256": "8af024ec08007baf0e075bb564014be3946c3432a3e9fb8ce4b1729d4095d938",
+      "original_sha256": "65545e84d7ecbb6ce0056c93853b040dcbf067bf88bde9176c01b36041c15835",
+      "changed_opaque_pixels_by_direction": [
+        4508,
+        4636,
+        4280,
+        4392,
+        4285,
+        4104,
+        4163,
+        4313
+      ],
+      "alpha_identical": true
+    },
+    {
+      "name": "ash-wraith",
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "sha256": "22674659dce9b2e6381a22c4be460f4acb435bfbb1ab78b2bf46a9407237df1a",
+      "original_sha256": "046c5bf716f43b0c1e4974e532b249f308af65f0bf52153535f371dda677ef7c",
+      "changed_opaque_pixels_by_direction": [
+        5605,
+        5468,
+        5594,
+        5756,
+        5625,
+        5528,
+        5524,
+        5997
+      ],
+      "alpha_identical": true
+    },
+    {
+      "name": "obsidian-sentinel",
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "sha256": "dfc3a99fe3e685293be157ab73a3a62ac8fa703be6afefeb6e38d40b6db90bca",
+      "original_sha256": "63acf12e6792c949df1f43eea67eed5fa62737f3e6c9f9ad285e486fbe63563f",
+      "changed_opaque_pixels_by_direction": [
+        6520,
+        6877,
+        6793,
+        6741,
+        6709,
+        6844,
+        6845,
+        6822
+      ],
+      "alpha_identical": true
+    },
+    {
+      "name": "ember-drake",
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "sha256": "21947dc6a87258faf0abeb4e72ac2d42613ae1206a7f43ef444b828c125ba928",
+      "original_sha256": "1ad8d8501730153f6671d1b2f345a6cb14f88999cbc024f6fe61878070774e61",
+      "changed_opaque_pixels_by_direction": [
+        7263,
+        7113,
+        5985,
+        6859,
+        7059,
+        6856,
+        6140,
+        7077
+      ],
+      "alpha_identical": true
+    },
+    {
+      "name": "varkhor",
+      "size": [
+        2048,
+        1536
+      ],
+      "rgba8_bytes": 12582912,
+      "sha256": "e45372efc0b5689928e3b9e6b2a7875e3042aba85b6693e2e33ce0b039f4a52a",
+      "original_sha256": "b058c37d885776fc206f2fd20ed580ec39237d27f0847b067dae2884bbbe9a93",
+      "changed_opaque_pixels_by_direction": [
+        16606,
+        16625,
+        16342,
+        15935,
+        16126,
+        16296,
+        15873,
+        16174
+      ],
+      "alpha_identical": true
+    }
+  ],
+  "generations": 56,
+  "species": 7,
+  "directions": 8,
+  "layered_ora": 7,
+  "native_kra": 0,
+  "local_only": true,
+  "paid_nodes": false,
+  "animation_keys_changed": false,
+  "texture_memory_rgba8": 55050240,
+  "foreground_fps_measured": false
+}
