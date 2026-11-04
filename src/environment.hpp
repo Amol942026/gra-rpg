@@ -53,6 +53,7 @@ float treeShift(const Prop& prop,float sourceY,float time){
     return treeBend(prop,a,time)*(1-fraction)+treeBend(prop,b,time)*fraction;
 }
 void drawPropTexture(const Prop& prop,Texture2D texture,bool upright,Color tint){
+    if(prop.type==13&&game.inVolcano()){volcano_art::drawPortal(prop,upright,tint);return;}
     if(prop.type>=14){volcano_art::drawProp(prop,upright,tint);return;}
     Vector2 base=screen(prop.pos);
     if(!treeProp(prop.type)){

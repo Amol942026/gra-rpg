@@ -1,0 +1,25 @@
+{
+  "name": "scenery",
+  "layers": [
+    "T\u0142o",
+    "Fractured basalt outcrops",
+    "Charred split trees",
+    "Sulphur vents",
+    "Obsidian glass",
+    "Mineral weathering / Fractured basalt outcrops",
+    "Mineral weathering / Charred split trees",
+    "Mineral weathering / Sulphur vents",
+    "Mineral weathering / Obsidian glass"
+  ],
+  "kra_sha256": "6f8fdf0ad7cd02283c200d502a246ac348549cd92f296555bc6313658288194d",
+  "png_sha256": "02dcf16cc9cb8bcdc014a28dbb2f9d381cf300d689cf002c80ec7aaa0e5fa0f6",
+  "retained_saved_document_id": "a6a82012-37b6-4279-bec5-a466e82bff4f",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\depth\\masters\\scenery.kra",
+  "source_kra_sha256": "b03544ca7f2f459a68fdd3b166cf38d6ea5bb9bb14407e02b597fd164c14446d",
+  "albedo_sha256": "1b70f5759d00bd70850eb553d7f6c74083fa02ef8befb452576cf354a8b3ed7d",
+  "albedo_size": [
+    1440,
+    1840
+  ]
+}

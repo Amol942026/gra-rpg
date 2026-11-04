@@ -1,0 +1,131 @@
+{
+  "Status": "PASS",
+  "Source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\ember-drake.png",
+  "OriginalUnchanged": true,
+  "SourceSha256": "a6752eead535d70768c4fc364d40b85d5f27159c5c95b5d2649e42b16cfab84e",
+  "SourceWidth": 1536,
+  "SourceHeight": 1152,
+  "SourcePixelSha256": "8fc5329634cd1143f00433819ad509b67a8bd4367023638ad6f5ee51cbc8d0f6",
+  "Laigter": "C:\\AI2D\\Tools\\Laigter\\laigter.exe",
+  "LaigterSha256": "95ded5057510ada7f45b0321192b91cf7ae058fcd683683a1ed5b5a19e276e48",
+  "Version": "laigter 1.14.0",
+  "Preset": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\laigter-heightmap.presets",
+  "PresetSha256": "dd144da7393f8d82d30f146d8e8436c2e9c56cf04846436bceec4e61150cabdc",
+  "Arguments": [
+    "--no-gui",
+    "--software-opengl",
+    "--not-recursive",
+    "--flatten",
+    "-d",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\_input\\ember-drake.png",
+    "-l",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6",
+    "-n",
+    "-c",
+    "-o",
+    "-p",
+    "-r",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\_input\\preset.presets"
+  ],
+  "OutputDirectory": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6",
+  "MapCount": 4,
+  "Maps": [
+    {
+      "Type": "normal",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\ember-drake_n.png",
+      "Bytes": 243682,
+      "Sha256": "cfa7c0a667b98b3037670ab36aefcc475e93959493f7b4883538ae816e514ae0",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "3d74fc14efc57592823bbb02ccc2b75842ebca8a6b02029b0b387db57dde5996",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          8,
+          9,
+          170
+        ],
+        "SampleMaximumRgb": [
+          245,
+          241,
+          255
+        ],
+        "SampleIsGrayscale": false,
+        "SampleMaxNormalUnitError": 0.012489
+      }
+    },
+    {
+      "Type": "specular",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\ember-drake_s.png",
+      "Bytes": 81261,
+      "Sha256": "c09deae670dbd5dee43587df605b3f01bbf6ffed4fca1dc30f2bf1a1eb969ceb",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "b3285a7d6582404bf97b2e025150fe50d8110a2b76c3311a26a288725040b673",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          129,
+          129,
+          129
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "occlusion",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\ember-drake_o.png",
+      "Bytes": 96044,
+      "Sha256": "9788454ccbdd8a66331dd2604379da2293cb2e5644340a9f0898a14e47d04ce5",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "1421b6bfa1ac432709b283af4c5708e23109648ca4450b2c1d5627b9ff88fe90",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          16,
+          16,
+          16
+        ],
+        "SampleMaximumRgb": [
+          254,
+          254,
+          254
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "parallax",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\ember-drake_p.png",
+      "Bytes": 83945,
+      "Sha256": "f8db56a685873b29f09c47c23c2af1fec832cb745d84cd0b81a4e83bbcd675c5",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "35ef53c4c08e67b02a964b25059b6866c0742c885addf9cb6e3416a8276e50db",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          146,
+          146,
+          146
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    }
+  ],
+  "ElapsedSeconds": 1.513
+}

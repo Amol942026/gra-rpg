@@ -1,0 +1,11 @@
+{
+  "name": "macro",
+  "layers": [
+    "Broad ash drifts and iron oxide fields",
+    "Ancient cooling flow ridges"
+  ],
+  "kra_sha256": "feb6210256a5b8a02bde30f4938050f56ab587f2a1c33a92654ea6c0e5d57d50",
+  "png_sha256": "345e7ff89cf397f8fff2a2e8ebd7a74ab86cd6ef381f2d7a39779f87df333e05",
+  "retained_saved_document_id": "fa0a1ec3-acc6-41a6-963d-881415c73680",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "scenery-extra",
+  "layers": [
+    "T\u0142o",
+    "Cracked volcanic boulders",
+    "Burnt stumps and ash grass",
+    "Sulphur craters",
+    "Runic basalt monoliths",
+    "Mineral weathering / Cracked volcanic boulders",
+    "Mineral weathering / Burnt stumps and ash grass",
+    "Mineral weathering / Sulphur craters",
+    "Mineral weathering / Runic basalt monoliths"
+  ],
+  "kra_sha256": "564264de91d38731ec93f3980ce867b46555d1f8884458b8977f1de175e259b2",
+  "png_sha256": "24598174a8fc4e1b867b1808375f4dcd233ce3847a9ba8c9ad585fc70b023a36",
+  "retained_saved_document_id": "5772f259-937d-419a-bf27-7483ad8da47e",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\AI2D\\sprites\\emberfall-volcano-river-detail-20261029\\scenery-extra.kra",
+  "source_kra_sha256": "e3dd8ea0a0580e3cc9ca6679d3a2d11181d6dce997cacb2501b9e6c63abf7b1a",
+  "albedo_sha256": "1a8c5d1bcab94f888cef101df0bd04ebdcc9cede9d5b90b25507daf6b475c265",
+  "albedo_size": [
+    1440,
+    1840
+  ]
+}

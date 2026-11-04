@@ -1,0 +1,32 @@
+{
+  "name": "lava-salamander",
+  "status": "PASS",
+  "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\lava-salamander.png",
+  "source_sha256": "143748697c094f67406e8eced4162934e1a1e4fd29d9d27f5adc5f4e2d4eddaa",
+  "source_kra_sha256": "e929ecefc1aad04218c22612ac092e9d18f909d415cdecf9a05d37d2e45bba40",
+  "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\lava-salamander.png",
+  "sha256": "29c4ac2b641c1f628a20c60ce3dfe4ce1dfd900b9cbbf4d59c49049278a6b851",
+  "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\maps-manifest.json",
+  "maps_manifest_sha256": "f63762c14d1c3476d6bea57642632ba4a32f327beed5f1add223c845d9b12ae6",
+  "map_types": [
+    "normal",
+    "specular",
+    "occlusion",
+    "parallax"
+  ],
+  "map_sha256": {
+    "normal": "f5b09f1a00d320c8bfa0398cb7e1a6062a7e0a351b745f190d3c6f89b1d95ebd",
+    "specular": "806f0900540e54e53052e756ac27bd1e2ee7ab27d22b0f917c44369b17d8f864",
+    "occlusion": "2aae991c468e647869c39e377e0c04fce22506c24bf0f7533f43ccfe40319e97",
+    "parallax": "d6b1676fbcacdeaf65f67548365b901790c23007f1a18bd1059cb0064a288498"
+  },
+  "size": [
+    1536,
+    1152
+  ],
+  "rgba8_bytes": 7077888,
+  "alpha_unchanged": true,
+  "preserved_emissive_pixels": 1081,
+  "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+  "runtime_material_shader": false
+}

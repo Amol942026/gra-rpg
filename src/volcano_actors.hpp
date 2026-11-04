@@ -58,7 +58,10 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  auto paint=[&](int p,Texture2D texture,Color tint,float dx=0,float dy=0){auto k=parts[p];Rectangle source{float(direction*atlas.cell),float(p*atlas.cell),float(atlas.cell),float(atlas.cell)};
   DrawTexturePro(texture,source,{(k.pivot.x-64+k.shift.x)*s+dx,(k.pivot.y-115+k.shift.y)*s+dy,128*s,128*s},{k.pivot.x*s,k.pivot.y*s},k.angle,tint);
  };
- int frontOrder[]={0,1,2,3,4,5},backOrder[]={0,1,2,4,5,3};const int* order=direction>=5?backOrder:frontOrder;
+ int frontOrder[]={0,1,2,3,4,5},backOrder[]={0,1,2,4,5,3},raisedSwordOrder[]={0,1,2,5,3,4};
+ // A raised sword passes behind the helmet during anticipation; the shield
+ // remains in front. The forward cut returns the blade to the foreground.
+ const int* order=direction>=5?backOrder:id==4&&!dead&&action>=.08f&&action<.53f?raisedSwordOrder:frontOrder;
  if(!shadow&&outline.a)for(Vector2 delta:{Vector2{-1.5f,0},Vector2{1.5f,0},Vector2{0,-1.5f},Vector2{0,1.5f}})for(int n=0;n<6;n++)paint(order[n],atlas.silhouette,outline,delta.x,delta.y);
  for(int n=0;n<6;n++)paint(order[n],shadow?atlas.silhouette:atlas.art,dead?rgb(171,158,167):WHITE);
  if(flash&&!shadow)for(int n=0;n<6;n++)paint(order[n],atlas.silhouette,Fade(WHITE,.48f));

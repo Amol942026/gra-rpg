@@ -1,0 +1,393 @@
+{
+  "status": "PASS",
+  "assets": [
+    {
+      "name": "slag-crawler",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\slag-crawler.png",
+      "source_sha256": "d482db7d4c8e811aa2b1b0c2b384a2945de74ce0586c7e687779241ce633ee7f",
+      "source_kra_sha256": "20c78f74a790876949753e4cf88e91d3ec3bf00aea22b1fad90c9076e2306d04",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\slag-crawler.png",
+      "sha256": "c4ccf895f41beff50bba29531491f9cc525e7970ac494e5e7f290f7434064af2",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\slag-crawler_20261104_152604_825_bdfaa0\\maps-manifest.json",
+      "maps_manifest_sha256": "a8c58a0f66af29079e9a5976c8d14a52259ca894c772d61234d21cfe9b3a87a5",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "5cb8f2cd8f318ec21d7728892fe8e13ac204f707ea00be8756df6758ca22d323",
+        "specular": "eb936449547ca274aaec973754de23a7b007cf356d4066057701980f06d2cdbf",
+        "occlusion": "fb88373a5db71c35071377056b6dfc9eb2e41860c3c3382922dc96210ddad8f7",
+        "parallax": "6a1959bb2bb652fcab12c9d0bda210eaf897e7b7af8c2e10e6cb9e782f337d36"
+      },
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 1934,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "lava-salamander",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\lava-salamander.png",
+      "source_sha256": "143748697c094f67406e8eced4162934e1a1e4fd29d9d27f5adc5f4e2d4eddaa",
+      "source_kra_sha256": "e929ecefc1aad04218c22612ac092e9d18f909d415cdecf9a05d37d2e45bba40",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\lava-salamander.png",
+      "sha256": "29c4ac2b641c1f628a20c60ce3dfe4ce1dfd900b9cbbf4d59c49049278a6b851",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\maps-manifest.json",
+      "maps_manifest_sha256": "f63762c14d1c3476d6bea57642632ba4a32f327beed5f1add223c845d9b12ae6",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "f5b09f1a00d320c8bfa0398cb7e1a6062a7e0a351b745f190d3c6f89b1d95ebd",
+        "specular": "806f0900540e54e53052e756ac27bd1e2ee7ab27d22b0f917c44369b17d8f864",
+        "occlusion": "2aae991c468e647869c39e377e0c04fce22506c24bf0f7533f43ccfe40319e97",
+        "parallax": "d6b1676fbcacdeaf65f67548365b901790c23007f1a18bd1059cb0064a288498"
+      },
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 1081,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "fire-imp",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\fire-imp.png",
+      "source_sha256": "de28520e4db37e971e0e0de2ca01301a04d958b51f563484902ec11d5b8e72c9",
+      "source_kra_sha256": "d55c0c361b77c0fac6c07cfa66c688d45b451ddce6085aa5354b005f09430885",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\fire-imp.png",
+      "sha256": "65545e84d7ecbb6ce0056c93853b040dcbf067bf88bde9176c01b36041c15835",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\fire-imp_20261104_152724_977_4d9a5b\\maps-manifest.json",
+      "maps_manifest_sha256": "0980aa501b9cf539e0914bcf6e75d7afe42510d9dadae4a888eede1b69eec669",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "c1e41902203fd14c96f7033d4b390d81ba29976fe46699f45372b3699973736a",
+        "specular": "6852b8d0d669839630d6edde299f1592497d4e314c60e79dc395d20fb9630e98",
+        "occlusion": "5d7dbde154c4994fa740997a8fb71e5937e95fe4c3ec5d5e1bff6683adc43c92",
+        "parallax": "a8a98015d26af183c33431b6a75fccacea108e5e6842a185529aebb364c7e3fe"
+      },
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 26796,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "ash-wraith",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\ash-wraith.png",
+      "source_sha256": "0b046c4a118cd2e9f3b4f29c123af47b8dc72c492e852c28027c4d4d2128c9fd",
+      "source_kra_sha256": "47f12be52d3b6a99b70a3289a172209c5a9405cb3228135c94fb5a282648e86a",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\ash-wraith.png",
+      "sha256": "046c5bf716f43b0c1e4974e532b249f308af65f0bf52153535f371dda677ef7c",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\maps-manifest.json",
+      "maps_manifest_sha256": "617b7ac998f47f671cb25c1b6070cd5e4b50e18c50ea15f33833f80fba522970",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "5804f0f8a4186be13cd7b1dab9ed73f32f8e1396890ad0bff46b9e9fb7641442",
+        "specular": "2f1f36a3cf754a23231fd8fb73de67905f7734eaf43d367f62eee2ae30cb5296",
+        "occlusion": "66f4653c4e5f00c93fc63924f4161e54f2649999ebfb53b20f9822318cfc54af",
+        "parallax": "e71158d462afba50f22033bd66cfc15ef9e670abf227b09b1804dfe317a51687"
+      },
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 0,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "obsidian-sentinel",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\obsidian-sentinel.png",
+      "source_sha256": "e3567a4977268ef11bd53b8aa26abdf4ab432b9688f61e30e89aed4163334e72",
+      "source_kra_sha256": "6d12b3fc4e577af0b66786d6f6a94f376eadfa5eafda5a02810c85b4315636cc",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\obsidian-sentinel.png",
+      "sha256": "63acf12e6792c949df1f43eea67eed5fa62737f3e6c9f9ad285e486fbe63563f",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\maps-manifest.json",
+      "maps_manifest_sha256": "5a21b9df538b250b815eff854371ce6f27efd7f3b7d3db65443f196fb6b69aad",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "c2aa795f7583b3c1ee27fdcbf951b50093db1c84fec103b1cd5f878af3cb853d",
+        "specular": "78a2098338efc15823e1d5b607fe1b4b346c32fd08e8c2e6b0d95d229bff6ae5",
+        "occlusion": "784841e4ec6730cc6f5b7c97ed454359e024f9aaf96e488ede8dc65e457a3887",
+        "parallax": "8d193fbd4da6dec570d91a11146e9ed5f74cd780cf9ee0308fe97cec54c6a905"
+      },
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 1003,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "ember-drake",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\ember-drake.png",
+      "source_sha256": "a6752eead535d70768c4fc364d40b85d5f27159c5c95b5d2649e42b16cfab84e",
+      "source_kra_sha256": "a5b25adc747e9d9f500af61f2787bf6acebb6b6cfac9e3d643bb4a3302783f89",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\ember-drake.png",
+      "sha256": "1ad8d8501730153f6671d1b2f345a6cb14f88999cbc024f6fe61878070774e61",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\maps-manifest.json",
+      "maps_manifest_sha256": "e64aa7893759df5d2bd9e0d70da382f6ffacc582068758d094e66c89c5b46a65",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "cfa7c0a667b98b3037670ab36aefcc475e93959493f7b4883538ae816e514ae0",
+        "specular": "c09deae670dbd5dee43587df605b3f01bbf6ffed4fca1dc30f2bf1a1eb969ceb",
+        "occlusion": "9788454ccbdd8a66331dd2604379da2293cb2e5644340a9f0898a14e47d04ce5",
+        "parallax": "f8db56a685873b29f09c47c23c2af1fec832cb745d84cd0b81a4e83bbcd675c5"
+      },
+      "size": [
+        1536,
+        1152
+      ],
+      "rgba8_bytes": 7077888,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 9094,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "varkhor",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\varkhor.png",
+      "source_sha256": "63691fc10615828fe20b79d39e771c268a559128a8a5d55301542cbc1c429b53",
+      "source_kra_sha256": "b587569638c591cead09e715b515e11e0514777b929b4b8982e7a4b59d526003",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\varkhor.png",
+      "sha256": "b058c37d885776fc206f2fd20ed580ec39237d27f0847b067dae2884bbbe9a93",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\varkhor_20261104_152735_789_7baf03\\maps-manifest.json",
+      "maps_manifest_sha256": "0b93ce85de383f89a1f2dca199552050d95753d0503ce6520c42f32af436a5a5",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "4912c2825d990f0bd26623e2d3aa93d4148336964c5839a542684042d8922f7b",
+        "specular": "4026b7c12c940df00744dc857c3f78dfe9666503ca77edbe433bb18f2a91d61c",
+        "occlusion": "6b13bbc3c96287a7f1661068709d6f8cfcfcac4d2b05ba05c1b41e5bd80e4ab8",
+        "parallax": "fe2cccbd69bbb0a65ba48085d125e37e4bd77c31c32bc2c67c8eee07b254841f"
+      },
+      "size": [
+        2048,
+        1536
+      ],
+      "rgba8_bytes": 12582912,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 10723,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "scenery",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\scenery.png",
+      "source_sha256": "1b70f5759d00bd70850eb553d7f6c74083fa02ef8befb452576cf354a8b3ed7d",
+      "source_kra_sha256": "6f8fdf0ad7cd02283c200d502a246ac348549cd92f296555bc6313658288194d",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\scenery.png",
+      "sha256": "1fe9c5f7062274f60b78953098f8c23423796fa25d7418a80b5c24ff80c71ea4",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7\\maps-manifest.json",
+      "maps_manifest_sha256": "e5d890cc8e0a8332a58a7df58e665d1372d9f495306869149c1894cf9e53b50f",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "efe813f00b3f58d3f5649b2ab8b459554b1be92b8c958f1ea7c62edbf0331dcc",
+        "specular": "5d329e4f04f14b7e259964978cbfdb7e359a75f073b4c849824f56db197b2827",
+        "occlusion": "7f55f62721034394686ae272f5224deb68f1321490ad826ccf4a91a2108d56b3",
+        "parallax": "a896c66bdba60f4bf4b041efee767ecb57528533451f173a434922633735dea6"
+      },
+      "size": [
+        1440,
+        1840
+      ],
+      "rgba8_bytes": 10598400,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 2292,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "scenery-extra",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\scenery-extra.png",
+      "source_sha256": "1a8c5d1bcab94f888cef101df0bd04ebdcc9cede9d5b90b25507daf6b475c265",
+      "source_kra_sha256": "564264de91d38731ec93f3980ce867b46555d1f8884458b8977f1de175e259b2",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\scenery-extra.png",
+      "sha256": "b98aa6a7527a9dcab3ddd7269eb6585ad1d21b48a9e4288369a2cffcce2224f1",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery-extra_20261104_152743_993_4bb3b9\\maps-manifest.json",
+      "maps_manifest_sha256": "ccf17b6bb5e6e8940ad9eef448d0724a55be5af416b891671e27393361dabbeb",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "1708364586a1263f9e5522e43360d5e2fd64b1e3bcfce907e4b3c78fff9f0952",
+        "specular": "73a371199809d7be33fba7f8bf0a80c6fcedc71604a0adf29bfe721750401a4c",
+        "occlusion": "370e69c0c3dfcb781104dd15955ffa0392397fc2d9fc10619dcf245c694375de",
+        "parallax": "e5520dd20f1109d11a5eb38e0a21c268d399638c8f04474cb4cf1deaf11ec286"
+      },
+      "size": [
+        1440,
+        1840
+      ],
+      "rgba8_bytes": 10598400,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 2210,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "ground",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\ground.png",
+      "source_sha256": "820b9c3198542e72c74525a2be1caa79bd6bfd1da0dad8783c16441b2ff0673a",
+      "source_kra_sha256": "39264ef98c044c450fc585d6cc23c9ce0e8b491a93519c8706a1e4b763055e16",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\ground.png",
+      "sha256": "fb0869a7c8792ff4f10f1559b9222cefca77d6fce0d9b450d106805dd915ba1c",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ground_20261104_152747_917_cc7668\\maps-manifest.json",
+      "maps_manifest_sha256": "68cc1ce0d340ce38d31b5110b609b9eecc78eb84cc8f6e487f15006c8dbd0a1c",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "d9107351497c0a2f089ec8d7be2a34c46388be42bcc6c1996fbacbb5a113423e",
+        "specular": "15075092f6443ae599c3bdfeaaedb90b6db925f551db5d59e1dc6ca8956a3e85",
+        "occlusion": "e894c5fb99c6ea058ac709b5b667ef87c16a7baebe9ede1722cc7504732dadb1",
+        "parallax": "3d6199da34b3055b649ca82d8ea533d9ba944eb1cf4e33d1d4f097a7727a23e0"
+      },
+      "size": [
+        512,
+        512
+      ],
+      "rgba8_bytes": 1048576,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 0,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "channel-wall",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\channel-wall.png",
+      "source_sha256": "4a628a1245e521259eae0d2c6e3fb1295c13518e2533edc444f0e6617d312d75",
+      "source_kra_sha256": "24992efa95b8092628e5f58aee2c5942bb490b2fe7ba582de7b65820afe03150",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\channel-wall.png",
+      "sha256": "668693a4fd4d83abb15de5a8c215d8967d0f1860f908c2f2e592692a40a1a964",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\channel-wall_20261104_152749_200_06ac6f\\maps-manifest.json",
+      "maps_manifest_sha256": "e11ae04bc17db0e062cffa7f7907691f61115d88e2c9b85e232f5c965e2cc42c",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "440f5262752c59456f76bffa6c6809f3d9d6ba47d4a1f9a6a4b03f167dde626f",
+        "specular": "4bc0f21f279c228bece42b5d36eee7939dc74894f24ca2c2a0630bdad5bcf619",
+        "occlusion": "0673fa88f2504f9ba2b9271ce3462fc3a01d170131793f91eded742a9f107a9a",
+        "parallax": "b1c23bbd5d532546ad4322557f0ee9ecf729a77db49a6bf3d251a70d293aa59a"
+      },
+      "size": [
+        512,
+        256
+      ],
+      "rgba8_bytes": 524288,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 0,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    },
+    {
+      "name": "macro",
+      "status": "PASS",
+      "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\macro.png",
+      "source_sha256": "2f4b20088c35586a62a5e637e5a232ec069bc20826445d93f682cdcc28b44eb0",
+      "source_kra_sha256": "08c81957f51b4502e49b9eb6780ebb5eb8c21cce065ae7f5e6ff29cf8e9242e3",
+      "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\macro.png",
+      "sha256": "3c17ec030a5b7225623a699ff45bfaf5600ee05ec845386d86f758aedc8fe031",
+      "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\macro_20261104_152750_584_1ed2d3\\maps-manifest.json",
+      "maps_manifest_sha256": "473d527f69d1173da724dffe517e44336368992ad7a878ea616c8931ea790f3e",
+      "map_types": [
+        "normal",
+        "specular",
+        "occlusion",
+        "parallax"
+      ],
+      "map_sha256": {
+        "normal": "0e14f9316e77b45f06b0f37ee8a842e1339bbe0a5614a9a966474572ac0469bb",
+        "specular": "92649ef9a1fa7ec925e84ea4e5fd885b5eca13402183a0fcf474937b60a021ac",
+        "occlusion": "59b20afecbc6c776a05c0e99f7b49b16b1a4c242aac36feb7e78fdcd839cf9a6",
+        "parallax": "36538bae78ff950d2699a81f8c4d38a662dfb7bd841e5928a84f0c034185c38d"
+      },
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba8_bytes": 4194304,
+      "alpha_unchanged": true,
+      "preserved_emissive_pixels": 368744,
+      "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+      "runtime_material_shader": false
+    }
+  ],
+  "map_count": 48,
+  "free_local_tools_only": true,
+  "runtime_additional_textures": 0,
+  "runtime_additional_draw_calls": 0
+}

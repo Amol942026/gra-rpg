@@ -1,0 +1,41 @@
+Build edition: player
+Frames: 180
+Window: 1920x1080
+Fullscreen: no
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: DXGI flip / V-sync
+DXGI synchronized presents: 180
+Occluded presentations: 0
+Suppressed native swaps: 180
+Actual presentation interval: 1
+Presentation fallback: 
+Strong cuts performed: 0
+Piercing arrows fired: 0
+Developer mode: 0
+Developer menu open: 0
+Developer destination: unavailable
+World location: forest
+Benchmark scenario: forest
+Desert areas visited: 0
+Sand prisons cast: 0
+Tower floor: 1
+Intro active: 0
+Developer error: 
+Main menu open: 1
+Pause menu open: 0
+Audio device opened: no
+Native canvas: 2160x1350
+Desert background buffer: 0x0
+Hidden background diagnostic: yes
+Window hidden: yes
+Diagnostic loop rate (not foreground FPS): 51.4139
+CPU frame mean (ms): 11.225
+EndDrawing mean (ms): 0.00742773
+Presentation mean (ms): 8.21512
+CPU frame p95 (ms): 12.0992
+CPU frame p99 (ms): 21.8851
+Frame p95 (ms): 16.8508
+Frame p99 (ms): 22.0182
+Frame max (ms): 350.415
+Frames over 25 ms: 1

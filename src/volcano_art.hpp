@@ -5,6 +5,15 @@ inline Texture2D extraScenery{},extraSceneryEdge{};inline std::vector<unsigned c
 inline constexpr int FlowFrames=60;inline constexpr float FlowFPS=30;
 inline std::array<Texture2D,60> lavaFrames{};
 inline std::vector<unsigned char> sceneryAlpha;
+inline Texture2D portalFrame{},portalLoop{},portalOutline{};inline std::vector<unsigned char> portalMask;
+inline int portalSample(float time){return int(std::floor(std::fmod(std::max(0.f,time)*60+.0001f,120.f)));}
+inline void drawPortal(const Prop& p,bool outline,Color tint){
+ Vector2 at=screen(p.pos);Rectangle bounds{at.x-90*p.size,at.y-208*p.size,180*p.size,230*p.size};
+ if(outline){DrawTexturePro(portalOutline,{0,0,360,460},bounds,{0,0},0,tint);return;}
+ int f=portalSample(game.time);DrawTexturePro(portalLoop,{float(f%15*132+2),float(f/15*212+2),128,208},{at.x-55*p.size,at.y-190*p.size,110*p.size,195*p.size},{0,0},0,tint);
+ DrawTexturePro(portalFrame,{0,0,360,460},bounds,{0,0},0,tint);
+}
+inline bool portalContains(const Prop& p,Vector2 point){Vector2 at=screen(p.pos);int x=int(std::floor(((point.x-at.x)/p.size+90)*2)),y=int(std::floor(((point.y-at.y)/p.size+208)*2));return x>=0&&x<360&&y>=0&&y<460&&!portalMask.empty()&&portalMask[y*360+x];}
 struct Strip{std::array<V,4> corners;float from,to;};inline std::vector<Strip> lavaStrips;
 struct CanyonFace{std::array<V,4> corners;std::array<float,4> depth;float from,to;};inline std::vector<CanyonFace> canyonFronts;
 inline Vector2 projected(V p){return {TerrainOriginX+(p.x-p.y)*40,90+(p.x+p.y)*20};}
@@ -27,6 +36,8 @@ inline void drawProp(const Prop& p,bool outline,Color tint){
 inline bool propContains(const Prop& p,Vector2 point){Vector2 at=screen(p.pos);int x=int(std::floor(((point.x-at.x)/p.size+90)*2)),y=int(std::floor(((point.y-at.y)/p.size+208)*2));if(x<0||x>=360||y<0||y>=460)return false;Rectangle s=source(p);const auto& alpha=variant(p)>=4?extraSceneryAlpha:sceneryAlpha;return alpha[(int(s.y)+y)*scenery.width+int(s.x)+x]>=160;}
 inline void make(){
  if(terrain.id)return;
+ portalFrame=LoadTexture("assets/volcano/portal-frame.png");portalLoop=LoadTexture("assets/volcano/portal-loop.png");portalOutline=LoadTexture("assets/volcano/portal-outline.png");for(auto t:{portalFrame,portalLoop,portalOutline})SetTextureFilter(t,TEXTURE_FILTER_BILINEAR);
+ Image gateMask=LoadImage("assets/volcano/portal-mask.png");Color* gatePixels=LoadImageColors(gateMask);portalMask.resize(gateMask.width*gateMask.height);for(size_t i=0;i<portalMask.size();i++)portalMask[i]=gatePixels[i].r>=160;UnloadImageColors(gatePixels);UnloadImage(gateMask);
  tiles=LoadTexture("assets/volcano/ground.png");scenery=LoadTexture("assets/volcano/scenery.png");sceneryEdge=LoadTexture("assets/volcano/scenery-edge.png");sky=LoadTexture("assets/volcano/sky.png");macro=LoadTexture("assets/volcano/macro.png");road=LoadTexture("assets/volcano/road.png");bank=LoadTexture("assets/volcano/bank.png");bridge=LoadTexture("assets/volcano/bridge.png");steam=LoadTexture("assets/volcano/steam-flow.png");
  channelWall=LoadTexture("assets/volcano/channel-wall.png");SetTextureFilter(channelWall,TEXTURE_FILTER_BILINEAR);SetTextureWrap(channelWall,TEXTURE_WRAP_REPEAT);
  extraScenery=LoadTexture("assets/volcano/scenery-extra.png");extraSceneryEdge=LoadTexture("assets/volcano/scenery-extra-edge.png");SetTextureFilter(extraScenery,TEXTURE_FILTER_BILINEAR);SetTextureFilter(extraSceneryEdge,TEXTURE_FILTER_BILINEAR);
@@ -93,5 +104,5 @@ inline void groundAttacks(){for(const auto& f:game.fissures){Vector2 p=screen(f.
 inline void bolt(const CinderBolt& b){Vector2 p=screen(b.pos),v{(b.velocity.x-b.velocity.y)*40,(b.velocity.x+b.velocity.y)*20};float n=std::hypot(v.x,v.y);if(n<=0)return;v.x/=n;v.y/=n;
  for(int i=4;i>=0;i--)ellipse(p.x-v.x*i*5,p.y-35-v.y*i*5,6-i*.7f,5-i*.6f,Fade(rgb(255,110+i*15,48),1-i*.16f));ellipse(p.x,p.y-35,2.3f,2.3f,rgb(255,239,183));
 }
-inline void unload(){for(auto t:{tiles,scenery,sceneryEdge,extraScenery,extraSceneryEdge,sky,minimap,macro,road,bank,bridge,steam,channelWall})if(t.id)UnloadTexture(t);for(auto t:lavaFrames)if(t.id)UnloadTexture(t);if(terrain.id)UnloadRenderTexture(terrain);tiles=scenery=sceneryEdge=extraScenery=extraSceneryEdge=sky=lava=minimap=macro=road=bank=bridge=steam=channelWall={};lavaFrames={};terrain={};lavaStrips.clear();canyonFronts.clear();sceneryAlpha.clear();extraSceneryAlpha.clear();}
+inline void unload(){for(auto t:{tiles,scenery,sceneryEdge,extraScenery,extraSceneryEdge,sky,minimap,macro,road,bank,bridge,steam,channelWall,portalFrame,portalLoop,portalOutline})if(t.id)UnloadTexture(t);for(auto t:lavaFrames)if(t.id)UnloadTexture(t);if(terrain.id)UnloadRenderTexture(terrain);tiles=scenery=sceneryEdge=extraScenery=extraSceneryEdge=sky=lava=minimap=macro=road=bank=bridge=steam=channelWall=portalFrame=portalLoop=portalOutline={};lavaFrames={};terrain={};lavaStrips.clear();canyonFronts.clear();sceneryAlpha.clear();extraSceneryAlpha.clear();portalMask.clear();}
 }

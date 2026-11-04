@@ -1,0 +1,131 @@
+{
+  "Status": "PASS",
+  "Source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\ash-wraith.png",
+  "OriginalUnchanged": true,
+  "SourceSha256": "0b046c4a118cd2e9f3b4f29c123af47b8dc72c492e852c28027c4d4d2128c9fd",
+  "SourceWidth": 1536,
+  "SourceHeight": 1152,
+  "SourcePixelSha256": "f92e6589f4f0d32feebda5c0c81e31df6e6f02bdcbfa6f61c77e87bd11f62934",
+  "Laigter": "C:\\AI2D\\Tools\\Laigter\\laigter.exe",
+  "LaigterSha256": "95ded5057510ada7f45b0321192b91cf7ae058fcd683683a1ed5b5a19e276e48",
+  "Version": "laigter 1.14.0",
+  "Preset": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\laigter-heightmap.presets",
+  "PresetSha256": "dd144da7393f8d82d30f146d8e8436c2e9c56cf04846436bceec4e61150cabdc",
+  "Arguments": [
+    "--no-gui",
+    "--software-opengl",
+    "--not-recursive",
+    "--flatten",
+    "-d",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\_input\\ash-wraith.png",
+    "-l",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276",
+    "-n",
+    "-c",
+    "-o",
+    "-p",
+    "-r",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\_input\\preset.presets"
+  ],
+  "OutputDirectory": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276",
+  "MapCount": 4,
+  "Maps": [
+    {
+      "Type": "normal",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\ash-wraith_n.png",
+      "Bytes": 85072,
+      "Sha256": "5804f0f8a4186be13cd7b1dab9ed73f32f8e1396890ad0bff46b9e9fb7641442",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "4dd675047da1c87ed6b81a601f459f1717ba1a983212093dd066a52e0b501f4e",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          8,
+          14,
+          166
+        ],
+        "SampleMaximumRgb": [
+          241,
+          237,
+          255
+        ],
+        "SampleIsGrayscale": false,
+        "SampleMaxNormalUnitError": 0.010933
+      }
+    },
+    {
+      "Type": "specular",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\ash-wraith_s.png",
+      "Bytes": 29490,
+      "Sha256": "2f1f36a3cf754a23231fd8fb73de67905f7734eaf43d367f62eee2ae30cb5296",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "5e6ccdebd621e2e61a759a71e49e7257436cf2dc21eef6c3ba8e014e6c6b5046",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          101,
+          101,
+          101
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "occlusion",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\ash-wraith_o.png",
+      "Bytes": 27747,
+      "Sha256": "66f4653c4e5f00c93fc63924f4161e54f2649999ebfb53b20f9822318cfc54af",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "224fa53c1ebb981c0f1984acd5982ec9a4bf2df062cfead7ea981938e17b7d28",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          16,
+          16,
+          16
+        ],
+        "SampleMaximumRgb": [
+          254,
+          254,
+          254
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "parallax",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\ash-wraith_p.png",
+      "Bytes": 27241,
+      "Sha256": "e71158d462afba50f22033bd66cfc15ef9e670abf227b09b1804dfe317a51687",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "67462b227c7aa73b6841257688c59cb8526c65c41d06103cffc0c4d3c6e5edc8",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          151,
+          151,
+          151
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    }
+  ],
+  "ElapsedSeconds": 1.476
+}

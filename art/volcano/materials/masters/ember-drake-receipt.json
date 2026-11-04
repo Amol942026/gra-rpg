@@ -1,0 +1,35 @@
+{
+  "name": "ember-drake",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right",
+    "Caldera material / back",
+    "Caldera material / leg-left",
+    "Caldera material / leg-right",
+    "Caldera material / body",
+    "Caldera material / arm-left",
+    "Caldera material / arm-right"
+  ],
+  "kra_sha256": "a5b25adc747e9d9f500af61f2787bf6acebb6b6cfac9e3d643bb4a3302783f89",
+  "png_sha256": "af3e7fd02fdb7358392de92917f7f58733aa1bde8dd51fc03b30c56972fe170a",
+  "retained_saved_document_id": "182e65e7-bafd-45fc-b135-5dfc116549f7",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\AI2D\\sprites\\emberfall-volcano-river-detail-20261029\\ember-drake.kra",
+  "source_kra_sha256": "59f4f07873ffd8f73c0d80e04d2d7e4a8fd991b562261b3a7f02d87ac37ad9f1",
+  "albedo_sha256": "a6752eead535d70768c4fc364d40b85d5f27159c5c95b5d2649e42b16cfab84e",
+  "albedo_size": [
+    1536,
+    1152
+  ]
+}

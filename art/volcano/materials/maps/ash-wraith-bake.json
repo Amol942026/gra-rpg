@@ -1,0 +1,32 @@
+{
+  "name": "ash-wraith",
+  "status": "PASS",
+  "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\ash-wraith.png",
+  "source_sha256": "0b046c4a118cd2e9f3b4f29c123af47b8dc72c492e852c28027c4d4d2128c9fd",
+  "source_kra_sha256": "47f12be52d3b6a99b70a3289a172209c5a9405cb3228135c94fb5a282648e86a",
+  "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\ash-wraith.png",
+  "sha256": "046c5bf716f43b0c1e4974e532b249f308af65f0bf52153535f371dda677ef7c",
+  "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\maps-manifest.json",
+  "maps_manifest_sha256": "617b7ac998f47f671cb25c1b6070cd5e4b50e18c50ea15f33833f80fba522970",
+  "map_types": [
+    "normal",
+    "specular",
+    "occlusion",
+    "parallax"
+  ],
+  "map_sha256": {
+    "normal": "5804f0f8a4186be13cd7b1dab9ed73f32f8e1396890ad0bff46b9e9fb7641442",
+    "specular": "2f1f36a3cf754a23231fd8fb73de67905f7734eaf43d367f62eee2ae30cb5296",
+    "occlusion": "66f4653c4e5f00c93fc63924f4161e54f2649999ebfb53b20f9822318cfc54af",
+    "parallax": "e71158d462afba50f22033bd66cfc15ef9e670abf227b09b1804dfe317a51687"
+  },
+  "size": [
+    1536,
+    1152
+  ],
+  "rgba8_bytes": 7077888,
+  "alpha_unchanged": true,
+  "preserved_emissive_pixels": 0,
+  "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+  "runtime_material_shader": false
+}

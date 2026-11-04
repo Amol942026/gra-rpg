@@ -1,0 +1,21 @@
+{
+  "name": "macro",
+  "layers": [
+    "T\u0142o",
+    "Broad ash drifts and iron oxide fields",
+    "Ancient cooling flow ridges",
+    "Broad iron rich ash and sulphur fields",
+    "Ancient overlapping cooling flow ridges"
+  ],
+  "kra_sha256": "08c81957f51b4502e49b9eb6780ebb5eb8c21cce065ae7f5e6ff29cf8e9242e3",
+  "png_sha256": "b89f8c8dacc09492326e57fe6380088940393c6eed55c41b1042cea011b1b7cd",
+  "retained_saved_document_id": "ca55b6b9-236e-4b5b-b7b6-bd22c6e81d06",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\depth\\masters\\macro.kra",
+  "source_kra_sha256": "feb6210256a5b8a02bde30f4938050f56ab587f2a1c33a92654ea6c0e5d57d50",
+  "albedo_sha256": "2f4b20088c35586a62a5e637e5a232ec069bc20826445d93f682cdcc28b44eb0",
+  "albedo_size": [
+    1024,
+    1024
+  ]
+}

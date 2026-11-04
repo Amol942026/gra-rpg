@@ -1,0 +1,32 @@
+{
+  "name": "varkhor",
+  "status": "PASS",
+  "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\varkhor.png",
+  "source_sha256": "63691fc10615828fe20b79d39e771c268a559128a8a5d55301542cbc1c429b53",
+  "source_kra_sha256": "b587569638c591cead09e715b515e11e0514777b929b4b8982e7a4b59d526003",
+  "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\varkhor.png",
+  "sha256": "b058c37d885776fc206f2fd20ed580ec39237d27f0847b067dae2884bbbe9a93",
+  "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\varkhor_20261104_152735_789_7baf03\\maps-manifest.json",
+  "maps_manifest_sha256": "0b93ce85de383f89a1f2dca199552050d95753d0503ce6520c42f32af436a5a5",
+  "map_types": [
+    "normal",
+    "specular",
+    "occlusion",
+    "parallax"
+  ],
+  "map_sha256": {
+    "normal": "4912c2825d990f0bd26623e2d3aa93d4148336964c5839a542684042d8922f7b",
+    "specular": "4026b7c12c940df00744dc857c3f78dfe9666503ca77edbe433bb18f2a91d61c",
+    "occlusion": "6b13bbc3c96287a7f1661068709d6f8cfcfcac4d2b05ba05c1b41e5bd80e4ab8",
+    "parallax": "fe2cccbd69bbb0a65ba48085d125e37e4bd77c31c32bc2c67c8eee07b254841f"
+  },
+  "size": [
+    2048,
+    1536
+  ],
+  "rgba8_bytes": 12582912,
+  "alpha_unchanged": true,
+  "preserved_emissive_pixels": 10723,
+  "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+  "runtime_material_shader": false
+}

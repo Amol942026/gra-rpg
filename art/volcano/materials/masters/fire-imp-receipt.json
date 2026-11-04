@@ -1,0 +1,35 @@
+{
+  "name": "fire-imp",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right",
+    "Caldera material / back",
+    "Caldera material / leg-left",
+    "Caldera material / leg-right",
+    "Caldera material / body",
+    "Caldera material / arm-left",
+    "Caldera material / arm-right"
+  ],
+  "kra_sha256": "d55c0c361b77c0fac6c07cfa66c688d45b451ddce6085aa5354b005f09430885",
+  "png_sha256": "96b8a3df9ac1ca4f7a116137cc3cccb4e9bef210d95da20a7e0cd70edbeef5e6",
+  "retained_saved_document_id": "2c353f55-6ed5-4455-9e40-5b8dfaad3704",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\AI2D\\sprites\\emberfall-volcano-river-detail-20261029\\fire-imp.kra",
+  "source_kra_sha256": "5f53eaf68790a2de6550e058f5b4fd0cf14c6ee025dbc6cd8ca2b6ae8ea67a54",
+  "albedo_sha256": "de28520e4db37e971e0e0de2ca01301a04d958b51f563484902ec11d5b8e72c9",
+  "albedo_size": [
+    1536,
+    1152
+  ]
+}

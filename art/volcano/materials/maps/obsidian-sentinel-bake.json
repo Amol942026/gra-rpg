@@ -1,0 +1,32 @@
+{
+  "name": "obsidian-sentinel",
+  "status": "PASS",
+  "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\obsidian-sentinel.png",
+  "source_sha256": "e3567a4977268ef11bd53b8aa26abdf4ab432b9688f61e30e89aed4163334e72",
+  "source_kra_sha256": "6d12b3fc4e577af0b66786d6f6a94f376eadfa5eafda5a02810c85b4315636cc",
+  "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\obsidian-sentinel.png",
+  "sha256": "63acf12e6792c949df1f43eea67eed5fa62737f3e6c9f9ad285e486fbe63563f",
+  "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\maps-manifest.json",
+  "maps_manifest_sha256": "5a21b9df538b250b815eff854371ce6f27efd7f3b7d3db65443f196fb6b69aad",
+  "map_types": [
+    "normal",
+    "specular",
+    "occlusion",
+    "parallax"
+  ],
+  "map_sha256": {
+    "normal": "c2aa795f7583b3c1ee27fdcbf951b50093db1c84fec103b1cd5f878af3cb853d",
+    "specular": "78a2098338efc15823e1d5b607fe1b4b346c32fd08e8c2e6b0d95d229bff6ae5",
+    "occlusion": "784841e4ec6730cc6f5b7c97ed454359e024f9aaf96e488ede8dc65e457a3887",
+    "parallax": "8d193fbd4da6dec570d91a11146e9ed5f74cd780cf9ee0308fe97cec54c6a905"
+  },
+  "size": [
+    1536,
+    1152
+  ],
+  "rgba8_bytes": 7077888,
+  "alpha_unchanged": true,
+  "preserved_emissive_pixels": 1003,
+  "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+  "runtime_material_shader": false
+}

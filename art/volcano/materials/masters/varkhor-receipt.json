@@ -1,0 +1,35 @@
+{
+  "name": "varkhor",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right",
+    "Caldera material / back",
+    "Caldera material / leg-left",
+    "Caldera material / leg-right",
+    "Caldera material / body",
+    "Caldera material / arm-left",
+    "Caldera material / arm-right"
+  ],
+  "kra_sha256": "b587569638c591cead09e715b515e11e0514777b929b4b8982e7a4b59d526003",
+  "png_sha256": "c5e0145ad60771ea15ef6801326c4266b07437b0d514b8b2c6b6e2792fe919f9",
+  "retained_saved_document_id": "4854c04c-e52c-4c61-a604-422fe1393cc6",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\AI2D\\sprites\\emberfall-volcano-river-detail-20261029\\varkhor.kra",
+  "source_kra_sha256": "05f6823c3dc7d983466b30b240234e3d85b1ede49293c73ab09c7074bfc2f3d9",
+  "albedo_sha256": "63691fc10615828fe20b79d39e771c268a559128a8a5d55301542cbc1c429b53",
+  "albedo_size": [
+    2048,
+    1536
+  ]
+}

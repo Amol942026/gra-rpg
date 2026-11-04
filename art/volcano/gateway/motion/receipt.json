@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "frames": 120,
+  "fps": 60,
+  "duration": 2,
+  "size": [
+    128,
+    208
+  ],
+  "cell": [
+    132,
+    212
+  ],
+  "columns": 15,
+  "atlas": [
+    1980,
+    1696
+  ],
+  "native_project_sha256": "f82a07d6f38793a019e1f6d98ef565d09ac02297aba8e63ee478cb98815bacfe",
+  "source_png_sha256": "594917a186cc184ee4b63af4d4dfb07136a02007c9bf773596401017f13da76e",
+  "atlas_sha256": "eecdf5257393cc1b9286a3a788588f6501a51ae0f6e18908b6d58522b9b4f362",
+  "loop_seam": 13.253380408653847,
+  "adjacent_difference": 13.001352163461538
+}

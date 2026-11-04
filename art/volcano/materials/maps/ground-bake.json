@@ -1,0 +1,32 @@
+{
+  "name": "ground",
+  "status": "PASS",
+  "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\ground.png",
+  "source_sha256": "820b9c3198542e72c74525a2be1caa79bd6bfd1da0dad8783c16441b2ff0673a",
+  "source_kra_sha256": "39264ef98c044c450fc585d6cc23c9ce0e8b491a93519c8706a1e4b763055e16",
+  "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\ground.png",
+  "sha256": "fb0869a7c8792ff4f10f1559b9222cefca77d6fce0d9b450d106805dd915ba1c",
+  "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ground_20261104_152747_917_cc7668\\maps-manifest.json",
+  "maps_manifest_sha256": "68cc1ce0d340ce38d31b5110b609b9eecc78eb84cc8f6e487f15006c8dbd0a1c",
+  "map_types": [
+    "normal",
+    "specular",
+    "occlusion",
+    "parallax"
+  ],
+  "map_sha256": {
+    "normal": "d9107351497c0a2f089ec8d7be2a34c46388be42bcc6c1996fbacbb5a113423e",
+    "specular": "15075092f6443ae599c3bdfeaaedb90b6db925f551db5d59e1dc6ca8956a3e85",
+    "occlusion": "e894c5fb99c6ea058ac709b5b667ef87c16a7baebe9ede1722cc7504732dadb1",
+    "parallax": "3d6199da34b3055b649ca82d8ea533d9ba944eb1cf4e33d1d4f097a7727a23e0"
+  },
+  "size": [
+    512,
+    512
+  ],
+  "rgba8_bytes": 1048576,
+  "alpha_unchanged": true,
+  "preserved_emissive_pixels": 0,
+  "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+  "runtime_material_shader": false
+}

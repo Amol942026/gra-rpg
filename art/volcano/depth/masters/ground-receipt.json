@@ -1,0 +1,13 @@
+{
+  "name": "ground",
+  "layers": [
+    "Unbroken volcanic ash substrate",
+    "Scumbled weathering and iron rich cooling fields",
+    "Twisted pahoehoe folds and fractured basalt",
+    "Porous stone grains and sparse scoria"
+  ],
+  "kra_sha256": "0ad4d18be131b0e2d0ff9f7bc8c17a20df1fdb1b7f346fdfe2475ed4f5ac2198",
+  "png_sha256": "25485e9ca9f581c7af6b8ad2296a722b8ca184dd2fd85e964f076efb293982e8",
+  "retained_saved_document_id": "3c2b15cb-36a0-4df0-b3b2-8290b1812450",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

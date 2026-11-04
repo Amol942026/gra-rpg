@@ -54,7 +54,11 @@ void presentCanvas(){
     if(shared)rlOrtho(0,GetRenderWidth(),0,GetRenderHeight(),0,1);
     else rlOrtho(0,GetRenderWidth(),GetRenderHeight(),0,0,1);
     rlMatrixMode(RL_MODELVIEW);rlLoadIdentity();
-    DrawTexturePro(canvas.texture,{0,0,float(canvas.texture.width),-float(canvas.texture.height)},presentationViewport,{0,0},0,WHITE);
+    // The canvas is a complete, opaque game frame. Its antialiased RGB has
+    // already been composited; multiplying it by coverage alpha again darkens
+    // and softens text. Copy pixels one-to-one instead of blending them twice.
+    rlSetBlendFactors(RL_ONE,RL_ZERO,RL_FUNC_ADD);BeginBlendMode(BLEND_CUSTOM);
+    DrawTexturePro(canvas.texture,{0,0,float(canvas.texture.width),-float(canvas.texture.height)},presentationViewport,{0,0},0,WHITE);EndBlendMode();
     if(shared){rlDrawRenderBatchActive();rlEnableBackfaceCulling();rlDisableFramebuffer();sync_present::end();}
 }
 Image presentedImage(){
@@ -95,9 +99,9 @@ void renderScene() {
     }
     const bool freeze=(statsOpen||skillsOpen)&&!intro.active()&&!towerStory.active();
     const float nativeScale=renderScale;
-    // Keep text at native display resolution. At 1080p the scenery uses 75%
-    // of the linear resolution; the HUD and labels remain fully native.
-    const bool separateWorld=!game.inTower()&&!freeze&&!nativeWorldRendering&&nativeScale>1.001f;
+    // Text and Caldera use native display resolution. Forest/desert keep the
+    // cheaper world buffer; their HUD and labels remain fully native.
+    const bool separateWorld=!game.inTower()&&!game.inVolcano()&&!freeze&&!nativeWorldRendering&&nativeScale>1.001f;
     if(separateWorld){
         constexpr float worldScale=.9f;constexpr int width=945,height=810;
         if(!worldCanvas.id||worldCanvas.texture.width!=width||worldCanvas.texture.height!=height){

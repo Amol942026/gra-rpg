@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "checks": 790,
+  "native_kra": 6,
+  "native_synfig": 9,
+  "warrior_frames": 480,
+  "river_frames": 60,
+  "sword_arc_degrees": 144,
+  "river_half_period_translation_error": 1.0172526041666666e-05,
+  "channel_wall_additional_rgba8_bytes": 524288,
+  "provenance": [
+    {
+      "name": "ground",
+      "native": "C:\\AI2D\\sprites\\emberfall-caldera-natural-20261104\\ground.kra",
+      "sha256": "0ad4d18be131b0e2d0ff9f7bc8c17a20df1fdb1b7f346fdfe2475ed4f5ac2198",
+      "original_local_2d": true
+    },
+    {
+      "name": "bank",
+      "native": "C:\\AI2D\\sprites\\emberfall-caldera-natural-20261104\\bank.kra",
+      "sha256": "7ca493bcb375fe20f8d2aa863770d0af9f529c02691659edec3e1f4255e33b83",
+      "original_local_2d": true
+    },
+    {
+      "name": "channel-wall",
+      "native": "C:\\AI2D\\sprites\\emberfall-caldera-natural-20261104\\channel-wall.kra",
+      "sha256": "97c0549ece6037ba95037656a6c1b6bdedaaaf10edf8b4cd3ec1467b4b812e00",
+      "original_local_2d": true
+    },
+    {
+      "name": "lava-surface",
+      "native": "C:\\AI2D\\sprites\\emberfall-caldera-natural-20261104\\lava-surface.kra",
+      "sha256": "47740a6edf1a5a7b1b3a98eecd0f02267b2f7a0d7e86157de4508bed8e8c41bb",
+      "original_local_2d": true
+    },
+    {
+      "name": "macro",
+      "native": "C:\\AI2D\\sprites\\emberfall-caldera-depth-20261030\\macro.kra",
+      "sha256": "feb6210256a5b8a02bde30f4938050f56ab587f2a1c33a92654ea6c0e5d57d50",
+      "original_local_2d": true
+    },
+    {
+      "name": "scenery",
+      "native": "C:\\AI2D\\sprites\\emberfall-caldera-depth-20261030\\scenery.kra",
+      "sha256": "b03544ca7f2f459a68fdd3b166cf38d6ea5bb9bb14407e02b597fd164c14446d",
+      "original_local_2d": true
+    }
+  ],
+  "paid_services": false,
+  "external_assets": []
+}

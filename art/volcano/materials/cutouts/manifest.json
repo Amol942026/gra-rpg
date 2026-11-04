@@ -1,0 +1,305 @@
+{
+  "direction": "SE",
+  "logical_cell": 128,
+  "foot_pivot": [
+    64,
+    115
+  ],
+  "parts": [
+    {
+      "actor": "slag-crawler",
+      "part": "back",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\slag-crawler\\back.png",
+      "sha256": "6cddfff26d1d2d4736175133cca222f88aef196d0abe2b1afa96c37b4ebf0af5"
+    },
+    {
+      "actor": "slag-crawler",
+      "part": "leg-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\slag-crawler\\leg-left.png",
+      "sha256": "3b24f5e42de3ded9da5ffcd9bc8c74923bc642f44faf409f6690b669a6c92835"
+    },
+    {
+      "actor": "slag-crawler",
+      "part": "leg-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\slag-crawler\\leg-right.png",
+      "sha256": "3e04cb9d5c3229aa5c0577683755d153af5c0deb2e913b0b707aeb49ac491e5f"
+    },
+    {
+      "actor": "slag-crawler",
+      "part": "body",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\slag-crawler\\body.png",
+      "sha256": "7eae0f9c20a8fa3811331ac709276eefe5ae44203722bcf7a6d7e9232b07b0b5"
+    },
+    {
+      "actor": "slag-crawler",
+      "part": "arm-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\slag-crawler\\arm-left.png",
+      "sha256": "635a2bb5c82cb422c4c6a800cf42efe177217a506490112ad55f3fe3ecb78794"
+    },
+    {
+      "actor": "slag-crawler",
+      "part": "arm-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\slag-crawler\\arm-right.png",
+      "sha256": "77e163f9666403dbe6b4ef79fc4c5248c8f40a46066ab8b05c8d66ccfb372f0e"
+    },
+    {
+      "actor": "lava-salamander",
+      "part": "back",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\lava-salamander\\back.png",
+      "sha256": "67a4991e3641201afebf4521baf716c9f07e1824524af2fb79193e69be97459f"
+    },
+    {
+      "actor": "lava-salamander",
+      "part": "leg-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\lava-salamander\\leg-left.png",
+      "sha256": "3e442fb25c3875ba4e3904c4b76a5460e2eabd8e26e52df91949bc1e60f42130"
+    },
+    {
+      "actor": "lava-salamander",
+      "part": "leg-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\lava-salamander\\leg-right.png",
+      "sha256": "171053a3e9a1fe7473f359cbea0655aaf960e5f6fcaa8a79534bfedb29df7fb6"
+    },
+    {
+      "actor": "lava-salamander",
+      "part": "body",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\lava-salamander\\body.png",
+      "sha256": "1288b8a063ab545b2a886c6513e21e42c4e0bf9fc5a56c4fb744903223946106"
+    },
+    {
+      "actor": "lava-salamander",
+      "part": "arm-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\lava-salamander\\arm-left.png",
+      "sha256": "e6da189c8b8fcaaf84b77b268db096c10999af87b17b80a24e0632d8d3a415a2"
+    },
+    {
+      "actor": "lava-salamander",
+      "part": "arm-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\lava-salamander\\arm-right.png",
+      "sha256": "567fdec933b72b1c14119bcecb6bea71eadeb48deec50f6ac7e9e112269bc8ce"
+    },
+    {
+      "actor": "fire-imp",
+      "part": "back",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\fire-imp\\back.png",
+      "sha256": "b9cb2000abca5710abedfa8cd3c7f21699bf10dc9da58b999e789ca581d6e1c6"
+    },
+    {
+      "actor": "fire-imp",
+      "part": "leg-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\fire-imp\\leg-left.png",
+      "sha256": "068f7abbbf2a6b4576556e87c66b593c416188b5017da3980c50aac44f7fc111"
+    },
+    {
+      "actor": "fire-imp",
+      "part": "leg-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\fire-imp\\leg-right.png",
+      "sha256": "85587ecce23dc0b30be2dff14a97b777ba10b72758243cd3a1e9cf0988c1d08b"
+    },
+    {
+      "actor": "fire-imp",
+      "part": "body",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\fire-imp\\body.png",
+      "sha256": "8eb99d8e9521757cc3aeeaba8f64014a01720fec493d858362be4ad123662502"
+    },
+    {
+      "actor": "fire-imp",
+      "part": "arm-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\fire-imp\\arm-left.png",
+      "sha256": "38061eab6dca939d5f89536dd48c016b64e55343f52c5a080db20ceb7a4642f3"
+    },
+    {
+      "actor": "fire-imp",
+      "part": "arm-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\fire-imp\\arm-right.png",
+      "sha256": "3fb3c596242c9f9fbaf3e62b9f82b6a9fc444436ef7f803eea2c8ec910af866c"
+    },
+    {
+      "actor": "ash-wraith",
+      "part": "back",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ash-wraith\\back.png",
+      "sha256": "3715cd5b95a19676402f9847551a6e32e36024093757a6aa4c29aa9fabbb8ddb"
+    },
+    {
+      "actor": "ash-wraith",
+      "part": "leg-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ash-wraith\\leg-left.png",
+      "sha256": "4eb6cafe15e8f4f496e6a53232b1097aa27caacd347aeac3da287e0cbb76c283"
+    },
+    {
+      "actor": "ash-wraith",
+      "part": "leg-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ash-wraith\\leg-right.png",
+      "sha256": "870034b8568cc6d0e96c3f5402a99fda639ca9372e70831c62a6797a81695f93"
+    },
+    {
+      "actor": "ash-wraith",
+      "part": "body",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ash-wraith\\body.png",
+      "sha256": "d5e14a963ba60752aa8394678187e64239e2ac92a4fb2b9d4cffcaa5a017645b"
+    },
+    {
+      "actor": "ash-wraith",
+      "part": "arm-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ash-wraith\\arm-left.png",
+      "sha256": "8229a56da2771a716b97af6f84c1f7290cbe72564ed3c93477edcdcf7833d388"
+    },
+    {
+      "actor": "ash-wraith",
+      "part": "arm-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ash-wraith\\arm-right.png",
+      "sha256": "fa488cdfa51cbb1ddc488d68aeeb5bca6bdefa787ea491ac1928aa2d365df1e8"
+    },
+    {
+      "actor": "obsidian-sentinel",
+      "part": "back",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\obsidian-sentinel\\back.png",
+      "sha256": "3715cd5b95a19676402f9847551a6e32e36024093757a6aa4c29aa9fabbb8ddb"
+    },
+    {
+      "actor": "obsidian-sentinel",
+      "part": "leg-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\obsidian-sentinel\\leg-left.png",
+      "sha256": "947391151a1587fbc9500dff4efd211cf4a97f4dfd7c5e94fef3411ef6a7565a"
+    },
+    {
+      "actor": "obsidian-sentinel",
+      "part": "leg-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\obsidian-sentinel\\leg-right.png",
+      "sha256": "04ab59724e28f44e6dc0cae96ba73c792422e54531699fb4ab0f794947065184"
+    },
+    {
+      "actor": "obsidian-sentinel",
+      "part": "body",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\obsidian-sentinel\\body.png",
+      "sha256": "25336d77f44facce1a11858cddeb86d0b739e69c9ebc70ecb6b25b96e57b8c7a"
+    },
+    {
+      "actor": "obsidian-sentinel",
+      "part": "arm-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\obsidian-sentinel\\arm-left.png",
+      "sha256": "7ca232b8c785520076f6ebae946bfeb3248b77e18dc953bd4634d61b1440b659"
+    },
+    {
+      "actor": "obsidian-sentinel",
+      "part": "arm-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\obsidian-sentinel\\arm-right.png",
+      "sha256": "5914548aadeea9fa091c5dced73ac2f44dd9793086b7e1c0147513b23325d569"
+    },
+    {
+      "actor": "ember-drake",
+      "part": "back",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ember-drake\\back.png",
+      "sha256": "aafe068e6bae6debf1be6b78c7bee14ef26a20e89065a7a36c770cc9849b9e1f"
+    },
+    {
+      "actor": "ember-drake",
+      "part": "leg-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ember-drake\\leg-left.png",
+      "sha256": "b0df98dea614c02afda4af543b0b886902bd954661f49174d0919f39d908f1cc"
+    },
+    {
+      "actor": "ember-drake",
+      "part": "leg-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ember-drake\\leg-right.png",
+      "sha256": "f233c84932181d21a3b10ba615a57a6d01ad9314147c9ae495bdf0fa1447c34e"
+    },
+    {
+      "actor": "ember-drake",
+      "part": "body",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ember-drake\\body.png",
+      "sha256": "d5ad7f76da81149959d049b07c2f8ad9b4210bbe444de23eb3b82c65d12a8b3b"
+    },
+    {
+      "actor": "ember-drake",
+      "part": "arm-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ember-drake\\arm-left.png",
+      "sha256": "f90f08389c69c69063bf86ed9cd1698b072c30bf70b8034a0a33bba225c76678"
+    },
+    {
+      "actor": "ember-drake",
+      "part": "arm-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\ember-drake\\arm-right.png",
+      "sha256": "febc2fd4b3414623d8c4574d39c10596df51bef3e2ecf9e29561807bfaa9085d"
+    },
+    {
+      "actor": "varkhor",
+      "part": "back",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\varkhor\\back.png",
+      "sha256": "47b96b604e556e81eb82208b13a0885f9e0b3651962c68fe5eae0b1cc7732fbf"
+    },
+    {
+      "actor": "varkhor",
+      "part": "leg-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\varkhor\\leg-left.png",
+      "sha256": "4ed597f16e9bd9fb6ddee8515959048a16a37127fde2a0c2ae4cbec38960f19a"
+    },
+    {
+      "actor": "varkhor",
+      "part": "leg-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\varkhor\\leg-right.png",
+      "sha256": "f231605c7a0f9e15262eea4e36a49d385143695fe2d3cbf2457dfd88bded247d"
+    },
+    {
+      "actor": "varkhor",
+      "part": "body",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\varkhor\\body.png",
+      "sha256": "3a3ef6095263f2e91ed5c179803e653d31ed757f26fef052f969ee910eae7f75"
+    },
+    {
+      "actor": "varkhor",
+      "part": "arm-left",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\varkhor\\arm-left.png",
+      "sha256": "2ff38aeb5d96997596f68b9c40f695ddddcb5b3a5d497fb76a066fd1b6032b26"
+    },
+    {
+      "actor": "varkhor",
+      "part": "arm-right",
+      "direction": "SE",
+      "path": "art\\volcano\\materials\\cutouts\\varkhor\\arm-right.png",
+      "sha256": "dffa2a0bc3208df779801931365a44db7107910e73e9bbce88dd03b0f1370d2d"
+    }
+  ],
+  "all_eight_directions_remain_in_native_kra_and_runtime_atlas": true
+}

@@ -1,0 +1,32 @@
+{
+  "name": "fire-imp",
+  "status": "PASS",
+  "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\fire-imp.png",
+  "source_sha256": "de28520e4db37e971e0e0de2ca01301a04d958b51f563484902ec11d5b8e72c9",
+  "source_kra_sha256": "d55c0c361b77c0fac6c07cfa66c688d45b451ddce6085aa5354b005f09430885",
+  "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\fire-imp.png",
+  "sha256": "65545e84d7ecbb6ce0056c93853b040dcbf067bf88bde9176c01b36041c15835",
+  "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\fire-imp_20261104_152724_977_4d9a5b\\maps-manifest.json",
+  "maps_manifest_sha256": "0980aa501b9cf539e0914bcf6e75d7afe42510d9dadae4a888eede1b69eec669",
+  "map_types": [
+    "normal",
+    "specular",
+    "occlusion",
+    "parallax"
+  ],
+  "map_sha256": {
+    "normal": "c1e41902203fd14c96f7033d4b390d81ba29976fe46699f45372b3699973736a",
+    "specular": "6852b8d0d669839630d6edde299f1592497d4e314c60e79dc395d20fb9630e98",
+    "occlusion": "5d7dbde154c4994fa740997a8fb71e5937e95fe4c3ec5d5e1bff6683adc43c92",
+    "parallax": "a8a98015d26af183c33431b6a75fccacea108e5e6842a185529aebb364c7e3fe"
+  },
+  "size": [
+    1536,
+    1152
+  ],
+  "rgba8_bytes": 7077888,
+  "alpha_unchanged": true,
+  "preserved_emissive_pixels": 26796,
+  "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+  "runtime_material_shader": false
+}

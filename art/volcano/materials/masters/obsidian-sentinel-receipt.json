@@ -1,0 +1,35 @@
+{
+  "name": "obsidian-sentinel",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right",
+    "Caldera material / back",
+    "Caldera material / leg-left",
+    "Caldera material / leg-right",
+    "Caldera material / body",
+    "Caldera material / arm-left",
+    "Caldera material / arm-right"
+  ],
+  "kra_sha256": "6d12b3fc4e577af0b66786d6f6a94f376eadfa5eafda5a02810c85b4315636cc",
+  "png_sha256": "31663116c6214e942c98960bf3bb98cce1e8c395d69f3cabcc8b6aa405529a56",
+  "retained_saved_document_id": "d34c97f4-ab72-4f88-b466-77e17df77522",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\AI2D\\sprites\\emberfall-volcano-river-detail-20261029\\obsidian-sentinel.kra",
+  "source_kra_sha256": "9c739f73b8b8c329e0442b16a5d38a5014452c82779b9e95b952f8174e7328de",
+  "albedo_sha256": "e3567a4977268ef11bd53b8aa26abdf4ab432b9688f61e30e89aed4163334e72",
+  "albedo_size": [
+    1536,
+    1152
+  ]
+}

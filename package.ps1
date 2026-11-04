@@ -11,7 +11,9 @@ try {
     foreach ($entry in @(@('dist/player/Emberfall.exe','Emberfall.exe'), @('LICENSES.md','LICENSES.md'), @('LOOT.md','LOOT.md'))) {
         [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $PSScriptRoot $entry[0]), ('Emberfall/' + $entry[1]), [IO.Compression.CompressionLevel]::Optimal) | Out-Null
     }
-    $assetDirectory = Join-Path $PSScriptRoot 'dist/player/assets'
+    # Package the canonical asset manifest. A reused build directory may also
+    # contain obsolete diagnostic receipts or resources from earlier versions.
+    $assetDirectory = Join-Path $PSScriptRoot 'assets'
     foreach ($assetFile in Get-ChildItem -LiteralPath $assetDirectory -File -Recurse) {
         $relativeAsset = $assetFile.FullName.Substring($assetDirectory.Length + 1).Replace('\','/')
         [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $assetFile.FullName, ('Emberfall/assets/' + $relativeAsset), [IO.Compression.CompressionLevel]::Optimal) | Out-Null

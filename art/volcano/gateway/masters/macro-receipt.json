@@ -1,0 +1,11 @@
+{
+  "name": "macro",
+  "layers": [
+    "Feathered ash and mineral transitions",
+    "Broad translucent soot drift"
+  ],
+  "kra_sha256": "a6ed436bb2f45e0440e33e59a5a89c8d77f9240b623ddf74e185a277f2d67cc0",
+  "png_sha256": "0848886e41f2494a91ea569754c29aa9c74f9135fcc3a8cbdc5c996360f9cbf6",
+  "retained_saved_document_id": "feb163fb-8bf5-40cb-a982-0b7333be9058",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

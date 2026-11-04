@@ -1,0 +1,35 @@
+{
+  "name": "lava-salamander",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right",
+    "Caldera material / back",
+    "Caldera material / leg-left",
+    "Caldera material / leg-right",
+    "Caldera material / body",
+    "Caldera material / arm-left",
+    "Caldera material / arm-right"
+  ],
+  "kra_sha256": "e929ecefc1aad04218c22612ac092e9d18f909d415cdecf9a05d37d2e45bba40",
+  "png_sha256": "0f5a0d12fde1154889b8dab37a835a7f037c390b4bf43c6e480cdb5565ad22ab",
+  "retained_saved_document_id": "ceff03f0-b971-414b-ad39-ef61c60e0119",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\AI2D\\sprites\\emberfall-volcano-river-detail-20261029\\lava-salamander.kra",
+  "source_kra_sha256": "d08c73cde96c076a1e6cdc45bd44da87188599eaff25ca86a11c85cdff63cef8",
+  "albedo_sha256": "143748697c094f67406e8eced4162934e1a1e4fd29d9d27f5adc5f4e2d4eddaa",
+  "albedo_size": [
+    1536,
+    1152
+  ]
+}

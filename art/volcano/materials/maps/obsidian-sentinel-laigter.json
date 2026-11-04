@@ -1,0 +1,131 @@
+{
+  "Status": "PASS",
+  "Source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\obsidian-sentinel.png",
+  "OriginalUnchanged": true,
+  "SourceSha256": "e3567a4977268ef11bd53b8aa26abdf4ab432b9688f61e30e89aed4163334e72",
+  "SourceWidth": 1536,
+  "SourceHeight": 1152,
+  "SourcePixelSha256": "34becd6c7750cb7cce57ef01a018eafed9b1a48df30b5c8fb868701625f33806",
+  "Laigter": "C:\\AI2D\\Tools\\Laigter\\laigter.exe",
+  "LaigterSha256": "95ded5057510ada7f45b0321192b91cf7ae058fcd683683a1ed5b5a19e276e48",
+  "Version": "laigter 1.14.0",
+  "Preset": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\laigter-heightmap.presets",
+  "PresetSha256": "dd144da7393f8d82d30f146d8e8436c2e9c56cf04846436bceec4e61150cabdc",
+  "Arguments": [
+    "--no-gui",
+    "--software-opengl",
+    "--not-recursive",
+    "--flatten",
+    "-d",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\_input\\obsidian-sentinel.png",
+    "-l",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd",
+    "-n",
+    "-c",
+    "-o",
+    "-p",
+    "-r",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\_input\\preset.presets"
+  ],
+  "OutputDirectory": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd",
+  "MapCount": 4,
+  "Maps": [
+    {
+      "Type": "normal",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\obsidian-sentinel_n.png",
+      "Bytes": 148421,
+      "Sha256": "c2aa795f7583b3c1ee27fdcbf951b50093db1c84fec103b1cd5f878af3cb853d",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "2e4b39338246c2dc66dce05b5001e8db87ec587c735be75d62c63d434de90e6d",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          9,
+          14,
+          169
+        ],
+        "SampleMaximumRgb": [
+          240,
+          243,
+          255
+        ],
+        "SampleIsGrayscale": false,
+        "SampleMaxNormalUnitError": 0.010746
+      }
+    },
+    {
+      "Type": "specular",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\obsidian-sentinel_s.png",
+      "Bytes": 46550,
+      "Sha256": "78a2098338efc15823e1d5b607fe1b4b346c32fd08e8c2e6b0d95d229bff6ae5",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "12e7ac2b4daa88c30c7f4e69bb2df73286e9ee2d6ed1c3ce2aa3888ee0b297b7",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          121,
+          121,
+          121
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "occlusion",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\obsidian-sentinel_o.png",
+      "Bytes": 40084,
+      "Sha256": "784841e4ec6730cc6f5b7c97ed454359e024f9aaf96e488ede8dc65e457a3887",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "6172375c66d81bae047de2878d32eddad4b697cf8c14a75f5d74c7f20f413bea",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          16,
+          16,
+          16
+        ],
+        "SampleMaximumRgb": [
+          254,
+          254,
+          254
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "parallax",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\obsidian-sentinel_p.png",
+      "Bytes": 45542,
+      "Sha256": "8d193fbd4da6dec570d91a11146e9ed5f74cd780cf9ee0308fe97cec54c6a905",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "b1d1282c688d6213fda4be89e1caeb713b910ecb1d9239f1dac1c0c5c51bbdf5",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          160,
+          160,
+          160
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    }
+  ],
+  "ElapsedSeconds": 1.528
+}

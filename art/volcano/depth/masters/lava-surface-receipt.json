@@ -1,0 +1,12 @@
+{
+  "name": "lava-surface",
+  "layers": [
+    "Deep vermilion molten bed",
+    "Irregular incandescent convection currents",
+    "Broken irregular cooling crust with ember edges"
+  ],
+  "kra_sha256": "47740a6edf1a5a7b1b3a98eecd0f02267b2f7a0d7e86157de4508bed8e8c41bb",
+  "png_sha256": "283f3ce6997adbd469c79a6be89ba1cecbafa3e14910bb05cc8238e7e98c0eda",
+  "retained_saved_document_id": "c1a4b3b9-14d7-4620-9ff8-5c136422429e",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "ground",
+  "layers": [
+    "T\u0142o",
+    "Unbroken volcanic ash substrate",
+    "Scumbled weathering and iron rich cooling fields",
+    "Twisted pahoehoe folds and fractured basalt",
+    "Porous stone grains and sparse scoria",
+    "Porous scoria inclusions and mineral edges"
+  ],
+  "kra_sha256": "39264ef98c044c450fc585d6cc23c9ce0e8b491a93519c8706a1e4b763055e16",
+  "png_sha256": "f6a4446d4840aeed90d6ec4a2ec574d1e0c764b9965e71877e4005966d93d59b",
+  "retained_saved_document_id": "9267aef5-652b-42af-be30-2e94500a51a2",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\depth\\masters\\ground.kra",
+  "source_kra_sha256": "0ad4d18be131b0e2d0ff9f7bc8c17a20df1fdb1b7f346fdfe2475ed4f5ac2198",
+  "albedo_sha256": "820b9c3198542e72c74525a2be1caa79bd6bfd1da0dad8783c16441b2ff0673a",
+  "albedo_size": [
+    512,
+    512
+  ]
+}

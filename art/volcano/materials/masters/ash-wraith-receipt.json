@@ -1,0 +1,35 @@
+{
+  "name": "ash-wraith",
+  "layers": [
+    "T\u0142o",
+    "back",
+    "leg-left",
+    "leg-right",
+    "body",
+    "arm-left",
+    "arm-right",
+    "Material detail / back",
+    "Material detail / leg-left",
+    "Material detail / leg-right",
+    "Material detail / body",
+    "Material detail / arm-left",
+    "Material detail / arm-right",
+    "Caldera material / back",
+    "Caldera material / leg-left",
+    "Caldera material / leg-right",
+    "Caldera material / body",
+    "Caldera material / arm-left",
+    "Caldera material / arm-right"
+  ],
+  "kra_sha256": "47f12be52d3b6a99b70a3289a172209c5a9405cb3228135c94fb5a282648e86a",
+  "png_sha256": "cce8527fc39eb72a29d1a3b4551a91e5c815e493f6be49861a58f584f095e37b",
+  "retained_saved_document_id": "47698cfc-0bc5-4b6a-a516-917943bdd308",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\AI2D\\sprites\\emberfall-volcano-river-detail-20261029\\ash-wraith.kra",
+  "source_kra_sha256": "cf5c220e0d479197b51795feb5a4b27ab9060cdce3797ff9951a0481afc0629e",
+  "albedo_sha256": "0b046c4a118cd2e9f3b4f29c123af47b8dc72c492e852c28027c4d4d2128c9fd",
+  "albedo_size": [
+    1536,
+    1152
+  ]
+}

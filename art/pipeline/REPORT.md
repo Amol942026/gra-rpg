@@ -1,5 +1,55 @@
 # Raport konfiguracji — 19.10.2026
 
+**Aktualizacja 04.11.2026 — portal, ciągły grunt i ostrość:** cztery nowe
+warstwowe KRA oraz natywny SIF. Kamienna brama ma runy i wirujący rdzeń,
+120 klatek / 60 Hz / pętla 2 s. Grunt jest zawiniętą fakturą bez ciemnych
+brzegów kafli, a duże pola popiołu mają miękkie przejścia. Poprawiono
+podwójne mnożenie gotowej klatki przez alfę; obraz końcowy zachowuje RGB
+piksel w piksel w DXGI i OpenGL. Kaldera korzysta z natywnego bufora świata.
+Monitor 1920×1080 / 60 Hz, DPI 125%; rzeczywisty V-sync interval 1.
+PASS: 293 kontrole źródeł/eksportów/prezentacji, 787 renderera, 194309
+logiki i 4090 zapisu. Finalne paczki sprawdzono po wypakowaniu: po 143
+zasoby; gracz — 180 klatek i 787 kontroli, DEV — 540 klatek trzech lokacji.
+Testy ukryte, bez audio, preferencje zachowane. Ukończony render gracza:
+średnia 5,53 ms / p95 6,17 ms; nie jest to pomiar FPS widocznych na ekranie.
+Portal dodaje 14,07 MiB tekstur i nie generuje zasobów w klatce.
+[Źródła, porównania i raport](../volcano/gateway/README.md),
+`../volcano/gateway/QA.json`. Nowsze podłoże zastępuje dwa eksporty
+terenowe z poprzedniej produkcji Krita/Laigter.
+
+**Aktualizacja 04.11.2026 — przeciwnicy i otoczenie Krita/Laigter:**
+6 gatunków, Varkhor i 32 odmiany scenografii korzystają z bardziej
+szczegółowych natywnych ilustracji. Dopracowano 12 KRA; Laigter 1.14.0
+wygenerował 48 map z profilem HeightMap. Oświetlenie wypalono w PNG,
+z zachowaniem żaru i alfy, bez dodatkowych tekstur/przebiegów w grze.
+Dodano osady mineralne, pory, odpryski, łuski i duże pola zastygłych potoków.
+Poprawiono też głębokość rysowania miecza za hełmem podczas zamachu.
+PASS: 811 kontroli źródeł/map/eksportów i 708 renderera, w tym 224 pozycje
+w ośmiu kierunkach. Finalny ZIP gracza wypakowano i sprawdzono: 139 zasobów,
+180 klatek startu oraz pełny test 708 kontroli. DEV: 139 zasobów i 540
+klatek w trzech punktach Kaldery. Wszystkie testy gry ukryte, bez audio;
+preferencje dźwięku pozostały niezmienione. Ukończony render paczki gracza:
+średnia 4,41 ms / p95 4,84 ms; nie jest to foreground FPS ani pomiar V-sync.
+12 zastępowanych tekstur zajmuje przed i po 82 014 208 bajtów RGBA8.
+Źródła, profile, podglądy i wyniki: `../volcano/materials/README.md`
+oraz `../volcano/materials/QA.json`. Starsze raporty dotyczą poprzedniej grafiki.
+
+**Aktualizacja 04.11.2026 — koryta lawy, teren i zamach Wojownika:**
+ukończono natywne materiały oraz integrację rozpoczętą 30.10. Lawa płynie
+poniżej gruntu, między skalnymi ścianami, i wychodzi poza obie granice mapy.
+Nowe powierzchnie, brzegi oraz 16 wariantów głównej scenografii pochodzą
+z Krity; duży zamach Wojownika w ośmiu kierunkach i nurt lawy — z Synfiga.
+Finalne źródła: 6 KRA, 9 SIF, 480 klatek ataku i 60 klatek lawy. PASS:
+790 kontroli natywnych źródeł/eksportów, 708 renderera, 194309 logiki
+i 4090 zapisu. Zaktualizowano EXE i oba ZIP-y. Wypakowana paczka gracza
+przeszła 180 klatek startu i pełne 708 kontroli; DEV — 540 klatek w trzech
+punktach Kaldery. Sprawdzono po 139 zasobów każdej paczki, brak natywnych
+masterów w ZIP-ach i niezmienione preferencje audio. Wszystkie okna testów
+były ukryte, audio wyłączone argumentem. Ukończony render paczki gracza:
+średnia 4,79 ms, p95 5,18 ms; nie jest to pomiar foreground FPS ani V-sync.
+Ściana dodaje 0,5 MiB tekstury bez kolejnego bufora mapy i bez I/O w klatce.
+Źródła, podglądy i raport: `../volcano/depth/README.md`, `../volcano/depth/QA.json`.
+
 **Aktualizacja 29.10.2026 — przepływ lawy i detal Kaldery:** 8 nowych
 natywnych KRA, 15 SIF, dodatkowe 16 grafik dekoracji oraz detale wszystkich
 sześciu gatunków i Varkhora w ośmiu kierunkach. Lawa faktycznie przesuwa się

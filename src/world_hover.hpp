@@ -57,6 +57,7 @@ bool worldPointerAllowed(Vector2 p) {
 }
 
 bool propContains(const Prop& prop,Vector2 point) {
+    if(prop.type==13&&game.inVolcano())return volcano_art::portalContains(prop,point);
     if(prop.type>=14)return volcano_art::propContains(prop,point);
     Vector2 base=screen(prop.pos);
     float sourceY=(point.y-base.y)/prop.size+208;

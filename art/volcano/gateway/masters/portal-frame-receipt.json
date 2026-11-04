@@ -1,0 +1,12 @@
+{
+  "name": "portal-frame",
+  "layers": [
+    "Contact with the ground",
+    "Carved basalt arch and pedestal",
+    "Eldrin violet runes and worn metal inlays"
+  ],
+  "kra_sha256": "697e12403b3e029f46f10b3ff5ce8241e6c1f5f4cb65ed951a6a5f8d6bc48d83",
+  "png_sha256": "6b424bafe14eaeb1696fd7323caec275b3aa77fe06dfc818a5d4aca1a6855b50",
+  "retained_saved_document_id": "f1be42e1-ea9d-415d-8ef2-86026e22b4ea",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

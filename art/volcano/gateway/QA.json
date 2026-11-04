@@ -1,0 +1,197 @@
+{
+  "status": "PASS",
+  "date": "2026-11-04",
+  "scope": [
+    "animated_caldera_gateway",
+    "continuous_caldera_ground",
+    "native_image_and_text_clarity",
+    "read_only_refresh_verification"
+  ],
+  "native_assets": {
+    "status": "PASS",
+    "checks": 293,
+    "native_kra": 4,
+    "native_synfig": 1,
+    "portal_frames": 120,
+    "portal_fps": 60,
+    "ground_seam_mean_rgb": [
+      0.0514322929084301,
+      0.01627604104578495
+    ],
+    "macro_max_alpha_gradient": 3,
+    "before_clarity": {
+      "backend": "DXGI flip / V-sync",
+      "width": 1924,
+      "height": 1055,
+      "monitor_hz": 60,
+      "swap_interval": 1,
+      "actual_last_sync_interval": 1,
+      "canvas_width": 1688,
+      "canvas_height": 1055,
+      "dpi_modes": 4,
+      "rgb_mismatches": 202592,
+      "max_rgb_error": 65,
+      "hidden": true,
+      "audio_opened": false,
+      "foreground_fps_measured": false
+    },
+    "after_clarity": {
+      "backend": "DXGI flip / V-sync",
+      "width": 1924,
+      "height": 1055,
+      "physical_client_width": 1924,
+      "physical_client_height": 1055,
+      "window_dpi": 120,
+      "monitor_hz": 60,
+      "swap_interval": 1,
+      "actual_last_sync_interval": 1,
+      "canvas_width": 1688,
+      "canvas_height": 1055,
+      "dpi_modes": 4,
+      "rgb_mismatches": 0,
+      "max_rgb_error": 0,
+      "hidden": true,
+      "audio_opened": false,
+      "foreground_fps_measured": false
+    },
+    "additional_portal_rgba8_bytes": 14757120,
+    "paid_services": false,
+    "external_assets": []
+  },
+  "native_animation": {
+    "status": "PASS",
+    "frames": 120,
+    "fps": 60,
+    "duration": 2,
+    "size": [
+      128,
+      208
+    ],
+    "cell": [
+      132,
+      212
+    ],
+    "columns": 15,
+    "atlas": [
+      1980,
+      1696
+    ],
+    "native_project_sha256": "f82a07d6f38793a019e1f6d98ef565d09ac02297aba8e63ee478cb98815bacfe",
+    "source_png_sha256": "594917a186cc184ee4b63af4d4dfb07136a02007c9bf773596401017f13da76e",
+    "atlas_sha256": "eecdf5257393cc1b9286a3a788588f6501a51ae0f6e18908b6d58522b9b4f362",
+    "loop_seam": 13.253380408653847,
+    "adjacent_difference": 13.001352163461538
+  },
+  "renderer": {
+    "status": "PASS",
+    "checks": 787,
+    "failures": 0,
+    "species": 7,
+    "directions": 8,
+    "pose_views": 224,
+    "hidden": true,
+    "audio_opened": false,
+    "presentation_measured": false,
+    "completed_render_mean_ms": 5.6497,
+    "completed_render_p95_ms": 6.1207
+  },
+  "logic_checks": 194309,
+  "persistence_checks": 4090,
+  "player_package": {
+    "status": "PASS",
+    "package_sha256": "3f24e855dc9f7b8546e33d0e8060e3a153f4a650625de8d9e1ab599c7801be2a",
+    "exe_sha256": "439346a899bc6b23ff11a2c9130ec56b883f5c8ca19e5e36f3f3347232bf0028",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-package-20261104-172957\\Emberfall",
+    "verified_assets": 143,
+    "startup_frames": 180,
+    "volcano": {
+      "status": "PASS",
+      "checks": 787,
+      "failures": 0,
+      "species": 7,
+      "directions": 8,
+      "pose_views": 224,
+      "hidden": true,
+      "audio_opened": false,
+      "presentation_measured": false,
+      "completed_render_mean_ms": 5.5318,
+      "completed_render_p95_ms": 6.1683
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  "developer_package": {
+    "status": "PASS",
+    "zip_sha256": "516e2fa815b18b3e0206eefe32ce4f911a4186c064044b5c7315c5b0266384af",
+    "exe_sha256": "f4dcb80e6d6bd1805575961baac97048954bb66b18389dc8d839f175587b4208",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-gateway-dev-20261104\\Emberfall-DEV",
+    "verified_assets": 143,
+    "startup_destinations": 3,
+    "startup_frames": 540,
+    "hidden": true,
+    "audio_opened": false,
+    "audio_preferences_unchanged": true,
+    "native_masters_in_zip": false,
+    "foreground_fps_measured": false
+  },
+  "windows": {
+    "gpu": "AMD Radeon (TM) Graphics",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "refresh_hz": 60,
+    "dpi": 120,
+    "settings_changed": false,
+    "real_hidden_executable_client": {
+      "client": [
+        2400,
+        1350
+      ],
+      "dpi": 120,
+      "awareness": 2,
+      "visible": false
+    }
+  },
+  "presentation": {
+    "backends_tested": [
+      "DXGI flip / V-sync",
+      "OpenGL fallback"
+    ],
+    "inherited_dpi_matrices": [
+      1,
+      1.25,
+      1.5,
+      2
+    ],
+    "system_dpi_changes": false,
+    "actual_last_sync_interval": 1,
+    "final_rgb_differences": 0,
+    "foreground_fps_measured": false
+  },
+  "additional_cpu_mask_bytes": 165600,
+  "no_generation_or_file_io_per_frame": true,
+  "source_sha256": {
+    "src/environment.hpp": "d03954e0e62f1f0b8836a90f21990d2890c1653807ac991441612dd628f82179",
+    "src/ground_shadows.hpp": "e5b6d2e5886da8483ad9b4187a4f15272fcf0f60c4493d1ac7b95cf8d0fec724",
+    "src/refresh_qa.hpp": "977224a05d8e022a0a11bb1b02494e85ab0d807ca4c3ec5a7bea119aa728bbd9",
+    "src/sync_present.cpp": "82afa015c284a273f18ae9f7dd179e0304dbfae6cf06ab4d861001a3dfaab3c6",
+    "src/visual_qa.hpp": "c21be774f84d9860f6591e5dbb5926ca0e2d0898bf371605c1eee15b773aa50e",
+    "src/volcano_art.hpp": "4978f07a2571c708daef75f2dafb1a6c3d7d8ef9eeefc8b77e2360d2c320e18b",
+    "src/world_hover.hpp": "0071b5076a42b8a2cd22dd35702eee98917c796c6d0a70f64d640bf9d36d52f5",
+    "tools/media/caldera_gateway_art.py": "54688e5b37e5d041198fefb75d230045220bb6721039e052da3d977c5091e6cd",
+    "tools/media/caldera_gateway_synfig.py": "891ce2861fdfba99887c33b9494bf12b05c0343258b4c6a9200fe98b48acdd73",
+    "tools/media/verify_caldera_gateway.py": "e69a0bec4087b659e3c73b1e827fc51a4ea47a6fbce98da3a4ea3e9cc99a4fc0",
+    "tests/image_clarity_probe.cpp": "b47d7b8fe8833024d492be5242abbdd077e857ce1df468041343b642a2790629",
+    "tests/image_clarity_probe.ps1": "bba2e70aff1b8ebdf02b67c8c8749f50a693da54824f319eca43290a34aff6c3",
+    "tests/volcano_qa.cpp": "3cb1e0f91e187c746df3f73ea4c9ded71468e137dd9e640e4239dfd6e544f5da",
+    "package.ps1": "5c2a161ba80145329c0be200f84f4208525799080a6491704e0643889b18bea2"
+  },
+  "backup": "C:/AI2D/pipeline/backups/caldera-gateway-20261104",
+  "all_game_windows_hidden": true,
+  "audio_opened": false,
+  "paid_services": false,
+  "external_artwork": false,
+  "save_format": 10,
+  "scenery_revision": 3
+}

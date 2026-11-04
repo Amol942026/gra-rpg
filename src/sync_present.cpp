@@ -128,7 +128,7 @@ bool surface(int width,int height){
     state.width=width;state.height=height;return validateSurface();
 }
 bool shaders(){
-    const char* code="struct V{float4 p:SV_Position;float2 uv:TEXCOORD0;};V vs(uint id:SV_VertexID){V v;v.uv=float2((id<<1)&2,id&2);v.p=float4(v.uv*float2(2,-2)+float2(-1,1),0,1);return v;}Texture2D image:register(t0);SamplerState sampleState:register(s0);float4 ps(V v):SV_Target{return image.Sample(sampleState,v.uv);}";
+    const char* code="struct V{float4 p:SV_Position;float2 uv:TEXCOORD0;};V vs(uint id:SV_VertexID){V v;v.uv=float2((id<<1)&2,id&2);v.p=float4(v.uv*float2(2,-2)+float2(-1,1),0,1);return v;}Texture2D image:register(t0);SamplerState sampleState:register(s0);float4 ps(V v):SV_Target{return float4(image.Sample(sampleState,v.uv).rgb,1);}";
     ID3DBlob* vertex=nullptr;ID3DBlob* pixel=nullptr;ID3DBlob* errors=nullptr;
     HRESULT hr=D3DCompile(code,std::strlen(code),nullptr,nullptr,nullptr,"vs","vs_4_0",D3DCOMPILE_OPTIMIZATION_LEVEL3,0,&vertex,&errors);release(errors);
     if(SUCCEEDED(hr))hr=D3DCompile(code,std::strlen(code),nullptr,nullptr,nullptr,"ps","ps_4_0",D3DCOMPILE_OPTIMIZATION_LEVEL3,0,&pixel,&errors);release(errors);

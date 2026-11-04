@@ -1,0 +1,13 @@
+{
+  "name": "channel-wall",
+  "layers": [
+    "Canyon basalt base",
+    "Irregular fractured faces and weathered strata",
+    "Porosity and molten bounce light",
+    "Rim contact shadow"
+  ],
+  "kra_sha256": "97c0549ece6037ba95037656a6c1b6bdedaaaf10edf8b4cd3ec1467b4b812e00",
+  "png_sha256": "848113bc84ae4859c83e0ef63a4c5aeece0622868de08eb3908654c0e72445d2",
+  "retained_saved_document_id": "1e4a791c-9056-4ca7-b9e5-8c90d62ea5b2",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

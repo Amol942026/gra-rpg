@@ -13,7 +13,36 @@ int main(int argc,char** argv){
  auto capture=[&](const std::string& name){renderScene();Image im=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&im);check(ExportImage(im,(root/(name+".png")).string().c_str()),"integrated screenshot / "+name);UnloadImage(im);check(IsWindowHidden(),"window remains hidden / "+name);};
  check(volcano_art::terrain.id&&volcano_art::terrain.depth.id==0&&volcano_art::lava.id,"third terrain and Synfig lava are preloaded without unused depth");
  check(volcano_art::lavaStrips.size()>100&&volcano_art::lavaFrames[59].id&&volcano_art::steam.id,"continuous lava ribbons and native steam loop preloaded");
+ check(volcano_art::channelWall.id&&volcano_art::canyonFronts.size()==volcano_art::lavaStrips.size(),"recessed river has preloaded rock faces for every visible lower segment");
+ for(int river=0;river<2;river++){
+  float low=1000,high=-1000;for(const auto& s:volcano_art::lavaStrips)if(std::abs(s.corners[0].x-(lavaCenter(river,s.corners[0].y)-1.6f))<.01f){low=std::min(low,s.corners[0].y);high=std::max(high,s.corners[1].y);}
+  check(low<0&&high>MapSize,"molten channel continues beyond both field edges");
+  for(float y:{2.f,5.f,68.f,70.f})check(volcanoLava({lavaCenter(river,y),y}),"extended river cannot be crossed at its former exposed end");
+ }
  check(volcano_art::extraScenery.id&&volcano_art::extraSceneryEdge.id&&volcano_art::extraSceneryAlpha.size()==1440*1840,"new boulders, stumps, craters and monoliths preloaded with alpha");
+ check(volcano_art::portalFrame.id&&volcano_art::portalLoop.id&&volcano_art::portalOutline.id&&volcano_art::portalMask.size()==360*460,"native gateway artwork, animation and exact interaction mask preloaded");
+ reset();game.activateField(WorldLocation::Volcano);game.player=VolcanoArrival;game.time=1;
+ auto gate=std::find_if(game.props.begin(),game.props.end(),[](const Prop& p){return p.type==13;});check(gate!=game.props.end(),"actual arrival gateway exists");
+ if(gate!=game.props.end()){
+  Prop portal=*gate;Vector2 at=screen(portal.pos);
+  check(propContains(portal,{at.x,at.y-105})&&!propContains(portal,{at.x-85,at.y-190}),"magical aperture is clickable while empty corner is rejected");
+  check(!game.walkable(portal.pos),"carved gateway retains its existing collision");
+  fs::create_directories(root/"portal-frames");RenderTexture2D sample=render_targets::colorOnly(320,280);std::vector<Color> first,previous;int changing=0;
+  for(int f=0;f<=120;f++){
+   game.time=f/60.f;BeginTextureMode(sample);ClearBackground(rgb(38,40,50));rlPushMatrix();rlTranslatef(160-at.x,255-at.y,0);volcano_art::drawPortal(portal,false,WHITE);rlPopMatrix();EndTextureMode();
+   Image im=LoadImageFromTexture(sample.texture);auto* pixels=LoadImageColors(im);int changed=0;
+   if(f==0)first.assign(pixels,pixels+320*280);else for(int i=0;i<320*280;i++)changed+=pixels[i].r!=previous[i].r||pixels[i].g!=previous[i].g||pixels[i].b!=previous[i].b;
+   if(f>0&&f<120)changing+=changed>40;
+   if(f==120){int seam=0;for(int i=0;i<320*280;i++)seam+=pixels[i].r!=first[i].r||pixels[i].g!=first[i].g||pixels[i].b!=first[i].b;check(seam==0,"native portal loop returns to exactly the same rendered frame");}
+   previous.assign(pixels,pixels+320*280);UnloadImageColors(pixels);ImageFlipVertical(&im);
+   if(f%2==0&&f<120){char file[32];std::snprintf(file,sizeof(file),"frame-%03d.png",f);check(ExportImage(im,(root/"portal-frames"/file).string().c_str()),"actual gateway animation preview");}UnloadImage(im);
+  }
+  check(changing==119,"portal visibly changes at every authored 60 Hz sample");UnloadRenderTexture(sample);
+  game.player=VolcanoArrival;game.time=1;nativeWorldRendering=false;renderScene();Image normal=LoadImageFromTexture(canvas.texture);nativeWorldRendering=true;renderScene();Image native=LoadImageFromTexture(canvas.texture);
+  auto* a=LoadImageColors(normal);auto* b=LoadImageColors(native);int difference=0;for(int i=0;i<normal.width*normal.height;i++)difference+=a[i].r!=b[i].r||a[i].g!=b[i].g||a[i].b!=b[i].b;
+  check(difference==0,"default Caldera renders at the same native resolution as explicit native-world");UnloadImageColors(a);UnloadImageColors(b);UnloadImage(normal);UnloadImage(native);nativeWorldRendering=false;capture("gateway-native");
+  game.player=VolcanoPortal+V{1.5f,0};check(game.useVolcanoPortal()&&game.inTower(),"animated gateway returns the player to Eldrin through the real interaction");
+ }
  for(int type=14;type<=17;type++)for(int variant=0;variant<8;variant++){
   Prop p{{10,10},type,1};for(int n=0;n<100&&volcano_art::variant(p)!=variant;n++)p.pos.x+=.25f;
   check(volcano_art::variant(p)==variant,"deterministic scenery variant available");Vector2 at=screen(p.pos);bool hit=false;
@@ -35,6 +64,13 @@ int main(int argc,char** argv){
   EndTextureMode();Image im=LoadImageFromTexture(sheet.texture);ImageFlipVertical(&im);check(ExportImage(im,(root/(std::string(volcano_actors::names[type-VolcanoFirstType])+"-poses.png")).string().c_str()),"eight-direction idle, locomotion, attack and corpse sheet");UnloadImage(im);
  }
  UnloadRenderTexture(sheet);
+ RenderTexture2D swing=render_targets::colorOnly(1536,1792);
+ BeginTextureMode(swing);ClearBackground(rgb(38,40,50));
+ const float swingPhases[]={0,.2f,.45f,.6f,.8f,1};
+ for(int d=0;d<8;d++)for(int p=0;p<6;p++){AnimationState state{};state.direction=Direction(d);volcano_actors::draw(16,128+p*256,202+d*224,1.7f,state,swingPhases[p]);}
+ EndTextureMode();Image swingImage=LoadImageFromTexture(swing.texture);ImageFlipVertical(&swingImage);check(ExportImage(swingImage,(root/"basalt-swing.png").string().c_str()),"actual renderer / eight directions / anticipation, full windup, strike and recovery");UnloadImage(swingImage);UnloadRenderTexture(swing);
+ fs::create_directories(root/"swing-frames");swing=render_targets::colorOnly(384,320);
+ for(int f=0;f<60;f++){BeginTextureMode(swing);ClearBackground(rgb(38,40,50));AnimationState state{};state.direction=Direction::SE;volcano_actors::draw(16,192,265,2.f,state,f/60.f);EndTextureMode();Image im=LoadImageFromTexture(swing.texture);ImageFlipVertical(&im);char file[32];std::snprintf(file,sizeof(file),"frame-%02d.png",f);check(ExportImage(im,(root/"swing-frames"/file).string().c_str()),"actual articulated warrior frame");UnloadImage(im);}UnloadRenderTexture(swing);
  reset();game.activateField(WorldLocation::Volcano);game.player={25,48};game.time=0;game.messageTime=0;
  RenderTexture2D river=render_targets::colorOnly(WorldW,H);std::vector<Color> reference;
  for(int n=0;n<2;n++){
@@ -74,6 +110,18 @@ int main(int argc,char** argv){
   reset();game.activateField(WorldLocation::Volcano);game.player=views[view];game.messageTime=0;game.time=2;capture("landscape-"+std::to_string(view));
   for(int frame=0;frame<80;frame++){game.time+=1.f/60;double t=GetTime();renderScene();rlDrawRenderBatchActive();if(finish)finish();if(frame>=20)timings.push_back((GetTime()-t)*1000);}
  }
+ for(int river=0;river<2;river++)for(float y:{2.f,36.f,70.f}){game.player={lavaCenter(river,y)-4,y};capture("canyon-"+std::to_string(river)+"-"+std::to_string(int(y)));}
+ // Exercise the fallback's actual final framebuffer, without restoring or
+ // focusing this hidden window. DXGI is tested by image_clarity_probe.
+ refreshDisplayLayout();updateFramePacing(true);renderScene();Image expected=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&expected);
+ for(float dpi:{1.f,1.25f,1.5f,2.f}){
+  BeginDrawing();rlMatrixMode(RL_MODELVIEW);rlLoadIdentity();rlScalef(dpi,dpi,1);presentCanvas();Image actual=presentedImage();
+  auto* a=LoadImageColors(expected);auto* b=LoadImageColors(actual);int differences=0;
+  for(int y=0;y<expected.height;y++)for(int x=0;x<expected.width;x++){auto s=a[y*expected.width+x],t=b[(y+int(presentationViewport.y))*actual.width+x+int(presentationViewport.x)];differences+=std::max({std::abs(int(s.r)-t.r),std::abs(int(s.g)-t.g),std::abs(int(s.b)-t.b)})>1;}
+  check(differences==0,"OpenGL fallback presents native RGB without double alpha at DPI "+std::to_string(dpi));
+  if(dpi==1)check(ExportImage(actual,(root/"opengl-presentation.png").string().c_str()),"actual fallback framebuffer snapshot");
+  UnloadImageColors(a);UnloadImageColors(b);UnloadImage(actual);EndDrawing();finishFramePacing();check(IsWindowHidden(),"presentation diagnostic remains hidden");
+ }UnloadImage(expected);
  check(IsWindowHidden()&&!audioSystem.available&&audioSystem.playedEffects==0,"entire integration run remains hidden and silent");check(PlayerBuild&&!developerActive,"actual player renderer without developer mode");
  std::sort(timings.begin(),timings.end());double mean=std::accumulate(timings.begin(),timings.end(),0.)/timings.size(),p95=timings[(timings.size()-1)*95/100];
  std::ofstream report(root/"summary.json");report<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"species\":7,\"directions\":8,\"pose_views\":224,\"hidden\":true,\"audio_opened\":false,\"presentation_measured\":false,\"completed_render_mean_ms\":"<<mean<<",\"completed_render_p95_ms\":"<<p95<<"}";

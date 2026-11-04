@@ -1,0 +1,131 @@
+{
+  "Status": "PASS",
+  "Source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\lava-salamander.png",
+  "OriginalUnchanged": true,
+  "SourceSha256": "143748697c094f67406e8eced4162934e1a1e4fd29d9d27f5adc5f4e2d4eddaa",
+  "SourceWidth": 1536,
+  "SourceHeight": 1152,
+  "SourcePixelSha256": "204c87f9495dec42dea6bdde13e9b41ee127647c888a8bf807d0484a2c9a62a9",
+  "Laigter": "C:\\AI2D\\Tools\\Laigter\\laigter.exe",
+  "LaigterSha256": "95ded5057510ada7f45b0321192b91cf7ae058fcd683683a1ed5b5a19e276e48",
+  "Version": "laigter 1.14.0",
+  "Preset": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\laigter-heightmap.presets",
+  "PresetSha256": "dd144da7393f8d82d30f146d8e8436c2e9c56cf04846436bceec4e61150cabdc",
+  "Arguments": [
+    "--no-gui",
+    "--software-opengl",
+    "--not-recursive",
+    "--flatten",
+    "-d",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\_input\\lava-salamander.png",
+    "-l",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff",
+    "-n",
+    "-c",
+    "-o",
+    "-p",
+    "-r",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\_input\\preset.presets"
+  ],
+  "OutputDirectory": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff",
+  "MapCount": 4,
+  "Maps": [
+    {
+      "Type": "normal",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\lava-salamander_n.png",
+      "Bytes": 174647,
+      "Sha256": "f5b09f1a00d320c8bfa0398cb7e1a6062a7e0a351b745f190d3c6f89b1d95ebd",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "c38928a9fc01dba62ca9f29932ef64c930e85e5774e600973dc45929546bed58",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          9,
+          9,
+          170
+        ],
+        "SampleMaximumRgb": [
+          245,
+          245,
+          255
+        ],
+        "SampleIsGrayscale": false,
+        "SampleMaxNormalUnitError": 0.011741
+      }
+    },
+    {
+      "Type": "specular",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\lava-salamander_s.png",
+      "Bytes": 59022,
+      "Sha256": "806f0900540e54e53052e756ac27bd1e2ee7ab27d22b0f917c44369b17d8f864",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "3bfed17897621e08ba7680261018c62e4f28aba73f81c7f1f82e09c77332a43b",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          117,
+          117,
+          117
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "occlusion",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\lava-salamander_o.png",
+      "Bytes": 72610,
+      "Sha256": "2aae991c468e647869c39e377e0c04fce22506c24bf0f7533f43ccfe40319e97",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "2f28e7c5bbe247164983fc5fd5c8fd73f86308a12eeaf9a10ace7675449bbcd1",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          16,
+          16,
+          16
+        ],
+        "SampleMaximumRgb": [
+          254,
+          254,
+          254
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "parallax",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\lava-salamander_p.png",
+      "Bytes": 60595,
+      "Sha256": "d6b1676fbcacdeaf65f67548365b901790c23007f1a18bd1059cb0064a288498",
+      "Decoded": {
+        "Width": 1536,
+        "Height": 1152,
+        "PixelSha256": "3ecd3f85c21b0e780f967c28a3bcc92eb4eafe1d691cda459c05cde128632dca",
+        "SampledPixels": 4096,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          146,
+          146,
+          146
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    }
+  ],
+  "ElapsedSeconds": 1.65
+}

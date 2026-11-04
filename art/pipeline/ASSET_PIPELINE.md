@@ -1,6 +1,17 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
-Aktualna Kaldera: [płynąca lawa, dodatkowe otoczenie i detale](../volcano/river-detail/README.md).
+Aktualny portal i ciągłe podłoże Kaldery oraz ostrość prezentacji:
+[Krita/Synfig, natywny obraz i 60 Hz](../volcano/gateway/README.md).
+Produkcja: `caldera_gateway_art.py`, `caldera_gateway_synfig.py`;
+kontrola: `verify_caldera_gateway.py`, `tests/image_clarity_probe.ps1 -NoAudio`.
+Nowe `ground.png` i `macro.png` zastępują starsze wypalane materiały podłoża.
+Pozostała grafika Kaldery: [przeciwnicy, otoczenie i materiały Krita/Laigter](../volcano/materials/README.md).
+Produkcja: `caldera_materials_krita.py`, `caldera_materials_bake.py`;
+kontrola: `verify_caldera_materials.py`. Preset w `tools/media/presets/`.
+Koryta i zamach: [zagłębione koryta lawy, teren i zamach Wojownika](../volcano/depth/README.md).
+Produkcja: `caldera_depth_art.py`, `caldera_natural_surfaces.py` (Krita),
+`caldera_depth_motion.py` (Synfig); odbiór: `verify_caldera_depth.py`.
+Poprzednia produkcja: [płynąca lawa, dodatkowe otoczenie i detale](../volcano/river-detail/README.md).
 Produkcja natywna: `volcano_river_detail.py` (Krita), `volcano_river_motion.py`
 (Synfig); niezależny odbiór: `verify_volcano_river_detail.py`.
 Pierwsza wersja i mechaniki: [Kaldera Popiołu](../volcano/README.md).

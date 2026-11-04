@@ -59,6 +59,7 @@ inline void sprite(Texture2D texture,Rectangle bounds,Vector2 base,bool inverted
 }
 inline void prop(const Prop& value){
  Vector2 base=screen(value.pos);Texture2D texture=propArt[value.type].texture;visibleCasters++;
+ if(value.type==13&&game.inVolcano()){sprite(volcano_art::portalFrame,{base.x-90*value.size,base.y-208*value.size,180*value.size,230*value.size},base,false);return;}
  if(value.type>=14){Rectangle s=volcano_art::source(value);auto t=volcano_art::propTexture(value);float x=base.x-90*value.size,y=base.y-208*value.size,w=180*value.size,h=230*value.size;
   quad(t,{{projected({x,y},base.y),projected({x,y+h},base.y),projected({x+w,y+h},base.y),projected({x+w,y},base.y)}},{{{s.x/t.width,s.y/t.height},{s.x/t.width,(s.y+s.height)/t.height},{(s.x+s.width)/t.width,(s.y+s.height)/t.height},{(s.x+s.width)/t.width,s.y/t.height}}});return;}
  if(!treeProp(value.type)){sprite(texture,{base.x-90*value.size,base.y-208*value.size,180*value.size,230*value.size},base);return;}

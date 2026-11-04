@@ -1,0 +1,41 @@
+Build edition: developer
+Frames: 180
+Window: 1920x1080
+Fullscreen: no
+Refresh rate (Hz): 60
+V-sync interval: 1
+Presentation clock: DXGI flip / V-sync
+DXGI synchronized presents: 180
+Occluded presentations: 0
+Suppressed native swaps: 180
+Actual presentation interval: 1
+Presentation fallback: 
+Strong cuts performed: 0
+Piercing arrows fired: 0
+Developer mode: 1
+Developer menu open: 0
+Developer destination: volcano
+World location: volcano
+Benchmark scenario: forest
+Desert areas visited: 0
+Sand prisons cast: 0
+Tower floor: 1
+Intro active: 0
+Developer error: 
+Main menu open: 0
+Pause menu open: 0
+Audio device opened: no
+Native canvas: 2160x1350
+Desert background buffer: 0x0
+Hidden background diagnostic: yes
+Window hidden: yes
+Diagnostic loop rate (not foreground FPS): 49.628
+CPU frame mean (ms): 13.6267
+EndDrawing mean (ms): 0.0115076
+Presentation mean (ms): 6.50947
+CPU frame p95 (ms): 14.9632
+CPU frame p99 (ms): 22.9244
+Frame p95 (ms): 16.829
+Frame p99 (ms): 23.0487
+Frame max (ms): 448.161
+Frames over 25 ms: 1

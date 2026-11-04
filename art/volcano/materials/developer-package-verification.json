@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "package_sha256": "a95a632147c58c07303866f60e7a6a8582d225ca0f917de69939752697017176",
+  "exe_sha256": "1311d9647a634742f3a988ba3c0e9866a22395eb2fdb5e3e2ad6a4ec40d4d5fd",
+  "verified_assets": 139,
+  "startup_destinations": 3,
+  "startup_frames": 540,
+  "audio_opened": false,
+  "hidden": true,
+  "audio_preferences_unchanged": true,
+  "native_sources_in_zip": false
+}

@@ -29,11 +29,11 @@ bool runRefreshQA(){
             for(int y=0;y<expected.height;y++)for(int x=0;x<expected.width;x++){
                 auto* a=sourcePixels+(size_t(y)*expected.width+x)*4;
                 auto* b=targetPixels+(size_t(y+int(presentationViewport.y))*actual.width+x+int(presentationViewport.x))*4;
-                // The final GL pass alpha-composites the canvas over black;
-                // antialiased edges can have alpha below 255 in the canvas.
-                mismatches+=std::abs((int(a[0])*a[3]+127)/255-b[0])>1
-                          ||std::abs((int(a[1])*a[3]+127)/255-b[1])>1
-                          ||std::abs((int(a[2])*a[3]+127)/255-b[2])>1;
+                // The complete opaque frame must reach the display without
+                // a second multiplication of antialiased coverage alpha.
+                mismatches+=std::abs(int(a[0])-b[0])>1
+                          ||std::abs(int(a[1])-b[1])>1
+                          ||std::abs(int(a[2])-b[2])>1;
                 nonBlack+=int(b[0])+b[1]+b[2]>10;palette[((b[0]>>3)<<10)|((b[1]>>3)<<5)|(b[2]>>3)]=true;
             }
             int colors=std::count(palette.begin(),palette.end(),true);

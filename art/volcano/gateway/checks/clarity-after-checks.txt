@@ -1,0 +1,4 @@
+DPI=1 mismatched RGB=0 max error=0 antialiased pixels=54281
+DPI=1.25 mismatched RGB=0 max error=0 antialiased pixels=54281
+DPI=1.5 mismatched RGB=0 max error=0 antialiased pixels=54281
+DPI=2 mismatched RGB=0 max error=0 antialiased pixels=54281

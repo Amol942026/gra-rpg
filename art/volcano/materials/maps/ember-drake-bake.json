@@ -1,0 +1,32 @@
+{
+  "name": "ember-drake",
+  "status": "PASS",
+  "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\ember-drake.png",
+  "source_sha256": "a6752eead535d70768c4fc364d40b85d5f27159c5c95b5d2649e42b16cfab84e",
+  "source_kra_sha256": "a5b25adc747e9d9f500af61f2787bf6acebb6b6cfac9e3d643bb4a3302783f89",
+  "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\ember-drake.png",
+  "sha256": "1ad8d8501730153f6671d1b2f345a6cb14f88999cbc024f6fe61878070774e61",
+  "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\maps-manifest.json",
+  "maps_manifest_sha256": "e64aa7893759df5d2bd9e0d70da382f6ffacc582068758d094e66c89c5b46a65",
+  "map_types": [
+    "normal",
+    "specular",
+    "occlusion",
+    "parallax"
+  ],
+  "map_sha256": {
+    "normal": "cfa7c0a667b98b3037670ab36aefcc475e93959493f7b4883538ae816e514ae0",
+    "specular": "c09deae670dbd5dee43587df605b3f01bbf6ffed4fca1dc30f2bf1a1eb969ceb",
+    "occlusion": "9788454ccbdd8a66331dd2604379da2293cb2e5644340a9f0898a14e47d04ce5",
+    "parallax": "f8db56a685873b29f09c47c23c2af1fec832cb745d84cd0b81a4e83bbcd675c5"
+  },
+  "size": [
+    1536,
+    1152
+  ],
+  "rgba8_bytes": 7077888,
+  "alpha_unchanged": true,
+  "preserved_emissive_pixels": 9094,
+  "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+  "runtime_material_shader": false
+}

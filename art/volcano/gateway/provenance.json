@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "original_artwork": true,
+  "paid_services": false,
+  "external_inputs": [],
+  "tools": {
+    "graphics": "Krita 5.3.4.1 native MCP",
+    "animation": "Synfig 1.4.5 native SIF/CLI"
+  },
+  "local_masters": {
+    "krita": "C:\\AI2D\\sprites\\emberfall-caldera-gateway-20261104",
+    "synfig": "C:\\AI2D\\animations\\emberfall-caldera-gateway-20261104"
+  },
+  "native_saved_documents_retained": true,
+  "files": {
+    "masters/ground-receipt.json": {
+      "bytes": 497,
+      "sha256": "9bb1e888a534e57e3d7b8701b54343701193eca6fe89023ce192d72b2d1acee7"
+    },
+    "masters/ground.kra": {
+      "bytes": 1088473,
+      "sha256": "55d16402a4d3cf611fe593fa7eb4865ea420c8ea1a2fb73c3feff22e917db15e"
+    },
+    "masters/ground.png": {
+      "bytes": 77043,
+      "sha256": "8406b0bc23b87f005780775d6d618a4801789c052db8cc51240b44483722dca6"
+    },
+    "masters/macro-receipt.json": {
+      "bytes": 456,
+      "sha256": "8661149677539651cbc1e3a28673c686ef3a700274e0ec3b42d239c955d150c6"
+    },
+    "masters/macro.kra": {
+      "bytes": 1704249,
+      "sha256": "a6ed436bb2f45e0440e33e59a5a89c8d77f9240b623ddf74e185a277f2d67cc0"
+    },
+    "masters/macro.png": {
+      "bytes": 351190,
+      "sha256": "0848886e41f2494a91ea569754c29aa9c74f9135fcc3a8cbdc5c996360f9cbf6"
+    },
+    "masters/portal-core-receipt.json": {
+      "bytes": 481,
+      "sha256": "ea3bbba9728cbdc80587558d00b7e827b5d5668783effc207cf4d2f034f90921"
+    },
+    "masters/portal-core.kra": {
+      "bytes": 253630,
+      "sha256": "ac0d11d0a863e71fcd1ac0ba558be24a7c35f8a46a0d5a6bfbc7366abd67cc4e"
+    },
+    "masters/portal-core.png": {
+      "bytes": 50159,
+      "sha256": "594917a186cc184ee4b63af4d4dfb07136a02007c9bf773596401017f13da76e"
+    },
+    "masters/portal-frame-receipt.json": {
+      "bytes": 502,
+      "sha256": "77bd8cb571981fb6e9d5c0c9e8b9a1e15de3ce83988fb5112ae5a70d8c38189d"
+    },
+    "masters/portal-frame.kra": {
+      "bytes": 239687,
+      "sha256": "697e12403b3e029f46f10b3ff5ce8241e6c1f5f4cb65ed951a6a5f8d6bc48d83"
+    },
+    "masters/portal-frame.png": {
+      "bytes": 44634,
+      "sha256": "6b424bafe14eaeb1696fd7323caec275b3aa77fe06dfc818a5d4aca1a6855b50"
+    },
+    "motion/parts/core.png": {
+      "bytes": 50159,
+      "sha256": "594917a186cc184ee4b63af4d4dfb07136a02007c9bf773596401017f13da76e"
+    },
+    "motion/portal.sif": {
+      "bytes": 34194,
+      "sha256": "f82a07d6f38793a019e1f6d98ef565d09ac02297aba8e63ee478cb98815bacfe"
+    },
+    "motion/receipt.json": {
+      "bytes": 566,
+      "sha256": "4fabece1737b6112cfa7e4f910b8b944123b092947642d962e204a33904b2021"
+    },
+    "motion/render.log": {
+      "bytes": 476,
+      "sha256": "02b8fe9bb8ddf2c8885d940f171fecaf6801341404fd0295ed5f2fee0e814e3d"
+    }
+  }
+}

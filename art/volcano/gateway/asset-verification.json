@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "checks": 293,
+  "native_kra": 4,
+  "native_synfig": 1,
+  "portal_frames": 120,
+  "portal_fps": 60,
+  "ground_seam_mean_rgb": [
+    0.0514322929084301,
+    0.01627604104578495
+  ],
+  "macro_max_alpha_gradient": 3,
+  "before_clarity": {
+    "backend": "DXGI flip / V-sync",
+    "width": 1924,
+    "height": 1055,
+    "monitor_hz": 60,
+    "swap_interval": 1,
+    "actual_last_sync_interval": 1,
+    "canvas_width": 1688,
+    "canvas_height": 1055,
+    "dpi_modes": 4,
+    "rgb_mismatches": 202592,
+    "max_rgb_error": 65,
+    "hidden": true,
+    "audio_opened": false,
+    "foreground_fps_measured": false
+  },
+  "after_clarity": {
+    "backend": "DXGI flip / V-sync",
+    "width": 1924,
+    "height": 1055,
+    "physical_client_width": 1924,
+    "physical_client_height": 1055,
+    "window_dpi": 120,
+    "monitor_hz": 60,
+    "swap_interval": 1,
+    "actual_last_sync_interval": 1,
+    "canvas_width": 1688,
+    "canvas_height": 1055,
+    "dpi_modes": 4,
+    "rgb_mismatches": 0,
+    "max_rgb_error": 0,
+    "hidden": true,
+    "audio_opened": false,
+    "foreground_fps_measured": false
+  },
+  "additional_portal_rgba8_bytes": 14757120,
+  "paid_services": false,
+  "external_assets": []
+}

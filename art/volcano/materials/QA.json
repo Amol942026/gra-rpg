@@ -1,0 +1,202 @@
+{
+  "status": "PASS",
+  "date": "2026-11-04",
+  "native_assets": {
+    "status": "PASS",
+    "checks": 811,
+    "native_kra": 12,
+    "species": 7,
+    "directions": 8,
+    "scenery_variants": 32,
+    "maps": 48,
+    "runtime_rgba8_bytes_before": 82014208,
+    "runtime_rgba8_bytes_after": 82014208,
+    "runtime_additional_textures": 0,
+    "runtime_additional_draw_calls": 0,
+    "original_local_2d": true,
+    "external_assets": [],
+    "paid_services": false,
+    "assets": [
+      {
+        "name": "slag-crawler",
+        "native_sha256": "20c78f74a790876949753e4cf88e91d3ec3bf00aea22b1fad90c9076e2306d04",
+        "runtime_sha256": "c4ccf895f41beff50bba29531491f9cc525e7970ac494e5e7f290f7434064af2",
+        "size": [
+          1536,
+          1152
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\slag-crawler_20261104_152604_825_bdfaa0\\maps-manifest.json"
+      },
+      {
+        "name": "lava-salamander",
+        "native_sha256": "e929ecefc1aad04218c22612ac092e9d18f909d415cdecf9a05d37d2e45bba40",
+        "runtime_sha256": "29c4ac2b641c1f628a20c60ce3dfe4ce1dfd900b9cbbf4d59c49049278a6b851",
+        "size": [
+          1536,
+          1152
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\lava-salamander_20261104_152722_046_161bff\\maps-manifest.json"
+      },
+      {
+        "name": "fire-imp",
+        "native_sha256": "d55c0c361b77c0fac6c07cfa66c688d45b451ddce6085aa5354b005f09430885",
+        "runtime_sha256": "65545e84d7ecbb6ce0056c93853b040dcbf067bf88bde9176c01b36041c15835",
+        "size": [
+          1536,
+          1152
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\fire-imp_20261104_152724_977_4d9a5b\\maps-manifest.json"
+      },
+      {
+        "name": "ash-wraith",
+        "native_sha256": "47f12be52d3b6a99b70a3289a172209c5a9405cb3228135c94fb5a282648e86a",
+        "runtime_sha256": "046c5bf716f43b0c1e4974e532b249f308af65f0bf52153535f371dda677ef7c",
+        "size": [
+          1536,
+          1152
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ash-wraith_20261104_152727_605_a7f276\\maps-manifest.json"
+      },
+      {
+        "name": "obsidian-sentinel",
+        "native_sha256": "6d12b3fc4e577af0b66786d6f6a94f376eadfa5eafda5a02810c85b4315636cc",
+        "runtime_sha256": "63acf12e6792c949df1f43eea67eed5fa62737f3e6c9f9ad285e486fbe63563f",
+        "size": [
+          1536,
+          1152
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\obsidian-sentinel_20261104_152730_248_6ca3cd\\maps-manifest.json"
+      },
+      {
+        "name": "ember-drake",
+        "native_sha256": "a5b25adc747e9d9f500af61f2787bf6acebb6b6cfac9e3d643bb4a3302783f89",
+        "runtime_sha256": "1ad8d8501730153f6671d1b2f345a6cb14f88999cbc024f6fe61878070774e61",
+        "size": [
+          1536,
+          1152
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ember-drake_20261104_152733_020_a54ab6\\maps-manifest.json"
+      },
+      {
+        "name": "varkhor",
+        "native_sha256": "b587569638c591cead09e715b515e11e0514777b929b4b8982e7a4b59d526003",
+        "runtime_sha256": "b058c37d885776fc206f2fd20ed580ec39237d27f0847b067dae2884bbbe9a93",
+        "size": [
+          2048,
+          1536
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\varkhor_20261104_152735_789_7baf03\\maps-manifest.json"
+      },
+      {
+        "name": "scenery",
+        "native_sha256": "6f8fdf0ad7cd02283c200d502a246ac348549cd92f296555bc6313658288194d",
+        "runtime_sha256": "1fe9c5f7062274f60b78953098f8c23423796fa25d7418a80b5c24ff80c71ea4",
+        "size": [
+          1440,
+          1840
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7\\maps-manifest.json"
+      },
+      {
+        "name": "scenery-extra",
+        "native_sha256": "564264de91d38731ec93f3980ce867b46555d1f8884458b8977f1de175e259b2",
+        "runtime_sha256": "b98aa6a7527a9dcab3ddd7269eb6585ad1d21b48a9e4288369a2cffcce2224f1",
+        "size": [
+          1440,
+          1840
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery-extra_20261104_152743_993_4bb3b9\\maps-manifest.json"
+      },
+      {
+        "name": "ground",
+        "native_sha256": "39264ef98c044c450fc585d6cc23c9ce0e8b491a93519c8706a1e4b763055e16",
+        "runtime_sha256": "fb0869a7c8792ff4f10f1559b9222cefca77d6fce0d9b450d106805dd915ba1c",
+        "size": [
+          512,
+          512
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\ground_20261104_152747_917_cc7668\\maps-manifest.json"
+      },
+      {
+        "name": "channel-wall",
+        "native_sha256": "24992efa95b8092628e5f58aee2c5942bb490b2fe7ba582de7b65820afe03150",
+        "runtime_sha256": "668693a4fd4d83abb15de5a8c215d8967d0f1860f908c2f2e592692a40a1a964",
+        "size": [
+          512,
+          256
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\channel-wall_20261104_152749_200_06ac6f\\maps-manifest.json"
+      },
+      {
+        "name": "macro",
+        "native_sha256": "08c81957f51b4502e49b9eb6780ebb5eb8c21cce065ae7f5e6ff29cf8e9242e3",
+        "runtime_sha256": "3c17ec030a5b7225623a699ff45bfaf5600ee05ec845386d86f758aedc8fe031",
+        "size": [
+          1024,
+          1024
+        ],
+        "maps": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\macro_20261104_152750_584_1ed2d3\\maps-manifest.json"
+      }
+    ]
+  },
+  "renderer": {
+    "status": "PASS",
+    "checks": 708,
+    "failures": 0,
+    "species": 7,
+    "directions": 8,
+    "pose_views": 224,
+    "hidden": true,
+    "audio_opened": false,
+    "presentation_measured": false,
+    "completed_render_mean_ms": 4.40942,
+    "completed_render_p95_ms": 4.8375
+  },
+  "player_package": {
+    "status": "PASS",
+    "package_sha256": "ca69263d47fd166caef61c4f67966b933f5db388f55de054442e73eaf2c6f526",
+    "exe_sha256": "ef4a2825347d5a442f9efa15c6eb0364876f6180509ab19c5e1933646801f49f",
+    "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-package-20261104-155559\\Emberfall",
+    "verified_assets": 139,
+    "startup_frames": 180,
+    "volcano": {
+      "status": "PASS",
+      "checks": 708,
+      "failures": 0,
+      "species": 7,
+      "directions": 8,
+      "pose_views": 224,
+      "hidden": true,
+      "audio_opened": false,
+      "presentation_measured": false,
+      "completed_render_mean_ms": 4.40942,
+      "completed_render_p95_ms": 4.8375
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  "developer_package": {
+    "status": "PASS",
+    "package_sha256": "a95a632147c58c07303866f60e7a6a8582d225ca0f917de69939752697017176",
+    "exe_sha256": "1311d9647a634742f3a988ba3c0e9866a22395eb2fdb5e3e2ad6a4ec40d4d5fd",
+    "verified_assets": 139,
+    "startup_destinations": 3,
+    "startup_frames": 540,
+    "audio_opened": false,
+    "hidden": true,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  "background_and_silent": true,
+  "foreground_fps_measured": false,
+  "source": "original project KRA revised through native Krita MCP; real Laigter CLI and offline bake",
+  "motion_keys_unchanged": true,
+  "sword_depth_corrected": true,
+  "runtime_added_material_textures": 0,
+  "runtime_added_draw_calls": 0,
+  "backup": "C:/AI2D/pipeline/backups/caldera-materials-20261104",
+  "native_source": "C:/AI2D/sprites/emberfall-caldera-materials-20261104",
+  "maps": "C:/AI2D/maps/emberfall-caldera-materials-height-20261104",
+  "runtime_stage": "C:/AI2D/pipeline/caldera-materials-20261104/runtime-final",
+  "save_format": 10
+}

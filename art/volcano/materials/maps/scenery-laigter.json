@@ -1,0 +1,131 @@
+{
+  "Status": "PASS",
+  "Source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\scenery.png",
+  "OriginalUnchanged": true,
+  "SourceSha256": "1b70f5759d00bd70850eb553d7f6c74083fa02ef8befb452576cf354a8b3ed7d",
+  "SourceWidth": 1440,
+  "SourceHeight": 1840,
+  "SourcePixelSha256": "06c31441f4634a4bb5507c2ddb4601dc47fbd77b4d831a4d01cdc38ecc0e563c",
+  "Laigter": "C:\\AI2D\\Tools\\Laigter\\laigter.exe",
+  "LaigterSha256": "95ded5057510ada7f45b0321192b91cf7ae058fcd683683a1ed5b5a19e276e48",
+  "Version": "laigter 1.14.0",
+  "Preset": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\laigter-heightmap.presets",
+  "PresetSha256": "dd144da7393f8d82d30f146d8e8436c2e9c56cf04846436bceec4e61150cabdc",
+  "Arguments": [
+    "--no-gui",
+    "--software-opengl",
+    "--not-recursive",
+    "--flatten",
+    "-d",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7\\_input\\scenery.png",
+    "-l",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7",
+    "-n",
+    "-c",
+    "-o",
+    "-p",
+    "-r",
+    "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7\\_input\\preset.presets"
+  ],
+  "OutputDirectory": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7",
+  "MapCount": 4,
+  "Maps": [
+    {
+      "Type": "normal",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7\\scenery_n.png",
+      "Bytes": 609770,
+      "Sha256": "efe813f00b3f58d3f5649b2ab8b459554b1be92b8c958f1ea7c62edbf0331dcc",
+      "Decoded": {
+        "Width": 1440,
+        "Height": 1840,
+        "PixelSha256": "cd54b00dd221536813253140ef7511121866117d67b4105f1664aaaadc72e8e3",
+        "SampledPixels": 4356,
+        "SampleMinimumRgb": [
+          5,
+          11,
+          163
+        ],
+        "SampleMaximumRgb": [
+          246,
+          247,
+          255
+        ],
+        "SampleIsGrayscale": false,
+        "SampleMaxNormalUnitError": 0.012302
+      }
+    },
+    {
+      "Type": "specular",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7\\scenery_s.png",
+      "Bytes": 176160,
+      "Sha256": "5d329e4f04f14b7e259964978cbfdb7e359a75f073b4c849824f56db197b2827",
+      "Decoded": {
+        "Width": 1440,
+        "Height": 1840,
+        "PixelSha256": "124ef02aa28681d236aa3511c0628bb53cd16112f6db01bfe831f9539eae6266",
+        "SampledPixels": 4356,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          120,
+          120,
+          120
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "occlusion",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7\\scenery_o.png",
+      "Bytes": 159077,
+      "Sha256": "7f55f62721034394686ae272f5224deb68f1321490ad826ccf4a91a2108d56b3",
+      "Decoded": {
+        "Width": 1440,
+        "Height": 1840,
+        "PixelSha256": "c73c2e85b8f740bc97b9a539f49443d6f7fdd8ae9e6d8f744688eee878e28844",
+        "SampledPixels": 4356,
+        "SampleMinimumRgb": [
+          16,
+          16,
+          16
+        ],
+        "SampleMaximumRgb": [
+          255,
+          255,
+          255
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    },
+    {
+      "Type": "parallax",
+      "Path": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\scenery_20261104_152739_908_e80ca7\\scenery_p.png",
+      "Bytes": 196097,
+      "Sha256": "a896c66bdba60f4bf4b041efee767ecb57528533451f173a434922633735dea6",
+      "Decoded": {
+        "Width": 1440,
+        "Height": 1840,
+        "PixelSha256": "229441516d76621fc5fb42c8a4e53c31b6603bc2686b64927cce2b0df70bd010",
+        "SampledPixels": 4356,
+        "SampleMinimumRgb": [
+          0,
+          0,
+          0
+        ],
+        "SampleMaximumRgb": [
+          181,
+          181,
+          181
+        ],
+        "SampleIsGrayscale": true,
+        "SampleMaxNormalUnitError": 0.0
+      }
+    }
+  ],
+  "ElapsedSeconds": 2.18
+}

@@ -1,0 +1,32 @@
+{
+  "name": "slag-crawler",
+  "status": "PASS",
+  "source": "C:\\AI2D\\sprites\\emberfall-caldera-materials-20261104\\albedo\\slag-crawler.png",
+  "source_sha256": "d482db7d4c8e811aa2b1b0c2b384a2945de74ce0586c7e687779241ce633ee7f",
+  "source_kra_sha256": "20c78f74a790876949753e4cf88e91d3ec3bf00aea22b1fad90c9076e2306d04",
+  "path": "C:\\AI2D\\pipeline\\caldera-materials-20261104\\runtime-final\\slag-crawler.png",
+  "sha256": "c4ccf895f41beff50bba29531491f9cc525e7970ac494e5e7f290f7434064af2",
+  "maps_manifest": "C:\\AI2D\\maps\\emberfall-caldera-materials-height-20261104\\slag-crawler_20261104_152604_825_bdfaa0\\maps-manifest.json",
+  "maps_manifest_sha256": "a8c58a0f66af29079e9a5976c8d14a52259ca894c772d61234d21cfe9b3a87a5",
+  "map_types": [
+    "normal",
+    "specular",
+    "occlusion",
+    "parallax"
+  ],
+  "map_sha256": {
+    "normal": "5cb8f2cd8f318ec21d7728892fe8e13ac204f707ea00be8756df6758ca22d323",
+    "specular": "eb936449547ca274aaec973754de23a7b007cf356d4066057701980f06d2cdbf",
+    "occlusion": "fb88373a5db71c35071377056b6dfc9eb2e41860c3c3382922dc96210ddad8f7",
+    "parallax": "6a1959bb2bb652fcab12c9d0bda210eaf897e7b7af8c2e10e6cb9e782f337d36"
+  },
+  "size": [
+    1536,
+    1152
+  ],
+  "rgba8_bytes": 7077888,
+  "alpha_unchanged": true,
+  "preserved_emissive_pixels": 1934,
+  "bake": "80% native map-derived lighting + 20% painted albedo, preserve incandescent palette",
+  "runtime_material_shader": false
+}

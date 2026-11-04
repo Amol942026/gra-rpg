@@ -1,0 +1,12 @@
+{
+  "name": "portal-core",
+  "layers": [
+    "Deep circular rift",
+    "Nebula and inner light",
+    "Spiral filaments and drifting stars"
+  ],
+  "kra_sha256": "ac0d11d0a863e71fcd1ac0ba558be24a7c35f8a46a0d5a6bfbc7366abd67cc4e",
+  "png_sha256": "594917a186cc184ee4b63af4d4dfb07136a02007c9bf773596401017f13da76e",
+  "retained_saved_document_id": "fe5f2327-f2e9-4239-9389-32e5d3bd96e1",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

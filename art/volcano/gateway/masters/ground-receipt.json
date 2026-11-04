@@ -1,0 +1,12 @@
+{
+  "name": "ground",
+  "layers": [
+    "Continuous cooled basalt",
+    "Wrapped soft ash deposits",
+    "Wrapped cooling folds and subtle mineral grains"
+  ],
+  "kra_sha256": "55d16402a4d3cf611fe593fa7eb4865ea420c8ea1a2fb73c3feff22e917db15e",
+  "png_sha256": "8406b0bc23b87f005780775d6d618a4801789c052db8cc51240b44483722dca6",
+  "retained_saved_document_id": "f5f583ab-11ac-4830-aa27-ed5c72d7e8a5",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}

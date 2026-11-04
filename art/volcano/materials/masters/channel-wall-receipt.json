@@ -1,0 +1,22 @@
+{
+  "name": "channel-wall",
+  "layers": [
+    "T\u0142o",
+    "Canyon basalt base",
+    "Irregular fractured faces and weathered strata",
+    "Porosity and molten bounce light",
+    "Rim contact shadow",
+    "Porous scoria inclusions and mineral edges"
+  ],
+  "kra_sha256": "24992efa95b8092628e5f58aee2c5942bb490b2fe7ba582de7b65820afe03150",
+  "png_sha256": "a35352c6dcd1cf937e73fea39011e4af3a55ccaad3d74b2247398c6dc76084c9",
+  "retained_saved_document_id": "5d2205d3-04e2-43cf-9659-76e651385ced",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA",
+  "source_kra": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\art\\volcano\\depth\\masters\\channel-wall.kra",
+  "source_kra_sha256": "97c0549ece6037ba95037656a6c1b6bdedaaaf10edf8b4cd3ec1467b4b812e00",
+  "albedo_sha256": "4a628a1245e521259eae0d2c6e3fb1295c13518e2533edc444f0e6617d312d75",
+  "albedo_size": [
+    512,
+    256
+  ]
+}

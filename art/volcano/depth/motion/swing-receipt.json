@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "clips": [
+    {
+      "direction": 0,
+      "frames": 60,
+      "sif_sha256": "48b02b1e27e46feade79db64741b43a55f5a4f20e6b5a26e0ce20e13abc17cf6"
+    },
+    {
+      "direction": 1,
+      "frames": 60,
+      "sif_sha256": "1deffb0cedfec89e68acbeda22e974aae218e3874372551c7076153628dfa358"
+    },
+    {
+      "direction": 2,
+      "frames": 60,
+      "sif_sha256": "1440d21fc4ea0e0d1f53a63f57b6d0aa28deeb0c8c706229ec86261e3da068f1"
+    },
+    {
+      "direction": 3,
+      "frames": 60,
+      "sif_sha256": "3ffcab6187b2a3909a154a782ed324fa6eab977e4d92561c40f19b268dd4c163"
+    },
+    {
+      "direction": 4,
+      "frames": 60,
+      "sif_sha256": "674a2e6cd8111555df60a7627ecabc7682ae6cd1e09b7397ccd563983e24031c"
+    },
+    {
+      "direction": 5,
+      "frames": 60,
+      "sif_sha256": "8436b8d685a17b59aa515143e5ae567746ba8d8b65e9870f45a3dad525cd2c84"
+    },
+    {
+      "direction": 6,
+      "frames": 60,
+      "sif_sha256": "9ea3bae287742b1d46a2a189132b6b3ead5a8b17084dd08513a0ccb3c8798955"
+    },
+    {
+      "direction": 7,
+      "frames": 60,
+      "sif_sha256": "a15cc32c0786c76d6b08f813d6f441e010a4ed29ac9935e42f53acce5aecfad9"
+    }
+  ],
+  "sword_arc_degrees": 144,
+  "header_sha256": "793aaa534239558c461651b3c21dc64cf0db4e2b4470a96b35c86471343a8769",
+  "source": "actual saved Synfig angle and translation tracks"
+}

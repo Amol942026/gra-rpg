@@ -1,0 +1,13 @@
+{
+  "name": "scenery",
+  "layers": [
+    "Fractured basalt outcrops",
+    "Charred split trees",
+    "Sulphur vents",
+    "Obsidian glass"
+  ],
+  "kra_sha256": "b03544ca7f2f459a68fdd3b166cf38d6ea5bb9bb14407e02b597fd164c14446d",
+  "png_sha256": "a23c5f7d58e7d0fedba741e265089cd74cd6f011c9e1b89fd864e5e716322d11",
+  "retained_saved_document_id": "82473d24-0344-43e6-a466-655b62e67244",
+  "retention_reason": "Avoid native close crash observed after editing a loaded KRA"
+}
