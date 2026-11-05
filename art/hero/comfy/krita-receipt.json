@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "layers": [
+    "Existing face and reference pieces",
+    "boot",
+    "bracer",
+    "tunic",
+    "hair-back",
+    "hair-front"
+  ],
+  "native_kra_sha256": "0a9ec61a1a4c97d95e3d9cf7ea6b62511b6551f379983d5f7f8d14abd0f21f5f",
+  "visible_rgba_exact": true,
+  "retained_saved_document_id": "10de8912-a0ea-425c-bf80-602bd5e22cf5"
+}

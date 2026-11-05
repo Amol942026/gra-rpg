@@ -1,5 +1,7 @@
 # Bestiariusz — materiały Krita i ruch Synfig
 
+Aktualizacja z 05.11.2026. Nowe materiały czterech bestii Morza Piasków przygotowane w ComfyUI są opisane w [Bestiach Morza Piasków](desert-comfy/README.md).
+
 Zakres: 12 istniejących gatunków lasu i pustyni. Żywe postacie mają obłe
 sylwetki, anatomiczne stawy, łapy, pysk i zęby; szkielety zakrzywione żebra,
 drzewiec korę i liście. Poprawiono także materiały ciał pozostających po walce.

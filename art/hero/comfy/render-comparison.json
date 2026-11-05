@@ -1,0 +1,9 @@
+{
+  "frames": 420,
+  "modes": 7,
+  "min_rgb_pixels_changed": 7,
+  "max_silhouette_delta_pixels": 23,
+  "renderer_checks": 424,
+  "hidden": true,
+  "audio_opened": false
+}

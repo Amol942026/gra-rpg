@@ -1,0 +1,90 @@
+{
+  "status": "PASS_DESERT_REFRESH",
+  "packages": [
+    {
+      "edition": "player",
+      "archive": "Emberfall-Windows-x64.zip",
+      "original_sha256": "7820747e1096cba6e65cf71e78b471925064e174db70df2f816e5586a9d39c18",
+      "sha256": "86c4e297fcb0fa9492b4e2304485015c36554f78f6746ab6f84cb4ffb2b865d3",
+      "exe_sha256": "e39e685547bfe654062723b921edb3cd177a3d0535914aeb44617487ab940ae0",
+      "verified_assets": 143,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "developer_destination": "unavailable"
+    },
+    {
+      "edition": "developer",
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "original_sha256": "5bbbdeedd57d8d5654d8826e270cacd3752fdbffeb2d47c2ff433eb878743073",
+      "sha256": "88b6bd2f40f4b5348daf1f0a08eb1bdc862eb90e691bdd72c85ce93816a46c1d",
+      "exe_sha256": "c8c85b239d3d0eacbbff1dbce225db8f9a233404d2b605f209e5f39a15b4914f",
+      "verified_assets": 143,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "developer_destination": "desert-boss"
+    }
+  ],
+  "renderer_checks_per_run": 1547,
+  "desert_poses_verified": 96,
+  "desert_poses_changed_per_species": {
+    "Skorpion bursztynowy": 24,
+    "Skarabeusz miedziany": 24,
+    "Kobra piaskowa": 24,
+    "Żywa Wydma": 24
+  },
+  "desert_pose_checks": [
+    "silhouette",
+    "pointer",
+    "GPU/immediate parity"
+  ],
+  "smallest_pose_pixel_change": 2990,
+  "forest_poses_unchanged": 192,
+  "hero_poses_unchanged": 4,
+  "corpse_views_repainted": 32,
+  "corpse_alpha_exact": true,
+  "scorpion_material_pointer_mask_exact": true,
+  "baseline_failure_count": 14,
+  "candidate_failure_count": 14,
+  "unchanged_legacy_failure_labels": {
+    "complete silhouette type=3 direction=5 action=1": 1,
+    "complete silhouette type=3 direction=5 action=2": 1,
+    "complete silhouette type=3 direction=7 action=1": 1,
+    "complete silhouette type=3 direction=7 action=2": 1,
+    "all corpse textures and pointer masks are prepared before combat starts": 1,
+    "detailed fallen body stays complete and visible in all eight directions": 8,
+    "physical ground shadows and shared body cache": 1
+  },
+  "krita": {
+    "layer_count": 5,
+    "visible_pixel_max_error": 0,
+    "mcp_preview": "bridge disconnected; verified decoded KRA and exported PNG",
+    "source_sha256": "a3bffa54050f9bc4ff4a01596894c2d7976b1b8e67dfdb771a6b9e37eb493524"
+  },
+  "new_runtime_textures": 0,
+  "audio_opened": false,
+  "visible_fps_measured": false
+}

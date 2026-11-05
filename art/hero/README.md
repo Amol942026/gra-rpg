@@ -1,5 +1,8 @@
 # Bohater — Krita i Synfig, 20.10.2026
 
+**Aktualna grafika, 05.11.2026:** [malowanie bohatera w ComfyUI](comfy/README.md).
+Nowe materiały używają dotychczasowego atlasu, twarzy i animacji.
+
 **Aktualizacja 26.10.2026 — szybsze wstawanie:** obecny ruch trwa 1,85 s.
 Zachowano lot obu stóp i kontakt pleców w 0,45 s; odpoczynek skrócono do
 0,66–0,80 s, podparcie bokiem następuje w 1,07 s, kolano w 1,24 s,

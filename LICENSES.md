@@ -24,6 +24,18 @@
   Nie rozpowszechniamy wag modelu w grze. Generowanie nie korzysta z płatnych
   API ani wysyłania projektu do chmury. Źródła, workflow i pochodzenie:
   `art/volcano/comfy/README.md` i `provenance.json`.
+- Atlas bohatera `assets/sprites/hero-paints.png` zawiera malowanie materiałów
+  wygenerowane lokalnie w ComfyUI z własnego atlasu Emberfall. Użyte wagi:
+  DreamShaper 8 (Lykon, warunki wymienione wyżej), LCM-LoRA SD 1.5
+  (https://huggingface.co/latent-consistency/lcm-lora-sdv1-5, OpenRAIL++)
+  i ControlNet Canny SD 1.5 (https://huggingface.co/lllyasviel/control_v11p_sd15_canny,
+  OpenRAIL; konwersja FP16 w formacie SafeTensors). Pochodzenie i hashe:
+  `art/hero/comfy/provenance.json`.
+- Materiały Skorpiona bursztynowego, Skarabeusza miedzianego, Kobry
+  piaskowej i Żywej Wydmy w Morzu Piasków opracowano lokalnie w ComfyUI
+  na bazie grafik Emberfall. Wykorzystano wymienione wyżej DreamShaper 8,
+  LCM-LoRA SD 1.5 i ControlNet Canny SD 1.5. Pochodzenie, licencje,
+  workflow i hashe są zapisane w art/creatures/desert-comfy/.
 - Odłamki `assets/sprites/guardian-fragments.png` powstały jako sześć oryginalnych warstw Krity; ich rozpad, obroty i odbicia opracowano w natywnym projekcie Synfig. Źródła i pochodzenie: `art/gameplay/guardian/shatter/`. Bez zewnętrznych grafik, modeli i płatnych usług.
 - Duży głaz Strażnika `assets/sprites/guardian-stone.png` to własna sześciowarstwowa grafika z Krity, z ziemią i korzeniami; wyrwanie i oburęczny rzut znad głowy opracowano w natywnym projekcie 2D Synfig. Źródła i pochodzenie: `art/gameplay/guardian/`. Bez zewnętrznych grafik, modeli i płatnych usług.
 - Ilustracja leśnej Bramy Świtu w `assets/menu/` została narysowana w Kricie dla Emberfall, a animacja warstw opracowana w Synfig Studio. Własne kształty i kolory, bez zewnętrznych obrazów, modeli, sampli i płatnych usług. Edytowalne źródła i pochodzenie: `art/menu/README.md`, `art/menu/forest/provenance.json`.

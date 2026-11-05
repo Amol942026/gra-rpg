@@ -1,0 +1,232 @@
+{
+  "status": "PASS",
+  "parts": [
+    {
+      "part": "scorpion",
+      "cell": 8,
+      "prompt_id": "3b212a04-ce16-44c7-aa4c-6c2d1dcf2c06",
+      "source_sha256": "d91eb5f5380449ab17a831b5edf74dc95ce6c0cfe1e279437318c6fee5b5d045",
+      "workflow": "workflows/scorpion.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "3b212a04_000.png",
+      "sha256": "d8658a5f39a9e956ff99f313c7f7207fd54273883b058543242212cec1d454b3",
+      "input": "inputs/emberfall-desert-20261105-scorpion.png"
+    },
+    {
+      "part": "scarab",
+      "cell": 9,
+      "prompt_id": "6b5255be-9eaf-4b00-9da5-011e42a49e00",
+      "source_sha256": "5dae66bfd134d10a342d9581837f74c4887e01b06a7bae59d4ea4467f361cdf6",
+      "workflow": "workflows/scarab.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "6b5255be_000.png",
+      "sha256": "2ac96c8075c4f64ca1c90ac167a12bf5ab71dbc9a2e8807cb6a538fca34446ab",
+      "input": "inputs/emberfall-desert-20261105-scarab.png"
+    },
+    {
+      "part": "cobra",
+      "cell": 10,
+      "prompt_id": "72ae9914-1418-4e7d-be3c-805ce33cda80",
+      "source_sha256": "4a0441437b5fe41cf030b862878e4e0c984a5824412b5e3231a71a37ae36460a",
+      "workflow": "workflows/cobra.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "72ae9914_000.png",
+      "sha256": "3fe18e6abfb561981fe9533be1ccbc36a9d66ea27f24db7a52f745611abb5e11",
+      "input": "inputs/emberfall-desert-20261105-cobra.png"
+    },
+    {
+      "part": "dune",
+      "cell": 11,
+      "prompt_id": "fdc93ed5-506e-4710-88a1-abafbbe272bd",
+      "source_sha256": "ee98d5108a0a9312a4f928abbc376fc86686948dbc76f1b0dd249ef58ffd7650",
+      "workflow": "workflows/dune.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "fdc93ed5_000.png",
+      "sha256": "bd5bad0cf8b2df573916434b2b338497c5afe196c854b7adc9f82d21d51b117f",
+      "input": "inputs/emberfall-desert-20261105-dune.png"
+    }
+  ],
+  "runtime_atlas_bytes": 1048576,
+  "models": [
+    {
+      "folder": "checkpoints",
+      "filename": "DreamShaper_8_pruned.safetensors",
+      "repo": "Lykon/DreamShaper",
+      "revision": "228d79cb20811466f5c5710aa91f05dabd0b8a14",
+      "original_filename": "DreamShaper_8_pruned.safetensors",
+      "bytes": 2132625894,
+      "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+      "download": "https://huggingface.co/Lykon/DreamShaper/resolve/228d79cb20811466f5c5710aa91f05dabd0b8a14/DreamShaper_8_pruned.safetensors",
+      "license": "Creator conditions permitting commercial use of generated images",
+      "license_source": "https://civitai.com/api/v1/models/4384"
+    },
+    {
+      "folder": "loras",
+      "filename": "lcm-lora-sdv1-5.safetensors",
+      "repo": "latent-consistency/lcm-lora-sdv1-5",
+      "revision": "cf2fced511dbe7e26c8d1d397e728fbab875db4b",
+      "original_filename": "pytorch_lora_weights.safetensors",
+      "bytes": 134621556,
+      "sha256": "8f90d840e075ff588a58e22c6586e2ae9a6f7922996ee6649a7f01072333afe4",
+      "download": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5/resolve/cf2fced511dbe7e26c8d1d397e728fbab875db4b/pytorch_lora_weights.safetensors",
+      "license": "OpenRAIL++",
+      "license_source": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5"
+    },
+    {
+      "folder": "controlnet",
+      "filename": "control_v11p_sd15_canny_fp16.safetensors",
+      "repo": "comfyanonymous/ControlNet-v1-1_fp16_safetensors",
+      "revision": "ab830a51c5c573a5b85bfdbaa3ae0ab7e1baf5f7",
+      "original_filename": "control_v11p_sd15_canny_fp16.safetensors",
+      "bytes": 722601100,
+      "sha256": "8932b66e15aae835b3490dbf989f56c253104cee08a88bf21283762f557c9f10",
+      "download": "https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/ab830a51c5c573a5b85bfdbaa3ae0ab7e1baf5f7/control_v11p_sd15_canny_fp16.safetensors",
+      "license": "OpenRAIL for original ControlNet Canny weights",
+      "license_source": "https://huggingface.co/lllyasviel/control_v11p_sd15_canny"
+    }
+  ],
+  "source_sha256": {
+    "corpses-creatures-v48.png": "4b859d5076cd4b4afe51ec93b5331b5bf90712d9e2c32f57b232d0f7378fe57f",
+    "creature-paints.png": "0fa5055140dbf5ed5432ca639179976639d93ae1b9dc6fc714b3e9c99171395b",
+    "dune-fallen.png": "cd9c5d20280e97e02f4509bc00b1da79e8c5309c51c15f56c0a0cde277fd5c7b"
+  },
+  "runtime_sha256": {
+    "corpses-creatures-v48.png": "cc2a166fe6ee43347d7233f4413a3a4f721c4c30d17758ac76c84b3e3c6991eb",
+    "creature-paints.png": "73b7a451d1d963e66f1a5b284337214d18be886421e64da59a8a11414dc94817",
+    "dune-fallen.png": "1e4c53895e7a3933f5776be6906bff3c0131f3cf9a52faa38f84f4299169172f"
+  },
+  "corpse_bake": {
+    "alpha_preserved": true,
+    "rows_changed": [
+      8,
+      9,
+      10
+    ],
+    "views": [
+      {
+        "species": 8,
+        "direction": 0,
+        "changed_pixels": 2694
+      },
+      {
+        "species": 8,
+        "direction": 1,
+        "changed_pixels": 2567
+      },
+      {
+        "species": 8,
+        "direction": 2,
+        "changed_pixels": 2490
+      },
+      {
+        "species": 8,
+        "direction": 3,
+        "changed_pixels": 2568
+      },
+      {
+        "species": 8,
+        "direction": 4,
+        "changed_pixels": 2694
+      },
+      {
+        "species": 8,
+        "direction": 5,
+        "changed_pixels": 2219
+      },
+      {
+        "species": 8,
+        "direction": 6,
+        "changed_pixels": 2065
+      },
+      {
+        "species": 8,
+        "direction": 7,
+        "changed_pixels": 2216
+      },
+      {
+        "species": 9,
+        "direction": 0,
+        "changed_pixels": 4100
+      },
+      {
+        "species": 9,
+        "direction": 1,
+        "changed_pixels": 4007
+      },
+      {
+        "species": 9,
+        "direction": 2,
+        "changed_pixels": 3929
+      },
+      {
+        "species": 9,
+        "direction": 3,
+        "changed_pixels": 3977
+      },
+      {
+        "species": 9,
+        "direction": 4,
+        "changed_pixels": 4128
+      },
+      {
+        "species": 9,
+        "direction": 5,
+        "changed_pixels": 3615
+      },
+      {
+        "species": 9,
+        "direction": 6,
+        "changed_pixels": 3333
+      },
+      {
+        "species": 9,
+        "direction": 7,
+        "changed_pixels": 3450
+      },
+      {
+        "species": 10,
+        "direction": 0,
+        "changed_pixels": 1201
+      },
+      {
+        "species": 10,
+        "direction": 1,
+        "changed_pixels": 1215
+      },
+      {
+        "species": 10,
+        "direction": 2,
+        "changed_pixels": 1178
+      },
+      {
+        "species": 10,
+        "direction": 3,
+        "changed_pixels": 1167
+      },
+      {
+        "species": 10,
+        "direction": 4,
+        "changed_pixels": 1032
+      },
+      {
+        "species": 10,
+        "direction": 5,
+        "changed_pixels": 744
+      },
+      {
+        "species": 10,
+        "direction": 6,
+        "changed_pixels": 751
+      },
+      {
+        "species": 10,
+        "direction": 7,
+        "changed_pixels": 869
+      }
+    ]
+  }
+}

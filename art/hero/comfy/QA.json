@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "packages": [
+    {
+      "edition": "player",
+      "archive": "Emberfall-Windows-x64.zip",
+      "sha256": "7820747e1096cba6e65cf71e78b471925064e174db70df2f816e5586a9d39c18",
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "exe_sha256": "e39e685547bfe654062723b921edb3cd177a3d0535914aeb44617487ab940ae0"
+    },
+    {
+      "edition": "developer",
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "sha256": "5bbbdeedd57d8d5654d8826e270cacd3752fdbffeb2d47c2ff433eb878743073",
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "exe_sha256": "c8c85b239d3d0eacbbff1dbce225db8f9a233404d2b605f209e5f39a15b4914f"
+    }
+  ],
+  "extracted_player_renderer_checks": 424,
+  "archive_assets": 143,
+  "preexisting_text_line_ending_differences": 8
+}

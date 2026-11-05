@@ -1,0 +1,118 @@
+{
+  "status": "PASS",
+  "source_sha256": "b9a426d0b76e46c6ae3fbaa22df7b2a5a07465d674098606f5060d3bcc9538e7",
+  "runtime_sha256": "7d186166f278d787d16609142fce1559a911d5ca29c74ebc4e658dd7e5d518e6",
+  "size": [
+    512,
+    384
+  ],
+  "rgba8_bytes": 786432,
+  "face_cell_identical": true,
+  "parts": [
+    {
+      "part": "hair-front",
+      "cell": 1,
+      "prompt_id": "a84e474b-339a-45bd-a5a0-46b01b8dae0f",
+      "source_sha256": "55b5ff9137eacf4a00411b0bede0269f1970785971d4607a3ca6e3bbcb079c58",
+      "workflow": "C:\\AI2D\\sprites\\emberfall-hero-comfy-20261105\\workflows\\hair-front.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "a84e474b_000.png",
+      "sha256": "996b9aa184d3c721e9590837dee18447db82fd51dfb554717b11a02363ab3dda",
+      "detail_region": [
+        95,
+        45,
+        256,
+        164
+      ]
+    },
+    {
+      "part": "hair-back",
+      "cell": 2,
+      "prompt_id": "530adfe6-e176-461b-ba02-323349cc8885",
+      "source_sha256": "a5b2605746f41cad87818a343469675546c978e40717576dcceaada0a6cdb39c",
+      "workflow": "C:\\AI2D\\sprites\\emberfall-hero-comfy-20261105\\workflows\\hair-back.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "530adfe6_000.png",
+      "sha256": "848e0a3cdfca1b88a214d8179b742aecea5ff6b54967ec80ecaf2d5acb50dd20",
+      "detail_region": [
+        91,
+        95,
+        230,
+        228
+      ]
+    },
+    {
+      "part": "tunic",
+      "cell": 3,
+      "prompt_id": "d8ee23d1-cbc3-4beb-be47-415ac27ed571",
+      "source_sha256": "db1060ffdacd166f5c5c47c13c50ca115ba853989137394caaf44f10d74351f6",
+      "workflow": "C:\\AI2D\\sprites\\emberfall-hero-comfy-20261105\\workflows\\tunic.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "d8ee23d1_000.png",
+      "sha256": "1482f1f26c0806cd71f9af5d763a811e593b424acfb0504fb1a851ad88aa786c"
+    },
+    {
+      "part": "bracer",
+      "cell": 4,
+      "prompt_id": "81634a1f-3702-4db0-8d98-d9506141c829",
+      "source_sha256": "0f891f5213ab04bb85f4069f82b757470dcb138bf6029af4c17b47c27730c7a7",
+      "workflow": "C:\\AI2D\\sprites\\emberfall-hero-comfy-20261105\\workflows\\bracer.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "81634a1f_000.png",
+      "sha256": "e1b55809b91dfd9eca856963a500e449393ab003fd3b8a815180ff6c7bd5bc9a"
+    },
+    {
+      "part": "boot",
+      "cell": 5,
+      "prompt_id": "10dd8d7b-42fc-4d89-af7a-752675de8815",
+      "source_sha256": "fece61dd6b82d5a4c0a44f56bed1e8dfed43bd71d7238988cf7ece43a73102ae",
+      "workflow": "C:\\AI2D\\sprites\\emberfall-hero-comfy-20261105\\workflows\\boot.json",
+      "endpoint": "http://127.0.0.1:8188",
+      "status": "PASS",
+      "png": "10dd8d7b_000.png",
+      "sha256": "e6faf112813127f94fdfbaaeaf03f3193cdbb944f55048217b40ddf65657daf8"
+    }
+  ],
+  "models": [
+    {
+      "folder": "checkpoints",
+      "filename": "DreamShaper_8_pruned.safetensors",
+      "repo": "Lykon/DreamShaper",
+      "revision": "228d79cb20811466f5c5710aa91f05dabd0b8a14",
+      "original_filename": "DreamShaper_8_pruned.safetensors",
+      "bytes": 2132625894,
+      "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+      "download": "https://huggingface.co/Lykon/DreamShaper/resolve/228d79cb20811466f5c5710aa91f05dabd0b8a14/DreamShaper_8_pruned.safetensors",
+      "license": "Creator conditions permitting commercial use of generated images",
+      "license_source": "https://civitai.com/api/v1/models/4384"
+    },
+    {
+      "folder": "loras",
+      "filename": "lcm-lora-sdv1-5.safetensors",
+      "repo": "latent-consistency/lcm-lora-sdv1-5",
+      "revision": "cf2fced511dbe7e26c8d1d397e728fbab875db4b",
+      "original_filename": "pytorch_lora_weights.safetensors",
+      "bytes": 134621556,
+      "sha256": "8f90d840e075ff588a58e22c6586e2ae9a6f7922996ee6649a7f01072333afe4",
+      "download": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5/resolve/cf2fced511dbe7e26c8d1d397e728fbab875db4b/pytorch_lora_weights.safetensors",
+      "license": "OpenRAIL++",
+      "license_source": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5"
+    },
+    {
+      "folder": "controlnet",
+      "filename": "control_v11p_sd15_canny_fp16.safetensors",
+      "repo": "comfyanonymous/ControlNet-v1-1_fp16_safetensors",
+      "revision": "ab830a51c5c573a5b85bfdbaa3ae0ab7e1baf5f7",
+      "original_filename": "control_v11p_sd15_canny_fp16.safetensors",
+      "bytes": 722601100,
+      "sha256": "8932b66e15aae835b3490dbf989f56c253104cee08a88bf21283762f557c9f10",
+      "download": "https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/ab830a51c5c573a5b85bfdbaa3ae0ab7e1baf5f7/control_v11p_sd15_canny_fp16.safetensors",
+      "license": "OpenRAIL for original ControlNet Canny weights",
+      "license_source": "https://huggingface.co/lllyasviel/control_v11p_sd15_canny"
+    }
+  ]
+}
