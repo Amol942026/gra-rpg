@@ -1,0 +1,18 @@
+{
+  "prompt_id": "5742598b-b1f9-4eb9-881c-db864aacf495",
+  "model": "realesr-general-x4v3",
+  "model_source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth",
+  "model_pth_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "model_safetensors_sha256": "ee54500e7d2665c7efaffdc7d739749f25f1ca2425f57e1351595db8c11859b1",
+  "model_license": "BSD-3-Clause / Copyright (c) 2021, Xintao Wang",
+  "source_sha256": "0d7c17eff4a2651546e2905386a69f216639df68a460cabb17b69288ff6e8406",
+  "workflow_sha256": "af8ba6315fbb7a037cd11bb944158b5a9ef88585b998e993b471a76807d14b7d",
+  "raw_output_sha256": "889eb8fc6fae948bae3c527dd7f8149af87136e359009a833c8c161f7e30a4c7",
+  "kra_sha256": "6aefde585e24caa701990e2fe45e441296a5c53f6ab88d596b525006474e0809",
+  "runtime_sha256": "b4155cc257bb896470a8261c04445d955ab6b1b9848b4208251f3d6dccf632f7",
+  "krita_native_layers": 7,
+  "krita_preview_verified": true,
+  "comfy_scale": 4,
+  "krita_detail_layer_opacity": 0.82,
+  "preview_sha256": "48dbe42eaca1fbb125fdc3c53da3dc5c83201a9b83d1d14f4c86f986245fc8d3"
+}

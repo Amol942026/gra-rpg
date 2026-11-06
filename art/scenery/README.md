@@ -1,5 +1,7 @@
 # Leśna roślinność — Krita
 
+Aktualizacja Lasu Mchu i Morza Piasków obejmuje 14 obiektów. [Nowe materiały ComfyUI i Krity](forest-desert-comfy/README.md) zawierają aktualny podgląd, źródła i wyniki testów.
+
 ## Drzewa — 23.10.2026
 
 Trzy oryginalne, warstwowe ilustracje zastępują proceduralne grafiki drzew:

@@ -1,7 +1,7 @@
 #pragma once
 #include "save_game.hpp"
 
-enum class MenuPage {Home,Load,Save,Options,Credits,Exit,Overwrite,ReplaceSession};
+enum class MenuPage {Home,Load,Save,Options,Controls,Credits,Exit,Overwrite,ReplaceSession};
 MenuPage menuPage=MenuPage::Home;
 bool exitRequested=false;
 int menuSelection=0,menuSlot=0;
@@ -41,14 +41,19 @@ void menuBack(){
  if(menuPage==MenuPage::Home){if(paused)resumeFromMenu();return;}
  if(menuPage==MenuPage::Overwrite)menuPageTo(MenuPage::Save);
  else if(menuPage==MenuPage::ReplaceSession)menuPageTo(MenuPage::Load);
+ else if(menuPage==MenuPage::Controls){menuPageTo(MenuPage::Options);menuSelection=4;}
  else menuPageTo(MenuPage::Home);
 }
 Rectangle menuHomeButton(int i){return welcome?Rectangle{946,309.f+i*75,364,58}:Rectangle{518,285.f+i*78,404,60};}
 Rectangle menuBackButton(){return {559,718,322,46};}
 Rectangle menuSlotButton(int i){return {380,300.f+i*116,680,96};}
-Rectangle menuOption(int i){return {395,292.f+i*72,650,54};}
+Rectangle menuOption(int i){return {395,307.f+i*67,650,51};}
+Rectangle menuScreenChoice(bool fullscreen){return {fullscreen?852.f:660.f,menuOption(2).y+7,184,37};}
 Rectangle menuConfirmButton(int i){return {405.f+i*325,532,305,58};}
 void menuHomeAction(int index){
+#ifndef EMBERFALL_PLAYER_BUILD
+ if(welcome&&index==5){openDeveloperMenu();return;}
+#endif
  if(welcome){if(index==0){menuNewGame();return;}if(index==1){menuPageTo(MenuPage::Load);refreshMenuSaves();return;}if(index==2)menuPageTo(MenuPage::Options);if(index==3)menuPageTo(MenuPage::Credits);if(index==4)menuPageTo(MenuPage::Exit);}
  else{if(index==0){menuPageTo(MenuPage::Save);refreshMenuSaves();return;}if(index==1){menuPageTo(MenuPage::Load);refreshMenuSaves();return;}if(index==2)menuPageTo(MenuPage::Options);if(index==3)menuPageTo(MenuPage::Exit);}
 }
@@ -62,20 +67,31 @@ void activateMenuRow(int row){
   return;
  }
  if(menuPage==MenuPage::Options){
-  if(row==0)audioSystem.toggleMusic();if(row==1)audioSystem.toggleEffects();if(row==2)toggleFullScreen();if(row==3)audioSystem.toggleMute();if(row==4)menuBack();return;
+  if(row==0)audioSystem.toggleMusic();
+  if(row==1)audioSystem.toggleEffects();
+  if(row==2)setFullScreen(!fullScreen());
+  if(row==3)audioSystem.toggleMute();
+  if(row==4)menuPageTo(MenuPage::Controls);
+  if(row==5)menuBack();
+  return;
  }
- if(menuPage==MenuPage::Credits){menuBack();return;}
+ if(menuPage==MenuPage::Credits||menuPage==MenuPage::Controls){menuBack();return;}
  if(row==1){menuBack();return;}
  if(menuPage==MenuPage::Exit)exitRequested=true;
  else if(menuPage==MenuPage::Overwrite)menuSave();
  else if(menuPage==MenuPage::ReplaceSession)menuLoad();
 }
-int menuRowCount(){switch(menuPage){case MenuPage::Home:return 5;case MenuPage::Load:case MenuPage::Save:return 4;case MenuPage::Options:return 5;case MenuPage::Credits:return 1;default:return 2;}}
+int menuRowCount(){
+#ifndef EMBERFALL_PLAYER_BUILD
+ if(welcome&&menuPage==MenuPage::Home)return 6;
+#endif
+ switch(menuPage){case MenuPage::Home:return 5;case MenuPage::Load:case MenuPage::Save:return 4;case MenuPage::Options:return 6;case MenuPage::Credits:case MenuPage::Controls:return 1;default:return 2;}
+}
 Rectangle menuRowRect(int i){
  if(menuPage==MenuPage::Home)return !welcome&&i==4?menuBackButton():menuHomeButton(i);
  if(menuPage==MenuPage::Load||menuPage==MenuPage::Save)return i==3?menuBackButton():menuSlotButton(i);
- if(menuPage==MenuPage::Options)return i==4?menuBackButton():menuOption(i);
- if(menuPage==MenuPage::Credits)return menuBackButton();return menuConfirmButton(i);
+ if(menuPage==MenuPage::Options)return i==5?menuBackButton():menuOption(i);
+ if(menuPage==MenuPage::Credits||menuPage==MenuPage::Controls)return menuBackButton();return menuConfirmButton(i);
 }
 // Shared event dispatcher makes mouse and keyboard use precisely the same actions.
 bool gameMenuEvent(bool escape,int vertical,bool accept,bool click,int horizontal=0){
@@ -83,8 +99,15 @@ bool gameMenuEvent(bool escape,int vertical,bool accept,bool click,int horizonta
  if(escape){menuBack();return true;}
  int count=menuRowCount();if(vertical)menuSelection=(menuSelection+vertical+count)%count;
  if(menuPage==MenuPage::Options&&horizontal&&menuSelection<2){float& value=menuSelection==0?audioSystem.musicVolume:audioSystem.effectsVolume;value=std::clamp(value+horizontal*.05f,0.f,1.f);}
+ if(menuPage==MenuPage::Options&&horizontal&&menuSelection==2)setFullScreen(horizontal>0);
  if(click){for(int i=0;i<count;i++)if(inside(menuRowRect(i))){menuSelection=i;
-   if(menuPage==MenuPage::Options&&i<2&&mouse.x>=640){float& value=i==0?audioSystem.musicVolume:audioSystem.effectsVolume;value=std::clamp((mouse.x-660)/280,0.f,1.f);return true;}
+   if(menuPage==MenuPage::Options&&i==2){
+    if(inside(menuScreenChoice(false)))setFullScreen(false);
+    if(inside(menuScreenChoice(true)))setFullScreen(true);
+    return true;
+   }
+   if(menuPage==MenuPage::Options&&i<2&&mouse.x>=650&&mouse.x<=950){float& value=i==0?audioSystem.musicVolume:audioSystem.effectsVolume;value=std::clamp((mouse.x-660)/280,0.f,1.f);return true;}
+   if(menuPage==MenuPage::Options&&i<2&&mouse.x>=650)return true;
    if(menuPage==MenuPage::Home&&!welcome&&i==4)resumeFromMenu();else activateMenuRow(i);return true;}}
  if(accept){if(menuPage==MenuPage::Home&&!welcome&&menuSelection==4)resumeFromMenu();else activateMenuRow(menuSelection);}
  return true;
@@ -117,6 +140,30 @@ void menuHeading(const std::string& title,const std::string& subtitle){
  line(365,201,690,201,Fade(Gold,.65f));diamond(720,201,7,11,Gold);line(750,201,1075,201,Fade(Gold,.65f));
  center(title,720,221,32,Text,true);center(subtitle,720,268,16,Muted);
 }
+struct ControlBinding {const char* key;const char* action;};
+constexpr ControlBinding expeditionControls[]={
+ {"WSAD","Ruch"},{"Shift","Bieg (przytrzymaj)"},{"Spacja","Unik"},{"LPM","Miecz: kliknij · łuk: napnij i puść"},
+ {"C / K","Rzuć czar / otwórz księgę czarów"},{"Z / X / V","Silne cięcie / przebicie / leczenie"},
+ {"1 / 2","Mikstura zdrowia / many"},{"Q","Koło wyboru broni"},{"E","Interakcja z pobliskim obiektem"}
+};
+constexpr ControlBinding interfaceControls[]={
+ {"PPM","Otwórz ciało / użyj przedmiotu"},{"2× LPM","Zbierz łup / załóż wyposażenie"},
+ {"2× LPM","Kup / sprzedaj w sklepie"},{"LPM + ruch","Przeciągnij przedmiot"},
+ {"U / P","Umiejętności / statystyki"},{"Esc","Pauza / powrót"},{"F1 / F2","Pomoc / głośność"},
+ {"M / F11","Wyciszenie / tryb ekranu"},
+#ifndef EMBERFALL_PLAYER_BUILD
+ {"F3","Tryb deweloperski"},
+#endif
+};
+void drawControlsColumn(float x,const char* heading,const ControlBinding* entries,int count){
+ txt(heading,x,310,14,Gold,true);line(x,333,x+337,333,Fade(Gold,.45f));
+ for(int i=0;i<count;i++){
+  float y=347.f+i*39;
+  rect(x,y,82,28,Card);center(entries[i].key,x+41,y+5,13,Gold);
+  txt(entries[i].action,x+93,y+5,14,Text);
+  line(x,y+32,x+337,y+32,Fade(Line,.65f));
+ }
+}
 void drawGameMenu(){
  if(!gameMenuActive())return;
  if(welcome){
@@ -139,6 +186,9 @@ void drawGameMenu(){
   const char* mainLabels[]={"Nowa gra","Wczytaj grę","Opcje","Twórcy","Wyjdź z gry"};
   const char* pauseLabels[]={"Zapisz grę","Wczytaj grę","Opcje","Wyjdź z gry"};
   for(int i=0;i<(welcome?5:4);i++)menuButton(menuHomeButton(i),welcome?mainLabels[i]:pauseLabels[i],i);
+#ifndef EMBERFALL_PLAYER_BUILD
+  if(welcome)menuButton(menuHomeButton(5),"Tryb deweloperski · F3",5);
+#endif
   if(!welcome)menuButton(menuBackButton(),"Wróć do gry · ESC",4);
  }else if(menuPage==MenuPage::Load||menuPage==MenuPage::Save){
   bool save=menuPage==MenuPage::Save;menuHeading(save?"KRONIKA WĘDROWCA":"POWRÓT DO KRONIKI",save?"Wybierz miejsce zapisu wyprawy":"Wybierz zapisaną wyprawę");
@@ -148,16 +198,37 @@ void drawGameMenu(){
    txt(s.valid?"Poziom "+std::to_string(s.level)+"  ·  "+s.date+(s.backup?"  ·  kopia zapasowa":""):s.exists?"Plik zachowano na dysku":save?"Zapisz tutaj bieżącą wyprawę":"Brak zapisanej wyprawy",r.x+88,r.y+54,16,Muted);
   }menuButton(menuBackButton(),"Wstecz · ESC",3);
  }else if(menuPage==MenuPage::Options){
-  menuHeading("PRZY OGNISKU","Dostosuj oprawę swojej wyprawy");
-  for(int i=0;i<4;i++){auto r=menuOption(i);panel(r,menuSelection==i?rgb(40,50,47):Card);DrawRectangleLinesEx(r,1,menuSelection==i?Gold:Line);
-   txt(i==0?"Muzyka":i==1?"Efekty dźwiękowe":i==2?"Tryb ekranu":"Wyciszenie",r.x+15,r.y+14,19,Text);
-   if(i<2){float v=i==0?audioSystem.musicVolume:audioSystem.effectsVolume;bool enabled=i==0?audioSystem.musicEnabled():audioSystem.effectsEnabled();
-    txt(enabled?"WŁ.":"WYŁ.",r.x+185,r.y+17,14,enabled?Green:Muted);rect(660,r.y+25,280,5,Line);rect(660,r.y+25,280*v,5,Gold);DrawCircleV({660+280*v,r.y+27},6,Text);txt(TextFormat("%d%%",int(v*100+.5f)),970,r.y+15,17,Gold);
-   }else center(i==2?(fullScreen()?"Pełny ekran · F11":"Okno · F11"):(audioSystem.muted?"Włączone":"Wyłączone"),874,r.y+16,17,Gold);
+  menuHeading("OPCJE","Dźwięk, obraz i sterowanie");
+  const char* labels[]={"Muzyka","Efekty dźwiękowe","Tryb ekranu","Wycisz wszystko"};
+  for(int i=0;i<4;i++){
+   auto r=menuOption(i);panel(r,menuSelection==i?rgb(40,50,47):Card);
+   DrawRectangleLinesEx(r,1,menuSelection==i?Gold:Line);
+   txt(labels[i],r.x+15,r.y+14,19,Text);
+   if(i<2){
+    float v=i==0?audioSystem.musicVolume:audioSystem.effectsVolume;
+    bool enabled=i==0?audioSystem.musicEnabled():audioSystem.effectsEnabled();
+    Rectangle toggle{r.x+174,r.y+7,61,37};
+    panel(toggle,inside(toggle)?Panel:Card);
+    center(enabled?"WŁ.":"WYŁ.",toggle.x+toggle.width/2,toggle.y+10,14,enabled?Green:Text);
+    rect(660,r.y+25,280,5,Line);rect(660,r.y+25,280*v,5,Gold);
+    DrawCircleV({660+280*v,r.y+27},6,Text);txt(TextFormat("%d%%",int(v*100+.5f)),970,r.y+15,17,Gold);
+   }else if(i==2){
+    for(bool fullscreen:{false,true}){
+     auto choice=menuScreenChoice(fullscreen);bool selected=fullscreen==fullScreen();
+     panel(choice,selected?rgb(54,64,55):inside(choice)?Panel:Card);
+     DrawRectangleLinesEx(choice,1,selected?Gold:Line);
+     center(fullscreen?"Pełny ekran":"Okno",choice.x+choice.width/2,choice.y+8,17,selected?Gold:Text);
+    }
+   }else center(audioSystem.muted?"Włączone":"Wyłączone",874,r.y+16,17,Gold);
   }
-  center("Kliknij nazwę, aby przełączyć kanał. Suwak / ← →: głośność.",720,609,15,Muted);
-  center("F1 podczas gry: przewodnik oraz opis sterowania.",720,642,15,Muted);
-  menuButton(menuBackButton(),"Gotowe · ESC",4);
+  menuButton(menuOption(4),"Sterowanie",4);
+  center("Kliknij przełącznik lub naciśnij Enter. Suwak / ← → zmienia głośność.",720,668,15,Muted);
+  menuButton(menuBackButton(),"Gotowe · ESC",5);
+ }else if(menuPage==MenuPage::Controls){
+  menuHeading("STEROWANIE","Klawisze i mysz podczas wyprawy");
+  drawControlsColumn(365,"RUCH I WALKA",expeditionControls,int(std::size(expeditionControls)));
+  drawControlsColumn(737,"PRZEDMIOTY I MENU",interfaceControls,int(std::size(interfaceControls)));
+  menuButton(menuBackButton(),"Wstecz · ESC",0);
  }else if(menuPage==MenuPage::Credits){
   menuHeading("TWÓRCY","Ludzie i narzędzia, dzięki którym płonie żar");
   center("EMBERFALL — ECHA ZAPOMNIANYCH RUIN",720,325,23,Gold,true);

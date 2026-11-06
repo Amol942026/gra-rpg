@@ -9,7 +9,9 @@ inline void load(){
  for(int i=0;i<4;i++)if(!layers[i].id){
   Image image=LoadImage(TextFormat("assets/menu/%s.png",names[i]));
   if(!image.data)continue;
-  if(image.width==1440&&image.height==900){layers[i]=LoadTextureFromImage(image);SetTextureFilter(layers[i],TEXTURE_FILTER_BILINEAR);}
+  const bool standardSize=image.width==1440&&image.height==900;
+  const bool detailedBackground=i==0&&image.width==1920&&image.height==1200;
+  if(standardSize||detailedBackground){layers[i]=LoadTextureFromImage(image);SetTextureFilter(layers[i],TEXTURE_FILTER_BILINEAR);}
   UnloadImage(image);
  }
 }
@@ -18,7 +20,8 @@ inline void draw(float time){
  if(!ready()){intro_art::observatory(time,false);intro_art::observatoryObjects(time);return;}
  auto motion=menu_motion::sample(time);
  auto paint=[&](int layer,float x,float y,float alpha=1,float zoom=1){
-  DrawTexturePro(layers[layer],{0,0,1440,900},{720-740*zoom+x,450-462.5f*zoom+y,1480*zoom,925*zoom},{0,0},0,Fade(WHITE,alpha));
+  const auto& texture=layers[layer];
+  DrawTexturePro(texture,{0,0,float(texture.width),float(texture.height)},{720-740*zoom+x,450-462.5f*zoom+y,1480*zoom,925*zoom},{0,0},0,Fade(WHITE,alpha));
  };
  paint(0,motion.cameraX,motion.cameraY);
  paint(3,0,0,motion.glow,motion.scale);

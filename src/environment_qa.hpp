@@ -53,9 +53,9 @@ bool runEnvironmentQA(){
         renderScene();saveTexture(canvas,TextFormat("qa-v14/wind-trees-%d.png",i));
     }
     int width=GetScreenWidth(),height=GetScreenHeight();Vector2 position=GetWindowPosition();
-    // Real raylib window transitions, using the same F11/button action as gameplay.
+    // Real raylib window transitions, using the same F11 and Options actions as gameplay.
     welcome=true;paused=true;dragging={Place::Bag,0};audioDragging=0;
-    check(displayAction(true,false),"F11 action is available even in welcome/pause");pump();
+    check(displayAction(true),"F11 action is available even in welcome/pause");pump();
     int monitor=GetCurrentMonitor();
     check(fullScreen()&&GetScreenWidth()==GetMonitorWidth(monitor)&&GetScreenHeight()==GetMonitorHeight(monitor),"borderless fullscreen covers the monitor at its native resolution");
     check(dragging.place==Place::None&&audioDragging<0,"display transition cancels item and volume drags");
@@ -71,19 +71,20 @@ bool runEnvironmentQA(){
     }
     check(bagMapping,"all 25 inventory cells map correctly in fullscreen");
     mouse={0,0};renderScene();saveTexture(canvas,"qa-v14/fullscreen-welcome.png");
-    check(textWidth("PEŁNY EKRAN · F11",14)<displayButton().width-39,"fullscreen label fits the always-visible HUD button");
+    check(textWidth("Pełny ekran",17)<menuScreenChoice(true).width,"fullscreen label fits its Options button");
     welcome=paused=false;renderScene();saveTexture(canvas,"qa-v14/fullscreen-game.png");
-    mouse={displayButton().x+60,displayButton().y+18};
-    check(displayAction(false,true),"HUD button returns to windowed mode");pump();
+    paused=true;menuPageTo(MenuPage::Options);auto windowChoice=menuScreenChoice(false);
+    mouse={windowChoice.x+windowChoice.width/2,windowChoice.y+windowChoice.height/2};
+    gameMenuEvent(false,0,false,true);check(!fullScreen()&&paused,"Options returns to windowed mode without leaving pause");pump();
     check(!fullScreen()&&GetScreenWidth()==width&&GetScreenHeight()==height,"window dimensions are restored after leaving fullscreen");
     Vector2 restored=GetWindowPosition();check(std::abs(restored.x-position.x)<=2&&std::abs(restored.y-position.y)<=2,"window position is restored");
-    mouse={500,450};check(!displayAction(false,true)&&!fullScreen(),"ordinary world clicks do not toggle fullscreen");
+    paused=false;mouse={500,450};check(!displayAction(false)&&!fullScreen(),"without F11 the world input does not toggle fullscreen");
     statsOpen=true;game.allocationRequired=true;float hp=game.hp,mana=game.mana,time=game.time;
-    displayAction(true,false);pump();displayAction(true,false);pump();
+    displayAction(true);pump();displayAction(true);pump();
     check(statsOpen&&game.allocationRequired&&game.hp==hp&&game.mana==mana&&game.time==time,"fullscreen switches preserve mandatory level allocation and game state");
     statsOpen=false;game.allocationRequired=false;MaximizeWindow();pump();
     check(IsWindowMaximized(),"maximized window test fixture is active");
-    displayAction(true,false);pump();displayAction(true,false);pump();
+    displayAction(true);pump();displayAction(true);pump();
     check(!fullScreen()&&IsWindowMaximized(),"fullscreen returns a previously maximized window to its maximized state");
     RestoreWindow();SetWindowSize(width,height);SetWindowPosition(int(position.x),int(position.y));pump();
     game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};

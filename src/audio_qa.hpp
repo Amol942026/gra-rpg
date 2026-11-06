@@ -84,24 +84,22 @@ bool runAudioQA(bool disabled) {
         welcome=help=paused=false;audioOpen=true;mouse={0,0};prepareCanvas(1.2f);
         renderScene();saveTexture(canvas,"qa-v09/audio-settings.png");audioOpen=false;
     }
-    // Use exactly the click handler used by the normal HUD, without OS input injection.
-    welcome=help=paused=audioOpen=false;dragging={};
+    // Exercise the same shared Options handler used by mouse and keyboard.
+    welcome=true;help=paused=audioOpen=false;dragging={};menuPageTo(MenuPage::Options);
     audioSystem.muted=audioSystem.musicMuted=audioSystem.effectsMuted=false;
-    auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
-    pointAt(audioToggle(0));
-    check(clickAudioHud()&&!audioSystem.musicEnabled()&&audioSystem.effectsEnabled()&&!audioOpen,"music HUD click works immediately without opening or pausing a menu");
-    check(!worldPointerAllowed(mouse),"audio controls cannot select or drop onto terrain behind HUD");
-    pointAt(audioToggle(1));
-    check(clickAudioHud()&&!audioSystem.musicEnabled()&&!audioSystem.effectsEnabled(),"effects HUD click is independent of the music switch");
-    audioSystem.toggleMute();pointAt(audioToggle(0));clickAudioHud();
+    auto clickChannel=[](int i){
+        Rectangle row=menuOption(i);mouse={row.x+203,row.y+25};return gameMenuEvent(false,0,false,true);
+    };
+    check(clickChannel(0)&&!audioSystem.musicEnabled()&&audioSystem.effectsEnabled()&&!audioOpen,"Options toggles music alone");
+    check(!worldPointerAllowed(mouse),"Options controls cannot select or drop onto terrain");
+    check(clickChannel(1)&&!audioSystem.musicEnabled()&&!audioSystem.effectsEnabled(),"Options toggles effects independently");
+    audioSystem.toggleMute();clickChannel(0);
     check(audioSystem.musicEnabled()&&!audioSystem.effectsEnabled(),"music button after global mute restores only music");
-    audioSystem.toggleMute();pointAt(audioToggle(1));clickAudioHud();
+    audioSystem.toggleMute();clickChannel(1);
     check(!audioSystem.musicEnabled()&&audioSystem.effectsEnabled(),"effects button after global mute restores only effects");
-    paused=true;pointAt(audioToggle(0));clickAudioHud();
-    check(paused&&audioSystem.musicEnabled(),"HUD switches also work while paused without resuming gameplay");paused=false;
-    pointAt(audioButton());check(clickAudioHud()&&audioOpen,"F2 settings remain available from the HUD");clickAudioHud();
-    check(!audioOpen,"settings button can close its own panel");
-    mouse={0,0};check(!clickAudioHud(),"pointer outside audio buttons is not consumed");
+    welcome=false;paused=true;clickChannel(0);
+    check(paused&&audioSystem.musicEnabled(),"Options switches work while paused without resuming gameplay");
+    paused=false;menuPageTo(MenuPage::Home);
     if(!disabled){
         game=Game{};audioSystem.toggleMusic();
         for(float factor:{.8f,1.f,1.2f}){

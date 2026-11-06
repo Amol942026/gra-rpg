@@ -37,7 +37,6 @@ int main(int argc,char** argv){
  mouse={107,170};
  check(worldPointerAllowed(mouse),"former DEV button area remains usable world space");
  check(!developerInput()&&!developerMenuOpen,"former DEV area does not open a hidden menu");
- check(!CheckCollisionPointRec(mouse,developerButton()),"no invisible developer button intercepts the mouse");
  if(key){
   key(window,KEY_F3,0,1,0);
   check(IsKeyPressed(KEY_F3)&&!developerInput()&&!developerMenuOpen&&!developerActive,"F3 cannot enable developer mode in the playable world");

@@ -1,0 +1,19 @@
+{
+  "items": [
+    "TrailFalchion",
+    "BirchBow",
+    "CopperHatchet",
+    "FlintDagger",
+    "DewSword",
+    "SunTrailSword",
+    "BasaltCleaver",
+    "GlassDagger",
+    "OasisBow",
+    "AshBow"
+  ],
+  "layer_count": 11,
+  "krita_preview_verified": true,
+  "master_sha256": "6356f01e7f88c992a0a867e2fb241b524176831758e6f0bc679ee16df74c83ef",
+  "export_sha256": "fcb1fd5a8ebf3995be778307f8fd08747cdbd3694bd6771462d22c91bc47c2c1",
+  "generated_sha256": "4011f3e0decf312464438fee45e3139a72b98c335c655efedd7e372479fe2843"
+}

@@ -36,7 +36,8 @@ void main(){
   float edge=length((point-receiver.xy)/receiver.zw);
   a*=1.0-smoothstep(.988,1.0,edge);
  }
- finalColor=vec4(ink,a*strength);
+ float opacity=a*strength;
+ finalColor=vec4(ink*opacity,opacity);
 }
 )GLSL";
  maskShader=LoadShaderFromMemory(nullptr,maskCode);softShader=LoadShaderFromMemory(nullptr,softCode);
@@ -127,7 +128,7 @@ inline void prepare(bool chamber=false){
   maskOffset={(x+2)/renderScale,(y+2)/renderScale};width+=2;height+=2;
  }
  if(!mask.id||mask.texture.width!=width||mask.texture.height!=height){
-  if(mask.id)UnloadRenderTexture(mask);mask=LoadRenderTexture(width,height);SetTextureFilter(mask.texture,TEXTURE_FILTER_BILINEAR);
+  if(mask.id)UnloadRenderTexture(mask);mask=render_targets::colorOnly(width,height);SetTextureFilter(mask.texture,TEXTURE_FILTER_BILINEAR);
  }
  if(!mask.id||!IsShaderValid(maskShader)||!IsShaderValid(softShader))return;
  actor_art::beginShadowFrame();shadow_geometry::beginBatch();BeginTextureMode(mask);ClearBackground(BLANK);BeginMode2D({{maskOffset.x*maskScale,maskOffset.y*maskScale},{0,0},0,maskScale});
@@ -200,9 +201,9 @@ inline void prepare(bool chamber=false){
 inline void soften(){
  if(!ready)return;
  if(!softMask.id||softMask.texture.width!=mask.texture.width||softMask.texture.height!=mask.texture.height){
-  if(softMask.id)UnloadRenderTexture(softMask);softMask=LoadRenderTexture(mask.texture.width,mask.texture.height);SetTextureFilter(softMask.texture,TEXTURE_FILTER_BILINEAR);
+  if(softMask.id)UnloadRenderTexture(softMask);softMask=render_targets::colorOnly(mask.texture.width,mask.texture.height);SetTextureFilter(softMask.texture,TEXTURE_FILTER_BILINEAR);
  }
- BeginTextureMode(softMask);ClearBackground(BLANK);
+ BeginTextureMode(softMask);
  // Preserve the previous physical penumbra width at every display scale.
  float texel[]={1.f/((chamberFrame?W:WorldW)*.8f),1.f/(H*.8f)};
  float strength=chamberFrame?.32f:game.inDesert()?.34f:game.inTower()?.30f:.32f;
@@ -216,9 +217,9 @@ inline void soften(){
  SetShaderValue(softShader,uniforms.receiver,receiver,SHADER_UNIFORM_VEC4);
  SetShaderValue(softShader,uniforms.logicalSize,logicalSize,SHADER_UNIFORM_VEC2);
  BeginShaderMode(softShader);
- // Preserve the receiver's alpha: shadows darken its colour, not its solidity.
- rlSetBlendFactorsSeparate(RL_SRC_ALPHA,RL_ONE_MINUS_SRC_ALPHA,RL_ONE,RL_ONE_MINUS_SRC_ALPHA,RL_FUNC_ADD,RL_FUNC_ADD);
- BeginBlendMode(BLEND_CUSTOM_SEPARATE);
+ // The shader emits premultiplied coverage and writes every pixel.
+ rlSetBlendFactors(RL_ONE,RL_ZERO,RL_FUNC_ADD);
+ BeginBlendMode(BLEND_CUSTOM);
  DrawTexturePro(mask.texture,{0,0,float(mask.texture.width),-float(mask.texture.height)},{0,0,float(softMask.texture.width),float(softMask.texture.height)},{0,0},0,WHITE);native_world::endBlendMode();EndShaderMode();EndTextureMode();
 }
 inline void draw(){

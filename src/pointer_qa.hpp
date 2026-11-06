@@ -39,7 +39,7 @@ bool runPointerQA(){
         if(mode==1){toggleFullScreen();SetWindowSize(1152,720);pump();}
         if(mode==2){SetWindowSize(1280,720);pump();}
         if(mode==3){SetWindowSize(1600,900);pump();}
-        if(mode==4){displayAction(true,false);pump();}
+        if(mode==4){displayAction(true);pump();}
         reset();
         report<<"Mode="<<mode<<", fullscreen="<<fullScreen()<<", window="<<GetScreenWidth()<<'x'<<GetScreenHeight()<<'\n';
         for(float inheritedDpi:{1.f,1.25f,1.5f,2.f}){
@@ -73,7 +73,7 @@ bool runPointerQA(){
         check(body->loot[0].empty()&&game.bag[19].kind==Kind::Gold&&game.bag[19].count==11,"presented corpse loot drags into the far-right backpack column");
         point({660,530});V ground=toWorld(mouse),expected=toWorld({660,530});
         check(distance(ground,expected)<.001f,"terrain picking matches the displayed point");
-        point(centerOf(displayButton()));check(inside(displayButton()),"fullscreen HUD button uses the corrected pointer");
+        point({minimapRect().x+90,minimapRect().y+120});check(inside(minimapRect())&&!worldPointerAllowed(mouse),"minimap uses the corrected pointer and blocks world clicks");
         if(presentationViewport.x>0){callback(window,0,GetScreenHeight()*.5);refreshDisplayLayout();
             check(mouse.x<0&&hoverSlot().place==Place::None&&!worldPointerAllowed(mouse),"black margin stays outside gameplay and inventory");}
     }

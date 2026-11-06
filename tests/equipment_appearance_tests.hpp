@@ -9,7 +9,8 @@ void equipmentAppearanceTests(){
   auto appearance=heroAppearance(g.equipment);
   check(appearance[slot].value.kind==kind&&appearance[slot].value.tier==2&&appearance[slot].shape==archetype(kind),"visual equipment retains exact kind and tier instead of only its archetype");
   auto look=gearAppearance(item(kind));auto upgraded=gearAppearance(item(kind,2));
-  check(look.paint.primary&&look.paint.accent&&equipment_paint_data::spans[k].count>0,"every equippable item has authored material colors and a real Krita inlay");
+  auto inlay=equipmentInlay(kind);
+  check(look.paint.primary&&look.paint.accent&&inlay.begin()!=inlay.end(),"every equippable item has authored material colors and a real Krita inlay");
   check(look.paint.trim!=upgraded.paint.trim,"upgraded equipment also has a visible trim change");
   check(g.transfer({Place::Equip,slot},{Place::Bag,11})&&!heroAppearance(g.equipment)[slot].present(),"removing gear immediately clears its visual slot");
  }

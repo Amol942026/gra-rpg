@@ -21,10 +21,10 @@ void prepare(){
  bool depth=actor_art::sceneDepth;actor_art::sceneDepth=false;
  // Use the exact native canvas transform, then copy only the portrait pixels
  // on the GPU. A tiny translated viewport changes subpixel rasterization.
- BeginTextureMode(canvas);BeginMode2D({{0,0},{0,0},0,renderScale});clip(1081,69,61,66);
+ BeginTextureMode(canvas);BeginMode2D({{0,0},{0,0},0,renderScale});clip(1081,69,61,66);native_world::beginOpaqueFrame();
  DrawRectangleRec({1081,69,61,66},rgb(37,54,51));hero(1110,137,.8f,true);rlDrawRenderBatchActive();
  rlEnableTexture(art.texture.id);copy(0x0DE1,0,0,0,left,canvas.texture.height-top-height,width,height);rlDisableTexture();
- EndScissorMode();EndMode2D();EndTextureMode();actor_art::sceneDepth=depth;
+ native_world::finishOpaqueBackground();EndScissorMode();EndMode2D();EndTextureMode();actor_art::sceneDepth=depth;
  equipment=game.equipment;arrows=std::min(3,game.ammoCount());pixelScale=renderScale;ready=true;builds++;
 }
 void draw(){
@@ -34,6 +34,6 @@ void draw(){
  // Copy RGBA rather than applying edge alpha to the panel a second time.
  rlSetBlendFactors(RL_ONE,RL_ZERO,RL_FUNC_ADD);BeginBlendMode(BLEND_CUSTOM);
  DrawTexturePro(art.texture,{0,0,float(art.texture.width),-float(art.texture.height)},{x,y,art.texture.width/renderScale,art.texture.height/renderScale},{0,0},0,WHITE);
- EndBlendMode();
+ native_world::endBlendMode();
 }
 }

@@ -15,6 +15,28 @@ Każda pozycja jest losowana **niezależnie raz przy śmierci**. Wilk może pozo
 
 Podejdź do ciała na maksymalnie 2,5 pola i otwórz je PPM. Przeciągnij przedmioty do plecaka. Większy łup ma do trzech stron po pięć kratek: przyciski < / > lub rolka myszy nad oknem ciała. Każdy przedmiot ma kolorową nazwę, opis rzadkości i szansę w podpowiedzi. Stosy materiałów, monet, mikstur i strzał mieszczą do 99 sztuk.
 
+## Dziesięć dodatkowych broni
+
+Każda z tych broni może pojawić się w skrzyni w dowolnej krainie. Skrzynia
+nadal wybiera pospolity sprzęt w 75% przypadków i rzadki w 25%, a następnie
+losuje przedmiot z odpowiedniej puli. Miron sprzedaje wszystkie dziesięć
+broni na trzeciej i czwartej stronie oferty. Istniejące zapisy zachowują
+zawartość wcześniej wylosowanych skrzyń i ciał. Żywi przeciwnicy używają
+nowych tabel po pokonaniu.
+
+| Broń | Rzadkość | Atak | Przeciwnik | Szansa z ciała | Cena u Mirona |
+|---|---|---:|---|---:|---:|
+| Tasak starego traktu | Pospolity | +10 | Leśny rozbójnik | 60% | 160 |
+| Łuk brzozowej polany | Pospolity | +15 | Wilk | 60% | 200 |
+| Miedziany toporek | Pospolity | +10 | Skarabeusz miedziany | 60% | 160 |
+| Krzemienny sztylet | Pospolity | +10 | Leśny pająk | 60% | 160 |
+| Miecz porannej rosy | Rzadki | +14 | Ożywione drzewo | 15% | 384 |
+| Miecz słonecznego szlaku | Rzadki | +18 | Kobra piaskowa | 15% | 448 |
+| Topór bazaltowej kuźni | Rzadki | +20 | Obsydianowy wojownik | 15% | 480 |
+| Sztylet szklistego żaru | Rzadki | +16 | Salamandra lawowa | 15% | 416 |
+| Łuk bursztynowej oazy | Rzadki | +18 | Skorpion bursztynowy | 15% | 448 |
+| Łuk popielnego wiatru | Rzadki | +20 | Żarowy drak | 15% | 480 |
+
 ## Szlam
 
 | Przedmiot | Rzadkość | Szansa | Liczba sztuk |

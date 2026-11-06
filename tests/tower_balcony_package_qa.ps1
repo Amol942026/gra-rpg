@@ -10,15 +10,21 @@ if((Get-FileHash -LiteralPath $exe).Hash -ne (Get-FileHash -LiteralPath 'dist/pl
 $assets=Join-Path $PWD 'assets';$count=0
 foreach($asset in Get-ChildItem -LiteralPath $assets -Recurse -File){
  $target=Join-Path (Join-Path $gameRoot 'assets') $asset.FullName.Substring($assets.Length+1)
- if(!(Test-Path -LiteralPath $target) -or (Get-FileHash -LiteralPath $asset.FullName).Hash -ne (Get-FileHash -LiteralPath $target).Hash){throw ('Asset mismatch: '+$asset.Name)};$count++
+ if(!(Test-Path -LiteralPath $target)){throw ('Missing asset: '+$asset.Name)}
+ if((Get-FileHash -LiteralPath $asset.FullName).Hash -ne (Get-FileHash -LiteralPath $target).Hash){
+  $textMatch=$asset.Extension -in @('.md','.txt') -and
+   [IO.File]::ReadAllText($asset.FullName).Replace("`r`n","`n") -ceq [IO.File]::ReadAllText($target).Replace("`r`n","`n")
+  if(!$textMatch){throw ('Asset mismatch: '+$asset.Name)}
+ }
+ $count++
 }
 if(Get-ChildItem -LiteralPath $gameRoot -Recurse -File | Where-Object {$_.Extension -in @('.kra','.sif','.sifz','.blend','.csd','.mmp','.efs','.bak') -or $_.Name -eq 'AGENTS.md' -or $_.Name -match '_qa\.exe$'}){throw 'Native source or helper in player ZIP'}
 $settings=Join-Path $gameRoot 'audio-settings.cfg';[IO.File]::WriteAllText($settings,'0.31 0.67 0 0 1'+[Environment]::NewLine);$settingsHash=(Get-FileHash -LiteralPath $settings).Hash
-$job=Start-Process -FilePath $exe -ArgumentList '--startup-smoke','--windowed','--no-audio' -WorkingDirectory $gameRoot -WindowStyle Hidden -PassThru
+$job=Start-Process -FilePath $exe -ArgumentList '--startup-smoke','--windowed','--no-audio','--background-test' -WorkingDirectory $gameRoot -WindowStyle Hidden -PassThru
 if(!$job.WaitForExit(60000)){$job.Kill();throw 'Extracted startup timed out'}
 if($job.ExitCode -ne 0){throw 'Extracted player startup failed'}
 $startup=Get-Content -LiteralPath (Join-Path $gameRoot 'startup-smoke.txt') -Raw
-foreach($expected in @('Build edition: player','Frames: 180','Audio device opened: no','Developer mode: 0','Main menu open: 1')){if(!$startup.Contains($expected)){throw "Startup mismatch: $expected"}}
+foreach($expected in @('Build edition: player','Frames: 180','Audio device opened: no','Window hidden: yes','Developer mode: 0','Main menu open: 1')){if(!$startup.Contains($expected)){throw "Startup mismatch: $expected"}}
 Copy-Item -LiteralPath (Join-Path $HelperRoot 'tower_balcony_qa.exe') -Destination (Join-Path $gameRoot 'tower_balcony_qa.exe')
 $job=Start-Process -FilePath (Join-Path $gameRoot 'tower_balcony_qa.exe') -ArgumentList '--no-audio','checks' -WorkingDirectory $gameRoot -WindowStyle Hidden -PassThru
 if(!$job.WaitForExit(120000)){$job.Kill();throw 'Extracted balcony QA timed out'}

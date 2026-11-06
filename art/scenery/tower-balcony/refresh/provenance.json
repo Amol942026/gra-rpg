@@ -1,0 +1,77 @@
+{
+  "prompt_id": "1ccb592a-ffb0-4b8d-b2d6-4391035c6742",
+  "upscale_prompt_id": "8dee1e6b-edd2-41c6-9e4c-e7c49d86eb01",
+  "service": "127.0.0.1:8188 / offline",
+  "models": [
+    {
+      "folder": "checkpoints",
+      "filename": "DreamShaper_8_pruned.safetensors",
+      "repo": "Lykon/DreamShaper",
+      "revision": "228d79cb20811466f5c5710aa91f05dabd0b8a14",
+      "original_filename": "DreamShaper_8_pruned.safetensors",
+      "bytes": 2132625894,
+      "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+      "download": "https://huggingface.co/Lykon/DreamShaper/resolve/228d79cb20811466f5c5710aa91f05dabd0b8a14/DreamShaper_8_pruned.safetensors",
+      "license": "Creator conditions permitting commercial use of generated images",
+      "license_source": "https://civitai.com/api/v1/models/4384"
+    },
+    {
+      "folder": "loras",
+      "filename": "lcm-lora-sdv1-5.safetensors",
+      "repo": "latent-consistency/lcm-lora-sdv1-5",
+      "revision": "cf2fced511dbe7e26c8d1d397e728fbab875db4b",
+      "original_filename": "pytorch_lora_weights.safetensors",
+      "bytes": 134621556,
+      "sha256": "8f90d840e075ff588a58e22c6586e2ae9a6f7922996ee6649a7f01072333afe4",
+      "download": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5/resolve/cf2fced511dbe7e26c8d1d397e728fbab875db4b/pytorch_lora_weights.safetensors",
+      "license": "OpenRAIL++",
+      "license_source": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5"
+    },
+    {
+      "folder": "controlnet",
+      "filename": "control_v11p_sd15_canny_fp16.safetensors",
+      "repo": "comfyanonymous/ControlNet-v1-1_fp16_safetensors",
+      "revision": "ab830a51c5c573a5b85bfdbaa3ae0ab7e1baf5f7",
+      "original_filename": "control_v11p_sd15_canny_fp16.safetensors",
+      "bytes": 722601100,
+      "sha256": "8932b66e15aae835b3490dbf989f56c253104cee08a88bf21283762f557c9f10",
+      "download": "https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/ab830a51c5c573a5b85bfdbaa3ae0ab7e1baf5f7/control_v11p_sd15_canny_fp16.safetensors",
+      "license": "OpenRAIL for original ControlNet Canny weights",
+      "license_source": "https://huggingface.co/lllyasviel/control_v11p_sd15_canny"
+    },
+    {
+      "filename": "realesr-general-x4v3.safetensors",
+      "sha256": "ee54500e7d2665c7efaffdc7d739749f25f1ca2425f57e1351595db8c11859b1",
+      "license": "BSD-3-Clause",
+      "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+    }
+  ],
+  "dimensions": [
+    1050,
+    900
+  ],
+  "runtime_rgba_bytes": 3780000,
+  "guide_sha256": "bd0c7af33b177b2c3a9ace0b5e9884f9389f7f19d2815e5ac71f30bbd5b6a3ab",
+  "original_kra_sha256": "df738ece8ac6509f2288d37def5d73d574cf7c526efbd4082268c7099c4cc77a",
+  "source_texture_sha256": "0f560299be17b60dc28bbe2d4e5cd1986b933f989004f26a0b72ce813eded83c",
+  "workflow_sha256": "6b8e80580b967d58603af0a3885906893dde71902cbe65e1652982d3884500d0",
+  "upscale_workflow_sha256": "026a906048c26e4c09973245be81e2bf0f5db02964cdb87bb141a60ccaec97f3",
+  "raw_sha256": "32aeadeb5524d874c6f7956325809bd55abfc00e2e52fca58045cd2640b6c8ca",
+  "upscaled_sha256": "cb23c1997a082755fd8fa3072e983bc8cc480f7d301f998628e5bd56f3778735",
+  "kra_sha256": "35cf18da9bbdfbfd201fba1169763ad40c95797d6852fe4d44ec7230f48acd2d",
+  "runtime_sha256": "0f63dd903e59c02258f0f78463f60a2956245a617bf60eb606244b96395655d6",
+  "krita_layers": [
+    "Tło",
+    "01 / Zmierzch turkusowy i zlota poswiata",
+    "02 / Cienkie obloki nad grzbietami",
+    "03 / Odlegle gory i granie",
+    "04 / Dolina, jezioro i wstega rzeki",
+    "05 / Lasy na zboczach i pasma mgiel",
+    "06 / Trakt, most i pradawne ruiny",
+    "07 / Bliskie urwiska, trawy i lesne szczegoly",
+    "08 · Świt nad doliną (ComfyUI i Real-ESRGAN)",
+    "09 · Ruiny strażnicy i kamienny most",
+    "10 · Refleksy świtu na wodzie"
+  ],
+  "krita_native_preview": true
+}

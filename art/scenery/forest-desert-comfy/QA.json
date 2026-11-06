@@ -1,0 +1,171 @@
+{
+  "status": "PASS_FOREST_DESERT_ART",
+  "updated_props": [
+    {
+      "type": 0,
+      "name": "Świerk",
+      "opaque_pixels": 47435,
+      "changed_pixels": 47435
+    },
+    {
+      "type": 1,
+      "name": "Omszały głaz",
+      "opaque_pixels": 2818,
+      "changed_pixels": 2818
+    },
+    {
+      "type": 2,
+      "name": "Leśny krzew",
+      "opaque_pixels": 22961,
+      "changed_pixels": 22961
+    },
+    {
+      "type": 3,
+      "name": "Kolumna ruin",
+      "opaque_pixels": 5672,
+      "changed_pixels": 5672
+    },
+    {
+      "type": 4,
+      "name": "Brzoza",
+      "opaque_pixels": 49374,
+      "changed_pixels": 49374
+    },
+    {
+      "type": 5,
+      "name": "Dąb",
+      "opaque_pixels": 51918,
+      "changed_pixels": 51918
+    },
+    {
+      "type": 6,
+      "name": "Leśne grzyby",
+      "opaque_pixels": 958,
+      "changed_pixels": 958
+    },
+    {
+      "type": 7,
+      "name": "Kaktus świecznikowy",
+      "opaque_pixels": 24976,
+      "changed_pixels": 24976
+    },
+    {
+      "type": 8,
+      "name": "Opuncja kwitnąca",
+      "opaque_pixels": 27410,
+      "changed_pixels": 27410
+    },
+    {
+      "type": 9,
+      "name": "Warstwowy piaskowiec",
+      "opaque_pixels": 18745,
+      "changed_pixels": 18745
+    },
+    {
+      "type": 10,
+      "name": "Obelisk Słońca",
+      "opaque_pixels": 19619,
+      "changed_pixels": 19619
+    },
+    {
+      "type": 11,
+      "name": "Suchy krzew",
+      "opaque_pixels": 2858,
+      "changed_pixels": 2858
+    },
+    {
+      "type": 12,
+      "name": "Palma oazy",
+      "opaque_pixels": 20059,
+      "changed_pixels": 20059
+    },
+    {
+      "type": 13,
+      "name": "Brama Eldrina",
+      "opaque_pixels": 63471,
+      "changed_pixels": 63471
+    }
+  ],
+  "other_props_exact": 4,
+  "alpha_and_cursor_masks_exact": true,
+  "six_real_scenes_changed_pixels": {
+    "Przesieka Wędrowca": 189005,
+    "Brzozowa Polana": 130037,
+    "Ruiny Mchu": 130274,
+    "Brama Piasków": 96981,
+    "Oaza Bursztynu": 136090,
+    "Szlak ku Żywej Wydmie": 50207
+  },
+  "new_startup_atlas_rgba8_bytes": 7948800,
+  "resident_prop_cache_rgba8_bytes_before_after": [
+    10432800,
+    10432800
+  ],
+  "no_extra_runtime_draws": true,
+  "audio_opened": false,
+  "hidden": true,
+  "foreground_fps_measured": false,
+  "packages": [
+    {
+      "edition": "player",
+      "archive": "Emberfall-Windows-x64.zip",
+      "original_sha256": "c557c8b73da53ef0505bdc11a29515efcbb13f3b57fd6353eb991b621d3a16c1",
+      "sha256": "8efde1d2ac1e0cb29930857611c22dfe963d8aec9f25ffc08c08101406367ece",
+      "exe_sha256": "11e07e9665dc7410d9e113dce4cc3b7bb5f2ea09108c8a2f7aa3c705cd95c947",
+      "old_exe_sha256": "8fed0df643ffd14905a61dccd506ad3a07645931e5b4237750a99cc784b3b85a",
+      "verified_assets": 144,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "main_menu_open": true,
+      "locations": []
+    },
+    {
+      "edition": "developer",
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "original_sha256": "a6360627df3c1ee7e83c26c3b622ea558773c5a755de81e6656738688b9d7b84",
+      "sha256": "d93c150fa5740638ca2e54bfe4c5e675dc5a9ea0c7753b8a5429d7d9fe797260",
+      "exe_sha256": "7c133aa266f3803b74ca080fdfc178fd5e7c2aca2167bb8371d4ec692ed55870",
+      "old_exe_sha256": "16a915fcdb9af51a85cb2db014296bbf0a04a98a442c02b323be11bf0ffe09ca",
+      "verified_assets": 144,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "main_menu_open": true,
+      "locations": [
+        {
+          "start": "birches",
+          "location": "forest",
+          "frames": 180
+        },
+        {
+          "start": "desert-oasis",
+          "location": "desert",
+          "frames": 180
+        }
+      ]
+    }
+  ]
+}

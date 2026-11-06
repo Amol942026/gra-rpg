@@ -2,9 +2,14 @@
 // Runs inside the same player-edition renderer as menu_qa.cpp, with its own
 // save folder. No playback, OS input automation or production saves.
 template<class Check>void forestMenuChecks(const fs::path& output,Check check){
- check(menu_scene::ready(),"four original Krita menu layers loaded");
- size_t bytes=0;for(auto t:menu_scene::layers){check(t.width==1440&&t.height==900,"menu texture dimensions within 2048 budget");bytes+=size_t(t.width)*t.height*4;}
- check(bytes==20736000,"background uses 19.8 MiB RGBA8 with no frame atlas");
+ check(menu_scene::ready(),"four menu layers loaded");
+ size_t bytes=0;
+ for(size_t i=0;i<menu_scene::layers.size();i++){
+  const auto& texture=menu_scene::layers[i];
+  check(texture.width==(i==0?1920:1440)&&texture.height==(i==0?1200:900),"menu texture dimensions within 2048 budget");
+  bytes+=size_t(texture.width)*texture.height*4;
+ }
+ check(bytes==24768000,"menu uses 23.6 MiB RGBA8 with no frame atlas");
  auto save=[&](RenderTexture2D target,const fs::path& path){Image im=LoadImageFromTexture(target.texture);ImageFlipVertical(&im);check(ExportImage(im,path.string().c_str()),"frame exported: "+path.filename().string());UnloadImage(im);};
  fs::create_directories(output/"animation");
  intro={};towerStory={};game=Game{};clearTransientUi();welcome=true;paused=false;menuPageTo(MenuPage::Home);mouse={0,0};prepareCanvas(.8f);

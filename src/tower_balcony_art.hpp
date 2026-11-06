@@ -15,11 +15,4 @@ void terrace(bool foreground){
  Vector2 anchor=screen(towerBalconyPoint(6.1f));
  DrawTexturePro(texture,{0,0,480,320},{anchor.x-64,anchor.y-160,480,320},{0,0},0,WHITE);
 }
-void sign(){
- Vector2 entrance=screen(towerBalconyPoint(6.1f));
- if(entrance.x<WorldW-90&&entrance.x>0){
-  center("BALKON",entrance.x+100,entrance.y-135,20,Gold,true);
-  center("Dolina Świtu",entrance.x+100,entrance.y-111,15,Text);
- }
-}
 }

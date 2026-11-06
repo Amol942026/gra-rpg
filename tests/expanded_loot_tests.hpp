@@ -1,9 +1,10 @@
 #pragma once
 void expandedLootTests(){
  static_assert(int(Kind::DawnShard)==30&&int(Kind::DuneShield)==62&&int(Kind::SlimeBlade)==63,"old save item IDs must never move");
- check(ItemKindCount==99&&EquipmentKindCount==75,"catalogue includes 36 new equippable items alongside all original IDs");
+ static_assert(int(Kind::DawnBow)==98&&int(Kind::TrailFalchion)==99&&int(Kind::AshBow)==108);
+ check(ItemKindCount==109&&EquipmentKindCount==85,"catalogue includes ten additional weapons alongside all original IDs");
  for(int type=0;type<LegacyEnemyTypeCount;type++){
-  int added=0,count=0;for(const auto& rule:enemyLootTable(type)){count+=rule.kind!=Kind::None;added+=rule.kind>=Kind::SlimeBlade;}
+  int added=0,count=0;for(const auto& rule:enemyLootTable(type)){count+=rule.kind!=Kind::None;added+=rule.kind>=Kind::SlimeBlade&&rule.kind<Kind::TrailFalchion;}
   check(added==3&&count<=CorpseLootSize,"each beast gains three loot entries without overflowing its corpse");
  }
  for(int k=int(Kind::SlimeBlade);k<ItemKindCount;k++){
@@ -21,4 +22,14 @@ void expandedLootTests(){
   check(g.transfer({Place::Bag,10},{Place::Equip,gearSlot(kind)})&&g.equipment[gearSlot(kind)].kind==kind,"looted item equips into its actual slot");
   check(itemSellValue(item(kind))>0,"new gear can be valued and sold using the existing economy");
  }
+ int common=0,rare=0;
+ for(int id=int(Kind::TrailFalchion);id<=int(Kind::AshBow);id++){
+  Kind kind=Kind(id);
+  check(gearSlot(kind)==0&&!stackable(kind),"all ten additions are single weapons for the weapon slot");
+  common+=itemRarity(kind)==Rarity::Common;
+  rare+=itemRarity(kind)==Rarity::Rare;
+  check(std::count_if(MerchantOffers.begin(),MerchantOffers.end(),[&](const auto& offer){return offer.kind==kind;})==1,
+        "each new weapon is available exactly once in Miron's catalogue");
+ }
+ check(common==4&&rare==6,"the new weapons preserve the chest rarity ceiling");
 }

@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "checks": {
+    "menu": 428,
+    "balcony": 1337,
+    "controls": 42,
+    "silent_audio": 8,
+    "developer": 64,
+    "independent_balcony": 114
+  },
+  "window_mode_transition_foreground_tested": false,
+  "audio_opened": false,
+  "hidden": true,
+  "visual_scales": [
+    80,
+    100,
+    120
+  ],
+  "balcony_render_only": {
+    "audio_opened": false,
+    "presentation_measured": false,
+    "scenes": [
+      {
+        "name": "observatory",
+        "frames": 120,
+        "p95_ms": 5.5165,
+        "mean_ms": 4.97025,
+        "within_60hz_render_budget": true
+      },
+      {
+        "name": "valley-lookout",
+        "frames": 120,
+        "p95_ms": 5.1743,
+        "mean_ms": 4.88306,
+        "within_60hz_render_budget": true
+      }
+    ]
+  },
+  "packages": [
+    {
+      "edition": "player",
+      "archive": "Emberfall-Windows-x64.zip",
+      "original_sha256": "68e6b5cce5b9d24d2cdcc8443c28501d3ffafb4e7e971445514425ab9fcaeb84",
+      "sha256": "4c9a1bd98f75fff7d27cbbb52f6b60423aaa86dd45857185161c6223fd8eebd4",
+      "exe_sha256": "0d9ea9663ebb85acf192d68bba217a531b50378778891cb6189f62103c40bef5",
+      "old_exe_sha256": "a137e130f4353503ae51e65a76ebeb2ca34a5f349020f176c323dc076458948c",
+      "verified_assets": 144,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "main_menu_open": true,
+      "locations": []
+    },
+    {
+      "edition": "developer",
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "original_sha256": "896e9ca5f1899ab3607d9f5a274024de2748b0fdc32f6cc8763e39892d8e7c08",
+      "sha256": "65fdd48db434650d14ef33026edeb3fbbf71a36d2a347efdc11473d5cbb12a2d",
+      "exe_sha256": "f04d069f0b7c2b94ccaa6dd962ffe67654c29ba0421385784fd58e1b6821a5d0",
+      "old_exe_sha256": "fa925025970152b0780cbded5cab6bde26ad7f12939d735fa0547cded42d1c67",
+      "verified_assets": 144,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "main_menu_open": true,
+      "locations": [
+        {
+          "start": "tower-5",
+          "location": "mage-tower",
+          "frames": 180
+        }
+      ]
+    }
+  ]
+}

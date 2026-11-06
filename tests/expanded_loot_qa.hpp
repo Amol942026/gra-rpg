@@ -20,7 +20,7 @@ template<class Check>void expandedLootChecks(const fs::path& root,Check check){
   BeginTextureMode(sheet);panel({x,y,340,250},Panel);float size=17;std::string name=itemName(item(kind));while(size>15&&textWidth(name,size)>314)size--;txt(name,x+12,y+12,size,rarity(item(kind)));
   txt(std::string(rarityName(itemRarity(kind)))+" · "+std::to_string(itemDropChance(kind))+"%",x+12,y+42,15,Gold);txt(std::string(slot==0||slot==5?"Atak +":"Pancerz +")+std::to_string(power(item(kind))),x+12,y+65,15,Muted);
   DrawTexturePro(picture,{0,0,400,320},{x+17,y+70,250,200},{0,0},0,WHITE);icon(item(kind),x+294,y+126,.85f);EndTextureMode();UnloadTexture(picture);
-  if(index%12==11)saveTexture(sheet,(root/("new-items-"+std::to_string(index/12+1)+".png")).string());
+  if(index%12==11||k==ItemKindCount-1)saveTexture(sheet,(root/("new-items-"+std::to_string(index/12+1)+".png")).string());
   UnloadImage(before);UnloadImage(after);UnloadImage(portraitBefore);UnloadImage(portraitAfter);
   unsigned seed=0;bool found=false;for(;seed<20000&&!found;seed++){std::mt19937 random(seed);for(Item value:rollEnemyLoot(owner,random))found|=value.kind==kind;}
   check(found,"seeded new item appears in its source beast's random loot");reset();game.bag={};game.rng.seed(seed-1);V at=game.player+V{.5f,0};game.enemies.push_back({910,owner,at,at,1,enemyInfo(owner).health});game.hit(game.enemies[0],10000);game.openCorpse(910);
@@ -33,7 +33,7 @@ template<class Check>void expandedLootChecks(const fs::path& root,Check check){
   auto text=itemTooltipText(item(kind),{Place::Bag,10});Rectangle box=tooltipBounds(text);check(textWidth(text.description,14)<=box.width-34&&text.chance.find(std::to_string(itemDropChance(kind))+"%")!=std::string::npos,"new tooltip fits and shows its exact central rarity chance");
   manifest<<k<<'\t'<<itemName(item(kind))<<'\t'<<int(archetype(kind))<<'\t'<<int(itemRarity(kind))<<'\t'<<itemDropChance(kind)<<'\t'<<power(item(kind))<<'\t'<<owner<<'\n';rendered++;
  }
- UnloadRenderTexture(sample);UnloadRenderTexture(sheet);check(rendered==36,"all 36 additional items rendered, equipped and looted");
+ UnloadRenderTexture(sample);UnloadRenderTexture(sheet);check(rendered==ItemKindCount-int(Kind::SlimeBlade),"all additional items rendered, equipped and looted");
  check(runRarityQA(),"entire expanded catalogue fits real rarity tooltips");check(runTradeQA(),"all catalogue item values and merchant interactions remain valid");
  std::ofstream out(root/"expansion.json");out<<"{\"status\":\"PASS\",\"new_items\":"<<rendered<<",\"catalogue_items\":"<<ItemKindCount<<",\"equipment_variants\":"<<EquipmentKindCount<<",\"audio_opened\":false}";
 }

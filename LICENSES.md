@@ -38,8 +38,19 @@
   workflow i hashe są zapisane w art/creatures/desert-comfy/.
 - Odłamki `assets/sprites/guardian-fragments.png` powstały jako sześć oryginalnych warstw Krity; ich rozpad, obroty i odbicia opracowano w natywnym projekcie Synfig. Źródła i pochodzenie: `art/gameplay/guardian/shatter/`. Bez zewnętrznych grafik, modeli i płatnych usług.
 - Duży głaz Strażnika `assets/sprites/guardian-stone.png` to własna sześciowarstwowa grafika z Krity, z ziemią i korzeniami; wyrwanie i oburęczny rzut znad głowy opracowano w natywnym projekcie 2D Synfig. Źródła i pochodzenie: `art/gameplay/guardian/`. Bez zewnętrznych grafik, modeli i płatnych usług.
-- Ilustracja leśnej Bramy Świtu w `assets/menu/` została narysowana w Kricie dla Emberfall, a animacja warstw opracowana w Synfig Studio. Własne kształty i kolory, bez zewnętrznych obrazów, modeli, sampli i płatnych usług. Edytowalne źródła i pochodzenie: `art/menu/README.md`, `art/menu/forest/provenance.json`.
+- Ilustrację Bramy Świtu w `assets/menu/` odświeżono lokalnie w ComfyUI
+  na podstawie własnego rysunku Emberfall. Wykorzystano opisane wyżej
+  DreamShaper 8, LCM-LoRA SD 1.5 i ControlNet Canny SD 1.5. Wykończenie
+  warstw wykonano w Kricie, a animacja korzysta z istniejącej pętli Synfig.
+  Pochodzenie i edytowalne źródło są w `art/menu/comfy/`.
+  Detale tła powiększono lokalnie w ComfyUI modelem Real-ESRGAN
+  (realesr-general-x4v3, Xintao Wang, BSD-3-Clause). Źródło, licencja i
+  dokument Krity są w `art/menu/comfy/ostrosc/`.
 - Malowane detale bohatera `assets/sprites/hero-paints.png` powstały w Kricie, a dodatkowe krzywe animacji w Synfig Studio, wyłącznie z oryginalnych części projektu. Źródła i pochodzenie: `art/hero/README.md`. Bez zewnętrznych modeli, grafik ani płatnych usług.
+- Pięć materiałów scenerii Lasu Mchu i Morza Piasków wygenerowano
+  lokalnie w ComfyUI z użyciem DreamShaper 8 i LCM-LoRA SD 1.5.
+  Pomalowano czternaście obiektów i dopracowano detale w Kricie.
+  Edytowalne źródła i pochodzenie są w `art/scenery/forest-desert-comfy/`.
 - Leśny krzew `assets/sprites/forest-bush.png` został narysowany w Kricie dla Emberfall, bez zasobów zewnętrznych. Warstwowy master i pochodzenie: `art/scenery/README.md`.
 - Świerk, brzoza i dąb w `assets/sprites/forest-{spruce,birch,oak}.png` to oryginalne warstwowe ilustracje narysowane natywnymi narzędziami Krity dla Emberfall. Bez zewnętrznych grafik, modeli i płatnych usług. Źródła i pochodzenie: `art/scenery/trees/`, `art/scenery/README.md`.
 - Muzyka „Echoes of the Ruins” i 21 efektów w `assets/audio/` powstały dla tego projektu metodą syntezy, bez zewnętrznych nagrań i sampli. Można je rozpowszechniać z grą. Opis: `assets/audio/README.md`.

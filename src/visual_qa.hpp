@@ -74,7 +74,10 @@ struct PausedWorldCache {RenderTexture2D art{};bool ready=false;float time=-1;V 
 void invalidatePausedWorld(){pausedWorldCache.ready=false;}
 void unloadPausedWorld(){if(pausedWorldCache.art.id)UnloadRenderTexture(pausedWorldCache.art);pausedWorldCache={};}
 void prepareLiveWorld(){
- if(game.inDesert())desert_art::renderBackdrop(renderScale);performance.end(RenderStage::Backdrop,true);
+ // The distant desert panorama has its own economical buffer. It never
+ // contains characters, their shadows, or the immediate terrain.
+ if(game.inDesert())desert_art::renderBackdrop(std::min(renderScale,1.f));
+ performance.end(RenderStage::Backdrop,true);
  world_shadows::prepare();performance.end(RenderStage::Shadows,true);
 }
 void renderScene() {
@@ -100,8 +103,8 @@ void renderScene() {
     }
     const bool freeze=(statsOpen||skillsOpen)&&!intro.active()&&!towerStory.active();
     const float nativeScale=renderScale;
-    // Text and Caldera use native display resolution. Forest/desert keep the
-    // cheaper world buffer; their HUD and labels remain fully native.
+    // The live world normally uses native pixels for camera, actors, and
+    // shadow alignment. Keep the smaller buffer for comparison diagnostics.
     const bool separateWorld=!game.inTower()&&!game.inVolcano()&&!freeze&&!nativeWorldRendering&&nativeScale>1.001f;
     if(separateWorld){
         constexpr float worldScale=.9f;constexpr int width=945,height=810;
@@ -154,8 +157,7 @@ void renderScene() {
     overlay();
     drawProgression();drawTowerPanel();
     drawAudioPanel();
-    drawAudioButton(); // Always visible, including pause/help and the audio panel.
-    drawDisplayButton();if(!towerPanelOpen)drawWeaponWheelButton();drawGameMenu();drawDeveloperUi();
+    drawGameMenu();drawDeveloperUi();
     drawAttributeTooltip();
     if(paused)native_world::finishOpaqueBackground();
     EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);

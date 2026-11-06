@@ -30,7 +30,7 @@ inline bool towerStairBlocked(V p,int direction){
  return dx*dx+dy*dy<=TowerStairPlayerRadius*TowerStairPlayerRadius;
 }
 struct TowerFloorInfo {const char* name;const char* theme;};
-inline constexpr std::array<TowerFloorInfo,TowerFloorCount> TowerFloors={{{"Sala przybycia","KOMINEK / SCHRONIENIE"},{"Biblioteka","KRONIKI / WIEDZA"},{"Pracownia alchemiczna","ZIOŁA / MIKSTURY"},{"Sala pieczęci","RUNY / SERCE ŚWITU"},{"Obserwatorium","GWIAZDY / BALKON DOLINY ŚWITU"}}};
+inline constexpr std::array<TowerFloorInfo,TowerFloorCount> TowerFloors={{{"Sala przybycia","KOMINEK / SCHRONIENIE"},{"Biblioteka","KRONIKI / WIEDZA"},{"Pracownia alchemiczna","ZIOŁA / MIKSTURY"},{"Sala pieczęci","RUNY / SERCE ŚWITU"},{"Obserwatorium","GWIAZDY / DOLINA ŚWITU"}}};
 struct TowerFurniture {V pos;float radius;int type;};
 inline const std::vector<TowerFurniture> TowerFurnishings={
  {{7.8f,8.2f},.65f,0},{{16.2f,7.8f},.65f,0},{{17.8f,10.2f},.65f,0},{{6.25f,11.3f},.65f,0},

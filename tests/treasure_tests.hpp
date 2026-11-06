@@ -1,6 +1,7 @@
 #pragma once
 void treasureTests(){
  int common=0,rare=0;std::array<bool,EquipSize> slots{};bool varied=false;
+ std::array<std::array<bool,ItemKindCount>,3> weaponsByRealm{};
  auto original=makeTreasure(0);
  for(unsigned seed=0;seed<1000;seed++){
   auto chests=makeTreasure(seed),same=makeTreasure(seed);int forest=0,desert=0,volcano=0;
@@ -14,6 +15,7 @@ void treasureTests(){
     check(value.kind==same[c].loot[i].kind,"seed reproduces chest contents");
     for(int j=0;j<i;j++)check(value.kind!=chest.loot[j].kind,"a chest contains distinct kinds of gear");
     common+=rarity==Rarity::Common;rare+=rarity==Rarity::Rare;slots[gearSlot(value.kind)]=true;
+    if(value.kind>=Kind::TrailFalchion)weaponsByRealm[c/2][int(value.kind)]=true;
     varied|=value.kind!=original[c].loot[i].kind;
    }
   }
@@ -21,6 +23,8 @@ void treasureTests(){
  }
  check(varied&&rare>4050&&rare<4950&&common+rare==18000,"new seeds vary treasure and maintain the 75/25 rarity roll");
  for(bool seen:slots)check(seen,"treasure can supply every equipment slot");
+ for(const auto& realm:weaponsByRealm)for(int id=int(Kind::TrailFalchion);id<=int(Kind::AshBow);id++)
+  check(realm[id],"all ten weapons can roll in each realm's treasure pool");
  for(WorldLocation location:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano}){
   Game g(9876),control(9876);g.activateField(location);
   int active=0;

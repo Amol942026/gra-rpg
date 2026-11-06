@@ -1,5 +1,7 @@
 # Menu i kronika wyprawy — 22.10.2026
 
+Aktualne tło startowe powstało w ComfyUI i Kricie. Warstwowy master, podgląd oraz wyniki są w [Bramie Świtu](comfy/README.md).
+
 `src/game_menu.hpp` obsługuje menu startowe, pauzę, opcje, twórców,
 trzy sloty i potwierdzenia. `welcome` oznacza menu przed prologiem,
 `paused` pauzę bieżącej sesji; `MenuPage` wybiera podstronę. Wszystkie

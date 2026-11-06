@@ -3,11 +3,12 @@
 #include <array>
 namespace ember {
 enum class Kind { None,Sword,Axe,Helmet,Armor,Shield,Boots,Ring,Health,Mana,Crystal,Gold,
- WolfFang,WolfFur,BoarTusk,BoarHide,SpiderSilk,VenomSac,BoneShard,SlimeGel,AncientBark,ForestEssence,BanditBadge,RuneStone,Dagger,Cloak,Amulet,Mushroom,Bow,Arrow,DawnShard,ScorpionSting,ScarabShell,CobraScale,SandEssence,WolfKnife,WolfCloak,MoonBow,BoarArmor,TuskAxe,SilkBoots,VenomRing,WebCowl,BoneHelmet,CryptSword,BanditBow,BanditBoots,RootShield,GroveAmulet,GelAmulet,GuardianSword,GuardianArmor,GuardianHelmet,EchoRing,StingDagger,ScarabHelmet,ScarabArmor,CobraBoots,MirageBow,SunAmulet,DuneBlade,SandRobe,DuneShield,SlimeBlade,SlimeCowl,SlimeRing,WolfHood,WolfBoots,WolfHeartAmulet,BoneShield,BoneArmor,GraveBow,GuardianBoots,GuardianShield,GuardianAxe,BoarBoots,BoarShield,BoarHelm,SpiderDagger,WebRobe,NightSilkCloak,BanditSword,BanditHelm,OutlawRing,BarkHelm,RootBoots,GroveBow,ScorpionAxe,StingShield,AmberRing,ScarabBoots,ScarabAxe,ScarabRing,CobraCloak,ScaleShield,SerpentAmulet,DuneBoots,DuneHelmet,DawnBow,Count };
+ WolfFang,WolfFur,BoarTusk,BoarHide,SpiderSilk,VenomSac,BoneShard,SlimeGel,AncientBark,ForestEssence,BanditBadge,RuneStone,Dagger,Cloak,Amulet,Mushroom,Bow,Arrow,DawnShard,ScorpionSting,ScarabShell,CobraScale,SandEssence,WolfKnife,WolfCloak,MoonBow,BoarArmor,TuskAxe,SilkBoots,VenomRing,WebCowl,BoneHelmet,CryptSword,BanditBow,BanditBoots,RootShield,GroveAmulet,GelAmulet,GuardianSword,GuardianArmor,GuardianHelmet,EchoRing,StingDagger,ScarabHelmet,ScarabArmor,CobraBoots,MirageBow,SunAmulet,DuneBlade,SandRobe,DuneShield,SlimeBlade,SlimeCowl,SlimeRing,WolfHood,WolfBoots,WolfHeartAmulet,BoneShield,BoneArmor,GraveBow,GuardianBoots,GuardianShield,GuardianAxe,BoarBoots,BoarShield,BoarHelm,SpiderDagger,WebRobe,NightSilkCloak,BanditSword,BanditHelm,OutlawRing,BarkHelm,RootBoots,GroveBow,ScorpionAxe,StingShield,AmberRing,ScarabBoots,ScarabAxe,ScarabRing,CobraCloak,ScaleShield,SerpentAmulet,DuneBoots,DuneHelmet,DawnBow,
+ TrailFalchion,BirchBow,CopperHatchet,FlintDagger,DewSword,SunTrailSword,BasaltCleaver,GlassDagger,OasisBow,AshBow,Count };
 constexpr int ItemKindCount=int(Kind::Count);
 enum class Rarity { Common, Rare, VeryRare, ExtremelyRare };
 struct GearDefinition { const char* name; Kind shape; Rarity rarity; int basePower; const char* description; };
-inline constexpr std::array<GearDefinition,64> BeastGear{{
+inline constexpr std::array<GearDefinition,74> BeastGear{{
  {"Sztylet wilczego kła",Kind::Dagger,Rarity::Rare,12,"Ostrze oprawione w srebrzysty wilczy kieł."},
  {"Płaszcz tropiciela",Kind::Cloak,Rarity::Rare,7,"Ciepły płaszcz z futra leśnych wilków."},
  {"Łuk księżycowego łowcy",Kind::Bow,Rarity::VeryRare,19,"Łuk z jasnego drewna i wilczej cięciwy."},
@@ -72,7 +73,18 @@ inline constexpr std::array<GearDefinition,64> BeastGear{{
  {"Buty wędrującej wydmy",Kind::Boots,Rarity::Rare,10,"Piaskowe okucia chronią przed gorącem."},
  {"Hełm serca pustyni",Kind::Helmet,Rarity::VeryRare,12,"Kamienna korona z rozżarzonym bursztynem."},
  {"Łuk ostatniej jutrzenki",Kind::Bow,Rarity::ExtremelyRare,27,"Złociste ramiona rozświetla chłodny żar."},
+ {"Tasak starego traktu",Kind::Sword,Rarity::Common,10,"Szerokie stalowe ostrze z rękojeścią z orzecha."},
+ {"Łuk brzozowej polany",Kind::Bow,Rarity::Common,15,"Jasne brzozowe drewno spięte zieloną owijką."},
+ {"Miedziany toporek",Kind::Axe,Rarity::Common,10,"Miedziane ostrze osadzone na krótkim trzonku."},
+ {"Krzemienny sztylet",Kind::Dagger,Rarity::Common,10,"Ciemny krzemień w chwycie owiniętym nicią."},
+ {"Miecz porannej rosy",Kind::Sword,Rarity::Rare,14,"Smukła klinga o srebrzystym, chłodnym blasku."},
+ {"Miecz słonecznego szlaku",Kind::Sword,Rarity::Rare,18,"Polerowana stal z mosiężnym znakiem słońca."},
+ {"Topór bazaltowej kuźni",Kind::Axe,Rarity::Rare,20,"Ciemną głowicę rozjaśniają miedziane żyły."},
+ {"Sztylet szklistego żaru",Kind::Dagger,Rarity::Rare,16,"Czarne szkliwo odbija czerwony blask."},
+ {"Łuk bursztynowej oazy",Kind::Bow,Rarity::Rare,18,"Miedziane okucia i bursztynowe groty ramion."},
+ {"Łuk popielnego wiatru",Kind::Bow,Rarity::Rare,20,"Długie popielate ramiona z ognistą inkrustacją."},
 }};
+static_assert(BeastGear.size()==ItemKindCount-int(Kind::WolfKnife));
 inline constexpr bool beastGear(Kind k){return k>=Kind::WolfKnife&&k<Kind::Count;}
 inline constexpr int EquipmentKindCount=11+int(BeastGear.size());
 inline constexpr Kind archetype(Kind k){return beastGear(k)?BeastGear[int(k)-int(Kind::WolfKnife)].shape:k;}

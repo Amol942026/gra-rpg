@@ -1,0 +1,89 @@
+{
+  "status": "PASS_STARTUP_MENU",
+  "renderer_checks": 349,
+  "inherited_pause_failures": {
+    "opaque final menu without double blending pause-forest": 1,
+    "opaque final menu without double blending pause-desert": 1,
+    "opaque final menu without double blending pause-80": 1,
+    "opaque final menu without double blending options-80": 1,
+    "opaque final menu without double blending pause-120": 1,
+    "opaque final menu without double blending options-120": 1,
+    "opaque final menu without double blending pause-tower": 1,
+    "opaque final menu without double blending pause-death": 1,
+    "opaque final menu without double blending exit-ingame": 1
+  },
+  "welcome_render_scales_percent": [
+    80,
+    100,
+    120
+  ],
+  "animated_frames": 60,
+  "loop_closes_pixel_exact": true,
+  "pause_examples_match_except_live_fps_counter": 6,
+  "no_audio": true,
+  "hidden": true,
+  "gpu_rgba8_bytes": 20736000,
+  "new_runtime_textures": 0,
+  "foreground_fps_measured": false,
+  "krita": {
+    "native_layers": 6,
+    "native_strokes": 8,
+    "native_preview": true,
+    "merged_export_max_channel_error": 5,
+    "exports": {
+      "background.png": "ae1f10258d3008afaa45db75f8ee1be6897b95c18ed054722a819079212bed36",
+      "glow.png": "7bb2a9691570137f6ffba2ec85740a2aa44cdd5234ce5e8fbd2d1fbae8f8ec37",
+      "mist.png": "a392a20feb477774837477e04592cad9fd75e0160787d2935426c9439a70477a",
+      "foreground.png": "8e61cc92212ac0f8eefb309fe68b513d160524a5ff6e9d0a1df298066597b532"
+    },
+    "kra_sha256": "3399e027986ee9408423d9c919f05de525aae20c64303c57fd280c0710047642"
+  },
+  "packages": [
+    {
+      "edition": "player",
+      "archive": "Emberfall-Windows-x64.zip",
+      "original_sha256": "86c4e297fcb0fa9492b4e2304485015c36554f78f6746ab6f84cb4ffb2b865d3",
+      "sha256": "e85c44eb7653d49166fa7aa2cdd6b5c9e4c09738979f2155815af28adf45d70b",
+      "exe_sha256": "e39e685547bfe654062723b921edb3cd177a3d0535914aeb44617487ab940ae0",
+      "verified_assets": 143,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "main_menu_open": true
+    },
+    {
+      "edition": "developer",
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "original_sha256": "88b6bd2f40f4b5348daf1f0a08eb1bdc862eb90e691bdd72c85ce93816a46c1d",
+      "sha256": "3b8bc69af416d1d8e3fe22a1feb223efbbe59787f14cfa23b1e18056840c1bc7",
+      "exe_sha256": "c8c85b239d3d0eacbbff1dbce225db8f9a233404d2b605f209e5f39a15b4914f",
+      "verified_assets": 143,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "main_menu_open": true
+    }
+  ]
+}

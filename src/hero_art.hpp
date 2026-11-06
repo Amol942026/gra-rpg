@@ -4,9 +4,7 @@
 // same articulated model, including equipment, bow poses and roll transforms.
 inline void gearInlay(Rig& rig,const GearAppearance& look,P3 center,float width,float height,bool back=false){
     if(!look.present())return;
-    auto span=equipment_paint_data::spans[int(look.value.kind)];
-    for(int i=0;i<span.count;i++){
-        auto s=equipment_paint_data::strokes[span.start+i];
+    for(auto s:equipmentInlay(look.value.kind)){
         float left=(s.x-8)*width/16,right=(s.x+s.width-8)*width/16,top=(8-s.y)*height/16,bottom=(7-s.y)*height/16;
         P3 a=center+P3{left,0,top},b=center+P3{right,0,top},c=center+P3{right,0,bottom},d=center+P3{left,0,bottom};
         if(back)rig.face(d,c,b,a,equipment_art::color(look.paint.accent));
@@ -217,9 +215,16 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
             P3 axis=world(pose.vector(hero_motion::data::HandL,{0,0,1}));
             P3 forward=world(pose.vector(hero_motion::data::HandL,{0,1,0}));
             float half=held.value.kind==Kind::BanditBow?23:held.value.kind==Kind::MoonBow?30:held.value.kind==Kind::MirageBow?29:27;
+            float curve=6;
+            switch(held.value.kind){
+            case Kind::BirchBow:half=24;curve=5;break;
+            case Kind::OasisBow:half=28;curve=7.2f;break;
+            case Kind::AshBow:half=31;curve=5.5f;break;
+            default:break;
+            }
             P3 bottom=grip-axis*half,top=grip+axis*half,previous=bottom;
             for(int part=1;part<=16;part++){
-                float t=part/16.f;P3 next=grip+axis*(-half+2*half*t)+forward*(6*std::sin(t*PI)*(1-.15f*drawCharge));
+                float t=part/16.f;P3 next=grip+axis*(-half+2*half*t)+forward*(curve*std::sin(t*PI)*(1-.15f*drawCharge));
                 rig.tapered(previous,next,2.6f,2.6f,weaponMetal);previous=next;
                 if(part==2||part==14)rig.rounded(next,{3.8f,3.8f,4},weaponTrim);
                 if(part==6||part==10)rig.rounded(next,{3,3,3},paint(held.paint.accent));
@@ -237,13 +242,27 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
             P3 blade=swordPoint(sword_pose::idleBlade(0));
             if(dagger)blade=blade*.65f;
             P3 base=weapon==Kind::Sword?hand+blade*.10f:hand-blade*.12f,tip=hand+blade*exposedBlade;
-            rig.beam(base,tip,weapon==Kind::Axe?3:held.value.kind==Kind::GuardianSword?5.5f:4,2,weapon==Kind::Axe?weaponGrip:weaponMetal);
+            float width=weapon==Kind::Axe?3:held.value.kind==Kind::GuardianSword?5.5f:4;
+            switch(held.value.kind){
+            case Kind::TrailFalchion:width=5.5f;break;
+            case Kind::DewSword:width=3.2f;break;
+            case Kind::SunTrailSword:width=4.6f;break;
+            case Kind::FlintDagger:width=3.5f;break;
+            case Kind::GlassDagger:width=4.6f;break;
+            default:break;
+            }
+            rig.beam(base,tip,width,2,weapon==Kind::Axe?weaponGrip:weaponMetal);
             rig.beam(hand-blade*.20f,hand+blade*.06f,3.5f,3.5f,weaponGrip);
             rig.beam((weapon==Kind::Sword?base:hand)+P3{0,0,.8f},tip+P3{0,0,.8f},.9f,.6f,shade(weaponMetal,1.3f));
             P3 guard=hand+blade*.10f;float flat=std::max(.001f,std::hypot(blade.r,blade.f));
             P3 cross{blade.f/flat*7,-blade.r/flat*7,0};
             rig.beam(guard-cross,guard+cross,2.5f,2.5f,weaponTrim);
-            if(weapon==Kind::Axe)rig.form(tip+P3{5,0,-7},{held.value.kind==Kind::TuskAxe?20.f:15.f,4,14},weaponMetal);
+            if(weapon==Kind::Axe){
+                float headWidth=held.value.kind==Kind::TuskAxe?20.f:15.f;
+                if(held.value.kind==Kind::CopperHatchet)headWidth=13;
+                if(held.value.kind==Kind::BasaltCleaver)headWidth=19;
+                rig.form(tip+P3{5,0,-7},{headWidth,4,14},weaponMetal);
+            }
             if(held.value.kind==Kind::TuskAxe)rig.tapered(tip+P3{-7,0,-5},tip+P3{-9,0,5},4,1,paint(held.paint.accent));
             if(held.value.kind==Kind::StingDagger||(held.value.kind==Kind::DuneBlade&&exposedBlade>.8f))rig.beam(tip-blade*.25f,tip+cross*.45f,3,1,weaponMetal);
             if(beastGear(held.value.kind))for(int i=0;i<3;i++){

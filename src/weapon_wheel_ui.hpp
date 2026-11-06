@@ -20,10 +20,9 @@ bool weaponWheelInput(){
   if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){int index=weaponWheelHit(mouse);if(index>=0)game.clearWeaponBinding(index);}
   if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))finishDrag();return true;
  }
- if(IsKeyPressed(KEY_Q)||(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&&inside(weaponWheelButton()))){openWeaponWheel();return weaponWheelOpen;}
+ if(IsKeyPressed(KEY_Q)){openWeaponWheel();return weaponWheelOpen;}
  return false;
 }
-void drawWeaponWheelButton(){Rectangle r=weaponWheelButton();panel(r,inside(r)||weaponWheelOpen?Card:Panel);icon(game.equipment[0],r.x+23,r.y+16,.43f);center("BROŃ · Q",r.x+101,r.y+10,14,Gold);}
 void drawWeaponWheel(){
  if(!weaponWheelOpen)return;
  rect(0,0,WorldW,H,rgb(5,14,17,185));center("KOŁO BRONI",WheelCenter.x,142,30,Text,true);

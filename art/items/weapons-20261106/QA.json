@@ -1,0 +1,78 @@
+{
+  "status": "PASS_NEW_WEAPONS",
+  "weapons": 10,
+  "common": 4,
+  "rare": 6,
+  "merchant_pages": [
+    3,
+    4
+  ],
+  "gameplay_checks": 194785,
+  "save_checks": 4510,
+  "weapon_ui_checks": 85,
+  "ui_failures": 0,
+  "merchant_regression_checks": 239,
+  "weapon_visuals_verified": 10,
+  "saved_gear_and_loot_compatible": true,
+  "hidden": true,
+  "audio_opened": false,
+  "runtime_textures_added": 0,
+  "packages": [
+    {
+      "edition": "player",
+      "archive": "Emberfall-Windows-x64.zip",
+      "original_sha256": "e16067d4a378c1c78617a14ca45c97048f30d20c14a1987500de54fc9b1b5d9b",
+      "sha256": "68e6b5cce5b9d24d2cdcc8443c28501d3ffafb4e7e971445514425ab9fcaeb84",
+      "exe_sha256": "a137e130f4353503ae51e65a76ebeb2ca34a5f349020f176c323dc076458948c",
+      "old_exe_sha256": "c2b4d9dfea7d50d9462ba4ea405138d6adab114e72b470c9e4cbbab5cafad8c6",
+      "verified_assets": 144,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "main_menu_open": true,
+      "locations": []
+    },
+    {
+      "edition": "developer",
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "original_sha256": "15ea6c7098310516fe1eda04c601f22b48e8577b82ab36e87161b309c5d7d5e0",
+      "sha256": "896e9ca5f1899ab3607d9f5a274024de2748b0fdc32f6cc8763e39892d8e7c08",
+      "exe_sha256": "fa925025970152b0780cbded5cab6bde26ad7f12939d735fa0547cded42d1c67",
+      "old_exe_sha256": "78de904a08dbaa8d3202999dbd79bfd246eb3bad07c6182e5d7d566c35798666",
+      "verified_assets": 144,
+      "crlf_only": [
+        "assets/Cinzel-LICENSE.txt",
+        "assets/Lato-LICENSE.txt",
+        "assets/Manrope-LICENSE.txt",
+        "assets/audio/README.md",
+        "assets/generated/README.md",
+        "assets/licenses/MinGW-w64-runtime.txt",
+        "assets/generated/v02/README.md",
+        "assets/generated/v07/README.md"
+      ],
+      "startup_frames": 180,
+      "audio_opened": false,
+      "hidden": true,
+      "audio_preferences_unchanged": true,
+      "main_menu_open": true,
+      "locations": [
+        {
+          "start": "tower-3",
+          "location": "mage-tower",
+          "frames": 180
+        }
+      ]
+    }
+  ]
+}

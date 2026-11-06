@@ -48,7 +48,7 @@ bool runControlsQA(){
         spellBookOpen=false;
     }
     reset();
-    for(Vector2 p:{Vector2{920,210},Vector2{90,710},Vector2{180,55},Vector2{-20,400}}){
+    for(Vector2 p:{Vector2{minimapRect().x+90,minimapRect().y+118},Vector2{90,710},Vector2{180,55},Vector2{-20,400}}){
         mouse=p;leftClickGameplay({});
         check(!rightClickWorldOrInventory()&&game.mana==100&&game.swing==0,"minimap, journal, title and outside-window clicks do not trigger combat");
     }

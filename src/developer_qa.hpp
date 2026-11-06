@@ -13,7 +13,7 @@ bool runDeveloperQA(){
  openDeveloperMenu();for(int id=0;id<DeveloperDestinationCount;id++){point(developerCard(id));clickDeveloperMenu();check(developerSelection==id&&developerMenuOpen,"each location card selects its actual destination without starting accidentally");check(textWidth(DeveloperDestinations[id].name,18)<developerCard(id).width-26&&textWidth(DeveloperDestinations[id].hint,14)<developerCard(id).width-26,"destination name and hint fit card without clipping");}
  point(developerCard(12));clickDeveloperMenu();point(developerNewButton());check(clickDeveloperMenu()&&developerActive&&!developerMenuOpen&&!intro.active()&&!towerStory.active()&&game.inTower()&&game.towerFloor==4&&gameplayInputAllowed(),"start button skips prologue and return scene and makes the selected observatory playable");
  check(game.walkable(game.player)&&game.skillRanks==SkillRanks{}&&game.ammoCount()==100&&game.bagCount(Kind::Mushroom)==15,"new test session receives safe position and optional kit");shot("observatory-start");
- point(developerButton());check(!worldPointerAllowed(mouse),"visible DEV HUD button cannot leak its click into a world attack");
+ mouse={107,170};check(worldPointerAllowed(mouse),"former DEV HUD area is usable world space");
  game.level=6;game.xp=17;game.bag[12]=item(Kind::DawnShard);game.bag[13]=item(Kind::Sword,2);game.skillRanks={3,2};game.attributes={4,3,2,1,3,4};auto old=game.bag;
  openDeveloperMenu();point(developerCard(10));clickDeveloperMenu();point(developerMoveButton());clickDeveloperMenu();
  bool same=true;for(int i=0;i<BagSize;i++)same&=game.bag[i].kind==old[i].kind&&game.bag[i].tier==old[i].tier&&game.bag[i].count==old[i].count;

@@ -18,6 +18,10 @@ int main(int argc,char** argv){
   saves::Snapshot s;roundtrip(s);
   for(int k=int(Kind::SlimeBlade);k<ItemKindCount;k++){
    auto extra=s;extra.game.bag[10]=item(Kind(k),2);extra.game.equipment[gearSlot(Kind(k))]=item(Kind(k),1);
+   if(Kind(k)>=Kind::TrailFalchion){
+    extra.game.weaponWheel[6]={Kind(k),1};
+    extra.game.chests[0].loot[0]=item(Kind(k));
+   }
    extra.game.enemies[0].alive=false;extra.game.enemies[0].hp=0;extra.game.enemies[0].loot[14]=item(Kind(k));roundtrip(extra);
    check(saves::decode(saves::encode(extra)).game.bag[10].kind==Kind(k),"every new item ID persists in bags, equipment and corpse loot");
   }

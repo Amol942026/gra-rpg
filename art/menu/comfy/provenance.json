@@ -1,0 +1,71 @@
+{
+  "prompt_id": "45bd4683-c46d-47e4-8bdf-ea2e2e293654",
+  "render_size": [
+    640,
+    400
+  ],
+  "render_sha256": "0d7c17eff4a2651546e2905386a69f216639df68a460cabb17b69288ff6e8406",
+  "guide_sha256": "6e8e20bc75e46561a5d2f0e3d59565312916ea2335c899686aaefdc08a71b242",
+  "workflow_sha256": "26d4dd556f8f52a139b7800a4c30f1b4526d524b0866e6214ca3ac032eb19027",
+  "models": [
+    {
+      "folder": "checkpoints",
+      "filename": "DreamShaper_8_pruned.safetensors",
+      "repo": "Lykon/DreamShaper",
+      "revision": "228d79cb20811466f5c5710aa91f05dabd0b8a14",
+      "original_filename": "DreamShaper_8_pruned.safetensors",
+      "bytes": 2132625894,
+      "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+      "download": "https://huggingface.co/Lykon/DreamShaper/resolve/228d79cb20811466f5c5710aa91f05dabd0b8a14/DreamShaper_8_pruned.safetensors",
+      "license": "Creator conditions permitting commercial use of generated images",
+      "license_source": "https://civitai.com/api/v1/models/4384"
+    },
+    {
+      "folder": "loras",
+      "filename": "lcm-lora-sdv1-5.safetensors",
+      "repo": "latent-consistency/lcm-lora-sdv1-5",
+      "revision": "cf2fced511dbe7e26c8d1d397e728fbab875db4b",
+      "original_filename": "pytorch_lora_weights.safetensors",
+      "bytes": 134621556,
+      "sha256": "8f90d840e075ff588a58e22c6586e2ae9a6f7922996ee6649a7f01072333afe4",
+      "download": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5/resolve/cf2fced511dbe7e26c8d1d397e728fbab875db4b/pytorch_lora_weights.safetensors",
+      "license": "OpenRAIL++",
+      "license_source": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5"
+    },
+    {
+      "folder": "controlnet",
+      "filename": "control_v11p_sd15_canny_fp16.safetensors",
+      "repo": "comfyanonymous/ControlNet-v1-1_fp16_safetensors",
+      "revision": "ab830a51c5c573a5b85bfdbaa3ae0ab7e1baf5f7",
+      "original_filename": "control_v11p_sd15_canny_fp16.safetensors",
+      "bytes": 722601100,
+      "sha256": "8932b66e15aae835b3490dbf989f56c253104cee08a88bf21283762f557c9f10",
+      "download": "https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/ab830a51c5c573a5b85bfdbaa3ae0ab7e1baf5f7/control_v11p_sd15_canny_fp16.safetensors",
+      "license": "OpenRAIL for original ControlNet Canny weights",
+      "license_source": "https://huggingface.co/lllyasviel/control_v11p_sd15_canny"
+    }
+  ],
+  "comfyui_version": "0.44.0",
+  "backend": "local CPU / 127.0.0.1",
+  "paid_nodes": false,
+  "original_textures": {
+    "background.png": "f1834f2e7750ce89d61da7e30ca91f2910c907e0429d2dc160a0a97537af75fd",
+    "foreground.png": "8cfea92b5ebb3b19b184130d72322c71be0c4a10e0597efbfce0632ab189782b",
+    "glow.png": "2af6bb301dc6b3273e942727d7f5d6f23e339746e84dc672ce8e0d062413fb50",
+    "mist.png": "26cf971525a6cba08fa959accb0187209aa0519f7b2bf5a279480e4ebcd7892b"
+  },
+  "krita": {
+    "native_layers": 6,
+    "native_strokes": 8,
+    "native_preview": true,
+    "merged_export_max_channel_error": 5,
+    "exports": {
+      "background.png": "ae1f10258d3008afaa45db75f8ee1be6897b95c18ed054722a819079212bed36",
+      "glow.png": "7bb2a9691570137f6ffba2ec85740a2aa44cdd5234ce5e8fbd2d1fbae8f8ec37",
+      "mist.png": "a392a20feb477774837477e04592cad9fd75e0160787d2935426c9439a70477a",
+      "foreground.png": "8e61cc92212ac0f8eefb309fe68b513d160524a5ff6e9d0a1df298066597b532"
+    },
+    "kra_sha256": "3399e027986ee9408423d9c919f05de525aae20c64303c57fd280c0710047642"
+  },
+  "preview_sha256": "70d9064fe4a7a62d4acaa7fc6194af9237d9c2091dab2aa7d580ef2ac196ad7e"
+}

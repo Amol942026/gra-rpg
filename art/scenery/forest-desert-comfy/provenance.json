@@ -1,0 +1,100 @@
+{
+  "materials": [
+    {
+      "material": "bark",
+      "render": "renders/bark/70dc3403_000.png",
+      "sha256": "2e21c289db751b6570f9c09009ebfef0986d1b28842db11fcc04f7b3c57c64fa",
+      "workflow": "workflows/bark.json",
+      "workflow_sha256": "ab06bc814daf897c65e9310bc118508a656699d3ea03171fb585397992ec08e6"
+    },
+    {
+      "material": "leaves",
+      "render": "renders/leaves/70354bed_000.png",
+      "sha256": "319692b65b4bda7060c6c7c54d3c224caa4ba41bb7d7b58fe27be4c34ff7ccc2",
+      "workflow": "workflows/leaves.json",
+      "workflow_sha256": "de19a7adf329dc111d7828ed75b711989fb96c5519a4aeb91704ca139483048d"
+    },
+    {
+      "material": "moss-stone",
+      "render": "renders/moss-stone/df538741_000.png",
+      "sha256": "ad41f0d93b32053e02d834d74a6ad4bf6c61755eafbbc3a41860657467f7af5c",
+      "workflow": "workflows/moss-stone.json",
+      "workflow_sha256": "b6707a2a72e83a5574f6604a284250eded587a3cc7e6b28dce41502a71bbb1a5"
+    },
+    {
+      "material": "sandstone",
+      "render": "renders/sandstone/ce1718b2_000.png",
+      "sha256": "28b9ff9c3dc397e1a95c4ec3b6c9f5e75977cf45acd5edec1159cf449c2e2ed5",
+      "workflow": "workflows/sandstone.json",
+      "workflow_sha256": "8634c6edf73d30cbe8a440fbbf898d2f8dad39f3f8e2f31efa1fd08ee276bf89"
+    },
+    {
+      "material": "cactus",
+      "render": "renders/cactus/14188b9f_000.png",
+      "sha256": "7331d50b05ab077c8228f3bb553c32fbf60150c77d96eb01245a233e22d40f0b",
+      "workflow": "workflows/cactus.json",
+      "workflow_sha256": "343db6091b1ae9677263a98defb0f307a77a068f97d159d603552a9cbdf126d8"
+    }
+  ],
+  "models": [
+    {
+      "folder": "checkpoints",
+      "filename": "DreamShaper_8_pruned.safetensors",
+      "repo": "Lykon/DreamShaper",
+      "revision": "228d79cb20811466f5c5710aa91f05dabd0b8a14",
+      "original_filename": "DreamShaper_8_pruned.safetensors",
+      "bytes": 2132625894,
+      "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+      "download": "https://huggingface.co/Lykon/DreamShaper/resolve/228d79cb20811466f5c5710aa91f05dabd0b8a14/DreamShaper_8_pruned.safetensors",
+      "license": "Creator conditions permitting commercial use of generated images",
+      "license_source": "https://civitai.com/api/v1/models/4384"
+    },
+    {
+      "folder": "loras",
+      "filename": "lcm-lora-sdv1-5.safetensors",
+      "repo": "latent-consistency/lcm-lora-sdv1-5",
+      "revision": "cf2fced511dbe7e26c8d1d397e728fbab875db4b",
+      "original_filename": "pytorch_lora_weights.safetensors",
+      "bytes": 134621556,
+      "sha256": "8f90d840e075ff588a58e22c6586e2ae9a6f7922996ee6649a7f01072333afe4",
+      "download": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5/resolve/cf2fced511dbe7e26c8d1d397e728fbab875db4b/pytorch_lora_weights.safetensors",
+      "license": "OpenRAIL++",
+      "license_source": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5"
+    }
+  ],
+  "comfyui": "0.44.0, local CPU",
+  "input_sha256": {
+    "forest-birch.png": "8acab2e22910cc6d8d0cede93b50c91ed032acd8cd05ca016b5f82f6102e4a73",
+    "forest-bush.png": "0c398b624f0e089af4c6e37e8ded8d988a8e095f0215d9a4edad6770da4946a5",
+    "forest-oak.png": "c91b7ed3379006926c1b7913970063b5bc98eb9ae380fdd2dce0a45376d9aba7",
+    "forest-spruce.png": "1d27674553048915f09b70763ee81c8a92e0df8b30851a3cbe08a89ddbcd1393"
+  },
+  "runtime_sha256": {
+    "forest-birch.png": "9105564ac300671ddf9e1562547afc52368df721e868acd193f4418d8b7e5644",
+    "forest-bush.png": "77a764b25a79c0f678c69e70a4790893fa10506c50d22e7e5be9bfa6c6f53d78",
+    "forest-desert-props.png": "8c8f497dfa0cdfda5c2fdb9af322b927ec3ddaf7342a682b017f9978fa78366a",
+    "forest-oak.png": "4c273ef8984ea92eca602b14febb70b9457437f22b497cda5f43b066c4b48135",
+    "forest-spruce.png": "70cabe73ca57b80541a12c3bbf5ad64b36d35a5aac885e2b85c5fc485f1de607"
+  },
+  "masters_sha256": {
+    "las-mchu.kra": "de82e8d499ded51bcc83bb91841cd29d6468317ae27091bd6a8ebdb5b0d78d14",
+    "morze-piaskow.kra": "f49fab2354fd8760704a79729e0beb5577f3205ec682a44a92cc6f13191e1da4"
+  },
+  "native_krita_strokes": {
+    "Świerk": 2,
+    "Omszały głaz": 2,
+    "Leśny krzew": 2,
+    "Kolumna ruin": 2,
+    "Brzoza": 2,
+    "Dąb": 1,
+    "Leśne grzyby": 1,
+    "Kaktus świecznikowy": 2,
+    "Opuncja kwitnąca": 2,
+    "Warstwowy piaskowiec": 2,
+    "Obelisk Słońca": 2,
+    "Suchy krzew": 0,
+    "Palma oazy": 2,
+    "Brama Eldrina": 1
+  },
+  "alpha_preserved": true
+}

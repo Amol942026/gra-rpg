@@ -85,30 +85,71 @@ void mushrooms(float x,float y,float s){
   for(int k=0;k<3;k++)ellipse(xx+(k-1)*r*.45f,yy-(12+n%3*3)*s-(k%2)*s,1.4f*s,s,rgb(234,214,167));
  }
 }
+// Paint the verge from continuous routes, independently of the gameplay grid.
+float forestRoadEdge(V p){
+ float edge=std::min(distance(p,{21,5})-3.4f,distance(p,{59,57})-3.3f);
+ for(const auto& trail:ForestTrails)edge=std::min(edge,desertSegmentDistance(p,trail.a,trail.b)-1.55f);
+ return std::min(edge,desertSegmentDistance(p,{39,62},{66,64})-1.55f);
+}
+float forestRoadPaint(V p,float edge){
+ const float grain=.14f*std::sin(p.x*3.2f+p.y*2.1f)+.08f*std::sin(p.y*6.4f-p.x*2.7f);
+ const float weight=std::clamp((.84f+grain-edge)/1.5f,0.f,1.f);
+ return weight*weight*(3-2*weight);
+}
+Color forestGroundMix(Color grass,Color road,float weight){
+ Color color=ColorLerp(grass,road,weight);
+ color.a=255;
+ return color;
+}
 void detailedGroundTile(int x,int y,float sx,float sy){
- unsigned h=Game::hash(x,y);bool path=Game::onPath(x,y);
+ unsigned h=Game::hash(x,y);
+ V tile{float(x),float(y)};
+ const bool verge=forestRoadEdge(tile)<1.85f;
  ForestZone zone=forestZone({float(x),float(y)});
  bool glade=forestClearing({float(x),float(y)});
- Color c=path?rgb(88+h%8,99+h%9,78+h%8):zone==ForestZone::Heart?rgb(40+h%9,67+h%10,47+h%8):
+ Color grassBase=zone==ForestZone::Heart?rgb(40+h%9,67+h%10,47+h%8):
   zone==ForestZone::Spiders?rgb(44+h%8,67+h%9,57+h%7):zone==ForestZone::Birches||zone==ForestZone::Grove?
   rgb(62+h%8,85+h%9,51+h%7):rgb(46+h%8,73+h%9,53+h%7);
- if(glade&&!path)c=shade(c,1.14f);
- diamond(sx,sy,40,20,c);
+ if(glade)grassBase=shade(grassBase,1.14f);
+ const Color roadBase=rgb(91,99,77);
+ if(!verge)diamond(sx,sy,40,20,grassBase);
+ else{
+  constexpr int Subdivisions=4;
+  std::array<std::array<Color,Subdivisions+1>,Subdivisions+1> colors{};
+  for(int u=0;u<=Subdivisions;u++)for(int v=0;v<=Subdivisions;v++){
+   V point=tile+V{float(u)/Subdivisions-.5f,float(v)/Subdivisions-.5f};
+   colors[u][v]=forestGroundMix(grassBase,roadBase,forestRoadPaint(point,forestRoadEdge(point)));
+  }
+  rlCheckRenderBatchLimit(Subdivisions*Subdivisions*4);
+  rlSetTexture(rlGetTextureIdDefault());rlBegin(RL_QUADS);
+  auto vertex=[&](int u,int v){
+   Color color=colors[u][v];
+   rlColor4ub(color.r,color.g,color.b,color.a);rlTexCoord2f(0,0);
+   rlVertex2f(sx+(u-v)*40.f/Subdivisions,sy+((u+v)*1.f/Subdivisions-1)*20);
+  };
+  for(int u=0;u<Subdivisions;u++)for(int v=0;v<Subdivisions;v++){
+   vertex(u,v);vertex(u,v+1);vertex(u+1,v+1);vertex(u+1,v);
+  }
+  rlEnd();rlSetTexture(0);
+ }
  // Sparse mottling replaces the conspicuous square grid on grass.
  for(int n=0;n<22;n++){unsigned k=Game::hash(x*29+n,y*31);float dx=int(k%71)-35,dy=int((k>>8)%33)-16;
   if(std::abs(dx)/40+std::abs(dy)/20>.9f)continue;
-  if(path){
-   float w=5+k%5,hh=2+(k>>6)%3;Color stone=shade(c,.92f+(k%7)*.05f);
+  V point=tile+V{dx/80+dy/40,dy/40-dx/80};
+  float weight=verge?forestRoadPaint(point,forestRoadEdge(point)):0.f;
+  Color c=forestGroundMix(grassBase,roadBase,weight);
+  if(float((k>>16)&255)/255<weight*weight){
+   float w=(5+k%5)*(.45f+.55f*weight),hh=(2+(k>>6)%3)*(.45f+.55f*weight);Color stone=shade(c,.92f+(k%7)*.05f);
    poly({{sx+dx-w,sy+dy},{sx+dx-w*.55f,sy+dy-hh},{sx+dx+w*.55f,sy+dy-hh*.9f},{sx+dx+w,sy+dy},{sx+dx+w*.4f,sy+dy+hh},{sx+dx-w*.7f,sy+dy+hh*.8f}},stone);
    line(sx+dx-w*.55f,sy+dy-hh,sx+dx+w*.5f,sy+dy-hh*.9f,shade(stone,1.17f),.7f);
   }else{
    ellipse(sx+dx,sy+dy,3+k%4,1+(k>>5)%2,shade(c,k%2?.87f:1.09f));
-   Color grass=rgb(70+k%21,99+k%24,57+k%16);line(sx+dx,sy+dy,sx+dx-1,sy+dy-3-k%3,grass,.75f);
+   Color grass=forestGroundMix(rgb(70+k%21,99+k%24,57+k%16),c,weight);line(sx+dx,sy+dy,sx+dx-1,sy+dy-3-k%3,grass,.75f);
    if(k%3==0)line(sx+dx,sy+dy,sx+dx+2,sy+dy-3,shade(grass,.8f),.7f);
-   if(k%(glade?7:29)==0){ellipse(sx+dx,sy+dy-4,1.5f,1,rgb(194,176,111));ellipse(sx+dx+2,sy+dy-3,1,1,rgb(211,193,130));}
+   if(weight<.4f&&k%(glade?7:29)==0){ellipse(sx+dx,sy+dy-4,1.5f,1,rgb(194,176,111));ellipse(sx+dx+2,sy+dy-3,1,1,rgb(211,193,130));}
   }
  }
- if(!path&&h%5==0){float xx=sx-9,yy=sy+3;ellipse(xx,yy,5,2,rgb(32,52,37));line(xx-5,yy,xx+7,yy-5,rgb(101,83,51),1.5f);line(xx+1,yy-2,xx+1,yy-6,rgb(101,83,51),1);}
+ if(!verge&&h%5==0){float xx=sx-9,yy=sy+3;ellipse(xx,yy,5,2,rgb(32,52,37));line(xx-5,yy,xx+7,yy-5,rgb(101,83,51),1.5f);line(xx+1,yy-2,xx+1,yy-6,rgb(101,83,51),1);}
  if(x==MapSize-2||y==MapSize-2){
   poly({{sx-40,sy},{sx,sy+20},{sx,sy+49},{sx-40,sy+29}},rgb(52,64,46));
   poly({{sx,sy+20},{sx+40,sy},{sx+40,sy+29},{sx,sy+49}},rgb(36,49,38));

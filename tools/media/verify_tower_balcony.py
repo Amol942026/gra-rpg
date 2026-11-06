@@ -4,21 +4,22 @@ from PIL import Image, ImageChops
 import argparse, hashlib, io, json, math, zipfile
 
 
-def verify(master, qa):
+def verify(master, qa, refresh, assets):
     checks=0;failures=[]
     def check(ok,label):
         nonlocal checks
         checks+=1
         if not ok:failures.append(label)
-    repo=Path(__file__).resolve().parents[2]
     receipt=json.loads((master/'provenance.json').read_text(encoding='utf-8'))
+    current=json.loads((refresh/'provenance.json').read_text(encoding='utf-8'))
     check(receipt['authoring']=='Krita native MCP draw' and receipt['external_assets']==[],'original local Krita authoring')
     calls=[json.loads(line) for line in (master/'logs/mcp-calls.jsonl').read_text(encoding='utf-8').splitlines()]
     for entry in receipt['documents']:
         name=entry['name'];source=master/(name+'.png');kra=master/(name+'.kra')
         check(hashlib.sha256(source.read_bytes()).hexdigest()==entry['png_sha256'],name+' native PNG hash')
         check(hashlib.sha256(kra.read_bytes()).hexdigest()==entry['kra_sha256'],name+' native KRA hash')
-        check((repo/'assets/sprites'/source.name).read_bytes()==source.read_bytes(),name+' shipped texture equals native export')
+        if name!='tower-valley':
+            check((assets/'sprites'/source.name).read_bytes()==source.read_bytes(),name+' shipped texture equals native export')
         with Image.open(source) as im,zipfile.ZipFile(kra) as z:
             im.load();check(im.mode=='RGBA' and list(im.size)==entry['size'],name+' dimensions and alpha format')
             check(z.testzip() is None,name+' valid KRA archive')
@@ -33,6 +34,21 @@ def verify(master, qa):
         owner=save['arguments']['document_id']
         check(any(r['tool']=='krita_state' and r['arguments'].get('document_id')==owner for r in calls),name+' actual state read')
         check(any(r['tool']=='krita_preview' and r['arguments'].get('document_id')==owner and r['images'] for r in calls),name+' actual native preview')
+    new_kra=refresh/'dolina-switu.kra'
+    new_png=refresh/'tower-valley.png'
+    check(hashlib.sha256(new_kra.read_bytes()).hexdigest()==current['kra_sha256'],'refreshed KRA hash')
+    check(hashlib.sha256(new_png.read_bytes()).hexdigest()==current['runtime_sha256'],'refreshed PNG hash')
+    check((assets/'sprites/tower-valley.png').read_bytes()==new_png.read_bytes(),'shipped panorama is the refreshed native export')
+    with zipfile.ZipFile(new_kra) as z, Image.open(new_png) as im:
+        check(z.testzip() is None,'refreshed KRA archive intact')
+        xml=z.read('maindoc.xml').decode('utf-8')
+        for layer in current['krita_layers']:
+            check(layer in xml,'refreshed native layer '+layer)
+        merged=Image.open(io.BytesIO(z.read('mergedimage.png'))).convert('RGBA')
+        png=im.convert('RGBA')
+        check(merged.size==png.size==(1050,900) and merged.tobytes()==png.tobytes(),'refreshed native composition and PNG match')
+        check(png.getchannel('A').getextrema()==(255,255),'refreshed panorama is opaque')
+    check(current['krita_native_preview'],'refreshed native preview completed')
     summary=json.loads((qa/'summary.json').read_text(encoding='utf-8'))
     check(summary['status']=='PASS' and summary['failures']==0,'real collision, movement, save and floor QA pass')
     check(not summary['audio_opened'],'game audio remained closed')
@@ -43,8 +59,8 @@ def verify(master, qa):
                 im.load();check(im.size==(round(1440*factor),round(900*factor)),file.name+' actual game resolution')
                 u=0 if scene==0 else 6.7 if scene==1 else 9.7
                 v=1.9 if scene==3 else 0
-                x=915+u*math.sqrt(2)*5.5;y=220+v*math.sqrt(2)*2.75
-                check(845<x<1018 and 136<y<285,file.name+' hero stays inside extended minimap')
+                x=925+u*math.sqrt(2)*5.5;y=103+v*math.sqrt(2)*2.75
+                check(855<x<1029 and 19<y<168,file.name+' hero stays inside extended minimap')
                 pixel=im.convert('RGB').getpixel((round(x*factor),round(y*factor)))
                 check(max(abs(a-b) for a,b in zip(pixel,(239,241,230)))<8,file.name+' real minimap draws the hero on the terrace')
                 # Landscape remains visible beyond the architecture at the right.
@@ -55,7 +71,7 @@ def verify(master, qa):
     for scene in timing['scenes']:
         check(scene['frames']==120 and 0<scene['p95_ms']<1000/60,scene['name']+' measured GPU render budget for 60 Hz')
     result={'status':'FAIL' if failures else 'PASS','checks':checks,'failures':failures,
-            'masters':3,'runtime_rgba_bytes':receipt['runtime_rgba_bytes'],'captures':12,'audio_opened':False}
+            'masters':4,'runtime_rgba_bytes':receipt['runtime_rgba_bytes'],'captures':12,'audio_opened':False}
     (qa/'verification.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(json.dumps(result));return bool(failures)
 
@@ -63,4 +79,6 @@ def verify(master, qa):
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--master',type=Path,default=Path(r'C:\AI2D\sprites\emberfall_tower_balcony_20261027_v3'))
     parser.add_argument('--qa',type=Path,required=True);parser.add_argument('--no-audio',action='store_true',required=True)
-    args=parser.parse_args();raise SystemExit(verify(args.master,args.qa))
+    parser.add_argument('--refresh',type=Path,default=Path(r'C:/AI2D/sprites/emberfall-balcony-20261106'))
+    parser.add_argument('--assets',type=Path,default=Path(__file__).resolve().parents[2]/'assets')
+    args=parser.parse_args();raise SystemExit(verify(args.master,args.qa,args.refresh,args.assets))

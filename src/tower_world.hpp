@@ -41,7 +41,7 @@ void drawTowerWorld(){
             intro_art::mage(p.x,p.y,1,game.time,towerStory.phase==TowerPhase::TravelOut?storyEase(towerStory.age/.9f):0);
         }else if(object.type==2){Vector2 p=screen(game.player);ellipseOutline(p.x,p.y+2,25,12,Fade(Gold,.6f));hero(p.x,p.y,1);}
     }
-    if(balcony){tower_balcony::terrace(true);tower_balcony::sign();}
+    if(balcony)tower_balcony::terrace(true);
     drawHealingAura();
     DrawRectangleGradientV(0,0,WorldW,160,rgb(9,12,26,238),rgb(9,12,26,0));
     DrawRectangleGradientV(0,680,WorldW,220,rgb(9,12,26,0),rgb(9,12,26,250));EndScissorMode();

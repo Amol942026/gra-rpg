@@ -25,6 +25,11 @@ inline void textured(Texture2D texture,const std::array<Vector2,4>& p,float u0=0
  const int normal[]={0,1,2,3},reverse[]={0,3,2,1};for(int k=0;k<4;k++){int i=flip?reverse[k]:normal[k];rlTexCoord2f(uv[i].x,uv[i].y);rlVertex2f(p[i].x,p[i].y);}rlEnd();rlSetTexture(0);
 }
 inline void groundQuad(Texture2D texture,const std::array<V,4>& points,float u0=0,float v0=0,float u1=1,float v1=1){std::array<Vector2,4> p;for(int i=0;i<4;i++)p[i]=projected(points[i]);textured(texture,p,u0,v0,u1,v1);}
+inline std::array<V,4> bridgeDeck(int index){
+ const float y=VolcanoBridges[index].y;
+ const V center{lavaCenter(index/2,y),y};
+ return {center+V{-5.3f,-2.8f},center+V{-5.3f,2.8f},center+V{5.3f,2.8f},center+V{5.3f,-2.8f}};
+}
 inline void canyonFace(const CanyonFace& face){std::array<Vector2,4> p;for(int i=0;i<4;i++){p[i]=projected(face.corners[i]);p[i].y+=face.depth[i];}textured(channelWall,p,face.from,0,face.to,1);}
 inline int variant(const Prop& p){return Game::hash(int(std::round(p.pos.x*4))+p.type*131,int(std::round(p.pos.y*4))+53)%8;}
 inline Rectangle source(const Prop& p){return {float((p.type-14)*360),float(variant(p)%4*460),360,460};}
@@ -54,13 +59,11 @@ inline void make(){
  for(int river=0;river<2;river++)for(int segment=0;segment<VolcanoRiverSegments;segment++){
   float y=VolcanoRiverStart+segment*.5f,z=y+.5f;V a{lavaCenter(river,y),y},b{lavaCenter(river,z),z};
   groundQuad(bank,{{a+V{-3.5f,0},a+V{3.5f,0},b+V{3.5f,0},b+V{-3.5f,0}}},y/4,0,z/4,1);
-  if(volcanoBridge({a.x,(y+z)*.5f}))continue;
   std::array<V,4> strip={{a+V{-1.6f,0},b+V{-1.6f,0},b+V{1.6f,0},a+V{1.6f,0}}};
   std::array<Vector2,4> floor;for(int i=0;i<4;i++){floor[i]=projected(strip[i]);floor[i].y+=VolcanoRiverDepth;}textured(lava,floor,0,y/4,1,z/4);lavaStrips.push_back({strip,y/4,z/4});
   CanyonFace far{{{a+V{-2.3f,0},a+V{-1.6f,0},b+V{-1.6f,0},b+V{-2.3f,0}}},{{0,VolcanoRiverDepth,VolcanoRiverDepth,0}},y/2,z/2};canyonFace(far);
   canyonFronts.push_back({{{a+V{2.3f,0},a+V{1.6f,0},b+V{1.6f,0},b+V{2.3f,0}}},{{0,VolcanoRiverDepth,VolcanoRiverDepth,0}},y/2,z/2});
  }
- for(int i=0;i<4;i++){float y=VolcanoBridges[i].y;V a{lavaCenter(i/2,y),y};groundQuad(bridge,{{a+V{-5.3f,-2.8f},a+V{-5.3f,2.8f},a+V{5.3f,2.8f},a+V{5.3f,-2.8f}}},0,0,2,1);}
  // The boss's ritual arena uses the same prepainted basalt, with a clear centre.
  Vector2 centre{float(TerrainOriginX+(VolcanoBossHome.x-VolcanoBossHome.y)*40),float(90+(VolcanoBossHome.x+VolcanoBossHome.y)*20)};
  for(int ring=0;ring<3;ring++)ellipseOutline(centre.x,centre.y,180-ring*10,90-ring*5,rgb(128-ring*10,85-ring*6,77-ring*5));
@@ -94,6 +97,15 @@ inline void flow(bool ambience=true){
   const bool flip=(p[1].x-p[0].x)*(p[2].y-p[0].y)-(p[1].y-p[0].y)*(p[2].x-p[0].x)>0;const int normal[]={0,1,2,3},reverse[]={0,3,2,1};
   for(int k=0;k<4;k++){int i=flip?reverse[k]:normal[k];rlTexCoord2f(uv[i].x,uv[i].y);rlVertex2f(p[i].x,p[i].y);}
  }rlEnd();rlSetTexture(0);
+ // The flow runs continuously at the bottom of the channel. Paint the
+ // opaque decks last so their projected footprints cover both lava passes.
+ for(int index=0;index<int(VolcanoBridges.size());index++){
+  const auto deck=bridgeDeck(index);
+  std::array<Vector2,4> points{};
+  for(int corner=0;corner<4;corner++)points[corner]=screen(deck[corner]);
+  if(points[3].x<0||points[1].x>WorldW||points[2].y<0||points[0].y>H)continue;
+  textured(bridge,points,0,0,2,1);
+ }
  if(!ambience)return;
  for(int n=0;n<20;n++){float x=std::fmod(n*191.f+game.time*(5+n%3),float(WorldW)),y=std::fmod(n*119.f-game.time*14+H*100,float(H));ellipse(x,y,1.2f,2.5f,Fade(rgb(255,177,99),.2f+.15f*std::sin(n+game.time*2)));}
 }

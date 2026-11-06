@@ -28,11 +28,14 @@ inline int itemSellValue(Item value){
 }
 inline std::int64_t itemStackValue(Item value){return std::int64_t(itemSellValue(value))*std::max(0,value.count);}
 struct MerchantOffer {Kind kind;int tier;};
-inline constexpr std::array<MerchantOffer,12> MerchantOffers{{
+inline constexpr std::array<MerchantOffer,22> MerchantOffers{{
  {Kind::Health,0},{Kind::Mana,0},{Kind::Arrow,0},
  {Kind::Sword,1},{Kind::Bow,1},{Kind::Armor,1},
  {Kind::Helmet,1},{Kind::Shield,1},{Kind::Boots,1},
- {Kind::WolfCloak,0},{Kind::GelAmulet,0},{Kind::BanditBow,0}
+ {Kind::WolfCloak,0},{Kind::GelAmulet,0},{Kind::BanditBow,0},
+ {Kind::TrailFalchion,0},{Kind::BirchBow,0},{Kind::CopperHatchet,0},{Kind::FlintDagger,0},
+ {Kind::DewSword,0},{Kind::SunTrailSword,0},{Kind::BasaltCleaver,0},{Kind::GlassDagger,0},
+ {Kind::OasisBow,0},{Kind::AshBow,0}
 }};
 inline Item merchantOfferItem(int index){return index>=0&&index<int(MerchantOffers.size())?item(MerchantOffers[index].kind,MerchantOffers[index].tier):Item{};}
 inline int itemBuyPrice(Item value){return itemSellValue(value)*2;}

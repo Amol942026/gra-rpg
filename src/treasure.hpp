@@ -22,11 +22,13 @@ inline std::array<TreasureChest,TreasureCount> makeTreasure(unsigned seed){
  auto result=TreasureLayout;
  // Separate stream: opening a chest never changes combat, enemy loot or plants.
  std::mt19937 random(seed^0x736b727au);
- constexpr Kind common[]={Kind::Sword,Kind::Bow,Kind::Armor,Kind::Shield,Kind::Boots};
+ constexpr Kind common[]={Kind::Sword,Kind::Bow,Kind::Armor,Kind::Shield,Kind::Boots,
+  Kind::TrailFalchion,Kind::BirchBow,Kind::CopperHatchet,Kind::FlintDagger};
  constexpr Kind rare[]={Kind::Axe,Kind::Helmet,Kind::Dagger,Kind::Cloak,Kind::Amulet,
   Kind::WolfKnife,Kind::WolfCloak,Kind::BoarArmor,Kind::SilkBoots,Kind::WebCowl,
   Kind::BoneHelmet,Kind::BanditBow,Kind::BanditBoots,Kind::RootShield,Kind::GelAmulet,
-  Kind::GuardianHelmet,Kind::StingDagger,Kind::ScarabHelmet,Kind::CobraBoots};
+  Kind::GuardianHelmet,Kind::StingDagger,Kind::ScarabHelmet,Kind::CobraBoots,
+  Kind::DewSword,Kind::SunTrailSword,Kind::BasaltCleaver,Kind::GlassDagger,Kind::OasisBow,Kind::AshBow};
  for(auto& chest:result)for(int slot=0;slot<ChestLootSize;slot++){
   bool uncommon=std::uniform_int_distribution<int>(0,99)(random)<25;
   const Kind* pool=uncommon?rare:common;int size=uncommon?int(std::size(rare)):int(std::size(common));
