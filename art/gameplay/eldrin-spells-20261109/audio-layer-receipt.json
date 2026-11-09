@@ -1,0 +1,200 @@
+[
+  {
+    "layer": "longbow",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\bow\\English Longbow Draw.wav",
+    "source_sha256": "bba988c01dfe839aff995b6b05d8d432eeb339bd9761cf92be7321bc733f3bee",
+    "source_offset_seconds": 0.7753541666666667,
+    "frames": 62880,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\longbow.wav",
+    "sha256": "d3f331776c21dc1f8d778e9a579f3d3ed2b3bbb9a85761a8a35dd5f4d47da597"
+  },
+  {
+    "layer": "recurve",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\bow\\Scythian Recurve Draw.wav",
+    "source_sha256": "b41781c926d358e6a259ea5e522b9730f857c8a0e65e28ff9ed632fdf598ce08",
+    "source_offset_seconds": 0.4159791666666667,
+    "frames": 62880,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\recurve.wav",
+    "sha256": "522fd2e3676817ca51093a48e088eb06b6affa93528c7c9d2d12796d6daefc2d"
+  },
+  {
+    "layer": "flame-0",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\torch.wav",
+    "source_sha256": "a027961cae4ffdeccfd497788b229dfe32547dcb32f30b8e0429976ae9e9ef57",
+    "source_offset_seconds": 1.9078541666666666,
+    "frames": 23040,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\flame-0.wav",
+    "sha256": "113b198dd06863e0db0c674492f29f47f7cc150951ee8cd8bed15276cd0ba670"
+  },
+  {
+    "layer": "flame-1",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\torch.wav",
+    "source_sha256": "a027961cae4ffdeccfd497788b229dfe32547dcb32f30b8e0429976ae9e9ef57",
+    "source_offset_seconds": 2.607854166666667,
+    "frames": 23040,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\flame-1.wav",
+    "sha256": "cf110a568d311cc85d7d9f880261825ce6d7f30b1835e5fb97d6431701c9d98f"
+  },
+  {
+    "layer": "flame-2",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\torch.wav",
+    "source_sha256": "a027961cae4ffdeccfd497788b229dfe32547dcb32f30b8e0429976ae9e9ef57",
+    "source_offset_seconds": 3.5078541666666667,
+    "frames": 23040,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\flame-2.wav",
+    "sha256": "23fc059bc4fbbae28ff7305f13418643f97c26f92015411dc560221d639f5c54"
+  },
+  {
+    "layer": "ice-0",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\magic\\qubodupIceAndElectricitySpells\\qubodupIceDamage01.flac",
+    "source_sha256": "7fa1b626d12bac9c83c2347f115e6b27fa49b4797aef81ac0c77300e32de6122",
+    "source_offset_seconds": 0.0019166666666666666,
+    "frames": 37471,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\ice-0.wav",
+    "sha256": "4e73150e1d6b8d5473fbb77a07521b284f629557ca40e9df8760430f00f1b321"
+  },
+  {
+    "layer": "ice-1",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\magic\\qubodupIceAndElectricitySpells\\qubodupIceDamage02.flac",
+    "source_sha256": "582dbad281d44c102eaf0f790f65707e9b83d90d9429d38df757bcba85ca4298",
+    "source_offset_seconds": 0.0008958333333333333,
+    "frames": 23569,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\ice-1.wav",
+    "sha256": "c0a7b2671fdf6f3910a49303e5cec6070bfad035cbf41599399f2f1b1a9b672f"
+  },
+  {
+    "layer": "ice-2",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\magic\\qubodupIceAndElectricitySpells\\qubodupIceDamage03.flac",
+    "source_sha256": "29a459232ba678b391c5c4b7b14c0ffa60c165cfd63172470a14de5efe81f224",
+    "source_offset_seconds": 0.0,
+    "frames": 39256,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\ice-2.wav",
+    "sha256": "4baec653edd24f28bba4f35c7261f37490cec71b1d341772eab748fc10336f94"
+  },
+  {
+    "layer": "electric-0",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\magic\\qubodupIceAndElectricitySpells\\qubodupElectricityDamage01.flac",
+    "source_sha256": "b61131bbed47caec321f5b3ee43ebe47d91c9f5d18084348ce2af73544ca4ecc",
+    "source_offset_seconds": 0.0,
+    "frames": 31269,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\electric-0.wav",
+    "sha256": "74082359a8dbe3aeed914d0937d064c6fc1268edec6876420849b97382cd1bb5"
+  },
+  {
+    "layer": "electric-1",
+    "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\sources\\magic\\qubodupIceAndElectricitySpells\\qubodupElectricityDamage02.flac",
+    "source_sha256": "04226646faf6c81fb56bed3b86e12e6ad7bd28ab763b3a9dac6a10a0382593ab",
+    "source_offset_seconds": 0.0006041666666666667,
+    "frames": 32680,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\electric-1.wav",
+    "sha256": "f42f59fdbf6f15e9464f7704676668b32c56a248ccad0767bef0e858d770ac3e"
+  },
+  {
+    "layer": "swish-4",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-4.wav",
+    "source_sha256": "716639a9214bb9e5ab445a8e5f24156158e1ad77d955bad211c03c986a8da548",
+    "source_offset_seconds": 0.0015,
+    "frames": 4109,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\swish-4.wav",
+    "sha256": "88ff02dae97eb60c767dc2e6a87c4bf23b42560047a8dee3d8a8f5c2eb75e1b1"
+  },
+  {
+    "layer": "swish-6",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-6.wav",
+    "source_sha256": "9eeb921118a113a40f92433c1c05915f64fdc4ba194344e1430bbf360e2f132b",
+    "source_offset_seconds": 0.0,
+    "frames": 4380,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\swish-6.wav",
+    "sha256": "0df8269964d2ada737072e1720601e92c3c924b96d0500a3167a56fd7320dc67"
+  },
+  {
+    "layer": "swish-8",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-8.wav",
+    "source_sha256": "327d22b636f58444008912211b8cd44d04188f62e3e953d6864c047d40d36962",
+    "source_offset_seconds": 0.00125,
+    "frames": 4351,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\swish-8.wav",
+    "sha256": "0e1ca84afc9cae44d4b5ced94a399194be318d824df32fb525f70e2c22be5402"
+  },
+  {
+    "layer": "impactSoft_heavy_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_000.wav",
+    "source_sha256": "4392c764461e9242a38f19f7ecf9dae898049c9faf349799de8de4bbe98979d0",
+    "source_offset_seconds": 0.0,
+    "frames": 12523,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\impactSoft_heavy_000.wav",
+    "sha256": "682dde93738866bfd54087e32abfbe8fcb786e7e323ced74a1931c40c537c291"
+  },
+  {
+    "layer": "impactSoft_heavy_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_001.wav",
+    "source_sha256": "96de41d1075c24a8698d6f27960ba13b894d16accf4a0d84328989172d63fe07",
+    "source_offset_seconds": 0.0,
+    "frames": 13792,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\impactSoft_heavy_001.wav",
+    "sha256": "dd1d378377af3d497162c0f7aefb7ee701aa8e827ee1d60fb13746dc246fc1ab"
+  },
+  {
+    "layer": "impactSoft_heavy_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_002.wav",
+    "source_sha256": "cebc5ed19055f474688756192875bb91b642d73b2db0ed531f3de08bc3540946",
+    "source_offset_seconds": 0.0,
+    "frames": 13964,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\impactSoft_heavy_002.wav",
+    "sha256": "3f055bf4e18c46dab05de99ce7af2545be3027bd869a869ffa1759bab9bb104d"
+  },
+  {
+    "layer": "impactMining_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMining_000.wav",
+    "source_sha256": "71a102778724cdf3df58d036f781567d10b0147096af2b2cd02b0a7f3d5af929",
+    "source_offset_seconds": 0.0,
+    "frames": 24253,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\impactMining_000.wav",
+    "sha256": "9587a0d488a9126843ccbbd400e2473288474d7790c13204017d300bde2e50f7"
+  },
+  {
+    "layer": "impactMining_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMining_001.wav",
+    "source_sha256": "5e857c1a1cb1e415223a16db9d53d18b88ea4746697560001bff1a8a81c9baaa",
+    "source_offset_seconds": 0.0,
+    "frames": 21361,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\impactMining_001.wav",
+    "sha256": "99918f99f222736557c5e1ea38465aece3a9d398be881dd085431e97a0dcef54"
+  },
+  {
+    "layer": "impactMining_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMining_002.wav",
+    "source_sha256": "2cf15287539632372962fae39e7097e46f5a5ec4407e5814b77a29106dc72ed6",
+    "source_offset_seconds": 0.0,
+    "frames": 19930,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\impactMining_002.wav",
+    "sha256": "490a1e5091878c177c3ff3a46036d772e336942246b1359daa8b2f314257d206"
+  },
+  {
+    "layer": "cloth1",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth1.wav",
+    "source_sha256": "51e2a4689f1e33948e99b0bdaf1a5820959c9a97d4d86d8d95814b5fe3c9957a",
+    "source_offset_seconds": 0.0004375,
+    "frames": 22028,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\cloth1.wav",
+    "sha256": "fa07009714ede6135dee45ffa839659c50b89ae1214e7850e1c72696bdf4723e"
+  },
+  {
+    "layer": "cloth2",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth2.wav",
+    "source_sha256": "f003f9da7ede831b196180ad08221916ddac53400fe71c3136a3e3df0a6cae73",
+    "source_offset_seconds": 8.333333333333333e-05,
+    "frames": 12844,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\cloth2.wav",
+    "sha256": "f46806c3c166ff8991cf9199e2fdb6298acc6616c32db3aa6a3e9c17faf14a57"
+  },
+  {
+    "layer": "cloth3",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth3.wav",
+    "source_sha256": "553d4e721fb2ca379d34e0bacfda0749c02cc779261cde3f24c02736340ec83b",
+    "source_offset_seconds": 0.0,
+    "frames": 18276,
+    "wav": "C:\\AI2D\\audio\\emberfall-spells-20261109\\layers\\cloth3.wav",
+    "sha256": "07df4251494d9f3408ad36d33a5594eb6ca2cb8a453f2a557e761995cf1c28b6"
+  }
+]

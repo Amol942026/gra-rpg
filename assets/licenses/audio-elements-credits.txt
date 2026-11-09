@@ -1,0 +1,33 @@
+Emberfall — real bow draws and elemental sound design (2026-11-09)
+
+Medieval sound effects - Weapon Textures
+Created and recorded by Ben Jaszczak and Brian Nelson / Still North Media.
+Source: https://opengameart.org/content/medieval-sound-effects-weapon-textures
+Inputs: English Longbow Draw.wav, Scythian Recurve Draw.wav
+License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+Modified: trimmed, high-pass filtered, time-fitted without pitch change,
+layered and normalized. Used in bow-draw variants. No door/hinge recordings.
+
+Torch Fire Spell — spookymodem
+Source: https://opengameart.org/content/torch-fire-spell
+Input: Waving Torch.wav
+License: Creative Commons Attribution 3.0 Unported
+https://creativecommons.org/licenses/by/3.0/
+Modified: short flame gestures extracted, filtered, layered, normalized.
+Used in fireball-cast variants. Original author does not endorse Emberfall.
+
+Ice and Electricity Magic — Iwan 'qubodup' Gabovitch
+Source: https://opengameart.org/content/ice-electricity-magic
+Author: http://opengameart.org/users/qubodup
+Inputs: qubodupIceDamage01/02/03.flac,
+qubodupElectricityDamage01/02.flac
+License: Creative Commons Attribution 3.0 Unported
+https://creativecommons.org/licenses/by/3.0/
+Modified: excerpts trimmed, filtered, rate-adjusted in layered elemental
+cast/impact/learning effects and normalized. No endorsement implied.
+The original source notes and references remain in the retained master pack.
+
+Additional previously credited CC0 recorded layers by Kenney and artisticdude
+are listed in audio-foley-CC0.txt. Their sources and original recordings remain
+unchanged. Offline editing: Csound 6.18.1 and Audacity 3.7.9. Runtime delivery:
+stereo PCM16 48 kHz. Native masters are not included in the player package.

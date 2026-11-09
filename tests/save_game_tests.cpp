@@ -7,11 +7,19 @@ void check(bool ok,const char* label){checks++;if(!ok)throw std::runtime_error(l
 template<class F>void rejects(F fn,const char* label){bool rejected=false;try{fn();}catch(...){rejected=true;}check(rejected,label);}
 void roundtrip(const saves::Snapshot& snapshot){auto bytes=saves::encode(snapshot);auto restored=saves::decode(bytes);check(saves::encode(restored)==bytes,"all serialized fields roundtrip exactly");auto a=snapshot.game.rng,b=restored.game.rng,c=snapshot.game.combatRng,d=restored.game.combatRng;for(int i=0;i<40;i++)check(a()==b()&&c()==d(),"both random streams continue exactly");}
 #include "boar_save_tests.hpp"
+#include "world_expansion_save_tests.hpp"
+#include "audio_save_tests.hpp"
+#include "spell_learning_save_tests.hpp"
 #include "volcano_save_tests.hpp"
+#include "enemy_ability_save_tests.hpp"
 int main(int argc,char** argv){
  if(argc<2||std::string(argv[1])!="--no-audio")return 3;
  try{
   fs::path root=argc>2?fs::path(argv[2]):fs::path("dist")/("qa-save-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
+  enemyAbilitySaveTests();
+  worldExpansionSaveTests();
+  audioSaveTests();
+  spellLearningSaveTests();
   check(!fs::exists(root),"fresh isolated test directory");fs::create_directories(root);
   boarSaveTests();
   volcanoSaveTests();
@@ -90,7 +98,7 @@ int main(int argc,char** argv){
   auto oldDesert=s;oldDesert.game=Game{};oldDesert.game.activateField(WorldLocation::Desert);oldDesert.game.player=DesertArrival;
   oldDesert.game.props.clear();oldDesert.game.props.push_back({DesertFountains[0],7,1});oldDesert.game.props.push_back({{35,35},8,1});
   auto migrated=saves::decode(envelope(oldDesert,5));
-  check(migrated.game.fountainUsed==std::array<bool,FountainCount>{}&&migrated.game.props.size()==1&&distance(migrated.game.props[0].pos,{35,35})==0,"legacy desert save gains unused fountains and removes only overlapping scenery");roundtrip(migrated);
+  check(migrated.game.fountainUsed==std::array<bool,FountainCount>{}&&migrated.game.props.size()>1&&distance(migrated.game.props[0].pos,{35,35})==0&&std::all_of(migrated.game.props.begin()+1,migrated.game.props.end(),[](const Prop& p){return p.pos.x>=71.5f||p.pos.y>=71.5f;}),"legacy desert save gains unused fountains, removes overlapping scenery and adds only new-territory props");roundtrip(migrated);
   auto fountains=migrated;fountains.game.player=DesertFountains[0]+V{1.6f,0};fountains.game.mana=7;check(fountains.game.useFountain(0),"save fixture uses actual mana fountain");roundtrip(fountains);
   fountains.game.update(.05f,{},false);roundtrip(fountains);
   auto badFountain=fountains;badFountain.game.fountainUsed[0]=false;rejects([&]{saves::encode(badFountain);},"draining unused fountain rejected");

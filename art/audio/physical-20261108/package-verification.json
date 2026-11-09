@@ -1,0 +1,71 @@
+[
+  {
+    "status": "PASS",
+    "edition": "player",
+    "package_sha256": "a533d256f4240eccfce7046b09b32dacbf3484ee3216884918c5ebf2580d8151",
+    "exe_sha256": "bf4ce21dd306478ef67fb25ae2b22e49e99a9428945c4cbb9df4f2de45780aae",
+    "verified_assets": 253,
+    "startup": [
+      {
+        "frames": 180,
+        "scenario": "main-menu"
+      }
+    ],
+    "audio_suite": {
+      "status": "PASS",
+      "checks": 435,
+      "failures": 0,
+      "effects": 41,
+      "variants": 123,
+      "music_tracks": 4,
+      "real_raylib_decode": true,
+      "transport": "offline in-memory sink",
+      "window_created": false,
+      "audio_device_opened": false,
+      "audio_played": false
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false,
+    "documentation_correction": {
+      "previous_package_sha256": "6fc0c05f21c4d907a06f215c3dd485251e8e1038aabdec4bfd15a63f30dfcdfb",
+      "changed_entries": [
+        "Emberfall/LICENSES.md",
+        "Emberfall/JAK_URUCHOMIC.txt"
+      ],
+      "all_binary_and_asset_entry_hashes_preserved": true,
+      "all_final_zip_entries_verified": true
+    }
+  },
+  {
+    "status": "PASS",
+    "edition": "developer",
+    "package_sha256": "6d597f042d02922a380bd6e1b248670c37ce14bc1bc91584bb508c77ab63c2dc",
+    "exe_sha256": "a0266531e064a4daaa8c4241b08a56e1c966096891c7a5dfff589d6d2ef5854e",
+    "verified_assets": 253,
+    "startup": [
+      {
+        "frames": 180,
+        "scenario": "forest"
+      },
+      {
+        "frames": 180,
+        "scenario": "desert"
+      },
+      {
+        "frames": 180,
+        "scenario": "volcano"
+      }
+    ],
+    "audio_suite": null,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false,
+    "documentation_correction": {
+      "previous_package_sha256": "40e5e6e8b32b2ee1e93e8c3d6af79960118396dc54210aa8e096c17d16d8507e",
+      "changed_entries": [
+        "Emberfall-DEV/LICENSES.md"
+      ],
+      "all_binary_and_asset_entry_hashes_preserved": true,
+      "all_final_zip_entries_verified": true
+    }
+  }
+]

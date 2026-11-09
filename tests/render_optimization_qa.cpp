@@ -13,7 +13,7 @@ int main(int argc,char** argv){
  auto difference=[](Image a,Image b){auto* p=LoadImageColors(a);auto* q=LoadImageColors(b);int count=0;for(int i=0;i<a.width*a.height;i++)count+=std::abs(int(p[i].r)-q[i].r)+std::abs(int(p[i].g)-q[i].g)+std::abs(int(p[i].b)-q[i].b)+std::abs(int(p[i].a)-q[i].a)>6;UnloadImageColors(p);UnloadImageColors(q);return count;};
  auto reset=[](){game=Game{};intro={};towerStory={};clearTransientUi();welcome=help=paused=false;mouse={0,0};game.messageTime=0;};
  check(terrain.depth.id==0&&desert_art::terrain.depth.id==0,"both static terrain textures omit unused depth attachments");
- check(render_targets::omittedDepthPixels>=std::uint64_t(TerrainWidth)*TerrainHeight*2,"large static maps avoid redundant depth storage");
+ check(render_targets::omittedDepthPixels>=std::uint64_t(TerrainCacheWidth)*TerrainCacheHeight*2,"large static maps avoid redundant depth storage");
  RenderTexture2D sample=LoadRenderTexture(480,480);int capacity=actor_art::creatureCapacity;unsigned shadowAllocations=shadow_geometry::allocations;
  auto pair=[&](const std::string& label,auto draw){
   actor_art::finishShadowFrame();actor_art::gpuCreatureDraw=false;BeginTextureMode(sample);ClearBackground(BLANK);draw();EndTextureMode();Image reference=LoadImageFromTexture(sample.texture);

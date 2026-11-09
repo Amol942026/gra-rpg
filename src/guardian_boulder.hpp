@@ -15,6 +15,7 @@ static BoulderSocket boulderHand(const Enemy& e,float progress){
  auto pose=guardian_motion::sample(progress);return guardianSocket(e,0,pose.rockForward,pose.rockUp);
 }
 void cancelBoulderAttacks(){
+ cancelEnemyAbilities();
  cancelVolcanoAttacks();
  cancelBoarCharges();
  boulders.clear();boulderImpacts.clear();
@@ -34,7 +35,10 @@ float updateHeroKnockback(float dt){
  // respect chests and map edges without tunnelling through narrow scenery.
  V delta=heroKnockback*(from*from-to*to);
  int steps=std::max(1,int(std::ceil(length(delta)/.04f)));
- for(int i=0;i<steps;i++)move(delta*(1.f/steps),false);
+ // The saved impulse is an authored world-XY displacement, not walking
+ // speed. Sample ground height at the destination without shortening the
+ // impulse on slopes or making its range depend on simulation frequency.
+ for(int i=0;i<steps;i++)move(delta*(1.f/steps),false,terrain_height::Travel::PlanarImpulse);
  if(heroKnockbackRemaining<.00001f)heroKnockbackRemaining=0;
  if(!knockedBack()){heroKnockback={};heroKnockdownFacing=0;}
  return lockedTime;
@@ -53,7 +57,7 @@ bool updateGuardianThrow(Enemy& e,float dt,bool visible,float distanceToPlayer){
     auto socket=boulderHand(e,BoulderWindup/(BoulderWindup+BoulderRecovery));
     float flight=std::max(BoulderMinFlight,distance(socket.ground,e.boulderTarget)/BoulderSpeed);
     boulders.push_back({socket.ground,e.boulderTarget,socket.ground,0,flight,socket.height,socket.height,BoulderDamage,e.id});
-    e.boulderThrows++;sound(Cue::Swing,e.pos);
+    e.boulderThrows++;sound(Cue::StoneAttack,e.pos);
    }
   }
   return true;
@@ -63,7 +67,7 @@ bool updateGuardianThrow(Enemy& e,float dt,bool visible,float distanceToPlayer){
     &&boulders.size()<MaxBoulders&&clearEnemySegment(e.pos,player,BoulderRadius)){
   e.boulderTarget=player;e.boulderWindup=BoulderWindup;e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
   e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
-  sound(Cue::EnemyAttack,e.pos);return true;
+  sound(enemyAttackCue(e.type),e.pos);return true;
  }
  return false;
 }

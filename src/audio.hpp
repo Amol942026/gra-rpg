@@ -6,6 +6,7 @@
 #include "raylib.h"
 #include "game.hpp"
 #include "startup_log.hpp"
+#include "music_blend.hpp"
 
 // Preserve headroom when several enemies, a spell and a fanfare overlap.
 // The mixer is stereo float; this callback allocates nothing on the audio thread.
@@ -23,19 +24,31 @@ public:
     inline static constexpr const char* Names[CueCount]={
         "step","swing","slime-hit","wolf-hit","bone-hit","stone-hit","enemy-fall",
         "hurt","death","roll","dodge","spell","potion","pickup","equip","drop",
-        "level-up","victory","enemy-attack","ui","reject","bow-shot"
+        "level-up","victory","enemy-attack","ui","reject","bow-shot",
+        "chest-open","weapon-equip","chitin-hit","fire-hit","beast-attack","stone-attack",
+        "magic-attack","venom-cast","copper-wave","obsidian-cleave","fire-breath",
+        "bone-attack","chitin-attack","serpent-attack","reptile-attack","wood-attack","armored-attack","blade-attack","heavy-swing",
+        "fireball-cast","fireball-impact","teleport-arrival","bow-draw",
+        "ice-cast","ice-impact","lightning-cast","lightning-impact","spell-learn"
     };
-    float musicVolume=.42f,effectsVolume=.72f;
+    static constexpr int ScoreCount=4;
+    inline static constexpr const char* ScoreNames[ScoreCount]={"echoes-of-the-ruins","desert","volcano","tower"};
+    static constexpr float DefaultMusicVolume=.85f,DefaultEffectsVolume=.95f,MasterGain=.9f;
+    float musicVolume=DefaultMusicVolume,effectsVolume=DefaultEffectsVolume;
     bool muted=false,musicMuted=false,effectsMuted=false,available=false;
-    int loadedEffects=0,playedEffects=0;
+    int loadedEffects=0,loadedVariations=0,loadedScores=0,playedEffects=0;
     Music music{};
 private:
-    struct Bank {Sound source{};std::array<Sound,3> voices{};std::array<float,3> gains{};int next=0;double last=-100;};
+    struct Bank {std::array<Sound,3> sources{},voices{};std::array<float,3> gains{};int next=0;double last=-100;};
     std::array<Bank,CueCount> banks{};
+    std::array<Music,ScoreCount> scores{};
+    MusicBlend musicBlend{};
     bool suspended=false,wasBlocked=false,savePreferences=true,deviceOpened=false;
     float currentMusicVolume=0;
     unsigned variation=0;
+    void applyMusicVolume(){for(int i=0;i<ScoreCount;i++)if(IsMusicValid(scores[i]))SetMusicVolume(scores[i],currentMusicVolume*musicBlend.weights[i]);}
 public:
+    static int scoreFor(const ember::Game& world){return world.inTower()?3:world.inDesert()?1:world.inVolcano()?2:0;}
     void loadSettings(const char* path="audio-settings.cfg") {
         std::ifstream file(path);float m,e;int mute;
         if(file>>m>>e>>mute&&std::isfinite(m)&&std::isfinite(e)){
@@ -57,29 +70,39 @@ public:
         InitAudioDevice();deviceOpened=IsAudioDeviceReady();available=deviceOpened;
         startupLog.write(available?"Audio device ready":"Audio device unavailable");
         if(!available)return; // The game remains playable without an audio device.
-        SetMasterVolume(.72f);
+        SetMasterVolume(MasterGain);
         AttachAudioMixedProcessor(limitEmberMix);
         for(int i=0;i<CueCount;i++){
-            auto& bank=banks[i];std::string path=std::string("assets/audio/")+Names[i]+".wav";
-            if(!FileExists(path.c_str()))continue;
-            bank.source=LoadSound(path.c_str());if(!IsSoundValid(bank.source))continue;
-            for(auto& voice:bank.voices)voice=LoadSoundAlias(bank.source);
+            auto& bank=banks[i];std::string stem=std::string("assets/audio/")+Names[i];
+            for(int v=0;v<3;v++){
+                std::string path=stem+(v?"-v"+std::to_string(v+1):"")+".wav";
+                if(FileExists(path.c_str())){bank.sources[v]=LoadSound(path.c_str());if(IsSoundValid(bank.sources[v]))loadedVariations++;}
+                Sound source=IsSoundValid(bank.sources[v])?bank.sources[v]:bank.sources[0];
+                if(IsSoundValid(source))bank.voices[v]=LoadSoundAlias(source);
+            }
+            if(!IsSoundValid(bank.sources[0]))continue;
             loadedEffects++;
         }
         startupLog.write("Sound effects ready; loading music");
-        if(FileExists("assets/audio/echoes-of-the-ruins.ogg")){
-            music=LoadMusicStream("assets/audio/echoes-of-the-ruins.ogg");
-            if(IsMusicValid(music)){music.looping=true;SetMusicVolume(music,0);PlayMusicStream(music);}
+        for(int i=0;i<ScoreCount;i++){
+            std::string path=std::string("assets/audio/")+ScoreNames[i]+".ogg";
+            if(!FileExists(path.c_str()))continue;scores[i]=LoadMusicStream(path.c_str());
+            if(IsMusicValid(scores[i])){scores[i].looping=true;SetMusicVolume(scores[i],0);loadedScores++;}
         }
+        music=scores[0];if(IsMusicValid(music))PlayMusicStream(music);
     }
     void stopEffects() {
         if(!available)return;
         for(auto& bank:banks)for(Sound voice:bank.voices)if(IsSoundValid(voice))StopSound(voice);
     }
+    void stopCue(ember::Cue cue) {
+        if(!available)return;
+        for(Sound voice:banks[int(cue)].voices)if(IsSoundValid(voice))StopSound(voice);
+    }
     void play(ember::Cue cue,ember::V position={},ember::V listener={},bool spatial=false) {
         if(!available||!effectsEnabled()||effectsVolume<=0||suspended)return;
         int i=int(cue);if(i<0||i>=CueCount)return;
-        auto& bank=banks[i];if(!IsSoundValid(bank.source))return;
+        auto& bank=banks[i];if(!IsSoundValid(bank.sources[0]))return;
         double now=GetTime();if(now-bank.last<(cue==ember::Cue::Step?.085:.045))return;
         float attenuation=1,pan=.5f;
         if(spatial){
@@ -91,29 +114,33 @@ public:
         int slot=bank.next;Sound voice=bank.voices[slot];bank.next=(slot+1)%3;
         if(!IsSoundValid(voice))return;
         StopSound(voice);float pitch=1;
-        if(i<=int(ember::Cue::Roll)||cue==ember::Cue::EnemyAttack){
-            variation=variation*1664525u+1013904223u;pitch=.94f+(variation%121)/1000.f;
+        if(cue!=ember::Cue::Ui&&cue!=ember::Cue::Reject&&cue!=ember::Cue::LevelUp&&cue!=ember::Cue::Victory&&cue!=ember::Cue::Pickup&&cue!=ember::Cue::BowDraw){
+            variation=variation*1664525u+1013904223u;pitch=.975f+(variation%51)/1000.f;
         }
         SetSoundPitch(voice,pitch);SetSoundPan(voice,pan);
         bank.gains[slot]=attenuation*(cue==ember::Cue::Step?.52f:1.f);
         SetSoundVolume(voice,effectsVolume*bank.gains[slot]);
         PlaySound(voice);bank.last=now;playedEffects++;
     }
-    void update(float dt,ember::Game& world,bool blocked,bool focused) {
+    void update(float dt,ember::Game& world,bool blocked,bool focused,bool cinematicArrival=false) {
         if(!available){world.sounds.clear();return;}
         if(blocked&&!wasBlocked)stopEffects();wasBlocked=blocked;
-        if(!focused&&!suspended){stopEffects();if(IsMusicValid(music))PauseMusicStream(music);suspended=true;}
-        if(focused&&suspended){if(IsMusicValid(music))ResumeMusicStream(music);suspended=false;}
-        float target=!musicEnabled()||!focused?0:musicVolume*(blocked?.42f:world.dead()?.3f:1.f);
+        if(!world.bowDrawing)stopCue(ember::Cue::BowDraw);
+        if(!focused&&!suspended){stopEffects();for(auto score:scores)if(IsMusicValid(score))PauseMusicStream(score);suspended=true;}
+        if(focused&&suspended){for(int i=0;i<ScoreCount;i++)if(IsMusicValid(scores[i])&&musicBlend.weights[i]>.001f)ResumeMusicStream(scores[i]);suspended=false;}
+        int desired=scoreFor(world);if(!IsMusicValid(scores[desired]))desired=0;
+        musicBlend.update(dt,desired);music=scores[desired];
+        float target=!musicEnabled()||!focused?0:musicVolume*(blocked?.65f:world.dead()?.3f:1.f);
         for(auto& bank:banks)for(int i=0;i<3;i++)if(IsSoundValid(bank.voices[i]))
             SetSoundVolume(bank.voices[i],effectsEnabled()?effectsVolume*bank.gains[i]:0);
         currentMusicVolume+=(target-currentMusicVolume)*std::min(1.f,std::max(0.f,dt)*5);
-        if(IsMusicValid(music)){
-            SetMusicVolume(music,currentMusicVolume);
-            if(!suspended)UpdateMusicStream(music);
+        applyMusicVolume();
+        for(int i=0;i<ScoreCount;i++)if(IsMusicValid(scores[i])&&!suspended){
+            if(musicBlend.weights[i]>.001f){if(!IsMusicStreamPlaying(scores[i]))PlayMusicStream(scores[i]);UpdateMusicStream(scores[i]);}
+            else if(IsMusicStreamPlaying(scores[i]))StopMusicStream(scores[i]);
         }
         if(focused)for(const auto& event:world.sounds)
-            if(!blocked||event.cue==ember::Cue::LevelUp||event.cue==ember::Cue::Victory)
+            if((event.cue!=ember::Cue::BowDraw||world.bowDrawing)&&(!blocked||event.cue==ember::Cue::LevelUp||event.cue==ember::Cue::Victory||event.cue==ember::Cue::SpellLearn||(cinematicArrival&&event.cue==ember::Cue::TeleportArrival)))
                 play(event.cue,{event.x,event.y},world.player,true);
         world.sounds.clear();
     }
@@ -124,10 +151,10 @@ public:
         // A channel button can re-enable just that channel after M muted both.
         if(muted){muted=false;musicMuted=false;effectsMuted=true;}
         else musicMuted=!musicMuted;
-        if(musicMuted){currentMusicVolume=0;if(musicReady())SetMusicVolume(music,0);}
+        if(musicMuted){currentMusicVolume=0;applyMusicVolume();}
     }
     void toggleEffects(){
-        if(muted){muted=false;effectsMuted=false;musicMuted=true;currentMusicVolume=0;if(musicReady())SetMusicVolume(music,0);}
+        if(muted){muted=false;effectsMuted=false;musicMuted=true;currentMusicVolume=0;applyMusicVolume();}
         else effectsMuted=!effectsMuted;
         if(effectsMuted)stopEffects();
     }
@@ -138,10 +165,10 @@ public:
         if(savePreferences)saveSettings();
         if(!deviceOpened)return;
         stopEffects();
-        if(IsMusicValid(music))UnloadMusicStream(music);
+        for(auto score:scores)if(IsMusicValid(score))UnloadMusicStream(score);music={};
         for(auto& bank:banks){
             for(Sound voice:bank.voices)if(IsSoundValid(voice))UnloadSoundAlias(voice);
-            if(IsSoundValid(bank.source))UnloadSound(bank.source);
+            for(auto source:bank.sources)if(IsSoundValid(source))UnloadSound(source);
         }
         DetachAudioMixedProcessor(limitEmberMix);
         CloseAudioDevice();available=false;deviceOpened=false;

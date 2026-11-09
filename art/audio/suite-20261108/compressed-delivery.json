@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "audio_played": false,
+  "tracks": [
+    {
+      "file": "desert.ogg",
+      "lufs": -18.98,
+      "true_peak_db": -4.54,
+      "lra": 2.8,
+      "sha256": "1e46002a47692e4a62ea8179544d7ed6cc9a38b3f31813e6c20930c3892b9719"
+    },
+    {
+      "file": "echoes-of-the-ruins.ogg",
+      "lufs": -18.97,
+      "true_peak_db": -4.61,
+      "lra": 3.0,
+      "sha256": "b473969b2a9a376d033c981a65f5709a6c40841da146a47a423e639ae880a46e"
+    },
+    {
+      "file": "tower.ogg",
+      "lufs": -19.98,
+      "true_peak_db": -5.12,
+      "lra": 3.1,
+      "sha256": "7cb283bb989866702383ac57d7223a47effa761c41bb517b4606a5132bd22a5c"
+    },
+    {
+      "file": "volcano.ogg",
+      "lufs": -18.97,
+      "true_peak_db": -3.73,
+      "lra": 2.8,
+      "sha256": "7b6666ee1e88d4450d93bf02e19154df82104713bd53da20049ab88ea047ee58"
+    }
+  ]
+}

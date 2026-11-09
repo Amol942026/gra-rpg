@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "audio_preferences_unchanged": true,
+  "source_png_and_kra_unchanged": true,
+  "packages": [
+    {
+      "edition": "player",
+      "archive": "Emberfall-Windows-x64.zip",
+      "sha256": "a6691b60e182d7d8946a34e79cf378c7e6d4b33753f64e28518f0e5d701291b6",
+      "exe_sha256": "f75cb90c1959ac58e4bc96e2169a63366a2653af37f2d43488e4021f10cb7c39",
+      "assets_verified": 144,
+      "startup_frames": 180,
+      "hidden": true,
+      "audio_device_opened": false
+    },
+    {
+      "edition": "developer",
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "sha256": "493f002e8f7980cc9ed6062f9fe17f997527ce825313b91e28783b2bbb734627",
+      "exe_sha256": "fca800c0b761133fb11638dd0c586ed81577a6b82c55908580462af6b0bcff07",
+      "assets_verified": 144,
+      "startup_frames": 180,
+      "hidden": true,
+      "audio_device_opened": false
+    }
+  ],
+  "extracted_player_renderer_checks": 428
+}

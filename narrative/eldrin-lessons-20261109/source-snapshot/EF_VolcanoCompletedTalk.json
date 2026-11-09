@@ -1,0 +1,21 @@
+{
+  "id": "EF_VolcanoCompletedTalk",
+  "title": "Eldrin — po odzyskaniu trzech części",
+  "array": "VolcanoCompletedTalk",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "7f21f7c35574709ac7d3452d9facdabfb52b27bc73a6013b3a5cc9516d1517bb",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Trzy części są bezpieczne w twoich rękach. Ślad dwóch pozostałych wciąż ginie w dawnych kronikach; szukam drogi do ich strażników."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "W takim razie sprawdzę znajome szlaki i uzupełnię zapasy. Gdy odnajdziesz trop, będę gotów."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Możesz wrócić do Morza Piasków lub Kaldery Popiołu. Pieczęć jeszcze się trzyma. Wykorzystajmy czas, który nam pozostał."
+    }
+  ]
+}

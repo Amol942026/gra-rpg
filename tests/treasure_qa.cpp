@@ -15,10 +15,11 @@ int main(int argc,char** argv){
  makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();
  makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  check(PlayerBuild&&!audioSystem.available,"treasure QA uses player code and no audio device");
- check(treasure_art::atlas.id&&treasure_art::atlas.width==768&&treasure_art::atlas.height==256,"Krita chest atlas loads once at its expected dimensions");
+ check(treasure_art::atlas.id&&treasure_art::atlas.width==768&&treasure_art::atlas.height==768,"three-realm Krita chest atlas loads once at its expected dimensions");
  RenderTexture2D sample=LoadRenderTexture(150,125);
- for(int state=0;state<3;state++){
-  auto chest=game.chests[0];chest.opened=state>0;if(state==2)chest.loot={};
+ for(int realm=0;realm<3;realm++)for(int state=0;state<3;state++){
+  auto chest=game.chests[realm*2];chest.opened=state>0;if(state==2)chest.loot={};
+  check(treasure_art::realm(chest)==realm,"chest style follows its saved realm rather than the active camera");
   const Color backdrop={67,99,91,255};const Vector2 anchor={75,103};
   BeginTextureMode(sample);ClearBackground(backdrop);treasure_art::draw(chest,anchor);EndTextureMode();
   Image image=LoadImageFromTexture(sample.texture);ImageFlipVertical(&image);
@@ -28,7 +29,7 @@ int main(int argc,char** argv){
   Color* pixels=LoadImageColors(image);int visible=0;
   for(int i=0;i<image.width*image.height;i++)visible+=!same(pixels[i]);
   check(visible>1800&&visible<7000,"each chest state renders a bounded, detailed visible silhouette");
-  UnloadImageColors(pixels);ExportImage(image,("qa-treasure/sprite-state-"+std::to_string(state)+".png").c_str());UnloadImage(image);
+  UnloadImageColors(pixels);ExportImage(image,("qa-treasure/sprite-realm-"+std::to_string(realm)+"-state-"+std::to_string(state)+".png").c_str());UnloadImage(image);
  }
  UnloadRenderTexture(sample);
  auto reset=[](){game=Game(9876);intro={};towerStory={};clearStoryMenus();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;developerActive=developerMenuOpen=false;dragging={};mouse={0,0};};

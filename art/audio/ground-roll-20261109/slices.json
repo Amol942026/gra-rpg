@@ -1,0 +1,20 @@
+[
+  {
+    "cue": "roll",
+    "variant": 0,
+    "start_frame": 9600,
+    "frames": 24960
+  },
+  {
+    "cue": "roll",
+    "variant": 1,
+    "start_frame": 55200,
+    "frames": 24960
+  },
+  {
+    "cue": "roll",
+    "variant": 2,
+    "start_frame": 100800,
+    "frames": 24960
+  }
+]

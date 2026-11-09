@@ -1,0 +1,713 @@
+{
+  "id": "emberfall-physical-audio-20261108",
+  "created_local": "2026-11-08T22:23:48.225780+01:00",
+  "processing": "Local Csound 6.18.1 sample layering / unpitched air, Audacity 3.7.9 normalization/DC, offline conversion and FFmpeg loudness metering",
+  "external_inputs": "CC0 1.0, credits shipped in assets/licenses/audio-foley-CC0.txt",
+  "sources": [
+    {
+      "name": "impact",
+      "page": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0",
+      "archive_sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+      "bytes": 800850
+    },
+    {
+      "name": "rpg",
+      "page": "https://kenney.nl/assets/rpg-audio",
+      "license": "CC0",
+      "archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "bytes": 964837
+    },
+    {
+      "name": "swishes",
+      "download": "https://opengameart.org/sites/default/files/swishes.zip",
+      "license": "CC0",
+      "sha256": "7980215241b739a787dcf26f660ce510bb237900968789395a86911619795693",
+      "bytes": 385150
+    },
+    {
+      "name": "snarl",
+      "download": "https://opengameart.org/sites/default/files/monster-snarl-attack.ogg",
+      "license": "CC0",
+      "sha256": "34bf1ceef265725abf00ab3263bbbb492792e126bb1619addd4a5d3ad123347f",
+      "bytes": 185872
+    }
+  ],
+  "source_evidence": [
+    {
+      "path": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact.html",
+      "sha256": "de749092fe485ef92d41d01de0188c24e15ab04e08d7a2771d83f4b9005fd238"
+    },
+    {
+      "path": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg.html",
+      "sha256": "c4d5827ee5c9413c86797bf215dc2b80b0b62d196ff5c84c235f034c95f2e31f"
+    },
+    {
+      "path": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\snarls.html",
+      "sha256": "16276702c0d74257fed9075fc582c2b3d935678824146d8651175ec6b3aa25e8"
+    },
+    {
+      "path": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes.html",
+      "sha256": "f8117aee273b934102ef3bde41e05c26240e3dd177b08cff777040d12e669100"
+    }
+  ],
+  "native_projects": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-physical-20261108-combat.aup3",
+      "sha256": "889a46f9a24a9119b9a64afe493349b71e44ee08e2e470c1061a5dde6ebc170a",
+      "bytes": 51707904,
+      "sqlite_quick_check": "ok"
+    },
+    {
+      "path": "C:\\AI2D\\audio\\emberfall-physical-20261108\\combat.aup3",
+      "sha256": "a0cf6c6ad9e5860193553bcf99b241c6d4acbb825839cc7d109d3deeef98f299",
+      "bytes": 51707904,
+      "sqlite_quick_check": "ok"
+    }
+  ],
+  "retained_open_project": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-physical-20261108-combat.aup3",
+  "native_close_used": false,
+  "playback_used": false,
+  "new_layers": 74,
+  "layer_manifest": "layers.json",
+  "music": "Existing original LMMS/Audacity masters; same compositions, remastered about +3 dB",
+  "native_masters": "C:\\AI2D\\audio\\emberfall-physical-20261108",
+  "backup_root": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\audio-refinement-20261108",
+  "audio_files": [
+    {
+      "file": "step.wav",
+      "sha256": "d506c543492321ca4884ce4c605cde3c3d48f05cd7f136c00a7e335a9e876ea2",
+      "bytes": 40364
+    },
+    {
+      "file": "step-v2.wav",
+      "sha256": "1f256ac0155c3a17e67be2b7ea0fcfd7044fe4d2b60f27335da7f39ab8c863c5",
+      "bytes": 40364
+    },
+    {
+      "file": "step-v3.wav",
+      "sha256": "62ea44a0e8755cbc61c8b87846685b24cd7df4e95a62010f299ef0da0dd547fe",
+      "bytes": 40364
+    },
+    {
+      "file": "swing.wav",
+      "sha256": "fb17d4063eb9d297fd2059b62dfb43ec7e378c79c5120ceef98a186a8085a484",
+      "bytes": 46124
+    },
+    {
+      "file": "swing-v2.wav",
+      "sha256": "5b7052abe521a184582630529b83bb6a32cd218086975edc4af254e11e75e1fc",
+      "bytes": 46124
+    },
+    {
+      "file": "swing-v3.wav",
+      "sha256": "da699d32010fc9c4a6a2513f04d97e8ce834f027aa96c3cb8a1f4bdb073e1476",
+      "bytes": 46124
+    },
+    {
+      "file": "slime-hit.wav",
+      "sha256": "e993d863b6192307fa36415a843e5f182b10238f01436c69bb7c3cbcac78378e",
+      "bytes": 46124
+    },
+    {
+      "file": "slime-hit-v2.wav",
+      "sha256": "c5c65a7ed15f75ccdbe6acd35a6bb1a90a0bff19a510118935a25065a3a3f978",
+      "bytes": 46124
+    },
+    {
+      "file": "slime-hit-v3.wav",
+      "sha256": "b1253d7099ad1233a885091f9a845d5428c86f8a92908379b552cc8babfa4b90",
+      "bytes": 46124
+    },
+    {
+      "file": "wolf-hit.wav",
+      "sha256": "7de9768ed2c9fcb09280a04fd32a569efe4704b34e65667c2d4e57ddf1f30224",
+      "bytes": 42284
+    },
+    {
+      "file": "wolf-hit-v2.wav",
+      "sha256": "e3441605c579fb457a4c56fd5f3ed0f46ee160c45868480d76bc91e030f92ac0",
+      "bytes": 42284
+    },
+    {
+      "file": "wolf-hit-v3.wav",
+      "sha256": "8578aaa426d1ee758639aa187e690955e9266dc00f52e001a33ff7c582afc5cd",
+      "bytes": 42284
+    },
+    {
+      "file": "bone-hit.wav",
+      "sha256": "716031a68e4f5aeb1c027b9ae01b943855a43a92d285b83eba079b482fe19285",
+      "bytes": 51884
+    },
+    {
+      "file": "bone-hit-v2.wav",
+      "sha256": "a6ed849d4f72274653c0bf99b877b5a514ad45d71da4362ab5ea8b2571ded079",
+      "bytes": 51884
+    },
+    {
+      "file": "bone-hit-v3.wav",
+      "sha256": "94aaa01b06abacc9bd32fd7d89c481e3030a8e688b1224b97cd769f9eace0c44",
+      "bytes": 51884
+    },
+    {
+      "file": "stone-hit.wav",
+      "sha256": "039a871372848dce9fd84fb5688af31513a53c12d0c76a89a69ebaf46b0cbab2",
+      "bytes": 57644
+    },
+    {
+      "file": "stone-hit-v2.wav",
+      "sha256": "e5e03e2ccc8014b5eca04fa23ce249a1701ab9c96b38035e6ad59de84cdbb7f7",
+      "bytes": 57644
+    },
+    {
+      "file": "stone-hit-v3.wav",
+      "sha256": "463dd9b5c858b88c7adea3b03819b4812c04f50dc699515094df2d201b28c1c9",
+      "bytes": 57644
+    },
+    {
+      "file": "enemy-fall.wav",
+      "sha256": "63f40ad04d3a5ddaadc8fbc1c49c6c3d3bc286bd84bdbeec0009aea65e145ebd",
+      "bytes": 124844
+    },
+    {
+      "file": "enemy-fall-v2.wav",
+      "sha256": "c0a700b1bdc69f4a57b28cfe4121fc84c81d1961f566af63db583a74a4425cff",
+      "bytes": 124844
+    },
+    {
+      "file": "enemy-fall-v3.wav",
+      "sha256": "f6a640109bc4dcbabfebd5a50884e3d23917d87d80eb2efba542eedfb73ef3c3",
+      "bytes": 124844
+    },
+    {
+      "file": "hurt.wav",
+      "sha256": "c1787de29a986b8f80fd5728fcdafc5af3662c18015d1e2aeb2db3991b359c0c",
+      "bytes": 53804
+    },
+    {
+      "file": "hurt-v2.wav",
+      "sha256": "a7fd9a5f0455096cd9c1d5b74146476eb35dd0df22b30bf89884887d076cb046",
+      "bytes": 53804
+    },
+    {
+      "file": "hurt-v3.wav",
+      "sha256": "d5a4a6c76d655fb571b27efb13b392cdee0784fb4e7260c44ca179a78af81a17",
+      "bytes": 53804
+    },
+    {
+      "file": "death.wav",
+      "sha256": "73990bde6e0533ccc7a25b3198f16103d982dc4833a9b81962d072fbd4312e68",
+      "bytes": 153644
+    },
+    {
+      "file": "death-v2.wav",
+      "sha256": "6701ceb0921b42a30a01b079c7e42dfad1b581d02a5485b261ad09a7e74059e0",
+      "bytes": 153644
+    },
+    {
+      "file": "death-v3.wav",
+      "sha256": "18aa05fe2c06900a50ae524de2d1226aada515453cfe589f371d6abc2a29a2a4",
+      "bytes": 153644
+    },
+    {
+      "file": "roll.wav",
+      "sha256": "5a4645e533e74b9afbc53c30b994c1c2d152d7dc733a9ad87694215eb00659b1",
+      "bytes": 92204
+    },
+    {
+      "file": "roll-v2.wav",
+      "sha256": "f9204d2dab271d0f6d1cac8df382ced8e18a500496ab8194f074c1046fca1317",
+      "bytes": 92204
+    },
+    {
+      "file": "roll-v3.wav",
+      "sha256": "537493613ac5cf600f43b7ca062d4e02e10c9d6011310920ec52271370ec8617",
+      "bytes": 92204
+    },
+    {
+      "file": "dodge.wav",
+      "sha256": "d91c9d7c95dfb504354ec7c6434ed89e05fe657337f1af7718739e8913879716",
+      "bytes": 42284
+    },
+    {
+      "file": "dodge-v2.wav",
+      "sha256": "78d3eb2dc74b897bccf7250d5acd62924ff44e5ae94412603ddf1fb93eaa4e6d",
+      "bytes": 42284
+    },
+    {
+      "file": "dodge-v3.wav",
+      "sha256": "62001bb096189bfab230b88db3bfff37e4d0356c06747cfb7096a4a086fb0cee",
+      "bytes": 42284
+    },
+    {
+      "file": "spell.wav",
+      "sha256": "c2b294ccae11250bb7596d5a87216a7506de1e642335831dadedd11141163e8d",
+      "bytes": 119084
+    },
+    {
+      "file": "spell-v2.wav",
+      "sha256": "babea164d5ac3b8f62561bb953927eabe8c02335ae2d28b1663322efbb30ccda",
+      "bytes": 119084
+    },
+    {
+      "file": "spell-v3.wav",
+      "sha256": "76bc49b67913d72307f0a1a069fab49df04ad164cecaabd943f64066901ad70e",
+      "bytes": 119084
+    },
+    {
+      "file": "potion.wav",
+      "sha256": "3dc312c314de810d6955a3253094fca625356624adcd807387d3552769cad2da",
+      "bytes": 124844
+    },
+    {
+      "file": "potion-v2.wav",
+      "sha256": "275193ff0ebb0ac8f4fe944bd6032f11b6606e1dd25892231782aa5f98a347cb",
+      "bytes": 124844
+    },
+    {
+      "file": "potion-v3.wav",
+      "sha256": "f9b6030240ea0b2845eba1c98acaea44bffac23510dc360a28ae222ce83d1386",
+      "bytes": 124844
+    },
+    {
+      "file": "pickup.wav",
+      "sha256": "d64aa5e3d2bce0e862582db5447a159d2fc3ec55309beb7c25c0d164879b5ffb",
+      "bytes": 67244
+    },
+    {
+      "file": "pickup-v2.wav",
+      "sha256": "eb684fbe11afe1cc3e2101fbb2a235517fd7fd90d1bb92ad2c44d96db5cb8f01",
+      "bytes": 67244
+    },
+    {
+      "file": "pickup-v3.wav",
+      "sha256": "72e45af97baf4282e62937c2a93c615b40cb34d0f0adc5d710c94c6e8e22f85c",
+      "bytes": 67244
+    },
+    {
+      "file": "equip.wav",
+      "sha256": "383cf77507cd82f9ae3a7d1a6abf609367efbd8d952ef83875d516be7cadd124",
+      "bytes": 92204
+    },
+    {
+      "file": "equip-v2.wav",
+      "sha256": "0bed1f3b1ce163bc858956261ae400a46b643bdb905e51afde2e2437ffdeb7c9",
+      "bytes": 92204
+    },
+    {
+      "file": "equip-v3.wav",
+      "sha256": "6eed0baf163d9016a2e47a046c4a8e43fe7b148fbd81a4eff87ab779cc40d3c5",
+      "bytes": 92204
+    },
+    {
+      "file": "drop.wav",
+      "sha256": "7559f01017b485b5d872a43edc65d5bae262349d28f36fadba982a5ea7f60ec1",
+      "bytes": 48044
+    },
+    {
+      "file": "drop-v2.wav",
+      "sha256": "0a27066736e15cc28f0bd69bb971252d9d530af44a19ff7cdfc08c585e9a739e",
+      "bytes": 48044
+    },
+    {
+      "file": "drop-v3.wav",
+      "sha256": "8179d005237569e6dc80826bd8ad28238e58e7066c727172567768dd528123b0",
+      "bytes": 48044
+    },
+    {
+      "file": "level-up.wav",
+      "sha256": "f08d2666c9e7bd5cfed15600d2c4247c74e5c298a7f65828e0ee9fdf0993f14c",
+      "bytes": 288044
+    },
+    {
+      "file": "level-up-v2.wav",
+      "sha256": "53559aae9668b3cc87e291a125fa54d755afd0f86ab6aca6928d62cc897304b6",
+      "bytes": 288044
+    },
+    {
+      "file": "level-up-v3.wav",
+      "sha256": "60b20c19b12d797d76378a5808fc15b09bfdeb60a7cf1f3d622c5c56397ebb0f",
+      "bytes": 288044
+    },
+    {
+      "file": "victory.wav",
+      "sha256": "4f2052644b563d1652df0ed16451d0dc397721944643f23d6a98261113e71552",
+      "bytes": 422444
+    },
+    {
+      "file": "victory-v2.wav",
+      "sha256": "0a1734486a11b4b6ba480087315860117c9059e800872cc6c8e62a3eca76c553",
+      "bytes": 422444
+    },
+    {
+      "file": "victory-v3.wav",
+      "sha256": "443500e3495d00e35e67557b4fa975853d94223a123abf6410b6854c71580879",
+      "bytes": 422444
+    },
+    {
+      "file": "enemy-attack.wav",
+      "sha256": "a54e71a966f1962636a1fb8ea672f343f7d631eee69eb22ab658c48f1de2d9ba",
+      "bytes": 57644
+    },
+    {
+      "file": "enemy-attack-v2.wav",
+      "sha256": "aff1b9bd453be0730be3e3167b72a8a224917c8928ecebaa2ec8165276ba485c",
+      "bytes": 57644
+    },
+    {
+      "file": "enemy-attack-v3.wav",
+      "sha256": "a5d57d3374f837bb0f6535c98dac60745a15d27d6fb865ac4fe47eb764046918",
+      "bytes": 57644
+    },
+    {
+      "file": "ui.wav",
+      "sha256": "1892de325bc6791e8c1481779b9d4bea516d97d077a05239553d6f453eddfc88",
+      "bytes": 23084
+    },
+    {
+      "file": "ui-v2.wav",
+      "sha256": "112ad0f201e7efe6cf59a9a63262695a6273ebff1f5396d690b813713039eea9",
+      "bytes": 23084
+    },
+    {
+      "file": "ui-v3.wav",
+      "sha256": "d01f04596f23cf6e116ea83d3924859a111af60528eddbebaa1da3ff1c64e4d4",
+      "bytes": 23084
+    },
+    {
+      "file": "reject.wav",
+      "sha256": "803597f946b28edb95141b17f4342603b190668e2be83d217458b0d561535214",
+      "bytes": 42284
+    },
+    {
+      "file": "reject-v2.wav",
+      "sha256": "f842bb1da2fabdba8c359d56bbc907d1063c20e494c03e1ef0c384a7c9a19577",
+      "bytes": 42284
+    },
+    {
+      "file": "reject-v3.wav",
+      "sha256": "bd24d4f0567594f52467a8b4cbc27f6e6317735e1f82c848e506fd8df944d33b",
+      "bytes": 42284
+    },
+    {
+      "file": "bow-shot.wav",
+      "sha256": "7803ad89bc43681e389d2a4af96d24bb3c1361f916d9f597cfe25807aa21123c",
+      "bytes": 49964
+    },
+    {
+      "file": "bow-shot-v2.wav",
+      "sha256": "730f3a718741bb02cff07e3abd9fbab24cfff7b5b46cfc3304548cfc9ecfa456",
+      "bytes": 49964
+    },
+    {
+      "file": "bow-shot-v3.wav",
+      "sha256": "62eceecac2a880aaf2906d7d0e0dadef36dca0295bb7eacb0456646bedd21747",
+      "bytes": 49964
+    },
+    {
+      "file": "chest-open.wav",
+      "sha256": "90c374c3c2080fb7bd3acba03b92b6ce32b900f13a31953ae1b5c2acc146cfd7",
+      "bytes": 182444
+    },
+    {
+      "file": "chest-open-v2.wav",
+      "sha256": "f8c469cf34c0c2b85c11e70c6985633e9ba720289b3a91d2c98a27f5f356e1be",
+      "bytes": 182444
+    },
+    {
+      "file": "chest-open-v3.wav",
+      "sha256": "d8fe63d9360f65bf621369df65aa3ead4dc3f768567073da519d4b2f0028c92d",
+      "bytes": 182444
+    },
+    {
+      "file": "weapon-equip.wav",
+      "sha256": "ad0c99776873f589f5da4abd8b3a8163528511f6ac47435fd22ec6df38cb7043",
+      "bytes": 103724
+    },
+    {
+      "file": "weapon-equip-v2.wav",
+      "sha256": "bffc8a69440150492a1cbfada8580e6a4e03eb2b2b3de5f5cc474cf88e4e6ef0",
+      "bytes": 103724
+    },
+    {
+      "file": "weapon-equip-v3.wav",
+      "sha256": "b4471126845a4d94e1102d22d294b24cd819de1860bf152ff6a1c81942bb6f22",
+      "bytes": 103724
+    },
+    {
+      "file": "chitin-hit.wav",
+      "sha256": "b08f00f8d47c62065883d4a1e9a467c9e27c6667ab677fe50b9668d0b033a06f",
+      "bytes": 48044
+    },
+    {
+      "file": "chitin-hit-v2.wav",
+      "sha256": "6a271099f0d2328d2398c411a732da4de0094be2853b6c3cdab2d4e1f5e1de7d",
+      "bytes": 48044
+    },
+    {
+      "file": "chitin-hit-v3.wav",
+      "sha256": "9f7f63a41d966242a69eecc2ecf0876bc684cc91845e554848169fda7a10d9c6",
+      "bytes": 48044
+    },
+    {
+      "file": "fire-hit.wav",
+      "sha256": "8716de5eb73c1783f8fee98397ac2dfb4845a48648ed19a6b03d142b8ae3d879",
+      "bytes": 67244
+    },
+    {
+      "file": "fire-hit-v2.wav",
+      "sha256": "b714f55b9e4105c0913d2a0110cefc37653de16d4bde286befeaee310ebb3a7a",
+      "bytes": 67244
+    },
+    {
+      "file": "fire-hit-v3.wav",
+      "sha256": "710a6fac610d2b9e5b47006144db5555c95aa5329ddf5b9ba7e1e4f7db6be092",
+      "bytes": 67244
+    },
+    {
+      "file": "beast-attack.wav",
+      "sha256": "581fc958d5f6e51e0a15b3ab14a4755e553fcb292bf0619306411f3ef0397042",
+      "bytes": 96044
+    },
+    {
+      "file": "beast-attack-v2.wav",
+      "sha256": "84a4ad9152e44f5b0f616816adb16d2add39e38781bb05051a125153e2be7dec",
+      "bytes": 96044
+    },
+    {
+      "file": "beast-attack-v3.wav",
+      "sha256": "8d74926ca58313a26749b4fee138d11e4386c29b2a8472a73553ad8557a04c30",
+      "bytes": 96044
+    },
+    {
+      "file": "stone-attack.wav",
+      "sha256": "92bab25d6f97fcd1616cbbaded44e20456ad6901b15eb900baf34d4695e801e0",
+      "bytes": 111404
+    },
+    {
+      "file": "stone-attack-v2.wav",
+      "sha256": "6fa5437198a7b842df3b79864f7204a44bf66d62fa1bdde248ed9e965bd6d6de",
+      "bytes": 111404
+    },
+    {
+      "file": "stone-attack-v3.wav",
+      "sha256": "cf7431fa5bd726ca1aca93a768d2f65585f649efcca183f1d7df948ee44479a3",
+      "bytes": 111404
+    },
+    {
+      "file": "magic-attack.wav",
+      "sha256": "1950201a0fb0f75a45b695340b5761037e68f2702e4aad22501f650cf42ae654",
+      "bytes": 105644
+    },
+    {
+      "file": "magic-attack-v2.wav",
+      "sha256": "83b881a0384cb540741e5fe9bc3fcce6cacf8a289aa9c5e67cae739d976bf6e4",
+      "bytes": 105644
+    },
+    {
+      "file": "magic-attack-v3.wav",
+      "sha256": "3de5369305f1264593b579ef4a6ed73bf23f6cb339da90075d9cbebbbfd27033",
+      "bytes": 105644
+    },
+    {
+      "file": "venom-cast.wav",
+      "sha256": "0233fe080e92c385b9c20c1b6f21cdf46bf9e9d0e543970512e1bb666d888be6",
+      "bytes": 80684
+    },
+    {
+      "file": "venom-cast-v2.wav",
+      "sha256": "5cee59889df99aede654803e87f8bc434e65dd957b7e8a82fec6a8e0225b196e",
+      "bytes": 80684
+    },
+    {
+      "file": "venom-cast-v3.wav",
+      "sha256": "bda643ad2e4dec4b7de47122c03e76d486ea12bc53b8c083e2e040e1e053ea65",
+      "bytes": 80684
+    },
+    {
+      "file": "copper-wave.wav",
+      "sha256": "ab6000269bd46e1cd3c745afdb289d73ef184e0312f776d39bae62bfa91ba708",
+      "bytes": 134444
+    },
+    {
+      "file": "copper-wave-v2.wav",
+      "sha256": "a5acaf26276026944203f9f1f9c8671c8b3d41aab5ccf49a9abc55b5325bfea9",
+      "bytes": 134444
+    },
+    {
+      "file": "copper-wave-v3.wav",
+      "sha256": "e200bc0743366a57ce1a812ec902feaf8283d8ca22c5333b3a58fe1554a6f296",
+      "bytes": 134444
+    },
+    {
+      "file": "obsidian-cleave.wav",
+      "sha256": "b8dbf23ea2630830ca24dadcc5ab980166dcd062cab3bb43ae4a9247b703bf5f",
+      "bytes": 76844
+    },
+    {
+      "file": "obsidian-cleave-v2.wav",
+      "sha256": "6ae4026716c5887af6d4766e1aa291d9d99ede2b06d1552590dc27819f5ae183",
+      "bytes": 76844
+    },
+    {
+      "file": "obsidian-cleave-v3.wav",
+      "sha256": "179b6f33007139e46d20bdf36c45fb42e20caff8f1981bdf7f59d5bc7bf3733f",
+      "bytes": 76844
+    },
+    {
+      "file": "fire-breath.wav",
+      "sha256": "84826d47f8bf5a87b81c277b0a6b5fd4baa4659c7aa45c5490afdbd44537f80b",
+      "bytes": 201644
+    },
+    {
+      "file": "fire-breath-v2.wav",
+      "sha256": "9a0a4e2371ebfce840d969c8d22a47fff00f328f80fb9dcd15e699226a3c2db0",
+      "bytes": 201644
+    },
+    {
+      "file": "fire-breath-v3.wav",
+      "sha256": "52208cff8400175cacd4993d965532f8d5115f0036b19f5bb3a3c5611e48c580",
+      "bytes": 201644
+    },
+    {
+      "file": "bone-attack.wav",
+      "sha256": "b77a2bc10014bd13c322b7cdf1ed38a09443ad434cad9871ec8e5cb1ab4643b8",
+      "bytes": 67244
+    },
+    {
+      "file": "bone-attack-v2.wav",
+      "sha256": "3520346f8b8f4bdcdfa59844dbd691948892c47a8935c84bddc4edae3c7a492c",
+      "bytes": 67244
+    },
+    {
+      "file": "bone-attack-v3.wav",
+      "sha256": "24634e358a6e31b5ed4c48c9e843858b40e06dcd73e2c2dfbe9eb7e290ce5061",
+      "bytes": 67244
+    },
+    {
+      "file": "chitin-attack.wav",
+      "sha256": "2c242febe169f9e91e1a16adeffbd2fd9f67eb4d6f642e2314bbf580ed2c162b",
+      "bytes": 53804
+    },
+    {
+      "file": "chitin-attack-v2.wav",
+      "sha256": "aa75b40a11cecc73778abf5a24023761589e2bb9d0286f6eb2d2e3a38e25013c",
+      "bytes": 53804
+    },
+    {
+      "file": "chitin-attack-v3.wav",
+      "sha256": "75973b696362e75bc2e94607881b02304f526dfadf577e5a220e450fe0d5f837",
+      "bytes": 53804
+    },
+    {
+      "file": "serpent-attack.wav",
+      "sha256": "d7e8de4da102c358c9f38335bde6b7a5010018e08fdd10ab12ee569a83a523d9",
+      "bytes": 61484
+    },
+    {
+      "file": "serpent-attack-v2.wav",
+      "sha256": "156fd27e53adb4cf5b6df9e55a95d0a8e36619745b4f085aab20fc603aa53b7b",
+      "bytes": 61484
+    },
+    {
+      "file": "serpent-attack-v3.wav",
+      "sha256": "ce99a01d79f6a27ebfcc2f5b920b2547cf96955d9f4137be80685b2e630a8538",
+      "bytes": 61484
+    },
+    {
+      "file": "reptile-attack.wav",
+      "sha256": "11a75c6351d341cd524792685c102e2a9cb53cbfe95ce7cc3d1656baa3edae54",
+      "bytes": 107564
+    },
+    {
+      "file": "reptile-attack-v2.wav",
+      "sha256": "51ad7aefbf8c2534e30f08274e6ee597a0dcb267704fcc86b040aaf6fd251602",
+      "bytes": 107564
+    },
+    {
+      "file": "reptile-attack-v3.wav",
+      "sha256": "4a729710235e7e63844557d7a4352bf9176f183be06f84fbaa3bebfb4bf4c076",
+      "bytes": 107564
+    },
+    {
+      "file": "wood-attack.wav",
+      "sha256": "88ae9ac3e066c513a2640d668e2140cdb0726a41866f98784b088e0696211f60",
+      "bytes": 107564
+    },
+    {
+      "file": "wood-attack-v2.wav",
+      "sha256": "1f293343ba2ce2201c4c4eefde94e7928fce2f6ee9bf07ef3a657f74da1ea4f3",
+      "bytes": 107564
+    },
+    {
+      "file": "wood-attack-v3.wav",
+      "sha256": "f3373cca74b89547299d76ea0ad4a7abc9822bd758becedfd81073f62c71d5e5",
+      "bytes": 107564
+    },
+    {
+      "file": "armored-attack.wav",
+      "sha256": "281fda06c44c73bfcd24b55542238401fa033b2541a73841ccb5e8c923d3d4bf",
+      "bytes": 76844
+    },
+    {
+      "file": "armored-attack-v2.wav",
+      "sha256": "0305be5970db0abf4a97665d05aed0e98fc273dd6ecc3075891db4107efdf0be",
+      "bytes": 76844
+    },
+    {
+      "file": "armored-attack-v3.wav",
+      "sha256": "3a43afd676ce5384e83c790b79f2321a480c94604c6342af85407fbfbe6424a6",
+      "bytes": 76844
+    },
+    {
+      "file": "blade-attack.wav",
+      "sha256": "0651c1555a32af1f1bc945e41de7a963de91b952292d7ab422ebfbf11f8e4832",
+      "bytes": 57644
+    },
+    {
+      "file": "blade-attack-v2.wav",
+      "sha256": "304da1e80a437cacd14a8d60f9b622790669074efe6b6a2ed9dc22bb230a8bdc",
+      "bytes": 57644
+    },
+    {
+      "file": "blade-attack-v3.wav",
+      "sha256": "4aca356d181f79ff00df4a20fe571795138cd8b0a03066ee5b2a1dd8bb513e6f",
+      "bytes": 57644
+    },
+    {
+      "file": "heavy-swing.wav",
+      "sha256": "400c26a496dc011efee1cc4be649b16889de034e915dba93e04f9e9fd1bdd35b",
+      "bytes": 69164
+    },
+    {
+      "file": "heavy-swing-v2.wav",
+      "sha256": "c550b3c440c79df9ccf7158b303c27335177fbfd0d78eb2ccd41bc937e203359",
+      "bytes": 69164
+    },
+    {
+      "file": "heavy-swing-v3.wav",
+      "sha256": "05e256fe88cea911ea726e1fb893d402baff5a88e106910ba28c983d7e09af90",
+      "bytes": 69164
+    },
+    {
+      "file": "echoes-of-the-ruins.ogg",
+      "sha256": "b12c0981451149f19a9541b35be74052048377e1be553a0ba9d23cc18600a63b",
+      "bytes": 1801007
+    },
+    {
+      "file": "desert.ogg",
+      "sha256": "08eced5c3eed0a3fcc10895d797fb65e35994a40a0ff458875a702db21777692",
+      "bytes": 1639208
+    },
+    {
+      "file": "volcano.ogg",
+      "sha256": "1d2fc6990c93a008bfd898e41fb4a86c9dd9e553d9088aca8ca3f16eba7254c6",
+      "bytes": 1268016
+    },
+    {
+      "file": "tower.ogg",
+      "sha256": "dd360acd5e5484d4827aaf44ad964e3b98025badaa658dd54c0fb2a339677b9e",
+      "bytes": 1898079
+    }
+  ]
+}

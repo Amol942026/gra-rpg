@@ -22,7 +22,7 @@ bool prepareBoarCharge(Enemy& e,float dt,bool visible,float range){
  if(dt>0&&visible&&range>=BoarChargeMinRange&&range<=EnemySightRange&&e.boarChargeCd<=.00001f&&e.attack<=0&&e.windup<=0&&e.strike<=0){
   e.boarAim=player;e.boarDirection=normalized(player-e.pos);e.boarHit=false;e.boarWindup=BoarChargeWindup;
   e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;e.recoil={};
-  faceBoarCharge(e,e.boarDirection);sound(Cue::EnemyAttack,e.pos);return true;
+  faceBoarCharge(e,e.boarDirection);sound(enemyAttackCue(e.type),e.pos);return true;
  }
  return false;
 }
@@ -57,7 +57,7 @@ void advanceBoarCharge(Enemy& e,float dt,V heroFrom,V heroTo,bool wasRolling,flo
    e.boarWindup=0;e.boarAim=heroFrom+(heroTo-heroFrom)*(elapsed/dt);e.boarDirection=normalized(e.boarAim-e.pos);
    e.boarChargeCd=BoarChargeCooldown;e.boarHit=false;
    if(length(e.boarDirection)<.5f||dead()){finishBoarCharge(e);}
-   else{e.boarRush=BoarChargeDuration;e.boarCharges++;faceBoarCharge(e,e.boarDirection);e.animation.facingAngle=e.animation.targetAngle;sound(Cue::Swing,e.pos);}
+   else{e.boarRush=BoarChargeDuration;e.boarCharges++;faceBoarCharge(e,e.boarDirection);e.animation.facingAngle=e.animation.targetAngle;sound(Cue::BeastAttack,e.pos);}
   }
  }
  if(remaining>0&&e.boarRush>0){

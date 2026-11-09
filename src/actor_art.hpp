@@ -179,6 +179,12 @@ public:
     }
     void setSkeleton(const hero_motion::Pose* pose){skeleton=pose;skinBone=-1;}
     void reuseStorage(Rig& other){faces.swap(other.faces);faces.clear();shadowFaces.swap(other.shadowFaces);shadowFaces.clear();}
+    Vector2 anchor()const{return {x,y};}
+    void moveAnchor(float px,float py){
+        float dx=px-x,dy=py-y;if(std::abs(dx)+std::abs(dy)<.00001f)return;
+        for(auto& face:faces)for(auto& p:face.points){p.x+=dx;p.y+=dy;}
+        depthMin.x+=dx;depthMin.y+=dy;depthMax.x+=dx;depthMax.y+=dy;x=px;y=py;
+    }
     void setBone(int bone){skinBone=bone;}
     void setFacing(float angle){
         fx=std::cos(angle);fy=std::sin(angle)/.52f;
@@ -591,6 +597,9 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     int cacheKey=shadowCacheKey;if(probe&&pickingFromPreparedFrame&&species==0)cacheKey=0;
     if(!shadowBuilding&&(!probe||pickingFromPreparedFrame)&&cacheKey>=0)for(auto& entry:frameRigs)if(entry.first==cacheKey){cached=&entry.second;break;}
     Rig& rig=cached?*cached:working;
+    // Shadow preparation uses a flat receiver before the receiver mesh is
+    // raised. Reanchor its reused body geometry to the actual ground height.
+    if(cached)rig.moveAnchor(x,y);
     if(!cached){
     if(shadowBuilding&&!recycledRigs.empty()){working.reuseStorage(recycledRigs.back());recycledRigs.pop_back();}
 
@@ -629,7 +638,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     return false;
 }
 inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
- if(e.type>=VolcanoFirstType){if(shadowBuilding&&!shadowCasting)return false;float action=e.eruptionWindup>0?1-e.eruptionWindup/.95f:e.windup>0?.45f*(1-e.windup/.42f):e.strike>0?.45f+.55f*(1-e.strike/.22f):-1;return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,probe,shadowBuilding,false,e.flash>0);}
+ if(e.type>=VolcanoFirstType){if(shadowBuilding&&!shadowCasting)return false;float action=e.abilityBusy()?e.abilityAction():e.eruptionWindup>0?1-e.eruptionWindup/.95f:e.windup>0?.45f*(1-e.windup/.42f):e.strike>0?.45f+.55f*(1-e.strike/.22f):-1;return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,probe,shadowBuilding,false,e.flash>0);}
  int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;
  bool hit=draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,e.flash>0,outline,probe,-1,-1,-1,3,false,nullptr,e.boulderProgress());shadowCacheKey=previous;return hit;
 }

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "files": [
+    {
+      "path": "assets/sprites/equipment-icons.png",
+      "sha256": "92fd5cd26256d467b44d371408dc1b859b8cdb1afb77fae1631ad826b40d2875",
+      "bytes": 586598
+    },
+    {
+      "path": "assets/sprites/equipment-icons.json",
+      "sha256": "ba755098ebdeb50eaba194a987ddcb71ace78bf66f8b455274d0ac2a8c7342c6",
+      "bytes": 36396
+    }
+  ],
+  "new_runtime_atlas": true,
+  "preloaded": true,
+  "models_delivered_to_game": false
+}

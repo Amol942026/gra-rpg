@@ -1,0 +1,195 @@
+{
+  "status": "PASS",
+  "date": "2026-11-08",
+  "old_map_side": 72,
+  "new_map_side": 102,
+  "area_multiplier": 2.0069444444444446,
+  "layout": [
+    {
+      "realm": "forest",
+      "size": 102,
+      "enemies": 91,
+      "props": 490,
+      "hills": 28
+    },
+    {
+      "realm": "desert",
+      "size": 102,
+      "enemies": 55,
+      "props": 487,
+      "hills": 28
+    },
+    {
+      "realm": "volcano",
+      "size": 102,
+      "enemies": 61,
+      "props": 209,
+      "hills": 32
+    }
+  ],
+  "gameplay_and_animation_checks": 234833,
+  "persistence_checks": 10157,
+  "renderer": {
+    "status": "PASS",
+    "checks": 184,
+    "failures": 0,
+    "realms": 3,
+    "map_side": 102,
+    "area_multiplier": 2.00694,
+    "captured_frames": 21,
+    "terrain_cache_width": 6270,
+    "terrain_cache_height": 3285,
+    "hidden": true,
+    "audio_opened": false,
+    "presentation_measured": false,
+    "completed_update_render_mean_ms": 8.46513,
+    "completed_update_render_p95_ms": 10.6155
+  },
+  "terrain_projections": [
+    {
+      "realm": 0,
+      "hills": 28,
+      "maximum": 3.6,
+      "min_projection_jacobian": 12.1413,
+      "raised_fraction": 0.501187,
+      "pass": true
+    },
+    {
+      "realm": 2,
+      "hills": 28,
+      "maximum": 3.6,
+      "min_projection_jacobian": 11.6082,
+      "raised_fraction": 0.475598,
+      "pass": true
+    },
+    {
+      "realm": 3,
+      "hills": 32,
+      "maximum": 3.6,
+      "min_projection_jacobian": 10.1172,
+      "raised_fraction": 0.422307,
+      "pass": true
+    }
+  ],
+  "save_version": 12,
+  "world_expansion_revision": 1,
+  "volcano_scenery_revision": 5,
+  "legacy_save_versions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "native_previous_release_fixtures": {
+    "source_release_save_version": 11,
+    "source_map_side": 72,
+    "created_before_expansion": true,
+    "fixtures": {
+      "desert-v11.efs": {
+        "sha256": "49dcb115ca91ab5ce08e8f5dbcd2122f17857c89c9e0c684533c7232c4b40dfc",
+        "bytes": 96073
+      },
+      "forest-v11.efs": {
+        "sha256": "982e34fcc60d243970d52b0026423304e2e47de9b9d645b18853204e4ee8405e",
+        "bytes": 96073
+      },
+      "volcano-v11.efs": {
+        "sha256": "f90116d3f9f65f6c64e949481533e7b41277a0c60acb5df5466d44307c034e12",
+        "bytes": 96073
+      }
+    }
+  },
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "f00599c47d81e42eb6d06f920c06d6a7a8fa93263f6e70eeb5e70f49c01186df",
+      "exe_sha256": "3e41bc0eba34304e4b8f2ed7807ad85859325156c640bca0b19157c059d5e5aa",
+      "verified_assets": 228,
+      "startup": [
+        {
+          "scenario": "main-menu",
+          "frames": 180
+        }
+      ],
+      "world_expansion": {
+        "status": "PASS",
+        "checks": 184,
+        "failures": 0,
+        "realms": 3,
+        "map_side": 102,
+        "area_multiplier": 2.00694,
+        "captured_frames": 21,
+        "terrain_cache_width": 6270,
+        "terrain_cache_height": 3285,
+        "hidden": true,
+        "audio_opened": false,
+        "presentation_measured": false,
+        "completed_update_render_mean_ms": 8.84847,
+        "completed_update_render_p95_ms": 10.6162
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "4779326b23214763a6406a70a4fc832e8daa50948999c60af27adf9974c174b1",
+      "exe_sha256": "e3342d480dacf01d76406274af51b9477f2a94a35da1b97302e594a287266dc9",
+      "verified_assets": 228,
+      "startup": [
+        {
+          "scenario": "forest",
+          "frames": 180
+        },
+        {
+          "scenario": "desert",
+          "frames": 180
+        },
+        {
+          "scenario": "volcano",
+          "frames": 180
+        }
+      ],
+      "world_expansion": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    }
+  ],
+  "audio_preferences_unchanged": true,
+  "audio_preferences_sha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6",
+  "audio_played": false,
+  "foreground_fps_measured": false,
+  "new_raster_assets": false,
+  "source_sha256": {
+    "src/game.hpp": "8e7ca4fa483f49d71647c21ae4eb8920d795587521b7d329d5028fbb831ba223",
+    "src/forest_layout.hpp": "eb9cf073e4dc9b1cd0eb4b36e12ae380e0840223ce5b3cbaa6bdea4d7fc0b0f8",
+    "src/desert_layout.hpp": "14100f1ebe55c20e1dc949bf210c2dfb935ad4ecad421d3793be5545dd0b0c09",
+    "src/volcano_layout.hpp": "1efa98dd84eed9597cb1513ce08b954d165e1af69b63309416785333598d2043",
+    "src/volcano_system.hpp": "bc6d0fab1bb52fd719bc8b0576f761313f9acfe691aac977ea4276e36641152d",
+    "src/world_expansion.hpp": "0a0f2300755061a3637b7b140ad6d7f38bda0b4cc7624cd7f23217ade7c0c0a6",
+    "src/save_game.hpp": "1af2e67980243d60a6da9b90b608c330992623ae0346df897bbb712339a5956e",
+    "src/main.cpp": "b07b99c9549544c37c88b070f71080230433795e03d8f175342fa503712a5bb9",
+    "src/terrain_height.hpp": "11c3fabc9169045f131dd3c867430b7ee775f82bde31b21c4d508f73cb35fd4d",
+    "src/terrain_surface.hpp": "9745b4c723a26838fff15b76eb63fca24d2cf232941cd9c3256ddb0e54afc1d5",
+    "src/volcano_roads.hpp": "0fd4de76cc26c6b7d37b332cb8ad4d86009db7d5b0661dcf8988d35b4e72bbb3",
+    "src/volcano_road_art.hpp": "cc3aea83621a9cbfa50318ce2287ec4c79450714e4a481cd5ffbd1eb109320c7",
+    "src/volcano_art.hpp": "8a0e62e152ecc4149dce2e813f77f866e78d616cc8e2a0f962d564a8a686dd06",
+    "src/desert_art.hpp": "645ba596ae9cc18c588ba0a25c4caa8fd34c8593791aa18ddd62cfa8f87de999",
+    "src/forest_qa.hpp": "89b4cfc42d2152c771afd5db0002fd17820633171000b854647953d1562bff30",
+    "src/desert_qa.hpp": "883197443abc8bf6e0611448b1ddc6f9e6345b83da2e0a839f07019f649c8b55",
+    "tests/world_expansion_tests.hpp": "cf2e42ccc9993fa2a1457d917b59da98e5b4ee2a38cd2ed7399508582df28730",
+    "tests/world_expansion_save_tests.hpp": "4067290a99de48d24bd2706bfe29968266ac450bf8e1831322de8e79aa8c55d6",
+    "tests/world_expansion_probe.cpp": "736b9a89a799ec9f4d5c9c8cb71fd639dfc7de940fa6393584ab0205cbf274aa",
+    "tests/world_expansion_qa.cpp": "5abe78ea45abf11eaeea55011c0880915b595e03a0e4a00abe2b23b72f1e02e6",
+    "tests/world_expansion_qa.ps1": "f62460086dc009fb9708eaae65153ee21bcb13da8241c6856d05a9fbaddeff5c",
+    "tests/world_expansion_package_qa.ps1": "87d9539e976671c5b3a90233ffe180eacb83b76123077dd90444aa6f98531fab"
+  }
+}

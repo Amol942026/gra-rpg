@@ -1,10 +1,10 @@
 """Offline loudness metering, fixed-length loop seam repair and OGG delivery."""
 from pathlib import Path
-import json, math, re, subprocess, wave
+import json, math, re, shutil, subprocess, wave
 import numpy as np
 from asset_tools import sha, write_json
 
-FFMPEG=Path(r"C:\Program Files\Krita (x64)\bin\ffmpeg.exe")
+FFMPEG=Path(shutil.which("ffmpeg") or r"C:\Program Files\Krita (x64)\bin\ffmpeg.exe")
 
 
 def ffmpeg(arguments, log_path, engine=FFMPEG):

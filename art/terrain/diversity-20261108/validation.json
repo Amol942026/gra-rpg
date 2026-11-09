@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "date": "2026-11-08",
+  "hills": {
+    "desert": 14,
+    "forest": 14,
+    "volcano": 16,
+    "total": 44
+  },
+  "gameplay_checks": 200013,
+  "persistence_checks": 4513,
+  "terrain_renderer_checks": 1584,
+  "volcano_renderer_checks": 1063,
+  "treasure_ui_checks": 115,
+  "native_asset_checks": 13,
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "c439c6fe2230b5e25b994a780ca3329bd048bb788f9e2c784207c905d150741e",
+      "exe_sha256": "20d0185857c9c83b4e4cf70503c18e52798371c2d486fc7b5482eba30d86e38d",
+      "verified_assets": 147,
+      "startup": [
+        {
+          "scenario": "main-menu",
+          "frames": 180
+        }
+      ],
+      "hills": {
+        "status": "PASS",
+        "checks": 1584,
+        "failures": 0,
+        "realms": 3,
+        "walkable_hills": 44,
+        "road_segments": 87,
+        "movement_frames": 180,
+        "hidden": true,
+        "audio_opened": false,
+        "completed_render_mean_ms": 6.05309,
+        "completed_render_p95_ms": 6.5427,
+        "presentation_measured": false
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "6834973ac2dab5e50cb87124493dc5ab4dec4271cc31d90bc9c9fab4e12ecb7a",
+      "exe_sha256": "1a38255f950413585f8c71af993ebdeecfd66f0cdf04f33a82d6704079e283b6",
+      "verified_assets": 147,
+      "startup": [
+        {
+          "scenario": "forest",
+          "frames": 180
+        },
+        {
+          "scenario": "desert",
+          "frames": 180
+        },
+        {
+          "scenario": "volcano",
+          "frames": 180
+        }
+      ],
+      "hills": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    }
+  ],
+  "audio_preferences_unchanged": true,
+  "save_version_changed": false,
+  "source_sha256": {
+    "src/game.hpp": "05e87a600b8c45531d5345c8e7963678fb85a3cb1cb47daf42a85cf90a204459",
+    "src/terrain_height.hpp": "f35519c6a34741268956cc5424e1318ac974b35ff77cf536d11a2014f94214f0",
+    "src/volcano_roads.hpp": "601977efcfbabaa89a5ff08efa530e29a9f48bd153ba58940854b11a850fdfd6",
+    "src/volcano_art.hpp": "e277bb96c06bdb83eb48a68140fa3308598741d34a548975d4b30736c42852cc",
+    "src/volcano_road_art.hpp": "e881292f307741c88b8419013e619e6e52430fe527533de26f8af4a94479f4f4",
+    "src/guardian_boulder.hpp": "1b1a85306ca37b6c194d28f1d508ec902162dbb9ea444e8ea26afe512879ef26"
+  }
+}

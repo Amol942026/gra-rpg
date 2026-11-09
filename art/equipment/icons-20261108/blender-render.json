@@ -1,0 +1,433 @@
+{
+  "version": "5.2.2 LTS",
+  "engine": "BLENDER_EEVEE",
+  "new_models": true,
+  "2d_delivery_only": true,
+  "renders": [
+    {
+      "kind": 1,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\001.png",
+      "sha256": "6406c7dabd96d8a7a5753b85f1c095209912b58c39bf391317ee3a70ea466c21"
+    },
+    {
+      "kind": 2,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\002.png",
+      "sha256": "25b4795f45ecf5e25aee708c3ee1353fa511f70fc7c55f988f7652640ad5c7b8"
+    },
+    {
+      "kind": 3,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\003.png",
+      "sha256": "86b174df9736373ec904c0ff372fa1d3cf81016c6b0b106d277a1eec7c42e2db"
+    },
+    {
+      "kind": 4,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\004.png",
+      "sha256": "07633f4227a33da3a1e85840b8f670f612c1d038db368d4f24fa1d63128a9467"
+    },
+    {
+      "kind": 5,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\005.png",
+      "sha256": "3aa4c1f4da200dd0d7454b2744f5d8d72d18dc31954df286d78247a6bd0859a5"
+    },
+    {
+      "kind": 6,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\006.png",
+      "sha256": "9a0e753daefe77de9ea144a11c902bec5bb8646af9b8382dbc5d432c75141005"
+    },
+    {
+      "kind": 7,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\007.png",
+      "sha256": "1bd7d25deb3d961c0a2ed86b2dafa939e3306cb881337b2cbabb984d33d00f89"
+    },
+    {
+      "kind": 24,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\024.png",
+      "sha256": "76e6d040ae78deb4c1f05fa274cb277b2492e2b3d4bd20f82231479ca0e220ef"
+    },
+    {
+      "kind": 25,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\025.png",
+      "sha256": "c7af8aef603842e3f44b3779ded07da47deeb3142ff2d2d6533e4b119c32e30c"
+    },
+    {
+      "kind": 26,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\026.png",
+      "sha256": "33475ccaa2eb24b988eadd3b2e669b02b827290133b4770db59cf5dd31f3df86"
+    },
+    {
+      "kind": 28,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\028.png",
+      "sha256": "d72d6a476bc41050f11a69b416caf53f7c0d67a36377583b9f75c1d5013148e2"
+    },
+    {
+      "kind": 35,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\035.png",
+      "sha256": "18f4fbfa9cc9c3ad342cfd2bc6de4c2241dd423dfd19bd6232f2c1842d63c31b"
+    },
+    {
+      "kind": 36,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\036.png",
+      "sha256": "934fdf5046dc36f5d1e5e0053dc5d36eac1660662b51461a9526108bb754819b"
+    },
+    {
+      "kind": 37,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\037.png",
+      "sha256": "0050e470f507f1e7083756dc0b8f6330778066544d8bd346adaad09a54fabf67"
+    },
+    {
+      "kind": 38,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\038.png",
+      "sha256": "9831c8e0d3b7b098b37baf10f5f5e85f33c2cd8a7b0db6dd31f542c117bafaf3"
+    },
+    {
+      "kind": 39,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\039.png",
+      "sha256": "561c5a8baea00cec3f997a90567638ef76660be3b42f229b534d7e18eae34f67"
+    },
+    {
+      "kind": 40,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\040.png",
+      "sha256": "5fa17b56e6d4ebf5404b9aa8d3dd227e3477349ee7c32929970fb5ed8fcb93a0"
+    },
+    {
+      "kind": 41,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\041.png",
+      "sha256": "3802ad997279ead0334ada51454309c637e0cc081efb96a2c4ef0c815a9c8cb9"
+    },
+    {
+      "kind": 42,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\042.png",
+      "sha256": "f2abd63434c63c0ad73336f6f0f88fd4a3330377d690df549028219fd1007d59"
+    },
+    {
+      "kind": 43,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\043.png",
+      "sha256": "9c0535c32919b9dc76b44c063cc687ca08d800fa5852332593efba518774dcb6"
+    },
+    {
+      "kind": 44,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\044.png",
+      "sha256": "d815e76af26b83cc98f156c0b0777f60d850a0effedc6431dc40ccebeb8e0191"
+    },
+    {
+      "kind": 45,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\045.png",
+      "sha256": "1786c101236a8b1a3246336c814cba8c44fdbcb0c620d970472fd750c37081cc"
+    },
+    {
+      "kind": 46,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\046.png",
+      "sha256": "b929a10f007cc3053795fe5146f73da40e5a7af395ccd8ce80560cab216a8b89"
+    },
+    {
+      "kind": 47,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\047.png",
+      "sha256": "0cde47aab89a8bdecade4057c08cfb80e2525f42b899202b0714a5de0787c455"
+    },
+    {
+      "kind": 48,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\048.png",
+      "sha256": "37ac88a6527469973c7934d190460a02dc75f7442afb2ded469f8e50e9cd477f"
+    },
+    {
+      "kind": 49,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\049.png",
+      "sha256": "054c63f539e38c0e2522061075184035ecd2b924e69f8eac776c7813f2de15f3"
+    },
+    {
+      "kind": 50,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\050.png",
+      "sha256": "7c6e0dad39d935597ecc5be135e19eca39f5bc9aea30d54c3417a1c9caa6efce"
+    },
+    {
+      "kind": 51,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\051.png",
+      "sha256": "8d06173d098d5a7f900b865d0c8eb680672a69466c884f14de7d3afd19a44a85"
+    },
+    {
+      "kind": 52,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\052.png",
+      "sha256": "36d6ba36b39faaa2d6974a2ce5124cb5cf52a6c61dff1c3cac9e622d367938c7"
+    },
+    {
+      "kind": 53,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\053.png",
+      "sha256": "3e4fbb0337debaa9a72e834a6528fa27ab023249ece0099dcfa135790d21c9cc"
+    },
+    {
+      "kind": 54,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\054.png",
+      "sha256": "b9b460a95cf440f39e31148f755431b0ec30349b1235782f533bc1bcbf75e182"
+    },
+    {
+      "kind": 55,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\055.png",
+      "sha256": "95f0a2f3c7d85cbcbe969084d50bc2b29b99aa6804c6346930de4ee0913f629d"
+    },
+    {
+      "kind": 56,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\056.png",
+      "sha256": "88000168e6f6675d34a330ad31a961987082638a58e88ac611c3cdfaa1164efa"
+    },
+    {
+      "kind": 57,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\057.png",
+      "sha256": "cf7796f2255ed642f93e6f0372514c41a9f6ee1837074aac94594dded048eab4"
+    },
+    {
+      "kind": 58,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\058.png",
+      "sha256": "208e0b347d051704a7844caa7e1b5c4ed115070ee950077378414e3b22702cca"
+    },
+    {
+      "kind": 59,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\059.png",
+      "sha256": "23fb30964b6c3edf2d9e91aa62e351226d1e163bd3abd38cde9e501214d04cd9"
+    },
+    {
+      "kind": 60,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\060.png",
+      "sha256": "39ba6f23126e0ea2237d041399a4ee3cacd2e72730311c2b1ff1ea01a87a4147"
+    },
+    {
+      "kind": 61,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\061.png",
+      "sha256": "4c6f1934fe449fc9c22c2c03fddea6d5d16c44054327257c822b2600d78cfc90"
+    },
+    {
+      "kind": 62,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\062.png",
+      "sha256": "44e870cf4f476c88ab646ac131841399f09e25e049af4852df79f017268100d9"
+    },
+    {
+      "kind": 63,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\063.png",
+      "sha256": "3de2207d07a0cc91ced13a788e661762d4b25f95c70c682462e97918023a58d4"
+    },
+    {
+      "kind": 64,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\064.png",
+      "sha256": "18d17948ad57a8cb3dd086654af201ac49a030e798dab7ea767ea129eb3086a7"
+    },
+    {
+      "kind": 65,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\065.png",
+      "sha256": "5804f9e1d39fa98a27a5fe9190cb62ef5a71dc28e69cc53be94755348d969867"
+    },
+    {
+      "kind": 66,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\066.png",
+      "sha256": "1889dff9bf5af36276225c977d6a66a325f68e5cc44319a81aab44d7bd10f77a"
+    },
+    {
+      "kind": 67,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\067.png",
+      "sha256": "1567cb054e0e16a0005099c22acc3fc800d940f0b04456512ee51acc9eba79b8"
+    },
+    {
+      "kind": 68,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\068.png",
+      "sha256": "2e6b6b28a3e98586fcdcd236c6b2aecb4397c3e269b3eff98f9ad0f929b26529"
+    },
+    {
+      "kind": 69,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\069.png",
+      "sha256": "4d5e24c0962c8ee4881e13c45034615de87340cf536b7de403db0c22db0dc540"
+    },
+    {
+      "kind": 70,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\070.png",
+      "sha256": "cee2eca938d34184a43ceb3564cdd5f83b4d16d345ac74e0fe2255832ddfa0f5"
+    },
+    {
+      "kind": 71,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\071.png",
+      "sha256": "c9eec8ff2d2522bdd6bd2e7837de3e02c99a54c2a2001439abc472391eb6d5eb"
+    },
+    {
+      "kind": 72,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\072.png",
+      "sha256": "29fe9341ca8eee05a2b9f62737facaffa0008c7a00d1c4d02e04be0199832c08"
+    },
+    {
+      "kind": 73,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\073.png",
+      "sha256": "9450377a614b747c9361518caa86bba70cf8e38371187fedf47d98057bebd413"
+    },
+    {
+      "kind": 74,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\074.png",
+      "sha256": "749965e5772ff4fc128bbcbd0b7de303f065e61fbfce635a80132f70514a933a"
+    },
+    {
+      "kind": 75,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\075.png",
+      "sha256": "437e8dc86f2502b8cd6c04f471dee906786379a16d51bb74f3d95c0a44ddf75e"
+    },
+    {
+      "kind": 76,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\076.png",
+      "sha256": "f204624ea120b41d7b65e74c7d5fc3a8656bd59b7c703d9d64ba4804f1d7ad23"
+    },
+    {
+      "kind": 77,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\077.png",
+      "sha256": "bdddb0e90d88bdbbec859d62d4e166dc48641ccade32e698d78a468ac6d42c95"
+    },
+    {
+      "kind": 78,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\078.png",
+      "sha256": "19ec60699b79dd9264887e0a71fed9f35939c0652e115422898bcbc89ae42a38"
+    },
+    {
+      "kind": 79,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\079.png",
+      "sha256": "a43b12b33b24f3cfd46887970324cec9d01d4206a4a1894e63312ced8a3fa48a"
+    },
+    {
+      "kind": 80,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\080.png",
+      "sha256": "101a04e39e42ae2a3449977d660790f315c148c3c050936e4c1868fb39c13c83"
+    },
+    {
+      "kind": 81,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\081.png",
+      "sha256": "4eb26af2bcbb703b334d664521c8a27e0ab59b5f7a8ea908210f837ffbd726fe"
+    },
+    {
+      "kind": 82,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\082.png",
+      "sha256": "fdd65b5e73f3632db53d5339692b74232aac613b8000a19df488798f53efffd3"
+    },
+    {
+      "kind": 83,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\083.png",
+      "sha256": "400915d8a97652966900b50827ade9303d82542ad194e206cffb32c92509d5d1"
+    },
+    {
+      "kind": 84,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\084.png",
+      "sha256": "737a8b07c59f98ac348ce51373867ea3e7f5c83bc408623691a6805ca6a60fc1"
+    },
+    {
+      "kind": 85,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\085.png",
+      "sha256": "685263f6e017d3847ee08a6df4608b2964a2d73a407e5a18f44258be0c0a44fd"
+    },
+    {
+      "kind": 86,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\086.png",
+      "sha256": "9b361cc68c372f9d8b7fefdb359f4d94a99a2c02cd18b222ad0e0f2b298d97ba"
+    },
+    {
+      "kind": 87,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\087.png",
+      "sha256": "4afacb00717173a0395baa6742fb34c80db65d45cca1495d897d5410b790f478"
+    },
+    {
+      "kind": 88,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\088.png",
+      "sha256": "f594f51f8c313c86ee479282dbf39952660ca01cb21e79dd7885edfefbd30372"
+    },
+    {
+      "kind": 89,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\089.png",
+      "sha256": "9bd514377ad982c5691addcd7169cd5fd991c31e5ce166e9d7f0fb48978935e5"
+    },
+    {
+      "kind": 90,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\090.png",
+      "sha256": "249254832a7d7c0ec3eaa967910891c52a03d751c20e1d18bb678f7cc6c32a68"
+    },
+    {
+      "kind": 91,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\091.png",
+      "sha256": "a2e52a2616a7d1ae40d7e45d9542ac88562619c1fdd4134b927c63d0e6c279e7"
+    },
+    {
+      "kind": 92,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\092.png",
+      "sha256": "3a023c378a2e6ea79d6b5556845694557cb378d18afe6808a57faf33b5c9c05d"
+    },
+    {
+      "kind": 93,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\093.png",
+      "sha256": "c06a9f4aa386b3945a65fa409b489883bc38776f616c443a1210daad33ddfa7f"
+    },
+    {
+      "kind": 94,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\094.png",
+      "sha256": "8878e8ef52ada8b81f586d0ca0309d3392a1b44ab9863b5a2315a609139b5ee1"
+    },
+    {
+      "kind": 95,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\095.png",
+      "sha256": "3a16d713fcd7703ed1e4bcc4fa6ee4c5bac1094f1ec862c0d18ece7245370203"
+    },
+    {
+      "kind": 96,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\096.png",
+      "sha256": "4b1e4fe18ffc13a95cce6d9a4cbb69e1bb73f6a5399936078bd9b145a0e6a7bb"
+    },
+    {
+      "kind": 97,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\097.png",
+      "sha256": "bc7b25ef5eda865153026e8b8fa6ae4fd0ae93a4deb689858c0f471f99458ddd"
+    },
+    {
+      "kind": 98,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\098.png",
+      "sha256": "c2007a451da2fb14e9ae2fe2db82a1059c5d49a5b4505da0ff5fa610d1ae8198"
+    },
+    {
+      "kind": 99,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\099.png",
+      "sha256": "f66e6f9fa9b719117bc80726d28eab7701c11ccbf7b69608cfcb8c6419899029"
+    },
+    {
+      "kind": 100,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\100.png",
+      "sha256": "b37db750795d9b009de5e299217dd4fb6cc6521c4a109fcbf62ce399fb158ed4"
+    },
+    {
+      "kind": 101,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\101.png",
+      "sha256": "f7fef3ad37f5295fbbeb5550d69d37f7a43fbfd7d5eb115402046ad0698e1b8a"
+    },
+    {
+      "kind": 102,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\102.png",
+      "sha256": "24f54db460080b5263bc339b8548046599694aba8fcc83c944fc611be0d2f0bb"
+    },
+    {
+      "kind": 103,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\103.png",
+      "sha256": "67c768cb5a5b7a8872e9d2c7941e076f8a14dacbe5e1f224ab1849827f56b945"
+    },
+    {
+      "kind": 104,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\104.png",
+      "sha256": "7b1347803cba8fe2c3e0f90acfb1df27e5c213e10487b74afac736d23fe77316"
+    },
+    {
+      "kind": 105,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\105.png",
+      "sha256": "23ef10eaa82fa84a5a894f23afbcb04e6cffb28c084dde3eb6a008eeff0749ca"
+    },
+    {
+      "kind": 106,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\106.png",
+      "sha256": "5f4c1a542fd02dc47a7d46392fe2d2f2c0a054b7bdc18c1713eabba16bb88d60"
+    },
+    {
+      "kind": 107,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\107.png",
+      "sha256": "4eecb7bcfe9ed2663fd5678ce90c3c387dd911d8efe2a13e06cb70b2d6a34be4"
+    },
+    {
+      "kind": 108,
+      "path": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\renders\\108.png",
+      "sha256": "16a43f93bd7dd58b24d644ab01e94833c96b7c0568f974fdbda5e33da87070ec"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+#include "save_game.hpp"
+#include <iostream>
+int main(int argc,char** argv){if(argc!=2||std::string(argv[1])!="--no-audio")return 3;using namespace ember;static_assert(saves::CurrentVersion==14&&int(Cue::Count)==45);saves::Snapshot s;s.game.hp=87;s.game.mana=71;s.game.gold=1420;s.game.bag[9]=item(Kind::Gold,0,100);s.game.fireballs.push_back({s.game.player,V{8,0},6,28,true});s.game.explosions.push_back({s.game.player,.2f});s.game.sounds.push_back({Cue::BowDraw,s.game.player.x,s.game.player.y});s.date="2026-11-09 00:30";auto data=saves::encode(s);std::ofstream out("art/gameplay/eldrin-spells-20261109/legacy-v14.efs",std::ios::binary);out.write(data.data(),data.size());std::cout<<"Authentic previous-code v14 fixture: "<<data.size()<<" bytes\n";}

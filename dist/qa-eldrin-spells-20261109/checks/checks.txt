@@ -1,0 +1,22 @@
+PASS player QA stays hidden with audio hardware closed
+PASS all elemental graphics preload once in the real player renderer
+PASS normal spell book cannot grant an unknown spell for free
+PASS normal spell book cannot grant an unknown spell for free
+PASS normal spell book cannot grant an unknown spell for free
+PASS C cannot cast before any lesson has been bought
+PASS E / NPC talk handler starts the real Eldrin conversation after the first guardian
+PASS existing fantasy dialogue reaches the travel and lessons choice
+PASS new lesson choice has spacing and does not overlap travel or stay
+PASS Eldrin choice opens the paid lessons panel and closes dialogue cleanly
+PASS insufficient payment remains rejected through the actual purchase button
+PASS paid fire lesson charges exactly its displayed price
+PASS clicking a known spell equips it without charging twice
+PASS ice and lightning buttons charge their displayed prices and remember independent knowledge
+PASS real UI purchases and balance survive a complete save/reload
+PASS actual cast input selects the bought element and aims at a visible target
+PASS rendered projectile impacts with its own elemental burst
+PASS actual cast input selects the bought element and aims at a visible target
+PASS rendered projectile impacts with its own elemental burst
+PASS actual cast input selects the bought element and aims at a visible target
+PASS rendered projectile impacts with its own elemental burst
+PASS no graphical or transaction diagnostic initializes audio

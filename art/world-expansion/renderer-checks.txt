@@ -1,0 +1,184 @@
+PASS bounded terrain cache loads / forest
+PASS new territory has continuous painted opaque ground / forest
+PASS realm arrival remains walkable / forest
+PASS actual full gameplay capture / forest-arrival
+PASS capture stays hidden / forest-arrival
+PASS walkable new region camera / forest
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / forest-extension-0
+PASS capture stays hidden / forest-extension-0
+PASS walking in new sectors reuses the same terrain cache / forest
+PASS walkable new region camera / forest
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / forest-extension-1
+PASS capture stays hidden / forest-extension-1
+PASS walking in new sectors reuses the same terrain cache / forest
+PASS walkable new region camera / forest
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / forest-extension-2
+PASS capture stays hidden / forest-extension-2
+PASS walking in new sectors reuses the same terrain cache / forest
+PASS walkable new region camera / forest
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / forest-extension-3
+PASS capture stays hidden / forest-extension-3
+PASS walking in new sectors reuses the same terrain cache / forest
+PASS walkable new region camera / forest
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / forest-extension-4
+PASS capture stays hidden / forest-extension-4
+PASS walking in new sectors reuses the same terrain cache / forest
+PASS original guardian arena remains accessible / forest
+PASS actual full gameplay capture / forest-guardian
+PASS capture stays hidden / forest-guardian
+PASS bounded terrain cache loads / desert
+PASS new territory has continuous painted opaque ground / desert
+PASS realm arrival remains walkable / desert
+PASS actual full gameplay capture / desert-arrival
+PASS capture stays hidden / desert-arrival
+PASS walkable new region camera / desert
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / desert-extension-0
+PASS capture stays hidden / desert-extension-0
+PASS walking in new sectors reuses the same terrain cache / desert
+PASS walkable new region camera / desert
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / desert-extension-1
+PASS capture stays hidden / desert-extension-1
+PASS walking in new sectors reuses the same terrain cache / desert
+PASS walkable new region camera / desert
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / desert-extension-2
+PASS capture stays hidden / desert-extension-2
+PASS walking in new sectors reuses the same terrain cache / desert
+PASS walkable new region camera / desert
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / desert-extension-3
+PASS capture stays hidden / desert-extension-3
+PASS walking in new sectors reuses the same terrain cache / desert
+PASS walkable new region camera / desert
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / desert-extension-4
+PASS capture stays hidden / desert-extension-4
+PASS walking in new sectors reuses the same terrain cache / desert
+PASS original guardian arena remains accessible / desert
+PASS actual full gameplay capture / desert-guardian
+PASS capture stays hidden / desert-guardian
+PASS bounded terrain cache loads / volcano
+PASS new territory has continuous painted opaque ground / volcano
+PASS realm arrival remains walkable / volcano
+PASS actual full gameplay capture / volcano-arrival
+PASS capture stays hidden / volcano-arrival
+PASS walkable new region camera / volcano
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / volcano-extension-0
+PASS capture stays hidden / volcano-extension-0
+PASS walking in new sectors reuses the same terrain cache / volcano
+PASS walkable new region camera / volcano
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / volcano-extension-1
+PASS capture stays hidden / volcano-extension-1
+PASS walking in new sectors reuses the same terrain cache / volcano
+PASS walkable new region camera / volcano
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / volcano-extension-2
+PASS capture stays hidden / volcano-extension-2
+PASS walking in new sectors reuses the same terrain cache / volcano
+PASS walkable new region camera / volcano
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / volcano-extension-3
+PASS capture stays hidden / volcano-extension-3
+PASS walking in new sectors reuses the same terrain cache / volcano
+PASS walkable new region camera / volcano
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS height-aware pointer returns the hero's actual world position in new terrain
+PASS actual full gameplay capture / volcano-extension-4
+PASS capture stays hidden / volcano-extension-4
+PASS walking in new sectors reuses the same terrain cache / volcano
+PASS original guardian arena remains accessible / volcano
+PASS actual full gameplay capture / volcano-guardian
+PASS capture stays hidden / volcano-guardian
+PASS continuous enlarged road mask uses a valid native shader
+PASS each painted deck aligns with its actual traversable lava bridge
+PASS each painted deck aligns with its actual traversable lava bridge
+PASS each painted deck aligns with its actual traversable lava bridge
+PASS each painted deck aligns with its actual traversable lava bridge
+PASS each painted deck aligns with its actual traversable lava bridge
+PASS each painted deck aligns with its actual traversable lava bridge
+PASS each painted deck aligns with its actual traversable lava bridge
+PASS each painted deck aligns with its actual traversable lava bridge
+PASS entire graphical integration stays silent and hidden

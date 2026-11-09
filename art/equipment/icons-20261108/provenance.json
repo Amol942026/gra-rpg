@@ -1,0 +1,949 @@
+{
+  "status": "PASS",
+  "runtime_2d_only": true,
+  "local_only": true,
+  "paid_nodes": false,
+  "new_models_requested_by_user": true,
+  "blender": {
+    "version": "5.2.2 LTS",
+    "engine": "BLENDER_EEVEE",
+    "master": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\equipment-master.blend",
+    "sha256": "468964dd9453edf3266fdfdb2cbf9d38c7efe442185b6e421e8b7321edb441b5",
+    "own_models": 85
+  },
+  "comfy": {
+    "version": "0.44.0",
+    "model": "C:\\Users\\Amol\\AppData\\Local\\Comfy-Desktop\\ComfyUI-Installs\\Amol\\ComfyUI\\models\\checkpoints\\DreamShaper_8_pruned.safetensors",
+    "model_sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+    "source": "https://huggingface.co/Lykon/DreamShaper",
+    "author": "Lykon",
+    "license_evidence": "art/volcano/comfy/",
+    "histories": [
+      {
+        "prompt_id": "03559349-d5e1-47af-8a5a-3b0e13cd7614",
+        "status": "success",
+        "history": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\logs\\03559349-d5e1-47af-8a5a-3b0e13cd7614-history.json",
+        "sha256": "c619ae33c02f9929cf9400c27c3114b2fa504ac09afc4e443afd79af103132e6",
+        "output_nodes": 12
+      },
+      {
+        "prompt_id": "0b37aa3e-31b5-4128-aa3b-60848abb3a79",
+        "status": "success",
+        "history": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\logs\\0b37aa3e-31b5-4128-aa3b-60848abb3a79-history.json",
+        "sha256": "3db4374998c716206c486aae7be615abb26b053c3685bfd35ac61feaeeff5426",
+        "output_nodes": 12
+      },
+      {
+        "prompt_id": "2b4f0b53-e844-44e9-93f3-80ecc6ca00c8",
+        "status": "success",
+        "history": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\logs\\2b4f0b53-e844-44e9-93f3-80ecc6ca00c8-history.json",
+        "sha256": "3d162295e383368fc995722027b8108fb86c51bb573a34f9396e1a0a756e1df4",
+        "output_nodes": 12
+      },
+      {
+        "prompt_id": "34abfe01-781b-482e-8669-db549045020a",
+        "status": "success",
+        "history": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\logs\\34abfe01-781b-482e-8669-db549045020a-history.json",
+        "sha256": "d5fface67a6359658efd2789c285349759a5ed594fb7828c35c13f74846a20e4",
+        "output_nodes": 12
+      },
+      {
+        "prompt_id": "50d9cb60-a23a-4ab4-bf0e-afc212492581",
+        "status": "success",
+        "history": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\logs\\50d9cb60-a23a-4ab4-bf0e-afc212492581-history.json",
+        "sha256": "f74eb01975a48ed74360d6594f7ece2323609244b464d117647ef4a3d246bea3",
+        "output_nodes": 12
+      },
+      {
+        "prompt_id": "5838d818-c27e-4a51-8981-c44cf73c3a2c",
+        "status": "success",
+        "history": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\logs\\5838d818-c27e-4a51-8981-c44cf73c3a2c-history.json",
+        "sha256": "5c10083cb2f50265608d02951aa9bb18b39cb55b62571704ee5c99f717b06bd1",
+        "output_nodes": 1
+      },
+      {
+        "prompt_id": "b3bc39df-ba47-412f-a3bf-43ff85d62aaa",
+        "status": "success",
+        "history": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\logs\\b3bc39df-ba47-412f-a3bf-43ff85d62aaa-history.json",
+        "sha256": "d82f372a10311033f316f7cb1ba3fb12e40761ae04d1e8c76a992f0d4e75c728",
+        "output_nodes": 12
+      },
+      {
+        "prompt_id": "ca3ab64c-f44c-4efb-b0af-1558480db787",
+        "status": "success",
+        "history": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2\\logs\\ca3ab64c-f44c-4efb-b0af-1558480db787-history.json",
+        "sha256": "80de158ea01abe0a6ff13689c260d748eef077ba2691208f98e53e74d6a53e3b",
+        "output_nodes": 12
+      }
+    ]
+  },
+  "runtime_atlas": {
+    "path": "assets/sprites/equipment-icons.png",
+    "sha256": "92fd5cd26256d467b44d371408dc1b859b8cdb1afb77fae1631ad826b40d2875",
+    "size": [
+      1536,
+      1024
+    ],
+    "rgba8_bytes": 6291456,
+    "equipment_items": 85
+  },
+  "items": [
+    {
+      "kind": 1,
+      "cell": 0,
+      "name": "Miecz wędrowca",
+      "shape": 1,
+      "blender_sha256": "6406c7dabd96d8a7a5753b85f1c095209912b58c39bf391317ee3a70ea466c21",
+      "comfy_sha256": "ede31945301db1d3c3de4720019b215fdf1260dc1980347950470cb3add71931",
+      "paint_sha256": "322278b0f53d8fd2278a54d8002986815810c17fffde46b3a897e4c1a814cec2",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 2,
+      "cell": 1,
+      "name": "Topór strażnika",
+      "shape": 2,
+      "blender_sha256": "25b4795f45ecf5e25aee708c3ee1353fa511f70fc7c55f988f7652640ad5c7b8",
+      "comfy_sha256": "8fa044e405c9d7571014819c248b4f104a08656e4bb834ce2e54506cd9461d2c",
+      "paint_sha256": "37a4f44c481bc1d0df06df4e73258f67759320fdd5db192859d99e88c01535e2",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 3,
+      "cell": 2,
+      "name": "Żelazny hełm",
+      "shape": 3,
+      "blender_sha256": "86b174df9736373ec904c0ff372fa1d3cf81016c6b0b106d277a1eec7c42e2db",
+      "comfy_sha256": "16b52579d7fd215ff20a9bfe900bd8240249a6a613dcc4e786fa86dfabbfb566",
+      "paint_sha256": "6eacc8c55b114e263d864a2981e7d3b81fe1b0438734edd988ef3893e9a94188",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 4,
+      "cell": 3,
+      "name": "Zbroja zwiadowcy",
+      "shape": 4,
+      "blender_sha256": "07633f4227a33da3a1e85840b8f670f612c1d038db368d4f24fa1d63128a9467",
+      "comfy_sha256": "3722178e7c90b27e8d8055daf9f73fbca8d237e02ecc1acd14d03c20d5cb64ff",
+      "paint_sha256": "25324a440e26409ae952ff4adabaee1263384405788fde7c82f33bec6191c111",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 5,
+      "cell": 4,
+      "name": "Tarcza dębowa",
+      "shape": 5,
+      "blender_sha256": "3aa4c1f4da200dd0d7454b2744f5d8d72d18dc31954df286d78247a6bd0859a5",
+      "comfy_sha256": "4ac669a632c666cd234a3ff2d5e0f7502dea35381a30cb34c36c3ee9d1b8020e",
+      "paint_sha256": "e35981dfba75bcbbd1fb837990dcd4c8070a575c4b52867fee29dff64c5446d1",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 6,
+      "cell": 5,
+      "name": "Buty podróżnika",
+      "shape": 6,
+      "blender_sha256": "9a0e753daefe77de9ea144a11c902bec5bb8646af9b8382dbc5d432c75141005",
+      "comfy_sha256": "300e41e5a91be205bc9226c8c7898219378c236d99d1195b7d7ef8d21494b487",
+      "paint_sha256": "76d5e17f879e6c4915b87da41dbc2025fd19cd78c14d5b9eafb9cf809aaeec2e",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 7,
+      "cell": 6,
+      "name": "Pierścień żaru",
+      "shape": 7,
+      "blender_sha256": "1bd7d25deb3d961c0a2ed86b2dafa939e3306cb881337b2cbabb984d33d00f89",
+      "comfy_sha256": "b19bb06ee94ffa71d8b98b59739c48af61ea19368fb24459402bb33b30505b55",
+      "paint_sha256": "2cfd1e7871ecc74a32dd003171997134dc32a996d3d9ac745b112deb70149342",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 24,
+      "cell": 7,
+      "name": "Sztylet łowcy",
+      "shape": 24,
+      "blender_sha256": "76e6d040ae78deb4c1f05fa274cb277b2492e2b3d4bd20f82231479ca0e220ef",
+      "comfy_sha256": "279f0836f7d564b6b96821f0350fee059b6baa1d9484b42a07ff0e100a039e1d",
+      "paint_sha256": "18b925f743bfd6287e467528ee5afff47083ea20a5afb5fdbddf6ed150213268",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 25,
+      "cell": 8,
+      "name": "Płaszcz z wilczej skóry",
+      "shape": 25,
+      "blender_sha256": "c7af8aef603842e3f44b3779ded07da47deeb3142ff2d2d6533e4b119c32e30c",
+      "comfy_sha256": "79584c5d99a24b3b9604afc88a49c78620ffe38311820c2b335b923e55f50477",
+      "paint_sha256": "911dfe2a30f47e9d4963e448b5b38a0adf513e275fe29b3128c1d7eeccb3b3bf",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 26,
+      "cell": 9,
+      "name": "Bursztynowy amulet",
+      "shape": 26,
+      "blender_sha256": "33475ccaa2eb24b988eadd3b2e669b02b827290133b4770db59cf5dd31f3df86",
+      "comfy_sha256": "de2948d496b9dfb1524b7f98ede9592fcad479d27550c034529efbf6675b2c46",
+      "paint_sha256": "18d5c875788cf8f8100e040db697e66bcf7f4d4589846d31a794d53dfb57aca1",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 28,
+      "cell": 10,
+      "name": "Łuk podróżnika",
+      "shape": 28,
+      "blender_sha256": "d72d6a476bc41050f11a69b416caf53f7c0d67a36377583b9f75c1d5013148e2",
+      "comfy_sha256": "2395110ddb8fb105764e8d29bb8d40c475f82da15a13a13afc63cbeddabbe3de",
+      "paint_sha256": "584b4756acb25693db0a42a12918193306508702515c0117101304b5dec71bc0",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 35,
+      "cell": 11,
+      "name": "Sztylet wilczego kła",
+      "shape": 24,
+      "blender_sha256": "18f4fbfa9cc9c3ad342cfd2bc6de4c2241dd423dfd19bd6232f2c1842d63c31b",
+      "comfy_sha256": "22ff605f862daa452c3948461ccb51ea9d82813535aa0e1b89a1295b8ce4da08",
+      "paint_sha256": "a9f6c50f14f5b12102bff257a415c2a8e483f6b1cba4e94407981ff09b9ba233",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 36,
+      "cell": 12,
+      "name": "Płaszcz tropiciela",
+      "shape": 25,
+      "blender_sha256": "934fdf5046dc36f5d1e5e0053dc5d36eac1660662b51461a9526108bb754819b",
+      "comfy_sha256": "e30085609e01bd01595c65a5396ce0f8ada4f77399e8687e3c24099b2ff68e2b",
+      "paint_sha256": "c5fa0f8004162305b7c9a021d91c0444df37df85fbe396e6481585c19fb90eb9",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 37,
+      "cell": 13,
+      "name": "Łuk księżycowego łowcy",
+      "shape": 28,
+      "blender_sha256": "0050e470f507f1e7083756dc0b8f6330778066544d8bd346adaad09a54fabf67",
+      "comfy_sha256": "fe771e6ce4256bdbddee82efa2d5a2dfe3df5f780460ec20fd64a64ea9c30862",
+      "paint_sha256": "9a8325af552b6fc0aed9b93551babacce235440907ba95dd1347f806f9e597b6",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 38,
+      "cell": 14,
+      "name": "Pancerz dziczej skóry",
+      "shape": 4,
+      "blender_sha256": "9831c8e0d3b7b098b37baf10f5f5e85f33c2cd8a7b0db6dd31f542c117bafaf3",
+      "comfy_sha256": "b6993d671197cc91bf03faf90bd6533528745d90e402b1a8ccc49b869e4feab8",
+      "paint_sha256": "a3c5b8f70b81a8bbcd591763c20d2468db77104c16698691bad4877cd2648f38",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 39,
+      "cell": 15,
+      "name": "Topór dziczego kła",
+      "shape": 2,
+      "blender_sha256": "561c5a8baea00cec3f997a90567638ef76660be3b42f229b534d7e18eae34f67",
+      "comfy_sha256": "7560923c9847f1fc6db24922a5e4c3992234c345ac7e1892eb7f2c0080c5916d",
+      "paint_sha256": "ee538b6b1d4b706f1a83daffd9f763049cb9c92c66c15a8de0fda95b9a36409c",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 40,
+      "cell": 16,
+      "name": "Buty pajęczego szlaku",
+      "shape": 6,
+      "blender_sha256": "5fa17b56e6d4ebf5404b9aa8d3dd227e3477349ee7c32929970fb5ed8fcb93a0",
+      "comfy_sha256": "6c361fb4a37d4fb737df3dff7e0babcfeba5d556499180c8fbe86654cb61154d",
+      "paint_sha256": "ef47556413d409e54c915d10b94db79a27554e636f14b3d050cbe652e6dc594d",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 41,
+      "cell": 17,
+      "name": "Pierścień jadowitego splotu",
+      "shape": 7,
+      "blender_sha256": "3802ad997279ead0334ada51454309c637e0cc081efb96a2c4ef0c815a9c8cb9",
+      "comfy_sha256": "168ba49cfc1fda89fc7da1d86a041b237cc4792e1f1506fbe39448bfe5574296",
+      "paint_sha256": "b4a2da826a74c66cef814b004601fda765a07c0e2e2e411d55bc0170e7218aca",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 42,
+      "cell": 18,
+      "name": "Kaptur pajęczej nici",
+      "shape": 3,
+      "blender_sha256": "f2abd63434c63c0ad73336f6f0f88fd4a3330377d690df549028219fd1007d59",
+      "comfy_sha256": "c28b01596255f93df442bbf5a8ea7707b0a869d5da873e26a0687cefcb281584",
+      "paint_sha256": "0ac23cf00bb6c5c591abc761ebd7f849774a8fd4eed2c1935a0b4c76ca64ad8c",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 43,
+      "cell": 19,
+      "name": "Hełm kościanej straży",
+      "shape": 3,
+      "blender_sha256": "9c0535c32919b9dc76b44c063cc687ca08d800fa5852332593efba518774dcb6",
+      "comfy_sha256": "b957c2461e63aa190ecd0034d6d9fa3666893b0d8f11ff1d7b73d7a988d05314",
+      "paint_sha256": "f4f410cee32d9b19e1925fce1a57ea09ed901b7befde995fd74b26d212d91db1",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 44,
+      "cell": 20,
+      "name": "Miecz zapomnianej krypty",
+      "shape": 1,
+      "blender_sha256": "d815e76af26b83cc98f156c0b0777f60d850a0effedc6431dc40ccebeb8e0191",
+      "comfy_sha256": "c8e1b14704112b0b95bf62365505c3d74565e3479c0554f9ac54d79bad41c5e3",
+      "paint_sha256": "ca7882d254546bda50bf12bd07722273a4bc0b97075efaa6df17efd185a3f340",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 45,
+      "cell": 21,
+      "name": "Łuk leśnego rozbójnika",
+      "shape": 28,
+      "blender_sha256": "1786c101236a8b1a3246336c814cba8c44fdbcb0c620d970472fd750c37081cc",
+      "comfy_sha256": "8a0e8f06a4b6ca706606fcf3a4e94df9c061b201df674a9ed82043e556c6358f",
+      "paint_sha256": "95ccf706edd09bd89f0fb3fc630465856316c794ebc2bff56123af4ad5062aa1",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 46,
+      "cell": 22,
+      "name": "Buty cichego kroku",
+      "shape": 6,
+      "blender_sha256": "b929a10f007cc3053795fe5146f73da40e5a7af395ccd8ce80560cab216a8b89",
+      "comfy_sha256": "72532339bf3c9be661069307c8ff1b5bce72b27a7c79846a50b28fe2b87988da",
+      "paint_sha256": "067ed79e3a2f90a35a5bef5292444e94ef05085c60d4a99a303d64da55238d77",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 47,
+      "cell": 23,
+      "name": "Tarcza prastarych korzeni",
+      "shape": 5,
+      "blender_sha256": "0cde47aab89a8bdecade4057c08cfb80e2525f42b899202b0714a5de0787c455",
+      "comfy_sha256": "9448e3eceaf162a62b22ed3af187a23e8680bd2eb81ee3db51fffb33e358ebec",
+      "paint_sha256": "aa2e0b729f07a58fe19167167b8e829844af072841131fd93806eefb58046764",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 48,
+      "cell": 24,
+      "name": "Amulet serca kniei",
+      "shape": 26,
+      "blender_sha256": "37ac88a6527469973c7934d190460a02dc75f7442afb2ded469f8e50e9cd477f",
+      "comfy_sha256": "de45b239be18fdfa0dbeb213f1f20dca603f5111c01763875f231df5d9e2b4b9",
+      "paint_sha256": "69407ce5f2582e1a76cad6c66f4a957cc0fadaba0a1c6706cc4974fe47555482",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 49,
+      "cell": 25,
+      "name": "Amulet szmaragdowej kropli",
+      "shape": 26,
+      "blender_sha256": "054c63f539e38c0e2522061075184035ecd2b924e69f8eac776c7813f2de15f3",
+      "comfy_sha256": "bc08eeb80d0fe10d7a7abe73ff72973a51d6cc16676758c473ea40ff383352dd",
+      "paint_sha256": "62aca1293bb3b2fed66bae721a39d802e960668e6a45c518e2e8ffc6e3f32d09",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 50,
+      "cell": 26,
+      "name": "Runiczne ostrze strażnika",
+      "shape": 1,
+      "blender_sha256": "7c6e0dad39d935597ecc5be135e19eca39f5bc9aea30d54c3417a1c9caa6efce",
+      "comfy_sha256": "b4e17240d44d38da1b4e16dae97e1e748ab28d749de8cc637e809e328a0acd39",
+      "paint_sha256": "c71826d54c4d12622b2b4e7f34cb23cde2aea190abc1cd14031b53d47002b556",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 51,
+      "cell": 27,
+      "name": "Zbroja kamiennego strażnika",
+      "shape": 4,
+      "blender_sha256": "8d06173d098d5a7f900b865d0c8eb680672a69466c884f14de7d3afd19a44a85",
+      "comfy_sha256": "ed88306029d176d4ae6c83f11df796d4acf807b5db34b6561847841e9a3fa5fa",
+      "paint_sha256": "34a91e776b8be7ec9d0a84445031265c520a6e9a0685f563c7085c8d43a25e57",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 52,
+      "cell": 28,
+      "name": "Hełm mchu i kamienia",
+      "shape": 3,
+      "blender_sha256": "36d6ba36b39faaa2d6974a2ce5124cb5cf52a6c61dff1c3cac9e622d367938c7",
+      "comfy_sha256": "eef88ca34e00f58fdb76db18db446d755c722dd16d9b7b4c5c23cb1748cbbc3f",
+      "paint_sha256": "2add05db9a93cc7b716e24ecdf3e233ece15a72e72c5b7cb3c865baca64ca3b0",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 53,
+      "cell": 29,
+      "name": "Pierścień pradawnego echa",
+      "shape": 7,
+      "blender_sha256": "3e4fbb0337debaa9a72e834a6528fa27ab023249ece0099dcfa135790d21c9cc",
+      "comfy_sha256": "ccbc5125204ad69f01d16b52a2866d0909f12dc6d8320b8448e44279847df442",
+      "paint_sha256": "04fb69a9434890e44f1546e52e7f11cf86700d772fe0513faf38fbdd7f11c50b",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 54,
+      "cell": 30,
+      "name": "Sztylet bursztynowego żądła",
+      "shape": 24,
+      "blender_sha256": "b9b460a95cf440f39e31148f755431b0ec30349b1235782f533bc1bcbf75e182",
+      "comfy_sha256": "c55564823be0ca852b3f0b7734b4f234f65bf43ca9a401242f4d3c2a6c879056",
+      "paint_sha256": "33dd1866f0b7841813cc001190aca12f59baa326f8c4df258387ebdb72cfecb7",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 55,
+      "cell": 31,
+      "name": "Hełm miedzianego skarabeusza",
+      "shape": 3,
+      "blender_sha256": "95f0a2f3c7d85cbcbe969084d50bc2b29b99aa6804c6346930de4ee0913f629d",
+      "comfy_sha256": "55fd2e8c8547f041c4da6f498b1d3a1701ad52abcdb7f31ee462c38058903324",
+      "paint_sha256": "9f3b604059d8c27035f62c003b68e3ffc7102428273933db94eecd8ec7ae883f",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 56,
+      "cell": 32,
+      "name": "Zbroja pustynnego skarabeusza",
+      "shape": 4,
+      "blender_sha256": "88000168e6f6675d34a330ad31a961987082638a58e88ac611c3cdfaa1164efa",
+      "comfy_sha256": "7de3a76d28a3fbeb2c1753168d0400e534ecab6ff218c7120d8335a927d6925e",
+      "paint_sha256": "7a1b541bed64b67f3523b0c30ed84cc60b6d4f54b49553598aee122955f6e80c",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 57,
+      "cell": 33,
+      "name": "Buty piaskowej kobry",
+      "shape": 6,
+      "blender_sha256": "cf7796f2255ed642f93e6f0372514c41a9f6ee1837074aac94594dded048eab4",
+      "comfy_sha256": "f6b94dee88edaa58a153d4fd2612247d39c2169eb3d8c57da2b426be33f06bab",
+      "paint_sha256": "5e9eef92fb1ea801755578f2d9b6169aa29545dd143430e8a7d431e7184161bd",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 58,
+      "cell": 34,
+      "name": "Łuk pustynnego mirażu",
+      "shape": 28,
+      "blender_sha256": "208e0b347d051704a7844caa7e1b5c4ed115070ee950077378414e3b22702cca",
+      "comfy_sha256": "f911fe6352aad99148ac65c2508552904424afa1d3caa6a71a115d5831f1261c",
+      "paint_sha256": "b3b6e1601ead1a038ce2bee5e60e8b83eec836c248af008c925261ec9b7e38df",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 59,
+      "cell": 35,
+      "name": "Amulet palącego słońca",
+      "shape": 26,
+      "blender_sha256": "23fb30964b6c3edf2d9e91aa62e351226d1e163bd3abd38cde9e501214d04cd9",
+      "comfy_sha256": "e40de13565e997587c4bd0a6f974b0c576c326760dd398760952350990a87657",
+      "paint_sha256": "33b06f27f552d2773a010d0013773395f9fc270c1ac99954968692b619e3c51c",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 60,
+      "cell": 36,
+      "name": "Ostrze żywej wydmy",
+      "shape": 1,
+      "blender_sha256": "39ba6f23126e0ea2237d041399a4ee3cacd2e72730311c2b1ff1ea01a87a4147",
+      "comfy_sha256": "8c7351888dd322e90bc716c3a59cf8b85c62d8149093875a022cdbd59276114d",
+      "paint_sha256": "70d7c730a0715d6ddd2ce8e7df78127d7bdef24823c24b46c928ec11fa173e2e",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 61,
+      "cell": 37,
+      "name": "Płaszcz piaskowej burzy",
+      "shape": 25,
+      "blender_sha256": "4c6f1934fe449fc9c22c2c03fddea6d5d16c44054327257c822b2600d78cfc90",
+      "comfy_sha256": "9f57462cde1b87bc30b6575358ad1fd4e7485c30b2669e289e0b0ba049f85aff",
+      "paint_sha256": "040ee4246dc6ab6605ad986700630fe574abd8b20e42f0659814c0ffd6f740f0",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 62,
+      "cell": 38,
+      "name": "Tarcza pustynnego monolitu",
+      "shape": 5,
+      "blender_sha256": "44e870cf4f476c88ab646ac131841399f09e25e049af4852df79f017268100d9",
+      "comfy_sha256": "382e1ae096ebbb16590c5d720b824a4328261a0f991f0054c1520d766507d462",
+      "paint_sha256": "e74f18a884e85e8baad318dcf4ac2b473eb71d4be080cec44acef52d2a150f7f",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 63,
+      "cell": 39,
+      "name": "Ostrze zielonej kropli",
+      "shape": 1,
+      "blender_sha256": "3de2207d07a0cc91ced13a788e661762d4b25f95c70c682462e97918023a58d4",
+      "comfy_sha256": "643518a966ffd420dcd0754ded23ee3dde449d88dcaa5a63b298557b97bcf9ec",
+      "paint_sha256": "5912efdec2fc08908b3dc46a39113d3af376b1c270c2872b94b0336757e62df7",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 64,
+      "cell": 40,
+      "name": "Kaptur mglistego runa",
+      "shape": 3,
+      "blender_sha256": "18d17948ad57a8cb3dd086654af201ac49a030e798dab7ea767ea129eb3086a7",
+      "comfy_sha256": "a1cdef1a56c6f108b0ce3743da446d7011ae461a62209b6180c60834721708a6",
+      "paint_sha256": "998297eac5a9dba0552f75de941328971c2e39da25a224741ecb4b7e5c3a7c62",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 65,
+      "cell": 41,
+      "name": "Pierścień bursztynowego żelu",
+      "shape": 7,
+      "blender_sha256": "5804f9e1d39fa98a27a5fe9190cb62ef5a71dc28e69cc53be94755348d969867",
+      "comfy_sha256": "db1b57d70c38ae19165a4a43edb16b7c1e506b2bd91d5feec3d1d0cda96d5740",
+      "paint_sha256": "8679228172e02c71994447ae9141563d7030741278e4d6dee5151db89d4c851e",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 66,
+      "cell": 42,
+      "name": "Kaptur szarego wilka",
+      "shape": 3,
+      "blender_sha256": "1889dff9bf5af36276225c977d6a66a325f68e5cc44319a81aab44d7bd10f77a",
+      "comfy_sha256": "fb9ce34e9ddcdd3bbda368e4ee4e3e270711ba845684ab4f97f81e8237ff658a",
+      "paint_sha256": "127190fc6ef22f14596140ddd469c329d325d87044b400d5634692bc730d316a",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 67,
+      "cell": 43,
+      "name": "Buty srebrnego tropu",
+      "shape": 6,
+      "blender_sha256": "1567cb054e0e16a0005099c22acc3fc800d940f0b04456512ee51acc9eba79b8",
+      "comfy_sha256": "0db8978d98d4232f6d1dfa5876adbc5b7dea317b36706f255c40dee0893cb1a2",
+      "paint_sha256": "a01668d26edf0190806fb978db212970d32e2ced572ea5d9b911cff4d6fb7bac",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 68,
+      "cell": 44,
+      "name": "Amulet wilczego serca",
+      "shape": 26,
+      "blender_sha256": "2e6b6b28a3e98586fcdcd236c6b2aecb4397c3e269b3eff98f9ad0f929b26529",
+      "comfy_sha256": "b1df9ea8371f6afbbebc1dfbfa425eabf0c8657d4b6eead51473aaaa14e66544",
+      "paint_sha256": "c62059d70d379da8e19a1de57304698d6269e2eaa0e2d1aec348387bbcfa1506",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 69,
+      "cell": 45,
+      "name": "Tarcza kościanych odłamków",
+      "shape": 5,
+      "blender_sha256": "4d5e24c0962c8ee4881e13c45034615de87340cf536b7de403db0c22db0dc540",
+      "comfy_sha256": "4e0193805cab29929db52e4a18089eb07642bbcda2ccd1a2eebb6d5040399520",
+      "paint_sha256": "da6a9e20859c8667ba2520c5431b0b4b35d83a315b3a6eff742c4f6674eab1bc",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 70,
+      "cell": 46,
+      "name": "Pancerz strażnika grobów",
+      "shape": 4,
+      "blender_sha256": "cee2eca938d34184a43ceb3564cdd5f83b4d16d345ac74e0fe2255832ddfa0f5",
+      "comfy_sha256": "c5cd0f927ba162b18906c0d6fba6a85a1e9a8de8be3276ad43f7286b90fad2d0",
+      "paint_sha256": "18031daa63ed12ff205096e8f62c60bc1b5f8184c9cdb15e66c8653e7edb62fa",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 71,
+      "cell": 47,
+      "name": "Łuk milczącej krypty",
+      "shape": 28,
+      "blender_sha256": "c9eec8ff2d2522bdd6bd2e7837de3e02c99a54c2a2001439abc472391eb6d5eb",
+      "comfy_sha256": "ee71cbad8339a43b87b2dba67adc0ae0d66f5753cfa124939fa7877a80aa60b4",
+      "paint_sha256": "e641ff025bb1a366536675221f8a6441e9805933165d94a55e830d44fc27189f",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 72,
+      "cell": 48,
+      "name": "Nagolenniki omszałych ruin",
+      "shape": 6,
+      "blender_sha256": "29fe9341ca8eee05a2b9f62737facaffa0008c7a00d1c4d02e04be0199832c08",
+      "comfy_sha256": "4a2d3a4469f23b1e98cc46ac9704e8fdcb7b6340fcd6b555a47e6f5f049da99d",
+      "paint_sha256": "63814f3ee61e5af60e5bbad6005cc06eab8f75900a19fe0cb40f113764340607",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 73,
+      "cell": 49,
+      "name": "Tarcza pieczęci strażnika",
+      "shape": 5,
+      "blender_sha256": "9450377a614b747c9361518caa86bba70cf8e38371187fedf47d98057bebd413",
+      "comfy_sha256": "6a9d073f4a79698f45a5ee901377207769a9f85d89b3756cc5c02c04f978739e",
+      "paint_sha256": "be157d3e2c30e75a68d4029f063a96776a9073940f80e299bd2ca5e91ab11d64",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 74,
+      "cell": 50,
+      "name": "Topór przebudzonej skały",
+      "shape": 2,
+      "blender_sha256": "749965e5772ff4fc128bbcbd0b7de303f065e61fbfce635a80132f70514a933a",
+      "comfy_sha256": "43297dd1af357f3abb00160ac025b8b157ceb5a775f339e64ee3c35f657c7510",
+      "paint_sha256": "4601b5dbfaaae2a115129be322ddedfeb61f976c01da9355cbf157bf98dbc427",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 75,
+      "cell": 51,
+      "name": "Buty dziczej skóry",
+      "shape": 6,
+      "blender_sha256": "437e8dc86f2502b8cd6c04f471dee906786379a16d51bb74f3d95c0a44ddf75e",
+      "comfy_sha256": "67b41a70814492539222da6165153446009a8fe788d14385478f1168311af143",
+      "paint_sha256": "e726a72b14dcad62aee1ed6762e046c496598edff9b6648307a6934b1aee32af",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 76,
+      "cell": 52,
+      "name": "Tarcza leśnego odyńca",
+      "shape": 5,
+      "blender_sha256": "f204624ea120b41d7b65e74c7d5fc3a8656bd59b7c703d9d64ba4804f1d7ad23",
+      "comfy_sha256": "362f42e0a1120e37b4ad0dd7424484cfc955847a5da0af679a2b1b9a51059f16",
+      "paint_sha256": "8a5b24071cc03a1279efbfc08b8af9470dc27bfa3facb3cfb48d310c7cf873cc",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 77,
+      "cell": 53,
+      "name": "Hełm odyńca",
+      "shape": 3,
+      "blender_sha256": "bdddb0e90d88bdbbec859d62d4e166dc48641ccade32e698d78a468ac6d42c95",
+      "comfy_sha256": "30c83615eb8652523de2c611a3b80b8646efd09deaaac54a122ef74dc7ac8106",
+      "paint_sha256": "a4434953bca2751468e0117d12a0afbf774b1d14bd53886c77ca216ddab00273",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 78,
+      "cell": 54,
+      "name": "Sztylet leśnego pająka",
+      "shape": 24,
+      "blender_sha256": "19ec60699b79dd9264887e0a71fed9f35939c0652e115422898bcbc89ae42a38",
+      "comfy_sha256": "88e60cc8d4611975055c402bc36f7adbb5b6222cc038b9a6a9418b0638edd978",
+      "paint_sha256": "dc771d2dbb4f5c8fb410cc22e1eac8066a53c0965332ba16ca4b57b722309faf",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 79,
+      "cell": 55,
+      "name": "Szata tkacza pajęczyn",
+      "shape": 4,
+      "blender_sha256": "a43b12b33b24f3cfd46887970324cec9d01d4206a4a1894e63312ced8a3fa48a",
+      "comfy_sha256": "8c622ba51f5a217cd06a10d8f91b4427ed0ca2e9956d43b91b0c21b5ad350d37",
+      "paint_sha256": "d08f43c102160f649cce7e134b80c06de6962c8a4105e58a2e4b12b19a48587e",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 80,
+      "cell": 56,
+      "name": "Płaszcz nocnego jedwabiu",
+      "shape": 25,
+      "blender_sha256": "101a04e39e42ae2a3449977d660790f315c148c3c050936e4c1868fb39c13c83",
+      "comfy_sha256": "dc6df34bcde2aa51409371ab8ca65fab389c4d3073d5755ea3bad38803c5bd39",
+      "paint_sha256": "32b9aa12074ed347fb1e0fae85056c85f04f184dc954eda23232abb2e5b28fa5",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 81,
+      "cell": 57,
+      "name": "Szabla leśnego rabusia",
+      "shape": 1,
+      "blender_sha256": "4eb26af2bcbb703b334d664521c8a27e0ab59b5f7a8ea908210f837ffbd726fe",
+      "comfy_sha256": "80f60d25a75f1f8320ae555b43bf37c1ce3c6e36dd08bedc5d0b745cb95c1585",
+      "paint_sha256": "ffb990420142a5578c0b0566ff268d301edcdfe41ebdeefc9a5e899a8dc920dd",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 82,
+      "cell": 58,
+      "name": "Hełm z leśnej zasadzki",
+      "shape": 3,
+      "blender_sha256": "fdd65b5e73f3632db53d5339692b74232aac613b8000a19df488798f53efffd3",
+      "comfy_sha256": "f18ef47616f7b54b57a612c4801bd42f143632d75c742ace807337966df1b830",
+      "paint_sha256": "53a775a01e4ed05bfa14a9445d132196476f286f7b1cf32b5dd3babbb2f1a3e8",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 83,
+      "cell": 59,
+      "name": "Sygnet króla bezdroży",
+      "shape": 7,
+      "blender_sha256": "400915d8a97652966900b50827ade9303d82542ad194e206cffb32c92509d5d1",
+      "comfy_sha256": "79d8947476b97f56395139175f2d306c07fe3eb32c47723dd424b8f5154c1be8",
+      "paint_sha256": "67594a6efad6eb3cee000f0ef18d6a6e1d13c266e5b3d16ff03f624c18744c9e",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 84,
+      "cell": 60,
+      "name": "Hełm starej kory",
+      "shape": 3,
+      "blender_sha256": "737a8b07c59f98ac348ce51373867ea3e7f5c83bc408623691a6805ca6a60fc1",
+      "comfy_sha256": "c5ab8dd3c66aa41cff17034a34a9e50b0202b521e42d37ee7061cac4801b1fc8",
+      "paint_sha256": "0a0b368223abe48eaee91d06d32e530760f3e40f55c9ee041a6438e6abb7ca23",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 85,
+      "cell": 61,
+      "name": "Buty splecionych korzeni",
+      "shape": 6,
+      "blender_sha256": "685263f6e017d3847ee08a6df4608b2964a2d73a407e5a18f44258be0c0a44fd",
+      "comfy_sha256": "36b621334ada9e9de73e7928df57d45d0f987f3b7a89c9820c5d9a5eb51b8540",
+      "paint_sha256": "dfb009a1e6306bd59f8e28d0a6a193535f671e61a9a7ba971e0cd7c6aa3c14af",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 86,
+      "cell": 62,
+      "name": "Łuk przebudzonej kniei",
+      "shape": 28,
+      "blender_sha256": "9b361cc68c372f9d8b7fefdb359f4d94a99a2c02cd18b222ad0e0f2b298d97ba",
+      "comfy_sha256": "71acf92f088a993bbed7c9f6f54ff3d8130023e1b59f13444902d0e3d1503d04",
+      "paint_sha256": "6fd7929413d38efb970b5e7cb1882dbcaca25f4a0ebefc5058d622693e9b7cc8",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 87,
+      "cell": 63,
+      "name": "Topór pustynnego żądła",
+      "shape": 2,
+      "blender_sha256": "4afacb00717173a0395baa6742fb34c80db65d45cca1495d897d5410b790f478",
+      "comfy_sha256": "dbcc44386312fc13bb6287274278fa87b430354b70b99301876487d4d67d335e",
+      "paint_sha256": "73bc15229fa0fb44d00fd52f63ede8c8c9617fa6c69bb8d804e509eb6f756534",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 88,
+      "cell": 64,
+      "name": "Tarcza bursztynowego żądła",
+      "shape": 5,
+      "blender_sha256": "f594f51f8c313c86ee479282dbf39952660ca01cb21e79dd7885edfefbd30372",
+      "comfy_sha256": "83b2089a99fa40f0bc03742f4ce2eaa7a67c3dc4c907e4707194e74df74a0db6",
+      "paint_sha256": "33fc13cdb9b0193b9b2d078c174820788986ef2899d7a5929a0137a555b44a05",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 89,
+      "cell": 65,
+      "name": "Pierścień pustynnego bursztynu",
+      "shape": 7,
+      "blender_sha256": "9bd514377ad982c5691addcd7169cd5fd991c31e5ce166e9d7f0fb48978935e5",
+      "comfy_sha256": "60e1f5228a17edbd492c77ee8cff6a07a2a65137d70838de13df9e2cacb26a06",
+      "paint_sha256": "48ec041c093e0eecc19147ce7c434d8517d2bc5dad3b1bcf8d40edd34a4eddd7",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 90,
+      "cell": 66,
+      "name": "Buty miedzianego szlaku",
+      "shape": 6,
+      "blender_sha256": "249254832a7d7c0ec3eaa967910891c52a03d751c20e1d18bb678f7cc6c32a68",
+      "comfy_sha256": "cc9e5cfc7bf81f27f6d0f57e586fa8759c685efac42ec5a538c8816150631a21",
+      "paint_sha256": "30afb3f82d161f8665a46aded215c1dbf8bf93d7dc1e6936d9521d8c8732acaf",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 91,
+      "cell": 67,
+      "name": "Topór pancernej skorupy",
+      "shape": 2,
+      "blender_sha256": "a2e52a2616a7d1ae40d7e45d9542ac88562619c1fdd4134b927c63d0e6c279e7",
+      "comfy_sha256": "08aa5ee3525a8cd68a2bf7932bf49a3caba24427ba5156fd96860c6a1fc4201e",
+      "paint_sha256": "708db23f6db41d29c2fb405515d414f750bcbafb005805b06f885ceed32bc3a2",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 92,
+      "cell": 68,
+      "name": "Sygnet słonecznego skarabeusza",
+      "shape": 7,
+      "blender_sha256": "3a023c378a2e6ea79d6b5556845694557cb378d18afe6808a57faf33b5c9c05d",
+      "comfy_sha256": "417d7460fe0e584674909f98c49411335010d1d16a73229bc69f5aea1fa2c939",
+      "paint_sha256": "1854e8338d5ec03ef80e783a03ceaebb71e7c814c62fa762be3e159b1a2d6564",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 93,
+      "cell": 69,
+      "name": "Płaszcz piaskowych łusek",
+      "shape": 25,
+      "blender_sha256": "c06a9f4aa386b3945a65fa409b489883bc38776f616c443a1210daad33ddfa7f",
+      "comfy_sha256": "180bbdb60c941251a2cf1da099d3b124ce7c73ce6437a73bbd9f1d733b304687",
+      "paint_sha256": "d647eaa13430160570b5aa725c753c2f8eab944b615cc6e35db38e2dbc1b6e0e",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 94,
+      "cell": 70,
+      "name": "Tarcza złocistej kobry",
+      "shape": 5,
+      "blender_sha256": "8878e8ef52ada8b81f586d0ca0309d3392a1b44ab9863b5a2315a609139b5ee1",
+      "comfy_sha256": "de1b38efbfd2689f6b15c9e02dca89465203a07bc8a5ba85b7fb6ede081b16a9",
+      "paint_sha256": "f02ff1675251e103caa32ce7526ffd9e8df95fd0a5d0233fc783978cf33c3eac",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 95,
+      "cell": 71,
+      "name": "Amulet władcy węży",
+      "shape": 26,
+      "blender_sha256": "3a16d713fcd7703ed1e4bcc4fa6ee4c5bac1094f1ec862c0d18ece7245370203",
+      "comfy_sha256": "2ab9dc10c3124052915a980e38a3e2f556abb08e0ac5a6f8ccf714f5e7ca056f",
+      "paint_sha256": "5f354281e2ff04042a037cf9274baf58fbd95dabe7e6c8104933b91c148315b5",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 96,
+      "cell": 72,
+      "name": "Buty wędrującej wydmy",
+      "shape": 6,
+      "blender_sha256": "4b1e4fe18ffc13a95cce6d9a4cbb69e1bb73f6a5399936078bd9b145a0e6a7bb",
+      "comfy_sha256": "124ebcf2e0390a8bd2ffb1e7f8c91d0fa1ec24a9a6532eec678429628bf6410d",
+      "paint_sha256": "5a6f85cbcad8bddb375238921b1d1f69446850147bf3d511978dd9ff28ea5851",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 97,
+      "cell": 73,
+      "name": "Hełm serca pustyni",
+      "shape": 3,
+      "blender_sha256": "bc7b25ef5eda865153026e8b8fa6ae4fd0ae93a4deb689858c0f471f99458ddd",
+      "comfy_sha256": "8f7d0bf812c907d9bdadff36a26b89f57cc26c6eaf86df38d8af6de3a4731e4f",
+      "paint_sha256": "8aeb9f6dd69113aff7cc4ade54294ca03b0ad5816628bba494dfcc54f9915f63",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 98,
+      "cell": 74,
+      "name": "Łuk ostatniej jutrzenki",
+      "shape": 28,
+      "blender_sha256": "c2007a451da2fb14e9ae2fe2db82a1059c5d49a5b4505da0ff5fa610d1ae8198",
+      "comfy_sha256": "cfc2bbf50ccd4054d6f1e0986fef1fd5053b95efb9df78ecfef1d242a32e50cb",
+      "paint_sha256": "73c4d290463beac8914841e0a4e73d9f186da8062409e31fdf9ed79f6724ca5e",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 99,
+      "cell": 75,
+      "name": "Tasak starego traktu",
+      "shape": 1,
+      "blender_sha256": "f66e6f9fa9b719117bc80726d28eab7701c11ccbf7b69608cfcb8c6419899029",
+      "comfy_sha256": "0e1940f66174d917b4ecc83805991926899ca0ccc2bbe5ed809dd97c0846dbed",
+      "paint_sha256": "bd7eaf77955f3352e17d3a47d5df60d2b140b172eeea22b82267b538b6f41c2d",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 100,
+      "cell": 76,
+      "name": "Łuk brzozowej polany",
+      "shape": 28,
+      "blender_sha256": "b37db750795d9b009de5e299217dd4fb6cc6521c4a109fcbf62ce399fb158ed4",
+      "comfy_sha256": "0ab59ccf68538963bede5bd9547872a3935ea98a1b9bcb6e0ea9a4f6543e9916",
+      "paint_sha256": "f35ae948a146ea0fa1f771cf46b18b1fd2f9dfdfada7d030e1ee840f8a715ede",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 101,
+      "cell": 77,
+      "name": "Miedziany toporek",
+      "shape": 2,
+      "blender_sha256": "f7fef3ad37f5295fbbeb5550d69d37f7a43fbfd7d5eb115402046ad0698e1b8a",
+      "comfy_sha256": "3599a3af4c49704245df7d440261258e196fbcf0a4890063a67ae0d7c43a872a",
+      "paint_sha256": "e108c422dced2195d643645e5b564e9f4fa84df349e5ec64f50e6716acdf7c21",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 102,
+      "cell": 78,
+      "name": "Krzemienny sztylet",
+      "shape": 24,
+      "blender_sha256": "24f54db460080b5263bc339b8548046599694aba8fcc83c944fc611be0d2f0bb",
+      "comfy_sha256": "efcc04add0e7e0f55de620314ad4f8e055f147934972cede1d5265d19d430ab9",
+      "paint_sha256": "13e01e5c557260fcefecc5bf01eebf3097506b96a88f5b6efbdfb2feaa780726",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 103,
+      "cell": 79,
+      "name": "Miecz porannej rosy",
+      "shape": 1,
+      "blender_sha256": "67c768cb5a5b7a8872e9d2c7941e076f8a14dacbe5e1f224ab1849827f56b945",
+      "comfy_sha256": "19cefe5b968ee660c11681fb2247b080e0b39db097193551eb0447f65bc83c40",
+      "paint_sha256": "0446fbd62489430c55615036095c2a10a592a77834aa231ac5ed8344ba1363de",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 104,
+      "cell": 80,
+      "name": "Miecz słonecznego szlaku",
+      "shape": 1,
+      "blender_sha256": "7b1347803cba8fe2c3e0f90acfb1df27e5c213e10487b74afac736d23fe77316",
+      "comfy_sha256": "35477651567feed91265b840daddf0d8b4fef448c1eedd4b298d6eeccdc0cd52",
+      "paint_sha256": "b0d610350bfe6d55eedc103e499e4d0e42a9e158e59f0bf59c1f329bf7b4cb5b",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 105,
+      "cell": 81,
+      "name": "Topór bazaltowej kuźni",
+      "shape": 2,
+      "blender_sha256": "23ef10eaa82fa84a5a894f23afbcb04e6cffb28c084dde3eb6a008eeff0749ca",
+      "comfy_sha256": "56775fca9375c7a39e415ba43f5dd9b4633111649d0d6d9894a2fc873f2c7f69",
+      "paint_sha256": "483144ea0cc95a9fe01ce961e86ec9d8cffcdef85e3d9d3cc0d90f31101a3150",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 106,
+      "cell": 82,
+      "name": "Sztylet szklistego żaru",
+      "shape": 24,
+      "blender_sha256": "5f4c1a542fd02dc47a7d46392fe2d2f2c0a054b7bdc18c1713eabba16bb88d60",
+      "comfy_sha256": "cbbbaf9f1dabc915faa38c2f958599bfbbed83c543609e4fb6b642d235f0d4e9",
+      "paint_sha256": "f01554536393bf17f43b329bcc3792bdbc5a88d738b8d5d5731666500c619d71",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 107,
+      "cell": 83,
+      "name": "Łuk bursztynowej oazy",
+      "shape": 28,
+      "blender_sha256": "4eecb7bcfe9ed2663fd5678ce90c3c387dd911d8efe2a13e06cb70b2d6a34be4",
+      "comfy_sha256": "a03461f4e3aaf467c6e1d636e89f4b92a178e7afd7c49a4cb9a26e8995a7545e",
+      "paint_sha256": "9df06d479d3d746c3ed64b1ed743a6b1873896e20b9afeee7e2783d66b7374d0",
+      "alpha_matches_blender": true
+    },
+    {
+      "kind": 108,
+      "cell": 84,
+      "name": "Łuk popielnego wiatru",
+      "shape": 28,
+      "blender_sha256": "16a43f93bd7dd58b24d644ab01e94833c96b7c0568f974fdbda5e33da87070ec",
+      "comfy_sha256": "7ad512c4dc117612dacce94f973ff2798963ed32d9bff8c505d0b114c4d23e21",
+      "paint_sha256": "a6770fd7c37d2969e0bfc62d5388d323cdb472e144573660936d10328796e8ce",
+      "alpha_matches_blender": true
+    }
+  ],
+  "alpha_preserved": true,
+  "gameplay_item_ids_unchanged": true,
+  "source_root": "C:\\AI2D\\sprites\\emberfall-equipment-20261108\\v2",
+  "source_scripts": {
+    "blender_equipment_icons.py": "f966148e133fc03a0ce857380c206f7844fc1b370cbacd68cc47975ce1e96cbb",
+    "equipment_icon_comfy.py": "569cb239dd31eb303a9749f08b3d809133c02538fd2d30126d4a4824d2af715a"
+  }
+}

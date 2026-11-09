@@ -13,6 +13,24 @@ int main(int argc,char** argv){
  if(!IsWindowReady())return 4;audioSystem.init(false,false);makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  check(PlayerBuild&&!audioSystem.available,"real player renderer uses no audio device");
  check(hero_paint::atlas.id&&hero_paint::atlas.width==512&&hero_paint::atlas.height==384,"Krita atlas decodes and is preloaded once");
+ Image original=LoadImage("assets/sprites/hero-paints.png"),material=LoadImageFromTexture(hero_paint::atlas);
+ Color* source=LoadImageColors(original);Color* corrected=LoadImageColors(material);
+ bool sameAlpha=true,sameOtherParts=true,hairTone=true;int changedHair=0,minHair=255,maxHair=0;
+ for(int y=0;y<384;y++)for(int x=0;x<512;x++){
+  int i=y*512+x;Color a=source[i],b=corrected[i];bool hair=y<128&&x>=128&&x<384;
+  sameAlpha&=a.a==b.a&&hero_paint::alpha[i]==a.a;
+  if(!hair)sameOtherParts&=a.r==b.r&&a.g==b.g&&a.b==b.b;
+  if(hair&&a.a){
+   changedHair+=a.r!=b.r||a.g!=b.g||a.b!=b.b;
+   minHair=std::min(minHair,int(b.r));maxHair=std::max(maxHair,int(b.r));
+   hairTone&=b.r>=58&&b.r<=79&&std::abs(int(b.g)*70-int(b.r)*59)<80&&std::abs(int(b.b)*70-int(b.r)*50)<80;
+  }
+ }
+ check(sameAlpha,"material correction preserves every alpha and picking pixel");
+ check(sameOtherParts,"face, clothes and all other atlas cells remain identical");
+ check(hairTone&&changedHair>5000,"both hair panels share crown brown without pale highlights");
+ check(maxHair-minHair>=10,"subtle individual strand contrast survives highlight removal");
+ UnloadImageColors(source);UnloadImageColors(corrected);UnloadImage(material);
  game=Game{};intro={};towerStory={};clearStoryMenus();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;
  game.props.clear();game.enemies.clear();game.forage.clear();game.messageTime=0;
  const std::array<Item,6> outfit={item(Kind::Sword),{},item(Kind::Shield),item(Kind::WolfCloak),item(Kind::Boots),{}};
@@ -29,6 +47,13 @@ int main(int argc,char** argv){
   if(mode==6)game.rollRemaining=(1-phase)*RollDuration;
   actor_art::finishShadowFrame();BeginTextureMode(sample);ClearBackground(BLANK);hero(200,320,2.7f,false);EndTextureMode();
  };
+ Texture2D rawHair=LoadTextureFromImage(original);SetTextureFilter(rawHair,TEXTURE_FILTER_BILINEAR);UnloadImage(original);
+ Texture2D fixedHair=hero_paint::atlas;
+ for(int dir=0;dir<8;dir++){
+  hero_paint::atlas=rawHair;draw(.1f,0,Direction(dir));saveTexture(sample,("qa-hero-art/hair-before-"+std::to_string(dir)+".png").c_str());
+  hero_paint::atlas=fixedHair;draw(.1f,0,Direction(dir));saveTexture(sample,("qa-hero-art/hair-after-"+std::to_string(dir)+".png").c_str());
+ }
+ UnloadTexture(rawHair);
  for(int dir=0;dir<8;dir++){
   draw(.1f,0,Direction(dir));BeginTextureMode(sheet);DrawTexturePro(sample.texture,{0,0,400,-420},{float(dir%4)*400,float(dir/4)*420,400,420},{0,0},0,WHITE);EndTextureMode();
  }

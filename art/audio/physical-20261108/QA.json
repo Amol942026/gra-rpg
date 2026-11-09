@@ -1,0 +1,230 @@
+{
+  "status": "PASS",
+  "completed_local": "2026-11-08T22:23:48.228434+01:00",
+  "defaults": {
+    "music": 0.85,
+    "effects": 0.95,
+    "master": 0.9,
+    "music_enabled": true,
+    "effects_enabled": true,
+    "menu_pause_music_factor": 0.65
+  },
+  "local_settings_enabled_on_user_request": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\audio-settings.cfg",
+      "before": "1 0.997024 0 0 0\n",
+      "after": "1 0.997024 0 0 0\n",
+      "sha256": "776a9e37887382789f66b0d7a960c5f055ce5771c5fc3dbbee46fd6464e54d41",
+      "explicit_user_request": true
+    },
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\player\\audio-settings.cfg",
+      "before": null,
+      "after": "0.85 0.95 0 0 0\n",
+      "sha256": "a77026753eb43a84f72a3855472d204986b346635dc9cafe4e7ce01e502d6344",
+      "explicit_user_request": true
+    }
+  ],
+  "settings_preserved_during_tests": true,
+  "gameplay_animation": {
+    "checks": 234852,
+    "failures": 0,
+    "status": "PASS",
+    "binary_sha256": "11b471b6019eeb117d96716ca2207c6c083fd916cc23f683e945074cb98afb18"
+  },
+  "persistence": {
+    "checks": 10202,
+    "failures": 0,
+    "status": "PASS",
+    "evidence": "save-tests.txt",
+    "binary_sha256": "17958d2593ebd15962af7bab1bf013b71bf83c1559cb3a8d0cb6b45fdf3eb74d"
+  },
+  "save_format": {
+    "current": 13,
+    "backward_reads": "v1-v12",
+    "real_v12_fixture": "legacy-v12.efs",
+    "fixture_sha256": "0cb52f235226ddd977085736e593bc272f327da85b463c5096b7f63527fe3777",
+    "fixture_bytes": 173601,
+    "fixture_previous_sources": {
+      "save_game.hpp": "7279b183843fb951a52ee4c388b47e70065047e4da9a84d1e55666e7643618c6",
+      "sound_events.hpp": "6caaf8b93e6fcf434e642ad95deb38efadbe129e1459aeaf7542e651960e7355",
+      "game.hpp": "8e7ca4fa483f49d71647c21ae4eb8920d795587521b7d329d5028fbb831ba223"
+    }
+  },
+  "offline_audio": {
+    "status": "PASS",
+    "checks": 435,
+    "failures": 0,
+    "effects": 41,
+    "variants": 123,
+    "music_tracks": 4,
+    "real_raylib_decode": true,
+    "transport": "offline in-memory sink",
+    "window_created": false,
+    "audio_device_opened": false,
+    "audio_played": false
+  },
+  "native_options": {
+    "checks": 8,
+    "failures": 0,
+    "status": "PASS",
+    "audio_device_opened": false,
+    "window_hidden": true,
+    "arguments": [
+      "--audio-qa",
+      "--no-audio",
+      "--background-test",
+      "--windowed"
+    ],
+    "evidence": "options-tests.txt"
+  },
+  "delivery": {
+    "new_combat_cues": 28,
+    "new_combat_variants": 84,
+    "total_cues": 41,
+    "wav_files": 123,
+    "music_tracks": 4,
+    "all_127_hashes_match_runtime_and_extracted_packages": true,
+    "paths_verified": [
+      "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio",
+      "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\assets\\audio",
+      "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\player\\assets\\audio",
+      "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-audio_suite-packages-20261108-221748\\player\\Emberfall\\assets\\audio",
+      "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-audio_suite-packages-20261108-221748\\developer\\Emberfall-DEV\\assets\\audio"
+    ]
+  },
+  "music_compressed": {
+    "status": "PASS",
+    "audio_played": false,
+    "tracks": [
+      {
+        "file": "desert.ogg",
+        "lufs": -16.0,
+        "true_peak_db": -1.91,
+        "sha256": "08eced5c3eed0a3fcc10895d797fb65e35994a40a0ff458875a702db21777692"
+      },
+      {
+        "file": "echoes-of-the-ruins.ogg",
+        "lufs": -16.01,
+        "true_peak_db": -2.03,
+        "sha256": "b12c0981451149f19a9541b35be74052048377e1be553a0ba9d23cc18600a63b"
+      },
+      {
+        "file": "tower.ogg",
+        "lufs": -16.98,
+        "true_peak_db": -2.05,
+        "sha256": "dd360acd5e5484d4827aaf44ad964e3b98025badaa658dd54c0fb2a339677b9e"
+      },
+      {
+        "file": "volcano.ogg",
+        "lufs": -16.02,
+        "true_peak_db": -1.9,
+        "sha256": "1d2fc6990c93a008bfd898e41fb4a86c9dd9e553d9088aca8ca3f16eba7254c6"
+      }
+    ]
+  },
+  "native_projects": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-physical-20261108-combat.aup3",
+      "sha256": "889a46f9a24a9119b9a64afe493349b71e44ee08e2e470c1061a5dde6ebc170a",
+      "bytes": 51707904,
+      "sqlite_quick_check": "ok"
+    },
+    {
+      "path": "C:\\AI2D\\audio\\emberfall-physical-20261108\\combat.aup3",
+      "sha256": "a0cf6c6ad9e5860193553bcf99b241c6d4acbb825839cc7d109d3deeef98f299",
+      "bytes": 51707904,
+      "sqlite_quick_check": "ok"
+    }
+  ],
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "a533d256f4240eccfce7046b09b32dacbf3484ee3216884918c5ebf2580d8151",
+      "exe_sha256": "bf4ce21dd306478ef67fb25ae2b22e49e99a9428945c4cbb9df4f2de45780aae",
+      "verified_assets": 253,
+      "startup": [
+        {
+          "frames": 180,
+          "scenario": "main-menu"
+        }
+      ],
+      "audio_suite": {
+        "status": "PASS",
+        "checks": 435,
+        "failures": 0,
+        "effects": 41,
+        "variants": 123,
+        "music_tracks": 4,
+        "real_raylib_decode": true,
+        "transport": "offline in-memory sink",
+        "window_created": false,
+        "audio_device_opened": false,
+        "audio_played": false
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false,
+      "documentation_correction": {
+        "previous_package_sha256": "6fc0c05f21c4d907a06f215c3dd485251e8e1038aabdec4bfd15a63f30dfcdfb",
+        "changed_entries": [
+          "Emberfall/LICENSES.md",
+          "Emberfall/JAK_URUCHOMIC.txt"
+        ],
+        "all_binary_and_asset_entry_hashes_preserved": true,
+        "all_final_zip_entries_verified": true
+      }
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "6d597f042d02922a380bd6e1b248670c37ce14bc1bc91584bb508c77ab63c2dc",
+      "exe_sha256": "a0266531e064a4daaa8c4241b08a56e1c966096891c7a5dfff589d6d2ef5854e",
+      "verified_assets": 253,
+      "startup": [
+        {
+          "frames": 180,
+          "scenario": "forest"
+        },
+        {
+          "frames": 180,
+          "scenario": "desert"
+        },
+        {
+          "frames": 180,
+          "scenario": "volcano"
+        }
+      ],
+      "audio_suite": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false,
+      "documentation_correction": {
+        "previous_package_sha256": "40e5e6e8b32b2ee1e93e8c3d6af79960118396dc54210aa8e096c17d16d8507e",
+        "changed_entries": [
+          "Emberfall-DEV/LICENSES.md"
+        ],
+        "all_binary_and_asset_entry_hashes_preserved": true,
+        "all_final_zip_entries_verified": true
+      }
+    }
+  ],
+  "test_audio_played": false,
+  "test_windows_hidden": true,
+  "artistic_listening_performed": false,
+  "foreground_frame_pacing_claimed": false,
+  "code_sha256": {
+    "src/audio.hpp": "ade0c30d105a18c817022819034793859340a102e398eccfc3b3e7c20b02462a",
+    "src/sound_events.hpp": "b495cd560e7baa8832c5e6cf06bfa942cdd54dba23606506fb10634b86f7447f",
+    "src/game.hpp": "c40a75379b4a6f5ea67c51800fb2bf8e3f8417ef62a26cfdc5be8f39c59eddff",
+    "src/skill_system.hpp": "efcc04a028df64b97d815791058a2db2a62f9ae9b1e0ce9febe5185e8b02a16c",
+    "src/boar_charge.hpp": "40298d417793f5725ee42129f2f660640f75c4a3d361e44ca866b6edb139abe7",
+    "src/guardian_boulder.hpp": "8f212646d669eb14281e8f02d93e26c030ef72185358f99c10e4e770f39b3a49",
+    "src/save_game.hpp": "7ed655a0037c82cd7c2ee085a60af0a1e3f0069b3bede925f33c8bbe1e26a479",
+    "tools/media/game_import.py": "c90d7b836c460114daed0b7593f8ee7306b32b444572f5bb85db3928a75d7f71",
+    "tools/media/refine_combat_audio.py": "eec845642dd456bf11b8d22dad062b85da93ea54e4d3b06e51e473cf9eeee8ef",
+    "tests/audio_suite_qa.cpp": "b1aa6bbaf8c34fcb6c16e4d1f3aabf064389688518fe9fdc1bc94e55b2bc9a5b",
+    "tests/audio_events_tests.hpp": "3d13b934fc61f8b56e7e91c1a6603022e1ea3828fd511f10a2f808c5aedb2c69",
+    "tests/audio_save_tests.hpp": "01b129b42fd4867ba47e231254909baa37ad9b80d7ebe58a0537673beaf3dfad"
+  },
+  "diff_whitespace_check": "PASS"
+}

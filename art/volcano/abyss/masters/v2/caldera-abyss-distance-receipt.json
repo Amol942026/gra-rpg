@@ -1,0 +1,19 @@
+{
+  "name": "caldera-abyss-distance",
+  "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-distance.kra",
+  "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-distance.png",
+  "layers": [
+    "Isolated pinnacles below the plateau"
+  ],
+  "size": [
+    2048,
+    1024
+  ],
+  "runtime_size": [
+    2048,
+    1024
+  ],
+  "kra_sha256": "26672d0b101e126e15ea1dcb6f62325ef5b475427130c735941dd4fe5757bbb7",
+  "png_sha256": "5000d2b941166caa97eaf159d70ba8de281f1eb4c31e618ea91d24c4ade86566",
+  "retained": true
+}

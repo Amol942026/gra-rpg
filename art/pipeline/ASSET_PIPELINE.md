@@ -1,5 +1,69 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+09.11.2026: [lekcje Eldrina i trzy żywioły](../gameplay/eldrin-spells-20261109/README.md).
+Natywna Krita, trzy projekty Synfig / 180 klatek, rzeczywiste Csound i Audacity.
+Naciąg prawdziwego łuku, nagrany podmuch płomienia, osobne lód/piorun i lekcja.
+50 Cue / 150 WAV, cztery OGG; zapis v15 czyta v1–v14. Źródła CC0 i CC BY 3.0
+z pełną atrybucją w paczce. Testy i produkcja bez playbacku, okna gry ukryte.
+
+09.11.2026: [przeturlanie z nagrań ubrania i ziemi](../audio/ground-roll-20261109/README.md)
+oraz [23 pozostałe ikony przedmiotów](../items/loot-20261109/README.md).
+Warstwowa Krita + lokalny ComfyUI, drugi atlas 1024 × 384; 85 ikon sprzętu
+bez zmian. Trzy istniejące WAV podmienione przez binder, liczba Cue i zapis
+v14 bez zmian. Praca bez playbacku, natywne mastery poza paczką gracza.
+
+Najnowsza aktualizacja: [kula ognia, teleport i naciąg łuku](../audio/flame-20261108/README.md)
+oraz [85 ikon wyposażenia Blender/ComfyUI](../equipment/icons-20261108/README.md).
+45 Cue / 135 WAV, cztery OGG; zapis v14 z odczytem v1–v13. Modele wykonano
+na wyraźne zamówienie użytkownika; dostarczone ikony i runtime pozostają 2D.
+Natywne mastery `.blend` i AUP3 są lokalne, grafy Comfy bez płatnych węzłów.
+
+Aktualna korekta audio 08.11.2026 — [głośniejszy miks i nagrane gesty walki](../audio/physical-20261108/README.md).
+41 Cue / 123 WAV, w tym 84 nowe warianty nagranego foley CC0; Csound/Audacity
+lokalnie. Muzyka −16 LUFS (wieża −17), kanały domyślnie włączone, głośniejsze
+poziomy i menu. Bieżący zapis v13 zachowuje odczyt v1–v12. Poprzednie liczby
+i poziomy w opisach niżej są historyczne. Test: `tests/audio_suite_qa.ps1 -NoAudio`.
+
+Aktualizacja map 08.11.2026 — [las, pustynia i Kaldera o dwukrotnej powierzchni](../world-expansion/README.md).
+102 × 102 pola, podwojone zwykłe populacje, drogi, cztery nowe mosty i 88
+wzniesień. Istniejące materiały i postacie 2D, bez nowych bitmap lub modeli.
+Bieżący zapis: v12 (migracja v1–v11 bez utraty postępu), scenografia Kaldery 5.
+Odbiór: `tests/world_expansion_qa.ps1 -NoAudio`. Opisy rozmiaru i wersji niżej
+dotyczą poprzednich etapów.
+
+Aktualizacja audio 08.11.2026 — [cztery kompozycje i 99 wariantów efektów](../audio/suite-20261108/README.md).
+Rzeczywiste LMMS 1.2.2, Csound 6.18.1 i pięć zachowanych projektów Audacity
+3.7.9; lokalne przenośne instalacje w `AppData/Local/Programs/CodexAudio`.
+Historyczne `C:/AI2D/audio/scripts` na tym PC nie istnieje: zastosowano
+już skonfigurowane narzędzia MCP, bez instalowania nowego serwera. Zachowano
+obejście zamykania: zapis i pozostawienie własnych projektów, bez Close.
+Nowe mastery: `C:/AI2D/audio/emberfall-suite-20261108`; bieżący runtime
+`assets/audio/production.json`. Test: `tests/audio_suite_qa.ps1 -NoAudio`.
+
+Aktualizacja 08.11.2026 — [cztery zdolności przeciwników pustyni i Kaldery](../gameplay/elite-abilities/README.md).
+Proceduralne znaczniki i efekty 2D wykorzystują istniejące malowane postacie
+i klipy Synfig, bez nowych bitmap, modeli i usług chmurowych. Bieżący zapis
+to v11 (fazy zdolności i pociski); odczyt v1–v10 jest zachowany. Opisy v10
+niżej dotyczą wcześniejszych etapów. Odbiór: `tests/enemy_ability_qa.ps1 -NoAudio`.
+
+Aktualna rzeźba trzech krain i poprawione ścieżki Kaldery:
+[44 formy terenu, ciągła nawierzchnia i nowy materiał Krita](../terrain/diversity-20261108/README.md).
+Produkcja: `krita_caldera_road.py`; odbiór: `verify_caldera_road.py`
+i `tests/hills_qa.ps1 -NoAudio`.
+
+Pierwsza implementacja wysokości i dostępnych zboczy trzech krain:
+[13 wzniesień, profil ruchu i podniesione podłoże — etap poprzedni](../terrain/hills/README.md).
+Wykorzystują istniejące malowane zasoby; bez nowych modeli i tekstur.
+Kontrola: `tests/hills_qa.ps1 -NoAudio`.
+
+Aktualne urwiska Kaldery, tło oddali i skrzynie trzech krain:
+[przepaść i natywne źródła Krita](../volcano/abyss/README.md).
+Zastępują kamienne obrzeże opisane w raporcie rozmieszczenia poniżej.
+
+Aktualne granice Kaldery i bardziej równomierne rozmieszczenie istniejącego
+terenu: [obrzeże bazaltowe i rewizja scenografii 4](../volcano/layout/README.md).
+Format zapisu pozostaje v10; wcześniejsze opisy rewizji 3 poniżej są historyczne.
+
 Nowsze malowanie siedmiu przeciwników Kaldery, zamówione przez użytkownika
 w ComfyUI: [lokalny img2img i istniejące rigi](../volcano/comfy/README.md).
 Workflow zachowuje osiem kierunków, sześć części, dokładną alfę i animacje

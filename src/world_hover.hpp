@@ -32,11 +32,20 @@ std::vector<DrawObject> worldDrawOrder() {
     if(game.hasFountains())for(int i=0;i<FountainCount;i++)objects.push_back({game.fountains()[i].x+game.fountains()[i].y,12,i});
     for(int i=0;i<int(game.fireballs.size());i++)objects.push_back({game.fireballs[i].pos.x+game.fireballs[i].pos.y,3,i});
     for(int i=0;i<int(game.cinders.size());i++)objects.push_back({game.cinders[i].pos.x+game.cinders[i].pos.y,14,i});
+    for(int i=0;i<int(game.venomGlobs.size());i++)objects.push_back({game.venomGlobs[i].pos.x+game.venomGlobs[i].pos.y,15,i});
     for(int i=0;i<int(game.arrows.size());i++)objects.push_back({game.arrows[i].pos.x+game.arrows[i].pos.y,5,i});
     for(int i=0;i<int(game.boulders.size());i++)objects.push_back({game.boulders[i].pos.x+game.boulders[i].pos.y,10,i});
     for(int i=0;i<int(game.boulderImpacts.size());i++)for(int piece=0;piece<guardian_break::Pieces;piece++){
         const auto& impact=game.boulderImpacts[i];auto q=guardian_break::sample(piece,impact.progress());
         if(q.alpha>0)objects.push_back({impact.pos.x+impact.pos.y+q.y/20,11,i*guardian_break::Pieces+piece});
+    }
+    for(auto& object:objects){V p{};bool grounded=true;
+        switch(object.type){case 0:p=game.props[object.index].pos;break;case 1:case 4:p=game.enemies[object.index].pos;break;case 2:p=game.player;break;
+        case 9:p=game.chests[object.index].pos;break;case 12:p=game.fountains()[object.index];break;
+        case 3:p=game.fireballs[object.index].pos;break;case 5:p=game.arrows[object.index].pos;break;case 14:p=game.cinders[object.index].pos;break;
+        case 15:p=game.venomGlobs[object.index].pos;break;
+        case 10:p=game.boulders[object.index].pos;break;case 11:p=game.boulderImpacts[object.index/guardian_break::Pieces].pos;break;default:grounded=false;}
+        if(grounded)object.depth+=game.elevation(p)*.8f;
     }
     std::stable_sort(objects.begin(),objects.end(),[](const auto& a,const auto& b){return a.depth<b.depth;});
     return objects;
@@ -77,7 +86,7 @@ WorldHover pickWorld(Vector2 point) {
     auto objects=worldDrawOrder();
     for(auto it=objects.rbegin();it!=objects.rend();++it){
         if(it->type==10||it->type==11)continue; // Stones and fragments are not inventory/hover targets.
-        if(it->type==3||it->type==5||it->type==14)continue; // Projectiles do not obstruct mouse inspection.
+        if(it->type==3||it->type==5||it->type==14||it->type==15)continue; // Projectiles do not obstruct mouse inspection.
         V position{};bool touched=false;HoverKind kind=HoverKind::None;int id=it->index;
         if(it->type==12){
             position=game.fountains()[it->index];kind=HoverKind::Fountain;touched=fountain_art::contains(it->index,point);
@@ -142,10 +151,9 @@ WorldHover pickWorld(Vector2 point) {
 
 void drawHoveredTile() {
     if(!hovered.tileValid)return;
-    Vector2 p=screen(hovered.tile);
     Color color=hovered.kind==HoverKind::Enemy?rgb(255,140,104):Gold;
-    diamond(p.x,p.y,40,20,Fade(color,.20f));
-    Vector2 corners[]={{p.x,p.y-20},{p.x+40,p.y},{p.x,p.y+20},{p.x-40,p.y}};
+    Vector2 corners[]={screen(hovered.tile+V{-.5f,-.5f}),screen(hovered.tile+V{.5f,-.5f}),screen(hovered.tile+V{.5f,.5f}),screen(hovered.tile+V{-.5f,.5f})};
+    poly({corners[0],corners[1],corners[2],corners[3]},Fade(color,.20f));
     for(int i=0;i<4;i++)DrawLineEx(corners[i],corners[(i+1)%4],2,Fade(color,.95f));
 }
 

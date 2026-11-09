@@ -1,0 +1,38 @@
+Emberfall combat foley — 2026-11-08
+
+The following recorded source material is licensed under Creative Commons
+CC0 1.0 Universal. It permits adaptation and commercial redistribution.
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Kenney (Kenney Vleugels): Impact Sounds 1.0
+https://kenney.nl/assets/impact-sounds
+Original package notice:
+  License: (Creative Commons Zero, CC0)
+  http://creativecommons.org/publicdomain/zero/1.0/
+  This content is free to use in personal, educational and commercial projects.
+  Support us by crediting Kenney or www.kenney.nl (this is not mandatory)
+
+Kenney (Kenney Vleugels): RPG Audio
+https://kenney.nl/assets/rpg-audio
+Original package notice:
+  License (Creative Commons Zero, CC0)
+  http://creativecommons.org/publicdomain/zero/1.0/
+  You may use these assets in personal and commercial projects.
+  Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
+
+artisticdude: Swishes Sound Pack
+https://opengameart.org/content/swishes-sound-pack
+13 recorded swishes, published by the author under CC0.
+
+Darsycho: Monster snarls — monster-snarl-attack.ogg
+https://opengameart.org/content/monster-snarls
+Published by the author under CC0.
+Original notice: Feel free to use for whatever, credit is appreciated!
+
+Changes for Emberfall: excerpt selection, trimming, DC removal, filtering,
+layering in Csound, native Audacity normalization, variation selection,
+level balancing and click guards. No source recordings imply endorsement.
+The original Emberfall music and other synthesized assets retain their
+existing project provenance. Full source hashes and receipts are retained
+in art/audio/physical-20261108 and C:/AI2D/audio/emberfall-physical-20261108.

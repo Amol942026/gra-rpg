@@ -1,0 +1,33 @@
+{
+  "id": "EF_DesertReturnDialogue",
+  "title": "Powrót z Morza Piasków",
+  "array": "DesertReturnDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+  "lines": [
+    {
+      "speaker": "Wanderer",
+      "text": "Żywa Wydma rozsypała się, Eldrinie. W piasku znalazłem drugą część. Jej blask rozpoznał odłamek z Kniei."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Dwie z pięciu części znów są razem. Dobrze się spisałeś. Strzeż obu — do odnowienia Pieczęci będziemy potrzebowali całego Serca."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Czuję jeszcze piasek w zbroi. Mam nadzieję, że nie każesz mi zaraz wracać na pustynię."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Trzeciej części szukaj w Kalderze Popiołu, krainie Varkhora, zwanego Sercem Kaldery. Bazaltowe mosty prowadzą tam nad lawą."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Zanim wyruszę, odpocznę i sprawdzę ekwipunek. Na piaskach przekonałem się, ile od tego zależy."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Słusznie. Skorzystaj ze źródła i zapasów Mirona. Gdy wrócisz, otworzę przejście do Kaldery. Droga do oazy również pozostaje otwarta."
+    }
+  ]
+}

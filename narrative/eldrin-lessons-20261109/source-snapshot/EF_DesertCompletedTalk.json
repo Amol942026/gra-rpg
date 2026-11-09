@@ -1,0 +1,21 @@
+{
+  "id": "EF_DesertCompletedTalk",
+  "title": "Eldrin — powrót do oazy",
+  "array": "DesertCompletedTalk",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "7f21f7c35574709ac7d3452d9facdabfb52b27bc73a6013b3a5cc9516d1517bb",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Odłamek Żywej Wydmy jest już bezpieczny. Jej straż nad drugą częścią dobiegła końca."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "W Morzu Piasków zostały jeszcze miejsca, które chciałbym zbadać."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Otworzę ci przejście. Brama Eldrina przy miejscu przybycia sprowadzi cię z powrotem do wieży."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "impact",
+    "page": "https://kenney.nl/assets/impact-sounds",
+    "license": "CC0",
+    "archive_sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+    "bytes": 800850
+  },
+  {
+    "name": "rpg",
+    "page": "https://kenney.nl/assets/rpg-audio",
+    "license": "CC0",
+    "archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+    "bytes": 964837
+  },
+  {
+    "name": "swishes",
+    "download": "https://opengameart.org/sites/default/files/swishes.zip",
+    "license": "CC0",
+    "sha256": "7980215241b739a787dcf26f660ce510bb237900968789395a86911619795693",
+    "bytes": 385150
+  },
+  {
+    "name": "snarl",
+    "download": "https://opengameart.org/sites/default/files/monster-snarl-attack.ogg",
+    "license": "CC0",
+    "sha256": "34bf1ceef265725abf00ab3263bbbb492792e126bb1619addd4a5d3ad123347f",
+    "bytes": 185872
+  }
+]

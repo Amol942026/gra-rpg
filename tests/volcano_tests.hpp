@@ -4,19 +4,21 @@ void volcanoTests(){
  Game g;g.enterMageTower();g.player=MagePosition;check(!g.canTravelVolcano()&&!g.travelToVolcano(),"third realm is locked before second boss dies");
  g.desertBossDead=true;g.collectedFragments=1;check(g.canTravelVolcano()&&g.travelToVolcano()&&g.inVolcano(),"killing the second boss unlocks explicit mage travel, independent of moving its loot");
  check(distance(g.player,VolcanoArrival)==0&&g.walkable(g.player)&&distance(g.player,VolcanoBossHome)>45,"third arrival is safe and far from its boss");
- check(g.enemies.size()==31&&g.volcanoCreated&&g.forage.empty(),"third realm contains thirty ordinary enemies and a boss");
+ check(g.enemies.size()==61&&g.volcanoCreated&&g.forage.empty(),"third realm contains sixty ordinary enemies and a boss");
  {
   int portal=0,fractional=0;std::array<int,4> types{};
   for(const auto& p:g.props){if(p.type==13){portal++;continue;}types[p.type-14]++;fractional+=std::abs(p.pos.x-std::round(p.pos.x))>.01f;
    check(!volcanoLava(p.pos,propRadius(p.type)+.8f)&&!nearVolcanoFountain(p.pos,3),"clustered scenery keeps river banks and shrines clear");
    for(const auto& road:VolcanoRoads)for(int i=1;i<6;i++)check(desertSegmentDistance(p.pos,road[i-1],road[i])>=1.7f+propRadius(p.type),"clustered scenery leaves broad navigable road margins");
   }
-  check(portal==1&&fractional>50&&g.props.size()<125,"authored clusters replace uniform grid scatter and retain one return portal");
+  check(portal==1&&fractional>100&&g.props.size()<=209,"irregular scenery covers the expanded realm and retains one return portal");
   for(int count:types)check(count>=8,"all four scenery families form visible groups");
+  for(size_t i=0;i<g.props.size();i++)for(size_t j=i+1;j<g.props.size();j++)if(g.props[i].type>=14&&g.props[j].type>=14)
+   check(distance(g.props[i].pos,g.props[j].pos)>4.4f,"large scenery silhouettes are separated instead of forming crowded clumps");
  }
  for(const auto& road:VolcanoRoads)for(int section=1;section<6;section++)for(int sample=0;sample<=100;sample++)check(!volcanoLava(road[section-1]+(road[section]-road[section-1])*(sample/100.f)),"every marked road section crosses lava only at an actual safe bridge");
  std::array<int,7> species{};for(const auto& e:g.enemies){species[e.type-VolcanoFirstType]++;check(g.enemyPositionClear(e.home,e.radius())&&!volcanoLava(e.home,e.radius()),"every volcanic enemy spawns on safe ground with body clearance");}
- for(int i=0;i<6;i++)check(species[i]==5,"six new species have five independent encounters each");check(species[6]==1,"one third boss, distinct from both earlier bosses");
+ for(int i=0;i<6;i++)check(species[i]==10,"six volcanic species have ten independent encounters each");check(species[6]==1,"one third boss, distinct from both earlier bosses");
  {
   auto wandering=g;for(int frame=0;frame<180;frame++){wandering.update(1.f/60,{},false);for(const auto& e:wandering.enemies)check(!volcanoLava(e.pos,e.radius()),"real volcanic patrols keep their complete bodies out of lava");}
   for(int fps:{30,60,120})for(int mode=0;mode<3;mode++){

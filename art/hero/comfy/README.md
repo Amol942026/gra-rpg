@@ -1,5 +1,8 @@
 # Wędrowiec — malowanie ComfyUI, 05.11.2026
 
+Aktualna korekta koloru włosów usuwa przejaśnienie nad czołem podczas
+wczytywania materiału: [jednolity brąz, porównanie i testy](../hair/README.md).
+
 Nowe pasma włosów, tkanina tuniki, karwasze i buty są częścią używanego
 przez grę atlasu `assets/sprites/hero-paints.png`. Pięć renderów img2img
 powstało lokalnie przez `comfy_local` w ComfyUI 0.44.0 na CPU, z użyciem

@@ -3,9 +3,9 @@
 void exportForestOverview(){
  RenderTexture2D map=LoadRenderTexture(1440,900);BeginTextureMode(map);ClearBackground(Ink);
  txt("LAS MCHU — ROZBUDOWANA KNIEJA",30,25,30,Gold);
- txt("72 × 72 pola  ·  46 rozproszonych przeciwników  ·  nowe polany i odnogi ścieżek",32,74,17,Text);
+ txt("102 × 102 pola  ·  91 rozproszonych przeciwników  ·  nowe polany i odnogi ścieżek",32,74,17,Text);
  float factor=1000.f/TerrainWidth;
- DrawTexturePro(terrain.texture,{0,0,float(TerrainWidth),-float(TerrainHeight)},{25,150,1000,TerrainHeight*factor},{0,0},0,WHITE);
+ DrawTexturePro(terrain.texture,{0,0,float(TerrainCacheWidth),-float(TerrainCacheHeight)},{25,150,1000,TerrainHeight*factor},{0,0},0,WHITE);
  auto point=[&](V p){return Vector2{25+(TerrainOriginX+(p.x-p.y)*40)*factor,150+(90+(p.x+p.y)*20)*factor};};
  for(const auto& prop:game.props){Vector2 p=point(prop.pos);DrawCircleV(p,treeProp(prop.type)?1.4f:1,Fade(treeProp(prop.type)?rgb(36,70,51):rgb(128,133,104),.8f));}
  const Color colors[]={rgb(146,199,114),rgb(203,144,117),rgb(222,215,179),Gold,rgb(181,137,94),rgb(180,203,96),rgb(219,113,98),rgb(129,179,149)};
@@ -32,7 +32,7 @@ bool runForestQA(){
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
  game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};refreshDisplayLayout();
  check(!audioSystem.available,"forest diagnostic opens no audio device");
- check(IsRenderTextureValid(terrain)&&terrain.texture.width==TerrainWidth&&IsTextureValid(minimapTerrain),"GPU loads the enlarged terrain and the cached minimap successfully");
+ check(IsRenderTextureValid(terrain)&&terrain.texture.width==TerrainCacheWidth&&IsTextureValid(minimapTerrain),"GPU loads the enlarged terrain and the cached minimap successfully");
  exportForestOverview();
  for(const auto& glade:ForestGlades){V camera=glade.center;
   game.player=camera;game.time=.9f;game.messageTime=0;renderScene();BeginDrawing();presentCanvas();Image actual=presentedImage();

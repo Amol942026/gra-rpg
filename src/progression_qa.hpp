@@ -4,7 +4,7 @@ bool runProgressionQA(){
     fs::create_directories("qa-v13");std::ofstream report("qa-v13/progression-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* label){checks++;if(!ok)failures++;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
     auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
-    game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};
+    game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};game.learnedSpells=spellBit(Spell::Fireball);
     welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;statDraft={};draftForLevel=-1;dragging={};
     prepareCanvas(1.2f);pointAt(statsButton());
     check(clickProgression()&&statsOpen,"HUD stats button opens the level-one character sheet");
@@ -45,7 +45,7 @@ bool runProgressionQA(){
     for(int i=0;i<5;i++)game.update(.05f,{},false);
     check(game.enemies[0].hp==69&&game.fireballs.empty()&&!game.explosions.empty(),"projectile hits with allocated magical damage and creates explosion");
     renderScene();saveTexture(canvas,"qa-v13/fireball-impact.png");
-    game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};game.xp=experienceForLevel(1)-1;
+    game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};game.xp=experienceForLevel(1)-1;game.learnedSpells=spellBit(Spell::Fireball);game.selectedSpell=Spell::Fireball;
     V victim=game.player+V{2,-2};game.enemies.push_back({44,0,victim,victim,1,36});game.enemies[0].windup=100;game.spell(victim-game.player);
     for(int i=0;i<30&&!game.allocationRequired;i++)game.update(.05f,{},false);
     syncAdvancement();check(game.allocationRequired&&statsOpen&&game.attributePoints==5,"a fireball kill also pauses and opens allocation automatically");

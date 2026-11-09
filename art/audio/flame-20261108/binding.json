@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "event": "bow-draw-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-draw-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\bow-draw-v2.wav",
+      "sha256": "27f5870e8c1ba2f5a27a75f3a9282f9fa02ebeb7690416d7186e464e2df73672",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "bow-draw-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-draw-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\bow-draw-v3.wav",
+      "sha256": "0ae5c1797e527d9d674bc2a65ebdcc9b4a7f60d75bcfd5decfba60f457c218e2",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "bow-draw",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-draw.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\bow-draw.wav",
+      "sha256": "44a5fc5ef46c496173d736077557b135faa6b21b52c76195194434729dfb949f",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "fireball-cast-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-cast-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\fireball-cast-v2.wav",
+      "sha256": "6db781beba48f92d088e5adff92a1a37b12f6918dfc7c424aaeffffd818e6771",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "fireball-cast-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-cast-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\fireball-cast-v3.wav",
+      "sha256": "32187fcfb14a1b063ed364f8cbdd1d864a0eb48254c46fb07005d16dd82a59d7",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "fireball-cast",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-cast.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\fireball-cast.wav",
+      "sha256": "9258d8ba592727915695e8311478d3d4b8a20b395b185624e5f7e23689b3c9de",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "fireball-impact-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-impact-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\fireball-impact-v2.wav",
+      "sha256": "aea52ff2a4f2bc2ec819464e5a4c83eae2d6e9434bb25af42614bf45d00244ed",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "fireball-impact-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-impact-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\fireball-impact-v3.wav",
+      "sha256": "6cce43399f98e1ff7e925dfc978909a09f642f4fd7ebc512c8ca2330aa158c46",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "fireball-impact",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-impact.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\fireball-impact.wav",
+      "sha256": "b389bb624f4fbb68afd62c33b33d289e14e4e609fa5bee78a4fcc50a73a0019e",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "teleport-arrival-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\teleport-arrival-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\teleport-arrival-v2.wav",
+      "sha256": "e3107e71b428d1f2bda1133eb6253b50f7fdb89026db77a3555af32863e025d2",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "teleport-arrival-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\teleport-arrival-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\teleport-arrival-v3.wav",
+      "sha256": "f24f0d57cb20bf15804693ba9d9adc0cc888e9c11a2d92d55bb0502084749473",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "teleport-arrival",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\teleport-arrival.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-flame-20261108\\delivery\\teleport-arrival.wav",
+      "sha256": "aa60c5b6d3d2cc1ac2726536c60a500cce7189e23a7a15284963951c6f27f47e",
+      "backup": null,
+      "before_sha256": null
+    }
+  ],
+  "receipt": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_230822_36058eda\\binding-receipt.json",
+  "asset_root": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets"
+}

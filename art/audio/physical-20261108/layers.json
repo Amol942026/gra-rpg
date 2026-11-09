@@ -1,0 +1,668 @@
+[
+  {
+    "layer": "swish-1",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-1.wav",
+    "source_sha256": "9a15c881345c1ce1c39cc31f52f081c8c4dc81fa41111e0079400f39d3ba0e45",
+    "offset": 0.023916666666666666,
+    "frames": 4788,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-1.wav",
+    "sha256": "7c8f86f04a263955341cc13629bd0bb2142e4e770fb53539fd3c401563f62afc"
+  },
+  {
+    "layer": "swish-10",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-10.wav",
+    "source_sha256": "4f7381a76f280d3f36f962ac3f44f16f77eec44797f30715d063c81ea3859024",
+    "offset": 0.008791666666666666,
+    "frames": 3471,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-10.wav",
+    "sha256": "7688b8f0e2e3f623add0be6eb5ed87f588a3c838e661177e260a417d4d02158d"
+  },
+  {
+    "layer": "swish-11",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-11.wav",
+    "source_sha256": "9e81d548d8215fbb36f7a41b5771d4b52c2fd02fbb9b5ff9a4c65118fd88ee4d",
+    "offset": 0.010625,
+    "frames": 3647,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-11.wav",
+    "sha256": "8a71d0fdb5b54e820a4b92d9e22b72bc3f95040cdc6e1f931dc86c85f1637324"
+  },
+  {
+    "layer": "swish-12",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-12.wav",
+    "source_sha256": "0513a86d428d9ed8601e93b8554580a5932c6c1a82d39d81a8f48883f1807a67",
+    "offset": 0.008041666666666667,
+    "frames": 3164,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-12.wav",
+    "sha256": "4f2ffa9c78d0696b0ddca3ee9f6fe8ce2c5b09d5ae0e01e84f5c161f32544bba"
+  },
+  {
+    "layer": "swish-13",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-13.wav",
+    "source_sha256": "698230ba3fe05a68c18d68cd6b3a07fb98e6c1198bb1a4238592ee9912c02c77",
+    "offset": 0.007395833333333333,
+    "frames": 3046,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-13.wav",
+    "sha256": "c7599f9291eb1e130fa905695e13b1436bb114f8e9aa3c49ea5fa43e5abe0f3b"
+  },
+  {
+    "layer": "swish-2",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-2.wav",
+    "source_sha256": "1ce7752cce3d43f16fc222ad7f7ffb69d9a5fc01e64b93d205765fc37b8e9b0d",
+    "offset": 0.019520833333333334,
+    "frames": 3663,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-2.wav",
+    "sha256": "f4b5672fb9838057bfd39ab7bfe6b38fe7144b4d52ffedef4a8fd2a35474c1ae"
+  },
+  {
+    "layer": "swish-3",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-3.wav",
+    "source_sha256": "55b100e2c67fa43dad8510e31e85bbd51a68d5ce84a6e0259e21e19030083e24",
+    "offset": 0.0305,
+    "frames": 4442,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-3.wav",
+    "sha256": "99ce68f836f65b3c396d2ac3f5da7b39f543e3a09e164ac0906413770bcd09b6"
+  },
+  {
+    "layer": "swish-4",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-4.wav",
+    "source_sha256": "0060f4a7040edce4cc50d1daa10a9cb76764128a942e4688339e69cd1d5d784c",
+    "offset": 0.024875,
+    "frames": 4415,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-4.wav",
+    "sha256": "716639a9214bb9e5ab445a8e5f24156158e1ad77d955bad211c03c986a8da548"
+  },
+  {
+    "layer": "swish-5",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-5.wav",
+    "source_sha256": "4db41f2d2f97caf94627be05ff2870217fecc86534cf30f2aab413b847a0d50a",
+    "offset": 0.018625,
+    "frames": 4343,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-5.wav",
+    "sha256": "b4b6c05c1b4d8ad9b5519b9ab48b28ad5b7be04aca78b4e54d6b2a409dbfb5a5"
+  },
+  {
+    "layer": "swish-6",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-6.wav",
+    "source_sha256": "edcaacf008da7ae692566f4fe0d6023ea68d0a014149889e95209be7ee0b746d",
+    "offset": 0.020666666666666667,
+    "frames": 4531,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-6.wav",
+    "sha256": "9eeb921118a113a40f92433c1c05915f64fdc4ba194344e1430bbf360e2f132b"
+  },
+  {
+    "layer": "swish-7",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-7.wav",
+    "source_sha256": "e6de737a34de16afed094d6170d7679149022f149e0a8356d2f029b0e8f4a4d7",
+    "offset": 0.016270833333333335,
+    "frames": 5558,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-7.wav",
+    "sha256": "84cb5d7f320b8b1225410511d94fafad559062bf9f977294abba8c2dcbcdf0b0"
+  },
+  {
+    "layer": "swish-8",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-8.wav",
+    "source_sha256": "113a3709ad889ad2fcf38eaceaf4eb9d67ffe1e96713fed93a6f0aed08769980",
+    "offset": 0.035875,
+    "frames": 4528,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-8.wav",
+    "sha256": "327d22b636f58444008912211b8cd44d04188f62e3e953d6864c047d40d36962"
+  },
+  {
+    "layer": "swish-9",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\swishes\\swishes\\swish-9.wav",
+    "source_sha256": "123883f006ce55feecbff11eea5f87c4493df4399989983037144570a23723c1",
+    "offset": 0.03308333333333333,
+    "frames": 5257,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-9.wav",
+    "sha256": "7bebacdf8bfea3471f1a3b5298322839b73261f31b14c4b31d6fe9fb4949cab4"
+  },
+  {
+    "layer": "snarl-0",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\snarl.ogg",
+    "source_sha256": "34bf1ceef265725abf00ab3263bbbb492792e126bb1619addd4a5d3ad123347f",
+    "offset": 10.88,
+    "frames": 20160,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\snarl-0.wav",
+    "sha256": "ea814392c7b0d65f67ae12ed7c55fbd946a32871f5b8c21ce5ab3a3237c3121e"
+  },
+  {
+    "layer": "snarl-1",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\snarl.ogg",
+    "source_sha256": "34bf1ceef265725abf00ab3263bbbb492792e126bb1619addd4a5d3ad123347f",
+    "offset": 13.04,
+    "frames": 20160,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\snarl-1.wav",
+    "sha256": "9bb4723e01e719b836ccc7f5b1e2eef11eaca1f39c0d1ccf63f22a4443118b64"
+  },
+  {
+    "layer": "snarl-2",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\snarl.ogg",
+    "source_sha256": "34bf1ceef265725abf00ab3263bbbb492792e126bb1619addd4a5d3ad123347f",
+    "offset": 17.04,
+    "frames": 20160,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\snarl-2.wav",
+    "sha256": "7cb607d5a8b7aeec84e839c2b5d296b83c4696ddd9f04da8e01c6c2b57bb1f8e"
+  },
+  {
+    "layer": "impactMetal_heavy_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_heavy_000.ogg",
+    "source_sha256": "e07045693e4a2b3d165c424e3dab4c781d9ff8880a386880ac89a51315d7f831",
+    "offset": 0.0,
+    "frames": 3434,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_heavy_000.wav",
+    "sha256": "d883b465eced712b14bc9d4df63086620864fd42958a8b11720a8f8b07dc9f67"
+  },
+  {
+    "layer": "impactMetal_heavy_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_heavy_001.ogg",
+    "source_sha256": "83554049f81f4db9209379e103c30bfa63f65c42189a03f300b045c2c82e23ae",
+    "offset": 0.0,
+    "frames": 6003,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_heavy_001.wav",
+    "sha256": "b68a42c39e64a597ec12d3ac134dd71d15be12a10280e8cfd24a93b1b928863d"
+  },
+  {
+    "layer": "impactMetal_heavy_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_heavy_002.ogg",
+    "source_sha256": "b914c8f1eb7c0f34bb165d7c77f4be0351f6be0660c13c53e65424e262e2c093",
+    "offset": 0.0,
+    "frames": 2795,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_heavy_002.wav",
+    "sha256": "7181a3640b60ba970d7b2d3d570759675cde05ddf7a2855d3aae3ad5297b25df"
+  },
+  {
+    "layer": "impactMetal_light_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_light_000.ogg",
+    "source_sha256": "33b5e6e37c6e9d54e07bf5a89b12c76e879f40c1ea83cdd82714df1d6f9fec6d",
+    "offset": 0.0,
+    "frames": 7558,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_light_000.wav",
+    "sha256": "55027d777d13767419d02d05600bf58d1984c2780841d3a2ebee28fdee58b905"
+  },
+  {
+    "layer": "impactMetal_light_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_light_001.ogg",
+    "source_sha256": "fba69c467ddd85da7b1d82e259f936b876d9ba6a3d6f1b24bdd10468e46bfe08",
+    "offset": 0.0,
+    "frames": 5772,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_light_001.wav",
+    "sha256": "ab4342d2d035dcba0a929cb24de5cad6906e1457e1f864bb338dee8cd560a66f"
+  },
+  {
+    "layer": "impactMetal_light_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_light_002.ogg",
+    "source_sha256": "25a96f90a9a1f88a531e824e126f0519504625e5635e65a72e4f31611428db29",
+    "offset": 0.0,
+    "frames": 5202,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_light_002.wav",
+    "sha256": "db4966b82c49d836f65e7aa5560f29818c3c0b79a7dd5b8ec59d5958ffb52982"
+  },
+  {
+    "layer": "impactMetal_medium_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_medium_000.ogg",
+    "source_sha256": "a96f879fec0864a8938e0c745b6996a6c5679c16a234ce31a01cc995e8401003",
+    "offset": 0.0,
+    "frames": 5800,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_medium_000.wav",
+    "sha256": "cbb93ef746c75ed4ee68c0cd813b8fd90095170f7cf7017daa0e95a03866aa3b"
+  },
+  {
+    "layer": "impactMetal_medium_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_medium_001.ogg",
+    "source_sha256": "e8a9eaba7c4d27422e4eeb3e6c7100d5d7dc0f83e005efc98c960adcc5265337",
+    "offset": 0.0,
+    "frames": 3475,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_medium_001.wav",
+    "sha256": "6231c5348ac6032d4cfd73af459d6fe93cd76b272e8cd8fd95af84ca8955a799"
+  },
+  {
+    "layer": "impactMetal_medium_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMetal_medium_002.ogg",
+    "source_sha256": "7e89ce2ca0dbda95ea2b78d4b50791cab35c10d20e9f5ccd45dd0b00e99ff548",
+    "offset": 0.0,
+    "frames": 2670,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMetal_medium_002.wav",
+    "sha256": "ab6651addc9fcc6212b3bc502b5a67285ad982abc639496b8d1f125f8f49071b"
+  },
+  {
+    "layer": "impactPlate_heavy_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_heavy_000.ogg",
+    "source_sha256": "112d4f93ddcc370b410630f971c0f5d991856102da9c76bc5c5540d388e75aaa",
+    "offset": 0.0,
+    "frames": 13212,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_heavy_000.wav",
+    "sha256": "76fefe4a331b9f8dbeed93739acd57464128c0294d579bc2f964404e12bd1607"
+  },
+  {
+    "layer": "impactPlate_heavy_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_heavy_001.ogg",
+    "source_sha256": "142fd6c77f13d25f318265901163f70f8dfe12f87829169a570025be43de7011",
+    "offset": 0.0,
+    "frames": 12481,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_heavy_001.wav",
+    "sha256": "4752a674a3a00e431c9dba9428a3cf7c94c012594696831b4a696cb23f2f079b"
+  },
+  {
+    "layer": "impactPlate_heavy_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_heavy_002.ogg",
+    "source_sha256": "b0cab75d1befa32b4cf215d8ee7e1c400a39182e8b105963b8e310f825b198a1",
+    "offset": 0.0,
+    "frames": 16813,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_heavy_002.wav",
+    "sha256": "0e81ed0b0f3de0dfc8e3e75db19e19ed2d43e318d9b92f8b8afdec9cdf8f1dfd"
+  },
+  {
+    "layer": "impactPlate_light_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_light_000.ogg",
+    "source_sha256": "6e797cf8a5bfc52d7ed5eb47c227974c1cf2a674954fec5b539cea7d62c7282c",
+    "offset": 0.0,
+    "frames": 6068,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_light_000.wav",
+    "sha256": "40aaab2ba4adb0632bf7cbb633b600b5e3088ac9381924f58004b1b5d81ac759"
+  },
+  {
+    "layer": "impactPlate_light_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_light_001.ogg",
+    "source_sha256": "947915c2eb6ac57ee08fd3a48b297fd108d69abc72076e79882c21cad0eef56e",
+    "offset": 0.0,
+    "frames": 8116,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_light_001.wav",
+    "sha256": "7c83a15541aa06a80f823b540478782ab093ee11026671af16e25ab158699909"
+  },
+  {
+    "layer": "impactPlate_light_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_light_002.ogg",
+    "source_sha256": "8ac5869ea434cf0d364872774efe70b2d666a4f02ba35ddfc1e051d336721be8",
+    "offset": 0.0,
+    "frames": 6419,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_light_002.wav",
+    "sha256": "950ca776f3027fd52eda7cb98bc225f085d7d7f069c773425ed3ad1988d22f94"
+  },
+  {
+    "layer": "impactPlate_medium_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_medium_000.ogg",
+    "source_sha256": "b670d30452983369771081319c268475edaaafe782bf4e8d70bd7eef09d8823c",
+    "offset": 0.0,
+    "frames": 8074,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_medium_000.wav",
+    "sha256": "800954089a28d01f30c5c17ad96acdec800443063fb9350759f5e9d9650d1c4b"
+  },
+  {
+    "layer": "impactPlate_medium_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_medium_001.ogg",
+    "source_sha256": "68ba7701b71ef620f498f3038e832157d71ac8db7ad59424545890b250ceb24e",
+    "offset": 0.0,
+    "frames": 9990,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_medium_001.wav",
+    "sha256": "09479700e7b984a6f6e6e4a1dd05624a4cfd8a0fdd56fe97954bdc1ce0542986"
+  },
+  {
+    "layer": "impactPlate_medium_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPlate_medium_002.ogg",
+    "source_sha256": "68762e1ed49bb59ae6602fad6ce2ebac61958478ddb2668de9106f010cd4b6b0",
+    "offset": 0.0,
+    "frames": 11380,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPlate_medium_002.wav",
+    "sha256": "7c00b118b9eb93af1062f506a34b3d8b03b67dfd51e4f1d20e094a899d55e905"
+  },
+  {
+    "layer": "impactPunch_heavy_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPunch_heavy_000.ogg",
+    "source_sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8",
+    "offset": 0.021229166666666667,
+    "frames": 13380,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPunch_heavy_000.wav",
+    "sha256": "9926c98adcb13dc564dbd344380f1378e50bd33a150998f0e452a5c7cbd83ab6"
+  },
+  {
+    "layer": "impactPunch_heavy_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPunch_heavy_001.ogg",
+    "source_sha256": "f92f5cb6ba4ff2766497292ffd90865654317eeca976f5652e0708dbdcdc0dd9",
+    "offset": 0.0170625,
+    "frames": 11417,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPunch_heavy_001.wav",
+    "sha256": "2524494e6b1dad83ac9239da990de8b1b2d2a21f405cb7017836dbf1cf1792c1"
+  },
+  {
+    "layer": "impactPunch_heavy_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPunch_heavy_002.ogg",
+    "source_sha256": "7993dd4c156b9979ad69f17be5ebe31850b16039a3857f8477141be54dfee1b3",
+    "offset": 0.014458333333333333,
+    "frames": 9892,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPunch_heavy_002.wav",
+    "sha256": "b88637cf34da7b254a8dd8c1f8aa74c89d0b9a3e20779dc29515d829ad2b4e88"
+  },
+  {
+    "layer": "impactPunch_medium_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPunch_medium_000.ogg",
+    "source_sha256": "486988aa2d6440ffc4c62a0e8ccf3c23673ba84424bd4723378d451b7255eb5c",
+    "offset": 0.013875,
+    "frames": 9356,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPunch_medium_000.wav",
+    "sha256": "fede0b8a3f2bf483f90ddd8d6862a9cdb365973b74f9c733c0fc0958c5c802c2"
+  },
+  {
+    "layer": "impactPunch_medium_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPunch_medium_001.ogg",
+    "source_sha256": "e71d23abcc3f10d9d6bc9615b2a431fff70b12333a5fcdd9964457564ace4349",
+    "offset": 0.013083333333333334,
+    "frames": 8827,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPunch_medium_001.wav",
+    "sha256": "5bddcd0f2a0f2df8a40be11a00c8555d00fcf2aae021a7cfc502ae2af2b8d3af"
+  },
+  {
+    "layer": "impactPunch_medium_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactPunch_medium_002.ogg",
+    "source_sha256": "6492f9ccbc8d24dcef607bb1b48790b7870961474561f7fe5601e1c73a3018ef",
+    "offset": 0.020833333333333332,
+    "frames": 9200,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactPunch_medium_002.wav",
+    "sha256": "d402c6978d30717f4d982f9df68f2e78746b0650a68627cf20864c7fcc58db1c"
+  },
+  {
+    "layer": "impactSoft_heavy_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_heavy_000.ogg",
+    "source_sha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1",
+    "offset": 0.0,
+    "frames": 12523,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_000.wav",
+    "sha256": "4392c764461e9242a38f19f7ecf9dae898049c9faf349799de8de4bbe98979d0"
+  },
+  {
+    "layer": "impactSoft_heavy_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_heavy_001.ogg",
+    "source_sha256": "4d0096364ba9e46119d2ff6df493fdc101bd2e1efae061da5e5f77a53b3fdcb6",
+    "offset": 0.0,
+    "frames": 13792,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_001.wav",
+    "sha256": "96de41d1075c24a8698d6f27960ba13b894d16accf4a0d84328989172d63fe07"
+  },
+  {
+    "layer": "impactSoft_heavy_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_heavy_002.ogg",
+    "source_sha256": "d130ae541951243d3f6ed963d0057450a445ffe117fbf9a084d34eb1635cb563",
+    "offset": 0.0,
+    "frames": 13964,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_002.wav",
+    "sha256": "cebc5ed19055f474688756192875bb91b642d73b2db0ed531f3de08bc3540946"
+  },
+  {
+    "layer": "impactSoft_medium_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_medium_000.ogg",
+    "source_sha256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3",
+    "offset": 0.0,
+    "frames": 3387,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_medium_000.wav",
+    "sha256": "9c324e7c4754d9e179613c763bd19b40583ca01262b860ba351b2773a70d7911"
+  },
+  {
+    "layer": "impactSoft_medium_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_medium_001.ogg",
+    "source_sha256": "7642a4fd43e547afe4f7adfadb3dabb681c0ff512f52c1674bae30a726841faf",
+    "offset": 0.0,
+    "frames": 5947,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_medium_001.wav",
+    "sha256": "b2a9e483c452e5d7ab2549f75e3862fb578440c439a9d1d74a2fb9d445043b72"
+  },
+  {
+    "layer": "impactSoft_medium_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_medium_002.ogg",
+    "source_sha256": "5069e3571a77d7f7aae9ef71d0364aa245fb7d64a7c8cc9956f221d03088c089",
+    "offset": 0.0,
+    "frames": 4411,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_medium_002.wav",
+    "sha256": "fb14a0cf98e409b8bdafe8d162ae10c02e53f3e73f13ccac942ed34b564fd491"
+  },
+  {
+    "layer": "impactWood_heavy_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_heavy_000.ogg",
+    "source_sha256": "15ff82332f342c30e469215539e1cc57e11b221aa2cf7e11e811d313a9927f3d",
+    "offset": 0.0,
+    "frames": 6208,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_heavy_000.wav",
+    "sha256": "ce68bcae6acedda993678f14937c18031412b4dfc53460027ab7ada43aea4ef2"
+  },
+  {
+    "layer": "impactWood_heavy_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_heavy_001.ogg",
+    "source_sha256": "f1b07a53ac10c615fff9ba470511fdeb722b5902e1a8520759fc20ad6f546015",
+    "offset": 0.0,
+    "frames": 5982,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_heavy_001.wav",
+    "sha256": "f72c6276f4a64af082fe927cfcf435b51eeedb3c24a3718dd332d2b37c83a15d"
+  },
+  {
+    "layer": "impactWood_heavy_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_heavy_002.ogg",
+    "source_sha256": "ce1e06f2a05f2634c645cb72f6a1623e64bc2d92be34917430a61031fb6597d4",
+    "offset": 0.0,
+    "frames": 4174,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_heavy_002.wav",
+    "sha256": "13cbd4c2b4230e59806337a3cff4a1548032d8d106eea3e6963a7d2b660d3367"
+  },
+  {
+    "layer": "impactWood_light_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_light_000.ogg",
+    "source_sha256": "eb45e35b4bed784d3f120de4afec4b0d6ac09d9e143cce8cfcb7d739e1b1f3c3",
+    "offset": 0.0,
+    "frames": 3367,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_light_000.wav",
+    "sha256": "b3001ebe4e30aa8d347f51298d2d8ff4a21f32f510bb4eebda2c4a59fbb04a9d"
+  },
+  {
+    "layer": "impactWood_light_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_light_001.ogg",
+    "source_sha256": "4b76bf3ccc8e60d19188f3165b778a7817786faa6887c55d9049bcbeef3b425f",
+    "offset": 0.0,
+    "frames": 3190,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_light_001.wav",
+    "sha256": "908acce7ef36995249485e6344e8f7b6d58d49356199c7e733f6660174e08046"
+  },
+  {
+    "layer": "impactWood_light_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_light_002.ogg",
+    "source_sha256": "b183cf7a5bd783817e0e4b82af34ac6658fa1927049089dadc8b15c2ecc771dc",
+    "offset": 0.0,
+    "frames": 3368,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_light_002.wav",
+    "sha256": "e4e784583742593a1eb5f9c9c15addf5e1a0f51dfe843102a737047eb8994e37"
+  },
+  {
+    "layer": "impactWood_medium_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_medium_000.ogg",
+    "source_sha256": "1723a9fd25103ed41af06054814e84e65f4a772bac86ab2dc927da93d9592ff5",
+    "offset": 0.0,
+    "frames": 5259,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_medium_000.wav",
+    "sha256": "252cc32d1ad99a85d728be679cf50a37bb89899cefe401650cf9af6957678b1c"
+  },
+  {
+    "layer": "impactWood_medium_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_medium_001.ogg",
+    "source_sha256": "15271dbe8e2872dbb0ff1aeb7b12b2d2b92b7c1951c88532b9ab9158c36dfc73",
+    "offset": 0.0,
+    "frames": 6139,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_medium_001.wav",
+    "sha256": "8f8f36535ac34789e09881531ae731c0093ed7dcc2dae2b67c0c888940023f25"
+  },
+  {
+    "layer": "impactWood_medium_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactWood_medium_002.ogg",
+    "source_sha256": "3f3f1917428b828f733a963167833c707bf88296ff158e1559c57c5cb813d799",
+    "offset": 0.0,
+    "frames": 6119,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_medium_002.wav",
+    "sha256": "f0a25b0287d269d4474cb854fc13ed074c0cb4c51d2f464e39335e23656afff4"
+  },
+  {
+    "layer": "cloth1",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\cloth1.ogg",
+    "source_sha256": "ddb93a3671233f95da0e0b10367f082f7eb42fa6caaddcf776410aa8833c747d",
+    "offset": 0.07395833333333333,
+    "frames": 22290,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth1.wav",
+    "sha256": "51e2a4689f1e33948e99b0bdaf1a5820959c9a97d4d86d8d95814b5fe3c9957a"
+  },
+  {
+    "layer": "cloth2",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\cloth2.ogg",
+    "source_sha256": "8a7451193c38bc05483aec25dd193e163a15d44cf7fff04ac7912573231b0201",
+    "offset": 0.060875,
+    "frames": 13515,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth2.wav",
+    "sha256": "f003f9da7ede831b196180ad08221916ddac53400fe71c3136a3e3df0a6cae73"
+  },
+  {
+    "layer": "cloth3",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\cloth3.ogg",
+    "source_sha256": "a48632d17a4f1416541d261a32a31612e01267144c407fa3ecab3ff410f0085b",
+    "offset": 0.022270833333333333,
+    "frames": 18413,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth3.wav",
+    "sha256": "553d4e721fb2ca379d34e0bacfda0749c02cc779261cde3f24c02736340ec83b"
+  },
+  {
+    "layer": "handleSmallLeather",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\handleSmallLeather.ogg",
+    "source_sha256": "ae3cbf695aa0a8b98b5a80a835be5a3ccbd5446a24db2235cd4c3cd6fc92ed96",
+    "offset": 0.03152083333333333,
+    "frames": 8813,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\handleSmallLeather.wav",
+    "sha256": "8e379b6e052259fd2f263b91de91ea66bbf5406e0c5bb9a378cf0475c255aac1"
+  },
+  {
+    "layer": "handleSmallLeather2",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\handleSmallLeather2.ogg",
+    "source_sha256": "a66f6db5918ad016c28a9f2768f127a7f39b5fa04481e5a3b4e78ebe2a1c282d",
+    "offset": 0.06060416666666667,
+    "frames": 9387,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\handleSmallLeather2.wav",
+    "sha256": "9cceecf3d89e152f2e4dcd94c6f9a2a8410c0c018703303b3d210cf76669432e"
+  },
+  {
+    "layer": "chop",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\chop.ogg",
+    "source_sha256": "d00c2b3c9fff07e376145c8c8c45c90e5084ec192f6ce0387db233f7b86f1486",
+    "offset": 0.035291666666666666,
+    "frames": 7505,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\chop.wav",
+    "sha256": "10005004ed9410fcf29f83f8a692a2524ca7007f29c62966a886787d141bd33b"
+  },
+  {
+    "layer": "creak1",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\creak1.ogg",
+    "source_sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e",
+    "offset": 0.061,
+    "frames": 23545,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\creak1.wav",
+    "sha256": "84db9dd771dc1c01c987a2c3cff23ede8354d473379e410acfd8a5e070e05dda"
+  },
+  {
+    "layer": "creak2",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\creak2.ogg",
+    "source_sha256": "8a990afdc03aebb91d528f5385e2f95582dbfa8e2c12c71098ab01be9142294a",
+    "offset": 0.008270833333333333,
+    "frames": 33474,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\creak2.wav",
+    "sha256": "6de7c63a5ebd970273e35c603c3ad056d82ab5c587f1292690c0f810cc57e35a"
+  },
+  {
+    "layer": "creak3",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\creak3.ogg",
+    "source_sha256": "f9638787f95004b9d2d06f8eff8e99d4e594c21b51947daf562856fbcec905d1",
+    "offset": 0.019020833333333334,
+    "frames": 10944,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\creak3.wav",
+    "sha256": "d737a40fda471c73ab94b4d0344933e91e941e372b824629d867a7ee01a811d3"
+  },
+  {
+    "layer": "knifeSlice",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\knifeSlice.ogg",
+    "source_sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f",
+    "offset": 0.0794375,
+    "frames": 15692,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\knifeSlice.wav",
+    "sha256": "a9c459269cd68b4fdea9cb6165404801deec24e8caa721a6edb62b7caa1519a2"
+  },
+  {
+    "layer": "knifeSlice2",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\knifeSlice2.ogg",
+    "source_sha256": "6c2064d0ef988d1ec3d56868e823ea8823a5cac00f2742560052633529407def",
+    "offset": 0.015270833333333334,
+    "frames": 18861,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\knifeSlice2.wav",
+    "sha256": "2258339351d9174faf95166c99f093f651dcdfa5f87a6d83569b39aa52f3cac3"
+  },
+  {
+    "layer": "drawKnife1",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\drawKnife1.ogg",
+    "source_sha256": "276403e72c3b71c47bc24db3083970c23f8e5551ffa78f436f83483c56f3f0bb",
+    "offset": 0.07525,
+    "frames": 10910,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\drawKnife1.wav",
+    "sha256": "74ee36d361adb84b6993b5721f17f98fe1cb6f6c73e617785f7ae0ac9756375d"
+  },
+  {
+    "layer": "drawKnife2",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\drawKnife2.ogg",
+    "source_sha256": "d5df6a4130cbb016f97b4883769a418917b9629cb4c21717030b186e0c73281a",
+    "offset": 0.0012083333333333334,
+    "frames": 15664,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\drawKnife2.wav",
+    "sha256": "8a38c1aa892f82215da75881f1be59deeacb3606f34f2136ac5ad39f58a2b5f1"
+  },
+  {
+    "layer": "drawKnife3",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\drawKnife3.ogg",
+    "source_sha256": "a11ae62fb1a628425769d11a9de394980ad8909c31f4c9a4316f226963e21caf",
+    "offset": 0.058208333333333334,
+    "frames": 11610,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\drawKnife3.wav",
+    "sha256": "b2fc41179a4ac87f3243c065f4c1a9ad0b00699687f41875dcf4f1a90b526770"
+  },
+  {
+    "layer": "metalClick",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\metalClick.ogg",
+    "source_sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3",
+    "offset": 0.0,
+    "frames": 16474,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\metalClick.wav",
+    "sha256": "4c7fd49bb7c6d8a9246ee6d4ab33e1599fb266752fc51f330f9dc192673a1fdc"
+  },
+  {
+    "layer": "metalLatch",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\metalLatch.ogg",
+    "source_sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708",
+    "offset": 0.0123125,
+    "frames": 6303,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\metalLatch.wav",
+    "sha256": "dffac45333c93fb401e3e89d3818a8cb7bad1dfe0c9a4e95a49291f01dfade81"
+  },
+  {
+    "layer": "impactMining_000",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMining_000.ogg",
+    "source_sha256": "36b4ea107222d073c67ca64dde26944975609202d5090b2f2021213c1a7e35cd",
+    "offset": 0.0,
+    "frames": 24328,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMining_000.wav",
+    "sha256": "71a102778724cdf3df58d036f781567d10b0147096af2b2cd02b0a7f3d5af929"
+  },
+  {
+    "layer": "impactMining_001",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMining_001.ogg",
+    "source_sha256": "61235a18de3f3d92118235398222dbf51d448f1be70b1c8bc962b10b86f2d9c6",
+    "offset": 0.0,
+    "frames": 22776,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMining_001.wav",
+    "sha256": "5e857c1a1cb1e415223a16db9d53d18b88ea4746697560001bff1a8a81c9baaa"
+  },
+  {
+    "layer": "impactMining_002",
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactMining_002.ogg",
+    "source_sha256": "059558ec751115ca6b1441e00f0adc837c1a3eeb0a066b109e0fd879fc5d0b0c",
+    "offset": 0.0,
+    "frames": 19980,
+    "wav": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactMining_002.wav",
+    "sha256": "2cf15287539632372962fae39e7097e46f5a5ec4407e5814b77a29106dc72ed6"
+  }
+]

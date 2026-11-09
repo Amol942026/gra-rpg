@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-09",
+  "local_only": true,
+  "visuals": {
+    "tools": [
+      "Krita",
+      "Synfig 1.4.5"
+    ],
+    "master_root": "C:\\AI2D\\sprites\\emberfall-spells-20261109",
+    "atlas": "assets/sprites/spells.png",
+    "atlas_sha256": "6f9019f67d33ab370a9adae803f9c6bfccaa2371c6ee8b684ab1575c98aa406b",
+    "rgba8_bytes": 2359296,
+    "original_emberfall_2d": true,
+    "krita_master_sha256": "92e6e549071a1c589a491ee008c3055791b9ca41b8d39e8e3b9437608e553e66",
+    "native_synfig_frames": 180,
+    "compiled_motion_sha256": "8133722fb0b12996fb2b2706c7b923ec8182acd4a90b08e3631914f982dce761"
+  },
+  "audio": {
+    "master_root": "C:\\AI2D\\audio\\emberfall-spells-20261109",
+    "native": {
+      "csound": {
+        "source": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-elements-and-real-bow-20261109.csd",
+        "render": {
+          "exit_code": 0,
+          "seconds": 0.11,
+          "stdout": "writing 16384-byte blks of shorts to C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-elements-and-real-bow-20261109.wav (WAV)\nScore finished in csoundPerform().\n  0.61155  0.565888192 16384 sample blks of shorts written to C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-elements-and-real-bow-20261109.wav (WAV)\n",
+          "stderr": "--Csound version 6.18 (double samples) Nov 23 2022\n[commit: a1580f9cdf331c35dceb486f4231871ce0b00266]\nlibsndfile-1.1.0\nsr = 48000.0, kr = 1500.000, ksmps = 32\n0dBFS level = 1.0, A4 tuning = 440.0\naudio buffered in 4096 sample-frame blocks\nSECTION 1:\nend of score.\t\t   overall amps:\n\t   overall samples out of range:        0        0\n0 errors in performance\n"
+        },
+        "audio": {
+          "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-elements-and-real-bow-20261109.wav",
+          "bytes": 4283564,
+          "seconds": 22.31,
+          "sample_rate": 48000,
+          "channels": 2,
+          "sample_width": 2,
+          "peak": 0.611572265625,
+          "rms": 0.035816244961167004,
+          "sha256": "0411a483f5c9b72d1f0dcabfba006d9c411e22c67147fb1aca6efce7ee6cd0be"
+        }
+      },
+      "audacity_export": {
+        "result": "Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-elements-and-real-bow-20261109-master.wav\nBatchCommand finished: OK",
+        "audio": {
+          "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-elements-and-real-bow-20261109-master.wav",
+          "bytes": 4283564,
+          "seconds": 22.31,
+          "sample_rate": 48000,
+          "channels": 2,
+          "sample_width": 2,
+          "peak": 0.724456787109375,
+          "rms": 0.04242656707572135,
+          "sha256": "88c933ad5f10c6ed4d06c684eba7f3b07d38ff66b6c51f6453720ffb366c57ca"
+        }
+      },
+      "audacity_save": {
+        "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-elements-and-real-bow-20261109.aup3",
+        "result": "BatchCommand finished: OK"
+      }
+    },
+    "retained_audacity_master_sha256": "feee4693aa81ab6eff17e55e8d0ab4beff4af32e16744f03545d3bc5d5e06f36",
+    "credits": "assets/licenses/audio-elements-credits.txt",
+    "cue_count": 50,
+    "recording_sources": "audio-source-receipt.json",
+    "license_ids": [
+      "CC0-1.0",
+      "CC-BY-3.0"
+    ],
+    "replaced": [
+      "bow-draw-v2.wav",
+      "bow-draw-v3.wav",
+      "bow-draw.wav",
+      "fireball-cast-v2.wav",
+      "fireball-cast-v3.wav",
+      "fireball-cast.wav"
+    ],
+    "added": [
+      "ice-cast-v2.wav",
+      "ice-cast-v3.wav",
+      "ice-cast.wav",
+      "ice-impact-v2.wav",
+      "ice-impact-v3.wav",
+      "ice-impact.wav",
+      "lightning-cast-v2.wav",
+      "lightning-cast-v3.wav",
+      "lightning-cast.wav",
+      "lightning-impact-v2.wav",
+      "lightning-impact-v3.wav",
+      "lightning-impact.wav",
+      "spell-learn-v2.wav",
+      "spell-learn-v3.wav",
+      "spell-learn.wav"
+    ],
+    "music_unchanged": true,
+    "audio_played": false
+  },
+  "narrative": {
+    "source_snapshot": "narrative/eldrin-lessons-20261109/source-snapshot/manifest.json",
+    "articy_native_edited": false,
+    "tower_story_sha256": "7f21f7c35574709ac7d3452d9facdabfb52b27bc73a6013b3a5cc9516d1517bb"
+  },
+  "before": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\eldrin-spells-20261109"
+}

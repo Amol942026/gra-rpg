@@ -23,7 +23,7 @@ bool runPointerQA(){
     report<<"After layout: raylib pointer="<<after.x<<','<<after.y<<'\n';
     check(std::abs(after.x-1746)<.01f&&std::abs(after.y-658)<.01f,"native startup reads unscaled client mouse coordinates");
     auto pump=[](){BeginDrawing();ClearBackground(BLACK);EndDrawing();refreshDisplayLayout();};
-    auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};
+    auto reset=[](){game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};game.learnedSpells=spellBit(Spell::Fireball);game.selectedSpell=Spell::Fireball;
         welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};nearbyPage=0;};
     auto point=[&](Vector2 p){
         int ww,wh,fw,fh;glfwGetWindowSize(window,&ww,&wh);glfwGetFramebufferSize(window,&fw,&fh);

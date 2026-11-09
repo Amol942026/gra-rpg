@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "before": {
+    "decorations": 91,
+    "minimum_spacing": 1.7728928766566787,
+    "mean_nearest_spacing": 2.5991718878123073,
+    "pairs_under_3_tiles": 68,
+    "occupied_9_tile_sectors": 38,
+    "largest_unreserved_gap": 13.5343
+  },
+  "after": {
+    "decorations": 101,
+    "minimum_spacing": 4.453552956909798,
+    "mean_nearest_spacing": 5.558601355500252,
+    "pairs_under_3_tiles": 0,
+    "occupied_9_tile_sectors": 61,
+    "largest_unreserved_gap": 4.96811
+  },
+  "renderer": {
+    "status": "PASS",
+    "checks": 820,
+    "failures": 0,
+    "species": 7,
+    "directions": 8,
+    "pose_views": 224,
+    "hidden": true,
+    "audio_opened": false,
+    "presentation_measured": false,
+    "completed_render_mean_ms": 3.94188,
+    "completed_render_p95_ms": 5.2113
+  },
+  "boundary_captures": 12
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include "equipment_appearance.hpp"
+#include "inventory_icons.hpp"
 namespace equipment_art {
 inline Color color(unsigned value){return {static_cast<unsigned char>(value>>16),static_cast<unsigned char>(value>>8),static_cast<unsigned char>(value),255};}
 inline void iconInlay(ember::Item value,float x,float y,float size,float alpha){

@@ -1,0 +1,29 @@
+{
+  "csound": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"source\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-elements-and-real-bow-20261109.csd\",\n  \"render\": {\n    \"exit_code\": 0,\n    \"seconds\": 0.11,\n    \"stdout\": \"writing 16384-byte blks of shorts to C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-elements-and-real-bow-20261109.wav (WAV)\\nScore finished in csoundPerform().\\n  0.61155  0.565888192 16384 sample blks of shorts written to C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-elements-and-real-bow-20261109.wav (WAV)\\n\",\n    \"stderr\": \"--Csound version 6.18 (double samples) Nov 23 2022\\n[commit: a1580f9cdf331c35dceb486f4231871ce0b00266]\\nlibsndfile-1.1.0\\nsr = 48000.0, kr = 1500.000, ksmps = 32\\n0dBFS level = 1.0, A4 tuning = 440.0\\naudio buffered in 4096 sample-frame blocks\\nSECTION 1:\\nend of score.\\t\\t   overall amps:\\n\\t   overall samples out of range:        0        0\\n0 errors in performance\\n\"\n  },\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-elements-and-real-bow-20261109.wav\",\n    \"bytes\": 4283564,\n    \"seconds\": 22.31,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.611572265625,\n    \"rms\": 0.035816244961167004\n  }\n}"
+      }
+    ],
+    "isError": false
+  },
+  "audacity_export": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"result\": \"Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-elements-and-real-bow-20261109-master.wav\\nBatchCommand finished: OK\",\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-elements-and-real-bow-20261109-master.wav\",\n    \"bytes\": 4283564,\n    \"seconds\": 22.31,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.724456787109375,\n    \"rms\": 0.04242656707572135\n  }\n}"
+      }
+    ],
+    "isError": false
+  },
+  "audacity_save": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-elements-and-real-bow-20261109.aup3\",\n  \"result\": \"BatchCommand finished: OK\"\n}"
+      }
+    ],
+    "isError": false
+  }
+}

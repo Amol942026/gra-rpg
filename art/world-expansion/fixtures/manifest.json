@@ -1,0 +1,19 @@
+{
+  "source_release_save_version": 11,
+  "source_map_side": 72,
+  "created_before_expansion": true,
+  "fixtures": {
+    "desert-v11.efs": {
+      "sha256": "49dcb115ca91ab5ce08e8f5dbcd2122f17857c89c9e0c684533c7232c4b40dfc",
+      "bytes": 96073
+    },
+    "forest-v11.efs": {
+      "sha256": "982e34fcc60d243970d52b0026423304e2e47de9b9d645b18853204e4ee8405e",
+      "bytes": 96073
+    },
+    "volcano-v11.efs": {
+      "sha256": "f90116d3f9f65f6c64e949481533e7b41277a0c60acb5df5466d44307c034e12",
+      "bytes": 96073
+    }
+  }
+}

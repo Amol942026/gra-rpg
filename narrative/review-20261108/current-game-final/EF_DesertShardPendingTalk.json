@@ -1,0 +1,21 @@
+{
+  "id": "EF_DesertShardPendingTalk",
+  "title": "Eldrin — odłamek pozostał przy Żywej Wydmie",
+  "array": "DesertShardPendingTalk",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Żywa Wydma padła, lecz jej odłamek nie wrócił z tobą. Samo zwycięstwo nad strażnikiem nie wystarczy — potrzebujemy części Serca."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Została wśród jej szczątków. Wrócę po nią przez bramę."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Otworzę drogę do Morza Piasków. Przejście do Kaldery także jest dostępne, ale nie zapomnij o odłamku pozostawionym na pustyni."
+    }
+  ]
+}

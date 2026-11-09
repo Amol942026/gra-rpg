@@ -18,8 +18,8 @@ def validate_audio(path):
             expected=stream.getnframes()*4
             if len(stream.readframes(stream.getnframes()))!=expected:raise ValueError("Truncated PCM data.")
     elif path.suffix.lower()==".ogg":
-        ffmpeg=Path(r"C:\Program Files\Krita (x64)\bin\ffmpeg.exe")
-        ffprobe=ffmpeg.with_name("ffprobe.exe")
+        ffmpeg=Path(shutil.which("ffmpeg") or r"C:\Program Files\Krita (x64)\bin\ffmpeg.exe")
+        ffprobe=Path(shutil.which("ffprobe") or str(ffmpeg.with_name("ffprobe.exe")))
         probe=subprocess.run([str(ffprobe),"-v","error","-show_entries","stream=codec_name,sample_rate,channels",
                              "-of","json",str(path)],capture_output=True,timeout=30,creationflags=subprocess.CREATE_NO_WINDOW)
         if probe.returncode:raise ValueError("Cannot inspect OGG delivery.")
@@ -83,14 +83,19 @@ def bind_audio(mapping, *, asset_root=None):
     """
     root=Path(asset_root or REPO/"assets").resolve()
     if not root.is_relative_to(REPO):raise ValueError("Destination must stay in this game repository.")
-    available=set(cue_names())|{"music"}
+    base=set(cue_names())
+    source=(REPO/"src/audio.hpp").read_text(encoding="utf-8")
+    scores=re.search(r"ScoreNames\[ScoreCount\]\s*=\s*\{(.*?)\};",source,re.S)
+    names=re.findall(r'"([a-z-]+)"',scores.group(1)) if scores else ["echoes-of-the-ruins"]
+    music_targets={"music":names[0],**{"music-"+name:name for name in names[1:]}}
+    available=base|{name+"-v"+str(n) for name in base for n in (2,3)}|set(music_targets)
     jobs=[]
     for cue,path in mapping.items():
         if cue not in available:raise ValueError("Unknown game audio event: "+cue)
         source=Path(path).resolve()
-        extension=".ogg" if cue=="music" else ".wav"
+        extension=".ogg" if cue in music_targets else ".wav"
         if source.suffix.lower()!=extension:raise ValueError("Incorrect format for event "+cue)
-        target=(root/"audio"/("echoes-of-the-ruins.ogg" if cue=="music" else cue+".wav")).resolve()
+        target=(root/"audio"/(music_targets[cue]+".ogg" if cue in music_targets else cue+".wav")).resolve()
         if not target.is_relative_to(root):raise ValueError("Audio destination escapes through a link.")
         if source==target:raise ValueError("Source cannot be a binding target.")
         validate_audio(source)

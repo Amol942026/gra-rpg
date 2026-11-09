@@ -1,29 +1,29 @@
 #pragma once
 
 Game emptyArena() {
-    Game g;g.props.clear();g.enemies.clear();g.ground.clear();g.player={15,15};
+    Game g;g.props.clear();g.enemies.clear();g.ground.clear();g.player={15,15};g.learnedSpells=spellBit(Spell::Fireball);g.selectedSpell=Spell::Fireball;
     return g;
 }
 void rollTests() {
     for(bool boots:{false,true}){
         Game g=emptyArena();if(boots)g.equipment[4]=item(Kind::Boots);
-        for(int i=0;i<20;i++)g.update(.05f,{1,0},false);
-        check(std::abs(g.player.x-15-(boots?4.3f:3.8f))<.001f,"faster walking, including equipment bonus");
+        float travelled=0;for(int i=0;i<20;i++){V before=g.player;g.update(.05f,{1,0},false);travelled+=g.surfaceDistance(before,g.player);}
+        check(std::abs(travelled-(boots?4.3f:3.8f))<.001f,"walking speed along terrain includes the equipment bonus");
     }
     for(bool boots:{false,true})for(int fps:{30,60,120})for(V direction:{V{1,0},V{1,-1}}){
         Game runner=emptyArena();if(boots)runner.equipment[4]=item(Kind::Boots);
-        for(int i=0;i<fps;i++)runner.update(1.f/fps,direction,false,true);
+        float travelled=0;for(int i=0;i<fps;i++){V before=runner.player;runner.update(1.f/fps,direction,false,true);travelled+=runner.surfaceDistance(before,runner.player);}
         const float expected=(boots?BootsSpeed:WalkSpeed)*RunMultiplier;
-        check(distance(runner.player,V{15,15}+normalized(direction)*expected)<.002f,"held run adds 50% speed, normalizes diagonals and is FPS independent with boots");
+        check(std::abs(travelled-expected)<.002f&&distance(normalized(runner.player-V{15,15}),normalized(direction))<.002f,"held run adds 50% ground speed, normalizes diagonals and is FPS independent with boots");
         check(!runner.rolling()&&runner.swing==0&&runner.mana==100,"running does not roll, attack or spend mana");
         V before=runner.player;runner.update(.05f,direction,false,false);
-        check(std::abs(distance(before,runner.player)-(boots?BootsSpeed:WalkSpeed)*.05f)<.001f,"releasing run immediately restores walking speed");
+        check(std::abs(runner.surfaceDistance(before,runner.player)-(boots?BootsSpeed:WalkSpeed)*.05f)<.001f,"releasing run immediately restores walking speed along the slope");
     }
     Game idleRun=emptyArena();idleRun.update(.05f,{},false,true);
     check(distance(idleRun.player,V{15,15})==0&&!idleRun.animation.moving,"holding run while idle does not move the hero");
     Game runRoll=emptyArena();runRoll.startRoll({1,-1});
-    for(int i=0;i<8;i++)runRoll.update(.05f,{},false,true);
-    check(distance(runRoll.player,V{15,15}+normalized(V{1,-1})*2.8f)<.002f,"run does not multiply the existing roll distance");
+    float rollTravel=0;for(int i=0;i<8;i++){V before=runRoll.player;runRoll.update(.05f,{},false,true);rollTravel+=runRoll.surfaceDistance(before,runRoll.player);}
+    check(std::abs(rollTravel-2.8f)<.002f,"run does not multiply the roll distance along terrain");
     Game runWall=emptyArena();runWall.props.push_back({{15.7f,15},0,1});
     for(int i=0;i<20;i++)runWall.update(.05f,{1,0},false,true);
     check(runWall.walkable(runWall.player)&&runWall.player.x<15.7f,"running respects terrain collisions");
@@ -34,16 +34,16 @@ void rollTests() {
         g.enemies.push_back({0,type,{15,15},{15,15},100,100});
         g.enemies.back().boulderCd=BoulderCooldown; // Isolate chase speed from the boss's stationary throw windup.
         g.enemies.back().boarChargeCd=BoarChargeCooldown; // Measure ordinary chase, not the new rush.
-        for(int i=0;i<20;i++)g.update(.05f,{},false);
-        check(std::abs(g.enemies[0].pos.x-15-speeds[type])<.001f,"all enemy types have faster movement");
+        float travelled=0;for(int i=0;i<20;i++){V before=g.enemies[0].pos;g.update(.05f,{},false);travelled+=g.surfaceDistance(before,g.enemies[0].pos);}
+        check(std::abs(travelled-speeds[type])<.001f,"all enemy types retain their authored ground movement speeds");
     }
     const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
     for(int d=0;d<8;d++){
         Game g=emptyArena();V start=g.player;
         check(g.startRoll(directions[d]),"roll starts in every movement direction");
         check(!g.startRoll(directions[(d+4)%8]),"cannot restart or redirect an active roll");
-        for(int i=0;i<8;i++)g.update(.05f,{},false);
-        check(distance(g.player,start+normalized(directions[d])*2.8f)<.002f&&!g.rolling(),"roll covers equal distance in all eight directions and ends");
+        float travelled=0;for(int i=0;i<8;i++){V before=g.player;g.update(.05f,{},false);travelled+=g.surfaceDistance(before,g.player);}
+        check(std::abs(travelled-2.8f)<.002f&&distance(normalized(g.player-start),normalized(directions[d]))<.002f&&!g.rolling(),"roll covers equal ground distance in all eight directions and ends");
         check(int(g.animation.direction)==d,"roll keeps its visual facing");
         Game idle=emptyArena();idle.animation.direction=static_cast<Direction>(d);
         check(idle.startRoll({})&&distance(idle.rollDirection,normalized(directions[d]))<.001f,"stationary roll follows last visual facing");
@@ -75,8 +75,8 @@ void rollTests() {
 
     for(int fps:{30,60,120}){
         Game g=emptyArena();g.startRoll({1,-1});
-        for(int i=0;i<fps;i++)g.update(1.f/fps,{},false);
-        check(distance(g.player,V{15,15}+normalized(V{1,-1})*2.8f)<.002f&&!g.rolling(),"roll distance and duration are independent of FPS");
+        float travelled=0;for(int i=0;i<fps;i++){V before=g.player;g.update(1.f/fps,{},false);travelled+=g.surfaceDistance(before,g.player);}
+        check(std::abs(travelled-2.8f)<.002f&&!g.rolling(),"roll ground distance and duration are independent of FPS");
     }
     // Hold the hero against a tree so range cannot mask an immunity failure.
     Game protection=emptyArena();protection.props.push_back({{15.6f,15},0,1});

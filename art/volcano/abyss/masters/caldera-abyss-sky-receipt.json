@@ -1,0 +1,22 @@
+{
+  "name": "caldera-abyss-sky",
+  "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-sky.kra",
+  "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-sky.png",
+  "layers": [
+    "Ash sky and distant furnace glow",
+    "Distant caldera ridges",
+    "Deep molten fissures",
+    "Layers of suspended ash"
+  ],
+  "size": [
+    2048,
+    1024
+  ],
+  "runtime_size": [
+    2048,
+    1024
+  ],
+  "kra_sha256": "a196ba074ea1c4a16390136c7c20af29fbcb83035597dfc8dc4e4b9b5cf9cfc0",
+  "png_sha256": "42b5e6951644b07273bb721852ec0af73b5d700bea5a0c722f18ab197db8a2b7",
+  "retained": true
+}

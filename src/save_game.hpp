@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=10;
+constexpr int CurrentVersion=15; // Spell ownership, typed projectiles and their animation clocks.
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -70,22 +70,25 @@ inline void visit(Archive& a,Enemy& v){
  if(a.version>=9)a(v.eruptionCd,v.eruptionWindup,v.eruptions);
  if(a.version>=8)a(v.boarChargeCd,v.boarWindup,v.boarRush,v.boarRecovery,v.boarAim,v.boarDirection,v.boarHit,v.boarCharges);
  else if(a.reading){v.boarChargeCd=BoarChargeFirstDelay;v.boarWindup=v.boarRush=v.boarRecovery=0;v.boarAim=v.boarDirection={};v.boarHit=false;v.boarCharges=0;}
+ if(a.version>=11)a(v.abilityCd,v.abilityAge,v.abilityDirection,v.abilityMask,v.abilityCasts);
+ else if(a.reading){v.abilityCd=3;v.abilityAge=-1;v.abilityDirection={};v.abilityMask=v.abilityCasts=0;}
  if(a.reading&&a.version>=2&&a.version<6){v.boulderCd*=BoulderCooldown/4.5f;v.boulderWindup*=BoulderWindup/2.2f;v.boulderRecovery*=BoulderRecovery/.6f;}
 }
 EF_SAVE(FieldState,v.enemies,v.props,v.forage)
 EF_SAVE(Effect,v.pos,v.text,v.life,v.color,v.damageNumber,v.critical,v.height)
-EF_SAVE(Fireball,v.pos,v.velocity,v.remaining,v.damage,v.critical)
+inline void visit(Archive& a,Fireball& v){a(v.pos,v.velocity,v.remaining,v.damage,v.critical);if(a.version>=15)a(v.spell,v.age);}
 EF_SAVE(WeaponBinding,v.kind,v.tier)
 EF_SAVE(Arrow,v.pos,v.velocity,v.remaining,v.damage,v.piercing,v.maxTargets,v.hitIds,v.critical)
 EF_SAVE(PierceFlash,v.pos,v.life)
-EF_SAVE(Explosion,v.pos,v.life)
+inline void visit(Archive& a,Explosion& v){a(v.pos,v.life);if(a.version>=15)a(v.spell);}
 EF_SAVE(Boulder,v.origin,v.target,v.pos,v.age,v.duration,v.height,v.startHeight,v.damage,v.owner)
 EF_SAVE(BoulderImpact,v.pos,v.life)
 EF_SAVE(CinderBolt,v.pos,v.velocity,v.remaining,v.damage,v.owner)
+EF_SAVE(VenomGlob,v.pos,v.velocity,v.remaining,v.damage,v.owner)
 EF_SAVE(LavaFissure,v.pos,v.age,v.delay,v.damage,v.owner,v.struck)
 EF_SAVE(SoundEvent,v.cue,v.x,v.y)
 EF_SAVE(IntroSequence,v.phase,v.line,v.age,v.time,v.revealed,v.arrivalPending)
-inline void visit(Archive& a,TowerSequence& v){a(v.phase,v.line,v.age,v.time,v.returning,v.revealed,v.arrivalPending,v.completionPending,v.offerDesert,v.desertArrivalPending,v.fragments);if(a.version>=9)a(v.offerVolcano,v.travelVolcano);}
+inline void visit(Archive& a,TowerSequence& v){a(v.phase,v.line,v.age,v.time,v.returning,v.revealed,v.arrivalPending,v.completionPending,v.offerDesert,v.desertArrivalPending,v.fragments);if(a.version>=9)a(v.offerVolcano,v.travelVolcano);if(a.version>=11)a(v.missingDesertShard,v.missingVolcanoShard);}
 inline void visit(Archive& a,Game& v){
  if(a.version>=9)a(v.chests);else for(int i=0;i<4;i++)a(v.chests[i]);
  a(v.openedChest,v.rng,v.combatRng,v.player,v.facing,v.animation,v.bag,v.equipment,v.ground,v.forage,v.enemies,v.props,v.effects,v.weaponWheel,v.arrows,v.bowDrawing,v.bowDrawTime,v.bowReleaseTime,v.lastBowCharge,v.bowAim,v.fireballs,v.explosions,v.attributes,v.attributePoints,v.allocationRequired,v.skillRanks,v.skillPoints,v.healingCd,v.healingPulse,v.strongCutCd,v.piercingArrowCd,v.meleeDuration,v.swingStrong,v.piercingArrowArmed,v.lastBowPiercing,v.pierceFlashes,v.selectedSpell,v.manaRegenTime,v.sounds,v.stepDistance,v.hp,v.mana,v.attackCd,v.spellCd,v.potionCd,v.swing,v.hurt,v.time,v.rollRemaining,v.rollCd,v.rollDirection,v.sandPrisonRemaining,v.level,v.xp,v.kills,v.nextGround,v.bossDead,v.location,v.dawnQuest,v.towerFloor,v.towerRuneMask,v.gold,v.towerReturnPending,v.desertBossDead,v.desertCreated,v.collectedFragments,v.fieldLocation,v.forestState,v.desertState,v.openedCorpse,v.message,v.messageTime);
@@ -96,6 +99,10 @@ inline void visit(Archive& a,Game& v){
  if(a.version>=7)a(v.merchantArrows);
  if(a.version>=9)a(v.volcanoCreated,v.volcanoBossDead,v.volcanoState,v.volcanoFountainUsed,v.volcanoFountainDrain,v.cinders,v.fissures);
  if(a.version>=10)a(v.volcanoSceneryVersion);
+ if(a.version>=11)a(v.venomGlobs);
+ if(a.version>=12)a(v.worldExpansionVersion);else if(a.reading)v.worldExpansionVersion=0;
+ if(a.version>=15)a(v.learnedSpells,v.spellCooldownTotal);
+ else if(a.reading){v.learnedSpells=0;v.spellCooldownTotal=std::max(FireballCooldown,v.spellCd);}
  if(a.reading&&a.version<7){
   require(v.level>=1&&v.level<=100000&&v.xp>=0&&v.xp<std::int64_t(v.level)*80);
   v.xp=v.xp*experienceForLevel(v.level)/(std::int64_t(v.level)*80); // Keep legacy level and fractional progress.
@@ -128,11 +135,20 @@ inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Pr
   require(!e.boarHit||(e.type==BoarType&&e.alive&&(e.boarRush>0||e.boarRecovery>0)));
  }
  for(const auto& e:enemies)require(e.eruptionCd>=0&&e.eruptionCd<=6.001f&&e.eruptionWindup>=0&&e.eruptionWindup<=.951f&&e.eruptions>=0&&(!e.eruptionWindup||(e.type==VolcanoBossType&&e.alive)));
+ for(const auto& e:enemies){const auto& spec=enemyAbilityProfile(e.type);require(e.abilityCd>=0&&e.abilityCd<=spec.cooldown+.001f&&e.abilityAge>=-1&&e.abilityCasts>=0&&e.abilityMask>=0&&e.abilityMask<=7&&length(e.abilityDirection)<=1.001f);
+  require(enemyAbility(e.type)==EnemyAbility::EmberBreath?(e.abilityMask==0||e.abilityMask==1||e.abilityMask==3||e.abilityMask==7):e.abilityMask<=1);
+  if(e.abilityAge>=0)require(e.alive&&enemyAbility(e.type)!=EnemyAbility::None&&e.abilityCasts>0&&e.abilityAge<spec.duration()&&std::abs(length(e.abilityDirection)-1)<.001f);
+  else require(e.abilityMask==0&&length(e.abilityDirection)==0);
+ }
  for(const auto& p:props){validatePos(p.pos);require(p.type>=0&&p.type<PropTypeCount&&p.size>0&&p.size<=10);}
  validateGround(forage);
 }
 inline void validate(const Snapshot& s){
- const auto& g=s.game;require(range(g.location,4)&&range(g.fieldLocation,4)&&g.fieldLocation!=WorldLocation::MageTower&&range(g.dawnQuest,3)&&range(g.selectedSpell,2));
+ const auto& g=s.game;require(range(g.location,4)&&range(g.fieldLocation,4)&&g.fieldLocation!=WorldLocation::MageTower&&range(g.dawnQuest,3)&&range(g.selectedSpell,int(Spell::Count)));
+ require((g.learnedSpells&~7u)==0&&(g.selectedSpell==Spell::None||g.knowsSpell(g.selectedSpell))&&g.spellCooldownTotal>=FireballCooldown&&g.spellCooldownTotal<=60);
+ require(g.fireballs.size()<=MaxEntries&&g.explosions.size()<=MaxEntries);
+ for(const auto& projectile:g.fireballs){validatePos(projectile.pos);require(validSpell(projectile.spell)&&projectile.age>=0&&projectile.age<=30&&projectile.remaining>=0&&projectile.remaining<=spellDefinition(projectile.spell).range+.001f&&length(projectile.velocity)<=20&&projectile.damage>=0&&projectile.damage<=1000000000);}
+ for(const auto& impact:g.explosions){validatePos(impact.pos);require(validSpell(impact.spell)&&impact.life>=0&&impact.life<=spellDefinition(impact.spell).impactLife+.001f);}
  require(g.towerFloor>=0&&g.towerFloor<5&&g.towerRuneMask>=0&&g.towerRuneMask<16&&g.collectedFragments>=0&&g.collectedFragments<=5);
  require(g.level>=1&&g.level<=100000&&g.xp>=0&&g.xp<experienceForLevel(g.level)&&g.gold>=0&&g.gold<=1000000000000LL&&g.kills>=0&&g.nextGround>=1);
  require(g.merchantArrows>=0&&g.merchantArrows<=MerchantArrowCapacity);
@@ -146,7 +162,9 @@ inline void validate(const Snapshot& s){
  validateField(g.enemies,g.props,g.forage);validateField(g.forestState.enemies,g.forestState.props,g.forestState.forage);validateField(g.desertState.enemies,g.desertState.props,g.desertState.forage);
  validateField(g.volcanoState.enemies,g.volcanoState.props,g.volcanoState.forage);
  require(!g.inVolcano()||g.volcanoCreated);require(g.cinders.size()<=24&&g.fissures.size()<=12);
+ require(g.venomGlobs.size()<=24);for(const auto& p:g.venomGlobs){validatePos(p.pos);require(g.inDesert()&&std::abs(length(p.velocity)-6)<.01f&&p.remaining>0&&p.remaining<=7&&p.damage>=0&&p.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==p.owner&&e.alive&&e.type==10;}));}
  require(g.volcanoSceneryVersion>=0&&g.volcanoSceneryVersion<=VolcanoSceneryRevision);
+ require(g.worldExpansionVersion>=0&&g.worldExpansionVersion<=WorldExpansionRevision);
  for(const auto& b:g.cinders){validatePos(b.pos);require(g.inVolcano()&&std::abs(length(b.velocity)-7.5f)<.01f&&b.remaining>0&&b.remaining<=7&&b.damage>=0&&b.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.alive&&Game::volcanoRanged(e.type);}));}
  for(const auto& f:g.fissures){validatePos(f.pos);require(g.inVolcano()&&f.age>=0&&f.delay>=.9f&&f.delay<=1.5f&&f.age<=f.delay+.651f&&f.damage>=0&&f.damage<=1000&&f.struck==(f.age>=f.delay)&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==f.owner&&e.alive&&e.type==VolcanoBossType;}));}
  for(int i=0;i<FountainCount;i++)require(g.volcanoFountainDrain[i]>=0&&g.volcanoFountainDrain[i]<=FountainDrainDuration&&(!g.volcanoFountainDrain[i]||g.volcanoFountainUsed[i]));
@@ -172,7 +190,15 @@ inline std::string encode(Snapshot snapshot){
  validate(snapshot);Archive payload(false);payload(snapshot);Archive out(false);std::string magic="EMBERFALL-SAVE";int version=CurrentVersion;size_t size=payload.bytes.size();uint64_t hash=checksum(payload.bytes);out(magic,version,size,hash);out.bytes+=payload.bytes;return out.bytes;
 }
 inline Snapshot decode(const std::string& bytes){
- require(bytes.size()<=MaxBytes);Archive in(true,bytes);std::string magic;int version=0;size_t size=0;uint64_t hash=0;in(magic,version,size,hash);require(magic=="EMBERFALL-SAVE"&&version>=1&&version<=CurrentVersion&&size==bytes.size()-in.at);std::string payload=bytes.substr(in.at);require(checksum(payload)==hash);Archive data(true,std::move(payload),version);Snapshot result;data(result);require(data.at==data.bytes.size());validate(result);result.game.refreshVolcanoScenery();validate(result);return result;
+ require(bytes.size()<=MaxBytes);Archive in(true,bytes);std::string magic;int version=0;size_t size=0;uint64_t hash=0;in(magic,version,size,hash);require(magic=="EMBERFALL-SAVE"&&version>=1&&version<=CurrentVersion&&size==bytes.size()-in.at);std::string payload=bytes.substr(in.at);require(checksum(payload)==hash);Archive data(true,std::move(payload),version);Snapshot result;data(result);require(data.at==data.bytes.size());
+ if(version<15){require(range(result.game.selectedSpell,2));result.game.selectedSpell=Spell::None;}
+ if(version<11){
+  // Earlier formats did not store the read-only missing-shard dialogue facts.
+  size_t oldCount=result.tower.lineCount();if(!result.tower.returning&&result.tower.fragments>=3)oldCount=std::max(oldCount,VolcanoReturnDialogue.size());
+  if(result.tower.active()){result.tower.missingDesertShard=result.game.dawnShardUnclaimed(WorldLocation::Desert);result.tower.missingVolcanoShard=result.game.dawnShardUnclaimed(WorldLocation::Volcano);}
+  if(result.tower.line<oldCount&&result.tower.line>=result.tower.lineCount())result.tower.line=result.tower.lineCount()-1;
+ }
+ validate(result);result.game.expandWorld();result.game.refreshVolcanoScenery();validate(result);return result;
 }
 inline std::string now(){std::time_t t=std::time(nullptr);std::tm local{};
 #ifdef _WIN32
@@ -212,7 +238,7 @@ struct Store {
   if(backup)*backup=false;try{return read(path(slot));}catch(...){fs::path b=path(slot);b+=L".bak";if(!fs::exists(b))throw;if(backup)*backup=true;return read(b);}
  }
  Entry inspect(int slot)const{
-  Entry entry;try{entry.exists=fs::exists(path(slot))||fs::exists(fs::path(path(slot).wstring()+L".bak"));if(!entry.exists)return entry;auto s=load(slot,&entry.backup);entry.valid=true;entry.date=s.date;entry.level=s.game.level;entry.location=s.intro.active()?"Prolog":s.game.inTower()?"Wieża Eldrina · piętro "+std::to_string(s.game.towerFloor+1):s.game.inVolcano()?"Kaldera Popiołu":s.game.inDesert()?"Morze Piasków":"Las Mchu";}catch(...){entry.exists=true;entry.error="Nie można odczytać zapisu";}return entry;
+  Entry entry;try{entry.exists=fs::exists(path(slot))||fs::exists(fs::path(path(slot).wstring()+L".bak"));if(!entry.exists)return entry;auto s=load(slot,&entry.backup);entry.valid=true;entry.date=s.date;entry.level=s.game.level;entry.location=s.intro.active()?"Prolog":s.game.inTower()?"Wieża Eldrina · piętro "+std::to_string(s.game.towerFloor+1):s.game.inVolcano()?"Kaldera Popiołu":s.game.inDesert()?"Morze Piasków":"Wielka Knieja";}catch(...){entry.exists=true;entry.error="Nie można odczytać zapisu";}return entry;
  }
  void save(int slot,Snapshot snapshot)const{
   snapshot.date=now();std::string bytes=encode(std::move(snapshot));fs::create_directories(root);auto target=path(slot);

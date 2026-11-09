@@ -127,10 +127,13 @@ inline void prepare(bool chamber=false){
   Vector2 camera=cameraPixels();float x=std::fmod(camera.x,2.f),y=std::fmod(camera.y,2.f);if(x<0)x+=2;if(y<0)y+=2;
   maskOffset={(x+2)/renderScale,(y+2)/renderScale};width+=2;height+=2;
  }
+ const bool raised=!chamber&&!game.inTower();
+ if(raised){maskOffset.y+=terrain_height::MaxPixels;height+=int(std::ceil(terrain_height::MaxPixels*maskScale*2));}
  if(!mask.id||mask.texture.width!=width||mask.texture.height!=height){
   if(mask.id)UnloadRenderTexture(mask);mask=render_targets::colorOnly(width,height);SetTextureFilter(mask.texture,TEXTURE_FILTER_BILINEAR);
  }
  if(!mask.id||!IsShaderValid(maskShader)||!IsShaderValid(softShader))return;
+ struct FlatScope{bool previous;FlatScope(bool active):previous(flatGroundProjection){flatGroundProjection=active;}~FlatScope(){flatGroundProjection=previous;}} flatScope(raised);
  actor_art::beginShadowFrame();shadow_geometry::beginBatch();BeginTextureMode(mask);ClearBackground(BLANK);BeginMode2D({{maskOffset.x*maskScale,maskOffset.y*maskScale},{0,0},0,maskScale});
  BeginShaderMode(maskShader);rlDisableBackfaceCulling();
  if(chamber){
@@ -226,7 +229,8 @@ inline void draw(){
  if(!ready||!softMask.id)return;
  // Filtering happens once at mask resolution, not nine times per world pixel.
  BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
- DrawTexturePro(softMask.texture,{0,0,float(softMask.texture.width),-float(softMask.texture.height)},
+ if(!chamberFrame&&!game.inTower())terrain_surface::draw(softMask.texture,true,maskScale,maskOffset);
+ else DrawTexturePro(softMask.texture,{0,0,float(softMask.texture.width),-float(softMask.texture.height)},
  {-maskOffset.x,-maskOffset.y,softMask.texture.width/maskScale,softMask.texture.height/maskScale},{0,0},0,WHITE);
  native_world::endBlendMode();
 }

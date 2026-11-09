@@ -39,6 +39,14 @@ void guardianKnockbackTests(){
   check(std::abs(g.hp-hp)<.001f&&g.rng==rng&&g.combatRng==combat,"shockwave adds no damage or random rolls outside the original hit");
   check(distance(g.facing,away*-1)<.0001f&&!g.animation.moving,"backfall faces the impact and does not play walking or footstep sounds");
  }
+ for(WorldLocation realm:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano})for(int fps:{30,60,120}){
+  Game slope; slope.activateField(realm);slope.props.clear();slope.enemies.clear();const auto& hill=terrain_height::hill(realm,0);
+  V start=hill.center-V{hill.radius.x*.6f,0},impulse{1.2f,.3f};slope.player=start;slope.heroKnockback=impulse;slope.heroKnockbackRemaining=BoulderKnockbackDuration;slope.heroKnockdownRemaining=HeroKnockdownDuration;
+  float before=slope.elevation(start);
+  for(int frame=0;frame<fps;frame++)slope.updateHeroKnockback(1.f/fps);
+  check(distance(slope.player,start+impulse)<.0002f,"saved shockwave displacement stays exact on real slopes in all three realms at 30/60/120 Hz");
+  check(std::abs(slope.elevation(slope.player)-before)>.05f&&slope.walkable(slope.player),"forced displacement follows actual changing ground height and retains collision clearance");
+ }
  auto g=landing({20,20});g.update(.05f,{},false);check(g.knockedBack()&&g.heroKnockback.x>0&&std::abs(g.heroKnockback.y)<.001f,"direct centre hit falls back to incoming rock direction without NaNs");
  V start=g.player;check(!g.startRoll({-1,0})&&!g.attack({-1,0})&&!g.spell({-1,0}),"new roll and attacks cannot cancel the short physical recoil");
  g.update(.05f,{-1,0},true,true);check(g.player.x>start.x&&!g.animation.sprinting,"held movement cannot reverse the impulse or turn it into sprinting");

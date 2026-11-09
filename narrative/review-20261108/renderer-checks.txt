@@ -1,0 +1,157 @@
+PASS all actual renderer diagnostics remain hidden with no audio device
+PASS intro selects the intended current-game dialogue
+PASS intro line 0 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 1 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 2 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 3 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 4 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 5 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 6 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 7 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 8 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 9 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 10 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS intro line 11 fits above the actual next/reveal control
+PASS intro preserves all UTF-8 characters
+PASS forest-return selects the intended current-game dialogue
+PASS forest-return line 0 fits above the actual next/reveal control
+PASS forest-return preserves all UTF-8 characters
+PASS forest-return line 1 fits above the actual next/reveal control
+PASS forest-return preserves all UTF-8 characters
+PASS forest-return line 2 fits above the actual next/reveal control
+PASS forest-return preserves all UTF-8 characters
+PASS forest-return line 3 fits above the actual next/reveal control
+PASS forest-return preserves all UTF-8 characters
+PASS forest-return line 4 fits above the actual next/reveal control
+PASS forest-return preserves all UTF-8 characters
+PASS forest-return line 5 fits above the actual next/reveal control
+PASS forest-return preserves all UTF-8 characters
+PASS forest-return line 6 fits above the actual next/reveal control
+PASS forest-return preserves all UTF-8 characters
+PASS forest-return line 7 fits above the actual next/reveal control
+PASS forest-return preserves all UTF-8 characters
+PASS desert-route selects the intended current-game dialogue
+PASS desert-route line 0 fits above the actual next/reveal control
+PASS desert-route preserves all UTF-8 characters
+PASS desert-route line 1 fits above the actual next/reveal control
+PASS desert-route preserves all UTF-8 characters
+PASS desert-route line 2 fits above the actual next/reveal control
+PASS desert-route preserves all UTF-8 characters
+PASS desert-route line 3 fits above the actual next/reveal control
+PASS desert-route preserves all UTF-8 characters
+PASS desert-route line 4 fits above the actual next/reveal control
+PASS desert-route preserves all UTF-8 characters
+PASS desert-return selects the intended current-game dialogue
+PASS desert-return line 0 fits above the actual next/reveal control
+PASS desert-return preserves all UTF-8 characters
+PASS desert-return line 1 fits above the actual next/reveal control
+PASS desert-return preserves all UTF-8 characters
+PASS desert-return line 2 fits above the actual next/reveal control
+PASS desert-return preserves all UTF-8 characters
+PASS desert-return line 3 fits above the actual next/reveal control
+PASS desert-return preserves all UTF-8 characters
+PASS desert-return line 4 fits above the actual next/reveal control
+PASS desert-return preserves all UTF-8 characters
+PASS desert-return line 5 fits above the actual next/reveal control
+PASS desert-return preserves all UTF-8 characters
+PASS desert-revisit selects the intended current-game dialogue
+PASS desert-revisit line 0 fits above the actual next/reveal control
+PASS desert-revisit preserves all UTF-8 characters
+PASS desert-revisit line 1 fits above the actual next/reveal control
+PASS desert-revisit preserves all UTF-8 characters
+PASS desert-revisit line 2 fits above the actual next/reveal control
+PASS desert-revisit preserves all UTF-8 characters
+PASS volcano-return selects the intended current-game dialogue
+PASS volcano-return line 0 fits above the actual next/reveal control
+PASS volcano-return preserves all UTF-8 characters
+PASS volcano-return line 1 fits above the actual next/reveal control
+PASS volcano-return preserves all UTF-8 characters
+PASS volcano-return line 2 fits above the actual next/reveal control
+PASS volcano-return preserves all UTF-8 characters
+PASS volcano-return line 3 fits above the actual next/reveal control
+PASS volcano-return preserves all UTF-8 characters
+PASS volcano-route selects the intended current-game dialogue
+PASS volcano-route line 0 fits above the actual next/reveal control
+PASS volcano-route preserves all UTF-8 characters
+PASS volcano-route line 1 fits above the actual next/reveal control
+PASS volcano-route preserves all UTF-8 characters
+PASS volcano-route line 2 fits above the actual next/reveal control
+PASS volcano-route preserves all UTF-8 characters
+PASS after-three selects the intended current-game dialogue
+PASS after-three line 0 fits above the actual next/reveal control
+PASS after-three preserves all UTF-8 characters
+PASS after-three line 1 fits above the actual next/reveal control
+PASS after-three preserves all UTF-8 characters
+PASS after-three line 2 fits above the actual next/reveal control
+PASS after-three preserves all UTF-8 characters
+PASS desert-shard-pending selects the intended current-game dialogue
+PASS desert-shard-pending line 0 fits above the actual next/reveal control
+PASS desert-shard-pending preserves all UTF-8 characters
+PASS desert-shard-pending line 1 fits above the actual next/reveal control
+PASS desert-shard-pending preserves all UTF-8 characters
+PASS desert-shard-pending line 2 fits above the actual next/reveal control
+PASS desert-shard-pending preserves all UTF-8 characters
+PASS volcano-shard-pending selects the intended current-game dialogue
+PASS volcano-shard-pending line 0 fits above the actual next/reveal control
+PASS volcano-shard-pending preserves all UTF-8 characters
+PASS volcano-shard-pending line 1 fits above the actual next/reveal control
+PASS volcano-shard-pending preserves all UTF-8 characters
+PASS volcano-shard-pending line 2 fits above the actual next/reveal control
+PASS volcano-shard-pending preserves all UTF-8 characters
+PASS volcano-return-skipped-desert selects the intended current-game dialogue
+PASS volcano-return-skipped-desert line 0 fits above the actual next/reveal control
+PASS volcano-return-skipped-desert preserves all UTF-8 characters
+PASS volcano-return-skipped-desert line 1 fits above the actual next/reveal control
+PASS volcano-return-skipped-desert preserves all UTF-8 characters
+PASS volcano-return-skipped-desert line 2 fits above the actual next/reveal control
+PASS volcano-return-skipped-desert preserves all UTF-8 characters
+PASS volcano-return-skipped-desert line 3 fits above the actual next/reveal control
+PASS volcano-return-skipped-desert preserves all UTF-8 characters
+PASS skipped-desert-revisit selects the intended current-game dialogue
+PASS skipped-desert-revisit line 0 fits above the actual next/reveal control
+PASS skipped-desert-revisit preserves all UTF-8 characters
+PASS skipped-desert-revisit line 1 fits above the actual next/reveal control
+PASS skipped-desert-revisit preserves all UTF-8 characters
+PASS skipped-desert-revisit line 2 fits above the actual next/reveal control
+PASS skipped-desert-revisit preserves all UTF-8 characters
+PASS actual friendly-NPC callback starts the conversation
+PASS unfocused dialogue ignores input and pauses its clock
+PASS real dialogue advances to travel choices
+PASS contextual travel description fits above fragment count and buttons
+PASS stay choice returns to tower control without teleporting
+PASS actual friendly-NPC callback starts the conversation
+PASS unfocused dialogue ignores input and pauses its clock
+PASS real dialogue advances to travel choices
+PASS contextual travel description fits above fragment count and buttons
+PASS stay choice returns to tower control without teleporting
+PASS actual friendly-NPC callback starts the conversation
+PASS repeat NPC greeting after Varkhor does not replay the hero's victory announcement
+PASS unfocused dialogue ignores input and pauses its clock
+PASS real dialogue advances to travel choices
+PASS contextual travel description fits above fragment count and buttons
+PASS stay choice returns to tower control without teleporting
+PASS real travel choice starts the selected route
+PASS travel after repeat dialogue still reaches the selected realm
+PASS chronicle page fits its actual text area at each milestone
+PASS chronicle page fits its actual text area at each milestone
+PASS chronicle page fits its actual text area at each milestone
+PASS chronicle page fits its actual text area at each milestone
+PASS chronicle page fits its actual text area at each milestone
+PASS chronicle page fits its actual text area at each milestone
+PASS chronicle page fits its actual text area at each milestone
+PASS chronicle page fits its actual text area at each milestone
+PASS chronicle page fits its actual text area at each milestone
+PASS resizing the diagnostic never restores or focuses its window
+PASS resizing the diagnostic never restores or focuses its window
+PASS all current-game dialogue turns were rendered and checked

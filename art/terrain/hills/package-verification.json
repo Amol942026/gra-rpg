@@ -1,0 +1,54 @@
+[
+  {
+    "status": "PASS",
+    "edition": "player",
+    "package_sha256": "685eb4b4b1af808f06d51f0c10565bdb6d5f238d0239229c96a202fb6020266f",
+    "exe_sha256": "e095a90d3762ac788ecaac33fc72de8b0576dac0168f23a315c371e805ac6761",
+    "verified_assets": 147,
+    "startup": [
+      {
+        "frames": 180,
+        "scenario": "main-menu"
+      }
+    ],
+    "hills": {
+      "status": "PASS",
+      "checks": 564,
+      "failures": 0,
+      "realms": 3,
+      "walkable_hills": 13,
+      "movement_frames": 180,
+      "hidden": true,
+      "audio_opened": false,
+      "completed_render_mean_ms": 4.04914,
+      "completed_render_p95_ms": 4.6695,
+      "presentation_measured": false
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  {
+    "status": "PASS",
+    "edition": "developer",
+    "package_sha256": "3f37b45b396355c670e4b70b2871d6026ffea9ff61749fa7ae32df2705bbf8e8",
+    "exe_sha256": "5d06737264645ca7c34d87b81ef827ba5d5223633c1c4a801ae374ec7ff0e130",
+    "verified_assets": 147,
+    "startup": [
+      {
+        "frames": 180,
+        "scenario": "forest"
+      },
+      {
+        "frames": 180,
+        "scenario": "desert"
+      },
+      {
+        "frames": 180,
+        "scenario": "volcano"
+      }
+    ],
+    "hills": null,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  }
+]

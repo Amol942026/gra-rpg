@@ -30,7 +30,7 @@ bool beginBow(V aim){
  if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||bowDrawing||archetype(equipment[0].kind)!=Kind::Bow)return false;
  if(piercingArrowArmed&&mana<PiercingArrowCost){say("Przeszywająca strzała wymaga 20 many.");return false;}
  if(ammoCount()<=0){say("Brak strzał w plecaku.");sound(Cue::Reject,player);return false;}
- bowDrawing=true;bowDrawTime=bowReleaseTime=0;bowAim=normalized(length(aim)>.001f?aim:facing);if(length(bowAim)<.001f)bowAim={0,-1};aimBow(bowAim);return true;
+ bowDrawing=true;bowDrawTime=bowReleaseTime=0;bowAim=normalized(length(aim)>.001f?aim:facing);if(length(bowAim)<.001f)bowAim={0,-1};aimBow(bowAim);sound(Cue::BowDraw,player);return true;
 }
 bool releaseBow(){
  if(!bowDrawing)return false;

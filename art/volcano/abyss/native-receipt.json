@@ -1,0 +1,157 @@
+{
+  "assets": [
+    {
+      "name": "realm-treasure-chests",
+      "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.png",
+      "layers": [
+        "Contact shadows",
+        "Raised lids",
+        "Carved bodies and interiors",
+        "Wood grain, inlays and obsidian cracks",
+        "Closed lids",
+        "Fittings, locks, vines and runes",
+        "Unclaimed treasure"
+      ],
+      "size": [
+        1536,
+        1536
+      ],
+      "runtime_size": [
+        768,
+        768
+      ],
+      "kra_sha256": "ad2f59c0e1034ecd8398b4f3fc68e0fd2d8c5ba4fcc428e8f5a6dc385165a28e",
+      "png_sha256": "b6aab9f545b2196049b8d516117063963d880ae528b87935c3617637231d962e",
+      "resumed_export": true,
+      "retained": true
+    },
+    {
+      "name": "caldera-abyss-cliff",
+      "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-cliff.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-cliff.png",
+      "layers": [
+        "Depth and reflected ash light",
+        "Broken basalt columns",
+        "Strata, pores and fissures"
+      ],
+      "size": [
+        1024,
+        768
+      ],
+      "runtime_size": [
+        1024,
+        768
+      ],
+      "kra_sha256": "4ae2817281de5c326bf58b0d68179a82d7966ceda993a471c800c913d1512af0",
+      "png_sha256": "8a5a47ac4e0670d05842190044dfaedb0457eca43cf5d1d637cd3a3d07483e83",
+      "retained": true
+    },
+    {
+      "name": "caldera-abyss-sky",
+      "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-sky.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-sky.png",
+      "layers": [
+        "Ash sky and distant furnace glow",
+        "Distant caldera ridges",
+        "Deep molten fissures",
+        "Layers of suspended ash"
+      ],
+      "size": [
+        2048,
+        1024
+      ],
+      "runtime_size": [
+        2048,
+        1024
+      ],
+      "kra_sha256": "a196ba074ea1c4a16390136c7c20af29fbcb83035597dfc8dc4e4b9b5cf9cfc0",
+      "png_sha256": "42b5e6951644b07273bb721852ec0af73b5d700bea5a0c722f18ab197db8a2b7",
+      "retained": true
+    },
+    {
+      "name": "caldera-abyss-distance",
+      "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-distance.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-distance.png",
+      "layers": [
+        "Isolated pinnacles below the plateau"
+      ],
+      "size": [
+        2048,
+        1024
+      ],
+      "runtime_size": [
+        2048,
+        1024
+      ],
+      "kra_sha256": "fda51d3a5a2a3edc5fa6027276ea40e6caa17081f3a39ceb430129a3dd4ddf6d",
+      "png_sha256": "ca156812ccaf2f8cc6624383c87be47db1c6f2d99e70c2dde07e219c72814a4c",
+      "retained": true
+    }
+  ],
+  "tool": "Krita native Python / Qt painting",
+  "external_inputs": [],
+  "audio": false,
+  "status": "PASS",
+  "before": {
+    "version": "5.3.4 (git c5b23e3)",
+    "owned_documents": []
+  },
+  "after": {
+    "version": "5.3.4 (git c5b23e3)",
+    "owned_documents": [
+      {
+        "name": "realm-treasure-chests",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+        "layers": [
+          "Contact shadows",
+          "Raised lids",
+          "Carved bodies and interiors",
+          "Wood grain, inlays and obsidian cracks",
+          "Closed lids",
+          "Fittings, locks, vines and runes",
+          "Unclaimed treasure"
+        ]
+      },
+      {
+        "name": "realm-treasure-chests",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+        "layers": [
+          "Contact shadows",
+          "Raised lids",
+          "Carved bodies and interiors",
+          "Wood grain, inlays and obsidian cracks",
+          "Closed lids",
+          "Fittings, locks, vines and runes",
+          "Unclaimed treasure"
+        ]
+      },
+      {
+        "name": "caldera-abyss-cliff",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-cliff.kra",
+        "layers": [
+          "Depth and reflected ash light",
+          "Broken basalt columns",
+          "Strata, pores and fissures"
+        ]
+      },
+      {
+        "name": "caldera-abyss-sky",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-sky.kra",
+        "layers": [
+          "Ash sky and distant furnace glow",
+          "Distant caldera ridges",
+          "Deep molten fissures",
+          "Layers of suspended ash"
+        ]
+      },
+      {
+        "name": "caldera-abyss-distance",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-distance.kra",
+        "layers": [
+          "Isolated pinnacles below the plateau"
+        ]
+      }
+    ]
+  }
+}

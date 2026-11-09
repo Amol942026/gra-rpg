@@ -7,6 +7,8 @@ void check(bool b,const char* label){checks++;if(!b){std::cerr<<"FAIL: "<<label<
 int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(auto&i:g.equipment)if(!i.empty())n+=i.count;for(auto&i:g.ground)if(!i.value.empty())n+=i.value.count;for(auto&e:g.enemies)for(auto&i:e.loot)if(!i.empty())n+=i.count;return n;}
 #include "roll_tests.hpp"
 #include "audio_events_tests.hpp"
+#include "spell_learning_tests.hpp"
+#include "world_expansion_tests.hpp"
 #include "combat_press_tests.hpp"
 #include "crowd_combat_tests.hpp"
 #include "progression_tests.hpp"
@@ -44,7 +46,12 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "performance_collision_tests.hpp"
 #include "boar_charge_tests.hpp"
 #include "volcano_tests.hpp"
+#include "dialogue_context_tests.hpp"
+#include "enemy_ability_tests.hpp"
 int main(){
+ spellLearningTests();
+ enemyAbilityTests();
+ dialogueContextTests();
  volcanoTests();
  boarChargeTests();
  performanceCollisionTests();
@@ -92,11 +99,11 @@ int main(){
  int oldTotal=total(g);check(g.drop({Place::Bag,2},g.player),"drop inventory item");check(total(g)==oldTotal,"drop conservation");
  check(!g.drop({Place::Bag,3},{0,0}),"reject invalid drop");
  g.player=g.enemies[0].pos;g.enemies[0].hp=1;size_t previousGround=g.ground.size();check(g.attack(),"attack triggers");check(!g.enemies[0].alive&&g.kills==1,"combat kill");check(g.ground.size()==previousGround&&g.findCorpse(g.enemies[0].id),"kill keeps loot in the body without scattering ground items");
- check(!g.attack(),"attack cooldown");g.mana=100;check(g.spell(),"spell cast");check(g.mana==90,"spell mana cost");check(!g.spell(),"spell cooldown");
+ check(!g.attack(),"attack cooldown");g.learnedSpells=spellBit(Spell::Fireball);g.selectedSpell=Spell::Fireball;g.mana=100;check(g.spell(),"spell cast");check(g.mana==90,"spell mana cost");check(!g.spell(),"spell cooldown");
  g.hp=0;check(!g.use({Place::Bag,0}),"dead cannot consume");check(!g.attack(),"dead cannot attack");
  Game a,b;for(int i=0;i<60;i++)a.update(1.f/60,{1,0},false);for(int i=0;i<120;i++)b.update(1.f/120,{1,0},false);check(distance(a.player,b.player)<.002f,"movement independent of frame rate");
  Game c;c.bag[10]=item(Kind::Health,0,98);c.bag[11]=item(Kind::Health,0,8);check(c.transfer({Place::Bag,11},{Place::Bag,10}),"partial stack");check(c.bag[10].count==99&&c.bag[11].count==7,"stack limit preserves remainder");
- c.player=c.enemies.back().pos;c.enemies.back().hp=1;c.spell();c.update(.01f,{},false);check(c.bossDead,"boss objective");
+ c.player=c.enemies.back().pos;c.enemies.back().hp=1;c.learnedSpells=spellBit(Spell::Fireball);c.selectedSpell=Spell::Fireball;c.spell();c.update(.01f,{},false);check(c.bossDead,"boss objective");
  const V directions[8]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
  for(int d=0;d<8;d++){
   Game walk;walk.props.clear();walk.enemies.clear();walk.player={15,15};
@@ -126,6 +133,7 @@ int main(){
  for(int i=0;i<8;i++){AnimationState pose;pose.moving=true;pose.phase=i/8.f;check(pose.walkFrame()==i,"all eight walk keyframes are selectable");}
  rollTests();
  audioEventTests();
+ worldExpansionTests();
  combatPressTests();
  crowdCombatTests();
  progressionTests();

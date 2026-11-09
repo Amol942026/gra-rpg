@@ -1,0 +1,75 @@
+{
+  "original_composition_and_synthesis": true,
+  "external_samples": false,
+  "cloud_services": false,
+  "commercial_distribution_with_game": true,
+  "audio_played": false,
+  "native_master_root": "C:\\AI2D\\audio\\emberfall-suite-20261108",
+  "programs": [
+    {
+      "name": "LMMS",
+      "version": "1.2.2",
+      "path": "C:\\Users\\Amol\\AppData\\Local\\Programs\\CodexAudio\\LMMS-1.2.2\\lmms.exe",
+      "sha256": "99d8c322066c8ff25c1bfd6f3b9c5b7757d8a80cd62bdc1c7e06f6cfa01332af"
+    },
+    {
+      "name": "Csound",
+      "version": "6.18.1",
+      "path": "C:\\Users\\Amol\\AppData\\Local\\Programs\\CodexAudio\\Csound-6.18.1\\build\\Release\\csound.exe",
+      "sha256": "af3f8f72319f8adbbcbc0bc7c5073fd37f07f6cb43334832ec6fabf916726974"
+    },
+    {
+      "name": "Audacity",
+      "version": "3.7.9",
+      "path": "C:\\Users\\Amol\\AppData\\Local\\Programs\\CodexAudio\\audacity-win-3.7.9-64bit\\audacity.exe",
+      "sha256": "be22b38c95ef0b89419e39e60a46b78b2bdc4c6fbf618f76daa446141654d8ee"
+    }
+  ],
+  "native_projects": [
+    {
+      "id": "effects",
+      "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-effects.aup3",
+      "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\effects.aup3",
+      "quick_check": "ok",
+      "retained_open": true,
+      "wav_sha256": "d5e6130f14f97f3a2341889f18b3d0b37dadec998fe473d9dc83709aa55b274c",
+      "backup_sha256": "85eae580befb280849a852f2c471fb9100ae89e3e764a312fd35f966a8f251c0"
+    },
+    {
+      "id": "forest",
+      "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-forest.aup3",
+      "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\forest.aup3",
+      "quick_check": "ok",
+      "retained_open": true,
+      "wav_sha256": "855646fcc25691e724cc0417a81dbd2338c760d2c53eb3828295dba9e2bbe8e3",
+      "backup_sha256": "b7dda44ebd4968d3bcba1ef3798dbe67ef2750457800385f9d356586ad857f2d"
+    },
+    {
+      "id": "desert",
+      "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-desert.aup3",
+      "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\desert.aup3",
+      "quick_check": "ok",
+      "retained_open": true,
+      "wav_sha256": "19936f30236a2d09b366a96767710ff5b4418c42ba4a40c9ce25984b57bbc2c1",
+      "backup_sha256": "d4800a7f8ff12f72ec6550dc7c3616d3746562abd2dac6e52fec51cf186d5a93"
+    },
+    {
+      "id": "volcano",
+      "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-volcano.aup3",
+      "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\volcano.aup3",
+      "quick_check": "ok",
+      "retained_open": true,
+      "wav_sha256": "6ab88425d6bcf1aba3ad25da581b70d8bc352d3821fdb885f980f86737c6fa8b",
+      "backup_sha256": "6f0a676165bc01dc198c3d9c2de254372b1628cbb1479a48a35b72bf8a2d2f52"
+    },
+    {
+      "id": "tower",
+      "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-tower.aup3",
+      "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\tower.aup3",
+      "quick_check": "ok",
+      "retained_open": true,
+      "wav_sha256": "0d370590fea3e72cd529ffe0e66ccc89f88a54e21b346775b8f199891d5ca68e",
+      "backup_sha256": "4fe846fe8d8776a8a500ae109458f906761cca8c4abd5c569f2d8c98aad9500e"
+    }
+  ]
+}

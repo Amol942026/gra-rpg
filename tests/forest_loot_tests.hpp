@@ -1,7 +1,7 @@
 #pragma once
 void forestLootTests(){
  Game forest;
- check(MapSize==72&&forest.enemies.size()==46,"larger forest spreads the same 46 monsters across 72x72 cells");
+ check(MapSize==102&&forest.enemies.size()==91,"doubled forest spreads 90 ordinary monsters and one guardian across 102x102 cells");
  std::array<int,EnemyTypeCount> species{};std::array<bool,PropTypeCount> props{};
  for(const auto& e:forest.enemies){species[e.type]++;check(forest.enemyPositionClear(e.home,e.radius()),"every initial monster has clearance at its spawn");}
  for(const auto& p:forest.props)props[p.type]=true;

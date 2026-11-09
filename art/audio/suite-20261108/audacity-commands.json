@@ -1,0 +1,747 @@
+[
+  {
+    "name": "mcp__audio_audacity__new_project",
+    "args": {},
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SetProject",
+      "parameters": {
+        "Rate": 48000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__import_audio",
+    "args": {
+      "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-effects.wav"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"BatchCommand finished: OK\",\n  \"project\": {\n    \"tracks\": \"[ \\n  { \\\"name\\\":\\\"Emberfall-20261108-effects\\\", \\\"focused\\\":1, \\\"selected\\\":1, \\\"kind\\\":\\\"wave\\\", \\\"start\\\":0, \\\"end\\\":98.38, \\\"pan\\\":0, \\\"volume\\\":1, \\\"channels\\\":2, \\\"solo\\\":0, \\\"mute\\\":0, \\\"VZoomMin\\\":-1, \\\"VZoomMax\\\":1 } ]\\nBatchCommand finished: OK\",\n    \"clips\": \"[ \\n  { \\\"track\\\":0, \\\"start\\\":0, \\\"end\\\":98.38, \\\"color\\\":0, \\n    \\\"name\\\":\\\"Emberfall-20261108-effects\\\" } ]\\nBatchCommand finished: OK\"\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SelectAll"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Normalize",
+      "parameters": {
+        "PeakLevel": -3,
+        "ApplyVolume": true,
+        "RemoveDcOffset": true,
+        "StereoIndependent": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__export_wav",
+    "args": {
+      "name": "Emberfall-20261108-effects-master",
+      "channels": 2
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-20261108-effects-master.wav\\nBatchCommand finished: OK\",\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-effects-master.wav\",\n    \"bytes\": 18889004,\n    \"seconds\": 98.38,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.707977294921875,\n    \"rms\": 0.08375654256507588\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__save_project",
+    "args": {
+      "name": "Emberfall-20261108-effects"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-effects.aup3\",\n  \"result\": \"BatchCommand finished: OK\"\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__new_project",
+    "args": {},
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SetProject",
+      "parameters": {
+        "Rate": 48000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__import_audio",
+    "args": {
+      "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-forest-raw.wav"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"BatchCommand finished: OK\",\n  \"project\": {\n    \"tracks\": \"[ \\n  { \\\"name\\\":\\\"Emberfall-20261108-forest-raw\\\", \\\"focused\\\":1, \\\"selected\\\":1, \\\"kind\\\":\\\"wave\\\", \\\"start\\\":0, \\\"end\\\":320, \\\"pan\\\":0, \\\"volume\\\":1, \\\"channels\\\":2, \\\"solo\\\":0, \\\"mute\\\":0, \\\"VZoomMin\\\":-1, \\\"VZoomMax\\\":1 } ]\\nBatchCommand finished: OK\",\n    \"clips\": \"[ \\n  { \\\"track\\\":0, \\\"start\\\":0, \\\"end\\\":320, \\\"color\\\":0, \\n    \\\"name\\\":\\\"Emberfall-20261108-forest-raw\\\" } ]\\nBatchCommand finished: OK\"\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SelectAll"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Reverb",
+      "parameters": {
+        "RoomSize": 52,
+        "Delay": 18,
+        "Reverberance": 39,
+        "HfDamping": 65,
+        "ToneLow": 60,
+        "ToneHigh": 62,
+        "WetGain": -18,
+        "DryGain": 0,
+        "StereoWidth": 80,
+        "WetOnly": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Normalize",
+      "parameters": {
+        "PeakLevel": -3,
+        "ApplyVolume": true,
+        "RemoveDcOffset": true,
+        "StereoIndependent": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__export_wav",
+    "args": {
+      "name": "Emberfall-20261108-forest-master",
+      "channels": 2
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-20261108-forest-master.wav\\nBatchCommand finished: OK\",\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-forest-master.wav\",\n    \"bytes\": 61440160,\n    \"seconds\": 320.0,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.70806884765625,\n    \"rms\": 0.1063018908914179\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__save_project",
+    "args": {
+      "name": "Emberfall-20261108-forest"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-forest.aup3\",\n  \"result\": \"BatchCommand finished: OK\"\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__new_project",
+    "args": {},
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SetProject",
+      "parameters": {
+        "Rate": 48000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__import_audio",
+    "args": {
+      "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-desert-raw.wav"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"BatchCommand finished: OK\",\n  \"project\": {\n    \"tracks\": \"[ \\n  { \\\"name\\\":\\\"Emberfall-20261108-desert-raw\\\", \\\"focused\\\":1, \\\"selected\\\":1, \\\"kind\\\":\\\"wave\\\", \\\"start\\\":0, \\\"end\\\":303.157, \\\"pan\\\":0, \\\"volume\\\":1, \\\"channels\\\":2, \\\"solo\\\":0, \\\"mute\\\":0, \\\"VZoomMin\\\":-1, \\\"VZoomMax\\\":1 } ]\\nBatchCommand finished: OK\",\n    \"clips\": \"[ \\n  { \\\"track\\\":0, \\\"start\\\":0, \\\"end\\\":303.157, \\\"color\\\":0, \\n    \\\"name\\\":\\\"Emberfall-20261108-desert-raw\\\" } ]\\nBatchCommand finished: OK\"\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SelectAll"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Reverb",
+      "parameters": {
+        "RoomSize": 52,
+        "Delay": 18,
+        "Reverberance": 39,
+        "HfDamping": 65,
+        "ToneLow": 60,
+        "ToneHigh": 62,
+        "WetGain": -18,
+        "DryGain": 0,
+        "StereoWidth": 80,
+        "WetOnly": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Normalize",
+      "parameters": {
+        "PeakLevel": -3,
+        "ApplyVolume": true,
+        "RemoveDcOffset": true,
+        "StereoIndependent": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__export_wav",
+    "args": {
+      "name": "Emberfall-20261108-desert-master",
+      "channels": 2
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-20261108-desert-master.wav\\nBatchCommand finished: OK\",\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-desert-master.wav\",\n    \"bytes\": 58206368,\n    \"seconds\": 303.1573333333333,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.707977294921875,\n    \"rms\": 0.10607670409295537\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__save_project",
+    "args": {
+      "name": "Emberfall-20261108-desert"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-desert.aup3\",\n  \"result\": \"BatchCommand finished: OK\"\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__new_project",
+    "args": {},
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SetProject",
+      "parameters": {
+        "Rate": 48000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__import_audio",
+    "args": {
+      "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-volcano-raw.wav"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"BatchCommand finished: OK\",\n  \"project\": {\n    \"tracks\": \"[ \\n  { \\\"name\\\":\\\"Emberfall-20261108-volcano-raw\\\", \\\"focused\\\":1, \\\"selected\\\":1, \\\"kind\\\":\\\"wave\\\", \\\"start\\\":0, \\\"end\\\":261.816, \\\"pan\\\":0, \\\"volume\\\":1, \\\"channels\\\":2, \\\"solo\\\":0, \\\"mute\\\":0, \\\"VZoomMin\\\":-1, \\\"VZoomMax\\\":1 } ]\\nBatchCommand finished: OK\",\n    \"clips\": \"[ \\n  { \\\"track\\\":0, \\\"start\\\":0, \\\"end\\\":261.816, \\\"color\\\":0, \\n    \\\"name\\\":\\\"Emberfall-20261108-volcano-raw\\\" } ]\\nBatchCommand finished: OK\"\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SelectAll"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Reverb",
+      "parameters": {
+        "RoomSize": 52,
+        "Delay": 18,
+        "Reverberance": 39,
+        "HfDamping": 65,
+        "ToneLow": 60,
+        "ToneHigh": 62,
+        "WetGain": -18,
+        "DryGain": 0,
+        "StereoWidth": 80,
+        "WetOnly": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Normalize",
+      "parameters": {
+        "PeakLevel": -3,
+        "ApplyVolume": true,
+        "RemoveDcOffset": true,
+        "StereoIndependent": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__export_wav",
+    "args": {
+      "name": "Emberfall-20261108-volcano-master",
+      "channels": 2
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-20261108-volcano-master.wav\\nBatchCommand finished: OK\",\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-volcano-master.wav\",\n    \"bytes\": 50268832,\n    \"seconds\": 261.816,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.707977294921875,\n    \"rms\": 0.1030738009391842\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__save_project",
+    "args": {
+      "name": "Emberfall-20261108-volcano"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-volcano.aup3\",\n  \"result\": \"BatchCommand finished: OK\"\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__new_project",
+    "args": {},
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SetProject",
+      "parameters": {
+        "Rate": 48000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__import_audio",
+    "args": {
+      "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-tower-raw.wav"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"BatchCommand finished: OK\",\n  \"project\": {\n    \"tracks\": \"[ \\n  { \\\"name\\\":\\\"Emberfall-20261108-tower-raw\\\", \\\"focused\\\":1, \\\"selected\\\":1, \\\"kind\\\":\\\"wave\\\", \\\"start\\\":0, \\\"end\\\":349.091, \\\"pan\\\":0, \\\"volume\\\":1, \\\"channels\\\":2, \\\"solo\\\":0, \\\"mute\\\":0, \\\"VZoomMin\\\":-1, \\\"VZoomMax\\\":1 } ]\\nBatchCommand finished: OK\",\n    \"clips\": \"[ \\n  { \\\"track\\\":0, \\\"start\\\":0, \\\"end\\\":349.091, \\\"color\\\":0, \\n    \\\"name\\\":\\\"Emberfall-20261108-tower-raw\\\" } ]\\nBatchCommand finished: OK\"\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "SelectAll"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Reverb",
+      "parameters": {
+        "RoomSize": 74,
+        "Delay": 18,
+        "Reverberance": 56,
+        "HfDamping": 65,
+        "ToneLow": 60,
+        "ToneHigh": 62,
+        "WetGain": -15,
+        "DryGain": 0,
+        "StereoWidth": 80,
+        "WetOnly": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__edit_audio",
+    "args": {
+      "command_name": "Normalize",
+      "parameters": {
+        "PeakLevel": -3,
+        "ApplyVolume": true,
+        "RemoveDcOffset": true,
+        "StereoIndependent": false
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "BatchCommand finished: OK"
+        }
+      ],
+      "structuredContent": {
+        "result": "BatchCommand finished: OK"
+      },
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__export_wav",
+    "args": {
+      "name": "Emberfall-20261108-tower-master",
+      "channels": 2
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": \"Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-20261108-tower-master.wav\\nBatchCommand finished: OK\",\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-tower-master.wav\",\n    \"bytes\": 67025568,\n    \"seconds\": 349.09066666666666,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.7080078125,\n    \"rms\": 0.10053962086429126\n  }\n}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "name": "mcp__audio_audacity__save_project",
+    "args": {
+      "name": "Emberfall-20261108-tower"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-20261108-tower.aup3\",\n  \"result\": \"BatchCommand finished: OK\"\n}"
+        }
+      ],
+      "isError": false
+    }
+  }
+]

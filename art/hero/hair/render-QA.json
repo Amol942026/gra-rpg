@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "capture_checks": 25,
+  "renderer_checks": 428,
+  "animation_frames": 420,
+  "views": [
+    {
+      "direction": 0,
+      "changed_pixels": 554,
+      "bounds": [
+        169,
+        91,
+        215,
+        156
+      ]
+    },
+    {
+      "direction": 1,
+      "changed_pixels": 815,
+      "bounds": [
+        179,
+        93,
+        224,
+        130
+      ]
+    },
+    {
+      "direction": 2,
+      "changed_pixels": 866,
+      "bounds": [
+        177,
+        93,
+        224,
+        125
+      ]
+    },
+    {
+      "direction": 3,
+      "changed_pixels": 786,
+      "bounds": [
+        176,
+        92,
+        221,
+        127
+      ]
+    },
+    {
+      "direction": 4,
+      "changed_pixels": 488,
+      "bounds": [
+        185,
+        91,
+        231,
+        158
+      ]
+    },
+    {
+      "direction": 5,
+      "changed_pixels": 941,
+      "bounds": [
+        177,
+        94,
+        230,
+        167
+      ]
+    },
+    {
+      "direction": 6,
+      "changed_pixels": 1045,
+      "bounds": [
+        179,
+        95,
+        221,
+        168
+      ]
+    },
+    {
+      "direction": 7,
+      "changed_pixels": 955,
+      "bounds": [
+        170,
+        94,
+        222,
+        167
+      ]
+    }
+  ],
+  "front_highlight_red_p95": {
+    "before": 170.64999999999998,
+    "after": 78.0
+  },
+  "source_atlas_sha256": "7d186166f278d787d16609142fce1559a911d5ca29c74ebc4e658dd7e5d518e6",
+  "source_kra_sha256": "0a9ec61a1a4c97d95e3d9cf7ea6b62511b6551f379983d5f7f8d14abd0f21f5f",
+  "audio_device_opened": false,
+  "hidden": true
+}

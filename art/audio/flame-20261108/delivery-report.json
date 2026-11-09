@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "files": [
+    {
+      "file": "fireball-cast.wav",
+      "sha256": "9258d8ba592727915695e8311478d3d4b8a20b395b185624e5f7e23689b3c9de",
+      "frames": 37440,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -18.237756792877594,
+      "dc": 1.360412336822249e-06,
+      "clipped_samples": 0
+    },
+    {
+      "file": "fireball-cast-v2.wav",
+      "sha256": "6db781beba48f92d088e5adff92a1a37b12f6918dfc7c424aaeffffd818e6771",
+      "frames": 37440,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -17.62640644958489,
+      "dc": 3.859528109558627e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "fireball-cast-v3.wav",
+      "sha256": "32187fcfb14a1b063ed364f8cbdd1d864a0eb48254c46fb07005d16dd82a59d7",
+      "frames": 37440,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -18.53631874492349,
+      "dc": -5.510118272569444e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "fireball-impact.wav",
+      "sha256": "b389bb624f4fbb68afd62c33b33d289e14e4e609fa5bee78a4fcc50a73a0019e",
+      "frames": 45600,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -18.07594457571003,
+      "dc": -1.609936095120614e-05,
+      "clipped_samples": 0
+    },
+    {
+      "file": "fireball-impact-v2.wav",
+      "sha256": "aea52ff2a4f2bc2ec819464e5a4c83eae2d6e9434bb25af42614bf45d00244ed",
+      "frames": 45600,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -18.581460311834885,
+      "dc": -1.507173504745751e-05,
+      "clipped_samples": 0
+    },
+    {
+      "file": "fireball-impact-v3.wav",
+      "sha256": "6cce43399f98e1ff7e925dfc978909a09f642f4fd7ebc512c8ca2330aa158c46",
+      "frames": 45600,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -18.7331997384908,
+      "dc": -1.453500044973273e-05,
+      "clipped_samples": 0
+    },
+    {
+      "file": "teleport-arrival.wav",
+      "sha256": "aa60c5b6d3d2cc1ac2726536c60a500cce7189e23a7a15284963951c6f27f47e",
+      "frames": 74400,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -22.94797615885947,
+      "dc": 1.2756675802251344e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "teleport-arrival-v2.wav",
+      "sha256": "e3107e71b428d1f2bda1133eb6253b50f7fdb89026db77a3555af32863e025d2",
+      "frames": 74400,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -23.335293547225227,
+      "dc": -1.4315369308635753e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "teleport-arrival-v3.wav",
+      "sha256": "f24f0d57cb20bf15804693ba9d9adc0cc888e9c11a2d92d55bb0502084749473",
+      "frames": 74400,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -22.88107936723387,
+      "dc": -4.4914983933971774e-08,
+      "clipped_samples": 0
+    },
+    {
+      "file": "bow-draw.wav",
+      "sha256": "44a5fc5ef46c496173d736077557b135faa6b21b52c76195194434729dfb949f",
+      "frames": 67200,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -22.799359322670906,
+      "dc": 1.1766524541945685e-06,
+      "clipped_samples": 0
+    },
+    {
+      "file": "bow-draw-v2.wav",
+      "sha256": "27f5870e8c1ba2f5a27a75f3a9282f9fa02ebeb7690416d7186e464e2df73672",
+      "frames": 67200,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -21.292013706818253,
+      "dc": 7.425035749162947e-08,
+      "clipped_samples": 0
+    },
+    {
+      "file": "bow-draw-v3.wav",
+      "sha256": "0ae5c1797e527d9d674bc2a65ebdcc9b4a7f60d75bcfd5decfba60f457c218e2",
+      "frames": 67200,
+      "peak_dbfs": -2.499835086148646,
+      "rms_dbfs": -21.5026849368553,
+      "dc": 3.4420830862862725e-06,
+      "clipped_samples": 0
+    }
+  ],
+  "audio_played": false
+}

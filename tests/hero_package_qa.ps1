@@ -18,7 +18,7 @@ foreach ($asset in Get-ChildItem -LiteralPath $sourceAssets -File -Recurse) {
     $verifiedAssets++
 }
 if (Get-ChildItem -LiteralPath $gameRoot -Recurse -File | Where-Object { $_.Extension -in @('.kra','.sif','.sifz','.blend','.csd','.mmp') }) { throw 'Native production sources were included in the player archive' }
-$smoke = Start-Process -FilePath $exe -ArgumentList '--startup-smoke','--windowed','--no-audio' -WindowStyle Hidden -PassThru -Wait
+$smoke = Start-Process -FilePath $exe -ArgumentList '--startup-smoke','--windowed','--no-audio','--background-test' -WindowStyle Hidden -PassThru -Wait
 if ($smoke.ExitCode -ne 0) { throw "Extracted player startup failed: $($smoke.ExitCode)" }
 $startup = Get-Content -LiteralPath (Join-Path $gameRoot 'startup-smoke.txt') -Raw
 foreach ($expected in @('Build edition: player','Frames: 180','Audio device opened: no','Developer mode: 0')) {
@@ -34,7 +34,9 @@ $report = [ordered]@{
     extracted = $gameRoot; verified_assets = $verifiedAssets
     exe_sha256 = (Get-FileHash -LiteralPath $exe -Algorithm SHA256).Hash.ToLowerInvariant()
     hero_atlas_sha256 = (Get-FileHash -LiteralPath (Join-Path $gameRoot 'assets\sprites\hero-paints.png')).Hash.ToLowerInvariant()
-    startup_frames = 180; native_renderer_checks = 424; audio_device_opened = $false; native_sources_in_player = $false
+    startup_frames = 180
+    native_renderer_checks = [int]([regex]::Match([IO.File]::ReadAllText((Join-Path $qaRoot 'packaged-render-tests.txt')), '(\d+)/(\d+) passed').Groups[1].Value)
+    audio_device_opened = $false; native_sources_in_player = $false
 }
 $report | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $qaRoot 'package-verification.json') -Encoding utf8
 $report | ConvertTo-Json -Depth 5

@@ -27,7 +27,7 @@ bool strongCut(V aim={}){
  if(!skillAllowed(Skill::StrongCut))return false;
  aimMelee(aim);
  animation.swordStow=0;
- mana-=StrongCutCost;strongCutCd=StrongCutCooldown;attackCd=.6f;meleeDuration=StrongCutDuration;swing=StrongCutDuration;swingStrong=true;sound(Cue::Swing,player);
+ mana-=StrongCutCost;strongCutCd=StrongCutCooldown;attackCd=.6f;meleeDuration=StrongCutDuration;swing=StrongCutDuration;swingStrong=true;sound(Cue::HeavySwing,player);
  // Capture damage before a kill can award a level during this same area cut.
  const float amount=strongCutDamage();const bool critical=rollCritical();
  for(auto& enemy:enemies)if(enemy.alive&&distance(player,enemy.pos)<=MeleeRange+.00001f)hit(enemy,amount,DamageType::Physical,critical);

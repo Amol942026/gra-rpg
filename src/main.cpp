@@ -4,6 +4,7 @@
 #include "render_targets.hpp"
 #include "native_world.hpp"
 #include "game.hpp"
+#include "story_context.hpp"
 #include "inventory_click.hpp"
 #include "intro_story.hpp"
 #include "tower_story.hpp"
@@ -31,6 +32,10 @@ constexpr int W=1440,H=900,WorldW=1050;
 const Color Ink{15,23,25,255},Panel{20,29,31,255},Card{27,38,40,255},Line{52,65,63,255},Gold{224,192,128,255},Text{239,241,230,255},Muted{175,195,188,255},Green{105,176,136,255},Blue{104,167,202,255};
 Typography typography;float renderScale=1;RenderTexture2D canvas{},terrain,worldCanvas{};Texture2D minimapTerrain{};std::array<RenderTexture2D,PropTypeCount> propArt;Game game;
 constexpr int TerrainWidth=MapSize*80+200,TerrainHeight=MapSize*40+300,TerrainOriginX=TerrainWidth/2;
+// Keep the enlarged maps within an 8192 texture limit and near the old cache
+// budget. Geometry, hit tests and UVs retain full world coordinates.
+constexpr float TerrainBakeScale=.75f;
+constexpr int TerrainCacheWidth=int(TerrainWidth*TerrainBakeScale),TerrainCacheHeight=int(TerrainHeight*TerrainBakeScale);
 AudioSystem audioSystem;
 IntroSequence intro;
 TowerSequence towerStory;
@@ -41,7 +46,7 @@ Vector2 mouse{};Slot dragging{};bool paused=false,help=false,welcome=true;int ne
 InventoryClicks inventoryClicks;
 bool weaponWheelOpen=false;
 void invalidatePausedWorld();
-bool statsOpen=false,spellBookOpen=false;Attributes statDraft{};int draftForLevel=-1;
+bool statsOpen=false,spellBookOpen=false,spellLessonOpen=false;std::string spellBookNotice;Attributes statDraft{};int draftForLevel=-1;
  bool skillsOpen=false;SkillRanks skillDraft{};int skillDraftLevel=-1;
  void openSkills();bool clickSkills();bool confirmSkills();void drawSkillsMenu();
 Color rgb(int r,int g,int b,int a=255){return{(unsigned char)r,(unsigned char)g,(unsigned char)b,(unsigned char)a};}
@@ -64,20 +69,33 @@ Color rarity(Rarity r){switch(r){case Rarity::Common:return WHITE;case Rarity::R
 Color rarity(Item value){return rarity(itemRarity(value));}
 Vector2 cameraPixels(){
  return {float(std::round((double(game.player.x)-game.player.y)*40*renderScale)),
-         float(std::round((double(game.player.x)+game.player.y)*20*renderScale))};
+         float(std::round(((double(game.player.x)+game.player.y)*20-terrain_height::pixels(game.location,game.player)*.35)*renderScale))};
+}
+bool flatGroundProjection=false;
+Vector2 screenFlat(V p){
+ Vector2 camera=cameraPixels();return {float((std::round(WorldW*.5*renderScale)+std::round((double(p.x)-p.y)*40*renderScale)-camera.x)/renderScale),
+ float((std::round(428.*renderScale)+std::round((double(p.x)+p.y)*20*renderScale)-camera.y)/renderScale)};
 }
 Vector2 screen(V p){
  // Quantize anchors in physical pixels before subtracting the camera. Static
  // geometry keeps exactly the same sampling phase as the camera moves.
  Vector2 camera=cameraPixels();
  return {float((std::round(WorldW*.5*renderScale)+std::round((double(p.x)-p.y)*40*renderScale)-camera.x)/renderScale),
-         float((std::round(428.*renderScale)+std::round((double(p.x)+p.y)*20*renderScale)-camera.y)/renderScale)};
+         float((std::round(428.*renderScale)+std::round(((double(p.x)+p.y)*20-(flatGroundProjection?0:terrain_height::pixels(game.location,p)))*renderScale)-camera.y)/renderScale)};
 }
 V toWorld(Vector2 p){
  Vector2 camera=cameraPixels();
  double x=(double(p.x)*renderScale-std::round(WorldW*.5*renderScale)+camera.x)/(40*renderScale),
         y=(double(p.y)*renderScale-std::round(428.*renderScale)+camera.y)/(20*renderScale);
- return {float((x+y)/2),float((y-x)/2)};
+ // A monotone ray/height-field intersection replaces the flat inverse. This
+ // keeps aiming, tile hover and item placement on the raised surface.
+ double low=y,high=y+terrain_height::MaxPixels/20+1;
+ if(!flatGroundProjection&&!game.inTower())for(int i=0;i<23;i++){
+  double middle=(low+high)*.5;V at{float((x+middle)/2),float((middle-x)/2)};
+  if(middle-terrain_height::pixels(game.location,at)/20<y)low=middle;else high=middle;
+ }
+ else high=low;
+ y=(low+high)*.5;return {float((x+y)/2),float((y-x)/2)};
 }
 Rectangle bagRect(int i){return{1080.f+(i%5)*65,366.f+(i/5)*44,57,40};}
 Rectangle equipRect(int i){return{1080.f+(i%3)*109,207.f+(i/3)*51,98,44};}
@@ -128,12 +146,17 @@ void finishDrag(){
  dragging={};
 }
 #include "equipment_art.hpp"
+#include "spell_art.hpp"
 void icon(Item i,float x,float y,float s=1,float alpha=1){
  auto C=[alpha](Color c){return Fade(c,alpha*c.a/255.f);};Color edge=C(rgb(12,19,22)),steel=C(rgb(172,195,192)),light=C(rgb(226,233,210)),wood=C(rgb(121,80,46)),gold=C(Gold),tint=C(rarity(i));
  auto R=[&](float a,float b,float w,float h,Color c){rect(x+a*s,y+b*s,w*s,h*s,c);};
  auto L=[&](float a,float b,float d,float e,Color c,float w){line(x+a*s,y+b*s,x+d*s,y+e*s,c,w*s);};
  auto P=[&](std::initializer_list<Vector2> vs,Color c){std::vector<Vector2> p;for(auto v:vs)p.push_back({x+v.x*s,y+v.y*s});for(size_t j=1;j+1<p.size();j++){Vector2 a=p[0],b=p[j],d=p[j+1];if((b.x-a.x)*(d.y-a.y)-(b.y-a.y)*(d.x-a.x)>0)std::swap(b,d);DrawTriangle(a,b,d,c);}};
  if(i.empty())return;
+ if(inventory_icons::draw(i,x,y,s,alpha)){
+  if(itemRarity(i)!=Rarity::Common)DrawCircleV({x+18*s,y-17*s},2.5f*s,tint);
+  return;
+ }
  auto gearLook=gearAppearance(i);
  if(gearLook.present()){
   wood=C(equipment_art::color(gearLook.paint.secondary));steel=C(equipment_art::color(gearLook.paint.primary));gold=C(equipment_art::color(gearLook.paint.trim));
@@ -217,6 +240,7 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
  if(itemRarity(i)!=Rarity::Common){DrawCircleV({x+18*s,y-17*s},2.5f*s,tint);}
 }
 #include "scenery_art.hpp"
+#include "terrain_surface.hpp"
 #include "desert_art.hpp"
 #include "volcano_art.hpp"
 #include "actor_art.hpp"
@@ -231,12 +255,14 @@ void monster(Enemy&e,float x,float y);
 namespace tree_wind {inline void init();}
 namespace world_shadows {inline void init();}
 void makeArt(){
+ inventory_icons::load();
+ spell_art::load();
  tree_wind::init();
  world_shadows::init();
  hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
  forest_bush_art::load();forest_tree_art::load();guardian_art::load();
  treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();
- terrain=render_targets::colorOnly(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
+ terrain=render_targets::colorOnly(TerrainCacheWidth,TerrainCacheHeight);BeginTextureMode(terrain);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,TerrainBakeScale});
  for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
   if(!land)continue; // The animated water is drawn underneath the land.
   detailedGroundTile(x,y,sx,sy);
@@ -252,8 +278,9 @@ void makeArt(){
   float a=i*PI/8,xx=cx+std::cos(a)*152,yy=cy+std::sin(a)*76;
   diamond(xx,yy,3,5,rgb(189,184,129));line(xx-5,yy-6,xx+5,yy+6,rgb(134,151,128),1.2f);
  }
- EndTextureMode();
+ EndMode2D();EndTextureMode();
  SetTextureFilter(terrain.texture,TEXTURE_FILTER_BILINEAR);
+ terrain_surface::prepare(WorldLocation::Forest,terrain.texture);
  // Roads never change during a run; baking their minimap avoids thousands of
  // path-distance calculations and tiny draw calls every frame on the larger map.
  Image mini=GenImageColor(180,112,BLANK);float mx=78.f/(MapSize-2),my=48.f/(MapSize-2);
@@ -320,17 +347,19 @@ void makeArt(){
 #include "ground_shadows.hpp"
 #include "tower_world.hpp"
 #include "map_labels.hpp"
+#include "enemy_ability_art.hpp"
 void drawWorld(){
  if(game.inTower()){drawTowerWorld();return;}
- clip(0,0,WorldW,H);ClearBackground(game.inVolcano()?rgb(43,33,48):game.inDesert()?rgb(163,121,74):rgb(22,44,47));if(game.inVolcano())volcano_art::backdrop();else if(game.inDesert())desert_art::drawCachedBackdrop();else drawWindWater();performance.end(RenderStage::Water,true);Vector2 o=screen({0,0});if(game.inDesert())BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
- DrawTextureRec(game.inVolcano()?volcano_art::terrain.texture:game.inDesert()?desert_art::terrain.texture:terrain.texture,{0,0,float(TerrainWidth),-float(TerrainHeight)},{o.x-TerrainOriginX,o.y-90},WHITE);
+ clip(0,0,WorldW,H);ClearBackground(game.inVolcano()?rgb(43,33,48):game.inDesert()?rgb(163,121,74):rgb(22,44,47));if(game.inVolcano())volcano_art::backdrop();else if(game.inDesert())desert_art::drawCachedBackdrop();else drawWindWater();performance.end(RenderStage::Water,true);if(game.inDesert())BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
+ terrain_surface::draw(game.inVolcano()?volcano_art::terrain.texture:game.inDesert()?desert_art::terrain.texture:terrain.texture);
  if(game.inDesert()){native_world::endBlendMode();desert_art::atmosphere();}
  if(game.inVolcano())volcano_art::flow();
  if(!game.inDesert()&&!game.inVolcano())for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
  world_shadows::draw();
- Vector2 pp=screen(game.player);DrawEllipseLines(int(pp.x),int(pp.y+2),25,12,Fade(Gold,.7f));
+ Vector2 pp=screen(game.player);terrain_surface::ring(game.player,.44f,Fade(Gold,.7f));
  drawHoveredTile();
  guardian_art::ground();if(game.inVolcano())volcano_art::groundAttacks();
+ enemy_ability_art::ground();
  for(const auto& plant:game.forage){
   if(plant.value.empty())continue;Vector2 p=screen(plant.pos);if(p.x<-40||p.x>WorldW+40||p.y<0||p.y>H)continue;
   if(hovered.kind==HoverKind::Forage&&hovered.index==plant.id){ellipseOutline(p.x,p.y,18,9,Gold);diamond(p.x,p.y,18,9,Fade(Gold,.17f));}
@@ -346,11 +375,13 @@ void drawWorld(){
   else if(obj.type==9)drawTreasureChest(game.chests[obj.index]);
   else if(obj.type==12)fountain_art::draw(obj.index);
   else if(obj.type==14)volcano_art::bolt(game.cinders[obj.index]);
+  else if(obj.type==15)enemy_ability_art::glob(game.venomGlobs[obj.index]);
   else if(obj.type==10)guardian_art::projectile(game.boulders[obj.index]);
   else if(obj.type==11)guardian_art::fragment(game.boulderImpacts[obj.index/guardian_break::Pieces],obj.index%guardian_break::Pieces);
   else if(!game.dead()||int(game.time*5)%2==0){sand_prison::drawMound(pp,false);hero(pp.x,pp.y,1);sand_prison::drawMound(pp,true);}
  }
  if(game.inDesert())desert_art::drawCachedFoothills();
+ enemy_ability_art::breath();
  for(const auto& flash:game.pierceFlashes){Vector2 p=screen(flash.pos);float age=1-flash.life/.26f;ellipseOutline(p.x,p.y-35,8+age*22,5+age*12,Fade(rgb(137,226,245),1-age));}
  for(const auto& blast:game.explosions)drawExplosion(blast);
  drawHealingAura();
@@ -409,16 +440,16 @@ void drawUI(){
  minimap();
  txt("DZIENNIK WYPRAWY",29,680,10,Gold);line(29,701,242,701,Fade(Gold,.3f));
  diamond(36,727,6,6,game.dawnFragments()?Green:Gold);txt("Serce Świtu",53,714,20,Text,true);
- txt(game.inTower()?"Schody i wyposażenie · E / PPM":game.inVolcano()?(game.dawnFragments()>=3?"Trzy części bezpieczne. Wróć do maga.":game.volcanoBossDead?"Zbierz fragment z ciała Varkhora.":"Varkhor: północny wschód kaldery."):game.inDesert()?(game.dawnFragments()>=2?"Dwie części bezpieczne. Wróć do maga.":game.desertBossDead?"Zbierz fragment z ciała Żywej Wydmy.":"Żywa Wydma: południowy wschód."):game.bossDead?"Zbierz część Serca Świtu z ciała.":"Odnajdź Strażnika na północy.",29,748,13,Muted);
- txt(TextFormat("Odzyskane części: %d / 5",game.dawnFragments()),29,771,12,game.dawnFragments()?Green:Muted);
+ txt(dawnQuestHint(game),29,748,13,Muted);
+ txt(TextFormat("Odzyskane części: %d / 5",game.recoveredDawnFragments()),29,771,12,game.recoveredDawnFragments()?Green:Muted);
  if(game.messageTime>0&&!weaponWheelOpen){float tw=textWidth(game.message,13);float width=std::min(760.f,tw+32);rect(WorldW/2.f-width/2,744,width,29,Fade(Panel,.94f));center(game.message,WorldW/2.f,750,13,Text);}
  for(int i=0;i<5;i++){
   Rectangle r=actionRect(i);panel(r,i>0&&inside(r)?rgb(40,52,50):Panel);
   if(i==0)icon(game.equipment[0],r.x+33,r.y+26,.8f);
-  if(i==1)fireIcon(r.x+33,r.y+26,.7f,game.time*3);
+  if(i==1)spell_art::icon(game.knowsSpell(game.selectedSpell)?game.selectedSpell:Spell::None,r.x+33,r.y+26,.7f);
   if(i==2||i==3)icon(item(i==2?Kind::Health:Kind::Mana),r.x+33,r.y+26,.7f);
   if(i==4){DrawRing({r.x+33,r.y+25},11,14,40,320,24,Gold);poly({{r.x+42,r.y+10},{r.x+52,r.y+12},{r.x+45,r.y+21}},Gold);}
-  float cd=i==0?game.attackCd/.46f:i==1?game.spellCd/FireballCooldown:i==4?game.rollCd/RollCooldown:game.potionCd/.65f;
+  float cd=i==0?game.attackCd/.46f:i==1?game.spellCd/game.spellCooldownTotal:i==4?game.rollCd/RollCooldown:game.potionCd/.65f;
   if(cd>0)rect(r.x+1,r.y+1,r.width-2,(r.height-2)*std::clamp(cd,0.f,1.f),Fade(Ink,.65f));
   const char* keys[]={"LPM","C","1","2","SPACJA"};center(keys[i],r.x+32,r.y+48,9,Gold);
  }
@@ -828,7 +859,7 @@ int main(int argc,char**argv) {
             bool fullscreen=fullScreen();input(dt);
             if(fullscreen!=fullScreen())refreshDisplayLayout();
         }
-        audioSystem.update(dt,game,developerMenuOpen||towerPanelOpen||towerStory.active()||intro.active()||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||game.allocationRequired,smoke||benchmark||IsWindowFocused());
+        audioSystem.update(dt,game,developerMenuOpen||towerPanelOpen||towerStory.active()||intro.active()||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||game.allocationRequired,smoke||benchmark||IsWindowFocused(),(intro.active()||towerStory.active())&&!paused&&!help&&!welcome);
         performance.end(RenderStage::Update);
         renderScene();
         if(frame==0)startupLog.write("First scene rendered");
@@ -886,9 +917,9 @@ int main(int argc,char**argv) {
     performance.save();
     startupLog.write("Shutting down");game_cursor::shutdown();audioSystem.shutdown();
     sync_present::shutdown();
-    world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
+    spell_art::unload();inventory_icons::unload();world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
     hero_portrait::unload();volcano_actors::unload();volcano_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
-    unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
+    terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 Game sandArena(){
  Game g;g.activateField(WorldLocation::Desert);g.props.clear();g.enemies.clear();g.forage.clear();g.player=DesertBossHome+V{4,0};
+ g.learnedSpells=spellBit(Spell::Fireball);g.selectedSpell=Spell::Fireball;
  g.attributes[int(Attribute::Vitality)]=1000;g.hp=float(g.maxHp());
  g.enemies.push_back({DesertBossId,DesertBossType,DesertBossHome,DesertBossHome,560,560});g.enemies[0].attack=1000;
  g.skillRanks={1,1,1};return g;

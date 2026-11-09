@@ -1,5 +1,40 @@
 # Zależności i zasoby
 
+- Atlas zaklęć `assets/sprites/spells.png` to własne ilustracje 2D Emberfall
+  z warstwowej Krity, animowane w Synfig 1.4.5. Nowe efekty żywiołów i łuku
+  zmontowano lokalnie w Csound i Audacity: nagrania łuków Bena Jaszczaka
+  i Briana Nelsona / StillNorthMedia (CC0), „Torch Fire Spell” spookymodem
+  (CC BY 3.0) oraz „Ice & Electricity Magic” Iwana „qubodup” Gabovitcha
+  (CC BY 3.0). Pełna atrybucja, źródła, licencje i opis modyfikacji:
+  `assets/licenses/audio-elements-credits.txt`.
+  Dokumentacja: `art/gameplay/eldrin-spells-20261109/`. Mastery poza paczką.
+
+- Pozostałe ikony przedmiotów `assets/sprites/loot-icons.png` są własnymi
+  warstwowymi ilustracjami 2D Emberfall z Krity, wykończonymi lokalnie
+  w ComfyUI / DreamShaper 8 (Lykon, warunki autora wymienione niżej).
+  Źródła i workflow: `art/items/loot-20261109/`. Trzy warianty przeturlania
+  wykorzystują nagrania CC0 Kenney (tkanina, skóra i kontakt z podłożem),
+  zmontowane lokalnie w Csound/Audacity. Licencje: `assets/licenses/audio-foley-CC0.txt`.
+  Można rozprowadzać z grą. Mastery i wagi pozostają poza paczką gracza.
+
+- Muzyka `assets/audio/` pochodzi z oryginalnych kompozycji LMMS Emberfall.
+  Aktualny zestaw zawiera 50 efektów w trzech wariantach i obróbkę Audacity.
+  28 efektów walki wykorzystuje nagrania **CC0 1.0**: Kenney (Impact Sounds,
+  RPG Audio), artisticdude (Swishes Sound Pack), Darsycho (Monster snarls),
+  przycięte, filtrowane i łączone w Csound. Pełne źródła, autorzy i licencja:
+  `assets/licenses/audio-foley-CC0.txt`, `art/audio/physical-20261108/README.md`.
+  Wcześniejsze pozostałe efekty są oryginalną syntezą projektu; nowe nagrania
+  żywiołów i łuków wymieniono wyżej. Wszystko można rozprowadzać
+  z grą. Nie użyto płatnych usług; narzędzi produkcyjnych nie dołączamy.
+
+- Atlas ikon wyposażenia `assets/sprites/equipment-icons.png` pochodzi z
+  nowych źródeł przygotowanych dla Emberfall w Blenderze 5.2.2 LTS,
+  z materiałami wykończonymi lokalnie w ComfyUI / DreamShaper 8 (Lykon,
+  uprawnienia autora i odnośniki wymienione niżej). Zachowano źródła,
+  workflow i pochodzenie w `art/equipment/icons-20261108/`.
+  Można go rozpowszechniać z grą; nie zawiera zewnętrznych modeli 3D ani
+  cudzych zdjęć. Modele źródłowe i wagi nie są częścią paczki gracza.
+
 - **raylib 5.5**, Ramon Santamaria i współtwórcy, licencja zlib: https://github.com/raysan5/raylib/blob/5.5/LICENSE . Pełna licencja jest dołączona w `assets/licenses/raylib-LICENSE.txt`.
 - **Manrope**, Mikhail Sharanda i współtwórcy, SIL Open Font License 1.1. Pełna licencja: `assets/Manrope-LICENSE.txt`. Źródło: https://github.com/google/fonts/tree/main/ofl/manrope .
 - **Lato**, Łukasz Dziedzic, SIL Open Font License 1.1. Pełna licencja: `assets/Lato-LICENSE.txt`. Źródło: https://github.com/google/fonts/tree/main/ofl/lato .
@@ -7,6 +42,10 @@
   `assets/Cinzel-Bold.ttf` to lokalnie utrwalona odmiana o wadze 700 z dołączonego fontu zmiennego, na tej samej licencji OFL. Proces i hashe: `art/typography/provenance.json`.
 - **w64devkit 2.0.0 / MinGW-w64** — narzędzia kompilacji, osobne licencje w folderze `tools/w64devkit`. Licencje runtime dystrybuowanego z plikiem EXE znajdują się w `assets/licenses/`.
 - Grafiki i kod gry Emberfall powstały dla tego projektu. Nie zawierają grafik z Tibii.
+- Materiał ciągłej ścieżki Kaldery `assets/volcano/road.png` został narysowany
+  lokalnie na czterech warstwach Krity dla Emberfall, bez zewnętrznych grafik,
+  modeli i płatnych usług. Można go rozpowszechniać z grą. Natywny master,
+  pochodzenie i odbiór: `art/terrain/diversity-20261108/`.
 - Otoczenie Kaldery w `assets/volcano/` oraz bazowe części przeciwników są
   oryginalnymi ilustracjami 2D wykonanymi w Kricie dla Emberfall. Animacje
   pochodzą z lokalnego Synfiga. Otoczenie nie używa zewnętrznych obrazów,
@@ -53,7 +92,6 @@
   Edytowalne źródła i pochodzenie są w `art/scenery/forest-desert-comfy/`.
 - Leśny krzew `assets/sprites/forest-bush.png` został narysowany w Kricie dla Emberfall, bez zasobów zewnętrznych. Warstwowy master i pochodzenie: `art/scenery/README.md`.
 - Świerk, brzoza i dąb w `assets/sprites/forest-{spruce,birch,oak}.png` to oryginalne warstwowe ilustracje narysowane natywnymi narzędziami Krity dla Emberfall. Bez zewnętrznych grafik, modeli i płatnych usług. Źródła i pochodzenie: `art/scenery/trees/`, `art/scenery/README.md`.
-- Muzyka „Echoes of the Ruins” i 21 efektów w `assets/audio/` powstały dla tego projektu metodą syntezy, bez zewnętrznych nagrań i sampli. Można je rozpowszechniać z grą. Opis: `assets/audio/README.md`.
 
 - Dwie pustynne fontanny w `assets/sprites/fountain-*.png` to oryginalne grafiki Emberfall narysowane na warstwach w Kricie. Wodę i opróżnianie animowano w lokalnym Synfigu. Bez zewnętrznych grafik, modeli, sampli i płatnych usług; można rozpowszechniać z grą. Natywne źródła i pochodzenie: `art/gameplay/fountains/`.
 

@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "player": {
+    "status": "PASS",
+    "package_sha256": "0250ac82218e8cda8bc7352c7f2add9b9faad060f9bf143a00643548dca65470",
+    "exe_sha256": "420107421d97c192709dc4ef0fbb4a8151f6125a0f2ca4f97ef20f8cb49cef7d",
+    "extracted": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\qa-volcano-package-20261108-012559\\Emberfall",
+    "verified_assets": 147,
+    "startup_frames": 180,
+    "volcano": {
+      "status": "PASS",
+      "checks": 1063,
+      "failures": 0,
+      "species": 7,
+      "directions": 8,
+      "pose_views": 224,
+      "hidden": true,
+      "audio_opened": false,
+      "presentation_measured": false,
+      "completed_render_mean_ms": 3.94553,
+      "completed_render_p95_ms": 4.5907
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  "packaged_chest_checks": 115,
+  "developer_runs": [
+    {
+      "hidden": true,
+      "audio_opened": false,
+      "frames": 180,
+      "destination": "volcano"
+    },
+    {
+      "hidden": true,
+      "audio_opened": false,
+      "frames": 180,
+      "destination": "volcano-forges"
+    },
+    {
+      "hidden": true,
+      "audio_opened": false,
+      "frames": 180,
+      "destination": "volcano-boss"
+    }
+  ],
+  "existing_audio_preferences_unchanged": true,
+  "staged_dev_exe_sha256": "f84c8f2248a25fc4467aff1f7ff55c6f1f36f206a27045a203482af6eb8d4bba",
+  "archives": [
+    {
+      "edition": "player",
+      "archive": "Emberfall-Windows-x64.zip",
+      "sha256": "0250ac82218e8cda8bc7352c7f2add9b9faad060f9bf143a00643548dca65470",
+      "exe_sha256": "420107421d97c192709dc4ef0fbb4a8151f6125a0f2ca4f97ef20f8cb49cef7d",
+      "assets_verified": 147,
+      "native_sources_in_archive": false
+    },
+    {
+      "edition": "developer",
+      "archive": "Emberfall-DEV-Windows-x64.zip",
+      "sha256": "2de0772445aadf115420162f915c3607647bcfea52cd3c43b2014b4df0412b8e",
+      "exe_sha256": "f84c8f2248a25fc4467aff1f7ff55c6f1f36f206a27045a203482af6eb8d4bba",
+      "assets_verified": 147,
+      "native_sources_in_archive": false
+    }
+  ],
+  "independent_asset_checks": 31
+}

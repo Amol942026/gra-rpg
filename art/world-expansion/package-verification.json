@@ -1,0 +1,57 @@
+[
+  {
+    "status": "PASS",
+    "edition": "player",
+    "package_sha256": "f00599c47d81e42eb6d06f920c06d6a7a8fa93263f6e70eeb5e70f49c01186df",
+    "exe_sha256": "3e41bc0eba34304e4b8f2ed7807ad85859325156c640bca0b19157c059d5e5aa",
+    "verified_assets": 228,
+    "startup": [
+      {
+        "scenario": "main-menu",
+        "frames": 180
+      }
+    ],
+    "world_expansion": {
+      "status": "PASS",
+      "checks": 184,
+      "failures": 0,
+      "realms": 3,
+      "map_side": 102,
+      "area_multiplier": 2.00694,
+      "captured_frames": 21,
+      "terrain_cache_width": 6270,
+      "terrain_cache_height": 3285,
+      "hidden": true,
+      "audio_opened": false,
+      "presentation_measured": false,
+      "completed_update_render_mean_ms": 8.84847,
+      "completed_update_render_p95_ms": 10.6162
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  {
+    "status": "PASS",
+    "edition": "developer",
+    "package_sha256": "4779326b23214763a6406a70a4fc832e8daa50948999c60af27adf9974c174b1",
+    "exe_sha256": "e3342d480dacf01d76406274af51b9477f2a94a35da1b97302e594a287266dc9",
+    "verified_assets": 228,
+    "startup": [
+      {
+        "scenario": "forest",
+        "frames": 180
+      },
+      {
+        "scenario": "desert",
+        "frames": 180
+      },
+      {
+        "scenario": "volcano",
+        "frames": 180
+      }
+    ],
+    "world_expansion": null,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  }
+]

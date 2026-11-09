@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "date": "2026-11-08",
+  "sfx_cues": 33,
+  "sfx_variants": 99,
+  "music_tracks": 4,
+  "native_aup3_projects": 5,
+  "gameplay_and_animation_checks": 200189,
+  "persistence_checks": 5162,
+  "offline_audio_integration": {
+    "status": "PASS",
+    "checks": 353,
+    "failures": 0,
+    "effects": 33,
+    "variants": 99,
+    "music_tracks": 4,
+    "real_raylib_decode": true,
+    "transport": "offline in-memory sink",
+    "window_created": false,
+    "audio_device_opened": false,
+    "audio_played": false
+  },
+  "native_options_checks": 8,
+  "native_options_failures": 0,
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "60bd78e024ac189628274b7b1f61b7362ddc83fe463ad52ff501ddd7a326c06a",
+      "exe_sha256": "74159a726cfccb64da1dfa2ea844716a657cf67229c12e79993a552d05ad3e7f",
+      "verified_assets": 228,
+      "startup": [
+        {
+          "frames": 180,
+          "scenario": "main-menu"
+        }
+      ],
+      "audio_suite": {
+        "status": "PASS",
+        "checks": 353,
+        "failures": 0,
+        "effects": 33,
+        "variants": 99,
+        "music_tracks": 4,
+        "real_raylib_decode": true,
+        "transport": "offline in-memory sink",
+        "window_created": false,
+        "audio_device_opened": false,
+        "audio_played": false
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "701507d64eb95a38ec19974f50bfa33ab824181690b841a21f0730d5b5160b8a",
+      "exe_sha256": "ac9491bfbf2f6c6de34b93a0cfbc64f2f4d3231c53dc52bc0ce3221ffab66333",
+      "verified_assets": 228,
+      "startup": [
+        {
+          "frames": 180,
+          "scenario": "forest"
+        },
+        {
+          "frames": 180,
+          "scenario": "desert"
+        },
+        {
+          "frames": 180,
+          "scenario": "volcano"
+        }
+      ],
+      "audio_suite": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    }
+  ],
+  "audio_preferences_unchanged": true,
+  "audio_preferences_sha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6",
+  "user_saved_music_muted": true,
+  "user_saved_effects_muted": true,
+  "audio_played": false,
+  "listening_review_performed": false,
+  "source_sha256": {
+    "src/audio.hpp": "2fe9a42f76fa598a55e651b536d0c42fbd1c42772bb53d1362693592a4d3b85e",
+    "src/music_blend.hpp": "d93ef18a0ae14d4f09b256787bde870df7e1161939cd042cf6858ea798d2c0a4",
+    "src/sound_events.hpp": "6caaf8b93e6fcf434e642ad95deb38efadbe129e1459aeaf7542e651960e7355",
+    "src/game.hpp": "96c650d5a0a4fa46181b7b56dcfe4c77a7b2e5ac849bdf4277d211bcd1d00319",
+    "src/enemy_ability_system.hpp": "94e8fd5bc6a057e618a13c00fa3d81cfd5b7835e283f3465be069407b4099b55",
+    "src/guardian_boulder.hpp": "ab413f060927387878c08e0c14514cd7d8e03b4b156c7e2d0d6b8b778725daa2",
+    "src/boar_charge.hpp": "7bcb7734848a26e906f10169a2dc7b9fbf91bec3da3bcf647767dd9fb1755935",
+    "src/volcano_system.hpp": "bd5d4ca6d64ff1145f964a976d239cb6a1d2fa45898704ae342204f9822f2fbc",
+    "tests/audio_events_tests.hpp": "a74c3d9ea3c42ed0c5ce14199bb3b324210dcb9d16fb64d4af4819a463f8d755",
+    "tests/audio_suite_qa.cpp": "07856dea503a6b150e77b7c9043295d369bf59c927b3fbafd7d8929438a80893",
+    "tests/audio_suite_qa.ps1": "d5d8abcd5a86fcb109f2fdd7a2a8f20465cf063124257871e10a6b43abf77029",
+    "tests/audio_suite_package_qa.ps1": "fefdaff54bd28891e493d8fc2ad491cc3e6cd25e4b94562aca2608cf01f09c04",
+    "tools/media/emberfall_audio_suite.py": "b72e65935f676b4d27e9f4dc654f3b5c1ffb91e8cb2dafed36acd44f5e8da5c4",
+    "tools/media/audio_tools.py": "2d024e278950d0c3c8df2c44081e9d36410b860c4cf18f0e1ae285d4149f5d01",
+    "tools/media/game_import.py": "cbb6f4af37158234477221384875e76c91276964d632f2eb4559c6839e5a05e9"
+  }
+}

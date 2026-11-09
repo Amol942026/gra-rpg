@@ -1,0 +1,21 @@
+{
+  "name": "caldera-abyss-cliff",
+  "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-cliff.kra",
+  "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-cliff.png",
+  "layers": [
+    "Depth and reflected ash light",
+    "Broken basalt columns",
+    "Strata, pores and fissures"
+  ],
+  "size": [
+    1024,
+    768
+  ],
+  "runtime_size": [
+    1024,
+    768
+  ],
+  "kra_sha256": "70131179b81ff58cad544351a80dec6b1cdcd8e5a541bb5550771790d27fa3ae",
+  "png_sha256": "a865e3b6131f0e9e991a1da1772f8b4d68c6da9e4fa7b1eae44cac29cb97cb0f",
+  "retained": true
+}

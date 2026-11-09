@@ -1,0 +1,21 @@
+{
+  "id": "EF_VolcanoTalkDialogue",
+  "title": "Eldrin — droga do Kaldery Popiołu",
+  "array": "VolcanoTalkDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "926faabfc409a6d67ca3d226cba90f82869959f4d2695b5e8bc601d48bbcf962",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Droga do Kaldery Popiołu jest otwarta. Varkhor, Serce Kaldery, strzeże tam trzeciej części artefaktu."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Jak dotrzeć do niego, nie kończąc w rzece lawy?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Trzymaj się bazaltowych mostów. Szukaj Varkhora na północnym wschodzie i schodź z miejsc, gdzie ziemia zapowiada erupcję. Brama przy miejscu przybycia pozwoli ci wrócić."
+    }
+  ]
+}

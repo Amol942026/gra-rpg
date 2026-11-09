@@ -1,0 +1,175 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "event": "bow-draw-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-draw-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\bow-draw-v2.wav",
+      "sha256": "3ece40ee2b0c1e74ce05c92d0002a2af261b1d5046315e6a54e1229f5460abb3",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_004958_c6d33a33\\bow-draw-v2.wav",
+      "before_sha256": "27f5870e8c1ba2f5a27a75f3a9282f9fa02ebeb7690416d7186e464e2df73672"
+    },
+    {
+      "event": "bow-draw-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-draw-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\bow-draw-v3.wav",
+      "sha256": "1ed111258d626b9fc7f91ec2583c9d2d22d8e8692a1d70b00eb1944bf5dd6403",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_004958_c6d33a33\\bow-draw-v3.wav",
+      "before_sha256": "0ae5c1797e527d9d674bc2a65ebdcc9b4a7f60d75bcfd5decfba60f457c218e2"
+    },
+    {
+      "event": "bow-draw",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-draw.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\bow-draw.wav",
+      "sha256": "7f6f7ff5aa4228d981d67c00d515429cfdd29ca0b0931647242b20c79bb02cc3",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_004958_c6d33a33\\bow-draw.wav",
+      "before_sha256": "44a5fc5ef46c496173d736077557b135faa6b21b52c76195194434729dfb949f"
+    },
+    {
+      "event": "fireball-cast-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-cast-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\fireball-cast-v2.wav",
+      "sha256": "a777c806f76f42764a68e43e11d2cfa00cfd712e11f509a7854595a795cd37ac",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_004958_c6d33a33\\fireball-cast-v2.wav",
+      "before_sha256": "6db781beba48f92d088e5adff92a1a37b12f6918dfc7c424aaeffffd818e6771"
+    },
+    {
+      "event": "fireball-cast-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-cast-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\fireball-cast-v3.wav",
+      "sha256": "c236961054a361d0b0a287f8f9056b5d39c3d61b4afbd1dcfcc376af2155d1cb",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_004958_c6d33a33\\fireball-cast-v3.wav",
+      "before_sha256": "32187fcfb14a1b063ed364f8cbdd1d864a0eb48254c46fb07005d16dd82a59d7"
+    },
+    {
+      "event": "fireball-cast",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fireball-cast.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\fireball-cast.wav",
+      "sha256": "4daa3d4bd7903105ff5b1658afd0951163abef5cc7d479ff5821cebb24977dd0",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_004958_c6d33a33\\fireball-cast.wav",
+      "before_sha256": "9258d8ba592727915695e8311478d3d4b8a20b395b185624e5f7e23689b3c9de"
+    },
+    {
+      "event": "ice-cast-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\ice-cast-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\ice-cast-v2.wav",
+      "sha256": "56e4e30e5b782131c4c753c6c2e5711f05d26ab77752ff674becc52eade28cb1",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "ice-cast-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\ice-cast-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\ice-cast-v3.wav",
+      "sha256": "54f1d3cc4f5ca35a9abc66c1de7784b59f8e761652a5d4eb67a6da9bfb03a1a9",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "ice-cast",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\ice-cast.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\ice-cast.wav",
+      "sha256": "324221b169efc92c242295bf4df5f04f7ec53989fbd443ababbcf4f4cced7e83",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "ice-impact-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\ice-impact-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\ice-impact-v2.wav",
+      "sha256": "2ff3157961c9524cf64d6de16a52017470dc96e34d00593f072b0f8ee358662f",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "ice-impact-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\ice-impact-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\ice-impact-v3.wav",
+      "sha256": "aa57447c8ab0e4e415ff12d9784c19e9bf4b2c68fec7b012bbf15c91e5fdcb1b",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "ice-impact",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\ice-impact.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\ice-impact.wav",
+      "sha256": "e983cee6a8a92ca2cff59248996638d59db7f2e3679c38d66630717b5939678e",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "lightning-cast-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\lightning-cast-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\lightning-cast-v2.wav",
+      "sha256": "aa5c7a405cc5f0d58e75cf1c722b1dd52d2cb4c89d2403b3fb1276f85720db23",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "lightning-cast-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\lightning-cast-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\lightning-cast-v3.wav",
+      "sha256": "12bfde50b6642fed4fc85619f72ce62b95cdfc2f1945775897f1c563edc2711e",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "lightning-cast",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\lightning-cast.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\lightning-cast.wav",
+      "sha256": "54f5fb6df61853435667557047f69b8a9b3f2c5fcbc8389a2504bccad400fc65",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "lightning-impact-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\lightning-impact-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\lightning-impact-v2.wav",
+      "sha256": "1bb66ba904f03760bb08451d9f0e6167b3d934fd1bf028482e19feb4f88629ff",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "lightning-impact-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\lightning-impact-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\lightning-impact-v3.wav",
+      "sha256": "188c8161564ee76925c9abad5dfb9a838fbb7c918ec61ec0d4712bafd9035212",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "lightning-impact",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\lightning-impact.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\lightning-impact.wav",
+      "sha256": "cbb2a4203c6b9016cf71ef6a98c80cd69034fb1ad5348ebdf506322945a924ea",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "spell-learn-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\spell-learn-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\spell-learn-v2.wav",
+      "sha256": "73ef981da6d91dc29fcbbd0ba8693565c7264db9c07e0e53656a2d4fd3cec3aa",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "spell-learn-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\spell-learn-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\spell-learn-v3.wav",
+      "sha256": "7005f43006bc71f05afea06850d4346acc9516c86bb1199697fd9eea6cbd6d59",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "spell-learn",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\spell-learn.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-spells-20261109\\delivery\\spell-learn.wav",
+      "sha256": "32c0faf64b51755dbd03e0cf40e4f01f23ccd644bce1fa4c4f9c13236e6891c3",
+      "backup": null,
+      "before_sha256": null
+    }
+  ],
+  "receipt": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_004958_c6d33a33\\binding-receipt.json",
+  "asset_root": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets"
+}

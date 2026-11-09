@@ -1,0 +1,52 @@
+[
+  {
+    "status": "PASS",
+    "edition": "player",
+    "package_sha256": "dc284be10039fbd9877f1876e60902b0e2de329ba458a3bfba186e682b31f66e",
+    "exe_sha256": "d5ee76b2e55ce8de9aba1ed6b62827ee5acd622e07b97d835155bac71c52ed47",
+    "verified_assets": 147,
+    "startup": [
+      {
+        "frames": 180,
+        "scenario": "main-menu"
+      }
+    ],
+    "dialogue": {
+      "status": "PASS",
+      "checks": 157,
+      "failures": 0,
+      "conversations": 12,
+      "rendered_lines": 57,
+      "hidden": true,
+      "audio_opened": false,
+      "source": "current-game",
+      "native_articy_modified": false
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  {
+    "status": "PASS",
+    "edition": "developer",
+    "package_sha256": "ff3cf9a51935cf8eb633296d4812f9d5091a6bb1a22fbfe9e0833233887fe98d",
+    "exe_sha256": "66137bb310b6bcfe60ad107e463b3a0bd8f5928acf3224521a2c441baea8f4da",
+    "verified_assets": 147,
+    "startup": [
+      {
+        "frames": 180,
+        "scenario": "forest"
+      },
+      {
+        "frames": 180,
+        "scenario": "desert"
+      },
+      {
+        "frames": 180,
+        "scenario": "volcano"
+      }
+    ],
+    "dialogue": null,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  }
+]

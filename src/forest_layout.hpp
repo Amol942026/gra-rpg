@@ -14,6 +14,8 @@ inline ForestZone forestZone(V p){
 }
 inline const char* forestRegion(V p){
     if(distance(p,ForestArrival)<4.2f)return "Przesieka Wędrowca";
+    if(p.x>=72)return p.y<30?"Wschodnie Ruiny":p.y<72?"Głęboka Knieja":"Korzenne Wzgórza";
+    if(p.y>=72)return p.x<35?"Południowy Zagajnik":"Korzenne Rozdroża";
     switch(forestZone(p)){
         case ForestZone::Wolves:return "Wilcza knieja";
         case ForestZone::Birches:return "Brzozowa polana";
@@ -25,20 +27,27 @@ inline const char* forestRegion(V p){
     }
 }
 struct ForestTrail {V a,b;};
-inline constexpr std::array<ForestTrail,17> ForestTrails={{
-    {ForestArrival,{14,61}},
+inline constexpr std::array<ForestTrail,35> ForestTrails={{
+    {ForestArrival,{10,92}},
     {{8,19},{21,6}},{{21,6},{44,8}},{{44,8},{63,8}},
     {{8,19},{35,19}},{{35,19},{55,21}},{{55,21},{66,25}},
     {{8,19},{12,35}},{{12,35},{14,43}},{{14,43},{14,61}},
     {{35,19},{35,42}},{{35,42},{39,62}},{{14,43},{35,42}},
-    {{35,42},{59,57}},{{55,21},{59,40}},{{59,40},{59,57}},{{14,61},{39,62}}
+    {{35,42},{59,57}},{{55,21},{59,40}},{{59,40},{59,57}},{{14,61},{39,62}},
+    {{10,92},{18,82}},{{18,82},{14,61}},{{18,82},{39,84}},{{39,84},{59,84}},
+    {{59,84},{80,84}},{{80,84},{94,92}},{{39,62},{39,84}},{{59,57},{80,55}},
+    {{80,55},{94,55}},{{94,55},{94,32}},{{94,32},{83,14}},{{63,8},{83,14}},
+    {{83,14},{79,34}},{{79,34},{80,55}},{{80,55},{80,84}},{{59,84},{66,64}},
+    {{94,55},{94,76}},{{94,76},{94,92}}
 }};
 struct ForestGlade {V center;float radius;const char* name;};
-inline constexpr std::array<ForestGlade,7> ForestGlades={{
+inline constexpr std::array<ForestGlade,12> ForestGlades={{
     {ForestArrival,3.6f,"Przesieka Wędrowca"},
     {{8,19},3.6f,"Stara przesieka"},{{21,5},3.4f,"Ruiny Mchu"},
     {{14,43},4.4f,"Brzozowa polana"},{{14,61},5.f,"Zaciszny zagajnik"},
-    {{59,57},4.8f,"Zapomniany krąg"},{{39,62},3.5f,"Stary trakt"}
+    {{59,57},4.8f,"Zapomniany krąg"},{{39,62},3.5f,"Stary trakt"},
+    {{18,82},4.2f,"Południowy Zagajnik"},{{39,84},4.f,"Korzenne Rozdroża"},
+    {{83,14},4.f,"Wschodnie Ruiny"},{{80,55},4.5f,"Głęboka Knieja"},{{94,92},4.f,"Korzenne Wzgórza"}
 }};
 inline bool forestClearing(V p){for(const auto& glade:ForestGlades)if(distance(p,glade.center)<glade.radius)return true;return false;}
 inline bool forestPath(V p){
@@ -54,7 +63,7 @@ inline bool forestPath(V p){
 struct ForestSpawn {int type;V pos;};
 inline constexpr float EnemyHomeSpacing=8.f;
 inline constexpr V ForestGuardian{21,5};
-inline constexpr std::array<ForestSpawn,45> ForestSpawns={{
+inline constexpr std::array<ForestSpawn,90> ForestSpawns={{
     {0,{19.5f,15.5f}},{0,{7.5f,5.5f}},{0,{27.5f,19}},{0,{19.5f,27}},
     {0,{7.5f,32.5f}},{0,{19.5f,35}},{0,{6,43}},{0,{19.5f,44}},
     {1,{61.5f,5}},{1,{67.5f,10.5f}},{1,{54.5f,12.5f}},{1,{63.5f,17.5f}},
@@ -66,5 +75,14 @@ inline constexpr std::array<ForestSpawn,45> ForestSpawns={{
     {5,{44.5f,34}},{5,{29.5f,37}},{5,{49,43.5f}},{5,{37.5f,44}},
     {5,{45.5f,56}},{5,{36.5f,57}},
     {6,{65,66}},{6,{57,66.5f}},{6,{32,67.5f}},{6,{20.5f,67.5f}},{6,{46,68}},
-    {7,{61,47.5f}},{7,{53.5f,50.5f}},{7,{68,54.5f}}
+    {7,{61,47.5f}},{7,{53.5f,50.5f}},{7,{68,54.5f}},
+    {0,{78,8}},{2,{78,18}},{2,{78,28}},{7,{78,38}},{7,{78,48}},
+    {7,{78,58}},{5,{78,68}},{1,{78,78}},{6,{78,88}},{0,{78,97}},
+    {2,{88,8}},{2,{88,18}},{2,{88,28}},{7,{88,38}},{1,{88,48}},
+    {7,{88,58}},{5,{88,68}},{5,{88,78}},{0,{88,88}},{6,{88,97}},
+    {2,{97,18}},{1,{97,28}},{7,{97,38}},{7,{97,58}},{5,{97,68}},
+    {5,{97,78}},{6,{97,88}},{0,{8,78}},{1,{18,78}},{4,{28,78}},
+    {5,{38,78}},{5,{48,78}},{5,{58,78}},{5,{68,78}},{4,{8,88}},
+    {1,{18,88}},{0,{28,88}},{6,{38,88}},{6,{48,88}},{6,{58,88}},
+    {6,{68,88}},{4,{18,97}},{1,{38,97}},{6,{48,97}},{6,{68,97}}
 }};

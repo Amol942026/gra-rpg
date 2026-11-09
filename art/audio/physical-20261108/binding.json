@@ -1,0 +1,711 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "event": "swing",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\swing.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\swing.wav",
+      "sha256": "fb17d4063eb9d297fd2059b62dfb43ec7e378c79c5120ceef98a186a8085a484",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\swing.wav",
+      "before_sha256": "14e29ba970c92ecda8c88960764dae72209a6d25cdb16e7e0e395d710ff99cb0"
+    },
+    {
+      "event": "swing-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\swing-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\swing-v2.wav",
+      "sha256": "5b7052abe521a184582630529b83bb6a32cd218086975edc4af254e11e75e1fc",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\swing-v2.wav",
+      "before_sha256": "57fac17a5b667116b6b0f679071036ce9c28b098d25f2b2654384b0fb008de98"
+    },
+    {
+      "event": "swing-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\swing-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\swing-v3.wav",
+      "sha256": "da699d32010fc9c4a6a2513f04d97e8ce834f027aa96c3cb8a1f4bdb073e1476",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\swing-v3.wav",
+      "before_sha256": "0ff34bccf6ae5190b23380c06edb458835a346340dfdefb6d860247fc23cd368"
+    },
+    {
+      "event": "heavy-swing",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\heavy-swing.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\heavy-swing.wav",
+      "sha256": "400c26a496dc011efee1cc4be649b16889de034e915dba93e04f9e9fd1bdd35b",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "heavy-swing-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\heavy-swing-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\heavy-swing-v2.wav",
+      "sha256": "c550b3c440c79df9ccf7158b303c27335177fbfd0d78eb2ccd41bc937e203359",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "heavy-swing-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\heavy-swing-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\heavy-swing-v3.wav",
+      "sha256": "05e256fe88cea911ea726e1fb893d402baff5a88e106910ba28c983d7e09af90",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "blade-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\blade-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\blade-attack.wav",
+      "sha256": "0651c1555a32af1f1bc945e41de7a963de91b952292d7ab422ebfbf11f8e4832",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "blade-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\blade-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\blade-attack-v2.wav",
+      "sha256": "304da1e80a437cacd14a8d60f9b622790669074efe6b6a2ed9dc22bb230a8bdc",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "blade-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\blade-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\blade-attack-v3.wav",
+      "sha256": "4aca356d181f79ff00df4a20fe571795138cd8b0a03066ee5b2a1dd8bb513e6f",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "enemy-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\enemy-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\enemy-attack.wav",
+      "sha256": "a54e71a966f1962636a1fb8ea672f343f7d631eee69eb22ab658c48f1de2d9ba",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\enemy-attack.wav",
+      "before_sha256": "5322557f6a7196542bf69f07c1dec2eafcd62ef46a224b21f531aaccb9e3f464"
+    },
+    {
+      "event": "enemy-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\enemy-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\enemy-attack-v2.wav",
+      "sha256": "aff1b9bd453be0730be3e3167b72a8a224917c8928ecebaa2ec8165276ba485c",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\enemy-attack-v2.wav",
+      "before_sha256": "518894624b996a33e929084ec844c73a732d81c3a2ac97ed3c3db2f60e136029"
+    },
+    {
+      "event": "enemy-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\enemy-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\enemy-attack-v3.wav",
+      "sha256": "a5d57d3374f837bb0f6535c98dac60745a15d27d6fb865ac4fe47eb764046918",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\enemy-attack-v3.wav",
+      "before_sha256": "bec40e3cde434880332befb59d7ee68b8fdc6968ccb2d192475f3facb3bdd5b1"
+    },
+    {
+      "event": "bone-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bone-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bone-attack.wav",
+      "sha256": "b77a2bc10014bd13c322b7cdf1ed38a09443ad434cad9871ec8e5cb1ab4643b8",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "bone-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bone-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bone-attack-v2.wav",
+      "sha256": "3520346f8b8f4bdcdfa59844dbd691948892c47a8935c84bddc4edae3c7a492c",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "bone-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bone-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bone-attack-v3.wav",
+      "sha256": "24634e358a6e31b5ed4c48c9e843858b40e06dcd73e2c2dfbe9eb7e290ce5061",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "chitin-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\chitin-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\chitin-attack.wav",
+      "sha256": "2c242febe169f9e91e1a16adeffbd2fd9f67eb4d6f642e2314bbf580ed2c162b",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "chitin-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\chitin-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\chitin-attack-v2.wav",
+      "sha256": "aa75b40a11cecc73778abf5a24023761589e2bb9d0286f6eb2d2e3a38e25013c",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "chitin-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\chitin-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\chitin-attack-v3.wav",
+      "sha256": "75973b696362e75bc2e94607881b02304f526dfadf577e5a220e450fe0d5f837",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "serpent-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\serpent-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\serpent-attack.wav",
+      "sha256": "d7e8de4da102c358c9f38335bde6b7a5010018e08fdd10ab12ee569a83a523d9",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "serpent-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\serpent-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\serpent-attack-v2.wav",
+      "sha256": "156fd27e53adb4cf5b6df9e55a95d0a8e36619745b4f085aab20fc603aa53b7b",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "serpent-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\serpent-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\serpent-attack-v3.wav",
+      "sha256": "ce99a01d79f6a27ebfcc2f5b920b2547cf96955d9f4137be80685b2e630a8538",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "reptile-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\reptile-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\reptile-attack.wav",
+      "sha256": "11a75c6351d341cd524792685c102e2a9cb53cbfe95ce7cc3d1656baa3edae54",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "reptile-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\reptile-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\reptile-attack-v2.wav",
+      "sha256": "51ad7aefbf8c2534e30f08274e6ee597a0dcb267704fcc86b040aaf6fd251602",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "reptile-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\reptile-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\reptile-attack-v3.wav",
+      "sha256": "4a729710235e7e63844557d7a4352bf9176f183be06f84fbaa3bebfb4bf4c076",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "wood-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\wood-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\wood-attack.wav",
+      "sha256": "88ae9ac3e066c513a2640d668e2140cdb0726a41866f98784b088e0696211f60",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "wood-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\wood-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\wood-attack-v2.wav",
+      "sha256": "1f293343ba2ce2201c4c4eefde94e7928fce2f6ee9bf07ef3a657f74da1ea4f3",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "wood-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\wood-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\wood-attack-v3.wav",
+      "sha256": "f3373cca74b89547299d76ea0ad4a7abc9822bd758becedfd81073f62c71d5e5",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "armored-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\armored-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\armored-attack.wav",
+      "sha256": "281fda06c44c73bfcd24b55542238401fa033b2541a73841ccb5e8c923d3d4bf",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "armored-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\armored-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\armored-attack-v2.wav",
+      "sha256": "0305be5970db0abf4a97665d05aed0e98fc273dd6ecc3075891db4107efdf0be",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "armored-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\armored-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\armored-attack-v3.wav",
+      "sha256": "3a43afd676ce5384e83c790b79f2321a480c94604c6342af85407fbfbe6424a6",
+      "backup": null,
+      "before_sha256": null
+    },
+    {
+      "event": "beast-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\beast-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\beast-attack.wav",
+      "sha256": "581fc958d5f6e51e0a15b3ab14a4755e553fcb292bf0619306411f3ef0397042",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\beast-attack.wav",
+      "before_sha256": "f858ffc0949fba8ef45a106bd12c8814d2f96cb31d6781e81e63e6e78908ddc2"
+    },
+    {
+      "event": "beast-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\beast-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\beast-attack-v2.wav",
+      "sha256": "84a4ad9152e44f5b0f616816adb16d2add39e38781bb05051a125153e2be7dec",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\beast-attack-v2.wav",
+      "before_sha256": "3fe603b93562a40e39b0acaf6387cec05e5d59907163c5dd664a46cb9b0836ff"
+    },
+    {
+      "event": "beast-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\beast-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\beast-attack-v3.wav",
+      "sha256": "8d74926ca58313a26749b4fee138d11e4386c29b2a8472a73553ad8557a04c30",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\beast-attack-v3.wav",
+      "before_sha256": "c27c2d5d299edb9a8310b82f8a2d9a9eaf32ffd68c4bd9cb9f00c7a6a91c4cba"
+    },
+    {
+      "event": "stone-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\stone-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\stone-attack.wav",
+      "sha256": "92bab25d6f97fcd1616cbbaded44e20456ad6901b15eb900baf34d4695e801e0",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\stone-attack.wav",
+      "before_sha256": "5da0d3640374d549ee1cf153fc63a4de279821e431f0de4a391c1e679d52af75"
+    },
+    {
+      "event": "stone-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\stone-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\stone-attack-v2.wav",
+      "sha256": "6fa5437198a7b842df3b79864f7204a44bf66d62fa1bdde248ed9e965bd6d6de",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\stone-attack-v2.wav",
+      "before_sha256": "3171cc0a75237667e51b0facdfe0bc6fa8801e6f1e926caacb7931e2d440b0f7"
+    },
+    {
+      "event": "stone-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\stone-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\stone-attack-v3.wav",
+      "sha256": "cf7431fa5bd726ca1aca93a768d2f65585f649efcca183f1d7df948ee44479a3",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\stone-attack-v3.wav",
+      "before_sha256": "9930969170ba51ad1be32b211dce2e4cea472d3a494ee4a2f54fd7c18e89f469"
+    },
+    {
+      "event": "slime-hit",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\slime-hit.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\slime-hit.wav",
+      "sha256": "e993d863b6192307fa36415a843e5f182b10238f01436c69bb7c3cbcac78378e",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\slime-hit.wav",
+      "before_sha256": "f8d94228694fc6ed035ad6d9f66bf57adeec0156989ca227a830fdf444cef0ad"
+    },
+    {
+      "event": "slime-hit-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\slime-hit-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\slime-hit-v2.wav",
+      "sha256": "c5c65a7ed15f75ccdbe6acd35a6bb1a90a0bff19a510118935a25065a3a3f978",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\slime-hit-v2.wav",
+      "before_sha256": "6ce4235ae3c85ed961a19d377232f3170da59550a449a4fd68ab5b7379e3caa8"
+    },
+    {
+      "event": "slime-hit-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\slime-hit-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\slime-hit-v3.wav",
+      "sha256": "b1253d7099ad1233a885091f9a845d5428c86f8a92908379b552cc8babfa4b90",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\slime-hit-v3.wav",
+      "before_sha256": "e01b40e527b0b52d7050b600c1f62bc72bf12954bd4d54a60b75bda8b26cd0ef"
+    },
+    {
+      "event": "wolf-hit",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\wolf-hit.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\wolf-hit.wav",
+      "sha256": "7de9768ed2c9fcb09280a04fd32a569efe4704b34e65667c2d4e57ddf1f30224",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\wolf-hit.wav",
+      "before_sha256": "c709c374f4686804f339328e377ca869cba6c8d5db1692e61ec267db48a819ca"
+    },
+    {
+      "event": "wolf-hit-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\wolf-hit-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\wolf-hit-v2.wav",
+      "sha256": "e3441605c579fb457a4c56fd5f3ed0f46ee160c45868480d76bc91e030f92ac0",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\wolf-hit-v2.wav",
+      "before_sha256": "ed1823312573fd042405d78850e7b736378c1f02c6b6cf18f2835a99f539e864"
+    },
+    {
+      "event": "wolf-hit-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\wolf-hit-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\wolf-hit-v3.wav",
+      "sha256": "8578aaa426d1ee758639aa187e690955e9266dc00f52e001a33ff7c582afc5cd",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\wolf-hit-v3.wav",
+      "before_sha256": "bf07e03fab27f1b055d4b5bd94e1fbccfa9f945681e9c3e22adc114fe4953514"
+    },
+    {
+      "event": "bone-hit",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bone-hit.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bone-hit.wav",
+      "sha256": "716031a68e4f5aeb1c027b9ae01b943855a43a92d285b83eba079b482fe19285",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\bone-hit.wav",
+      "before_sha256": "69d1a1b72c8b5f4a15aceb8bbbf14a32015c9625bc3c041bf0c6400a750005f6"
+    },
+    {
+      "event": "bone-hit-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bone-hit-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bone-hit-v2.wav",
+      "sha256": "a6ed849d4f72274653c0bf99b877b5a514ad45d71da4362ab5ea8b2571ded079",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\bone-hit-v2.wav",
+      "before_sha256": "6d27510ba0b989135de73090c36626cba469270b11aa96533ff8b3898c565ad1"
+    },
+    {
+      "event": "bone-hit-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bone-hit-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bone-hit-v3.wav",
+      "sha256": "94aaa01b06abacc9bd32fd7d89c481e3030a8e688b1224b97cd769f9eace0c44",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\bone-hit-v3.wav",
+      "before_sha256": "8f7a7d369c39adf267a936bc9822ae4eec945ad14693cf9a034353525d15b737"
+    },
+    {
+      "event": "stone-hit",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\stone-hit.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\stone-hit.wav",
+      "sha256": "039a871372848dce9fd84fb5688af31513a53c12d0c76a89a69ebaf46b0cbab2",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\stone-hit.wav",
+      "before_sha256": "0b137e3f5f357799b1f861a705c3b7c23f8bcc985ff0c74e8b2863e170a1bd18"
+    },
+    {
+      "event": "stone-hit-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\stone-hit-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\stone-hit-v2.wav",
+      "sha256": "e5e03e2ccc8014b5eca04fa23ce249a1701ab9c96b38035e6ad59de84cdbb7f7",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\stone-hit-v2.wav",
+      "before_sha256": "6e9007f1498cab79e3c40807393791a2fae3b933eede1271bc5ec20786c0644a"
+    },
+    {
+      "event": "stone-hit-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\stone-hit-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\stone-hit-v3.wav",
+      "sha256": "463dd9b5c858b88c7adea3b03819b4812c04f50dc699515094df2d201b28c1c9",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\stone-hit-v3.wav",
+      "before_sha256": "4b16cbfa1c249cf090e3f4289bd2abca80b5d8cf38ad0639e236489cb51498d0"
+    },
+    {
+      "event": "chitin-hit",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\chitin-hit.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\chitin-hit.wav",
+      "sha256": "b08f00f8d47c62065883d4a1e9a467c9e27c6667ab677fe50b9668d0b033a06f",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\chitin-hit.wav",
+      "before_sha256": "80ad49d666cd2711d970c7de8e74d9f8a10183782946a21149b01af6ed6cf899"
+    },
+    {
+      "event": "chitin-hit-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\chitin-hit-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\chitin-hit-v2.wav",
+      "sha256": "6a271099f0d2328d2398c411a732da4de0094be2853b6c3cdab2d4e1f5e1de7d",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\chitin-hit-v2.wav",
+      "before_sha256": "80c1552cd1839d19fac7f34a4f8878168690e51fc999497a11ced399f2e1aed4"
+    },
+    {
+      "event": "chitin-hit-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\chitin-hit-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\chitin-hit-v3.wav",
+      "sha256": "9f7f63a41d966242a69eecc2ecf0876bc684cc91845e554848169fda7a10d9c6",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\chitin-hit-v3.wav",
+      "before_sha256": "8313f1d27c49b9d23d3a143be1c66be53607b6207836c3a9ea17ad64faeaa95a"
+    },
+    {
+      "event": "fire-hit",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fire-hit.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\fire-hit.wav",
+      "sha256": "8716de5eb73c1783f8fee98397ac2dfb4845a48648ed19a6b03d142b8ae3d879",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\fire-hit.wav",
+      "before_sha256": "a8eb07c91fa86f85f82d9fd7a362526c5d8a42b78030872de322ca77e16400f5"
+    },
+    {
+      "event": "fire-hit-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fire-hit-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\fire-hit-v2.wav",
+      "sha256": "b714f55b9e4105c0913d2a0110cefc37653de16d4bde286befeaee310ebb3a7a",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\fire-hit-v2.wav",
+      "before_sha256": "496b60e0a391ede115044edc568fbc74b39b7d4cdef1af746dcff8a526527be5"
+    },
+    {
+      "event": "fire-hit-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fire-hit-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\fire-hit-v3.wav",
+      "sha256": "710a6fac610d2b9e5b47006144db5555c95aa5329ddf5b9ba7e1e4f7db6be092",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\fire-hit-v3.wav",
+      "before_sha256": "db4f54643a36fdec3a0f9a982622cac971f508db52181e12685215534aefcb3b"
+    },
+    {
+      "event": "enemy-fall",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\enemy-fall.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\enemy-fall.wav",
+      "sha256": "63f40ad04d3a5ddaadc8fbc1c49c6c3d3bc286bd84bdbeec0009aea65e145ebd",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\enemy-fall.wav",
+      "before_sha256": "bf5802f6b928d8bbd8d7505523a113c24259add81db677c3412883406cd04fe5"
+    },
+    {
+      "event": "enemy-fall-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\enemy-fall-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\enemy-fall-v2.wav",
+      "sha256": "c0a700b1bdc69f4a57b28cfe4121fc84c81d1961f566af63db583a74a4425cff",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\enemy-fall-v2.wav",
+      "before_sha256": "84d44d5dd969416f7903eabba9f41079e2fcb6353c149af879efee933f924851"
+    },
+    {
+      "event": "enemy-fall-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\enemy-fall-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\enemy-fall-v3.wav",
+      "sha256": "f6a640109bc4dcbabfebd5a50884e3d23917d87d80eb2efba542eedfb73ef3c3",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\enemy-fall-v3.wav",
+      "before_sha256": "572f73df4c6697fa7d3e4e5c13d2e7a0e0b3d05a1373166f709e1df9619a109e"
+    },
+    {
+      "event": "hurt",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\hurt.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\hurt.wav",
+      "sha256": "c1787de29a986b8f80fd5728fcdafc5af3662c18015d1e2aeb2db3991b359c0c",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\hurt.wav",
+      "before_sha256": "82a8aa01a836176036e046b4382dbc2ae4606cfe9da1af4ab1fbc88c7e3e6301"
+    },
+    {
+      "event": "hurt-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\hurt-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\hurt-v2.wav",
+      "sha256": "a7fd9a5f0455096cd9c1d5b74146476eb35dd0df22b30bf89884887d076cb046",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\hurt-v2.wav",
+      "before_sha256": "4af3de5e927ae7b7ad448b21748f2f050dece3a035af2c4fc807ef863967dfc0"
+    },
+    {
+      "event": "hurt-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\hurt-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\hurt-v3.wav",
+      "sha256": "d5a4a6c76d655fb571b27efb13b392cdee0784fb4e7260c44ca179a78af81a17",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\hurt-v3.wav",
+      "before_sha256": "284f207ea0f6c5c0d2c3ec38d8aeb302af200aa4cfc91d357a1272cb497cc776"
+    },
+    {
+      "event": "death",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\death.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\death.wav",
+      "sha256": "73990bde6e0533ccc7a25b3198f16103d982dc4833a9b81962d072fbd4312e68",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\death.wav",
+      "before_sha256": "8b4069544758ba8f16f7c0409b20fe31d5091e527fcf3f8f4bd8f847da13385c"
+    },
+    {
+      "event": "death-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\death-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\death-v2.wav",
+      "sha256": "6701ceb0921b42a30a01b079c7e42dfad1b581d02a5485b261ad09a7e74059e0",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\death-v2.wav",
+      "before_sha256": "313544c452ab4a8fa272da0e3d40c58a2cb2af71c49b2ef769d02ffbdd8a9b2d"
+    },
+    {
+      "event": "death-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\death-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\death-v3.wav",
+      "sha256": "18aa05fe2c06900a50ae524de2d1226aada515453cfe589f371d6abc2a29a2a4",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\death-v3.wav",
+      "before_sha256": "30719ba625dbc63f83af3581a49148c2f071699edfc9289a334a4ebefffbdb30"
+    },
+    {
+      "event": "bow-shot",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-shot.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bow-shot.wav",
+      "sha256": "7803ad89bc43681e389d2a4af96d24bb3c1361f916d9f597cfe25807aa21123c",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\bow-shot.wav",
+      "before_sha256": "7fb1662c14f8a7b28af66daeb8ad1b5172ca8d541f2070f76a7c33ff62b171c9"
+    },
+    {
+      "event": "bow-shot-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-shot-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bow-shot-v2.wav",
+      "sha256": "730f3a718741bb02cff07e3abd9fbab24cfff7b5b46cfc3304548cfc9ecfa456",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\bow-shot-v2.wav",
+      "before_sha256": "781300b614e4dd4303208eff080382688f39343b9735f2ca18b15dddb1b6620b"
+    },
+    {
+      "event": "bow-shot-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\bow-shot-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\bow-shot-v3.wav",
+      "sha256": "62eceecac2a880aaf2906d7d0e0dadef36dca0295bb7eacb0456646bedd21747",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\bow-shot-v3.wav",
+      "before_sha256": "cab0fdb17677ab5e7d2e50f271bebc6628e44a21385fc99b1d1bf53b26c07480"
+    },
+    {
+      "event": "spell",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\spell.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\spell.wav",
+      "sha256": "c2b294ccae11250bb7596d5a87216a7506de1e642335831dadedd11141163e8d",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\spell.wav",
+      "before_sha256": "a2f5a2d6e040cd713288120bc2abf1741be758d9cdc9a973f880f766e3c6b014"
+    },
+    {
+      "event": "spell-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\spell-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\spell-v2.wav",
+      "sha256": "babea164d5ac3b8f62561bb953927eabe8c02335ae2d28b1663322efbb30ccda",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\spell-v2.wav",
+      "before_sha256": "549c1d2dcaf769b01258878289aeeb756d089ecd4b16c1982d75f868b57847a7"
+    },
+    {
+      "event": "spell-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\spell-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\spell-v3.wav",
+      "sha256": "76bc49b67913d72307f0a1a069fab49df04ad164cecaabd943f64066901ad70e",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\spell-v3.wav",
+      "before_sha256": "6f1670b0c7e424ef837d1c2fd061be875cb52646de40f188dcc78a6eb1587876"
+    },
+    {
+      "event": "magic-attack",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\magic-attack.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\magic-attack.wav",
+      "sha256": "1950201a0fb0f75a45b695340b5761037e68f2702e4aad22501f650cf42ae654",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\magic-attack.wav",
+      "before_sha256": "bae655316671beaf76fe03e78ebad9c2edac1f8d28aa1f68a58b8f917dd6565f"
+    },
+    {
+      "event": "magic-attack-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\magic-attack-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\magic-attack-v2.wav",
+      "sha256": "83b881a0384cb540741e5fe9bc3fcce6cacf8a289aa9c5e67cae739d976bf6e4",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\magic-attack-v2.wav",
+      "before_sha256": "b5962c5aa2593d61ee04f1a3ec2e41d3b6c6093b19fff58fe1036935d5fc3b76"
+    },
+    {
+      "event": "magic-attack-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\magic-attack-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\magic-attack-v3.wav",
+      "sha256": "3de5369305f1264593b579ef4a6ed73bf23f6cb339da90075d9cbebbbfd27033",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\magic-attack-v3.wav",
+      "before_sha256": "8dbbafac93aa3097359c065860de5eed3389580066e19a0f6497d767233a9275"
+    },
+    {
+      "event": "venom-cast",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\venom-cast.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\venom-cast.wav",
+      "sha256": "0233fe080e92c385b9c20c1b6f21cdf46bf9e9d0e543970512e1bb666d888be6",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\venom-cast.wav",
+      "before_sha256": "5752b522b7afb4e913d0c226fbfcfd03e6a13527d86739eb52f103759a29646a"
+    },
+    {
+      "event": "venom-cast-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\venom-cast-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\venom-cast-v2.wav",
+      "sha256": "5cee59889df99aede654803e87f8bc434e65dd957b7e8a82fec6a8e0225b196e",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\venom-cast-v2.wav",
+      "before_sha256": "26aceee56c4ec7285d0aaba36f738ddd982f4b9ecbebcf65bf4d19a5ac8241fb"
+    },
+    {
+      "event": "venom-cast-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\venom-cast-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\venom-cast-v3.wav",
+      "sha256": "bda643ad2e4dec4b7de47122c03e76d486ea12bc53b8c083e2e040e1e053ea65",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\venom-cast-v3.wav",
+      "before_sha256": "032db34bed19f96f4fd6af1a1f12d115535520f5097893f8a4431d8d43600538"
+    },
+    {
+      "event": "copper-wave",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\copper-wave.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\copper-wave.wav",
+      "sha256": "ab6000269bd46e1cd3c745afdb289d73ef184e0312f776d39bae62bfa91ba708",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\copper-wave.wav",
+      "before_sha256": "a9602f4ee4e2698aee24a72978548a99143de77002361dcd6e79159485ea941a"
+    },
+    {
+      "event": "copper-wave-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\copper-wave-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\copper-wave-v2.wav",
+      "sha256": "a5acaf26276026944203f9f1f9c8671c8b3d41aab5ccf49a9abc55b5325bfea9",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\copper-wave-v2.wav",
+      "before_sha256": "e5025996d31c72de55f2b74e56b7503c9e661f70e8b5afd7bf49433dacdb5ac3"
+    },
+    {
+      "event": "copper-wave-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\copper-wave-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\copper-wave-v3.wav",
+      "sha256": "e200bc0743366a57ce1a812ec902feaf8283d8ca22c5333b3a58fe1554a6f296",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\copper-wave-v3.wav",
+      "before_sha256": "4bcbd7952bdc0ef577ec48667b854e207c442ac1afb40368657c8615b5429b46"
+    },
+    {
+      "event": "obsidian-cleave",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\obsidian-cleave.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\obsidian-cleave.wav",
+      "sha256": "b8dbf23ea2630830ca24dadcc5ab980166dcd062cab3bb43ae4a9247b703bf5f",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\obsidian-cleave.wav",
+      "before_sha256": "9a1b6dbd5af944711da519b0c3e7c35739d834a700a5bdfe9c12f16120ea2dff"
+    },
+    {
+      "event": "obsidian-cleave-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\obsidian-cleave-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\obsidian-cleave-v2.wav",
+      "sha256": "6ae4026716c5887af6d4766e1aa291d9d99ede2b06d1552590dc27819f5ae183",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\obsidian-cleave-v2.wav",
+      "before_sha256": "1139287babad9b30252a45ca7a9e312c6e699700b2cc6b409f4575883f61cc64"
+    },
+    {
+      "event": "obsidian-cleave-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\obsidian-cleave-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\obsidian-cleave-v3.wav",
+      "sha256": "179b6f33007139e46d20bdf36c45fb42e20caff8f1981bdf7f59d5bc7bf3733f",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\obsidian-cleave-v3.wav",
+      "before_sha256": "d00efec30f6127de57e2b0433ac4e02bb52a9396c6ba95ec6e334b72536f74d0"
+    },
+    {
+      "event": "fire-breath",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fire-breath.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\fire-breath.wav",
+      "sha256": "84826d47f8bf5a87b81c277b0a6b5fd4baa4659c7aa45c5490afdbd44537f80b",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\fire-breath.wav",
+      "before_sha256": "4f56194b13cd24f2798585b4ef4e494eb944dd85e38ae4d75223928f35c88873"
+    },
+    {
+      "event": "fire-breath-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fire-breath-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\fire-breath-v2.wav",
+      "sha256": "9a0a4e2371ebfce840d969c8d22a47fff00f328f80fb9dcd15e699226a3c2db0",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\fire-breath-v2.wav",
+      "before_sha256": "58486431de3a53e25a98cd08426c382edc209d02a2dc9943bc17dbe252d70b5f"
+    },
+    {
+      "event": "fire-breath-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\fire-breath-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\fire-breath-v3.wav",
+      "sha256": "52208cff8400175cacd4993d965532f8d5115f0036b19f5bb3a3c5611e48c580",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\fire-breath-v3.wav",
+      "before_sha256": "dca43385f2cc4757b60b8eb6aa04e87b2b1e873e4d4c2a9967ae1b0759910d5f"
+    },
+    {
+      "event": "music",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\echoes-of-the-ruins.ogg",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\echoes-of-the-ruins.ogg",
+      "sha256": "b12c0981451149f19a9541b35be74052048377e1be553a0ba9d23cc18600a63b",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\echoes-of-the-ruins.ogg",
+      "before_sha256": "b473969b2a9a376d033c981a65f5709a6c40841da146a47a423e639ae880a46e"
+    },
+    {
+      "event": "music-desert",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\desert.ogg",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\desert.ogg",
+      "sha256": "08eced5c3eed0a3fcc10895d797fb65e35994a40a0ff458875a702db21777692",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\desert.ogg",
+      "before_sha256": "1e46002a47692e4a62ea8179544d7ed6cc9a38b3f31813e6c20930c3892b9719"
+    },
+    {
+      "event": "music-volcano",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\volcano.ogg",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\volcano.ogg",
+      "sha256": "1d2fc6990c93a008bfd898e41fb4a86c9dd9e553d9088aca8ca3f16eba7254c6",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\volcano.ogg",
+      "before_sha256": "7b6666ee1e88d4450d93bf02e19154df82104713bd53da20049ab88ea047ee58"
+    },
+    {
+      "event": "music-tower",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\tower.ogg",
+      "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\delivery\\tower.ogg",
+      "sha256": "dd360acd5e5484d4827aaf44ad964e3b98025badaa658dd54c0fb2a339677b9e",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\tower.ogg",
+      "before_sha256": "7cb283bb989866702383ac57d7223a47effa761c41bb517b4606a5132bd22a5c"
+    }
+  ],
+  "receipt": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261108_220918_c2804b87\\binding-receipt.json",
+  "asset_root": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets"
+}

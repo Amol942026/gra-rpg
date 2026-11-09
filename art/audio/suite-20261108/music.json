@@ -1,0 +1,42 @@
+[
+  {
+    "realm": "forest",
+    "bpm": 72,
+    "bars": 32,
+    "cycles": 3,
+    "loop_frames": 5120000,
+    "mmp": "C:\\AI2D\\audio\\emberfall-suite-20261108\\forest.mmp",
+    "sha256": "9fbb96fb721b2b8f29cbcdef52fb9f791af5c8ebce256ea5b13ba3d0232abfd9",
+    "notes": 1662
+  },
+  {
+    "realm": "desert",
+    "bpm": 76,
+    "bars": 32,
+    "cycles": 3,
+    "loop_frames": 4850526,
+    "mmp": "C:\\AI2D\\audio\\emberfall-suite-20261108\\desert.mmp",
+    "sha256": "4531b485a6fa3b7d787dd617144b0433a99cd3c123369c96d878fb3a8ae75a6c",
+    "notes": 1662
+  },
+  {
+    "realm": "volcano",
+    "bpm": 88,
+    "bars": 32,
+    "cycles": 3,
+    "loop_frames": 4189091,
+    "mmp": "C:\\AI2D\\audio\\emberfall-suite-20261108\\volcano.mmp",
+    "sha256": "62c30e2dd7642bc613320c611f808580f8942d0ee45923886305116474c6963d",
+    "notes": 1710
+  },
+  {
+    "realm": "tower",
+    "bpm": 66,
+    "bars": 32,
+    "cycles": 3,
+    "loop_frames": 5585455,
+    "mmp": "C:\\AI2D\\audio\\emberfall-suite-20261108\\tower.mmp",
+    "sha256": "bd76ed08a8e126ad3f0f4687976f204392afb09be778373b73bf14cb13356b65",
+    "notes": 1158
+  }
+]

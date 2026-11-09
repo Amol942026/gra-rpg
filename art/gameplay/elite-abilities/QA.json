@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "date": "2026-11-08",
+  "gameplay_and_animation_checks": 200119,
+  "persistence_checks": 5162,
+  "unit_command": "pwsh -NoProfile -File build.ps1 -Test",
+  "renderer": {
+    "status": "PASS",
+    "checks": 497,
+    "failures": 0,
+    "abilities": 4,
+    "directions": 8,
+    "captured_frames": 105,
+    "authored_encounters": 4,
+    "hidden": true,
+    "audio_opened": false,
+    "presentation_measured": false
+  },
+  "renderer_captures": "dist\\qa-volcano-elite-20261108-final\\checks",
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "44c56408b492965fd33dfe3feeae43e16e376542ff57e9fca849b5724a392965",
+      "exe_sha256": "16f599d5baec12a06d2bed43a690b05c8a706d35730a4f159fef4d5d41cd58c6",
+      "verified_assets": 147,
+      "startup": [
+        {
+          "frames": 180,
+          "scenario": "main-menu"
+        }
+      ],
+      "enemy_ability": {
+        "status": "PASS",
+        "checks": 497,
+        "failures": 0,
+        "abilities": 4,
+        "directions": 8,
+        "captured_frames": 105,
+        "authored_encounters": 4,
+        "hidden": true,
+        "audio_opened": false,
+        "presentation_measured": false
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "76e034e9fbcc73de22d5433320b19b16badfca6b4aba37b6460b0f1fb44c5d66",
+      "exe_sha256": "b93ea72c0643e8241799f92c3d1df79d8e51c77e7ec27487220140fd866c3ad2",
+      "verified_assets": 147,
+      "startup": [
+        {
+          "frames": 180,
+          "scenario": "forest"
+        },
+        {
+          "frames": 180,
+          "scenario": "desert"
+        },
+        {
+          "frames": 180,
+          "scenario": "volcano"
+        }
+      ],
+      "enemy_ability": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    }
+  ],
+  "audio_preferences_unchanged": true,
+  "audio_preferences_sha256": "12ba35cfd8ef37db138c8a4cc1a40cd35e9e8f17e4e7456d2b3c957e4dbd7cd6",
+  "save_version": 11,
+  "legacy_save_versions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "native_art_created": false,
+  "existing_actor_clips_reused": true,
+  "presentation_fps_measured": false,
+  "source_sha256": {
+    "src/enemy_abilities.hpp": "755484bbf027c091f8121119c43bf1a7566286800fcd0d926f2699c2ce3452c4",
+    "src/enemy_ability_system.hpp": "e42d1f13d63001ee0b08558b112de1c61e287d97d459467973a43abb5147b7f3",
+    "src/enemy_ability_art.hpp": "31caee42ea046fb62e5531ffe993a82c340d6d3a7887e853843b606c0336c4b5",
+    "src/game.hpp": "f9e48ba08dde0dd9393b04b1dcf740425f09ee19cce61aedfd2fae6269cb32c3",
+    "src/save_game.hpp": "7e8c0d029fb56f4fd81363d47fb7cd68421c5a5df0819752cfb26092793d6370",
+    "src/main.cpp": "5aa529285fc19215418700b1e92e76afbc591e444ecea7a4514c57b84e4298fe",
+    "src/world_hover.hpp": "96b4fa66214a4b2b1d96590d276d4913df384f3a216ac14bedcdfcb747622977",
+    "src/inspection_hud.hpp": "6ba9f951784d719f66155f102bb4bab2916e48373b42ade41facc20d816cbf4a",
+    "src/guardian_boulder.hpp": "d5eb1362c35a37b59059cc3e33092a7257a379bb58a74adcc5aa727cc0aaf157",
+    "src/actor_art.hpp": "c2daeb7cc0e7abd0fcd9aa2d18c8427b04daaf9e50450def5bab157cbd58b81b",
+    "tests/enemy_ability_fixture.hpp": "8c1c34eb82e520c6d6bc1bec7f9a5b13235cfe6249b05e91f56b746884ade42b",
+    "tests/enemy_ability_tests.hpp": "993d01206328f8e6a7ad6681361b2962eed40f80b1fd31447817cce235ed51cc",
+    "tests/enemy_ability_save_tests.hpp": "51af42c6596a3a845893a75848881b9e37172b4ebfe355d0c69ae4ecb0ff68ba",
+    "tests/enemy_ability_qa.cpp": "bc09edb29d60f4ddd6873a55df4f670d3f0c38d2c65e9c78f4a5c1d16c2b33ff",
+    "tests/enemy_ability_qa.ps1": "96b7de536b30aad4df47eea4de773bf51eb5340b55b121c0c7c9bee45f7c7349",
+    "tests/enemy_ability_package_qa.ps1": "bc1728330ee3031928b465c64ac2926bbee5476e28573883c2ae86950b54d84e",
+    "tests/enemy_ability_preview.py": "1ee207bb7766a5954f89ed09200c75fb8734ed95733c08a8066743555c55bf62"
+  }
+}

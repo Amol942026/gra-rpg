@@ -1,0 +1,41 @@
+Build edition: developer
+Frames: 180
+Window: 1920x1080
+Fullscreen: no
+Refresh rate (Hz): 144
+V-sync interval: 2
+Presentation clock: OpenGL V-sync
+DXGI synchronized presents: 0
+Occluded presentations: 0
+Suppressed native swaps: 0
+Actual presentation interval: 2
+Presentation fallback: GPU sharing pixel validation failed (0x80004005)
+Strong cuts performed: 0
+Piercing arrows fired: 0
+Developer mode: 1
+Developer menu open: 0
+Developer destination: volcano
+World location: volcano
+Benchmark scenario: forest
+Desert areas visited: 0
+Sand prisons cast: 0
+Tower floor: 1
+Intro active: 0
+Developer error: 
+Main menu open: 0
+Pause menu open: 0
+Audio device opened: no
+Native canvas: 1728x1080
+Desert background buffer: 0x0
+Hidden background diagnostic: yes
+Window hidden: yes
+Diagnostic loop rate (not foreground FPS): 64.194
+CPU frame mean (ms): 15.5273
+EndDrawing mean (ms): 0.0510639
+Presentation mean (ms): 9.07563e-05
+CPU frame p95 (ms): 14.568
+CPU frame p99 (ms): 21.3803
+Frame p95 (ms): 14.6082
+Frame p99 (ms): 21.4595
+Frame max (ms): 221.376
+Frames over 25 ms: 1

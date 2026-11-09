@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "producer": "existing-game-source-snapshot",
+  "native_articy_imported": false,
+  "dialogues": [
+    {
+      "id": "EF_IntroDialogue",
+      "title": "Prolog — Pieczęć Popiołu",
+      "array": "IntroDialogue",
+      "source": "src/intro_story.hpp",
+      "source_sha256": "a277c1f7bb82f72bb78d7d8f3d5e69eb1aa484546c3f0ffe278195b4f68b1c10",
+      "line_count": 12
+    },
+    {
+      "id": "EF_TowerReturnDialogue",
+      "title": "Powrót z Wielkiej Kniei",
+      "array": "TowerReturnDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 8
+    },
+    {
+      "id": "EF_TowerTalkDialogue",
+      "title": "Eldrin — droga do Morza Piasków",
+      "array": "TowerTalkDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 5
+    },
+    {
+      "id": "EF_DesertReturnDialogue",
+      "title": "Powrót z Morza Piasków",
+      "array": "DesertReturnDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 6
+    },
+    {
+      "id": "EF_DesertCompletedTalk",
+      "title": "Eldrin — powrót do oazy",
+      "array": "DesertCompletedTalk",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 3
+    },
+    {
+      "id": "EF_VolcanoReturnDialogue",
+      "title": "Powrót z Kaldery Popiołu",
+      "array": "VolcanoReturnDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 4
+    },
+    {
+      "id": "EF_VolcanoTalkDialogue",
+      "title": "Eldrin — droga do Kaldery Popiołu",
+      "array": "VolcanoTalkDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 3
+    },
+    {
+      "id": "EF_VolcanoCompletedTalk",
+      "title": "Eldrin — po odzyskaniu trzech części",
+      "array": "VolcanoCompletedTalk",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 3
+    },
+    {
+      "id": "EF_DesertShardPendingTalk",
+      "title": "Eldrin — odłamek pozostał przy Żywej Wydmie",
+      "array": "DesertShardPendingTalk",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 3
+    },
+    {
+      "id": "EF_VolcanoShardPendingTalk",
+      "title": "Eldrin — odłamek pozostał przy Varkhorze",
+      "array": "VolcanoShardPendingTalk",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 3
+    },
+    {
+      "id": "EF_VolcanoReturnMissingDesertDialogue",
+      "title": "Powrót z Kaldery bez części Żywej Wydmy",
+      "array": "VolcanoReturnMissingDesertDialogue",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 4
+    },
+    {
+      "id": "EF_VolcanoMissingDesertTalk",
+      "title": "Eldrin — powrót po pominięty odłamek",
+      "array": "VolcanoMissingDesertTalk",
+      "source": "src/tower_story.hpp",
+      "source_sha256": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+      "line_count": 3
+    }
+  ],
+  "total_lines": 57
+}

@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "date": "2026-10-30",
-  "overall": "working_native_mcp_in_background",
+  "overall": "current-game-authoritative-native-history-retained",
   "nativeProject": {
     "name": "Emberfall Dialogues",
     "guid": "cb99e03a-ae90-4443-b79f-7f8da1539c34",
@@ -162,5 +162,19 @@
     "compiled_without_errors": true,
     "path": "C:\\Users\\Amadeusz\\AppData\\Roaming\\Articy Software\\articy\\4.x\\Plugins\\Local\\Emberfall.DialogueBridge\\1.0.1\\Emberfall.DialogueBridge.dll",
     "sha256": "fef85f582d1564ee24a744b0d8bd686a1c9976f23936abdc957c91ab2595ac30"
+  },
+  "nativeStatusHistorical": true,
+  "currentNativeStatus": {
+    "live_query": false,
+    "modified": false,
+    "date": "2026-11-08"
+  },
+  "currentRuntimeReview": {
+    "date": "2026-11-08",
+    "source": "current-game",
+    "conversations": 12,
+    "lines": 57,
+    "validation": "../review-20261108/validation.json",
+    "user_instruction": "Review and edit actual game; articy is outdated"
   }
 }

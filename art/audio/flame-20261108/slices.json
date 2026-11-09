@@ -1,0 +1,74 @@
+[
+  {
+    "cue": "fireball-cast",
+    "variant": 0,
+    "start_frame": 9600,
+    "frames": 37440
+  },
+  {
+    "cue": "fireball-cast",
+    "variant": 1,
+    "start_frame": 71040,
+    "frames": 37440
+  },
+  {
+    "cue": "fireball-cast",
+    "variant": 2,
+    "start_frame": 132480,
+    "frames": 37440
+  },
+  {
+    "cue": "fireball-impact",
+    "variant": 0,
+    "start_frame": 193920,
+    "frames": 45600
+  },
+  {
+    "cue": "fireball-impact",
+    "variant": 1,
+    "start_frame": 263520,
+    "frames": 45600
+  },
+  {
+    "cue": "fireball-impact",
+    "variant": 2,
+    "start_frame": 333120,
+    "frames": 45600
+  },
+  {
+    "cue": "teleport-arrival",
+    "variant": 0,
+    "start_frame": 402720,
+    "frames": 74400
+  },
+  {
+    "cue": "teleport-arrival",
+    "variant": 1,
+    "start_frame": 501120,
+    "frames": 74400
+  },
+  {
+    "cue": "teleport-arrival",
+    "variant": 2,
+    "start_frame": 599520,
+    "frames": 74400
+  },
+  {
+    "cue": "bow-draw",
+    "variant": 0,
+    "start_frame": 697920,
+    "frames": 67200
+  },
+  {
+    "cue": "bow-draw",
+    "variant": 1,
+    "start_frame": 789120,
+    "frames": 67200
+  },
+  {
+    "cue": "bow-draw",
+    "variant": 2,
+    "start_frame": 880320,
+    "frames": 67200
+  }
+]

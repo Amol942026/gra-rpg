@@ -1,0 +1,42 @@
+[
+  {
+    "id": "effects",
+    "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-effects.aup3",
+    "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\effects.aup3",
+    "quick_check": "ok",
+    "retained_open": true,
+    "wav_sha256": "d5e6130f14f97f3a2341889f18b3d0b37dadec998fe473d9dc83709aa55b274c"
+  },
+  {
+    "id": "forest",
+    "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-forest.aup3",
+    "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\forest.aup3",
+    "quick_check": "ok",
+    "retained_open": true,
+    "wav_sha256": "855646fcc25691e724cc0417a81dbd2338c760d2c53eb3828295dba9e2bbe8e3"
+  },
+  {
+    "id": "desert",
+    "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-desert.aup3",
+    "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\desert.aup3",
+    "quick_check": "ok",
+    "retained_open": true,
+    "wav_sha256": "19936f30236a2d09b366a96767710ff5b4418c42ba4a40c9ce25984b57bbc2c1"
+  },
+  {
+    "id": "volcano",
+    "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-volcano.aup3",
+    "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\volcano.aup3",
+    "quick_check": "ok",
+    "retained_open": true,
+    "wav_sha256": "6ab88425d6bcf1aba3ad25da581b70d8bc352d3821fdb885f980f86737c6fa8b"
+  },
+  {
+    "id": "tower",
+    "native": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-20261108-tower.aup3",
+    "backup": "C:\\AI2D\\audio\\emberfall-suite-20261108\\tower.aup3",
+    "quick_check": "ok",
+    "retained_open": true,
+    "wav_sha256": "0d370590fea3e72cd529ffe0e66ccc89f88a54e21b346775b8f199891d5ca68e"
+  }
+]

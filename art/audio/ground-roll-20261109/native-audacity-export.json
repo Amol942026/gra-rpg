@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"result\": \"Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-ground-roll-20261109-master.wav\\nBatchCommand finished: OK\",\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-ground-roll-20261109-master.wav\",\n    \"bytes\": 576044,\n    \"seconds\": 3.0,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.707977294921875,\n    \"rms\": 0.03704967946812646\n  }\n}"
+    }
+  ],
+  "isError": false
+}

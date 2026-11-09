@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"source\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-ground-roll-20261109.csd\",\n  \"render\": {\n    \"exit_code\": 0,\n    \"seconds\": 0.063,\n    \"stdout\": \"writing 16384-byte blks of shorts to C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-ground-roll-20261109.wav (WAV)\\nScore finished in csoundPerform().\\n  0.35316  0.238428192 16384 sample blks of shorts written to C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-ground-roll-20261109.wav (WAV)\\n\",\n    \"stderr\": \"--Csound version 6.18 (double samples) Nov 23 2022\\n[commit: a1580f9cdf331c35dceb486f4231871ce0b00266]\\nlibsndfile-1.1.0\\nsr = 48000.0, kr = 1500.000, ksmps = 32\\n0dBFS level = 1.0, A4 tuning = 440.0\\naudio buffered in 4096 sample-frame blocks\\nSECTION 1:\\nend of score.\\t\\t   overall amps:\\n\\t   overall samples out of range:        0        0\\n0 errors in performance\\n\"\n  },\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-ground-roll-20261109.wav\",\n    \"bytes\": 576044,\n    \"seconds\": 3.0,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.353179931640625,\n    \"rms\": 0.018484635310847212\n  }\n}"
+    }
+  ],
+  "isError": false
+}

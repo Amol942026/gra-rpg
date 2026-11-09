@@ -182,7 +182,7 @@ void drawGameMenu(){
   float cx=frame.x+frame.width/2;diamond(cx,frame.y+38,5,9,Gold);
   center(welcome?"OSTATNIA PIECZĘĆ":"CHWILA ODDECHU",cx,frame.y+62,welcome?25:29,Text,true);
   if(welcome)center("Twoja opowieść zaczyna się tutaj",cx,frame.y+100,16,Muted);
-  else center(intro.active()?"Opowieść Eldrina":game.inTower()?"Schronienie w wieży Eldrina":game.inDesert()?"Morze Piasków":"Las Mchu",cx,frame.y+108,16,Muted);
+  else center(intro.active()?"Opowieść Eldrina":game.inTower()?"Schronienie w wieży Eldrina":game.inVolcano()?"Kaldera Popiołu":game.inDesert()?"Morze Piasków":"Wielka Knieja",cx,frame.y+108,16,Muted);
   const char* mainLabels[]={"Nowa gra","Wczytaj grę","Opcje","Twórcy","Wyjdź z gry"};
   const char* pauseLabels[]={"Zapisz grę","Wczytaj grę","Opcje","Wyjdź z gry"};
   for(int i=0;i<(welcome?5:4);i++)menuButton(menuHomeButton(i),welcome?mainLabels[i]:pauseLabels[i],i);

@@ -1,0 +1,98 @@
+{
+  "status": "PASS",
+  "completed_local": "2026-11-09T01:01:00.549650+01:00",
+  "gameplay_animation_checks": 234931,
+  "persistence_checks": 10646,
+  "new_save_version": 15,
+  "legacy_v14_fixture_sha256": "3c819cea667ff771c42bbdeecd08a22e114d3c0e48a9cbb48d26222c8f06c33b",
+  "native_ui": {
+    "status": "PASS",
+    "checks": 22,
+    "failures": 0,
+    "window_hidden": true,
+    "audio_device_opened": false,
+    "audio_played": false,
+    "spells": 3
+  },
+  "offline_audio": {
+    "status": "PASS",
+    "checks": 534,
+    "failures": 0,
+    "effects": 50,
+    "variants": 150,
+    "music_tracks": 4,
+    "real_raylib_decode": true,
+    "transport": "offline in-memory sink",
+    "window_created": false,
+    "audio_device_opened": false,
+    "audio_played": false
+  },
+  "native_synfig_frames": 180,
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "394828a88d6fa5c22554b655a67408b7126c542048dd9fdb6125ad86c6194b62",
+      "exe_sha256": "a68580bf33e5cb2c8b2681bd20c45e0540c6ef82288690a271626c5e03f04422",
+      "verified_assets": 286,
+      "startup": [
+        {
+          "scenario": "main-menu",
+          "frames": 180
+        }
+      ],
+      "audio_suite": {
+        "status": "PASS",
+        "checks": 534,
+        "failures": 0,
+        "effects": 50,
+        "variants": 150,
+        "music_tracks": 4,
+        "real_raylib_decode": true,
+        "transport": "offline in-memory sink",
+        "window_created": false,
+        "audio_device_opened": false,
+        "audio_played": false
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false,
+      "path": "Emberfall-Windows-x64.zip"
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "eb65c504665496c5ef28d10f82a16ea04f17526c8c1a9fd0bbddcfcba4b44fae",
+      "exe_sha256": "3f058cbb583fa4ac7a46d86d879a93154d1a8b8cfe6cd0d842f945da5e7f9b36",
+      "verified_assets": 286,
+      "startup": [
+        {
+          "scenario": "forest",
+          "frames": 180
+        },
+        {
+          "scenario": "desert",
+          "frames": 180
+        },
+        {
+          "scenario": "volcano",
+          "frames": 180
+        }
+      ],
+      "audio_suite": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false,
+      "path": "Emberfall-DEV-Windows-x64.zip"
+    }
+  ],
+  "package_extractions": "dist\\qa-volcano-audio_suite-packages-20261109-005947",
+  "audio_files_verified_at_five_locations": 154,
+  "audio_settings_sha256": {
+    "dist/audio-settings.cfg": "776a9e37887382789f66b0d7a960c5f055ce5771c5fc3dbbee46fd6464e54d41",
+    "dist/player/audio-settings.cfg": "a77026753eb43a84f72a3855472d204986b346635dc9cafe4e7ce01e502d6344"
+  },
+  "audio_settings_unchanged": true,
+  "audio_played": false,
+  "source_and_package_licenses_equal": true,
+  "windows_hidden": true,
+  "foreground_fps_measured": false
+}

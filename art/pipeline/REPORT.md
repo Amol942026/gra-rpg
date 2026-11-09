@@ -1,5 +1,151 @@
 # Raport konfiguracji — 19.10.2026
 
+**09.11.2026 — lekcje Eldrina:** po pierwszym bossie płatna nauka ognia,
+lodu i pioruna (600 / 1500 / 3000 złota). Własne 2D Krita i trzy pętle
+Synfig, 180 rzeczywistych klatek 60 Hz. Nagrane prawdziwe łuki i podmuch
+płomienia; Csound/Audacity, 21 wariantów, źródła CC0 i CC BY 3.0 z atrybucją.
+50 Cue / 150 WAV; muzyka i ustawienia zachowane. Zapis v15 czyta v1–v14.
+PASS: 234931 logiki/animacji, 10646 zapisu, 534 AudioSystem i 22 natywnego UI.
+Praca cicha, testy gry ukryte. [Źródła i końcowy odbiór](../gameplay/eldrin-spells-20261109/README.md).
+
+**09.11.2026 — przeturlanie i pozostałe przedmioty:** trzy warianty Roll
+z nagrań tkaniny/skóry/podłoża, po 0,52 s, native Csound i Audacity.
+Własne 23 ilustracje 2D w warstwowym KRA i lokalnym ComfyUI, z korektą
+monet i sierści po przeglądzie. Drugi preloadowany atlas 1024 × 384,
+1,5 MiB RGBA8; dotychczasowe 85 ikon sprzętu bajtowo zachowane.
+Zapis v14, 45 Cue / 135 WAV, muzyka i preferencje bez zmian.
+[Źródła audio](../audio/ground-roll-20261109/README.md),
+[ikony i końcowy odbiór](../items/loot-20261109/README.md).
+
+**Kula ognia, teleport, łuk i ikony HUD — 08.11.2026:** cztery nowe Cue,
+12 wariantów Csound/Audacity, 45 Cue / 135 WAV łącznie. Wyrzut ognia oraz
+eksplozja osobno; pojawienie po teleportacji słyszalne w odsłonięciu sceny;
+fizyczny naciąg łuku zatrzymywany przy puszczeniu/anulowaniu/pauzie.
+85 modeli ikon wyrenderowano rzeczywistym Blenderem 5.2.2 LTS, następnie
+wykończono lokalnym ComfyUI 0.44 / DreamShaper 8 w ośmiu udanych zadaniach.
+Preload jednego atlasu 1536 × 1024, 6 MiB RGBA8; runtime wyłącznie 2D.
+PASS: 234864 kontrole logiki, 10244 zapisu i 482 obsługi audio bez sprzętu.
+[Audio](../audio/flame-20261108/README.md), [ikony](../equipment/icons-20261108/README.md).
+
+**Korekta audio 08.11.2026:** nagrane foley CC0 (Kenney, artisticdude,
+Darsycho), filtracja i montaż Csound, rzeczywisty eksport i AUP3 Audacity.
+Przebudowano 28 gestów walki / 84 warianty; cały bank ma 41 Cue / 123 WAV.
+Osobne brzmienia typów wrogów, rozbójnika i mocnego ciosu; zwykły cios wroga
+brzmi przy uderzeniu. Kanały domyślnie włączone, muzyka 85%, efekty 95%,
+master 90%; menu/pauza 65%. Muzyka po korekcie: −16 LUFS (wieża −17),
+finalne OGG −2,05 do −1,90 dBTP. Użytkownik jawnie polecił włączyć dźwięk;
+lokalne konfiguracje są włączone, późniejsze wybory nadal się zapisują.
+PASS: 234852 kontroli logiki/animacji, 10202 zapisu i 435 AudioSystem/
+dekodera. Zapis v13 czyta v1–v12; autentyczny fixture v12 zachowuje cały
+payload. Praca i testy bez playbacku, gra ukryta. [Źródła i odbiór](../audio/physical-20261108/README.md).
+Końcowe paczki PASS: 253 zasoby każda, gracz 180 klatek i 435 kontroli audio,
+DEV 3 × 180 klatek krain i osiem kontroli Opcji. Zatwierdzone preferencje
+zachowane; końcowe licencje/instrukcje i wszystkie wpisy ZIP zweryfikowano.
+
+**Aktualizacja map 08.11.2026:** wszystkie trzy krainy 72 × 72 → 102 × 102,
+czyli 2,00694 × dawna powierzchnia. Przeciwnicy: las 91, pustynia 55,
+Kaldera 61; teren: 490 / 487 / 209 obiektów, łącznie 88 wzniesień.
+Rozszerzona sieć dróg i cztery nowe przeprawy, przedłużona lawa i urwiska.
+Istniejące zasoby 2D są ponownie użyte; bufory podłoża 6270 × 3285 mieszczą
+się w limicie 8192 i zajmują około 8,7% więcej pamięci niż poprzednie.
+Zapis v12 migruje v1–v11 z zachowaniem pierwotnych mieszkańców, ciał, łupu,
+przedmiotów, postępu, pozycji i RNG. PASS: 234833 kontroli logiki/animacji,
+10157 zapisu, trzy pomiary projekcji i 184 renderera. Nowe spotkania i dalekie
+krańce map osiągalne przez rzeczywiste kolizje. 21 podglądów, cicho i w tle.
+Ukończona aktualizacja + render: średnia 8,47 / p95 10,62 ms; bez deklaracji
+foreground FPS. [Źródła, przegląd i odbiór paczek](../world-expansion/README.md).
+Gotowe EXE i oba ZIP-y sprawdzone po wypakowaniu: po 228 zgodnych zasobów,
+gracz — 180 klatek startu i ponownie 184 kontrole rozbudowy, DEV — 3 × 180
+klatek krain. Okna ukryte, audio wyłączone argumentem, preferencje zachowane.
+
+**Aktualizacja audio 08.11.2026:** cztery nowe, 32-taktowe kompozycje LMMS
+dla lasu/pustyni/Kaldery/wieży, z płynną zmianą regionu. 33 efekty Csound
+w trzech wariantach (99 WAV), obejmujące walkę obu stron, skrzynie,
+broń/ekwipunek, zbieranie przedmiotów i turlanie oraz zdolności specjalne.
+Obróbka Audacity: pogłos muzyki, normalizacja/DC; pięć rzeczywistych AUP3
+z kontrolą SQLite i pozostawieniem otwartych projektów, bez Close/playback.
+Całość lokalna, bez obcych sampli. Stereo 48 kHz; muzyka Vorbis q5,
+−19 LUFS (wieża −20), PCM16 efekty. PASS: 200189 kontroli logiki/animacji,
+5162 zapisu i 353 cichego odbioru AudioSystem z rzeczywistym dekoderem raylib
+i wyjściem w pamięci. Nie otwierano urządzenia, nie oceniano przez odsłuch.
+Mastery, pochodzenie i końcowy odbiór paczek: [oprawa dźwiękowa](../audio/suite-20261108/README.md).
+Gotowe EXE i obie paczki ZIP przeszły weryfikację po wypakowaniu: po 228
+zgodnych zasobów, gracz — 180 klatek startu i ponowne 353 kontrole audio,
+DEV — 3 × 180 klatek krain. Osiem kontroli rzeczywistego menu Opcji — PASS,
+ukryte i bez urządzenia. Cztery finalne OGG mają −18,97 do −19,98 LUFS
+i −5,12 do −3,73 dBTP. Zapisane wyciszenie obu kanałów użytkownika zachowane.
+
+**Aktualizacja 08.11.2026 — zdolności silnych gatunków:** kobra piaskowa
+otrzymała Jadowity wachlarz, skarabeusz miedziany Miedzianą falę,
+obsydianowy wojownik Rozłupujący cios, a żarowy drak Żarowy oddech.
+Każdy atak ma zapowiedź, stały kierunek i odpoczynek; działa unik oraz osłona.
+Efekty 2D i znaczniki korzystają z istniejących postaci i klipów Synfig,
+bez nowej produkcji bitmap lub modeli. Zapis v11 zachowuje fazy i pociski,
+odczyt v1–v10 pozostaje dostępny. Logika/animacje: 200119 kontroli,
+zapis: 5162, renderer: 497 (cztery zdolności, osiem kierunków, 105 obrazów,
+cztery spotkania w oryginalnej scenografii) — PASS, cicho i w tle.
+Oba ZIP-y po wypakowaniu: zgodne EXE i po 147 zasobów; gracz — 180 klatek
+startu i ponownie 497 kontroli zdolności, DEV — 3 × 180 klatek. Audio nie
+zostało otwarte, preferencje użytkownika zachowane; bez pomiaru foreground FPS.
+[Opis, podgląd i końcowy odbiór paczek](../gameplay/elite-abilities/README.md).
+
+**Aktualizacja 08.11.2026 — 44 formy terenu i ciągłe drogi Kaldery:**
+las 14 / pustynia 14 / Kaldera 16, o różnych wysokościach i promieniach.
+Łączą się w grzbiety i łagodne siodła. Ścieżka otrzymała nowy, czterowarstwowy
+materiał z lokalnej Krity i wspólną maskę całej wygładzonej sieci.
+Miękkie brzegi i skrzyżowania nie nakładają osobnych pasów. Poprawione
+mieszanie alfa podczas wypieku zachowuje pełne krycie gruntu i usuwa smugi
+od odsłanianego tła. Mosty i przepaść zachowane; zapis bez migracji.
+PASS: 1584 kontrole wysokości/dróg, 1063 renderera Kaldery i 13 źródeł KRA/PNG.
+Logika i animacje: 200013 / zapis: 4513 / obsługa skrzyń: 115 — PASS.
+Wszystkie testy ciche i ukryte. Ukończony render: średnia 4,11 / p95 4,85 ms;
+nie jest to pomiar foreground FPS. [Źródła, podglądy i odbiór](../terrain/diversity-20261108/README.md).
+Gotowe EXE i oba ZIP-y sprawdzono po wypakowaniu: po 147 zgodnych zasobów,
+gracz — 180 klatek startu i 1584 kontrole podłoża/dróg, DEV — 3 × 180 klatek.
+Audio wyłączone w testach, okna ukryte, preferencje użytkownika zachowane.
+
+**Aktualizacja 08.11.2026 — dostępne wzniesienia trzech krain:** 13 profili
+wysokości (las 4 / pustynia 4 / Kaldera 5), z łagodnymi wejściami i zejściami.
+Ruch bohatera i przeciwników mierzy odległość po powierzchni. Podłoże,
+obiekty, cienie, kamera i odwrotny rzut kursora korzystają z tej samej
+wysokości. Istniejące ilustracje są rysowane na podniesionej siatce 2.5D;
+bez nowych modeli, tekstur lub migracji zapisów. Wszystkie szczyty mają
+dostęp z równiny przy rzeczywistej scenografii i kolizjach. PASS: 564
+kontrole wysokości/ruchu/renderera, 1063 regresji Kaldery i 115 obsługi
+skrzyń. Testy ukryte i ciche, preferencje audio zachowane.
+Ukończony render próby wysokości: średnia 4,06 ms / p95 4,47 ms;
+nie jest to pomiar FPS widocznego okna. [Podglądy i odbiór](../terrain/hills/README.md).
+Logika: 199995 / zapis: 4513 — PASS. Zaktualizowane EXE oraz oba ZIP-y
+przeszły odbiór po wypakowaniu (147 zgodnych zasobów w każdej paczce,
+gracz: 180 klatek startu i 564 kontrole renderera, DEV: 3 × 180 klatek).
+
+**Aktualizacja 08.11.2026 — przepaść i skrzynie krain:** kamienne obrzeże
+zastąpiono urwiskiem schodzącym w mgłę. Powierzchnia kończy się na brzegu;
+tło ma warstwy odległych skał, popiół i żar, a rzeki spływają do otchłani.
+Trzy style skrzyń, po trzy stany: drewno i mech / piaskowe złoto / obsydian
+i żar. Nowe źródła wykonano lokalnie w oficjalnej przenośnej Kricie 5.3.4,
+przez natywne Python/Qt i kritarunner, bez nowego MCP, chmury i obcych grafik.
+Zapisane projekty worker zachowuje w tle. PASS: 1063 kontroli renderera,
+115 obsługi skrzyń i 31 niezależnych kontroli zasobów. Testy ukryte i ciche.
+[Źródła, podglądy i raporty](../volcano/abyss/README.md).
+
+**Aktualizacja 08.11.2026 — granice i teren Kaldery:** ciągłe skalne obrzeże
+przy granicy ruchu, przyciemnione zewnętrze i kontur minimapy. Istniejące
+ilustracje Krity wypiekane są raz w tym samym buforze; bez nowych zasobów GPU.
+Nowe rozmieszczenie ogranicza tłok i puste obszary: minimalny odstęp
+1,77 → 4,45 pola, największy pusty promień próbki 13,53 → 4,97 pola.
+Zachowano przejścia i interakcje. Rewizja 4 aktualizuje także starsze zapisy,
+z zachowaniem pozostałych danych bajt w bajt. PASS: 199995 kontroli logiki,
+4513 zapisu i 820 renderera. Testy ciche i ukryte.
+[Opis, podglądy i wyniki](../volcano/layout/README.md).
+
+**Aktualizacja 07.11.2026 — jednolite włosy bohatera:** usunięto jasną
+plamę nad czołem, dopasowano kolor przednich i tylnych pasm do korony,
+zachowując ich delikatny detal. Korekta istniejącego materiału jest wykonywana
+raz przy wczytywaniu; źródłowy PNG i KRA są niezmienione. 428 kontroli
+renderera i 25 niezależnych kontroli obrazów — PASS. Wszystkie okna ukryte,
+bez urządzenia audio. [Porównanie i raport](../hero/hair/README.md).
+
 **Aktualizacja 04.11.2026 — przeciwnicy Kaldery / ComfyUI:** na wyraźne
 zamówienie użytkownika i po potwierdzeniu lokalnego lekkiego modelu wykonano
 56 rzeczywistych generacji img2img w ComfyUI 0.41.3 / DreamShaper 8.

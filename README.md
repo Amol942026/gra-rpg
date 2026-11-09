@@ -1,5 +1,54 @@
 # Emberfall — Echa zapomnianych ruin
 
+09.11.2026: po pokonaniu Kamiennego Strażnika Eldrin prowadzi płatne lekcje
+magii w wieży. Kula ognia kosztuje 600 złota, Sopel lodu 1500, a Kulisty
+piorun 3000. Każdy czar trzeba najpierw kupić; K pozwala wybrać poznany
+czar, C go rzuca. Rosną obrażenia, koszt many i odnowienie. Nowe ilustracje
+Krita, animacje Synfig i nagrane efekty żywiołów; naciąg łuku wykorzystuje
+nagrania prawdziwych łuków. [Szczegóły i odbiór](art/gameplay/eldrin-spells-20261109/README.md).
+
+Aktualizacja 09.11.2026: nagrane szelesty ubrania, tarcie o ziemię i miękkie
+przyziemienie podczas przeturlania. Pozostałe 23 przedmioty ekwipunku
+(mikstury, strzały, materiały i łupy) mają ilustracje dopracowane w Kricie
+i lokalnym ComfyUI. Źródła: [przeturlanie](art/audio/ground-roll-20261109/README.md),
+[pozostałe ikony](art/items/loot-20261109/README.md).
+
+Najnowsza oprawa: nowy wyrzut i eksplozja kuli ognia, dźwięk materializacji
+po teleportacji oraz fizyczny naciąg łuku, uciszany po puszczeniu cięciwy.
+85 ikon broni i wyposażenia HUD opracowano w Blenderze i lokalnym ComfyUI.
+Źródła i odbiór: [efekty](art/audio/flame-20261108/README.md),
+[ikony ekwipunku](art/equipment/icons-20261108/README.md).
+
+Aktualizacja dźwięku 08.11.2026: naturalniejsze ataki oparte na nagranych
+świstach, uderzeniach i odgłosach materiałów; osobne brzmienia przeciwników
+i mocnego ciosu bohatera. Głośniejsza muzyka i miks, domyślnie oba kanały
+włączone (muzyka 85%, efekty 95%). Późniejsze własne ustawienia nadal się
+zapisują. Źródła i odbiór: [fizyczne odgłosy walki](art/audio/physical-20261108/README.md).
+
+Aktualizacja map 08.11.2026: las, pustynia i Kaldera mają teraz **102 × 102
+pola** zamiast 72 × 72 — około dwukrotną powierzchnię. Nowe obszary łączą
+odnogi ścieżek i cztery dodatkowe mosty nad lawą. Las ma 91 przeciwników,
+pustynia 55, Kaldera 61; scenografia i dostępne wzniesienia obejmują również
+dobudowane tereny. Zapis v12 dodaje je do istniejącej wyprawy, zachowując
+pokonanych wrogów, łup i postępy. Odczyt v1–v11 pozostaje dostępny.
+Szczegóły i podgląd: [rozbudowa trzech krain](art/world-expansion/README.md).
+
+Aktualizacja audio 08.11.2026: cztery autorskie utwory LMMS dla lasu, pustyni,
+Kaldery i wieży Eldrina, z płynnymi przejściami. 33 efekty Csound w trzech
+wariantach obejmują walkę, obrażenia obu stron, skrzynie, broń/ekwipunek,
+zbieranie przedmiotów i turlanie. Obróbkę wykonano w Audacity. Osobną głośność
+muzyki i efektów ustawisz w Opcjach, także po naciśnięciu ESC.
+Źródła i odbiór: [nowa oprawa dźwiękowa](art/audio/suite-20261108/README.md).
+
+Aktualizacja 08.11.2026: po dwa silne gatunki pustyni i Kaldery mają własne
+zdolności. Kobra piaskowa rzuca **Jadowity wachlarz**, skarabeusz miedziany
+wypuszcza **Miedzianą falę**, obsydianowy wojownik wykonuje **Rozłupujący cios**,
+a żarowy drak zionie **Żarowym oddechem**. Znacznik na ziemi zapowiada zasięg
+i kierunek ataku; można wyjść ze strefy, użyć uniku lub osłony. Po ataku
+przeciwnik przez chwilę pozostaje odsłonięty. Zapis v11 zachowuje fazę walki
+i pociski, a wcześniejsze zapisy v1–v10 nadal działają.
+Szczegóły: [zdolności przeciwników](art/gameplay/elite-abilities/README.md).
+
 **Kursor myszy Windows (04.11.2026):** gra używa zwykłej strzałki z ustawień
 Windows. Przywraca normalny tryb myszy, natywny uchwyt kursora i jego licznik
 widoczności przy wejściu nad okno oraz po zmianie aktywności lub trybu ekranu.
@@ -457,7 +506,7 @@ Po każdym awansie świat zatrzymuje się i otwiera menu z **5 punktami do rozda
 
 Początkowo bohater ma **100 HP i 100 many**, a statystyki do rozdzielenia mają wartość 0. Przyrosty HP, many i obrażeń wynikają z przydzielonych punktów oraz sprzętu; dawny automatyczny przyrost parametrów za poziom został zastąpiony tym systemem. Awans nadal odnawia zdrowie i manę. Regeneracja many daje **dokładnie 1 punkt co 5 sekund aktywnej gry**, do aktualnego maksimum.
 
-**K** lub kliknięcie kafelka czaru na pasku akcji otwiera księgę. Na razie dostępna jest **Kula ognia**, wybrana domyślnie. **C** wystrzeliwuje ją w stronę kursora; najazd na potwora celuje w jego pozycję. Koszt to **10 many**, odnowienie **0,8 s**, zasięg lotu **8 pól**. Podstawowe obrażenia wynoszą **28** wobec **14** zwykłego miecza. Moc magiczna rozwija czar niezależnie od siły i broni. Kula ma płonący ślad, zatrzymuje się na przeszkodach i wybucha, raniąc pobliskich przeciwników. Trafienia używają obrony magicznej.
+**K** lub kliknięcie kafelka czaru otwiera księgę. Wszystkich trzech czarów uczy Eldrin za złoto po pokonaniu Kamiennego Strażnika. **C** rzuca wybrany poznany czar w stronę kursora; najazd na potwora celuje w jego pozycję. Kula ognia: 600 złota, 10 many, 28 bazowych obrażeń, 0,8 s odnowienia. Sopel lodu: 1500 złota, 20 many, 48 bazowych obrażeń, 1,8 s. Kulisty piorun: 3000 złota, 35 many, 84 bazowe obrażenia, 3,5 s. Moc magiczna rozwija każdy czar niezależnie od siły i broni. Pociski zatrzymują się na przeszkodach i mają własne efekty trafienia. Trafienia używają obrony magicznej. Przełączanie czarów nie skraca bieżącego odnowienia.
 
 Strażnik ruin zadaje obrażenia magiczne, oznaczone niebieskim ostrzeżeniem; od wersji 0.20 dotyczy to także jadu leśnych pająków. Pozostałe potwory atakują fizycznie. HUD przeciwnika pokazuje typ ataku i obronę magiczną. Fala żaru została zastąpiona Kulą ognia.
 
@@ -525,7 +574,7 @@ Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/E
 | LPM na mapie (pojedyncze kliknięcie) | Jeden zamach; wszyscy przeciwnicy w promieniu 2,1 pola |
 | Najazd kursorem na potwora lub obiekt | Informacje w sekcji POD KURSOREM po prawej |
 | V / kafelek LECZENIE | Poznane Leczenie: +30 HP za 20 many |
-| C | Wystrzelenie wybranego czaru w stronę kursora: Kula ognia za 10 many |
+| C | Rzucenie wybranego poznanego czaru w stronę kursora; koszt w księdze K |
 | PPM na ciele potwora | Otwarcie jego łupu w prawym HUD |
 | K / kliknięcie kafelka czaru | Księga czarów i wybór czaru |
 | P / STATYSTYKI w prawym HUD | Karta statystyk bohatera |

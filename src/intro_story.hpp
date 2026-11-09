@@ -9,17 +9,17 @@ namespace ember {
 enum class IntroPhase { Finished, Opening, Dialogue, Charging, Departing, Arriving };
 struct StoryLine {bool mage;const char* text;};
 inline constexpr std::array<StoryLine,12> IntroDialogue={{
-    {true,"Wędrowcze... dobrze, że dotarłeś. Spójrz na niebo. Te czerwone blizny nie są zwiastunem burzy."},
-    {false,"Widziałem je nad wioską. Zwierzęta uciekają z lasu, a nocą ktoś woła spośród ruin. Co się dzieje?"},
-    {true,"Pęka Pieczęć Popiołu. Po drugiej stronie czeka armia demonów. Gdy brama się otworzy, żaden mur nie ochroni naszego świata."},
-    {false,"Jesteś magiem, Eldrinie. Nie możesz jej zamknąć?"},
-    {true,"Moja magia jedynie opóźnia ich nadejście. Potrzebujemy Serca Świtu — artefaktu, który kiedyś oddzielił nasz świat od Otchłani."},
-    {false,"Powiedz, gdzie go znajdę. Jeśli istnieje choć cień szansy, spróbuję."},
-    {true,"Serce rozbito na pięć części i ukryto w odległych krainach. Każdej strzeże osobny strażnik. Musisz zdobyć wszystkie pięć i złączyć je ponownie."},
-    {false,"Pięciu strażników przeciw jednemu wędrowcowi... Mam nadzieję, że nie wybrałeś mnie tylko dlatego, że byłem najbliżej."},
-    {true,"Wybrałem cię, bo mimo strachu przyszedłeś pomóc. Pierwszej części strzeże Kamienny Strażnik, w północnej części Lasu Mchu."},
-    {false,"Zacznę od lasu. A kiedy wrócę, będziesz mi winien długą opowieść... i porządny posiłek."},
-    {true,"Umowa stoi. Otworzę ci drogę. Pamiętaj: nie musisz dziś ocalić całego świata. Musisz tylko zrobić pierwszy krok."},
+    {true,"Wędrowcze, podejdź do okna. Te czerwone szczeliny nad horyzontem sięgają dalej, niż widzi oko."},
+    {false,"Widziałem je nad wioską. Zwierzyna ucieka z Kniei, a nocą słychać głosy w ruinach. Co się budzi, Eldrinie?"},
+    {true,"Pieczęć Popiołu słabnie. Za nią czeka Otchłań i zastępy demonów. Jeśli granica pęknie, wedrą się do naszego świata."},
+    {false,"A twoja magia? Zdołasz utrzymać Pieczęć?"},
+    {true,"Jeszcze przez pewien czas. Odnowić ją może tylko Serce Świtu, artefakt, którego moc niegdyś oddzieliła nas od Otchłani."},
+    {false,"Więc znajdę to Serce. Powiedz tylko, dokąd mam ruszyć."},
+    {true,"Dawno temu podzielono je na pięć części i ukryto w odległych krainach. Każdej strzeże inny strażnik. Potrzebujemy wszystkich pięciu."},
+    {false,"Pięciu strażników... Zacznijmy od jednego. Gdzie go szukać?"},
+    {true,"W północnych ruinach Wielkiej Kniei. Kamienny Strażnik pilnuje pierwszej części. Wróć z nią do mnie; razem odnajdziemy następny szlak."},
+    {false,"Przyniosę ją. A ty dopilnuj, żeby ten świat jeszcze tu był, gdy wrócę."},
+    {true,"Dopilnuję. Otworzę przejście do Kniei. Strzeż odzyskanego światła — każda część będzie potrzebna do odnowienia Pieczęci."},
     {true,"Ruszaj więc"}
 }};
 

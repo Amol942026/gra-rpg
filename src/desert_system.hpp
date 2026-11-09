@@ -32,10 +32,10 @@ bool travelToDesert(){
  activateField(WorldLocation::Desert);player=DesertArrival;facing={1,0};animation={};animation.face(1,0);
  cancelBow();closeCorpse();rollRemaining=rollCd=swing=attackCd=spellCd=hurt=stepDistance=0;
  arrows.clear();fireballs.clear();explosions.clear();effects.clear();pierceFlashes.clear();healingPulse=0;
- say(desertBossDead?"Morze Piasków. Brama Eldrina prowadzi z powrotem do wieży.":"Morze Piasków. Odnajdź Żywą Wydmę na południowym wschodzie.");sound(Cue::Spell,player);return true;
+ say(desertBossDead?"Morze Piasków. Brama Eldrina prowadzi z powrotem do wieży.":"Morze Piasków. Odnajdź Żywą Wydmę na południowym wschodzie.");sound(Cue::TeleportArrival,player);return true;
 }
 bool useDesertPortal(){
  if(sandTrapped()||!inDesert()||dead()||allocationRequired||storyBlocked()||rolling())return false;
  if(distance(player,DesertPortal)>2.8f){say("Podejdź do Bramy Eldrina (E / PPM).");return false;}
- enterMageTower();dawnQuest=DawnQuest::AtTower;say("Powrót do wieży. Porozmawiaj z Eldrinem, aby wrócić na pustynię.");return true;
+ enterMageTower();sound(Cue::TeleportArrival,player);dawnQuest=DawnQuest::AtTower;say("Powrót do wieży. Porozmawiaj z Eldrinem, aby wrócić na pustynię.");return true;
 }

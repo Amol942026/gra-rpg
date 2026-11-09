@@ -1,0 +1,16 @@
+[
+  {
+    "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\audio-settings.cfg",
+    "before": "1 0.997024 0 0 0\n",
+    "after": "1 0.997024 0 0 0\n",
+    "sha256": "776a9e37887382789f66b0d7a960c5f055ce5771c5fc3dbbee46fd6464e54d41",
+    "explicit_user_request": true
+  },
+  {
+    "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\player\\audio-settings.cfg",
+    "before": null,
+    "after": "0.85 0.95 0 0 0\n",
+    "sha256": "a77026753eb43a84f72a3855472d204986b346635dc9cafe4e7ce01e502d6344",
+    "explicit_user_request": true
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "known_cues": [
+    "step",
+    "swing",
+    "slime-hit",
+    "wolf-hit",
+    "bone-hit",
+    "stone-hit",
+    "enemy-fall",
+    "hurt",
+    "death",
+    "roll",
+    "dodge",
+    "spell",
+    "potion",
+    "pickup",
+    "equip",
+    "drop",
+    "level-up",
+    "victory",
+    "enemy-attack",
+    "ui",
+    "reject",
+    "bow-shot"
+  ],
+  "bindings": {
+    "music": "C:\\AI2D\\pipeline\\runs\\media_20261019_175901_828feb\\music\\crystal_sanctum_loop.ogg",
+    "spell": "C:\\AI2D\\pipeline\\runs\\media_20261019_175901_828feb\\sfx\\electric_processed.wav",
+    "swing": "C:\\AI2D\\pipeline\\runs\\media_20261019_175901_828feb\\sfx\\weapon_hit_processed.wav",
+    "pickup": "C:\\AI2D\\pipeline\\runs\\media_20261019_175901_828feb\\sfx\\loot_processed.wav"
+  },
+  "deployment": "Use bind-audio after approving these sounds for production."
+}

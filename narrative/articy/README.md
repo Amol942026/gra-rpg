@@ -1,5 +1,24 @@
 # articy:draft X FREE — Emberfall dialogue workflow
 
+## Current authority — 2026-11-08
+
+The user explicitly requested reviewing the **current game**, because articy's
+content is outdated. The runtime now contains 12 mapped conversations / 57 lines,
+plus contextual travel/chronicle text in `src/story_context.hpp`. The revision is
+documented in `narrative/review-20261108/`. Those files are actual game-source
+snapshots and renderer evidence, **not native articy exports**. No native project
+was changed in this revision. The local Emberfall bridge did not have a live
+connection on this PC; the Wichrogród connector belongs to a different project.
+
+The exports and plans dated 2026-10-30 below are historical and must not overwrite
+the current game. The source mapping now includes all 12 arrays. A future native
+sync must start from a fresh current-game extraction and inspect native differences
+before any edit. The earlier seven-conversation validation below describes only
+the 2026-10-30 state. The latest user instruction takes precedence over the older
+standing preference about articy as the main narrative workspace.
+
+## Historical native integration — 2026-10-30
+
 Status on 2026-10-30: **working native MCP integration, articy minimized**.
 Seven conversations, 41 lines, two speakers and 34 native connections are saved
 in the real client. The structural-child readback bug is fixed. All nine MCP

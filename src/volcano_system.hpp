@@ -1,28 +1,31 @@
 // Included inside Game; native third-field state and local combat.
 FieldState& storedField(WorldLocation realm){return realm==WorldLocation::Volcano?volcanoState:realm==WorldLocation::Desert?desertState:forestState;}
 std::vector<Prop> makeVolcanoScenery(const std::vector<Enemy>& inhabitants,bool protectPlayer=false)const{
- struct Cluster{V centre;int type,count;float spread;};
- const Cluster groups[]={{{9,44},15,7,4.6f},{{12,29},15,7,4.4f},{{19,13},15,6,4.2f},{{8,54},15,5,3.7f},
-  {{18,60},14,6,4.2f},{{6,19},14,6,3.8f},{{21,36},14,7,4.5f},{{34,13},14,6,3.5f},{{35,49},14,6,3.7f},
-  {{58,63},14,6,3.8f},{{63,31},14,7,4.4f},{{67,18},14,5,3.5f},{{45,9},14,5,3.3f},
-  {{43,55},17,7,4.4f},{{65,47},17,7,4.4f},{{57,9},17,6,3.8f},{{33,64},17,6,3.6f},
-  {{37,16},16,4,3.2f},{{44,45},16,4,3.4f},{{56,36},16,4,3.6f},
-  {{12,59},14,3,3.2f},{{13,33},15,3,3.2f},{{39,53},16,3,3.1f},{{61,20},17,3,3.5f}};
- std::vector<Prop> result;result.reserve(132);
- for(int group=0;group<int(std::size(groups));group++){
-  const auto& c=groups[group];int made=0;
-  for(int n=0;n<c.count*12&&made<c.count;n++){
-   unsigned h=hash(group+941,n+271);float a=n*2.3999632f+group*.71f;
-   float r=c.spread*std::sqrt(((h>>8)%1000+.5f)/1000.f);V p=c.centre+V{std::cos(a)*r,std::sin(a)*r};
-   float radius=propRadius(c.type);
+ // Pick the largest remaining gaps from a deterministic, irregular candidate
+ // set. Regional materials remain distinct without tightly packed clusters.
+ // Generation happens only on realm creation / scenery migration, using no RNG.
+ struct Candidate{Prop prop;float gap=10000;};std::vector<Candidate> candidates;candidates.reserve(8192);
+ std::vector<Prop> result;result.reserve(209);
+ for(int n=0;n<8192;n++){
+   unsigned h=hash(n+941,271);V p{3.5f+float(h&65535)/65535.f*(MapSize-7),3.5f+float(h>>16)/65535.f*(MapSize-7)};
+   int roll=hash(n,734)%100,type;
+   if(p.x<24)type=roll<53?15:roll<87?14:16;
+   else if(p.x>51)type=roll<53?17:roll<83?14:16;
+   else type=roll<38?14:roll<70?16:17;
+   float radius=propRadius(type);
    if(p.x<3||p.y<3||p.x>MapSize-3||p.y>MapSize-3||volcanoLava(p,radius+.8f)||nearVolcanoFountain(p,3)||nearTreasure(p,WorldLocation::Volcano)||distance(p,VolcanoArrival)<6||distance(p,VolcanoPortal)<4||distance(p,VolcanoBossHome)<8)continue;
    bool clear=true;
    for(const auto& road:VolcanoRoads)for(int i=1;i<6;i++)if(desertSegmentDistance(p,road[i-1],road[i])<1.7f+radius)clear=false;
    for(const auto& e:inhabitants)if(distance(p,e.home)<e.radius()+2.5f||distance(p,e.pos)<e.radius()+1.2f)clear=false;
-   for(const auto& q:result)if(distance(p,q.pos)<radius+propRadius(q.type)+.8f)clear=false;
    if(protectPlayer&&distance(p,player)<radius+1.2f)clear=false;
-   if(clear){result.push_back({p,c.type,.82f+float((h>>19)%25)*.01f});made++;}
-  }
+   if(clear)candidates.push_back({{p,type,.74f+float(hash(n,519)%25)*.01f}});
+ }
+ for(int placed=0;placed<208;placed++){
+  int best=-1;float gap=4.4f;
+  for(int i=0;i<int(candidates.size());i++)if(candidates[i].gap>gap){gap=candidates[i].gap;best=i;}
+  if(best<0)break;
+  Prop chosen=candidates[best].prop;result.push_back(chosen);
+  for(auto& candidate:candidates)candidate.gap=std::min(candidate.gap,distance(candidate.prop.pos,chosen.pos));
  }
  result.push_back({VolcanoPortal,13,1});return result;
 }
@@ -50,12 +53,12 @@ void resetFieldArrival(V arrival){
 }
 bool travelToVolcano(){
  if(!canTravelVolcano())return false;activateField(WorldLocation::Volcano);resetFieldArrival(VolcanoArrival);
- say(volcanoBossDead?"Kaldera Popiołu. Brama Eldrina prowadzi do wieży.":"Kaldera Popiołu. Varkhor strzeże trzeciej części Serca Świtu na północnym wschodzie.");sound(Cue::Spell,player);return true;
+ say(volcanoBossDead?"Kaldera Popiołu. Brama Eldrina prowadzi do wieży.":"Kaldera Popiołu. Varkhor strzeże trzeciej części Serca Świtu na północnym wschodzie.");sound(Cue::TeleportArrival,player);return true;
 }
 bool useVolcanoPortal(){
  if(!inVolcano()||dead()||allocationRequired||storyBlocked()||rolling()||knockedBack())return false;
  if(distance(player,VolcanoPortal)>2.8f){say("Podejdź do Bramy Eldrina (E / PPM).");return false;}
- enterMageTower();dawnQuest=DawnQuest::AtTower;say("Eldrin może ponownie otworzyć drogę do Kaldery Popiołu.");return true;
+ enterMageTower();sound(Cue::TeleportArrival,player);dawnQuest=DawnQuest::AtTower;say("Eldrin może ponownie otworzyć drogę do Kaldery Popiołu.");return true;
 }
 static bool volcanoRanged(int type){return type==14||type==15;}
 static void advanceVolcanoAnimation(Enemy& e,V movement,float dt){
@@ -70,13 +73,13 @@ bool prepareEruption(Enemy& e,float dt,bool visible){
  if(visible||e.eruptionWindup>0)e.eruptionCd=std::max(0.f,e.eruptionCd-dt);
  if(e.eruptionWindup>0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.eruptionWindup=std::max(0.f,e.eruptionWindup-dt);return true;}
  if(dt>0&&visible&&e.eruptionCd<=.00001f&&e.windup<=0&&e.attack<=0&&fissures.size()<=9){
-  e.eruptionCd=6.f;e.eruptionWindup=.95f;e.attack=1.5f;e.eruptions++;sound(Cue::EnemyAttack,e.pos);
+  e.eruptionCd=6.f;e.eruptionWindup=.95f;e.attack=1.5f;e.eruptions++;sound(enemyAttackCue(e.type),e.pos);
   V side=normalized(V{player.y-e.pos.y,e.pos.x-player.x});
   for(int n=-1;n<=1;n++){V target=player+side*(n*2.6f);if(!walkable(target))target=player;fissures.push_back({target,0,.95f+std::abs(n)*.23f,48,e.id,false});}
   return true;
  }return false;
 }
-void launchCinder(const Enemy& e){if(cinders.size()<24){cinders.push_back({e.pos,normalized(player-e.pos)*7.5f,7,float(e.damage()),e.id});sound(Cue::Swing,e.pos);}}
+void launchCinder(const Enemy& e){if(cinders.size()<24){cinders.push_back({e.pos,normalized(player-e.pos)*7.5f,7,float(e.damage()),e.id});sound(Cue::MagicAttack,e.pos);}}
 void updateVolcanoAttacks(float dt,V heroBefore,bool wasRolling,float rollAge){
  if(!inVolcano()||dt<=0)return;
  for(size_t i=0;i<cinders.size();){

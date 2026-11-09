@@ -114,11 +114,11 @@ void groundTile(int x,int y,float sx,float sy){
 }
 void make(){
  makeScenery();
- terrain=render_targets::colorOnly(TerrainWidth,TerrainHeight);BeginTextureMode(terrain);ClearBackground(BLANK);
+ terrain=render_targets::colorOnly(TerrainCacheWidth,TerrainCacheHeight);BeginTextureMode(terrain);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,TerrainBakeScale});
  for(int sum=0;sum<MapSize*2;sum++)for(int x=1;x<MapSize-1;x++){int y=sum-x;if(y<1||y>=MapSize-1)continue;groundTile(x,y,TerrainOriginX+(x-y)*40,90+(x+y)*20);}
  drawRoads();
  // Large smooth ridges are baked across tile boundaries; no square sand grid.
- for(int i=0;i<210;i++){unsigned h=Game::hash(i,443);V pos{4.f+h%64,4.f+(h>>8)%64};if(desertPath(pos)||distance(pos,DesertOasis)<6||distance(pos,DesertBossHome)<7)continue;
+ for(int i=0;i<420;i++){unsigned h=Game::hash(i,443);V pos{4.f+h%(MapSize-8),4.f+(h>>8)%(MapSize-8)};if(desertPath(pos)||distance(pos,DesertOasis)<6||distance(pos,DesertBossHome)<7)continue;
   float x=TerrainOriginX+(pos.x-pos.y)*40,y=90+(pos.x+pos.y)*20,w=38+h%54,hh=8+(h>>15)%13;
   softShape({{x-w,y},{x-w*.48f,y-hh*.7f},{x+w*.12f,y-hh},{x+w*.74f,y-hh*.3f},{x+w,y+2},{x+w*.2f,y+hh*.7f},{x-w*.52f,y+hh*.4f}},rgb(220,173,109));
   curve({x-w*.94f,y},{x-w*.25f,y-hh*1.23f},{x+w*.22f,y-hh*1.27f},{x+w*.91f,y+1},rgb(244,203,143),1.1f);
@@ -130,7 +130,8 @@ void make(){
  x=TerrainOriginX+(DesertBossHome.x-DesertBossHome.y)*40;y=90+(DesertBossHome.x+DesertBossHome.y)*20;
  oval(x,y,213,105,rgb(189,136,79));oval(x-8,y-6,194,91,rgb(220,174,108));for(int i=0;i<4;i++)ovalOutline(x,y,173-i*9,82-i*4,rgb(200-i*3,145-i*2,81));
  for(int i=0;i<12;i++){float a=i*PI/6;diamond(x+std::cos(a)*192,y+std::sin(a)*94,5,3,rgb(148,104,66));}
- EndTextureMode();SetTextureFilter(terrain.texture,TEXTURE_FILTER_BILINEAR);
+ EndMode2D();EndTextureMode();SetTextureFilter(terrain.texture,TEXTURE_FILTER_BILINEAR);
+ terrain_surface::prepare(WorldLocation::Desert,terrain.texture);
  Image mini=GenImageColor(180,112,BLANK);for(int y=0;y<112;y++)for(int x=0;x<180;x++){float delta=(x-90)*(MapSize-2)/78.f,sum=(y-6)*(MapSize-2)/48.f+2;V p{(sum+delta)*.5f,(sum-delta)*.5f};if(p.x>=1&&p.y>=1&&p.x<MapSize-1&&p.y<MapSize-1)ImageDrawPixel(&mini,x,y,desertWater(p)?rgb(64,168,181):desertPath(p)?rgb(136,100,64):rgb(202,160,101));}minimap=LoadTextureFromImage(mini);UnloadImage(mini);
 }
 void unload(){unloadScenery();if(terrain.id)UnloadRenderTexture(terrain);if(minimap.id)UnloadTexture(minimap);terrain={};minimap={};}

@@ -1,0 +1,21 @@
+{
+  "id": "EF_VolcanoMissingDesertTalk",
+  "title": "Eldrin — powrót po pominięty odłamek",
+  "array": "VolcanoMissingDesertTalk",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "7f21f7c35574709ac7d3452d9facdabfb52b27bc73a6013b3a5cc9516d1517bb",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Odłamek Varkhora jest już z tobą. Część Żywej Wydmy nadal jednak czeka pośród jej szczątków w Morzu Piasków."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Muszę wrócić na pustynię i domknąć tę wyprawę."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Wybierz przejście do Morza Piasków. Brama przy miejscu przybycia znów sprowadzi cię do wieży."
+    }
+  ]
+}

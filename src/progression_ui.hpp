@@ -5,8 +5,9 @@ Rectangle statAdjust(int row,bool add){return {add?951.f:878.f,273.f+row*56,add?
 Rectangle statAddFive(int row){return {1028,273.f+row*56,84,36};}
 Rectangle statRow(int row){return {330,266.f+row*56,782,54};}
 Rectangle statsConfirm(){return {520,685,400,47};}
-Rectangle spellChoice(){return {389,331,662,142};}
-Rectangle spellConfirm(){return {540,496,360,46};}
+Rectangle spellChoice(int index=0){return {286.f+index*300.f,292,280,330};}
+Rectangle spellConfirm(int index=0){auto r=spellChoice(index);return {r.x+18,563,r.width-36,42};}
+Rectangle spellBookClose(){return {548,698,344,42};}
 
 int draftRemaining(){return game.attributePoints-std::accumulate(statDraft.begin(),statDraft.end(),0);}
 void openStats(){
@@ -19,9 +20,22 @@ void syncAdvancement(){
  if(game.attributePoints>0){if(!statsOpen||draftForLevel!=game.level)openStats();}
  else if(game.skillAllocationPending()){if(!skillsOpen||skillDraftLevel!=game.level)openSkills();}
 }
-void openSpellBook(){
+void openSpellBook(bool lessons=false){
     if(game.allocationRequired||game.dead())return;
-    game.cancelBow();weaponWheelOpen=false;skillsOpen=false;spellBookOpen=true;statsOpen=false;dragging={};audioSystem.play(Cue::Ui);
+    invalidatePausedWorld();game.cancelBow();weaponWheelOpen=false;skillsOpen=false;spellBookOpen=true;statsOpen=false;dragging={};spellLessonOpen=lessons&&game.spellLessonsUnlocked()&&game.mageReachable();spellBookNotice.clear();audioSystem.play(Cue::Ui);
+}
+void openSpellLessons(){
+    if(!game.spellLessonsUnlocked()||!game.mageReachable()){game.say(learnSpellMessage(LearnSpellResult::Unavailable));return;}
+    towerStory={};openSpellBook(true);
+}
+bool spellBookAction(int index){
+    if(index<0||index>=int(Spells.size()))return false;
+    Spell spell=Spell(index+1);
+    if(spellLessonOpen&&!game.knowsSpell(spell)){
+        auto result=game.learnSpell(spell);spellBookNotice=learnSpellMessage(result);if(result!=LearnSpellResult::Success)audioSystem.play(Cue::Reject);return result==LearnSpellResult::Success;
+    }
+    if(!game.chooseSpell(spell)){spellBookNotice="Tego zaklęcia nauczy cię Eldrin po pokonaniu Kamiennego Strażnika.";audioSystem.play(Cue::Reject);return false;}
+    spellBookOpen=spellLessonOpen=false;audioSystem.play(Cue::Ui);return true;
 }
 bool castSelectedSpell(){
     V aim{};WorldHover hit=pickWorld(mouse);
@@ -49,7 +63,8 @@ bool clickProgression(){
         return true;
     }
     if(spellBookOpen){
-        if(inside(spellChoice())||inside(spellConfirm())){game.chooseSpell(Spell::Fireball);spellBookOpen=false;audioSystem.play(Cue::Ui);}
+        if(inside(spellBookClose())){spellBookOpen=spellLessonOpen=false;return true;}
+        for(int i=0;i<int(Spells.size());i++)if(inside(spellChoice(i))){spellBookAction(i);break;}
         return true;
     }
     if(!welcome&&!help&&!paused&&!game.dead()&&inside(skillsButton())){openSkills();return true;}
@@ -72,8 +87,9 @@ bool progressionInput(){
     }
     if(spellBookOpen){
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))clickProgression();
-        if(IsKeyPressed(KEY_ENTER)){game.chooseSpell(Spell::Fireball);spellBookOpen=false;}
-        if(IsKeyPressed(KEY_ESCAPE)||IsKeyPressed(KEY_K))spellBookOpen=false;
+        // Enter may close a read-only book; paid lessons require their visible button.
+        if(IsKeyPressed(KEY_ENTER)&&!spellLessonOpen)spellBookOpen=false;
+        if(IsKeyPressed(KEY_ESCAPE)||IsKeyPressed(KEY_K))spellBookOpen=spellLessonOpen=false;
         return true;
     }
     if(!welcome&&!help&&!paused&&!game.dead()){
@@ -87,7 +103,7 @@ bool progressionInput(){
 struct AttributeHelp {const char* name;const char* effect;const char* detail;const char* five;};
 constexpr AttributeHelp AttributeHints[]={
  {"Siła","+2 obrażenia fizyczne za punkt.","Wzmacnia miecze, topory, sztylety i łuki. Zwiększa też obrażenia Mocnego cięcia i Przeszywającej strzały. Nie wpływa na obrażenia magii.","5 punktów: +10 do ataku fizycznego."},
- {"Moc magiczna","+3 obrażenia magiczne za punkt.","Zwiększa obrażenia Kuli ognia. Nie podnosi kosztu czaru ani nie wzmacnia Leczenia, które zawsze odnawia 30 HP.","5 punktów: +15 obrażeń Kuli ognia."},
+ {"Moc magiczna","+3 bazowe obrażenia magiczne za punkt.","Wzmacnia kulę ognia, sopel lodu i kulisty piorun. Silniejsze żywioły mają własny mnożnik. Nie zmienia kosztów many ani Leczenia, które odnawia 30 HP.","5 punktów: +15 bazowych obrażeń magii."},
  {"Obrona","+1 obrony fizycznej za punkt.","Chroni przed trafieniami fizycznymi. Każdy punkt obrony zmniejsza takie obrażenia o 0,45 HP. Trafienie zadaje co najmniej 2 HP. Nie chroni przed magią.","5 punktów: +5 obrony, do 2,25 HP mniej na cios."},
  {"Obrona magiczna","+1 obrony magicznej za punkt.","Chroni przed atakami magicznymi. Każdy punkt zmniejsza ich obrażenia o 0,45 HP. Trafienie zadaje co najmniej 2 HP. Nie zmniejsza obrażeń fizycznych.","5 punktów: +5 obrony, do 2,25 HP mniej na czar."},
  {"Wytrzymałość","+10 maksymalnego HP za punkt.","Zwiększa maksymalne zdrowie. Po zatwierdzeniu każdy punkt dodaje także 10 do obecnego HP, zachowując wcześniejszy ubytek zdrowia.","5 punktów: +50 maksymalnego i obecnego HP."},
@@ -146,16 +162,24 @@ void drawStatsMenu(){
     center(game.allocationRequired?"Świat jest zatrzymany. Rozdaj wszystkie punkty i zatwierdź.":"ENTER / ESC / P — wróć do gry",720,742,14,Muted);
 }
 void drawSpellBook(){
-    rect(0,0,W,H,rgb(6,15,18,215));panel({340,213,760,454},Panel);line(368,234,1072,234,Gold);
-    center("KSIĘGA CZARÓW",720,259,30,Text,true);center("Wybierz czar używany klawiszem C",720,302,17,Muted);
-    Rectangle card=spellChoice();panel(card,inside(card)?Card:Panel);DrawRectangleLinesEx(card,1,Gold);
-    fireIcon(442,405,1.5f,game.time*3);txt("Kula ognia",487,347,25,Text,true);
-    txt(TextFormat("Obrażenia magiczne: %d   ·   Koszt: 10 many",game.magicDamage()),487,388,17,Gold);
-    txt("Zasięg: 8 pól   ·   Odnowienie: 0,8 s",487,419,16,Muted);
-    txt("Celuj kursorem. Kula wybucha po trafieniu.",487,446,15,Muted);
-    panel(spellConfirm(),inside(spellConfirm())?Card:Panel);center("WYBIERZ KULĘ OGNIA",720,509,18,Gold);
-    center(game.selectedSpell==Spell::Fireball?"Wybrany czar: Kula ognia":"Nie wybrano czaru",720,569,16,Green);
-    center(TextFormat("Mana: %d / %d   ·   Regeneracja: 1 punkt co 5 s",int(game.mana),game.maxMana()),720,598,15,Blue);
-    center("Świat jest zatrzymany. ESC / K — wróć bez zmiany.",720,625,15,Muted);
+    rect(0,0,W,H,rgb(6,15,18,215));panel({252,158,936,600},Panel);line(278,180,1162,180,Gold);
+    center(spellLessonOpen?"ELDRIN — SZTUKA ŻYWIOŁÓW":"KSIĘGA CZARÓW",720,204,29,Text,true);
+    center(spellLessonOpen?"Ogień, mróz i burza. Nauka każdego żywiołu wymaga osobnej lekcji.":"Wybierz poznane zaklęcie. Klawisz C rzuca je w kierunku kursora.",720,249,16,Muted);
+    for(int i=0;i<int(Spells.size());i++){
+        Spell spell=Spell(i+1);const auto& definition=Spells[i];bool known=game.knowsSpell(spell);Rectangle card=spellChoice(i);float x=card.x+card.width/2;
+        panel(card,inside(card)?Card:Panel);DrawRectangleLinesEx(card,1,game.selectedSpell==spell&&known?Green:Line);
+        spell_art::icon(spell,x,350,1.45f,known||spellLessonOpen?1:.42f);
+        center(definition.name,x,397,22,known?Text:Muted,true);
+        center(TextFormat("OBRAŻENIA  %d",game.spellDamage(spell)),x,437,18,Gold);
+        center(TextFormat("MANA  %d     ODNOWIENIE  %.1f s",int(definition.mana),definition.cooldown),x,470,14,Blue);
+        center(TextFormat("ZASIĘG  %.0f     KOSZT NAUKI  %d",definition.range,definition.price),x,500,13,Muted);
+        center(known?"ZAKLĘCIE POZNANE":spellLessonOpen?"LEKCJA U ELDRINA":"NIEZNANE — NAUKA U ELDRINA",x,533,12,known?Green:Muted);
+        Rectangle button=spellConfirm(i);bool enabled=known||(spellLessonOpen&&game.spellLessonStatus(spell)==LearnSpellResult::Success);
+        panel(button,enabled&&inside(button)?Card:Ink);DrawRectangleLinesEx(button,1,enabled?Gold:Line);
+        center(known?"WYBIERZ":spellLessonOpen?TextFormat("NAUCZ SIĘ — %d ZŁ",definition.price):"WYMAGA NAUKI",x,button.y+12,15,enabled?Gold:Muted);
+    }
+    center(spellBookNotice.empty()?(spellLessonOpen?TextFormat("Twoje złoto: %lld",static_cast<long long>(game.goldBalance())):"Nieznane czary kupisz u Eldrina po pokonaniu Kamiennego Strażnika."):spellBookNotice.c_str(),720,644,15,Gold);
+    center(TextFormat("Mana: %d / %d   ·   Regeneracja: 1 punkt co 5 s",int(game.mana),game.maxMana()),720,671,14,Blue);
+    Rectangle close=spellBookClose();panel(close,inside(close)?Card:Ink);center("WRÓĆ · ESC / K",720,close.y+12,15,Muted);
 }
 void drawProgression(){syncAdvancement();if(statsOpen)drawStatsMenu();else if(skillsOpen)drawSkillsMenu();else if(spellBookOpen)drawSpellBook();}

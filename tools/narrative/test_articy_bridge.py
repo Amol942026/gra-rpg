@@ -152,15 +152,15 @@ class StoryTests(unittest.TestCase):
                 time.sleep(.2)
 
     def test_all_actual_lines_extracted(self):
-        self.assertEqual(len(self.plans), 7)
-        self.assertEqual(sum(len(p["lines"]) for p in self.plans), 41)
+        self.assertEqual(len(self.plans), 12)
+        self.assertEqual(sum(len(p["lines"]) for p in self.plans), 57)
         self.assertIn("Pieczęć", self.plans[0]["lines"][2]["text"])
 
     def test_source_snapshot_label_and_no_overwrite(self):
         directory = self.root / "plans"
         manifest = extract(directory)
         self.assertFalse(manifest["native_articy_imported"])
-        self.assertEqual(len(list(directory.glob("EF_*.json"))), 7)
+        self.assertEqual(len(list(directory.glob("EF_*.json"))), 12)
         with self.assertRaises(FileExistsError): extract(directory)
 
     def test_source_snapshot_not_accepted_as_native_export(self):
@@ -262,7 +262,7 @@ class StoryTests(unittest.TestCase):
         with patch("story_sync.ArticyBridge", ReadOnlyBridge):
             result = import_plans(directory)
         self.assertEqual(result["jobs"], [])
-        self.assertEqual(len(result["unchanged_skipped"]), 7)
+        self.assertEqual(len(result["unchanged_skipped"]), 12)
 
     def test_quotes_newlines_backslashes_are_escaped(self):
         self.data["dialogues"][0]["lines"][0]["text"] = 'Świt: "cześć"\\droga\nDalej.'

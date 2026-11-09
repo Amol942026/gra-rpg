@@ -1,0 +1,29 @@
+{
+  "id": "EF_TowerTalkDialogue",
+  "title": "Eldrin — droga do Morza Piasków",
+  "array": "TowerTalkDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "7f21f7c35574709ac7d3452d9facdabfb52b27bc73a6013b3a5cc9516d1517bb",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Pierwsza część jest w twoich rękach. Kolejny szlak wiedzie przez Morze Piasków."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Co powinienem wiedzieć o strażniku pustyni?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Żywa Wydma przybiera kształt olbrzyma i więzi intruzów w piasku. Szukaj jej na południowym wschodzie. To ona strzeże drugiej części."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Będę uważał pod nogi. Otworzysz mi drogę?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Gdy wybierzesz podróż. Przy miejscu przybycia czeka Brama Eldrina — wrócisz nią do wieży, kiedy zechcesz odpocząć lub uzupełnić zapasy."
+    }
+  ]
+}

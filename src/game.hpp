@@ -1,6 +1,7 @@
 #pragma once
 #include "animation.hpp"
 #include "sound_events.hpp"
+#include "spell_definitions.hpp"
 #include "entity_info.hpp"
 #include "loot.hpp"
 #include "commerce.hpp"
@@ -17,7 +18,8 @@
 #include "generated/creature_motion_data.hpp"
 
 namespace ember {
-constexpr int MapSize=72, BagSize=25, EquipSize=6;
+constexpr int LegacyMapSize=72,MapSize=102, BagSize=25, EquipSize=6;
+constexpr int WorldExpansionRevision=1;
 constexpr int MushroomCount=48,MushroomHealing=10;
 inline std::int64_t experienceForLevel(int level){std::int64_t n=std::clamp(level,1,100000);return 100*n+2*n*(n-1);}
 constexpr int WeaponWheelSize=8;
@@ -44,7 +46,6 @@ constexpr float BoulderImpactClock=.4f; // Preserve the v2 save clock; phase spa
 enum class Attribute { Strength,MagicPower,Defense,MagicDefense,Vitality,Mana,Count };
 constexpr int AttributeCount=int(Attribute::Count),PointsPerLevel=5;
 using Attributes=std::array<int,AttributeCount>;
-enum class Spell { None,Fireball };
 enum class Skill { StrongCut,PiercingArrow,Healing,Count };
 constexpr int SkillCount=int(Skill::Count),SkillPointsPerLevel=1;
 using SkillRanks=std::array<int,SkillCount>;
@@ -62,6 +63,9 @@ inline V normalized(V v){float n=length(v);return n>.001f?v*(1/n):V{};}
 #include "volcano_layout.hpp"
 enum class WorldLocation {Forest,MageTower,Desert,Volcano};
 #include "treasure.hpp"
+#include "terrain_height.hpp"
+#include "volcano_roads.hpp"
+#include "enemy_abilities.hpp"
 enum class DawnQuest {Seeking,Returning,AtTower};
 struct Ground { int id; Item value; V pos; WorldLocation location=WorldLocation::Forest; int floor=0; };
 struct Prop { V pos; int type; float size; };
@@ -78,6 +82,14 @@ struct Enemy {
  V boarAim{},boarDirection{};bool boarHit=false;int boarCharges=0;
  bool boarBusy()const{return type==BoarType&&(boarWindup>0||boarRush>0||boarRecovery>0);}
  float eruptionCd=2.8f,eruptionWindup=0;int eruptions=0;
+ float abilityCd=3.f,abilityAge=-1;V abilityDirection{};int abilityMask=0,abilityCasts=0;
+ bool abilityBusy()const{return abilityAge>=0&&enemyAbility(type)!=EnemyAbility::None;}
+ float abilityAction()const{
+  if(!abilityBusy())return -1;const auto& spec=enemyAbilityProfile(type);
+  if(abilityAge<spec.windup)return .45f*abilityAge/spec.windup;
+  if(abilityAge<spec.windup+spec.active)return .65f;
+  return .65f+.35f*std::clamp((abilityAge-spec.windup-spec.active)/spec.recovery,0.f,1.f);
+ }
  float boulderProgress()const{
   if(type!=3)return -1;
   if(boulderWindup>0)return (BoulderWindup-boulderWindup)/(BoulderWindup+BoulderRecovery);
@@ -85,6 +97,7 @@ struct Enemy {
   return -1;
  }
  float attackPose()const{
+  if(abilityBusy())return abilityAge<enemyAbilityProfile(type).windup?-.85f*abilityAge/enemyAbilityProfile(type).windup:.8f;
   // Reuse the existing boar attack pose and distance-driven locomotion.
   if(type==BoarType){
    if(boarWindup>0)return .7f*(1-boarWindup/BoarChargeWindup);
@@ -104,12 +117,13 @@ struct Enemy {
 };
 struct FieldState {std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Ground> forage;};
 struct Effect { V pos; std::string text; float life; int color; bool damageNumber=false,critical=false;float height=75; };
-struct Fireball { V pos,velocity;float remaining=FireballRange,damage=0;bool critical=false; };
+struct Fireball { V pos,velocity;float remaining=FireballRange,damage=0;bool critical=false;Spell spell=Spell::Fireball;float age=0; };
 struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
 struct Arrow {V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false;};
 struct PierceFlash {V pos;float life=.26f;};
-struct Explosion { V pos;float life=.35f; };
+struct Explosion { V pos;float life=.35f;Spell spell=Spell::Fireball; };
 struct CinderBolt {V pos,velocity;float remaining=7,damage=0;int owner=0;};
+struct VenomGlob {V pos,velocity;float remaining=7,damage=0;int owner=0;};
 struct LavaFissure {V pos;float age=0,delay=.95f,damage=48;int owner=VolcanoBossId;bool struck=false;};
 struct Boulder {V origin,target,pos;float age=0,duration=1,height=0,startHeight=0,damage=BoulderDamage;int owner=-1;};
 struct BoulderImpact {V pos;float life=BoulderImpactClock;float progress()const{return std::clamp(1-life/BoulderImpactClock,0.f,1.f);}};
@@ -127,6 +141,7 @@ inline bool outsideCircleBounds(V delta,float radius){return std::abs(delta.x)>r
 enum class Place { None,Bag,Equip,Ground,Corpse,Forage,Chest };
 struct Slot { Place place=Place::None; int index=-1; int owner=-1; };
 struct Game {
+ int worldExpansionVersion=WorldExpansionRevision;
  std::array<TreasureChest,TreasureCount> chests{};int openedChest=-1;
  TreasureChest* findChest(int id){for(auto& c:chests)if(c.id==id&&c.location==location)return &c;return nullptr;}
  const TreasureChest* findChest(int id)const{for(const auto& c:chests)if(c.id==id&&c.location==location)return &c;return nullptr;}
@@ -135,7 +150,7 @@ struct Game {
   auto* chest=findChest(id);
   if(!chest||dead()||allocationRequired||storyBlocked()||rolling()||sandTrapped())return false;
   if(!chestReachable(id)){say("Podejdź do skrzyni (maks. 2,5 pola).");return false;}
-  cancelBow();openedCorpse=-1;openedChest=id;chest->opened=true;sound(Cue::Ui,player);
+  cancelBow();openedCorpse=-1;openedChest=id;chest->opened=true;sound(Cue::ChestOpen,chest->pos);
   say("Skrzynia otwarta. Przeciągnij wyposażenie do plecaka.");return true;
  }
  bool openNearestChest(){
@@ -185,7 +200,7 @@ struct Game {
  float healingCd=0,healingPulse=0;
  float strongCutCd=0,piercingArrowCd=0,meleeDuration=SwingDuration;bool swingStrong=false,piercingArrowArmed=false,lastBowPiercing=false;
  std::vector<PierceFlash> pierceFlashes;
- Spell selectedSpell=Spell::Fireball;float manaRegenTime=0;
+ Spell selectedSpell=Spell::None;float manaRegenTime=0;unsigned learnedSpells=0;float spellCooldownTotal=FireballCooldown;
  std::vector<SoundEvent> sounds;float stepDistance=0;
  void sound(Cue cue,V position){if(sounds.size()<64)sounds.push_back({cue,position.x,position.y});}
  float hp=100,mana=100,attackCd=0,spellCd=0,potionCd=0,swing=0,hurt=0,time=0;
@@ -208,7 +223,7 @@ struct Game {
   sandPrisonRemaining=SandPrisonDuration;cancelBow();rollRemaining=0;swing=0;swingStrong=false;
   animation.moving=false;animation.stopSprint();stepDistance=0;
   caster.sandCastPulse=SandCastDuration;caster.animation.face(player.x-caster.pos.x,player.y-caster.pos.y);
-  caster.sandPrisonCasts++;sound(Cue::EnemyAttack,caster.pos);
+  caster.sandPrisonCasts++;sound(enemyAttackCue(caster.type),caster.pos);
   say("Piaskowe więzienie! Ruch i ataki zablokowane na 3 sekundy.");
  }
  int level=1;std::int64_t xp=0;int kills=0,nextGround=1;bool bossDead=false;
@@ -220,9 +235,20 @@ struct Game {
  bool volcanoCreated=false,volcanoBossDead=false;
  int volcanoSceneryVersion=0;
  std::vector<CinderBolt> cinders;std::vector<LavaFissure> fissures;
+ std::vector<VenomGlob> venomGlobs;
  bool inTower()const{return location==WorldLocation::MageTower;}
  bool storyBlocked()const{return dawnQuest==DawnQuest::Returning;}
  int dawnFragments()const{return std::max(collectedFragments,dawnQuest==DawnQuest::Seeking?0:1);}
+ // Read-only narrative facts: defeating a guardian and taking its shard are
+ // separate events. Inspect both the active field and saved off-screen corpses.
+ bool dawnShardUnclaimed(WorldLocation realm)const{
+  const auto& bodies=realm==fieldLocation?enemies:realm==WorldLocation::Forest?forestState.enemies:realm==WorldLocation::Desert?desertState.enemies:volcanoState.enemies;
+  int guardian=realm==WorldLocation::Forest?3:realm==WorldLocation::Desert?DesertBossType:VolcanoBossType;
+  for(const auto& body:bodies)if(body.type==guardian&&!body.alive)for(const auto& value:body.loot)if(value.kind==Kind::DawnShard&&!value.empty())return true;
+  return false;
+ }
+ bool recoveredDawnPart(int index)const{return index>=0&&index<dawnFragments()&&(index>=3||!dawnShardUnclaimed(index==0?WorldLocation::Forest:index==1?WorldLocation::Desert:WorldLocation::Volcano));}
+ int recoveredDawnFragments()const{int count=0;for(int i=0;i<dawnFragments();i++)count+=recoveredDawnPart(i);return count;}
  bool inDesert()const{return location==WorldLocation::Desert;}
  bool inVolcano()const{return location==WorldLocation::Volcano;}
  const char* currentRegion()const{return inVolcano()?volcanoRegion(player):inDesert()?desertRegion(player):forestRegion(player);}
@@ -281,6 +307,7 @@ struct Game {
   trim(forestState.forage);
  }
  static unsigned hash(int x,int y){unsigned n=unsigned(x)*374761393u+unsigned(y)*668265263u+8713u;n=(n^(n>>13))*1274126177u;return n^(n>>16);}
+ #include "world_expansion.hpp"
  static bool onPath(int x,int y){return forestPath({float(x),float(y)});}
  static const char* region(V pos){return forestRegion(pos);}
  int attribute(Attribute a)const{return attributes[int(a)];}
@@ -299,7 +326,23 @@ struct Game {
   hp=std::min(float(maxHp()),hp+maxHp()-oldHp);mana=std::min(float(maxMana()),mana+maxMana()-oldMana);
   attributePoints=0;allocationRequired=skillPoints>0;say(allocationRequired?"Statystyki rozdane. Wybierz umiejętność.":"Punkty rozdane. Wyprawa trwa dalej.");return true;
  }
- bool chooseSpell(Spell choice){if(choice!=Spell::Fireball&&choice!=Spell::None)return false;selectedSpell=choice;return true;}
+ bool knowsSpell(Spell spell)const{return validSpell(spell)&&(learnedSpells&spellBit(spell))!=0;}
+ bool chooseSpell(Spell choice){if(choice!=Spell::None&&!knowsSpell(choice))return false;selectedSpell=choice;return true;}
+ int spellDamage(Spell spell)const{return int(std::lround(magicDamage()*spellDefinition(spell).multiplier));}
+ bool spellLessonsUnlocked()const{return bossDead;}
+ LearnSpellResult spellLessonStatus(Spell spell)const{
+  if(!validSpell(spell))return LearnSpellResult::Invalid;
+  if(!spellLessonsUnlocked()||!mageReachable())return LearnSpellResult::Unavailable;
+  if(knowsSpell(spell))return LearnSpellResult::AlreadyKnown;
+  return goldBalance()<spellDefinition(spell).price?LearnSpellResult::NotEnoughGold:LearnSpellResult::Success;
+ }
+ LearnSpellResult learnSpell(Spell spell){
+  auto status=spellLessonStatus(spell);if(status!=LearnSpellResult::Success){say(learnSpellMessage(status));return status;}
+  auto result=bag;std::int64_t cost=spellDefinition(spell).price,fromWallet=std::min(gold,cost),wallet=gold-fromWallet;cost-=fromWallet;
+  for(auto& value:result)if(value.kind==Kind::Gold&&!value.empty()&&cost>0){int used=int(std::min(cost,std::int64_t(value.count)));value.count-=used;cost-=used;if(value.empty())value={};}
+  if(cost)return LearnSpellResult::NotEnoughGold;
+  bag=result;gold=wallet;learnedSpells|=spellBit(spell);selectedSpell=spell;cancelBow();sound(Cue::SpellLearn,player);say(learnSpellMessage(LearnSpellResult::Success));return LearnSpellResult::Success;
+ }
  bool dead()const{return hp<=0;}
  bool rolling()const{return rollRemaining>0;}
  bool combatFacingActive()const{return bowDrawing||bowReleaseTime>0||swing>0;}
@@ -355,7 +398,8 @@ struct Game {
   else if(stackable(a->kind)&&a->kind==b->kind&&a->tier==b->tier){int n=std::min(a->count,99-b->count);if(n<=0)return false;b->count+=n;a->count-=n;if(a->count==0)*a={};}
   else std::swap(*a,*b);
   if((to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0))cancelBow();
-  sound(to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
+  bool weaponChanged=(to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0);
+  sound(weaponChanged?Cue::WeaponEquip:to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
   if(collectingShard){collectedFragments=inVolcano()?3:inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inVolcano()?"Trzecia część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");}
   else say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
  }
@@ -391,10 +435,13 @@ struct Game {
  #include "weapon_system.hpp"
  void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
  bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inVolcano()&&(volcanoLava(p)||nearVolcanoFountain(p)))return false;if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
- void move(V delta,bool turn=true){
+ float elevation(V p)const{return terrain_height::height(location,p);}
+ float surfaceDistance(V a,V b)const{return terrain_height::surfaceDistance(location,a,b);}
+ void move(V delta,bool turn=true,terrain_height::Travel travel=terrain_height::Travel::Surface){
   if(sandTrapped())return;
   int steps=inTower()?std::max(1,int(std::ceil(length(delta)/.08f))):1;V step=delta*(1.f/steps);
-  for(int i=0;i<steps;i++){V p=player+step;if(walkable(p))player=p;else{p={player.x+step.x,player.y};if(walkable(p))player=p;p={player.x,player.y+step.y};if(walkable(p))player=p;}}
+  auto pace=[&](V at,V delta){return travel==terrain_height::Travel::Surface?terrain_height::step(location,at,delta):delta;};
+  for(int i=0;i<steps;i++){V p=player+pace(player,step);if(walkable(p))player=p;else{p=player+pace(player,{step.x,0});if(walkable(p))player=p;p=player+pace(player,{0,step.y});if(walkable(p))player=p;}}
   if(turn&&length(delta)>.001f&&!combatFacingActive())facing=normalized(delta);
  }
  Enemy* findEnemy(int id){for(auto&e:enemies)if(e.id==id&&e.alive)return &e;return nullptr;}
@@ -405,9 +452,10 @@ struct Game {
   e.hp-=amount;e.flash=.18f;
   float lift=0;for(const auto& effect:effects)if(effect.damageNumber&&distance(effect.pos,e.pos)<.1f)lift=std::max(lift,effect.height-enemyInfo(e.type).visualHeight+24);
   effects.push_back({e.pos,std::to_string(int(std::round(amount))),critical?1.25f:.95f,0,true,critical,enemyInfo(e.type).visualHeight+18+std::min(lift,90.f)});
-  const Cue materials[]={Cue::SlimeHit,Cue::WolfHit,Cue::BoneHit,Cue::StoneHit,Cue::WolfHit,Cue::SlimeHit,Cue::WolfHit,Cue::StoneHit};sound(materials[std::clamp(e.type,0,ForestEnemyTypeCount-1)],e.pos);
+  sound(enemyHitCue(e.type),e.pos);
   if(e.hp>0)return;e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=e.boulderWindup=e.boulderRecovery=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;
   e.boarWindup=e.boarRush=e.boarRecovery=0;e.boarDirection=e.boarAim={};e.boarHit=false;e.eruptionWindup=0;
+  e.abilityAge=-1;e.abilityMask=0;e.abilityDirection={};venomGlobs.erase(std::remove_if(venomGlobs.begin(),venomGlobs.end(),[&](const auto& p){return p.owner==e.id;}),venomGlobs.end());
   cinders.erase(std::remove_if(cinders.begin(),cinders.end(),[&](const auto& b){return b.owner==e.id;}),cinders.end());
   fissures.erase(std::remove_if(fissures.begin(),fissures.end(),[&](const auto& b){return b.owner==e.id;}),fissures.end());
   boulders.erase(std::remove_if(boulders.begin(),boulders.end(),[&](const Boulder& b){return b.owner==e.id;}),boulders.end());
@@ -430,21 +478,23 @@ struct Game {
  }
  bool spell(V aim={}){
   if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||spellCd>0||bowDrawing)return false;
-  if(selectedSpell==Spell::None){say("Wybierz czar w księdze (K lub kafelek czaru).");sound(Cue::Reject,player);return false;}
-  if(mana<FireballCost){say("Kula ognia wymaga 10 many.");sound(Cue::Reject,player);return false;}
+  if(!knowsSpell(selectedSpell)){say("Najpierw poznaj zaklęcie u Eldrina. K otwiera księgę czarów.");sound(Cue::Reject,player);return false;}
+  const auto& definition=spellDefinition(selectedSpell);
+  if(mana<definition.mana){say(std::string(definition.name)+" — potrzebujesz "+std::to_string(int(definition.mana))+" many.");sound(Cue::Reject,player);return false;}
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
   V direction=normalized(length(aim)>.001f?aim:directions[int(animation.direction)]);
-  mana-=FireballCost;spellCd=FireballCooldown;facing=direction;animation.face(direction.x,direction.y);
-  fireballs.push_back({player,direction*FireballSpeed,FireballRange,float(magicDamage()),rollCritical()});
-  sound(Cue::Spell,player);return true;
+  mana-=definition.mana;spellCd=spellCooldownTotal=definition.cooldown;facing=direction;animation.face(direction.x,direction.y);
+  fireballs.push_back({player,direction*definition.speed,definition.range,float(spellDamage(selectedSpell)),rollCritical(),selectedSpell});
+  sound(selectedSpell==Spell::IceShard?Cue::IceCast:selectedSpell==Spell::LightningOrb?Cue::LightningCast:Cue::FireballCast,player);return true;
  }
- void explode(V position,float amount,bool critical=false){
-  explosions.push_back({position});
-  for(auto& e:enemies)if(e.alive&&distance(e.pos,position)<=1.05f+e.radius())hit(e,amount,DamageType::Magic,critical);
+ void explode(V position,float amount,bool critical=false,Spell spell=Spell::Fireball){
+  sound(spell==Spell::IceShard?Cue::IceImpact:spell==Spell::LightningOrb?Cue::LightningImpact:Cue::FireballImpact,position);
+  explosions.push_back({position,spellDefinition(spell).impactLife,spell});
+  for(auto& e:enemies)if(e.alive&&distance(e.pos,position)<=spellDefinition(spell).radius+e.radius())hit(e,amount,DamageType::Magic,critical);
  }
  void updateFireballs(float dt){
   for(size_t i=0;i<fireballs.size();){
-   auto& ball=fireballs[i];float travel=std::min(ball.remaining,FireballSpeed*dt);
+   auto& ball=fireballs[i];ball.age+=dt;float travel=std::min(ball.remaining,length(ball.velocity)*dt);
    V delta=normalized(ball.velocity)*travel;float first=2;
    for(const auto& e:enemies)if(e.alive)first=std::min(first,segmentCircle(ball.pos,delta,e.pos,e.radius()+.18f));
    if(hasFountains())for(V f:fountains())first=std::min(first,segmentCircle(ball.pos,delta,f,FountainRadius+.18f));
@@ -456,7 +506,7 @@ struct Game {
    }
    bool impact=first<=1||travel>=ball.remaining-.00001f;
    ball.pos=ball.pos+delta*(first<=1?first:1);ball.remaining-=travel;
-   if(impact){V position=ball.pos;float amount=ball.damage;bool critical=ball.critical;fireballs.erase(fireballs.begin()+i);explode(position,amount,critical);}
+   if(impact){V position=ball.pos;float amount=ball.damage;bool critical=ball.critical;Spell spell=ball.spell;fireballs.erase(fireballs.begin()+i);explode(position,amount,critical,spell);}
    else i++;
    if(allocationRequired)return;
   }
@@ -464,6 +514,7 @@ struct Game {
  float incomingDamage(float amount,DamageType type)const{return damageAfterArmor(amount,type==DamageType::Magic?magicDefense():defense());}
  #include "enemy_ai.hpp"
  #include "boar_charge.hpp"
+ #include "enemy_ability_system.hpp"
  #include "guardian_boulder.hpp"
  float constrainEnemy(Enemy& e){
   const float radius=e.radius();
@@ -494,7 +545,7 @@ struct Game {
     V beforeStep=e.pos;
     e.recoil=e.recoil*std::exp(-10.f*step);
     if(location==WorldLocation::Forest&&e.boarBusy())advanceBoarCharge(e,step,heroFrom+(heroEnd-heroFrom)*(float(sub)/steps),heroFrom+(heroEnd-heroFrom)*(float(sub+1)/steps),wasRolling,rollElapsed+sub*step);
-    else e.pos=e.pos+(desired[i]+e.recoil)*step;
+    else e.pos=e.pos+terrain_height::step(location,e.pos,(desired[i]+e.recoil)*step);
     if(inVolcano()&&volcanoLava(e.pos,e.radius()))e.pos=beforeStep;
     constrainEnemy(e);
    }
@@ -564,7 +615,7 @@ struct Game {
    if(bowDrawing||bowReleaseTime>0)animation.face(bowAim.x,bowAim.y);
    animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing,!aiming,swing<=0);
   }
-  if(!wasRolling&&!wasKnockedBack){stepDistance+=distance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
+  if(!wasRolling&&!wasKnockedBack){stepDistance+=surfaceDistance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
   if(mana<maxMana()){
    manaRegenTime+=dt;
    if(manaRegenTime+.00001f>=ManaRegenInterval){mana=std::min(float(maxMana()),mana+1);manaRegenTime=std::max(0.f,manaRegenTime-ManaRegenInterval);}
@@ -576,6 +627,7 @@ struct Game {
   updateFireballs(dt);if(allocationRequired)return;
   updateBoulders(dt,before,wasRolling,rollElapsed);
   updateVolcanoAttacks(dt,before,wasRolling,rollElapsed);
+  updateVenomGlobs(dt,before,wasRolling,rollElapsed);
   std::vector<V> oldPositions,desired(enemies.size());oldPositions.reserve(enemies.size());
   for(size_t i=0;i<enemies.size();i++){auto& e=enemies[i];oldPositions.push_back(e.pos);tick(e.flash);tick(e.attack);tick(e.strike);if(!e.alive){e.animation.moving=false;continue;}float d=distance(player,e.pos);
    tick(e.sandCastPulse);
@@ -588,18 +640,20 @@ struct Game {
    if(updateGuardianThrow(e,dt,visible,d))continue;
    if(prepareBoarCharge(e,dt,visible,d))continue;
    if(prepareEruption(e,dt,visible))continue;
-   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(inVolcano()&&volcanoRanged(e.type)){if(visible&&d<EnemySightRange)launchCinder(e);}
+   if(prepareEnemyAbility(e,dt,visible,d))continue;
+   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(!(inVolcano()&&volcanoRanged(e.type)))sound(enemyAttackCue(e.type),e.pos);if(inVolcano()&&volcanoRanged(e.type)){if(visible&&d<EnemySightRange)launchCinder(e);}
    else if(d<(e.type==DesertBossType||e.type==VolcanoBossType?2.15f:1.6f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead()){float dmg=incomingDamage(float(e.damage()),e.attackType());hp=std::max(0.f,hp-dmg);hurt=.2f;sound(dead()?Cue::Death:Cue::Hurt,player);effects.push_back({player,"-"+std::to_string(int(dmg)),.8f,4});}
    }}continue;}
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
-    if(d<(inVolcano()&&volcanoRanged(e.type)?4.5f:e.type==DesertBossType||e.type==VolcanoBossType?1.9f:1.25f)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;sound(Cue::EnemyAttack,e.pos);}
+    if(d<(inVolcano()&&volcanoRanged(e.type)?4.5f:e.type==DesertBossType||e.type==VolcanoBossType?1.9f:1.25f)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;}
     else if(e.sandCastPulse<=0&&d>(inVolcano()&&volcanoRanged(e.type)?3.5f:e.type==DesertBossType||e.type==VolcanoBossType?1.7f:1.05f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
    }else desired[i]=patrolVelocity(e,dt);
   }
   moveEnemies(dt,desired,&before,wasRolling,rollElapsed);
+  for(size_t i=0;i<enemies.size();i++)advanceEnemyAbility(enemies[i],dt,oldPositions[i],before,wasRolling,rollElapsed);
   for(size_t i=0;i<enemies.size();i++){
    auto& e=enemies[i];if(!e.alive)continue;
    V movement=e.pos-oldPositions[i];
@@ -612,6 +666,7 @@ struct Game {
    else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
    else e.animation.advance(movement.x,movement.y,dt,false,!e.boarBusy());
    if(e.boarBusy())faceBoarCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);
+   if(e.abilityBusy())faceEnemyAbility(e);
    if(e.boulderWindup>0||e.boulderRecovery>0)e.animation.face(e.boulderTarget.x-e.pos.x,e.boulderTarget.y-e.pos.y);
    else if(e.windup>0)e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
   }

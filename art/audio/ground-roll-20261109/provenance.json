@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "date": "2026-11-09",
+  "source_root": "C:\\AI2D\\audio\\emberfall-roll-20261109",
+  "source_license": "assets/licenses/audio-foley-CC0.txt",
+  "recorded_layers_only": true,
+  "csound": "native-render.json",
+  "audacity_projects": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-ground-roll-20261109.aup3",
+      "sha256": "a756b0f07dc7e43426f3dac3f93197ef27c604ab89f65a84082a05d501b16a61",
+      "sqlite_quick_check": "ok"
+    },
+    {
+      "path": "C:\\AI2D\\audio\\emberfall-roll-20261109\\roll-master.aup3",
+      "sha256": "881268983f46dad650f330364643b4ca66dd14a1f55dd629fc67bcb92136542c",
+      "sqlite_quick_check": "ok"
+    }
+  ],
+  "retention": {
+    "project": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\Emberfall-ground-roll-20261109.aup3",
+    "backup": "C:\\AI2D\\audio\\emberfall-roll-20261109\\roll-master.aup3",
+    "sqlite_quick_check": "ok",
+    "saved": true,
+    "windows": [
+      {
+        "title": "Emberfall-ground-roll-20261109",
+        "minimized": true
+      }
+    ],
+    "close_sent": false,
+    "audio_played": false
+  },
+  "delivery": {
+    "status": "PASS",
+    "files": [
+      {
+        "file": "roll.wav",
+        "sha256": "4bb18004aca60eb2b7a9f501b0f15941c8d57f53f56ff956ec2c1c317c4bc620",
+        "frames": 24960,
+        "peak_dbfs": -2.9999878172428636,
+        "rms_dbfs": -22.585621571884182,
+        "dc": 1.5552227313701923e-06,
+        "clipped_samples": 0
+      },
+      {
+        "file": "roll-v2.wav",
+        "sha256": "ef7d931dd85fdb9528ccc39a5842347a6fdae48459818af9cc78536e4ffaa282",
+        "frames": 24960,
+        "peak_dbfs": -2.9999878172428636,
+        "rms_dbfs": -25.47985176397408,
+        "dc": -2.8243431678185097e-06,
+        "clipped_samples": 0
+      },
+      {
+        "file": "roll-v3.wav",
+        "sha256": "50a063fb58931a0f26d2b261d31a27abc4d63e52557fcff0142f9f2c9abc1fb7",
+        "frames": 24960,
+        "peak_dbfs": -2.9999878172428636,
+        "rms_dbfs": -22.163440976357116,
+        "dc": 9.224965022160457e-07,
+        "clipped_samples": 0
+      }
+    ],
+    "duration": 0.52,
+    "recorded_layers_only": true,
+    "tonal_synthesis": false,
+    "audio_played": false
+  },
+  "no_audio": true,
+  "source_script_sha256": "0e49f3703973c2f6cac13016377733e6d8b3291b1fe9b69dd52f3fae3ffb0917"
+}

@@ -1,0 +1,117 @@
+PASS actual player renderer keeps the audio device closed
+PASS graphics window stays hidden
+PASS complete icon atlas is preloaded at startup
+PASS reusing graphics never reloads or duplicates the icon texture
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS non-equipment retains its existing icon renderer
+PASS every equipment cell has a visible padded transparent illustration
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS non-equipment retains its existing icon renderer
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS every equipment cell has a visible padded transparent illustration
+PASS all 85 equipment kinds map to distinct stable cells
+PASS actual prologue arrival queues one destination burst, even if the handler is called twice
+PASS actual return cinematic queues one arrival after clearing the old scene
+PASS scene transition checks never initialize hardware audio
+PASS icon atlas is released at shutdown

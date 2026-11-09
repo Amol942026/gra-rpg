@@ -1,0 +1,36 @@
+{
+  "authoring": "Original 2D artwork painted inside Krita 5.3.4 native Python/Qt runtime",
+  "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+  "sha256": "b6aab9f545b2196049b8d516117063963d880ae528b87935c3617637231d962e",
+  "size": [
+    768,
+    768
+  ],
+  "cell": [
+    256,
+    256
+  ],
+  "anchor": [
+    128,
+    183
+  ],
+  "scale": 0.42,
+  "states": [
+    "closed",
+    "open_treasure",
+    "open_empty"
+  ],
+  "rows": [
+    "forest",
+    "desert",
+    "volcano"
+  ],
+  "master_size": [
+    1536,
+    1536
+  ],
+  "layers": 7,
+  "external_inputs": [],
+  "native_worker": "C:/AI2D/pipeline/krita-worker-20261108-v2",
+  "retained_saved_documents": true
+}

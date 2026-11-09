@@ -1,0 +1,20 @@
+{
+  "name": "eldrin-three-elements",
+  "master": "C:\\AI2D\\sprites\\emberfall-spells-20261109\\krita\\eldrin-three-elements.kra",
+  "png": "C:\\AI2D\\sprites\\emberfall-spells-20261109\\krita\\eldrin-three-elements.png",
+  "layers": [
+    "Ember, faceted ice and storm plasma with transparent glow",
+    "Hot core, frost glints and electrical highlights"
+  ],
+  "size": [
+    768,
+    768
+  ],
+  "runtime_size": [
+    768,
+    768
+  ],
+  "kra_sha256": "92e6e549071a1c589a491ee008c3055791b9ca41b8d39e8e3b9437608e553e66",
+  "png_sha256": "6f9019f67d33ab370a9adae803f9c6bfccaa2371c6ee8b684ab1575c98aa406b",
+  "retained": true
+}

@@ -1,0 +1,195 @@
+{
+  "status": "PASS",
+  "files": [
+    {
+      "file": "bow-draw.wav",
+      "sha256": "7f6f7ff5aa4228d981d67c00d515429cfdd29ca0b0931647242b20c79bb02cc3",
+      "frames": 67200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -30.752744378302186,
+      "dc": -1.2261526925223213e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "bow-draw-v2.wav",
+      "sha256": "3ece40ee2b0c1e74ce05c92d0002a2af261b1d5046315e6a54e1229f5460abb3",
+      "frames": 67200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -27.831858972421564,
+      "dc": -2.597627185639881e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "bow-draw-v3.wav",
+      "sha256": "1ed111258d626b9fc7f91ec2583c9d2d22d8e8692a1d70b00eb1944bf5dd6403",
+      "frames": 67200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -30.752741711495553,
+      "dc": -1.0876428513299851e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "fireball-cast.wav",
+      "sha256": "4daa3d4bd7903105ff5b1658afd0951163abef5cc7d479ff5821cebb24977dd0",
+      "frames": 21600,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -21.354904121764676,
+      "dc": 6.993611653645833e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "fireball-cast-v2.wav",
+      "sha256": "a777c806f76f42764a68e43e11d2cfa00cfd712e11f509a7854595a795cd37ac",
+      "frames": 21600,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -18.978816381720037,
+      "dc": 1.0233278627748842e-05,
+      "clipped_samples": 0
+    },
+    {
+      "file": "fireball-cast-v3.wav",
+      "sha256": "c236961054a361d0b0a287f8f9056b5d39c3d61b4afbd1dcfcc376af2155d1cb",
+      "frames": 21600,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -17.677205076159712,
+      "dc": -1.3400890209056712e-06,
+      "clipped_samples": 0
+    },
+    {
+      "file": "ice-cast.wav",
+      "sha256": "324221b169efc92c242295bf4df5f04f7ec53989fbd443ababbcf4f4cced7e83",
+      "frames": 20160,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -23.73816612407035,
+      "dc": -1.2715657552083333e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "ice-cast-v2.wav",
+      "sha256": "56e4e30e5b782131c4c753c6c2e5711f05d26ab77752ff674becc52eade28cb1",
+      "frames": 20160,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -24.566038815956457,
+      "dc": -8.401416596912203e-08,
+      "clipped_samples": 0
+    },
+    {
+      "file": "ice-cast-v3.wav",
+      "sha256": "54f1d3cc4f5ca35a9abc66c1de7784b59f8e761652a5d4eb67a6da9bfb03a1a9",
+      "frames": 20160,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -17.770882142083263,
+      "dc": 3.072950575086806e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "ice-impact.wav",
+      "sha256": "e983cee6a8a92ca2cff59248996638d59db7f2e3679c38d66630717b5939678e",
+      "frames": 31200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -22.57507302865072,
+      "dc": -2.2301307091346153e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "ice-impact-v2.wav",
+      "sha256": "2ff3157961c9524cf64d6de16a52017470dc96e34d00593f072b0f8ee358662f",
+      "frames": 31200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -24.147010504280647,
+      "dc": -2.4453187600160256e-08,
+      "clipped_samples": 0
+    },
+    {
+      "file": "ice-impact-v3.wav",
+      "sha256": "aa57447c8ab0e4e415ff12d9784c19e9bf4b2c68fec7b012bbf15c91e5fdcb1b",
+      "frames": 31200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -18.56563545190926,
+      "dc": 2.513787685296474e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "lightning-cast.wav",
+      "sha256": "54f5fb6df61853435667557047f69b8a9b3f2c5fcbc8389a2504bccad400fc65",
+      "frames": 31200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -22.82111848475556,
+      "dc": -3.041976537459936e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "lightning-cast-v2.wav",
+      "sha256": "aa5c7a405cc5f0d58e75cf1c722b1dd52d2cb4c89d2403b3fb1276f85720db23",
+      "frames": 31200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -22.13444516877456,
+      "dc": -2.1323179587339744e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "lightning-cast-v3.wav",
+      "sha256": "12bfde50b6642fed4fc85619f72ce62b95cdfc2f1945775897f1c563edc2711e",
+      "frames": 31200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -22.834299081862646,
+      "dc": -1.7704107822516025e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "lightning-impact.wav",
+      "sha256": "cbb2a4203c6b9016cf71ef6a98c80cd69034fb1ad5348ebdf506322945a924ea",
+      "frames": 43200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -23.502769006534876,
+      "dc": -2.548782913773148e-06,
+      "clipped_samples": 0
+    },
+    {
+      "file": "lightning-impact-v2.wav",
+      "sha256": "1bb66ba904f03760bb08451d9f0e6167b3d934fd1bf028482e19feb4f88629ff",
+      "frames": 43200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -22.925360407003808,
+      "dc": -3.046459621853299e-06,
+      "clipped_samples": 0
+    },
+    {
+      "file": "lightning-impact-v3.wav",
+      "sha256": "188c8161564ee76925c9abad5dfb9a838fbb7c918ec61ec0d4712bafd9035212",
+      "frames": 43200,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -23.44825750126786,
+      "dc": -2.1496525517216436e-06,
+      "clipped_samples": 0
+    },
+    {
+      "file": "spell-learn.wav",
+      "sha256": "32c0faf64b51755dbd03e0cf40e4f01f23ccd644bce1fa4c4f9c13236e6891c3",
+      "frames": 38400,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -23.15144227776038,
+      "dc": 7.534027099609375e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "spell-learn-v2.wav",
+      "sha256": "73ef981da6d91dc29fcbbd0ba8693565c7264db9c07e0e53656a2d4fd3cec3aa",
+      "frames": 38400,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -25.471521144707285,
+      "dc": -4.096825917561849e-07,
+      "clipped_samples": 0
+    },
+    {
+      "file": "spell-learn-v3.wav",
+      "sha256": "7005f43006bc71f05afea06850d4346acc9516c86bb1199697fd9eea6cbd6d59",
+      "frames": 38400,
+      "peak_dbfs": -2.8001161890920208,
+      "rms_dbfs": -20.404224970683487,
+      "dc": -4.76837158203125e-09,
+      "clipped_samples": 0
+    }
+  ],
+  "audio_played": false
+}

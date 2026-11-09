@@ -1,0 +1,16 @@
+[
+  {
+    "edition": "player",
+    "archive": "Emberfall-Windows-x64.zip",
+    "sha256": "7e07350e2438a28990034bd6d9942eef71cc4dcb89f2b4ef1de34b4411fb4395",
+    "exe_sha256": "39e4dc3a7727815ff194bfac245748c4afa75893a9bc8a671eb82729de468092",
+    "assets_verified": 144
+  },
+  {
+    "edition": "developer",
+    "archive": "Emberfall-DEV-Windows-x64.zip",
+    "sha256": "a2feae5b527e5b5acf5267905cb6d3e6574e8e74a0324ef7050bc6d893024516",
+    "exe_sha256": "c3bcbb9b1defc1e2b8f0b8fca26842accf107c0a77d81ac1b674eddfdf51460f",
+    "assets_verified": 144
+  }
+]

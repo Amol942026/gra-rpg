@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\media_20261019_175901_828feb\\pack.json",
+  "destination": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb",
+  "files": [
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\sprites\\crystal.png",
+      "sha256": "7232df78a58ec0f143cb2a2354f9013536ea398b4334f6b23831516655dbfb84",
+      "bytes": 23838,
+      "role": "diffuse"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\sprites\\crystal_lit.png",
+      "sha256": "3afca986905d91d575462330fc519267cdd5245e52ca4cd391c66055dc05f062",
+      "bytes": 25529,
+      "role": "baked_material"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\sprites\\crystal_atlas.png",
+      "sha256": "3017f223d0cf2b5243edf3d4e5daf1288e97566129b8b28d59c8eb20dd0a2d91",
+      "bytes": 345339,
+      "role": "animation_atlas"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\sprites\\crystal_atlas.json",
+      "sha256": "259dab1d5d34bf653ef9a60425beb7dbfeb6d3c39ab622ebd737f9187b6d7233",
+      "bytes": 19060,
+      "role": "animation_metadata"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\audio\\crystal_sanctum_loop.wav",
+      "sha256": "a46d7a224d53f56085dd94d0141e65cfc9eab95133561793b4cc5c8adcb7c778",
+      "bytes": 1920044,
+      "role": "music_master"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\audio\\crystal_sanctum_loop.ogg",
+      "sha256": "63a79e3282342fad8caa8139cd52ec45333f2d1b2a29f1fa9caa5b24f0488b2e",
+      "bytes": 151539,
+      "role": "music_stream"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\audio\\spell.wav",
+      "sha256": "454db2f7aa6f45499e471f6f7f5e9dc43177a116ed09a0cf16dabf26fadef6e1",
+      "bytes": 460844,
+      "role": "sfx_spell"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\audio\\swing.wav",
+      "sha256": "589a8801b44a946d9fe79e998a926393418dae4a52dc45b6b0be6f4b3f9a4253",
+      "bytes": 307244,
+      "role": "sfx_swing"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\audio\\pickup.wav",
+      "sha256": "50f677eefeff041514015fd76cbe0439d292426b3ea08afbefc71cf8efa64233",
+      "bytes": 537644,
+      "role": "sfx_pickup"
+    },
+    {
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\media\\media_20261019_175901_828feb\\audio\\events.json",
+      "sha256": "62976f8fe43f8c3c4165293d02d684b0ac351c187cbe179299863a2f108529c2",
+      "bytes": 874,
+      "role": "event_mapping"
+    }
+  ],
+  "provenance": {
+    "kind": "project-authored test assets",
+    "external_samples": [],
+    "paid_services": false,
+    "graphics": "native Krita MCP",
+    "music": "LMMS built-in synthesis; user template szablon.mmp",
+    "sfx": "Csound original procedural patches"
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false
+}

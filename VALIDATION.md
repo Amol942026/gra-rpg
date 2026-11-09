@@ -1,5 +1,94 @@
 # Weryfikacja prototypu
 
+## Lekcje Eldrina i trzy żywioły — 09.11.2026
+
+PASS: 234931 kontroli logiki/animacji, 10646 zapisu, 534 AudioSystem
+i 22 prawdziwego interfejsu/rendererów. Zakup po pierwszym bossie, brak
+pieniędzy, niezależne poznanie czarów, brak podwójnej opłaty, wspólne
+odnowienie i zachowanie typu lecącego pocisku. Zapis v15 odczytuje v1–v14;
+autentyczny zapis v14 zachowuje postęp przy nowej zasadzie płatnej nauki.
+150 WAV / cztery OGG dekodowane prawdziwym raylib bez urządzenia audio.
+180 rzeczywistych PNG Synfig, natywne KRA/CSD/AUP3 i kontrola próbek.
+Wszystkie okna gry ukryte, argumenty `--no-audio --background-test`.
+[Źródła i końcowy odbiór paczek](art/gameplay/eldrin-spells-20261109/README.md).
+
+## Przeturlanie i pozostałe przedmioty — 09.11.2026
+
+PASS: 143 kontrole prawdziwego HUD i handlerów teleportacji, 482 AudioSystem
+z pełnym dekodowaniem 135 WAV/czterech OGG oraz 234864 logiki/animacji.
+Wszystkie 108 rodzajów przedmiotów ma pokrycie w atlasach: 85 wcześniejszych
+ikon sprzętu i 23 nowe ilustracje łupów. Sprawdzono mapowanie, marginesy,
+preload, zwalnianie i rzeczywiste widoki plecaka ze stosami po 37 sztuk.
+Po końcowym dopracowaniu monet/sierści powtórzono 143 kontrole na tym samym
+skompilowanym helperze z finalnymi zasobami. Testy ukryte, bez urządzenia audio.
+Trzy nowe Roll WAV przechodzą kontrolę wszystkich próbek i są odtwarzane
+przez istniejący Cue, bez zmiany mechaniki ani formatu zapisu v14.
+Końcowe paczki i źródła: [ikony](art/items/loot-20261109/README.md),
+[audio](art/audio/ground-roll-20261109/README.md).
+
+## Płomień, teleport, łuk i nowe ikony HUD — 08.11.2026
+
+PASS: 234864 kontrole logiki/animacji, 10244 zapisu i 482 AudioSystem.
+135 PCM16 WAV i cztery OGG dekodują się poprawnie. Testy sprawdzają cichy
+tryb bez urządzenia, jednorazowe pojawienie w krainach, blokady pauzy/focusu,
+wyjątek dla odsłonięcia sceny oraz zatrzymanie cięciwy po anulowaniu/zwolnieniu.
+85 ilustracji z rzeczywistego Blendera i ComfyUI zachowuje alfę i własne
+mapowanie Kind. Zapis v14 czyta dotychczasowe v1–v13. Końcowy odbiór HUD,
+EXE i paczek: [ikony](art/equipment/icons-20261108/README.md) oraz
+[audio](art/audio/flame-20261108/README.md).
+
+## Głośniejszy miks i nagrane ataki — 08.11.2026
+
+PASS: 234852 kontroli logiki/animacji, 10202 zapisu i 435 odbioru AudioSystem
+z wyjściem w pamięci. Rzeczywisty dekoder sprawdza 123 WAV i cztery OGG;
+testowane są domyślne włączenie/poziomy, warianty, przejścia, wyciszenie,
+menu/pauza, focus i zwalnianie zasobów. Ataki 19 gatunków emitują dźwięk
+po przygotowaniu, a odrębne trafienie tylko przy kontakcie. Zapis v13
+odtwarza cały payload rzeczywistego zapisu v12, nie zmieniając postępów.
+Foley CC0 przetworzono w Csound/Audacity, z zachowaniem oryginałów i AUP3;
+muzyka po pełnym dekodowaniu OGG ma −16,00 do −16,98 LUFS i szczyty
+od −2,05 do −1,90 dBTP. Testy są bez urządzenia audio, z ukrytymi oknami.
+[Źródła i końcowy odbiór paczek](art/audio/physical-20261108/README.md).
+
+## Dwukrotna powierzchnia trzech krain — 08.11.2026
+
+PASS: 234833 kontroli logiki/animacji, 10157 zapisów, trzy pełne pomiary
+wysokości/projekcji i 184 renderera. Każda mapa ma 102 × 102 pola.
+Testy sprawdzają obsadzenie dziesięciu sektorów nowego obszaru, dojście
+od wejścia do każdego starego i nowego spotkania oraz do dalekiego narożnika,
+drogi i osiem rzeczywistych mostów. Trzy autentyczne fixture v11 sprzed
+rozbudowy potwierdzają dokładne zachowanie stanu dawnych przeciwników,
+ciał, łupu i wszystkich pozostałych pól wyprawy przy migracji do v12.
+Starsze fixture v1–v10 nadal działają; migracja jest jednorazowa.
+21 podglądów renderera pozostaje ukrytych, bez audio i zmiany jego preferencji.
+Ukończona aktualizacja + render: średnia 8,47 ms / p95 10,62 ms; ten wynik
+nie mierzy FPS wyświetlanego okna. [Źródła i odbiór](art/world-expansion/README.md).
+
+## Nowa oprawa dźwiękowa — 08.11.2026
+
+PASS: 200189 kontroli logiki/animacji i 5162 zapisu. Zdarzenia obejmują
+wszystkie 19 gatunków, właściwe materiały trafień, broń, sprzęt i skrzynie.
+353 kontrole rzeczywistego AudioSystem przez wyjście w pamięci sprawdzają
+99 plików SFX, cztery pełne OGG, preload, warianty, przejścia muzyki,
+wyciszenie obu kanałów, pauzę, focus i zwalnianie źródeł/aliasów.
+Dekoduje prawdziwa biblioteka raylib, bez urządzenia i bez tworzenia okna.
+Mastery pochodzą z rzeczywistych LMMS/Csound/Audacity; pięć zapisanych AUP3
+ma poprawne SQLite quick_check. Testy nie obejmują odsłuchu artystycznego.
+Raport i paczki: [art/audio/suite-20261108](art/audio/suite-20261108/README.md).
+
+## Zdolności pustyni i Kaldery — 08.11.2026
+
+PASS: 200119 kontroli logiki/animacji i 5162 zapisu. Testy obejmują
+Jadowity wachlarz, Miedzianą falę, Rozłupujący cios i Żarowy oddech:
+telegraph, obrażenia 30/60/120 Hz, wyjście ze strefy, osłony, unik,
+blokadę kierunku, przerwanie śmiercią/podróżą, fazy i pociski po odczycie,
+poprawne użycie w zwarciu i pojedyncze trafienie wachlarza z bliska.
+Zapis v11; odczyt v1–v10 oraz rzeczywisty wcześniejszy zapis v10 przechodzą.
+Renderer: 497 kontroli, cztery zdolności × osiem kierunków, 105 obrazów
+i cztery rzeczywiste spotkania w oryginalnym terenie. Okna pozostają ukryte,
+audio nie jest otwierane. Nie mierzono foreground FPS. Wyniki i paczki:
+[art/gameplay/elite-abilities](art/gameplay/elite-abilities/README.md).
+
 ## Natywny kursor Windows — 04.11.2026
 
 Na życzenie użytkownika usunięto wcześniejszy rysowany wskaźnik oraz całą

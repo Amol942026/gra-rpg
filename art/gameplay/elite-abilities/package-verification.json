@@ -1,0 +1,53 @@
+[
+  {
+    "status": "PASS",
+    "edition": "player",
+    "package_sha256": "44c56408b492965fd33dfe3feeae43e16e376542ff57e9fca849b5724a392965",
+    "exe_sha256": "16f599d5baec12a06d2bed43a690b05c8a706d35730a4f159fef4d5d41cd58c6",
+    "verified_assets": 147,
+    "startup": [
+      {
+        "frames": 180,
+        "scenario": "main-menu"
+      }
+    ],
+    "enemy_ability": {
+      "status": "PASS",
+      "checks": 497,
+      "failures": 0,
+      "abilities": 4,
+      "directions": 8,
+      "captured_frames": 105,
+      "authored_encounters": 4,
+      "hidden": true,
+      "audio_opened": false,
+      "presentation_measured": false
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  {
+    "status": "PASS",
+    "edition": "developer",
+    "package_sha256": "76e034e9fbcc73de22d5433320b19b16badfca6b4aba37b6460b0f1fb44c5d66",
+    "exe_sha256": "b93ea72c0643e8241799f92c3d1df79d8e51c77e7ec27487220140fd866c3ad2",
+    "verified_assets": 147,
+    "startup": [
+      {
+        "frames": 180,
+        "scenario": "forest"
+      },
+      {
+        "frames": 180,
+        "scenario": "desert"
+      },
+      {
+        "frames": 180,
+        "scenario": "volcano"
+      }
+    ],
+    "enemy_ability": null,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  }
+]

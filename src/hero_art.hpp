@@ -297,7 +297,7 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     rig.tapered({-2.3f,8.3f,head-5},{2.3f,8.3f,head-5},.65f,.65f,rgb(134,88,78));
     rig.rounded({0,6.5f,head-8},{9,3,2.5f},shade(skin,.82f));
     }
-    Color hood=helmet?paint(headwear.paint.primary):paint(0x463b32);
+    Color hood=helmet?paint(headwear.paint.primary):flash?Text:hero_paint::HairColor;
     rig.rounded({0,-3,head+6},{22,19,15},hood,helmet||flash?-1:1);
     rig.rounded({0,-6,head},{21,11,23},hood,helmet||flash?-1:2,true);
     for(float side:{-1.f,1.f}){

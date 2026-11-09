@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "event": "roll-v2",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\roll-v2.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-roll-20261109\\delivery\\roll-v2.wav",
+      "sha256": "ef7d931dd85fdb9528ccc39a5842347a6fdae48459818af9cc78536e4ffaa282",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_001504_f252ad58\\roll-v2.wav",
+      "before_sha256": "f9204d2dab271d0f6d1cac8df382ced8e18a500496ab8194f074c1046fca1317"
+    },
+    {
+      "event": "roll-v3",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\roll-v3.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-roll-20261109\\delivery\\roll-v3.wav",
+      "sha256": "50a063fb58931a0f26d2b261d31a27abc4d63e52557fcff0142f9f2c9abc1fb7",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_001504_f252ad58\\roll-v3.wav",
+      "before_sha256": "537493613ac5cf600f43b7ca062d4e02e10c9d6011310920ec52271370ec8617"
+    },
+    {
+      "event": "roll",
+      "target": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\audio\\roll.wav",
+      "source": "C:\\AI2D\\audio\\emberfall-roll-20261109\\delivery\\roll.wav",
+      "sha256": "4bb18004aca60eb2b7a9f501b0f15941c8d57f53f56ff956ec2c1c317c4bc620",
+      "backup": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_001504_f252ad58\\roll.wav",
+      "before_sha256": "5a4645e533e74b9afbc53c30b994c1c2d152d7dc733a9ad87694215eb00659b1"
+    }
+  ],
+  "receipt": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\art\\pipeline\\backups\\20261109_001504_f252ad58\\binding-receipt.json",
+  "asset_root": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets"
+}

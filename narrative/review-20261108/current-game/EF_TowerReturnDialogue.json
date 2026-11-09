@@ -1,0 +1,41 @@
+{
+  "id": "EF_TowerReturnDialogue",
+  "title": "Powrót z Wielkiej Kniei",
+  "array": "TowerReturnDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "926faabfc409a6d67ca3d226cba90f82869959f4d2695b5e8bc601d48bbcf962",
+  "lines": [
+    {
+      "speaker": "Wanderer",
+      "text": "Eldrinie, Kamienny Strażnik padł. Mam pierwszą część Serca Świtu. Nawet pod kamiennym pyłem nie przestaje świecić."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Dobrze się spisałeś, Wędrowcze. Wysłałem cię przeciw mocy starszej od tej wieży, a jednak wróciłeś. Odzyskaliśmy pierwszą z pięciu części."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Następnym razem uprzedź mnie, jak daleko sięga kamienna pięść."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Zapamiętam. Zachowaj odłamek przy sobie. Runy wieży ukazują tylko jego odbicie; prawdziwe Serce złożymy, gdy odzyskasz całą piątkę."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "A Pieczęć? Mamy jeszcze czas?"
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Moje zaklęcia wciąż ją podtrzymują. Pozostały cztery części. Następnej strzeże Żywa Wydma w Morzu Piasków."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Więc najpierw odpocznę, potem pomówimy o drodze przez piaski."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Wieża jest twoim schronieniem. Źródło odnowi twoje siły, a Miron na trzecim piętrze uzupełni zapasy. Gdy będziesz gotowy, wróć do mnie."
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\cloth1.ogg",
+    "source_sha256": "ddb93a3671233f95da0e0b10367f082f7eb42fa6caaddcf776410aa8833c747d",
+    "trim_frames": [
+      3495,
+      25613
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\cloth-0.wav",
+    "sha256": "77298f03a1e9ea216971155aca76b53fb0792b846d52ad295094e217960bd68f"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\footstep_grass_000.ogg",
+    "source_sha256": "9d49497777405d78d7cf7f2888e28277f3a23192300cfd1d79d54876b20f479f",
+    "trim_frames": [
+      0,
+      3214
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\earth-0.wav",
+    "sha256": "db3bce1aa37b8a7a9f90b132e58532120f2b1f6bf94f33f5c1766ea6f541895f"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_medium_000.ogg",
+    "source_sha256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3",
+    "trim_frames": [
+      0,
+      3321
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\contact-0.wav",
+    "sha256": "93eb9fb875c1dfc97a3e6c53f348a096cf35f6f1d752f8c0d42ac43fc058c582"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\cloth2.ogg",
+    "source_sha256": "8a7451193c38bc05483aec25dd193e163a15d44cf7fff04ac7912573231b0201",
+    "trim_frames": [
+      2922,
+      16197
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\cloth-1.wav",
+    "sha256": "98b18ebb8257c14b21daf8d2eb36ca96f4a4728f80e8c9a2a6d5cc2a7a425bf1"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\footstep_grass_001.ogg",
+    "source_sha256": "fb28781bd22b2eefdc14077f1adf5c94d7fe9c3a130194633b55f3e0d39d9f04",
+    "trim_frames": [
+      0,
+      6624
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\earth-1.wav",
+    "sha256": "b9eefbe667ff7e4f85c728a1898ed90d7a5d04b2aa9ae6d97b04943e4a76e84e"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_medium_001.ogg",
+    "source_sha256": "7642a4fd43e547afe4f7adfadb3dabb681c0ff512f52c1674bae30a726841faf",
+    "trim_frames": [
+      0,
+      5716
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\contact-1.wav",
+    "sha256": "12fb8836150a1705be5fa4b3fccf8ea4feaea7918b4e260ab02b413df416be35"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\cloth3.ogg",
+    "source_sha256": "a48632d17a4f1416541d261a32a31612e01267144c407fa3ecab3ff410f0085b",
+    "trim_frames": [
+      1068,
+      19806
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\cloth-2.wav",
+    "sha256": "51b7aa5af211b956804dc88bde5606bf91de0a7d88b665ed25cfb50e98794435"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\footstep_grass_002.ogg",
+    "source_sha256": "73a520139f5be716a403bfe9c80e0e94d1e61d8e9de04a354b336392164b53dc",
+    "trim_frames": [
+      0,
+      6444
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\earth-2.wav",
+    "sha256": "3a41a23d5ac561e529f48ccd4ca8154b8919dbc0a257ddbaf0e5d990da4a2c27"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\impact\\Audio\\impactSoft_medium_002.ogg",
+    "source_sha256": "5069e3571a77d7f7aae9ef71d0364aa245fb7d64a7c8cc9956f221d03088c089",
+    "trim_frames": [
+      0,
+      4393
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\contact-2.wav",
+    "sha256": "524bd5e335d016e377f0b147914755a903fdd4a75d1bc5c64ffd1966b5ef951e"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\sources\\rpg\\Audio\\dropLeather.ogg",
+    "source_sha256": "097e1d3b74949b0145fda0519d40b7e0773ab82ec4858727f95be830927e1a45",
+    "trim_frames": [
+      253,
+      13070
+    ],
+    "layer": "C:\\AI2D\\audio\\emberfall-roll-20261109\\layers\\leather.wav",
+    "sha256": "cb0a0ca82453cc313e4b4a9a56d8ae63017f66abc671e1d4bfb230e9609cb555"
+  }
+]

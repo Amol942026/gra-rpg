@@ -1,0 +1,9 @@
+PASS: audio device initialization can be skipped
+PASS: silent fallback still moves and drains sound events
+PASS: Options toggles music alone
+PASS: Options controls cannot select or drop onto terrain
+PASS: Options toggles effects independently
+PASS: music button after global mute restores only music
+PASS: effects button after global mute restores only effects
+PASS: Options switches work while paused without resuming gameplay
+Checks: 8; failures: 0

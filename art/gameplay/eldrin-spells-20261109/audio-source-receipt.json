@@ -1,0 +1,29 @@
+[
+  {
+    "file": "bow.7z",
+    "source": "https://opengameart.org/sites/default/files/medieval_sfx_textures_1_of_2.7z",
+    "page": "https://opengameart.org/content/medieval-sound-effects-weapon-textures",
+    "license": "CC0",
+    "author": "Ben Jaszczak and Brian Nelson",
+    "sha256": "b5e2b2c86d811d983d15dbf8453df6a25275a2a0dc4e88e0dc5e1cb3046fd4ae",
+    "bytes": 89924031
+  },
+  {
+    "file": "torch.wav",
+    "source": "https://opengameart.org/sites/default/files/Waving%20Torch.wav",
+    "page": "https://opengameart.org/content/torch-fire-spell",
+    "license": "CC-BY 3.0",
+    "author": "spookymodem",
+    "sha256": "a027961cae4ffdeccfd497788b229dfe32547dcb32f30b8e0429976ae9e9ef57",
+    "bytes": 757804
+  },
+  {
+    "file": "ice-electricity.7z",
+    "source": "https://opengameart.org/sites/default/files/qubodupIceAndElectricitySpells.7z",
+    "page": "https://opengameart.org/content/ice-electricity-magic",
+    "license": "CC-BY 3.0",
+    "author": "Iwan 'qubodup' Gabovitch",
+    "sha256": "e38bf3046f1503d7bad52894ff6d3d4d2e18d595746ab68151667c84a1b12a8d",
+    "bytes": 1401585
+  }
+]

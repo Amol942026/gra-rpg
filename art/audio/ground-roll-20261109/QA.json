@@ -1,0 +1,105 @@
+{
+  "status": "PASS",
+  "date": "2026-11-09",
+  "completed_local": "2026-11-09T00:22:34.365997+01:00",
+  "gameplay_animation_checks": 234864,
+  "native_hud": {
+    "status": "PASS",
+    "checks": 143,
+    "failures": 0,
+    "equipment_icons": 85,
+    "other_item_icons": 23,
+    "window_hidden": true,
+    "audio_device_opened": false,
+    "audio_played": false
+  },
+  "offline_audio": {
+    "status": "PASS",
+    "checks": 482,
+    "failures": 0,
+    "effects": 45,
+    "variants": 135,
+    "music_tracks": 4,
+    "real_raylib_decode": true,
+    "transport": "offline in-memory sink",
+    "window_created": false,
+    "audio_device_opened": false,
+    "audio_played": false
+  },
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "dc6de22935e4174ef201561fa37c510742e863311636a78424d5dd7507c2308e",
+      "exe_sha256": "c497d2f16bf3be03ddb8d5a2155c3cf4bc1f56f6df82c51dcbd09443cca8ece3",
+      "verified_assets": 269,
+      "startup": [
+        {
+          "scenario": "main-menu",
+          "frames": 180
+        }
+      ],
+      "audio_suite": {
+        "status": "PASS",
+        "checks": 482,
+        "failures": 0,
+        "effects": 45,
+        "variants": 135,
+        "music_tracks": 4,
+        "real_raylib_decode": true,
+        "transport": "offline in-memory sink",
+        "window_created": false,
+        "audio_device_opened": false,
+        "audio_played": false
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "9bdbebb5c1e2883bed3e57d2d3dbb7ef3bd87aae943ba486b0a03791e91365fd",
+      "exe_sha256": "0fb99513ff64f8b4843c0d24ef858c884a263ec91c79dede53ce7b941702a69a",
+      "verified_assets": 269,
+      "startup": [
+        {
+          "scenario": "forest",
+          "frames": 180
+        },
+        {
+          "scenario": "desert",
+          "frames": 180
+        },
+        {
+          "scenario": "volcano",
+          "frames": 180
+        }
+      ],
+      "audio_suite": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    }
+  ],
+  "canonical_assets": 269,
+  "all_139_audio_files_and_two_atlases_verified_in_five_locations": true,
+  "remaining_item_icons": 23,
+  "equipment_icons_85_unchanged": true,
+  "only_roll_audio_variants_replaced": true,
+  "all_other_136_audio_files_unchanged": true,
+  "saved_preferences_unchanged": true,
+  "save_version": 14,
+  "save_format_changed": false,
+  "windows_hidden": true,
+  "audio_device_opened": false,
+  "audio_played": false,
+  "artistic_listening_performed": false,
+  "foreground_fps_claimed": false,
+  "diff_whitespace_check": "PASS",
+  "code_sha256": {
+    "src/inventory_icons.hpp": "3c72d49f0d89ea4a2d11c970924f529dd7032748d72c5051b2eb01e7f30fa15c",
+    "tests/inventory_icons_qa.cpp": "73a11d9c15060ebe511f0e12e581529c52c6da4676fa848906b6e61b12ef521c",
+    "tools/media/krita_loot_icons.py": "dea9c0beaee82650f25da8a1b628580b0c6ffc37d96efc1f68f31c035ad21526",
+    "tools/media/loot_icon_comfy.py": "741c3657d9945dbfa7e60c6b6d27b31d8ab5a6b964fed5679192b5ad0d91974e",
+    "tools/media/ground_roll_audio.py": "0e49f3703973c2f6cac13016377733e6d8b3291b1fe9b69dd52f3fae3ffb0917"
+  }
+}

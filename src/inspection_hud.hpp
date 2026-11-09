@@ -23,7 +23,7 @@ Inspection inspectWorld(WorldHover hit) {
         info.secondary=towerInteractive(type)?"Podejdź i użyj E / LPM / PPM.":"Blokuje ruch; element wystroju.";
     }else if(hit.kind==HoverKind::Mage&&game.inTower()&&game.towerFloor==0){
         info.source=hit.kind;info.name="Eldrin";info.kind="Mag / przyjazny NPC";
-        info.detail="Strażnik ostatniej pieczęci.";
+        info.detail="Strażnik Pieczęci Popiołu.";
         info.secondary=game.mageReachable()?"E / PPM: porozmawiaj.":"Podejdź bliżej, aby porozmawiać.";
     }else if(hit.kind==HoverKind::Enemy){
         const Enemy* enemy=game.findEnemy(hit.index);if(!enemy)return info;
@@ -33,6 +33,7 @@ Inspection inspectWorld(WorldHover hit) {
         info.attack=enemy->damage();info.defense=enemy->defense();info.speed=stats.speed;
         info.magicDefense=enemy->magicDefense();info.attackType=enemy->attackType();
         if(enemy->type==BoarType)info.secondary="Szarża: 2× obrażenia · co 4,5 s";
+        if(enemyAbility(enemy->type)!=EnemyAbility::None){info.secondary=enemy->type==10?"Wachlarz jadu · unik lub osłona":enemy->type==9?"Fala dookoła · unik lub wycofanie":enemy->type==16?"Cios na wprost · zejdź na bok":"Ognisty oddech · omiń z boku";info.detail=std::string(enemyAbilityProfile(enemy->type).name)+(enemy->abilityBusy()?(enemy->abilityAge<enemyAbilityProfile(enemy->type).windup?" · przygotowanie":" · atak / odsłonięcie"):" · zdolność specjalna");}
         info.loot=lootHint(enemy->type);
     }else if(hit.kind==HoverKind::Corpse){
         const Enemy* e=game.findCorpse(hit.index);if(!e)return info;

@@ -1,0 +1,92 @@
+[
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-4.wav",
+    "source_sha256": "716639a9214bb9e5ab445a8e5f24156158e1ad77d955bad211c03c986a8da548",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\swish-4.wav",
+    "sha256": "716639a9214bb9e5ab445a8e5f24156158e1ad77d955bad211c03c986a8da548"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-6.wav",
+    "source_sha256": "9eeb921118a113a40f92433c1c05915f64fdc4ba194344e1430bbf360e2f132b",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\swish-6.wav",
+    "sha256": "9eeb921118a113a40f92433c1c05915f64fdc4ba194344e1430bbf360e2f132b"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\swish-8.wav",
+    "source_sha256": "327d22b636f58444008912211b8cd44d04188f62e3e953d6864c047d40d36962",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\swish-8.wav",
+    "sha256": "327d22b636f58444008912211b8cd44d04188f62e3e953d6864c047d40d36962"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\creak1.wav",
+    "source_sha256": "84db9dd771dc1c01c987a2c3cff23ede8354d473379e410acfd8a5e070e05dda",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\creak1.wav",
+    "sha256": "84db9dd771dc1c01c987a2c3cff23ede8354d473379e410acfd8a5e070e05dda"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\creak2.wav",
+    "source_sha256": "6de7c63a5ebd970273e35c603c3ad056d82ab5c587f1292690c0f810cc57e35a",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\creak2.wav",
+    "sha256": "6de7c63a5ebd970273e35c603c3ad056d82ab5c587f1292690c0f810cc57e35a"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\creak3.wav",
+    "source_sha256": "d737a40fda471c73ab94b4d0344933e91e941e372b824629d867a7ee01a811d3",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\creak3.wav",
+    "sha256": "d737a40fda471c73ab94b4d0344933e91e941e372b824629d867a7ee01a811d3"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth1.wav",
+    "source_sha256": "51e2a4689f1e33948e99b0bdaf1a5820959c9a97d4d86d8d95814b5fe3c9957a",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\cloth1.wav",
+    "sha256": "51e2a4689f1e33948e99b0bdaf1a5820959c9a97d4d86d8d95814b5fe3c9957a"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth2.wav",
+    "source_sha256": "f003f9da7ede831b196180ad08221916ddac53400fe71c3136a3e3df0a6cae73",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\cloth2.wav",
+    "sha256": "f003f9da7ede831b196180ad08221916ddac53400fe71c3136a3e3df0a6cae73"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\cloth3.wav",
+    "source_sha256": "553d4e721fb2ca379d34e0bacfda0749c02cc779261cde3f24c02736340ec83b",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\cloth3.wav",
+    "sha256": "553d4e721fb2ca379d34e0bacfda0749c02cc779261cde3f24c02736340ec83b"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_000.wav",
+    "source_sha256": "4392c764461e9242a38f19f7ecf9dae898049c9faf349799de8de4bbe98979d0",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\impactSoft_heavy_000.wav",
+    "sha256": "4392c764461e9242a38f19f7ecf9dae898049c9faf349799de8de4bbe98979d0"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_001.wav",
+    "source_sha256": "96de41d1075c24a8698d6f27960ba13b894d16accf4a0d84328989172d63fe07",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\impactSoft_heavy_001.wav",
+    "sha256": "96de41d1075c24a8698d6f27960ba13b894d16accf4a0d84328989172d63fe07"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactSoft_heavy_002.wav",
+    "source_sha256": "cebc5ed19055f474688756192875bb91b642d73b2db0ed531f3de08bc3540946",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\impactSoft_heavy_002.wav",
+    "sha256": "cebc5ed19055f474688756192875bb91b642d73b2db0ed531f3de08bc3540946"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_light_000.wav",
+    "source_sha256": "b3001ebe4e30aa8d347f51298d2d8ff4a21f32f510bb4eebda2c4a59fbb04a9d",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\impactWood_light_000.wav",
+    "sha256": "b3001ebe4e30aa8d347f51298d2d8ff4a21f32f510bb4eebda2c4a59fbb04a9d"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_light_001.wav",
+    "source_sha256": "908acce7ef36995249485e6344e8f7b6d58d49356199c7e733f6660174e08046",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\impactWood_light_001.wav",
+    "sha256": "908acce7ef36995249485e6344e8f7b6d58d49356199c7e733f6660174e08046"
+  },
+  {
+    "source": "C:\\AI2D\\audio\\emberfall-physical-20261108\\layers\\impactWood_light_002.wav",
+    "source_sha256": "e4e784583742593a1eb5f9c9c15addf5e1a0f51dfe843102a737047eb8994e37",
+    "output": "C:\\AI2D\\audio\\emberfall-flame-20261108\\layers\\impactWood_light_002.wav",
+    "sha256": "e4e784583742593a1eb5f9c9c15addf5e1a0f51dfe843102a737047eb8994e37"
+  }
+]

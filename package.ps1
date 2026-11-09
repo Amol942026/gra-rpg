@@ -57,7 +57,12 @@ Najazd na przedmiot - opis i rzadkosc; na obiekt lub bestie - informacje.
 1 / 2 - mikstura zdrowia / many.
 PPM na miksturze lub grzybie w plecaku - uzyj. Grzyb odnawia 10 HP.
 C - rzuc wybrany czar w kierunku kursora. K - wybor czaru.
-Kula ognia kosztuje 10 many. Mana odnawia sie o 1 punkt co 5 sekund.
+Po pokonaniu Kamiennego Straznika Eldrin uczy zaklec w swojej wiezy.
+W rozmowie wybierz "Naucz mnie wladac zywiolami". Kazdy czar wymaga zakupu.
+Kula ognia: 600 zlota, 10 many, odnowienie 0,8 s.
+Sopel lodu: 1500 zlota, 20 many, odnowienie 1,8 s.
+Kulisty piorun: 3000 zlota, 35 many, odnowienie 3,5 s.
+K otwiera ksiege poznanych czarow. Mana odnawia sie o 1 punkt co 5 sekund.
 Z - Mocne ciecie (miecz, 10 many).
 X - Przeszywajaca strzala (luk, 20 many).
 V - Leczenie (30 HP za 20 many).
@@ -82,7 +87,8 @@ Fragmentow Serca Switu nie mozna sprzedac. Saldo zlota widac w HUD.
 Brak miejsca lub zlota nie powoduje utraty przedmiotow ani pieniedzy.
 F1 - pomoc. Esc - menu pauzy z zapisem, odczytem i opcjami.
 Esc w menu pauzy / Wroc do gry - wznow. Enter po smierci - nowa wyprawa.
-F2 - glosnosc. MUZYKA / EFEKTY w HUD - osobne wyciszenie.
+Muzyka i efekty: osobne przelaczniki i suwaki w Opcjach menu glownego oraz pauzy Esc.
+Domyslnie oba kanaly sa wlaczone: muzyka 85%, efekty 95%.
 F11 / przycisk u gory ekranu - pelny ekran lub okno.
 W rozmowach Enter, Spacja lub LPM przewija tekst. Przycisk POMIN pomija rozmowe.
 Esc pauzuje takze rozmowy i prolog.
@@ -92,6 +98,11 @@ Odkryj las, pokonaj Kamiennego Straznika i dotrzyj do wiezy Eldrina.
 Lesne dziki przygotowuja szarze przez 0,55 s, potem biegna prosto w cel.
 Stratowanie zadaje jednorazowo podwojne obrazenia; odnowienie wynosi 4,5 s.
 Zejdz z toru, uzyj uniku lub skorzystaj z oslony terenowej.
+Kobra piaskowa: Jadowity wachlarz, trzy pociski - unik lub oslona.
+Skarabeusz miedziany: Miedziana fala, rozszerzajacy sie pierscien - wycofanie lub unik.
+Obsydianowy wojownik: Rozlupujacy cios na wprost - zejdz na bok.
+Zarowy drak: Zarowy oddech w stozku - obejdz bestie z boku.
+Kazdy z tych atakow ma zapowiedz na ziemi i chwile odpoczynku po uzyciu.
 Wieza ma piec tematycznych pieter. Eldrin otwiera droge na pustynie,
 gdzie czeka Zywa Wydma. Rozmowa z magiem pozwala wybrac podroz.
 Po pokonaniu Zywej Wydmy Eldrin otwiera droge do Kaldery Popiolu.

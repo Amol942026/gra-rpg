@@ -1,0 +1,21 @@
+{
+  "id": "EF_VolcanoShardPendingTalk",
+  "title": "Eldrin — odłamek pozostał przy Varkhorze",
+  "array": "VolcanoShardPendingTalk",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "926faabfc409a6d67ca3d226cba90f82869959f4d2695b5e8bc601d48bbcf962",
+  "lines": [
+    {
+      "speaker": "Eldrin",
+      "text": "Varkhor już ci nie zagrozi, lecz trzecia część nadal spoczywa przy jego szczątkach. Nie zostawiaj jej w Kalderze."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Potrzebowałem oddechu po walce. Wrócę i zabiorę odłamek."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Brama jest gotowa. Przygotuj się w wieży, a potem wybierz powrót do Kaldery Popiołu."
+    }
+  ]
+}

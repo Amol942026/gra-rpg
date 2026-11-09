@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "files": [
+    {
+      "file": "roll.wav",
+      "sha256": "4bb18004aca60eb2b7a9f501b0f15941c8d57f53f56ff956ec2c1c317c4bc620",
+      "frames": 24960,
+      "peak_dbfs": -2.9999878172428636,
+      "rms_dbfs": -22.585621571884182,
+      "dc": 1.5552227313701923e-06,
+      "clipped_samples": 0
+    },
+    {
+      "file": "roll-v2.wav",
+      "sha256": "ef7d931dd85fdb9528ccc39a5842347a6fdae48459818af9cc78536e4ffaa282",
+      "frames": 24960,
+      "peak_dbfs": -2.9999878172428636,
+      "rms_dbfs": -25.47985176397408,
+      "dc": -2.8243431678185097e-06,
+      "clipped_samples": 0
+    },
+    {
+      "file": "roll-v3.wav",
+      "sha256": "50a063fb58931a0f26d2b261d31a27abc4d63e52557fcff0142f9f2c9abc1fb7",
+      "frames": 24960,
+      "peak_dbfs": -2.9999878172428636,
+      "rms_dbfs": -22.163440976357116,
+      "dc": 9.224965022160457e-07,
+      "clipped_samples": 0
+    }
+  ],
+  "duration": 0.52,
+  "recorded_layers_only": true,
+  "tonal_synthesis": false,
+  "audio_played": false
+}

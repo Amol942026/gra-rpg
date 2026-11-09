@@ -1,13 +1,13 @@
 {
   "status": "PASS",
-  "package": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\Emberfall-Windows-x64.zip",
-  "package_sha256": "e516108188018eb26f054986f38f4710881f323b23f06956cfeb2f39e3b70302",
-  "extracted": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\qa-hero-art\\package-20261021-140454\\Emberfall",
-  "verified_assets": 95,
-  "exe_sha256": "3df9fcded7eaedfdb30a6bc4c035917b28d503ad725cb3df755dd71f4fcada20",
-  "hero_atlas_sha256": "b9a426d0b76e46c6ae3fbaa22df7b2a5a07465d674098606f5060d3bcc9538e7",
+  "package": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\Emberfall-Windows-x64.zip",
+  "package_sha256": "a6691b60e182d7d8946a34e79cf378c7e6d4b33753f64e28518f0e5d701291b6",
+  "extracted": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\dist\\qa-hero-art\\package-20261107-234618\\Emberfall",
+  "verified_assets": 144,
+  "exe_sha256": "f75cb90c1959ac58e4bc96e2169a63366a2653af37f2d43488e4021f10cb7c39",
+  "hero_atlas_sha256": "7d186166f278d787d16609142fce1559a911d5ca29c74ebc4e658dd7e5d518e6",
   "startup_frames": 180,
-  "native_renderer_checks": 424,
+  "native_renderer_checks": 428,
   "audio_device_opened": false,
   "native_sources_in_player": false
 }

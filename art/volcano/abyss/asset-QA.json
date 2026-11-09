@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "independent_asset_checks": 31,
+  "chest_styles": 3,
+  "chest_states": 3,
+  "unique_chest_cells": 9,
+  "runtime_chest_dimensions": [
+    768,
+    768
+  ],
+  "native_chest_dimensions": [
+    1536,
+    1536
+  ],
+  "cliff_fades_to_transparency": true,
+  "audio": false,
+  "external_art_inputs": [],
+  "portable_krita_sha256": "4bf5b51100b30fa68edd12b995932b82f8a0080ef115b5461941fa2d186d126c",
+  "tool_source": "https://krita.org/en/posts/2026/krita-5.3.4-released/"
+}

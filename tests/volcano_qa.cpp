@@ -14,9 +14,27 @@ int main(int argc,char** argv){
  check(volcano_art::terrain.id&&volcano_art::terrain.depth.id==0&&volcano_art::lava.id,"third terrain and Synfig lava are preloaded without unused depth");
  check(volcano_art::lavaStrips.size()>100&&volcano_art::lavaFrames[59].id&&volcano_art::steam.id,"continuous lava ribbons and native steam loop preloaded");
  check(volcano_art::channelWall.id&&volcano_art::canyonFronts.size()==volcano_art::lavaStrips.size(),"recessed river has preloaded rock faces for every visible lower segment");
+ check(volcano_art::BoundaryLow<MapWalkMin&&volcano_art::BoundaryHigh>MapWalkMax,"visible rock perimeter lies immediately outside the existing movement boundary");
+ for(int count:volcano_art::boundarySides)check(count>=30,"deep cliff strips cover every side of the playable platform");
+ check(volcano_art::abyssCliff.id&&volcano_art::abyssDistance.id&&volcano_art::abyssFalls.size()==4,"native abyss rock, distant silhouettes and four molten waterfalls are preloaded");
+ auto textureParameter=reinterpret_cast<void(*)(unsigned,int,int*)>(glfwGetProcAddress("glGetTexParameteriv"));
+ if(textureParameter){int wrapS=0,wrapT=0;rlEnableTexture(volcano_art::abyssCliff.id);textureParameter(0x0DE1,RL_TEXTURE_WRAP_S,&wrapS);textureParameter(0x0DE1,RL_TEXTURE_WRAP_T,&wrapT);rlDisableTexture();
+  check(wrapS==RL_TEXTURE_WRAP_REPEAT,"cliff material repeats horizontally around the perimeter");
+  check(wrapT==RL_TEXTURE_WRAP_CLAMP,"bottom transparency stays clamped instead of wrapping into an opaque seam");
+ }else check(false,"native texture parameter query available");
+ for(const auto& face:volcano_art::abyssFaces)check(face.depth[1]>400&&face.depth[2]>400&&face.depth[0]==0&&face.depth[3]==0,"cliff faces descend far below the walking surface rather than rising into walls");
+ for(int side=0;side<4;side++){
+  size_t perSide=volcano_art::abyssFaces.size()/4;const auto& a=volcano_art::abyssFaces[(side+1)*perSide-1];const auto& b=volcano_art::abyssFaces[((side+1)%4)*perSide];
+  check(distance(a.corners[3],b.corners[0])<.001f&&distance(a.corners[2],b.corners[1])<.001f&&a.depth[2]==b.depth[1],"cliff corner is sealed at both the surface and the bottom of the abyss");
+ }
+ Image surface=LoadImageFromTexture(volcano_art::terrain.texture);
+ for(V probe:std::array<V,4>{{{-2,MapSize*.5f},{MapSize+2.f,MapSize*.5f},{MapSize*.5f,-2},{MapSize*.5f,MapSize+2.f}}}){
+  Vector2 at=volcano_art::projected(probe);Color outside=GetImageColor(surface,int(at.x*TerrainBakeScale),surface.height-1-int(at.y*TerrainBakeScale));
+  check(outside.a==0,"land ends at all four cliffs: transparent exterior reveals the abyss panorama");
+ }UnloadImage(surface);
  for(int river=0;river<2;river++){
   float low=1000,high=-1000;for(const auto& s:volcano_art::lavaStrips)if(std::abs(s.corners[0].x-(lavaCenter(river,s.corners[0].y)-1.6f))<.01f){low=std::min(low,s.corners[0].y);high=std::max(high,s.corners[1].y);}
-  check(low<0&&high>MapSize,"molten channel continues beyond both field edges");
+  check(std::abs(low-volcano_art::BoundaryLow)<.01f&&std::abs(high-volcano_art::BoundaryHigh)<.01f,"molten surface ends at the plateau and joins descending waterfalls");
   for(float y:{2.f,5.f,68.f,70.f})check(volcanoLava({lavaCenter(river,y),y}),"extended river cannot be crossed at its former exposed end");
  }
  check(volcano_art::extraScenery.id&&volcano_art::extraSceneryEdge.id&&volcano_art::extraSceneryAlpha.size()==1440*1840,"new boulders, stumps, craters and monoliths preloaded with alpha");
@@ -110,7 +128,14 @@ int main(int argc,char** argv){
   reset();game.activateField(WorldLocation::Volcano);game.player=views[view];game.messageTime=0;game.time=2;capture("landscape-"+std::to_string(view));
   for(int frame=0;frame<80;frame++){game.time+=1.f/60;double t=GetTime();renderScene();rlDrawRenderBatchActive();if(finish)finish();if(frame>=20)timings.push_back((GetTime()-t)*1000);}
  }
- for(int river=0;river<2;river++)for(float y:{2.f,36.f,70.f}){game.player={lavaCenter(river,y)-4,y};capture("canyon-"+std::to_string(river)+"-"+std::to_string(int(y)));}
+ for(int river=0;river<2;river++)for(float y:{2.f,36.f,70.f}){float safeY=std::clamp(y,MapWalkMin+1,MapWalkMax-1.1f);game.player={lavaCenter(river,safeY)-4,safeY};capture("canyon-"+std::to_string(river)+"-"+std::to_string(int(y)));}
+ for(int river=0;river<2;river++){float y=volcano_art::BoundaryHigh-3;game.player={lavaCenter(river,y)-4,y};capture("abyss-fall-"+std::to_string(river));}
+ const V edges[]={{3,36},{36,3},{68,36},{36,68},{4,4},{4,67},{67,4},{67,67},{12,29},{35,13},{43,55},{63,47}};
+ for(int view=0;view<int(std::size(edges));view++){reset();game.activateField(WorldLocation::Volcano);game.player=edges[view];game.time=2;capture("boundary-"+std::to_string(view));}
+ reset();game.activateField(WorldLocation::Volcano);game.enemies.clear();
+ const auto boundaryProps=game.props;game.props.clear();game.player={36,36};
+ for(V target:std::array<V,4>{{{MapWalkMin-.1f,36},{MapWalkMax+.1f,36},{36,MapWalkMin-.1f},{36,MapWalkMax+.1f}}})check(!game.walkable(target),"all four visible map edges retain actual movement collision");
+ game.props=boundaryProps;
  // Exercise the fallback's actual final framebuffer, without restoring or
  // focusing this hidden window. DXGI is tested by image_clarity_probe.
  refreshDisplayLayout();updateFramePacing(true);renderScene();Image expected=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&expected);

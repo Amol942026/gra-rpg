@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "date": "2026-11-08",
+  "authority": "current-game-per-explicit-user-instruction",
+  "conversations": 12,
+  "lines": 57,
+  "game_logic_checks": 200040,
+  "persistence_checks": 4513,
+  "renderer_checks": 157,
+  "offline_story_sync_checks": 32,
+  "native_articy_modified": false,
+  "native_connection_available": false,
+  "quest_gates_changed": false,
+  "save_schema_changed": false,
+  "audio_preferences_unchanged": true,
+  "source_sha256": {
+    "src/intro_story.hpp": "a277c1f7bb82f72bb78d7d8f3d5e69eb1aa484546c3f0ffe278195b4f68b1c10",
+    "src/tower_story.hpp": "59c11576856b73de59f649d55f5da9d97f418013a72cd5d9a3fd23c096ca37f1",
+    "src/story_context.hpp": "bcae2483c485b287cd7d4d9cb80820a4bd05159503c3ebb8747a582c2ff821ee",
+    "src/tower_scene.hpp": "b677ca11b60fae8d4def83152fdee438f630fefc73c8e6aff7e13dad483b4a33",
+    "src/tower_rooms_ui.hpp": "9f0df9832821e08e938f1e350ef7081d9ac3eec4655b5e1603d40852472ac2ad",
+    "src/game.hpp": "8da52cbd11473b1059877979417bbf40a3db197522fb56d83ccb336118206a4e",
+    "src/main.cpp": "58f0773cdd17d5b3fd7f12c8e016f7e191bfce4ed789164c96e0701aa2cb0a52",
+    "src/game_menu.hpp": "a95271627e1c624fa85bbefefb8116b6a53882027fbcc8acad883b958538d36d",
+    "src/save_game.hpp": "f071731510d37ae3bcea510f5bd609c48aabd5d863fa571b2d58413baf5374d9"
+  },
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "dc284be10039fbd9877f1876e60902b0e2de329ba458a3bfba186e682b31f66e",
+      "exe_sha256": "d5ee76b2e55ce8de9aba1ed6b62827ee5acd622e07b97d835155bac71c52ed47",
+      "verified_assets": 147,
+      "startup": [
+        {
+          "frames": 180,
+          "scenario": "main-menu"
+        }
+      ],
+      "dialogue": {
+        "status": "PASS",
+        "checks": 157,
+        "failures": 0,
+        "conversations": 12,
+        "rendered_lines": 57,
+        "hidden": true,
+        "audio_opened": false,
+        "source": "current-game",
+        "native_articy_modified": false
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "ff3cf9a51935cf8eb633296d4812f9d5091a6bb1a22fbfe9e0833233887fe98d",
+      "exe_sha256": "66137bb310b6bcfe60ad107e463b3a0bd8f5928acf3224521a2c441baea8f4da",
+      "verified_assets": 147,
+      "startup": [
+        {
+          "frames": 180,
+          "scenario": "forest"
+        },
+        {
+          "frames": 180,
+          "scenario": "desert"
+        },
+        {
+          "frames": 180,
+          "scenario": "volcano"
+        }
+      ],
+      "dialogue": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    }
+  ]
+}

@@ -39,7 +39,6 @@ bool developerInput(){
  return false;
 }
 void drawDeveloperUi(){
- if(developerActive&&!towerPanelOpen&&!developerMenuOpen&&!intro.active()&&!towerStory.active())txt("SESJA TESTOWA",29,195,14,Gold);
  if(!developerMenuOpen)return;
  rect(0,0,W,H,rgb(6,12,18,224));panel({140,100,1160,714},rgb(21,30,36));line(180,122,1210,122,Gold);
  center("TRYB DEWELOPERSKI",720,143,30,Text,true);center("Wybierz lokację i rozpocznij test bez przechodzenia fabuły.",720,186,17,Muted);

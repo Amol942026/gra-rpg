@@ -1,0 +1,26 @@
+{
+  "name": "realm-treasure-chests",
+  "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+  "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.png",
+  "layers": [
+    "Contact shadows",
+    "Raised lids",
+    "Carved bodies and interiors",
+    "Wood grain, inlays and obsidian cracks",
+    "Closed lids",
+    "Fittings, locks, vines and runes",
+    "Unclaimed treasure"
+  ],
+  "size": [
+    1536,
+    1536
+  ],
+  "runtime_size": [
+    768,
+    768
+  ],
+  "kra_sha256": "ad2f59c0e1034ecd8398b4f3fc68e0fd2d8c5ba4fcc428e8f5a6dc385165a28e",
+  "png_sha256": "b6aab9f545b2196049b8d516117063963d880ae528b87935c3617637231d962e",
+  "resumed_export": true,
+  "retained": true
+}

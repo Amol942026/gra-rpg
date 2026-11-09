@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/synfig/synfig/releases/tag/v1.4.5",
+  "asset": "https://github.com/synfig/synfig/releases/download/v1.4.5/SynfigStudio-1.4.5-2024.05.19-win64-f4b8d.zip",
+  "sha256": "1610ec2eb2352ab6583d73218c498c27822d0645978abbb23873ad99cd07103a",
+  "bytes": 119507206,
+  "github_digest": null,
+  "portable_only": true
+}

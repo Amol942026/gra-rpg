@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"result\": \"Exported to WAV format: C:/Users/Amol/Documents/ChatGPT/Gra Unity 2/work/audio-mcp-20261023/output/Emberfall-flame-portal-bow-20261108-master-48k.wav\\nBatchCommand finished: OK\",\n  \"audio\": {\n    \"path\": \"C:\\\\Users\\\\Amol\\\\Documents\\\\ChatGPT\\\\Gra Unity 2\\\\work\\\\audio-mcp-20261023\\\\output\\\\Emberfall-flame-portal-bow-20261108-master-48k.wav\",\n    \"bytes\": 3886124,\n    \"seconds\": 20.24,\n    \"sample_rate\": 48000,\n    \"channels\": 2,\n    \"sample_width\": 2,\n    \"peak\": 0.749908447265625,\n    \"rms\": 0.05484203106274615\n  }\n}"
+    }
+  ],
+  "isError": false
+}

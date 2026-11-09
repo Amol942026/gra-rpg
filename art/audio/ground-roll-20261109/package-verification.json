@@ -1,0 +1,54 @@
+[
+  {
+    "status": "PASS",
+    "edition": "player",
+    "package_sha256": "dc6de22935e4174ef201561fa37c510742e863311636a78424d5dd7507c2308e",
+    "exe_sha256": "c497d2f16bf3be03ddb8d5a2155c3cf4bc1f56f6df82c51dcbd09443cca8ece3",
+    "verified_assets": 269,
+    "startup": [
+      {
+        "scenario": "main-menu",
+        "frames": 180
+      }
+    ],
+    "audio_suite": {
+      "status": "PASS",
+      "checks": 482,
+      "failures": 0,
+      "effects": 45,
+      "variants": 135,
+      "music_tracks": 4,
+      "real_raylib_decode": true,
+      "transport": "offline in-memory sink",
+      "window_created": false,
+      "audio_device_opened": false,
+      "audio_played": false
+    },
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  },
+  {
+    "status": "PASS",
+    "edition": "developer",
+    "package_sha256": "9bdbebb5c1e2883bed3e57d2d3dbb7ef3bd87aae943ba486b0a03791e91365fd",
+    "exe_sha256": "0fb99513ff64f8b4843c0d24ef858c884a263ec91c79dede53ce7b941702a69a",
+    "verified_assets": 269,
+    "startup": [
+      {
+        "scenario": "forest",
+        "frames": 180
+      },
+      {
+        "scenario": "desert",
+        "frames": 180
+      },
+      {
+        "scenario": "volcano",
+        "frames": 180
+      }
+    ],
+    "audio_suite": null,
+    "audio_preferences_unchanged": true,
+    "native_sources_in_zip": false
+  }
+]

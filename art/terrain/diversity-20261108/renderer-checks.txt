@@ -1,0 +1,1584 @@
+PASS all elevation diagnostics remain hidden and silent
+PASS slope lighting shader is supported by the actual graphics driver
+PASS continuous road union was baked using a valid native shader and mask
+PASS feathered roads and ash preserve opaque land without holes revealing the distant backdrop
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS every authored junction and endpoint has continuous opaque road coverage
+PASS rounded path centerlines cross lava only on existing safe bridges
+PASS one road material covers all curved centerline segments without seams
+PASS the actual arrival connects to a large walkable realm with all scenery enabled
+PASS realm has a precomputed raised surface with shared vertices
+PASS world heights are finite, bounded and substantially above the plain
+PASS all ramps have a unique ground ray intersection without folded geometry
+PASS each realm contains many more authored hills with unequal footprints and heights
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS the actual arrival connects to a large walkable realm with all scenery enabled
+PASS realm has a precomputed raised surface with shared vertices
+PASS world heights are finite, bounded and substantially above the plain
+PASS all ramps have a unique ground ray intersection without folded geometry
+PASS each realm contains many more authored hills with unequal footprints and heights
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS the actual arrival connects to a large walkable realm with all scenery enabled
+PASS realm has a precomputed raised surface with shared vertices
+PASS world heights are finite, bounded and substantially above the plain
+PASS all ramps have a unique ground ray intersection without folded geometry
+PASS each realm contains many more authored hills with unequal footprints and heights
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS each authored landform has substantial world-space elevation
+PASS high ground near each authored summit is reachable from the actual arrival with scenery and collisions enabled
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS screen picking roundtrips on crests and slopes at each display scale
+PASS hero walks up and down the actual dense terrain across each hill
+PASS movement follows three-dimensional ground distance rather than flat XY speed
+PASS enemy movement climbs the same actual ground height as the hero
+PASS prepared hero geometry is anchored on the raised ground, not on its flat shadow receiver
+PASS actual GPU-rendered feet meet the raised ground instead of floating below the summit
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS lava beds remain level beneath the raised basalt terrain
+PASS existing tower floors keep their separate height system

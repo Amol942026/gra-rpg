@@ -1,0 +1,353 @@
+PASS real raylib hardware output stays closed
+PASS real AudioSystem preloads every effect, variation and regional score through the offline sink
+PASS source and alias ownership is bounded
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib fully decodes each PCM16 stereo effect
+PASS decoded effect is non-silent with headroom
+PASS raylib decodes every actual Vorbis track and complete musical phrase
+PASS raylib decodes every actual Vorbis track and complete musical phrase
+PASS raylib decodes every actual Vorbis track and complete musical phrase
+PASS raylib decodes every actual Vorbis track and complete musical phrase
+PASS actual cue routes into one voice / step
+PASS actual cue routes into one voice / step
+PASS actual cue routes into one voice / step
+PASS successive events select three authored variants / step
+PASS actual cue routes into one voice / swing
+PASS actual cue routes into one voice / swing
+PASS actual cue routes into one voice / swing
+PASS successive events select three authored variants / swing
+PASS actual cue routes into one voice / slime-hit
+PASS actual cue routes into one voice / slime-hit
+PASS actual cue routes into one voice / slime-hit
+PASS successive events select three authored variants / slime-hit
+PASS actual cue routes into one voice / wolf-hit
+PASS actual cue routes into one voice / wolf-hit
+PASS actual cue routes into one voice / wolf-hit
+PASS successive events select three authored variants / wolf-hit
+PASS actual cue routes into one voice / bone-hit
+PASS actual cue routes into one voice / bone-hit
+PASS actual cue routes into one voice / bone-hit
+PASS successive events select three authored variants / bone-hit
+PASS actual cue routes into one voice / stone-hit
+PASS actual cue routes into one voice / stone-hit
+PASS actual cue routes into one voice / stone-hit
+PASS successive events select three authored variants / stone-hit
+PASS actual cue routes into one voice / enemy-fall
+PASS actual cue routes into one voice / enemy-fall
+PASS actual cue routes into one voice / enemy-fall
+PASS successive events select three authored variants / enemy-fall
+PASS actual cue routes into one voice / hurt
+PASS actual cue routes into one voice / hurt
+PASS actual cue routes into one voice / hurt
+PASS successive events select three authored variants / hurt
+PASS actual cue routes into one voice / death
+PASS actual cue routes into one voice / death
+PASS actual cue routes into one voice / death
+PASS successive events select three authored variants / death
+PASS actual cue routes into one voice / roll
+PASS actual cue routes into one voice / roll
+PASS actual cue routes into one voice / roll
+PASS successive events select three authored variants / roll
+PASS actual cue routes into one voice / dodge
+PASS actual cue routes into one voice / dodge
+PASS actual cue routes into one voice / dodge
+PASS successive events select three authored variants / dodge
+PASS actual cue routes into one voice / spell
+PASS actual cue routes into one voice / spell
+PASS actual cue routes into one voice / spell
+PASS successive events select three authored variants / spell
+PASS actual cue routes into one voice / potion
+PASS actual cue routes into one voice / potion
+PASS actual cue routes into one voice / potion
+PASS successive events select three authored variants / potion
+PASS actual cue routes into one voice / pickup
+PASS actual cue routes into one voice / pickup
+PASS actual cue routes into one voice / pickup
+PASS successive events select three authored variants / pickup
+PASS actual cue routes into one voice / equip
+PASS actual cue routes into one voice / equip
+PASS actual cue routes into one voice / equip
+PASS successive events select three authored variants / equip
+PASS actual cue routes into one voice / drop
+PASS actual cue routes into one voice / drop
+PASS actual cue routes into one voice / drop
+PASS successive events select three authored variants / drop
+PASS actual cue routes into one voice / level-up
+PASS actual cue routes into one voice / level-up
+PASS actual cue routes into one voice / level-up
+PASS successive events select three authored variants / level-up
+PASS actual cue routes into one voice / victory
+PASS actual cue routes into one voice / victory
+PASS actual cue routes into one voice / victory
+PASS successive events select three authored variants / victory
+PASS actual cue routes into one voice / enemy-attack
+PASS actual cue routes into one voice / enemy-attack
+PASS actual cue routes into one voice / enemy-attack
+PASS successive events select three authored variants / enemy-attack
+PASS actual cue routes into one voice / ui
+PASS actual cue routes into one voice / ui
+PASS actual cue routes into one voice / ui
+PASS successive events select three authored variants / ui
+PASS actual cue routes into one voice / reject
+PASS actual cue routes into one voice / reject
+PASS actual cue routes into one voice / reject
+PASS successive events select three authored variants / reject
+PASS actual cue routes into one voice / bow-shot
+PASS actual cue routes into one voice / bow-shot
+PASS actual cue routes into one voice / bow-shot
+PASS successive events select three authored variants / bow-shot
+PASS actual cue routes into one voice / chest-open
+PASS actual cue routes into one voice / chest-open
+PASS actual cue routes into one voice / chest-open
+PASS successive events select three authored variants / chest-open
+PASS actual cue routes into one voice / weapon-equip
+PASS actual cue routes into one voice / weapon-equip
+PASS actual cue routes into one voice / weapon-equip
+PASS successive events select three authored variants / weapon-equip
+PASS actual cue routes into one voice / chitin-hit
+PASS actual cue routes into one voice / chitin-hit
+PASS actual cue routes into one voice / chitin-hit
+PASS successive events select three authored variants / chitin-hit
+PASS actual cue routes into one voice / fire-hit
+PASS actual cue routes into one voice / fire-hit
+PASS actual cue routes into one voice / fire-hit
+PASS successive events select three authored variants / fire-hit
+PASS actual cue routes into one voice / beast-attack
+PASS actual cue routes into one voice / beast-attack
+PASS actual cue routes into one voice / beast-attack
+PASS successive events select three authored variants / beast-attack
+PASS actual cue routes into one voice / stone-attack
+PASS actual cue routes into one voice / stone-attack
+PASS actual cue routes into one voice / stone-attack
+PASS successive events select three authored variants / stone-attack
+PASS actual cue routes into one voice / magic-attack
+PASS actual cue routes into one voice / magic-attack
+PASS actual cue routes into one voice / magic-attack
+PASS successive events select three authored variants / magic-attack
+PASS actual cue routes into one voice / venom-cast
+PASS actual cue routes into one voice / venom-cast
+PASS actual cue routes into one voice / venom-cast
+PASS successive events select three authored variants / venom-cast
+PASS actual cue routes into one voice / copper-wave
+PASS actual cue routes into one voice / copper-wave
+PASS actual cue routes into one voice / copper-wave
+PASS successive events select three authored variants / copper-wave
+PASS actual cue routes into one voice / obsidian-cleave
+PASS actual cue routes into one voice / obsidian-cleave
+PASS actual cue routes into one voice / obsidian-cleave
+PASS successive events select three authored variants / obsidian-cleave
+PASS actual cue routes into one voice / fire-breath
+PASS actual cue routes into one voice / fire-breath
+PASS actual cue routes into one voice / fire-breath
+PASS successive events select three authored variants / fire-breath
+PASS region selects its score, fades in and stops the previous score
+PASS realm transition does no sound-file I/O
+PASS region selects its score, fades in and stops the previous score
+PASS realm transition does no sound-file I/O
+PASS region selects its score, fades in and stops the previous score
+PASS realm transition does no sound-file I/O
+PASS region selects its score, fades in and stops the previous score
+PASS realm transition does no sound-file I/O
+PASS music toggle immediately silences every crossfading score alone
+PASS disabled effects discard events while music continues
+PASS pause drains queued combat without replay
+PASS focus loss pauses every active score
+PASS focus return resumes the existing selected score
+PASS real stereo mix limiter bounds overlapping peaks while preserving quieter dynamics
+PASS no-audio mode skips the output sink and all preloading
+PASS shutdown releases all sources and aliases once with real hardware still closed

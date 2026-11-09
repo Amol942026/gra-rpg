@@ -1,0 +1,196 @@
+{
+  "size": [
+    1024,
+    384
+  ],
+  "cell": 128,
+  "columns": 8,
+  "rgba8_bytes": 1572864,
+  "items": [
+    {
+      "kind": 8,
+      "name": "Mikstura zdrowia",
+      "cell": 0,
+      "comfy_sha256": "404e00a841a979b6cb868b0ad8b693ea66febbcbd482d5edf14ee483542ff93e",
+      "paint_sha256": "dc53e77730a5fe9ad1c0292e571fe31ed93c831bde75226c77bcf379b0502455",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 9,
+      "name": "Mikstura many",
+      "cell": 1,
+      "comfy_sha256": "cf24502933530724c404c893dbfc429b405c42a6676c5530326a3bc6cdc99b30",
+      "paint_sha256": "ba408c3ac4edef9d256b70f572b2bf92b972c87061f003dcdf7d4a4d7d2bd2a3",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 10,
+      "name": "Odłamek echa",
+      "cell": 2,
+      "comfy_sha256": "7064901bef5dd163c76ad81630c78ae1d81c97f7d2d55660a6d64e02d9a5a9a4",
+      "paint_sha256": "2fea623fdd953af31fd2dbf8c505873d0c4cb9316b5603acf3aed974f52fcd8c",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 11,
+      "name": "Złote monety",
+      "cell": 3,
+      "comfy_sha256": "026aac153d9a9976792ff9976d7b56c1e1d6c8eb770faa6a7a864220c9bb8d4d",
+      "paint_sha256": "cedffd58a8bd1c918340f49d498ea79ed31159afec79a400b99120eedeea1f36",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 12,
+      "name": "Kieł wilka",
+      "cell": 4,
+      "comfy_sha256": "bc552b79f66a284a9cb42289e764dbe45b9b6663d9aac855fb59cb5d5bac7e89",
+      "paint_sha256": "2deb0cab22b86c34a9105880cb58ec4c25e50b3bc3cbaa27c3f370059989640f",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 13,
+      "name": "Sierść wilka",
+      "cell": 5,
+      "comfy_sha256": "9ab7bcbebdbea12273037443f96d5e3f5cf691f90a678faee6a94488bd56eae0",
+      "paint_sha256": "157424ef2d564b500439ca137893edfac16d0b3e84cefb6955920255accc73a8",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 14,
+      "name": "Kieł dzika",
+      "cell": 6,
+      "comfy_sha256": "c5bf9c429806189628212074688c85548dbc2f272949546184d502952b2cadbe",
+      "paint_sha256": "f934c6596673657e053f8cd0450c7dea90fbfbc67f55a4b8fbdbd42963b47d9d",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 15,
+      "name": "Skóra dzika",
+      "cell": 7,
+      "comfy_sha256": "2f3575e1e3bd3773d3d925a19cd07d5b85424d9f23dc608700201daaad377eae",
+      "paint_sha256": "ef874a7704b4299939993f2ef05140ae68bae7ed5bd47a56d21da9fa9ee102f3",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 16,
+      "name": "Pajęcza nić",
+      "cell": 8,
+      "comfy_sha256": "2d1ebdd4f1fd6ea58cd446ce79b27ee7fdf9ec6dd36126c72bf1ea303434b9ea",
+      "paint_sha256": "b3a240edb25af5b507318d6cfaeade6bb81ade276f0ca84d44b1d7a1f90278cd",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 17,
+      "name": "Woreczek jadu",
+      "cell": 9,
+      "comfy_sha256": "0935e1e0ad9dec880d4ebc3ee536b05bc1fc777e845839ad00f72aa7e21270c0",
+      "paint_sha256": "a59499e25c39fbae322dd1ff09e147f94a5f125fe4285376187a071ded5fd3fd",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 18,
+      "name": "Fragment kości",
+      "cell": 10,
+      "comfy_sha256": "1f64a3b84fb2c57326789c878129695b3404c6effb4ef39e7d6727d074eb4885",
+      "paint_sha256": "f47a2dcc2b60862543b681526063ed87ee074a5091007be57f51bdc4190d1f85",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 19,
+      "name": "Śluz szlama",
+      "cell": 11,
+      "comfy_sha256": "4d10586dfc6f520b812bdd1f40211f87e844154a6c39d392de65bf406175c90b",
+      "paint_sha256": "2993249ae616e893cf7c0a2415923a2b86c93b8fc104be9009c983669ac9b02f",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 20,
+      "name": "Prastara kora",
+      "cell": 12,
+      "comfy_sha256": "3bb5adbbc1e13d3e3869b0e226e626dc2b861941aab1cf54ff8b7cc82cbf33aa",
+      "paint_sha256": "9b3245208e3e830dd4d5107fc4cd03c5eefe8c2f269d6e1b00e82aea19020325",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 21,
+      "name": "Esencja lasu",
+      "cell": 13,
+      "comfy_sha256": "fa08d373b188ea1ac0c0624368639ce1e85d1c10f2d970e9da34a9351e5d7a70",
+      "paint_sha256": "1875ce955ace1e5b7e24bffe3eb80c6643cef3c1e724ca140212b65175b6012f",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 22,
+      "name": "Odznaka rozbójnika",
+      "cell": 14,
+      "comfy_sha256": "7649e66e0f909776efeb7d643eb61f8d74374045ff3e2bed8ba0d26d164b04f5",
+      "paint_sha256": "e78a13961e84ff0ff6b2b102cbd1be0b071376afb1a49e596692dfd4501116dc",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 23,
+      "name": "Kamień runiczny",
+      "cell": 15,
+      "comfy_sha256": "a373c9be63344ab7b7569a8ca16d276ac334c93d70dfb38b435f050c78fd4786",
+      "paint_sha256": "92849da9b47c1d7e3beb7bbdd0a9b6952358ff0f6c3d0c3a2a86e241ea66bcff",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 27,
+      "name": "Borowik",
+      "cell": 16,
+      "comfy_sha256": "1d5e34bb1ce24c8862f053f7f5c3e5ceb93dea597b57f0f9226194d17cde31ab",
+      "paint_sha256": "babf93695b084a705cca9e68b23e74082fc3b4433db6bfd378611e9b65fb8bf8",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 29,
+      "name": "Strzały",
+      "cell": 17,
+      "comfy_sha256": "3ff8e7944b1a15c62092ceb29393a67f65618c2adef58faba4891a215600b0b7",
+      "paint_sha256": "fd5291d8813dea3730d6975852b4d00d1745309805bebca047001842406d7899",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 30,
+      "name": "Część Serca Świtu",
+      "cell": 18,
+      "comfy_sha256": "8d1ee7e53835257a6579eb5ba2eb6921c1e7bfe7f120e4cb0ae6136b248d0f66",
+      "paint_sha256": "2c935cf115c26b24b6808fee4d5bf4dbe6e55c410c67a1cf0750664bace0b10f",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 31,
+      "name": "Żądło skorpiona",
+      "cell": 19,
+      "comfy_sha256": "66e4d2c7d38515754a08fbd9f891fccb2513378eb808e3d6080281dd56607a18",
+      "paint_sha256": "0900b1c32e1db645c32a6bd272da035f2b697f080b0dd119a9fa2374d63b57f5",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 32,
+      "name": "Pancerz skarabeusza",
+      "cell": 20,
+      "comfy_sha256": "8fca5f42e6055af2e78dfea318486149da13025bbcd7475f8d1e7a992f81c1ab",
+      "paint_sha256": "e2a0c37d1635111a2374f50c9cfbddb274d49144c6ddaa0b5060025f35523fa7",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 33,
+      "name": "Łuska kobry",
+      "cell": 21,
+      "comfy_sha256": "6339875569d9f5a8a204ee9761367e2b128d2a94f0736e2f1df6da9054141193",
+      "paint_sha256": "a885d22cfa521ff8455e88c4e4f928f1d47357a33c095718845c14619e72eb57",
+      "alpha_preserved": true
+    },
+    {
+      "kind": 34,
+      "name": "Esencja piasku",
+      "cell": 22,
+      "comfy_sha256": "a8fcdecb6685233a4be45187d79e477cba40f239a53a0fb12e429e1e9d0ce945",
+      "paint_sha256": "798a752ec4dec19e6b8ba84b08b0fe0dc8046470ae384dfc0b30ffc7891d4afa",
+      "alpha_preserved": true
+    }
+  ],
+  "sha256": "665f20f6d7e32ab7d922e87055bb33585fe3164278c9493db2a6023344898136"
+}

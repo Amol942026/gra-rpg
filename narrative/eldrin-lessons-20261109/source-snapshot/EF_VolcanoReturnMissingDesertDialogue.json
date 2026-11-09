@@ -1,0 +1,25 @@
+{
+  "id": "EF_VolcanoReturnMissingDesertDialogue",
+  "title": "Powrót z Kaldery bez części Żywej Wydmy",
+  "array": "VolcanoReturnMissingDesertDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "7f21f7c35574709ac7d3452d9facdabfb52b27bc73a6013b3a5cc9516d1517bb",
+  "lines": [
+    {
+      "speaker": "Wanderer",
+      "text": "Varkhor pokonany, Eldrinie. Przyniosłem część Serca, której strzegł w Kalderze."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Dobrze się spisałeś. Pamiętaj jednak o odłamku Żywej Wydmy — został na pustyni. Nie mamy jeszcze trzech części."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Wrócę do jej szczątków. Nie po to przemierzyłem te krainy, żeby zostawić tam część Serca."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Otworzę ci przejście do Morza Piasków. Zabierz odłamek; każda z pięciu części jest potrzebna do odnowienia Pieczęci."
+    }
+  ]
+}

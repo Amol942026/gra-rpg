@@ -19,12 +19,17 @@ ARRAY = re.compile(r"inline constexpr std::array<StoryLine,(\d+)>\s+(\w+)\s*=\s*
 ROW = re.compile(r'\{\s*(true|false)\s*,\s*("(?:[^"\\]|\\.)*")\s*\}', re.S)
 TITLES = {
     "IntroDialogue": "Prolog — Pieczęć Popiołu",
-    "TowerReturnDialogue": "Powrót z Lasu Mchu",
+    "TowerReturnDialogue": "Powrót z Wielkiej Kniei",
     "TowerTalkDialogue": "Eldrin — droga do Morza Piasków",
     "DesertReturnDialogue": "Powrót z Morza Piasków",
     "DesertCompletedTalk": "Eldrin — powrót do oazy",
     "VolcanoReturnDialogue": "Powrót z Kaldery Popiołu",
     "VolcanoTalkDialogue": "Eldrin — droga do Kaldery Popiołu",
+    "VolcanoCompletedTalk": "Eldrin — po odzyskaniu trzech części",
+    "DesertShardPendingTalk": "Eldrin — odłamek pozostał przy Żywej Wydmie",
+    "VolcanoShardPendingTalk": "Eldrin — odłamek pozostał przy Varkhorze",
+    "VolcanoReturnMissingDesertDialogue": "Powrót z Kaldery bez części Żywej Wydmy",
+    "VolcanoMissingDesertTalk": "Eldrin — powrót po pominięty odłamek",
 }
 
 
@@ -48,7 +53,7 @@ def sources(repo=REPO):
             result.append({"id": "EF_" + name, "title": TITLES[name], "array": name,
                            "source": "src/" + filename, "source_sha256": sha(path), "lines": rows})
     if {p["array"] for p in result} != set(TITLES):
-        raise ValueError("Expected seven dialogue arrays")
+        raise ValueError("Expected all mapped dialogue arrays")
     return result
 
 
@@ -75,7 +80,7 @@ def validate_export(data, repo=REPO):
     expected = {p["id"]: p for p in sources(repo)}
     dialogues = data.get("dialogues", [])
     if len(dialogues) != len(expected) or {d["id"] for d in dialogues} != set(expected):
-        raise ValueError("Export must contain exactly the seven mapped dialogues")
+        raise ValueError("Export must contain exactly the current mapped dialogues")
     for dialogue in dialogues:
         rows = dialogue["lines"]
         if not 1 <= len(rows) <= 120:
@@ -191,7 +196,7 @@ def import_plans(directory):
                 raise ValueError("Invalid planned line")
         plans.append(plan)
     if len(plans) != len(expected) or {p["id"] for p in plans} != set(expected):
-        raise ValueError("Expected all seven mapped source plans")
+        raise ValueError("Expected all current mapped source plans")
     bridge = ArticyBridge()
     status = bridge.call("status")
     heartbeat = status.get("result", {})

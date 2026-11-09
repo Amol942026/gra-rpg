@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "date": "2026-11-08",
+  "gameplay_checks": 199995,
+  "persistence_checks": 4513,
+  "hills_checks": 564,
+  "volcano_regression_checks": 1063,
+  "treasure_ui_checks": 115,
+  "walkable_hills": {
+    "volcano": 5,
+    "desert": 4,
+    "forest": 4
+  },
+  "audio_preferences_unchanged": true,
+  "game_tests_hidden": true,
+  "audio_opened": false,
+  "new_raster_assets": 0,
+  "save_format_changed": false,
+  "source_sha256": {
+    "src/game.hpp": "5611fee75f79d3d09ffe843e3fb020d1f0cdaa805cd60422f19ac6d6407ca21c",
+    "src/main.cpp": "653fc3209093366211ab3c5761efc940aaa5e9721baba9c58bcae56cb9420d8d",
+    "src/terrain_height.hpp": "679a3e11a8d3af49059882951318f00f143dc53ae06a90096467f6de371e81fd",
+    "src/terrain_surface.hpp": "1d6c0fb29d07591bb791cf165d45defde0e9e6abb698239645d54995e097c324",
+    "src/actor_art.hpp": "a628363bcaedb69ceda3663b7f121986b7e35f56087a6715add0fa728dd431c1",
+    "src/ground_shadows.hpp": "0430ed7a94eeb43feaa9d22e991d7db2d651a75e47a48e6827de3f73df56bedc",
+    "src/world_hover.hpp": "fd8b5960fd0a2e976aa48bed581a87dff67a0f60158392c5b760023e0c64f115",
+    "src/desert_art.hpp": "be90c1f0d00648dfd45ef53e286b009ba68bbc223d9bd63436cce3e895bbd155",
+    "src/volcano_art.hpp": "2c7bf4e4691336d6b4f013391189c82940795a6aa4e0fbc8b38c27ebbfaf2a45"
+  }
+}

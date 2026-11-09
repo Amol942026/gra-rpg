@@ -90,7 +90,7 @@ void crowdCombatTests() {
         for(int frame=0;frame<fps*12;frame++){
             crowd.hp=100;crowd.update(1.f/fps,{},false);
             clear&=separatedEnemies(crowd);worldClear&=enemiesClearOfScenery(crowd);
-            for(auto& sound:crowd.sounds)if(sound.cue==Cue::EnemyAttack)strikes++;
+            for(auto& sound:crowd.sounds)if(sound.cue==Cue::EnemyAttack||sound.cue==Cue::BeastAttack||sound.cue==Cue::StoneAttack||sound.cue==Cue::MagicAttack||sound.cue==Cue::BoneAttack)strikes++;
             crowd.sounds.clear();
         }
         check(clear,"14 chasing monsters do not overlap throughout a 12 second crowd simulation");
@@ -106,8 +106,9 @@ void crowdCombatTests() {
     Game corpse=emptyArena();corpse.player={20,15};
     corpse.enemies.push_back({0,1,{15,15},{15,15},100,100});
     corpse.enemies.push_back({1,3,{15.1f,15},{15.1f,15},0,100});corpse.enemies[1].alive=false;
-    corpse.update(.05f,{},false);
-    check(std::abs(corpse.enemies[0].pos.x-15.13f)<.001f,"dead enemies no longer block living ones");
+    Game unobstructed=corpse;unobstructed.enemies.pop_back();
+    corpse.update(.05f,{},false);unobstructed.update(.05f,{},false);
+    check(distance(corpse.enemies[0].pos,unobstructed.enemies[0].pos)<.00001f&&corpse.enemies[0].pos.x>15.05f,"a corpse permits the same living movement as an empty route on the actual terrain");
 }
 
 

@@ -1,0 +1,25 @@
+{
+  "id": "EF_VolcanoReturnDialogue",
+  "title": "Powrót z Kaldery Popiołu",
+  "array": "VolcanoReturnDialogue",
+  "source": "src/tower_story.hpp",
+  "source_sha256": "926faabfc409a6d67ca3d226cba90f82869959f4d2695b5e8bc601d48bbcf962",
+  "lines": [
+    {
+      "speaker": "Wanderer",
+      "text": "Varkhor padł. Mam trzecią część Serca Świtu. Jej światło przetrwało nawet żar Kaldery."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Dokonałeś wielkiej rzeczy, Wędrowcze. Odzyskaliśmy trzy części; wciąż brakuje dwóch. Zachowaj je razem — ich moc będzie potrzebna do odnowienia Pieczęci."
+    },
+    {
+      "speaker": "Wanderer",
+      "text": "Zostanę chwilę w wieży. Potem może wrócę do kuźni; nie zdążyłem obejrzeć wszystkiego."
+    },
+    {
+      "speaker": "Eldrin",
+      "text": "Bramy do Kaldery i Morza Piasków pozostaną otwarte. Ja przeszukam kroniki za śladem dwóch pozostałych strażników. Odpocznij, przyjacielu."
+    }
+  ]
+}

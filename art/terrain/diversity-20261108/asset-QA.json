@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "pass": true,
+      "label": "saved native KRA hash"
+    },
+    {
+      "pass": true,
+      "label": "saved native PNG hash"
+    },
+    {
+      "pass": true,
+      "label": "runtime is the exact native Krita export"
+    },
+    {
+      "pass": true,
+      "label": "native KRA ZIP integrity"
+    },
+    {
+      "pass": true,
+      "label": "four editable native paint layers"
+    },
+    {
+      "pass": true,
+      "label": "native Krita document type"
+    },
+    {
+      "pass": true,
+      "label": "decoded full-size native painting"
+    },
+    {
+      "pass": true,
+      "label": "runtime tile dimensions and unchanged texture budget"
+    },
+    {
+      "pass": true,
+      "label": "opaque material for continuous distance-mask blending"
+    },
+    {
+      "pass": true,
+      "label": "visible painted gravel and material detail"
+    },
+    {
+      "pass": true,
+      "label": "horizontal wrapped seam stays within local paint variation"
+    },
+    {
+      "pass": true,
+      "label": "vertical wrapped seam stays within local paint variation"
+    },
+    {
+      "pass": true,
+      "label": "previous working material remains backed up"
+    }
+  ],
+  "master": "C:\\AI2D\\sprites\\emberfall-caldera-road-20261108-v1\\caldera-worn-basalt-trail.kra",
+  "runtime_sha256": "a78a8637910e4da669770e05cacda92bd0c8e0d167851d57c3c6098991676378",
+  "seam_mae": [
+    0.578125,
+    1.1171875
+  ],
+  "interior_mae": [
+    0.6023600578930203,
+    0.7369485893672537
+  ],
+  "rgba8_bytes": 1048576,
+  "local_only": true,
+  "external_inputs": [],
+  "audio_opened": false
+}

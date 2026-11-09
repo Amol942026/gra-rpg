@@ -12,7 +12,8 @@ void startIntro(){
 void applyIntroArrival(){
     if(!intro.takeArrival())return;
     game.player=ForestArrival;game.animation=AnimationState{};game.cancelBow();dragging={};mouse={0,0};
-    game.say("Serce Świtu: znajdź Kamiennego Strażnika na północy Lasu Mchu.");
+    game.sound(Cue::TeleportArrival,game.player);
+    game.say("Serce Świtu: znajdź Kamiennego Strażnika w północnych ruinach Wielkiej Kniei.");
     startupLog.write("Prologue complete: hero teleported to the forest");
 }
 void introAction(bool advance,bool skip,float dt,bool focused=true){
@@ -59,7 +60,7 @@ void drawStoryDialogue(const StoryLine& current,size_t turn,size_t total,const s
     Color speaker=current.mage?rgb(191,148,243):Gold;
     rect(box.x,box.y,4,box.height,speaker);
     txt(current.mage?"ELDRIN":"WĘDROWIEC",146,647,23,speaker,true);
-    txt(current.mage?"Strażnik ostatniej pieczęci":"Strażnik żaru",146,681,14,Muted);
+    txt(current.mage?"Strażnik Pieczęci Popiołu":"Strażnik żaru",146,681,14,Muted);
     txt(TextFormat("%02d / %02d",int(turn)+1,int(total)),1222,653,14,Muted);
     storyWrappedText(text,146,716,1140,21,Text);
     if(controls){
