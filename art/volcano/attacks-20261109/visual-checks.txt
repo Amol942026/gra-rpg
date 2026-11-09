@@ -1,0 +1,514 @@
+PASS the four Caldera effects preload in one texture
+PASS actual scene decoded / 9-0-warning
+PASS saved gameplay frame / 9-0-warning
+PASS test remains hidden / 9-0-warning
+PASS actual scene decoded / 9-0-attack
+PASS saved gameplay frame / 9-0-attack
+PASS test remains hidden / 9-0-attack
+PASS actual scene decoded / 9-0-recovery
+PASS saved gameplay frame / 9-0-recovery
+PASS test remains hidden / 9-0-recovery
+PASS all three ability stages were rendered / 9-0
+PASS all three ability stages were rendered / 9-0
+PASS all three ability stages were rendered / 9-0
+PASS rendered ability respects cooldown / 9-0
+PASS stationary target receives finite damage / 9-0
+PASS real body picking / 9-0
+PASS ability counter tip fits inspection HUD / 9-0
+PASS actual scene decoded / 9-0-inspection
+PASS saved gameplay frame / 9-0-inspection
+PASS test remains hidden / 9-0-inspection
+PASS actual scene decoded / 9-1-warning
+PASS saved gameplay frame / 9-1-warning
+PASS test remains hidden / 9-1-warning
+PASS actual scene decoded / 9-1-attack
+PASS saved gameplay frame / 9-1-attack
+PASS test remains hidden / 9-1-attack
+PASS actual scene decoded / 9-1-recovery
+PASS saved gameplay frame / 9-1-recovery
+PASS test remains hidden / 9-1-recovery
+PASS all three ability stages were rendered / 9-1
+PASS all three ability stages were rendered / 9-1
+PASS all three ability stages were rendered / 9-1
+PASS rendered ability respects cooldown / 9-1
+PASS stationary target receives finite damage / 9-1
+PASS actual scene decoded / 9-2-warning
+PASS saved gameplay frame / 9-2-warning
+PASS test remains hidden / 9-2-warning
+PASS actual scene decoded / 9-2-attack
+PASS saved gameplay frame / 9-2-attack
+PASS test remains hidden / 9-2-attack
+PASS actual scene decoded / 9-2-recovery
+PASS saved gameplay frame / 9-2-recovery
+PASS test remains hidden / 9-2-recovery
+PASS all three ability stages were rendered / 9-2
+PASS all three ability stages were rendered / 9-2
+PASS all three ability stages were rendered / 9-2
+PASS rendered ability respects cooldown / 9-2
+PASS stationary target receives finite damage / 9-2
+PASS actual scene decoded / 9-3-warning
+PASS saved gameplay frame / 9-3-warning
+PASS test remains hidden / 9-3-warning
+PASS actual scene decoded / 9-3-attack
+PASS saved gameplay frame / 9-3-attack
+PASS test remains hidden / 9-3-attack
+PASS actual scene decoded / 9-3-recovery
+PASS saved gameplay frame / 9-3-recovery
+PASS test remains hidden / 9-3-recovery
+PASS all three ability stages were rendered / 9-3
+PASS all three ability stages were rendered / 9-3
+PASS all three ability stages were rendered / 9-3
+PASS rendered ability respects cooldown / 9-3
+PASS stationary target receives finite damage / 9-3
+PASS actual scene decoded / 9-4-warning
+PASS saved gameplay frame / 9-4-warning
+PASS test remains hidden / 9-4-warning
+PASS actual scene decoded / 9-4-attack
+PASS saved gameplay frame / 9-4-attack
+PASS test remains hidden / 9-4-attack
+PASS actual scene decoded / 9-4-recovery
+PASS saved gameplay frame / 9-4-recovery
+PASS test remains hidden / 9-4-recovery
+PASS all three ability stages were rendered / 9-4
+PASS all three ability stages were rendered / 9-4
+PASS all three ability stages were rendered / 9-4
+PASS rendered ability respects cooldown / 9-4
+PASS stationary target receives finite damage / 9-4
+PASS actual scene decoded / 9-5-warning
+PASS saved gameplay frame / 9-5-warning
+PASS test remains hidden / 9-5-warning
+PASS actual scene decoded / 9-5-attack
+PASS saved gameplay frame / 9-5-attack
+PASS test remains hidden / 9-5-attack
+PASS actual scene decoded / 9-5-recovery
+PASS saved gameplay frame / 9-5-recovery
+PASS test remains hidden / 9-5-recovery
+PASS all three ability stages were rendered / 9-5
+PASS all three ability stages were rendered / 9-5
+PASS all three ability stages were rendered / 9-5
+PASS rendered ability respects cooldown / 9-5
+PASS stationary target receives finite damage / 9-5
+PASS actual scene decoded / 9-6-warning
+PASS saved gameplay frame / 9-6-warning
+PASS test remains hidden / 9-6-warning
+PASS actual scene decoded / 9-6-attack
+PASS saved gameplay frame / 9-6-attack
+PASS test remains hidden / 9-6-attack
+PASS actual scene decoded / 9-6-recovery
+PASS saved gameplay frame / 9-6-recovery
+PASS test remains hidden / 9-6-recovery
+PASS all three ability stages were rendered / 9-6
+PASS all three ability stages were rendered / 9-6
+PASS all three ability stages were rendered / 9-6
+PASS rendered ability respects cooldown / 9-6
+PASS stationary target receives finite damage / 9-6
+PASS actual scene decoded / 9-7-warning
+PASS saved gameplay frame / 9-7-warning
+PASS test remains hidden / 9-7-warning
+PASS actual scene decoded / 9-7-attack
+PASS saved gameplay frame / 9-7-attack
+PASS test remains hidden / 9-7-attack
+PASS actual scene decoded / 9-7-recovery
+PASS saved gameplay frame / 9-7-recovery
+PASS test remains hidden / 9-7-recovery
+PASS all three ability stages were rendered / 9-7
+PASS all three ability stages were rendered / 9-7
+PASS all three ability stages were rendered / 9-7
+PASS rendered ability respects cooldown / 9-7
+PASS stationary target receives finite damage / 9-7
+PASS actual scene decoded / 10-0-warning
+PASS saved gameplay frame / 10-0-warning
+PASS test remains hidden / 10-0-warning
+PASS actual scene decoded / 10-0-attack
+PASS saved gameplay frame / 10-0-attack
+PASS test remains hidden / 10-0-attack
+PASS actual scene decoded / 10-0-recovery
+PASS saved gameplay frame / 10-0-recovery
+PASS test remains hidden / 10-0-recovery
+PASS all three ability stages were rendered / 10-0
+PASS all three ability stages were rendered / 10-0
+PASS all three ability stages were rendered / 10-0
+PASS rendered ability respects cooldown / 10-0
+PASS stationary target receives finite damage / 10-0
+PASS real body picking / 10-0
+PASS ability counter tip fits inspection HUD / 10-0
+PASS actual scene decoded / 10-0-inspection
+PASS saved gameplay frame / 10-0-inspection
+PASS test remains hidden / 10-0-inspection
+PASS actual scene decoded / 10-1-warning
+PASS saved gameplay frame / 10-1-warning
+PASS test remains hidden / 10-1-warning
+PASS actual scene decoded / 10-1-attack
+PASS saved gameplay frame / 10-1-attack
+PASS test remains hidden / 10-1-attack
+PASS actual scene decoded / 10-1-recovery
+PASS saved gameplay frame / 10-1-recovery
+PASS test remains hidden / 10-1-recovery
+PASS all three ability stages were rendered / 10-1
+PASS all three ability stages were rendered / 10-1
+PASS all three ability stages were rendered / 10-1
+PASS rendered ability respects cooldown / 10-1
+PASS stationary target receives finite damage / 10-1
+PASS actual scene decoded / 10-2-warning
+PASS saved gameplay frame / 10-2-warning
+PASS test remains hidden / 10-2-warning
+PASS actual scene decoded / 10-2-attack
+PASS saved gameplay frame / 10-2-attack
+PASS test remains hidden / 10-2-attack
+PASS actual scene decoded / 10-2-recovery
+PASS saved gameplay frame / 10-2-recovery
+PASS test remains hidden / 10-2-recovery
+PASS all three ability stages were rendered / 10-2
+PASS all three ability stages were rendered / 10-2
+PASS all three ability stages were rendered / 10-2
+PASS rendered ability respects cooldown / 10-2
+PASS stationary target receives finite damage / 10-2
+PASS actual scene decoded / 10-3-warning
+PASS saved gameplay frame / 10-3-warning
+PASS test remains hidden / 10-3-warning
+PASS actual scene decoded / 10-3-attack
+PASS saved gameplay frame / 10-3-attack
+PASS test remains hidden / 10-3-attack
+PASS actual scene decoded / 10-3-recovery
+PASS saved gameplay frame / 10-3-recovery
+PASS test remains hidden / 10-3-recovery
+PASS all three ability stages were rendered / 10-3
+PASS all three ability stages were rendered / 10-3
+PASS all three ability stages were rendered / 10-3
+PASS rendered ability respects cooldown / 10-3
+PASS stationary target receives finite damage / 10-3
+PASS actual scene decoded / 10-4-warning
+PASS saved gameplay frame / 10-4-warning
+PASS test remains hidden / 10-4-warning
+PASS actual scene decoded / 10-4-attack
+PASS saved gameplay frame / 10-4-attack
+PASS test remains hidden / 10-4-attack
+PASS actual scene decoded / 10-4-recovery
+PASS saved gameplay frame / 10-4-recovery
+PASS test remains hidden / 10-4-recovery
+PASS all three ability stages were rendered / 10-4
+PASS all three ability stages were rendered / 10-4
+PASS all three ability stages were rendered / 10-4
+PASS rendered ability respects cooldown / 10-4
+PASS stationary target receives finite damage / 10-4
+PASS actual scene decoded / 10-5-warning
+PASS saved gameplay frame / 10-5-warning
+PASS test remains hidden / 10-5-warning
+PASS actual scene decoded / 10-5-attack
+PASS saved gameplay frame / 10-5-attack
+PASS test remains hidden / 10-5-attack
+PASS actual scene decoded / 10-5-recovery
+PASS saved gameplay frame / 10-5-recovery
+PASS test remains hidden / 10-5-recovery
+PASS all three ability stages were rendered / 10-5
+PASS all three ability stages were rendered / 10-5
+PASS all three ability stages were rendered / 10-5
+PASS rendered ability respects cooldown / 10-5
+PASS stationary target receives finite damage / 10-5
+PASS actual scene decoded / 10-6-warning
+PASS saved gameplay frame / 10-6-warning
+PASS test remains hidden / 10-6-warning
+PASS actual scene decoded / 10-6-attack
+PASS saved gameplay frame / 10-6-attack
+PASS test remains hidden / 10-6-attack
+PASS actual scene decoded / 10-6-recovery
+PASS saved gameplay frame / 10-6-recovery
+PASS test remains hidden / 10-6-recovery
+PASS all three ability stages were rendered / 10-6
+PASS all three ability stages were rendered / 10-6
+PASS all three ability stages were rendered / 10-6
+PASS rendered ability respects cooldown / 10-6
+PASS stationary target receives finite damage / 10-6
+PASS actual scene decoded / 10-7-warning
+PASS saved gameplay frame / 10-7-warning
+PASS test remains hidden / 10-7-warning
+PASS actual scene decoded / 10-7-attack
+PASS saved gameplay frame / 10-7-attack
+PASS test remains hidden / 10-7-attack
+PASS actual scene decoded / 10-7-recovery
+PASS saved gameplay frame / 10-7-recovery
+PASS test remains hidden / 10-7-recovery
+PASS all three ability stages were rendered / 10-7
+PASS all three ability stages were rendered / 10-7
+PASS all three ability stages were rendered / 10-7
+PASS rendered ability respects cooldown / 10-7
+PASS stationary target receives finite damage / 10-7
+PASS actual scene decoded / 16-0-warning
+PASS saved gameplay frame / 16-0-warning
+PASS test remains hidden / 16-0-warning
+PASS actual scene decoded / 16-0-attack
+PASS saved gameplay frame / 16-0-attack
+PASS test remains hidden / 16-0-attack
+PASS actual scene decoded / 16-0-recovery
+PASS saved gameplay frame / 16-0-recovery
+PASS test remains hidden / 16-0-recovery
+PASS all three ability stages were rendered / 16-0
+PASS all three ability stages were rendered / 16-0
+PASS all three ability stages were rendered / 16-0
+PASS rendered ability respects cooldown / 16-0
+PASS stationary target receives finite damage / 16-0
+PASS real body picking / 16-0
+PASS ability counter tip fits inspection HUD / 16-0
+PASS actual scene decoded / 16-0-inspection
+PASS saved gameplay frame / 16-0-inspection
+PASS test remains hidden / 16-0-inspection
+PASS actual scene decoded / 16-1-warning
+PASS saved gameplay frame / 16-1-warning
+PASS test remains hidden / 16-1-warning
+PASS actual scene decoded / 16-1-attack
+PASS saved gameplay frame / 16-1-attack
+PASS test remains hidden / 16-1-attack
+PASS actual scene decoded / 16-1-recovery
+PASS saved gameplay frame / 16-1-recovery
+PASS test remains hidden / 16-1-recovery
+PASS all three ability stages were rendered / 16-1
+PASS all three ability stages were rendered / 16-1
+PASS all three ability stages were rendered / 16-1
+PASS rendered ability respects cooldown / 16-1
+PASS stationary target receives finite damage / 16-1
+PASS actual scene decoded / 16-2-warning
+PASS saved gameplay frame / 16-2-warning
+PASS test remains hidden / 16-2-warning
+PASS actual scene decoded / 16-2-attack
+PASS saved gameplay frame / 16-2-attack
+PASS test remains hidden / 16-2-attack
+PASS actual scene decoded / 16-2-recovery
+PASS saved gameplay frame / 16-2-recovery
+PASS test remains hidden / 16-2-recovery
+PASS all three ability stages were rendered / 16-2
+PASS all three ability stages were rendered / 16-2
+PASS all three ability stages were rendered / 16-2
+PASS rendered ability respects cooldown / 16-2
+PASS stationary target receives finite damage / 16-2
+PASS actual scene decoded / 16-3-warning
+PASS saved gameplay frame / 16-3-warning
+PASS test remains hidden / 16-3-warning
+PASS actual scene decoded / 16-3-attack
+PASS saved gameplay frame / 16-3-attack
+PASS test remains hidden / 16-3-attack
+PASS actual scene decoded / 16-3-recovery
+PASS saved gameplay frame / 16-3-recovery
+PASS test remains hidden / 16-3-recovery
+PASS all three ability stages were rendered / 16-3
+PASS all three ability stages were rendered / 16-3
+PASS all three ability stages were rendered / 16-3
+PASS rendered ability respects cooldown / 16-3
+PASS stationary target receives finite damage / 16-3
+PASS actual scene decoded / 16-4-warning
+PASS saved gameplay frame / 16-4-warning
+PASS test remains hidden / 16-4-warning
+PASS actual scene decoded / 16-4-attack
+PASS saved gameplay frame / 16-4-attack
+PASS test remains hidden / 16-4-attack
+PASS actual scene decoded / 16-4-recovery
+PASS saved gameplay frame / 16-4-recovery
+PASS test remains hidden / 16-4-recovery
+PASS all three ability stages were rendered / 16-4
+PASS all three ability stages were rendered / 16-4
+PASS all three ability stages were rendered / 16-4
+PASS rendered ability respects cooldown / 16-4
+PASS stationary target receives finite damage / 16-4
+PASS actual scene decoded / 16-5-warning
+PASS saved gameplay frame / 16-5-warning
+PASS test remains hidden / 16-5-warning
+PASS actual scene decoded / 16-5-attack
+PASS saved gameplay frame / 16-5-attack
+PASS test remains hidden / 16-5-attack
+PASS actual scene decoded / 16-5-recovery
+PASS saved gameplay frame / 16-5-recovery
+PASS test remains hidden / 16-5-recovery
+PASS all three ability stages were rendered / 16-5
+PASS all three ability stages were rendered / 16-5
+PASS all three ability stages were rendered / 16-5
+PASS rendered ability respects cooldown / 16-5
+PASS stationary target receives finite damage / 16-5
+PASS actual scene decoded / 16-6-warning
+PASS saved gameplay frame / 16-6-warning
+PASS test remains hidden / 16-6-warning
+PASS actual scene decoded / 16-6-attack
+PASS saved gameplay frame / 16-6-attack
+PASS test remains hidden / 16-6-attack
+PASS actual scene decoded / 16-6-recovery
+PASS saved gameplay frame / 16-6-recovery
+PASS test remains hidden / 16-6-recovery
+PASS all three ability stages were rendered / 16-6
+PASS all three ability stages were rendered / 16-6
+PASS all three ability stages were rendered / 16-6
+PASS rendered ability respects cooldown / 16-6
+PASS stationary target receives finite damage / 16-6
+PASS actual scene decoded / 16-7-warning
+PASS saved gameplay frame / 16-7-warning
+PASS test remains hidden / 16-7-warning
+PASS actual scene decoded / 16-7-attack
+PASS saved gameplay frame / 16-7-attack
+PASS test remains hidden / 16-7-attack
+PASS actual scene decoded / 16-7-recovery
+PASS saved gameplay frame / 16-7-recovery
+PASS test remains hidden / 16-7-recovery
+PASS all three ability stages were rendered / 16-7
+PASS all three ability stages were rendered / 16-7
+PASS all three ability stages were rendered / 16-7
+PASS rendered ability respects cooldown / 16-7
+PASS stationary target receives finite damage / 16-7
+PASS actual scene decoded / 17-0-warning
+PASS saved gameplay frame / 17-0-warning
+PASS test remains hidden / 17-0-warning
+PASS actual scene decoded / 17-0-attack
+PASS saved gameplay frame / 17-0-attack
+PASS test remains hidden / 17-0-attack
+PASS actual scene decoded / 17-0-recovery
+PASS saved gameplay frame / 17-0-recovery
+PASS test remains hidden / 17-0-recovery
+PASS all three ability stages were rendered / 17-0
+PASS all three ability stages were rendered / 17-0
+PASS all three ability stages were rendered / 17-0
+PASS rendered ability respects cooldown / 17-0
+PASS stationary target receives finite damage / 17-0
+PASS real body picking / 17-0
+PASS ability counter tip fits inspection HUD / 17-0
+PASS actual scene decoded / 17-0-inspection
+PASS saved gameplay frame / 17-0-inspection
+PASS test remains hidden / 17-0-inspection
+PASS actual scene decoded / 17-1-warning
+PASS saved gameplay frame / 17-1-warning
+PASS test remains hidden / 17-1-warning
+PASS actual scene decoded / 17-1-attack
+PASS saved gameplay frame / 17-1-attack
+PASS test remains hidden / 17-1-attack
+PASS actual scene decoded / 17-1-recovery
+PASS saved gameplay frame / 17-1-recovery
+PASS test remains hidden / 17-1-recovery
+PASS all three ability stages were rendered / 17-1
+PASS all three ability stages were rendered / 17-1
+PASS all three ability stages were rendered / 17-1
+PASS rendered ability respects cooldown / 17-1
+PASS stationary target receives finite damage / 17-1
+PASS actual scene decoded / 17-2-warning
+PASS saved gameplay frame / 17-2-warning
+PASS test remains hidden / 17-2-warning
+PASS actual scene decoded / 17-2-attack
+PASS saved gameplay frame / 17-2-attack
+PASS test remains hidden / 17-2-attack
+PASS actual scene decoded / 17-2-recovery
+PASS saved gameplay frame / 17-2-recovery
+PASS test remains hidden / 17-2-recovery
+PASS all three ability stages were rendered / 17-2
+PASS all three ability stages were rendered / 17-2
+PASS all three ability stages were rendered / 17-2
+PASS rendered ability respects cooldown / 17-2
+PASS stationary target receives finite damage / 17-2
+PASS actual scene decoded / 17-3-warning
+PASS saved gameplay frame / 17-3-warning
+PASS test remains hidden / 17-3-warning
+PASS actual scene decoded / 17-3-attack
+PASS saved gameplay frame / 17-3-attack
+PASS test remains hidden / 17-3-attack
+PASS actual scene decoded / 17-3-recovery
+PASS saved gameplay frame / 17-3-recovery
+PASS test remains hidden / 17-3-recovery
+PASS all three ability stages were rendered / 17-3
+PASS all three ability stages were rendered / 17-3
+PASS all three ability stages were rendered / 17-3
+PASS rendered ability respects cooldown / 17-3
+PASS stationary target receives finite damage / 17-3
+PASS actual scene decoded / 17-4-warning
+PASS saved gameplay frame / 17-4-warning
+PASS test remains hidden / 17-4-warning
+PASS actual scene decoded / 17-4-attack
+PASS saved gameplay frame / 17-4-attack
+PASS test remains hidden / 17-4-attack
+PASS actual scene decoded / 17-4-recovery
+PASS saved gameplay frame / 17-4-recovery
+PASS test remains hidden / 17-4-recovery
+PASS all three ability stages were rendered / 17-4
+PASS all three ability stages were rendered / 17-4
+PASS all three ability stages were rendered / 17-4
+PASS rendered ability respects cooldown / 17-4
+PASS stationary target receives finite damage / 17-4
+PASS actual scene decoded / 17-5-warning
+PASS saved gameplay frame / 17-5-warning
+PASS test remains hidden / 17-5-warning
+PASS actual scene decoded / 17-5-attack
+PASS saved gameplay frame / 17-5-attack
+PASS test remains hidden / 17-5-attack
+PASS actual scene decoded / 17-5-recovery
+PASS saved gameplay frame / 17-5-recovery
+PASS test remains hidden / 17-5-recovery
+PASS all three ability stages were rendered / 17-5
+PASS all three ability stages were rendered / 17-5
+PASS all three ability stages were rendered / 17-5
+PASS rendered ability respects cooldown / 17-5
+PASS stationary target receives finite damage / 17-5
+PASS actual scene decoded / 17-6-warning
+PASS saved gameplay frame / 17-6-warning
+PASS test remains hidden / 17-6-warning
+PASS actual scene decoded / 17-6-attack
+PASS saved gameplay frame / 17-6-attack
+PASS test remains hidden / 17-6-attack
+PASS actual scene decoded / 17-6-recovery
+PASS saved gameplay frame / 17-6-recovery
+PASS test remains hidden / 17-6-recovery
+PASS all three ability stages were rendered / 17-6
+PASS all three ability stages were rendered / 17-6
+PASS all three ability stages were rendered / 17-6
+PASS rendered ability respects cooldown / 17-6
+PASS stationary target receives finite damage / 17-6
+PASS actual scene decoded / 17-7-warning
+PASS saved gameplay frame / 17-7-warning
+PASS test remains hidden / 17-7-warning
+PASS actual scene decoded / 17-7-attack
+PASS saved gameplay frame / 17-7-attack
+PASS test remains hidden / 17-7-attack
+PASS actual scene decoded / 17-7-recovery
+PASS saved gameplay frame / 17-7-recovery
+PASS test remains hidden / 17-7-recovery
+PASS all three ability stages were rendered / 17-7
+PASS all three ability stages were rendered / 17-7
+PASS all three ability stages were rendered / 17-7
+PASS rendered ability respects cooldown / 17-7
+PASS stationary target receives finite damage / 17-7
+PASS Varkhor starts the three warning areas
+PASS actual scene decoded / varkhor-charge
+PASS saved gameplay frame / varkhor-charge
+PASS test remains hidden / varkhor-charge
+PASS central plume leads the outer eruptions
+PASS actual scene decoded / varkhor-eruption
+PASS saved gameplay frame / varkhor-eruption
+PASS test remains hidden / varkhor-eruption
+PASS actual scene decoded / varkhor-outer-eruptions
+PASS saved gameplay frame / varkhor-outer-eruptions
+PASS test remains hidden / varkhor-outer-eruptions
+PASS caster launches a real cinder projectile
+PASS actual scene decoded / cinder-flight
+PASS saved gameplay frame / cinder-flight
+PASS test remains hidden / cinder-flight
+PASS loading the Caldera effects twice retains the same texture
+PASS actual rendered cobra releases three projectiles
+PASS projectiles do not change hover targets
+PASS actual scene decoded / venom-flight
+PASS saved gameplay frame / venom-flight
+PASS test remains hidden / venom-flight
+PASS authored realm has a reachable encounter / 9
+PASS existing spawn starts its new ability / 9
+PASS actual scene decoded / 9-scenery
+PASS saved gameplay frame / 9-scenery
+PASS test remains hidden / 9-scenery
+PASS authored realm has a reachable encounter / 10
+PASS existing spawn starts its new ability / 10
+PASS actual scene decoded / 10-scenery
+PASS saved gameplay frame / 10-scenery
+PASS test remains hidden / 10-scenery
+PASS authored realm has a reachable encounter / 16
+PASS existing spawn starts its new ability / 16
+PASS actual scene decoded / 16-scenery
+PASS saved gameplay frame / 16-scenery
+PASS test remains hidden / 16-scenery
+PASS authored realm has a reachable encounter / 17
+PASS existing spawn starts its new ability / 17
+PASS actual scene decoded / 17-scenery
+PASS saved gameplay frame / 17-scenery
+PASS test remains hidden / 17-scenery
+PASS abilities reuse preloaded actor buffer
+PASS abilities do not grow shadow storage
+PASS renderer uses player edition without developer mode
+PASS no audio device opened or effects played

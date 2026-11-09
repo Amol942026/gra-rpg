@@ -1,0 +1,69 @@
+{
+  "authoring": "Original 2D artwork painted inside Krita 5.3.4 native Python/Qt runtime",
+  "source": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2",
+  "external_inputs": [],
+  "assets": [
+    {
+      "name": "caldera-abyss-cliff",
+      "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-cliff.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-cliff.png",
+      "layers": [
+        "Depth and reflected ash light",
+        "Broken basalt columns",
+        "Strata, pores and fissures"
+      ],
+      "size": [
+        1024,
+        768
+      ],
+      "runtime_size": [
+        1024,
+        768
+      ],
+      "kra_sha256": "70131179b81ff58cad544351a80dec6b1cdcd8e5a541bb5550771790d27fa3ae",
+      "png_sha256": "a865e3b6131f0e9e991a1da1772f8b4d68c6da9e4fa7b1eae44cac29cb97cb0f",
+      "retained": true
+    },
+    {
+      "name": "caldera-abyss-sky",
+      "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-sky.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-sky.png",
+      "layers": [
+        "Ash sky and distant furnace glow",
+        "Distant caldera ridges",
+        "Deep molten fissures",
+        "Layers of suspended ash"
+      ],
+      "size": [
+        2048,
+        1024
+      ],
+      "runtime_size": [
+        2048,
+        1024
+      ],
+      "kra_sha256": "26a273fb379bbc3090c0ad90f0ccd7ca13c53f7814e9962feb8b449589c50201",
+      "png_sha256": "77c6c43593acd71528fac51f96601825186968aa183c3f81070cd69edc9b8590",
+      "retained": true
+    },
+    {
+      "name": "caldera-abyss-distance",
+      "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-distance.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-distance.png",
+      "layers": [
+        "Isolated pinnacles below the plateau"
+      ],
+      "size": [
+        2048,
+        1024
+      ],
+      "runtime_size": [
+        2048,
+        1024
+      ],
+      "kra_sha256": "26672d0b101e126e15ea1dcb6f62325ef5b475427130c735941dd4fe5757bbb7",
+      "png_sha256": "5000d2b941166caa97eaf159d70ba8de281f1eb4c31e618ea91d24c4ade86566",
+      "retained": true
+    }
+  ]
+}

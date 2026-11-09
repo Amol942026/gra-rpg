@@ -177,11 +177,42 @@ inline void flow(bool ambience=true){
  if(!ambience)return;
  for(int n=0;n<20;n++){float x=std::fmod(n*191.f+game.time*(5+n%3),float(WorldW)),y=std::fmod(n*119.f-game.time*14+H*100,float(H));ellipse(x,y,1.2f,2.5f,Fade(rgb(255,177,99),.2f+.15f*std::sin(n+game.time*2)));}
 }
-inline void groundAttacks(){for(const auto& f:game.fissures){Vector2 p=screen(f.pos);float t=std::min(1.f,f.age/f.delay);Color col=rgb(250,136,74);
- ellipse(p.x,p.y,65,32,Fade(col,f.struck?.25f:.08f+.15f*t));ellipseOutline(p.x,p.y,65,32,Fade(col,.65f));ellipseOutline(p.x,p.y,65*t,32*t,col);
- if(f.struck){float fade=1-std::clamp((f.age-f.delay)/.65f,0.f,1.f);for(int i=0;i<5;i++){float off=(i-2)*16;line(p.x+off,p.y+std::abs(off)*.18f,p.x+off*.8f,p.y-(35+26*std::sin(i+2))*fade,Fade(rgb(255,199,103),fade),5*fade+1);}}
-}}
+inline void groundAttacks(){
+ for(const auto& f:game.fissures){
+  Vector2 p=screen(f.pos);
+  if(p.x<-115||p.x>WorldW+115||p.y<-70||p.y>H+80)continue;
+  float t=std::clamp(f.age/f.delay,0.f,1.f);
+  float fade=f.struck?1-std::clamp((f.age-f.delay)/.65f,0.f,1.f):1.f;
+  Color hot=rgb(255,156,71);
+  ellipse(p.x,p.y,70,35,Fade(rgb(135,43,43),(.30f+.24f*t)*fade));
+  terrain_surface::ring(f.pos,1.35f,Fade(hot,(.66f+.32f*t)*fade));
+  terrain_surface::ring(f.pos,.27f+t*.94f,Fade(rgb(255,219,145),.65f*fade));
+  for(int i=0;i<7;i++){
+   float a=i*2*PI/7+.31f;
+   V direction{std::cos(a),std::sin(a)};
+   Vector2 inside=screen(f.pos+direction*(.28f+.26f*t)),outside=screen(f.pos+direction*(.61f+.58f*t));
+   Vector2 bend{(inside.x+outside.x)*.5f-4,(inside.y+outside.y)*.5f+3};
+   DrawLineEx(inside,bend,1.5f,Fade(hot,fade*t));DrawLineEx(bend,outside,1.5f,Fade(hot,fade*t));
+  }
+ }
+}
+inline void eruptionPlumes(){
+ for(const auto& f:game.fissures){
+  if(!f.struck)continue;
+  Vector2 p=screen(f.pos);
+  if(p.x<-130||p.x>WorldW+130||p.y<-45||p.y>H+200)continue;
+  float phase=std::clamp((f.age-f.delay)/.65f,0.f,1.f);
+  if(caldera_attack_art::draw(caldera_attack_art::Clip::Eruption,p,{162,197},0,phase,1,{.5f,.83f}))continue;
+  float fade=1-phase;
+  for(int i=0;i<5;i++){
+   float off=(i-2)*16;
+   line(p.x+off,p.y+std::abs(off)*.18f,p.x+off*.8f,p.y-(35+26*std::sin(i+2))*fade,Fade(rgb(255,199,103),fade),5*fade+1);
+  }
+ }
+}
 inline void bolt(const CinderBolt& b){Vector2 p=screen(b.pos),v{(b.velocity.x-b.velocity.y)*40,(b.velocity.x+b.velocity.y)*20};float n=std::hypot(v.x,v.y);if(n<=0)return;v.x/=n;v.y/=n;
+ float phase=std::fmod(std::max(0.f,7-b.remaining)*.29f,1.f);
+ if(caldera_attack_art::draw(caldera_attack_art::Clip::Cinder,{p.x,p.y-35},{80,48},std::atan2(v.y,v.x)*RAD2DEG,phase,1,{.64f,.5f}))return;
  for(int i=4;i>=0;i--)ellipse(p.x-v.x*i*5,p.y-35-v.y*i*5,6-i*.7f,5-i*.6f,Fade(rgb(255,110+i*15,48),1-i*.16f));ellipse(p.x,p.y-35,2.3f,2.3f,rgb(255,239,183));
 }
 inline void unload(){for(auto t:{tiles,scenery,sceneryEdge,extraScenery,extraSceneryEdge,sky,minimap,macro,road,bank,bridge,steam,channelWall,portalFrame,portalLoop,portalOutline,abyssCliff,abyssDistance})if(t.id)UnloadTexture(t);for(auto t:lavaFrames)if(t.id)UnloadTexture(t);if(terrain.id)UnloadRenderTexture(terrain);tiles=scenery=sceneryEdge=extraScenery=extraSceneryEdge=sky=lava=minimap=macro=road=bank=bridge=steam=channelWall=portalFrame=portalLoop=portalOutline=abyssCliff=abyssDistance={};lavaFrames={};terrain={};lavaStrips.clear();canyonFronts.clear();abyssFaces.clear();abyssFalls.clear();abyssLips.clear();sceneryAlpha.clear();extraSceneryAlpha.clear();portalMask.clear();}

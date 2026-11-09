@@ -1,6 +1,7 @@
 #pragma once
 #include "game.hpp"
 #include <cctype>
+#include <iterator>
 namespace ember {
 struct DeveloperDestination {const char* id;const char* name;const char* hint;WorldLocation location;V spawn;int floor;};
 inline constexpr int DeveloperDestinationCount=19;
@@ -31,10 +32,9 @@ inline int developerDestination(std::string id){
  if(id=="kaldera"||id=="caldera")id="volcano";if(id=="varkhor")id="volcano-boss";
  for(int i=0;i<DeveloperDestinationCount;i++)if(id==DeveloperDestinations[i].id)return i;return -1;
 }
-struct DeveloperLaunch {bool enabled=false,kit=true;int destination=-1;std::string error;};
+struct DeveloperLaunch {bool enabled=false;int destination=-1;std::string error;};
 inline bool parseDeveloperArgument(const std::string& arg,int& i,int argc,char** argv,DeveloperLaunch& launch){
  if(arg=="--dev"){launch.enabled=true;return true;}
- if(arg=="--no-dev-kit"){launch.kit=false;return true;}
  if(arg!="--start"&&arg.rfind("--start=",0)!=0)return false;
  launch.enabled=true;std::string id;
  if(arg=="--start"){if(i+1<argc&&std::string(argv[i+1]).rfind("--",0)!=0)id=argv[++i];}
@@ -43,18 +43,62 @@ inline bool parseDeveloperArgument(const std::string& arg,int& i,int argc,char**
  if(destination<0){launch.destination=-1;launch.error=id.empty()?"Brakuje lokacji po --start. Wybierz ją z listy.":"Nieznana lokacja: "+id+". Wybierz ją z listy.";}
  else{launch.destination=destination;launch.error.clear();}return true;
 }
-inline bool developerAddItem(Game& g,Kind kind,int minimum){
- int remaining=std::max(0,minimum-g.bagCount(kind));
- for(auto& value:g.bag)if(value.kind==kind&&value.tier==0&&!value.empty()){int count=std::min(remaining,99-value.count);if(count>0){value.count+=count;remaining-=count;}}
- for(auto& value:g.bag)if(value.empty()&&remaining>0){int count=std::min(99,remaining);value=item(kind,0,count);remaining-=count;}
- return remaining==0;
+inline constexpr int DeveloperLevel=100;
+inline constexpr std::array<std::pair<Kind,int>,3> DeveloperSupplies{{
+ {Kind::Arrow,100},{Kind::Health,50},{Kind::Mana,50}
+}};
+inline void replenishDeveloperSupplies(Game& game){
+ std::array<int,DeveloperSupplies.size()> missing{};
+ for(std::size_t i=0;i<DeveloperSupplies.size();i++){
+  auto [kind,minimum]=DeveloperSupplies[i];
+  int available=game.bagCount(kind);
+  // Older saves can contain oversized stacks. Keep them intact.
+  if(available>=minimum&&std::any_of(game.bag.begin(),game.bag.end(),[kind](const Item& value){
+    return value.kind==kind&&value.count>99;
+  }))continue;
+  int remaining=std::max(minimum,available);
+  // Reuse existing stacks and consolidate small stacks before taking new slots.
+  for(auto& stack:game.bag){
+   if(stack.kind!=kind||stack.empty())continue;
+   int count=std::min(remaining,99);
+   if(count>0)stack.count=count;
+   else stack={};
+   remaining-=count;
+  }
+  missing[i]=remaining;
+ }
+ for(std::size_t i=0;i<DeveloperSupplies.size();i++){
+  Kind kind=DeveloperSupplies[i].first;
+  int remaining=missing[i];
+  while(remaining>0){
+   auto slot=std::find_if(game.bag.begin(),game.bag.end(),[](const Item& value){return value.empty();});
+   if(slot==game.bag.end()){
+    // Keep required supplies in the bag. Stash overflow at this destination.
+    auto spare=std::find_if(game.bag.rbegin(),game.bag.rend(),[&](const Item& value){
+     for(auto [supply,count]:DeveloperSupplies){
+      if(value.kind==supply)return game.bagCount(supply)-value.count>=count;
+     }
+     return value.kind!=Kind::DawnShard;
+    });
+    if(spare==game.bag.rend()){
+     // Even a saved bag full of quest items has room in the local ground inventory.
+     spare=std::find_if(game.bag.rbegin(),game.bag.rend(),[](const Item& value){return value.kind==Kind::DawnShard;});
+    }
+    slot=std::prev(spare.base());
+    game.addGround(*slot,game.player);
+   }
+   int added=std::min(remaining,99);
+   *slot=item(kind,0,added);
+   remaining-=added;
+  }
+ }
 }
 inline bool developerSpawnSafe(const Game& g,V pos){
  if(!g.walkable(pos))return false;
  if(!g.inTower())for(const auto& enemy:g.enemies)if(enemy.alive&&distance(enemy.pos,pos)<enemy.radius()+.75f)return false;
  return true;
 }
-inline bool developerStart(Game& current,int destination,bool reset,bool kit,unsigned seed=12593){
+inline bool developerStart(Game& current,int destination,bool reset,unsigned seed=12593){
  if(destination<0||destination>=DeveloperDestinationCount)return false;
  Game candidate=reset?Game(seed):current;const auto& target=DeveloperDestinations[destination];
  if(target.location==WorldLocation::MageTower){candidate.enterMageTower();candidate.towerFloor=target.floor;candidate.dawnQuest=DawnQuest::AtTower;}
@@ -72,12 +116,17 @@ inline bool developerStart(Game& current,int destination,bool reset,bool kit,uns
  candidate.meleeDuration=SwingDuration;candidate.swingStrong=candidate.lastBowPiercing=false;candidate.manaRegenTime=0;
  candidate.hp=float(candidate.maxHp());candidate.mana=float(candidate.maxMana());
  candidate.arrows.clear();candidate.fireballs.clear();candidate.explosions.clear();candidate.effects.clear();candidate.pierceFlashes.clear();candidate.sounds.clear();
- bool complete=true;
- if(kit){
-  // Supplies do not grant skills: ranks come only from allocated level points.
-  for(auto recipe:std::array<std::pair<Kind,int>,5>{{{Kind::Arrow,100},{Kind::Mushroom,15},{Kind::ForestEssence,15},{Kind::Health,10},{Kind::Mana,10}}})complete=developerAddItem(candidate,recipe.first,recipe.second)&&complete;
- }
- candidate.say(complete?std::string("DEV — ")+target.name:"DEV — lokacja gotowa; pełny plecak ograniczył zestaw testowy.");
+ candidate.developerSession=true;
+ candidate.level=DeveloperLevel;
+ candidate.xp=0;
+ candidate.allocationRequired=false;
+ for(int& rank:candidate.skillRanks)rank=std::max(rank,1);
+ for(int i=1;i<int(Spell::Count);i++)candidate.learnedSpells|=spellBit(Spell(i));
+ if(!candidate.knowsSpell(candidate.selectedSpell))candidate.chooseSpell(Spell::Fireball);
+ auto groundCount=candidate.ground.size();
+ replenishDeveloperSupplies(candidate);
+ candidate.say(groundCount==candidate.ground.size()?std::string("DEV — ")+target.name:
+     "DEV — pełny plecak. Przedmioty odłożono obok bohatera.");
  current=std::move(candidate);return true;
 }
 }

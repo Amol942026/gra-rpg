@@ -40,7 +40,7 @@ AudioSystem audioSystem;
 IntroSequence intro;
 TowerSequence towerStory;
 #include "performance.hpp"
-bool developerActive=false,developerMenuOpen=false,developerKit=true,nativeWorldRendering=true;int developerSelection=0;std::string developerError;
+bool developerActive=false,developerMenuOpen=false,nativeWorldRendering=true;int developerSelection=0;std::string developerError;
 void drawDeveloperUi();
 Vector2 mouse{};Slot dragging{};bool paused=false,help=false,welcome=true;int nearbyPage=0,corpsePage=0,corpsePageOwner=-1;float scale=1;Rectangle viewport{};
 InventoryClicks inventoryClicks;
@@ -242,6 +242,7 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 #include "scenery_art.hpp"
 #include "terrain_surface.hpp"
 #include "desert_art.hpp"
+#include "caldera_attack_art.hpp"
 #include "volcano_art.hpp"
 #include "actor_art.hpp"
 #include "guardian_art.hpp"
@@ -261,7 +262,7 @@ void makeArt(){
  world_shadows::init();
  hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
  forest_bush_art::load();forest_tree_art::load();guardian_art::load();
- treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();
+ treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();caldera_attack_art::load();
  terrain=render_targets::colorOnly(TerrainCacheWidth,TerrainCacheHeight);BeginTextureMode(terrain);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,TerrainBakeScale});
  for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
   if(!land)continue; // The animated water is drawn underneath the land.
@@ -381,7 +382,7 @@ void drawWorld(){
   else if(!game.dead()||int(game.time*5)%2==0){sand_prison::drawMound(pp,false);hero(pp.x,pp.y,1);sand_prison::drawMound(pp,true);}
  }
  if(game.inDesert())desert_art::drawCachedFoothills();
- enemy_ability_art::breath();
+ if(game.inVolcano()){enemy_ability_art::air();volcano_art::eruptionPlumes();}
  for(const auto& flash:game.pierceFlashes){Vector2 p=screen(flash.pos);float age=1-flash.life/.26f;ellipseOutline(p.x,p.y-35,8+age*22,5+age*12,Fade(rgb(137,226,245),1-age));}
  for(const auto& blast:game.explosions)drawExplosion(blast);
  drawHealingAura();
@@ -760,9 +761,9 @@ int main(int argc,char**argv) {
     startupLog.write(noAudio?"Audio skipped (--no-audio)":"Audio initialization complete");
 #ifndef EMBERFALL_PLAYER_BUILD
     if(developerLaunch.enabled&&!diagnostic){
-        developerKit=developerLaunch.kit;developerSelection=developerLaunch.destination>=0?developerLaunch.destination:0;
+        developerSelection=developerLaunch.destination>=0?developerLaunch.destination:0;
         if(developerLaunch.destination>=0&&developerLaunch.error.empty())startDeveloperSession(true);
-        else{welcome=false;developerActive=true;intro={};openDeveloperMenu();developerError=developerLaunch.error;}
+        else{openDeveloperMenu();developerError=developerLaunch.error;}
     }
 #endif
     if(smoke||benchmark)welcome=false;
@@ -913,12 +914,20 @@ int main(int argc,char**argv) {
          <<"\nFrame p99 (ms): "<<frameTimes[size_t(frameTimes.size()*.99)]
          <<"\nFrame max (ms): "<<frameTimes.back()
          <<"\nFrames over 25 ms: "<<std::count_if(frameTimes.begin(),frameTimes.end(),[](double ms){return ms>25;})<<"\n";
+        if(developerSmoke){
+            f<<"Developer level: "<<game.level<<"\nDeveloper arrows: "<<game.ammoCount()
+             <<"\nDeveloper health potions: "<<game.bagCount(Kind::Health)
+             <<"\nDeveloper mana potions: "<<game.bagCount(Kind::Mana)
+             <<"\nDeveloper learned spells: "<<game.learnedSpells<<"\nDeveloper skill ranks:";
+            for(int rank:game.skillRanks)f<<' '<<rank;
+            f<<'\n';
+        }
     }
     performance.save();
     startupLog.write("Shutting down");game_cursor::shutdown();audioSystem.shutdown();
     sync_present::shutdown();
     spell_art::unload();inventory_icons::unload();world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    hero_portrait::unload();volcano_actors::unload();volcano_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    hero_portrait::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
     terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }

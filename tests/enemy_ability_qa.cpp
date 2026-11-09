@@ -19,6 +19,8 @@ int main(int argc,char** argv){
   check(IsWindowHidden(),"test remains hidden / "+name);
  };
  const int capacity=actor_art::creatureCapacity;const unsigned allocations=shadow_geometry::allocations;
+ check(caldera_attack_art::atlas.id&&caldera_attack_art::atlas.width==2048&&caldera_attack_art::atlas.height==512,
+       "the four Caldera effects preload in one texture");
  for(int type:{9,10,16,17})for(int side=0;side<8;side++){
   game=enemyAbilityArena(type);resetUi();auto& enemy=game.enemies[0];const auto spec=enemyAbilityProfile(type);
   V dir{std::cos(side*PI/4),std::sin(side*PI/4)};game.player=enemy.pos+dir*3;
@@ -38,6 +40,19 @@ int main(int argc,char** argv){
    auto info=inspectWorld(hovered);check(!info.secondary.empty()&&textWidth(info.secondary,14)<=301,"ability counter tip fits inspection HUD / "+prefix);capture(prefix+"-inspection");
   }
  }
+ // Varkhor and the cinder caster share the same production renderer as the elites.
+ game=enemyAbilityArena(VolcanoBossType);resetUi();auto& varkhor=game.enemies[0];varkhor.eruptionCd=0;
+ check(game.prepareEruption(varkhor,1.f/60,true)&&game.fissures.size()==3,"Varkhor starts the three warning areas");
+ game.prepareEruption(varkhor,.66f,true);game.updateVolcanoAttacks(.66f,game.player,false,0);capture("varkhor-charge");
+ game.player={67,40};game.prepareEruption(varkhor,.31f,true);game.updateVolcanoAttacks(.31f,game.player,false,0);
+ check(game.fissures[1].struck&&!game.fissures[0].struck&&!game.fissures[2].struck,"central plume leads the outer eruptions");
+ game.updateVolcanoAttacks(.12f,game.player,false,0);capture("varkhor-eruption");
+ game.updateVolcanoAttacks(.23f,game.player,false,0);capture("varkhor-outer-eruptions");
+ game=enemyAbilityArena(VolcanoFirstType+3);resetUi();game.launchCinder(game.enemies[0]);
+ check(game.cinders.size()==1,"caster launches a real cinder projectile");
+ game.updateVolcanoAttacks(.19f,game.player,false,0);capture("cinder-flight");
+ auto lastAtlas=caldera_attack_art::atlas.id;caldera_attack_art::load();
+ check(caldera_attack_art::atlas.id==lastAtlas,"loading the Caldera effects twice retains the same texture");
  // Released venom must not become a false hero target in reverse draw picking.
  game=enemyAbilityArena(10,5);resetUi();for(int i=0;i<49;i++)game.update(1.f/60,{},false);renderScene();
  check(game.venomGlobs.size()==3,"actual rendered cobra releases three projectiles");
@@ -61,5 +76,5 @@ int main(int argc,char** argv){
  check(!audioSystem.available&&audioSystem.playedEffects==0,"no audio device opened or effects played");
  std::ofstream out(root/"summary.json");out<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"abilities\":4,\"directions\":8,\"captured_frames\":"<<captures<<",\"authored_encounters\":4,\"hidden\":true,\"audio_opened\":false,\"presentation_measured\":false}";
  std::cout<<"Elite ability integration: "<<checks<<" checks, "<<failures<<" failures\n";
- audioSystem.shutdown();CloseWindow();return failures?2:0;
+ caldera_attack_art::unload();audioSystem.shutdown();CloseWindow();return failures?2:0;
 }

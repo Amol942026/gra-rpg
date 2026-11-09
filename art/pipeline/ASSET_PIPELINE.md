@@ -1,5 +1,10 @@
 # Lokalne środowisko tworzenia zasobów Emberfall
 
+09.11.2026: [ataki specjalne Kaldery](../volcano/attacks-20261109/README.md).
+Krita i dwa przebiegi lokalnego ComfyUI przygotowały cztery tekstury.
+Blender dostarczył ruch kart 2D oraz gesty wojownika, draka i Varkhora.
+Atlas 2048 × 512 i krzywe próbkowane w 60 Hz są ładowane lokalnie przez grę.
+
 09.11.2026: [lekcje Eldrina i trzy żywioły](../gameplay/eldrin-spells-20261109/README.md).
 Natywna Krita, trzy projekty Synfig / 180 klatek, rzeczywiste Csound i Audacity.
 Naciąg prawdziwego łuku, nagrany podmuch płomienia, osobne lód/piorun i lekcja.

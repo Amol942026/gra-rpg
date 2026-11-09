@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "local_only": true,
+  "image_master_root": "C:/AI2D/sprites/emberfall-caldera-attacks-20261109",
+  "atlas": "assets/volcano/caldera-attack-fx.png",
+  "atlas_sha256": "7783234a351d89c386f2b7c23bc173b0008c85e5d1fe1cc17d5d6484a96665ef",
+  "atlas_size": [
+    2048,
+    512
+  ],
+  "rgba8_bytes": 4194304,
+  "blender_master_sha256": "b9539b72a2bea35d27c14aa7581897c9682d527ace9ebe41cf45d533dfecf97f",
+  "motion_sha256": "6f6b01e81564c584a4eebef619d5855416b21dcb3108c0816199eb4a64eae12f",
+  "comfy_model": "DreamShaper 8 / Lykon",
+  "model_license_evidence": "art/volcano/comfy",
+  "comfy_refined_prompt_id": "fde1c326-7836-49e7-a3ff-6643c7809b05",
+  "blender_distinct_preview_frames": 12,
+  "effect_tracks": 4,
+  "pose_tracks": 3
+}

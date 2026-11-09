@@ -1,7 +1,8 @@
 #pragma once
 #include "generated/volcano_motion.hpp"
 #include "generated/basalt_swing.hpp"
-// Native Krita cutouts, articulated by saved Synfig tracks. No mesh generation.
+#include "generated/caldera_attack_motion.hpp"
+// The original cutouts retain their walk cycles. Special gestures add Blender pose curves.
 namespace volcano_actors {
 inline constexpr const char* names[]={"slag-crawler","lava-salamander","fire-imp","ash-wraith","obsidian-sentinel","ember-drake","varkhor"};
 struct Atlas {Texture2D art{},silhouette{};std::vector<unsigned char> alpha;int cell=128;};
@@ -13,7 +14,7 @@ inline void load(){for(int i=0;i<7;i++){
  a.silhouette=LoadTextureFromImage(im);UnloadImage(im);SetTextureFilter(a.art,TEXTURE_FILTER_BILINEAR);SetTextureFilter(a.silhouette,TEXTURE_FILTER_BILINEAR);
 }}
 inline void unload(){for(auto& a:atlases){if(a.art.id)UnloadTexture(a.art);if(a.silhouette.id)UnloadTexture(a.silhouette);a={};}}
-inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false){
+inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false,float special=-1){
  int id=std::clamp(type-VolcanoFirstType,0,6),direction=std::clamp(int(state.direction),0,7);const auto& atlas=atlases[id];if(!atlas.art.id)return false;
  float bodyScale=id==6?1.85f:id==3?1.12f:id==4?1.1f:1.f,s=size*bodyScale;
  static constexpr float angles[]={0,.4636476f,1.5707963f,2.677945f,3.14159265f,3.6052403f,4.712389f,5.8195377f};float heading=angles[direction];
@@ -21,6 +22,8 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  auto strike=volcano_motion::sample(id,std::max(0.f,action),true);
  float blend=dead?0:state.moveBlend;
  bool quadruped=id==0||id==1||id==5;
+ bool specialPose=id>=4&&special>=0&&!dead;
+ auto gesture=specialPose?caldera_attack_motion::pose(id-4,special):caldera_attack_motion::Pose{};
  struct Part {Vector2 pivot,shift;float angle;};std::array<Part,6> parts{};
  for(int p=0;p<6;p++){
   auto& part=parts[p];part.pivot={64,90};
@@ -38,6 +41,15 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
     part.shift.x+=joint.x*std::cos(r)-joint.y*std::sin(r)-joint.x;part.shift.y+=joint.x*std::sin(r)+joint.y*std::cos(r)-joint.y;
     part.angle=sign*(key.torso+(p==5?key.blade:key.shield));
    }
+  }
+  if(specialPose&&(p==0||p==3||(!quadruped&&p>=4))){
+   const float forward=std::cos(heading),side=std::sin(heading),mirror=forward<-.1f?-1.f:1.f;
+   const float weight=p==3?1.f:.56f;
+   part.shift.x+=forward*gesture.advance*weight;
+   part.shift.y+=(side*gesture.advance*.44f-gesture.lift)*weight;
+   part.angle+=mirror*gesture.pitch;
+   if(p==3){part.pivot={64+forward*12,79};part.angle+=mirror*gesture.drive*.64f;}
+   if(p>=4)part.angle+=mirror*gesture.drive*(p==4?-.36f:.72f);
   }
   if(dead){part.shift={};part.angle=p==1?-18:p==2?24:p==4?-32:p==5?39:0;}
  }

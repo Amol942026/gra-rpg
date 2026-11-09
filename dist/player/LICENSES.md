@@ -1,5 +1,11 @@
 # Zależności i zasoby
 
+- Efekty specjalne Kaldery `assets/volcano/caldera-attack-fx.png` powstały
+  z własnych warstwowych ilustracji Emberfall w Kricie. Materiały dopracowano
+  w lokalnym ComfyUI z modelem DreamShaper 8 Lykona, na warunkach opisanych
+  niżej. Ruch kart 2D i pozy wycinanek przygotowano w Blenderze. Mastery,
+  grafy i wagi modelu pozostają poza paczką gry.
+
 - Atlas zaklęć `assets/sprites/spells.png` to własne ilustracje 2D Emberfall
   z warstwowej Krity, animowane w Synfig 1.4.5. Nowe efekty żywiołów i łuku
   zmontowano lokalnie w Csound i Audacity: nagrania łuków Bena Jaszczaka

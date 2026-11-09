@@ -638,7 +638,16 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     return false;
 }
 inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
- if(e.type>=VolcanoFirstType){if(shadowBuilding&&!shadowCasting)return false;float action=e.abilityBusy()?e.abilityAction():e.eruptionWindup>0?1-e.eruptionWindup/.95f:e.windup>0?.45f*(1-e.windup/.42f):e.strike>0?.45f+.55f*(1-e.strike/.22f):-1;return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,probe,shadowBuilding,false,e.flash>0);}
+ if(e.type>=VolcanoFirstType){
+  if(shadowBuilding&&!shadowCasting)return false;
+  float action=e.abilityBusy()?e.abilityAction():e.eruptionWindup>0?1-e.eruptionWindup/.95f:e.windup>0?.45f*(1-e.windup/.42f):e.strike>0?.45f+.55f*(1-e.strike/.22f):-1;
+  float special=e.abilityBusy()?e.abilityAge/enemyAbilityProfile(e.type).duration():-1.f;
+  if(e.type==VolcanoBossType){
+   if(e.eruptionWindup>0)special=(.95f-e.eruptionWindup)/1.37f;
+   else for(const auto& fissure:game.fissures)if(fissure.owner==e.id&&fissure.age<1.37f){special=fissure.age/1.37f;break;}
+  }
+  return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,probe,shadowBuilding,false,e.flash>0,special);
+ }
  int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;
  bool hit=draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,e.flash>0,outline,probe,-1,-1,-1,3,false,nullptr,e.boulderProgress());shadowCacheKey=previous;return hit;
 }

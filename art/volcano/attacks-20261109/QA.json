@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "core_checks": 234935,
+  "save_checks": 10646,
+  "dev_menu_checks": 64,
+  "dev_volcano_checks": 260,
+  "caldera_render_checks": 514,
+  "gameplay_frames_captured": 109,
+  "blender_preview_frames": 12,
+  "final_dev_verified_realms": [
+    "forest",
+    "desert",
+    "volcano"
+  ],
+  "final_dev_level": 100,
+  "final_dev_arrow_count": 100,
+  "final_dev_potions_each": 50,
+  "final_dev_spells": 3,
+  "final_dev_skills": 3,
+  "packages": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "package_sha256": "57626ce7bfc3c74c767989a833fb3c8e1d50c7ed5c1e6e60d5ceefabc668b764",
+      "exe_sha256": "bbc601b46a5293800d5161ca3ba03f68f2e95af48075018c4504860dd2fdc209",
+      "verified_assets": 287,
+      "startup": [
+        {
+          "scenario": "main-menu",
+          "frames": 180
+        }
+      ],
+      "enemy_ability": {
+        "status": "PASS",
+        "checks": 514,
+        "failures": 0,
+        "abilities": 4,
+        "directions": 8,
+        "captured_frames": 109,
+        "authored_encounters": 4,
+        "hidden": true,
+        "audio_opened": false,
+        "presentation_measured": false
+      },
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "package_sha256": "e03decbf48345ac9e6be0902d8d7968193970996ba63d002e308d9470868b391",
+      "exe_sha256": "3a79ad289307951eef0983c2744a5e9abdb02948fa9b712adb9361275b604f9c",
+      "verified_assets": 287,
+      "startup": [
+        {
+          "scenario": "forest",
+          "frames": 180
+        },
+        {
+          "scenario": "desert",
+          "frames": 180
+        },
+        {
+          "scenario": "volcano",
+          "frames": 180
+        }
+      ],
+      "enemy_ability": null,
+      "audio_preferences_unchanged": true,
+      "native_sources_in_zip": false
+    }
+  ],
+  "hidden": true,
+  "audio_played": false,
+  "local_audio_preferences_unchanged": true
+}

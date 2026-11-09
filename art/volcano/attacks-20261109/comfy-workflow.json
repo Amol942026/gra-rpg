@@ -1,0 +1,364 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "DreamShaper_8_pruned.safetensors"
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "emberfall-caldera-attacks-20261109/slash.png"
+    }
+  },
+  "11": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "isolated painted fantasy action RPG spell effect texture, a crescent shockwave of violet magic, razor bright lavender cutting edge, broken obsidian splinters, dark purple energy ribbons, high contrast, exceptionally fine material details, incandescent gradients, rich hand painted shading, angular volcanic shards and very fine sparks, keep the reference exact silhouette and direction, dark plain background, layered billowing turbulent motion, intricate strands of smoke and fire, rich small scale tonal variations and erosion detail, vivid painted textures, realistic soft falloff"
+    }
+  },
+  "12": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "characters, face, dragon body, people, hands, weapons, icon border, user interface, landscape, lettering, watermark, duplicate effect, obscured silhouette, flat vector, oversaturated white blob, flat single color, rigid concentric bands, geometric polygon, plain gradient"
+    }
+  },
+  "13": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "10",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "14": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "11",
+        0
+      ],
+      "negative": [
+        "12",
+        0
+      ],
+      "latent_image": [
+        "13",
+        0
+      ],
+      "seed": 20261109621,
+      "steps": 22,
+      "cfg": 6.2,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.63
+    }
+  },
+  "15": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "14",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "16": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "15",
+        0
+      ],
+      "filename_prefix": "emberfall-caldera-attacks-20261109/refined-slash"
+    }
+  },
+  "20": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "emberfall-caldera-attacks-20261109/breath.png"
+    }
+  },
+  "21": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "isolated painted fantasy action RPG spell effect texture, a long narrow tongue of dragon fire flowing from left to right, luminous gold core, turbulent orange flame curls, glowing embers and dark red smoke, high contrast, exceptionally fine material details, incandescent gradients, rich hand painted shading, angular volcanic shards and very fine sparks, keep the reference exact silhouette and direction, dark plain background, layered billowing turbulent motion, intricate strands of smoke and fire, rich small scale tonal variations and erosion detail, vivid painted textures, realistic soft falloff"
+    }
+  },
+  "22": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "characters, face, dragon body, people, hands, weapons, icon border, user interface, landscape, lettering, watermark, duplicate effect, obscured silhouette, flat vector, oversaturated white blob, flat single color, rigid concentric bands, geometric polygon, plain gradient"
+    }
+  },
+  "23": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "20",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "24": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "21",
+        0
+      ],
+      "negative": [
+        "22",
+        0
+      ],
+      "latent_image": [
+        "23",
+        0
+      ],
+      "seed": 20261109622,
+      "steps": 22,
+      "cfg": 6.2,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.63
+    }
+  },
+  "25": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "24",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "26": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "25",
+        0
+      ],
+      "filename_prefix": "emberfall-caldera-attacks-20261109/refined-breath"
+    }
+  },
+  "30": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "emberfall-caldera-attacks-20261109/eruption.png"
+    }
+  },
+  "31": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "isolated painted fantasy action RPG spell effect texture, an upward plume of molten lava erupting from a shallow oval crater, fractured basalt rim, white hot center, long flame tongues and suspended red volcanic rocks, high contrast, exceptionally fine material details, incandescent gradients, rich hand painted shading, angular volcanic shards and very fine sparks, keep the reference exact silhouette and direction, dark plain background, layered billowing turbulent motion, intricate strands of smoke and fire, rich small scale tonal variations and erosion detail, vivid painted textures, realistic soft falloff"
+    }
+  },
+  "32": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "characters, face, dragon body, people, hands, weapons, icon border, user interface, landscape, lettering, watermark, duplicate effect, obscured silhouette, flat vector, oversaturated white blob, flat single color, rigid concentric bands, geometric polygon, plain gradient"
+    }
+  },
+  "33": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "30",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "34": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "31",
+        0
+      ],
+      "negative": [
+        "32",
+        0
+      ],
+      "latent_image": [
+        "33",
+        0
+      ],
+      "seed": 20261109623,
+      "steps": 22,
+      "cfg": 6.2,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.63
+    }
+  },
+  "35": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "34",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "36": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "35",
+        0
+      ],
+      "filename_prefix": "emberfall-caldera-attacks-20261109/refined-eruption"
+    }
+  },
+  "40": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "emberfall-caldera-attacks-20261109/cinder.png"
+    }
+  },
+  "41": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "isolated painted fantasy action RPG spell effect texture, one cracked obsidian meteor with molten orange fissures, white hot leading edge on the right and a wispy fire trail tapering to the left, high contrast, exceptionally fine material details, incandescent gradients, rich hand painted shading, angular volcanic shards and very fine sparks, keep the reference exact silhouette and direction, dark plain background, layered billowing turbulent motion, intricate strands of smoke and fire, rich small scale tonal variations and erosion detail, vivid painted textures, realistic soft falloff"
+    }
+  },
+  "42": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "characters, face, dragon body, people, hands, weapons, icon border, user interface, landscape, lettering, watermark, duplicate effect, obscured silhouette, flat vector, oversaturated white blob, flat single color, rigid concentric bands, geometric polygon, plain gradient"
+    }
+  },
+  "43": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "40",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "44": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "41",
+        0
+      ],
+      "negative": [
+        "42",
+        0
+      ],
+      "latent_image": [
+        "43",
+        0
+      ],
+      "seed": 20261109624,
+      "steps": 22,
+      "cfg": 6.2,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.63
+    }
+  },
+  "45": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "44",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "46": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "45",
+        0
+      ],
+      "filename_prefix": "emberfall-caldera-attacks-20261109/refined-cinder"
+    }
+  }
+}

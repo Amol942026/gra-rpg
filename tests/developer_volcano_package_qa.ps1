@@ -24,9 +24,9 @@ function Invoke-Hidden([string]$program,[string[]]$arguments){
  if($process.ExitCode -ne 0){throw ('Developer test failed: '+$process.ExitCode)}
 }
 foreach($destination in @('volcano','volcano-forges','volcano-boss')){
- Invoke-Hidden $exe @('--dev-smoke',('--start='+$destination),'--no-dev-kit','--no-audio','--background-test','--windowed')
+ Invoke-Hidden $exe @('--dev-smoke',('--start='+$destination),'--no-audio','--background-test','--windowed')
  $report=Get-Content -LiteralPath (Join-Path $root 'dev-startup-v43.txt') -Raw
- foreach($expected in @('Build edition: developer','Frames: 180','World location: volcano',('Developer destination: '+$destination),'Developer mode: 1','Developer menu open: 0','Audio device opened: no','Window hidden: yes','Intro active: 0')){if(!$report.Contains($expected)){throw ('Developer startup mismatch: '+$expected)}}
+ foreach($expected in @('Build edition: developer','Frames: 180','World location: volcano',('Developer destination: '+$destination),'Developer mode: 1','Developer menu open: 0','Audio device opened: no','Window hidden: yes','Intro active: 0','Developer level: 100','Developer arrows: 100','Developer health potions: 50','Developer mana potions: 50','Developer learned spells: 7','Developer skill ranks: 1 1 1')){if(($report -split '\r?\n') -notcontains $expected){throw ('Developer startup mismatch: '+$expected)}}
  Copy-Item -LiteralPath (Join-Path $root 'dev-startup-v43.txt') -Destination (Join-Path $output ($destination+'-startup.txt'))
 }
 Copy-Item -LiteralPath (Join-Path $HelperRoot 'developer_volcano_qa.exe') -Destination (Join-Path $root 'developer_volcano_qa.exe')

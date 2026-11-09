@@ -1,0 +1,56 @@
+{
+  "job": {
+    "prompt_id": "fde1c326-7836-49e7-a3ff-6643c7809b05",
+    "status": "completed",
+    "workflow_size": null,
+    "outputs": [
+      "http://127.0.0.1:8188/view?filename=refined-slash_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output",
+      "http://127.0.0.1:8188/view?filename=refined-cinder_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output",
+      "http://127.0.0.1:8188/view?filename=refined-eruption_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output",
+      "http://127.0.0.1:8188/view?filename=refined-breath_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output"
+    ],
+    "outputs_by_node": {
+      "16": [
+        "http://127.0.0.1:8188/view?filename=refined-slash_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output"
+      ],
+      "26": [
+        "http://127.0.0.1:8188/view?filename=refined-breath_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output"
+      ],
+      "36": [
+        "http://127.0.0.1:8188/view?filename=refined-eruption_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output"
+      ],
+      "46": [
+        "http://127.0.0.1:8188/view?filename=refined-cinder_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output"
+      ]
+    },
+    "outputs_by_item": {},
+    "text_outputs": {},
+    "error": null,
+    "host": "127.0.0.1",
+    "port": 8188
+  },
+  "prompt_id": "fde1c326-7836-49e7-a3ff-6643c7809b05",
+  "out_dir": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\comfy\\outputs-refined",
+  "files": [
+    {
+      "url": "http://127.0.0.1:8188/view?filename=refined-slash_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output",
+      "path": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\comfy\\outputs-refined\\fde1c326_000.png",
+      "size": 274664
+    },
+    {
+      "url": "http://127.0.0.1:8188/view?filename=refined-cinder_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output",
+      "path": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\comfy\\outputs-refined\\fde1c326_001.png",
+      "size": 272566
+    },
+    {
+      "url": "http://127.0.0.1:8188/view?filename=refined-eruption_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output",
+      "path": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\comfy\\outputs-refined\\fde1c326_002.png",
+      "size": 296950
+    },
+    {
+      "url": "http://127.0.0.1:8188/view?filename=refined-breath_00001_.png&subfolder=emberfall-caldera-attacks-20261109&type=output",
+      "path": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\comfy\\outputs-refined\\fde1c326_003.png",
+      "size": 256440
+    }
+  ]
+}

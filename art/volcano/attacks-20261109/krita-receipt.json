@@ -1,0 +1,274 @@
+{
+  "assets": [
+    {
+      "name": "caldera-attack-paints",
+      "master": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\krita\\caldera-attack-paints.kra",
+      "png": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\krita\\caldera-attack-paints.png",
+      "layers": [
+        "Painted silhouette and material",
+        "Glowing fractures and airborne particles"
+      ],
+      "size": [
+        2048,
+        512
+      ],
+      "runtime_size": [
+        2048,
+        512
+      ],
+      "kra_sha256": "216e392ac7a9749ec19a0796ef02017969394e875511974d1fa90ed1aedcea14",
+      "png_sha256": "81d1f51f338a176ffb5b5c37e7b6ceb9b2b6b8485764c0710a5ccea6deca0d36",
+      "retained": true
+    }
+  ],
+  "roles": [
+    "slash",
+    "breath",
+    "eruption",
+    "cinder"
+  ],
+  "audio": false,
+  "status": "PASS",
+  "before": {
+    "version": "5.3.4 (git c5b23e3)",
+    "owned_documents": [
+      {
+        "name": "realm-treasure-chests",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+        "layers": [
+          "Contact shadows",
+          "Raised lids",
+          "Carved bodies and interiors",
+          "Wood grain, inlays and obsidian cracks",
+          "Closed lids",
+          "Fittings, locks, vines and runes",
+          "Unclaimed treasure"
+        ]
+      },
+      {
+        "name": "realm-treasure-chests",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+        "layers": [
+          "Contact shadows",
+          "Raised lids",
+          "Carved bodies and interiors",
+          "Wood grain, inlays and obsidian cracks",
+          "Closed lids",
+          "Fittings, locks, vines and runes",
+          "Unclaimed treasure"
+        ]
+      },
+      {
+        "name": "caldera-abyss-cliff",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-cliff.kra",
+        "layers": [
+          "Depth and reflected ash light",
+          "Broken basalt columns",
+          "Strata, pores and fissures"
+        ]
+      },
+      {
+        "name": "caldera-abyss-sky",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-sky.kra",
+        "layers": [
+          "Ash sky and distant furnace glow",
+          "Distant caldera ridges",
+          "Deep molten fissures",
+          "Layers of suspended ash"
+        ]
+      },
+      {
+        "name": "caldera-abyss-distance",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-distance.kra",
+        "layers": [
+          "Isolated pinnacles below the plateau"
+        ]
+      },
+      {
+        "name": "caldera-abyss-cliff",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-cliff.kra",
+        "layers": [
+          "Depth and reflected ash light",
+          "Broken basalt columns",
+          "Strata, pores and fissures"
+        ]
+      },
+      {
+        "name": "caldera-abyss-sky",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-sky.kra",
+        "layers": [
+          "Ash sky and distant furnace glow",
+          "Distant caldera ridges",
+          "Deep molten fissures",
+          "Layers of suspended ash"
+        ]
+      },
+      {
+        "name": "caldera-abyss-distance",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-distance.kra",
+        "layers": [
+          "Isolated pinnacles below the plateau"
+        ]
+      },
+      {
+        "name": "caldera-worn-basalt-trail",
+        "file": "C:\\AI2D\\sprites\\emberfall-caldera-road-20261108-v1\\caldera-worn-basalt-trail.kra",
+        "layers": [
+          "Compacted volcanic ash and fine grains",
+          "Rounded weathered basalt chips and slabs",
+          "Hairline fractures, pores and weathered edges",
+          "Scattered dark gravel and muted warm mineral flecks"
+        ]
+      },
+      {
+        "name": "remaining-inventory-items",
+        "file": "C:\\AI2D\\sprites\\emberfall-loot-20261109\\krita\\remaining-inventory-items.kra",
+        "layers": [
+          "Item bodies, cutouts and material gradients",
+          "Glass glints, engraving and material details"
+        ]
+      },
+      {
+        "name": "remaining-inventory-items",
+        "file": "C:\\AI2D\\sprites\\emberfall-loot-20261109\\krita-refinement\\remaining-inventory-items.kra",
+        "layers": [
+          "Item bodies, cutouts and material gradients",
+          "Glass glints, engraving and material details"
+        ]
+      },
+      {
+        "name": "eldrin-three-elements",
+        "file": "C:\\AI2D\\sprites\\emberfall-spells-20261109\\krita\\eldrin-three-elements.kra",
+        "layers": [
+          "Ember, faceted ice and storm plasma with transparent glow",
+          "Hot core, frost glints and electrical highlights"
+        ]
+      }
+    ]
+  },
+  "after": {
+    "version": "5.3.4 (git c5b23e3)",
+    "owned_documents": [
+      {
+        "name": "realm-treasure-chests",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+        "layers": [
+          "Contact shadows",
+          "Raised lids",
+          "Carved bodies and interiors",
+          "Wood grain, inlays and obsidian cracks",
+          "Closed lids",
+          "Fittings, locks, vines and runes",
+          "Unclaimed treasure"
+        ]
+      },
+      {
+        "name": "realm-treasure-chests",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
+        "layers": [
+          "Contact shadows",
+          "Raised lids",
+          "Carved bodies and interiors",
+          "Wood grain, inlays and obsidian cracks",
+          "Closed lids",
+          "Fittings, locks, vines and runes",
+          "Unclaimed treasure"
+        ]
+      },
+      {
+        "name": "caldera-abyss-cliff",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-cliff.kra",
+        "layers": [
+          "Depth and reflected ash light",
+          "Broken basalt columns",
+          "Strata, pores and fissures"
+        ]
+      },
+      {
+        "name": "caldera-abyss-sky",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-sky.kra",
+        "layers": [
+          "Ash sky and distant furnace glow",
+          "Distant caldera ridges",
+          "Deep molten fissures",
+          "Layers of suspended ash"
+        ]
+      },
+      {
+        "name": "caldera-abyss-distance",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\caldera-abyss-distance.kra",
+        "layers": [
+          "Isolated pinnacles below the plateau"
+        ]
+      },
+      {
+        "name": "caldera-abyss-cliff",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-cliff.kra",
+        "layers": [
+          "Depth and reflected ash light",
+          "Broken basalt columns",
+          "Strata, pores and fissures"
+        ]
+      },
+      {
+        "name": "caldera-abyss-sky",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-sky.kra",
+        "layers": [
+          "Ash sky and distant furnace glow",
+          "Distant caldera ridges",
+          "Deep molten fissures",
+          "Layers of suspended ash"
+        ]
+      },
+      {
+        "name": "caldera-abyss-distance",
+        "file": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v2\\caldera-abyss-distance.kra",
+        "layers": [
+          "Isolated pinnacles below the plateau"
+        ]
+      },
+      {
+        "name": "caldera-worn-basalt-trail",
+        "file": "C:\\AI2D\\sprites\\emberfall-caldera-road-20261108-v1\\caldera-worn-basalt-trail.kra",
+        "layers": [
+          "Compacted volcanic ash and fine grains",
+          "Rounded weathered basalt chips and slabs",
+          "Hairline fractures, pores and weathered edges",
+          "Scattered dark gravel and muted warm mineral flecks"
+        ]
+      },
+      {
+        "name": "remaining-inventory-items",
+        "file": "C:\\AI2D\\sprites\\emberfall-loot-20261109\\krita\\remaining-inventory-items.kra",
+        "layers": [
+          "Item bodies, cutouts and material gradients",
+          "Glass glints, engraving and material details"
+        ]
+      },
+      {
+        "name": "remaining-inventory-items",
+        "file": "C:\\AI2D\\sprites\\emberfall-loot-20261109\\krita-refinement\\remaining-inventory-items.kra",
+        "layers": [
+          "Item bodies, cutouts and material gradients",
+          "Glass glints, engraving and material details"
+        ]
+      },
+      {
+        "name": "eldrin-three-elements",
+        "file": "C:\\AI2D\\sprites\\emberfall-spells-20261109\\krita\\eldrin-three-elements.kra",
+        "layers": [
+          "Ember, faceted ice and storm plasma with transparent glow",
+          "Hot core, frost glints and electrical highlights"
+        ]
+      },
+      {
+        "name": "caldera-attack-paints",
+        "file": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\krita\\caldera-attack-paints.kra",
+        "layers": [
+          "Painted silhouette and material",
+          "Glowing fractures and airborne particles"
+        ]
+      }
+    ]
+  }
+}

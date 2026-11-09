@@ -1,5 +1,11 @@
 # Raport konfiguracji — 19.10.2026
 
+**09.11.2026 — ataki specjalne Kaldery:** własne warstwy Krita, cztery
+tekstury z drugiego przebiegu DreamShaper 8 w lokalnym ComfyUI i ruch 2D
+Blendera. Cztery ścieżki efektów, trzy gesty postaci, 12 różnych renderów
+podglądu i atlas 4 MiB. PASS: 514 kontroli gry, 109 klatek z ukrytych scen.
+[Źródła i odbiór](../volcano/attacks-20261109/README.md).
+
 **09.11.2026 — lekcje Eldrina:** po pierwszym bossie płatna nauka ognia,
 lodu i pioruna (600 / 1500 / 3000 złota). Własne 2D Krita i trzy pętle
 Synfig, 180 rzeczywistych klatek 60 Hz. Nagrane prawdziwe łuki i podmuch

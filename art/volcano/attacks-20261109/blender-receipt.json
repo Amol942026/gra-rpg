@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "program": "Blender 5.2.2 LTS",
+  "master": "C:\\AI2D\\sprites\\emberfall-caldera-attacks-20261109\\blender-delivery\\caldera-attack-motion.blend",
+  "master_sha256": "b9539b72a2bea35d27c14aa7581897c9682d527ace9ebe41cf45d533dfecf97f",
+  "motion_sha256": "6f6b01e81564c584a4eebef619d5855416b21dcb3108c0816199eb4a64eae12f",
+  "effect_tracks": 4,
+  "actor_tracks": 3,
+  "sample_hz": 60,
+  "renders": [
+    {
+      "role": "slash",
+      "frame": 8,
+      "path": "slash-08.png",
+      "sha256": "1a1a2ec4fec3946535116372a069db7095a2ef4249853eec854c0e431fb53646"
+    },
+    {
+      "role": "slash",
+      "frame": 26,
+      "path": "slash-26.png",
+      "sha256": "bcf56d8f606d253dcd3c74218c499d2b20d2649c86428fec727ca3ce4d55e6b0"
+    },
+    {
+      "role": "slash",
+      "frame": 48,
+      "path": "slash-48.png",
+      "sha256": "fcaa06834692b9de3b8de91a9c4065b6e17c06da325bd0e33b21022871011020"
+    },
+    {
+      "role": "breath",
+      "frame": 8,
+      "path": "breath-08.png",
+      "sha256": "9d55bbec8a3642967d3995b6edb22d7b3041a413d193f21445ab1c23aa71ba7b"
+    },
+    {
+      "role": "breath",
+      "frame": 26,
+      "path": "breath-26.png",
+      "sha256": "e96d5f8d291ef34f34d658a080d200e39c61e177bbcee4764f70c27d710836c6"
+    },
+    {
+      "role": "breath",
+      "frame": 48,
+      "path": "breath-48.png",
+      "sha256": "b4fc776e18ec78fec2b1fe17ad9e7dd9d66dc79cee6f9795908b13d047900ad8"
+    },
+    {
+      "role": "eruption",
+      "frame": 8,
+      "path": "eruption-08.png",
+      "sha256": "fc6d3d398b804573e4b9831cb35a157b427f27fb0543d29e5586b184e2c83b88"
+    },
+    {
+      "role": "eruption",
+      "frame": 26,
+      "path": "eruption-26.png",
+      "sha256": "3b6d7c0227e370fa1fdc8ecc4f602d1e0e7eb243de63afca0bfed0148c4376a7"
+    },
+    {
+      "role": "eruption",
+      "frame": 48,
+      "path": "eruption-48.png",
+      "sha256": "a5cd94a16cda43a796c9613c36f9a2cedfcc00efa47cf426d3b573bdf5f4c1d3"
+    },
+    {
+      "role": "cinder",
+      "frame": 8,
+      "path": "cinder-08.png",
+      "sha256": "b0ccb78bef841343698851b3aa9798de4c3656028cf36b5e1ea133674e38a70e"
+    },
+    {
+      "role": "cinder",
+      "frame": 26,
+      "path": "cinder-26.png",
+      "sha256": "b614b7d52c896a9caa50ba590a76c145127d682079a8c968aefbb2098fc6b99f"
+    },
+    {
+      "role": "cinder",
+      "frame": 48,
+      "path": "cinder-48.png",
+      "sha256": "3f0b27c3c2f1dd5e87960089386d146fe98b9afcedc9f0b92959cb7c3c3e2be0"
+    }
+  ],
+  "runtime_2d": true,
+  "audio": false
+}

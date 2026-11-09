@@ -255,7 +255,7 @@ Drugi boss, **Żywa Wydma**, czeka na **południowym wschodzie**. Jest dużą, a
 
 **Brama Eldrina w miejscu przybycia** pozwala wracać do wieży przez **E / LPM / PPM** z odległości do 2,8 pola. Zdrowie, mana, poziom, umiejętności i ekwipunek są zachowane. Ponowna podróż przywraca stan pustyni: martwe potwory, ciała i pozostawione przedmioty. Las zachowuje swój własny stan i grzyby; łup nie przenika między krainami ani piętrami.
 
-**Szybki test:** `Test_pustyni.bat` albo **F3 → Pustynia**. Lista ma teraz **19 miejsc**, w tym trzy punkty Kaldery Popiołu. Parametry: `--start desert`, `--start desert-oasis`, `--start desert-boss`; `--no-dev-kit` wyłącza dodatkowy zestaw. Zwykłe uruchomienie wciąż zaczyna się prologiem.
+**Szybki test** przez `Test_pustyni.bat` albo **F3 → Pustynia**. Lista ma **19 miejsc**, w tym trzy punkty Kaldery Popiołu. Bezpośredni start umożliwiają `--start desert`, `--start desert-oasis` i `--start desert-boss`.
 
 Cichy test `--desert-qa --no-audio` sprawdza faktyczne przyciski dialogowe, teleportację, powrót przez bramę, otwieranie ciała bossa, przeciąganie fragmentu i drugi powrót do Eldrina, grafiki GPU, wskazywanie oraz trzy skale i pełny ekran. `--desert-benchmark --no-audio` mierzy 900 klatek w pięciu obszarach pustyni. Raporty i galerie: `dist/qa-v33/`. Testy modelu: `tests/desert_tests.hpp`. Cała grafika powstaje z kodu; gra nie pobiera zasobów z sieci.
 
@@ -283,7 +283,7 @@ Każdy udany atak bohatera ma **5% szansy na trafienie krytyczne**: zwykły zama
 
 Zwykłe obrażenia mają większe jasne cyfry i ciemny obrys. Krytyk pokazuje **duże złote cyfry, napis KRYTYK! i ciemne tło** przez dłuższy czas. Wyniki unoszą się ponad sylwetką danego przeciwnika, również dużego Strażnika.
 
-**Leczenie** można poznać za **1 punkt umiejętności** po rozdaniu statystyk podczas awansu. **V** lub zielony kafelek **LECZENIE** w HUD przywraca **30 HP za 20 many**, do maksymalnego zdrowia. Działa z każdą bronią i w wieży. Zielone pierścienie i krzyżyki pokazują efekt, a napis podaje rzeczywiście odzyskane HP. Przy pełnym zdrowiu lub niewystarczającej manie akcja nie pobiera kosztu. Odnowienie: **1 s**. Leczenie ma jedną rangę; kolejne punkty nadal można wydawać na dwie umiejętności broni. Leczenie trzeba poznać za punkt po awansie, również w nowej sesji developerskiej.
+**Leczenie** można poznać za **1 punkt umiejętności** po rozdaniu statystyk podczas awansu. **V** lub zielony kafelek **LECZENIE** w HUD przywraca **30 HP za 20 many**, do maksymalnego zdrowia. Działa z każdą bronią i w wieży. Zielone pierścienie i krzyżyki pokazują efekt, a napis podaje rzeczywiście odzyskane HP. Przy pełnym zdrowiu lub niewystarczającej manie akcja nie pobiera kosztu. Odnowienie: **1 s**. Leczenie ma jedną rangę; kolejne punkty nadal można wydawać na dwie umiejętności broni. W sesji deweloperskiej Leczenie jest od razu dostępne.
 
 Cichy test `--combat-qa --no-audio` sprawdza oba etapy awansu, naukę Leczenia, używanie z mieczem i łukiem oraz w wieży, koszty i wszystkie pięć rodzajów krytycznych ataków. Menu i efekty są renderowane w skalach 80%, 100% i 120%; raporty oraz podglądy: `dist/qa-v30/`. Testy modelu: `tests/critical_healing_tests.hpp`.
 
@@ -292,13 +292,13 @@ Cichy test `--combat-qa --no-audio` sprawdza oba etapy awansu, naukę Leczenia, 
 Naciśnij **F3** albo kliknij **DEV · F3**. Wybór działa także podczas prologu, scenki powrotu, pauzy, rozdawania punktów i po śmierci. Dostępnych jest **19 miejsc startu**: osiem punktów lasu, pięć pięter wieży, trzy punkty pustyni i trzy Kaldery Popiołu. Zaznacz miejsce, następnie wybierz:
 
 - **NOWA SESJA TESTOWA** — resetuje wyprawę, postać i przeciwników, pomija prolog i uruchamia wybraną lokację. ENTER robi to samo.
-- **PRZENIEŚ OBECNĄ POSTAĆ** — zachowuje plecak, założony sprzęt, poziom, XP, statystyki i istniejące rangi. Pozostawione przedmioty i ciała zostają w swojej lokacji; można wrócić po nie.
+- **PRZENIEŚ OBECNĄ POSTAĆ** — zachowuje założony sprzęt, statystyki, zdobyte punkty, wyższe rangi i postęp walk. Pozostawione przedmioty i ciała zostają w swojej lokacji.
 
 Każdy start odnawia HP i manę oraz usuwa stary naciąg, unik, pociski, efekty i otwarte menu łupu. Bohater pojawia się w najbliższym bezpiecznym miejscu, poza przeszkodami i ciałami żywych przeciwników. Wieża jest w sesji testowej odblokowana bez walki z bossem; powrót do lasu z zachowaną postacią zachowuje również postęp zadania. **Nowa sesja przy bossie** pozwala ponownie testować zabicie Strażnika, łup i powrót do Eldrina.
 
-Opcjonalny **ZESTAW TESTOWY** uzupełnia do **100 strzał, po 15 borowików i esencji lasu oraz po 10 mikstur zdrowia i many**; nie przyznaje umiejętności. Rangi zdobywa się przez rozdanie punktów po awansie; przeniesienie obecnej postaci zachowuje już poznane umiejętności. Zestaw nie nadpisuje przedmiotów. Powtórne przenoszenie nie powiększa kompletnego zestawu. Przy pełnym plecaku wyświetla informację o ograniczeniu zestawu. Odznacz opcję, aby testować bez dodatkowych przedmiotów.
+Każda sesja DEV ustawia **poziom 100** i odblokowuje wszystkie umiejętności oraz czary. Start, przeniesienie i restart po śmierci uzupełniają plecak do **100 strzał, 50 mikstur zdrowia i 50 mikstur many**. Zużycie działa podczas walki. Jeśli zabraknie miejsca, przedmioty z plecaka zostają odłożone obok miejsca przybycia.
 
-**ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu bez resetowania wyprawy. Otwarta lista zatrzymuje symulację. Po uruchomieniu testu HUD pokazuje **SESJA TESTOWA**. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. **NOWA ZWYKŁA GRA — PROLOG** kończy tryb testowy i resetuje wyprawę do normalnego startu. Zwykłe uruchomienie zaczyna się menu głównym; Nowa gra uruchamia prolog bez zestawu testowego.
+**ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu. Otwarta lista zatrzymuje symulację. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. Prolog otwiera **Nowa gra** w głównym menu.
 
 W folderze projektu są poniższe launchery. Osobna paczka
 **Emberfall-DEV-Windows-x64.zip** zawiera menu DEV oraz skróty do kaldery i Varkhora:
@@ -310,10 +310,9 @@ W folderze projektu są poniższe launchery. Osobna paczka
 - `Test_Varkhora.bat` — zaczyna przy trzecim bossie.
 
 Prawa kolumna menu F3 obejmuje Bramę Popiołu, Obsydianowe Kuźnie i Varkhora.
-Przeniesienie postaci zachowuje wyposażenie, poziom, punkty i postęp walki,
-czyszcząc aktywne pociski, erupcje i przewrócenie. Start DEV w kalderze
+Przeniesienie postaci usuwa aktywne pociski, erupcje i przewrócenie. Start DEV w kalderze
 przygotowuje testowy postęp wcześniejszych aktów, aby działał powrót przez
-Eldrina; nie przyznaje rang umiejętności. Testy i instrukcje paczki:
+Eldrina. Testy i instrukcje paczki są opisane w
 [art/volcano/developer/README.md](art/volcano/developer/README.md).
 
 Bezpośredni start w projekcie (Windows CMD). W wypakowanej paczce DEV użyj
@@ -322,13 +321,13 @@ Bezpośredni start w projekcie (Windows CMD). W wypakowanej paczce DEV użyj
 ```bat
 dist\Emberfall.exe --start tower-3
 dist\Emberfall.exe --start tower-5
-dist\Emberfall.exe --start ruins --no-dev-kit
+dist\Emberfall.exe --start ruins
 Test_kaldery.bat
-Test_Varkhora.bat --no-dev-kit
+Test_Varkhora.bat
 dist\Emberfall.exe --dev
 ```
 
-Identyfikatory lokacji: `forest`, `ruins` (także `boss`), `birches`, `grove`, `heart`, `trail`, `wolves`, `spiders`, `tower-1` do `tower-5` (`tower` oznacza pierwsze piętro). Obsługiwane jest również `--start=tower-3`. Błędna lub brakująca lokacja otwiera listę z komunikatem. `--no-dev-kit` wyłącza domyślny zestaw testowy. Pozostałe parametry, np. `--windowed`, `--opengl`, `--no-audio`, nadal działają.
+Identyfikatory lokacji obejmują `forest`, `ruins` (także `boss`), `birches`, `grove`, `heart`, `trail`, `wolves`, `spiders` oraz `tower-1` do `tower-5` (`tower` oznacza pierwsze piętro). Obsługiwane jest również `--start=tower-3`. Błędna lub brakująca lokacja otwiera listę z komunikatem.
 
 `--dev-qa --no-audio` sprawdza rzeczywiste menu i jego interakcje; raport i obrazy trafiają do `dist/qa-v29/`. `--dev-smoke --no-audio` kończy uruchomienie testowe po 180 klatkach, zapisuje faktyczny obraz i stan startu w `dist/dev-startup-v29.txt`. Testy mechaniki i parametrów są w `tests/developer_tests.hpp`.
 

@@ -227,6 +227,7 @@ struct Game {
   say("Piaskowe więzienie! Ruch i ataki zablokowane na 3 sekundy.");
  }
  int level=1;std::int64_t xp=0;int kills=0,nextGround=1;bool bossDead=false;
+ bool developerSession=false; // Runtime only. A test session keeps its starting level.
  int merchantArrows=MerchantArrowCapacity;
  WorldLocation location=WorldLocation::Forest;DawnQuest dawnQuest=DawnQuest::Seeking;
  int towerFloor=0,towerRuneMask=0;std::int64_t gold=0;
@@ -459,7 +460,8 @@ struct Game {
   cinders.erase(std::remove_if(cinders.begin(),cinders.end(),[&](const auto& b){return b.owner==e.id;}),cinders.end());
   fissures.erase(std::remove_if(fissures.begin(),fissures.end(),[&](const auto& b){return b.owner==e.id;}),fissures.end());
   boulders.erase(std::remove_if(boulders.begin(),boulders.end(),[&](const Boulder& b){return b.owner==e.id;}),boulders.end());
-  sound(enemyBoss(e.type)?Cue::Victory:Cue::EnemyFall,e.pos);kills++;xp+=enemyInfo(e.type).experience;
+  sound(enemyBoss(e.type)?Cue::Victory:Cue::EnemyFall,e.pos);kills++;
+  if(!developerSession)xp+=enemyInfo(e.type).experience;
   e.loot=rollEnemyLoot(e.type,rng);
   if(e.type==3){bossDead=true;say("Kamienny Strażnik pokonany! PPM na ciele: łup i część Serca Świtu.");}
   else if(e.type==DesertBossType){if(!desertBossDead)merchantArrows=MerchantArrowCapacity;desertBossDead=true;say("Żywa Wydma rozsypała się! PPM: łup i druga część Serca Świtu.");}

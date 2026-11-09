@@ -22,11 +22,14 @@ F3 otwiera wybor lokacji. Prawa kolumna: KALDERA POPIOLU.
 
 Test_kaldery.bat i Test_Varkhora.bat uruchamiaja wybrany punkt od razu.
 NOWA SESJA TESTOWA tworzy nowa wyprawe i zywych bossow.
-PRZENIES OBECNA POSTAC zachowuje ekwipunek, poziom, punkty i postep walk.
+PRZENIES OBECNA POSTAC zachowuje sprzet, statystyki, zdobyte punkty i postep walk.
+W obu opcjach postac ma poziom 100 i zna wszystkie umiejetnosci oraz czary.
+Plecak jest uzupelniany do 100 strzal i po 50 mikstur zdrowia oraz many.
+Gdy plecak jest pelny, przedmioty potrzebne do zwolnienia miejsca trafiaja na ziemie obok postaci.
 Aktywne pociski, erupcje i przewrocenie sa czyszczone podczas teleportu.
 Start DEV w kalderze ustawia testowy postep drugiego aktu,
-aby mozna bylo wracac tam takze przez Eldrina. Nie przyznaje rang umiejetnosci.
-ZESTAW TESTOWY jest opcjonalny. F3 wraca do wyboru lokacji.
+aby mozna bylo wracac tam takze przez Eldrina.
+F3 wraca do wyboru lokacji.
 Folder assets musi pozostac obok Emberfall.exe.
 '@
 [IO.File]::WriteAllText((Join-Path $folder 'JAK_URUCHOMIC_DEV.txt'),$instructions,[Text.UTF8Encoding]::new($true))
