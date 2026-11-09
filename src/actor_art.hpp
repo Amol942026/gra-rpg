@@ -8,7 +8,9 @@
 #include "volcano_actors.hpp"
 #include "hero_paint.hpp"
 #include "creature_paint.hpp"
+#include "bandit_gait.hpp"
 #include "generated/creature_motion_data.hpp"
+#include "generated/forest_motion_data.hpp"
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 
 // Small geometric character rigs: all parts turn in depth, including the face,
@@ -346,7 +348,7 @@ public:
         }();
         return sphere;
     }
-    void rounded(P3 center,P3 size,Color col,int paintCell=-1,bool paintBack=false){
+    void rounded(P3 center,P3 size,Color col,int paintCell=-1,bool paintBack=false,int reverseCell=-1,bool wrapPaint=false){
         bool savedClosed=closedShadow;closedShadow=true;
         auto point=[&](P3 p){return center+P3{p.r*size.r*.5f,p.f*size.f*.5f,p.z*size.z*.5f};};
         auto surface=[&](const auto& sphere){
@@ -368,24 +370,34 @@ public:
                 if(smoothSurfaces&&faces.size()!=before){auto& f=faces.back();f.smooth=true;f.vertexColors={colors[j][i],colors[j][n],colors[j+1][n],colors[j+1][i]};}
                 // Paint the original front skin, using its exact vertices.
                 // No second shell, depth offset or protruding rectangular edge.
-                bool creature=paintCell>=100;
-                unsigned paintTexture=creature?creature_paint::atlas.id:hero_paint::atlas.id;
-                if(paintCell>=0&&paintTexture&&(creature||normal.f*(paintBack?-1:1)>.001f)&&faces.size()!=before){
+                bool reverse=reverseCell>=0&&normal.f<0;
+                int cell=reverse?reverseCell:paintCell;
+                bool back=reverse||paintBack;
+                bool creature=cell>=100;
+                unsigned paintTexture=creature?(creature_paint::available(cell-100)?creature_paint::atlas.id:0):hero_paint::atlas.id;
+                if(cell>=0&&paintTexture&&(creature||normal.f*(back?-1:1)>.001f)&&faces.size()!=before){
                     // Features and hair paint are transparent. Retain the
                     // original skin/hair under every painted pixel.
                     faces.push_back(faces.back());
                     auto& f=faces.back();f.textureId=paintTexture;
                     const P3 unit[]={sphere[j][i],sphere[j][n],sphere[j+1][n],sphere[j+1][i]};
                     for(int k=0;k<4;k++){
-                        float u=unit[k].r*(paintBack?-1:1),v=unit[k].z;
-                        if(creature){
+                        float u=unit[k].r*(back?-1:1),v=unit[k].z;
+                        if(wrapPaint){
+                            // Continuous coordinates around the rounded body.
+                            // Keep the single wrap seam on the rear of the rig.
+                            size_t sides=sphere[0].size();
+                            float column=float((i+sides/4)%sides)+(k==1||k==2?1:0);
+                            float row=float(j)+(k>=2?1:0);
+                            u=2*column/sides-1;v=2*row/(sphere.size()-1)-1;
+                        }else if(creature){
                             // Project material marks onto the dominant curved
                             // surface, including flanks and dorsal fur/scales.
                             if(std::abs(normal.z)>std::max(std::abs(normal.r),std::abs(normal.f))){u=unit[k].r;v=unit[k].f;}
                             else if(std::abs(normal.r)>std::abs(normal.f)){u=unit[k].f;v=unit[k].z;}
                         }
                         u=std::clamp((u+1)*.5f,.00390625f,.99609375f);v=std::clamp((1-v)*.5f,.00390625f,.99609375f);
-                        f.uv[k]=creature?creature_paint::uv(paintCell-100,u,v):hero_paint::uv(paintCell,u,v);
+                        f.uv[k]=creature?creature_paint::uv(cell-100,u,v):hero_paint::uv(cell,u,v);
                         const Color light[]={paintColors[j][i],paintColors[j][n],paintColors[j+1][n],paintColors[j+1][i]};
                         f.vertexColors[k]=light[k];
                     }

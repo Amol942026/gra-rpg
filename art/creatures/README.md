@@ -1,5 +1,11 @@
 # Bestiariusz — materiały Krita i ruch Synfig
 
+Aktualizacja z 10.11.2026. [Szlam, wilk, szkielet i drzewiec](forest-20261110/README.md)
+mają nowe materiały, sylwetki i ruch.
+
+Aktualizacja z 10.11.2026. [Leśny rozbójnik](bandit-20261110/README.md)
+ma nową grafikę i wyprostowaną pozycję spoczynkową.
+
 Aktualizacja z 05.11.2026. Nowe materiały czterech bestii Morza Piasków przygotowane w ComfyUI są opisane w [Bestiach Morza Piasków](desert-comfy/README.md).
 
 Zakres: 12 istniejących gatunków lasu i pustyni. Żywe postacie mają obłe

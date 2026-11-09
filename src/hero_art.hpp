@@ -19,16 +19,19 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     const auto& held=appearance[0];const auto& headwear=appearance[1];const auto& ward=appearance[2];
     const auto& armor=appearance[3];const auto& boots=appearance[4];const auto& jewel=appearance[5];
     auto paint=[&](unsigned color){return flash?Text:equipment_art::color(color);};
-    const bool plated=armor.shape==Kind::Armor,cape=armor.shape==Kind::Cloak||!appearance.explicitGear;
+    const bool travelCoat=armor.value.kind==Kind::Armor;
+    const bool plated=armor.shape==Kind::Armor&&!travelCoat;
+    const bool cape=travelCoat||armor.shape==Kind::Cloak||!appearance.explicitGear;
     const bool fur=armor.value.kind==Kind::WolfCloak||armor.value.kind==Kind::Cloak||armor.value.kind==Kind::BoarArmor;
     const bool robe=armor.value.kind==Kind::SandRobe;
-    const Color skin=flash?Text:rgb(213,177,139),skinLight=flash?Text:rgb(237,206,172);
+    const Color skin=flash?Text:rgb(202,158,121),skinLight=flash?Text:rgb(227,186,148);
     const Color metal=plated?paint(armor.paint.primary):paint(0x657f79),edge=plated?shade(metal,1.3f):paint(0x9bb5aa);
-    const Color cloth=armor.present()?paint(armor.shape==Kind::Cloak?armor.paint.primary:armor.paint.secondary):paint(0x495e5a),clothLight=shade(cloth,1.25f);
+    const Color cloth=travelCoat?paint(0x354c62):armor.present()?paint(armor.shape==Kind::Cloak?armor.paint.primary:armor.paint.secondary):paint(0x454c55);
+    const Color mantle=travelCoat?paint(0x326e70):cloth,clothLight=shade(cloth,1.25f);
     const Color trim=armor.present()?paint(armor.paint.trim):paint(0xa49370);
     const Color weaponMetal=held.present()?paint(held.paint.primary):edge,weaponTrim=held.present()?paint(held.paint.trim):Gold;
     const Color weaponGrip=held.present()?paint(held.paint.secondary):paint(0x60452e);
-    const Color leather=flash?Text:rgb(95,65,45),pants=flash?Text:rgb(60,74,66);
+    const Color leather=paint(0x744b38),pants=paint(0x5d5746);
     bool archer=weapon==Kind::Bow;float drawCharge=std::max(0.f,bowDraw);
     float stowPhase=weapon==Kind::Sword&&!striking?(rolling?1.f:state.motionInitialized?state.swordStow:std::clamp(run,0.f,1.f)):0;
     float moving=state.motionInitialized?state.moveBlend:(state.moving?1.f:0.f);
@@ -78,19 +81,24 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     // Cloth hangs in a curved sheet; its scalloped edge and folds move with
     // the walking cycle, while the roll rotates the entire sheet with the body.
     auto capePoint=[&](float u,float down){
-        float width=12+6*down,r=(u*2-1)*width;
-        float fold=std::cos(u*5*PI)*(.4f+down*1.2f);
-        float sway=std::sin(cycle-down*2+u*3)*std::abs(stride)*down*(1.7f+run*1.3f);
-        return P3{r+sway+clothMotion.capeSway*.32f*down*down,-10-down*(3+run*9)-fold-clothMotion.capeLift*.4f*down,58+lift-down*(45-run*7-tuck*15)+std::sin(u*4*PI)*down*1.2f+clothMotion.capeLift*.18f*down};
+        float r=(u*2-1)*(12+down*(travelCoat?4:6));
+        float tip=down*down,fold=std::cos(u*5*PI)*(.55f+tip*1.8f);
+        float sway=std::sin(cycle-down*2+u*3)*std::abs(stride)*tip*(1.3f+run);
+        float length=travelCoat?34.f:45.f;
+        return P3{r+sway+clothMotion.capeSway*.44f*tip,
+                  -10-down*(3+run*9)-fold-clothMotion.capeLift*.50f*tip,
+                  58+lift-down*(length-run*7-tuck*13)+std::sin(u*4*PI)*tip*1.5f+clothMotion.capeLift*.25f*tip};
     };
-    if(cape){for(int row=0;row<7;row++)for(int col=0;col<12;col++){
-        float a=col/12.f,b=(col+1)/12.f,top=row/7.f,bottom=(row+1)/7.f;
-        P3 p=capePoint(a,top),q=capePoint(b,top),r=capePoint(b,bottom),s=capePoint(a,bottom);
-        float light=.77f+.22f*std::cos((a+b)*2.5f*PI);
-        rig.face(p,q,r,s,cloth,light);rig.face(s,r,q,p,cloth,light*.85f);
-    }
-    for(int i=0;i<24;i++)rig.tapered(capePoint(i/24.f,1),capePoint((i+1)/24.f,1),.65f,.65f,trim);
-    for(float side:{0.f,1.f})for(int i=0;i<12;i++)rig.tapered(capePoint(side,i/12.f),capePoint(side,(i+1)/12.f),.7f,.7f,clothLight);
+    if(cape){
+        for(int row=0;row<7;row++)for(int col=0;col<12;col++){
+            float a=col/12.f,b=(col+1)/12.f,top=row/7.f,bottom=(row+1)/7.f;
+            P3 p=capePoint(a,top),q=capePoint(b,top),r=capePoint(b,bottom),s=capePoint(a,bottom);
+            float light=.86f+.16f*std::cos((a+b)*2.5f*PI);
+            rig.face(p,q,r,s,mantle,light);rig.face(s,r,q,p,mantle,light*.85f);
+            if(!flash)rig.decal(p,q,r,s,7,a,top,b,bottom,shade(mantle,light),true);
+        }
+        for(int i=0;i<18;i++)rig.tapered(capePoint(i/18.f,1),capePoint((i+1)/18.f,1),.85f,.85f,trim);
+        for(float side:{0.f,1.f})for(int i=0;i<8;i++)rig.tapered(capePoint(side,i/8.f),capePoint(side,(i+1)/8.f),.85f,.85f,shade(mantle,1.3f));
     }
     for(int side=0;side<2;side++){
         int thigh=side?hero_motion::data::ThighR:hero_motion::data::ThighL;
@@ -99,27 +107,51 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         P3 hip=rest(thigh),knee=rest(shin),foot=rest(ankle);
         rig.setBone(thigh);
         rig.tapered(knee,hip,8,9,pants,1.15f);rig.rounded(knee,{8,8,9},pants);
+        if(travelCoat){
+            // The two coat panels follow their thighs, clearing the knees and
+            // scabbard as the feet trade places.
+            float sign=side?1.f:-1.f;
+            auto hem=[&](float u,float down){
+                float x=hip.r+(u-.5f)*(10+2*down)+sign*down*1.1f;
+                return P3{x,7.8f+down*1.4f-std::abs(u-.5f)*2,34-down*(14+sign*(u-.5f)*3)};
+            };
+            for(int row=0;row<3;row++)for(int col=0;col<4;col++){
+                float u=col/4.f,v=row/3.f,uu=(col+1)/4.f,vv=(row+1)/3.f;
+                P3 a=hem(u,v),b=hem(uu,v),c=hem(uu,vv),d=hem(u,vv);
+                rig.face(a,b,c,d,cloth,.93f);rig.face(d,c,b,a,cloth,.65f);
+                if(!flash)rig.decal(a,b,c,d,8,u,v,uu,vv,clothLight);
+            }
+            for(int i=0;i<4;i++)rig.tapered(hem(i/4.f,1),hem((i+1)/4.f,1),.7f,.7f,trim);
+        }
         Color bootColor=boots.present()?paint(boots.paint.primary):pants;
         Color bootTrim=boots.present()?paint(boots.paint.trim):leather;
         rig.setBone(shin);rig.tapered(foot,knee,7.5f,8,boots.present()?bootColor:pants,.92f);
         if(boots.present())rig.rounded(knee+P3{0,3,0},{7,4,8},bootTrim);
         if(boots.present()){
-            panel({foot.r,4.6f,foot.z+11},7.5f,15,5,5,11,bootTrim);
+            panel({foot.r,4.6f,foot.z+11},7.5f,15,5,5,11,shade(bootColor,1.25f));
             gearInlay(rig,boots,foot+P3{0,4,12},6,9);
             if(boots.value.kind==Kind::CobraBoots)for(int i=0;i<3;i++)for(float s:{-1.f,1.f})rig.tapered(foot+P3{0,4.8f,7+i*4.f},foot+P3{s*3.6f,4,9+i*4.f},.8f,.6f,bootTrim);
             if(boots.value.kind==Kind::BanditBoots)for(int i=0;i<3;i++)rig.rounded(foot+P3{0,0,6+i*5.f},{9,9,1.5f},paint(boots.paint.secondary));
         }
         rig.setBone(ankle);
-        rig.rounded(foot+P3{0,3,-1},{10,17,8},boots.present()?bootColor:leather);
+        rig.rounded(foot+P3{0,3,-1},{10,16,8},boots.present()?bootColor:leather);
         rig.rounded(foot+P3{0,1,4},{9,10,9},boots.present()?bootColor:leather);
         rig.rounded(foot+P3{0,5,-3},{10,14,2},rgb(37,32,28));
+        if(!boots.present()){
+            rig.rounded(foot+P3{0,0,6},{8.5f,10,4},shade(leather,.75f));
+            if(travelCoat){
+                rig.setBone(shin);
+                rig.tapered(foot+P3{0,0,1},foot+P3{0,0,9},8,7.5f,leather,1.1f);
+                panel({foot.r,4.6f,foot.z+5},6,7,5,5,6.5f,shade(leather,1.3f));
+            }
+        }
         if(boots.present())rig.tapered(foot+P3{-4,2,5},foot+P3{4,2,5},1.1f,1.1f,bootTrim);
     }
     rig.setBone(hero_motion::data::Pelvis);
     rig.rounded({0,0,31+lift},{24,17,15},cloth);
     rig.setBone(hero_motion::data::Spine);
     rig.rounded({0,0,46+lift},plated?P3{27,18,28}:P3{25,17,27},plated?metal:cloth);
-    if(!plated){panel({0,8.6f,46},23,25,3,12.5f,14,clothLight);panel({0,-8.6f,46},23,25,3,12.5f,14,cloth,true);}
+    if(!plated){panel({0,8.6f,46},23,25,3,12.5f,14,clothLight);panel({0,-8.6f,46},23,25,3,12.5f,14,clothLight,true);}
     // Curved breastplate: raised rim, overlapping lower plates and a sun clasp.
     if(plated){for(float side:{-1.f,1.f})for(int j=0;j<8;j++){
         float z=36+j*2.5f,zz=z+2.5f,r=side*(10.5f-std::abs(z-46)*.15f),rr=side*(10.5f-std::abs(zz-46)*.15f);
@@ -140,8 +172,14 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     rig.rounded({0,0,32+lift},{25,18,4},leather);
     rig.rounded({0,9,32+lift},{5,2,4},Gold);rig.rounded({0,10,32+lift},{2.8f,1,2},leather);
     rig.setBone(hero_motion::data::Spine);
-    rig.tapered({-9,8,54+lift},{9,8,36+lift},2.5f,2,leather);
-    rig.rounded({0,9.4f,49+lift},{5,2,6},Gold);rig.rounded({0,10.5f,49+lift},{2,1,3},cloth);
+    rig.tapered({-9,8,54+lift},{9,8,36+lift},travelCoat?3.3f:2.5f,2,leather);
+    P3 clasp=travelCoat?P3{-2,10.3f,50}:P3{0,9.4f,49};
+    rig.rounded(clasp,{travelCoat?7.f:5.f,2,travelCoat?7.f:6.f},trim);
+    rig.rounded(clasp+P3{0,1.2f,0},{3.2f,1,3.2f},travelCoat?paint(0x263b45):cloth);
+    if(travelCoat)for(int i=0;i<4;i++){
+        P3 ray=i%2?P3{0,0,i==1?1.f:-1.f}:P3{i==0?1.f:-1.f,0,0};
+        rig.tapered(clasp+P3{0,1.8f,0}+ray*1.25f,clasp+P3{0,1.5f,0}+ray*2.9f,.8f,.65f,trim);
+    }
     for(float side:{-1.f,1.f}){
         rig.rounded({side*12,-1,29+lift},{7,9,9},leather);
         rig.rounded({side*12,3.5f,31+lift},{6,2,3},shade(leather,1.25f));
@@ -151,8 +189,15 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     rig.rounded({0,0,61+lift},{10,10,10},skin);
     // A softer collar and two shoulder plates attach to rounded upper arms.
     rig.setBone(hero_motion::data::Spine);
-    rig.rounded({0,-1,57+lift},{28,18,8},cloth);
-    if(fur)for(int i=0;i<9;i++)rig.rounded({-12+i*3.f,-1,57-std::abs(i-4)*.65f},{6,21,7},paint(armor.value.kind==Kind::BoarArmor?0xbfa782:0xb2bdb0));
+    rig.rounded({0,-1,57+lift},{26,18,7},mantle);
+    if(travelCoat)for(float side:{-1.f,1.f}){
+        rig.tapered({side*5,-1,60},{side*8,7,54},4.2f,3,shade(mantle,1.2f));
+        rig.tapered({side*8,7,54},{side*2,9,51},3.2f,2.4f,mantle);
+    }
+    if(fur)for(int i=0;i<5;i++){
+        Color furTone=paint(armor.value.kind==Kind::BoarArmor?0xbfa782:0xb2bdb0);
+        rig.rounded({-11+i*5.5f,-1,57-std::abs(i-2)*1.25f},{8,19,5.5f},shade(furTone,i%2?.85f:.98f));
+    }
     if(armor.value.kind==Kind::BoarArmor)for(float side:{-1.f,1.f})rig.tapered({side*13,3,52},{side*16,2,60},3,1,paint(armor.paint.accent));
     if(jewel.shape==Kind::Amulet){
         Color chain=paint(jewel.paint.trim);
@@ -192,10 +237,15 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         rig.setBone(upper);
         rig.tapered(elbow,shoulder,8,9,cloth);
         rig.rounded(shoulder,plated?P3{13,17,10}:P3{11,14,8},plated?metal:cloth);
+        if(travelCoat){
+            P3 pauldron=shoulder+P3{side*.7f,.4f,1.6f};
+            rig.rounded(pauldron,{12.2f,16,7.2f},paint(0x995d36),flash?-1:6);
+            rig.rounded(pauldron+P3{side*.25f,0,-3.1f},{11.8f,14.7f,2.2f},trim);
+        }
         if(plated)rig.rounded(shoulder+P3{0,5,1},{11,5,3},edge);
         if(armor.value.kind==Kind::GuardianArmor)rig.rounded(shoulder+P3{side*2,-1,3},{14,16,7},paint(armor.paint.secondary));
         rig.setBone(fore);
-        rig.tapered(hand,elbow,6,7,skin,1.15f);
+        rig.tapered(hand,elbow,6,7,cloth,1.15f);
         rig.rounded(elbow,{8,9,8},plated?metal:cloth);
         P3 cuff=hand+(elbow-hand)*.42f;
         rig.rounded(cuff,{7.2f,8.2f,9},leather);
@@ -282,9 +332,9 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     }
     rig.setBone(hero_motion::data::Head);
     float head=70+lift;
-    rig.rounded({0,0,head},{18,17,21},skin,flash?-1:0);
+    rig.rounded({0,0,head},{17,16,20},skin,flash?-1:0);
     for(float side:{-1.f,1.f}){
-        rig.rounded({side*9,0,head},{3.5f,4,6},skin);
+        rig.rounded({side*8.2f,-.1f,head-.8f},{2.8f,3.5f,5.3f},skin);
         if(!hero_paint::atlas.id){
         rig.rounded({side*4,7.7f,head+1.6f},{3.2f,1.6f,1.7f},rgb(235,229,208));
         rig.rounded({side*4,8.6f,head+1.6f},{1.4f,1,1.5f},Ink);
@@ -298,8 +348,13 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     rig.rounded({0,6.5f,head-8},{9,3,2.5f},shade(skin,.82f));
     }
     Color hood=helmet?paint(headwear.paint.primary):flash?Text:hero_paint::HairColor;
-    rig.rounded({0,-3,head+6},{22,19,15},hood,helmet||flash?-1:1);
-    rig.rounded({0,-6,head},{21,11,23},hood,helmet||flash?-1:2,true);
+    if(helmet){
+        rig.rounded({0,-3,head+6},{22,19,15},hood);
+        rig.rounded({0,-6,head},{21,11,23},hood);
+    }else{
+        rig.rounded({-.85f,-3.45f,head+4.2f},{19.5f,18,17.6f},hood,flash?-1:1,false,flash?-1:2);
+        rig.rounded({-5.4f,3.6f,head+6.4f},{6.8f,8.1f,5.4f},hood,flash?-1:1);
+    }
     for(float side:{-1.f,1.f}){
         P3 a{side*8,6,head+8},b{side*10,4,head-5};
         if(helmet)rig.tapered(a,b,.8f,.8f,paint(headwear.paint.trim));

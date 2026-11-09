@@ -1,5 +1,36 @@
 # Raport konfiguracji — 19.10.2026
 
+**10.11.2026 — cztery gatunki leśnego bestiariusza.** Osobne projekty FLUX
+i 13 warstw Krity, ciągłe mapowanie nowych materiałów i ruch z 444 klatek
+Synfig. PASS w 1189 kontrolach renderera i 345 804 kontrolach logiki.
+[Źródła i odbiór](../creatures/forest-20261110/README.md).
+
+**10.11.2026 — leśni rozbójnicy.** Wyprostowana poza spoczynkowa,
+skórzana kurta i bordowy kaptur z lokalnego FLUX.1 Schnell oraz Krity.
+Cztery klipy Synfig i 192 sprawdzone klatki. PASS w 323 kontrolach
+renderera, wskazywania kursorem i eksportu ciał oraz w 345 308 kontrolach
+logiki i animacji. [Źródła i wyniki](../creatures/bandit-20261110/README.md).
+
+**09.11.2026 — nowy wygląd Wędrowca.** FLUX.1 Schnell i SDXL, 12 warstw
+Krity oraz sześć klipów ruchu tkaniny z projektów Synfig, sprawdzonych na
+354 klatkach. Atlas 512 × 384, mocowania i bazowe czasy ruchu z istniejącego
+rigu. PASS: 452 kontrole renderera, 594 wyposażenia, 340 709 logiki i animacji
+oraz 19 047 zapisu. Obie paczki po wypakowaniu przeszły po 180 klatek,
+ukryte i bez dźwięku. [Źródła i odbiór](../hero/wanderer-20261109/README.md).
+
+**09.11.2026 — lokalne modele AI:** Piper TTS, ACE-Step 1.5, SDXL,
+FLUX.1 Schnell, AnimateDiff, AudioLDM 2 i TangoFlux przeszły próby
+generowania. ComfyUI działa w trybie offline i low VRAM, generatory
+efektów mają osobne środowisko Pythona. Własna LoRA odłożona.
+[Konfiguracja i wyniki prób](AI_SUITE_SETUP.md).
+
+**09.11.2026 — ComfyUI i Krita MCP:** trzy nowe modele w katalogu
+współdzielonym, sumy wydawców sprawdzone i trzy renderowania 512 × 512
+zakończone powodzeniem na RTX 3060 6 GB. Zainstalowana Krita 5.3.4.1
+połączona przez przypięty lokalny MCP 0.2.0. Próba odczytu, rysowania dwóch
+warstw, podglądu oraz zapisu KRA i PNG zakończona powodzeniem.
+[Konfiguracja i ścieżki do raportu](COMFY_KRITA_SETUP.md).
+
 **09.11.2026 — ataki specjalne Kaldery:** własne warstwy Krita, cztery
 tekstury z drugiego przebiegu DreamShaper 8 w lokalnym ComfyUI i ruch 2D
 Blendera. Cztery ścieżki efektów, trzy gesty postaci, 12 różnych renderów

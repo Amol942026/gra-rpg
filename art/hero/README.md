@@ -1,7 +1,9 @@
 # Bohater — Krita i Synfig, 20.10.2026
 
-**Aktualna grafika, 05.11.2026:** [malowanie bohatera w ComfyUI](comfy/README.md).
-Nowe materiały używają dotychczasowego atlasu, twarzy i animacji.
+**Aktualna grafika i ruch tkaniny, 09.11.2026:**
+[wędrowiec w turkusowym płaszczu](wanderer-20261109/README.md).
+Poprzednie [malowanie bohatera z 05.11.2026](comfy/README.md) opisuje
+starszy atlas.
 
 **Aktualizacja 26.10.2026 — szybsze wstawanie:** obecny ruch trwa 1,85 s.
 Zachowano lot obu stóp i kontakt pleców w 0,45 s; odpoczynek skrócono do

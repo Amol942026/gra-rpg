@@ -47,10 +47,10 @@ def rotate(parent,name,origin,samples):
  for f,n in enumerate(samples):
   w=ET.SubElement(a,'waypoint',time=f'{f}f',before='linear',after='linear');ET.SubElement(w,'angle',value=f'{n:.7f}')
 
-def author(root,parts):
+def author(root,parts,clips=CLIPS):
  root.mkdir(parents=True,exist_ok=False);shutil.copytree(parts,root/'parts')
  paths=[]
- for name,(frames,loop,keys) in CLIPS.items():
+ for name,(frames,loop,keys) in clips.items():
   tracks={c:[curve(k,f/frames) for f in range(frames+1)] for c,k in zip(CHANNELS,keys)}
   canvas=ET.Element('canvas',version='1.2',width='256',height='320',xres='2834.645669',yres='2834.645669',**{'view-box':'-1.6 2.3 1.6 -1.7','antialias':'2','fps':'60','begin-time':'0f','end-time':f'{frames-1}f','bgcolor':'0 0 0 0'})
   ET.SubElement(canvas,'name').text='Emberfall / Krita cutout / '+name

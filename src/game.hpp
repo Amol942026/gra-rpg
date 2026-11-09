@@ -7,6 +7,7 @@
 #include "commerce.hpp"
 #include "treant_gait.hpp"
 #include "guardian_gait.hpp"
+#include "forest_gait.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -683,6 +684,8 @@ struct Game {
    else if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==6)grounded_gait::advance(e.animation,movement.x,movement.y,dt,grounded_gait::Bandit);
+   else if(e.type==1||e.type==2)grounded_gait::advance(e.animation,movement.x,movement.y,dt,
+       e.type==1?forest_gait::Wolf:forest_gait::Skeleton);
    else e.animation.advance(movement.x,movement.y,dt,false,!e.boarBusy());
    if(e.boarBusy())faceBoarCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);
    if(e.abilityBusy())faceEnemyAbility(e);

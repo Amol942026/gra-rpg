@@ -73,4 +73,18 @@ inline Pose pose(const AnimationState& state,float walk,const Contact& contact){
     }
     return result;
 }
+
+inline Pose fromStanding(const AnimationState& state,float walk,const Contact& contact,float hipOffset=0){
+    // Both endpoints are reachable. Interpolate the ankles and hips first,
+    // then solve the knees to preserve the lengths of both segments.
+    const float standing=FootHeight+2*contact.legLength*contact.reachRatio;
+    Pose result=walk>0?pose(state,1,contact):Pose{};
+    result.hip=standing+(result.hip-standing)*walk+hipOffset;
+    for(auto& leg:result.legs){
+        leg.forward*=walk;
+        leg.height=FootHeight+(leg.height-FootHeight)*walk;
+        leg.joint=knee(leg.forward,result.hip,leg.height,contact.legLength);
+    }
+    return result;
+}
 }

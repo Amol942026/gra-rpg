@@ -4,16 +4,18 @@ namespace actor_art {
 // asymmetric limbs that rest on the terrain.
 inline void buildFallenForest(Rig& rig,int type){
  rig.setCreatureSurfaces();rig.reserve(2400);
- Color bone=rgb(199,191,160),fur=rgb(129,144,135),darkFur=rgb(83,99,92),ivory=rgb(227,217,181);
+ Color bone=forest_detail::Bone,fur=forest_detail::Fur,darkFur=shade(fur,.70f),ivory=rgb(227,217,181);
  if(type==0){
-  Color gel=rgb(92,143,89);rig.rounded({0,0,4.5f},{53,42,9},gel,100);
+  Color gel=shade(forest_detail::Gel,.88f);forest_detail::surface(rig,{0,0,4.5f},{53,42,9},gel,0,false);
   rig.rounded({-5,-4,7},{34,27,10},shade(gel,1.12f));
   for(int i=0;i<7;i++)rig.rounded({-19+i*6.f,std::sin(i*1.7f)*15,2},{12,12,4},shade(gel,.93f));
   for(float side:{-1.f,1.f})rig.tapered({side*7-2,14,8},{side*7+2,14,8},1,1,rgb(41,65,42));
   rig.rounded({-10,-5,11},{12,6,1.8f},rgb(165,199,137));rig.rounded({8,3,9},{4,3,1.5f},rgb(153,192,126));
  }else if(type==1){
-  rig.rounded({0,-3,9},{24,42,18},fur,101);rig.rounded({2,11,7},{23,25,13},rgb(159,170,151),101);
-  rig.rounded({5,25,9},{20,22,17},fur);rig.rounded({10,35,6},{13,17,10},rgb(174,184,158));
+  forest_detail::surface(rig,{0,-3,9},{24,42,18},fur,1,false);
+  forest_detail::surface(rig,{2,11,7},{23,25,13},forest_detail::Ruff,13,false);
+  forest_detail::surface(rig,{5,25,9},{20,22,17},fur,13,false);
+  forest_detail::surface(rig,{10,35,6},{13,17,10},forest_detail::Ruff,13,false);
   rig.rounded({10,42,7},{8,4,5},rgb(41,53,47));
   rig.spike({-2,22,15},{-4,19,25},8,6,darkFur);rig.spike({12,24,12},{17,21,19},7,6,darkFur);
   rig.tapered({10,30,13},{15,29,12},.9f,.9f,rgb(40,51,45));
@@ -30,10 +32,13 @@ inline void buildFallenForest(Rig& rig,int type){
    rig.tube({{-w,f,5},{-w+1,f,10},{0,f,14},{w-1,f,10},{w,f,5}},2.5f,2.5f,bone);
   }
   rig.rounded({0,-18,5},{16,11,7},bone);
-  rig.rounded({3,29,7},{17,18,14},bone,102);rig.rounded({3,35,3},{13,9,5},shade(bone,.84f));
+  forest_detail::surface(rig,{3,29,7},{17,18,14},bone,2,false);
+  rig.rounded({3,35,3},{13,9,5},shade(bone,.84f));
   for(float side:{-1.f,1.f})rig.rounded({3+side*4,34,10},{4.5f,3,4},rgb(48,52,44));
   rig.rounded({3,36,7},{2.5f,2,3},rgb(76,76,61));
   for(int n=0;n<5;n++)rig.rounded({-2+n*2.5f,39,4},{1.4f,1.5f,3},ivory);
+  rig.rounded({-10,14,8.6f},{7.8f,8.9f,5.7f},rgb(131,89,54));
+  rig.rounded({-11,15.5f,11.2f},{2.2f,2.5f,1.2f},rgb(177,127,78));
   for(float side:{-1.f,1.f}){
    rig.tapered({side*9,14,7},{side*21,2,3},3.6f,3.6f,bone);rig.rounded({side*21,2,3},{5,5,5},bone);
    rig.tapered({side*21,2,3},{side*20,-12,2},3,3,bone);
@@ -81,21 +86,23 @@ inline void buildFallenForest(Rig& rig,int type){
   for(int n=0;n<3;n++)rig.tapered({-8,-20+n*7.f,15},{7,-20+n*7.f,15},.8f,.8f,shade(shell,1.27f));
   for(float side:{-1.f,1.f})rig.spike({side*5,24,5},{side*8,28,2},2.3f,2.3f,ivory);
  }else if(type==6){
-  Color cloth=rgb(121,65,48),skin=rgb(199,159,118),leather=rgb(88,64,43);
-  rig.rounded({0,1,6},{27,36,13},cloth,106);rig.rounded({3,28,6},{18,20,13},skin);
-  rig.rounded({1,21,9},{23,21,13},cloth);rig.rounded({5,34,8},{11,8,7},skin);
-  rig.tapered({6,37,11},{11,35,10},.8f,.8f,rgb(82,59,44));
+  using namespace bandit_art;
+  Color cloth=Coat,skin=Skin,leather=Leather;
+  rig.rounded({0,1,6},{27,36,13},cloth,100+CoatCell);rig.rounded({3,28,6},{18,20,13},skin);
+  rig.rounded({1,21,9},{23,21,13},Hood,100+HoodCell);rig.rounded({5,34,8},{11,8,7},Mask);
+  rig.tapered({6,37,11},{11,35,10},.8f,.8f,shade(Mask,1.35f));
   rig.rounded({0,-13,7},{25,13,8},leather);rig.rounded({0,-6,12},{5,4,2},rgb(181,142,77));
   for(float side:{-1.f,1.f}){
    rig.tube({{side*10,13,6},{side*21,2,4}},7,7,cloth);rig.tapered({side*21,2,4},{side*21,-12,2},5,5,skin);rig.rounded({side*21,-14,2},{7,7,4},skin);
-   rig.tube({{side*6,-15,5},{side*13,-29,4},{side*10,-41,2}},7,7,rgb(59,73,61));rig.rounded({side*10,-44,3},{9,13,6},leather);
+   rig.tube({{side*6,-15,5},{side*13,-29,4},{side*10,-41,2}},7,7,Trousers);rig.rounded({side*10,-44,3},{9,13,6},leather);
   }
   for(int n=0;n<4;n++)rig.tapered({-8+n*5.f,-12,10},{-10+n*5.f,14,11},.8f,.8f,shade(cloth,.75f));
   rig.tapered({-27,1,2},{-28,22,2},3,2,rgb(174,191,181));rig.rounded({-27,-2,2},{4,7,4},leather);
  }else{
-  Color bark=rgb(103,83,56),leaf=rgb(73,101,60);
+  Color bark=forest_detail::Bark,leaf=shade(forest_detail::Leaf,.84f);
   rig.tube({{0,-22,10},{0,5,13},{2,27,10}},25,22,bark);
-  rig.rounded({3,31,10},{26,23,20},shade(bark,1.07f));
+  forest_detail::surface(rig,{0,2,12},{26,39,22},bark,7,false);
+  forest_detail::surface(rig,{3,31,10},{26,23,20},shade(bark,1.07f),7,false);
   for(float side:{-1.f,1.f}){
    rig.tube({{side*11,10,9},{side*30,16,5},{side*40,8,2}},8,8,shade(bark,.86f));
    rig.tube({{side*7,-22,7},{side*18,-36,3},{side*26,-37,2}},9,9,bark);
@@ -103,7 +110,8 @@ inline void buildFallenForest(Rig& rig,int type){
    for(int n=0;n<3;n++)rig.tapered({side*40,8,2},{side*(42+n*3.f),2+n*5.f,1},2.5f,2.5f,bark);
   }
   for(int i=0;i<7;i++)rig.tapered({-8,-17+i*6.f,20},{-5,-14+i*6.f,23},1.1f,1.1f,shade(bark,.55f));
-  rig.rounded({-7,39,14},{26,24,12},leaf,112);rig.rounded({14,34,12},{25,23,13},shade(leaf,.92f),112);
+  forest_detail::surface(rig,{-7,39,14},{26,24,12},leaf,16,false);
+  forest_detail::surface(rig,{14,34,12},{25,23,13},shade(leaf,.92f),16,false);
   rig.tapered({2,37,16},{9,37,16},1.1f,1.1f,rgb(69,61,39));
  }
 }

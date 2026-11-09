@@ -50,5 +50,9 @@ inline void unload(){if(atlas.id)UnloadTexture(atlas);atlas={};alpha.fill(0);}
 inline bool opaque(Vector2 uv){
  int x=int(uv.x*512),y=int(uv.y*384);return x>=0&&x<512&&y>=0&&y<384&&alpha[y*512+x]>64;
 }
-inline Vector2 uv(int cell,float u,float v){return {(cell%4+u)/4.f,(cell/4+v)/3.f};}
+inline Vector2 uv(int cell,float u,float v){
+ constexpr float inset=.5f/128;
+ return {(cell%4+std::clamp(u,inset,1-inset))/4.f,
+         (cell/4+std::clamp(v,inset,1-inset))/3.f};
+}
 }

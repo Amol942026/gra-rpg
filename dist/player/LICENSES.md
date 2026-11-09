@@ -69,13 +69,21 @@
   Nie rozpowszechniamy wag modelu w grze. Generowanie nie korzysta z płatnych
   API ani wysyłania projektu do chmury. Źródła, workflow i pochodzenie:
   `art/volcano/comfy/README.md` i `provenance.json`.
-- Atlas bohatera `assets/sprites/hero-paints.png` zawiera malowanie materiałów
-  wygenerowane lokalnie w ComfyUI z własnego atlasu Emberfall. Użyte wagi:
-  DreamShaper 8 (Lykon, warunki wymienione wyżej), LCM-LoRA SD 1.5
-  (https://huggingface.co/latent-consistency/lcm-lora-sdv1-5, OpenRAIL++)
-  i ControlNet Canny SD 1.5 (https://huggingface.co/lllyasviel/control_v11p_sd15_canny,
-  OpenRAIL; konwersja FP16 w formacie SafeTensors). Pochodzenie i hashe:
-  `art/hero/comfy/provenance.json`.
+- Bieżący atlas bohatera `assets/sprites/hero-paints.png` wykorzystuje materiały
+  wygenerowane lokalnie w ComfyUI i dopracowane w Kricie. Źródła wag to
+  FLUX.1 Schnell (Black Forest Labs, Apache-2.0,
+  https://huggingface.co/black-forest-labs/FLUX.1-schnell, konwersja GGUF
+  https://huggingface.co/city96/FLUX.1-schnell-gguf) oraz SDXL 1.0 (Stability AI,
+  CreativeML Open RAIL++-M, https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0).
+  Źródła i wyniki: `art/hero/wanderer-20261109/README.md`.
+- Materiały leśnego rozbójnika w `assets/sprites/creature-paints.png`
+  wykorzystują lokalny FLUX.1 Schnell (Apache-2.0, źródła powyżej) i retusz
+  w Kricie. Krzywe ruchu pochodzą z natywnych projektów Synfig.
+  Źródła: `art/creatures/bandit-20261110/README.md`.
+- Materiały szlamu, wilka, szkieletu i drzewca w tym samym atlasie powstały
+  z lokalnych renderów FLUX.1 Schnell oraz retuszu w Kricie. Krzywe ruchu
+  wyeksportowano z natywnych SIF. Źródła opisano w
+  `art/creatures/forest-20261110/README.md`.
 - Materiały Skorpiona bursztynowego, Skarabeusza miedzianego, Kobry
   piaskowej i Żywej Wydmy w Morzu Piasków opracowano lokalnie w ComfyUI
   na bazie grafik Emberfall. Wykorzystano wymienione wyżej DreamShaper 8,
@@ -91,7 +99,8 @@
   Detale tła powiększono lokalnie w ComfyUI modelem Real-ESRGAN
   (realesr-general-x4v3, Xintao Wang, BSD-3-Clause). Źródło, licencja i
   dokument Krity są w `art/menu/comfy/ostrosc/`.
-- Malowane detale bohatera `assets/sprites/hero-paints.png` powstały w Kricie, a dodatkowe krzywe animacji w Synfig Studio, wyłącznie z oryginalnych części projektu. Źródła i pochodzenie: `art/hero/README.md`. Bez zewnętrznych modeli, grafik ani płatnych usług.
+- Krzywe ruchu płaszcza bohatera powstały w Synfig Studio. Gra wykorzystuje
+  je wraz z oryginalnymi klipami i mocowaniami ekwipunku.
 - Pięć materiałów scenerii Lasu Mchu i Morza Piasków wygenerowano
   lokalnie w ComfyUI z użyciem DreamShaper 8 i LCM-LoRA SD 1.5.
   Pomalowano czternaście obiektów i dopracowano detale w Kricie.
