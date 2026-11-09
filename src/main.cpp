@@ -34,7 +34,8 @@ Typography typography;float renderScale=1;RenderTexture2D canvas{},terrain,world
 constexpr int TerrainWidth=MapSize*80+200,TerrainHeight=MapSize*40+300,TerrainOriginX=TerrainWidth/2;
 // Keep the enlarged maps within an 8192 texture limit and near the old cache
 // budget. Geometry, hit tests and UVs retain full world coordinates.
-constexpr float TerrainBakeScale=.75f;
+// Keep the expanded cache inside the 8192px limit of the integrated GPU class.
+constexpr float TerrainBakeScale=.69f;
 constexpr int TerrainCacheWidth=int(TerrainWidth*TerrainBakeScale),TerrainCacheHeight=int(TerrainHeight*TerrainBakeScale);
 AudioSystem audioSystem;
 IntroSequence intro;
@@ -47,7 +48,7 @@ InventoryClicks inventoryClicks;
 bool weaponWheelOpen=false;
 void invalidatePausedWorld();
 bool statsOpen=false,spellBookOpen=false,spellLessonOpen=false;std::string spellBookNotice;Attributes statDraft{};int draftForLevel=-1;
- bool skillsOpen=false;SkillRanks skillDraft{};int skillDraftLevel=-1;
+ bool skillsOpen=false;SkillRanks skillDraft{};int skillDraftLevel=-1,quickPickerSlot=-1;
  void openSkills();bool clickSkills();bool confirmSkills();void drawSkillsMenu();
 Color rgb(int r,int g,int b,int a=255){return{(unsigned char)r,(unsigned char)g,(unsigned char)b,(unsigned char)a};}
 Color shade(Color c,float s){return rgb(std::clamp(int(c.r*s),0,255),std::clamp(int(c.g*s),0,255),std::clamp(int(c.b*s),0,255),c.a);}
@@ -254,11 +255,12 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
 namespace tree_wind {inline void init();}
+namespace forest_water {inline void init();}
 namespace world_shadows {inline void init();}
 void makeArt(){
  inventory_icons::load();
  spell_art::load();
- tree_wind::init();
+ tree_wind::init();forest_water::init();
  world_shadows::init();
  hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
  forest_bush_art::load();forest_tree_art::load();guardian_art::load();
@@ -351,7 +353,13 @@ void makeArt(){
 #include "enemy_ability_art.hpp"
 void drawWorld(){
  if(game.inTower()){drawTowerWorld();return;}
- clip(0,0,WorldW,H);ClearBackground(game.inVolcano()?rgb(43,33,48):game.inDesert()?rgb(163,121,74):rgb(22,44,47));if(game.inVolcano())volcano_art::backdrop();else if(game.inDesert())desert_art::drawCachedBackdrop();else drawWindWater();performance.end(RenderStage::Water,true);if(game.inDesert())BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
+ clip(0,0,WorldW,H);
+ ClearBackground(game.inVolcano()?rgb(43,33,48):game.inDesert()?rgb(163,121,74):rgb(22,44,47));
+ if(game.inVolcano())volcano_art::backdrop();
+ else if(game.inDesert())desert_art::drawCachedBackdrop();
+ else{forest_water::draw();forest_water::drawRaisedCrests();}
+ performance.end(RenderStage::Water,true);
+ if(game.inDesert())BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
  terrain_surface::draw(game.inVolcano()?volcano_art::terrain.texture:game.inDesert()?desert_art::terrain.texture:terrain.texture);
  if(game.inDesert()){native_world::endBlendMode();desert_art::atmosphere();}
  if(game.inVolcano())volcano_art::flow();
@@ -448,7 +456,12 @@ void drawUI(){
   Rectangle r=actionRect(i);panel(r,i>0&&inside(r)?rgb(40,52,50):Panel);
   if(i==0)icon(game.equipment[0],r.x+33,r.y+26,.8f);
   if(i==1)spell_art::icon(game.knowsSpell(game.selectedSpell)?game.selectedSpell:Spell::None,r.x+33,r.y+26,.7f);
-  if(i==2||i==3)icon(item(i==2?Kind::Health:Kind::Mana),r.x+33,r.y+26,.7f);
+  if(i==2||i==3){
+   const Kind kind=game.potionAssigned[i-2];
+   if(kind!=Kind::None)icon(item(kind),r.x+33,r.y+26,.7f);
+   else line(r.x+24,r.y+26,r.x+42,r.y+26,Muted,2);
+   if(quickPickerSlot==SkillCount+i-2||(gameplayInputAllowed()&&inside(r)))DrawRectangleLinesEx(r,1,Gold);
+  }
   if(i==4){DrawRing({r.x+33,r.y+25},11,14,40,320,24,Gold);poly({{r.x+42,r.y+10},{r.x+52,r.y+12},{r.x+45,r.y+21}},Gold);}
   float cd=i==0?game.attackCd/.46f:i==1?game.spellCd/game.spellCooldownTotal:i==4?game.rollCd/RollCooldown:game.potionCd/.65f;
   if(cd>0)rect(r.x+1,r.y+1,r.width-2,(r.height-2)*std::clamp(cd,0.f,1.f),Fade(Ink,.65f));
@@ -485,11 +498,14 @@ void drawUI(){
  }else{
   txt("W ZASIĘGU",1080,595,10,Gold);auto n=nearbySlots();int pages=std::max(1,(int(n.size())+4)/5);nearbyPage=std::clamp(nearbyPage,0,pages-1);txt(TextFormat("%d  W ZASIĘGU",int(n.size())),1270,595,10,Muted);
   for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size())slotDraw(n[j],lootRect(i));else panel(lootRect(i),rgb(19,29,31));}
-  txt("LPM: zbierz · PPM w plecaku: użyj",1080,679,11,Muted);
   if(pages>1){rect(1286,668,117,25,Panel);txt(TextFormat("<  %d / %d  >",nearbyPage+1,pages),1300,673,11,Gold);}
  }
  drawInspectionHud();
- line(1080,880,1400,880,Line);DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inVolcano()?"WYPRAWA DO KALDERY":game.inDesert()?"WYPRAWA NA PUSTYNIĘ":"WYPRAWA W TOKU",1096,885,10,Muted);txt("v0.47",1370,885,10,Muted);
+ line(1080,880,1400,880,Line);
+ if(game.inTower()||game.inVolcano()||game.inDesert()){
+  DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inVolcano()?"WYPRAWA DO KALDERY":"WYPRAWA NA PUSTYNIĘ",1096,885,10,Muted);
+ }
+ txt("v0.47",1370,885,10,Muted);
 }
 struct ItemTooltipText {std::string label,name,stat,description,instruction,chance,value;Color color;};
 ItemTooltipText itemTooltipText(Item value,Slot source){
@@ -539,9 +555,9 @@ void overlay(){
  if(game.dead()){center("ŻAR PRZYGASŁ",720,274,39,Text,true);center("Ruiny zatrzymały twoją wyprawę.",720,347,18,Muted);center("Naciśnij ENTER, aby rozpocząć od nowa.",720,411,17,Gold);center("Spróbuj zakładać lepszy sprzęt i unikać zamachów.",720,462,15,Muted);return;}
  center(welcome?"WITAJ W EMBERFALL":help?"PRZEWODNIK WĘDROWCA":"CHWILA ODDECHU",720,258,32,Text,true);
  center("Echa zapomnianych ruin",720,307,19,Gold);line(420,348,1020,348,Line);
- const char* keys[]={"W S A D","SHIFT","SPACJA","LPM","C","PPM","1 / 2","PRZECIĄGNIJ"};const char* desc[]={"W — góra, S — dół, A — lewo, D — prawo.","Przytrzymaj z WSAD, aby biec 50% szybciej.","Przeturlaj się w kierunku ruchu lub ustawienia.","Miecz: kliknij. Łuk: przytrzymaj i puść.","Rzuć wybrany czar w stronę kursora (10 many).","Otwórz ciało; użyj mikstury / grzyba w plecaku.","Wypij miksturę zdrowia / many z plecaka.","Zbierz łup lub grzyb do plecaka."};
+ const char* keys[]={"W S A D","SHIFT","SPACJA","LPM","C","PPM","1 / 2","PRZECIĄGNIJ"};const char* desc[]={"W — góra, S — dół, A — lewo, D — prawo.","Przytrzymaj z WSAD, aby biec 50% szybciej.","Przeturlaj się w kierunku ruchu lub ustawienia.","Miecz: kliknij. Łuk: przytrzymaj i puść.","Rzuć wybrany czar w stronę kursora (10 many).","Otwórz ciało; użyj mikstury / grzyba w plecaku.","Wypij przypisaną miksturę. LPM na kafelku: wybór.","Zbierz łup lub grzyb do plecaka."};
  for(int i=0;i<8;i++){txt(keys[i],384,363+i*29,15,Gold);txt(desc[i],554,360+i*29,19,Text);}
- Rectangle b{540,613,360,57};panel(b,inside(b)?rgb(73,82,61):rgb(49,62,51));center(welcome?"WYRUSZ":"WRÓĆ DO GRY",720,629,21,Text);center("Z / X — ataki specjalne  /  V — Leczenie  /  U — umiejętności  /  Q — broń  /  F2 — dźwięk  /  ESC — pauza",720,687,14,Muted);
+ Rectangle b{540,613,360,57};panel(b,inside(b)?rgb(73,82,61):rgb(49,62,51));center(welcome?"WYRUSZ":"WRÓĆ DO GRY",720,629,21,Text);center("Z / X / V — przypisane umiejętności  /  U — umiejętności  /  Q — broń  /  F2 — dźwięk  /  ESC — pauza",720,687,14,Muted);
 }
 namespace world_shadows {void draw();}
 #include "intro_scene.hpp"
@@ -553,6 +569,7 @@ namespace world_shadows {void draw();}
 void input(float dt){
  if(!gameplayInputAllowed()||!IsWindowFocused())inventoryClicks.clear();else inventoryClicks.moved(mouse.x,mouse.y);
  if(developerMenuOpen||IsKeyPressed(KEY_F3)){if(developerInput())return;}
+ if(IsWindowFocused()&&quickPickerEvent(IsKeyPressed(KEY_ESCAPE),IsMouseButtonPressed(MOUSE_BUTTON_LEFT)))return;
  if(menuInput(dt))return;
  if(intro.active()){introInput(dt);return;}
  startTowerReturn();if(towerStory.active()){towerInput(dt);return;}
@@ -576,16 +593,17 @@ void input(float dt){
  V move{};if(IsKeyDown(KEY_D))move=move+V{1,-1};if(IsKeyDown(KEY_A))move=move+V{-1,1};if(IsKeyDown(KEY_S))move=move+V{1,1};if(IsKeyDown(KEY_W))move=move+V{-1,-1};
  if(IsKeyPressed(KEY_SPACE))game.startRoll(move);
  const bool running=IsKeyDown(KEY_LEFT_SHIFT)||IsKeyDown(KEY_RIGHT_SHIFT);
- if(IsKeyPressed(KEY_ONE))game.potion(Kind::Health);if(IsKeyPressed(KEY_TWO))game.potion(Kind::Mana);
+ if(IsKeyPressed(KEY_ONE))activatePotionSlot(0);
+ if(IsKeyPressed(KEY_TWO))activatePotionSlot(1);
  if(IsKeyPressed(KEY_C))castGameplaySpell();
- if(IsKeyPressed(KEY_Z))activateGameplaySkill(Skill::StrongCut);
- if(IsKeyPressed(KEY_X))activateGameplaySkill(Skill::PiercingArrow);
- if(IsKeyPressed(KEY_V))activateGameplaySkill(Skill::Healing);
+ if(IsKeyPressed(KEY_Z))activateSkillSlot(Skill::StrongCut);
+ if(IsKeyPressed(KEY_X))activateSkillSlot(Skill::PiercingArrow);
+ if(IsKeyPressed(KEY_V))activateSkillSlot(Skill::Healing);
  if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))rightClickWorldOrInventory();
  if(towerStory.active()||towerPanelOpen)return;
  if(mouse.x>WorldW&&mouse.y>=594&&mouse.y<702){float wheel=GetMouseWheelMove();if(wheel!=0){if(game.findCorpse(game.openedCorpse)){syncCorpsePage();corpsePage=std::clamp(corpsePage+(wheel<0?1:-1),0,corpsePages()-1);}else nearbyPage+=wheel<0?1:-1;}}
  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))leftClickGameplay(move);
- if(towerStory.active()||towerPanelOpen)return;
+ if(towerStory.active()||towerPanelOpen||quickPickerSlot>=0)return;
  if(game.bowDrawing){if(worldPointerAllowed(mouse))game.aimBow(combatAimFromPointer());else game.cancelBow();}
  if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){if(dragging.place!=Place::None)finishDrag();else releaseWorldBow();}
  startTowerReturn();if(towerStory.active()||towerPanelOpen)return;
@@ -751,8 +769,9 @@ int main(int argc,char**argv) {
     if(!IsWindowReady()){startupLog.write("ERROR: graphics window initialization failed");return 1;}
     game_cursor::initialize();
     startupLog.write("Graphics window ready; native Windows cursor enabled");SetTraceLogLevel(LOG_WARNING);
-    SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);updateFramePacing(true);
+    SetWindowMinSize(1152,720);SetExitKey(KEY_NULL);watchWindowRestore();updateFramePacing(true);
     if(startFullScreen)toggleFullScreen();
+    else if(!backgroundTest)centerWindowed(GetCurrentMonitor(),GetScreenWidth(),GetScreenHeight());
     bool diagnostic=worldMotionQA||labelsQA||tradeQA||shadowQA||desertQA||towerArtQA||stairsQA||combatQA||developerQA||towerFloorsQA||towerQA||introQA||smoke||benchmark||integration||visualQA||hoverQA||rollQA||audioQA||inspectionQA||swingQA||crowdQA||progressionQA||controlsQA||corpseQA||patrolQA||environmentQA||presentationQA||motionQA||pointerQA||performanceQA||refreshQA||forestQA||graphicsQA||mushroomQA||bowQA||skillsQA;
     if(!diagnostic){game=Game(std::random_device{}());intro={};towerStory={};welcome=true;paused=false;menuPageTo(MenuPage::Home);}
     startupLog.write("Generating world graphics");
@@ -814,6 +833,7 @@ int main(int argc,char**argv) {
         double begin=GetTime();double elapsed=begin-previous;previous=begin;
         performance.begin();
         float dt=float(std::clamp(elapsed,0.0,.05));
+        updateWindowPlacement();
         updateFramePacing();
         refreshDisplayLayout();
         bool displayChanged=displayAction(IsKeyPressed(KEY_F11));
@@ -860,7 +880,7 @@ int main(int argc,char**argv) {
             bool fullscreen=fullScreen();input(dt);
             if(fullscreen!=fullScreen())refreshDisplayLayout();
         }
-        audioSystem.update(dt,game,developerMenuOpen||towerPanelOpen||towerStory.active()||intro.active()||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||game.allocationRequired,smoke||benchmark||IsWindowFocused(),(intro.active()||towerStory.active())&&!paused&&!help&&!welcome);
+        audioSystem.update(dt,game,developerMenuOpen||towerPanelOpen||towerStory.active()||intro.active()||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||quickPickerSlot>=0||game.allocationRequired,smoke||benchmark||IsWindowFocused(),(intro.active()||towerStory.active())&&!paused&&!help&&!welcome);
         performance.end(RenderStage::Update);
         renderScene();
         if(frame==0)startupLog.write("First scene rendered");
@@ -928,7 +948,7 @@ int main(int argc,char**argv) {
     sync_present::shutdown();
     spell_art::unload();inventory_icons::unload();world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
     hero_portrait::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
-    terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
+    forest_water::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }
 

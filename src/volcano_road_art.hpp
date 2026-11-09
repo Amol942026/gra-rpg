@@ -4,9 +4,20 @@
 // detail and feathering then use the existing cached terrain render target.
 inline bool roadBakeValid=false;
 inline void bakeRoad(){
- constexpr int MaskSize=MapSize*8;Image image=GenImageColor(MaskSize,MaskSize,WHITE);auto* pixels=static_cast<Color*>(image.data);
- for(int y=0;y<MaskSize;y++)for(int x=0;x<MaskSize;x++){
-  V p{(x+.5f)*MapSize/MaskSize,(y+.5f)*MapSize/MaskSize};unsigned char a=static_cast<unsigned char>(std::round(volcano_roads::coverage(p)*255));pixels[y*MaskSize+x]={a,a,a,255};
+ constexpr int SamplesPerTile=8,MaskSize=MapSize*SamplesPerTile;
+ Image image=GenImageColor(MaskSize,MaskSize,BLACK);auto* pixels=static_cast<Color*>(image.data);
+ constexpr float reach=volcano_roads::FeatherLimit;
+ auto pixel=[](float pos){return std::clamp(int(std::floor(pos*SamplesPerTile)),0,MaskSize-1);};
+ for(const auto& segment:volcano_roads::segments()){
+  int left=pixel(std::min(segment.a.x,segment.b.x)-reach),right=pixel(std::max(segment.a.x,segment.b.x)+reach);
+  int top=pixel(std::min(segment.a.y,segment.b.y)-reach),bottom=pixel(std::max(segment.a.y,segment.b.y)+reach);
+  for(int y=top;y<=bottom;y++)for(int x=left;x<=right;x++){
+   V p{(x+.5f)/SamplesPerTile,(y+.5f)/SamplesPerTile};
+   float coverage=volcano_roads::coverage(p,desertSegmentDistance(p,segment.a,segment.b));
+   auto a=static_cast<unsigned char>(std::round(coverage*255));
+   Color& sample=pixels[y*MaskSize+x];
+   if(a>sample.r)sample={a,a,a,255};
+  }
  }
  Texture2D mask=LoadTextureFromImage(image);UnloadImage(image);SetTextureFilter(mask,TEXTURE_FILTER_BILINEAR);
  Shader shader=LoadShaderFromMemory(nullptr,R"GLSL(#version 330

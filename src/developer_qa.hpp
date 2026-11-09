@@ -23,6 +23,9 @@ bool runDeveloperQA(){
  openDeveloperMenu();point(developerCard(1));clickDeveloperMenu();point(developerNewButton());clickDeveloperMenu();
  check(!game.inTower()&&standardStart()&&!game.bossDead&&game.enemies.back().alive&&gameplayInputAllowed(),"fresh boss session grants the standard test character and a living guardian");
  check(distance(game.player,ForestGuardian)<5&&developerSpawnSafe(game,game.player),"boss start is nearby without spawning inside his body or a pillar");shot("boss-start");
+ const float devHp=game.hp;
+ game.enemyAbilityDamage(5000,DamageType::Magic,game.player,false,0,0);
+ check(game.developerSession&&game.hp==devHp&&!game.dead(),"a lethal attack during a real developer session leaves its health unchanged");
  game.hp=0;check(startDeveloperSession(true)&&!game.dead()&&developerActive&&!intro.active()&&developerSelection==1&&standardStart(),"death restart restores the developer character at the same destination");
  openDeveloperMenu();developerSelection=-1;check(!startDeveloperSession(true)&&developerMenuOpen&&!developerError.empty(),"invalid developer selection does not close picker or replace the game");developerSelection=0;developerError="Nieznana lokacja: tower-6. Wybierz ją z listy.";shot("invalid-location");
  mouse={720,760};clickDeveloperMenu();check(developerActive&&developerMenuOpen&&!intro.active(),"former normal-game button area has no action");
@@ -30,5 +33,8 @@ bool runDeveloperQA(){
  check(game.towerFloor==3&&!towerStory.active()&&!intro.active()&&gameplayInputAllowed()&&!game.storyBlocked(),"developer start interrupts an active return cutscene without leaving ghost dialogue or blocked movement");
  bool startedFull=fullScreen();if(startedFull)toggleFullScreen();SetWindowSize(1152,720);PollInputEvents();refreshDisplayLayout();openDeveloperMenu();shot("menu-1152");
  Rectangle card=developerCard(12);Vector2 logical{card.x+20,card.y+20},raw{viewport.x+logical.x*viewport.width/W,viewport.y+logical.y*viewport.height/H};mouse=pointerToGame(raw);clickDeveloperMenu();check(developerSelection==12&&inside(card),"small-window pointer correctly chooses the requested tower floor");closeDeveloperMenu();if(startedFull)toggleFullScreen();PollInputEvents();refreshDisplayLayout();
+ openPauseMenu();menuHomeAction(3);activateMenuRow(0);
+ check(welcome&&!paused&&!developerActive&&!developerMenuOpen&&!game.developerSession,"return to main menu clears the developer session and its protection");
+ menuNewGame();check(!game.developerSession&&game.maxHp()==100&&intro.active(),"a new expedition from the title uses normal resources and rules");
  reset();report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

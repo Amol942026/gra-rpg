@@ -20,7 +20,7 @@ bool prepareEnemyAbility(Enemy& e,float dt,bool visible,float range){
 void enemyAbilityDamage(float amount,DamageType type,V at,bool wasRolling,float rollAge,float impactTime){
  if(dead())return;
  if(wasRolling&&!sandTrapped()&&rollAge+impactTime<RollProtection){sound(Cue::Dodge,at);effects.push_back({at,"UNIK",.65f,3});return;}
- float damage=incomingDamage(amount,type);hp=std::max(0.f,hp-damage);hurt=.25f;sound(dead()?Cue::Death:Cue::Hurt,at);effects.push_back({at,"-"+std::to_string(int(damage)),.8f,4});
+ takeMonsterDamage(incomingDamage(amount,type),at,.25f);
 }
 void advanceEnemyAbility(Enemy& e,float dt,V casterBefore,V heroBefore,bool wasRolling,float rollAge){
  if(e.abilityAge<0||!e.alive||dt<=0)return;

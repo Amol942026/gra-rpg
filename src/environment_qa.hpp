@@ -1,4 +1,5 @@
 #pragma once
+extern "C" int glfwGetWindowAttrib(GLFWwindow*,int);
 
 bool runEnvironmentQA(){
     if(fullScreen()){toggleFullScreen();BeginDrawing();EndDrawing();refreshDisplayLayout();}
@@ -45,6 +46,10 @@ bool runEnvironmentQA(){
     check(waterChanges>700,"wind visibly animates the rendered water surface");
     check(landChanges<60,"water animation does not move or paint over land");
     UnloadImageColors(a);UnloadImageColors(b);for(Image im:images)UnloadImage(im);
+    game=Game{};mouse={0,0};
+    for(int i=0;i<3;i++){
+        game.time=.6f+i*.44f;renderScene();saveTexture(canvas,TextFormat("qa-v14/forest-arrival-water-%d.png",i));
+    }
     game=Game{};game.player={5,15};game.enemies.clear();game.props={{{3,15},0,1.4f},{{4,14},0,1},{{6,13},0,.85f}};
     for(int i=0;i<3;i++){
         game.time=i*1.1f;Vector2 base=screen(game.props[0].pos);
@@ -52,7 +57,17 @@ bool runEnvironmentQA(){
         check(pickWorld(mouse).kind==HoverKind::Prop,"swaying canopy retains hover and HUD information");
         renderScene();saveTexture(canvas,TextFormat("qa-v14/wind-trees-%d.png",i));
     }
-    int width=GetScreenWidth(),height=GetScreenHeight();Vector2 position=GetWindowPosition();
+    if(IsWindowHidden())ClearWindowState(FLAG_WINDOW_UNDECORATED);
+    pump();
+    int width=GetScreenWidth(),height=GetScreenHeight();
+    auto centered=[](int monitor){
+        const auto area=windowWorkArea(monitor);const auto frame=windowFrame();const auto p=GetWindowPosition();
+        const float dx=2*(p.x-frame.left-area.x)+GetScreenWidth()+frame.left+frame.right-area.width;
+        const float dy=2*(p.y-frame.top-area.y)+GetScreenHeight()+frame.top+frame.bottom-area.height;
+        return area.width>0&&area.height>0&&std::abs(dx)<=2&&std::abs(dy)<=2&&
+               GetScreenWidth()+frame.left+frame.right<=area.width&&GetScreenHeight()+frame.top+frame.bottom<=area.height;
+    };
+    const auto visible=[](){constexpr int GlfwVisible=0x00020004;return glfwGetWindowAttrib(glfwGetCurrentContext(),GlfwVisible)!=0;};
     // Real raylib window transitions, using the same F11 and Options actions as gameplay.
     welcome=true;paused=true;dragging={Place::Bag,0};audioDragging=0;
     check(displayAction(true),"F11 action is available even in welcome/pause");pump();
@@ -76,17 +91,31 @@ bool runEnvironmentQA(){
     paused=true;menuPageTo(MenuPage::Options);auto windowChoice=menuScreenChoice(false);
     mouse={windowChoice.x+windowChoice.width/2,windowChoice.y+windowChoice.height/2};
     gameMenuEvent(false,0,false,true);check(!fullScreen()&&paused,"Options returns to windowed mode without leaving pause");pump();
-    check(!fullScreen()&&GetScreenWidth()==width&&GetScreenHeight()==height,"window dimensions are restored after leaving fullscreen");
-    Vector2 restored=GetWindowPosition();check(std::abs(restored.x-position.x)<=2&&std::abs(restored.y-position.y)<=2,"window position is restored");
+    const auto area=windowWorkArea(monitor);const auto frame=windowFrame();
+    check(!fullScreen()&&GetScreenWidth()==std::min(width,area.width-frame.left-frame.right)&&
+          GetScreenHeight()==std::min(height,area.height-frame.top-frame.bottom),"window dimensions fit the work area with its decorated frame");
+    check(centered(monitor),"the full window frame is centered in the monitor work area");
+    check(IsWindowHidden()&&!visible(),"real fullscreen transitions leave the diagnostic window hidden");
     paused=false;mouse={500,450};check(!displayAction(false)&&!fullScreen(),"without F11 the world input does not toggle fullscreen");
     statsOpen=true;game.allocationRequired=true;float hp=game.hp,mana=game.mana,time=game.time;
     displayAction(true);pump();displayAction(true);pump();
     check(statsOpen&&game.allocationRequired&&game.hp==hp&&game.mana==mana&&game.time==time,"fullscreen switches preserve mandatory level allocation and game state");
-    statsOpen=false;game.allocationRequired=false;MaximizeWindow();pump();
-    check(IsWindowMaximized(),"maximized window test fixture is active");
-    displayAction(true);pump();displayAction(true);pump();
-    check(!fullScreen()&&IsWindowMaximized(),"fullscreen returns a previously maximized window to its maximized state");
-    RestoreWindow();SetWindowSize(width,height);SetWindowPosition(int(position.x),int(position.y));pump();
+    statsOpen=false;game.allocationRequired=false;
+    SetWindowPosition(area.x+frame.left,area.y+frame.top-60);
+    GLFWwindow* native=glfwGetCurrentContext();
+    auto iconify=glfwSetWindowIconifyCallback(native,nullptr);
+    glfwSetWindowIconifyCallback(native,iconify);
+    check(iconify==windowIconifyChanged,"production restore handler is chained to the GLFW callback");
+    if(iconify){
+        // Replay iconify events through the owned hidden window's callback.
+        // The real centering path runs without bringing any window onscreen.
+        const auto before=GetWindowPosition();
+        iconify(native,1);updateWindowPlacement();
+        check(IsWindowMinimized()&&GetWindowPosition().y==before.y,"minimization leaves the window untouched");
+        iconify(native,0);updateWindowPlacement();pump();
+        check(!IsWindowMinimized()&&centered(monitor),"restoring a window from minimization recenters the decorated frame");
+        check(IsWindowHidden()&&!visible(),"restore callback test never displays the diagnostic window");
+    }
     game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};
     report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

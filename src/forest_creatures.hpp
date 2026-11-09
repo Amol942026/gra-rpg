@@ -82,12 +82,13 @@ inline void buildForestCreature(Rig& r,int type,const AnimationState& s,float at
    for(int n=0;n<4;n++)r.spike({side*11,-24+n*6.f,z+8},{side*15,-25+n*6.f,z+11},1.2f,1.2f,shade(shell,1.2f));
   }
  }else if(type==7){
-  Color bark=flash?Text:rgb(111,91,58),leaf=flash?Text:rgb(70,113,67);float z=bob;
+  Color bark=flash?Text:rgb(111,91,58),leaf=flash?Text:rgb(70,113,67);
+  const auto gait=grounded_gait::pose(s,walk,treant_gait::Contact);
+  float z=gait.hip-40;
   for(float side:{-1.f,1.f}){
-   auto k=creature_motion::sample(5,s.phase+(side>0?.5f:0));
-   P3 foot{side*12,k.travel*walk*treant_gait::Stride,4+k.lift*walk*treant_gait::Lift};
-   auto bend=treant_gait::knee(foot.f,40+z,foot.z);P3 knee{side*10,bend.forward,bend.height};
-   creatureJoint(r,{side*8,0,40+z},knee,13,bark,.85f);creatureJoint(r,knee,foot,12,bark,.8f);
+   const auto& leg=gait.legs[side>0];
+   P3 foot{side*12,leg.forward,leg.height},knee{side*10,leg.joint.forward,leg.joint.height};
+   creatureJoint(r,{side*8,0,gait.hip},knee,13,bark,.85f);creatureJoint(r,knee,foot,12,bark,.8f);
    for(int root=0;root<3;root++)r.tapered(foot,foot+P3{side*(root-1)*7,10+root*2.f,-3},5,4,bark,.15f);
    P3 elbow{side*26,3,56+z},hand{side*31,6+hit*24-motion.sway*walk*side*4,41+z+hit*7};
    creatureJoint(r,{side*16,0,70+z},elbow,10,bark);creatureJoint(r,elbow,hand,8,bark);
@@ -108,6 +109,8 @@ inline void buildForestCreature(Rig& r,int type,const AnimationState& s,float at
   float thick=golem?12:skeleton?3.8f:7,spacing=golem?10:7,lift=bob*(golem?.5f:1);
   bool throwing=golem&&guardianThrow>=0;auto throwPose=guardian_motion::sample(std::max(0.f,guardianThrow));
   float lean=throwing?throwPose.bodyForward:0,lower=throwing?throwPose.bodyUp:0;lift+=lower;
+  const auto bandit=type==6?grounded_gait::pose(s,walk,grounded_gait::Bandit):grounded_gait::Pose{};
+  if(type==6)lift=bandit.hip-31;
   float gaitHip=golem?guardian_gait::hipHeight(s.phase):31+lift;
   // Fade the walking support height into idle/crouch with the existing
   // movement blend, including the first frames of a boulder windup.
@@ -116,6 +119,10 @@ inline void buildForestCreature(Rig& r,int type,const AnimationState& s,float at
   for(float side:{-1.f,1.f}){
    auto k=creature_motion::sample(2,s.phase+(side>0?.5f:0));P3 foot{side*spacing,k.travel*walk*(golem?guardian_gait::Stride:7.f),4+k.lift*walk*6},knee{side*spacing,3+k.travel*walk*3-lower*.55f,17+lift*(throwing?.45f:1.f)};
    if(golem){foot.z=4+(guardian_gait::footHeight(s.phase+(side>0?.5f:0),gaitHip)-4)*walk;auto bend=guardian_gait::knee(foot.f-lean*.35f,31+lift,foot.z);knee.f+=(lean*.35f+bend.forward-knee.f)*walk;knee.z+=(bend.height-knee.z)*walk;}
+   if(type==6){
+    const auto& leg=bandit.legs[side>0];
+    foot.f=leg.forward;foot.z=leg.height;knee.f=leg.joint.forward;knee.z=leg.joint.height;
+   }
    creatureJoint(r,{side*spacing,lean*.35f,31+lift},knee,thick,skeleton?bone:golem?body:rgb(65,76,66));
    creatureJoint(r,knee,foot,thick*.85f,skeleton?bone:golem?body:rgb(57,68,62));
    r.rounded(foot+P3{0,3,-1},{thick+2,thick+8,6},skeleton?bone:golem?shade(body,.86f):leather);

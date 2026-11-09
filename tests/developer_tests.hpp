@@ -11,7 +11,30 @@ void developerTests(){
   Game g(seed);g.hp=0;g.mana=0;check(developerStart(g,destination,true,seed),"every developer destination accepts a fresh session across seeds");
   const auto& target=DeveloperDestinations[destination];check(g.location==target.location&&g.towerFloor==target.floor&&developerSpawnSafe(g,g.player),"developer spawn is in selected room and respects scenery and enemy bodies");
   check(distance(g.player,target.spawn)<=4.001f&&g.hp==g.maxHp()&&g.mana==g.maxMana()&&!g.allocationRequired&&!g.storyBlocked()&&!g.towerReturnPending,"direct start restores resources and never leaves a story or progression input lock");
+  check(g.maxHp()==920&&g.maxMana()==510,"new level 100 developer gets balanced health and mana pools");
   check(unlocked(g)&&g.xp==0&&g.ammoCount()==100&&g.bagCount(Kind::Health)==50&&g.bagCount(Kind::Mana)==50,"each fresh developer start has all unlocks and exact supplies");
+ }
+ for(bool dev:{false,true}){
+  Game hit;hit.developerSession=dev;hit.player={15,15};hit.enemies.clear();hit.props.clear();
+  hit.enemies.push_back({20,0,{16,15},{16,15},100,100});hit.enemies.back().windup=.01f;hit.hp=1;
+  hit.update(.02f,{},false);
+  check(hit.hp==(dev?1.f:0.f)&&hit.dead()!=dev,"a real lethal monster strike only kills in ordinary play");
+  hit.hp=70;hit.sounds.clear();hit.effects.clear();hit.hurt=0;
+  hit.enemies[0].windup=.01f;
+  hit.update(.02f,{},false);
+  check(dev?hit.hp==70&&hit.effects.empty()&&hit.hurt==0:hit.hp<70&&!hit.effects.empty()&&hit.hurt>0,
+        "ordinary hits do not reduce developer HP or display false damage");
+  hit.hp=70;hit.effects.clear();hit.sounds.clear();
+  hit.enemyAbilityDamage(200,DamageType::Magic,hit.player,false,0,0);
+  check(dev?hit.hp==70&&!hit.dead()&&hit.effects.empty()&&hit.sounds.empty():hit.dead(),
+        "lethal magic retains normal damage outside DEV and no damage or death cue inside DEV");
+ }
+ {
+  Game rock;rock.developerSession=true;rock.enemies.clear();rock.props.clear();rock.player={20,20};
+  rock.boulders.push_back({{17,20},{20,20},{19.7f,20},.45f,.5f,25,70,BoulderDamage,13});
+  rock.update(.05f,{},false);
+  check(rock.hp==rock.maxHp()&&rock.knockedBack()&&rock.heroKnockdownRemaining>0&&rock.effects.empty(),
+        "rock impact keeps its knockdown for testing without reducing developer HP");
  }
  Game g;check(!g.developerSession&&g.level==1&&g.skillRanks==SkillRanks{}&&g.learnedSpells==0&&g.ammoCount()==20,"normal character starts with ordinary progression");
  check(developerStart(g,10,true)&&g.inTower()&&g.towerFloor==2&&unlocked(g),"developer tower start grants the standard test character");

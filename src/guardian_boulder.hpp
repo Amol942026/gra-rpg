@@ -89,7 +89,7 @@ void updateBoulders(float dt,V playerBefore,bool wasRolling=false,float rollElap
    if(!blocked&&!dead()&&proximity<=BoulderKnockbackRadius&&clearEnemySegment(impact,heroAtImpact,0)){
     if(dodged){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else{
-     if(proximity<=BoulderImpactRadius){float damage=incomingDamage(amount,DamageType::Physical);hp=std::max(0.f,hp-damage);sound(dead()?Cue::Death:Cue::Hurt,player);effects.push_back({player,"-"+std::to_string(int(damage)),.8f,4});}
+     if(proximity<=BoulderImpactRadius)takeMonsterDamage(incomingDamage(amount,DamageType::Physical),player);
      if(!dead()){
       V away=heroAtImpact-impact;if(length(away)<.001f)away=incoming;if(length(away)<.001f)away={1,0};
       heroKnockback=normalized(away)*(BoulderKnockbackDistance*(1-.6f*std::clamp(proximity/BoulderKnockbackRadius,0.f,1.f)));

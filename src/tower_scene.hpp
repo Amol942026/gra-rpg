@@ -1,7 +1,7 @@
 #pragma once
 
 void clearStoryMenus(){
-    spellLessonOpen=false;spellBookNotice.clear();
+    quickPickerSlot=-1;spellLessonOpen=false;spellBookNotice.clear();
     game.cancelBow();game.closeCorpse();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;
     towerPanelOpen=false;towerPanelObject=-1;towerPage=0;dragging={};audioDragging=-1;nearbyPage=0;hovered={};
 }

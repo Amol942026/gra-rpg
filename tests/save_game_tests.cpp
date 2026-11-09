@@ -33,6 +33,14 @@ int main(int argc,char** argv){
    extra.game.enemies[0].alive=false;extra.game.enemies[0].hp=0;extra.game.enemies[0].loot[14]=item(Kind(k));roundtrip(extra);
    check(saves::decode(saves::encode(extra)).game.bag[10].kind==Kind(k),"every new item ID persists in bags, equipment and corpse loot");
   }
+  auto assignments=s;assignments.game.skillAssigned={false,true,false};
+  check(saves::decode(saves::encode(assignments)).game.skillAssigned==assignments.game.skillAssigned,"skill slot choices persist in current saves");
+  assignments.game.potionAssigned={Kind::Health,Kind::None};
+  check(saves::decode(saves::encode(assignments)).game.potionAssigned==assignments.game.potionAssigned,"potion assignment and unassignment persist in current saves");
+  auto dev=s;dev.game.developerSession=true;dev.game.level=100;dev.game.hp=dev.game.maxHp();dev.game.mana=dev.game.maxMana();
+  auto ordinary=saves::decode(saves::encode(dev)).game;
+  check(dev.game.hp==920&&dev.game.mana==510&&!ordinary.developerSession&&ordinary.hp==100&&ordinary.mana==100,
+        "a developer save opens as ordinary play with safe resource values");
   auto legacy=saves::read("art/gameplay/guardian/fixtures/legacy-v1.efs");
   check(distance(legacy.game.player,{8,19})==0&&legacy.game.hp==57&&legacy.game.gold==123&&legacy.game.bag[8].kind==Kind::GuardianSword,"real pre-change v1 save preserves existing position and inventory");
   check(legacy.game.boulders.empty()&&legacy.game.enemies.back().boulderCd==BoulderFirstDelay,"v1 saves receive safe default boss timers");roundtrip(legacy);
@@ -109,6 +117,15 @@ int main(int argc,char** argv){
   check(oldProgressLoaded.game.level==5&&oldProgressLoaded.game.xp==experienceForLevel(5)/2&&oldProgressLoaded.game.attributes[0]==12,"legacy saves retain earned levels, allocated stats and proportional XP progress");roundtrip(oldProgressLoaded);
   auto scarce=s;scarce.game.merchantArrows=7;roundtrip(scarce);scarce.game.merchantArrows=0;scarce.game.desertBossDead=true;roundtrip(scarce);
   auto badStock=s;badStock.game.merchantArrows=-1;rejects([&]{saves::encode(badStock);},"negative shop stock rejected");badStock.game.merchantArrows=21;rejects([&]{saves::encode(badStock);},"oversized shop stock rejected");
+  check(saves::decode(envelope(assignments,15)).game.skillAssigned==std::array<bool,SkillCount>{true,true,true},
+        "v15 saves use the previous Z X V assignments");
+  const auto legacyPotions=saves::decode(envelope(assignments,16)).game;
+  check(legacyPotions.potionAssigned==DefaultPotions&&legacyPotions.skillAssigned==assignments.game.skillAssigned,
+        "v16 saves retain skill selections and initialize both potion shortcuts");
+  auto wrongPotion=assignments;wrongPotion.game.potionAssigned={Kind::Mana,Kind::Health};
+  rejects([&]{saves::decode(envelope(wrongPotion,17));},"cross-category potion assignments are rejected");
+  wrongPotion.game.potionAssigned={Kind::Sword,Kind::None};
+  rejects([&]{saves::decode(envelope(wrongPotion,17));},"non-potion items cannot be assigned to a potion slot");
   rejects([&]{saves::decode(envelope(s,saves::CurrentVersion+1));},"unknown future version refused");
   invalid=s;invalid.game.heroKnockback={100,0};rejects([&]{saves::encode(invalid);},"oversized knockback vector rejected");
   invalid=s;invalid.game.heroKnockbackRemaining=BoulderKnockbackDuration+.1f;rejects([&]{saves::encode(invalid);},"oversized knockback timer rejected");

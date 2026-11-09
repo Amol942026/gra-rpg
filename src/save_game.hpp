@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=15; // Spell ownership, typed projectiles and their animation clocks.
+constexpr int CurrentVersion=17; // Potion assignments for the two HUD shortcuts.
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -102,6 +102,8 @@ inline void visit(Archive& a,Game& v){
  if(a.version>=11)a(v.venomGlobs);
  if(a.version>=12)a(v.worldExpansionVersion);else if(a.reading)v.worldExpansionVersion=0;
  if(a.version>=15)a(v.learnedSpells,v.spellCooldownTotal);
+ if(a.version>=16)a(v.skillAssigned);
+ if(a.version>=17)a(v.potionAssigned);
  else if(a.reading){v.learnedSpells=0;v.spellCooldownTotal=std::max(FireballCooldown,v.spellCd);}
  if(a.reading&&a.version<7){
   require(v.level>=1&&v.level<=100000&&v.xp>=0&&v.xp<std::int64_t(v.level)*80);
@@ -156,6 +158,7 @@ inline void validate(const Snapshot& s){
  require(g.attributePoints>=0&&g.attributePoints<=1000000&&g.skillPoints>=0&&g.skillPoints<=1000000&&g.hp>=0&&g.hp<=g.maxHp()&&g.mana>=0&&g.mana<=g.maxMana());
  validatePos(g.player);validateAnimation(g.animation);for(auto& i:g.bag)validateItem(i);
  for(int n=0;n<EquipSize;n++){validateItem(g.equipment[n]);require(g.equipment[n].empty()||gearSlot(g.equipment[n].kind)==n);}
+ for(int i=0;i<int(g.potionAssigned.size());i++)require(g.potionAssigned[i]==Kind::None||potionSlotFor(g.potionAssigned[i])==i);
  for(auto& b:g.weaponWheel)require(range(b.kind,int(Kind::Count))&&b.tier>=0&&b.tier<=100);
  for(int n=0;n<TreasureCount;n++){const auto& c=g.chests[n];require(c.id==n&&c.location==TreasureLayout[n].location&&c.pos.x==TreasureLayout[n].pos.x&&c.pos.y==TreasureLayout[n].pos.y);for(auto& i:c.loot)validateItem(i);}
  validateGround(g.ground);for(auto& item:g.ground)require(item.id<g.nextGround);
@@ -187,6 +190,12 @@ inline void validate(const Snapshot& s){
 }
 inline uint64_t checksum(const std::string& data){uint64_t h=14695981039346656037ULL;for(unsigned char c:data){h^=c;h*=1099511628211ULL;}return h;}
 inline std::string encode(Snapshot snapshot){
+ auto& game=snapshot.game;
+ if(game.developerSession){
+  game.developerSession=false;
+  game.hp=std::min(game.hp,float(game.maxHp()));
+  game.mana=std::min(game.mana,float(game.maxMana()));
+ }
  validate(snapshot);Archive payload(false);payload(snapshot);Archive out(false);std::string magic="EMBERFALL-SAVE";int version=CurrentVersion;size_t size=payload.bytes.size();uint64_t hash=checksum(payload.bytes);out(magic,version,size,hash);out.bytes+=payload.bytes;return out.bytes;
 }
 inline Snapshot decode(const std::string& bytes){

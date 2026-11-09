@@ -52,7 +52,7 @@ std::vector<DrawObject> worldDrawOrder() {
 }
 
 bool worldPointerAllowed(Vector2 p) {
-    if(developerMenuOpen||towerPanelOpen||intro.active()||towerStory.active()||game.storyBlocked()||weaponWheelOpen||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||game.allocationRequired||game.dead())return false;
+    if(developerMenuOpen||towerPanelOpen||intro.active()||towerStory.active()||game.storyBlocked()||weaponWheelOpen||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||quickPickerSlot>=0||game.allocationRequired||game.dead())return false;
     if(!CheckCollisionPointRec(p,{0,116,WorldW,678}))return false;
     if(archetype(game.equipment[0].kind)==Kind::Bow&&CheckCollisionPointRec(p,{195,112,515,36}))return false;
     if(CheckCollisionPointRec(p,minimapRect()))return false; // minimap

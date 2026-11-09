@@ -8,7 +8,7 @@ Rectangle developerCard(int index){int column=index<8?0:index<16?1:2;int row=ind
 Rectangle developerNewButton(){return {welcome?533.5f:330.f,667,373,47};}
 Rectangle developerMoveButton(){return {737,667,373,47};}
 Rectangle developerCloseButton(){return {1230,116,40,35};}
-void openDeveloperMenu(){game.cancelBow();dragging={};audioDragging=-1;developerMenuOpen=true;}
+void openDeveloperMenu(){quickPickerSlot=-1;game.cancelBow();dragging={};audioDragging=-1;developerMenuOpen=true;}
 void closeDeveloperMenu(){developerMenuOpen=false;developerError.clear();}
 bool startDeveloperSession(bool reset){
  if(welcome&&!reset)return false;

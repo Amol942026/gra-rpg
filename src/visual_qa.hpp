@@ -151,7 +151,7 @@ void renderScene() {
     if(intro.active()){
         drawUI();drawIntroArrival();drawGameMenu();drawDeveloperUi();if(paused)native_world::finishOpaqueBackground();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;
     }
-    drawUI();drawHoveredName();drawSkillHud();drawBowHud();drawWeaponWheel();tooltip();
+    drawUI();drawHoveredName();drawSkillHud();drawBowHud();drawWeaponWheel();tooltip();drawQuickPicker();
     if(towerStory.active()){drawTowerStoryOverlay();drawGameMenu();drawDeveloperUi();if(paused)native_world::finishOpaqueBackground();EndMode2D();EndTextureMode();performance.end(RenderStage::Hud,true);return;}
     if(dragging.place!=Place::None){Item* p=game.get(dragging);if(p)icon(*p,mouse.x,mouse.y,.95f,.9f);}
     overlay();

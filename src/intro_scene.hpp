@@ -5,7 +5,7 @@ Rectangle introSkipButton(){return {1190,77,170,34};}
 Rectangle introDialogueBox(){return {112,626,1216,222};}
 Rectangle introNextButton(){Rectangle box=introDialogueBox();return {box.x+box.width-34-162,794,162,40};}
 void startIntro(){
-    developerActive=developerMenuOpen=false;developerError.clear();
+    quickPickerSlot=-1;developerActive=developerMenuOpen=false;developerError.clear();
     towerPanelOpen=false;towerPanelObject=-1;towerPage=0;game.cancelBow();intro.begin();towerStory={};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;
     dragging={};audioDragging=-1;nearbyPage=0;hovered={};
 }
@@ -13,7 +13,7 @@ void applyIntroArrival(){
     if(!intro.takeArrival())return;
     game.player=ForestArrival;game.animation=AnimationState{};game.cancelBow();dragging={};mouse={0,0};
     game.sound(Cue::TeleportArrival,game.player);
-    game.say("Serce Świtu: znajdź Kamiennego Strażnika w północnych ruinach Wielkiej Kniei.");
+    game.message.clear();game.messageTime=0;
     startupLog.write("Prologue complete: hero teleported to the forest");
 }
 void introAction(bool advance,bool skip,float dt,bool focused=true){

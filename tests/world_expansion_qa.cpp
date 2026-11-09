@@ -21,7 +21,7 @@ int main(int argc,char** argv){
   reset(realm);std::string name=realm==WorldLocation::Forest?"forest":realm==WorldLocation::Desert?"desert":"volcano";auto ground=texture(realm);
   check(IsTextureValid(ground)&&ground.width==TerrainCacheWidth&&ground.height==TerrainCacheHeight&&ground.width<8192,"bounded terrain cache loads / "+name);
   Image pixels=LoadImageFromTexture(ground);bool opaque=true;int extensionSamples=0;
-  for(float y=4;y<98;y+=3)for(float x=4;x<98;x+=3){V p{x,y};if(x<72&&y<72)continue;if(realm==WorldLocation::Volcano&&volcanoLava(p,2.5f))continue;
+  for(float y=4;y<MapSize-4;y+=3)for(float x=4;x<MapSize-4;x+=3){V p{x,y};if(x<PreviousMapSize&&y<PreviousMapSize)continue;if(realm==WorldLocation::Volcano&&volcanoLava(p,2.5f))continue;
    int px=int((TerrainOriginX+(x-y)*40)*TerrainBakeScale),py=pixels.height-1-int((90+(x+y)*20)*TerrainBakeScale);
    opaque&=GetImageColor(pixels,px,py).a>=250;extensionSamples++;
   }
@@ -30,15 +30,15 @@ int main(int argc,char** argv){
   float factor=560.f/TerrainWidth,x0=20+column*600.f,y0=120;
   auto point=[&](V p){return Vector2{x0+(TerrainOriginX+(p.x-p.y)*40)*factor,y0+(90+(p.x+p.y)*20)*factor};};
   BeginTextureMode(overview);txt(name=="forest"?"WIELKA KNIEJA":name=="desert"?"MORZE PIASKÓW":"KALDERA POPIOŁU",x0,25,23,Gold,true);
-  txt(TextFormat("102 × 102  |  %d przeciwników  |  %d obiektów",int(game.enemies.size()),int(game.props.size())),x0,65,15,Text);
+  txt(TextFormat("%d × %d  |  %d przeciwników  |  %d obiektów",MapSize,MapSize,int(game.enemies.size()),int(game.props.size())),x0,65,15,Text);
   DrawTexturePro(ground,{0,0,float(ground.width),-float(ground.height)},{x0,y0,560,TerrainHeight*factor},{0,0},0,WHITE);
   for(const auto& p:game.props)DrawCircleV(point(p.pos),1.25f,realm==WorldLocation::Forest?rgb(153,196,120):rgb(235,205,154));
   for(const auto& e:game.enemies)DrawCircleV(point(e.home),2.25f,enemyBoss(e.type)?Gold:rgb(232,104,91));
-  const V old[]={{.5f,.5f},{.5f,70.5f},{70.5f,70.5f},{70.5f,.5f},{.5f,.5f}};
+  const float oldEdge=PreviousMapSize-1.5f;const V old[]={{.5f,.5f},{.5f,oldEdge},{oldEdge,oldEdge},{oldEdge,.5f},{.5f,.5f}};
   for(int i=0;i<4;i++)DrawLineEx(point(old[i]),point(old[i+1]),1.5f,rgb(105,204,221));
   txt("Turkus: dawny obszar  |  Czerwone punkty: wrogowie",x0,450,14,Muted);EndTextureMode();column++;
   check(moveNear(realm==WorldLocation::Forest?ForestArrival:realm==WorldLocation::Desert?DesertArrival:VolcanoArrival),"realm arrival remains walkable / "+name);capture(name+"-arrival");
-  int location=0;for(V target:{V{88,30},V{88,60},V{88,88},V{24,86},V{54,86}}){
+  int location=0;for(V target:{V{117,30},V{127,68},V{131,129},V{24,125},V{58,128}}){
    check(moveNear(target),"walkable new region camera / "+name);game.time=2.1f;
    V saved=game.player;for(int i=0;i<6;i++){Vector2 at=screen(saved);V recovered=toWorld(at);check(distance(saved,recovered)<.03f,"height-aware pointer returns the hero's actual world position in new terrain");}
    capture(name+"-extension-"+std::to_string(location++));
@@ -53,8 +53,15 @@ int main(int argc,char** argv){
   auto deck=volcano_art::bridgeDeck(int(i));V center{};for(V p:deck)center=center+p*.25f;
   check(std::abs(center.x-lavaCenter(VolcanoBridgeRivers[i],center.y))<.001f&&!volcanoLava(center),"each painted deck aligns with its actual traversable lava bridge");
  }
+ reset(WorldLocation::Volcano);
+ const float bridgeY=VolcanoBridges.front().y;
+ check(moveNear({lavaCenter(0,bridgeY),bridgeY}),"main bridge is walkable after scenery cleanup");
+ capture("volcano-main-bridge");
+ const float southernY=VolcanoBridges.back().y;
+ check(moveNear({lavaCenter(1,southernY),southernY}),"southern bridge reaches the expanded region");
+ capture("volcano-southern-bridge");
  check(!audioSystem.available&&audioSystem.playedEffects==0&&IsWindowHidden(),"entire graphical integration stays silent and hidden");
  std::sort(completed.begin(),completed.end());double mean=std::accumulate(completed.begin(),completed.end(),0.)/completed.size(),p95=completed[(completed.size()-1)*95/100];
- std::ofstream out(root/"summary.json");out<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"realms\":3,\"map_side\":102,\"area_multiplier\":"<<float(MapSize*MapSize)/(72*72)<<",\"captured_frames\":"<<captures<<",\"terrain_cache_width\":"<<TerrainCacheWidth<<",\"terrain_cache_height\":"<<TerrainCacheHeight<<",\"hidden\":true,\"audio_opened\":false,\"presentation_measured\":false,\"completed_update_render_mean_ms\":"<<mean<<",\"completed_update_render_p95_ms\":"<<p95<<'}';
+ std::ofstream out(root/"summary.json");out<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"realms\":3,\"map_side\":"<<MapSize<<",\"area_multiplier\":"<<float(MapSize*MapSize)/(PreviousMapSize*PreviousMapSize)<<",\"captured_frames\":"<<captures<<",\"terrain_cache_width\":"<<TerrainCacheWidth<<",\"terrain_cache_height\":"<<TerrainCacheHeight<<",\"hidden\":true,\"audio_opened\":false,\"presentation_measured\":false,\"completed_update_render_mean_ms\":"<<mean<<",\"completed_update_render_p95_ms\":"<<p95<<'}';
  std::cout<<"Expanded realm renderer: "<<checks<<" checks, "<<failures<<" failures\n";audioSystem.shutdown();CloseWindow();return failures?2:0;
 }

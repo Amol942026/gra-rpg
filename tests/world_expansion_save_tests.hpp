@@ -26,10 +26,10 @@ void worldExpansionSaveTests(){
  for(const char* realm:{"forest","desert","volcano"}){
   auto bytes=saves::readBytes(std::string("art/world-expansion/fixtures/")+realm+"-v11.efs");saves::Archive envelope(true,bytes);std::string magic;int version;size_t size;uint64_t hash;envelope(magic,version,size,hash);
   saves::Archive payload(true,bytes.substr(envelope.at),version);saves::Snapshot original;payload(original);auto expanded=saves::decode(bytes);
-  check(version==11&&original.game.worldExpansionVersion==0&&expanded.game.worldExpansionVersion==1,"real previous-release 72x72 fixture gains the new territory");
+  check(version==11&&original.game.worldExpansionVersion==0&&expanded.game.worldExpansionVersion==WorldExpansionRevision,"real previous-release 72x72 fixture gains the new territory");
   verifyAndAlignWorldExpansion(original,expanded);original.game.volcanoSceneryVersion=expanded.game.volcanoSceneryVersion;
   check(saves::encode(original)==saves::encode(expanded),"complete snapshot retains every other byte: player, items, chest contents, shrines, quests and both RNG streams");
-  auto& g=expanded.game;check(g.enemies.size()==(g.inDesert()?55:g.inVolcano()?61:91),"legacy active field receives the complete expanded population");
+  auto& g=expanded.game;check(g.enemies.size()==(g.inDesert()?109:g.inVolcano()?121:181),"legacy active field receives the complete expanded population");
   check(g.player.x==(g.inDesert()?DesertArrival.x:g.inVolcano()?VolcanoArrival.x:1.6f)&&g.player.y==(g.inDesert()?DesertArrival.y:g.inVolcano()?VolcanoArrival.y:69.4f)&&g.walkable(g.player),"loaded hero stays at the exact old position with clear terrain");
   check(g.hp==67&&g.mana==43&&g.gold==127&&g.bag[12].kind==Kind::GuardianSword&&g.chests[4].loot[0].empty()&&g.fountainUsed[0]&&g.volcanoFountainUsed[1],"legacy resources, equipment, looted chest and consumed shrines are retained");
   auto once=saves::encode(expanded);check(saves::encode(saves::decode(once))==once,"expanded world saves exactly and does not append content a second time");roundtrip(expanded);
@@ -39,6 +39,22 @@ void worldExpansionSaveTests(){
   check(!world.findEnemy(id)&&world.enemies.size()==count&&before.bytes==after.bytes&&world.rng==rng&&world.combatRng==combat,"migration never respawns a defeated guardian or rerolls its fragment and loot");
  }
  auto unvisited=saves::read("art/volcano/fixtures/legacy-v8.efs");check(!unvisited.game.volcanoCreated&&unvisited.game.volcanoState.enemies.empty(),"unvisited realms remain uncreated during load");
- unvisited.game.activateField(WorldLocation::Volcano);check(unvisited.game.enemies.size()==61,"first visit creates the expanded realm once");
- auto invalid=unvisited;invalid.game.worldExpansionVersion=2;rejects([&]{saves::encode(invalid);},"unknown world expansion revision rejected");
+ unvisited.game.activateField(WorldLocation::Volcano);check(unvisited.game.enemies.size()==121,"first visit creates the expanded realm once");
+ // Exercise the second migration independently with a v17-era active Caldera.
+ saves::Snapshot previous;auto& caldera=previous.game;caldera.activateField(WorldLocation::Volcano);
+ auto inExtension=[](V p,float limit){return p.x>=limit||p.y>=limit;};
+ caldera.enemies.erase(std::remove_if(caldera.enemies.begin(),caldera.enemies.end(),[&](const Enemy& e){return inExtension(e.home,PreviousMapSize);}),caldera.enemies.end());
+ caldera.props.erase(std::remove_if(caldera.props.begin(),caldera.props.end(),[&](const Prop& p){return inExtension(p.pos,PreviousMapSize-.5f);}),caldera.props.end());
+ const size_t safeProps=caldera.props.size();
+ caldera.props.push_back({{30.58011f,50.88041f},17,.92f});
+ caldera.props.push_back({{21.01995f,46.48085f},14,.74f});
+ caldera.player=VolcanoArrival;caldera.worldExpansionVersion=1;caldera.volcanoSceneryVersion=5;
+ caldera.addGround(item(Kind::Health),caldera.player);
+ const auto twice=saves::decode(saves::encode(previous));
+ check(twice.game.worldExpansionVersion==WorldExpansionRevision&&twice.game.volcanoSceneryVersion==VolcanoSceneryRevision,"previous expansion migrates once to the larger field and cleared bridges");
+ check(twice.game.enemies.size()==121&&twice.game.props.size()>safeProps&&twice.game.ground.size()==1,"previous Caldera gains only extension encounters and scenery, preserving dropped items");
+ for(size_t i=0;i<safeProps;i++)check(distance(twice.game.props[i].pos,caldera.props[i].pos)==0,"existing scenery outside the two removed props retains its exact location");
+ check(std::none_of(twice.game.props.begin(),twice.game.props.end(),Game::retiredVolcanoBridgeProp),"the two bridge obstructions are removed from existing saves");
+ roundtrip(twice);
+ auto invalid=unvisited;invalid.game.worldExpansionVersion=WorldExpansionRevision+1;rejects([&]{saves::encode(invalid);},"unknown world expansion revision rejected");
 }

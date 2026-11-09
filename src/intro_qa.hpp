@@ -51,6 +51,7 @@ bool runIntroQA(){
     for(int i=0;i<200&&intro.phase!=IntroPhase::Arriving;i++)introAction(false,false,1.f/60);
     check(intro.phase==IntroPhase::Arriving&&distance(game.player,ForestArrival)==0&&!intro.arrivalPending,
           "teleport places the real hero at the existing safe forest spawn exactly once");
+    check(game.message.empty()&&game.messageTime==0,"no HUD notification is queued by the prologue teleport");
     intro.age=.75f;Image arrival=shot("qa-v24/intro/arrival.png");
     pixels=LoadImageColors(arrival);int blue=0;std::array<bool,232> blueRows{};Vector2 hero=screen(game.player);
     for(int y=0;y<arrival.height;y++)for(int x=0;x<arrival.width;x++){
@@ -67,6 +68,7 @@ bool runIntroQA(){
           "blue arrival remains visible after the flash clears and before gameplay resumes");
     for(int i=0;i<100&&intro.active();i++)introAction(false,false,1.f/60);
     check(!intro.active()&&gameplayInputAllowed()&&game.time==0,"arrival restores gameplay only after the transition with no hidden simulation time");
+    check(game.messageTime==0&&game.dawnQuest==DawnQuest::Seeking,"forest gameplay opens without a notification and retains the original quest");
     Image forest=shot("qa-v24/intro/forest-after.png");UnloadImage(forest);
     float before=game.time;game.update(.05f,{1,0},false);check(game.time>before,"world simulation resumes after the prologue");
     startIntro();check(intro.phase==IntroPhase::Opening&&intro.line==0,"new adventure can replay the complete introduction");

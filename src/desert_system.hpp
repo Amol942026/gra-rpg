@@ -2,7 +2,7 @@
 // Included inside Game. Each field keeps corpses, wandering positions and forage.
 void buildDesert(){
  enemies.clear();props.clear();forage.clear();
- for(size_t i=0;i<DesertSpawns.size();i++){const auto& s=DesertSpawns[i];float hp=enemyInfo(s.type).health;enemies.push_back({1000+int(i),s.type,s.pos,s.pos,hp,hp});enemies.back().patrolWait=.5f+(hash(int(i),99)%1000)*.001f;}
+ for(size_t i=0;i<DesertSpawns.size();i++){const auto& s=DesertSpawns[i];float hp=enemyInfo(s.type).health;enemies.push_back({1000+int(i)+(i>=99),s.type,s.pos,s.pos,hp,hp});enemies.back().patrolWait=.5f+(hash(int(i),99)%1000)*.001f;}
  float hp=enemyInfo(DesertBossType).health;enemies.push_back({DesertBossId,DesertBossType,DesertBossHome,DesertBossHome,hp,hp});
  for(int x=3;x<MapSize-3;x++)for(int y=3;y<MapSize-3;y++){
   V p{float(x),float(y)};unsigned h=hash(x+91,y+137);

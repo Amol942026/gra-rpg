@@ -590,7 +590,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     const float stride=state.moving?std::sin(cycle):0;
     const float run=species==0&&!rolling&&!striking&&bowDraw<0?std::clamp(state.runBlend,0.f,1.f):0;
     const float lift=state.moving?(1-run)*std::abs(std::cos(cycle))*1.7f+run*(1.5f+.9f*std::cos(cycle*2)):std::sin(state.idleTime*2.4f)*.6f;
-    const float bodyScale=species==4?GuardianBodyScale:species==8?1.18f:1.f;
+    const float bodyScale=species==4?GuardianBodyScale:species==8?treant_gait::Scale:1.f;
     Rig working(x,y,size*bodyScale,state.direction);
     if(state.facingInitialized)working.setFacing(state.facingAngle);
     Rig* cached=nullptr;

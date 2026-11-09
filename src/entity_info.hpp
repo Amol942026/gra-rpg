@@ -23,7 +23,7 @@ inline const EnemyInfo& enemyInfo(int type) {
         {"Kamienny Strażnik","Konstrukt · boss",260,1.35f,25,8,6,DamageType::Magic,.84f,120,1.5f,126},
         {"Dzik","Bestia",88,2.25f,15,4,1,DamageType::Physical,.8f,42,1.25f,69},
         {"Leśny pająk","Jadowita bestia",48,2.8f,13,1,3,DamageType::Magic,.86f,38,1.1f,55},
-        {"Leśny rozbójnik","Człowiek",96,2.2f,18,4,2,DamageType::Physical,.48f,55,1.1f,92},
+        {"Leśny rozbójnik","Człowiek",96,1.85f,18,4,2,DamageType::Physical,.48f,55,1.1f,92},
         {"Ożywione drzewo","Duch kniei",170,1.45f,21,6,5,DamageType::Physical,.94f,65,1.6f,164},
         {"Skorpion bursztynowy","Pustynny pajęczak",82,2.35f,18,3,3,DamageType::Magic,.85f,48,1.35f,93},
         {"Skarabeusz miedziany","Pustynny owad",96,2.1f,17,6,2,DamageType::Physical,.72f,52,1.2f,67},

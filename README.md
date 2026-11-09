@@ -25,7 +25,14 @@ i mocnego ciosu bohatera. Głośniejsza muzyka i miks, domyślnie oba kanały
 włączone (muzyka 85%, efekty 95%). Późniejsze własne ustawienia nadal się
 zapisują. Źródła i odbiór: [fizyczne odgłosy walki](art/audio/physical-20261108/README.md).
 
-Aktualizacja map 08.11.2026: las, pustynia i Kaldera mają teraz **102 × 102
+Aktualizacja map 09.11.2026: każda kraina ma **144 × 144 pola**, prawie
+dwukrotnie większą powierzchnię niż poprzednia mapa 102 × 102. Nowe sektory
+mają łączące się szlaki, osobne grupy przeciwników, dekoracje i 62 dodatkowe
+wzniesienia. Kaldera ma cztery kolejne przeprawy przez lawę. Dwie dekoracje
+zasłaniające główny most zostały usunięte. Istniejące zapisy otrzymują nowy
+teren przy wczytaniu, zachowując postępy, pozycję i łup.
+
+Aktualizacja map 08.11.2026: las, pustynia i Kaldera otrzymały wówczas **102 × 102
 pola** zamiast 72 × 72 — około dwukrotną powierzchnię. Nowe obszary łączą
 odnogi ścieżek i cztery dodatkowe mosty nad lawą. Las ma 91 przeciwników,
 pustynia 55, Kaldera 61; scenografia i dostępne wzniesienia obejmują również
@@ -113,7 +120,7 @@ Menu startowe przedstawia **leśną Bramę Świtu**, narysowaną warstwowo w Kri
 
 Gra zaczyna się w menu **Nowa gra / Wczytaj grę / Opcje / Twórcy / Wyjdź z gry**. Nowa gra rozpoczyna pełny prolog Eldrina. **Escape** zatrzymuje rozgrywkę i otwiera **Zapisz grę / Wczytaj grę / Opcje / Wyjdź z gry**; przycisk **Wróć do gry** lub ponowne Escape wznawia wyprawę. Menu działa także podczas prologu i rozmów. Pomijanie rozmowy pozostaje dostępne przez jej widoczny przycisk.
 
-Są **trzy ręczne sloty** z datą, poziomem i lokacją. Zapisy znajdują się w **`%LOCALAPPDATA%\Emberfall\saves`**, wspólnie dla kolejnych rozpakowań gry. Zachowują postać, ekwipunek, złoto, przydzielone i niewydane punkty, zadania, oba światy, potwory i ich łup, grzyby, skrzynie, piętra i pieczęcie wieży, aktywne efekty oraz dokładny moment rozmowy. Niezatwierdzone wybory punktów trzeba wybrać ponownie; nie są przydzielane automatycznie. Nadpisanie slotu i wczytanie podczas gry wymagają zatwierdzenia. Wyjście ostrzega o utracie niezapisanego postępu; nie ma automatycznego zapisu przy zamykaniu.
+Są **trzy ręczne sloty** z datą, poziomem i lokacją. Zapisy znajdują się w **`%LOCALAPPDATA%\Emberfall\saves`**, wspólnie dla kolejnych rozpakowań gry. Zachowują postać, ekwipunek, złoto, przydzielone i niewydane punkty, zadania, oba światy, potwory i ich łup, grzyby, skrzynie, piętra i pieczęcie wieży, aktywne efekty oraz dokładny moment rozmowy. Niezatwierdzone wybory punktów trzeba wybrać ponownie; nie są przydzielane automatycznie. Nadpisanie slotu i wczytanie podczas gry wymagają zatwierdzenia. Opcja **Wyjdź z gry** w pauzie pozwala wrócić do menu głównego lub zamknąć grę. Obie opcje ostrzegają o utracie niezapisanego postępu.
 
 Pliki `.efs` mają wersjonowany format i kontrolę integralności. Zapis używa pliku tymczasowego i atomowej podmiany. Poprzedni poprawny zapis pozostaje w `.bak`; jeśli główny plik jest uszkodzony, wczytywana jest kopia i pojawia się informacja. Po odczycie gra pozostaje w pauzie do wybrania **Wróć do gry**. Uszkodzony odczyt nie podmienia bieżącej wyprawy.
 
@@ -247,7 +254,7 @@ Teren i dekoracje są przygotowywane raz na starcie. Cichy test `--desert-qa --n
 
 Po pokonaniu Kamiennego Strażnika **zbierz pierwszą część Serca Świtu do plecaka** i wróć w scence do wieży. Podejdź do Eldrina na pierwszym piętrze i porozmawiaj przez **E / LPM / PPM**. Po rozmowie pojawia się wybór **„Przenieś mnie na pustynię.”** albo **„Jeszcze zostanę w wieży.”**. Podróż zaczyna się wyłącznie po kliknięciu pierwszej odpowiedzi; czekanie, Enter i Spacja w oknie wyboru nie przenoszą postaci. ESC zostawia bohatera w wieży. Odjazd i przybycie mają ściemnienie oraz animację magicznego słupa.
 
-**Morze Piasków** to oddzielna mapa **72 × 72 pola**: Brama Piasków, Oaza Bursztynu, Ruiny Słońca i Tron Żywej Wydmy. Ciepły piasek ma wydmowe grzbiety, drobiny i łagodne ścieżki. Świecznikowe kaktusy i kwitnące opuncje mają żebra, kolce i kwiaty; skały warstwy piaskowca, obeliski rzeźbienia, palmy pierścienie pnia oraz falujące liście. Oaza ma miękki brzeg, wodne kręgi i rzeczywistą kolizję wody. Nowe dekoracje przygotowuje się raz w **2× rozdzielczości**, wraz z dokładną maską myszy. Teren i minimapa są również przechowywane na GPU.
+**Morze Piasków** to oddzielna mapa **144 × 144 pola**, m.in. z lokacjami Brama Piasków, Oaza Bursztynu, Ruiny Słońca i Tron Żywej Wydmy. Ciepły piasek ma wydmowe grzbiety, drobiny i łagodne ścieżki. Świecznikowe kaktusy i kwitnące opuncje mają żebra, kolce i kwiaty; skały warstwy piaskowca, obeliski rzeźbienia, palmy pierścienie pnia oraz falujące liście. Oaza ma miękki brzeg, wodne kręgi i rzeczywistą kolizję wody. Nowe dekoracje przygotowuje się raz w **2× rozdzielczości**, wraz z dokładną maską myszy. Teren i minimapa są również przechowywane na GPU.
 
 Na pustyni żyje **27 zwykłych przeciwników**: skorpiony bursztynowe, skarabeusze miedziane i kobry piaskowe. Mają własne modele w **ośmiu kierunkach**, animacje chodu, ataku i bezczynności, patrolowanie oraz rozdzielanie ciał przy zderzeniu. Łup zostaje w ciałach i jest zbierany przez **PPM → przeciągnięcie do plecaka**. Nowe materiały: **żądło skorpiona 60%**, **pancerz skarabeusza 60%**, **łuska kobry 60%** i esencja piasku. Szanse i ilości: `LOOT.md`.
 
@@ -283,7 +290,7 @@ Każdy udany atak bohatera ma **5% szansy na trafienie krytyczne**: zwykły zama
 
 Zwykłe obrażenia mają większe jasne cyfry i ciemny obrys. Krytyk pokazuje **duże złote cyfry, napis KRYTYK! i ciemne tło** przez dłuższy czas. Wyniki unoszą się ponad sylwetką danego przeciwnika, również dużego Strażnika.
 
-**Leczenie** można poznać za **1 punkt umiejętności** po rozdaniu statystyk podczas awansu. **V** lub zielony kafelek **LECZENIE** w HUD przywraca **30 HP za 20 many**, do maksymalnego zdrowia. Działa z każdą bronią i w wieży. Zielone pierścienie i krzyżyki pokazują efekt, a napis podaje rzeczywiście odzyskane HP. Przy pełnym zdrowiu lub niewystarczającej manie akcja nie pobiera kosztu. Odnowienie: **1 s**. Leczenie ma jedną rangę; kolejne punkty nadal można wydawać na dwie umiejętności broni. W sesji deweloperskiej Leczenie jest od razu dostępne.
+**Leczenie** można poznać za **1 punkt umiejętności** po rozdaniu statystyk podczas awansu. **V** przy przypisanym Leczeniu przywraca **30 HP za 20 many**, do maksymalnego zdrowia. Działa z każdą bronią i w wieży. Zielone pierścienie i krzyżyki pokazują efekt, a napis podaje rzeczywiście odzyskane HP. Przy pełnym zdrowiu lub niewystarczającej manie akcja nie pobiera kosztu. Odnowienie: **1 s**. Leczenie ma jedną rangę; kolejne punkty nadal można wydawać na dwie umiejętności broni. W sesji deweloperskiej Leczenie jest od razu dostępne.
 
 Cichy test `--combat-qa --no-audio` sprawdza oba etapy awansu, naukę Leczenia, używanie z mieczem i łukiem oraz w wieży, koszty i wszystkie pięć rodzajów krytycznych ataków. Menu i efekty są renderowane w skalach 80%, 100% i 120%; raporty oraz podglądy: `dist/qa-v30/`. Testy modelu: `tests/critical_healing_tests.hpp`.
 
@@ -296,7 +303,7 @@ Naciśnij **F3** albo kliknij **DEV · F3**. Wybór działa także podczas prolo
 
 Każdy start odnawia HP i manę oraz usuwa stary naciąg, unik, pociski, efekty i otwarte menu łupu. Bohater pojawia się w najbliższym bezpiecznym miejscu, poza przeszkodami i ciałami żywych przeciwników. Wieża jest w sesji testowej odblokowana bez walki z bossem; powrót do lasu z zachowaną postacią zachowuje również postęp zadania. **Nowa sesja przy bossie** pozwala ponownie testować zabicie Strażnika, łup i powrót do Eldrina.
 
-Każda sesja DEV ustawia **poziom 100** i odblokowuje wszystkie umiejętności oraz czary. Start, przeniesienie i restart po śmierci uzupełniają plecak do **100 strzał, 50 mikstur zdrowia i 50 mikstur many**. Zużycie działa podczas walki. Jeśli zabraknie miejsca, przedmioty z plecaka zostają odłożone obok miejsca przybycia.
+Każda sesja DEV ustawia **poziom 100**, odblokowuje wszystkie umiejętności oraz czary i uzupełnia zdrowie oraz manę. Standardowa postać DEV ma **920 HP i 510 many**, z zachowaniem wyższych wartości wynikających z jej atrybutów. Postać DEV jest odporna na obrażenia. Trafienia nadal mogą ją odrzucić lub przewrócić. Start i przeniesienie uzupełniają plecak do **100 strzał, 50 mikstur zdrowia i 50 mikstur many**. Zużycie działa podczas walki. Jeśli zabraknie miejsca, przedmioty z plecaka zostają odłożone obok miejsca przybycia.
 
 **ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu. Otwarta lista zatrzymuje symulację. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. Prolog otwiera **Nowa gra** w głównym menu.
 
@@ -349,10 +356,10 @@ Cichy test `--tower-floors-qa --no-audio` zapisuje pięć pomieszczeń, księgę
 
 Każdy zdobyty poziom daje **5 punktów statystyk oraz 1 punkt umiejętności**. Po zatwierdzeniu statystyk automatycznie otwiera się okno umiejętności. Gra pozostaje zatrzymana do rozdania i zatwierdzenia wszystkich punktów. Kliknij kartę lub przycisk +, a przyciskiem - popraw wybór. Pierwszy punkt odblokowuje umiejętność; kolejne zwiększają jej rangę. Awans o kilka poziomów jednocześnie zachowuje wszystkie należne punkty.
 
-- **Mocne cięcie — Z albo pierwszy nowy kafelek HUD.** Działa wyłącznie z mieczem i kosztuje **10 many**. Ranga 1 zadaje **150% obrażeń zwykłego ataku**; każda kolejna dodaje 10 punktów procentowych tego mnożnika. Trafia przeciwników w dotychczasowym zasięgu miecza i uwzględnia obronę fizyczną. Ma dłuższy, szerszy zamach z pomarańczową smugą i odnowienie **1,2 s**. Łuk, topór i sztylet blokują tę umiejętność.
-- **Przeszywająca strzała — X albo drugi nowy kafelek HUD.** Działa wyłącznie z łukiem. X przygotowuje następny strzał; następnie **przytrzymaj i puść LPM**, tak jak przy zwykłym strzale. Skuteczne wypuszczenie kosztuje **20 many i 1 strzałę**. Ranga 1 trafia do **3 kolejnych przeciwników**, każda kolejna zwiększa limit o 1. **Obrażenia, zasięg i prędkość są takie same jak dla zwykłej strzały przy tym samym naciągu.** Każdy cel otrzymuje obrażenia tylko raz. Przeszkody i granice mapy nadal zatrzymują pocisk. Ma błękitną cięciwę, smugę, celownik i pierścienie trafień oraz odnowienie **1,5 s**. Ponowne X wyłącza przygotowanie bez kosztu.
+- **Mocne cięcie — Z po przypisaniu.** Działa wyłącznie z mieczem i kosztuje **10 many**. Ranga 1 zadaje **150% obrażeń zwykłego ataku**; każda kolejna dodaje 10 punktów procentowych tego mnożnika. Trafia przeciwników w dotychczasowym zasięgu miecza i uwzględnia obronę fizyczną. Ma dłuższy, szerszy zamach z pomarańczową smugą i odnowienie **1,2 s**. Łuk, topór i sztylet blokują tę umiejętność.
+- **Przeszywająca strzała — X po przypisaniu.** Działa wyłącznie z łukiem. X przygotowuje następny strzał; następnie **przytrzymaj i puść LPM**, tak jak przy zwykłym strzale. Skuteczne wypuszczenie kosztuje **20 many i 1 strzałę**. Ranga 1 trafia do **3 kolejnych przeciwników**, każda kolejna zwiększa limit o 1. **Obrażenia, zasięg i prędkość są takie same jak dla zwykłej strzały przy tym samym naciągu.** Każdy cel otrzymuje obrażenia tylko raz. Przeszkody i granice mapy nadal zatrzymują pocisk. Ma błękitną cięciwę, smugę, celownik i pierścienie trafień oraz odnowienie **1,5 s**. Ponowne X wyłącza przygotowanie bez kosztu.
 
-**U** lub przycisk **UMIEJĘTNOŚCI** na prawym HUD otwiera podgląd rang. Nieznane umiejętności i umiejętności niewłaściwe dla broni są przygaszone. Najechanie na kafelek wyjaśnia sterowanie, koszt i blokadę. Menu, zmiana broni, unik i anulowanie strzału nie pobierają kosztu przygotowanej strzały. Koszt jest sprawdzany ponownie przed wypuszczeniem. Oba ataki są fizyczne; zabójstwa zachowują dotychczasowy łup, doświadczenie, awans i fabułę. Walka pozostaje zablokowana w wieży Eldrina.
+**U** lub przycisk **UMIEJĘTNOŚCI** na prawym HUD otwiera podgląd rang. Nieznane umiejętności i umiejętności niewłaściwe dla broni są przygaszone. Najechanie na kafelek wyjaśnia sterowanie, koszt i blokadę. LPM otwiera wybór przypisania w danej kategorii. Menu, zmiana broni, unik i anulowanie strzału nie pobierają kosztu przygotowanej strzały. Koszt jest sprawdzany ponownie przed wypuszczeniem. Oba ataki są fizyczne; zabójstwa zachowują dotychczasowy łup, doświadczenie, awans i fabułę. Walka pozostaje zablokowana w wieży Eldrina.
 
 ## Wersja 0.26 — pierwsza część Serca Świtu i wieża Eldrina
 
@@ -446,7 +453,7 @@ Naprawiono rozbieżność między widocznym kursorem a punktem wskazywanym w grz
 
 ## Wersja 0.16 — domyślny pełny ekran i płynny ruch
 
-Gra uruchamia się domyślnie na **pełnym ekranie**, w rozdzielczości monitora. **F11** lub **OKNO · F11** przywraca okno. Opcjonalny parametr `--windowed` pozwala zacząć od razu w oknie.
+Gra uruchamia się domyślnie na **pełnym ekranie**, w rozdzielczości monitora. **F11** lub wybór **Okno** w opcjach centruje okno w obszarze roboczym monitora. Zwykłe okno centruje się także po przywróceniu z minimalizacji. Opcjonalny parametr `--windowed` pozwala zacząć od razu w oknie.
 
 W wersji 0.16 dodano synchronizację z kompozytorem pulpitu. Wersja 0.19 zastępuje ją synchronizowaną prezentacją DXGI dla widocznego okna, z V-sync OpenGL jako ścieżką zastępczą. Gra unika podwójnego oczekiwania na odświeżenie. Na monitorze 60 Hz celem jest 60 FPS; przy wyższych częstotliwościach wybiera całkowitą liczbę odświeżeń na klatkę (np. 120 Hz → 60 FPS, 144 Hz → 72 FPS), aby ruch miał równy rytm.
 
@@ -464,7 +471,7 @@ Drzewa mają łagodniejszy rytm podmuchów, dokładniejsze uginanie i płynny ru
 
 Drzewa mają animowane korony i gałęzie, które kołyszą się i uginają podczas podmuchów. Pień przy ziemi pozostaje nieruchomy. Każde drzewo ma własną fazę ruchu; podświetlenie i informacje pod kursorem podążają za jego aktualnym kształtem. Na wodzie przesuwają się zmienne, delikatne fale zgodne z kierunkiem wiatru. Animacje zatrzymują się razem ze światem podczas pauzy.
 
-**F11** lub przycisk **PEŁNY EKRAN · F11** u góry HUD przełącza grę na pełny ekran bez ramek, w natywnej rozdzielczości monitora. Ponowne użycie F11 albo przycisku **OKNO · F11** przywraca rozmiar i położenie okna. Przycisk działa także w menu, podczas pauzy i awansu. Proporcje obrazu, czytelność napisów i obsługa ekwipunku myszą są zachowane.
+**F11** lub przycisk **PEŁNY EKRAN · F11** u góry HUD przełącza grę na pełny ekran bez ramek, w natywnej rozdzielczości monitora. Ponowne użycie F11 przywraca rozmiar okna i centruje całą ramkę w dostępnym obszarze ekranu. Przycisk działa także w menu, podczas pauzy i awansu. Proporcje obrazu, czytelność napisów i obsługa ekwipunku myszą są zachowane.
 
 ## Wersja 0.13 — patrole i pusty teren na starcie
 
@@ -572,12 +579,14 @@ Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/E
 | Spacja (pojedyncze naciśnięcie) | Przeturlanie w kierunku ruchu lub ustawienia; odnowienie 1,2 s |
 | LPM na mapie (pojedyncze kliknięcie) | Jeden zamach; wszyscy przeciwnicy w promieniu 2,1 pola |
 | Najazd kursorem na potwora lub obiekt | Informacje w sekcji POD KURSOREM po prawej |
-| V / kafelek LECZENIE | Poznane Leczenie: +30 HP za 20 many |
+| V | Przypisane Leczenie przywraca do 30 HP za 20 many |
+| LPM na kafelku Z, X lub V | Menu przypisania umiejętności do danej kategorii |
 | C | Rzucenie wybranego poznanego czaru w stronę kursora; koszt w księdze K |
 | PPM na ciele potwora | Otwarcie jego łupu w prawym HUD |
 | K / kliknięcie kafelka czaru | Księga czarów i wybór czaru |
 | P / STATYSTYKI w prawym HUD | Karta statystyk bohatera |
-| 1 / 2 | Mikstura zdrowia / many z plecaka |
+| 1 / 2 | Wypij przypisaną miksturę zdrowia / many |
+| LPM na kafelku mikstury | Menu przypisania mikstury do klawisza 1 / 2 |
 | PPM na miksturze w plecaku lub panelu przedmiotów na ziemi | Wypicie wskazanej mikstury |
 | LPM + przeciągnięcie | Przenoszenie przedmiotów |
 | F1 | Pomoc |
@@ -589,7 +598,7 @@ Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/E
 | Enter po śmierci | Nowa wyprawa |
 | F12 | Zrzut wyświetlonego obrazu do `screenshots/emberfall-v31.png` obok EXE |
 
-Klikalne przyciski akcji na dole pozwalają wybierać czar, pić mikstury i robić unik. Ikona miecza jest wskaźnikiem ataku pod LPM. Utrata aktywności okna pauzuje rozgrywkę.
+Klikalne przyciski akcji na dole pozwalają wybierać czar, przypisywać mikstury i robić unik. Ikona miecza jest wskaźnikiem ataku pod LPM. Utrata aktywności okna pauzuje rozgrywkę.
 
 ## Loot i ekwipunek
 
@@ -659,11 +668,11 @@ Start-Process .\dist\Emberfall.exe -ArgumentList '--start','tower-3','--dev-smok
 
 Pierwsza komenda renderuje 180 klatek i zapisuje zrzut. Druga wykonuje 13 sprawdzeń interakcji, używając tych samych funkcji wskazywania, rozpoczynania i kończenia przeciągania co mysz; raport zapisuje do `dist/interaction-test-v29.txt`. Nie jest to automatyzacja urządzenia wejściowego systemu Windows. Benchmark uruchamia 900 klatek z ruchem kamery, walką, unikami, podświetlaniem i wiatrem, a `--windowed --large` wybiera okno 1920 × 1080. Raporty mają nazwy `benchmark-v29.txt`, `benchmark-v29-large.txt` i `benchmark-v29-fullscreen.txt`. `--visual-qa` eksportuje arkusze animacji oraz podglądy interfejsu w trzech skalach do `dist/qa-v02`. `--hover-qa` wykonuje 24 sprawdzenia wskazywania i eksportuje podglądy do `dist/qa-v04`. `--roll-qa` zapisuje arkusz przewrotów (8 kierunków × 12 klatek) w `assets/generated/v04/hero-roll.png` obok EXE oraz podglądy w `dist/qa-v04`. Testy w `tests/roll_tests.hpp` sprawdzają szybkość, kierunki uniku, kolizje, ochronę, odnowienie i niezależność od FPS.
 
-Gra synchronizuje klatki z monitorem, celując w 60 FPS na ekranie 60 Hz; osiągana płynność zależy od komputera i obciążenia systemu. Logika korzysta z rzeczywistego czasu między klatkami. Podłoże i podstawowe grafiki dekoracji są renderowane do tekstur przy starcie, a korony drzew są deformowane podczas rysowania każdej klatki. Fale na wodzie są animowane osobno pod lądem.
+Gra synchronizuje klatki z monitorem, celując w 60 FPS na ekranie 60 Hz; osiągana płynność zależy od komputera i obciążenia systemu. Logika korzysta z rzeczywistego czasu między klatkami. Podłoże i podstawowe grafiki dekoracji są renderowane do tekstur przy starcie, a korony drzew są deformowane podczas rysowania każdej klatki. Ciemna woda wokół lasu ma szybko płynące fale o różnych wysokościach, cienkie refleksy i krótkie grzbiety wygasające przy brzegu. Zagęszczone fale unoszą się nad taflą jako animowane profile 2D. Zawijające się grzbiety mają cienkie włókna piany, a po ich zboczach spływają smugi wody. Warstwy wody są pomijane w głębi lądu.
 
 W wersji 0.25 aktualne raporty wydajności i ekwipunku mają przyrostek `v25`. Eksporty `--hover-qa` i `--roll-qa` pozostają w `dist/qa-v04`. `--audio-qa` sprawdza rzeczywisty mikser, wszystkie efekty, granicę pętli muzycznej, wyciszanie, utratę aktywności okna, sumowanie efektów i zapis ustawień; raporty oraz podglądy panelu i nowych przycisków HUD zapisuje w `dist/qa-v09`. Nie zmienia ustawień gracza. Wariant `--no-audio` sprawdza działanie z pominiętym urządzeniem audio. `audio/create_audio.py` odtwarza zasoby z syntezy przy użyciu NumPy i SoundFile; nie jest uruchamiany przy starcie ani kompilacji gry.
 
-`--environment-qa` porównuje maskę wskazywania drzewa z jego faktycznie wyrenderowanym, poruszającym się kształtem w ośmiu pozycjach i skalach. Sprawdza zmiany pikseli wody i nieruchomy ląd, podświetlenie i HUD, rzeczywiste przejścia okno–pełny ekran, przywrócenie rozmiaru, pozycji i maksymalizacji, zachowanie menu awansu oraz mapowanie wszystkich pól plecaka. Raport i obrazy są w `dist/qa-v14`. `--fullscreen` pozwala też uruchomić grę lub benchmark bezpośrednio na pełnym ekranie.
+`--environment-qa` porównuje maskę wskazywania drzewa z jego faktycznie wyrenderowanym, poruszającym się kształtem w ośmiu pozycjach i skalach. Sprawdza zmiany pikseli wody i nieruchomy ląd, podświetlenie i HUD, rzeczywiste przejścia okno–pełny ekran, dopasowanie ramki do obszaru roboczego i centrowanie po zdarzeniu przywrócenia, zachowanie menu awansu oraz mapowanie wszystkich pól plecaka. Raport i obrazy są w `dist/qa-v14`. `--fullscreen` pozwala też uruchomić grę lub benchmark bezpośrednio na pełnym ekranie.
 
 `--presentation-qa` sprawdza końcowy obraz w buforze ekranu, po przejściu przez rzeczywistą ścieżkę wyświetlania gry. Wykrywa przycięcie znaczników przy wszystkich czterech narożnikach, przy czterech rozmiarach okna i odziedziczonych transformacjach DPI 100/125/150/200% (bez zmiany ustawień Windows). Sprawdza też mapowanie plecaka i płynne zmiany pikseli drzew oraz wody w kolejnych 45 klatkach. Raport i pełne zrzuty okna są w `dist/qa-v15`.
 

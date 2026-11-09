@@ -67,7 +67,25 @@ int main(int argc,char** argv){
  openPauseMenu();menuPageTo(MenuPage::Load);menuSlot=0;
  auto primary=menuStore().path(0),recovery=fs::path(primary.wstring()+L".bak");{std::ofstream out(primary,std::ios::binary|std::ios::trunc);out<<"broken";}{std::ofstream out(recovery,std::ios::binary|std::ios::trunc);out<<"also broken";}
  auto live=saves::encode({game,intro,towerStory,{}});menuLoad();check(saves::encode({game,intro,towerStory,{}})==live&&!menuNotice.empty(),"failed load leaves live session byte-for-byte unchanged");menuPageTo(MenuPage::Home);
- click(3);check(menuPage==MenuPage::Exit&&!exitRequested,"pause exit confirmation");shot("exit-ingame");click(0);check(exitRequested,"confirmed exit sets actual application loop condition");exitRequested=false;
+ click(3);check(menuPage==MenuPage::Exit&&menuRowCount()==3&&menuSelection==2&&!exitRequested,"pause exit shows both destinations and selects Cancel");
+ for(float factor:{.8f,1.f,1.2f}){
+  prepareCanvas(factor);shot("exit-ingame-"+std::to_string(int(factor*100)));
+  const char* labels[]={"Wróć do menu głównego","Zamknij grę","Anuluj · ESC"};
+  for(int row=0;row<3;row++)check(textWidth(labels[row],22)<menuRowRect(row).width-44,"each Polish exit label fits at current scale");
+ }
+ prepareCanvas(1);key(0,true);
+ check(paused&&!welcome&&menuPage==MenuPage::Home&&!exitRequested&&saves::encode({game,intro,towerStory,{}})==live,"default Enter cancels exit without changing the session");
+ click(3);key(0,false,true);check(paused&&menuPage==MenuPage::Home&&!exitRequested,"Escape cancels exit and stays paused");
+ const auto savedPath=menuStore().path(1);const auto slotBefore=saves::readBytes(savedPath);
+ click(3);click(0);
+ check(welcome&&!paused&&!exitRequested&&menuPage==MenuPage::Home&&!intro.active()&&!towerStory.active()&&game.hp==100&&game.gold==0&&!gameplayInputAllowed(),"return to main menu ends the expedition without closing the application");
+ check(saves::readBytes(savedPath)==slotBefore,"return to title leaves the last saved slot byte for byte");
+ shot("exit-back-at-title");
+ click(1);click(1);check(paused&&!welcome&&game.allocationRequired,"saved expedition is still loadable from the returned title");
+ click(3);key(-1);key(0,true);
+ check(exitRequested&&!welcome,"keyboard selects Close game and sets the application loop exit condition");exitRequested=false;
+ click(3);click(1);check(exitRequested,"mouse Close game also sets the actual application loop condition");exitRequested=false;
+ check(IsWindowHidden(),"the menu diagnostic never restores the game window");
  check(!audioSystem.available&&audioSystem.playedEffects==0,"no playback during entire diagnostic");check(!fs::exists(menuSaveRoot/"slot-4.efs"),"only three slots used");
  forestMenuChecks(output,check);
  menu_scene::unload();

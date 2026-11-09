@@ -54,7 +54,8 @@ Sprzet mozna tez przeciagnac z ciala lub skrzyni wprost na noszone eq.
 Zastepowany przedmiot trafia do plecaka; musi byc na niego miejsce.
 Przeciagnij przedmiot z plecaka na pasujacy slot ekwipunku.
 Najazd na przedmiot - opis i rzadkosc; na obiekt lub bestie - informacje.
-1 / 2 - mikstura zdrowia / many.
+1 / 2 - uzyj przypisanej mikstury zdrowia / many.
+LPM na kafelku mikstury otwiera wybor przypisania.
 PPM na miksturze lub grzybie w plecaku - uzyj. Grzyb odnawia 10 HP.
 C - rzuc wybrany czar w kierunku kursora. K - wybor czaru.
 Po pokonaniu Kamiennego Straznika Eldrin uczy zaklec w swojej wiezy.
@@ -66,6 +67,7 @@ K otwiera ksiege poznanych czarow. Mana odnawia sie o 1 punkt co 5 sekund.
 Z - Mocne ciecie (miecz, 10 many).
 X - Przeszywajaca strzala (luk, 20 many).
 V - Leczenie (30 HP za 20 many).
+LPM na kafelku Z, X lub V otwiera menu przypisania umiejetnosci.
 U - umiejetnosci. P - statystyki.
 Po awansie rozdaj 5 punktow statystyk i 1 punkt umiejetnosci.
 Okna P / U nie maja przyciskow plus/minus; przy awansie uzyj DODAJ / COFNIJ.
@@ -86,6 +88,7 @@ Cena kupna jest dwukrotnie wyzsza. Monety w plecaku sluza do placenia.
 Fragmentow Serca Switu nie mozna sprzedac. Saldo zlota widac w HUD.
 Brak miejsca lub zlota nie powoduje utraty przedmiotow ani pieniedzy.
 F1 - pomoc. Esc - menu pauzy z zapisem, odczytem i opcjami.
+Wyjdz z gry w pauzie pozwala wrocic do menu glownego lub zamknac gre.
 Esc w menu pauzy / Wroc do gry - wznow. Enter po smierci - nowa wyprawa.
 Muzyka i efekty: osobne przelaczniki i suwaki w Opcjach menu glownego oraz pauzy Esc.
 Domyslnie oba kanaly sa wlaczone: muzyka 85%, efekty 95%.

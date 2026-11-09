@@ -24,6 +24,7 @@ Test_kaldery.bat i Test_Varkhora.bat uruchamiaja wybrany punkt od razu.
 NOWA SESJA TESTOWA tworzy nowa wyprawe i zywych bossow.
 PRZENIES OBECNA POSTAC zachowuje sprzet, statystyki, zdobyte punkty i postep walk.
 W obu opcjach postac ma poziom 100 i zna wszystkie umiejetnosci oraz czary.
+Domyslnie ma pelne 920 HP i 510 many. Postac DEV jest odporna na obrazenia.
 Plecak jest uzupelniany do 100 strzal i po 50 mikstur zdrowia oraz many.
 Gdy plecak jest pelny, przedmioty potrzebne do zwolnienia miejsca trafiaja na ziemie obok postaci.
 Aktywne pociski, erupcje i przewrocenie sa czyszczone podczas teleportu.

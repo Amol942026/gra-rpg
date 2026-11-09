@@ -68,7 +68,7 @@ void advanceBoarCharge(Enemy& e,float dt,V heroFrom,V heroTo,bool wasRolling,flo
   if(!e.boarHit&&!dead()&&contact<=travel){
    e.boarHit=true;V heroAt=from+(to-from)*contact;
    if(wasRolling&&!sandTrapped()&&rollAge+elapsed+used*contact<RollProtection){sound(Cue::Dodge,heroAt);effects.push_back({heroAt,"UNIK",.65f,3});}
-   else{float damage=incomingDamage(float(e.damage()),DamageType::Physical)*BoarChargeDamageMultiplier;hp=std::max(0.f,hp-damage);hurt=.25f;sound(dead()?Cue::Death:Cue::Hurt,heroAt);effects.push_back({heroAt,"-"+std::to_string(int(damage)),.8f,4});}
+   else takeMonsterDamage(incomingDamage(float(e.damage()),DamageType::Physical)*BoarChargeDamageMultiplier,heroAt,.25f);
   }
   e.pos=e.pos+delta*travel;e.boarRush=std::max(0.f,e.boarRush-used);remaining-=used;elapsed+=used;
   if(obstacle<=1||e.boarRush<.000001f){if(obstacle<=1)sound(Cue::Step,e.pos);finishBoarCharge(e);}

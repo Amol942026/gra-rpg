@@ -29,7 +29,8 @@ inline void groundQuad(Texture2D texture,const std::array<V,4>& points,float u0=
 inline std::array<V,4> bridgeDeck(int index){
  const float y=VolcanoBridges[index].y;
  const V center{lavaCenter(VolcanoBridgeRivers[index],y),y};
- return {center+V{-5.3f,-2.8f},center+V{-5.3f,2.8f},center+V{5.3f,2.8f},center+V{5.3f,-2.8f}};
+ const float span=VolcanoBridgeHalfSpan,depth=VolcanoBridgeHalfDepth;
+ return {center+V{-span,-depth},center+V{-span,depth},center+V{span,depth},center+V{span,-depth}};
 }
 inline void canyonFace(const CanyonFace& face){std::array<Vector2,4> p;for(int i=0;i<4;i++){p[i]=projected(face.corners[i]);p[i].y+=face.depth[i];}textured(channelWall,p,face.from,0,face.to,1);}
 inline int variant(const Prop& p){return Game::hash(int(std::round(p.pos.x*4))+p.type*131,int(std::round(p.pos.y*4))+53)%8;}

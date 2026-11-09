@@ -1,61 +1,78 @@
 #pragma once
 
-// Version 0.17's water algorithm is the independent visual reference for the
-// viewport culling and sine reuse. Used only by the explicit diagnostic.
-namespace performance_reference {
-void wave(Vector2 p,float width,float phase,Color color){
-    float feather=1.1f/renderScale;
-    auto vertex=[&](float x,float y,float opacity){rlColor4ub(color.r,color.g,color.b,(unsigned char)(color.a*opacity));rlTexCoord2f(.5f,.5f);rlVertex2f(x,y);};
-    rlSetTexture(rlGetTextureIdDefault());rlBegin(RL_QUADS);
-    for(int i=0;i<14;i++){
-        float a=-1+2.f*i/14,b=-1+2.f*(i+1)/14;
-        float x0=p.x+a*width,x1=p.x+b*width;
-        float y0=p.y+a*width*.12f+std::sin(a*PI+phase)*1.4f,y1=p.y+b*width*.12f+std::sin(b*PI+phase)*1.4f;
-        float edges[]={-.38f-feather,-.38f,.38f,.38f+feather},coverage[]={0,1,1,0};
-        for(int strip=0;strip<3;strip++){
-            vertex(x0,y0+edges[strip],(1-a*a)*coverage[strip]);vertex(x0,y0+edges[strip+1],(1-a*a)*coverage[strip+1]);
-            vertex(x1,y1+edges[strip+1],(1-b*b)*coverage[strip+1]);vertex(x1,y1+edges[strip],(1-b*b)*coverage[strip]);
-        }
-    }
-    rlEnd();rlSetTexture(0);
-}
-void water(){
-    int px=int(std::floor(game.player.x)),py=int(std::floor(game.player.y));
-    for(int x=px-30;x<=px+30;x++)for(int y=py-30;y<=py+30;y++){
-        if(x>=1&&x<=MapSize-2&&y>=1&&y<=MapSize-2)continue;
-        unsigned hash=Game::hash(x,y);
-        V origin{float(x)+float(hash%89)/100.f-.44f,float(y)+float((hash>>8)%89)/100.f-.44f};
-        float cycle=game.time*.20f+float(hash%997)/997.f,travel=cycle-std::floor(cycle),envelope=std::sin(travel*PI);
-        Vector2 p=screen(origin+V{.8f,-.24f}*(travel-.5f));
-        if(p.x<-40||p.x>WorldW+40||p.y<-30||p.y>H+30)continue;
-        float gust=windGust(origin,game.time),width=12+float(hash%14)+gust*4,phase=game.time*1.3f+origin.x*.8f+origin.y*.6f;
-        wave(p,width,phase,Fade(rgb(100,156,151),envelope*envelope*(.20f+gust*.22f)));
-        wave({p.x-5,p.y+8},width*.45f,phase+.8f,Fade(rgb(57,107,108),envelope*envelope*.35f));
-    }
-}
-}
-
 bool runPerformanceQA(){
     fs::create_directories("qa-v18");std::ofstream report("qa-v18/performance-tests.txt");int checks=0,failures=0;
     auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
     check(!audioSystem.available,"performance diagnostic has no audio device");
     check(!performance.enabled,"normal rendering never uses blocking GPU profiling barriers");
     RenderTexture2D sample=LoadRenderTexture(WorldW,H);renderScale=1;
-    for(V camera:{V{15,15},V{2,15},V{MapWalkMax,15},V{15,2},V{15,MapWalkMax},V{1.6f,1.6f},V{MapWalkMax,MapWalkMax},V{21,5}})for(float time:{0.f,.65f,1.93f}){
-        game.player=camera;game.time=time;
-        BeginTextureMode(sample);ClearBackground(rgb(22,44,47));performance_reference::water();EndTextureMode();
-        Image reference=LoadImageFromTexture(sample.texture);
-        BeginTextureMode(sample);ClearBackground(rgb(22,44,47));drawWindWater();EndTextureMode();
-        Image optimized=LoadImageFromTexture(sample.texture);Color* a=LoadImageColors(reference);Color* b=LoadImageColors(optimized);
-        int maximum=0,largeChanges=0;
-        for(int i=0;i<WorldW*H;i++){
-            int delta=std::max({std::abs(int(a[i].r)-b[i].r),std::abs(int(a[i].g)-b[i].g),std::abs(int(a[i].b)-b[i].b)});
-            maximum=std::max(maximum,delta);largeChanges+=delta>1;
+    check(forest_water::cameraLocation>=0&&forest_water::timeLocation>=0,"the forest water shader has live projection and time uniforms");
+    auto drawSurface=[&](float time){
+        game.time=time;BeginTextureMode(sample);ClearBackground(BLANK);forest_water::draw();EndTextureMode();
+        Image im=LoadImageFromTexture(sample.texture);ImageFlipVertical(&im);return im;
+    };
+    for(V camera:{ForestArrival,V{MapWalkMin,72},V{MapWalkMax,72},V{72,MapWalkMin},V{72,MapWalkMax}}){
+        game.player=camera;
+        Image first=drawSurface(.4f),second=drawSurface(1.8f);
+        auto* a=static_cast<Color*>(first.data);auto* b=static_cast<Color*>(second.data);
+        int changed=0,dark=0,bright=0;
+        for(int i=0;i<WorldW*H;i++)if(a[i].a){
+            dark+=a[i].g<95;bright+=a[i].g>155;changed+=std::abs(int(a[i].g)-b[i].g)>8;
         }
-        report<<"Camera="<<camera.x<<','<<camera.y<<"; time="<<time<<"; max pixel delta="<<maximum<<"; changes >1="<<largeChanges<<'\n';
-        check(maximum<=3&&largeChanges<50,"optimized water retains visible waves, including all shores and corners");
-        UnloadImageColors(a);UnloadImageColors(b);UnloadImage(reference);UnloadImage(optimized);
+        report<<"Coast "<<camera.x<<','<<camera.y<<"; wave pixels="<<changed<<"; bright crests="<<bright<<'\n';
+        check(changed>12000&&dark>10000&&bright>1000,"each shore has varied, readable and time-dependent wave crests");
+        UnloadImage(first);UnloadImage(second);
     }
+    game.player={72,72};Image inland=drawSurface(1.f);
+    auto* pixels=static_cast<Color*>(inland.data);
+    check(std::none_of(pixels,pixels+WorldW*H,[](Color c){return c.a!=0;}),"inland frames skip the water pass");
+    UnloadImage(inland);
+    game.player=ForestArrival;
+    BeginTextureMode(sample);ClearBackground(BLANK);terrain_surface::draw(terrain.texture);EndTextureMode();
+    Image shore=LoadImageFromTexture(sample.texture);ImageFlipVertical(&shore);
+    pixels=static_cast<Color*>(shore.data);
+    int stray=0,ground=0;Vector2 origin=screenFlat({0,0});
+    for(int y=0;y<H;y++)for(int x=0;x<WorldW;x++)if(pixels[y*WorldW+x].a>30){
+        float dx=(x+.5f-origin.x)/80,dy=(y+.5f-origin.y)/40;
+        float wx=dx+dy,wy=dy-dx;
+        if(wx<-3||wy>MapSize+2)stray++;else ground++;
+    }
+    check(stray==0&&ground>100000,"the start corner has continuous land and no wrapped grass in the water");
+    UnloadImage(shore);
+    using namespace forest_wave_crests;
+    const auto arrivalCrests=collect(origin,1.f);
+    check(forest_wave_crests::timeLocation>=0&&std::any_of(arrivalCrests.crests.begin(),arrivalCrests.crests.begin()+arrivalCrests.count,
+          [](const Crest& c){return c.height>=60&&c.center.x>=40&&c.center.x<WorldW-40&&c.center.y>120&&c.center.y<H;}),
+          "visible high crests are active near the forest arrival");
+    int displayedCrests=0;
+    for(int frame=0;frame<20;frame++){
+        const auto waves=collect(origin,frame*.35f);
+        for(int i=0;i<waves.count;i++){
+            const Crest& c=waves.crests[i];
+            if(c.center.x>=0&&c.center.x<WorldW&&c.center.y>=0&&c.center.y<H&&c.opacity>=.20f&&c.height>=10)
+                displayedCrests++;
+        }
+    }
+    report<<"Visible crests across 20 arrival samples: "<<displayedCrests<<'\n';
+    check(displayedCrests>=180,"the forest arrival sustains the denser crest field over a full wave cycle");
+    Crest crest{{224,505},{.94f,.342f},{-.342f,.94f},137,98,48,1,2.4f,.45f};
+    auto profileTop=[&](const Crest& shape){
+        BeginTextureMode(sample);ClearBackground(BLANK);
+        BeginShaderMode(forest_wave_crests::material);
+        SetShaderValue(forest_wave_crests::material,forest_wave_crests::timeLocation,&game.time,SHADER_UNIFORM_FLOAT);
+        drawProfile(shape,origin,forest_water::variation,game.time,Face,false);
+        EndShaderMode();EndTextureMode();
+        Image profile=LoadImageFromTexture(sample.texture);ImageFlipVertical(&profile);
+        auto* colors=static_cast<Color*>(profile.data);int top=H;
+        for(int y=0;y<H&&top==H;y++)for(int x=213;x<235;x++)if(colors[y*WorldW+x].a>90){top=y;break;}
+        UnloadImage(profile);return top;
+    };
+    int raisedTop=profileTop(crest);crest.height=0;
+    int flatTop=profileTop(crest);
+    report<<"Raised crest silhouette: "<<flatTop-raisedTop<<" pixels above the flat profile"<<'\n';
+    check(raisedTop>=0&&flatTop<H&&flatTop-raisedTop>=55,"large waves physically extend above their projected water footprint");
+    game.player={72,72};
+    check(collect(screenFlat({0,0}),1.4f).count==0,"raised waves are culled in the interior of the forest");
     UnloadRenderTexture(sample);refreshDisplayLayout();size_t prepared=typography.atlasCount();
     for(int scenario=0;scenario<10;scenario++){
         game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;mouse={0,0};dragging={};

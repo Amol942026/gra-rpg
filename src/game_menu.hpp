@@ -12,17 +12,23 @@ std::array<ember::saves::Entry,3> menuSaves{};
 fs::path menuSaveRoot;
 ember::saves::Store menuStore(){return menuSaveRoot.empty()?ember::saves::Store{}:ember::saves::Store{menuSaveRoot};}
 bool gameMenuActive(){return welcome||paused;}
-void menuPageTo(MenuPage page){menuPage=page;menuSelection=0;menuNotice.clear();}
+void menuPageTo(MenuPage page){menuPage=page;menuSelection=page==MenuPage::Exit&&paused?2:0;menuNotice.clear();}
 void refreshMenuSaves(){
  try{auto store=menuStore();for(int i=0;i<3;i++)menuSaves[i]=store.inspect(i);}catch(...){menuSaves={};menuNotice="Katalog zapisów jest niedostępny.";}
 }
 void clearTransientUi(){
- dragging={};inventoryClicks.clear();audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=help=false;
+ quickPickerSlot=-1;dragging={};inventoryClicks.clear();audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=help=false;
  audioDragging=-1;towerPanelOpen=false;towerPanelObject=-1;towerPage=nearbyPage=corpsePage=0;corpsePageOwner=-1;hovered={};
  statDraft={};skillDraft={};draftForLevel=skillDraftLevel=-1;
 }
 void openPauseMenu(){game.cancelBow();clearTransientUi();paused=true;menuPageTo(MenuPage::Home);}
 void resumeFromMenu(){paused=false;menuPageTo(MenuPage::Home);}
+void menuReturnToTitle(){
+ clearTransientUi();invalidatePausedWorld();
+ game=Game{};intro={};towerStory={};spellLessonOpen=false;spellBookNotice.clear();
+ developerActive=developerMenuOpen=false;developerError.clear();
+ welcome=true;paused=false;menuClock=0;menuPageTo(MenuPage::Home);
+}
 void menuNewGame(){game=Game(std::random_device{}());clearTransientUi();menuPageTo(MenuPage::Home);startIntro();}
 void menuSave(){
  try{menuStore().save(menuSlot,{game,intro,towerStory,{}});menuPageTo(MenuPage::Save);refreshMenuSaves();menuNotice="Zapisano wyprawę w slocie "+std::to_string(menuSlot+1)+".";}
@@ -50,6 +56,7 @@ Rectangle menuSlotButton(int i){return {380,300.f+i*116,680,96};}
 Rectangle menuOption(int i){return {395,307.f+i*67,650,51};}
 Rectangle menuScreenChoice(bool fullscreen){return {fullscreen?852.f:660.f,menuOption(2).y+7,184,37};}
 Rectangle menuConfirmButton(int i){return {405.f+i*325,532,305,58};}
+Rectangle menuExitButton(int i){return {478,397.f+i*78,484,58};}
 void menuHomeAction(int index){
 #ifndef EMBERFALL_PLAYER_BUILD
  if(welcome&&index==5){openDeveloperMenu();return;}
@@ -76,22 +83,30 @@ void activateMenuRow(int row){
   return;
  }
  if(menuPage==MenuPage::Credits||menuPage==MenuPage::Controls){menuBack();return;}
+ if(menuPage==MenuPage::Exit){
+  if(welcome){if(row==0)exitRequested=true;else menuBack();}
+  else if(row==0)menuReturnToTitle();
+  else if(row==1)exitRequested=true;
+  else menuBack();
+  return;
+ }
  if(row==1){menuBack();return;}
- if(menuPage==MenuPage::Exit)exitRequested=true;
- else if(menuPage==MenuPage::Overwrite)menuSave();
+ if(menuPage==MenuPage::Overwrite)menuSave();
  else if(menuPage==MenuPage::ReplaceSession)menuLoad();
 }
 int menuRowCount(){
 #ifndef EMBERFALL_PLAYER_BUILD
  if(welcome&&menuPage==MenuPage::Home)return 6;
 #endif
+ if(menuPage==MenuPage::Exit&&!welcome)return 3;
  switch(menuPage){case MenuPage::Home:return 5;case MenuPage::Load:case MenuPage::Save:return 4;case MenuPage::Options:return 6;case MenuPage::Credits:case MenuPage::Controls:return 1;default:return 2;}
 }
 Rectangle menuRowRect(int i){
  if(menuPage==MenuPage::Home)return !welcome&&i==4?menuBackButton():menuHomeButton(i);
  if(menuPage==MenuPage::Load||menuPage==MenuPage::Save)return i==3?menuBackButton():menuSlotButton(i);
  if(menuPage==MenuPage::Options)return i==5?menuBackButton():menuOption(i);
- if(menuPage==MenuPage::Credits||menuPage==MenuPage::Controls)return menuBackButton();return menuConfirmButton(i);
+ if(menuPage==MenuPage::Credits||menuPage==MenuPage::Controls)return menuBackButton();
+ return menuPage==MenuPage::Exit&&!welcome?menuExitButton(i):menuConfirmButton(i);
 }
 // Shared event dispatcher makes mouse and keyboard use precisely the same actions.
 bool gameMenuEvent(bool escape,int vertical,bool accept,bool click,int horizontal=0){
@@ -143,8 +158,8 @@ void menuHeading(const std::string& title,const std::string& subtitle){
 struct ControlBinding {const char* key;const char* action;};
 constexpr ControlBinding expeditionControls[]={
  {"WSAD","Ruch"},{"Shift","Bieg (przytrzymaj)"},{"Spacja","Unik"},{"LPM","Miecz: kliknij · łuk: napnij i puść"},
- {"C / K","Rzuć czar / otwórz księgę czarów"},{"Z / X / V","Silne cięcie / przebicie / leczenie"},
- {"1 / 2","Mikstura zdrowia / many"},{"Q","Koło wyboru broni"},{"E","Interakcja z pobliskim obiektem"}
+ {"C / K","Rzuć czar / otwórz księgę czarów"},{"Z / X / V","Użyj przypisanej umiejętności"},
+ {"1 / 2","Użyj przypisanej mikstury HP / MP"},{"Q","Koło wyboru broni"},{"E","Interakcja z pobliskim obiektem"}
 };
 constexpr ControlBinding interfaceControls[]={
  {"PPM","Otwórz ciało / użyj przedmiotu"},{"2× LPM","Zbierz łup / załóż wyposażenie"},
@@ -240,11 +255,16 @@ void drawGameMenu(){
   center("Manrope — Mikhail Sharanda i współtwórcy",720,591,17,Muted);
   center("Pełne informacje o licencjach: LICENSES.md oraz assets/licenses",720,650,15,Gold);
   menuButton(menuBackButton(),"Wstecz · ESC",0);
+ }else if(menuPage==MenuPage::Exit&&!welcome){
+  menuHeading("ŻAR POCZEKA","Wybierz, jak zakończyć wyprawę");
+  center("Niezapisany postęp bieżącej wyprawy zostanie utracony.",720,332,19,Text);
+  menuButton(menuExitButton(0),"Wróć do menu głównego",0);
+  menuButton(menuExitButton(1),"Zamknij grę",1);
+  menuButton(menuExitButton(2),"Anuluj · ESC",2);
  }else{
   bool exiting=menuPage==MenuPage::Exit,overwriting=menuPage==MenuPage::Overwrite;
   menuHeading(exiting?"ŻAR POCZEKA":overwriting?"NADPISAĆ KRONIKĘ?":"WCZYTAĆ WYPRAWĘ?",exiting?"Zakończyć grę?":overwriting?"Slot "+std::to_string(menuSlot+1)+" zawiera już zapis":"Powrót do zapisanej wyprawy");
   center(welcome?"Do świata Emberfall możesz wrócić w każdej chwili.":overwriting?"Poprzedni zapis zachowamy jako kopię zapasową.":"Niezapisany postęp bieżącej wyprawy zostanie utracony.",720,399,19,Text);
-  center(exiting&&!welcome?"Wybierz Anuluj, aby wrócić i zapisać grę.":"",720,439,17,Muted);
   menuButton(menuConfirmButton(0),exiting?"Wyjdź z gry":overwriting?"Zapisz grę":"Wczytaj grę",0);
   menuButton(menuConfirmButton(1),"Anuluj · ESC",1);
  }

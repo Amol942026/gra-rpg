@@ -1,11 +1,9 @@
 #pragma once
 
 // The sword tile indicates the world-click attack; UI clicks never swing it.
-bool gameplayInputAllowed(){return !developerMenuOpen&&!towerPanelOpen&&!intro.active()&&!towerStory.active()&&!game.storyBlocked()&&!weaponWheelOpen&&!welcome&&!help&&!paused&&!audioOpen&&!statsOpen&&!skillsOpen&&!spellBookOpen&&!game.allocationRequired&&!game.dead();}
+bool gameplayInputAllowed(){return !developerMenuOpen&&!towerPanelOpen&&!intro.active()&&!towerStory.active()&&!game.storyBlocked()&&!weaponWheelOpen&&!welcome&&!help&&!paused&&!audioOpen&&!statsOpen&&!skillsOpen&&!spellBookOpen&&quickPickerSlot<0&&!game.allocationRequired&&!game.dead();}
 void activateMouseAction(int index,V movement) {
     if(index==1)openSpellBook();
-    if(index==2)game.potion(Kind::Health);
-    if(index==3)game.potion(Kind::Mana);
     if(index==4)game.startRoll(movement);
 }
 V combatAimFromPointer(){
@@ -64,9 +62,26 @@ bool activateGameplaySkill(Skill skill){
  if(!used){game.say(game.sandTrapped()&&skill!=Skill::Healing?"Piaskowe więzienie blokuje ataki.":game.skillRank(skill)<=0?"Najpierw naucz się tej umiejętności (U).":!game.skillWeaponMatches(skill)?"Ta umiejętność wymaga odpowiedniej broni.":skill==Skill::Healing&&game.hp>=game.maxHp()?"Zdrowie jest już pełne.":"Za mało many, brak strzał lub odnowienie umiejętności.");game.sound(Cue::Reject,game.player);}
  return used;
 }
+bool activateSkillSlot(Skill skill){
+ if(!gameplayInputAllowed()||dragging.place!=Place::None)return false;
+ if(game.skillAssigned[int(skill)])return activateGameplaySkill(skill);
+ game.say("Brak przypisania. Kliknij kafelek, aby wybrać umiejętność.");return false;
+}
+bool activatePotionSlot(int slot){
+ if(!gameplayInputAllowed())return false;
+ const Kind kind=game.potionAssigned[slot];
+ if(kind!=Kind::None)return game.potion(kind);
+ game.say("Brak przypisania. Kliknij kafelek, aby wybrać miksturę.");return false;
+}
+constexpr int QuickPickerSlotCount=SkillCount+int(DefaultPotions.size());
+Rectangle quickPickerTile(int slot){
+ return slot<SkillCount?skillActionRect(slot):actionRect(slot-SkillCount+2);
+}
 void leftClickGameplay(V movement,double now=GetTime()){
     if(!gameplayInputAllowed()||dragging.place!=Place::None){inventoryClicks.clear();return;}
-    for(int i=0;i<SkillCount;i++)if(inside(skillActionRect(i))){activateGameplaySkill(static_cast<Skill>(i));return;}
+    for(int i=0;i<QuickPickerSlotCount;i++)if(inside(quickPickerTile(i))){
+        inventoryClicks.clear();game.cancelBow();quickPickerSlot=i;return;
+    }
     if((game.openedCorpse>=0||game.openedChest>=0)&&inside(corpseCloseRect())){game.closeCorpse();return;}
     for(int i=0;i<5;i++)if(inside(actionRect(i))){activateMouseAction(i,movement);return;}
     if(mouse.y>=668&&mouse.y<696&&mouse.x>=1286&&mouse.x<1404){if(game.findCorpse(game.openedCorpse)){syncCorpsePage();corpsePage=std::clamp(corpsePage+(mouse.x<1344?-1:1),0,corpsePages()-1);}else nearbyPage+=mouse.x<1344?-1:1;return;}

@@ -18,8 +18,8 @@
 #include "generated/creature_motion_data.hpp"
 
 namespace ember {
-constexpr int LegacyMapSize=72,MapSize=102, BagSize=25, EquipSize=6;
-constexpr int WorldExpansionRevision=1;
+constexpr int LegacyMapSize=72,PreviousMapSize=102,MapSize=144, BagSize=25, EquipSize=6;
+constexpr int WorldExpansionRevision=2;
 constexpr int MushroomCount=48,MushroomHealing=10;
 inline std::int64_t experienceForLevel(int level){std::int64_t n=std::clamp(level,1,100000);return 100*n+2*n*(n-1);}
 constexpr int WeaponWheelSize=8;
@@ -197,6 +197,8 @@ struct Game {
  std::vector<Boulder> boulders;std::vector<BoulderImpact> boulderImpacts;
  Attributes attributes{};int attributePoints=0;bool allocationRequired=false;
  SkillRanks skillRanks{};int skillPoints=0;
+ std::array<bool,SkillCount> skillAssigned{{true,true,true}};
+ std::array<Kind,DefaultPotions.size()> potionAssigned=DefaultPotions;
  float healingCd=0,healingPulse=0;
  float strongCutCd=0,piercingArrowCd=0,meleeDuration=SwingDuration;bool swingStrong=false,piercingArrowArmed=false,lastBowPiercing=false;
  std::vector<PierceFlash> pierceFlashes;
@@ -312,8 +314,17 @@ struct Game {
  static bool onPath(int x,int y){return forestPath({float(x),float(y)});}
  static const char* region(V pos){return forestRegion(pos);}
  int attribute(Attribute a)const{return attributes[int(a)];}
- int maxHp()const{return 100+attribute(Attribute::Vitality)*10;}
- int maxMana()const{return 100+attribute(Attribute::Mana)*5;}
+ // DEV uses the resource attributes of an evenly developed character at this level.
+ int developerResourceFloor()const{return developerSession?(level-1)*PointsPerLevel/AttributeCount:0;}
+ int maxHp()const{return 100+std::max(attribute(Attribute::Vitality),developerResourceFloor())*10;}
+ int maxMana()const{return 100+std::max(attribute(Attribute::Mana),developerResourceFloor())*5;}
+ void takeMonsterDamage(float damage,V at,float hurtDuration=0){
+  if(developerSession)return;
+  hp=std::max(0.f,hp-damage);
+  if(hurtDuration>0)hurt=hurtDuration;
+  sound(dead()?Cue::Death:Cue::Hurt,at);
+  effects.push_back({at,"-"+std::to_string(int(damage)),.8f,4});
+ }
  int damage()const{return 8+attribute(Attribute::Strength)*2+power(equipment[0])+power(equipment[5]);}
  int magicDamage()const{return 28+attribute(Attribute::MagicPower)*3;}
  int defense()const{int a=attribute(Attribute::Defense);for(int i=1;i<5;i++)a+=power(equipment[i]);return a;}
@@ -434,7 +445,10 @@ struct Game {
  #include "trade_system.hpp"
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
- void potion(Kind k){for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty()){use({Place::Bag,i});return;}say("Brak mikstury w plecaku.");}
+ bool potion(Kind k){
+  for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty())return use({Place::Bag,i});
+  say("Brak mikstury w plecaku.");return false;
+ }
  bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inVolcano()&&(volcanoLava(p)||nearVolcanoFountain(p)))return false;if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
  float elevation(V p)const{return terrain_height::height(location,p);}
  float surfaceDistance(V a,V b)const{return terrain_height::surfaceDistance(location,a,b);}
@@ -557,7 +571,9 @@ struct Game {
     float overlap=0;
     for(size_t i=0;i<enemies.size();i++)for(size_t j=i+1;j<enemies.size();j++){
      auto& a=enemies[i];auto& b=enemies[j];if(!a.alive||!b.alive)continue;
-     V delta=a.pos-b.pos;float d=length(delta),clearance=a.radius()+b.radius()+.002f;
+     V delta=a.pos-b.pos;float clearance=a.radius()+b.radius()+.002f;
+     if(outsideCircleBounds(delta,clearance))continue;
+     float d=length(delta);
      if(d>=clearance)continue;
      // Stable fallback also separates creatures spawned at identical positions.
      float angle=float(hash(std::min(a.id,b.id),std::max(a.id,b.id))%6283)*.001f;
@@ -646,7 +662,7 @@ struct Game {
    if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(!(inVolcano()&&volcanoRanged(e.type)))sound(enemyAttackCue(e.type),e.pos);if(inVolcano()&&volcanoRanged(e.type)){if(visible&&d<EnemySightRange)launchCinder(e);}
    else if(d<(e.type==DesertBossType||e.type==VolcanoBossType?2.15f:1.6f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
-    else if(!dead()){float dmg=incomingDamage(float(e.damage()),e.attackType());hp=std::max(0.f,hp-dmg);hurt=.2f;sound(dead()?Cue::Death:Cue::Hurt,player);effects.push_back({player,"-"+std::to_string(int(dmg)),.8f,4});}
+    else if(!dead())takeMonsterDamage(incomingDamage(float(e.damage()),e.attackType()),player,.2f);
    }}continue;}
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
@@ -666,6 +682,7 @@ struct Game {
    if(e.type>=VolcanoFirstType)advanceVolcanoAnimation(e,movement,dt);
    else if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
+   else if(e.type==6)grounded_gait::advance(e.animation,movement.x,movement.y,dt,grounded_gait::Bandit);
    else e.animation.advance(movement.x,movement.y,dt,false,!e.boarBusy());
    if(e.boarBusy())faceBoarCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);
    if(e.abilityBusy())faceEnemyAbility(e);

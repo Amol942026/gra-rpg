@@ -4,8 +4,10 @@ void spellLearningSaveTests(){
  check(migrated.game.selectedSpell==Spell::None&&migrated.game.learnedSpells==0,"authentic v14 save applies the requested purchase gate without free legacy spells");
  check(migrated.game.hp==87&&migrated.game.mana==71&&migrated.game.gold==1420&&migrated.game.bag[9].count==100&&migrated.game.sounds.back().cue==Cue::BowDraw,"v14 migration preserves resources, bag money and old cue IDs");
  check(migrated.game.fireballs.size()==1&&migrated.game.fireballs[0].spell==Spell::Fireball&&migrated.game.fireballs[0].age==0&&migrated.game.explosions[0].spell==Spell::Fireball,"legacy in-flight fire and impact receive their original element safely");
- saves::Archive header(true,bytes);std::string magic;int version;size_t size;uint64_t hash;header(magic,version,size,hash);auto projected=migrated;projected.game.selectedSpell=Spell::Fireball;saves::Archive old(false,{},14);old(projected);
- check(version==14&&old.bytes==bytes.substr(header.at),"every v14 payload byte outside the explicitly changed selection policy remains intact");roundtrip(migrated);
+ saves::Archive header(true,bytes);std::string magic;int version;size_t size;uint64_t hash;header(magic,version,size,hash);
+ saves::Snapshot original;saves::Archive payload(true,bytes.substr(header.at),14);payload(original);
+ verifyAndAlignWorldExpansion(original,migrated);original.game.volcanoSceneryVersion=migrated.game.volcanoSceneryVersion;
+ check(version==14&&saves::encode(original)==saves::encode(migrated),"v14 payload preserves every field outside world expansion and the spell purchase gate");roundtrip(migrated);
  for(unsigned mask=0;mask<8;mask++){
   saves::Snapshot s;s.game.learnedSpells=mask;
   for(auto spell:{Spell::Fireball,Spell::IceShard,Spell::LightningOrb})if(mask&spellBit(spell)){

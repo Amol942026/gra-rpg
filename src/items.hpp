@@ -6,6 +6,13 @@ enum class Kind { None,Sword,Axe,Helmet,Armor,Shield,Boots,Ring,Health,Mana,Crys
  WolfFang,WolfFur,BoarTusk,BoarHide,SpiderSilk,VenomSac,BoneShard,SlimeGel,AncientBark,ForestEssence,BanditBadge,RuneStone,Dagger,Cloak,Amulet,Mushroom,Bow,Arrow,DawnShard,ScorpionSting,ScarabShell,CobraScale,SandEssence,WolfKnife,WolfCloak,MoonBow,BoarArmor,TuskAxe,SilkBoots,VenomRing,WebCowl,BoneHelmet,CryptSword,BanditBow,BanditBoots,RootShield,GroveAmulet,GelAmulet,GuardianSword,GuardianArmor,GuardianHelmet,EchoRing,StingDagger,ScarabHelmet,ScarabArmor,CobraBoots,MirageBow,SunAmulet,DuneBlade,SandRobe,DuneShield,SlimeBlade,SlimeCowl,SlimeRing,WolfHood,WolfBoots,WolfHeartAmulet,BoneShield,BoneArmor,GraveBow,GuardianBoots,GuardianShield,GuardianAxe,BoarBoots,BoarShield,BoarHelm,SpiderDagger,WebRobe,NightSilkCloak,BanditSword,BanditHelm,OutlawRing,BarkHelm,RootBoots,GroveBow,ScorpionAxe,StingShield,AmberRing,ScarabBoots,ScarabAxe,ScarabRing,CobraCloak,ScaleShield,SerpentAmulet,DuneBoots,DuneHelmet,DawnBow,
  TrailFalchion,BirchBow,CopperHatchet,FlintDagger,DewSword,SunTrailSword,BasaltCleaver,GlassDagger,OasisBow,AshBow,Count };
 constexpr int ItemKindCount=int(Kind::Count);
+inline constexpr std::array<Kind,2> DefaultPotions{{Kind::Health,Kind::Mana}};
+struct PotionType { Kind kind; int slot; };
+inline constexpr PotionType PotionTypes[]={{Kind::Health,0},{Kind::Mana,1}};
+inline constexpr int potionSlotFor(Kind kind){
+ for(const auto& type:PotionTypes)if(type.kind==kind)return type.slot;
+ return -1;
+}
 enum class Rarity { Common, Rare, VeryRare, ExtremelyRare };
 struct GearDefinition { const char* name; Kind shape; Rarity rarity; int basePower; const char* description; };
 inline constexpr std::array<GearDefinition,74> BeastGear{{

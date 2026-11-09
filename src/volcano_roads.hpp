@@ -26,9 +26,11 @@ inline float distanceTo(V p){
   if(x*x+y*y>=result*result)continue;result=std::min(result,desertSegmentDistance(p,s.a,s.b));
  }return result;
 }
-inline float coverage(V p){
+inline constexpr float FeatherLimit=2.4f;
+inline float coverage(V p,float distance){
  float width=1.7f+.12f*std::sin(p.x*2.3f+p.y*.8f)+.06f*std::sin(p.y*4.2f-p.x);
- float t=std::clamp((distanceTo(p)-(width-.5f))/1.f,0.f,1.f);
+ float t=std::clamp((distance-(width-.5f))/1.f,0.f,1.f);
  return 1-t*t*(3-2*t);
 }
+inline float coverage(V p){return coverage(p,distanceTo(p));}
 }

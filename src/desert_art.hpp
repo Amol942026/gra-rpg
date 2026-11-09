@@ -118,7 +118,7 @@ void make(){
  for(int sum=0;sum<MapSize*2;sum++)for(int x=1;x<MapSize-1;x++){int y=sum-x;if(y<1||y>=MapSize-1)continue;groundTile(x,y,TerrainOriginX+(x-y)*40,90+(x+y)*20);}
  drawRoads();
  // Large smooth ridges are baked across tile boundaries; no square sand grid.
- for(int i=0;i<420;i++){unsigned h=Game::hash(i,443);V pos{4.f+h%(MapSize-8),4.f+(h>>8)%(MapSize-8)};if(desertPath(pos)||distance(pos,DesertOasis)<6||distance(pos,DesertBossHome)<7)continue;
+ for(int i=0;i<420*MapSize*MapSize/(PreviousMapSize*PreviousMapSize);i++){unsigned h=Game::hash(i,443);V pos{4.f+h%(MapSize-8),4.f+(h>>8)%(MapSize-8)};if(desertPath(pos)||distance(pos,DesertOasis)<6||distance(pos,DesertBossHome)<7)continue;
   float x=TerrainOriginX+(pos.x-pos.y)*40,y=90+(pos.x+pos.y)*20,w=38+h%54,hh=8+(h>>15)%13;
   softShape({{x-w,y},{x-w*.48f,y-hh*.7f},{x+w*.12f,y-hh},{x+w*.74f,y-hh*.3f},{x+w,y+2},{x+w*.2f,y+hh*.7f},{x-w*.52f,y+hh*.4f}},rgb(220,173,109));
   curve({x-w*.94f,y},{x-w*.25f,y-hh*1.23f},{x+w*.22f,y-hh*1.27f},{x+w*.91f,y+1},rgb(244,203,143),1.1f);

@@ -1,36 +1,76 @@
 #pragma once
-#include "../src/generated/creature_motion_data.hpp"
 void treantTests(){
- using namespace ember::treant_gait;
- for(int heading=0;heading<8;heading++)for(int fps:{30,60,120})for(float speed:{1.45f,1.45f*PatrolSpeedFactor}){
-  float angle=heading*AnimationPi/4,fx=std::cos(angle),fy=std::sin(angle)/.52f,n=std::hypot(fx,fy);fx/=n;fy/=n;
-  V direction=normalized({(fx/40+fy*.52f/20)*.5f,(fy*.52f/20-fx/40)*.5f});
-  V step=direction*(speed/fps),pos{};AnimationState state;state.phase=.08f;state.moveBlend=1;state.motionInitialized=true;
-  float maxSlip=0;int contactSamples=0;
-  for(int frame=0;frame<fps*3;frame++){
-   auto before=state;V old=pos;pos=pos+step;advance(state,step.x,step.y,1.f/fps);
-   for(float side:{0.f,.5f}){
-    float p0=std::fmod(before.phase+side,1.f),p1=std::fmod(state.phase+side,1.f);
-    if(p1>=p0&&p0<Support-.02f&&p1<Support-.02f){
-     float f0=creature_motion::sample(5,p0).travel*Stride*Scale,f1=creature_motion::sample(5,p1).travel*Stride*Scale;
-     float sx=(pos.x-pos.y-old.x+old.y)*40+(f1-f0)*fx;
-     float sy=(pos.x+pos.y-old.x-old.y)*20+(f1-f0)*fy*.52f;
-     maxSlip=std::max(maxSlip,std::hypot(sx,sy));contactSamples++;
+ using namespace ember::grounded_gait;
+ for(int type:{7,6}){
+  const auto& contact=type==7?ember::treant_gait::Contact:Bandit;
+  for(int heading=0;heading<8;heading++)for(int fps:{30,60,120})for(float speed:{enemySpeed(type),enemySpeed(type)*PatrolSpeedFactor}){
+   float angle=heading*AnimationPi/4;
+   float fx=std::cos(angle),fy=std::sin(angle)/.52f,n=std::hypot(fx,fy);fx/=n;fy/=n;
+   V direction=normalized({(std::cos(angle)/40+std::sin(angle)/20)*.5f,(std::sin(angle)/20-std::cos(angle)/40)*.5f});
+   V step=direction*(speed/fps);
+   AnimationState state;state.phase=.08f;state.moveBlend=1;state.motionInitialized=true;
+   float maxSlip=0;int contactSamples=0;
+   for(int frame=0;frame<fps*3;frame++){
+    auto before=state;advance(state,step.x,step.y,1.f/fps,contact);
+    const auto previous=pose(before,1,contact),current=pose(state,1,contact);
+    for(int side=0;side<2;side++){
+     const auto& a=previous.legs[side];const auto& b=current.legs[side];
+     float p0=std::fmod(before.phase+side*.5f,1.f),p1=std::fmod(state.phase+side*.5f,1.f);
+     if(p1>=p0&&p0<contact.support-.02f&&p1<contact.support-.02f){
+      float travel=(b.forward-a.forward)*contact.scale;
+      float sx=(step.x-step.y)*40+travel*fx,sy=(step.x+step.y)*20+travel*fy*.52f;
+      maxSlip=std::max(maxSlip,std::hypot(sx,sy));contactSamples++;
+     }
     }
    }
+   check(contactSamples>fps&&maxSlip<.003f,"support foot stays planted at every direction, speed and FPS");
+   float expected=std::fmod(.08f+phaseDistance(step.x*fps*3,step.y*fps*3,contact),1.f);
+   check(std::abs(std::remainder(state.phase-expected,1.f))<.00005f,"cadence follows ground distance, not elapsed time");
   }
-  check(contactSamples>fps&&maxSlip<.003f,"treant support foot remains planted in screen space at every direction, speed and FPS");
-  float expected=std::fmod(.08f+phaseDistance(step.x*fps*3,step.y*fps*3),1.f);
-  check(std::abs(std::remainder(state.phase-expected,1.f))<.00005f,"treant cadence depends on real ground distance, not elapsed time");
+  AnimationState state;
+  for(int frame=0;frame<=240;frame++)for(float blend:{0.f,.4f,1.f}){
+   state.phase=frame/240.f;
+   const auto gait=pose(state,blend,contact);
+   for(const auto& leg:gait.legs){
+    const auto k=leg.joint;
+    check(std::abs(std::hypot(k.forward,k.height-gait.hip)-contact.legLength)<.001f&&
+          std::abs(std::hypot(leg.forward-k.forward,leg.height-k.height)-contact.legLength)<.001f,
+          "upper and lower leg lengths stay constant through walking and the idle transition");
+    const float dz=leg.height-gait.hip,distance=std::hypot(leg.forward,dz);
+    const float bend=(leg.forward*(k.height-gait.hip)-dz*k.forward)/distance;
+    const float minBend=type==7?.12f:.04f;
+    check(bend>=minBend*contact.legLength,"knees bend forward and never lock");
+   }
+  }
+  for(int side=0;side<2;side++){
+   state.phase=contact.support*.5f+side*.5f;
+   const auto gait=pose(state,1,contact);
+   const auto& planted=gait.legs[side];const auto& swing=gait.legs[1-side];
+   const float extension=std::hypot(planted.forward,planted.height-gait.hip);
+   const float minExtension=type==7?1.96f:1.99f,maxExtension=type==7?1.986f:1.999f;
+   check(std::abs(planted.height-FootHeight)<.0001f&&extension>minExtension*contact.legLength&&extension<maxExtension*contact.legLength,
+         "the weight-bearing leg reaches its species-specific extension without locking");
+   check(swing.height>FootHeight+1&&swing.joint.forward>swing.forward*.5f+1,
+         "the other knee flexes to clear the ground");
+   if(type==6){
+    state.phase=.21f+side*.5f;
+    const auto transfer=pose(state,1,contact);
+    const auto& support=transfer.legs[side];
+    check(std::abs(support.height-FootHeight)<.0001f&&
+          std::hypot(support.forward,support.height-transfer.hip)>1.98f*contact.legLength&&
+          transfer.legs[1-side].height>FootHeight+1,
+          "the bandit keeps an extended support leg as the trailing foot lifts");
+   }
+  }
+  state.phase=.23f;
+  for(int i=0;i<60;i++)advance(state,0,0,1.f/60,contact);
+  check(state.phase==.23f&&!state.moving,"a blocked or attacking enemy cannot walk in place");
+  Game g;g.props.clear();g.enemies.clear();g.player={17,17};
+  g.enemies.push_back({91,type,{14,14},{14,14},170,170});
+  auto& enemy=g.enemies[0];enemy.attack=1000;
+  V before=enemy.pos;float phase=enemy.animation.phase;
+  g.update(.05f,{},false);V moved=enemy.pos-before;
+  check(length(moved)>0&&std::abs(enemy.animation.phase-std::fmod(phase+phaseDistance(moved.x,moved.y,contact),1.f))<.00001f,
+        "actual enemy simulation uses the resolved ground distance");
  }
- for(int frame=0;frame<=240;frame++){
-  auto k=creature_motion::sample(5,frame/240.f);float foot=k.travel*Stride,z=4+k.lift*Lift,hip=40+k.bob;
-  auto p=knee(foot,hip,z);
-  check(std::abs(std::hypot(p.forward,p.height-hip)-LegLength)<.001f&&std::abs(std::hypot(foot-p.forward,z-p.height)-LegLength)<.001f,"treant leg lengths stay constant through full step");
- }
- AnimationState blocked;blocked.phase=.23f;for(int i=0;i<60;i++)advance(blocked,0,0,1.f/60);
- check(blocked.phase==.23f&&!blocked.moving,"blocked or attacking treant cannot walk in place");
- Game g;g.props.clear();g.enemies.clear();g.player={17,17};g.enemies.push_back({91,7,{14,14},{14,14},170,170});
- V before=g.enemies[0].pos;float phase=g.enemies[0].animation.phase;g.update(.05f,{},false);V moved=g.enemies[0].pos-before;
- check(length(moved)>0&&std::abs(g.enemies[0].animation.phase-std::fmod(phase+phaseDistance(moved.x,moved.y),1.f))<.00001f,"actual enemy simulation uses calibrated treant gait");
 }

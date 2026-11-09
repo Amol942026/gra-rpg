@@ -78,27 +78,111 @@ void drawSkillsMenu(){
  center(game.skillAllocationPending()?"ZATWIERDŹ I WRÓĆ DO GRY":"WRÓĆ DO GRY",720,690,18,ready?Gold:Muted);
  center(game.skillAllocationPending()?"Gra pozostaje zatrzymana do rozdania punktów umiejętności.":"Z / X — umiejętności broni · V — Leczenie",720,749,14,Muted);
 }
+constexpr const char* skillSlotKeys[]={"Z","X","V"};
+constexpr const char* skillSlotCategories[]={"W ZWARCIU","DYSTANSOWE","POMOCNICZE"};
+struct PotionPickerChoices {
+ std::array<Kind,std::size(PotionTypes)+1> kinds{};
+ int count=0;
+};
+PotionPickerChoices potionPickerChoices(int slot){
+ PotionPickerChoices choices;
+ for(const auto& type:PotionTypes)if(type.slot==slot)choices.kinds[choices.count++]=type.kind;
+ choices.kinds[choices.count++]=Kind::None;
+ return choices;
+}
+Rectangle quickPickerBounds(int slot,int rowCount){
+ const float height=78.f+57.f*rowCount;
+ return {quickPickerTile(slot).x,792.f-height,350,height};
+}
+Rectangle quickPickerOption(Rectangle bounds,int row){
+ return {bounds.x+12,bounds.y+52.f+57.f*row,bounds.width-24,49};
+}
+bool quickPickerEvent(bool dismiss,bool click){
+ if(quickPickerSlot<0)return false;
+ if(dismiss){quickPickerSlot=-1;return true;}
+ if(!click)return true;
+ const int slot=quickPickerSlot;
+ for(int i=0;i<QuickPickerSlotCount;i++)if(inside(quickPickerTile(i))){
+  quickPickerSlot=i==slot?-1:i;return true;
+ }
+ const bool skill=slot<SkillCount;
+ const auto potions=potionPickerChoices(slot-SkillCount);
+ const int count=skill?2:potions.count;
+ const auto bounds=quickPickerBounds(slot,count);
+ for(int row=0;row<count;row++)if(inside(quickPickerOption(bounds,row))){
+  if(skill){
+   if(row==0&&game.skillRank(Skill(slot))<=0)return true;
+   game.skillAssigned[slot]=row==0;
+  }else game.potionAssigned[slot-SkillCount]=potions.kinds[row];
+  quickPickerSlot=-1;audioSystem.play(Cue::Ui);return true;
+ }
+ if(!inside(bounds))quickPickerSlot=-1;
+ return true;
+}
+void drawQuickPicker(){
+ if(quickPickerSlot<0)return;
+ const int slot=quickPickerSlot;
+ const bool isSkill=slot<SkillCount;
+ const int potionSlot=slot-SkillCount;
+ const auto potions=potionPickerChoices(potionSlot);
+ const int count=isSkill?2:potions.count;
+ const auto bounds=quickPickerBounds(slot,count);
+ panel(bounds,rgb(14,23,28,252));DrawRectangleLinesEx(bounds,1,Fade(Gold,.8f));
+ const char* category=isSkill?skillSlotCategories[slot]:potionSlot==0?"MIKSTURY ZDROWIA":"MIKSTURY MANY";
+ const char* key=isSkill?skillSlotKeys[slot]:potionSlot==0?"1":"2";
+ txt(category,bounds.x+16,bounds.y+13,17,Gold,true);
+ txt(key,bounds.x+bounds.width-31,bounds.y+14,17,Gold);
+ line(bounds.x+12,bounds.y+42,bounds.x+bounds.width-12,bounds.y+42,Line);
+ for(int i=0;i<count;i++){
+  const auto row=quickPickerOption(bounds,i);
+  const Kind potion=isSkill?Kind::None:potions.kinds[i];
+  const bool hasItem=isSkill?i==0:potion!=Kind::None;
+  const bool enabled=!isSkill||!hasItem||game.skillRank(Skill(slot))>0;
+  const bool selected=isSkill?game.skillAssigned[slot]==hasItem:game.potionAssigned[potionSlot]==potion;
+  panel(row,enabled&&inside(row)?rgb(45,56,52):Card);
+  DrawRectangleLinesEx(row,1,selected?Gold:Line);
+  if(!hasItem)line(row.x+15,row.y+25,row.x+29,row.y+25,Muted,2);
+  else if(isSkill)skillIcon(Skill(slot),row.x+22,row.y+25,.53f,enabled?1.f:.42f);
+  else icon(item(potion),row.x+22,row.y+25,.62f);
+  const std::string title=!hasItem?"Bez przypisania":isSkill?skillName(Skill(slot)):itemName(item(potion));
+  txt(title,row.x+47,row.y+4,17,enabled?Text:Muted);
+  const char* detail=!enabled?"Zablokowana · poznaj w menu U":selected?"Przypisane":hasItem?"Przypisz do kafelka":"Wyłącz skrót dla tej kategorii";
+  txt(detail,row.x+47,row.y+25,14,enabled&&selected?Gold:Muted);
+ }
+ txt("ESC — zamknij",bounds.x+15,bounds.y+bounds.height-25,14,Muted);
+}
 void drawSkillHud(){
- const char* keys[]={"Z · 10 MP","X · 20 MP","V · 20 MP"};const char* labels[]={"CIĘCIE","STRZAŁA","LECZENIE"};
+ const char* labels[]={"CIĘCIE","STRZAŁA","LECZENIE"};
  for(int i=0;i<SkillCount;i++){
-  Skill skill=static_cast<Skill>(i);Rectangle button=skillActionRect(i);bool learned=game.skillRank(skill)>0,weapon=game.skillWeaponMatches(skill),ready=game.skillAllowed(skill),armed=i==1&&game.piercingArrowArmed;
-  panel(button,armed?rgb(31,62,66):Panel);DrawRectangleLinesEx(button,1,armed?rgb(126,215,232):ready&&inside(button)?Gold:Line);
-  skillIcon(skill,button.x+33,button.y+23,.72f,learned&&weapon?1.f:.3f);
-  if(!learned){
-   float x=button.x+33,y=button.y+23;
-   ellipseOutline(x,y-4,5,6,Muted);
-   rect(x-8,y-3,16,13,Panel);DrawRectangleLinesEx({x-8,y-3,16,13},1,Muted);
-   rect(x-1,y,2,5,Muted);
+  Skill skill=Skill(i);Rectangle button=skillActionRect(i);const bool assigned=game.skillAssigned[i];
+  bool learned=game.skillRank(skill)>0,weapon=game.skillWeaponMatches(skill);
+  bool armed=assigned&&skill==Skill::PiercingArrow&&game.piercingArrowArmed;
+  const bool highlighted=quickPickerSlot==i||(gameplayInputAllowed()&&inside(button));
+  panel(button,armed?rgb(31,62,66):highlighted?Card:Panel);
+  DrawRectangleLinesEx(button,1,armed?rgb(126,215,232):highlighted?Gold:Line);
+  if(assigned){
+   skillIcon(skill,button.x+33,button.y+23,.72f,learned&&weapon?1.f:.3f);
+   if(!learned){
+    float x=button.x+33,y=button.y+23;
+    ellipseOutline(x,y-4,5,6,Muted);
+    rect(x-8,y-3,16,13,Panel);DrawRectangleLinesEx({x-8,y-3,16,13},1,Muted);
+    rect(x-1,y,2,5,Muted);
+   }
+   float cooldown=i==0?game.strongCutCd/StrongCutCooldown:i==1?game.piercingArrowCd/PiercingArrowCooldown:game.healingCd/HealingCooldown;
+   if(cooldown>0)rect(button.x+1,button.y+1,button.width-2,(button.height-2)*std::clamp(cooldown,0.f,1.f),Fade(Ink,.65f));
+  }else line(button.x+24,button.y+23,button.x+42,button.y+23,Muted,2);
+  center(assigned?TextFormat("%s · %d MP",skillSlotKeys[i],i==0?10:20):skillSlotKeys[i],button.x+32,button.y+46,14,assigned&&learned&&weapon?Gold:Muted);
+  center(assigned?(learned?labels[i]:"ZABLOK."):"PUSTY",button.x+32,870,14,Muted);
+  if(!inside(button)||!gameplayInputAllowed())continue;
+  const float x=button.x,y=608;
+  panel({x,y,378,174},rgb(12,22,25,250));
+  txt(assigned?skillName(skill):"Bez przypisania",x+15,y+13,20,Text);
+  if(assigned){
+   txt(TextFormat("%s · Koszt %d many",i==2?(learned?"Poznane":"Nieznane"):TextFormat("Ranga %d",game.skillRank(skill)),i==0?10:20),x+15,y+45,15,Gold);
+   txt(!learned?"Naucz się po awansie (U).":!weapon?(i==0?"Wymagany miecz.":"Wymagany łuk."):i==0?"Z wykonuje mocne cięcie.":i==1?"X przygotowuje strzałę. Naciągnij i puść LPM.":"V przywraca do 30 HP.",x+15,y+72,15,Muted);
+   txt(i==0?"150% obrażeń na randze 1.":i==1?"Obrażenia takie jak zwykły strzał.":"Pełne HP: bez kosztu many.",x+15,y+98,15,i==2?Green:Gold);
+   if(armed)txt("Przeszywająca strzała gotowa",x+15,y+146,14,Green);
   }
-  float cooldown=i==0?game.strongCutCd/StrongCutCooldown:i==1?game.piercingArrowCd/PiercingArrowCooldown:game.healingCd/HealingCooldown;
-  if(cooldown>0)rect(button.x+1,button.y+1,button.width-2,(button.height-2)*std::clamp(cooldown,0.f,1.f),Fade(Ink,.65f));
-  center(keys[i],button.x+32,button.y+46,14,learned&&weapon?Gold:Muted);
-  center(learned?labels[i]:"ZABLOK.",button.x+32,870,learned?14:12,Muted);
-  if(!inside(button)||welcome||help||paused||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||intro.active()||towerStory.active()||towerPanelOpen||developerMenuOpen)continue;
-  float x=button.x,y=635;panel({x,y,356,147},rgb(12,22,25,250));txt(skillName(skill),x+15,y+13,20,Text);
-  txt(TextFormat("%s · Koszt %d many",i==2?(learned?"Poznane":"Nieznane"):TextFormat("Ranga %d",game.skillRank(skill)),i==0?10:20),x+15,y+46,15,Gold);
-  txt(!learned?"Naucz się po awansie (U).":!weapon?(i==0?"Zablokowane: wymagany miecz.":"Zablokowane: wymagany łuk."):i==0?"Z: wykonaj mocne cięcie.":i==1?"X: przygotuj, LPM: naciągnij i puść.":"V: przywróć 30 HP, niezależnie od broni.",x+15,y+75,15,Muted);
-  txt(i==0?"150% obrażeń na randze 1.":i==1?"Obrażenia takie jak zwykły strzał.":"Pełne HP: nie zużywa many.",x+15,y+104,15,i==2?Green:Gold);
-  if(armed)txt("Przeszywająca strzała gotowa",x+15,y+128,14,Green);
+  txt("LPM — wybierz przypisanie",x+15,y+(assigned?121:45),15,Gold);
  }
 }
