@@ -4,6 +4,7 @@
 #include <cmath>
 #include "generated/hero_motion_data.hpp"
 #include "generated/hero_walk_data.hpp"
+#include "generated/hero_run_arms_data.hpp"
 #include "hero_secondary.hpp"
 namespace ember::hero_motion {
 using Bone=data::Bone;
@@ -92,9 +93,47 @@ inline void secondary(Pose& pose,hero_secondary::Key key){
  bend(pose,data::UpperArmR,axisAngle({1,0,0},-key.armSwing));
  pose.bind();
 }
+inline run_synfig::Key runArmKey(float phase){
+ constexpr int last=sizeof(run_synfig::keys)/sizeof(run_synfig::keys[0])-1;
+ float position=(phase-std::floor(phase))*last;int i=std::min(int(position),last-1);
+ float t=position-i;const auto a=run_synfig::keys[i],b=run_synfig::keys[i+1];
+ return {a.swing+(b.swing-a.swing)*t,a.flex+(b.flex-a.flex)*t,a.tuck+(b.tuck-a.tuck)*t,
+         a.shoulder+(b.shoulder-a.shoulder)*t};
+}
+inline LocalPose runningPose(float phase){
+ auto local=sample(data::RunClip,phase);
+ auto gripRotation=[&](){
+  return mul(local[data::UpperArmR].q,mul(local[data::ForearmR].q,local[data::HandR].q));
+ };
+ const Quat swordCarry=mul(gripRotation(),local[data::Weapon].q);
+ const Quat spineInverse=conjugate(restRotation(data::Spine));
+ for(int side=0;side<2;side++){
+  const int upper=side?data::UpperArmR:data::UpperArmL;
+  const int fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;
+  const float sign=side?1.f:-1.f;const auto key=runArmKey(phase+side*.5f);
+  // Tilt before pitching so the elbows retain their width at the top
+  // of the swing and the forearms bring the wrists slightly inward.
+  const Vec down{0,0,-13};
+  const Quat elbowTilt=axisAngle({0,1,0},sign*key.tuck);
+  const Quat wristTilt=axisAngle({0,1,0},sign*3.5f);
+  const Vec upperVector=rotate(mul(axisAngle({1,0,0},key.swing),elbowTilt),down);
+  const Vec foreVector=rotate(mul(axisAngle({1,0,0},key.swing+key.flex),wristTilt),down);
+  const Quat upperRotation=mul(fromTo(restHead(fore)-restHead(upper),upperVector),restRotation(upper));
+  const Quat foreRotation=mul(fromTo(restHead(hand)-restHead(fore),foreVector),restRotation(fore));
+  local[upper].p=local[upper].p+rotate(spineInverse,{0,key.shoulder,0});
+  local[upper].q=mul(spineInverse,upperRotation);
+  local[fore]={rotate(conjugate(upperRotation),upperVector),mul(conjugate(upperRotation),foreRotation)};
+  local[hand].p=rotate(conjugate(foreRotation),foreVector);
+ }
+ // Drawing the sword must start from the same carry direction relative to
+ // the torso. The revised wrist pose only changes the grip's position.
+ local[data::Weapon].q=mul(conjugate(gripRotation()),swordCarry);
+ return local;
+}
 inline Pose evaluate(float phase,float motion,float run,float idleTime,float attack=-1,bool heavy=false,float roll=-1){
  auto idle=sample(data::IdleClip,idleTime/2);
- auto locomotion=blend(sample(walk_synfig::clip,phase),sample(data::RunClip,phase),std::clamp(run,0.f,1.f));
+ auto locomotion=sample(walk_synfig::clip,phase);
+ if(run>0)locomotion=blend(locomotion,runningPose(phase),std::min(run,1.f));
  auto local=blend(idle,locomotion,std::clamp(motion,0.f,1.f));
  if(roll>=0){
   float weight=ease(roll/.10f)*ease((1-roll)/.13f);
@@ -104,8 +143,7 @@ inline Pose evaluate(float phase,float motion,float run,float idleTime,float att
   local=blend(local,sample(heavy?data::HeavyClip:data::SlashClip,attack),weight);
  }
  auto pose=forward(local);auto follow=hero_secondary::evaluate(phase,motion,run,idleTime,attack,heavy,roll,true);
- // The new Synfig walk already authors its complete weight transfer and arm
- // swing. Keep cloth follow-through, without layering the former wobble on it.
+ // Synfig locomotion owns the arm swing; secondary tracks add torso and cloth motion.
  secondary(pose,follow);return pose;
 }
 inline Pose action(float progress,bool heavy=false){return forward(sample(heavy?data::HeavyClip:data::SlashClip,progress));}

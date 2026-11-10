@@ -1,48 +1,164 @@
 {
-  "files": [
+  "status": "APPLIED",
+  "date": "2026-11-10",
+  "engine": "ComfyUI 0.44.2 / DreamShaper 8 + LCM-LoRA SD 1.5; Krita",
+  "scope": "7 existing 2D animated atlases, 8 directions and 6 pieces each; alpha preserved exactly",
+  "local_only": true,
+  "generations": 7,
+  "native_kra": 7,
+  "alpha_unchanged": true,
+  "models": [
     {
-      "path": "assets\\volcano\\slag-crawler.png",
-      "before": "c4ccf895f41beff50bba29531491f9cc525e7970ac494e5e7f290f7434064af2",
-      "after": "ee10acb25003d7b7aadb38a9fb1fe17333ebf6ead3f353d23f8f3a0395756c7e"
+      "folder": "checkpoints",
+      "filename": "DreamShaper_8_pruned.safetensors",
+      "repo": "Lykon/DreamShaper",
+      "revision": "228d79cb20811466f5c5710aa91f05dabd0b8a14",
+      "original_filename": "DreamShaper_8_pruned.safetensors",
+      "bytes": 2132625894,
+      "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+      "download": "https://huggingface.co/Lykon/DreamShaper/resolve/228d79cb20811466f5c5710aa91f05dabd0b8a14/DreamShaper_8_pruned.safetensors",
+      "license": "Creator conditions permitting commercial use of generated images",
+      "license_source": "https://civitai.com/api/v1/models/4384"
     },
     {
-      "path": "assets\\volcano\\lava-salamander.png",
-      "before": "29c4ac2b641c1f628a20c60ce3dfe4ce1dfd900b9cbbf4d59c49049278a6b851",
-      "after": "198f3cc489f857822a6baaceef387d92b6c9a8b389f09976ff7caa174e77f1c1"
-    },
-    {
-      "path": "assets\\volcano\\fire-imp.png",
-      "before": "65545e84d7ecbb6ce0056c93853b040dcbf067bf88bde9176c01b36041c15835",
-      "after": "8af024ec08007baf0e075bb564014be3946c3432a3e9fb8ce4b1729d4095d938"
-    },
-    {
-      "path": "assets\\volcano\\ash-wraith.png",
-      "before": "046c5bf716f43b0c1e4974e532b249f308af65f0bf52153535f371dda677ef7c",
-      "after": "22674659dce9b2e6381a22c4be460f4acb435bfbb1ab78b2bf46a9407237df1a"
-    },
-    {
-      "path": "assets\\volcano\\obsidian-sentinel.png",
-      "before": "63acf12e6792c949df1f43eea67eed5fa62737f3e6c9f9ad285e486fbe63563f",
-      "after": "dfc3a99fe3e685293be157ab73a3a62ac8fa703be6afefeb6e38d40b6db90bca"
-    },
-    {
-      "path": "assets\\volcano\\ember-drake.png",
-      "before": "1ad8d8501730153f6671d1b2f345a6cb14f88999cbc024f6fe61878070774e61",
-      "after": "21947dc6a87258faf0abeb4e72ac2d42613ae1206a7f43ef444b828c125ba928"
-    },
-    {
-      "path": "assets\\volcano\\varkhor.png",
-      "before": "b058c37d885776fc206f2fd20ed580ec39237d27f0847b067dae2884bbbe9a93",
-      "after": "e45372efc0b5689928e3b9e6b2a7875e3042aba85b6693e2e33ce0b039f4a52a"
+      "folder": "loras",
+      "filename": "lcm-lora-sdv1-5.safetensors",
+      "repo": "latent-consistency/lcm-lora-sdv1-5",
+      "revision": "cf2fced511dbe7e26c8d1d397e728fbab875db4b",
+      "original_filename": "pytorch_lora_weights.safetensors",
+      "bytes": 134621556,
+      "sha256": "8f90d840e075ff588a58e22c6586e2ae9a6f7922996ee6649a7f01072333afe4",
+      "download": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5/resolve/cf2fced511dbe7e26c8d1d397e728fbab875db4b/pytorch_lora_weights.safetensors",
+      "license": "OpenRAIL++",
+      "license_source": "https://huggingface.co/latent-consistency/lcm-lora-sdv1-5"
     }
   ],
-  "status": "APPLIED",
-  "local_only": true,
-  "alpha_unchanged": true,
-  "engine": "ComfyUI 0.41.3 / DreamShaper 8",
-  "source_root": "C:\\AI2D\\sprites\\emberfall-caldera-comfy-20261104",
-  "generations": 56,
-  "scope": "7 material atlases; existing animation and alpha preserved",
-  "native_kra": 0,
-  "layered_ora": 7
+  "files": [
+    {
+      "path": "assets/volcano/slag-crawler.png",
+      "before": "ee10acb25003d7b7aadb38a9fb1fe17333ebf6ead3f353d23f8f3a0395756c7e",
+      "after": "b265ec76fec591d49580e2af57c07ae759d5e784067677ceb51a3feed8a234e6",
+      "prompt_id": "31a3a666-1bb6-42e9-b742-068b628340db",
+      "generated_sha256": "dc2acae0f51c11373caa529d8a2abeb22cd05b560c1c256765bbf8acb9ba3635",
+      "krita_master_sha256": "24e700d42965f3cf7b572b2d8d5dabe360d94484fa8492c5449af04e6739cb01",
+      "opaque_pixel_changes": [
+        0.701,
+        0.759,
+        0.673,
+        0.686,
+        0.697,
+        0.673,
+        0.633,
+        0.681
+      ]
+    },
+    {
+      "path": "assets/volcano/lava-salamander.png",
+      "before": "198f3cc489f857822a6baaceef387d92b6c9a8b389f09976ff7caa174e77f1c1",
+      "after": "0da21177cc0874ba14f62940db77c44a6e6b09483bd4fe93533e51bc2d0dc637",
+      "prompt_id": "f7ee7daa-78f7-4b8a-b3fe-0ae7cd309fae",
+      "generated_sha256": "3fde3ba84e9ded7ac9d339053061613f144a5a5ec8245d80e2ca5d39b6bf40e2",
+      "krita_master_sha256": "4a6bbfd4fafcdaccbb59e11f70f52e4f0b420f9b6c37b63ca0ae181e1de83cf7",
+      "opaque_pixel_changes": [
+        0.667,
+        0.794,
+        0.618,
+        0.681,
+        0.686,
+        0.718,
+        0.649,
+        0.682
+      ]
+    },
+    {
+      "path": "assets/volcano/fire-imp.png",
+      "before": "8af024ec08007baf0e075bb564014be3946c3432a3e9fb8ce4b1729d4095d938",
+      "after": "44418f52f2e797a5ed3070954792f8171aefbe3401a097401b0d677e8ec6b04f",
+      "prompt_id": "0252d130-cb05-4bb8-aa82-be97eda1326e",
+      "generated_sha256": "2920ef0c01f8e54cd48c39b979edb3a2ca6e3b51fbe515d1222c05045fa79c8e",
+      "krita_master_sha256": "f524d287de7eb6bdbac2702efad550e756be14bacfddef58bcbfacabcf15d080",
+      "opaque_pixel_changes": [
+        0.714,
+        0.81,
+        0.719,
+        0.718,
+        0.724,
+        0.722,
+        0.726,
+        0.734
+      ]
+    },
+    {
+      "path": "assets/volcano/ash-wraith.png",
+      "before": "22674659dce9b2e6381a22c4be460f4acb435bfbb1ab78b2bf46a9407237df1a",
+      "after": "63e507f1f6a4ce6e9fa0916ca20532aea0fcf0e5b33f624550b197cfbf2d3562",
+      "prompt_id": "8f3d4811-9a0c-4622-9615-3136b64ca867",
+      "generated_sha256": "a16f18dc32c25cc8136cecc6e090a6cb250f2c765049141dde572c3b4ca23d08",
+      "krita_master_sha256": "bd2ea49d5862a473853f2a626f41f0565b1470f7e88d6e7b94093fdca6016b60",
+      "opaque_pixel_changes": [
+        0.505,
+        0.598,
+        0.49,
+        0.488,
+        0.491,
+        0.48,
+        0.495,
+        0.499
+      ]
+    },
+    {
+      "path": "assets/volcano/obsidian-sentinel.png",
+      "before": "dfc3a99fe3e685293be157ab73a3a62ac8fa703be6afefeb6e38d40b6db90bca",
+      "after": "ef5f9d571e60f23b6e63ab6fb74807ff3e69fbbc2825b0fe9d09587d13f29739",
+      "prompt_id": "99eec4b5-b8a2-4bba-a875-8bd481005354",
+      "generated_sha256": "95f5d86ecf4ad062c476277f56bf041d7abbd2c7337f39a4006cd1fb73bce6d2",
+      "krita_master_sha256": "c3c357271e0d28662f2caf1b7d530bb58e0890d71608a45836b4f416bff61e00",
+      "opaque_pixel_changes": [
+        0.534,
+        0.663,
+        0.532,
+        0.531,
+        0.53,
+        0.521,
+        0.525,
+        0.527
+      ]
+    },
+    {
+      "path": "assets/volcano/ember-drake.png",
+      "before": "21947dc6a87258faf0abeb4e72ac2d42613ae1206a7f43ef444b828c125ba928",
+      "after": "bb7e2301165180c5746b93abd281ce6c159d5059460a304b43c199e6e919c7ec",
+      "prompt_id": "1e8f8339-e70d-450a-bfeb-f0d2ca263b4d",
+      "generated_sha256": "813d59eb609c87189bb8f5e766a344e82808012707ac3328dd6e4a03cf6e09fd",
+      "krita_master_sha256": "3e3f4e53cbdc88ad9eca74f1a91a703748806cf2f07e4451be94e4fa7bf6203a",
+      "opaque_pixel_changes": [
+        0.672,
+        0.775,
+        0.68,
+        0.67,
+        0.667,
+        0.657,
+        0.711,
+        0.666
+      ]
+    },
+    {
+      "path": "assets/volcano/varkhor.png",
+      "before": "e45372efc0b5689928e3b9e6b2a7875e3042aba85b6693e2e33ce0b039f4a52a",
+      "after": "3c31bcc817255eab05806a97b9d0cf2bc3c6ea89c8416a6a87958875aee5caef",
+      "prompt_id": "ee60311b-9160-46f2-b1b4-6788ebab5933",
+      "generated_sha256": "c2bc679710f15186a169dfb91dcdfd172d802176e7de04e2f212970ccc77d7a7",
+      "krita_master_sha256": "b081abf0378844a51e6ee60218f856bcac714a01c09fb2e66104eb8860206356",
+      "opaque_pixel_changes": [
+        0.5,
+        0.679,
+        0.493,
+        0.495,
+        0.501,
+        0.517,
+        0.524,
+        0.522
+      ]
+    }
+  ]
 }

@@ -34,7 +34,7 @@ void worldExpansionTests(){
   }
   if(realm==WorldLocation::Volcano)for(const auto& p:g.props)if(p.type>=14){
    check(!Game::retiredVolcanoBridgeProp(p),"the two original bridge props are absent from fresh games");
-   if(p.pos.x>=PreviousMapSize-.5f||p.pos.y>=PreviousMapSize-.5f)check(!Game::volcanoPropCoversBridge(p),"new scenery silhouettes leave bridge decks clear");
+   check(!Game::volcanoPropCoversBridge(p),"original and extended scenery silhouettes leave bridge decks clear");
   }
   bool extended=false;for(V p:queue)extended|=p.x>135&&p.y>135;check(extended,"the far corner of the expanded field is reachable without crossing invisible borders or lava");
  }

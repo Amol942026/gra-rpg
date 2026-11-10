@@ -6,15 +6,20 @@ static bool retiredVolcanoBridgeProp(const Prop& p){
         (p.type==14&&distance(p.pos,{21.01995f,46.48085f})<.02f);
 }
 static bool volcanoPropCoversBridge(const Prop& prop){
- // A sprite can cover a deck even when its footprint is safely on the bank.
+ if(prop.type<14||prop.type>17)return false;
+ // Bounds of visible pixels across the eight painted variants, in world
+ // sprite pixels relative to the ground anchor. The vent includes its steam.
+ struct Bounds {float halfWidth,top,bottom;};
+ static constexpr Bounds bounds[]={{60,-153,17},{57,-165,14},{57,-147,18},{57,-171,13}};
+ const auto shape=bounds[prop.type-14];
  const float rise=terrain_height::pixels(WorldLocation::Volcano,prop.pos);
  const float span=VolcanoBridgeHalfSpan,depth=VolcanoBridgeHalfDepth;
  for(size_t i=0;i<VolcanoBridges.size();i++){
   float y=VolcanoBridges[i].y;
   V delta=prop.pos-V{lavaCenter(VolcanoBridgeRivers[i],y),y};
   float u=(delta.x-delta.y)*40,v=(delta.x+delta.y)*20-rise;
-  float left=u-90*prop.size,right=u+90*prop.size;
-  float top=v-208*prop.size,bottom=v+22*prop.size;
+  float left=u-shape.halfWidth*prop.size,right=u+shape.halfWidth*prop.size;
+  float top=v+shape.top*prop.size,bottom=v+shape.bottom*prop.size;
   if(left>(span+depth)*40||right<-(span+depth)*40||top>(span+depth)*20||bottom<-(span+depth)*20)continue;
   if(left/80+top/40>span||right/80+bottom/40<-span||-right/80+top/40>depth||-left/80+bottom/40<-depth)continue;
   return true;
@@ -59,20 +64,26 @@ void appendVolcanoScenery(std::vector<Prop>& result,const std::vector<Enemy>& in
   for(auto& candidate:candidates)candidate.gap=std::min(candidate.gap,distance(candidate.prop.pos,chosen.pos));
  }
 }
+static void clearVolcanoBridgeProps(std::vector<Prop>& scenery){
+ scenery.erase(std::remove_if(scenery.begin(),scenery.end(),[](const Prop& prop){
+  return retiredVolcanoBridgeProp(prop)||volcanoPropCoversBridge(prop);
+ }),scenery.end());
+}
 void upgradeVolcanoScenery(std::vector<Prop>& scenery,const std::vector<Enemy>& inhabitants,bool retain,bool protectPlayer){
  if(!retain){
   scenery.clear();
   appendVolcanoScenery(scenery,inhabitants,false,protectPlayer);
   scenery.push_back({VolcanoPortal,13,1});
  }
- scenery.erase(std::remove_if(scenery.begin(),scenery.end(),retiredVolcanoBridgeProp),scenery.end());
+ clearVolcanoBridgeProps(scenery);
  appendVolcanoScenery(scenery,inhabitants,true,protectPlayer);
 }
 void refreshVolcanoScenery(){
  if(!volcanoCreated||volcanoSceneryVersion>=VolcanoSceneryRevision)return;
- const bool retain=volcanoSceneryVersion>=5;
- if(fieldLocation==WorldLocation::Volcano)upgradeVolcanoScenery(props,enemies,retain,inVolcano());
- else upgradeVolcanoScenery(volcanoState.props,volcanoState.enemies,retain,false);
+ const bool active=fieldLocation==WorldLocation::Volcano;
+ auto& scenery=active?props:volcanoState.props;
+ if(volcanoSceneryVersion<6)upgradeVolcanoScenery(scenery,active?enemies:volcanoState.enemies,volcanoSceneryVersion>=5,inVolcano());
+ else clearVolcanoBridgeProps(scenery);
  volcanoSceneryVersion=VolcanoSceneryRevision;
 }
 void buildVolcano(){

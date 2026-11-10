@@ -24,6 +24,20 @@ void volcanoSaveTests(){
  check(stored.game.volcanoState.props.size()>50&&stored.game.rng==random&&stored.game.combatRng==combat&&!stored.game.volcanoState.enemies[0].alive,"stored field scenery refresh preserves random streams and dead enemies");
  auto occupied=v9;occupied.game.player=occupied.game.props.front().pos;V position=occupied.game.player;occupied.game.volcanoSceneryVersion=0;occupied.game.refreshVolcanoScenery();
  check(distance(occupied.game.player,position)==0&&occupied.game.walkable(position),"layout refresh leaves a loaded hero in place without trapping them inside a new obstacle");
+ for(bool active:{false,true}){
+  saves::Snapshot old;auto& g=old.game;g.activateField(WorldLocation::Volcano);
+  if(!active)g.activateField(WorldLocation::Desert);
+  auto& decorations=active?g.props:g.volcanoState.props;
+  const size_t clearCount=decorations.size();
+  const V deck{lavaCenter(0,VolcanoBridges[0].y),VolcanoBridges[0].y};
+  decorations.push_back({deck,16,.87f});
+  decorations.push_back({deck+V{3.3f,4.4f},17,.97f});
+  check(Game::volcanoPropCoversBridge(decorations.back()),"a stalagmite can overlap the bridge from outside its footprint");
+  g.volcanoSceneryVersion=6;
+  auto upgraded=saves::decode(saves::encode(old));
+  decorations.resize(clearCount);g.volcanoSceneryVersion=VolcanoSceneryRevision;
+  check(saves::encode(old)==saves::encode(upgraded),"revision six clears the crater and stalagmite without shifting other props or saved progress");
+ }
  auto legacy=saves::read("art/volcano/fixtures/legacy-v8.efs");
  check(!legacy.game.volcanoCreated&&!legacy.game.volcanoBossDead&&legacy.game.chests.size()==6&&legacy.game.chests[4].location==WorldLocation::Volcano,"real v8 save gains an unexplored third realm and two fresh chests");roundtrip(legacy);
  auto oldBytes=saves::readBytes("art/volcano/fixtures/legacy-v8.efs");saves::Archive oldFile(true,oldBytes);std::string magic;int version;size_t size;uint64_t hash;oldFile(magic,version,size,hash);
