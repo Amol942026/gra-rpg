@@ -17,7 +17,12 @@ import argparse, datetime, hashlib, json, math, os, re, shutil, struct, subproce
 import sys, time, uuid, xml.etree.ElementTree as ET, zlib
 from pathlib import Path
 
-SYNFIG = Path(r"C:\Program Files\Synfig\bin\synfig.exe")
+_SYNFIG_LOCATIONS = (
+    Path(r"C:\Program Files\Synfig\bin\synfig.exe"),
+    Path(r"C:\AI2D\Tools\Synfig-1.4.5-spells\portable\bin\synfig.exe"),
+)
+SYNFIG = (Path(os.environ["EMBERFALL_SYNFIG_EXE"]) if os.environ.get("EMBERFALL_SYNFIG_EXE")
+          else next((p for p in _SYNFIG_LOCATIONS if p.is_file()), _SYNFIG_LOCATIONS[0]))
 TIMEOUT = 300
 
 

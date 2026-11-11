@@ -12,7 +12,11 @@ void buildDesert(){
  }
  for(int i=0;i<7;i++){float a=i*6.2831853f/7;props.push_back({DesertOasis+V{std::cos(a),std::sin(a)}*4.9f,12,.8f+(i%3)*.08f});}
  for(V p:{V{40,13},V{46,13},V{40,17},V{46,17}})props.push_back({p,10,1});
- props.push_back({DesertPortal,13,1});desertCreated=true;
+ props.push_back({DesertPortal,13,1});
+ const size_t guardianIndex=enemies.size()-1;
+ addRegionalEnemies(WorldLocation::Desert,enemies,props,forage);
+ std::rotate(enemies.begin()+guardianIndex,enemies.begin()+guardianIndex+1,enemies.end());
+ desertCreated=true;
 }
 bool activateField(WorldLocation next){
  if(next!=WorldLocation::Forest&&next!=WorldLocation::Desert&&next!=WorldLocation::Volcano)return false;

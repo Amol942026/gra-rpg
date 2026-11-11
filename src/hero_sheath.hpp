@@ -1,10 +1,12 @@
 #pragma once
 #include "sword_stow.hpp"
 #include "hero_motion.hpp"
+#include "hero_carry.hpp"
 namespace ember::hero_sheath {
 // This changes existing bone transforms only. Feet and locomotion stay intact.
 inline sword_stow::Key apply(hero_motion::Pose& pose,float phase){
  using namespace hero_motion;auto key=sword_stow::sample(phase);
+ if(key.insertion<1)hero_carry::melee(pose);
  if(phase>0&&phase<1){
   bend(pose,data::Spine,axisAngle({0,0,1},key.yaw));
   bend(pose,data::Spine,axisAngle({0,1,0},key.lean));
@@ -24,15 +26,10 @@ inline sword_stow::Key apply(hero_motion::Pose& pose,float phase){
  if(phase<1){
   Vec target=pose.point(data::Pelvis,{key.handR,key.handF,key.handZ});
   Vec natural=pose.world[data::HandR].p;
-  if(key.insertion<1){
-   // Rapid walk/run reversals can retain a running arm swing while the sword
-   // is already drawn. Keep that carry hand outside the breastplate as well.
-   Vec local=rotate(conjugate(pose.skin[data::Spine].q),natural-pose.world[data::Spine].p)+restHead(data::Spine);
-   local.x=std::max(local.x,24.f);natural=pose.point(data::Spine,local);
-  }
   target=natural*(1-key.reach)+target*key.reach;
   auto shoulder=pose.world[data::UpperArmR].p;
-  auto solved=sword_pose::solveArm({shoulder.x,shoulder.y,shoulder.z},{target.x,target.y,target.z});
+  Vec pole=(pose.world[data::ForearmR].p-shoulder)*(1-key.reach)+Vec{13,-1.56f,1.56f}*key.reach;
+  auto solved=sword_pose::solveArm({shoulder.x,shoulder.y,shoulder.z},{target.x,target.y,target.z},{pole.x,pole.y,pole.z});
   Vec elbow{solved.elbow.r,solved.elbow.f,solved.elbow.z},hand{solved.hand.r,solved.hand.f,solved.hand.z};
   attach(pose,data::UpperArmR,shoulder,elbow,restHead(data::ForearmR));
   attach(pose,data::ForearmR,elbow,hand,restHead(data::HandR));

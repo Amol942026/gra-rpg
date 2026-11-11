@@ -123,7 +123,6 @@ void drawMerchantPanel(){
  center(std::to_string(amount)+" złota",action.x+action.width/2,action.y+35,16,available?Gold:Muted);
  std::string notice=!merchantNotice.empty()?merchantNotice:status!=TradeResult::Success?tradeMessage(status):"2× LPM: kup / sprzedaj jedną sztukę. Przyciski ilości pozwalają handlować całym stosem.";
  merchantTextFit(notice,139,724,1170,15,status==TradeResult::Success?Green:Gold);
- center("Gra jest zatrzymana · ENTER / ESC — zamknij · Monety w plecaku też służą do płacenia",720,751,14,Muted);
 
  // The same value/rarity descriptions apply to stock, backpack and worn gear.
  for(int row=0;row<MerchantRows;row++)if(inside(merchantOfferRect(row))){

@@ -30,7 +30,7 @@ template<class Check>void expandedLootChecks(const fs::path& root,Check check){
   check(game.bag[0].kind==kind&&game.enemies[0].loot[source].empty(),"double LPM loots the new item from its real corpse page");point(bagRect(0));leftClickGameplay({},21);dragging={};leftClickGameplay({},21.15);
   check(game.equipment[slot].kind==kind,"looted new gear equips through the same actual mouse handler");
   game.bag[10]=item(kind);mouse={bagRect(10).x+20,bagRect(10).y+20};renderScene();saveTexture(canvas,(root/"items"/(std::to_string(k)+".png")).string());
-  auto text=itemTooltipText(item(kind),{Place::Bag,10});Rectangle box=tooltipBounds(text);check(textWidth(text.description,14)<=box.width-34&&text.chance.find(std::to_string(itemDropChance(kind))+"%")!=std::string::npos,"new tooltip fits and shows its exact central rarity chance");
+  auto text=itemTooltipText(item(kind),{Place::Bag,10});Rectangle box=tooltipBounds(text);check(textWidth(text.description,14)<=box.width-34&&text.instruction.empty(),"new tooltip fits without interaction hints or drop-rate text");
   manifest<<k<<'\t'<<itemName(item(kind))<<'\t'<<int(archetype(kind))<<'\t'<<int(itemRarity(kind))<<'\t'<<itemDropChance(kind)<<'\t'<<power(item(kind))<<'\t'<<owner<<'\n';rendered++;
  }
  UnloadRenderTexture(sample);UnloadRenderTexture(sheet);check(rendered==ItemKindCount-int(Kind::SlimeBlade),"all additional items rendered, equipped and looted");

@@ -159,7 +159,7 @@ void drawStatsMenu(){
     Rectangle button=statsConfirm();bool ready=!game.allocationRequired||draftRemaining()==0;
     panel(button,ready&&inside(button)?rgb(53,73,57):Card);
     center(game.allocationRequired?"DALEJ — WYBÓR UMIEJĘTNOŚCI":"WRÓĆ DO GRY",720,699,18,ready?Gold:Muted);
-    center(game.allocationRequired?"Świat jest zatrzymany. Rozdaj wszystkie punkty i zatwierdź.":"ENTER / ESC / P — wróć do gry",720,742,14,Muted);
+    if(game.allocationRequired)center("Świat jest zatrzymany. Rozdaj wszystkie punkty i zatwierdź.",720,742,14,Muted);
 }
 void drawSpellBook(){
     rect(0,0,W,H,rgb(6,15,18,215));panel({252,158,936,600},Panel);line(278,180,1162,180,Gold);

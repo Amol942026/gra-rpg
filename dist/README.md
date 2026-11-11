@@ -485,6 +485,8 @@ Patrole używają ośmiu kierunków animacji i istniejących kolizji: potwory ni
 
 Pokonany potwór zostawia **ciało z łupem w środku**. Przedmioty z zabójstwa nie pojawiają się na ziemi. **PPM na ciele** otwiera jego zawartość w prawym HUD, zamiast listy przedmiotów na ziemi. Panel pokazuje nazwę potwora i pięć pól na stronę; ciało mieści do 15 pozycji, dostępnych przez < / > lub rolkę myszy. **LPM + przeciągnięcie do plecaka** zabiera przedmiot; nie można użyć go ani założyć przed zebraniem. Pełny lub zajęty plecak nie usuwa łupu; przy częściowym łączeniu stosów reszta pozostaje w ciele.
 
+Przycisk **WEŹ WSZYSTKO** przy kafelkach ciała lub skrzyni przenosi cały łup ze wszystkich stron do plecaka i łączy zgodne stosy. Jeśli cały łup się nie mieści, pokazuje błąd i pozostawia wszystkie przedmioty na miejscu. Zebranie w ten sposób fragmentu Serca Świtu rozpoczyna powrót dopiero po zabraniu pozostałych nagród.
+
 Ciała pozostają na mapie również po opróżnieniu. Można zamknąć okienko przyciskiem **X**, wrócić później albo otworzyć inne ciało. Otwarcie i zabieranie przedmiotów wymaga odległości do **2,5 pola**; odejście zamyka panel. Ciała nie blokują ruchu. Szlam, wilk, szkielet i strażnik mają własną grafikę poległej postaci oraz podświetlenie pod kursorem. Strażnik zachowuje gwarantowany fragment oraz wylosowane nagrody w swoim ciele.
 
 **C** rzuca wybrany czar w stronę kursora. **K** lub kliknięcie kafelka czaru otwiera księgę wyboru. **PPM** otwiera ciało i nie rzuca czaru. Spacja, bieg pod Shiftem i pojedynczy zamach LPM pozostają bez zmian. Przedmioty odłożone przez gracza nadal leżą na ziemi i można je przeciągać dotychczasowym sposobem.

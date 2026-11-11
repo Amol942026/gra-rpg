@@ -2,7 +2,11 @@
 #include <algorithm>
 
 namespace ember {
-constexpr int ForestEnemyTypeCount=8,ForestPropTypeCount=7,LegacyEnemyTypeCount=12,LegacyPropTypeCount=14,EnemyTypeCount=19,PropTypeCount=18;
+constexpr int ForestEnemyTypeCount=8,ForestPropTypeCount=7,LegacyEnemyTypeCount=12,LegacyPropTypeCount=14,PropTypeCount=18;
+constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21,EnemyTypeCount=22;
+constexpr int RegionalEnemyTypeCount=EnemyTypeCount-SporekinType;
+inline constexpr bool regionalEnemy(int type){return type>=SporekinType&&type<EnemyTypeCount;}
+constexpr float RegionalEnemyFallTime=.48f;
 enum class DamageType { Physical, Magic };
 struct EnemyInfo {
     const char* name;
@@ -13,7 +17,7 @@ struct EnemyInfo {
     DamageType attackType=DamageType::Physical;
     float radius=.48f;
     int experience=25;
-    float cooldown=1.2f,visualHeight=86;
+    float cooldown=1.2f,visualHeight=86,attackReach=1.25f;
 };
 inline const EnemyInfo& enemyInfo(int type) {
     static constexpr EnemyInfo entries[]={
@@ -35,7 +39,10 @@ inline const EnemyInfo& enemyInfo(int type) {
         {"Popielny upiór","Duch pogorzeliska",135,1.75f,30,4,13,DamageType::Magic,.5f,90,2.5f,103},
         {"Obsydianowy wojownik","Strażnik kuźni",205,1.65f,33,14,6,DamageType::Physical,.62f,100,1.55f,109},
         {"Żarowy drak","Skrzydlata bestia",155,2.65f,31,7,9,DamageType::Magic,.83f,96,1.2f,90},
-        {"Varkhor, Serce Kaldery","Władca wulkanu · boss",940,1.3f,42,17,12,DamageType::Magic,1.3f,390,1.85f,205}
+        {"Varkhor, Serce Kaldery","Władca wulkanu · boss",940,1.3f,42,17,12,DamageType::Magic,1.3f,390,1.85f,205},
+        {"Zarodnik kniei","Zarodnikowiec",65,2.2f,13,1,4,DamageType::Magic,.55f,39,1.45f,92,1.45f},
+        {"Oko Wydm","Konstrukt piaskowca",115,1.65f,20,5,6,DamageType::Magic,.64f,62,1.7f,112,2.05f},
+        {"Rogacz Żaru","Bestia wulkaniczna",174,1.95f,32,9,7,DamageType::Physical,.75f,95,1.65f,145,1.55f}
     };
     static_assert(sizeof(entries)/sizeof(entries[0])==EnemyTypeCount);
     return entries[std::clamp(type,0,EnemyTypeCount-1)];

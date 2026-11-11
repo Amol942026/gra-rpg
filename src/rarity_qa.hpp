@@ -15,8 +15,8 @@ bool runRarityQA(){
   reset();Item value=item(static_cast<Kind>(k));game.bag[10]=value;Rectangle slot=bagRect(10);mouse={slot.x+20,slot.y+20};
   auto text=itemTooltipText(value,{Place::Bag,10});Rectangle box=tooltipBounds(text);
   float size=20;while(size>14&&textWidth(text.name,size)>box.width-34)size--;
-  check(textWidth(text.name,size)<=box.width-34&&textWidth(text.label,14)<=box.width-34&&textWidth(text.stat,14)<=box.width-34&&textWidth(text.description,14)<=box.width-34&&textWidth(text.instruction,14)<=box.width-34&&textWidth(text.chance,14)<=box.width-34,"all item text fits its real tooltip without clipped names or descriptions");
-  check(text.label==rarityName(itemRarity(value))&&!text.chance.empty(),"every item tooltip exposes its actual rarity and central drop chance");
+  check(textWidth(text.name,size)<=box.width-34&&textWidth(text.label,14)<=box.width-34&&textWidth(text.stat,14)<=box.width-34&&textWidth(text.description,14)<=box.width-34,"all item text fits its real tooltip without clipped names or descriptions");
+  check(text.label==rarityName(itemRarity(value))&&text.instruction.empty(),"every item tooltip keeps its actual rarity without interaction instructions");
   BeginTextureMode(sample);ClearBackground(Ink);tooltip();EndTextureMode();
   Image im=LoadImageFromTexture(sample.texture);ImageFlipVertical(&im);Color* pixels=LoadImageColors(im);int colored=0;
   for(int y=int(box.y)+34;y<int(box.y)+59;y++)for(int x=int(box.x)+17;x<int(box.x+box.width)-15;x++){

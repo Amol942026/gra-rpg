@@ -94,7 +94,11 @@ void buildVolcano(){
   float health=enemyInfo(spawn.type).health;enemies.push_back({2000+int(i)+(i>=99),spawn.type,spawn.pos,spawn.pos,health,health});enemies.back().patrolWait=.6f+(hash(int(i),301)%1200)*.001f;
  }
  float hp=enemyInfo(VolcanoBossType).health;enemies.push_back({VolcanoBossId,VolcanoBossType,VolcanoBossHome,VolcanoBossHome,hp,hp});
- upgradeVolcanoScenery(props,enemies,false,false);volcanoCreated=true;volcanoSceneryVersion=VolcanoSceneryRevision;
+ upgradeVolcanoScenery(props,enemies,false,false);
+ const size_t guardianIndex=enemies.size()-1;
+ addRegionalEnemies(WorldLocation::Volcano,enemies,props,forage);
+ std::rotate(enemies.begin()+guardianIndex,enemies.begin()+guardianIndex+1,enemies.end());
+ volcanoCreated=true;volcanoSceneryVersion=VolcanoSceneryRevision;
 }
 bool canTravelVolcano()const{return mageReachable()&&desertBossDead;}
 void resetFieldArrival(V arrival){

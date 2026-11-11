@@ -29,7 +29,10 @@ public:
         "magic-attack","venom-cast","copper-wave","obsidian-cleave","fire-breath",
         "bone-attack","chitin-attack","serpent-attack","reptile-attack","wood-attack","armored-attack","blade-attack","heavy-swing",
         "fireball-cast","fireball-impact","teleport-arrival","bow-draw",
-        "ice-cast","ice-impact","lightning-cast","lightning-impact","spell-learn"
+        "ice-cast","ice-impact","lightning-cast","lightning-impact","spell-learn",
+        "sporekin-attack","sporekin-hit","sporekin-fall",
+        "dune-eye-attack","dune-eye-hit","dune-eye-fall",
+        "cinderhorn-attack","cinderhorn-hit","cinderhorn-fall","spear-thrust","spear-impact"
     };
     static constexpr int ScoreCount=4;
     inline static constexpr const char* ScoreNames[ScoreCount]={"echoes-of-the-ruins","desert","volcano","tower"};

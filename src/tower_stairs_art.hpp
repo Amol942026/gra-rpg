@@ -1,4 +1,5 @@
 #pragma once
+#include "tower_paint.hpp"
 // Full-size masonry projected with the same 40:20 floor axes as the room.
 // Static geometry and exact opaque silhouettes are cached at 2x resolution.
 namespace tower_stairs {
@@ -128,7 +129,9 @@ void make(){
   BeginTextureMode(art[i]);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,ArtScale});model(dir,OriginX,OriginY);EndMode2D();EndTextureMode();
   groundShadows[i]=shadow_geometry::bake(shadowMeshes[i]);shadowMeshes[i].clear();
   SetTextureFilter(art[i].texture,TEXTURE_FILTER_BILINEAR);
-  Image source=LoadImageFromTexture(art[i].texture);ImageFlipVertical(&source);Color* pixels=LoadImageColors(source);
+  Image source=LoadImageFromTexture(art[i].texture);ImageFlipVertical(&source);
+  tower_paint::apply(art[i].texture,source,tower_paint::FirstStair+i);
+  Color* pixels=LoadImageColors(source);
   masks[i].resize(ArtWidth*ArtHeight);for(int n=0;n<ArtWidth*ArtHeight;n++)masks[i][n]=pixels[n].a>=210?255:0;UnloadImageColors(pixels);UnloadImage(source);
   Image border=GenImageColor(ArtWidth,ArtHeight,BLANK);auto* out=static_cast<Color*>(border.data);
   for(int y=4;y<ArtHeight-4;y++)for(int x=4;x<ArtWidth-4;x++)if(!masks[i][y*ArtWidth+x]){

@@ -6,7 +6,9 @@
 // the equipment cells stay fixed as the remaining item art is introduced.
 namespace inventory_icons {
 inline Texture2D atlas{},lootAtlas{};
-inline constexpr int Cell=128,Columns=12,Width=1536,Height=1024;
+inline constexpr int Cell=128,Columns=12,Width=Columns*Cell;
+inline constexpr int Height=(ember::EquipmentKindCount+Columns-1)/Columns*Cell;
+static_assert(ember::EquipmentKindCount<=Columns*(Height/Cell));
 inline constexpr int LootColumns=8,LootWidth=1024,LootHeight=384;
 inline const auto cells=[](){
     std::array<int,ember::ItemKindCount> result{};result.fill(-1);int cell=0;

@@ -72,7 +72,7 @@ bool runShadowQA(){
   check(tower_furniture::groundShadows[type].art.id!=0,"each physical tower furnishing has a baked geometry shadow");
  }
  for(int direction:{1,-1})check(tower_stairs::groundShadows[tower_stairs::index(direction)].art.id!=0,"both stairs have geometry shadows for masonry above the floor");
- for(int type=0;type<EnemyTypeCount;type++)for(int d=0;d<8;d++)check(fallen_art::sprites[type][d].ground.art.id!=0,"each fallen body has a cached physical shadow in all eight directions");
+ for(int type=0;type<LegacyEnemyTypeCount;type++)for(int d=0;d<8;d++)check(fallen_art::sprites[type][d].ground.art.id!=0,"each legacy fallen body has a cached physical shadow in all eight directions");
  // Test the real frame order, masks and reuse at different display scales.
  for(bool desert:{false,true}){
   game=Game(49);if(desert)game.activateField(WorldLocation::Desert);game.messageTime=0;game.hp=game.maxHp();

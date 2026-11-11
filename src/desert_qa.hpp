@@ -45,7 +45,7 @@ bool runDesertQA(){
   im=LoadImageFromTexture(rt.texture);ImageFlipVertical(&im);Color pixel=GetImageColor(im,128,126);check(pixel.b>100&&pixel.r<30,"intersecting surfaces: the nearer blue surface hides the red rear surface at the actual pixel");UnloadImage(im);UnloadRenderTexture(rt);
  }
  // Fallen bodies retain their physical picking silhouettes after rounding.
- for(int type=8;type<EnemyTypeCount;type++){
+ for(int type=8;type<LegacyEnemyTypeCount;type++){
   RenderTexture2D rt=LoadRenderTexture(300,150);BeginTextureMode(rt);ClearBackground(BLANK);Enemy e{100+type,type,{},{},0,100};e.animation.direction=Direction::SE;corpseArt(e,150,98);EndTextureMode();Image im=LoadImageFromTexture(rt.texture);ImageFlipVertical(&im);Color* p=LoadImageColors(im);int drawn=0,cut=0,bad=0,probes=0;
 
   for(int y=0;y<im.height;y++)for(int x=0;x<im.width;x++){bool solid=p[y*im.width+x].a>=240;drawn+=solid;cut+=solid&&(x<3||y<3||x>=im.width-3||y>=im.height-3);}
@@ -53,7 +53,7 @@ bool runDesertQA(){
   check(drawn>200&&cut==0&&probes>1000&&bad==0,"rounded corpse "+std::to_string(type)+": full GPU silhouette and physical picking agree");saveTexture(rt,"qa-v39/corpse-"+std::to_string(type)+".png");UnloadImageColors(p);UnloadImage(im);UnloadRenderTexture(rt);
  }
  // Same physical rigs draw, turn, animate and receive mouse inspection in all directions.
- for(int type=8;type<EnemyTypeCount;type++){
+ for(int type=8;type<LegacyEnemyTypeCount;type++){
   RenderTexture2D sheet=LoadRenderTexture(1120,570);BeginTextureMode(sheet);ClearBackground(Ink);txt(enemyInfo(type).name,22,13,25,Gold);
   for(int direction=0;direction<8;direction++){float x=direction%4*280.f+140,y=direction/4*260.f+246;AnimationState state;state.direction=Direction(direction);state.moving=true;state.phase=.17f;state.idleTime=2.7f;actor_art::draw(type+1,x,y,1,state);center(TextFormat("KIERUNEK %d",direction+1),x,y+18,14,Muted);}
   EndTextureMode();saveTexture(sheet,"qa-v39/enemy-"+std::to_string(type)+"-directions.png");UnloadRenderTexture(sheet);

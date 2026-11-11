@@ -4,14 +4,14 @@ void worldExpansionTests(){
  check(terrain_height::Count==150&&VolcanoBridges.size()==12,"expansion adds 62 hills and knolls and four new lava bridges");
  for(auto realm:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano}){
   Game g;g.activateField(realm);int expected=realm==WorldLocation::Forest?181:realm==WorldLocation::Desert?109:121;
-  check(int(g.enemies.size())==expected,"each realm doubles ordinary encounters and keeps exactly one story guardian");
+  check(int(g.enemies.size())==expected+RegionalEncountersPerRealm,"each realm retains its expanded population and receives its new species");
   int guardian=realm==WorldLocation::Forest?3:realm==WorldLocation::Desert?11:18,guardians=0,addedEnemies=0,addedProps=0;
   std::array<int,10> creatures{},objects{};
   auto sector=[](V p){
    return p.x>=PreviousMapSize?std::min(3,int(p.y/36))*2+std::min(1,int((p.x-PreviousMapSize)/21)):
           p.y>=PreviousMapSize?8+std::min(1,int(p.x/51)):-1;
   };
-  for(const auto& e:g.enemies){guardians+=e.type==guardian;int cell=sector(e.home);if(cell>=0){creatures[cell]++;addedEnemies++;}}
+  for(const auto& e:g.enemies){guardians+=e.type==guardian;int cell=sector(e.home);if(cell>=0&&!regionalEnemy(e.type)){creatures[cell]++;addedEnemies++;}}
   for(const auto& prop:g.props){int cell=sector(prop.pos);if(cell>=0){objects[cell]++;addedProps++;}}
   check(guardians==1&&addedEnemies==(realm==WorldLocation::Forest?90:realm==WorldLocation::Desert?54:60),"all added enemies occupy the new territory, without copying bosses");
   check(std::all_of(creatures.begin(),creatures.end(),[](int n){return n>0;})&&std::all_of(objects.begin(),objects.end(),[](int n){return n>0;}),"all ten extension sectors contain both scenery and encounters");

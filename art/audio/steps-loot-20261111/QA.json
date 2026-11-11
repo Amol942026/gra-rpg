@@ -1,0 +1,194 @@
+{
+  "status": "COMPLETE",
+  "task_date": "2026-11-11",
+  "audio": {
+    "status": "PASS",
+    "master_root": "C:\\AI2D\\audio\\emberfall-steps-loot-20261111",
+    "source_entries_verified": 18,
+    "runtime_manifest_files_verified": 154,
+    "effects": [
+      {
+        "file": "step.wav",
+        "sha256": "a100b8f6df4e06c802c037d36bcf0b1443da509aa291cebe0441631e2dd6a59b",
+        "bytes": 57644,
+        "frames": 14400,
+        "seconds": 0.3,
+        "peak_dbfs": -2.9999878172428636,
+        "rms_dbfs": -25.549136898540105,
+        "dc": -0.0005828317006429036,
+        "clipped_samples": 0
+      },
+      {
+        "file": "step-v2.wav",
+        "sha256": "5a838db463ac9107516e723a27ef78bb3a05ecff11125c15724b3e39a90adfe5",
+        "bytes": 57644,
+        "frames": 14400,
+        "seconds": 0.3,
+        "peak_dbfs": -2.9999878172428636,
+        "rms_dbfs": -24.1119806072252,
+        "dc": -0.0005779891543918186,
+        "clipped_samples": 0
+      },
+      {
+        "file": "step-v3.wav",
+        "sha256": "3b858d28d67d6df37f9e88bbdf07b7cf60a47764c473eac85bc5d3da48214c9e",
+        "bytes": 57644,
+        "frames": 14400,
+        "seconds": 0.3,
+        "peak_dbfs": -2.9999878172428636,
+        "rms_dbfs": -24.864295772412298,
+        "dc": -0.0005591106414794922,
+        "clipped_samples": 0
+      },
+      {
+        "file": "pickup.wav",
+        "sha256": "3d5f5daeb06dc3e4f48a720e2a4342a51143dbb3f90cb4958b5e401c5a05b774",
+        "bytes": 80684,
+        "frames": 20160,
+        "seconds": 0.42,
+        "peak_dbfs": -4.99990598233068,
+        "rms_dbfs": -29.60368732736816,
+        "dc": -1.4131031339130705e-06,
+        "clipped_samples": 0
+      },
+      {
+        "file": "pickup-v2.wav",
+        "sha256": "1dd8d8f95a0b79b1e1ac31202c7d8faa9c896feea83d9c1bf14aeaee5e9320d5",
+        "bytes": 80684,
+        "frames": 20160,
+        "seconds": 0.42,
+        "peak_dbfs": -4.99990598233068,
+        "rms_dbfs": -28.093467612233923,
+        "dc": -2.346341572110615e-07,
+        "clipped_samples": 0
+      },
+      {
+        "file": "pickup-v3.wav",
+        "sha256": "5ac9e50beb597db6a9c0c8b383a41bd312282ab2787b931354df9a1470e0db1a",
+        "bytes": 80684,
+        "frames": 20160,
+        "seconds": 0.42,
+        "peak_dbfs": -4.99990598233068,
+        "rms_dbfs": -29.17098478458053,
+        "dc": 2.868591792999752e-07,
+        "clipped_samples": 0
+      }
+    ],
+    "comfyui_prompt_id": "9c52adc9-b7d4-474f-a8a2-1e96a6eec115",
+    "method": "Recorded CC0 foley layered/EQ in native local ComfyUI nodes, mastered in real Audacity 3.7.9; no generative model, no playback",
+    "aup3_snapshot": {
+      "aup3": "C:\\AI2D\\audio\\emberfall-steps-loot-20261111\\steps-loot-master.aup3",
+      "sha256": "7e176ecc722665883e42276199521448131071af2264b2cfb4c40b569931605b",
+      "sqlite_integrity": "ok",
+      "native_project_retained_open": "C:\\Users\\Amol\\Documents\\ChatGPT\\Gra Unity 2\\work\\audio-mcp-20261023\\output\\emberfall-steps-loot-20261111-48k.aup3",
+      "closed": false
+    }
+  },
+  "loot_all": {
+    "status": "PASS",
+    "atomic": true,
+    "all_pages": true,
+    "stack_limit": 99,
+    "quest_fragments_preserved": true
+  },
+  "verification": {
+    "game_checks": 477595,
+    "save_checks": 19030,
+    "loot_ui": {
+      "status": "PASS",
+      "checks": 7,
+      "failures": 0,
+      "audio": false,
+      "window_hidden": true
+    },
+    "offline_audio": {
+      "status": "PASS",
+      "checks": 534,
+      "failures": 0,
+      "effects": 50,
+      "variants": 150,
+      "music_tracks": 4,
+      "real_raylib_decode": true,
+      "transport": "offline in-memory sink",
+      "window_created": false,
+      "audio_device_opened": false,
+      "audio_played": false
+    },
+    "saved_user_audio_preferences_and_startup_log_unchanged": true
+  },
+  "releases": [
+    {
+      "status": "PASS",
+      "edition": "player",
+      "archive": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\Emberfall-Windows-x64.zip",
+      "sha256": "546A6E79218AACA638885E2BEA49D470AF382A017429121C230B05AB12F5BBC4",
+      "assets": 287,
+      "frames": 180,
+      "audio_device_opened": false,
+      "window_hidden": true
+    },
+    {
+      "status": "PASS",
+      "edition": "developer",
+      "archive": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\Emberfall-DEV-Windows-x64.zip",
+      "sha256": "F5AB74A4FC1AB2480FB6C495B52FA7E4C50B989F1D7CF8850A518EB952B7F460",
+      "assets": 287,
+      "frames": 180,
+      "audio_device_opened": false,
+      "window_hidden": true
+    }
+  ],
+  "sprite_maker": {
+    "status": "COMPLETE_WITH_LIMITATION",
+    "version": "0.3.3",
+    "source_commit": "9de73a6136a1a045af2e8769349fbadc17dbef69",
+    "native_tools_discovered": 48,
+    "import": "PASS",
+    "save_rig": "PASS",
+    "analyze_rig_fit": "PASS",
+    "master_export": {
+      "format": "asset",
+      "height": 360,
+      "metadataPath": "\\\\?\\C:\\AI2D\\pipeline\\runs\\emberfall-loot-foley-20261111\\sprite-trial\\workspace\\exports\\hero-master.json",
+      "pngPath": "\\\\?\\C:\\AI2D\\pipeline\\runs\\emberfall-loot-foley-20261111\\sprite-trial\\workspace\\exports\\hero-master.png",
+      "width": 320
+    },
+    "anchor": {
+      "assetId": "edc90583-60ad-401f-aa6f-7bf235241735",
+      "baselineY": 319,
+      "contentHash": "a630550fbc09761e5a2cd38f25c2b37a73a8b699bdc619ca88e7f36f7a0ca779",
+      "facing": "w",
+      "facingConfidence": 0.04499471538577684,
+      "facingStatus": "uncertain",
+      "frameHeight": 360,
+      "frameWidth": 320,
+      "pivot": {
+        "x": 159.24822587951078,
+        "y": 319.0
+      },
+      "promotedAt": "2026-11-10T23:40:51.776727700+00:00",
+      "relativePath": "assets\\characters\\hero-master.png",
+      "slug": "emberfall-trial",
+      "view": "side"
+    },
+    "render_rig_animation": "FAIL: nested Tokio runtime panic",
+    "gui_rendering_tested": false,
+    "cloud_calls": 0,
+    "production_art_replaced": false,
+    "export_decode": {
+      "status": "PASS",
+      "size": [
+        320,
+        360
+      ],
+      "mode": "RGBA",
+      "sha256": "471510d72254aa53f4c8925fe545b5d627bc9126994303b8f3ea19b91c93c5d0"
+    },
+    "render_stderr": "render-panic-stderr.txt (preserved from actual native stderr before later export-only session)"
+  },
+  "limitations": [
+    "No listening test: silent development preference. All WAV samples, decode and routing checked offline.",
+    "Hidden startup tests validate completed rendering only, not foreground frame pacing.",
+    "Sprite Studio 0.3.3 native MCP animation renderer panicked; GUI renderer was not tested and no production animation was replaced."
+  ]
+}

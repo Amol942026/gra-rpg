@@ -119,7 +119,9 @@ Każde uruchomienie testowe otrzymuje `--no-audio`.
 
 ## Naturalny chód — 21.10.2026
 
-Aktualny master: `C:\AI2D\animations\emberfall_walk_20261021_v1\walk.sif`.
+Aktualny master: `C:\AI2D\animations\emberfall-walk-arms-20261110\walk.sif`.
+10.11.2026: większy naprzemienny wymach obu ramion, zapisany w krzywych
+Synfiga. Wyniki i lokalizacja przenośnego edytora: [WALK_QA.md](WALK_QA.md).
 Przenośna kopia jest w `art/hero/walk`. Natywne węzły Synfiga określają
 kontakty i przetaczanie stóp, tory kolan, przenoszenie ciężaru, ruch bioder,
 przeciwbalans tułowia i dłonie. Pętla ma 61 zapisanych punktów kontrolnych.

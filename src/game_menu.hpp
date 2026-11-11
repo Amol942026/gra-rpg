@@ -140,8 +140,7 @@ void menuButton(Rectangle r,const std::string& label,int row,bool enabled=true){
   bool active=menuSelection==row;
   if(active){DrawRectangleGradientH(int(r.x),int(r.y),int(r.width),int(r.height),rgb(124,105,64,90),rgb(48,66,62,25));line(r.x,r.y,r.x,r.y+r.height,Gold,2);}
   line(r.x+14,r.y+r.height+5,r.x+r.width-10,r.y+r.height+5,Fade(Gold,active?.42f:.13f));
-  txt(TextFormat("%02d",row+1),r.x+18,r.y+20,14,active?Gold:shade(Muted,.65f),true);
-  txt(label,r.x+63,r.y+17,23,active?rgb(251,226,175):Text);
+  txt(label,r.x+24,r.y+17,23,active?rgb(251,226,175):Text);
   if(active)diamond(r.x+r.width-16,r.y+r.height/2,3,6,Gold);
   return;
  }
@@ -197,12 +196,11 @@ void drawGameMenu(){
   float cx=frame.x+frame.width/2;diamond(cx,frame.y+38,5,9,Gold);
   center(welcome?"OSTATNIA PIECZĘĆ":"CHWILA ODDECHU",cx,frame.y+62,welcome?25:29,Text,true);
   if(welcome)center("Twoja opowieść zaczyna się tutaj",cx,frame.y+100,16,Muted);
-  else center(intro.active()?"Opowieść Eldrina":game.inTower()?"Schronienie w wieży Eldrina":game.inVolcano()?"Kaldera Popiołu":game.inDesert()?"Morze Piasków":"Wielka Knieja",cx,frame.y+108,16,Muted);
   const char* mainLabels[]={"Nowa gra","Wczytaj grę","Opcje","Twórcy","Wyjdź z gry"};
   const char* pauseLabels[]={"Zapisz grę","Wczytaj grę","Opcje","Wyjdź z gry"};
   for(int i=0;i<(welcome?5:4);i++)menuButton(menuHomeButton(i),welcome?mainLabels[i]:pauseLabels[i],i);
 #ifndef EMBERFALL_PLAYER_BUILD
-  if(welcome)menuButton(menuHomeButton(5),"Tryb deweloperski · F3",5);
+  if(welcome)menuButton(menuHomeButton(5),"Tryb deweloperski",5);
 #endif
   if(!welcome)menuButton(menuBackButton(),"Wróć do gry · ESC",4);
  }else if(menuPage==MenuPage::Load||menuPage==MenuPage::Save){
@@ -237,10 +235,9 @@ void drawGameMenu(){
    }else center(audioSystem.muted?"Włączone":"Wyłączone",874,r.y+16,17,Gold);
   }
   menuButton(menuOption(4),"Sterowanie",4);
-  center("Kliknij przełącznik lub naciśnij Enter. Suwak / ← → zmienia głośność.",720,668,15,Muted);
   menuButton(menuBackButton(),"Gotowe · ESC",5);
  }else if(menuPage==MenuPage::Controls){
-  menuHeading("STEROWANIE","Klawisze i mysz podczas wyprawy");
+  menuHeading("STEROWANIE","");
   drawControlsColumn(365,"RUCH I WALKA",expeditionControls,int(std::size(expeditionControls)));
   drawControlsColumn(737,"PRZEDMIOTY I MENU",interfaceControls,int(std::size(interfaceControls)));
   menuButton(menuBackButton(),"Wstecz · ESC",0);

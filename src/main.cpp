@@ -109,6 +109,7 @@ Rectangle lootRect(int i){return{1080.f+(i%5)*65,620,57,44};}
 int corpsePages(){const Enemy* body=game.findCorpse(game.openedCorpse);int last=0;if(body)for(int i=0;i<CorpseLootSize;i++)if(!body->loot[i].empty())last=i;return last/5+1;}
 void syncCorpsePage(){if(corpsePageOwner!=game.openedCorpse){corpsePageOwner=game.openedCorpse;corpsePage=0;}corpsePage=std::clamp(corpsePage,0,corpsePages()-1);}
 Rectangle corpseCloseRect(){return{1375,590,27,25};}
+Rectangle takeAllLootRect(){return{1080,668,154,27};}
 Rectangle skillActionRect(int i){return {167.f+i*72,799,65,63};}
 Rectangle skillsButton(){return {1080,16,146,29};}
 Rectangle actionRect(int i){return{392.f+i*72,799,65,63};}
@@ -194,6 +195,7 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
  case Kind::BanditBadge:P({{-13,-15},{13,-15},{16,5},{0,19},{-16,5}},wood);P({{-9,-11},{9,-11},{11,3},{0,13},{-11,3}},gold);L(-5,7,5,-6,edge,3);L(-5,-6,5,7,edge,3);break;
  case Kind::RuneStone:P({{-13,-14},{0,-20},{15,-7},{11,16},{-3,20},{-16,7}},steel);L(-5,12,-5,-9,C(Blue),3);L(-5,-9,7,-3,C(Blue),3);L(7,-3,-5,4,C(Blue),3);break;
  case Kind::Dagger:L(-9,14,8,-10,edge,7);P({{4,-7},{16,-19},{10,-2}},steel);L(7,-9,15,-17,light,2);L(-9,12,-3,3,wood,4);L(-9,0,4,10,gold,3);break;
+ case Kind::Spear:L(-15,17,11,-12,wood,3);P({{6,-8},{12,-20},{18,-22},{14,-13},{10,-7}},steel);L(8,-9,14,-18,light,1);L(5,-7,10,-3,gold,2);break;
  case Kind::Cloak:P({{-9,-15},{8,-15},{13,-3},{20,18},{0,13},{-20,18},{-13,-4}},steel);P({{-8,-14},{0,-20},{9,-14},{7,-6},{-6,-6}},wood);L(-2,-2,-2,12,edge,2);ellipse(x,y-7*s,3*s,3*s,gold);break;
  case Kind::Bow:{
   Vector2 previous{x-9*s,y-22*s};for(int n=1;n<=14;n++){float t=n/14.f;Vector2 next{x+(-9+24*std::sin(t*PI))*s,y+(-22+44*t)*s};DrawLineEx(previous,next,4*s,steel);DrawLineEx({previous.x-s,previous.y},{next.x-s,next.y},s,gold);previous=next;}
@@ -252,6 +254,7 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 #include "menu_scene.hpp"
 #include "treasure_art.hpp"
 #include "fountain_art.hpp"
+#include "wind_post.hpp"
 void hero(float x,float y,float s,bool portrait=false);
 void monster(Enemy&e,float x,float y);
 namespace tree_wind {inline void init();}
@@ -260,11 +263,11 @@ namespace world_shadows {inline void init();}
 void makeArt(){
  inventory_icons::load();
  spell_art::load();
- tree_wind::init();forest_water::init();
+ tree_wind::init();forest_water::init();wind_post::load();
  world_shadows::init();
  hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
  forest_bush_art::load();forest_tree_art::load();guardian_art::load();
- treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();caldera_attack_art::load();
+ treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();regional_enemy_art::load();caldera_attack_art::load();
  terrain=render_targets::colorOnly(TerrainCacheWidth,TerrainCacheHeight);BeginTextureMode(terrain);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,TerrainBakeScale});
  for(int sum=0;sum<MapSize*2;sum++)for(int x=0;x<MapSize;x++){int y=sum-x;if(y<0||y>=MapSize)continue;float sx=TerrainOriginX+(x-y)*40,sy=90+(x+y)*20;bool land=x>=1&&y>=1&&x<=MapSize-2&&y<=MapSize-2;
   if(!land)continue; // The animated water is drawn underneath the land.
@@ -391,6 +394,8 @@ void drawWorld(){
  }
  if(game.inDesert())desert_art::drawCachedFoothills();
  if(game.inVolcano()){enemy_ability_art::air();volcano_art::eruptionPlumes();}
+ // Composite the regional wind over the world. Combat flashes and HUD follow.
+ wind_post::draw();
  for(const auto& flash:game.pierceFlashes){Vector2 p=screen(flash.pos);float age=1-flash.life/.26f;ellipseOutline(p.x,p.y-35,8+age*22,5+age*12,Fade(rgb(137,226,245),1-age));}
  for(const auto& blast:game.explosions)drawExplosion(blast);
  drawHealingAura();
@@ -440,11 +445,11 @@ void minimap(){const Rectangle r=minimapRect();panel(r,Fade(Panel,.92f));
  if(!game.inDesert()&&!game.inVolcano())for(const auto& glade:ForestGlades){Vector2 p=point(glade.center);diamond(p.x,p.y,2,2,Fade(Gold,.7f));}
  for(auto&e:game.enemies)if(e.alive){Vector2 p=point(e.pos);DrawCircleV(p,enemyBoss(e.type)?3:1.6f,enemyBoss(e.type)?Gold:rgb(166,90,75));}
  for(const auto& c:game.chests)if(c.location==game.location)diamond(point(c.pos).x,point(c.pos).y,2.8f,2.8f,c.opened?Muted:Gold);
- if(game.inVolcano()){DrawCircleV(point(VolcanoPortal),3,rgb(192,153,240));for(int i=0;i<2;i++)DrawCircleV(point(VolcanoFountains[i]),2,i==0?Blue:rgb(238,123,123));}if(game.inDesert()){DrawCircleV(point(DesertPortal),3,rgb(192,153,240));DrawCircleV(point(DesertOasis),2,Blue);}DrawCircleV(point(game.player),3,Text);txt("N",r.x+83,r.y+25,9,Muted);}
+ if(game.inVolcano()){DrawCircleV(point(VolcanoPortal),3,rgb(192,153,240));for(int i=0;i<2;i++)DrawCircleV(point(VolcanoFountains[i]),2,i==0?Blue:rgb(238,123,123));}if(game.inDesert()){DrawCircleV(point(DesertPortal),3,rgb(192,153,240));DrawCircleV(point(DesertOasis),2,Blue);}DrawCircleV(point(game.player),3,Text);}
 void drawUI(){
  sand_prison::drawStatus();
  txt("EMBERFALL",28,22,34,Text,true);txt("ECHA ZAPOMNIANYCH RUIN",31,66,10,Gold);line(29,92,308,92,Fade(Gold,.35f));
- txt(game.inTower()?TextFormat("%02d / 5",game.towerFloor+1):game.inVolcano()?"03":game.inDesert()?"02":"01",335,29,20,Gold,true);txt(game.inTower()?TowerFloors[game.towerFloor].name:game.currentRegion(),410,29,20,Text);txt(game.inTower()?TowerFloors[game.towerFloor].theme:game.inVolcano()?"TRZECIA KRAINA / PIEŚŃ KALDERY":game.inDesert()?"DRUGA KRAINA / SZLAK ŻYWEJ WYDMY":"POGRANICZE  /  STREFA DZIKICH",411,56,10,Muted);
+ txt(game.inTower()?TowerFloors[game.towerFloor].name:game.currentRegion(),335,29,20,Text);txt(game.inTower()?TowerFloors[game.towerFloor].theme:game.inVolcano()?"TRZECIA KRAINA / PIEŚŃ KALDERY":game.inDesert()?"DRUGA KRAINA / SZLAK ŻYWEJ WYDMY":"POGRANICZE  /  STREFA DZIKICH",336,56,10,Muted);
  DrawCircle(755,39,3,Green);txt(TextFormat("%d FPS",GetFPS()),766,30,13,Green);
  minimap();
  txt("DZIENNIK WYPRAWY",29,680,10,Gold);line(29,701,242,701,Fade(Gold,.3f));
@@ -467,17 +472,23 @@ void drawUI(){
   if(cd>0)rect(r.x+1,r.y+1,r.width-2,(r.height-2)*std::clamp(cd,0.f,1.f),Fade(Ink,.65f));
   const char* keys[]={"LPM","C","1","2","SPACJA"};center(keys[i],r.x+32,r.y+48,9,Gold);
  }
- const char* labels[]={"ATAK","CZAR · K","ZDROWIE","MANA","UNIK"};for(int i=0;i<5;i++){Rectangle button=actionRect(i);center(labels[i],button.x+button.width/2,870,14,Muted);}
+ const char* labels[]={archetype(game.equipment[0].kind)==Kind::Spear?"PCHNIĘCIE":"ATAK","CZAR · K","ZDROWIE","MANA","UNIK"};for(int i=0;i<5;i++){Rectangle button=actionRect(i);center(labels[i],button.x+button.width/2,870,14,Muted);}
  rect(WorldW,0,W-WorldW,H,Panel);line(WorldW,0,WorldW,H,Gold);rect(WorldW+1,0,4,H,rgb(32,42,41));
- panel(skillsButton(),inside(skillsButton())?Card:Panel);center("UMIEJĘTNOŚCI · U",1153,23,13,Gold);panel(statsButton(),inside(statsButton())?Card:Panel);center("STATYSTYKI · P",1322,23,13,Gold);line(1080,50,1400,50,Line);
+ panel(skillsButton(),inside(skillsButton())?Card:Panel);center("UMIEJĘTNOŚCI",1153,23,13,Gold);panel(statsButton(),inside(statsButton())?Card:Panel);center("STATYSTYKI",1322,23,13,Gold);line(1080,50,1400,50,Line);
  panel({1080,68,63,68},rgb(37,54,51));clip(1081,69,61,66);hero_portrait::draw();EndScissorMode();
- txt("Wędrowiec",1158,70,25,Text,true);txt(TextFormat("POZIOM %02d  /  STRAŻNIK ŻARU",game.level),1159,105,10,Gold);
+ txt("Wędrowiec",1158,70,25,Text,true);txt(TextFormat("POZIOM %d",game.level),1159,105,10,Gold);
  txt(TextFormat("ZŁOTO  %lld",static_cast<long long>(game.goldBalance())),1159,125,14,Gold);
  txt("ŻYCIE",1080,151,10,Muted);txt(TextFormat("%d / %d",int(game.hp),game.maxHp()),1328,148,12,Text);bar(1139,153,173,9,game.hp,float(game.maxHp()),rgb(153,73,73));
  txt("MANA",1080,175,10,Muted);txt(TextFormat("%d / %d",int(game.mana),game.maxMana()),1328,172,12,Text);bar(1139,177,173,9,game.mana,float(game.maxMana()),rgb(66,127,161));
  const char* names[]={"BROŃ","HEŁM","TARCZA","ZBROJA","BUTY","PIERŚCIEŃ"};for(int i=0;i<EquipSize;i++)slotDraw({Place::Equip,i},equipRect(i),names[i]);
- txt(TextFormat("ATAK  %d",game.damage()),1080,314,11,Gold);txt(TextFormat("PANCERZ  %d",game.defense()),1192,314,11,Muted);txt(TextFormat("PD  %lld/%lld",static_cast<long long>(game.xp),static_cast<long long>(experienceForLevel(game.level))),1302,314,11,Muted);
- line(1080,338,1400,338,Line);txt("PLECAK",1080,346,11,Gold);int occupied=0;for(auto&i:game.bag)if(!i.empty())occupied++;txt(TextFormat("%02d / 25",occupied),1348,346,11,Muted);
+ const auto nextLevelExperience=experienceForLevel(game.level);
+ const std::string experience=TextFormat("%lld / %lld",static_cast<long long>(game.xp),static_cast<long long>(nextLevelExperience));
+ const float experienceX=std::min(1320.f,1400.f-textWidth(experience,12));
+ txt("PD",1080,307,10,Muted);
+ bar(1139,310,std::min(173.f,experienceX-1147.f),9,float(game.xp),float(nextLevelExperience),rgb(38,91,56));
+ txt(experience,experienceX,305,12,Text);
+ txt(TextFormat("ATAK  %d",game.damage()),1080,327,11,Gold);txt(TextFormat("PANCERZ  %d",game.defense()),1242,327,11,Muted);
+ line(1080,342,1400,342,Line);txt("PLECAK",1080,350,11,Gold);int occupied=0;for(auto&i:game.bag)if(!i.empty())occupied++;txt(TextFormat("%02d / 25",occupied),1348,350,11,Muted);
  for(int i=0;i<BagSize;i++)slotDraw({Place::Bag,i},bagRect(i));
  line(1080,612,1400,612,Line);
  if(auto* chest=game.findChest(game.openedChest)){
@@ -486,7 +497,9 @@ void drawUI(){
   panel(corpseCloseRect(),inside(corpseCloseRect())?Card:Panel);center("X",1388,594,14,Gold);
   int count=0;for(int i=0;i<ChestLootSize;i++){count+=!chest->loot[i].empty();slotDraw({Place::Chest,i,chest->id},lootRect(i));}
   for(int i=ChestLootSize;i<5;i++)panel(lootRect(i),rgb(19,29,31));
-  txt(count?"2× LPM: do plecaka":"Skrzynia jest pusta.",1080,679,14,count?Muted:Green);
+  panel(takeAllLootRect(),count&&inside(takeAllLootRect())?Card:Panel);DrawRectangleLinesEx(takeAllLootRect(),1,count?Gold:Line);
+  center("WEŹ WSZYSTKO",1157,675,13,count?Gold:Muted);
+  if(!count)txt("Skrzynia jest pusta.",1240,677,11,Green);
  }else if(Enemy* corpse=game.findCorpse(game.openedCorpse)){
   panel({1076,584,328,116},rgb(17,29,30));DrawRectangleLinesEx({1076,584,328,116},1,Fade(Green,.6f));
   txt(std::string("ŁUP: ")+enemyInfo(corpse->type).name,1080,594,14,Gold);
@@ -494,7 +507,9 @@ void drawUI(){
   syncCorpsePage();int count=0;for(const auto& value:corpse->loot)count+=!value.empty();
   for(int i=0;i<5;i++)slotDraw({Place::Corpse,corpsePage*5+i,corpse->id},lootRect(i));
   if(corpsePages()>1){panel({1286,668,117,25},Panel);center(TextFormat("<  %d / %d  >",corpsePage+1,corpsePages()),1344,674,14,Gold);}
-  txt(count?"2× LPM: do plecaka":"Ciało jest puste.",1080,679,14,count?Muted:Green);
+  panel(takeAllLootRect(),count&&inside(takeAllLootRect())?Card:Panel);DrawRectangleLinesEx(takeAllLootRect(),1,count?Gold:Line);
+  center("WEŹ WSZYSTKO",1157,675,13,count?Gold:Muted);
+  if(!count)txt("Ciało jest puste.",1240,677,11,Green);
  }else{
   txt("W ZASIĘGU",1080,595,10,Gold);auto n=nearbySlots();int pages=std::max(1,(int(n.size())+4)/5);nearbyPage=std::clamp(nearbyPage,0,pages-1);txt(TextFormat("%d  W ZASIĘGU",int(n.size())),1270,595,10,Muted);
   for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size())slotDraw(n[j],lootRect(i));else panel(lootRect(i),rgb(19,29,31));}
@@ -507,7 +522,7 @@ void drawUI(){
  }
  txt("v0.47",1370,885,10,Muted);
 }
-struct ItemTooltipText {std::string label,name,stat,description,instruction,chance,value;Color color;};
+struct ItemTooltipText {std::string label,name,stat,description,instruction,value;Color color;};
 ItemTooltipText itemTooltipText(Item value,Slot source){
  ItemTooltipText text;Kind shape=archetype(value.kind);int slot=gearSlot(value.kind);
  text.color=rarity(value);text.label=rarityName(itemRarity(value));text.name=itemName(value);
@@ -520,18 +535,15 @@ ItemTooltipText itemTooltipText(Item value,Slot source){
  else if(material(value.kind))text.stat=materialDescription(value.kind);
  else text.stat="Skarb znaleziony w ruinach";
  if(shape==Kind::Bow)text.stat+=" · zasięg zależy od naciągu";
+ if(shape==Kind::Spear)text.stat+=" · pchnięcie w linii";
  text.description=gearDescription(value.kind);
  text.value="Wartość: "+std::to_string(itemSellValue(value))+" złota";
  if(value.count>1)text.value+=" / szt. · stos: "+std::to_string(itemStackValue(value))+" złota";
- bool world=source.place==Place::Ground||source.place==Place::Forage||source.place==Place::Corpse||source.place==Place::Chest;
- text.instruction=world&&!game.reachable(source)?"Podejdź bliżej, aby podnieść.":source.place==Place::Corpse||source.place==Place::Chest?"2× LPM: do plecaka · przeciągnij, aby założyć":source.place==Place::Bag&&slot>=0?"2× LPM: załóż · LPM: przeciągnij":slot==0?"Przeciągnij na sprzęt lub koło broni (Q)":value.kind==Kind::Health||value.kind==Kind::Mana||value.kind==Kind::Mushroom?"PPM: użyj · LPM: przeciągnij":"LPM: przeciągnij przedmiot";
- if(value.kind==Kind::DawnShard)text.instruction="Artefakt fabularny · nie na sprzedaż";
- text.chance=value.kind==Kind::DawnShard?"Łup fabularny · gwarantowany (100%)":"Szansa na łup: "+std::to_string(itemDropChance(value))+"% · według rzadkości";
- if(source.place==Place::Chest)text.chance="Skrzynia: 3 przedmioty · pospolite / rzadkie";
+ (void)source;
  return text;
 }
 Rectangle tooltipBounds(const ItemTooltipText& text){
- float width=std::clamp(std::max({360.f,textWidth(text.value,14)+34,textWidth(text.stat,14)+34,textWidth(text.description,14)+34,textWidth(text.chance,14)+34,textWidth(text.instruction,14)+34}),360.f,560.f),height=text.description.empty()?174.f:200.f;
+ float width=std::clamp(std::max({360.f,textWidth(text.value,14)+34,textWidth(text.stat,14)+34,textWidth(text.description,14)+34,textWidth(text.instruction,14)+34}),360.f,560.f),height=(text.description.empty()?122.f:148.f)+(text.instruction.empty()?0:26.f);
  return {std::clamp(mouse.x+20,8.f,W-width-12),std::clamp(mouse.y+20,8.f,H-height-14),width,height};
 }
 void drawItemTooltip(Item value,Slot source,const std::string& instruction=""){
@@ -544,7 +556,7 @@ void drawItemTooltip(Item value,Slot source,const std::string& instruction=""){
  float row=box.y+90;
  if(!text.description.empty()){txt(text.description,box.x+17,row,14,Muted);row+=26;}
  txt(text.value,box.x+17,row,14,Gold);row+=26;
- txt(text.instruction,box.x+17,row,14,Muted);txt(text.chance,box.x+17,row+24,14,value.kind==Kind::DawnShard?Gold:Muted);
+ if(!text.instruction.empty())txt(text.instruction,box.x+17,row,14,Muted);
 }
 void tooltip(){
  if(towerPanelOpen||dragging.place!=Place::None||welcome||help||paused)return;
@@ -947,8 +959,8 @@ int main(int argc,char**argv) {
     startupLog.write("Shutting down");game_cursor::shutdown();audioSystem.shutdown();
     sync_present::shutdown();
     spell_art::unload();inventory_icons::unload();world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    hero_portrait::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
-    forest_water::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
+    hero_portrait::unload();regional_enemy_art::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    wind_post::unload();forest_water::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }
 

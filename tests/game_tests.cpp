@@ -17,6 +17,7 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "forest_loot_tests.hpp"
 #include "mushroom_tests.hpp"
 #include "bow_tests.hpp"
+#include "spear_tests.hpp"
 #include "intro_tests.hpp"
 #include "forest_expansion_tests.hpp"
 #include "tower_tests.hpp"
@@ -35,10 +36,12 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "sword_pose_tests.hpp"
 #include "hero_motion_tests.hpp"
 #include "walk_tests.hpp"
+#include "weapon_carry_tests.hpp"
 #include "treasure_tests.hpp"
 #include "combat_facing_tests.hpp"
 #include "equipment_appearance_tests.hpp"
 #include "loot_controls_tests.hpp"
+#include "loot_all_tests.hpp"
 #include "treant_tests.hpp"
 #include "guardian_boulder_tests.hpp"
 #include "guardian_gait_tests.hpp"
@@ -60,11 +63,13 @@ int main(){
  guardianBoulderTests();
  treantTests();
  lootControlsTests();
+ lootAllTests();
  equipmentAppearanceTests();
  combatFacingTests();
  treasureTests();
  heroMotionTests();
  walkTests();
+ weaponCarryTests();
  swordPoseTests();
  tradeTests();
  shadowTests();
@@ -76,6 +81,7 @@ int main(){
  towerStairsTests();
  criticalHealingTests();
  developerTests();
+ spearTests();
  towerFloorsTests();
  skillTests();
  towerTests();

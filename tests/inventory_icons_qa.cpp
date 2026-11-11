@@ -14,7 +14,7 @@ int main(int argc,char** argv){
  audioSystem.init(false,false);makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  check(!IsAudioDeviceReady()&&!audioSystem.available,"actual player renderer keeps the audio device closed");
  check(IsWindowHidden(),"graphics window stays hidden");
- check(inventory_icons::atlas.id&&inventory_icons::atlas.width==1536&&inventory_icons::atlas.height==1024,"complete icon atlas is preloaded at startup");
+ check(inventory_icons::atlas.id&&inventory_icons::atlas.width==inventory_icons::Width&&inventory_icons::atlas.height==inventory_icons::Height,"complete icon atlas is preloaded at startup");
  check(inventory_icons::lootAtlas.id&&inventory_icons::lootAtlas.width==1024&&inventory_icons::lootAtlas.height==384,"23 remaining item illustrations preload in their separate atlas");
  auto textureId=inventory_icons::atlas.id,lootId=inventory_icons::lootAtlas.id;inventory_icons::load();check(textureId==inventory_icons::atlas.id&&lootId==inventory_icons::lootAtlas.id,"reusing graphics never reloads or duplicates either icon texture");
  Image source=LoadImage("assets/sprites/equipment-icons.png");Color* pixels=LoadImageColors(source);std::vector<Kind> kinds;std::set<int> cells;
@@ -24,7 +24,7 @@ int main(int argc,char** argv){
   for(int y=0;y<128;y++)for(int x=0;x<128;x++){Color c=pixels[(cell/12*128+y)*source.width+cell%12*128+x];solid+=c.a>30;if(x<4||x>=124||y<4||y>=124)edge+=c.a>0;}
   check(solid>90&&edge==0,"every equipment cell has a visible padded transparent illustration");
  }
- check(kinds.size()==85&&cells.size()==85&&*cells.begin()==0&&*cells.rbegin()==84,"all 85 equipment kinds map to distinct stable cells");UnloadImageColors(pixels);UnloadImage(source);
+ check(kinds.size()==EquipmentKindCount&&cells.size()==EquipmentKindCount&&*cells.begin()==0&&*cells.rbegin()==EquipmentKindCount-1,"all equipment kinds map to distinct stable cells");UnloadImageColors(pixels);UnloadImage(source);
  Image loot=LoadImage("assets/sprites/loot-icons.png");pixels=LoadImageColors(loot);std::set<int> lootCells;int otherItems=0;
  for(int k=1;k<ItemKindCount;k++)if(gearSlot(Kind(k))<0){
   int cell=inventory_icons::lootCell(Kind(k));lootCells.insert(cell);int solid=0,edge=0;
@@ -34,7 +34,7 @@ int main(int argc,char** argv){
  check(otherItems==23&&lootCells.size()==23&&*lootCells.begin()==0&&*lootCells.rbegin()==22,"all 23 remaining item kinds have independent stable cells");
  check(inventory_icons::lootCell(Kind::None)==-1&&inventory_icons::lootCell(Kind::Sword)==-1&&inventory_icons::lootCell(Kind(-1))==-1,"empty, equipment and invalid kinds cannot alias remaining-item cells");
  UnloadImageColors(pixels);UnloadImage(loot);
- RenderTexture2D preview=LoadRenderTexture(1440,1280);BeginTextureMode(preview);ClearBackground(Ink);
+ RenderTexture2D preview=LoadRenderTexture(1440,int((kinds.size()+11)/12)*128);BeginTextureMode(preview);ClearBackground(Ink);
  for(size_t i=0;i<kinds.size();i++){
   float x=60+float(i%12)*120,y=60+float(i/12)*128;icon(item(kinds[i]),x,y,1.7f);txt(storyPrefix(itemName(item(kinds[i])),19),x-53,y+44,11,Text);icon(item(kinds[i]),x+36,y+35,.55f,.45f);
  }
@@ -52,6 +52,6 @@ int main(int argc,char** argv){
  check(!IsAudioDeviceReady(),"scene transition checks never initialize hardware audio");
  inventory_icons::unload();check(!inventory_icons::atlas.id&&!inventory_icons::lootAtlas.id,"both item atlases are released at shutdown");
  audioSystem.shutdown();sync_present::shutdown();CloseWindow();
- std::ofstream summary(root/"summary.json");summary<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"equipment_icons\":85,\"other_item_icons\":23,\"window_hidden\":true,\"audio_device_opened\":false,\"audio_played\":false}";
+ std::ofstream summary(root/"summary.json");summary<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"equipment_icons\":"<<EquipmentKindCount<<",\"other_item_icons\":23,\"window_hidden\":true,\"audio_device_opened\":false,\"audio_played\":false}";
  std::cout<<"Native inventory and arrival QA: "<<checks<<" checks, "<<failures<<" failures\n";return failures?2:0;
 }

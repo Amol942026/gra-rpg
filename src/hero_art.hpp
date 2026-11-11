@@ -1,7 +1,25 @@
 #pragma once
+#include "hero_weapon_art.hpp"
+#include "hero_armor_variants.hpp"
 
 // Included inside actor_art after Rig. Every view and pointer query uses this
 // same articulated model, including equipment, bow poses and roll transforms.
+template<std::size_t N>
+inline void gearPlate(Rig& rig,const std::array<equipment_shape::Point,N>& outline,
+                      const equipment_shape::Triangles<N>& triangles,P3 center,P3 u,P3 v,P3 depth,Color color){
+ auto cross=[](P3 a,P3 b){return P3{a.f*b.z-a.z*b.f,a.z*b.r-a.r*b.z,a.r*b.f-a.f*b.r};};
+ P3 normal=cross(u,v);bool reverse=normal.r*depth.r+normal.f*depth.f+normal.z*depth.z<0;
+ auto point=[&](int i,float side){return center+u*outline[i].x+v*outline[i].y+depth*(side*.5f);};
+ for(int i=0;i<triangles.count;i++){
+  auto t=triangles.indices[i];if(reverse)std::swap(t[1],t[2]);
+  rig.face(point(t[0],1),point(t[1],1),point(t[2],1),point(t[2],1),color,1.06f);
+  rig.face(point(t[2],-1),point(t[1],-1),point(t[0],-1),point(t[0],-1),color,.78f);
+ }
+ for(std::size_t i=0;i<N;i++){
+  int j=int((i+1)%N);P3 a=point(int(i),-1),b=point(j,-1),c=point(j,1),d=point(int(i),1);
+  rig.face(a,b,c,d,color,.85f);rig.face(d,c,b,a,color,.85f);
+ }
+}
 inline void gearInlay(Rig& rig,const GearAppearance& look,P3 center,float width,float height,bool back=false){
     if(!look.present())return;
     for(auto s:equipmentInlay(look.value.kind)){
@@ -9,6 +27,16 @@ inline void gearInlay(Rig& rig,const GearAppearance& look,P3 center,float width,
         P3 a=center+P3{left,0,top},b=center+P3{right,0,top},c=center+P3{right,0,bottom},d=center+P3{left,0,bottom};
         if(back)rig.face(d,c,b,a,equipment_art::color(look.paint.accent));
         else rig.face(a,b,c,d,equipment_art::color(look.paint.accent));
+    }
+}
+inline int armorMaterial(Kind kind){
+    switch(kind){
+        case Kind::Armor:return hero_paint::Steel;
+        case Kind::BoarArmor:return hero_paint::Hide;
+        case Kind::GuardianArmor:return hero_paint::Stone;
+        case Kind::ScarabArmor:case Kind::CobraCloak:return hero_paint::Scales;
+        case Kind::BoneArmor:return hero_paint::Bone;
+        default:return hero_paint::Cloth;
     }
 }
 inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
@@ -19,23 +47,35 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     const auto& held=appearance[0];const auto& headwear=appearance[1];const auto& ward=appearance[2];
     const auto& armor=appearance[3];const auto& boots=appearance[4];const auto& jewel=appearance[5];
     auto paint=[&](unsigned color){return flash?Text:equipment_art::color(color);};
-    const bool travelCoat=armor.value.kind==Kind::Armor;
-    const bool plated=armor.shape==Kind::Armor&&!travelCoat;
-    const bool cape=travelCoat||armor.shape==Kind::Cloak||!appearance.explicitGear;
-    const bool fur=armor.value.kind==Kind::WolfCloak||armor.value.kind==Kind::Cloak||armor.value.kind==Kind::BoarArmor;
-    const bool robe=armor.value.kind==Kind::SandRobe;
+    const bool travelCoat=!armor.present()||(!appearance.explicitGear&&armor.value.kind==Kind::Armor);
+    const bool robe=armor.value.kind==Kind::SandRobe||armor.value.kind==Kind::WebRobe;
+    const bool plated=armor.shape==Kind::Armor&&!travelCoat&&!robe;
+    const bool realmArmor=additionalArmor(armor.value.kind);
+    const bool cape=travelCoat||armor.shape==Kind::Cloak;
+    const int material=armorMaterial(armor.value.kind);
+    const bool hide=material==hero_paint::Hide,bone=material==hero_paint::Bone,scales=material==hero_paint::Scales;
     const Color skin=flash?Text:rgb(202,158,121),skinLight=flash?Text:rgb(227,186,148);
     const Color metal=plated?paint(armor.paint.primary):paint(0x657f79),edge=plated?shade(metal,1.3f):paint(0x9bb5aa);
-    const Color cloth=travelCoat?paint(0x354c62):armor.present()?paint(armor.shape==Kind::Cloak?armor.paint.primary:armor.paint.secondary):paint(0x454c55);
-    const Color mantle=travelCoat?paint(0x326e70):cloth,clothLight=shade(cloth,1.25f);
+    const Color cloth=travelCoat?paint(0x354c62):armor.present()?paint(armor.paint.secondary):paint(0x454c55);
+    const Color mantle=travelCoat?paint(0x326e70):armor.present()?paint(armor.paint.primary):cloth,clothLight=shade(cloth,1.25f);
     const Color trim=armor.present()?paint(armor.paint.trim):paint(0xa49370);
+    const hero_armor_variants::Finish realmFinish{metal,cloth,trim,paint(armor.paint.accent),
+        !realmArmor||flash?-1:hero_paint::NewArmorFirstCell+int(armor.value.kind)-FirstAdditionalArmor};
     const Color weaponMetal=held.present()?paint(held.paint.primary):edge,weaponTrim=held.present()?paint(held.paint.trim):Gold;
     const Color weaponGrip=held.present()?paint(held.paint.secondary):paint(0x60452e);
+    const hero_weapon_art::Finish weaponFinish{weaponMetal,weaponGrip,weaponTrim,paint(held.paint.accent),flash};
     const Color leather=paint(0x744b38),pants=paint(0x5d5746);
     bool archer=weapon==Kind::Bow;float drawCharge=std::max(0.f,bowDraw);
+    const bool spearing=weapon==Kind::Spear;
     float stowPhase=weapon==Kind::Sword&&!striking?(rolling?1.f:state.motionInitialized?state.swordStow:std::clamp(run,0.f,1.f)):0;
     float moving=state.motionInitialized?state.moveBlend:(state.moving?1.f:0.f);
-    auto pose=hero_motion::evaluate(state.phase,moving,bowDraw>=0?0:state.runBlend,state.idleTime,striking?strikeProgress:-1,empowered,rollProgress);
+    auto pose=hero_motion::evaluate(state.phase,moving,bowDraw>=0?0:state.runBlend,state.idleTime,striking&&!spearing?strikeProgress:-1,empowered,rollProgress);
+    if(!striking&&!rolling){
+        if(archer&&bowDraw<0)hero_carry::bow(pose);
+        else if(weapon==Kind::Axe||weapon==Kind::Dagger)hero_carry::melee(pose);
+    }
+    if(striking&&!spearing)hero_carry::melee(pose,1-hero_motion::ease(strikeProgress/.12f)*hero_motion::ease((1-strikeProgress)/.20f));
+    if(spearing)spear_motion::apply(pose,striking?strikeProgress:-1,moving,stride);
     auto stow=weapon==Kind::Sword&&!striking?hero_sheath::apply(pose,stowPhase):sword_stow::sample(0);
     if(knockdown>=0){
         pose=hero_knockdown::evaluate(pose,knockdown,{fallR,fallF,0});
@@ -58,6 +98,9 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         }
         pose.bind();
     }
+    // Keep the left side free until the sword hand finishes crossing the hip.
+    const bool shieldOnBack=archer||spearing||run>.1f||rolling||stowPhase>0;
+    if(shield&&!shieldOnBack&&knockdown<0)hero_carry::shield(pose);
     auto rest=[](int bone){auto p=hero_motion::restHead(bone);return P3{p.x,p.y,p.z};};
     auto world=[](hero_motion::Vec p){return P3{p.x,p.y,p.z};};
     lift=0;stride*=moving;
@@ -81,13 +124,16 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     // Cloth hangs in a curved sheet; its scalloped edge and folds move with
     // the walking cycle, while the roll rotates the entire sheet with the body.
     auto capePoint=[&](float u,float down){
-        float r=(u*2-1)*(12+down*(travelCoat?4:6));
+        float edge=std::abs(u*2-1);
+        float r=(u*2-1)*(travelCoat?12+down*4:7+down*11);
         float tip=down*down,fold=std::cos(u*5*PI)*(.55f+tip*1.8f);
         float sway=std::sin(cycle-down*2+u*3)*std::abs(stride)*tip*(1.3f+run);
         float length=travelCoat?34.f:45.f;
+        float hem=travelCoat?std::sin(u*4*PI)*1.5f:
+            edge<=.45f?-1.6f+edge*(3.7f/.45f):2.1f*(1-(edge-.45f)/.55f);
         return P3{r+sway+clothMotion.capeSway*.44f*tip,
                   -10-down*(3+run*9)-fold-clothMotion.capeLift*.50f*tip,
-                  58+lift-down*(length-run*7-tuck*13)+std::sin(u*4*PI)*tip*1.5f+clothMotion.capeLift*.25f*tip};
+                  58+lift-down*(length-run*7-tuck*13)+hem*tip+clothMotion.capeLift*.25f*tip};
     };
     if(cape){
         for(int row=0;row<7;row++)for(int col=0;col<12;col++){
@@ -95,7 +141,7 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
             P3 p=capePoint(a,top),q=capePoint(b,top),r=capePoint(b,bottom),s=capePoint(a,bottom);
             float light=.86f+.16f*std::cos((a+b)*2.5f*PI);
             rig.face(p,q,r,s,mantle,light);rig.face(s,r,q,p,mantle,light*.85f);
-            if(!flash)rig.decal(p,q,r,s,7,a,top,b,bottom,shade(mantle,light),true);
+            if(!flash)rig.decal(p,q,r,s,travelCoat?7:material,a,top,b,bottom,shade(mantle,light),true);
         }
         for(int i=0;i<18;i++)rig.tapered(capePoint(i/18.f,1),capePoint((i+1)/18.f,1),.85f,.85f,trim);
         for(float side:{0.f,1.f})for(int i=0;i<8;i++)rig.tapered(capePoint(side,i/8.f),capePoint(side,(i+1)/8.f),.85f,.85f,shade(mantle,1.3f));
@@ -107,7 +153,7 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         P3 hip=rest(thigh),knee=rest(shin),foot=rest(ankle);
         rig.setBone(thigh);
         rig.tapered(knee,hip,8,9,pants,1.15f);rig.rounded(knee,{8,8,9},pants);
-        if(travelCoat){
+        if(travelCoat||robe){
             // The two coat panels follow their thighs, clearing the knees and
             // scabbard as the feet trade places.
             float sign=side?1.f:-1.f;
@@ -119,22 +165,22 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
                 float u=col/4.f,v=row/3.f,uu=(col+1)/4.f,vv=(row+1)/3.f;
                 P3 a=hem(u,v),b=hem(uu,v),c=hem(uu,vv),d=hem(u,vv);
                 rig.face(a,b,c,d,cloth,.93f);rig.face(d,c,b,a,cloth,.65f);
-                if(!flash)rig.decal(a,b,c,d,8,u,v,uu,vv,clothLight);
+                if(!flash)rig.decal(a,b,c,d,robe?material:8,u,v,uu,vv,robe?mantle:clothLight);
             }
             for(int i=0;i<4;i++)rig.tapered(hem(i/4.f,1),hem((i+1)/4.f,1),.7f,.7f,trim);
         }
-        Color bootColor=boots.present()?paint(boots.paint.primary):pants;
+        Color bootColor=boots.present()?paint(boots.paint.secondary):pants;
         Color bootTrim=boots.present()?paint(boots.paint.trim):leather;
         rig.setBone(shin);rig.tapered(foot,knee,7.5f,8,boots.present()?bootColor:pants,.92f);
-        if(boots.present())rig.rounded(knee+P3{0,3,0},{7,4,8},bootTrim);
+        if(boots.present())rig.rounded(knee+P3{0,0,-1},{9,9,3},bootTrim);
         if(boots.present()){
             panel({foot.r,4.6f,foot.z+11},7.5f,15,5,5,11,shade(bootColor,1.25f));
             gearInlay(rig,boots,foot+P3{0,4,12},6,9);
-            if(boots.value.kind==Kind::CobraBoots)for(int i=0;i<3;i++)for(float s:{-1.f,1.f})rig.tapered(foot+P3{0,4.8f,7+i*4.f},foot+P3{s*3.6f,4,9+i*4.f},.8f,.6f,bootTrim);
-            if(boots.value.kind==Kind::BanditBoots)for(int i=0;i<3;i++)rig.rounded(foot+P3{0,0,6+i*5.f},{9,9,1.5f},paint(boots.paint.secondary));
+            for(int i=0;i<4;i++)rig.tapered(foot+P3{-2.4f,4.8f,7+i*3.f},foot+P3{2.4f,4.8f,9+i*3.f},.55f,.55f,bootTrim);
         }
         rig.setBone(ankle);
         rig.rounded(foot+P3{0,3,-1},{10,16,8},boots.present()?bootColor:leather);
+        if(boots.present())rig.rounded(foot+P3{0,8,0},{9,6,5},paint(boots.paint.primary));
         rig.rounded(foot+P3{0,1,4},{9,10,9},boots.present()?bootColor:leather);
         rig.rounded(foot+P3{0,5,-3},{10,14,2},rgb(37,32,28));
         if(!boots.present()){
@@ -150,32 +196,53 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     rig.setBone(hero_motion::data::Pelvis);
     rig.rounded({0,0,31+lift},{24,17,15},cloth);
     rig.setBone(hero_motion::data::Spine);
-    rig.rounded({0,0,46+lift},plated?P3{27,18,28}:P3{25,17,27},plated?metal:cloth);
-    if(!plated){panel({0,8.6f,46},23,25,3,12.5f,14,clothLight);panel({0,-8.6f,46},23,25,3,12.5f,14,clothLight,true);}
-    // Curved breastplate: raised rim, overlapping lower plates and a sun clasp.
-    if(plated){for(float side:{-1.f,1.f})for(int j=0;j<8;j++){
-        float z=36+j*2.5f,zz=z+2.5f,r=side*(10.5f-std::abs(z-46)*.15f),rr=side*(10.5f-std::abs(zz-46)*.15f);
-        rig.tapered({r,5.5f,z+lift},{rr,5.5f,zz+lift},.8f,.8f,edge);
+    if(realmArmor){
+        hero_armor_variants::torso(rig,armor.value.kind,realmFinish);
+    }else if(travelCoat){
+        rig.rounded({0,0,46},{25,17,27},cloth);
+        panel({0,8.6f,46},23,25,3,12.5f,14,clothLight);
+        panel({0,-8.6f,46},23,25,3,12.5f,14,clothLight,true);
+    }else{
+        const int cell=flash?-1:material;
+        const Color outer=plated?metal:mantle;
+        rig.rounded({0,0,47},{plated?27.f:25.f,plated?21.f:18.f,28},outer,cell,false,cell,false,true);
+        // Follow the shell curvature so neck binding and shoulder seams sit
+        // against the material as the torso twists.
+        for(float side:{-1.f,1.f})for(float facing:{-1.f,1.f}){
+            const float f=facing*(plated?1.f:.86f);
+            rig.tapered({0,8.2f*f,54},{side*5,7.5f*f,56.5f},1.2f,1.2f,trim);
+            rig.tapered({side*5,7.5f*f,56.5f},{side*8,6.2f*f,56},1.2f,1.2f,trim);
+            rig.tapered({side*8,6.2f*f,56},{side*11,6.5f*f,51},1.1f,1.1f,trim);
+            if(plated){
+                rig.rounded({side*9.8f,7.5f*f,51},{1.8f,1.8f,1.8f},trim);
+                rig.rounded({side*10.3f,7.3f*f,43},{1.5f,1.7f,1.5f},trim);
+            }
+        }
     }
-    rig.rounded({0,7,39+lift},{20,5,5},shade(metal,.95f));
-    rig.rounded({0,7.6f,35+lift},{19,4,4},shade(metal,.85f));
-    gearInlay(rig,armor,{0,9.5f,46},12,13);
-    gearInlay(rig,armor,{0,-9.5f,46},12,13,true);
-    if(armor.value.kind==Kind::ScarabArmor)for(int row=0;row<4;row++)rig.rounded({0,9.2f,37+row*4.f},{19-row*2.f,3,5},row%2?metal:paint(armor.paint.secondary));
-    }
-    if(robe){
-        rig.setBone(hero_motion::data::Pelvis);
-        rig.tapered({0,0,34},{0,0,12},23,31,cloth);
-        rig.tapered({-7,9,32},{-11,11,13},1.4f,1.4f,trim);rig.tapered({7,9,32},{11,11,13},1.4f,1.4f,trim);
+    if(plated&&!realmArmor){
+        const int rows=scales||bone?4:3;
+        for(float facing:{-1.f,1.f})for(int row=0;row<rows;row++){
+            float z=35+row*3.1f,halfWidth=8.f+row*.63f,front=(6.7f+row*.8f)*facing;
+            Color finish=shade(metal,.86f+.07f*row);
+            rig.rounded({0,front,z},{halfWidth*2+2,5,4.8f},finish);
+            for(float side:{-1.f,1.f}){
+                rig.tapered({0,front+2.4f*facing,z-.9f},
+                            {side*halfWidth,front-.4f*facing,z+.6f},.72f,.72f,shade(trim,.78f+.055f*row));
+            }
+        }
+        gearInlay(rig,armor,{0,10.7f,50.1f},7,7);
+        gearInlay(rig,armor,{0,-10.7f,50.1f},7,7,true);
     }
     rig.setBone(hero_motion::data::Pelvis);
     rig.rounded({0,0,32+lift},{25,18,4},leather);
     rig.rounded({0,9,32+lift},{5,2,4},Gold);rig.rounded({0,10,32+lift},{2.8f,1,2},leather);
     rig.setBone(hero_motion::data::Spine);
-    rig.tapered({-9,8,54+lift},{9,8,36+lift},travelCoat?3.3f:2.5f,2,leather);
-    P3 clasp=travelCoat?P3{-2,10.3f,50}:P3{0,9.4f,49};
-    rig.rounded(clasp,{travelCoat?7.f:5.f,2,travelCoat?7.f:6.f},trim);
-    rig.rounded(clasp+P3{0,1.2f,0},{3.2f,1,3.2f},travelCoat?paint(0x263b45):cloth);
+    if(travelCoat)rig.tapered({-9,8,54},{9,8,36},3.3f,2,leather);
+    P3 clasp=travelCoat?P3{-2,10.3f,50}:P3{0,plated?11.f:9.4f,54};
+    if(!realmArmor){
+        rig.rounded(clasp,{travelCoat?7.f:5.f,2,travelCoat?7.f:6.f},trim);
+        rig.rounded(clasp+P3{0,1.2f,0},{3.2f,1,3.2f},travelCoat?paint(0x263b45):cloth);
+    }
     if(travelCoat)for(int i=0;i<4;i++){
         P3 ray=i%2?P3{0,0,i==1?1.f:-1.f}:P3{i==0?1.f:-1.f,0,0};
         rig.tapered(clasp+P3{0,1.8f,0}+ray*1.25f,clasp+P3{0,1.5f,0}+ray*2.9f,.8f,.65f,trim);
@@ -190,19 +257,15 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     // A softer collar and two shoulder plates attach to rounded upper arms.
     rig.setBone(hero_motion::data::Spine);
     rig.rounded({0,-1,57+lift},{26,18,7},mantle);
-    if(travelCoat)for(float side:{-1.f,1.f}){
+    if(travelCoat||cape||robe)for(float side:{-1.f,1.f}){
         rig.tapered({side*5,-1,60},{side*8,7,54},4.2f,3,shade(mantle,1.2f));
         rig.tapered({side*8,7,54},{side*2,9,51},3.2f,2.4f,mantle);
     }
-    if(fur)for(int i=0;i<5;i++){
-        Color furTone=paint(armor.value.kind==Kind::BoarArmor?0xbfa782:0xb2bdb0);
-        rig.rounded({-11+i*5.5f,-1,57-std::abs(i-2)*1.25f},{8,19,5.5f},shade(furTone,i%2?.85f:.98f));
-    }
-    if(armor.value.kind==Kind::BoarArmor)for(float side:{-1.f,1.f})rig.tapered({side*13,3,52},{side*16,2,60},3,1,paint(armor.paint.accent));
     if(jewel.shape==Kind::Amulet){
         Color chain=paint(jewel.paint.trim);
         rig.tapered({-6,7,58},{0,10.5f,48},.7f,.7f,chain);rig.tapered({6,7,58},{0,10.5f,48},.7f,.7f,chain);
-        rig.rounded({0,11,48},{7,3,8},chain);rig.rounded({0,12.4f,48},{4.5f,2,5.5f},paint(jewel.paint.accent));
+        gearPlate(rig,equipment_shape::Pendant,equipment_shape::PendantTriangles,{0,11,51},{6,0,0},{0,0,6},{0,2,0},chain);
+        gearPlate(rig,equipment_shape::Pendant,equipment_shape::PendantTriangles,{0,12.3f,50.2f},{4.2f,0,0},{0,0,4.2f},{0,1.2f,0},paint(jewel.paint.accent));
     }
     if(archer){
         rig.rounded({-7,-17,44+lift},{12,12,31},leather);
@@ -236,14 +299,23 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         P3 shoulder=rest(upper),elbow=rest(fore),hand=rest(handBone);
         rig.setBone(upper);
         rig.tapered(elbow,shoulder,8,9,cloth);
-        rig.rounded(shoulder,plated?P3{13,17,10}:P3{11,14,8},plated?metal:cloth);
+        rig.rounded(shoulder,{11,14,8},cloth);
         if(travelCoat){
             P3 pauldron=shoulder+P3{side*.7f,.4f,1.6f};
             rig.rounded(pauldron,{12.2f,16,7.2f},paint(0x995d36),flash?-1:6);
             rig.rounded(pauldron+P3{side*.25f,0,-3.1f},{11.8f,14.7f,2.2f},trim);
         }
-        if(plated)rig.rounded(shoulder+P3{0,5,1},{11,5,3},edge);
-        if(armor.value.kind==Kind::GuardianArmor)rig.rounded(shoulder+P3{side*2,-1,3},{14,16,7},paint(armor.paint.secondary));
+        if(realmArmor){
+            hero_armor_variants::shoulder(rig,armor.value.kind,shoulder,side,realmFinish);
+        }else if(plated){
+            const float width=hide?11.f:13.f;
+            P3 shell=shoulder+P3{side*.9f,.4f,1.7f};
+            const int cell=flash?-1:material;
+            rig.rounded(shell,{width,15.4f,8},metal,cell,false,cell,false,true);
+            rig.rounded(shell+P3{side*.6f,0,-3.5f},{width-.6f,14.2f,4.1f},shade(trim,.87f));
+            if(scales||bone)rig.rounded(shell+P3{side*.9f,0,-6},{width-1.8f,11.8f,4.7f},metal);
+            for(float f:{-1.f,1.f})rig.rounded(shell+P3{side*2.2f,f*6.9f,-.3f},{2,2,2},trim);
+        }
         rig.setBone(fore);
         rig.tapered(hand,elbow,6,7,cloth,1.15f);
         rig.rounded(elbow,{8,9,8},plated?metal:cloth);
@@ -264,70 +336,33 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
             P3 grip=world(pose.world[hero_motion::data::HandL].p);
             P3 axis=world(pose.vector(hero_motion::data::HandL,{0,0,1}));
             P3 forward=world(pose.vector(hero_motion::data::HandL,{0,1,0}));
-            float half=held.value.kind==Kind::BanditBow?23:held.value.kind==Kind::MoonBow?30:held.value.kind==Kind::MirageBow?29:27;
-            float curve=6;
-            switch(held.value.kind){
-            case Kind::BirchBow:half=24;curve=5;break;
-            case Kind::OasisBow:half=28;curve=7.2f;break;
-            case Kind::AshBow:half=31;curve=5.5f;break;
-            default:break;
-            }
-            P3 bottom=grip-axis*half,top=grip+axis*half,previous=bottom;
-            for(int part=1;part<=16;part++){
-                float t=part/16.f;P3 next=grip+axis*(-half+2*half*t)+forward*(curve*std::sin(t*PI)*(1-.15f*drawCharge));
-                rig.tapered(previous,next,2.6f,2.6f,weaponMetal);previous=next;
-                if(part==2||part==14)rig.rounded(next,{3.8f,3.8f,4},weaponTrim);
-                if(part==6||part==10)rig.rounded(next,{3,3,3},paint(held.paint.accent));
-            }
-            P3 string=bowDraw>=0&&!rolling?world(pose.world[hero_motion::data::HandR].p):grip;
-            rig.beam(bottom,string,.75f,.75f,Text);rig.beam(string,top,.75f,.75f,Text);
-            if(bowDraw>=0&&!rolling){
-                P3 tip=grip+P3{0,20,0};rig.beam(string-P3{0,3,0},tip,1.4f,1.4f,rgb(190,143,81));
-                rig.form(tip,{4,7,3},metal);rig.form(string-P3{0,1,0},{5,5,2},Text);
-            }
+            const bool nocked=bowDraw>=0&&!rolling;
+            const float curve=equipment_shape::BowCurve*(1-.15f*drawCharge);
+            P3 string=nocked?world(pose.world[hero_motion::data::HandR].p):grip-forward*curve;
+            hero_weapon_art::bow(rig,grip,axis,forward,string,weaponFinish,held.value.kind,drawCharge,nocked);
         }
-        if(side>0&&held.present()&&!archer){
-            bool dagger=weapon==Kind::Dagger;
+        if(side>0&&spearing){
+            rig.setBone(-1);
+            hero_weapon_art::spear(rig,world(pose.world[hero_motion::data::HandR].p),
+                 world(pose.world[hero_motion::data::HandL].p),weaponFinish,held.value.kind);
+        }else if(side>0&&held.present()&&!archer){
             rig.setBone(hero_motion::data::Weapon);
-            P3 blade=swordPoint(sword_pose::idleBlade(0));
-            if(dagger)blade=blade*.65f;
-            P3 base=weapon==Kind::Sword?hand+blade*.10f:hand-blade*.12f,tip=hand+blade*exposedBlade;
-            float width=weapon==Kind::Axe?3:held.value.kind==Kind::GuardianSword?5.5f:4;
-            switch(held.value.kind){
-            case Kind::TrailFalchion:width=5.5f;break;
-            case Kind::DewSword:width=3.2f;break;
-            case Kind::SunTrailSword:width=4.6f;break;
-            case Kind::FlintDagger:width=3.5f;break;
-            case Kind::GlassDagger:width=4.6f;break;
-            default:break;
-            }
-            rig.beam(base,tip,width,2,weapon==Kind::Axe?weaponGrip:weaponMetal);
-            rig.beam(hand-blade*.20f,hand+blade*.06f,3.5f,3.5f,weaponGrip);
-            rig.beam((weapon==Kind::Sword?base:hand)+P3{0,0,.8f},tip+P3{0,0,.8f},.9f,.6f,shade(weaponMetal,1.3f));
-            P3 guard=hand+blade*.10f;float flat=std::max(.001f,std::hypot(blade.r,blade.f));
-            P3 cross{blade.f/flat*7,-blade.r/flat*7,0};
-            rig.beam(guard-cross,guard+cross,2.5f,2.5f,weaponTrim);
-            if(weapon==Kind::Axe){
-                float headWidth=held.value.kind==Kind::TuskAxe?20.f:15.f;
-                if(held.value.kind==Kind::CopperHatchet)headWidth=13;
-                if(held.value.kind==Kind::BasaltCleaver)headWidth=19;
-                rig.form(tip+P3{5,0,-7},{headWidth,4,14},weaponMetal);
-            }
-            if(held.value.kind==Kind::TuskAxe)rig.tapered(tip+P3{-7,0,-5},tip+P3{-9,0,5},4,1,paint(held.paint.accent));
-            if(held.value.kind==Kind::StingDagger||(held.value.kind==Kind::DuneBlade&&exposedBlade>.8f))rig.beam(tip-blade*.25f,tip+cross*.45f,3,1,weaponMetal);
-            if(beastGear(held.value.kind))for(int i=0;i<3;i++){
-                if(.3f+i*.15f>exposedBlade)continue;
-                P3 p=hand+blade*(.3f+i*.15f)+P3{0,0,1.2f};rig.beam(p-cross*.2f,p+cross*.2f,1,1,paint(held.paint.accent));
-            }
+            hero_weapon_art::melee(rig,hand,held.value.kind,exposedBlade,weaponFinish);
         }
         if(side<0&&shield){
-            bool stored=archer||run>.1f||rolling;float front=stored?-1.f:1.f;
+            bool stored=shieldOnBack;float front=stored?-1.f:1.f;
             rig.setBone(stored?hero_motion::data::Spine:handBone);
-            P3 p=stored?P3{archer?7.f:0.f,-15,archer?42.f:45.f}:hand+P3{-2,7,1};
-            rig.rounded(p,{21,5,29},paint(ward.paint.trim));rig.rounded(p+P3{0,front*2,0},{18,4,25},paint(ward.paint.primary));
-            rig.rounded(p+P3{0,front*4.2f,1},{3,2,22},paint(ward.paint.secondary));
-            gearInlay(rig,ward,p+P3{0,front*5.5f,2},14,19,stored);
-            for(int i=0;i<8;i++){float a=i*PI/4;rig.rounded(p+P3{std::cos(a)*7.8f,front*3.9f,std::sin(a)*11},{1.4f,1.4f,1.4f},edge);}
+            P3 p=stored?P3{archer?7.f:0.f,-15,archer?42.f:45.f}:hand+P3{-2,hero_carry::ShieldOffset,1};
+            if(!stored){
+                // The fist closes around a leather handle mounted on the inner face.
+                rig.tapered(hand+P3{-2,2,-2.3f},p+P3{0,-1.5f,-3.3f},1.7f,1.6f,leather);
+                rig.tapered(hand+P3{-2,2,2.3f},p+P3{0,-1.5f,3.3f},1.7f,1.6f,leather);
+            }
+            gearPlate(rig,equipment_shape::Shield,equipment_shape::ShieldTriangles,p,{8.7f,0,0},{0,0,8.7f},{0,front*hero_carry::ShieldRimDepth,0},paint(ward.paint.trim));
+            gearPlate(rig,equipment_shape::Shield,equipment_shape::ShieldTriangles,p+P3{0,front*2,0},{7.45f,0,0},{0,0,7.45f},{0,front*1.4f,0},paint(ward.paint.primary));
+            for(float x:{-.6f,0.f,.6f}){rig.tapered(p+P3{x*8.7f,front*3,8},p+P3{x*8.7f,front*3,0},.65f,.65f,paint(ward.paint.secondary));rig.tapered(p+P3{x*8.7f,front*3,0},p+P3{x*3.9f,front*3,-10},.65f,.65f,paint(ward.paint.secondary));}
+            rig.rounded(p+P3{0,front*3.6f,1.3f},{5.5f,2.5f,5.5f},paint(ward.paint.trim));
+            rig.rounded(p+P3{0,front*5,1.3f},{2.4f,1.3f,2.4f},paint(ward.paint.accent));
         }
     }
     rig.setBone(hero_motion::data::Head);
@@ -349,8 +384,9 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     }
     Color hood=helmet?paint(headwear.paint.primary):flash?Text:hero_paint::HairColor;
     if(helmet){
-        rig.rounded({0,-3,head+6},{22,19,15},hood);
-        rig.rounded({0,-6,head},{21,11,23},hood);
+        rig.rounded({0,-3,head+2},{20,17,24},hood);
+        gearPlate(rig,equipment_shape::Helmet,equipment_shape::HelmetTriangles,{0,6,head},{8.5f,0,0},{0,0,8.5f},{0,4,0},hood);
+        gearPlate(rig,equipment_shape::Visor,equipment_shape::VisorTriangles,{0,8.2f,head},{8.5f,0,0},{0,0,8.5f},{0,.6f,0},paint(0x17212a));
     }else{
         rig.rounded({-.85f,-3.45f,head+4.2f},{19.5f,18,17.6f},hood,flash?-1:1,false,flash?-1:2);
         rig.rounded({-5.4f,3.6f,head+6.4f},{6.8f,8.1f,5.4f},hood,flash?-1:1);
@@ -360,12 +396,11 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         if(helmet)rig.tapered(a,b,.8f,.8f,paint(headwear.paint.trim));
     }
     if(helmet){
-        bool soft=headwear.value.kind==Kind::WebCowl;
-        if(!soft){rig.tapered({0,6,head+12},{0,10,head-4},1.2f,1.2f,paint(headwear.paint.trim));rig.rounded({0,0,head+13},{3,13,3},paint(headwear.paint.accent));}
-        gearInlay(rig,headwear,{0,8,head+8},10,7);
-        if(headwear.value.kind==Kind::BoneHelmet)for(float side:{-1.f,1.f})rig.rounded({side*9,4,head-2},{4,5,16},paint(headwear.paint.accent));
-        if(headwear.value.kind==Kind::GuardianHelmet)for(int i=0;i<3;i++)rig.rounded({-6+i*6.f,-1,head+13},{5,10,4},paint(headwear.paint.secondary));
-        if(headwear.value.kind==Kind::ScarabHelmet)rig.rounded({0,0,head+14},{8,14,3},paint(headwear.paint.secondary));
+        Color helmetTrim=paint(headwear.paint.trim);
+        rig.tapered({0,9,head+4},{0,9,head-10},1.6f,1.6f,helmetTrim);
+        rig.tapered({-9,8.8f,head+3.6f},{0,9.2f,head+5.3f},1.1f,1.1f,helmetTrim);
+        rig.tapered({0,9.2f,head+5.3f},{9,8.8f,head+3.6f},1.1f,1.1f,helmetTrim);
+        rig.rounded({0,8.7f,head+8},{2.8f,1.6f,2.8f},paint(headwear.paint.accent));
     }
     rig.setSkeleton(nullptr);
 }

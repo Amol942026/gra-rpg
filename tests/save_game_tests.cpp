@@ -25,13 +25,12 @@ int main(int argc,char** argv){
   volcanoSaveTests();
   saves::Snapshot s;roundtrip(s);
   for(int k=int(Kind::SlimeBlade);k<ItemKindCount;k++){
-   auto extra=s;extra.game.bag[10]=item(Kind(k),2);extra.game.equipment[gearSlot(Kind(k))]=item(Kind(k),1);
-   if(Kind(k)>=Kind::TrailFalchion){
-    extra.game.weaponWheel[6]={Kind(k),1};
-    extra.game.chests[0].loot[0]=item(Kind(k));
-   }
-   extra.game.enemies[0].alive=false;extra.game.enemies[0].hp=0;extra.game.enemies[0].loot[14]=item(Kind(k));roundtrip(extra);
-   check(saves::decode(saves::encode(extra)).game.bag[10].kind==Kind(k),"every new item ID persists in bags, equipment and corpse loot");
+   const Kind kind=Kind(k);const int slot=gearSlot(kind);
+   auto extra=s;extra.game.bag[10]=item(kind,2);extra.game.equipment.at(slot)=item(kind,1);
+   if(kind>=Kind::TrailFalchion)extra.game.chests[0].loot[0]=item(kind);
+   if(kind>=Kind::TrailFalchion&&slot==0)extra.game.weaponWheel[6]={kind,1};
+   extra.game.enemies[0].alive=false;extra.game.enemies[0].hp=0;extra.game.enemies[0].loot[14]=item(kind);roundtrip(extra);
+   check(saves::decode(saves::encode(extra)).game.bag[10].kind==kind,"every new item ID persists in bags, equipment and corpse loot");
   }
   auto assignments=s;assignments.game.skillAssigned={false,true,false};
   check(saves::decode(saves::encode(assignments)).game.skillAssigned==assignments.game.skillAssigned,"skill slot choices persist in current saves");

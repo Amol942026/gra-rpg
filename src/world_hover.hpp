@@ -111,14 +111,14 @@ WorldHover pickWorld(Vector2 point) {
             const Enemy& e=game.enemies[it->index];position=e.pos;
             Vector2 p=screen(e.pos);kind=HoverKind::Enemy;id=e.id;
             float half=enemyBoss(e.type)?125:75;
-            if(CheckCollisionPointRec(point,{p.x-half,p.y-enemyInfo(e.type).visualHeight,half*2,enemyInfo(e.type).visualHeight+14})){
+            if(regionalEnemy(e.type)||CheckCollisionPointRec(point,{p.x-half,p.y-enemyInfo(e.type).visualHeight,half*2,enemyInfo(e.type).visualHeight+14})){
                 touched=actor_art::drawEnemy(e,p.x,p.y,BLANK,&point);
             }
         }else if(it->type==4){
             const Enemy& e=game.enemies[it->index];position=e.pos;kind=HoverKind::Corpse;id=e.id;
             Vector2 p=screen(position);
             float half=e.type==VolcanoBossType?170:enemyBoss(e.type)?110:85;
-            if(CheckCollisionPointRec(point,{p.x-half,p.y-65,half*2,109}))touched=corpseArt(e,p.x,p.y,BLANK,&point);
+            if(regionalEnemy(e.type)||CheckCollisionPointRec(point,{p.x-half,p.y-65,half*2,109}))touched=corpseArt(e,p.x,p.y,BLANK,&point);
         }else{
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){

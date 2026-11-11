@@ -47,6 +47,29 @@ inline constexpr int DeveloperLevel=100;
 inline constexpr std::array<std::pair<Kind,int>,3> DeveloperSupplies{{
  {Kind::Arrow,100},{Kind::Health,50},{Kind::Mana,50}
 }};
+inline constexpr std::array<Kind,5> DeveloperWeapons{{Kind::Sword,Kind::Axe,Kind::Dagger,Kind::Bow,Kind::Spear}};
+inline int developerWeaponCount(const Game& game,Kind type){
+ auto matches=[type](Item value){return !value.empty()&&archetype(value.kind)==type;};
+ return int(matches(game.equipment[0]))+int(std::count_if(game.bag.begin(),game.bag.end(),matches));
+}
+inline Item& developerBagSlot(Game& game){
+ auto slot=std::find_if(game.bag.begin(),game.bag.end(),[](Item value){return value.empty();});
+ if(slot!=game.bag.end())return *slot;
+ auto spare=std::find_if(game.bag.rbegin(),game.bag.rend(),[&](Item value){
+  for(auto [supply,count]:DeveloperSupplies)
+   if(value.kind==supply)return game.bagCount(supply)-value.count>=count;
+  if(gearSlot(value.kind)==0)return developerWeaponCount(game,archetype(value.kind))>1;
+  return value.kind!=Kind::DawnShard;
+ });
+ if(spare==game.bag.rend()){
+  spare=std::find_if(game.bag.rbegin(),game.bag.rend(),[](Item value){return value.kind==Kind::DawnShard;});
+ }
+ // Supplies are consolidated first, so a full pack always has an overflow
+ // slot beyond its required stacks and five weapon types.
+ slot=std::prev(spare.base());
+ game.addGround(*slot,game.player);
+ return *slot;
+}
 inline void replenishDeveloperSupplies(Game& game){
  std::array<int,DeveloperSupplies.size()> missing{};
  for(std::size_t i=0;i<DeveloperSupplies.size();i++){
@@ -71,24 +94,8 @@ inline void replenishDeveloperSupplies(Game& game){
   Kind kind=DeveloperSupplies[i].first;
   int remaining=missing[i];
   while(remaining>0){
-   auto slot=std::find_if(game.bag.begin(),game.bag.end(),[](const Item& value){return value.empty();});
-   if(slot==game.bag.end()){
-    // Keep required supplies in the bag. Stash overflow at this destination.
-    auto spare=std::find_if(game.bag.rbegin(),game.bag.rend(),[&](const Item& value){
-     for(auto [supply,count]:DeveloperSupplies){
-      if(value.kind==supply)return game.bagCount(supply)-value.count>=count;
-     }
-     return value.kind!=Kind::DawnShard;
-    });
-    if(spare==game.bag.rend()){
-     // Even a saved bag full of quest items has room in the local ground inventory.
-     spare=std::find_if(game.bag.rbegin(),game.bag.rend(),[](const Item& value){return value.kind==Kind::DawnShard;});
-    }
-    slot=std::prev(spare.base());
-    game.addGround(*slot,game.player);
-   }
    int added=std::min(remaining,99);
-   *slot=item(kind,0,added);
+   developerBagSlot(game)=item(kind,0,added);
    remaining-=added;
   }
  }
@@ -125,6 +132,7 @@ inline bool developerStart(Game& current,int destination,bool reset,unsigned see
  if(!candidate.knowsSpell(candidate.selectedSpell))candidate.chooseSpell(Spell::Fireball);
  auto groundCount=candidate.ground.size();
  replenishDeveloperSupplies(candidate);
+ for(Kind kind:DeveloperWeapons)if(!developerWeaponCount(candidate,kind))developerBagSlot(candidate)=item(kind);
  candidate.say(groundCount==candidate.ground.size()?std::string("DEV — ")+target.name:
      "DEV — pełny plecak. Przedmioty odłożono obok bohatera.");
  current=std::move(candidate);return true;

@@ -43,10 +43,8 @@ void drawDeveloperUi(){
   Rectangle card=developerCard(i);bool selected=i==developerSelection;panel(card,selected?rgb(39,53,54):inside(card)?Card:Panel);DrawRectangleLinesEx(card,1,selected?Gold:Line);
   txt(DeveloperDestinations[i].name,card.x+13,card.y+3,18,selected?Text:Muted);txt(DeveloperDestinations[i].hint,card.x+13,card.y+25,14,selected?Gold:Muted);
  }
- center("Poziom 100 · Wszystkie umiejętności i czary · 100 strzał · Po 50 mikstur zdrowia i many",720,635,16,Muted);
 
  for(bool reset:{true,false}){if(welcome&&!reset)continue;Rectangle action=reset?developerNewButton():developerMoveButton();panel(action,inside(action)?Card:Panel);center(reset?"NOWA SESJA TESTOWA":"PRZENIEŚ OBECNĄ POSTAĆ",action.x+action.width/2,action.y+13,17,Gold);}
- center(welcome?"Rozpocznij nową sesję w wybranej lokacji.":"Nowa sesja resetuje wyprawę. Przeniesienie zachowuje sprzęt i postęp walk.",720,727,14,Muted);
  panel(developerCloseButton(),inside(developerCloseButton())?Card:Panel);center("X",1250,123,18,Gold);
  if(!developerError.empty())center(developerError,720,753,15,rgb(244,157,131));
 }

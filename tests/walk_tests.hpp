@@ -40,4 +40,19 @@ void walkTests(){
   auto a=evaluate(std::fmod(.10f+offset,1.f),1,0,0),b=evaluate(std::fmod(.25f+offset,1.f),1,0,0),c=evaluate(std::fmod(.40f+offset,1.f),1,0,0);
   check(std::abs((b.world[foot].p.y-a.world[foot].p.y)-(c.world[foot].p.y-b.world[foot].p.y))<.03f,"support foot travels evenly under the hips without accelerating/slowing in place");
  }
+ float low[2]={100,100},high[2]={-100,-100};
+ for(int frame=0;frame<240;frame++){
+  auto p=evaluate(frame/240.f,1,0,0);
+  for(int side=0;side<2;side++){
+   int upper=side?data::UpperArmR:data::UpperArmL;
+   int fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;
+   const auto wrist=p.world[hand].p;
+   low[side]=std::min(low[side],wrist.y);high[side]=std::max(high[side],wrist.y);
+   check(std::abs(length(p.world[fore].p-p.world[upper].p)-13)<.003f&&
+         std::abs(length(wrist-p.world[fore].p)-13)<.003f,
+         "larger walking arm swing keeps both arm segments rigid");
+  }
+ }
+ check(high[0]-low[0]>24&&high[1]-low[1]>20,
+       "both walking wrists have a pronounced forward and backward swing");
 }

@@ -28,7 +28,7 @@ bool runTradeQA(){
  for(int kind=1;kind<ItemKindCount;kind++){
   Item value=item(Kind(kind),0,3);auto text=itemTooltipText(value,{Place::Bag,10});Rectangle box=tooltipBounds(text);
   check(text.value.find("Wartość: ")==0&&text.value.find(std::to_string(itemSellValue(value)))!=std::string::npos&&text.value.find(std::to_string(itemStackValue(value)))!=std::string::npos,"every item tooltip shows unit and stack gold values");
-  check(textWidth(text.value,14)<=box.width-34&&textWidth(text.chance,14)<=box.width-34,"value and rarity text fit without clipping");
+  check(textWidth(text.value,14)<=box.width-34&&textWidth(text.label,14)<=box.width-34,"value and rarity text fit without clipping");
  }
  mouse={0,0};shot("merchant-shop");
  game.bag[10]=item(Kind::CobraScale,0,8);point(merchantBagRect(10));clickTowerPanel();
@@ -53,7 +53,7 @@ bool runTradeQA(){
 
  point(merchantCloseRect());clickTowerPanel();check(!towerPanelOpen&&gameplayInputAllowed(),"close button resumes normal gameplay");
  game.player=MerchantPosition+V{-1,0};check(nearestTowerInteraction()&&towerPanelOpen,"trader can be reopened normally");
- game.player=TowerCenter;check(towerPanelInput()&&!towerPanelOpen,"merchant dialog closes if its context becomes unreachable");
+ game.player=MerchantPosition+V{-TowerUseRange-.5f,0};check(towerPanelInput()&&!towerPanelOpen,"merchant dialog closes if its context becomes unreachable");
  reset();game.gold=0;nearestTowerInteraction();point(merchantTradeRect());clickTowerPanel();
  check(game.goldBalance()==0&&game.bagCount(Kind::Health)==5&&selectedMerchantStatus()==TradeResult::NotEnoughGold,"insufficient funds show an error without removing any item");
  mouse={0,0};shot("merchant-no-gold");

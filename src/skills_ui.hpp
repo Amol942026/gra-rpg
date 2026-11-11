@@ -73,10 +73,10 @@ void drawSkillsMenu(){
   center(i==2?(rank?"POZNANE":"NIEZNANE"):TextFormat("RANGA %d",rank),1048,card.y+37,15,skillDraft[i]?Green:rank?Gold:Muted);
   for(bool add:{false,true}){Rectangle button=skillAdjust(i,add);bool enabled=game.skillAllocationPending()&&(add?skillDraftRemaining()>0&&(i!=2||rank<1):skillDraft[i]>0);if(enabled){panel(button,inside(button)?Card:Panel);center(add?"DODAJ":"COFNIJ",button.x+button.width/2,button.y+9,13,Gold);}}
  }
- center(game.skillAllocationPending()?"Kliknij umiejętność, aby przypisać punkt. COFNIJ anuluje wybór.":"U lub ESC zamyka okno. Leczenie wystarczy poznać raz.",720,647,16,Muted);
+ if(game.skillAllocationPending())center("Kliknij umiejętność, aby przypisać punkt. COFNIJ anuluje wybór.",720,647,16,Muted);
  bool ready=!game.skillAllocationPending()||skillDraftRemaining()==0;panel(skillsConfirm(),ready&&inside(skillsConfirm())?rgb(53,73,57):Card);
  center(game.skillAllocationPending()?"ZATWIERDŹ I WRÓĆ DO GRY":"WRÓĆ DO GRY",720,690,18,ready?Gold:Muted);
- center(game.skillAllocationPending()?"Gra pozostaje zatrzymana do rozdania punktów umiejętności.":"Z / X — umiejętności broni · V — Leczenie",720,749,14,Muted);
+ if(game.skillAllocationPending())center("Gra pozostaje zatrzymana do rozdania punktów umiejętności.",720,749,14,Muted);
 }
 constexpr const char* skillSlotKeys[]={"Z","X","V"};
 constexpr const char* skillSlotCategories[]={"W ZWARCIU","DYSTANSOWE","POMOCNICZE"};

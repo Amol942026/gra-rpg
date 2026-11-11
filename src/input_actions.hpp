@@ -83,6 +83,9 @@ void leftClickGameplay(V movement,double now=GetTime()){
         inventoryClicks.clear();game.cancelBow();quickPickerSlot=i;return;
     }
     if((game.openedCorpse>=0||game.openedChest>=0)&&inside(corpseCloseRect())){game.closeCorpse();return;}
+    if((game.findCorpse(game.openedCorpse)||game.findChest(game.openedChest))&&inside(takeAllLootRect())){
+        inventoryClicks.clear();game.cancelBow();game.takeAllLoot();syncCorpsePage();return;
+    }
     for(int i=0;i<5;i++)if(inside(actionRect(i))){activateMouseAction(i,movement);return;}
     if(mouse.y>=668&&mouse.y<696&&mouse.x>=1286&&mouse.x<1404){if(game.findCorpse(game.openedCorpse)){syncCorpsePage();corpsePage=std::clamp(corpsePage+(mouse.x<1344?-1:1),0,corpsePages()-1);}else nearbyPage+=mouse.x<1344?-1:1;return;}
     clickWorldOrInventory(now);

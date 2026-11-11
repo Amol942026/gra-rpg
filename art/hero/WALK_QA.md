@@ -1,4 +1,108 @@
-# Naturalniejszy chód — 21.10.2026
+# Broń bliżej ciała i bardziej pionowo — 11.11.2026
+
+Zmniejszono boczne odchylenie ostrzy i łuków do 6 stopni względem tułowia.
+Chwyt jest bliżej ciała: minimalna odległość boczna dłoni wynosi 24 jednostki
+zamiast 28 dla broni białej i 31 dla łuków. Ręka jest bardziej zgięta,
+uniesiona i wysunięta przed żebra. Korekta omijania rękawa zmienia teraz
+pochylenie ostrza do przodu, zachowując mały kąt boczny. Jelec nadal omija
+przedramię; chowanie i płynne przejście do ataku pozostają zachowane.
+
+Wyniki w `C:\AI2D\pipeline\runs\weapon-upright-20261110` (praca zakończona
+11.11): wszystkie 32 bronie przechodzą kontrolę odległości przy 240 fazach,
+trzech wagach ruchu i pięciu mieszankach chód/bieg. Dodatkowa regresja
+ogranicza boczny kąt do 6,1 stopnia. Logika i animacje: **476 734 kontrole
+PASS**. Pełna kontrola głowy/tułowia przy chowaniu i rzeczywistym wejściu
+również przechodzi. Źródła sprzed korekty zachowano w `backup`.
+
+`render/render-verification.json`: **138 363 kontrole PASS**, 32 bronie,
+1384 pozycje w ośmiu kierunkach, ataki, chowanie i szerokie naramienniki.
+Wszystkie obrazy zdekodowano; podgląd jest w
+`render/weapon-upright-preview.gif`. Pełna procedura
+`tests/weapon_carry_qa.ps1 -NoAudio` została wykonana, z ukrytym oknem
+i bez otwierania urządzenia audio.
+Zaktualizowano oba EXE oraz obie paczki ZIP. Każda po rozpakowaniu przeszła
+180 klatek ukrytego uruchomienia i kontrolę zgodności EXE oraz 287 zasobów.
+Zapisane ustawienia dźwięku i dziennik użytkownika pozostały niezmienione.
+
+# Korekta przenikania broni przez ramię — 10.11.2026
+
+Większy wymach ujawnił kolizję pionowo trzymanego miecza z ramieniem
+i przedramieniem. Poprzednia kontrola chowania broni obejmowała głowę
+oraz napierśnik, lecz nie te części ciała. Nowe testy odtwarzają błąd
+na zachowanej kopii kodu, a po korekcie przechodzą dla całego katalogu:
+32 miecze, topory, sztylety i łuki, w chodzie, spoczynku i pośrednich
+stanach chód/bieg.
+
+`src/hero_carry.hpp` ustala chwyt na zewnątrz ciała, rozwiązuje łokieć
+przy zachowanych długościach obu segmentów ręki i odchyla ostrze od
+przedramienia. Jelec jest ustawiany w płaszczyźnie, która omija rękaw.
+Łuk ma osobny chwyt, sprawdzony także dla najkrótszego i najdłuższego
+wariantu. Korekta płynnie zanika przy wejściu w atak i wraca przy jego
+zakończeniu. Gest chowania zachowuje istniejące krzywe Synfiga i kontakt
+z pochwą. Główny klip chodu, ruch wolnej ręki i nóg pozostały bez zmian.
+
+Wyniki: `C:\AI2D\pipeline\runs\weapon-clearance-20261110`.
+
+- `baseline.json`: test wykrywa przenikanie w poprzednim kodzie;
+  w 7680 sprawdzonych pozycjach chodu po korekcie nie wykrywa przecięć.
+- `tests/weapon_carry_tests.hpp`: odległości od odcinków ramion oraz
+  powiększonych brył naramienników, głowy i tułowia. Kontakt dłoni z chwytem
+  jest zamierzony; kontrola przedramienia pomija samą dłoń i mankiet.
+  Sprawdza także długości kończyn i zgodność chwytu na granicach ataku.
+- Logika i animacje: **442 174 kontroli PASS**.
+- Rzeczywisty renderer: **103 803 kontrole PASS**, 1384 pozycje,
+  wszystkie 32 bronie w ośmiu kierunkach, dodatkowe szerokie naramienniki,
+  początek/koniec ataku oraz 11 etapów chowania. Brak obcięcia obrazu.
+- Niezależny test chowania: 485 856 pozycji i 201 600 klatek rzeczywistego
+  wejścia; brak przecięć powiększonej głowy i napierśnika. Błąd kontaktu
+  ostrza z wlotem pochwy poniżej 0,0001 jednostki.
+- Zdekodowano wszystkie 32 arkusze oraz 60 klatek podglądu:
+  `qa/weapon-carry-preview.gif`.
+- Oba EXE i obie paczki ZIP zaktualizowane. Po wypakowaniu zgodność EXE
+  i wszystkich 287 zasobów oraz po 180 klatek ukrytego uruchomienia,
+  bez otwierania urządzenia audio: PASS. Zapisane ustawienia dźwięku
+  i dziennik uruchomienia użytkownika pozostały identyczne z początkiem pracy.
+
+Reprodukcja pełnej kontroli broni i renderera w nowym katalogu:
+`pwsh -NoProfile -File tests/weapon_carry_qa.ps1 -NoAudio`.
+Uruchomienia pozostają ukryte i bez dźwięku. Oryginały EXE, ZIP i zmienianych
+źródeł zachowano w katalogu `backup` tego przebiegu.
+
+# Większy wymach ramion — 10.11.2026
+
+W natywnym projekcie Synfig zwiększono naprzemienny ruch obu ramion
+przód–tył. Zakres dłoni lewej wynosi teraz 25 jednostek rigu (wcześniej 9,2),
+a prawej 21 (wcześniej 2,2). Dłonie unoszą się na końcach łuku, zachowując
+stałe długości ramion i przedramion. Zmieniono cztery kanały dłoni; krzywe
+nóg, tułowia i głowy oraz osobny klip biegu pozostały bez zmian.
+
+Master: `C:\AI2D\animations\emberfall-walk-arms-20261110\walk.sif`.
+Kopia źródłowa w repo: `walk/walk.sif`; dane gry: `src/generated/hero_walk_data.hpp`.
+Użyto rzeczywistego silnika Synfig 1.4.5 z przenośnego pakietu
+`C:\AI2D\Tools\Synfig-1.4.5-spells\portable\bin`. Są tam zarówno
+`synfig.exe` (CLI), jak i `synfigstudio.exe` (edytor). Automatyzacja renderuje
+w tle. `synfig_cli.py` wykrywa tę lokalizację; opcjonalne nadpisanie ścieżki
+to zmienna `EMBERFALL_SYNFIG_EXE`.
+
+Wyniki w `C:\AI2D\pipeline\runs\walk-arms-20261110\qa`:
+
+- 60 poprawnych, różnych klatek natywnego renderu Synfiga.
+- Eksport z zapisanego SIF odtwarza nagłówek C++ bajt w bajt.
+  Największa różnica kontrolek po odtworzeniu w C++: 0,000059 jednostki.
+- 120 klatek rzeczywistego renderera, osiem kierunków, miecz/tarcza
+  oraz postać bez broni. Brak obcięcia obrazu i nieprawidłowych kości.
+- Kontakt butów i długości kończyn przechodzą kontrolę w całym cyklu.
+  Sprawdzono start, zatrzymanie, zmianę kierunku i przejście do biegu.
+- 338 477 kontroli logiki i animacji: PASS, w tym chowanie miecza i walka.
+- Zaktualizowane EXE oraz obie paczki ZIP: zgodność 287 zasobów i EXE
+  po wypakowaniu; po 180 klatek próby uruchomienia, ukrytej i bez dźwięku.
+
+Podgląd: `qa/walk-preview.gif` w powyższym katalogu przebiegu.
+Oryginały źródeł, obu EXE i ZIP zachowano w jego podkatalogu `backup`.
+Wszystkie testy były bez dźwięku; okno renderera było ukryte.
+Są to kontrole poprawności animacji, nie pomiar płynności okna na pierwszym planie.
+
+# Naturalniejszy chód — 21.10.2026 (raport wcześniejszej wersji)
 
 Nowy główny klip chodu powstał z natywnych krzywych Synfiga. Stopy mają
 węższe, równoległe tory. Kolana są rozwiązywane w kierunku przodu nogi,

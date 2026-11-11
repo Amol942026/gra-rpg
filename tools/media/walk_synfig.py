@@ -4,7 +4,7 @@ Uses the existing game's joint layout only. No Blender, model generation,
 external art, network, or runtime file reads. The SIF is the editable master.
 """
 from pathlib import Path
-import argparse, hashlib, json, math, re, shutil, subprocess
+import argparse, hashlib, json, math, re, shutil
 import xml.etree.ElementTree as ET
 from hero_synfig import value, group, image
 
@@ -60,8 +60,12 @@ def controls(t):
    v=(u-support)/(1-support);v2=v*v;v3=v2*v;velocity=-2*half/support*(1-support)
    f=(2*v3-3*v2+1)*-half+(v3-2*v2+v)*velocity+(-2*v3+3*v2)*half+(v3-v2)*velocity
    lift=3.7*math.sin(math.pi*v)**2
-  hand_f=(-4.6*math.cos(w-.12)) if side=='l' else (3+1.1*math.cos(w))
-  hand_z=(30.5+.5*math.sin(w-.12)) if side=='l' else (33.5+.35*math.sin(w))
+  arm_phase=w-.12 if side=='l' else w
+  arm_swing=math.cos(arm_phase)
+  hand_f=-12.5*arm_swing if side=='l' else 3+10.5*arm_swing
+  # The wrist rises along its arc instead of reaching farther by stretching
+  # the arm. The two sides retain their opposite phases.
+  hand_z=(31.8 if side=='l' else 32.8)+4*arm_swing*arm_swing
   row.update({f'{side}_foot_r':sign*5.8,f'{side}_foot_f':f,f'{side}_foot_z':-boot_bottom(pitch)+lift,
               f'{side}_foot_pitch':pitch,f'{side}_hand_r':-17.5 if side=='l' else 22,
               f'{side}_hand_f':hand_f,f'{side}_hand_z':hand_z})
@@ -163,7 +167,7 @@ if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--parts',type=Path,required=True);p.add_argument('--header',type=Path,required=True);p.add_argument('--render',action='store_true');p.add_argument('--no-audio',action='store_true',required=True);a=p.parse_args()
  source=author(a.root,a.parts);rows=compile_clip(source,a.header)
  if a.render:
-  r=subprocess.run(['pwsh','-NoProfile','-File',r'C:\AI2D\animations\Render-Synfig.ps1','-ProjectPath',str(source),'-OutputRoot',str(a.root/'renders'),'-ExpectedFrames','60','-Threads','2','-RequireMotion'],capture_output=True,text=True)
-  (a.root/'render.log').write_text(r.stdout+'\n'+r.stderr,encoding='utf-8');assert r.returncode==0,r.stderr
+  from synfig_cli import render
+  render(source,output_root=a.root/'renders',threads=2,expected_frames=60,require_motion=True)
  report={'status':'PASS','source':'native Synfig real waypoints; existing joint layout; no 3D authoring','project':str(source),'project_sha256':sha(source),'header_sha256':sha(a.header),'loop':True,'control_samples':len(rows),'pose_samples':121,'rendered_frames':60 if a.render else 0,'external_assets':[]}
  (a.root/'receipt.json').write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report,indent=2))

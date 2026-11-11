@@ -3,9 +3,11 @@
 #include "sword_pose.hpp"
 #include "hero_motion.hpp"
 #include "hero_sheath.hpp"
+#include "spear_motion.hpp"
 #include "hero_knockdown.hpp"
 #include "shadow_geometry.hpp"
 #include "volcano_actors.hpp"
+#include "regional_enemy_art.hpp"
 #include "hero_paint.hpp"
 #include "creature_paint.hpp"
 #include "bandit_gait.hpp"
@@ -255,6 +257,13 @@ public:
         size_t before=faces.size();face(a,b,c,d,ca);
         if(faces.size()!=before){auto& f=faces.back();f.smooth=true;f.vertexColors={ca,cb,cc,cd};}
     }
+    void paintedWeaponFace(const std::array<P3,4>& p,const std::array<Vector2,4>& uv,int cell,Color tint){
+        size_t before=faces.size();
+        face(p[0],p[1],p[2],p[3],tint);
+        if(!hero_paint::weaponCellAvailable(cell)||!hero_paint::atlas.id||faces.size()==before)return;
+        auto& f=faces.back();f.textureId=hero_paint::atlas.id;
+        for(size_t i=0;i<p.size();i++)f.uv[i]=hero_paint::uv(cell,uv[i].x,uv[i].y);
+    }
     void materialQuad(P3 a,P3 b,P3 c,P3 d,int cell,float u0,float v0,float u1,float v1,Color tint){
         if(!creature_paint::atlas.id)return;bool saved=collectShadow;collectShadow=false;size_t before=faces.size();
         face(a,b,c,d,tint);collectShadow=saved;
@@ -348,7 +357,7 @@ public:
         }();
         return sphere;
     }
-    void rounded(P3 center,P3 size,Color col,int paintCell=-1,bool paintBack=false,int reverseCell=-1,bool wrapPaint=false){
+    void rounded(P3 center,P3 size,Color col,int paintCell=-1,bool paintBack=false,int reverseCell=-1,bool wrapPaint=false,bool tintPaint=false){
         bool savedClosed=closedShadow;closedShadow=true;
         auto point=[&](P3 p){return center+P3{p.r*size.r*.5f,p.f*size.f*.5f,p.z*size.z*.5f};};
         auto surface=[&](const auto& sphere){
@@ -362,7 +371,7 @@ public:
                     n={n.r/std::max(1.f,size.r),n.f/std::max(1.f,size.f),n.z/std::max(1.f,size.z)};
                     float length=std::sqrt(n.r*n.r+n.f*n.f+n.z*n.z);if(length>0)n=n*(1/length);
                 }
-                float lighting=surfaceLight(n);colors[j][i]=shade(col,lighting);paintColors[j][i]=shade(WHITE,lighting);
+                float lighting=surfaceLight(n);colors[j][i]=shade(col,lighting);paintColors[j][i]=shade(tintPaint?col:WHITE,lighting);
             }
             for(size_t j=0;j+1<sphere.size();j++)for(size_t i=0;i<sphere[0].size();i++){
                 size_t n=(i+1)%sphere[0].size();P3 normal=(sphere[j][i]+sphere[j][n]+sphere[j+1][n]+sphere[j+1][i])*.25f;
@@ -589,6 +598,11 @@ inline void prepareKnockdown(const Game& g,AnimationState& state,float& fallR,fl
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
                  Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1) {
+    if(regionalEnemy(species-1)){
+        if(shadowBuilding&&!shadowCasting)return false;
+        Enemy e{};e.type=species-1;e.animation=state;e.strike=attack>0?.14f:0;e.flash=flash?.1f:0;
+        return regional_enemy_art::draw(e,x,y,outline,probe,shadowBuilding,size);
+    }
     if(species>VolcanoFirstType){if(shadowBuilding&&!shadowCasting)return false;return volcano_actors::draw(species-1,x,y,size,state,attack!=0?std::clamp(std::abs(attack)*.7f,0.f,1.f):-1,outline,probe,shadowBuilding,false,flash);}
     HeroAppearance appearance;
     if(species==0){appearance=equipment?heroAppearance(*equipment):legacyHeroAppearance(helmet,shield,weapon);weapon=appearance[0].shape;helmet=appearance[1].present();shield=appearance[2].present();}
@@ -650,6 +664,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     return false;
 }
 inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
+ if(regionalEnemy(e.type))return regional_enemy_art::draw(e,x,y,outline,probe,shadowBuilding);
  if(e.type>=VolcanoFirstType){
   if(shadowBuilding&&!shadowCasting)return false;
   float action=e.abilityBusy()?e.abilityAction():e.eruptionWindup>0?1-e.eruptionWindup/.95f:e.windup>0?.45f*(1-e.windup/.42f):e.strike>0?.45f+.55f*(1-e.strike/.22f):-1;

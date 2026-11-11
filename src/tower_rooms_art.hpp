@@ -2,6 +2,28 @@
 #include "tower_balcony_art.hpp"
 Color towerAccent(int floor){const Color colors[]={Gold,rgb(157,183,214),rgb(137,207,143),rgb(184,139,248),rgb(118,189,247)};return colors[std::clamp(floor,0,4)];}
 std::array<RenderTexture2D,TowerFloorCount> towerFloorArt{};
+Texture2D towerWall{};
+constexpr float TowerWallLeft=-409,TowerWallTop=-510;
+constexpr float TowerWallWidth=554,TowerWallHeight=480;
+float towerWallFoot(float x){
+ float u=x/(TowerRadius*56.5685f);
+ return 4-TowerRadius*28.2843f*std::sqrt(std::max(0.f,1-u*u));
+}
+bool drawTowerWall(Vector2 center,bool balcony){
+ if(!towerWall.id)return false;
+ const float width=balcony?TowerWallWidth:-TowerWallLeft;
+ const float sourceWidth=towerWall.width*width/TowerWallWidth;
+ const float sourceHeight=float(towerWall.height);
+ const float top=center.y+TowerWallTop;
+ DrawTexturePro(towerWall,{0,0,sourceWidth,sourceHeight},
+                {center.x+TowerWallLeft,top,width,TowerWallHeight},{},0,WHITE);
+ if(!balcony){
+  // The opposite half follows the same curved floor and ends in the same pilaster.
+  DrawTexturePro(towerWall,{0,0,-sourceWidth,sourceHeight},
+                 {center.x,top,width,TowerWallHeight},{},0,WHITE);
+ }
+ return true;
+}
 void drawTowerGround(Vector2 c,int floor){
  float rx=TowerRadius*56.5685f,ry=TowerRadius*28.2843f;Color accent=towerAccent(floor);
  ellipse(c.x,c.y+24,rx+17,ry+15,rgb(12,12,25));ellipse(c.x,c.y+13,rx+10,ry+8,rgb(55,45,72));
@@ -25,8 +47,22 @@ void drawTowerGround(Vector2 c,int floor){
   for(int i=0;i<16;i++){float a=i*PI/8;intro_art::star(c.x+std::cos(a)*115,c.y+std::sin(a)*57,3,accent);if(i%2==0)line(c.x+std::cos(a)*103,c.y+std::sin(a)*51,c.x+std::cos(a+PI*.5f)*103,c.y+std::sin(a+PI*.5f)*51,Fade(accent,.14f));}
  }
 }
-void makeTowerRoomArt(){tower_balcony::load();for(int i=0;i<TowerFloorCount;i++){towerFloorArt[i]=LoadRenderTexture(1024,600);BeginTextureMode(towerFloorArt[i]);ClearBackground(BLANK);drawTowerGround({512,300},i);EndTextureMode();SetTextureFilter(towerFloorArt[i].texture,TEXTURE_FILTER_BILINEAR);}}
-void unloadTowerRoomArt(){tower_balcony::unload();for(auto& target:towerFloorArt)if(target.id)UnloadRenderTexture(target);}
+void makeTowerRoomArt(){
+ tower_balcony::load();
+ towerWall=LoadTexture("assets/sprites/tower-observatory-wall.png");
+ if(towerWall.id)SetTextureFilter(towerWall,TEXTURE_FILTER_BILINEAR);
+ for(int i=0;i<TowerFloorCount;i++){
+  towerFloorArt[i]=LoadRenderTexture(1024,600);BeginTextureMode(towerFloorArt[i]);
+  ClearBackground(BLANK);drawTowerGround({512,300},i);EndTextureMode();
+  SetTextureFilter(towerFloorArt[i].texture,TEXTURE_FILTER_BILINEAR);
+ }
+}
+void unloadTowerRoomArt(){
+ tower_balcony::unload();
+ if(towerWall.id)UnloadTexture(towerWall);
+ towerWall={};
+ for(auto& target:towerFloorArt)if(target.id)UnloadRenderTexture(target);
+}
 void drawTowerStairs(int direction){
  Vector2 p=screen(towerStairBase(direction));bool hover=hovered.kind==HoverKind::TowerStair&&hovered.index==direction;
  tower_stairs::draw(direction,p,hover);

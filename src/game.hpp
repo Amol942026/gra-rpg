@@ -1,5 +1,6 @@
 #pragma once
 #include "animation.hpp"
+#include "spear_timing.hpp"
 #include "sound_events.hpp"
 #include "spell_definitions.hpp"
 #include "entity_info.hpp"
@@ -21,6 +22,7 @@
 namespace ember {
 constexpr int LegacyMapSize=72,PreviousMapSize=102,MapSize=144, BagSize=25, EquipSize=6;
 constexpr int WorldExpansionRevision=2;
+constexpr int RegionalEncountersPerRealm=4;
 constexpr int MushroomCount=48,MushroomHealing=10;
 inline std::int64_t experienceForLevel(int level){std::int64_t n=std::clamp(level,1,100000);return 100*n+2*n*(n-1);}
 constexpr int WeaponWheelSize=8;
@@ -258,6 +260,7 @@ struct Game {
  const char* currentRegion()const{return inVolcano()?volcanoRegion(player):inDesert()?desertRegion(player):forestRegion(player);}
  #include "volcano_system.hpp"
  #include "desert_system.hpp"
+ #include "regional_enemy_spawns.hpp"
  bool mageReachable()const{return inTower()&&towerFloor==0&&!dead()&&!allocationRequired&&!storyBlocked()&&distance(player,MagePosition)<=MageTalkRange;}
  bool takeTowerReturn(){bool pending=towerReturnPending;towerReturnPending=false;return pending;}
  void enterMageTower(){
@@ -290,6 +293,9 @@ struct Game {
   for(int i=0;i<8;i++){float angle=(i+.5f)*2*3.14159265f/8;props.push_back({V{59,57}+V{std::cos(angle),std::sin(angle)}*4.1f,3,.85f+i%3*.08f});}
   for(V p:{V{42,6},V{46,6},V{37,60},V{41,60}})props.push_back({p,3,.8f});
   plantMushrooms(seed);
+  const size_t guardianIndex=enemies.size()-1;
+  addRegionalEnemies(WorldLocation::Forest,enemies,props,forage);
+  std::rotate(enemies.begin()+guardianIndex,enemies.begin()+guardianIndex+1,enemies.end());
  }
  void plantMushrooms(unsigned seed){
   // A separate generator keeps gathering independent from monster drop rolls.
@@ -390,12 +396,18 @@ struct Game {
  }
  bool reachable(Slot s)const{if(s.place==Place::Chest)return openedChest==s.owner&&chestReachable(s.owner);if(s.place==Place::Corpse)return corpseReachable(s.owner);if(s.place==Place::Forage){if(inTower())return false;for(const auto&g:forage)if(g.id==s.index)return distance(player,g.pos)<=2.5f;return false;}if(s.place!=Place::Ground)return true;for(const auto&g:ground)if(g.id==s.index&&groundVisible(g))return distance(player,g.pos)<=2.5f;return false;}
  static bool accepts(Slot s,Item i){if(!i.empty()&&i.kind==Kind::DawnShard&&s.place!=Place::Bag&&s.place!=Place::Corpse)return false;return s.place!=Place::Equip||i.empty()||gearSlot(i.kind)==s.index;}
+ bool newDawnFragment(Slot source,Item value)const{
+  const Enemy* body=source.place==Place::Corpse?findCorpse(source.owner):nullptr;
+  return value.kind==Kind::DawnShard&&!value.empty()&&body&&
+   ((location==WorldLocation::Forest&&body->type==3&&dawnFragments()<1)||(inDesert()&&body->type==DesertBossType&&dawnFragments()<2)||(inVolcano()&&body->type==VolcanoBossType&&dawnFragments()<3));
+ }
+ void completeDawnFragmentPickup(){
+  collectedFragments=inVolcano()?3:inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inVolcano()?"Trzecia część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");
+ }
  bool transfer(Slot from,Slot to){
   if(dead()||allocationRequired||storyBlocked()||(from.place==to.place&&from.index==to.index&&from.owner==to.owner)||to.place==Place::Corpse||to.place==Place::Forage||to.place==Place::Chest)return false;
   Item* a=get(from);Item* b=get(to);if(!a||!b||a->empty())return false;
-  const Enemy* sourceBody=from.place==Place::Corpse?findCorpse(from.owner):nullptr;
-  const bool collectingShard=a->kind==Kind::DawnShard&&to.place==Place::Bag&&sourceBody&&
-   ((location==WorldLocation::Forest&&sourceBody->type==3&&dawnFragments()<1)||(inDesert()&&sourceBody->type==DesertBossType&&dawnFragments()<2)||(inVolcano()&&sourceBody->type==VolcanoBossType&&dawnFragments()<3));
+  const bool collectingShard=to.place==Place::Bag&&newDawnFragment(from,*a);
   const bool equipLoot=(from.place==Place::Corpse||from.place==Place::Chest)&&to.place==Place::Equip;
   if(from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest){
    if(from.place==Place::Corpse&&openedCorpse!=from.owner)return false;
@@ -410,10 +422,10 @@ struct Game {
   }
   else if(stackable(a->kind)&&a->kind==b->kind&&a->tier==b->tier){int n=std::min(a->count,99-b->count);if(n<=0)return false;b->count+=n;a->count-=n;if(a->count==0)*a={};}
   else std::swap(*a,*b);
-  if((to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0))cancelBow();
-  bool weaponChanged=(to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0);
+  const bool weaponChanged=(to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0);
+  if(weaponChanged){cancelBow();cancelSpear();if(archetype(equipment[0].kind)==Kind::Spear)swing=0;}
   sound(weaponChanged?Cue::WeaponEquip:to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
-  if(collectingShard){collectedFragments=inVolcano()?3:inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inVolcano()?"Trzecia część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");}
+  if(collectingShard)completeDawnFragmentPickup();
   else say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
  }
  bool quickTransfer(Slot source){
@@ -434,7 +446,33 @@ struct Game {
   }
   if(!moved)say("Brak miejsca w plecaku.");return moved;
  }
- bool drop(Slot from,V p){Item* a=get(from);if(a&&a->kind==Kind::DawnShard){say("Serce Świtu jest zbyt cenne, by je porzucić.");return false;}if((from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest)||dead()||allocationRequired||storyBlocked()||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0)cancelBow();Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
+ bool takeAllLoot(){
+  if(dead()||allocationRequired||storyBlocked())return false;
+  Place place=Place::None;int owner=-1,count=0;
+  if(auto* chest=findChest(openedChest)){if(!chest->opened)return false;place=Place::Chest;owner=chest->id;count=ChestLootSize;}
+  else if(auto* body=findCorpse(openedCorpse)){place=Place::Corpse;owner=body->id;count=CorpseLootSize;}
+  else return false;
+  auto reject=[&](const char* message){say(message);sound(Cue::Reject,player);return false;};
+  if(!reachable({place,0,owner}))return reject("Podejdź bliżej, aby zebrać łup (maks. 2,5 pola).");
+  // Plan the whole collection first: a full backpack must leave every source
+  // slot intact, including quest fragments and already partially filled stacks.
+  auto result=bag;bool any=false,fragment=false;
+  for(int slot=0;slot<count;slot++){
+   Slot source{place,slot,owner};const Item* value=get(source);if(!value||value->empty())continue;
+   any=true;fragment=fragment||newDawnFragment(source,*value);int remaining=value->count;
+   if(stackable(value->kind))for(auto& target:result)if(!target.empty()&&target.kind==value->kind&&target.tier==value->tier&&target.count<99){
+    int added=std::min(remaining,99-target.count);target.count+=added;remaining-=added;
+   }
+   for(auto& target:result)if(target.empty()&&remaining>0){int added=stackable(value->kind)?std::min(remaining,99):1;target=item(value->kind,value->tier,added);remaining-=added;}
+   if(remaining>0)return reject("Brak miejsca w plecaku na cały łup. Zwolnij miejsce i spróbuj ponownie.");
+  }
+  if(!any){say("Nie ma już nic do zebrania.");return false;}
+  bag=result;for(int slot=0;slot<count;slot++)if(Item* value=get({place,slot,owner}))*value={};
+  cancelBow();sound(Cue::Pickup,player);
+  if(fragment)completeDawnFragmentPickup();else say("Zebrano cały łup do plecaka.");
+  return true;
+ }
+ bool drop(Slot from,V p){Item* a=get(from);if(a&&a->kind==Kind::DawnShard){say("Serce Świtu jest zbyt cenne, by je porzucić.");return false;}if((from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest)||dead()||allocationRequired||storyBlocked()||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0){cancelBow();cancelSpear();}Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
  bool use(Slot s){if(s.place==Place::Forage){say("Najpierw zbierz grzyb do plecaka.");return false;}Item* a=get(s);if(s.place==Place::Corpse||s.place==Place::Chest||dead()||allocationRequired||storyBlocked()||potionCd>0||!a||a->empty()||!reachable(s))return false;
   bool mushroom=a->kind==Kind::Mushroom;
   if(mushroom){if(hp>=maxHp()){say("Zdrowie jest już pełne.");return false;}float restored=std::min(float(MushroomHealing),float(maxHp())-hp);hp+=restored;effects.push_back({player,"+"+std::to_string(int(restored))+" HP",1.3f,1});}
@@ -446,6 +484,7 @@ struct Game {
  #include "trade_system.hpp"
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
+ #include "spear_system.hpp"
  bool potion(Kind k){
   for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty())return use({Place::Bag,i});
   say("Brak mikstury w plecaku.");return false;
@@ -475,18 +514,19 @@ struct Game {
   cinders.erase(std::remove_if(cinders.begin(),cinders.end(),[&](const auto& b){return b.owner==e.id;}),cinders.end());
   fissures.erase(std::remove_if(fissures.begin(),fissures.end(),[&](const auto& b){return b.owner==e.id;}),fissures.end());
   boulders.erase(std::remove_if(boulders.begin(),boulders.end(),[&](const Boulder& b){return b.owner==e.id;}),boulders.end());
-  sound(enemyBoss(e.type)?Cue::Victory:Cue::EnemyFall,e.pos);kills++;
+  if(regionalEnemy(e.type))e.strike=RegionalEnemyFallTime;
+  sound(enemyFallCue(e.type),e.pos);kills++;
   if(!developerSession)xp+=enemyInfo(e.type).experience;
   e.loot=rollEnemyLoot(e.type,rng);
   if(e.type==3){bossDead=true;say("Kamienny Strażnik pokonany! PPM na ciele: łup i część Serca Świtu.");}
   else if(e.type==DesertBossType){if(!desertBossDead)merchantArrows=MerchantArrowCapacity;desertBossDead=true;say("Żywa Wydma rozsypała się! PPM: łup i druga część Serca Świtu.");}
   else if(e.type==VolcanoBossType){volcanoBossDead=true;say("Varkhor pokonany! PPM na ciele: trzecia część Serca Świtu.");}
-  else say("Przeciwnik pokonany. Otwórz jego ciało prawym przyciskiem myszy.");
   while(xp>=experienceForLevel(level)){xp-=experienceForLevel(level);level++;attributePoints+=PointsPerLevel;skillPoints+=SkillPointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
  }
  bool attack(V aim={}){
   if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)==Kind::Bow)return false;
   aimMelee(aim);
+  if(archetype(equipment[0].kind)==Kind::Spear)return startSpear();
   animation.swordStow=0;attackCd=.46f;meleeDuration=SwingDuration;swingStrong=false;swing=SwingDuration;sound(Cue::Swing,player);
   // Capture once: a kill can level up the player during this same swing.
   const float amount=float(damage());const bool critical=rollCritical();
@@ -500,7 +540,7 @@ struct Game {
   if(mana<definition.mana){say(std::string(definition.name)+" — potrzebujesz "+std::to_string(int(definition.mana))+" many.");sound(Cue::Reject,player);return false;}
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
   V direction=normalized(length(aim)>.001f?aim:directions[int(animation.direction)]);
-  mana-=definition.mana;spellCd=spellCooldownTotal=definition.cooldown;facing=direction;animation.face(direction.x,direction.y);
+  cancelSpear();mana-=definition.mana;spellCd=spellCooldownTotal=definition.cooldown;facing=direction;animation.face(direction.x,direction.y);
   fireballs.push_back({player,direction*definition.speed,definition.range,float(spellDamage(selectedSpell)),rollCritical(),selectedSpell});
   sound(selectedSpell==Spell::IceShard?Cue::IceCast:selectedSpell==Spell::LightningOrb?Cue::LightningCast:Cue::FireballCast,player);return true;
  }
@@ -601,6 +641,7 @@ struct Game {
  // attackPressed is a single press event, never a held button.
  void update(float dt,V input,bool attackPressed,bool running=false){
   if(allocationRequired||storyBlocked())return;
+  const float previousSwing=swing;
   dt=std::clamp(dt,0.f,.05f);time+=dt;auto tick=[dt](float&v){v=std::max(0.f,v-dt);};tick(attackCd);tick(spellCd);tick(potionCd);tick(swing);tick(hurt);tick(messageTime);tick(rollCd);tick(bowReleaseTime);tick(strongCutCd);tick(piercingArrowCd);tick(healingCd);tick(healingPulse);
   for(auto& flash:pierceFlashes)flash.life-=dt;pierceFlashes.erase(std::remove_if(pierceFlashes.begin(),pierceFlashes.end(),[](const auto& flash){return flash.life<=0;}),pierceFlashes.end());
   for(auto&e:effects)e.life-=dt;effects.erase(std::remove_if(effects.begin(),effects.end(),[](auto&e){return e.life<=0;}),effects.end());
@@ -622,24 +663,32 @@ struct Game {
    for(int i=0;i<steps;i++)move(rollDirection*(stepTime*RollSpeed/steps));
    rollRemaining=std::max(0.f,rollRemaining-stepTime);if(rollRemaining<.00001f)rollRemaining=0;
   }
-  const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(running?RunMultiplier:1.f)*(bowDrawing?.55f:1.f);
+  const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(running&&!spearActive()?RunMultiplier:1.f)
+                    *(bowDrawing?.55f:spearActive()?.62f:1.f);
   move(normalized(input)*(walkTime*speed));
   if(openedCorpse>=0&&!corpseReachable(openedCorpse))closeCorpse();
   if(openedChest>=0&&!chestReachable(openedChest))openedChest=-1;
+  const float previousGaitPhase=animation.phase;
   if(wasKnockedBack){float stow=animation.swordStow;animation.stopSprint();animation.advance(0,0,dt);animation.swordStow=stow;}
   else if(wasRolling){animation.stopSprint();animation.face(rollDirection.x,rollDirection.y);animation.advance(0,0,dt);animation.swordStow=1;}
   else {
    // Resolve combat aim before smoothing; locomotion still advances the gait.
    const bool aiming=combatFacingActive();
    if(bowDrawing||bowReleaseTime>0)animation.face(bowAim.x,bowAim.y);
-   animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing,!aiming,swing<=0);
+   animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing&&!spearActive(),!aiming,swing<=0);
   }
-  if(!wasRolling&&!wasKnockedBack){stepDistance+=surfaceDistance(player,before);if(stepDistance>=.85f){stepDistance=std::fmod(stepDistance,.85f);sound(Cue::Step,player);}}
+  if(!wasRolling&&!wasKnockedBack){
+   stepDistance+=surfaceDistance(player,before);
+   // Two contacts per gait cycle, shared with the visible foot animation.
+   // Distance-only timing previously played extra steps between contacts.
+   if(animation.moving&&(animation.phase<previousGaitPhase||int(animation.phase*2)>int(previousGaitPhase*2))){stepDistance=0;sound(Cue::Step,player);}
+  }
   if(mana<maxMana()){
    manaRegenTime+=dt;
    if(manaRegenTime+.00001f>=ManaRegenInterval){mana=std::min(float(maxMana()),mana+1);manaRegenTime=std::max(0.f,manaRegenTime-ManaRegenInterval);}
   }else manaRegenTime=0;
   if(inTower())return; // The forest remains intact but does not simulate in the tower.
+  updateSpear(previousSwing);if(allocationRequired)return;
   if(attackPressed&&!wasRolling&&!wasKnockedBack)attack();
   if(allocationRequired)return;
   updateArrows(dt);if(allocationRequired)return;
@@ -660,15 +709,18 @@ struct Game {
    if(prepareBoarCharge(e,dt,visible,d))continue;
    if(prepareEruption(e,dt,visible))continue;
    if(prepareEnemyAbility(e,dt,visible,d))continue;
-   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(!(inVolcano()&&volcanoRanged(e.type)))sound(enemyAttackCue(e.type),e.pos);if(inVolcano()&&volcanoRanged(e.type)){if(visible&&d<EnemySightRange)launchCinder(e);}
-   else if(d<(e.type==DesertBossType||e.type==VolcanoBossType?2.15f:1.6f)&&visible){
+   const bool ranged=inVolcano()&&volcanoRanged(e.type);
+   const bool large=e.type==DesertBossType||e.type==VolcanoBossType;
+   const float reach=enemyInfo(e.type).attackReach;
+   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(!ranged)sound(enemyAttackCue(e.type),e.pos);if(ranged){if(visible&&d<EnemySightRange)launchCinder(e);}
+   else if(d<(large?2.15f:reach+.35f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead())takeMonsterDamage(incomingDamage(float(e.damage()),e.attackType()),player,.2f);
    }}continue;}
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
-    if(d<(inVolcano()&&volcanoRanged(e.type)?4.5f:e.type==DesertBossType||e.type==VolcanoBossType?1.9f:1.25f)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;}
-    else if(e.sandCastPulse<=0&&d>(inVolcano()&&volcanoRanged(e.type)?3.5f:e.type==DesertBossType||e.type==VolcanoBossType?1.7f:1.05f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
+    if(d<(ranged?4.5f:large?1.9f:reach)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;}
+    else if(e.sandCastPulse<=0&&d>(ranged?3.5f:large?1.7f:reach-.2f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
    }else desired[i]=patrolVelocity(e,dt);
   }
   moveEnemies(dt,desired,&before,wasRolling,rollElapsed);
@@ -680,7 +732,7 @@ struct Game {
     e.patrolBlocked=length(movement)<length(desired[i])*dt*.15f?e.patrolBlocked+dt:0;
     if(e.patrolBlocked>.65f){e.patrolGoalActive=false;e.patrolBlocked=0;}
    }
-   if(e.type>=VolcanoFirstType)advanceVolcanoAnimation(e,movement,dt);
+   if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType)advanceVolcanoAnimation(e,movement,dt);
    else if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==6)grounded_gait::advance(e.animation,movement.x,movement.y,dt,grounded_gait::Bandit);

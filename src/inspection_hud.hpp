@@ -67,10 +67,9 @@ Inspection inspectWorld(WorldHover hit) {
 void drawInspectionHud() {
     const Inspection info=inspectWorld(hovered);
     panel({1078,705,326,169},rgb(16,26,28));
-    txt("POD KURSOREM",1090,714,13,Gold);
     if(info.source==HoverKind::None){
-        txt("Najedź na potwora lub obiekt.",1090,750,16,Text);
-        txt("Tutaj zobaczysz jego informacje.",1090,777,14,Muted);
+        txt("Najedź na przeciwnika lub obiekt.",1090,750,16,Text);
+        txt("Tutaj zobaczysz informacje o nim.",1090,777,14,Muted);
         return;
     }
     txt(info.name,1090,735,info.name.size()>24?16:22,info.nameColor);

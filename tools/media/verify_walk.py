@@ -19,7 +19,7 @@ def verify(project,qa):
   assert data['ActualFrames']==60 and data['Status']=='PASS'
   hashes=set()
   for frame in data['Frames']:
-   p=manifest.parent/frame['Name'];assert sha(p)==frame['Sha256'];im=Image.open(p).convert('RGBA');assert im.size==(400,480) and im.getbbox();hashes.add(hashlib.sha256(im.tobytes()).hexdigest())
+   p=manifest.parent/(frame.get('name') or frame['Name']);assert sha(p)==(frame.get('sha256') or frame['Sha256']);im=Image.open(p).convert('RGBA');assert im.size==(400,480) and im.getbbox();hashes.add(hashlib.sha256(im.tobytes()).hexdigest())
   assert len(hashes)>50
   break
  else:raise AssertionError('Native render manifest missing')

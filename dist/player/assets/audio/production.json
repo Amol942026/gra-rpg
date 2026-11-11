@@ -2,7 +2,7 @@
   "id": "emberfall-eldrin-elements-20261109",
   "sample_rate": 48000,
   "channels": 2,
-  "sfx_cues": 50,
+  "sfx_cues": 59,
   "variants_per_cue": 3,
   "music_tracks": 4,
   "recorded_combat_cues": 28,
@@ -480,18 +480,18 @@
     },
     {
       "file": "pickup-v2.wav",
-      "sha256": "eb684fbe11afe1cc3e2101fbb2a235517fd7fd90d1bb92ad2c44d96db5cb8f01",
-      "bytes": 67244
+      "sha256": "1dd8d8f95a0b79b1e1ac31202c7d8faa9c896feea83d9c1bf14aeaee5e9320d5",
+      "bytes": 80684
     },
     {
       "file": "pickup-v3.wav",
-      "sha256": "72e45af97baf4282e62937c2a93c615b40cb34d0f0adc5d710c94c6e8e22f85c",
-      "bytes": 67244
+      "sha256": "5ac9e50beb597db6a9c0c8b383a41bd312282ab2787b931354df9a1470e0db1a",
+      "bytes": 80684
     },
     {
       "file": "pickup.wav",
-      "sha256": "d64aa5e3d2bce0e862582db5447a159d2fc3ec55309beb7c25c0d164879b5ffb",
-      "bytes": 67244
+      "sha256": "3d5f5daeb06dc3e4f48a720e2a4342a51143dbb3f90cb4958b5e401c5a05b774",
+      "bytes": 80684
     },
     {
       "file": "potion-v2.wav",
@@ -615,18 +615,18 @@
     },
     {
       "file": "step-v2.wav",
-      "sha256": "1f256ac0155c3a17e67be2b7ea0fcfd7044fe4d2b60f27335da7f39ab8c863c5",
-      "bytes": 40364
+      "sha256": "5a838db463ac9107516e723a27ef78bb3a05ecff11125c15724b3e39a90adfe5",
+      "bytes": 57644
     },
     {
       "file": "step-v3.wav",
-      "sha256": "62ea44a0e8755cbc61c8b87846685b24cd7df4e95a62010f299ef0da0dd547fe",
-      "bytes": 40364
+      "sha256": "3b858d28d67d6df37f9e88bbdf07b7cf60a47764c473eac85bc5d3da48214c9e",
+      "bytes": 57644
     },
     {
       "file": "step.wav",
-      "sha256": "d506c543492321ca4884ce4c605cde3c3d48f05cd7f136c00a7e335a9e876ea2",
-      "bytes": 40364
+      "sha256": "a100b8f6df4e06c802c037d36bcf0b1443da509aa291cebe0441631e2dd6a59b",
+      "bytes": 57644
     },
     {
       "file": "stone-attack-v2.wav",
@@ -805,5 +805,26 @@
   ],
   "new_spell_cues": 5,
   "actual_bow_draw_recordings": true,
-  "old_door_creak_removed_from_bow": true
+  "old_door_creak_removed_from_bow": true,
+  "steps_loot_20261111": {
+    "master_root": "C:\\AI2D\\audio\\emberfall-steps-loot-20261111",
+    "cues": [
+      "step",
+      "pickup"
+    ],
+    "variants": 6,
+    "pipeline": "Local native ComfyUI audio layering/EQ and Audacity 3.7.9 regional mastering",
+    "recorded_source_license": "CC0 1.0",
+    "tonal_generation": false,
+    "audio_played": false
+  },
+  "regional_enemies_20261111": {
+    "master_root": "C:/AI2D/audio/region-enemies-20261111",
+    "species": ["sporekin", "dune-eye", "cinderhorn"],
+    "events": ["attack", "hit", "fall"],
+    "cues": 9,
+    "variants": 27,
+    "pipeline": "Local ACE-Step 1.5 Turbo in ComfyUI, Kenney CC0 foley, Audacity 3.7.9 mastering",
+    "audio_played": false
+  }
 }

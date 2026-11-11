@@ -1,0 +1,121 @@
+{
+  "status": "COMPLETE",
+  "task_date": "2026-11-11",
+  "scope": "Local Sprite Studio 0.3.3 native MCP render runtime fix",
+  "installation": {
+    "status": "PASS",
+    "base_version": "0.3.3",
+    "source_commit": "9de73a6136a1a045af2e8769349fbadc17dbef69",
+    "local_patch": "MCP nested-runtime fix",
+    "exe": "C:\\AI2D\\Tools\\SpriteStudio-v0.3.3\\extracted\\PFiles\\Sprite Studio\\sprite-studio-mcp.exe",
+    "sha256": "13F5DB501F81C6568A5CDFC25A189657CE74E185D7ABC5A1C426078D0579830B",
+    "backup": "C:\\AI2D\\pipeline\\runs\\sprite-maker-fix-20261111\\backup\\sprite-studio-mcp.exe",
+    "backup_sha256": "1747147CA72740858F82AF00622B7CB2F04B46CF072F70AE108B30C2FA8F6033",
+    "added_loader": "C:\\AI2D\\Tools\\SpriteStudio-v0.3.3\\extracted\\PFiles\\Sprite Studio\\WebView2Loader.dll",
+    "loader_sha256": "8427B1FC58EC707813E5C0A51EB5D69397BB333250A7B891BE4D3B123F1E0F1C",
+    "loader_source": "Cargo.lock pinned webview2-com-sys 0.38.2 x64",
+    "gui_unchanged": true,
+    "rust_version": "1.99.1 GNU",
+    "patch_file": "C:/Users/Amol/Documents/GitHub/gra-rpg/tools/media/sprite-studio-mcp-runtime.patch",
+    "patch_sha256": "E090D52EDE22903922DD8D1E1A9FA96885B06690620AE71AEBE1B5F8A652397D",
+    "installed_smoke": "installed-smoke/report.json"
+  },
+  "unit_tests": {
+    "rig": 39,
+    "mcp": 16,
+    "failures": 0,
+    "log": "C:\\AI2D\\pipeline\\runs\\sprite-maker-fix-20261111\\native-tests-final.log",
+    "nested_runtime_flavors": [
+      "current_thread",
+      "multi_thread"
+    ]
+  },
+  "installed_smoke": {
+    "status": "PASS",
+    "exe": "C:\\AI2D\\Tools\\SpriteStudio-v0.3.3\\extracted\\PFiles\\Sprite Studio\\sprite-studio-mcp.exe",
+    "exe_sha256": "13f5db501f81c6568a5cdfc25a189657ce74e185d7abc5a1c426078d0579830b",
+    "native_tool_count": 48,
+    "frames": [
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_01.png",
+        "sha256": "925332bf6c9544fd766f2640a4b5eb900de1487ded1d97a52b33ede04b4c3bb0"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_02.png",
+        "sha256": "d62a5cfd3c93a6a4dc3523e803a92c24f3237600abc628a6173fbf3b7dc142dd"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_03.png",
+        "sha256": "1179d9a674ac6448f7e9e9130154ffd82d5aeea98417a0692f5fd76a72b805ef"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_04.png",
+        "sha256": "1caf32dd229ed2a7e8b84801fd6183c67b6b151cd15707efa825b98657059c9a"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_05.png",
+        "sha256": "1179d9a674ac6448f7e9e9130154ffd82d5aeea98417a0692f5fd76a72b805ef"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_06.png",
+        "sha256": "d62a5cfd3c93a6a4dc3523e803a92c24f3237600abc628a6173fbf3b7dc142dd"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_07.png",
+        "sha256": "bcf46566ee1a9822bcc253739462a6d054c9a96fbc45783086e637f5e66f9e87"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_08.png",
+        "sha256": "75c0a39673596e7f6899d8b9d48f24cfcfededc25de9882210ac938538674743"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_09.png",
+        "sha256": "49a855cff2a7eac6371c47d8b3c9ccc23ac897d51d2881994cf23f001bc88a98"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_10.png",
+        "sha256": "4ba4bf674ccb84927fb98aae62a4bb390bee6803b3dc06c0b562544e7e212e18"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_11.png",
+        "sha256": "49a855cff2a7eac6371c47d8b3c9ccc23ac897d51d2881994cf23f001bc88a98"
+      },
+      {
+        "path": "assets\\characters\\emberfall-fixed-runtime-walk_12.png",
+        "sha256": "75c0a39673596e7f6899d8b9d48f24cfcfededc25de9882210ac938538674743"
+      }
+    ],
+    "unique_decoded_poses": 8,
+    "frame_size": [
+      320,
+      360
+    ],
+    "render_seconds": 0.45908090006560087,
+    "render_repeated_byte_identical": true,
+    "invalid_input_recovered": true,
+    "export": {
+      "format": "sprite-studio",
+      "height": 360,
+      "metadataPath": "\\\\?\\C:\\AI2D\\pipeline\\runs\\sprite-maker-fix-20261111\\installed-smoke\\workspace\\exports\\emberfall-fixed-runtime-walk.json",
+      "pngPath": "\\\\?\\C:\\AI2D\\pipeline\\runs\\sprite-maker-fix-20261111\\installed-smoke\\workspace\\exports\\emberfall-fixed-runtime-walk.png",
+      "width": 3840
+    },
+    "worker_exit_code": 0,
+    "native_panic": false,
+    "database_isolated": true,
+    "window_created": false,
+    "cloud_calls": 0,
+    "audio_played": false,
+    "production_art_replaced": false,
+    "quality_scope": "Runtime regression only; trial is not approved production animation."
+  },
+  "release_smoke_status": "PASS",
+  "debug_smoke_status": "PASS",
+  "patch_applies_to_pristine_tag": true,
+  "game_release_archives_unchanged": true,
+  "game_launched_by_agent_this_task": false,
+  "user_audio_preferences_written_by_agent": false,
+  "gui_rebuilt_or_tested": false,
+  "production_animation_replaced": false,
+  "report_root": "C:\\AI2D\\pipeline\\runs\\sprite-maker-fix-20261111"
+}

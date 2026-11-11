@@ -3,7 +3,7 @@
 namespace fallen_art {
 constexpr int Width=192,Height=128,Density=2,OriginX=96,OriginY=80;
 struct Sprite {Texture2D body{},edge{};std::vector<unsigned char> mask;shadow_geometry::Sprite ground;};
-inline std::array<std::array<Sprite,8>,EnemyTypeCount> sprites{};
+inline std::array<std::array<Sprite,8>,LegacyEnemyTypeCount> sprites{};
 inline int prepared=0;
 inline void storeSprite(Sprite& sprite,const Image& image){
  sprite.body=LoadTextureFromImage(image);SetTextureFilter(sprite.body,TEXTURE_FILTER_BILINEAR);
@@ -47,8 +47,9 @@ inline void init(){
 inline void unload(){for(auto& species:sprites)for(auto& sprite:species){if(sprite.body.id)UnloadTexture(sprite.body);if(sprite.edge.id)UnloadTexture(sprite.edge);shadow_geometry::unload(sprite.ground);sprite={};}prepared=0;}
 }
 bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
+ if(regionalEnemy(e.type))return regional_enemy_art::draw(e,x,y,outline,probe);
  if(e.type>=VolcanoFirstType)return volcano_actors::draw(e.type,x,y,1,e.animation,-1,outline,probe,false,true,false);
- int type=std::clamp(e.type,0,EnemyTypeCount-1),direction=std::clamp(int(e.animation.direction),0,7);
+ int type=std::clamp(e.type,0,LegacyEnemyTypeCount-1),direction=std::clamp(int(e.animation.direction),0,7);
  const auto& sprite=fallen_art::sprites[type][direction];if(!sprite.body.id)return false;
  if(probe){
   int px=int(std::floor((probe->x-x+fallen_art::OriginX)*fallen_art::Density));

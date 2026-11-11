@@ -4,7 +4,7 @@ void volcanoTests(){
  Game g;g.enterMageTower();g.player=MagePosition;check(!g.canTravelVolcano()&&!g.travelToVolcano(),"third realm is locked before second boss dies");
  g.desertBossDead=true;g.collectedFragments=1;check(g.canTravelVolcano()&&g.travelToVolcano()&&g.inVolcano(),"killing the second boss unlocks explicit mage travel, independent of moving its loot");
  check(distance(g.player,VolcanoArrival)==0&&g.walkable(g.player)&&distance(g.player,VolcanoBossHome)>45,"third arrival is safe and far from its boss");
- check(g.enemies.size()==121&&g.volcanoCreated&&g.forage.empty(),"third realm contains 120 ordinary enemies and a boss");
+ check(g.enemies.size()==121+RegionalEncountersPerRealm&&g.volcanoCreated&&g.forage.empty(),"third realm includes the original population and new regional enemies");
  {
   int portal=0,fractional=0;std::array<int,4> types{};
   for(const auto& p:g.props){if(p.type==13){portal++;continue;}types[p.type-14]++;fractional+=std::abs(p.pos.x-std::round(p.pos.x))>.01f;
@@ -18,7 +18,7 @@ void volcanoTests(){
    check(distance(g.props[i].pos,g.props[j].pos)>4.4f,"large scenery silhouettes are separated instead of forming crowded clumps");
  }
  for(const auto& road:VolcanoRoads)for(int section=1;section<6;section++)for(int sample=0;sample<=100;sample++)check(!volcanoLava(road[section-1]+(road[section]-road[section-1])*(sample/100.f)),"every marked road section crosses lava only at an actual safe bridge");
- std::array<int,7> species{};for(const auto& e:g.enemies){species[e.type-VolcanoFirstType]++;check(g.enemyPositionClear(e.home,e.radius())&&!volcanoLava(e.home,e.radius()),"every volcanic enemy spawns on safe ground with body clearance");}
+ std::array<int,7> species{};for(const auto& e:g.enemies){if(e.type<=VolcanoBossType)species[e.type-VolcanoFirstType]++;check(g.enemyPositionClear(e.home,e.radius())&&!volcanoLava(e.home,e.radius()),"every volcanic enemy spawns on safe ground with body clearance");}
  for(int i=0;i<6;i++)check(species[i]==20,"six volcanic species have twenty independent encounters each");check(species[6]==1,"one third boss, distinct from both earlier bosses");
  {
   auto wandering=g;for(int frame=0;frame<180;frame++){wandering.update(1.f/60,{},false);for(const auto& e:wandering.enemies)check(!volcanoLava(e.pos,e.radius()),"real volcanic patrols keep their complete bodies out of lava");}

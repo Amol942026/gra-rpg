@@ -156,6 +156,10 @@ inline void prepare(bool chamber=false){
   }
   for(const auto& e:game.enemies){
    Vector2 p=screen(e.pos);
+   if(regionalEnemy(e.type)){
+    if(near(p,180)){billboard(p.y,[&]{regional_enemy_art::draw(e,p.x,p.y,BLANK,nullptr,true);});visibleCasters++;}
+    continue;
+   }
    if(e.alive){
     float half=enemyBoss(e.type)?150:90,height=enemyInfo(e.type).visualHeight;
     bool casts=p.x>-(half+shadow_math::LightX*height)&&p.x<WorldW+half
@@ -171,7 +175,7 @@ inline void prepare(bool chamber=false){
     const auto& tex=fallen_art::sprites[e.type][std::clamp(int(e.animation.direction),0,7)].body;
     if(near(p,200))sprite(tex,{p.x-fallen_art::OriginX,p.y-fallen_art::OriginY,float(fallen_art::Width),float(fallen_art::Height)},p,false);
    }else{
-    const auto& shadow=fallen_art::sprites[std::clamp(e.type,0,EnemyTypeCount-1)][std::clamp(int(e.animation.direction),0,7)].ground;
+    const auto& shadow=fallen_art::sprites[std::clamp(e.type,0,LegacyEnemyTypeCount-1)][std::clamp(int(e.animation.direction),0,7)].ground;
     const auto& tex=shadow.art.texture;
     if(p.x+tex.width*.5f-shadow.origin.x<0||p.x-shadow.origin.x>WorldW||p.y+tex.height*.5f-shadow.origin.y<0||p.y-shadow.origin.y>H)continue;
     shadow_geometry::draw(shadow,p);

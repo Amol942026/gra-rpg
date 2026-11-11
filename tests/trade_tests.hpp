@@ -58,7 +58,7 @@ void tradeTests(){
  check(g.sellMerchantItem({Place::Bag,10})==TradeResult::GoldLimit&&same(old,g.bag)&&g.gold==GoldLimit,"wallet limit cannot destroy the item or overflow the gold balance");
  for(int state=0;state<6;state++){
   g=trader();g.gold=1000;old=g.bag;auto gear=g.equipment;
-  if(state==0)g.location=WorldLocation::Forest;if(state==1)g.towerFloor=0;if(state==2)g.player=TowerCenter;
+  if(state==0)g.location=WorldLocation::Forest;if(state==1)g.towerFloor=0;if(state==2)g.player=MerchantPosition+V{-TowerUseRange-.5f,0};
   if(state==3)g.hp=0;if(state==4)g.allocationRequired=true;if(state==5)g.dawnQuest=DawnQuest::Returning;
   check(g.buyMerchantItem(0)==TradeResult::Unavailable&&g.sellMerchantItem({Place::Bag,0})==TradeResult::Unavailable&&same(old,g.bag)&&same(gear,g.equipment)&&g.gold==1000,"wrong location, distance, death and locked story states cannot trade");
  }

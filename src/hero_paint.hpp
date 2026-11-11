@@ -4,7 +4,20 @@
 // Original layered Krita paint sheet; loaded at scene setup, never in draw().
 namespace hero_paint {
 inline Texture2D atlas{};
-inline std::array<unsigned char,512*384> alpha{};
+inline constexpr int Width=512,BaseHeight=384,ArmorHeight=256,WeaponHeight=256;
+inline constexpr int NewArmorTop=BaseHeight+ArmorHeight+WeaponHeight,NewArmorHeight=384;
+inline constexpr int NewArmorFirstCell=NewArmorTop/128*4;
+inline constexpr int RealmWeaponTop=NewArmorTop+NewArmorHeight,RealmWeaponHeight=384;
+inline constexpr int RealmWeaponFirstCell=RealmWeaponTop/128*4;
+inline constexpr int SpearTop=RealmWeaponTop+RealmWeaponHeight,SpearHeight=256;
+inline constexpr int Height=SpearTop+SpearHeight,SpearFirstCell=SpearTop/128*4;
+inline constexpr int Steel=12,Hide=13,Stone=14,Scales=15,Bone=16,Cloth=17;
+inline constexpr int Forged=20,Bronze=21,Wood=22,Binding=23,Obsidian=24,Ivory=25;
+inline bool weaponsLoaded=false,realmWeaponsLoaded=false,spearsLoaded=false;
+inline bool weaponCellAvailable(int cell){
+ return cell>=0&&(cell>=SpearFirstCell?spearsLoaded:cell>=RealmWeaponFirstCell?realmWeaponsLoaded:weaponsLoaded);
+}
+inline std::array<unsigned char,Width*Height> alpha{};
 inline constexpr Color HairColor{70,59,50,255};
 // The imported strands contain a broad, baked highlight. Applying it over an
 // already lit crown made a pale patch above the forehead. Keep fine strand
@@ -37,22 +50,36 @@ inline void unifyHair(Image& image){
   }
  }
 }
+inline bool addSheet(Image& atlasImage,const char* path,int top,int height){
+ if(!FileExists(path))return false;
+ Image sheet=LoadImage(path);
+ const bool valid=sheet.data&&sheet.width==Width&&sheet.height==height;
+ if(valid)ImageDraw(&atlasImage,sheet,{0,0,Width,float(height)},{0,float(top),Width,float(height)},WHITE);
+ if(sheet.data)UnloadImage(sheet);
+ return valid;
+}
 inline void load(){
  if(atlas.id)return;
  Image image=LoadImage("assets/sprites/hero-paints.png");
- if(!image.data||image.width!=512||image.height!=384){if(image.data)UnloadImage(image);return;}
+ if(!image.data||image.width!=Width||image.height!=BaseHeight){if(image.data)UnloadImage(image);return;}
  unifyHair(image);
+ ImageResizeCanvas(&image,Width,Height,0,0,BLANK);
+ addSheet(image,"assets/sprites/hero-armor-paints.png",BaseHeight,ArmorHeight);
+ weaponsLoaded=addSheet(image,"assets/sprites/hero-weapon-paints.png",BaseHeight+ArmorHeight,WeaponHeight);
+ addSheet(image,"assets/sprites/hero-realm-armor.png",NewArmorTop,NewArmorHeight);
+ realmWeaponsLoaded=addSheet(image,"assets/sprites/hero-realm-weapons.png",RealmWeaponTop,RealmWeaponHeight);
+ spearsLoaded=addSheet(image,"assets/sprites/hero-spear-paints.png",SpearTop,SpearHeight);
  Color* pixels=LoadImageColors(image);for(size_t i=0;i<alpha.size();i++)alpha[i]=pixels[i].a;
  UnloadImageColors(pixels);atlas=LoadTextureFromImage(image);UnloadImage(image);
  if(atlas.id)SetTextureFilter(atlas,TEXTURE_FILTER_BILINEAR);
 }
-inline void unload(){if(atlas.id)UnloadTexture(atlas);atlas={};alpha.fill(0);}
+inline void unload(){if(atlas.id)UnloadTexture(atlas);atlas={};weaponsLoaded=realmWeaponsLoaded=spearsLoaded=false;alpha.fill(0);}
 inline bool opaque(Vector2 uv){
- int x=int(uv.x*512),y=int(uv.y*384);return x>=0&&x<512&&y>=0&&y<384&&alpha[y*512+x]>64;
+ int x=int(uv.x*Width),y=int(uv.y*Height);return x>=0&&x<Width&&y>=0&&y<Height&&alpha[y*Width+x]>64;
 }
 inline Vector2 uv(int cell,float u,float v){
  constexpr float inset=.5f/128;
  return {(cell%4+std::clamp(u,inset,1-inset))/4.f,
-         (cell/4+std::clamp(v,inset,1-inset))/3.f};
+         (cell/4+std::clamp(v,inset,1-inset))/(Height/128.f)};
 }
 }

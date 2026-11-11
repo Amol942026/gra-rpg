@@ -15,6 +15,7 @@ void expandWorld(){
   // Custom diagnostic arenas are not authored realms and gain no strangers.
   if(std::none_of(inhabitants.begin(),inhabitants.end(),[&](const auto& e){return e.id==guardian&&e.type==guardianType;}))continue;
   for(const auto& e:authored.enemies){
+   if(regionalEnemy(e.type))continue; // These encounters have their own save migration.
    if(e.home.x<previousSize&&e.home.y<previousSize)continue;
    if(std::any_of(inhabitants.begin(),inhabitants.end(),[&](const auto& old){return old.id==e.id;}))continue;
    if(location==realm&&distance(e.home,player)<EnemySightRange+PatrolRadius+1)continue;

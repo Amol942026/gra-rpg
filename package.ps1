@@ -49,6 +49,8 @@ Dlugosc naciagu zmienia zasieg. Na poczatek masz 20 strzal.
 Q / BRON - kolo wyboru broni. Przeciagnij bron z plecaka na kolo.
 PPM na ciele bestii - otworz jego loot. Przeciagnij lup do plecaka.
 2x LPM na lupie w ciele lub skrzyni - przenies do plecaka.
+WEZ WSZYSTKO przy kafelkach - zbierz caly lup ze wszystkich stron.
+Jesli calosc sie nie miesci, pojawia sie blad i wszystkie rzeczy zostaja na miejscu.
 2x LPM na sprzecie w plecaku - zaloz do odpowiedniego slota.
 Sprzet mozna tez przeciagnac z ciala lub skrzyni wprost na noszone eq.
 Zastepowany przedmiot trafia do plecaka; musi byc na niego miejsce.

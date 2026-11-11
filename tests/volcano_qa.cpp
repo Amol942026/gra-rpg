@@ -68,7 +68,7 @@ int main(int argc,char** argv){
   check(hit&&!propContains(p,{at.x+100,at.y-100}),"variant picking follows actual opaque pixels and rejects empty surroundings");
  }
  RenderTexture2D sheet=LoadRenderTexture(1280,2048);
- for(int type=VolcanoFirstType;type<EnemyTypeCount;type++){
+ for(int type=VolcanoFirstType;type<=VolcanoBossType;type++){
   const auto& atlas=volcano_actors::atlases[type-VolcanoFirstType];check(atlas.art.id&&atlas.silhouette.id&&atlas.alpha.size()==size_t(atlas.art.width)*atlas.art.height,"actual Krita cutouts and picking masks loaded / "+std::to_string(type));
   BeginTextureMode(sheet);ClearBackground(rgb(38,40,50));
   for(int d=0;d<8;d++)for(int action=0;action<4;action++){

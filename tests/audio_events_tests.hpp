@@ -10,11 +10,19 @@ void audioEventTests() {
     for(int i=0;i<8;i++)g.update(.05f,{},false);
     check(cueCount(g,Cue::Roll)==1&&cueCount(g,Cue::Step)==0,"roll emits once without walking footsteps");
     g.sounds.clear();for(int i=0;i<20;i++)g.update(.05f,{1,0},false);
-    check(cueCount(g,Cue::Step)>=4&&cueCount(g,Cue::Step)<=5,"footsteps follow travelled distance");
+    check(cueCount(g,Cue::Step)>=2&&cueCount(g,Cue::Step)<=3,"footsteps follow the two visible foot contacts per gait cycle");
     g.sounds.clear();for(int i=0;i<20;i++)g.update(.05f,{},false);
     check(g.sounds.empty(),"idle does not create footsteps");
     g.player={MapWalkMax,15};g.sounds.clear();for(int i=0;i<20;i++)g.update(.05f,{1,0},false);
     check(g.sounds.empty(),"blocked movement is silent");
+    for(int fps:{30,60,120})for(bool run:{false,true}){
+        Game steps=emptyArena();steps.player={30,30};
+        for(int frame=0;frame<fps*2;frame++){
+            float before=steps.animation.phase;steps.sounds.clear();steps.update(1.f/fps,{1,0},false,run);
+            bool contact=steps.animation.phase<before||int(steps.animation.phase*2)>int(before*2);
+            check(cueCount(steps,Cue::Step)==int(contact),"walk and run emit one footstep exactly at each animated contact at 30/60/120 Hz");
+        }
+    }
     Game p=emptyArena();p.hp=25;p.use({Place::Bag,0});
     check(cueCount(p,Cue::Potion)==1,"successful potion emits bubbling sound");
     p.use({Place::Bag,0});check(cueCount(p,Cue::Potion)==1,"failed potion use is silent");
@@ -74,11 +82,11 @@ void audioEventTests() {
     check(cueCount(weapon,Cue::WeaponEquip)==1&&cueCount(weapon,Cue::Equip)==0,"changing a weapon emits a distinct draw and fastening sound");
     for(int type=0;type<EnemyTypeCount;type++){
         Game hit=emptyArena();Enemy target{0,type,{15,15},{15,15},10000,10000};hit.hit(target,10);
-        check(cueCount(hit,enemyHitCue(type))==1,"all nineteen enemy species emit their assigned material impact");
+        check(cueCount(hit,enemyHitCue(type))==1,"all enemy species emit their assigned material impact");
         Game attack=emptyArena();attack.enemies.push_back({0,type,{15.2f,15},{15.2f,15},100,100});attack.update(.01f,{},false);
         check(cueCount(attack,enemyAttackCue(type))==0&&attack.enemies[0].windup>0,"ordinary attack sound waits for the actual strike instead of playing during preparation");
         for(int frame=0;frame<25;frame++)attack.update(.02f,{},false);
-        check(cueCount(attack,enemyAttackCue(type))==1,"all nineteen enemy species emit one physical attack sound at their strike");
+        check(cueCount(attack,enemyAttackCue(type))==1,"all enemy species emit one physical attack sound at their strike");
     }
     check(enemyHitCue(9)==Cue::ChitinHit&&enemyHitCue(15)==Cue::FireHit&&enemyAttackCue(16)==Cue::ArmoredAttack&&enemyAttackCue(17)==Cue::ReptileAttack&&enemyAttackCue(6)==Cue::BladeAttack&&enemyAttackCue(10)==Cue::SerpentAttack,"enemy gestures match their actual body, weapon and material");
     for(int fps:{30,60,120}){

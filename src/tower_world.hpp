@@ -12,10 +12,15 @@ void drawTowerWorld(){
     bool balcony=game.towerFloor==TowerBalconyFloor;
     if(balcony)tower_balcony::panorama();
     intro_art::glow(c.x,c.y-220,600,380,Fade(accent,.13f));
+    bool masonry=drawTowerWall(c,balcony);
     for(int i=-2;i<=2;i++){
         if(balcony&&i>0)continue; // The terrace side is open to the valley.
         float x=c.x+i*162,y=c.y-320+std::abs(i)*19;
-        tower_furniture::drawSprite(tower_furniture::Window,{x,y+125});
+        if(masonry){
+            float sill=c.y+towerWallFoot(i*162.f)-17;
+            tower_furniture::drawSprite(tower_furniture::Window,{x,sill},.9f);
+            y=sill-113;
+        }else tower_furniture::drawSprite(tower_furniture::Window,{x,y+125});
         clip(x-48,y-114,96,228);
         for(int star=0;star<18;star++){
             float xx=x-40+(Game::hash(i+9,star)%80),yy=y-106+(Game::hash(star,i+29)%185);

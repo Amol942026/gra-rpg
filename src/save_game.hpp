@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=17; // Potion assignments for the two HUD shortcuts.
+constexpr int CurrentVersion=18; // Appended enemy species and combat sounds.
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -207,7 +207,9 @@ inline Snapshot decode(const std::string& bytes){
   if(result.tower.active()){result.tower.missingDesertShard=result.game.dawnShardUnclaimed(WorldLocation::Desert);result.tower.missingVolcanoShard=result.game.dawnShardUnclaimed(WorldLocation::Volcano);}
   if(result.tower.line<oldCount&&result.tower.line>=result.tower.lineCount())result.tower.line=result.tower.lineCount()-1;
  }
- validate(result);result.game.expandWorld();result.game.refreshVolcanoScenery();validate(result);return result;
+ validate(result);result.game.expandWorld();result.game.refreshVolcanoScenery();
+ if(version<18)result.game.restoreRegionalEnemies();
+ validate(result);return result;
 }
 inline std::string now(){std::time_t t=std::time(nullptr);std::tm local{};
 #ifdef _WIN32

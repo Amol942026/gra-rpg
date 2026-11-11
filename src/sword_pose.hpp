@@ -16,17 +16,18 @@ inline Point mix(Point a,Point b,float t){return a*(1-t)+b*t;}
 inline float ease(float t){t=std::clamp(t,0.f,1.f);return t*t*(3-2*t);}
 inline Point turn(Point p,float angle){float c=std::cos(angle),s=std::sin(angle);return {p.r*c+p.f*s,p.f*c-p.r*s,p.z};}
 struct Arm {Point hand,elbow;};
-inline Arm solveArm(Point shoulder,Point target,float side=1){
+inline Arm solveArm(Point shoulder,Point target,Point pole){
  Point delta=target-shoulder;float distance=length(delta);
  float reach=std::clamp(distance,.2f,UpperArm+Forearm-.15f);
  Point direction=distance<.00001f?Point{0,0,-1}:normalized(delta);Point hand=shoulder+direction*reach;
- Point pole{side,-.12f,.12f};Point perpendicular=pole-direction*dot(pole,direction);
+ Point perpendicular=pole-direction*dot(pole,direction);
  if(length(perpendicular)<.001f){pole=std::abs(direction.f)<.9f?Point{0,1,0}:Point{0,0,1};perpendicular=pole-direction*dot(pole,direction);}
  Point bend=normalized(perpendicular);
  float along=(UpperArm*UpperArm-Forearm*Forearm+reach*reach)/(2*reach);
  float height=std::sqrt(std::max(0.f,UpperArm*UpperArm-along*along));
  return {hand,shoulder+direction*along+bend*height};
 }
+inline Arm solveArm(Point shoulder,Point target,float side=1){return solveArm(shoulder,target,Point{side,-.12f,.12f});}
 inline Point blade(float yaw,float pitch){
  float flat=std::cos(pitch);return Point{std::sin(yaw)*flat,std::cos(yaw)*flat,std::sin(pitch)}*BladeLength;
 }

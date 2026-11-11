@@ -14,7 +14,7 @@ bool runMapLabelsQA(){
  for(int floor=0;floor<TowerFloorCount;floor++){
   game.towerFloor=floor;auto names=labels();
   int stairs=0,merchants=0,mages=0;for(const auto& label:names){stairs+=label.name.find("SCHODY")==0;merchants+=label.name=="MIRON";mages+=label.name=="ELDRIN";}
-  check(stairs==(floor>0)+(floor<4)&&merchants==(floor==MerchantFloor)&&mages==(floor==0),"only the existing stairs and NPCs get labels on floor "+std::to_string(floor+1));
+  check(stairs==0&&merchants==(floor==MerchantFloor)&&mages==(floor==0),"only NPCs get labels on floor "+std::to_string(floor+1));
  }
  int motionSamples=0;
  for(float requestedScale:{.8f,1.f,1.2f,1.5f}){
@@ -33,6 +33,8 @@ bool runMapLabelsQA(){
      Image sample=crop(image,names[i]);Color* current=LoadImageColors(sample);
      int visible=0;for(int p=0;p<sample.width*sample.height;p++)visible+=current[p].a>180&&current[p].r>100;
      check(visible>20,"native glyph interiors remain visible: "+names[i].name);
+     check(current[0].a==0&&current[sample.width-1].a==0&&current[sample.width*sample.height-1].a==0,
+           "NPC text has transparent corners and no panel: "+names[i].name);
      if(frame==0)reference.push_back(ImageCopy(sample));
      else{
       Color* initial=LoadImageColors(reference[i]);int different=0;
@@ -49,7 +51,7 @@ bool runMapLabelsQA(){
      for(int y=0;y<image.height;y++)for(int x=0;x<image.width;x++){
       const Color a=expected[y*image.width+x],b=actual[y*image.width+x];
       if(x>=int(std::round(WorldW*renderScale)))outside+=a.a!=0;
-      if(a.a>0){probes++;mismatch+=a.r!=b.r||a.g!=b.g||a.b!=b.b||a.a!=b.a;}
+      if(a.a==255){probes++;mismatch+=a.r!=b.r||a.g!=b.g||a.b!=b.b||a.a!=b.a;}
      }
      check(probes>60&&mismatch==0,"actual scene draws labels after the world resolve at native scale");
      check(outside==0,"map labels cannot overlap the right-hand HUD");

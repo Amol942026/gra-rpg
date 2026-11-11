@@ -15,6 +15,36 @@ Każda pozycja jest losowana **niezależnie raz przy śmierci**. Wilk może pozo
 
 Podejdź do ciała na maksymalnie 2,5 pola i otwórz je PPM. Przeciągnij przedmioty do plecaka. Większy łup ma do trzech stron po pięć kratek: przyciski < / > lub rolka myszy nad oknem ciała. Każdy przedmiot ma kolorową nazwę, opis rzadkości i szansę w podpowiedzi. Stosy materiałów, monet, mikstur i strzał mieszczą do 99 sztuk.
 
+## Dziesięć dodatkowych pancerzy
+
+| Kraina | Pancerz | Obrona | Przeciwnik | Rzadkość | Szansa z ciała |
+|---|---|---:|---|---|---:|
+| Las | Przeszywanica rozbójników | +5 | Leśny rozbójnik | Pospolity | 60% |
+| Las | Pancerz zarodnikowej kniei | +7 | Zarodnik kniei | Rzadki | 15% |
+| Las | Kiryś żywej kory | +10 | Ożywione drzewo | Bardzo rzadki | 4% |
+| Pustynia | Pancerz łuskowy wydm | +7 | Skarabeusz miedziany | Pospolity | 60% |
+| Pustynia | Pancerz bursztynowego żądła | +10 | Skorpion bursztynowy | Rzadki | 15% |
+| Pustynia | Kiryś Słonecznej Pieczęci | +14 | Żywa Wydma | Niezwykle rzadki | 1% |
+| Kaldera | Brygantyna popielna | +9 | Żużlowy pełzacz | Pospolity | 60% |
+| Kaldera | Pancerz Rogacza Żaru | +12 | Rogacz Żaru | Rzadki | 15% |
+| Kaldera | Zbroja obsydianowej straży | +14 | Obsydianowy wojownik | Bardzo rzadki | 4% |
+| Kaldera | Pancerz Serca Rozłamu | +17 | Varkhor, Serce Kaldery | Niezwykle rzadki | 1% |
+
+## Broń z trzech krain
+
+| Kraina | Broń | Typ | Atak | Przeciwnik | Rzadkość | Szansa z ciała |
+|---|---|---|---:|---|---|---:|
+| Las | Miecz cierniowego szlaku | Miecz | +15 | Szkielet | Pospolity | 60% |
+| Las | Sztylet fioletowej grzybni | Sztylet | +16 | Zarodnik kniei | Rzadki | 15% |
+| Las | Topór kamiennej przysięgi | Topór | +23 | Kamienny Strażnik | Niezwykle rzadki | 1% |
+| Pustynia | Łuk trzcinowej oazy | Łuk | +16 | Kobra piaskowa | Pospolity | 60% |
+| Pustynia | Szabla pękniętego mirażu | Miecz | +24 | Oko Wydm | Bardzo rzadki | 4% |
+| Pustynia | Sztylet słonecznego szkła | Sztylet | +19 | Skorpion bursztynowy | Rzadki | 15% |
+| Kaldera | Topór żużlowego haka | Topór | +19 | Żużlowy pełzacz | Pospolity | 60% |
+| Kaldera | Łuk Rogacza Żaru | Łuk | +24 | Rogacz Żaru | Rzadki | 15% |
+| Kaldera | Miecz lawowej żyły | Miecz | +27 | Obsydianowy wojownik | Bardzo rzadki | 4% |
+| Kaldera | Łuk Serca Kaldery | Łuk | +32 | Varkhor, Serce Kaldery | Niezwykle rzadki | 1% |
+
 ## Dziesięć dodatkowych broni
 
 Każda z tych broni może pojawić się w skrzyni w dowolnej krainie. Skrzynia

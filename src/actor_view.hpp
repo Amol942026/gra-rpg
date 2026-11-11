@@ -53,6 +53,23 @@ void monster(Enemy& e,float x,float y) {
     actor_art::shadowCacheKey=100+e.id;
     actor_art::drawEnemy(e,x,y,underMouse?rgb(255,140,104):BLANK);
     actor_art::shadowCacheKey=-1;
+    if(regionalEnemy(e.type)&&e.strike>0){
+        float age=std::clamp(1-e.strike/.22f,0.f,1.f);
+        const bool spores=e.type==SporekinType;
+        const bool sand=e.type==DuneEyeType;
+        Color dust=spores?rgb(218,183,106):sand?rgb(223,179,106):rgb(253,111,62);
+        float heading=int(e.animation.direction)*PI/4;
+        Vector2 forward{std::cos(heading),std::sin(heading)};
+        Vector2 origin{x+forward.x*22,y+forward.y*12-(sand?33:spores?20:27)};
+        float radius=(sand?32:spores?21:17)*age;
+        for(int i=0;i<9;i++){
+            float a=heading+(i-4)*.25f;
+            float travel=radius*(.65f+(i%3)*.24f);
+            Vector2 at{origin.x+std::cos(a)*travel,origin.y+std::sin(a)*travel*.55f-(i%3)*5*age};
+            ellipse(at.x,at.y,(spores?3.5f:2.f)*(1-.5f*age),1.7f,Fade(dust,(1-age)*.72f));
+        }
+        if(sand)ellipseOutline(origin.x,origin.y,6+radius,(6+radius)*.34f,Fade(rgb(98,225,207),(1-age)*.73f));
+    }
     guardian_art::held(e);
     if(e.hp<e.maxHp||underMouse){
           float w=enemyBoss(e.type)||e.type==7?98:48,yy=y-enemyInfo(e.type).visualHeight;

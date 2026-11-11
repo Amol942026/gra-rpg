@@ -1,20 +1,11 @@
 #pragma once
-// Map labels follow world positions, but their glyphs and plates share the
-// final framebuffer pixel grid, shared with the directly rendered world.
+// Map labels follow world positions and snap to the final framebuffer grid.
 struct MapNameplate {
  std::string name,hint;Vector2 anchor;float size;Color color,hintColor;
  bool title=false,bold=true;
 };
 template<class Emit> void forEachMapNameplate(Emit emit){
  if(!game.inTower())return;
- for(int direction:{1,-1})if(game.stairPresent(direction)){
-  Vector2 p=screen(towerStairBase(direction));
-  bool hot=hovered.kind==HoverKind::TowerStair&&hovered.index==direction;
-  emit(MapNameplate{direction==1?"SCHODY W GÓRĘ":"SCHODY W DÓŁ",
-   game.stairReachable(direction)?"E / LPM / PPM":"",
-   {p.x+(direction==1?-20:TowerStairRun*20),p.y+(direction==1?29:92)},
-   14,hot?Text:direction==1?Gold:Blue,Text});
- }
  if(game.towerFloor==0){
   Vector2 p=screen(MagePosition);
   emit(MapNameplate{"ELDRIN",game.mageReachable()?"E / PPM · ROZMAWIAJ":"MAG · MENTOR",
@@ -36,17 +27,16 @@ Rectangle mapNameplateBounds(const MapNameplate& label){
 }
 void drawMapNameplate(const MapNameplate& label){
  Rectangle box=mapNameplateBounds(label);
- DrawRectangleRec(box,rgb(12,18,26));
- DrawRectangleLinesEx(box,1/renderScale,rgb(66,69,67));
- // Both lines are placed relative to the snapped plate, so their raster and
- // padding stay identical at every fractional phase of camera movement.
+ // Snap both text lines together. A glyph shadow keeps them legible over
+ // bright scenery while leaving the space around the letters transparent.
  float x=box.x+box.width/2,y=box.y+4;
- float width=typography.width(label.name,label.size,label.title,label.bold);
- typography.draw(label.name,x-width/2,y,label.size,label.color,label.title,label.bold);
- if(!label.hint.empty()){
-  float hintWidth=typography.width(label.hint,14,false,true);
-  typography.draw(label.hint,x-hintWidth/2,y+label.size+6,14,label.hintColor,false,true);
- }
+ auto drawLine=[&](const std::string& text,float top,float size,Color color,bool title,bool bold){
+  float left=x-typography.width(text,size,title,bold)/2;
+  typography.draw(text,left+1/renderScale,top+1/renderScale,size,rgb(12,16,25,225),title,bold);
+  typography.draw(text,left,top,size,color,title,bold);
+ };
+ drawLine(label.name,y,label.size,label.color,label.title,label.bold);
+ if(!label.hint.empty())drawLine(label.hint,y+label.size+6,14,label.hintColor,false,true);
 }
 void drawWorldLabels(){
  clip(0,0,WorldW,H);

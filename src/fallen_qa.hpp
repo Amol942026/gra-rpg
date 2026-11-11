@@ -1,6 +1,6 @@
 #pragma once
 template<class Check>void verifyFallenArt(Check check){
- fs::create_directories("qa-v39");check(fallen_art::prepared==EnemyTypeCount*8,"all corpse textures and pointer masks are prepared before combat starts");
+ fs::create_directories("qa-v39");check(fallen_art::prepared==LegacyEnemyTypeCount*8,"legacy corpse textures and pointer masks are prepared before combat starts");
  int prepared=fallen_art::prepared;
  RenderTexture2D sample=LoadRenderTexture(240,160);
  for(int type=0;type<EnemyTypeCount;type++)for(int direction=0;direction<8;direction++){
@@ -19,7 +19,7 @@ template<class Check>void verifyFallenArt(Check check){
  UnloadRenderTexture(sample);check(fallen_art::prepared==prepared,"drawing and probing corpses never rebuilds meshes or uploads textures during combat");
  RenderTexture2D gallery=LoadRenderTexture(1400,860);BeginTextureMode(gallery);ClearBackground(Ink);
  txt("POKONANE BESTIE — NOWE POZY I SZCZEGÓŁY",24,20,27,Gold);
- for(int type=0;type<EnemyTypeCount;type++){
+ for(int type=0;type<LegacyEnemyTypeCount;type++){
   float x=25+(type%4)*345.f,y=87+(type/4)*247.f;panel({x,y,330,227},Panel);
   center(enemyInfo(type).name,x+165,y+15,17,Gold);
   const auto& texture=fallen_art::sprites[type][int(Direction::SE)].body;

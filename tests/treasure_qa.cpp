@@ -53,7 +53,7 @@ int main(int argc,char** argv){
   game.messageTime=0;renderScene();saveTexture(canvas,"qa-treasure/chest-"+std::to_string(id)+"-loot.png");
   Item value=game.chests[id].loot[0];Rectangle r=lootRect(0);mouse={r.x+20,r.y+20};
   Slot source=hoverSlot();check(source.place==Place::Chest&&source.owner==id&&source.index==0,"HUD loot slot refers to the selected chest");
-  check(itemTooltipText(value,source).chance=="Skrzynia: 3 przedmioty · pospolite / rzadkie","chest tooltip does not misrepresent monster drop rates");
+  check(itemTooltipText(value,source).instruction.empty(),"chest tooltip omits interaction and drop-rate instructions");
   clickWorldOrInventory();check(dragging.place==Place::Chest,"left click starts dragging chest gear from the HUD");
   Rectangle target=bagRect(10);mouse={target.x+20,target.y+20};finishDrag();
   check(dragging.place==Place::None&&game.bag[10].kind==value.kind&&game.chests[id].loot[0].empty(),"actual drag handler transfers loot into the bag once");

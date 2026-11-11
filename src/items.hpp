@@ -4,8 +4,21 @@
 namespace ember {
 enum class Kind { None,Sword,Axe,Helmet,Armor,Shield,Boots,Ring,Health,Mana,Crystal,Gold,
  WolfFang,WolfFur,BoarTusk,BoarHide,SpiderSilk,VenomSac,BoneShard,SlimeGel,AncientBark,ForestEssence,BanditBadge,RuneStone,Dagger,Cloak,Amulet,Mushroom,Bow,Arrow,DawnShard,ScorpionSting,ScarabShell,CobraScale,SandEssence,WolfKnife,WolfCloak,MoonBow,BoarArmor,TuskAxe,SilkBoots,VenomRing,WebCowl,BoneHelmet,CryptSword,BanditBow,BanditBoots,RootShield,GroveAmulet,GelAmulet,GuardianSword,GuardianArmor,GuardianHelmet,EchoRing,StingDagger,ScarabHelmet,ScarabArmor,CobraBoots,MirageBow,SunAmulet,DuneBlade,SandRobe,DuneShield,SlimeBlade,SlimeCowl,SlimeRing,WolfHood,WolfBoots,WolfHeartAmulet,BoneShield,BoneArmor,GraveBow,GuardianBoots,GuardianShield,GuardianAxe,BoarBoots,BoarShield,BoarHelm,SpiderDagger,WebRobe,NightSilkCloak,BanditSword,BanditHelm,OutlawRing,BarkHelm,RootBoots,GroveBow,ScorpionAxe,StingShield,AmberRing,ScarabBoots,ScarabAxe,ScarabRing,CobraCloak,ScaleShield,SerpentAmulet,DuneBoots,DuneHelmet,DawnBow,
- TrailFalchion,BirchBow,CopperHatchet,FlintDagger,DewSword,SunTrailSword,BasaltCleaver,GlassDagger,OasisBow,AshBow,Count };
+ TrailFalchion,BirchBow,CopperHatchet,FlintDagger,DewSword,SunTrailSword,BasaltCleaver,GlassDagger,OasisBow,AshBow,
+ BanditJack,SporeHarness,GroveBarkArmor,DuneLamellar,ScorpionCarapace,SunwardCuirass,
+ AshBrigandine,CinderhornMail,ObsidianPlate,RiftCarapace,
+ BriarSword,SporeDagger,OathAxe,ReedBow,MirageSword,SunDagger,AshHookAxe,CinderBow,EmberSword,RiftBow,
+ Spear,BriarSpear,OasisSpear,BasaltSpear,DawnSpear,Count };
 constexpr int ItemKindCount=int(Kind::Count);
+constexpr int FirstAdditionalArmor=int(Kind::BanditJack);
+constexpr int FirstRealmWeapon=int(Kind::BriarSword);
+constexpr int FirstSpear=int(Kind::Spear);
+constexpr int AdditionalArmorCount=FirstRealmWeapon-FirstAdditionalArmor;
+constexpr int RealmWeaponCount=FirstSpear-FirstRealmWeapon;
+constexpr int SpearCount=ItemKindCount-FirstSpear;
+inline constexpr bool additionalArmor(Kind kind){return kind>=Kind::BanditJack&&kind<Kind::BriarSword;}
+inline constexpr bool realmWeapon(Kind kind){return kind>=Kind::BriarSword&&kind<Kind::Spear;}
+inline constexpr bool spearVariant(Kind kind){return kind>=Kind::Spear&&kind<Kind::Count;}
 inline constexpr std::array<Kind,2> DefaultPotions{{Kind::Health,Kind::Mana}};
 struct PotionType { Kind kind; int slot; };
 inline constexpr PotionType PotionTypes[]={{Kind::Health,0},{Kind::Mana,1}};
@@ -15,7 +28,7 @@ inline constexpr int potionSlotFor(Kind kind){
 }
 enum class Rarity { Common, Rare, VeryRare, ExtremelyRare };
 struct GearDefinition { const char* name; Kind shape; Rarity rarity; int basePower; const char* description; };
-inline constexpr std::array<GearDefinition,74> BeastGear{{
+inline constexpr std::array<GearDefinition,99> BeastGear{{
  {"Sztylet wilczego kła",Kind::Dagger,Rarity::Rare,12,"Ostrze oprawione w srebrzysty wilczy kieł."},
  {"Płaszcz tropiciela",Kind::Cloak,Rarity::Rare,7,"Ciepły płaszcz z futra leśnych wilków."},
  {"Łuk księżycowego łowcy",Kind::Bow,Rarity::VeryRare,19,"Łuk z jasnego drewna i wilczej cięciwy."},
@@ -90,6 +103,31 @@ inline constexpr std::array<GearDefinition,74> BeastGear{{
  {"Sztylet szklistego żaru",Kind::Dagger,Rarity::Rare,16,"Czarne szkliwo odbija czerwony blask."},
  {"Łuk bursztynowej oazy",Kind::Bow,Rarity::Rare,18,"Miedziane okucia i bursztynowe groty ramion."},
  {"Łuk popielnego wiatru",Kind::Bow,Rarity::Rare,20,"Długie popielate ramiona z ognistą inkrustacją."},
+ {"Przeszywanica rozbójników",Kind::Armor,Rarity::Common,5,"Pikowane płótno spięte zielonym pasem leśnej bandy."},
+ {"Pancerz zarodnikowej kniei",Kind::Armor,Rarity::Rare,7,"Skórę pokrywają miękkie łuski grzybni o fioletowych brzegach."},
+ {"Kiryś żywej kory",Kind::Armor,Rarity::VeryRare,10,"Sękate płyty dębu wciąż wypuszczają drobne pędy mchu."},
+ {"Pancerz łuskowy wydm",Kind::Armor,Rarity::Common,7,"Mosiężne łuski naszyte na lekką piaskową tkaninę."},
+ {"Pancerz bursztynowego żądła",Kind::Armor,Rarity::Rare,10,"Wypolerowany pancerz skorpiona zachował wygięte ostrogi."},
+ {"Kiryś Słonecznej Pieczęci",Kind::Armor,Rarity::ExtremelyRare,14,"Złote promienie otaczają turkusową pieczęć pustynnego słońca."},
+ {"Brygantyna popielna",Kind::Armor,Rarity::Common,9,"Pod czerwonym płótnem kryją się płyty hartowane w popiele."},
+ {"Pancerz Rogacza Żaru",Kind::Armor,Rarity::Rare,12,"Warstwowe płyty rogacza wieńczą dwa osmalone rogi."},
+ {"Zbroja obsydianowej straży",Kind::Armor,Rarity::VeryRare,14,"Kanciaste płyty czarnego szkliwa przecinają miedziane żyły."},
+ {"Pancerz Serca Rozłamu",Kind::Armor,Rarity::ExtremelyRare,17,"Fioletowy kryształ pulsuje między żebrami demonicznej skorupy."},
+ {"Miecz cierniowego szlaku",Kind::Sword,Rarity::Common,15,"Na smukłej stali wyryto cierń. Chwyt owinięto zieloną skórą."},
+ {"Sztylet fioletowej grzybni",Kind::Dagger,Rarity::Rare,16,"W ciemnym ostrzu tkwią fioletowe zarodniki."},
+ {"Topór kamiennej przysięgi",Kind::Axe,Rarity::ExtremelyRare,23,"Zielona runa spaja kamienną głowicę ze starym dębowym drzewcem."},
+ {"Łuk trzcinowej oazy",Kind::Bow,Rarity::Common,16,"Jasne ramiona z oazowej trzciny spięto lnianą nicią."},
+ {"Szabla pękniętego mirażu",Kind::Sword,Rarity::VeryRare,24,"Na złocistym ostrzu migocze turkusowy wzór pękniętego mirażu."},
+ {"Sztylet słonecznego szkła",Kind::Dagger,Rarity::Rare,19,"Bursztynowe szkło łapie światło na każdej krawędzi."},
+ {"Topór żużlowego haka",Kind::Axe,Rarity::Common,19,"Głowicę ze zwęglonego żużlu mocują miedziane nity."},
+ {"Łuk Rogacza Żaru",Kind::Bow,Rarity::Rare,24,"Czerwone ramiona kończą się osmalonymi rogami bestii."},
+ {"Miecz lawowej żyły",Kind::Sword,Rarity::VeryRare,27,"Wzdłuż obsydianowej klingi płonie wąska żyła lawy."},
+ {"Łuk Serca Kaldery",Kind::Bow,Rarity::ExtremelyRare,32,"Fioletowy kryształ w chwycie rozświetla żebrowane ramiona."},
+ {"Włócznia jesionowa",Kind::Spear,Rarity::Common,13,"Prosty stalowy grot osadzony na jesionowym drzewcu."},
+ {"Włócznia cierni kniei",Kind::Spear,Rarity::Rare,18,"Zielony grot wyrasta z drzewca oplecionego żywym korzeniem."},
+ {"Włócznia bursztynowej oazy",Kind::Spear,Rarity::Rare,21,"Grot z bursztynowego szkła lśni nad turkusową owijką."},
+ {"Włócznia bazaltowego grotu",Kind::Spear,Rarity::VeryRare,25,"Obsydianowy grot przecina wąska, pomarańczowa żyła."},
+ {"Włócznia Ostatniego Świtu",Kind::Spear,Rarity::ExtremelyRare,31,"Jasny grot i runy wokół oprawy mienią się fioletem."},
 }};
 static_assert(BeastGear.size()==ItemKindCount-int(Kind::WolfKnife));
 inline constexpr bool beastGear(Kind k){return k>=Kind::WolfKnife&&k<Kind::Count;}
@@ -112,7 +150,7 @@ inline constexpr int itemDropChance(Kind k){return k==Kind::None?0:k==Kind::Dawn
 struct Item { Kind kind=Kind::None; int tier=0,count=0; bool empty()const{return kind==Kind::None||count<=0;} };
 inline Item item(Kind k,int tier=0,int count=1){return{k,tier,count};}
 inline bool material(Kind k){return (k>=Kind::WolfFang&&k<=Kind::RuneStone)||(k>=Kind::ScorpionSting&&k<=Kind::SandEssence);}
-inline int gearSlot(Kind k){switch(archetype(k)){case Kind::Sword:case Kind::Axe:case Kind::Dagger:case Kind::Bow:return 0;case Kind::Helmet:return 1;case Kind::Shield:return 2;case Kind::Armor:case Kind::Cloak:return 3;case Kind::Boots:return 4;case Kind::Ring:case Kind::Amulet:return 5;default:return -1;}}
+inline int gearSlot(Kind k){switch(archetype(k)){case Kind::Sword:case Kind::Axe:case Kind::Dagger:case Kind::Bow:case Kind::Spear:return 0;case Kind::Helmet:return 1;case Kind::Shield:return 2;case Kind::Armor:case Kind::Cloak:return 3;case Kind::Boots:return 4;case Kind::Ring:case Kind::Amulet:return 5;default:return -1;}}
 inline bool stackable(Kind k){return k==Kind::Arrow||k==Kind::Mushroom||material(k)||k==Kind::Health||k==Kind::Mana||k==Kind::Crystal||k==Kind::Gold;}
 inline std::string itemName(Item i){
  static constexpr const char* names[]={"","Miecz wędrowca","Topór strażnika","Żelazny hełm","Zbroja zwiadowcy","Tarcza dębowa","Buty podróżnika","Pierścień żaru","Mikstura zdrowia","Mikstura many","Odłamek echa","Złote monety",
@@ -120,7 +158,7 @@ inline std::string itemName(Item i){
  if(beastGear(i.kind))return BeastGear[int(i.kind)-int(Kind::WolfKnife)].name;
  int k=int(i.kind);return k>=0&&k<ItemKindCount?names[k]:"Nieznany przedmiot";
 }
-inline const char* itemShortName(Kind k){switch(archetype(k)){case Kind::ScorpionSting:return "żądło";case Kind::ScarabShell:return "pancerz";case Kind::CobraScale:return "łuska";case Kind::SandEssence:return "piasek";case Kind::Bow:return "łuk";case Kind::Arrow:return "strzały";case Kind::Sword:return "miecz";case Kind::Axe:return "topór";case Kind::Mushroom:return "borowik";case Kind::WolfFang:return "kieł";case Kind::WolfFur:return "sierść";case Kind::BoarTusk:return "kieł";case Kind::BoarHide:return "skóra";case Kind::SpiderSilk:return "nić";case Kind::VenomSac:return "jad";case Kind::BoneShard:return "kość";case Kind::SlimeGel:return "śluz";case Kind::AncientBark:return "kora";case Kind::ForestEssence:return "esencja";case Kind::BanditBadge:return "odznaka";case Kind::RuneStone:return "runa";case Kind::Crystal:return "odłamek";case Kind::Health:return "mikstura HP";case Kind::Mana:return "mikstura MP";case Kind::Dagger:return "sztylet";case Kind::Cloak:return "płaszcz";case Kind::Amulet:return "amulet";default:return "sprzęt";}}
+inline const char* itemShortName(Kind k){switch(archetype(k)){case Kind::ScorpionSting:return "żądło";case Kind::ScarabShell:return "pancerz";case Kind::CobraScale:return "łuska";case Kind::SandEssence:return "piasek";case Kind::Bow:return "łuk";case Kind::Arrow:return "strzały";case Kind::Sword:return "miecz";case Kind::Spear:return "włócznia";case Kind::Axe:return "topór";case Kind::Mushroom:return "borowik";case Kind::WolfFang:return "kieł";case Kind::WolfFur:return "sierść";case Kind::BoarTusk:return "kieł";case Kind::BoarHide:return "skóra";case Kind::SpiderSilk:return "nić";case Kind::VenomSac:return "jad";case Kind::BoneShard:return "kość";case Kind::SlimeGel:return "śluz";case Kind::AncientBark:return "kora";case Kind::ForestEssence:return "esencja";case Kind::BanditBadge:return "odznaka";case Kind::RuneStone:return "runa";case Kind::Crystal:return "odłamek";case Kind::Health:return "mikstura HP";case Kind::Mana:return "mikstura MP";case Kind::Dagger:return "sztylet";case Kind::Cloak:return "płaszcz";case Kind::Amulet:return "amulet";default:return "sprzęt";}}
 inline Rarity itemRarity(Item value){return itemRarity(value.kind);}
 inline int itemDropChance(Item value){return itemDropChance(value.kind);}
 inline int power(Item i){if(i.empty()||gearSlot(i.kind)<0)return 0;if(beastGear(i.kind))return BeastGear[int(i.kind)-int(Kind::WolfKnife)].basePower+i.tier*3;return (i.kind==Kind::Bow?14:i.kind==Kind::Axe?8:i.kind==Kind::Sword?6:i.kind==Kind::Dagger?9:i.kind==Kind::Ring?2:i.kind==Kind::Amulet?4:i.kind==Kind::Cloak?5:3)+i.tier*3;}

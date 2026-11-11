@@ -1,5 +1,26 @@
 # Zależności i zasoby
 
+- Ikony broni z trzech krain w `assets/sprites/equipment-icons.png`
+  powstały w ImageGen. Materiały kling, głowic i łuków w
+  `assets/sprites/hero-realm-weapons.png` powstały w lokalnym ComfyUI / DreamShaper 8
+  (Lykon) i Kricie. Źródła KRA, ilustracje i graf są w
+  `C:/AI2D/sprites/ten-realm-weapons-20261111`.
+
+- Ikony dziesięciu nowych pancerzy w `assets/sprites/equipment-icons.png`
+  powstały w ImageGen. Materiały na bohaterze w `assets/sprites/hero-realm-armor.png`
+  opracowano w lokalnym ComfyUI / DreamShaper 8 (Lykon) i dopracowano w Kricie.
+  Master KRA, ilustracje i graf są w `C:/AI2D/sprites/ten-armor-drops-20261111`.
+
+- Materiały broni trzymanej przez bohatera w `assets/sprites/hero-weapon-paints.png`
+  wykonano w ImageGen i lokalnym ComfyUI / DreamShaper 8 (Lykon). Zbrocza,
+  przeszycia i okucia dopracowano w Kricie. Master KRA, źródła i graf
+  są w `C:/AI2D/sprites/held-weapon-art-20261111-final`.
+
+- Materiały zbroi bohatera w `assets/sprites/hero-armor-paints.png` powstały
+  z wbudowanego ImageGen oraz lokalnego ComfyUI z modelem DreamShaper 8
+  Lykona. Szwy i ornamenty opracowano na osobnej warstwie w Kricie.
+  Projekt KRA, źródła i graf ComfyUI są w `C:/AI2D/sprites/hero-gear-wind-20261111`.
+
 - Efekty specjalne Kaldery `assets/volcano/caldera-attack-fx.png` powstały
   z własnych warstwowych ilustracji Emberfall w Kricie. Materiały dopracowano
   w lokalnym ComfyUI z modelem DreamShaper 8 Lykona, na warunkach opisanych

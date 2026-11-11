@@ -1,0 +1,111 @@
+diff --git a/src-tauri/build.rs b/src-tauri/build.rs
+index 39a2ed5..0e0ab59 100644
+--- a/src-tauri/build.rs
++++ b/src-tauri/build.rs
+@@ -7,7 +7,7 @@ fn main() {
+ /// `rfd`/`tao` import `TaskDialogIndirect` from comctl32 v5 and the test exe fails
+ /// to start with STATUS_ENTRYPOINT_NOT_FOUND.
+ fn request_common_controls_v6() {
+-    #[cfg(windows)]
++    #[cfg(all(windows, target_env = "msvc"))]
+     {
+         println!("cargo:rerun-if-changed=build.rs");
+         println!(
+diff --git a/src-tauri/src/mcp/schema.rs b/src-tauri/src/mcp/schema.rs
+index c2f1152..0be0878 100644
+--- a/src-tauri/src/mcp/schema.rs
++++ b/src-tauri/src/mcp/schema.rs
+@@ -647,8 +647,16 @@ impl SpriteStudioMcp {
+     }
+ 
+     #[tool(description = "Render a saved native rig into frame PNGs and a draft animation.")]
+-    fn render_rig_animation(&self, Parameters(input): Parameters<crate::rig::RigInput>) -> String {
+-        json_result(super::handlers::render_rig_animation(&self.state, input))
++    async fn render_rig_animation(&self, Parameters(input): Parameters<crate::rig::RigInput>) -> String {
++        let state = self.state.clone();
++        let result = tokio::task::spawn_blocking(move || {
++            super::handlers::render_rig_animation(&state, input)
++        })
++        .await
++        .unwrap_or_else(|error| {
++            Err(crate::error::CommandError::new("render_failed", error.to_string()))
++        });
++        json_result(result)
+     }
+ 
+     #[tool(description = "Suggest deterministic rig points and bones for a master sprite asset.")]
+diff --git a/src-tauri/src/rig/commands.rs b/src-tauri/src/rig/commands.rs
+index e72694c..c6d6fe7 100644
+--- a/src-tauri/src/rig/commands.rs
++++ b/src-tauri/src/rig/commands.rs
+@@ -263,12 +263,9 @@ pub(crate) fn render_rig_animation_blocking(
+     }
+     validate_perceptible_rig_motion(&rig)?;
+     let master_path = asset.path.clone();
+-    let render_rig = rig.clone();
+-    let frames = tauri::async_runtime::block_on(async move {
+-        tauri::async_runtime::spawn_blocking(move || render_rig_frames_blocking(master_path, render_rig))
+-            .await
+-    })
+-    .map_err(|error| CommandError::new("render_failed", error.to_string()))??;
++    // This is the synchronous renderer. Its caller chooses the worker thread;
++    // entering block_on here panics when an MCP request already runs in Tokio.
++    let frames = render_rig_frames_blocking(master_path, rig.clone())?;
+     render_rig_animation_inner(&frames, &rig, &asset, &workspace, state)
+ }
+ 
+diff --git a/src-tauri/src/rig/tests.rs b/src-tauri/src/rig/tests.rs
+index 6a93964..c75f811 100644
+--- a/src-tauri/src/rig/tests.rs
++++ b/src-tauri/src/rig/tests.rs
+@@ -365,6 +365,50 @@ fn rig_persists_renders_into_assets_and_creates_an_animation() {
+         .query_row("SELECT COUNT(*) FROM animations", [], |row| row.get(0))
+         .expect("animation count");
+     assert_eq!(animation_rows, 1, "rendered rigs become animations");
++
++    // MCP dispatch already runs inside Tokio. Exercise the complete synchronous
++    // render entry point there, rather than bypassing it via rendered frames.
++    // The old nested block_on panicked for both runtime flavors.
++    let mut first_runtime_frames = None;
++    for multithreaded in [false, true] {
++        let mut builder = if multithreaded {
++            tokio::runtime::Builder::new_multi_thread()
++        } else {
++            tokio::runtime::Builder::new_current_thread()
++        };
++        let runtime = builder.enable_all().build().expect("runtime");
++        let input = RigInput {
++            id: None,
++            workspace_id: saved.workspace_id.clone(),
++            worktree_id: None,
++            asset_id: Some(asset.id.clone()),
++            name: format!("runtime regression {multithreaded}"),
++            // One animated bone is a valid object rig; biped validation needs
++            // separate torso and limb movement, tested by the hero MCP trial.
++            morphology: "object".into(),
++            fps: saved.fps,
++            looping: saved.looping,
++            points: saved.points.clone(),
++            bones: saved.bones.clone(),
++            frames: saved.frames.clone(),
++        };
++        let rendered = runtime
++            .block_on(async { super::render_rig_animation_blocking(input, &state) })
++            .expect("native render inside an active Tokio runtime");
++        assert_eq!(rendered.animation.frames.len(), 2);
++        let pngs: Vec<Vec<u8>> = rendered.frame_paths.iter().map(|relative| {
++            let path = root.join(relative);
++            let decoded = image::open(&path).expect("decodable rendered PNG");
++            assert_eq!((decoded.width(), decoded.height()), (16, 16));
++            std::fs::read(path).expect("rendered PNG bytes")
++        }).collect();
++        assert_ne!(pngs[0], pngs[1], "rendered poses must actually differ");
++        if let Some(expected) = &first_runtime_frames {
++            assert_eq!(&pngs, expected, "runtime flavor must not change pixels");
++        } else {
++            first_runtime_frames = Some(pngs);
++        }
++    }
+     drop(state);
+     std::fs::remove_dir_all(root).expect("temporary fixture should be removable");
+ }

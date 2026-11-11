@@ -1,5 +1,107 @@
 # Raport konfiguracji — 19.10.2026
 
+**11.11.2026 — wiatr niezależny od kamery.** Obie warstwy shadera
+próbkują rzut współrzędnych mapy, a ich dryf zależy od czasu. Wygląd
+pustynnego piasku zachowano. W lesie są smugi podmuchów i niesione listki,
+w Kalderze osobne drobiny popiołu. Tekstury dwóch krain dopracowano w Kricie
+na bazie wcześniejszych źródeł ComfyUI. Przeszło 30 kontroli renderera,
+w tym porównanie tych samych miejsc mapy przy nieruchomym czasie oraz
+przesunięciu kamery w obu osiach. Podgląd i raport są w
+`C:/AI2D/pipeline/runs/wind-world-20261111`.
+
+**11.11.2026 — wiatr w trzech krainach.** DreamShaper 8 w lokalnym ComfyUI
+i trzy warstwowe pliki Krity dostarczyły maski mgiełki, piasku i popiołu.
+Shader przesuwa dwie warstwy nad scenerią, ogranicza krycie przy bohaterze
+i kończy pracę przed rysowaniem HUD. Wczytuje trzy tekstury 640 × 320
+przy starcie. Przeszły 24 kontrole renderera bez dźwięku, w tym zmiana
+podmuchów w czasie, pokrycie alfa i zgodność pikseli bocznego HUD.
+Źródła KRA są w `C:/AI2D/sprites/region-wind-20261111`.
+Graf ComfyUI, raport i zrzuty są w `C:/AI2D/pipeline/runs/region-wind-20261111`.
+
+**11.11.2026 — dopracowanie wieży i dwóch przeciwników.** Źródło odnowy
+przesunięto od schodów, Miron stoi na środku pracowni, a podpisy NPC
+mają przejrzyste tło. Witraże obserwatorium osadzono w kamiennej ścianie
+z otwartym wyjściem na balkon. Rogacz Żaru jest większy o 45%. Zarodnik
+kniei ma widok od tyłu oraz poprawione kierunki chodu i ataku. Dwa
+źródła KRA i 92 klatki Synfig zapisano lokalnie pod nazwą
+`tower-finish-20261111`. Przeszło 49 kontroli obrazu, interakcji i kierunków,
+239 handlu oraz 479 129 logiki i animacji. Obie paczki Windows zweryfikowano
+po wypakowaniu. Testy grafiki i startu działały w ukrytym oknie bez dźwięku.
+Zrzuty i odbiór są w
+`C:/AI2D/pipeline/runs/tower-finish-20261111`.
+
+**11.11.2026 — trzy gatunki przeciwników.** Zarodnik kniei, Oko Wydm
+i Rogacz Żaru mają po cztery spotkania w swoich krainach, własne łupy
+i osobne efekty ataku, trafienia oraz upadku. Lokalny DreamShaper 8
+w ComfyUI i trzy projekty KRA dostarczyły wycinanki. Synfig wyrenderował
+15 klipów i 138 klatek do trzech atlasów z maskami kursora. ACE-Step 1.5
+Turbo w ComfyUI, nagrania Kenney CC0 i Audacity 3.7.9 dały 27 wariantów
+PCM16 stereo 48 kHz. Mastery zachowano w katalogach `C:/AI2D/sprites`,
+`C:/AI2D/animations` i `C:/AI2D/audio` pod nazwą `region-enemies-20261111`.
+Zapis v18 dodaje spotkania do odwiedzonych krain v1–v17, zachowując łupy.
+PASS: 479 129 kontroli rozgrywki, 19 034 zapisu, 100 renderera i 624
+miksera offline. Każda rozpakowana edycja Windows przeszła 180 ukrytych
+klatek bez urządzenia audio. Raporty i podglądy są w
+`C:/AI2D/pipeline/runs/region-enemies-20261111`.
+[Wagi ACE-Step 1.5](https://huggingface.co/Comfy-Org/ACE-Step-1.5)
+
+**11.11.2026 — wyposażenie Wieży Eldrina.** Odmalowano 25 grafik na pięciu
+piętrach, w tym schody, regały, kominek, kocioł, teleskop, witraże i stoisko
+Mirona. Lokalny ComfyUI z DreamShaper 8 dodał szczegóły materiałów. Akcenty
+rysowane w Kricie zapisano na osobnej warstwie. Zachowano obrysy,
+projekcję i maski wskazywania. Usunięto tabliczki pod schodami i stopkę
+sklepu. Przeszło 91 kontroli renderera, grafiki i interakcji w ukrytym
+oknie bez audio. W obu rozpakowanych edycjach zweryfikowano 312 zasobów
+i 180 klatek startowych w ukrytym oknie bez audio.
+Pliki KRA i grafy są w `C:/AI2D/sprites/emberfall-tower-20261111`,
+a metryki, skróty plików i zrzuty w `C:/AI2D/pipeline/runs/tower-paint-20261111`.
+
+**11.11.2026 — porządek w HUD i zgodność noszonego wyposażenia z ikonami.**
+Wprowadzono 17 zmian z listy użytkownika. Pasek PD jest ciemnozielony,
+a Atak i Pancerz są pod nim. Obrysy noszonego sprzętu odpowiadają używanym
+ikonom, w tym spiczaste tarcze, hełmy z nosalem i topory o łukowym ostrzu.
+Sprawdzono 85 przedmiotów w 2040 ujęciach, po osiem kierunków w postoju,
+chodzie i biegu. Przeszło 2170 kontroli HUD i renderera oraz 477 595 kontroli
+logiki i animacji. Każda paczka Windows przeszła 180 ukrytych klatek
+startowych bez otwierania urządzenia audio. Wyniki i zrzuty znajdują się w
+`C:/AI2D/pipeline/runs/hud-equipment-consistency-20261111`.
+
+**11.11.2026 — naprawiony natywny MCP Sprite Studio 0.3.3.** Usunięto
+zagnieżdżone `block_on`; handler renderuje w `spawn_blocking`. Zbudowano
+i zainstalowano lokalny plik release z kopią oryginału. 39 testów rigu,
+16 MCP oraz rzeczywiste 12 PNG / powtórny render / błąd FPS / eksport
+na zainstalowanym programie: PASS. [Naprawa i odbiór](SPRITE_MAKER_FIX.md).
+
+**11.11.2026 — kroki, zbieranie i Weź wszystko.** Sześć wariantów foley
+CC0 zmontowanych w lokalnym ComfyUI i rzeczywistym Audacity (AUP3, 48 kHz).
+Kroki zgodne z fazą stóp, atomowe zbieranie całego łupu i zachowane fragmenty
+fabularne. 477 595 kontroli logiki, 19 030 zapisu, 534 audio i 7 UI: PASS.
+Oba EXE i ZIP-y odświeżone; 287 zasobów i 180 ukrytych, bezgłośnych klatek
+startowych każdej rozpakowanej edycji: PASS (bez wniosku o FPS na pierwszym planie).
+[Źródła i odbiór](../audio/steps-loot-20261111/README.md).
+
+**11.11.2026 — próba Sprite Studio 0.3.3.** Natywny import, zapis rigu,
+analiza i eksport PNG działają. Render przez MCP ujawnił błąd zagnieżdżonego
+runtime Tokio; bez klatek z tego renderu i bez podmiany animacji gry.
+[Raport próby](SPRITE_MAKER_TRIAL.md).
+
+**11.11.2026 — bardziej pionowe trzymanie broni.** Boczne odchylenie
+ograniczone do 6 stopni dzięki chwytowi bliżej ciała i zgięciu łokcia.
+Omijanie rękawa zmienia pochylenie do przodu. Kontrola 32 broni i 476 734
+kontrole logiki/animacji: PASS. [Źródła i wyniki](../hero/WALK_QA.md).
+
+**10.11.2026 — broń omija ramiona podczas chodu.** Korekta chwytu,
+łokcia i orientacji ostrza/jelca dla mieczy, toporów i sztyletów; osobny
+chwyt łuku. Wszystkie 32 bronie, 1384 pozycje renderera i 442 174 kontrole
+logiki oraz animacji: PASS. Sprawdzono również przejścia do ataku i chowanie
+broni. [Źródła i wyniki](../hero/WALK_QA.md).
+
+**10.11.2026 — wymach ramion bohatera w chodzie.** Większy ruch obu
+ramion z zachowaniem długości kończyn, zapisany w natywnym Synfigu 1.4.5.
+60 klatek silnika Synfig, 120 klatek renderera w ośmiu kierunkach oraz
+338 477 kontroli logiki i animacji: PASS. Wykrywanie przenośnego Synfiga
+w skryptach działa bez instalatora. [Źródła i wyniki](../hero/WALK_QA.md).
+
 **10.11.2026 — cztery gatunki leśnego bestiariusza.** Osobne projekty FLUX
 i 13 warstw Krity, ciągłe mapowanie nowych materiałów i ruch z 444 klatek
 Synfig. PASS w 1189 kontrolach renderera i 345 804 kontrolach logiki.

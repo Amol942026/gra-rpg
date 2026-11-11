@@ -4,6 +4,7 @@
 namespace tower_furniture {
 using P=tower_stairs::P;
 constexpr int ObjectCount=13,AlchemyTable=13,Window=14,Orb=15,Crystal=16,Heart=17,Herb=18,Flame=21,MerchantSprite=22,SpriteCount=23;
+static_assert(SpriteCount==tower_paint::FirstStair);
 const Color Stone{151,160,163,255},Wood{129,83,51,255},Brass{193,151,81,255},Paper{232,216,176,255};
 Vector2 offset(P p){return {(p.x-p.y)*40,(p.x+p.y)*20-p.z};}
 struct Model: tower_stairs::Mesh {
@@ -197,7 +198,9 @@ void make(){
    Model m(s.ox,s.oy);switch(id){case 0:column(m);break;case 1:table(m,false);break;case 2:m.pedestal(69,.55f);break;case 3:fireplace(m);break;case 4:m.pedestal(33,.55f);m.frustum(0,0,.53f,.72f,33,51,Stone,false,16);m.ring(0,0,.73f,.58f,52,rgb(206,211,191));m.frustum(0,0,.58f,.58f,49,49.4f,rgb(46,117,141),true,24);break;case 5:shelf(m);break;case 6:lectern(m);break;case 7:cauldron(m);break;case 8:garden(m);break;case 9:rune(m);break;case 10:telescope(m);break;case 11:astrolabe(m);break;case 12:m.pedestal(62,.57f);m.ring(0,0,.46f,.43f,62.2f,Brass,28);break;case AlchemyTable:table(m,true);break;}
    shadow=std::move(m.shadowFaces);m.draw();
   }EndMode2D();EndTextureMode();groundShadows[id]=shadow_geometry::bake(shadow);SetTextureFilter(s.art.texture,TEXTURE_FILTER_BILINEAR);
-  Image source=LoadImageFromTexture(s.art.texture);ImageFlipVertical(&source);Color* pixels=LoadImageColors(source);s.mask.resize(s.w*s.h);int left=s.w,right=0,top=s.h,bottom=0;
+  Image source=LoadImageFromTexture(s.art.texture);ImageFlipVertical(&source);
+  tower_paint::apply(s.art.texture,source,id);
+  Color* pixels=LoadImageColors(source);s.mask.resize(s.w*s.h);int left=s.w,right=0,top=s.h,bottom=0;
   for(int y=0;y<s.h;y++)for(int x=0;x<s.w;x++){bool solid=pixels[y*s.w+x].a>=210;s.mask[y*s.w+x]=solid?255:0;if(solid){left=std::min(left,x);right=std::max(right,x);top=std::min(top,y);bottom=std::max(bottom,y);}}
   UnloadImageColors(pixels);UnloadImage(source);Image border=GenImageColor(s.w,s.h,BLANK);auto* out=static_cast<Color*>(border.data);
   for(int y=std::max(4,top-4);y<=std::min(s.h-5,bottom+4);y++)for(int x=std::max(4,left-4);x<=std::min(s.w-5,right+4);x++)if(!s.mask[y*s.w+x]){bool edge=false;for(int dy=-4;dy<=4&&!edge;dy++)for(int dx=-4;dx<=4;dx++)if(dx*dx+dy*dy<=16&&s.mask[(y+dy)*s.w+x+dx]){edge=true;break;}if(edge)out[y*s.w+x]=WHITE;}
