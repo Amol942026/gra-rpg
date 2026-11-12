@@ -32,7 +32,9 @@ public:
         "ice-cast","ice-impact","lightning-cast","lightning-impact","spell-learn",
         "sporekin-attack","sporekin-hit","sporekin-fall",
         "dune-eye-attack","dune-eye-hit","dune-eye-fall",
-        "cinderhorn-attack","cinderhorn-hit","cinderhorn-fall","spear-thrust","spear-impact"
+        "cinderhorn-attack","cinderhorn-hit","cinderhorn-fall","spear-thrust","spear-impact",
+        "spear-briar-thrust","spear-briar-impact","spear-oasis-thrust","spear-oasis-impact",
+        "spear-basalt-thrust","spear-basalt-impact","spear-dawn-thrust","spear-dawn-impact"
     };
     static constexpr int ScoreCount=4;
     inline static constexpr const char* ScoreNames[ScoreCount]={"echoes-of-the-ruins","desert","volcano","tower"};

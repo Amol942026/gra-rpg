@@ -14,9 +14,9 @@ void spearTests(){
  Game g=arena();enemy(g,1,{2.6f,0});enemy(g,2,{3.7f,0});enemy(g,3,{2.4f,1.2f});enemy(g,4,{-1.4f,0});
  check(g.attack({1,0})&&g.spearActive()&&!g.attack({1,0}),"spear starts one timed thrust and respects cooldown");
  check(cue(g,Cue::SpearThrust)==1&&cue(g,Cue::Swing)==0,"spear uses a dedicated thrust sound");
- advance(g,10);
+ advance(g,SpearImpactFrame-1);
  check(g.enemies[0].hp==150&&cue(g,Cue::SpearImpact)==0,"spear windup does not hit early");
- advance(g,3);
+ advance(g,1);
  check(g.enemies[0].hp<150&&g.enemies[1].hp==150&&g.enemies[2].hp==150&&g.enemies[3].hp==150,
        "thrust hits the first enemy in its narrow forward line, outside ordinary melee reach");
  float hp=g.enemies[0].hp;advance(g,24);
@@ -24,6 +24,9 @@ void spearTests(){
  g=arena();enemy(g,1,{2.6f,0});g.props.push_back({g.player+V{1.2f,0},3});
  check(g.attack({1,0}),"spear begins even when a prop obstructs the strike");advance(g,13);
  check(g.enemies[0].hp==150&&cue(g,Cue::SpearImpact)==1,"solid prop stops the thrust and has its own contact event");
+ g=arena();enemy(g,1,{2.6f,0});g.chests[0].location=g.location;g.chests[0].pos=g.player+V{1.2f,0};
+ check(g.attack({1,0}),"spear begins with a chest between the hero and enemy");advance(g,SpearImpactFrame);
+ check(g.enemies[0].hp==150&&cue(g,Cue::SpearImpact)==1,"chest stops the thrust before an enemy behind it");
  g=arena();enemy(g,1,{2.6f,1.25f});
  check(g.attack({1,0}),"spear can miss a target off the aim line");advance(g,13);
  check(g.enemies[0].hp==150&&cue(g,Cue::SpearImpact)==0,"a miss plays air movement without an impact");
@@ -33,9 +36,30 @@ void spearTests(){
  g=arena();enemy(g,1,{2.6f,0});check(g.attack({1,0})&&g.startRoll({0,-1}),"rolling cancels the spear windup");
  advance(g,14);check(cue(g,Cue::SpearImpact)==0,"roll does not trigger a delayed hit");
  constexpr int sources[]={6,7,8,16,18},chances[]={60,15,15,4,1};
+ constexpr Cue thrusts[]={Cue::SpearThrust,Cue::BriarSpearThrust,Cue::OasisSpearThrust,Cue::BasaltSpearThrust,Cue::DawnSpearThrust};
+ constexpr Cue impacts[]={Cue::SpearImpact,Cue::BriarSpearImpact,Cue::OasisSpearImpact,Cue::BasaltSpearImpact,Cue::DawnSpearImpact};
  for(int i=0;i<SpearCount;i++){
   Kind kind=Kind(FirstSpear+i);
   check(archetype(kind)==Kind::Spear&&gearSlot(kind)==0&&!stackable(kind)&&
         lootChance(sources[i],item(kind))==chances[i],"each spear is a single weapon with its own documented source");
+  g=arena();g.equipment[0]=item(kind);enemy(g,1,{2.6f,0});
+  check(g.attack({1,0})&&cue(g,thrusts[i])==1,"the equipped spear selects its own thrust bank");
+  advance(g,SpearImpactFrame);
+  check(g.enemies[0].hp<150&&cue(g,impacts[i])==1,"the equipped spear selects its own impact bank on contact");
  }
+ g=arena();g.equipment[0]=item(Kind::Dagger);
+ enemy(g,1,{1.5f,0});enemy(g,2,{1.5f,1});enemy(g,3,{-1.1f,0});
+ check(g.attack({1,0})&&!g.spearActive(),"dagger starts its own thrust");
+ advance(g,DaggerImpactFrame-1);
+ check(g.enemies[0].hp==150,"dagger windup does not damage the target");
+ advance(g,1);
+ check(g.enemies[0].hp<150&&g.enemies[1].hp==150&&g.enemies[2].hp==150,
+       "dagger thrust hits only the first enemy on the aim line");
+ g=arena();g.equipment[0]=item(Kind::Axe);
+ enemy(g,1,{1.55f,.4f});enemy(g,2,{1.5f,-.45f});
+ check(g.attack({1,0})&&!g.spearActive(),"axe starts its own windup");
+ advance(g,AxeImpactFrame-1);
+ check(g.enemies[0].hp==150&&g.enemies[1].hp==150,"axe winds up before damage");
+ advance(g,1);
+ check(g.enemies[0].hp<150&&g.enemies[1].hp<150,"axe impact preserves its area hit");
 }

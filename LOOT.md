@@ -321,6 +321,16 @@ nowych tabel po pokonaniu.
 | Hełm serca pustyni | hełm | pancerz +12 | Kamienna korona z rozżarzonym bursztynem. |
 | Łuk ostatniej jutrzenki | broń | atak +27 | Złociste ramiona rozświetla chłodny żar. |
 
+## Włócznie
+
+| Broń | Premia ataku | Rzadkość | Źródło | Szansa |
+|---|---:|---|---|---:|
+| Włócznia jesionowa | +13 | Pospolita | Leśny rozbójnik | 60% |
+| Włócznia cierni kniei | +18 | Rzadka | Ożywione drzewo | 15% |
+| Włócznia bursztynowej oazy | +21 | Rzadka | Skorpion bursztynowy | 15% |
+| Włócznia bazaltowego grotu | +25 | Bardzo rzadka | Obsydianowy wojownik | 4% |
+| Włócznia Ostatniego Świtu | +31 | Niezwykle rzadka | Varkhor, Serce Kaldery | 1% |
+
 ## Zgodność zapisów — rozszerzenie 27.10.2026
 
 Łącznie dostępnych jest 75 elementów wyposażenia. Stare identyfikatory przedmiotów i zapisy pozostają zgodne. Istniejące ciała zachowują swój wcześniej wylosowany łup; nowe przedmioty mogą wypaść z kolejnych zabitych bestii. Każdy gatunek zyskał trzy dodatkowe pozycje, bez zmiany procentów rzadkości ani gwarantowanych fragmentów fabularnych.

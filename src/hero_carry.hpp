@@ -40,11 +40,22 @@ inline void shield(hero_motion::Pose& pose){
            42.f+std::clamp((swing.z-37)*.45f,-3.f,4.f)};
  placeGrip(pose,true,pose.point(data::Pelvis,guard),pose.vector(data::Pelvis,{-.85f,-1,.1f}),pelvis);
 }
+inline hero_motion::Quat bladeOrientation(hero_motion::Vec axis,hero_motion::Vec across){
+ using namespace hero_motion;
+ const auto blade=sword_pose::idleBlade(0);
+ const Quat align=fromTo({blade.r,blade.f,blade.z},axis);
+ const Vec initial=rotate(align,{1,0,0});
+ const Vec cross{initial.y*across.z-initial.z*across.y,
+                 initial.z*across.x-initial.x*across.z,
+                 initial.x*across.y-initial.y*across.x};
+ const float sinRoll=axis.x*cross.x+axis.y*cross.y+axis.z*cross.z;
+ const float cosRoll=initial.x*across.x+initial.y*across.y+initial.z*across.z;
+ return mul(axisAngle(axis,std::atan2(sinRoll,cosRoll)*180/sword_pose::Pi),align);
+}
 inline void melee(hero_motion::Pose& pose,float weight=1){
  using namespace hero_motion;
  weight=std::clamp(weight,0.f,1.f);if(weight<=0)return;
  auto originalHand=pose.world[data::HandR],originalFore=pose.world[data::ForearmR],originalWeapon=pose.world[data::Weapon];
- auto v=sword_pose::idleBlade(0);
  constexpr float lateral=6*3.14159265358979323846f/180;
  Quat orientation=mul(pose.skin[data::Spine].q,axisAngle({0,1,0},6));
  grip(pose,false,24,orientation);
@@ -57,13 +68,8 @@ inline void melee(hero_motion::Pose& pose,float weight=1){
  float pitch=75.5297f*3.14159265358979323846f/180;
  if(up>0&&localFore.y<0)pitch=std::min(pitch,std::atan2(-localFore.y,up));
  Vec axis=pose.vector(data::Spine,{std::sin(lateral)*std::sin(pitch),std::cos(pitch),std::cos(lateral)*std::sin(pitch)});
- auto dot=[](Vec a,Vec b){return a.x*b.x+a.y*b.y+a.z*b.z;};
- auto cross=[](Vec a,Vec b){return Vec{a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x};};
- Vec guard=cross(fore,axis);guard=guard*(1/std::max(.00001f,length(guard)));
- orientation=fromTo({v.r/37,v.f/37,v.z/37},axis);
- Vec initial=rotate(orientation,{1,0,0});
- float roll=std::atan2(dot(axis,cross(initial,guard)),dot(initial,guard))*180/3.14159265358979323846f;
- orientation=mul(axisAngle(axis,roll),orientation);
+ const Vec guard{fore.y*axis.z-fore.z*axis.y,fore.z*axis.x-fore.x*axis.z,fore.x*axis.y-fore.y*axis.x};
+ orientation=bladeOrientation(axis,guard);
  Quat handRotation=mul(orientation,restRotation(data::HandR)),weaponRotation=mul(orientation,restRotation(data::Weapon));
  if(weight<1){
   // Fade the carrying correction at attack entry/recovery while solving

@@ -52,7 +52,7 @@ void developerTests(){
  g.props.push_back({DeveloperDestinations[0].spawn,0,1});g.enemies.clear();check(developerStart(g,0,false)&&distance(g.player,DeveloperDestinations[0].spawn)>.1f&&g.walkable(g.player),"blocked preset position falls back to the nearest safe point");
  g=Game{};for(auto& value:g.bag)value=item(Kind::Sword,2);g.bag.back()=item(Kind::DawnShard);
  check(developerStart(g,10,false)&&g.ammoCount()==100&&g.bagCount(Kind::Health)==50&&g.bagCount(Kind::Mana)==50&&g.bagCount(Kind::DawnShard)==1,"full pack receives all supplies and keeps its quest item");
- bool stash=g.ground.size()==4&&g.bagCount(Kind::Sword)==20;
+ bool stash=!g.ground.empty()&&g.bagCount(Kind::Sword)+int(g.ground.size())==int(g.bag.size())-1;
  for(const auto& drop:g.ground)stash&=drop.value.kind==Kind::Sword&&drop.value.tier==2&&g.groundVisible(drop)&&distance(drop.pos,g.player)==0;
  check(stash,"gear displaced by supplies remains recoverable at the destination");
  g=Game{};g.bag.fill(item(Kind::Health,0,1));

@@ -42,6 +42,8 @@ Przytrzymany Shift - bieg. Spacja - przeturlanie w kierunku ruchu.
 W biegu miecz jest w pochwie przy biodrze, tarcza na plecach, rece pracuja naprzemiennie.
 Animacje szkieletowe: plynny chod, bieg, ciecie i skulone przeturlanie.
 LPM z mieczem - jeden zamach na klikniecie; trafia wrogow w zasiegu.
+LPM z wlocznia - dwureczne pchniecie w strone kursora.
+Pchniecie siega dalej niz miecz i zatrzymuje sie na pierwszym celu lub przeszkodzie.
 Miecz: przygotowanie, ciecie przed bohaterem i powrot do pozycji.
 Ruch zachowuje dlugosc ostrza i ramienia; tulow i peleryna podazaja za ciosem.
 LPM z lukiem - przytrzymaj, by naciagac cieciwe, i pusc, by strzelic.

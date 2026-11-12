@@ -32,6 +32,22 @@ int main(int argc,char** argv){
    extra.game.enemies[0].alive=false;extra.game.enemies[0].hp=0;extra.game.enemies[0].loot[14]=item(kind);roundtrip(extra);
    check(saves::decode(saves::encode(extra)).game.bag[10].kind==kind,"every new item ID persists in bags, equipment and corpse loot");
   }
+  auto spear=s;
+  spear.game.props.clear();spear.game.player={20,20};spear.game.equipment[0]=item(Kind::DawnSpear);
+  spear.game.enemies.resize(1);auto& target=spear.game.enemies[0];
+  target.pos=target.home=spear.game.player+V{2.6f,0};target.hp=target.maxHp=150;target.windup=3;
+  check(spear.game.attack({1,0}),"save fixture starts a real spear thrust");
+  for(int i=0;i<SpearImpactFrame-1;i++)spear.game.update(1.f/60,{},false);
+  auto beforeContact=saves::decode(saves::encode(spear));
+  beforeContact.game.update(1.f/60,{},false);
+  check(beforeContact.game.enemies[0].hp<150&&
+        std::count_if(beforeContact.game.sounds.begin(),beforeContact.game.sounds.end(),
+            [](auto e){return e.cue==Cue::DawnSpearImpact;})==1,"loading before impact resolves the correct spear strike once");
+  auto afterContact=saves::decode(saves::encode(beforeContact));afterContact.game.sounds.clear();
+  for(int i=0;i<10;i++)afterContact.game.update(1.f/60,{},false);
+  check(afterContact.game.enemies[0].hp==beforeContact.game.enemies[0].hp&&
+        std::none_of(afterContact.game.sounds.begin(),afterContact.game.sounds.end(),
+            [](auto e){return e.cue==Cue::DawnSpearImpact;}),"loading in recovery does not repeat the spear hit");
   auto assignments=s;assignments.game.skillAssigned={false,true,false};
   check(saves::decode(saves::encode(assignments)).game.skillAssigned==assignments.game.skillAssigned,"skill slot choices persist in current saves");
   assignments.game.potionAssigned={Kind::Health,Kind::None};

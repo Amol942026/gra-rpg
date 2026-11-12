@@ -7,7 +7,7 @@ struct Weather {
  float speed,rise,opacity,slope,textureScale,bend;
 };
 inline constexpr std::array<Weather,3> weather={{
- {"forest",{214,232,206,255},.062f,.006f,.226f,.095f,1.f,.016f},
+ {"forest",{214,232,206,255},.096875f,.009375f,.226f,.095f,1.f,.016f},
  {"desert",{249,218,159,255},.123f,.016f,.207f,.16f,1.f,.037f},
  {"caldera",{212,208,205,255},.102f,.024f,.278f,.23f,1.62f,.008f},
 }};

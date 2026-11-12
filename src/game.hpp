@@ -1,6 +1,7 @@
 #pragma once
 #include "animation.hpp"
 #include "spear_timing.hpp"
+#include "weapon_attack_timing.hpp"
 #include "sound_events.hpp"
 #include "spell_definitions.hpp"
 #include "entity_info.hpp"
@@ -423,7 +424,7 @@ struct Game {
   else if(stackable(a->kind)&&a->kind==b->kind&&a->tier==b->tier){int n=std::min(a->count,99-b->count);if(n<=0)return false;b->count+=n;a->count-=n;if(a->count==0)*a={};}
   else std::swap(*a,*b);
   const bool weaponChanged=(to.place==Place::Equip&&to.index==0)||(from.place==Place::Equip&&from.index==0);
-  if(weaponChanged){cancelBow();cancelSpear();if(archetype(equipment[0].kind)==Kind::Spear)swing=0;}
+  if(weaponChanged){cancelBow();swing=0;swingStrong=false;}
   sound(weaponChanged?Cue::WeaponEquip:to.place==Place::Equip||from.place==Place::Equip?Cue::Equip:to.place==Place::Ground?Cue::Drop:Cue::Pickup,player);
   if(collectingShard)completeDawnFragmentPickup();
   else say(to.place==Place::Equip?"Ekwipunek założony. Statystyki zaktualizowane.":"Przedmiot przeniesiony.");return true;
@@ -472,7 +473,7 @@ struct Game {
   if(fragment)completeDawnFragmentPickup();else say("Zebrano cały łup do plecaka.");
   return true;
  }
- bool drop(Slot from,V p){Item* a=get(from);if(a&&a->kind==Kind::DawnShard){say("Serce Świtu jest zbyt cenne, by je porzucić.");return false;}if((from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest)||dead()||allocationRequired||storyBlocked()||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0){cancelBow();cancelSpear();}Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
+ bool drop(Slot from,V p){Item* a=get(from);if(a&&a->kind==Kind::DawnShard){say("Serce Świtu jest zbyt cenne, by je porzucić.");return false;}if((from.place==Place::Corpse||from.place==Place::Forage||from.place==Place::Chest)||dead()||allocationRequired||storyBlocked()||!a||a->empty()||!reachable(from)||distance(player,p)>2.5f||!walkable(p))return false;if(from.place==Place::Equip&&from.index==0){cancelBow();swing=0;swingStrong=false;}Item copy=*a;*a={};addGround(copy,p);sound(Cue::Drop,p);say("Przedmiot odłożony na ziemię.");return true;}
  bool use(Slot s){if(s.place==Place::Forage){say("Najpierw zbierz grzyb do plecaka.");return false;}Item* a=get(s);if(s.place==Place::Corpse||s.place==Place::Chest||dead()||allocationRequired||storyBlocked()||potionCd>0||!a||a->empty()||!reachable(s))return false;
   bool mushroom=a->kind==Kind::Mushroom;
   if(mushroom){if(hp>=maxHp()){say("Zdrowie jest już pełne.");return false;}float restored=std::min(float(MushroomHealing),float(maxHp())-hp);hp+=restored;effects.push_back({player,"+"+std::to_string(int(restored))+" HP",1.3f,1});}
@@ -526,12 +527,17 @@ struct Game {
  bool attack(V aim={}){
   if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)==Kind::Bow)return false;
   aimMelee(aim);
-  if(archetype(equipment[0].kind)==Kind::Spear)return startSpear();
+  const Kind weapon=archetype(equipment[0].kind);
+  if(weapon==Kind::Spear)return startSpear();
+  if(weapon==Kind::Axe||weapon==Kind::Dagger)return startAxeOrDagger(weapon);
   animation.swordStow=0;attackCd=.46f;meleeDuration=SwingDuration;swingStrong=false;swing=SwingDuration;sound(Cue::Swing,player);
+  hitMeleeArea();
+  return true;
+ }
+ void hitMeleeArea(){
   // Capture once: a kill can level up the player during this same swing.
   const float amount=float(damage());const bool critical=rollCritical();
   for(auto&e:enemies)if(e.alive&&distance(player,e.pos)<=MeleeRange+.00001f)hit(e,amount,DamageType::Physical,critical);
-  return true;
  }
  bool spell(V aim={}){
   if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||spellCd>0||bowDrawing)return false;
@@ -540,7 +546,7 @@ struct Game {
   if(mana<definition.mana){say(std::string(definition.name)+" — potrzebujesz "+std::to_string(int(definition.mana))+" many.");sound(Cue::Reject,player);return false;}
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
   V direction=normalized(length(aim)>.001f?aim:directions[int(animation.direction)]);
-  cancelSpear();mana-=definition.mana;spellCd=spellCooldownTotal=definition.cooldown;facing=direction;animation.face(direction.x,direction.y);
+  cancelTimedWeaponAttack();mana-=definition.mana;spellCd=spellCooldownTotal=definition.cooldown;facing=direction;animation.face(direction.x,direction.y);
   fireballs.push_back({player,direction*definition.speed,definition.range,float(spellDamage(selectedSpell)),rollCritical(),selectedSpell});
   sound(selectedSpell==Spell::IceShard?Cue::IceCast:selectedSpell==Spell::LightningOrb?Cue::LightningCast:Cue::FireballCast,player);return true;
  }
@@ -688,7 +694,8 @@ struct Game {
    if(manaRegenTime+.00001f>=ManaRegenInterval){mana=std::min(float(maxMana()),mana+1);manaRegenTime=std::max(0.f,manaRegenTime-ManaRegenInterval);}
   }else manaRegenTime=0;
   if(inTower())return; // The forest remains intact but does not simulate in the tower.
-  updateSpear(previousSwing);if(allocationRequired)return;
+  if(!wasRolling&&!wasKnockedBack)updateTimedWeaponAttack(previousSwing);
+  if(allocationRequired)return;
   if(attackPressed&&!wasRolling&&!wasKnockedBack)attack();
   if(allocationRequired)return;
   updateArrows(dt);if(allocationRequired)return;

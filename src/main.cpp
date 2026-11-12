@@ -472,7 +472,9 @@ void drawUI(){
   if(cd>0)rect(r.x+1,r.y+1,r.width-2,(r.height-2)*std::clamp(cd,0.f,1.f),Fade(Ink,.65f));
   const char* keys[]={"LPM","C","1","2","SPACJA"};center(keys[i],r.x+32,r.y+48,9,Gold);
  }
- const char* labels[]={archetype(game.equipment[0].kind)==Kind::Spear?"PCHNIĘCIE":"ATAK","CZAR · K","ZDROWIE","MANA","UNIK"};for(int i=0;i<5;i++){Rectangle button=actionRect(i);center(labels[i],button.x+button.width/2,870,14,Muted);}
+ const Kind actionWeapon=archetype(game.equipment[0].kind);
+ const char* attackLabel=actionWeapon==Kind::Spear||actionWeapon==Kind::Dagger?"PCHNIĘCIE":"ATAK";
+ const char* labels[]={attackLabel,"CZAR · K","ZDROWIE","MANA","UNIK"};for(int i=0;i<5;i++){Rectangle button=actionRect(i);center(labels[i],button.x+button.width/2,870,14,Muted);}
  rect(WorldW,0,W-WorldW,H,Panel);line(WorldW,0,WorldW,H,Gold);rect(WorldW+1,0,4,H,rgb(32,42,41));
  panel(skillsButton(),inside(skillsButton())?Card:Panel);center("UMIEJĘTNOŚCI",1153,23,13,Gold);panel(statsButton(),inside(statsButton())?Card:Panel);center("STATYSTYKI",1322,23,13,Gold);line(1080,50,1400,50,Line);
  panel({1080,68,63,68},rgb(37,54,51));clip(1081,69,61,66);hero_portrait::draw();EndScissorMode();
@@ -535,7 +537,7 @@ ItemTooltipText itemTooltipText(Item value,Slot source){
  else if(material(value.kind))text.stat=materialDescription(value.kind);
  else text.stat="Skarb znaleziony w ruinach";
  if(shape==Kind::Bow)text.stat+=" · zasięg zależy od naciągu";
- if(shape==Kind::Spear)text.stat+=" · pchnięcie w linii";
+ if(shape==Kind::Spear||shape==Kind::Dagger)text.stat+=" · pchnięcie w linii";
  text.description=gearDescription(value.kind);
  text.value="Wartość: "+std::to_string(itemSellValue(value))+" złota";
  if(value.count>1)text.value+=" / szt. · stos: "+std::to_string(itemStackValue(value))+" złota";

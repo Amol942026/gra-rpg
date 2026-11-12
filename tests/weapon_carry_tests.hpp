@@ -2,6 +2,7 @@
 #include "../src/items.hpp"
 #include "../src/equipment_shapes.hpp"
 #include "../src/hero_carry.hpp"
+#include "../src/hero_weapon_motion.hpp"
 #include "../src/spear_motion.hpp"
 #include "sword_stow_clearance.hpp"
 namespace carry_checks {
@@ -64,10 +65,10 @@ inline Clearance measure(const Pose& pose,Kind kind){
    outline(equipment_shape::Axe,hand+v*.45f,across*(length(v)*.30f),v*.30f,1.2f);
   }else{
    bool dagger=shape==Kind::Dagger;
-   Vec guard=hand+v*.1f,cross=across*7;
+   Vec guard=hand+v*.1f,cross=across*(dagger?5.f:7.f);
    Vec left=guard-cross*.5f-v*.04f,right=guard+cross*.5f-v*.04f;
    segment(guard-cross,left,.85f);segment(left,right,.85f);segment(right,guard+cross,.85f);
-   Vec base=hand+v*(dagger?-.12f:.10f),vertical=(hand+v-base)*(1/(dagger?1.9f:2.55f));
+   Vec base=guard,vertical=(hand+v-base)*(1/(dagger?1.9f:2.55f));
    Vec origin=base+vertical*.65f,width=across*length(vertical);
    if(dagger)outline(equipment_shape::Dagger,origin,width,vertical,.7f);
    else outline(equipment_shape::Sword,origin,width,vertical,.7f);
@@ -80,7 +81,7 @@ inline Pose equipped(float phase,float motion,float run,Kind kind){
  auto pose=evaluate(phase,motion,run,0);
  if(archetype(kind)==Kind::Sword)hero_sheath::apply(pose,0);
  else if(archetype(kind)==Kind::Bow)hero_carry::bow(pose);
- else hero_carry::melee(pose);
+ else hero_weapon_motion::carry(pose,archetype(kind));
  return pose;
 }
 }
@@ -115,6 +116,9 @@ inline void weaponCarryTests(){
    axis=rotate(conjugate(pose.skin[data::Spine].q),axis);
    check(axis.z>0&&std::abs(std::atan2(axis.x,axis.z))*180/3.14159265358979323846f<6.1f,
          "held weapons remain upright without excessive lateral flare at any gait phase");
+   if(archetype(Kind(k))==Kind::Axe)
+    check(carry_checks::dot(pose.vector(data::Weapon,{-1,0,0}),pose.vector(data::Spine,{0,1,0}))>.9f,
+          "axe cutting edge faces forward in every carry pose");
    for(int side=0;side<2;side++){
     int upper=side?data::UpperArmR:data::UpperArmL,fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;
     check(std::abs(length(pose.world[fore].p-pose.world[upper].p)-13)<.003f&&std::abs(length(pose.world[hand].p-pose.world[fore].p)-13)<.003f,"weapon carrying preserves both anatomical arm lengths");
@@ -122,13 +126,43 @@ inline void weaponCarryTests(){
   }
  }
  check(weapons==47,"clearance covers the complete current weapon catalogue");
- for(int frame=0;frame<=SpearFrames;frame++)for(float stride:{-1.f,0.f,1.f}){
+ for(Kind kind:{Kind::Axe,Kind::Dagger}){
+  const bool axe=kind==Kind::Axe;
+  const int frames=axe?AxeAttackFrames:DaggerAttackFrames;
+  const int impact=axe?AxeImpactFrame:DaggerImpactFrame;
+  const auto shaft=sword_pose::idleBlade(0);
+  for(float motion:{0.f,1.f})for(float gait:{0.f,.25f,.5f,.75f}){
+   auto carried=carry_checks::equipped(gait,motion,0,kind);
+   for(int frame=0;frame<=frames*2;frame++){
+    auto pose=evaluate(gait,motion,0,0);
+    hero_weapon_motion::apply(pose,kind,frame/float(frames*2));
+    const auto wrist=pose.world[data::HandR].p,elbow=pose.world[data::ForearmR].p;
+    const auto clearance=carry_checks::measure(pose,kind);
+    check(clearance.arms>=1&&clearance.body>=1,"axe and dagger attack clear the arm and body");
+    check(std::abs(length(elbow-pose.world[data::UpperArmR].p)-13)<.003f&&std::abs(length(wrist-elbow)-13)<.003f,
+          "axe and dagger attack preserve both arm segments");
+    if(frame==0||frame==frames*2)
+     check(length(wrist-carried.world[data::HandR].p)<.001f&&
+           length(elbow-carried.world[data::ForearmR].p)<.001f,"attack joins the same carrying pose at both ends");
+    if(frame==impact*2)
+     check(pose.vector(data::Weapon,{shaft.r,shaft.f,shaft.z}).y>33&&wrist.y>18,
+           "the blade reaches forward at the real impact frame");
+    if(axe&&frame==16)
+     check(pose.vector(data::Weapon,{shaft.r,shaft.f,shaft.z}).y<-10,
+           "axe winds up behind the hero before the forward chop");
+   }
+  }
+ }
+ for(int id=FirstSpear;id<ItemKindCount;id++)for(int frame=0;frame<=SpearFrames;frame++)for(float stride:{-1.f,0.f,1.f}){
   auto pose=evaluate(.25f,1,0,0);
-  spear_motion::apply(pose,frame/float(SpearFrames),1,stride);
+  const float slide=spear_motion::apply(pose,Kind(id),frame/float(SpearFrames),1,stride);
   const Vec rear=pose.world[data::HandR].p,front=pose.world[data::HandL].p;
   check(length(front-rear)>8&&length(front-rear)<14,"both hands hold the same spear shaft through the thrust");
-  if(frame==SpearImpactFrame)
-   check(front.y-rear.y>9&&std::abs(front.z-rear.z)<5,"spear points forward at the impact key");
+  if(frame==SpearImpactFrame){
+   const auto axis=(front-rear)*(1/length(front-rear));
+   check(front.y-rear.y>9&&std::abs(front.z-rear.z)<5&&rear.y+axis.y*(42.4f+slide)>62,
+         "spear tip projects well ahead of the hero at contact");
+  }
   for(int side=0;side<2;side++){
    int upper=side?data::UpperArmR:data::UpperArmL,fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;
    check(std::abs(length(pose.world[fore].p-pose.world[upper].p)-13)<.003f&&

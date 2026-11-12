@@ -1,5 +1,22 @@
 # Raport konfiguracji — 19.10.2026
 
+**12.11.2026 — pięć włóczni.** Zachowano dostarczone ikony, materiały i
+źródła łupu. Pięć projektów Synfig daje osobne przygotowanie i powrót
+do gardy, ze wspólną klatką kontaktu. Dla czterech odmian Csound
+wyrenderował 24 nowe pliki WAV PCM16 48 kHz stereo. Gra wybiera
+osobny bank ruchu i kontaktu dla każdego modelu. Pchnięcie zatrzymuje
+się na pierwszym celu lub przeszkodzie, w tym na skrzyni. Zapis v18
+zachowuje stan pchnięcia przed kontaktem i podczas powrotu do gardy.
+
+Źródła w `C:/AI2D/animations/emberfall-spear-finish-20261112` i
+`C:/AI2D/audio/emberfall-spear-finish-20261112` można odtworzyć przez
+`tools/media/spear_synfig.py` i `tools/media/spear_audio.py`.
+Opcja `--export-only` przenosi zmienione klucze Synfig do gry.
+150 klatek Synfig, 524 756 kontroli rozgrywki, 20 087 zapisu, 532
+grafiki i 724 miksera offline. Czas ukrytego renderu i eksportu
+PNG w teście gry wyniósł 6,06 s. Wyniki i podgląd są w
+`C:/AI2D/pipeline/runs/emberfall-spear-finish-20261112`.
+
 **11.11.2026 — wiatr niezależny od kamery.** Obie warstwy shadera
 próbkują rzut współrzędnych mapy, a ich dryf zależy od czasu. Wygląd
 pustynnego piasku zachowano. W lesie są smugi podmuchów i niesione listki,

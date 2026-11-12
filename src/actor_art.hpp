@@ -4,6 +4,7 @@
 #include "hero_motion.hpp"
 #include "hero_sheath.hpp"
 #include "spear_motion.hpp"
+#include "hero_weapon_motion.hpp"
 #include "hero_knockdown.hpp"
 #include "shadow_geometry.hpp"
 #include "volcano_actors.hpp"
@@ -643,18 +644,17 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
         return false;
     }
     if(probe)return rig.contains(*probe);
-    float trail=striking?sword_pose::trailStrength(strikeProgress,empowered):0;
+    float trail=striking&&weapon==Kind::Sword?sword_pose::trailStrength(strikeProgress,empowered):0;
     if(trail>0){
         // One short ribbon follows the exact physical edge during the cut.
         // Windup and recovery do not draw another apparent hit.
         float finish=std::min(strikeProgress,sword_pose::cutEnd(empowered));
         float start=std::max(sword_pose::cutStart(empowered),finish-(empowered?.16f:.13f));
-        float bladeScale=weapon==Kind::Dagger?.65f:1.f;
         for(int i=0;i<10;i++){
             float a=start+(finish-start)*i/10,b=start+(finish-start)*(i+1)/10;
             auto first=forwardStrike(a,lift,empowered),second=forwardStrike(b,lift,empowered);
-            Vector2 innerA=rig.project(first.hand+first.blade*(.68f*bladeScale)),outerA=rig.project(first.hand+first.blade*bladeScale);
-            Vector2 innerB=rig.project(second.hand+second.blade*(.68f*bladeScale)),outerB=rig.project(second.hand+second.blade*bladeScale);
+            Vector2 innerA=rig.project(first.hand+first.blade*.68f),outerA=rig.project(first.hand+first.blade);
+            Vector2 innerB=rig.project(second.hand+second.blade*.68f),outerB=rig.project(second.hand+second.blade);
             float opacity=trail*(.025f+i*.023f)*(empowered?1.2f:1.f);
             poly({innerA,outerA,outerB,innerB},Fade(empowered?rgb(255,155,65):Gold,opacity));
             DrawLineEx(outerA,outerB,(empowered?2.4f:1.f)*size,Fade(Text,opacity));

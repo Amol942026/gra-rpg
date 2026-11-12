@@ -13,7 +13,9 @@ enum class Cue {
     IceCast, IceImpact, LightningCast, LightningImpact, SpellLearn,
     SporekinAttack, SporekinHit, SporekinFall,
     DuneEyeAttack, DuneEyeHit, DuneEyeFall,
-    CinderhornAttack, CinderhornHit, CinderhornFall, SpearThrust, SpearImpact, Count
+    CinderhornAttack, CinderhornHit, CinderhornFall, SpearThrust, SpearImpact,
+    BriarSpearThrust, BriarSpearImpact, OasisSpearThrust, OasisSpearImpact,
+    BasaltSpearThrust, BasaltSpearImpact, DawnSpearThrust, DawnSpearImpact, Count
 };
 // Preserve the original cue numbers in older saves; new entries are appended.
 inline Cue regionalEnemyCue(int type,int offset){

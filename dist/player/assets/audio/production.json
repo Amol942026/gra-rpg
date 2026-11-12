@@ -2,7 +2,7 @@
   "id": "emberfall-eldrin-elements-20261109",
   "sample_rate": 48000,
   "channels": 2,
-  "sfx_cues": 59,
+  "sfx_cues": 69,
   "variants_per_cue": 3,
   "music_tracks": 4,
   "recorded_combat_cues": 28,
@@ -825,6 +825,196 @@
     "cues": 9,
     "variants": 27,
     "pipeline": "Local ACE-Step 1.5 Turbo in ComfyUI, Kenney CC0 foley, Audacity 3.7.9 mastering",
+    "audio_played": false
+  },
+  "spears_20261112": {
+    "existing_ash_bank": [
+      {
+        "file": "spear-impact-v2.wav",
+        "sha256": "bfd827325e58248934193da6805f83388442de437fb1b2e891fba4231e4bc063",
+        "bytes": 40364
+      },
+      {
+        "file": "spear-impact-v3.wav",
+        "sha256": "6a289537a1e2702910e71e6c946c9932897faf6c1761eb114e535974a81765b0",
+        "bytes": 40364
+      },
+      {
+        "file": "spear-impact.wav",
+        "sha256": "3da05c18099c5a0766a8229e637e0fe9313789aa8c7191cbbbdccf1377ba11b0",
+        "bytes": 40364
+      },
+      {
+        "file": "spear-thrust-v2.wav",
+        "sha256": "8ea47964c0c0e554763c7c85939c4fc75b7b5333a539fced17a45707bbc590f7",
+        "bytes": 59564
+      },
+      {
+        "file": "spear-thrust-v3.wav",
+        "sha256": "df3d512809d281f21c91ce69e9289ffb5c89b68a90379402554d0e846d0db4c3",
+        "bytes": 59564
+      },
+      {
+        "file": "spear-thrust.wav",
+        "sha256": "709acd81a9ccd7e028cc04786f03bf988295c5449f4796c8152a99ee11ab139d",
+        "bytes": 59564
+      }
+    ],
+    "master_root": "C:/AI2D/audio/emberfall-spear-finish-20261112",
+    "production": "Original Csound synthesis without external audio samples",
+    "new_banks": [
+      "briar",
+      "oasis",
+      "basalt",
+      "dawn"
+    ],
+    "new_variants": 24,
+    "files": [
+      {
+        "file": "spear-briar-thrust.wav",
+        "frames": 12000,
+        "sha256": "c7bd8640f2670b23b6e9f194701b96c689d8b729026dc6cd3af10cfe4e9c3d28",
+        "bytes": 48044
+      },
+      {
+        "file": "spear-briar-thrust-v2.wav",
+        "frames": 12000,
+        "sha256": "d0b0b0f3dc4e115245effc03ad428e7ef895b841993b8b026d62b1ad5b26d53c",
+        "bytes": 48044
+      },
+      {
+        "file": "spear-briar-thrust-v3.wav",
+        "frames": 12000,
+        "sha256": "94f7efff0366696c947c6b39a42dbb78334d318c9f1f83c2e60a37384223b021",
+        "bytes": 48044
+      },
+      {
+        "file": "spear-briar-impact.wav",
+        "frames": 9120,
+        "sha256": "a1bd1a5972a901206d76433937f4c759e23745812e4565bc6b4d52c07d143aae",
+        "bytes": 36524
+      },
+      {
+        "file": "spear-briar-impact-v2.wav",
+        "frames": 9120,
+        "sha256": "5768b5b00700b2a6de34ca58192db9cc0309c78accdeefd423b070665677aee6",
+        "bytes": 36524
+      },
+      {
+        "file": "spear-briar-impact-v3.wav",
+        "frames": 9120,
+        "sha256": "2117db1dcbe555a987a271ccef5c9c1f854e5f2dd4357425280d12ea7b415fe5",
+        "bytes": 36524
+      },
+      {
+        "file": "spear-oasis-thrust.wav",
+        "frames": 14400,
+        "sha256": "0ad1bd87c4b0fbe877189f3ff799e07485892840d44db96dc5caf6757e9d6aa7",
+        "bytes": 57644
+      },
+      {
+        "file": "spear-oasis-thrust-v2.wav",
+        "frames": 14400,
+        "sha256": "3d653e8b5fb62679f23b64910fb479b5908e254be11ddec240ffb8d521521531",
+        "bytes": 57644
+      },
+      {
+        "file": "spear-oasis-thrust-v3.wav",
+        "frames": 14400,
+        "sha256": "a2e0d3f6526bde22721a728014134904585884cf3357cbf1feafcc9880bbac9b",
+        "bytes": 57644
+      },
+      {
+        "file": "spear-oasis-impact.wav",
+        "frames": 11040,
+        "sha256": "5bc9d680430d5efd823b544f819d832d257fcf026e1ad7bc74fa373b60c530ba",
+        "bytes": 44204
+      },
+      {
+        "file": "spear-oasis-impact-v2.wav",
+        "frames": 11040,
+        "sha256": "4cc04018589a98708fff12d04edf257b2431be9bd18a5126ddec659510327ef9",
+        "bytes": 44204
+      },
+      {
+        "file": "spear-oasis-impact-v3.wav",
+        "frames": 11040,
+        "sha256": "2c142f71644e764f9febe5611d411e67f993f7d07740f5edba89c50dd51247f5",
+        "bytes": 44204
+      },
+      {
+        "file": "spear-basalt-thrust.wav",
+        "frames": 16320,
+        "sha256": "eb1a0f51fe314042c1384a35af7d3c879b37cce1e930485478112a02c2d49c88",
+        "bytes": 65324
+      },
+      {
+        "file": "spear-basalt-thrust-v2.wav",
+        "frames": 16320,
+        "sha256": "116210adb4107ebf4b6f67dc3b714aaa45fb77f8227ceca107abe1288f9e0956",
+        "bytes": 65324
+      },
+      {
+        "file": "spear-basalt-thrust-v3.wav",
+        "frames": 16320,
+        "sha256": "a2d0ff5115220e8c5ec917dbe67d99b5b7a6ab93183f7fd1fa9eacec66d58f8f",
+        "bytes": 65324
+      },
+      {
+        "file": "spear-basalt-impact.wav",
+        "frames": 12000,
+        "sha256": "fbfd5494598fd8f73a48c88825ab3ab57c75d32da30a074ca109f29a322eb6d5",
+        "bytes": 48044
+      },
+      {
+        "file": "spear-basalt-impact-v2.wav",
+        "frames": 12000,
+        "sha256": "0833bd35aa777bd4455781989cfd7b731c27159e7a4cfb59e3fc2cb433278bc4",
+        "bytes": 48044
+      },
+      {
+        "file": "spear-basalt-impact-v3.wav",
+        "frames": 12000,
+        "sha256": "a82cc344dd380c6d51a1aaaf09260d33d224aa15b46dd5aab5aeaecdc539512c",
+        "bytes": 48044
+      },
+      {
+        "file": "spear-dawn-thrust.wav",
+        "frames": 14880,
+        "sha256": "7bd5b46fb91bd3b9f9207e3fa0ebc1b4d12a5197ed1c6fc3312cf42e6d2fd508",
+        "bytes": 59564
+      },
+      {
+        "file": "spear-dawn-thrust-v2.wav",
+        "frames": 14880,
+        "sha256": "a26b6df7b960c4af478c4b35933d453bbbdf9fd2f6ab49d815ecf8d7a18a45dd",
+        "bytes": 59564
+      },
+      {
+        "file": "spear-dawn-thrust-v3.wav",
+        "frames": 14880,
+        "sha256": "7f9611b89d5a0057b4c94ebb28e1859e0b9f6a22521ebc20c7e6bc8128fea406",
+        "bytes": 59564
+      },
+      {
+        "file": "spear-dawn-impact.wav",
+        "frames": 13440,
+        "sha256": "a3138f31e8ea93fbbed76ff290df012c779af8c822c45feb53c15324fb0eeaa9",
+        "bytes": 53804
+      },
+      {
+        "file": "spear-dawn-impact-v2.wav",
+        "frames": 13440,
+        "sha256": "39bb26f3bdce6a7dc6da2a4d8205bf37851c67438ed8005d33e1e8f62ab44757",
+        "bytes": 53804
+      },
+      {
+        "file": "spear-dawn-impact-v3.wav",
+        "frames": 13440,
+        "sha256": "ef43b95e32c191b8f991c7c642907463822e244a45af6d7ac8eb722fa460bff3",
+        "bytes": 53804
+      }
+    ],
     "audio_played": false
   }
 }

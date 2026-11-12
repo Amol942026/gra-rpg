@@ -67,15 +67,20 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     const Color leather=paint(0x744b38),pants=paint(0x5d5746);
     bool archer=weapon==Kind::Bow;float drawCharge=std::max(0.f,bowDraw);
     const bool spearing=weapon==Kind::Spear;
+    const bool axeOrDagger=weapon==Kind::Axe||weapon==Kind::Dagger;
+    const bool swordStrike=striking&&weapon==Kind::Sword;
     float stowPhase=weapon==Kind::Sword&&!striking?(rolling?1.f:state.motionInitialized?state.swordStow:std::clamp(run,0.f,1.f)):0;
     float moving=state.motionInitialized?state.moveBlend:(state.moving?1.f:0.f);
-    auto pose=hero_motion::evaluate(state.phase,moving,bowDraw>=0?0:state.runBlend,state.idleTime,striking&&!spearing?strikeProgress:-1,empowered,rollProgress);
-    if(!striking&&!rolling){
+    auto pose=hero_motion::evaluate(state.phase,moving,bowDraw>=0?0:state.runBlend,state.idleTime,swordStrike?strikeProgress:-1,empowered,rollProgress);
+    if(!rolling){
         if(archer&&bowDraw<0)hero_carry::bow(pose);
-        else if(weapon==Kind::Axe||weapon==Kind::Dagger)hero_carry::melee(pose);
+        if(axeOrDagger){
+            if(striking)hero_weapon_motion::apply(pose,weapon,strikeProgress);
+            else hero_weapon_motion::carry(pose,weapon);
+        }
     }
-    if(striking&&!spearing)hero_carry::melee(pose,1-hero_motion::ease(strikeProgress/.12f)*hero_motion::ease((1-strikeProgress)/.20f));
-    if(spearing)spear_motion::apply(pose,striking?strikeProgress:-1,moving,stride);
+    if(swordStrike)hero_carry::melee(pose,1-hero_motion::ease(strikeProgress/.12f)*hero_motion::ease((1-strikeProgress)/.20f));
+    const float spearSlide=spearing?spear_motion::apply(pose,held.value.kind,striking?strikeProgress:-1,moving,stride):0;
     auto stow=weapon==Kind::Sword&&!striking?hero_sheath::apply(pose,stowPhase):sword_stow::sample(0);
     if(knockdown>=0){
         pose=hero_knockdown::evaluate(pose,knockdown,{fallR,fallF,0});
@@ -104,7 +109,7 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     auto rest=[](int bone){auto p=hero_motion::restHead(bone);return P3{p.x,p.y,p.z};};
     auto world=[](hero_motion::Vec p){return P3{p.x,p.y,p.z};};
     lift=0;stride*=moving;
-    auto clothMotion=hero_secondary::evaluate(state.phase,moving,state.runBlend,state.idleTime,striking?strikeProgress:-1,empowered,rollProgress);
+    auto clothMotion=hero_secondary::evaluate(state.phase,moving,state.runBlend,state.idleTime,swordStrike?strikeProgress:-1,empowered,rollProgress);
     rig.setSkeleton(&pose);rig.setBone(-2);
     // Krita-painted panels conform to the existing joints. Item-specific
     // silhouettes, inlays and materials remain independent of this paint.
@@ -344,7 +349,7 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         if(side>0&&spearing){
             rig.setBone(-1);
             hero_weapon_art::spear(rig,world(pose.world[hero_motion::data::HandR].p),
-                 world(pose.world[hero_motion::data::HandL].p),weaponFinish,held.value.kind);
+                 world(pose.world[hero_motion::data::HandL].p),spearSlide,weaponFinish,held.value.kind);
         }else if(side>0&&held.present()&&!archer){
             rig.setBone(hero_motion::data::Weapon);
             hero_weapon_art::melee(rig,hand,held.value.kind,exposedBlade,weaponFinish);

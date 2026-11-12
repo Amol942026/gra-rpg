@@ -106,18 +106,19 @@ inline constexpr auto SpearLeafFaces=equipment_shape::triangulate(SpearLeaf);
 inline constexpr auto SpearWingFaces=equipment_shape::triangulate(SpearWing);
 static_assert(SpearLeafFaces.count==4&&SpearWingFaces.count==5);
 
-inline void spear(Rig& rig,P3 rear,P3 front,const Finish& finish,Kind kind){
+inline void spear(Rig& rig,P3 rear,P3 front,float slide,const Finish& finish,Kind kind){
     P3 axis=front-rear;
     axis=axis*(1/std::max(.001f,std::hypot(std::hypot(axis.r,axis.f),axis.z)));
     const float flat=std::hypot(axis.r,axis.f);
     const P3 across=flat>.001f?P3{axis.f/flat,-axis.r/flat,0}:P3{1,0,0};
     const P3 normal=cross(across,axis);
-    const P3 heel=rear-axis*21.f,socket=rear+axis*31.5f;
+    const P3 shaft=rear+axis*slide;
+    const P3 heel=shaft-axis*21.f,socket=shaft+axis*31.5f;
     strip(rig,heel,socket,across,normal*.80f,1.11f,1.22f,0,1,finish.grip,finish.texture(hero_paint::Wood));
-    strip(rig,rear-axis*3.5f,front+axis*3.3f,across,normal*.83f,1.35f,1.35f,
+    strip(rig,shaft-axis*3.5f,shaft+axis*16.7f,across,normal*.83f,1.35f,1.35f,
           0,1,shade(finish.grip,.83f),finish.texture(hero_paint::Binding));
     for(float at:{-20.f,-6.f,17.8f,29.8f,31.8f}){
-        const P3 band=rear+axis*at;
+        const P3 band=shaft+axis*at;
         strip(rig,band-axis*.7f,band+axis*.7f,across,normal*.82f,1.48f,1.48f,0,1,finish.trim,-1);
     }
     const int cell=hero_paint::SpearFirstCell+int(kind)-FirstSpear;
@@ -207,7 +208,7 @@ inline void melee(Rig& rig,P3 hand,Kind kind,float visible,const Finish& finish)
         return;
     }
     if(visible>.115f){
-        const P3 base=dagger?hand-blade*.12f:guard;
+        const P3 base=guard;
         const P3 v=(tip-base)*(1/(dagger?1.9f:2.55f));
         const P3 origin=base+v*.65f;
         const float width=std::hypot(std::hypot(v.r,v.f),v.z);
