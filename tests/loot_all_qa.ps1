@@ -1,7 +1,8 @@
-param([Parameter(Mandatory)][switch]$NoAudio,[string]$OutputRoot=('C:/AI2D/pipeline/runs/loot-all-'+[DateTime]::Now.ToString('yyyyMMdd-HHmmss')))
+param([Parameter(Mandatory)][switch]$NoAudio,[string]$OutputRoot)
 $ErrorActionPreference='Stop'
 if(!$NoAudio){throw 'Silent QA requires -NoAudio'}
 $repo=Split-Path -Parent $PSScriptRoot;Set-Location -LiteralPath $repo
+if(!$OutputRoot){$OutputRoot=Join-Path $repo ('dist/qa-local/loot-all-'+[DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))}
 $qa=[IO.Path]::GetFullPath($OutputRoot)
 if(Test-Path -LiteralPath $qa){throw 'Choose a fresh output directory'}
 New-Item -ItemType Directory -Path $qa | Out-Null

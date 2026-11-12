@@ -8,6 +8,7 @@ Edytuj ten plik po polsku. Przed zadaniem związanym z mediami przeczytaj `art/p
 - Nie odtwarzaj dźwięku gry przez głośniki laptopa ani nie zmieniaj zapisanych preferencji w celu wyciszenia. Zwykły start przez użytkownika zachowuje audio.
 - Raportuj osobno czas ukończenia renderu. Ukryte lub zminimalizowane okno oraz eksport w 60 Hz nie dowodzą wyświetlanego FPS ani płynności na pierwszym planie.
 - AVG CyberCapture analizuje przy uruchomieniu świeże kompilacje gry i pomocnicze EXE. Grupuj zmiany przed kompilacją, korzystaj z istniejących narzędzi QA i łącz powiązane próby w jednym uruchomieniu, gdy dany test na to pozwala. Każde wydanie sprawdzaj po rozpakowaniu obu paczek. Przy ostrzeżeniu sprawdź nazwę zdarzenia i ścieżkę w dzienniku AVG.
+- Pomocnicze EXE i rozpakowane paczki do uruchomień testowych przygotowuj w `dist/qa-local/` wewnątrz repozytorium. Katalog `C:\AI2D\pipeline\runs` służy do przechowywania raportów i podglądów.
 
 ## Produkcja mediów
 

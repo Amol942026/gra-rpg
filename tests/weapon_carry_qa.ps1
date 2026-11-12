@@ -1,11 +1,14 @@
 param(
     [Parameter(Mandatory)][switch]$NoAudio,
-    [string]$OutputRoot = ('C:/AI2D/pipeline/runs/weapon-carry-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss'))
+    [string]$OutputRoot
 )
 $ErrorActionPreference = 'Stop'
 if (!$NoAudio) { throw 'Silent QA requires -NoAudio.' }
 $repo = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $repo
+if (!$OutputRoot) {
+    $OutputRoot = Join-Path $repo ('dist/qa-local/weapon-carry-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
+}
 $qa = [IO.Path]::GetFullPath($OutputRoot)
 if (Test-Path -LiteralPath $qa) { throw 'Choose a fresh QA output directory.' }
 New-Item -ItemType Directory -Path $qa | Out-Null

@@ -160,8 +160,8 @@ inline void weaponCarryTests(){
   check(length(front-rear)>8&&length(front-rear)<14,"both hands hold the same spear shaft through the thrust");
   if(frame==SpearImpactFrame){
    const auto axis=(front-rear)*(1/length(front-rear));
-   check(front.y-rear.y>9&&std::abs(front.z-rear.z)<5&&rear.y+axis.y*(42.4f+slide)>62,
-         "spear tip projects well ahead of the hero at contact");
+   check(front.y-rear.y>8&&std::abs(front.z-rear.z)<5&&rear.y+axis.y*(42.4f+slide)>74,
+         "spear tip reaches farther ahead of the hero at contact");
   }
   for(int side=0;side<2;side++){
    int upper=side?data::UpperArmR:data::UpperArmL,fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;

@@ -7,6 +7,7 @@
 /dist/qa-save-*/
 /dist/qa-volcano-*/
 /dist/qa-cursor-*/
+/dist/qa-local/
 
 # Generated .NET plugin build intermediates; sources remain versioned.
 /tools/narrative/Emberfall.DialogueBridge/bin/

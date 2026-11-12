@@ -78,13 +78,15 @@ inline Pose forward(const LocalPose& local){
  out.bind();return out;
 }
 inline Quat axisAngle(Vec axis,float degrees){float half=degrees*.00872664626f,s=std::sin(half);return {std::cos(half),axis.x*s,axis.y*s,axis.z*s};}
-inline void bend(Pose& pose,int pivot,Quat delta){
- Vec origin=pose.world[pivot].p;
+inline void bend(Pose& pose,int pivot,Quat delta,Vec origin){
  for(int b=pivot;b<data::BoneCount;b++){
   int ancestor=b;while(ancestor>=0&&ancestor!=pivot)ancestor=data::parents[ancestor];
   if(ancestor<0)continue;
   auto& world=pose.world[b];world.p=origin+rotate(delta,world.p-origin);world.q=mul(delta,world.q);
  }
+}
+inline void bend(Pose& pose,int pivot,Quat delta){
+ bend(pose,pivot,delta,pose.world[pivot].p);
 }
 inline void secondary(Pose& pose,hero_secondary::Key key){
  bend(pose,data::Spine,mul(axisAngle({0,1,0},key.spineRoll),axisAngle({1,0,0},-key.spinePitch)));

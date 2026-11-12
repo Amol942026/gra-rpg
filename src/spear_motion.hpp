@@ -21,7 +21,9 @@ inline float apply(hero_motion::Pose& pose,Kind kind,float progress,float gait,f
  namespace bone=hero_motion::data;
  const auto key=sample(kind,progress);
  const float carry=gait*stride*(1-ease(std::min(progress,1-progress)/.14f));
- bend(pose,bone::Spine,mul(axisAngle({0,0,1},key.yaw),axisAngle({1,0,0},-key.lean)));
+ // Tip the upper body from the hips so the lunge keeps both feet anchored.
+ bend(pose,bone::Spine,mul(axisAngle({0,0,1},key.yaw),axisAngle({1,0,0},-key.lean)),
+      pose.world[bone::Pelvis].p);
  bend(pose,bone::Head,axisAngle({0,0,1},-key.yaw*.82f));
  pose.bind();
  const Vec rear{key.rearR,key.rearF+carry*.7f,key.rearZ+std::abs(carry)*.7f};

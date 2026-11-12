@@ -21,10 +21,16 @@ void spearTests(){
        "thrust hits the first enemy in its narrow forward line, outside ordinary melee reach");
  float hp=g.enemies[0].hp;advance(g,24);
  check(g.enemies[0].hp==hp&&cue(g,Cue::SpearImpact)==1&&!g.spearActive(),"recovery never repeats damage or the impact sound");
+ g=arena();enemy(g,1,{3.85f,0});
+ check(g.attack({1,0}),"spear starts at the new extended distance");advance(g,SpearImpactFrame);
+ check(g.enemies[0].hp<150&&cue(g,Cue::SpearImpact)==1,"spear hits a target past the previous reach");
+ g=arena();enemy(g,1,{4.25f,0});
+ check(g.attack({1,0}),"spear starts outside the extended distance");advance(g,SpearImpactFrame);
+ check(g.enemies[0].hp==150&&cue(g,Cue::SpearImpact)==0,"the extended thrust still stops at its endpoint");
  g=arena();enemy(g,1,{2.6f,0});g.props.push_back({g.player+V{1.2f,0},3});
  check(g.attack({1,0}),"spear begins even when a prop obstructs the strike");advance(g,13);
  check(g.enemies[0].hp==150&&cue(g,Cue::SpearImpact)==1,"solid prop stops the thrust and has its own contact event");
- g=arena();enemy(g,1,{2.6f,0});g.chests[0].location=g.location;g.chests[0].pos=g.player+V{1.2f,0};
+ g=arena();enemy(g,1,{3.85f,0});g.chests[0].location=g.location;g.chests[0].pos=g.player+V{2.75f,0};
  check(g.attack({1,0}),"spear begins with a chest between the hero and enemy");advance(g,SpearImpactFrame);
  check(g.enemies[0].hp==150&&cue(g,Cue::SpearImpact)==1,"chest stops the thrust before an enemy behind it");
  g=arena();enemy(g,1,{2.6f,1.25f});
@@ -42,7 +48,7 @@ void spearTests(){
   Kind kind=Kind(FirstSpear+i);
   check(archetype(kind)==Kind::Spear&&gearSlot(kind)==0&&!stackable(kind)&&
         lootChance(sources[i],item(kind))==chances[i],"each spear is a single weapon with its own documented source");
-  g=arena();g.equipment[0]=item(kind);enemy(g,1,{2.6f,0});
+  g=arena();g.equipment[0]=item(kind);enemy(g,1,{3.85f,0});
   check(g.attack({1,0})&&cue(g,thrusts[i])==1,"the equipped spear selects its own thrust bank");
   advance(g,SpearImpactFrame);
   check(g.enemies[0].hp<150&&cue(g,impacts[i])==1,"the equipped spear selects its own impact bank on contact");
