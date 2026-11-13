@@ -123,7 +123,7 @@ WorldHover pickWorld(Vector2 point) {
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){
                 float progress=game.swingProgress();float attack=progress>=0?std::sin(progress*PI):0;
-                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,&point,game.rollProgress(),progress,game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),game.empoweredPose(),&game.equipment);
+                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,&point,game.rollProgress(),progress,game.visibleBowCharge(),game.ammoCount(),game.empoweredPose(),&game.equipment,-1,-1,0,-1,game.activePowerVisual(),game.powerVisualAge(),game.powerWindupProgress());
             }
         }
         if(touched){

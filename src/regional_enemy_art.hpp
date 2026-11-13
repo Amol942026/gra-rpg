@@ -12,16 +12,20 @@ struct Atlas {
  std::vector<unsigned char> alpha;
 };
 inline std::array<Atlas,RegionalEnemyTypeCount> atlases{};
-inline Atlas sporekinBack{};
+inline Atlas sporekinBack{},cinderhornBack{};
+inline std::array<Atlas,5> cinderhornWalk{};
+inline std::array<Atlas,5> cinderhornRush{};
+inline std::array<Atlas,2> cinderhornChargePose{};
+inline constexpr int CinderhornWalkView[]={0,1,2,1,0,4,3,4};
 inline constexpr const char* Names[]={"sporekin","dune-eye","cinderhorn"};
-constexpr float CinderhornScale=1.45f;
+static_assert(cinderhorn_gait::Frames%Columns==0);
 
-inline void loadAtlas(Atlas& atlas,const char* name){
+inline void loadAtlas(Atlas& atlas,const char* name,int rows=Rows){
   if(atlas.art.id)return;
   std::string path=std::string("assets/sprites/region-enemies/")+name+".png";
   Image image=LoadImage(path.c_str());
   if(!image.data)return;
-  if(image.width==Columns*Stride&&image.height==Rows*Stride){
+  if(image.width==Columns*Stride&&image.height==rows*Stride){
    ImageFormat(&image,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
    atlas.art=LoadTextureFromImage(image);
    auto* pixels=static_cast<Color*>(image.data);
@@ -40,6 +44,13 @@ inline void loadAtlas(Atlas& atlas,const char* name){
 inline void load(){
  for(int i=0;i<RegionalEnemyTypeCount;i++)loadAtlas(atlases[i],Names[i]);
  loadAtlas(sporekinBack,"sporekin-back");
+ loadAtlas(cinderhornBack,"cinderhorn-back");
+ for(int i=0;i<int(cinderhornWalk.size());i++)
+  loadAtlas(cinderhornWalk[i],TextFormat("cinderhorn-walk-%d",i),cinderhorn_gait::Frames/Columns);
+ for(int i=0;i<int(cinderhornRush.size());i++)
+  loadAtlas(cinderhornRush[i],TextFormat("cinderhorn-charge-%d",i),cinderhorn_gait::ChargeFrames/Columns);
+ loadAtlas(cinderhornChargePose[0],"cinderhorn-charge-front",4);
+ loadAtlas(cinderhornChargePose[1],"cinderhorn-charge-back",4);
 }
 inline void unloadAtlas(Atlas& atlas){
  if(atlas.art.id)UnloadTexture(atlas.art);
@@ -49,9 +60,13 @@ inline void unloadAtlas(Atlas& atlas){
 inline void unload(){
  for(auto& atlas:atlases)unloadAtlas(atlas);
  unloadAtlas(sporekinBack);
+ unloadAtlas(cinderhornBack);
+ for(auto& atlas:cinderhornWalk)unloadAtlas(atlas);
+ for(auto& atlas:cinderhornRush)unloadAtlas(atlas);
+ for(auto& atlas:cinderhornChargePose)unloadAtlas(atlas);
 }
 
-inline bool sporekinBackView(Direction direction){
+inline bool northFacing(Direction direction){
  return direction==Direction::NW||direction==Direction::N||direction==Direction::NE;
 }
 inline bool mirrored(int type,Direction direction){
@@ -68,16 +83,35 @@ inline int frame(const Enemy& e){
  return index(std::fmod(e.animation.idleTime*.84f,1.f),IdleFrames);
 }
 
+struct SpriteFrame {const Atlas& atlas;int index;};
+inline SpriteFrame spriteFrame(const Enemy& e){
+ const auto direction=e.animation.direction;
+ const int view=CinderhornWalkView[int(direction)];
+ auto sample=[](float t,int frames){return std::clamp(int(t*frames),0,frames-1);};
+ if(e.type==CinderhornType&&e.alive&&e.chargeBusy()){
+  const auto& poses=cinderhornChargePose[northFacing(direction)];
+  if(e.boarWindup>0&&poses.art.id)return {poses,sample(1-e.boarWindup/CinderhornCharge.windup,12)};
+  const auto& rush=cinderhornRush[view];
+  if(e.boarRush>0&&rush.art.id)return {rush,sample(e.animation.phase,cinderhorn_gait::ChargeFrames)};
+  if(e.boarRecovery>0&&poses.art.id){
+   const float t=1-e.boarRecovery/CinderhornCharge.recovery;
+   return {poses,e.boarHit?20+sample(t,12):12+sample(t,8)};
+  }
+ }
+ const Atlas* alternate=e.type==SporekinType?&sporekinBack:e.type==CinderhornType?&cinderhornBack:nullptr;
+ const int pose=frame(e);
+ const auto& walk=cinderhornWalk[view];
+ const bool walking=e.type==CinderhornType&&pose>=MoveStart&&pose<AttackStart&&walk.art.id;
+ if(walking)return {walk,sample(e.animation.phase,cinderhorn_gait::Frames)};
+ return {alternate&&alternate->art.id&&northFacing(direction)?*alternate:atlases[e.type-SporekinType],pose};
+}
 inline bool draw(const Enemy& e,float x,float y,Color outline=BLANK,
                  const Vector2* probe=nullptr,bool shadow=false,float scale=1){
- const auto direction=e.animation.direction;
- const bool back=e.type==SporekinType&&sporekinBackView(direction)&&sporekinBack.art.id;
- const Atlas& atlas=back?sporekinBack:atlases[e.type-SporekinType];
+ const auto [atlas,n]=spriteFrame(e);
  if(!atlas.art.id)return false;
- const int n=frame(e);
  const int sx=(n%Columns)*Stride+Pad,sy=(n/Columns)*Stride+Pad;
- const bool mirror=mirrored(e.type,direction);
- if(e.type==CinderhornType)scale*=CinderhornScale;
+ const bool mirror=mirrored(e.type,e.animation.direction);
+ if(e.type==CinderhornType)scale*=cinderhorn_gait::Scale;
  const float left=x-AnchorX*scale,top=y-AnchorY*scale;
  if(probe){
   int px=int(std::floor((probe->x-left)/scale)),py=int(std::floor((probe->y-top)/scale));

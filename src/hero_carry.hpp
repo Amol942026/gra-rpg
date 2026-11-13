@@ -17,7 +17,7 @@ inline void placeGrip(hero_motion::Pose& pose,bool left,hero_motion::Vec target,
  if(!left)pose.world[data::Weapon]={wrist,mul(orientation,restRotation(data::Weapon))};
  pose.bind();
 }
-inline void grip(hero_motion::Pose& pose,bool left,float width,hero_motion::Quat orientation){
+inline void grip(hero_motion::Pose& pose,bool left,float width,hero_motion::Quat orientation,hero_motion::Vec elbowPole){
  using namespace hero_motion;
  int hand=left?data::HandL:data::HandR;
  float side=left?-1.f:1.f;
@@ -26,7 +26,7 @@ inline void grip(hero_motion::Pose& pose,bool left,float width,hero_motion::Quat
  local.x=side*std::max(side*local.x,width);
  local.y=std::clamp(local.y*.8f+14,8.f,24.f);
  local.z=std::clamp(local.z+6,42.f,50.f);
- placeGrip(pose,left,pose.point(data::Spine,local),pose.vector(data::Spine,{side*.35f,-1,.12f}),orientation);
+ placeGrip(pose,left,pose.point(data::Spine,local),pose.vector(data::Spine,elbowPole),orientation);
 }
 inline constexpr float ShieldOffset=7.f,ShieldRimDepth=3.2f;
 inline void shield(hero_motion::Pose& pose){
@@ -58,7 +58,7 @@ inline void melee(hero_motion::Pose& pose,float weight=1){
  auto originalHand=pose.world[data::HandR],originalFore=pose.world[data::ForearmR],originalWeapon=pose.world[data::Weapon];
  constexpr float lateral=6*3.14159265358979323846f/180;
  Quat orientation=mul(pose.skin[data::Spine].q,axisAngle({0,1,0},6));
- grip(pose,false,24,orientation);
+ grip(pose,false,24,orientation,{.35f,-1,.12f});
  // Clearance changes forward pitch, rather than pushing the blade farther
  // sideways. Keep the crossguard across the forearm's plane as well.
  Vec wrist=pose.world[data::HandR].p,fore=pose.world[data::ForearmR].p-wrist;
@@ -85,9 +85,8 @@ inline void melee(hero_motion::Pose& pose,float weight=1){
 }
 inline void bow(hero_motion::Pose& pose){
  using namespace hero_motion;
- // Both limbs of the longest bow must clear the shoulder and the legs.
- // Rotate around the upright bow axis so the slack-side chord clears the arm.
- Quat carry=mul(axisAngle({0,1,0},-6),axisAngle({0,0,1},-75));
- grip(pose,true,24,mul(pose.skin[data::Spine].q,carry));
+ // Keep the stave facing forward and move the elbow inside the bow's plane.
+ const Quat carry=axisAngle({0,1,0},-6);
+ grip(pose,true,24,mul(pose.skin[data::Spine].q,carry),{.65f,-1,.12f});
 }
 }

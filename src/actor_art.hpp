@@ -4,6 +4,7 @@
 #include "hero_motion.hpp"
 #include "hero_sheath.hpp"
 #include "spear_motion.hpp"
+#include "power_motion.hpp"
 #include "hero_weapon_motion.hpp"
 #include "hero_knockdown.hpp"
 #include "shadow_geometry.hpp"
@@ -598,7 +599,8 @@ inline void prepareKnockdown(const Game& g,AnimationState& state,float& fallR,fl
 // species: player, slime, wolf, skeleton, guardian, boar, spider, bandit, treant.
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
-                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1) {
+                 Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1,
+                 PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1) {
     if(regionalEnemy(species-1)){
         if(shadowBuilding&&!shadowCasting)return false;
         Enemy e{};e.type=species-1;e.animation=state;e.strike=attack>0?.14f:0;e.flash=flash?.1f:0;
@@ -615,7 +617,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     tuck=tuck*tuck*(3-2*tuck);
     const float cycle=state.phase*(2*PI);
     const float stride=state.moving?std::sin(cycle):0;
-    const float run=species==0&&!rolling&&!striking&&bowDraw<0?std::clamp(state.runBlend,0.f,1.f):0;
+    const float run=species==0&&!rolling&&!striking&&bowDraw<0&&windup<0?std::clamp(state.runBlend,0.f,1.f):0;
     const float lift=state.moving?(1-run)*std::abs(std::cos(cycle))*1.7f+run*(1.5f+.9f*std::cos(cycle*2)):std::sin(state.idleTime*2.4f)*.6f;
     const float bodyScale=species==4?GuardianBodyScale:species==8?treant_gait::Scale:1.f;
     Rig working(x,y,size*bodyScale,state.direction);
@@ -631,7 +633,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     if(shadowBuilding&&!recycledRigs.empty()){working.reuseStorage(recycledRigs.back());recycledRigs.pop_back();}
 
     if(species==0){
-        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF);
+        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF,power,powerAge,windup);
     } else if(species>=9){
         buildDesert(rig,species-1,state,attack,flash);
     } else {
@@ -644,7 +646,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
         return false;
     }
     if(probe)return rig.contains(*probe);
-    float trail=striking&&weapon==Kind::Sword?sword_pose::trailStrength(strikeProgress,empowered):0;
+    float trail=striking&&weapon==Kind::Sword&&power!=PowerStyle::Sword?sword_pose::trailStrength(strikeProgress,empowered):0;
     if(trail>0){
         // One short ribbon follows the exact physical edge during the cut.
         // Windup and recovery do not draw another apparent hit.

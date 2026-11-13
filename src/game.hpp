@@ -3,6 +3,7 @@
 #include "spear_timing.hpp"
 #include "weapon_attack_timing.hpp"
 #include "sound_events.hpp"
+#include "power_attack.hpp"
 #include "spell_definitions.hpp"
 #include "entity_info.hpp"
 #include "loot.hpp"
@@ -10,6 +11,7 @@
 #include "treant_gait.hpp"
 #include "guardian_gait.hpp"
 #include "forest_gait.hpp"
+#include "cinderhorn_gait.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -37,6 +39,12 @@ constexpr int BoarType=4;
 constexpr float BoarChargeFirstDelay=.65f,BoarChargeCooldown=4.5f,BoarChargeWindup=.55f;
 constexpr float BoarChargeDuration=.7f,BoarChargeRecovery=.6f,BoarChargeSpeed=9.5f;
 constexpr float BoarChargeMinRange=2.2f,BoarChargeDamageMultiplier=2.f,HeroBodyRadius=.28f;
+struct ChargeProfile {float windup,duration,recovery,speed,cooldown,minRange,multiplier;};
+inline constexpr ChargeProfile BoarCharge{BoarChargeWindup,BoarChargeDuration,BoarChargeRecovery,
+ BoarChargeSpeed,BoarChargeCooldown,BoarChargeMinRange,BoarChargeDamageMultiplier};
+inline constexpr ChargeProfile CinderhornCharge{.74f,.66f,.64f,10.2f,5.2f,2.7f,1.8f};
+inline constexpr const ChargeProfile& chargeProfile(int type){return type==CinderhornType?CinderhornCharge:BoarCharge;}
+inline constexpr bool chargingSpecies(int type){return type==BoarType||type==CinderhornType;}
 constexpr float MeleeRange=2.1f, SwingDuration=.32f;
 constexpr float RollDuration=.4f, RollSpeed=7.f, RollCooldown=1.2f, RollProtection=.28f;
 constexpr float FireballCost=10,FireballCooldown=.8f,FireballSpeed=8,FireballRange=8,ManaRegenInterval=5;
@@ -85,6 +93,7 @@ struct Enemy {
  float boarChargeCd=BoarChargeFirstDelay,boarWindup=0,boarRush=0,boarRecovery=0;
  V boarAim{},boarDirection{};bool boarHit=false;int boarCharges=0;
  bool boarBusy()const{return type==BoarType&&(boarWindup>0||boarRush>0||boarRecovery>0);}
+ bool chargeBusy()const{return chargingSpecies(type)&&(boarWindup>0||boarRush>0||boarRecovery>0);}
  float eruptionCd=2.8f,eruptionWindup=0;int eruptions=0;
  float abilityCd=3.f,abilityAge=-1;V abilityDirection{};int abilityMask=0,abilityCasts=0;
  bool abilityBusy()const{return abilityAge>=0&&enemyAbility(type)!=EnemyAbility::None;}
@@ -123,7 +132,7 @@ struct FieldState {std::vector<Enemy> enemies;std::vector<Prop> props;std::vecto
 struct Effect { V pos; std::string text; float life; int color; bool damageNumber=false,critical=false;float height=75; };
 struct Fireball { V pos,velocity;float remaining=FireballRange,damage=0;bool critical=false;Spell spell=Spell::Fireball;float age=0; };
 struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
-struct Arrow {V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false;};
+struct Arrow {V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false,power=false;};
 struct PierceFlash {V pos;float life=.26f;};
 struct Explosion { V pos;float life=.35f;Spell spell=Spell::Fireball; };
 struct CinderBolt {V pos,velocity;float remaining=7,damage=0;int owner=0;};
@@ -197,6 +206,8 @@ struct Game {
  std::vector<Ground> ground,forage;std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Effect> effects;
  std::array<WeaponBinding,WeaponWheelSize> weaponWheel{};
  std::vector<Arrow> arrows;bool bowDrawing=false;float bowDrawTime=0,bowReleaseTime=0,lastBowCharge=0;V bowAim{0,-1};
+ Item heldAttackWeapon{};float heldAttackTime=0;
+ bool lastBowPower=false;
  std::vector<Fireball> fireballs;std::vector<Explosion> explosions;
  std::vector<Boulder> boulders;std::vector<BoulderImpact> boulderImpacts;
  Attributes attributes{};int attributePoints=0;bool allocationRequired=false;
@@ -365,7 +376,7 @@ struct Game {
  }
  bool dead()const{return hp<=0;}
  bool rolling()const{return rollRemaining>0;}
- bool combatFacingActive()const{return bowDrawing||bowReleaseTime>0||swing>0;}
+ bool combatFacingActive()const{return holdingMelee()||bowDrawing||bowReleaseTime>0||swing>0;}
  void aimMelee(V aim){
   if(length(aim)<.001f)return;
   facing=normalized(aim);
@@ -486,6 +497,7 @@ struct Game {
  #include "skill_system.hpp"
  #include "weapon_system.hpp"
  #include "spear_system.hpp"
+ #include "power_attack_system.hpp"
  bool potion(Kind k){
   for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty())return use({Place::Bag,i});
   say("Brak mikstury w plecaku.");return false;
@@ -546,7 +558,7 @@ struct Game {
   if(mana<definition.mana){say(std::string(definition.name)+" — potrzebujesz "+std::to_string(int(definition.mana))+" many.");sound(Cue::Reject,player);return false;}
   const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
   V direction=normalized(length(aim)>.001f?aim:directions[int(animation.direction)]);
-  cancelTimedWeaponAttack();mana-=definition.mana;spellCd=spellCooldownTotal=definition.cooldown;facing=direction;animation.face(direction.x,direction.y);
+  cancelMeleeHold();cancelTimedWeaponAttack();mana-=definition.mana;spellCd=spellCooldownTotal=definition.cooldown;facing=direction;animation.face(direction.x,direction.y);
   fireballs.push_back({player,direction*definition.speed,definition.range,float(spellDamage(selectedSpell)),rollCritical(),selectedSpell});
   sound(selectedSpell==Spell::IceShard?Cue::IceCast:selectedSpell==Spell::LightningOrb?Cue::LightningCast:Cue::FireballCast,player);return true;
  }
@@ -607,7 +619,7 @@ struct Game {
     auto& e=enemies[i];if(!e.alive)continue;
     V beforeStep=e.pos;
     e.recoil=e.recoil*std::exp(-10.f*step);
-    if(location==WorldLocation::Forest&&e.boarBusy())advanceBoarCharge(e,step,heroFrom+(heroEnd-heroFrom)*(float(sub)/steps),heroFrom+(heroEnd-heroFrom)*(float(sub+1)/steps),wasRolling,rollElapsed+sub*step);
+    if(e.chargeBusy())advanceCharge(e,step,heroFrom+(heroEnd-heroFrom)*(float(sub)/steps),heroFrom+(heroEnd-heroFrom)*(float(sub+1)/steps),wasRolling,rollElapsed+sub*step);
     else e.pos=e.pos+terrain_height::step(location,e.pos,(desired[i]+e.recoil)*step);
     if(inVolcano()&&volcanoLava(e.pos,e.radius()))e.pos=beforeStep;
     constrainEnemy(e);
@@ -648,7 +660,8 @@ struct Game {
  void update(float dt,V input,bool attackPressed,bool running=false){
   if(allocationRequired||storyBlocked())return;
   const float previousSwing=swing;
-  dt=std::clamp(dt,0.f,.05f);time+=dt;auto tick=[dt](float&v){v=std::max(0.f,v-dt);};tick(attackCd);tick(spellCd);tick(potionCd);tick(swing);tick(hurt);tick(messageTime);tick(rollCd);tick(bowReleaseTime);tick(strongCutCd);tick(piercingArrowCd);tick(healingCd);tick(healingPulse);
+  dt=std::clamp(dt,0.f,.05f);time+=dt;auto tick=[dt](float&v){v=std::max(0.f,v-dt);};tick(attackCd);tick(spellCd);tick(potionCd);tick(hurt);tick(messageTime);tick(rollCd);tick(bowReleaseTime);tick(strongCutCd);tick(piercingArrowCd);tick(healingCd);tick(healingPulse);
+  swing=std::max(0.f,swing-dt*powerAttackRate(activePowerMelee()));
   for(auto& flash:pierceFlashes)flash.life-=dt;pierceFlashes.erase(std::remove_if(pierceFlashes.begin(),pierceFlashes.end(),[](const auto& flash){return flash.life<=0;}),pierceFlashes.end());
   for(auto&e:effects)e.life-=dt;effects.erase(std::remove_if(effects.begin(),effects.end(),[](auto&e){return e.life<=0;}),effects.end());
   for(auto& e:explosions)e.life-=dt;explosions.erase(std::remove_if(explosions.begin(),explosions.end(),[](auto& e){return e.life<=0;}),explosions.end());
@@ -657,6 +670,8 @@ struct Game {
   if(inVolcano())for(auto& drain:volcanoFountainDrain)tick(drain);
   if(dead()){cancelBoulderAttacks();clearSandPrison();cancelBow();animation.moving=false;animation.stopSprint();rollRemaining=0;closeCorpse();return;}
   if(bowDrawing){if(archetype(equipment[0].kind)!=Kind::Bow||ammoCount()<=0)cancelBow();else bowDrawTime=std::min(BowDrawDuration,bowDrawTime+dt);}
+  if(holdingMelee()&&canHoldAttack())heldAttackTime=std::min(PowerHoldTime,heldAttackTime+dt);
+  else cancelMeleeHold();
   const float movementDt=std::max(0.f,dt-std::min(dt,sandPrisonRemaining));
   tick(sandPrisonRemaining);if(sandPrisonRemaining<.00001f)sandPrisonRemaining=0;
   const bool wasRolling=rolling(),wasKnockedBack=knockedBack();const float rollElapsed=RollDuration-rollRemaining;
@@ -680,8 +695,11 @@ struct Game {
   else {
    // Resolve combat aim before smoothing; locomotion still advances the gait.
    const bool aiming=combatFacingActive();
+   const bool drawingSword=holdingMelee()&&archetype(equipment[0].kind)==Kind::Sword;
+   const float previousStow=animation.swordStow;
    if(bowDrawing||bowReleaseTime>0)animation.face(bowAim.x,bowAim.y);
-   animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing&&!spearActive(),!aiming,swing<=0);
+   animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing&&!spearActive(),!aiming,swing<=0&&!holdingMelee());
+   if(drawingSword)animation.swordStow=sword_stow::advance(previousStow,false,dt*2);
   }
   if(!wasRolling&&!wasKnockedBack){
    stepDistance+=surfaceDistance(player,before);
@@ -694,7 +712,7 @@ struct Game {
    if(manaRegenTime+.00001f>=ManaRegenInterval){mana=std::min(float(maxMana()),mana+1);manaRegenTime=std::max(0.f,manaRegenTime-ManaRegenInterval);}
   }else manaRegenTime=0;
   if(inTower())return; // The forest remains intact but does not simulate in the tower.
-  if(!wasRolling&&!wasKnockedBack)updateTimedWeaponAttack(previousSwing);
+  if(!wasRolling&&!wasKnockedBack){updateTimedWeaponAttack(previousSwing);updatePowerMelee(previousSwing);}
   if(allocationRequired)return;
   if(attackPressed&&!wasRolling&&!wasKnockedBack)attack();
   if(allocationRequired)return;
@@ -713,7 +731,7 @@ struct Game {
     if(e.sandPrisonCd<=.00001f){e.sandPrisonCd+=SandPrisonInterval;imprisonInSand(e);}
    }
    if(updateGuardianThrow(e,dt,visible,d))continue;
-   if(prepareBoarCharge(e,dt,visible,d))continue;
+   if(prepareCharge(e,dt,visible,d))continue;
    if(prepareEruption(e,dt,visible))continue;
    if(prepareEnemyAbility(e,dt,visible,d))continue;
    const bool ranged=inVolcano()&&volcanoRanged(e.type);
@@ -723,7 +741,10 @@ struct Game {
    else if(d<(large?2.15f:reach+.35f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead())takeMonsterDamage(incomingDamage(float(e.damage()),e.attackType()),player,.2f);
-   }}continue;}
+   }}else if(e.type==CinderhornType&&dt>0&&e.windup<=.14f&&visible&&d>e.radius()+HeroBodyRadius+.12f){
+    const V lunge=normalized(player-e.pos)*std::min(3.4f,(d-e.radius()-HeroBodyRadius)/dt);
+    if(clearEnemySegment(e.pos,e.pos+lunge*dt,e.radius()))desired[i]=lunge;
+   }continue;}
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
     if(d<(ranged?4.5f:large?1.9f:reach)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;}
@@ -740,13 +761,14 @@ struct Game {
     if(e.patrolBlocked>.65f){e.patrolGoalActive=false;e.patrolBlocked=0;}
    }
    if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType)advanceVolcanoAnimation(e,movement,dt);
+   else if(e.type==CinderhornType)cinderhorn_gait::advance(e.animation,movement.x,movement.y,dt,e.windup<=0&&e.strike<=0&&!e.chargeBusy(),e.boarRush>0);
    else if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==6)grounded_gait::advance(e.animation,movement.x,movement.y,dt,grounded_gait::Bandit);
    else if(e.type==1||e.type==2)grounded_gait::advance(e.animation,movement.x,movement.y,dt,
        e.type==1?forest_gait::Wolf:forest_gait::Skeleton);
    else e.animation.advance(movement.x,movement.y,dt,false,!e.boarBusy());
-   if(e.boarBusy())faceBoarCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);
+   if(e.chargeBusy())faceCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);
    if(e.abilityBusy())faceEnemyAbility(e);
    if(e.boulderWindup>0||e.boulderRecovery>0)e.animation.face(e.boulderTarget.x-e.pos.x,e.boulderTarget.y-e.pos.y);
    else if(e.windup>0)e.animation.face(player.x-e.pos.x,player.y-e.pos.y);

@@ -13,18 +13,20 @@ int main(int argc,char** argv){
  SetTraceLogLevel(LOG_ERROR);SetConfigFlags(FLAG_WINDOW_HIDDEN);sync_present::useOpenGL();InitWindow(W,H,"Emberfall weapon clearance --no-audio");if(!IsWindowReady())return 4;
  audioSystem.init(false,false);makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  check(hero_paint::atlas.id&&hero_paint::weaponsLoaded,"held weapon materials loaded");
+ check(power_fx::atlas.id!=0,"the five charged effects are preloaded");
  for(int cell=hero_paint::Forged;cell<=hero_paint::Ivory;cell++)
   check(hero_paint::opaque(hero_paint::uv(cell,.5f,.5f)),"opaque swatch in the combined hero atlas");
  RenderTexture2D sample=LoadRenderTexture(360,390);
  auto save=[&](RenderTexture2D target,const fs::path& file){Image im=LoadImageFromTexture(target.texture);ImageFlipVertical(&im);check(ExportImage(im,file.string().c_str()),"renderer writes the complete QA image");UnloadImage(im);};
  int clipped=0,rendered=0,weapons=0;
  auto draw=[&](Kind kind,int direction,float phase,bool plate=false,float attack=-1,float stow=0,float run=0,
-               Kind armor=Kind::None,Kind shield=Kind::Shield,float bowDraw=-1){
+               Kind armor=Kind::None,Kind shield=Kind::Shield,float bowDraw=-1,float windup=-1){
   std::array<Item,6> gear{item(kind),{},item(shield),item(plate?Kind::GuardianArmor:armor==Kind::None?Kind::Armor:armor),item(Kind::Boots),{}};
   AnimationState state;state.direction=Direction(direction);state.phase=phase;state.moving=true;state.moveBlend=1;state.motionInitialized=true;
   state.swordStow=stow;state.runBlend=run;
   actor_art::finishShadowFrame();BeginTextureMode(sample);ClearBackground(BLANK);
-  actor_art::draw(0,180,310,2.55f,state,0,false,true,kind,false,BLANK,nullptr,-1,attack,bowDraw,20,false,&gear);EndTextureMode();
+  actor_art::draw(0,180,windup>=0?337.f:310.f,2.55f,state,0,false,true,kind,false,BLANK,nullptr,-1,attack,bowDraw,20,false,&gear,
+                  -1,-1,0,-1,PowerStyle::Count,0,windup);EndTextureMode();
   Image im=LoadImageFromTexture(sample.texture);Color* px=LoadImageColors(im);
   for(int y=0;y<390;y++)for(int x=0;x<360;x++)if(px[y*360+x].a>180&&(x<2||x>=358||y<2||y>=388))clipped++;
   UnloadImageColors(px);UnloadImage(im);rendered++;
@@ -144,6 +146,87 @@ int main(int argc,char** argv){
   }
  }
  save(newWeapons,root/"new-weapons.png");UnloadRenderTexture(newWeapons);
+ for(Kind kind:{Kind::Sword,Kind::Axe,Kind::Dagger,Kind::Spear,Kind::Bow}){
+  game=Game{};game.player={27,26};game.enemies.clear();game.props.clear();game.forage.clear();
+  clearTransientUi();invalidatePausedWorld();intro={};towerStory={};welcome=paused=false;
+  game.equipment[0]=item(kind);game.messageTime=0;
+  const Vector2 target=screen(game.player+V{2,-2});
+  mouse={target.x,target.y-34};leftClickGameplay({});
+  const auto style=powerStyle(kind);
+  int previousFrame=0;
+  Color emptyRight=BLANK;
+  for(int frame:{0,8,16,35}){
+   for(int f=previousFrame;f<frame;f++)game.update(1.f/60,{},false);
+   previousFrame=frame;
+   check(std::abs(game.powerWindupProgress()-std::min(1.f,frame/(60*PowerHoldTime)))<.001f,
+         "world charge meter follows the held attack clock");
+   check(game.swing==0&&game.arrows.empty(),"the charge pose does not attack before release");
+   renderScene();save(canvas,root/TextFormat("charge-%d-%02d.png",int(style),frame));
+   Image meter=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&meter);
+   const Rectangle bar=power_fx::chargeBarRect(style,screen(game.player));
+   const int x=int(bar.x),y=int(bar.y)+3;
+   const Color left=GetImageColor(meter,x+7,y),right=GetImageColor(meter,x+46,y);
+   if(frame==0)emptyRight=right;
+   check((ColorToInt(left)==ColorToInt(emptyRight))==(frame==0),"charge fill starts at the left edge");
+   check((ColorToInt(right)==ColorToInt(emptyRight))==(frame!=35),"charge fill reaches the right edge at full charge");
+   UnloadImage(meter);
+  }
+  check(game.powerHoldFraction()==1&&releaseWorldAttack()&&game.activePowerVisual()==style,
+        "actual mouse handlers commit the charged weapon on release");
+  check(game.powerWindupProgress()<0,"releasing hides the world charge meter");
+  const auto& profile=powerAttack(style);
+  const float rate=powerAttackRate(style);
+  const int effectFrame=int(profile.contact*60/rate)+4;
+  for(int frame=0;frame<effectFrame;frame++){
+   if(rate>1){
+    renderScene();
+    Image release=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&release);
+    ImageCrop(&release,{450,283,230,182});
+    const auto file=root/TextFormat("fast-release-%d-%02d.png",int(style),frame);
+    check(ExportImage(release,file.string().c_str()),"renderer writes the fast release frame");
+    UnloadImage(release);
+   }
+   game.update(1.f/60,{},false);
+  }
+  renderScene();save(canvas,root/TextFormat("power-%d.png",int(style)));
+  Image painted=LoadImageFromTexture(canvas.texture);
+  Texture2D atlas=power_fx::atlas;power_fx::atlas={};
+  renderScene();power_fx::atlas=atlas;
+  Image noAtlas=LoadImageFromTexture(canvas.texture);
+  Color* a=LoadImageColors(painted);Color* b=LoadImageColors(noAtlas);
+  int changed=0;
+  for(int j=0;j<painted.width*painted.height;j++)changed+=a[j].r!=b[j].r||a[j].g!=b[j].g||a[j].b!=b[j].b;
+  check(changed>120,"charged weapon effect changes pixels in the normal scene renderer");
+  UnloadImageColors(a);UnloadImageColors(b);UnloadImage(painted);UnloadImage(noAtlas);
+ }
+ for(Kind kind:{Kind::Sword,Kind::Axe}){
+  auto legs=[&](float phase){
+   draw(kind,1,phase,false,-1,0,0,Kind::None,Kind::Shield,-1,1);
+   Image image=LoadImageFromTexture(sample.texture);ImageFlipVertical(&image);
+   ImageCrop(&image,{115,270,130,86});
+   return image;
+  };
+  Image first=legs(.17f),second=legs(.65f);
+  int changed=0;
+  for(int y=0;y<first.height;y++)for(int x=0;x<first.width;x++)
+   changed+=GetImageColor(first,x,y).a!=GetImageColor(second,x,y).a;
+  check(changed>180,"fully charged weapons still render a changing leg silhouette during walking");
+  UnloadImage(first);UnloadImage(second);
+  game=Game{};game.player={27,26};game.enemies.clear();game.props.clear();game.forage.clear();
+  game.equipment[0]=item(kind);game.animation.swordStow=kind==Kind::Sword?1.f:0.f;game.messageTime=0;
+  mouse=screen(game.player+V{2,-2});mouse.y-=34;leftClickGameplay({});
+  for(int frame=0;frame<=54;frame++){
+   game.update(1.f/60,{1,0},false);
+   if(frame==11||frame==23||frame==34||frame==43||frame==54){
+    renderScene();save(canvas,root/TextFormat("overhead-walk-%d-%02d.png",int(powerStyle(kind)),frame));
+   }
+  }
+  check(game.animation.moving&&game.animation.swordStow==0&&game.powerWindupProgress()==1,
+        "a fully charged walking hero has drawn the weapon and keeps moving");
+ }
+ game=Game{};game.props.clear();game.enemies.clear();game.player={27,26};mouse=screen(game.player+V{2,-2});mouse.y-=34;
+ leftClickGameplay({});mouse={1270,455};
+ check(!releaseWorldAttack()&&game.powerWindupProgress()<0&&game.swing==0,"releasing into the HUD discards a pending world click and hides the meter");
  RenderTexture2D attacks=LoadRenderTexture(1440,585);BeginTextureMode(attacks);ClearBackground(Ink);EndTextureMode();
  int row=0;for(Kind kind:{Kind::Sword,Kind::Axe,Kind::Dagger}){
   int column=0;for(float p:{0.f,.02f,.06f,.12f,.5f,.85f,.96f,1.f}){

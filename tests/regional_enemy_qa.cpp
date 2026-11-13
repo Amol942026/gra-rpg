@@ -30,6 +30,18 @@ int main(int argc,char** argv){
  auto playCount=[](const Game& world,Cue cue){
   return std::count_if(world.sounds.begin(),world.sounds.end(),[cue](const SoundEvent& e){return e.cue==cue;});
  };
+ const auto& hornBack=regional_enemy_art::cinderhornBack;
+ check(hornBack.art.id&&hornBack.silhouette.id&&
+       hornBack.alpha.size()==size_t(hornBack.art.width)*hornBack.art.height,
+       "Cinderhorn rear artwork and complete silhouette are preloaded");
+ check(hornBack.alpha!=regional_enemy_art::atlases[CinderhornType-SporekinType].alpha,
+       "Cinderhorn front and back use distinct silhouettes");
+ for(const auto& walk:regional_enemy_art::cinderhornWalk)
+  check(walk.art.id&&walk.silhouette.id,"Cinderhorn direction has its Synfig walk and matching mask");
+ for(const auto& rush:regional_enemy_art::cinderhornRush)
+  check(rush.art.id&&rush.silhouette.id,"Cinderhorn rush and matching mask");
+ for(const auto& charge:regional_enemy_art::cinderhornChargePose)
+  check(charge.art.id&&charge.silhouette.id,"Cinderhorn windup, horn impact and recovery atlas");
 
  for(int i=0;i<RegionalEnemyTypeCount;i++){
   const int type=SporekinType+i;
@@ -40,6 +52,12 @@ int main(int argc,char** argv){
   check(atlas.alpha.size()==size_t(atlas.art.width)*atlas.art.height,"complete RGBA alpha "+slug);
   game=Game{};game.activateField(realm);
   check(count(game,type)==RegionalEncountersPerRealm,"authored encounters "+slug);
+  if(type==CinderhornType){
+   std::vector<V> homes;
+   for(const auto& candidate:game.enemies)if(candidate.type==type)homes.push_back(candidate.home);
+   for(size_t a=0;a<homes.size();a++)for(size_t b=0;b<a;b++)
+    check(distance(homes[a],homes[b])>=27,"Cinderhorn patrol sites are separated");
+  }
   for(const auto& e:game.enemies)if(regionalEnemy(e.type)){
    check(e.type==type&&game.enemyPositionClear(e.pos,e.radius()),"safe spawn "+std::to_string(e.id));
   }
@@ -59,6 +77,12 @@ int main(int argc,char** argv){
   e->animation.direction=Direction::SE;
   renderScene();
   saveTexture(canvas,(output/(slug+".png")).string());
+  if(type==CinderhornType){
+   e->animation.direction=Direction::NE;
+   e->animation.moving=true;e->animation.phase=.25f;
+   renderScene();saveTexture(canvas,(output/"cinderhorn-back.png").string());
+   e->animation.moving=false;e->animation.direction=Direction::SE;
+  }
   for(Direction facing:{Direction::SE,Direction::NW}){
    e->animation.direction=facing;
    for(int pose=0;pose<5;pose++){
@@ -129,6 +153,70 @@ int main(int argc,char** argv){
  }
  auto bytes=saves::encode(migrated);
  check(saves::encode(saves::decode(bytes))==bytes,"new save round trip does not duplicate encounters");
+ check(IsShaderValid(volcano_art::bridgeBlend),"bridge feather shader loaded");
+ game=Game{};game.activateField(WorldLocation::Volcano);
+ game.props.clear();game.enemies.clear();game.forage.clear();
+ game.messageTime=0;game.player={16,20};
+ game.enemies.push_back({3130,CinderhornType,{12,20},{12,20},174,174});
+ auto& charger=game.enemies.front();charger.boarChargeCd=0;
+ for(int step=0;step<88;step++){
+  game.update(1.f/60,{},false);
+  if(step==31||step==49||step==62||step==78){
+   renderScene();
+   saveTexture(canvas,(output/("charge-"+std::to_string(step)+".png")).string());
+  }
+  if(step==49){
+   auto snapshot=saves::decode(saves::encode({game,intro,towerStory,{}}));
+   auto* restored=snapshot.game.findEnemy(3130);
+   check(restored&&restored->boarRush==charger.boarRush&&restored->boarCharges==1&&restored->chargeBusy(),
+         "in-flight Cinderhorn rush round-trips with its exact phase");
+  }
+ }
+ check(charger.boarHit&&charger.boarRecovery>0,"render sequence finishes in horn impact recovery");
+ for(int v=1;v<=3;v++){
+  std::string path=std::string("assets/audio/cinderhorn-charge")+(v==1?"":"-v"+std::to_string(v))+".wav";
+  Wave wave=LoadWave(path.c_str());
+  check(IsWaveValid(wave)&&wave.sampleRate==48000&&wave.channels==2&&wave.frameCount==34560,"Cinderhorn charge WAV decodes");
+  UnloadWave(wave);
+ }
+ game.enemies.clear();
+ for(int index:{0,3,11}){
+  const float y=VolcanoBridges[index].y;
+  const float x=lavaCenter(VolcanoBridgeRivers[index],y);
+  game.player={x,y};renderScene();
+  saveTexture(canvas,(output/("bridge-"+std::to_string(index)+".png")).string());
+  for(float side:{-1.f,1.f}){
+   const V apron{x+side*(VolcanoBridgeHalfSpan+.6f),y};
+   check(volcano_roads::coverage(apron)>.95f&&game.walkable(apron),"each sampled bridge connects to solid road on both banks");
+  }
+ }
+ auto oldCaldera=migrated;
+ auto& oldField=oldCaldera.game;
+ auto horn=std::find_if(oldField.enemies.begin(),oldField.enemies.end(),[](const Enemy& e){return e.type==CinderhornType;});
+ if(horn!=oldField.enemies.end()){
+  const int id=horn->id;
+  horn->alive=false;horn->hp=0;horn->loot[0]=item(Kind::Gold,0,29);
+  const V corpse=horn->pos;
+  ++horn;
+  const int liveId=horn->id;
+  horn->home=horn->pos={35,45};horn->hp=71;
+  const V oldHome=horn->home;
+  oldField.player=VolcanoArrival;
+  oldField.enemies.erase(std::next(horn));
+  saves::Archive previous(false,{},19),file(false);
+  previous(oldCaldera);
+  version=19;size=previous.bytes.size();hash=saves::checksum(previous.bytes);
+  file(magic,version,size,hash);
+  auto upgraded=saves::decode(file.bytes+previous.bytes);
+  const auto* survivor=upgraded.game.findEnemy(liveId);
+  const auto* body=upgraded.game.findCorpse(id);
+  check(count(upgraded.game,CinderhornType)==4&&survivor&&survivor->hp==71&&distance(survivor->home,oldHome)>20,
+        "v19 redistributes existing survivors and fills missing Cinderhorn sites");
+  check(body&&distance(body->pos,corpse)<.001f&&body->loot[0].count==29,
+        "v19 keeps a defeated Cinderhorn and its loot at the old location");
+  const auto updated=saves::encode(upgraded);
+  check(saves::encode(saves::decode(updated))==updated,"Cinderhorn redistribution runs only once");
+ }else check(false,"v19 fixture contains a Cinderhorn");
  check(!audioSystem.available,"audio device remains closed");
  std::ofstream report(output/"report.json");
  report<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks

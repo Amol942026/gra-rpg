@@ -117,7 +117,25 @@ int main(int argc,char** argv){
   invalid=s;invalid.game.player.x=std::numeric_limits<float>::quiet_NaN();rejects([&]{saves::encode(invalid);},"nonfinite position rejected");
   invalid=s;invalid.game.enemies.push_back(invalid.game.enemies[0]);rejects([&]{saves::encode(invalid);},"duplicate enemy ID rejected");
   invalid=s;invalid.game.equipment[0]=item(Kind::Boots);rejects([&]{saves::encode(invalid);},"wrong equipment slot rejected");
+  auto powerBow=s;powerBow.game.equipment[0]=item(Kind::Bow);powerBow.game.lastBowPower=true;
+  powerBow.game.bowReleaseTime=.20f;powerBow.game.arrows.push_back({{15,15},{24,0},7,32,false,1,{},false,true});
+  auto savedPower=saves::decode(saves::encode(powerBow)).game;
+  check(savedPower.arrows[0].power&&savedPower.activePowerVisual()==PowerStyle::Bow,"saved power arrow keeps its trail and bow recoil");
+  for(auto style:{PowerStyle::Sword,PowerStyle::Axe}){
+   saves::Snapshot snapshot;
+   const auto& attack=powerAttack(style);
+   snapshot.game.equipment[0]=item(attack.weapon);
+   snapshot.game.meleeDuration=attack.duration;
+   snapshot.game.swing=attack.duration-.06f;
+   auto restored=saves::decode(saves::encode(snapshot)).game;
+   check(restored.activePowerMelee()==style&&std::abs(restored.powerVisualAge()-.06f/attack.duration)<.001f,
+         "an existing charged melee clock restores its animation phase");
+   restored.update(.03f,{},false);
+   check(std::abs(restored.swing-(attack.duration-.06f-.03f*powerAttackRate(style)))<.001f,
+         "a restored charged melee swing advances at the new release speed");
+  }
   auto envelope=[](saves::Snapshot snapshot,int version){saves::Archive payload(false,{},std::min(version,saves::CurrentVersion));payload(snapshot);saves::Archive file(false);std::string magic="EMBERFALL-SAVE";size_t size=payload.bytes.size();uint64_t hash=saves::checksum(payload.bytes);file(magic,version,size,hash);return file.bytes+payload.bytes;};
+  check(!saves::decode(envelope(powerBow,18)).game.arrows[0].power,"version 18 arrows load without a power marker");
   auto oldDesert=s;oldDesert.game=Game{};oldDesert.game.activateField(WorldLocation::Desert);oldDesert.game.player=DesertArrival;
   oldDesert.game.props.clear();oldDesert.game.props.push_back({DesertFountains[0],7,1});oldDesert.game.props.push_back({{35,35},8,1});
   auto migrated=saves::decode(envelope(oldDesert,5));

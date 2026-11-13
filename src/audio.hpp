@@ -34,7 +34,8 @@ public:
         "dune-eye-attack","dune-eye-hit","dune-eye-fall",
         "cinderhorn-attack","cinderhorn-hit","cinderhorn-fall","spear-thrust","spear-impact",
         "spear-briar-thrust","spear-briar-impact","spear-oasis-thrust","spear-oasis-impact",
-        "spear-basalt-thrust","spear-basalt-impact","spear-dawn-thrust","spear-dawn-impact"
+        "spear-basalt-thrust","spear-basalt-impact","spear-dawn-thrust","spear-dawn-impact",
+        "power-sword","power-axe","power-dagger","power-spear","power-bow","cinderhorn-charge"
     };
     static constexpr int ScoreCount=4;
     inline static constexpr const char* ScoreNames[ScoreCount]={"echoes-of-the-ruins","desert","volcano","tower"};

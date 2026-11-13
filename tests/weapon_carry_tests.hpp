@@ -3,6 +3,7 @@
 #include "../src/equipment_shapes.hpp"
 #include "../src/hero_carry.hpp"
 #include "../src/hero_weapon_motion.hpp"
+#include "../src/power_motion.hpp"
 #include "../src/spear_motion.hpp"
 #include "sword_stow_clearance.hpp"
 namespace carry_checks {
@@ -119,6 +120,9 @@ inline void weaponCarryTests(){
    if(archetype(Kind(k))==Kind::Axe)
     check(carry_checks::dot(pose.vector(data::Weapon,{-1,0,0}),pose.vector(data::Spine,{0,1,0}))>.9f,
           "axe cutting edge faces forward in every carry pose");
+   if(archetype(Kind(k))==Kind::Bow)
+    check(carry_checks::dot(pose.vector(data::HandL,{0,1,0}),pose.vector(data::Spine,{0,1,0}))>.99f,
+          "every carried bow faces forward with its string behind the grip");
    for(int side=0;side<2;side++){
     int upper=side?data::UpperArmR:data::UpperArmL,fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;
     check(std::abs(length(pose.world[fore].p-pose.world[upper].p)-13)<.003f&&std::abs(length(pose.world[hand].p-pose.world[fore].p)-13)<.003f,"weapon carrying preserves both anatomical arm lengths");
@@ -175,5 +179,43 @@ inline void weaponCarryTests(){
   check(length(carried.world[data::HandR].p-attack.world[data::HandR].p)<.001f&&
         length(carried.vector(data::Weapon,{0,0,37})-attack.vector(data::Weapon,{0,0,37}))<.001f,
         "attack entry and recovery join the corrected carrying grip without a snap");
+ }
+ for(PowerStyle style:{PowerStyle::Sword,PowerStyle::Axe})for(float gait:{0.f,.25f,.5f,.75f}){
+  const Kind kind=powerAttack(style).weapon;
+  const auto walking=evaluate(gait,1,0,0);
+  auto overhead=[&](float progress,bool winding){
+   auto pose=walking;
+   power_motion::body(pose,power_motion::sample(style,progress,winding));
+   if(kind==Kind::Sword)hero_sheath::apply(pose,0);
+   else hero_weapon_motion::carry(pose,kind);
+   power_motion::overheadGrip(pose,style,progress,winding,1);
+   return pose;
+  };
+  for(bool winding:{true,false})for(int frame=0;frame<=60;frame++){
+   const auto pose=overhead(frame/60.f,winding);
+   const auto clearance=carry_checks::measure(pose,kind);
+   check(clearance.arms>=1&&clearance.body>=1,"overhead windup and strike clear the arm, head and torso");
+   check(length(pose.world[data::FootL].p-walking.world[data::FootL].p)<.001f&&
+         length(pose.world[data::FootR].p-walking.world[data::FootR].p)<.001f,
+         "overhead weapon layer preserves both walking feet");
+  }
+  const auto ready=overhead(1,true),release=overhead(0,false);
+  const Vec grip=ready.world[data::Weapon].p;
+  const auto blade=sword_pose::idleBlade();
+  const Vec shaft=ready.vector(data::Weapon,{blade.r,blade.f,blade.z});
+  check(grip.z>70&&grip.z+shaft.z>102&&shaft.y<-12,"full charge holds the weapon high over the head");
+  check(length(grip-release.world[data::Weapon].p)<.001f&&
+        length(ready.vector(data::Weapon,{1,0,0})-release.vector(data::Weapon,{1,0,0}))<.001f,
+        "release starts from the exact fully charged grip");
+  if(kind==Kind::Axe)check(ready.vector(data::Weapon,{-1,0,0}).y>.9f,
+                           "raised axe presents its cutting edge forward");
+  if(kind==Kind::Sword){
+   const auto first=overhead(.22f,false),last=overhead(.56f,false);
+   const Vec axis{blade.r,blade.f,blade.z};
+   const auto point=[&](const Pose& pose){return pose.world[data::Weapon].p+pose.vector(data::Weapon,axis);};
+   const Vec from=point(first),to=point(last);
+   check(from.x>46&&to.x<-24&&std::abs(from.z-to.z)<30,
+         "charged sword tip travels across the hero's front at chest height");
+  }
  }
 }

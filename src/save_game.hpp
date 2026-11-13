@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=18; // Appended enemy species and combat sounds.
+constexpr int CurrentVersion=21; // Cinderhorn charge clocks and sound cue.
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -78,7 +78,7 @@ EF_SAVE(FieldState,v.enemies,v.props,v.forage)
 EF_SAVE(Effect,v.pos,v.text,v.life,v.color,v.damageNumber,v.critical,v.height)
 inline void visit(Archive& a,Fireball& v){a(v.pos,v.velocity,v.remaining,v.damage,v.critical);if(a.version>=15)a(v.spell,v.age);}
 EF_SAVE(WeaponBinding,v.kind,v.tier)
-EF_SAVE(Arrow,v.pos,v.velocity,v.remaining,v.damage,v.piercing,v.maxTargets,v.hitIds,v.critical)
+inline void visit(Archive& a,Arrow& v){a(v.pos,v.velocity,v.remaining,v.damage,v.piercing,v.maxTargets,v.hitIds,v.critical);if(a.version>=19)a(v.power);}
 EF_SAVE(PierceFlash,v.pos,v.life)
 inline void visit(Archive& a,Explosion& v){a(v.pos,v.life);if(a.version>=15)a(v.spell);}
 EF_SAVE(Boulder,v.origin,v.target,v.pos,v.age,v.duration,v.height,v.startHeight,v.damage,v.owner)
@@ -104,6 +104,7 @@ inline void visit(Archive& a,Game& v){
  if(a.version>=15)a(v.learnedSpells,v.spellCooldownTotal);
  if(a.version>=16)a(v.skillAssigned);
  if(a.version>=17)a(v.potionAssigned);
+ if(a.version>=19)a(v.lastBowPower);
  else if(a.reading){v.learnedSpells=0;v.spellCooldownTotal=std::max(FireballCooldown,v.spellCd);}
  if(a.reading&&a.version<7){
   require(v.level>=1&&v.level<=100000&&v.xp>=0&&v.xp<std::int64_t(v.level)*80);
@@ -131,10 +132,11 @@ inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Pr
  for(const auto& e:enemies){require(e.id>=0&&ids.insert(e.id).second&&range(e.behavior,4)&&e.type>=0&&e.type<EnemyTypeCount&&e.hp>=0&&e.maxHp>0&&e.hp<=e.maxHp&&e.sandPrisonCasts>=0);validatePos(e.pos);validatePos(e.home);validateAnimation(e.animation);for(auto& i:e.loot)validateItem(i);}
  for(const auto& e:enemies){require(e.boulderCd>=0&&e.boulderCd<=BoulderCooldown+.001f&&e.boulderWindup>=0&&e.boulderWindup<=BoulderWindup+.001f&&e.boulderRecovery>=0&&e.boulderRecovery<=BoulderRecovery+.001f&&e.boulderThrows>=0);validatePos(e.boulderTarget);}
  for(const auto& e:enemies){
-  require(e.boarChargeCd>=0&&e.boarChargeCd<=BoarChargeCooldown+.001f&&e.boarWindup>=0&&e.boarWindup<=BoarChargeWindup+.001f&&e.boarRush>=0&&e.boarRush<=BoarChargeDuration+.001f&&e.boarRecovery>=0&&e.boarRecovery<=BoarChargeRecovery+.001f&&e.boarCharges>=0);
-  int phases=(e.boarWindup>0)+(e.boarRush>0)+(e.boarRecovery>0);require(phases<=1&&(!phases||(e.type==BoarType&&e.alive)));
+  const auto& charge=chargeProfile(e.type);
+  require(e.boarChargeCd>=0&&e.boarChargeCd<=charge.cooldown+.001f&&e.boarWindup>=0&&e.boarWindup<=charge.windup+.001f&&e.boarRush>=0&&e.boarRush<=charge.duration+.001f&&e.boarRecovery>=0&&e.boarRecovery<=charge.recovery+.001f&&e.boarCharges>=0);
+  int phases=(e.boarWindup>0)+(e.boarRush>0)+(e.boarRecovery>0);require(phases<=1&&(!phases||(chargingSpecies(e.type)&&e.alive)));
   validatePos(e.boarAim);require(length(e.boarDirection)<=1.001f&&(!e.boarRush||std::abs(length(e.boarDirection)-1)<.001f));
-  require(!e.boarHit||(e.type==BoarType&&e.alive&&(e.boarRush>0||e.boarRecovery>0)));
+  require(!e.boarHit||(chargingSpecies(e.type)&&e.alive&&(e.boarRush>0||e.boarRecovery>0)));
  }
  for(const auto& e:enemies)require(e.eruptionCd>=0&&e.eruptionCd<=6.001f&&e.eruptionWindup>=0&&e.eruptionWindup<=.951f&&e.eruptions>=0&&(!e.eruptionWindup||(e.type==VolcanoBossType&&e.alive)));
  for(const auto& e:enemies){const auto& spec=enemyAbilityProfile(e.type);require(e.abilityCd>=0&&e.abilityCd<=spec.cooldown+.001f&&e.abilityAge>=-1&&e.abilityCasts>=0&&e.abilityMask>=0&&e.abilityMask<=7&&length(e.abilityDirection)<=1.001f);
@@ -208,7 +210,10 @@ inline Snapshot decode(const std::string& bytes){
   if(result.tower.line<oldCount&&result.tower.line>=result.tower.lineCount())result.tower.line=result.tower.lineCount()-1;
  }
  validate(result);result.game.expandWorld();result.game.refreshVolcanoScenery();
- if(version<18)result.game.restoreRegionalEnemies();
+ if(version<18){
+  for(auto realm:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano})
+   result.game.restoreRegionalEnemies(realm);
+ }else if(version<20)result.game.restoreRegionalEnemies(WorldLocation::Volcano,true);
  validate(result);return result;
 }
 inline std::string now(){std::time_t t=std::time(nullptr);std::tm local{};

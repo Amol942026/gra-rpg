@@ -1,6 +1,7 @@
 #pragma once
 namespace volcano_art {
 inline Texture2D tiles{},scenery{},sceneryEdge{},sky{},lava{},minimap{},macro{},road{},bank{},bridge{},steam{},channelWall{};inline RenderTexture2D terrain{};
+inline Shader bridgeBlend{};
 inline Texture2D extraScenery{},extraSceneryEdge{};inline std::vector<unsigned char> extraSceneryAlpha;
 inline Texture2D abyssCliff{},abyssDistance{};
 inline constexpr int FlowFrames=60;inline constexpr float FlowFPS=30;
@@ -31,6 +32,25 @@ inline std::array<V,4> bridgeDeck(int index){
  const V center{lavaCenter(VolcanoBridgeRivers[index],y),y};
  const float span=VolcanoBridgeHalfSpan,depth=VolcanoBridgeHalfDepth;
  return {center+V{-span,-depth},center+V{-span,depth},center+V{span,depth},center+V{span,-depth}};
+}
+inline void initBridgeBlend(){
+ bridgeBlend=LoadShaderFromMemory(nullptr,R"GLSL(#version 330
+in vec2 fragTexCoord;
+uniform sampler2D texture0;
+out vec4 finalColor;
+void main(){
+ vec2 uv=fragTexCoord;
+ float end=abs(uv.x-1.0);
+ float side=abs(uv.y*2.0-1.0);
+ float grit=.045*sin(uv.y*24.0+uv.x*17.0)+.028*sin(uv.y*61.0-uv.x*47.0);
+ float fade=smoothstep(.48,.97,end+grit+side*side*.11);
+ float width=mix(1.0,.74,smoothstep(.46,.99,end));
+ float shoulder=smoothstep(width-.12,width,side+grit)*smoothstep(.46,.88,end);
+ vec4 flagstone=texture(texture0,uv);
+ vec3 dust=flagstone.rgb*vec3(.92,.86,.90);
+ finalColor=vec4(mix(flagstone.rgb,dust,fade),flagstone.a*(1.0-fade)*(1.0-shoulder)*(1.0-smoothstep(.93,1.0,end)));
+}
+)GLSL");
 }
 inline void canyonFace(const CanyonFace& face){std::array<Vector2,4> p;for(int i=0;i<4;i++){p[i]=projected(face.corners[i]);p[i].y+=face.depth[i];}textured(channelWall,p,face.from,0,face.to,1);}
 inline int variant(const Prop& p){return Game::hash(int(std::round(p.pos.x*4))+p.type*131,int(std::round(p.pos.y*4))+53)%8;}
@@ -99,6 +119,7 @@ inline void make(){
  Image atlas=LoadImage("assets/volcano/lava-flow.png");for(int f=0;f<60;f++){Image frame=ImageFromImage(atlas,{float(f%8*256),float(f/8*256),256,256});lavaFrames[f]=LoadTextureFromImage(frame);UnloadImage(frame);SetTextureFilter(lavaFrames[f],TEXTURE_FILTER_BILINEAR);SetTextureWrap(lavaFrames[f],TEXTURE_WRAP_REPEAT);}UnloadImage(atlas);lava=lavaFrames[0];
  for(Texture2D t:{tiles,scenery,sceneryEdge,sky,macro,road,bank,bridge,steam})if(t.id)SetTextureFilter(t,TEXTURE_FILTER_BILINEAR);
  for(Texture2D t:{tiles,road,bank,bridge})SetTextureWrap(t,TEXTURE_WRAP_REPEAT);
+ initBridgeBlend();
  Image mask=LoadImage("assets/volcano/scenery.png");Color* pixels=LoadImageColors(mask);sceneryAlpha.resize(mask.width*mask.height);for(size_t i=0;i<sceneryAlpha.size();i++)sceneryAlpha[i]=pixels[i].a;UnloadImageColors(pixels);UnloadImage(mask);
  mask=LoadImage("assets/volcano/scenery-extra.png");pixels=LoadImageColors(mask);extraSceneryAlpha.resize(mask.width*mask.height);for(size_t i=0;i<extraSceneryAlpha.size();i++)extraSceneryAlpha[i]=pixels[i].a;UnloadImageColors(pixels);UnloadImage(mask);
  terrain=render_targets::colorOnly(TerrainCacheWidth,TerrainCacheHeight);BeginTextureMode(terrain);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,TerrainBakeScale});
@@ -166,8 +187,9 @@ inline void flow(bool ambience=true){
   const bool flip=(p[1].x-p[0].x)*(p[2].y-p[0].y)-(p[1].y-p[0].y)*(p[2].x-p[0].x)>0;const int normal[]={0,1,2,3},reverse[]={0,3,2,1};
   for(int k=0;k<4;k++){int i=flip?reverse[k]:normal[k];rlTexCoord2f(uv[i].x,uv[i].y);rlVertex2f(p[i].x,p[i].y);}
  }rlEnd();rlSetTexture(0);
- // The flow runs continuously at the bottom of the channel. Paint the
- // opaque decks last so their projected footprints cover both lava passes.
+ // The deck spans the channel, then feathers into the baked road on each bank.
+ const bool blended=IsShaderValid(bridgeBlend);
+ if(blended)BeginShaderMode(bridgeBlend);
  for(int index=0;index<int(VolcanoBridges.size());index++){
   const auto deck=bridgeDeck(index);
   std::array<Vector2,4> points{};
@@ -175,6 +197,7 @@ inline void flow(bool ambience=true){
   if(points[3].x<0||points[1].x>WorldW||points[2].y<0||points[0].y>H)continue;
   textured(bridge,points,0,0,2,1);
  }
+ if(blended)EndShaderMode();
  if(!ambience)return;
  for(int n=0;n<20;n++){float x=std::fmod(n*191.f+game.time*(5+n%3),float(WorldW)),y=std::fmod(n*119.f-game.time*14+H*100,float(H));ellipse(x,y,1.2f,2.5f,Fade(rgb(255,177,99),.2f+.15f*std::sin(n+game.time*2)));}
 }
@@ -216,5 +239,5 @@ inline void bolt(const CinderBolt& b){Vector2 p=screen(b.pos),v{(b.velocity.x-b.
  if(caldera_attack_art::draw(caldera_attack_art::Clip::Cinder,{p.x,p.y-35},{80,48},std::atan2(v.y,v.x)*RAD2DEG,phase,1,{.64f,.5f}))return;
  for(int i=4;i>=0;i--)ellipse(p.x-v.x*i*5,p.y-35-v.y*i*5,6-i*.7f,5-i*.6f,Fade(rgb(255,110+i*15,48),1-i*.16f));ellipse(p.x,p.y-35,2.3f,2.3f,rgb(255,239,183));
 }
-inline void unload(){for(auto t:{tiles,scenery,sceneryEdge,extraScenery,extraSceneryEdge,sky,minimap,macro,road,bank,bridge,steam,channelWall,portalFrame,portalLoop,portalOutline,abyssCliff,abyssDistance})if(t.id)UnloadTexture(t);for(auto t:lavaFrames)if(t.id)UnloadTexture(t);if(terrain.id)UnloadRenderTexture(terrain);tiles=scenery=sceneryEdge=extraScenery=extraSceneryEdge=sky=lava=minimap=macro=road=bank=bridge=steam=channelWall=portalFrame=portalLoop=portalOutline=abyssCliff=abyssDistance={};lavaFrames={};terrain={};lavaStrips.clear();canyonFronts.clear();abyssFaces.clear();abyssFalls.clear();abyssLips.clear();sceneryAlpha.clear();extraSceneryAlpha.clear();portalMask.clear();}
+inline void unload(){for(auto t:{tiles,scenery,sceneryEdge,extraScenery,extraSceneryEdge,sky,minimap,macro,road,bank,bridge,steam,channelWall,portalFrame,portalLoop,portalOutline,abyssCliff,abyssDistance})if(t.id)UnloadTexture(t);for(auto t:lavaFrames)if(t.id)UnloadTexture(t);if(terrain.id)UnloadRenderTexture(terrain);if(IsShaderValid(bridgeBlend))UnloadShader(bridgeBlend);bridgeBlend={};tiles=scenery=sceneryEdge=extraScenery=extraSceneryEdge=sky=lava=minimap=macro=road=bank=bridge=steam=channelWall=portalFrame=portalLoop=portalOutline=abyssCliff=abyssDistance={};lavaFrames={};terrain={};lavaStrips.clear();canyonFronts.clear();abyssFaces.clear();abyssFalls.clear();abyssLips.clear();sceneryAlpha.clear();extraSceneryAlpha.clear();portalMask.clear();}
 }

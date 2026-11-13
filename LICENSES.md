@@ -1,5 +1,14 @@
 # Zależności i zasoby
 
+- Efekty mocnych ataków w `assets/sprites/power-attacks.png` powstały
+  w ImageGen i lokalnym ComfyUI / DreamShaper 8 (Lykon). Wykończenie w Kricie
+  oraz krzywe Synfiga mają własne źródła w `C:/AI2D/sprites/power-attacks-20261112`
+  i `C:/AI2D/animations/power-attacks-20261112`.
+- Dźwięki `assets/audio/power-*.wav` to miksy lokalnego ComfyUI z nagrań
+  Kenney (Impact Sounds, RPG Audio), artisticdude (Swishes Sound Pack)
+  i istniejących odgłosów łuku. Źródła, licencje, modyfikacje i pomiary
+  są w `C:/AI2D/audio/power-attacks-20261112` i w atrybucjach poniżej.
+
 - Ikony broni z trzech krain w `assets/sprites/equipment-icons.png`
   powstały w ImageGen. Materiały kling, głowic i łuków w
   `assets/sprites/hero-realm-weapons.png` powstały w lokalnym ComfyUI / DreamShaper 8

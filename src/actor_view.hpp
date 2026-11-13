@@ -18,30 +18,34 @@ void hero(float x,float y,float s,bool portrait) {
         if(roll*RollDuration<RollProtection)ellipseOutline(x,y+2*s,28*s,13*s,Fade(Gold,.8f));
     }
     actor_art::shadowCacheKey=portrait?-1:0;
-    actor_art::draw(0,x,y,s,state,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,nullptr,roll,progress,portrait?-1:game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),!portrait&&game.empoweredPose(),&game.equipment,-1,fall,fallR,fallF);
+    actor_art::draw(0,x,y,s,state,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,nullptr,roll,progress,portrait?-1:game.visibleBowCharge(),game.ammoCount(),!portrait&&game.empoweredPose(),&game.equipment,-1,fall,fallR,fallF,portrait?PowerStyle::Count:game.activePowerVisual(),game.powerVisualAge(),portrait?-1:game.powerWindupProgress());
     actor_art::shadowCacheKey=-1;
 }
 void monster(Enemy& e,float x,float y) {
     sand_prison::drawCaster(e,x,y);
     if(e.eruptionWindup>0)ellipseOutline(x,y,62,30,Fade(rgb(255,159,88),.7f));
-    if(e.type==BoarType&&e.boarWindup>0){
-        float progress=1-e.boarWindup/BoarChargeWindup;
-        Color warning=Fade(rgb(244,154,73),.4f+.5f*progress);
+    if(chargingSpecies(e.type)&&e.boarWindup>0){
+        const auto& charge=chargeProfile(e.type);
+        float progress=1-e.boarWindup/charge.windup;
+        Color warning=Fade(e.type==CinderhornType?rgb(255,125,70):rgb(244,154,73),.4f+.5f*progress);
         V direction=normalized(e.boarAim-e.pos),side{-direction.y,direction.x};
-        V end=e.pos+direction*std::min(distance(e.pos,e.boarAim),BoarChargeSpeed*BoarChargeDuration);
-        auto a=screen(e.pos+side*.55f),b=screen(end+side*.55f),c=screen(end-side*.55f),d=screen(e.pos-side*.55f);
+        V delta=direction*(e.type==CinderhornType?charge.speed*charge.duration:std::min(distance(e.pos,e.boarAim),charge.speed*charge.duration));
+        V end=e.pos+delta*std::min(1.f,game.chargeObstacleTime(e,delta));
+        const float width=e.type==CinderhornType?.74f:.55f;
+        auto a=screen(e.pos+side*width),b=screen(end+side*width),c=screen(end-side*width),d=screen(e.pos-side*width);
         poly({a,b,c,d},Fade(warning,.1f+.08f*progress));
         line(a.x,a.y,b.x,b.y,warning,2);line(d.x,d.y,c.x,c.y,warning,2);
         auto tip=screen(end),left=screen(end-direction*.45f+side*.4f),right=screen(end-direction*.45f-side*.4f);
         line(left.x,left.y,tip.x,tip.y,warning,2);line(right.x,right.y,tip.x,tip.y,warning,2);
         ellipseOutline(x,y,34+progress*5,17+progress*2,warning);
     }
-    if(e.type==BoarType&&e.boarRush>0){
+    if(chargingSpecies(e.type)&&e.boarRush>0){
         // Bounded ground dust; existing creature gait still follows actual travel.
         for(int i=0;i<3;i++){
             auto p=screen(e.pos-e.boarDirection*(.5f+i*.35f));
             float pulse=.5f+.5f*std::sin(game.time*26-i*1.7f);
-            ellipse(p.x,p.y,5+i*2+pulse*2,2+i,Fade(rgb(161,139,99),.27f-i*.06f));
+            const Color ash=e.type==CinderhornType?rgb(177,125,106):rgb(161,139,99);
+            ellipse(p.x,p.y,5+i*2+pulse*2,2+i,Fade(ash,.27f-i*.06f));
         }
     }
     if(e.windup>0){

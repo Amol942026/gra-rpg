@@ -16,6 +16,12 @@ inline const std::vector<Segment>& segments(){
    }
    append(road.back());
   }
+  // Let the worn road continue across the apron of every bridge.
+  for(size_t i=0;i<VolcanoBridges.size();i++){
+   const float y=VolcanoBridges[i].y;
+   const float x=lavaCenter(VolcanoBridgeRivers[i],y);
+   result.push_back({{x-VolcanoBridgeHalfSpan-1.1f,y},{x+VolcanoBridgeHalfSpan+1.1f,y}});
+  }
   return result;
  }();return value;
 }

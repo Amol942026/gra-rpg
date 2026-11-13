@@ -17,8 +17,8 @@ bool runCrowdQA() {
         Vector2 p=screen(game.enemies[i].pos);mouse={p.x,p.y-(i==0?18.f:36.f)};
         check(pickWorld(mouse).kind==HoverKind::Enemy,"test pointer is over a monster");
     }
-    clickWorldOrInventory();mouse={0,0};
-    check(game.swing>0&&game.attackCd>0&&game.animation.direction==Direction::E,"left click swings without turning or selecting a target");
+    clickWorldOrInventory();releaseWorldAttack();mouse={0,0};
+    check(game.swing>0&&game.attackCd>0,"left tap releases one sword swing");
     check(inspectWorld(pickWorld(mouse)).source==HoverKind::None,"moving the pointer away leaves no selected enemy in HUD");
     for(int i=0;i<6;i++)check(game.enemies[i].hp<game.enemies[i].maxHp,"one left click hits every nearby monster");
     check(game.enemies[6].hp==game.enemies[6].maxHp,"distant boss is outside the attack area");

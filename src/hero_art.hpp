@@ -41,7 +41,8 @@ inline int armorMaterial(Kind kind){
 }
 inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
                       bool helmet,bool shield,Kind weapon,bool flash,bool rolling,bool striking,
-                      float strikeProgress,float bowDraw,int quiverArrows,float run,bool empowered,const AnimationState& state,float rollProgress,const HeroAppearance& appearance,float knockdown=-1,float fallR=0,float fallF=-1){
+                      float strikeProgress,float bowDraw,int quiverArrows,float run,bool empowered,const AnimationState& state,float rollProgress,const HeroAppearance& appearance,float knockdown=-1,float fallR=0,float fallF=-1,
+                      PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1){
     rig.reserve(1800);
     rig.setSmoothSurfaces();
     const auto& held=appearance[0];const auto& headwear=appearance[1];const auto& ward=appearance[2];
@@ -65,41 +66,57 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     const Color weaponGrip=held.present()?paint(held.paint.secondary):paint(0x60452e);
     const hero_weapon_art::Finish weaponFinish{weaponMetal,weaponGrip,weaponTrim,paint(held.paint.accent),flash};
     const Color leather=paint(0x744b38),pants=paint(0x5d5746);
-    bool archer=weapon==Kind::Bow;float drawCharge=std::max(0.f,bowDraw);
+    if(rolling||knockdown>=0){power=PowerStyle::Count;windup=-1;}
+    const float stowPhase=weapon==Kind::Sword&&!striking?(rolling?1.f:state.motionInitialized?state.swordStow:std::clamp(run,0.f,1.f)):0;
+    const bool charging=windup>=0;
+    if(charging)power=powerStyle(weapon);
+    const bool overhead=power_motion::usesOverheadGrip(power);
+    const float powerProgress=charging?windup:powerAge;
+    const auto powerKey=power_motion::sample(power,powerProgress,charging);
+    if(power!=PowerStyle::Count)strikeProgress=powerKey.phase;
+    if(power==PowerStyle::Sword)empowered=true;
+    bool archer=weapon==Kind::Bow;float drawCharge=std::clamp(bowDraw,0.f,1.f);
+    if(power==PowerStyle::Bow)drawCharge=std::clamp(drawCharge+.20f*powerKey.recoil,0.f,1.f);
+    const float bowLift=charging&&archer?powerKey.phase:1;
     const bool spearing=weapon==Kind::Spear;
     const bool axeOrDagger=weapon==Kind::Axe||weapon==Kind::Dagger;
-    const bool swordStrike=striking&&weapon==Kind::Sword;
-    float stowPhase=weapon==Kind::Sword&&!striking?(rolling?1.f:state.motionInitialized?state.swordStow:std::clamp(run,0.f,1.f)):0;
+    const bool attackPose=striking||charging;
+    const bool swordStrike=striking&&weapon==Kind::Sword&&!overhead;
     float moving=state.motionInitialized?state.moveBlend:(state.moving?1.f:0.f);
-    auto pose=hero_motion::evaluate(state.phase,moving,bowDraw>=0?0:state.runBlend,state.idleTime,swordStrike?strikeProgress:-1,empowered,rollProgress);
+    const float sprintBlend=attackPose||bowDraw>=0?0:state.runBlend;
+    auto pose=hero_motion::evaluate(state.phase,moving,sprintBlend,state.idleTime,swordStrike?strikeProgress:-1,empowered,rollProgress);
+    if(power!=PowerStyle::Count)power_motion::body(pose,powerKey);
     if(!rolling){
-        if(archer&&bowDraw<0)hero_carry::bow(pose);
+        if(archer&&(bowDraw<0||bowLift<1))hero_carry::bow(pose);
         if(axeOrDagger){
-            if(striking)hero_weapon_motion::apply(pose,weapon,strikeProgress);
+            if(attackPose&&!overhead)hero_weapon_motion::apply(pose,weapon,strikeProgress);
             else hero_weapon_motion::carry(pose,weapon);
         }
     }
     if(swordStrike)hero_carry::melee(pose,1-hero_motion::ease(strikeProgress/.12f)*hero_motion::ease((1-strikeProgress)/.20f));
-    const float spearSlide=spearing?spear_motion::apply(pose,held.value.kind,striking?strikeProgress:-1,moving,stride):0;
-    auto stow=weapon==Kind::Sword&&!striking?hero_sheath::apply(pose,stowPhase):sword_stow::sample(0);
+    const float spearSlide=spearing?spear_motion::apply(pose,held.value.kind,attackPose?strikeProgress:-1,moving,stride):0;
+    auto stow=weapon==Kind::Sword&&(!swordStrike||stowPhase>0)?hero_sheath::apply(pose,stowPhase):sword_stow::sample(0);
+    if(overhead)power_motion::overheadGrip(pose,power,powerProgress,charging,1-hero_motion::ease(stowPhase/.26f));
     if(knockdown>=0){
         pose=hero_knockdown::evaluate(pose,knockdown,{fallR,fallF,0});
         if(weapon==Kind::Sword&&stowPhase>=.999f)stow=hero_sheath::apply(pose,1);
         if(knockdown>0&&knockdown<1)rig.setGroundBounded();
     }
     float exposedBlade=weapon==Kind::Sword?sword_stow::visibleFraction(stow):1;
-    if(archer&&bowDraw>=0&&!rolling){
+    if(archer&&bowDraw>=0&&bowLift>0&&!rolling){
         for(int side=0;side<2;side++){
             int upper=side?hero_motion::data::UpperArmR:hero_motion::data::UpperArmL;
             int fore=side?hero_motion::data::ForearmR:hero_motion::data::ForearmL;
             int handBone=side?hero_motion::data::HandR:hero_motion::data::HandL;
             auto sh=pose.world[upper].p;
             hero_motion::Vec target=side?hero_motion::Vec{4-12*drawCharge,16-23*drawCharge,47}:hero_motion::Vec{-10,27,47};
+            const auto carried=pose.world[handBone];
+            target=carried.p*(1-bowLift)+target*bowLift;
             auto arm=sword_pose::solveArm({sh.x,sh.y,sh.z},{target.x,target.y,target.z},side?1:-1);
             hero_motion::Vec elbow{arm.elbow.r,arm.elbow.f,arm.elbow.z},hand{arm.hand.r,arm.hand.f,arm.hand.z};
             hero_motion::attach(pose,upper,sh,elbow,hero_motion::restHead(fore));
             hero_motion::attach(pose,fore,elbow,hand,hero_motion::restHead(handBone));
-            pose.world[handBone]={hand,pose.world[hero_motion::data::Spine].q};
+            pose.world[handBone]={hand,hero_motion::mix(carried.q,pose.world[hero_motion::data::Spine].q,bowLift)};
         }
         pose.bind();
     }
@@ -341,9 +358,11 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
             P3 grip=world(pose.world[hero_motion::data::HandL].p);
             P3 axis=world(pose.vector(hero_motion::data::HandL,{0,0,1}));
             P3 forward=world(pose.vector(hero_motion::data::HandL,{0,1,0}));
-            const bool nocked=bowDraw>=0&&!rolling;
+            const bool nocked=bowDraw>=0&&bowLift>.58f&&!rolling;
             const float curve=equipment_shape::BowCurve*(1-.15f*drawCharge);
-            P3 string=nocked?world(pose.world[hero_motion::data::HandR].p):grip-forward*curve;
+            P3 string=grip-forward*curve;
+            if(bowDraw>=0&&!rolling)
+                string=string*(1-bowLift)+world(pose.world[hero_motion::data::HandR].p)*bowLift;
             hero_weapon_art::bow(rig,grip,axis,forward,string,weaponFinish,held.value.kind,drawCharge,nocked);
         }
         if(side>0&&spearing){

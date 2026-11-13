@@ -87,7 +87,7 @@ inline void player(Vector2 p,float size=1,const AnimationState* special=nullptr)
  actor_art::shadowCacheKey=0;
  float fall=special?-1:game.knockdownProgress(),fallR=0,fallF=-1;if(fall>=0)actor_art::prepareKnockdown(game,state,fallR,fallF);
  actor_art::draw(0,p.x,p.y,size,state,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,nullptr,
- special?-1:game.rollProgress(),progress,special?-1:game.bowDrawing?game.bowCharge():game.bowReleaseTime>0?game.lastBowCharge*game.bowReleaseTime/.18f:-1,game.ammoCount(),!special&&game.empoweredPose(),&game.equipment,-1,fall,fallR,fallF);
+ special?-1:game.rollProgress(),progress,special?-1:game.visibleBowCharge(),game.ammoCount(),!special&&game.empoweredPose(),&game.equipment,-1,fall,fallR,fallF,special?PowerStyle::Count:game.activePowerVisual(),game.powerVisualAge(),special?-1:game.powerWindupProgress());
  actor_art::shadowCacheKey=-1;visibleCasters++;
 }
 inline void mage(Vector2 p,float size,float time,float casting){

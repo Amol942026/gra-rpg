@@ -5,7 +5,7 @@
 bool spearActive()const{return meleeDuration==SpearDuration&&swing>0&&
                                archetype(equipment[0].kind)==Kind::Spear;}
 void cancelTimedWeaponAttack(){
- if(spearActive()||meleeDuration==AxeAttackDuration||meleeDuration==DaggerAttackDuration)swing=0;
+ if(spearActive()||meleeDuration==AxeAttackDuration||meleeDuration==DaggerAttackDuration||activePowerMelee()!=PowerStyle::Count)swing=0;
 }
 Cue spearSound(bool impact)const{
  return Cue(int(Cue::SpearThrust)+2*(int(equipment[0].kind)-FirstSpear)+int(impact));
@@ -32,6 +32,17 @@ bool startAxeOrDagger(Kind weapon){
  sound(Cue::Swing,player);
  return true;
 }
+float weaponContactBlock(V delta,float padding)const{
+ float block=2.f;
+ auto stopAt=[&](V center,float radius){block=std::min(block,segmentCircle(player,delta,center,radius+padding));};
+ for(const auto& prop:props)stopAt(prop.pos,propRadius(prop.type));
+ for(const auto& chest:chests)if(chest.location==location)stopAt(chest.pos,ChestRadius);
+ if(hasFountains())for(V center:fountains())stopAt(center,FountainRadius);
+ const V end=player+delta;
+ if(end.x<MapWalkMin||end.x>MapWalkMax)block=std::min(block,(std::clamp(end.x,MapWalkMin,MapWalkMax)-player.x)/delta.x);
+ if(end.y<MapWalkMin||end.y>MapWalkMax)block=std::min(block,(std::clamp(end.y,MapWalkMin,MapWalkMax)-player.y)/delta.y);
+ return block;
+}
 void updateTimedWeaponAttack(float previousSwing){
  if(previousSwing<=0||sandTrapped()||knockedBack()||rolling()||inTower())return;
  const Kind weapon=archetype(equipment[0].kind);
@@ -44,14 +55,7 @@ void updateTimedWeaponAttack(float previousSwing){
  if(previousSwing<=impactRemaining||swing>impactRemaining)return;
  if(axe){hitMeleeArea();return;}
  const V delta=normalized(facing)*(spear?SpearReach:MeleeRange);
- float block=2.f;
- auto stopAt=[&](V center,float radius){block=std::min(block,segmentCircle(player,delta,center,radius+SpearTipRadius));};
- for(const auto& prop:props)stopAt(prop.pos,propRadius(prop.type));
- for(const auto& chest:chests)if(chest.location==location)stopAt(chest.pos,ChestRadius);
- if(hasFountains())for(V center:fountains())stopAt(center,FountainRadius);
- const V end=player+delta;
- if(end.x<MapWalkMin||end.x>MapWalkMax)block=std::min(block,(std::clamp(end.x,MapWalkMin,MapWalkMax)-player.x)/delta.x);
- if(end.y<MapWalkMin||end.y>MapWalkMax)block=std::min(block,(std::clamp(end.y,MapWalkMin,MapWalkMax)-player.y)/delta.y);
+ const float block=weaponContactBlock(delta,SpearTipRadius);
  Enemy* first=nullptr;float contact=block;
  for(auto& enemy:enemies)if(enemy.alive){
   const float t=segmentCircle(player,delta,enemy.pos,enemy.radius()+SpearTipRadius);

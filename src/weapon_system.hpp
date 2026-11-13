@@ -24,7 +24,7 @@ int ammoCount()const{int count=0;for(const auto& value:bag)if(value.kind==Kind::
 float bowCharge()const{return std::clamp(bowDrawTime/BowDrawDuration,0.f,1.f);}
 static float bowRange(float charge){return BowMinRange+(BowMaxRange-BowMinRange)*std::clamp(charge,0.f,1.f);}
 float arrowDamage(float charge)const{return float(damage())+12*std::clamp(charge,0.f,1.f);}
-void cancelBow(){bowDrawing=false;bowDrawTime=0;bowReleaseTime=0;piercingArrowArmed=false;}
+void cancelBow(){bowDrawing=false;bowDrawTime=0;bowReleaseTime=0;piercingArrowArmed=false;lastBowPower=false;cancelMeleeHold();}
 void aimBow(V aim){if(!bowDrawing||length(aim)<.001f)return;bowAim=normalized(aim);facing=bowAim;animation.face(bowAim.x,bowAim.y);}
 bool beginBow(V aim){
  if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||bowDrawing||archetype(equipment[0].kind)!=Kind::Bow)return false;
@@ -32,16 +32,20 @@ bool beginBow(V aim){
  if(ammoCount()<=0){say("Brak strzał w plecaku.");sound(Cue::Reject,player);return false;}
  bowDrawing=true;bowDrawTime=bowReleaseTime=0;bowAim=normalized(length(aim)>.001f?aim:facing);if(length(bowAim)<.001f)bowAim={0,-1};aimBow(bowAim);sound(Cue::BowDraw,player);return true;
 }
-bool releaseBow(){
+bool releaseBow(bool allowPower=false){
  if(!bowDrawing)return false;
- float charge=bowCharge();V direction=bowAim;bool piercing=piercingArrowArmed;cancelBow();
+ float charge=bowCharge();V direction=bowAim;bool piercing=piercingArrowArmed;
+ const bool power=allowPower&&!piercing&&bowDrawTime>=PowerHoldTime;cancelBow();
  if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||attackCd>0||archetype(equipment[0].kind)!=Kind::Bow||ammoCount()<=0)return false;
  if(piercing&&(skillRank(Skill::PiercingArrow)<=0||piercingArrowCd>0||mana<PiercingArrowCost))return false;
  for(auto& value:bag)if(value.kind==Kind::Arrow&&!value.empty()){if(--value.count<=0)value={};break;}
- arrows.push_back({player,direction*(12+8*charge),bowRange(charge),arrowDamage(charge),piercing,piercing?piercingTargets():1,{},rollCritical()});
+ const auto& heavy=powerAttack(PowerStyle::Bow);
+ arrows.push_back({player,direction*(power?24.f:12+8*charge),bowRange(charge)*(power?heavy.reach:1.f),
+                   arrowDamage(charge)*(power?heavy.multiplier:1.f),piercing,piercing?piercingTargets():1,{},rollCritical(),power});
  if(piercing){mana-=PiercingArrowCost;piercingArrowCd=PiercingArrowCooldown;}
  lastBowPiercing=piercing;
- attackCd=BowCooldown;lastBowCharge=charge;bowReleaseTime=.18f;sound(Cue::BowShot,player);return true;
+ lastBowPower=power;attackCd=power?heavy.cooldown:BowCooldown;lastBowCharge=charge;
+ bowReleaseTime=power?heavy.duration:.18f;sound(power?Cue::PowerBow:Cue::BowShot,player);return true;
 }
 void updateArrows(float dt){
  for(size_t i=0;i<arrows.size();){

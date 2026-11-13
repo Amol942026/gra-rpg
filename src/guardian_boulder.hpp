@@ -17,7 +17,7 @@ static BoulderSocket boulderHand(const Enemy& e,float progress){
 void cancelBoulderAttacks(){
  cancelEnemyAbilities();
  cancelVolcanoAttacks();
- cancelBoarCharges();
+ cancelCharges();
  boulders.clear();boulderImpacts.clear();
  heroKnockback={};heroKnockbackRemaining=heroKnockdownRemaining=0;heroKnockdownFacing=0;
  for(auto& e:enemies){if(e.boulderWindup>0||e.boulderRecovery>0)e.boulderCd=std::max(e.boulderCd,BoulderFirstDelay);e.boulderWindup=e.boulderRecovery=0;}

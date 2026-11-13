@@ -11,12 +11,12 @@ bool runControlsQA(){
     for(int i=0;i<3;i++){V p=game.player+V{float(i-1),-.8f};game.enemies.push_back({i,0,p,p,500,500});game.enemies.back().windup=100;}
     Vector2 target=screen(game.enemies[0].pos);mouse={target.x,target.y-18};
     leftClickGameplay({});
-    check(game.swing>0&&game.attackCd>0,"LPM world press starts a sword swing");
+    check(game.holdingMelee()&&game.swing==0&&releaseWorldAttack()&&game.swing>0&&game.attackCd>0,"short LPM release starts a sword swing");
     for(const auto& e:game.enemies)check(e.hp<500,"one LPM press damages every nearby enemy");
     float hp=game.enemies[0].hp;
     for(int i=0;i<120;i++)game.update(1.f/60,{},false);
     check(game.enemies[0].hp==hp&&game.swing==0,"held mouse without another press never repeats the swing");
-    leftClickGameplay({});check(game.enemies[0].hp<hp,"a new LPM press starts another swing after cooldown");
+    leftClickGameplay({});releaseWorldAttack();check(game.enemies[0].hp<hp,"a new LPM tap starts another swing after cooldown");
 
     reset();V position=game.player+V{3,-2};game.enemies.push_back({44,0,position,position,100,100});
     target=screen(position);mouse={target.x,target.y-18};

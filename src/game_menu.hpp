@@ -156,7 +156,7 @@ void menuHeading(const std::string& title,const std::string& subtitle){
 }
 struct ControlBinding {const char* key;const char* action;};
 constexpr ControlBinding expeditionControls[]={
- {"WSAD","Ruch"},{"Shift","Bieg (przytrzymaj)"},{"Spacja","Unik"},{"LPM","Miecz: kliknij · łuk: napnij i puść"},
+ {"WSAD","Ruch"},{"Shift","Bieg (przytrzymaj)"},{"Spacja","Unik"},{"LPM","Kliknij: atak · przytrzymaj i puść: mocny atak"},
  {"C / K","Rzuć czar / otwórz księgę czarów"},{"Z / X / V","Użyj przypisanej umiejętności"},
  {"1 / 2","Użyj przypisanej mikstury HP / MP"},{"Q","Koło wyboru broni"},{"E","Interakcja z pobliskim obiektem"}
 };

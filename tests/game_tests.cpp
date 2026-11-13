@@ -17,6 +17,7 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "forest_loot_tests.hpp"
 #include "mushroom_tests.hpp"
 #include "bow_tests.hpp"
+#include "power_attack_tests.hpp"
 #include "spear_tests.hpp"
 #include "intro_tests.hpp"
 #include "forest_expansion_tests.hpp"
@@ -57,6 +58,7 @@ int main(){
  dialogueContextTests();
  volcanoTests();
  boarChargeTests();
+ cinderhornChargeTests();
  performanceCollisionTests();
  expandedLootTests();
  guardianGaitTests();
@@ -81,6 +83,7 @@ int main(){
  towerStairsTests();
  criticalHealingTests();
  developerTests();
+ powerAttackTests();
  spearTests();
  towerFloorsTests();
  skillTests();

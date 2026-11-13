@@ -15,9 +15,9 @@ bool runInspectionQA() {
         check(info.name==stats.name&&info.kind==stats.kind&&info.attack==enemy.damage()&&info.defense==enemy.defense(),"HUD uses actual enemy identity and combat stats");
         game.hit(enemy,10);info=inspectWorld(hit);
         check(info.hp==enemy.hp&&info.maxHp==enemy.maxHp,"HUD health updates immediately after damage");
-        const Direction direction=game.animation.direction;
-        check(clickWorldOrInventory(),"left click on a monster starts one area swing");
-        check(game.animation.direction==direction&&game.swing>0&&game.attackCd>0&&dragging.place==Place::None,"monster click swings without selecting a target or starting item drag");
+        const Direction direction=directionFor(position.x-game.player.x,position.y-game.player.y,game.animation.direction);
+        check(clickWorldOrInventory()&&releaseWorldAttack(),"left tap on a monster starts one area swing");
+        check(game.animation.direction==direction&&game.swing>0&&game.attackCd>0&&dragging.place==Place::None,"monster click aims the swing without starting item drag");
         game.swing=game.attackCd=0;
         activateMouseAction(0,{});
         check(game.swing==0&&game.attackCd==0,"clicking sword indicator cannot attack");

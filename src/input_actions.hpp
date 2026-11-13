@@ -13,7 +13,13 @@ V combatAimFromPointer(){
 bool releaseWorldBow(){
  if(!game.bowDrawing)return false;
  if(!gameplayInputAllowed()||!worldPointerAllowed(mouse)||dragging.place!=Place::None){game.cancelBow();return false;}
- game.aimBow(combatAimFromPointer());return game.releaseBow();
+ game.aimBow(combatAimFromPointer());return game.releaseBow(true);
+}
+bool releaseWorldAttack(){
+ if(game.bowDrawing)return releaseWorldBow();
+ if(!gameplayInputAllowed()||!worldPointerAllowed(mouse)||dragging.place!=Place::None){game.cancelMeleeHold();return false;}
+ if(!game.holdingMelee())return false;
+ return game.releaseMeleeHold(combatAimFromPointer());
 }
 bool clickWorldOrInventory(double now=GetTime()) {
     if(!gameplayInputAllowed()||dragging.place!=Place::None){inventoryClicks.clear();return false;}
@@ -35,7 +41,7 @@ bool clickWorldOrInventory(double now=GetTime()) {
     if(hit.kind==HoverKind::TowerObject||hit.kind==HoverKind::TowerStair)return useTowerTarget(hit);
         if(hit.kind==HoverKind::Prop&&game.props[hit.index].type==13){bool ok=game.inVolcano()?game.useVolcanoPortal():game.useDesertPortal();if(ok){dragging={};nearbyPage=0;hovered={};}return ok;}
     V aim=combatAimFromPointer();
-    return archetype(game.equipment[0].kind)==Kind::Bow?game.beginBow(aim):game.attack(aim);
+    return archetype(game.equipment[0].kind)==Kind::Bow?game.beginBow(aim):game.beginMeleeHold(aim);
 }
 bool rightClickWorldOrInventory(){
     inventoryClicks.clear();

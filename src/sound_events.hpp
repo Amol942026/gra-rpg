@@ -15,7 +15,8 @@ enum class Cue {
     DuneEyeAttack, DuneEyeHit, DuneEyeFall,
     CinderhornAttack, CinderhornHit, CinderhornFall, SpearThrust, SpearImpact,
     BriarSpearThrust, BriarSpearImpact, OasisSpearThrust, OasisSpearImpact,
-    BasaltSpearThrust, BasaltSpearImpact, DawnSpearThrust, DawnSpearImpact, Count
+    BasaltSpearThrust, BasaltSpearImpact, DawnSpearThrust, DawnSpearImpact,
+    PowerSword, PowerAxe, PowerDagger, PowerSpear, PowerBow, CinderhornCharge, Count
 };
 // Preserve the original cue numbers in older saves; new entries are appended.
 inline Cue regionalEnemyCue(int type,int offset){

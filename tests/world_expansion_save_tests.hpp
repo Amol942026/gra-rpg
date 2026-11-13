@@ -43,7 +43,9 @@ void worldExpansionSaveTests(){
  // Exercise the second migration independently with a v17-era active Caldera.
  saves::Snapshot previous;auto& caldera=previous.game;caldera.activateField(WorldLocation::Volcano);
  auto inExtension=[](V p,float limit){return p.x>=limit||p.y>=limit;};
- caldera.enemies.erase(std::remove_if(caldera.enemies.begin(),caldera.enemies.end(),[&](const Enemy& e){return inExtension(e.home,PreviousMapSize);}),caldera.enemies.end());
+ caldera.enemies.erase(std::remove_if(caldera.enemies.begin(),caldera.enemies.end(),[&](const Enemy& e){
+  return !regionalEnemy(e.type)&&inExtension(e.home,PreviousMapSize);
+ }),caldera.enemies.end());
  caldera.props.erase(std::remove_if(caldera.props.begin(),caldera.props.end(),[&](const Prop& p){return inExtension(p.pos,PreviousMapSize-.5f);}),caldera.props.end());
  const size_t safeProps=caldera.props.size();
  caldera.props.push_back({{30.58011f,50.88041f},17,.92f});

@@ -38,7 +38,7 @@ void boarChargeTests(){
  check(g.hp<g.maxHp(),"late roll outside protection does not negate charge damage");
  // A moving hero crosses the boar segment between endpoints; relative sweep must hit.
  g=boarArena();auto& crossing=g.enemies[0];crossing.boarRush=.5f;crossing.boarDirection={1,0};crossing.boarAim={20,20};
- g.advanceBoarCharge(crossing,.2f,{17,18},{17,22},false,0);
+ g.advanceCharge(crossing,.2f,{17,18},{17,22},false,0);
  check(g.hp<g.maxHp()&&crossing.boarHit,"relative sweep detects a hero crossing the rush between frames");
  for(int obstacle=0;obstacle<4;obstacle++){
   g=boarArena();launchBoar(g);float stop=18;
@@ -91,4 +91,48 @@ void boarChargeTests(){
  float normal=g.incomingDamage(float(g.enemies[0].damage()),DamageType::Physical),hp=g.hp;launchBoar(g);
  for(int i=0;i<35;i++)g.update(.02f,{},false);
  check(std::abs(hp-g.hp-normal*2)<.001f&&hp-g.hp>normal,"charge remains stronger than melee even against high defense");
+}
+
+Game cinderhornArena(){
+ auto game=boarArena();
+ game.location=WorldLocation::Volcano;
+ game.enemies[0].type=CinderhornType;
+ game.enemies[0].hp=game.enemies[0].maxHp=enemyInfo(CinderhornType).health;
+ return game;
+}
+void cinderhornChargeTests(){
+ auto cues=[](const Game& game,Cue cue){
+  return std::count_if(game.sounds.begin(),game.sounds.end(),[cue](SoundEvent s){return s.cue==cue;});
+ };
+ for(int hz:{30,60,120}){
+  auto game=cinderhornArena();
+  auto& horn=game.enemies[0];
+  const V start=horn.pos;
+  const float hp=game.hp;
+  for(int i=0;i<hz/2;i++)game.update(1.f/hz,{},false);
+  check(horn.boarWindup>0&&distance(start,horn.pos)<.001f&&cues(game,Cue::CinderhornCharge)==0,
+        "Cinderhorn lowers its head before it moves or plays the rush cue");
+  for(int i=0;i<hz;i++)game.update(1.f/hz,{},false);
+  const float expected=game.incomingDamage(float(horn.damage()),DamageType::Physical)*CinderhornCharge.multiplier;
+  check(horn.boarCharges==1&&horn.boarRecovery>0&&horn.boarHit&&std::abs(hp-game.hp-expected)<.002f,
+        "Cinderhorn rush hits once and stops on the hero at 30, 60 and 120 Hz");
+  check(cues(game,Cue::CinderhornCharge)==1&&cues(game,Cue::CinderhornAttack)==1,
+        "hoof rush and horn impact have separate audio events");
+ }
+ auto game=cinderhornArena();
+ auto& horn=game.enemies[0];
+ horn.pos={22,20};horn.boarRush=.5f;horn.boarDirection={1,0};horn.boarAim={30,20};
+ game.player=horn.boarAim;
+ for(int i=0;i<10;i++)game.update(.05f,{},false);
+ check(horn.boarRecovery>0&&!volcanoLava(horn.pos,horn.radius())&&game.hp==game.maxHp(),
+       "lava banks stop a committed rush before the hero on the other side");
+ game=cinderhornArena();
+ game.player={17.55f,20};
+ const V start=game.enemies[0].pos;
+ game.update(.02f,{},false);
+ for(int i=0;i<18;i++)game.update(.02f,{},false);
+ check(game.enemies[0].windup>0&&distance(game.enemies[0].pos,start)>.1f&&game.hp==game.maxHp(),
+       "ordinary horn attack lunges after the head-lowering phase");
+ for(int i=0;i<4;i++)game.update(.02f,{},false);
+ check(game.hp<game.maxHp()&&game.enemies[0].boarCharges==0,"nearby horn attack still uses the regular damage event");
 }

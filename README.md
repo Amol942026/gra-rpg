@@ -769,3 +769,12 @@ nie odnawiają zapasu. Pokonanie Żywej Wydmy jednorazowo przywraca zapas do 20.
 Awans wymaga `100 × poziom + 2 × poziom × (poziom − 1)` PD. Pierwsze progi:
 100, 204, 312, 424, 540 PD. Nagrody za bestie pozostają takie same. Starsze
 zapisy zachowują zdobyte poziomy, statystyki i procent postępu bieżącego awansu.
+
+## Mocne ataki
+
+Krótki klik **LPM** wykonuje zwykły atak. Przytrzymaj LPM przez około pół
+sekundy. Bohater stopniowo przygotuje broń. Gdy pasek nad nim się wypełni,
+puść przycisk nad polem walki. Miecz tnie szeroko przed bohaterem, topór uderza
+obszarowo przed nim, sztylet pcha dwukrotnie, włócznia sięga dwóch celów
+w jednej linii, a łuk wypuszcza mocniejszą strzałę i zużywa jedną sztukę
+amunicji. Umiejętności Z i X nadal mają własne działanie i koszt many.

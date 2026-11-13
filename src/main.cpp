@@ -260,7 +260,9 @@ void monster(Enemy&e,float x,float y);
 namespace tree_wind {inline void init();}
 namespace forest_water {inline void init();}
 namespace world_shadows {inline void init();}
+#include "power_fx.hpp"
 void makeArt(){
+ power_fx::load();
  inventory_icons::load();
  spell_art::load();
  tree_wind::init();forest_water::init();wind_post::load();
@@ -396,11 +398,14 @@ void drawWorld(){
  if(game.inVolcano()){enemy_ability_art::air();volcano_art::eruptionPlumes();}
  // Composite the regional wind over the world. Combat flashes and HUD follow.
  wind_post::draw();
+ power_fx::world(game);
  for(const auto& flash:game.pierceFlashes){Vector2 p=screen(flash.pos);float age=1-flash.life/.26f;ellipseOutline(p.x,p.y-35,8+age*22,5+age*12,Fade(rgb(137,226,245),1-age));}
  for(const auto& blast:game.explosions)drawExplosion(blast);
  drawHealingAura();
  DrawRectangleGradientV(0,0,WorldW,170,game.inDesert()?rgb(52,34,24,215):rgb(9,20,23,238),game.inDesert()?rgb(52,34,24,0):rgb(9,20,23,0));DrawRectangleGradientV(0,680,WorldW,220,game.inDesert()?rgb(52,34,24,0):rgb(9,20,23,0),game.inDesert()?rgb(52,34,24,230):rgb(9,20,23,250));
- if(game.hurt>0)rect(0,0,WorldW,H,Fade(rgb(154,47,40),game.hurt*.3f));EndScissorMode();
+ if(game.hurt>0)rect(0,0,WorldW,H,Fade(rgb(154,47,40),game.hurt*.3f));
+ power_fx::chargeBar(game,pp);
+ EndScissorMode();
 }
 void bar(float x,float y,float w,float h,float value,float max,Color c){rect(x,y,w,h,rgb(9,19,21));rect(x+1,y+1,(w-2)*std::clamp(value/max,0.f,1.f),h-2,c);line(x+1,y+1,x+std::max(1.f,(w-2)*std::clamp(value/max,0.f,1.f)),y+1,shade(c,1.2f));}
 #include "inspection_hud.hpp"
@@ -470,6 +475,10 @@ void drawUI(){
   if(i==4){DrawRing({r.x+33,r.y+25},11,14,40,320,24,Gold);poly({{r.x+42,r.y+10},{r.x+52,r.y+12},{r.x+45,r.y+21}},Gold);}
   float cd=i==0?game.attackCd/.46f:i==1?game.spellCd/game.spellCooldownTotal:i==4?game.rollCd/RollCooldown:game.potionCd/.65f;
   if(cd>0)rect(r.x+1,r.y+1,r.width-2,(r.height-2)*std::clamp(cd,0.f,1.f),Fade(Ink,.65f));
+  if(i==0){
+   const float charge=game.powerHoldFraction();
+   if(charge>0){rect(r.x+7,r.y+42,r.width-14,3,Ink);rect(r.x+7,r.y+42,(r.width-14)*charge,3,charge>=1?Text:Gold);}
+  }
   const char* keys[]={"LPM","C","1","2","SPACJA"};center(keys[i],r.x+32,r.y+48,9,Gold);
  }
  const Kind actionWeapon=archetype(game.equipment[0].kind);
@@ -581,7 +590,8 @@ namespace world_shadows {void draw();}
 #include "developer_ui.hpp"
 #include "game_menu.hpp"
 void input(float dt){
- if(!gameplayInputAllowed()||!IsWindowFocused())inventoryClicks.clear();else inventoryClicks.moved(mouse.x,mouse.y);
+ if(!gameplayInputAllowed()||!IsWindowFocused()){inventoryClicks.clear();game.cancelMeleeHold();}
+ else inventoryClicks.moved(mouse.x,mouse.y);
  if(developerMenuOpen||IsKeyPressed(KEY_F3)){if(developerInput())return;}
  if(IsWindowFocused()&&quickPickerEvent(IsKeyPressed(KEY_ESCAPE),IsMouseButtonPressed(MOUSE_BUTTON_LEFT)))return;
  if(menuInput(dt))return;
@@ -619,9 +629,11 @@ void input(float dt){
  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))leftClickGameplay(move);
  if(towerStory.active()||towerPanelOpen||quickPickerSlot>=0)return;
  if(game.bowDrawing){if(worldPointerAllowed(mouse))game.aimBow(combatAimFromPointer());else game.cancelBow();}
- if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){if(dragging.place!=Place::None)finishDrag();else releaseWorldBow();}
+ if(game.holdingMelee()){if(worldPointerAllowed(mouse))game.aimMelee(combatAimFromPointer());else game.cancelMeleeHold();}
+ if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){if(dragging.place!=Place::None)finishDrag();else releaseWorldAttack();}
  startTowerReturn();if(towerStory.active()||towerPanelOpen)return;
  if(game.bowDrawing&&!IsMouseButtonDown(MOUSE_BUTTON_LEFT))game.cancelBow();
+ if(game.holdingMelee()&&!IsMouseButtonDown(MOUSE_BUTTON_LEFT))game.cancelMeleeHold();
  if(!statsOpen&&!skillsOpen&&!spellBookOpen)game.update(dt,move,false,running);
  if(dragging.place==Place::Corpse&&game.openedCorpse!=dragging.owner)dragging={};
  if(dragging.place==Place::Chest&&game.openedChest!=dragging.owner)dragging={};
@@ -962,7 +974,7 @@ int main(int argc,char**argv) {
     sync_present::shutdown();
     spell_art::unload();inventory_icons::unload();world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
     hero_portrait::unload();regional_enemy_art::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
-    wind_post::unload();forest_water::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
+    power_fx::unload();wind_post::unload();forest_water::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     typography.clear();CloseWindow();return worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }
 
