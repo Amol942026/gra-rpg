@@ -53,9 +53,18 @@ int main(int argc,char** argv){
   assignments.game.potionAssigned={Kind::Health,Kind::None};
   check(saves::decode(saves::encode(assignments)).game.potionAssigned==assignments.game.potionAssigned,"potion assignment and unassignment persist in current saves");
   auto dev=s;dev.game.developerSession=true;dev.game.level=100;dev.game.hp=dev.game.maxHp();dev.game.mana=dev.game.maxMana();
-  auto ordinary=saves::decode(saves::encode(dev)).game;
-  check(dev.game.hp==920&&dev.game.mana==510&&!ordinary.developerSession&&ordinary.hp==100&&ordinary.mana==100,
-        "a developer save opens as ordinary play with safe resource values");
+  dev.game.bag.resize(2*BagSize);dev.game.bag.back()=item(Kind::DawnSpear,2);
+  saves::Store standardStore(root/"profiles"),developerStore(root/"profiles",true);
+  standardStore.save(0,s);developerStore.save(0,dev);
+  auto ordinary=standardStore.load(0).game,restoredDev=developerStore.load(0).game;
+  check(!ordinary.developerSession&&ordinary.bag.size()==BagSize&&ordinary.hp==100&&ordinary.mana==100,
+        "developer saves leave normal progress and capacity in the ordinary slot");
+  check(restoredDev.developerSession&&restoredDev.bag.size()==2*BagSize&&restoredDev.bag.back().kind==Kind::DawnSpear&&
+        restoredDev.bag.back().tier==2&&restoredDev.hp==920&&restoredDev.mana==510,
+        "developer slot roundtrips later pages, gear and developer resources");
+  rejects([&]{standardStore.save(0,dev);},"developer session cannot overwrite a normal slot");
+  saves::atomicWrite(standardStore.path(1),saves::encode(dev));
+  rejects([&]{standardStore.load(1);},"a developer file copied into a normal slot is refused");
   auto legacy=saves::read("art/gameplay/guardian/fixtures/legacy-v1.efs");
   check(distance(legacy.game.player,{8,19})==0&&legacy.game.hp==57&&legacy.game.gold==123&&legacy.game.bag[8].kind==Kind::GuardianSword,"real pre-change v1 save preserves existing position and inventory");
   check(legacy.game.boulders.empty()&&legacy.game.enemies.back().boulderCd==BoulderFirstDelay,"v1 saves receive safe default boss timers");roundtrip(legacy);

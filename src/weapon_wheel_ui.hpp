@@ -7,6 +7,7 @@ int weaponWheelHit(Vector2 point){
 void closeWeaponWheel(){weaponWheelOpen=false;dragging={};game.cancelBow();}
 void openWeaponWheel(){if(welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||game.allocationRequired||game.dead())return;game.cancelBow();weaponWheelOpen=true;game.say("Przeciągnij broń z plecaka do koła.");audioSystem.play(Cue::Ui);}
 void clickWeaponWheel(){
+ if(clickBagPage())return;
  int sector=weaponWheelHit(mouse);
  if(sector>=0){if(game.weaponWheel[sector].kind==Kind::None){game.say("Przeciągnij broń z plecaka na puste pole.");return;}
   if(game.selectWeapon(sector))closeWeaponWheel();return;}

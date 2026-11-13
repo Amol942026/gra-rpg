@@ -10,7 +10,9 @@ std::string menuNotice;
 std::array<ember::saves::Entry,3> menuSaves{};
 // Empty in production. Native QA supplies its own isolated save directory.
 fs::path menuSaveRoot;
-ember::saves::Store menuStore(){return menuSaveRoot.empty()?ember::saves::Store{}:ember::saves::Store{menuSaveRoot};}
+ember::saves::Store menuStore(){
+ return ember::saves::Store{menuSaveRoot.empty()?ember::saves::defaultRoot():menuSaveRoot,game.developerSession};
+}
 bool gameMenuActive(){return welcome||paused;}
 void menuPageTo(MenuPage page){menuPage=page;menuSelection=page==MenuPage::Exit&&paused?2:0;menuNotice.clear();}
 void refreshMenuSaves(){
@@ -25,11 +27,11 @@ void openPauseMenu(){game.cancelBow();clearTransientUi();paused=true;menuPageTo(
 void resumeFromMenu(){paused=false;menuPageTo(MenuPage::Home);}
 void menuReturnToTitle(){
  clearTransientUi();invalidatePausedWorld();
- game=Game{};intro={};towerStory={};spellLessonOpen=false;spellBookNotice.clear();
+ game=Game{};bagPage=0;intro={};towerStory={};spellLessonOpen=false;spellBookNotice.clear();
  developerActive=developerMenuOpen=false;developerError.clear();
  welcome=true;paused=false;menuClock=0;menuPageTo(MenuPage::Home);
 }
-void menuNewGame(){game=Game(std::random_device{}());clearTransientUi();menuPageTo(MenuPage::Home);startIntro();}
+void menuNewGame(){game=Game(std::random_device{}());bagPage=0;clearTransientUi();menuPageTo(MenuPage::Home);startIntro();}
 void menuSave(){
  try{menuStore().save(menuSlot,{game,intro,towerStory,{}});menuPageTo(MenuPage::Save);refreshMenuSaves();menuNotice="Zapisano wyprawę w slocie "+std::to_string(menuSlot+1)+".";}
  catch(const std::exception&){menuNotice="Nie udało się zapisać. Sprawdź miejsce na dysku i dostęp do folderu zapisów.";}
@@ -37,9 +39,12 @@ void menuSave(){
 void menuLoad(){
  try{
   bool backup=false;auto saved=menuStore().load(menuSlot,&backup);saved.game.limitForestForage();saved.game.ensureTowerPosition();
-  clearTransientUi();game=std::move(saved.game);intro=saved.intro;towerStory=saved.tower;
+#ifndef EMBERFALL_PLAYER_BUILD
+  if(saved.game.developerSession)replenishDeveloperEquipment(saved.game);
+#endif
+  clearTransientUi();game=std::move(saved.game);bagPage=0;intro=saved.intro;towerStory=saved.tower;
   // Never replay queued sound events from the frame before saving.
-  game.sounds.clear();developerActive=developerMenuOpen=false;developerError.clear();welcome=false;paused=true;menuPageTo(MenuPage::Home);
+  game.sounds.clear();developerActive=game.developerSession;developerMenuOpen=false;developerError.clear();welcome=false;paused=true;menuPageTo(MenuPage::Home);
   menuNotice=backup?"Odzyskano poprzedni zapis z kopii zapasowej. ESC — kontynuuj.":"Wczytano wyprawę. ESC — kontynuuj.";
  }catch(const std::exception&){menuNotice="Nie udało się wczytać. Bieżąca wyprawa pozostała bez zmian.";}
 }
@@ -204,7 +209,9 @@ void drawGameMenu(){
 #endif
   if(!welcome)menuButton(menuBackButton(),"Wróć do gry · ESC",4);
  }else if(menuPage==MenuPage::Load||menuPage==MenuPage::Save){
-  bool save=menuPage==MenuPage::Save;menuHeading(save?"KRONIKA WĘDROWCA":"POWRÓT DO KRONIKI",save?"Wybierz miejsce zapisu wyprawy":"Wybierz zapisaną wyprawę");
+  bool save=menuPage==MenuPage::Save;
+  menuHeading(save?"KRONIKA WĘDROWCA":"POWRÓT DO KRONIKI",game.developerSession?"Oddzielne zapisy trybu deweloperskiego":
+              save?"Wybierz miejsce zapisu wyprawy":"Wybierz zapisaną wyprawę");
   for(int i=0;i<3;i++){auto r=menuSlotButton(i);auto& s=menuSaves[i];bool active=menuSelection==i;
    panel(r,active?rgb(40,50,47):Card);DrawRectangleLinesEx(r,1,active?Gold:Line);txt("0"+std::to_string(i+1),r.x+20,r.y+22,30,Gold,true);
    txt(s.valid?s.location:s.exists?"Zapis niedostępny":"Pusty slot",r.x+87,r.y+15,22,s.valid||save?Text:Muted);

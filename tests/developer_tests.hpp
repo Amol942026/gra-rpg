@@ -1,7 +1,14 @@
 #pragma once
 #include "../src/developer_mode.hpp"
 void developerTests(){
- auto same=[](const auto& a,const auto& b){for(size_t i=0;i<a.size();i++)if(a[i].kind!=b[i].kind||a[i].tier!=b[i].tier||a[i].count!=b[i].count)return false;return true;};
+ auto same=[](const auto& a,const auto& b){if(a.size()!=b.size())return false;for(size_t i=0;i<a.size();i++)if(a[i].kind!=b[i].kind||a[i].tier!=b[i].tier||a[i].count!=b[i].count)return false;return true;};
+ auto catalogueComplete=[](const Game& g){
+  for(int id=1;id<ItemKindCount;id++){
+   const Kind kind=Kind(id);const int slot=gearSlot(kind);
+   if(slot>=0&&g.equipment[slot].kind!=kind&&g.bagCount(kind)==0)return false;
+  }
+  return true;
+ };
  auto unlocked=[](const Game& g){
   for(int rank:g.skillRanks)if(rank<1)return false;
   for(int i=1;i<int(Spell::Count);i++)if(!g.knowsSpell(Spell(i)))return false;
@@ -36,9 +43,14 @@ void developerTests(){
   check(rock.hp==rock.maxHp()&&rock.knockedBack()&&rock.heroKnockdownRemaining>0&&rock.effects.empty(),
         "rock impact keeps its knockdown for testing without reducing developer HP");
  }
- Game g;check(!g.developerSession&&g.level==1&&g.skillRanks==SkillRanks{}&&g.learnedSpells==0&&g.ammoCount()==20,"normal character starts with ordinary progression");
+ Game g;check(!g.developerSession&&g.bag.size()==BagSize&&g.level==1&&g.skillRanks==SkillRanks{}&&g.learnedSpells==0&&g.ammoCount()==20,"normal character starts with ordinary progression and one page");
  check(developerStart(g,10,true)&&g.inTower()&&g.towerFloor==2&&unlocked(g),"developer tower start grants the standard test character");
- g.skillRanks={3,2};g.level=7;g.xp=56;g.attributes={8,7,6,5,4,3};auto attrs=g.attributes;g.towerRuneMask=7;g.bag[12]=item(Kind::DawnShard);g.bag[13]=item(Kind::Sword,2);g.addGround(item(Kind::Gold),g.player);int dropped=g.ground.back().id;auto supplies=g.bag;
+ check(catalogueComplete(g)&&g.bag.size()>BagSize&&g.bag.size()%BagSize==0,"fresh DEV session contains every gear kind across full pages");
+ auto later=std::find_if(g.bag.begin()+BagSize,g.bag.end(),[](Item value){return gearSlot(value.kind)==0;});
+ const int laterIndex=int(later-g.bag.begin());
+ check(later!=g.bag.end()&&g.bindWeapon({Place::Bag,laterIndex},7)&&g.weaponSource(7).index==laterIndex&&g.selectWeapon(7),
+       "a weapon on a later page can be assigned and equipped through the wheel");
+ g.skillRanks={3,2};g.level=7;g.xp=56;g.attributes={8,7,6,5,4,3};auto attrs=g.attributes;g.towerRuneMask=7;developerBagSlot(g)=item(Kind::DawnShard);developerBagSlot(g)=item(Kind::Sword,2);g.addGround(item(Kind::Gold),g.player);int dropped=g.ground.back().id;auto supplies=g.bag;
  g.bag[0].count-=5;g.bag[1].count-=4;g.bag[5].count-=7;
  check(developerStart(g,12,false)&&same(g.bag,supplies)&&unlocked(g)&&g.xp==0&&g.attributes==attrs&&g.skillRanks==SkillRanks{3,2,1}&&g.towerRuneMask==7,"moving upgrades the character and preserves gear, attributes and higher ranks");
  check(!g.get({Place::Ground,dropped})&&developerStart(g,10,false)&&g.get({Place::Ground,dropped}),"developer transitions retain floor-local ground items for return");
@@ -52,10 +64,8 @@ void developerTests(){
  g.props.push_back({DeveloperDestinations[0].spawn,0,1});g.enemies.clear();check(developerStart(g,0,false)&&distance(g.player,DeveloperDestinations[0].spawn)>.1f&&g.walkable(g.player),"blocked preset position falls back to the nearest safe point");
  g=Game{};for(auto& value:g.bag)value=item(Kind::Sword,2);g.bag.back()=item(Kind::DawnShard);
  check(developerStart(g,10,false)&&g.ammoCount()==100&&g.bagCount(Kind::Health)==50&&g.bagCount(Kind::Mana)==50&&g.bagCount(Kind::DawnShard)==1,"full pack receives all supplies and keeps its quest item");
- bool stash=!g.ground.empty()&&g.bagCount(Kind::Sword)+int(g.ground.size())==int(g.bag.size())-1;
- for(const auto& drop:g.ground)stash&=drop.value.kind==Kind::Sword&&drop.value.tier==2&&g.groundVisible(drop)&&distance(drop.pos,g.player)==0;
- check(stash,"gear displaced by supplies remains recoverable at the destination");
- g=Game{};g.bag.fill(item(Kind::Health,0,1));
+ check(g.ground.empty()&&g.bagCount(Kind::Sword)==BagSize-1&&catalogueComplete(g),"full backpack adds pages while preserving the existing gear");
+ g=Game{};std::fill(g.bag.begin(),g.bag.end(),item(Kind::Health,0,1));
  check(developerStart(g,10,false)&&g.ammoCount()==100&&g.bagCount(Kind::Health)==50&&g.bagCount(Kind::Mana)==50&&g.ground.empty(),"fragmented potion stacks consolidate before reserving space for supplies");
  auto parse=[](std::vector<std::string> arguments){std::vector<char*> argv;for(auto& s:arguments)argv.push_back(s.data());DeveloperLaunch launch;for(int i=1;i<int(argv.size());i++)parseDeveloperArgument(argv[i],i,int(argv.size()),argv.data(),launch);return launch;};
  auto launch=parse({"game","--dev"});check(launch.enabled&&launch.destination==-1&&launch.error.empty(),"dev flag opens picker rather than requiring a destination");
@@ -66,7 +76,7 @@ void developerTests(){
  check(developerDestination("TOWER-3")==10&&developerDestination("tower")==8&&developerDestination("boss")==1&&developerDestination("")==-1,"location aliases, case normalization and unknown input are predictable");
  check(developerDestination("volcano")==16&&developerDestination("volcano-forges")==17&&developerDestination("volcano-boss")==18&&developerDestination("KALDERA")==16&&developerDestination("varkhor")==18,"third realm and boss have stable developer destinations and aliases");
  launch=parse({"game","--start=volcano-boss","--no-audio"});check(launch.enabled&&launch.destination==18&&launch.error.empty(),"CLI supports direct start at Varkhor");
- check(developerStart(g,16,true)&&g.inVolcano()&&g.dawnFragments()==2&&g.desertBossDead&&!g.volcanoBossDead&&g.findEnemy(VolcanoBossId)&&g.bagCount(Kind::DawnShard)==0,"fresh volcanic session bypasses earlier story gates without granting gear or defeating Varkhor");
+ check(developerStart(g,16,true)&&g.inVolcano()&&g.dawnFragments()==2&&g.desertBossDead&&!g.volcanoBossDead&&g.findEnemy(VolcanoBossId)&&g.bagCount(Kind::DawnShard)==0,"fresh volcanic session grants gear but leaves Varkhor and the quest item in the world");
  auto equipment=g.equipment;auto inventory=g.bag;g.level=9;g.xp=35;g.attributes={3,2,4,1,5,6};g.skillRanks={2,1,0};g.hp=float(g.maxHp());g.mana=float(g.maxMana());
  auto* boss=g.findEnemy(VolcanoBossId);boss->hp-=23;float bossHp=boss->hp;boss->eruptionWindup=.8f;
  g.cinders.push_back({g.player,{7.5f,0},7,20,2002});g.fissures.push_back({g.player,0,.95f,48,VolcanoBossId,false});g.heroKnockdownRemaining=.5f;g.heroKnockbackRemaining=.2f;g.sandPrisonRemaining=1;g.openedChest=4;

@@ -1,6 +1,6 @@
 #pragma once
 inline void lootAllTests(){
- auto arena=[](){Game g;g.props.clear();g.enemies.clear();g.forage.clear();g.chests={};g.bag={};g.player={20,20};return g;};
+ auto arena=[](){Game g;g.props.clear();g.enemies.clear();g.forage.clear();g.chests={};std::fill(g.bag.begin(),g.bag.end(),Item{});g.player={20,20};return g;};
  auto body=[](Game& g){Enemy e;e.id=9801;e.type=1;e.alive=false;e.pos=g.player;e.loot={};g.enemies.push_back(e);g.openedCorpse=e.id;};
  auto same=[](const auto& a,const auto& b){for(size_t i=0;i<a.size();i++)if(a[i].kind!=b[i].kind||a[i].tier!=b[i].tier||a[i].count!=b[i].count)return false;return true;};
  Game g=arena();body(g);auto& loot=g.enemies[0].loot;

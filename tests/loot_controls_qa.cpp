@@ -13,7 +13,7 @@ int main(int argc,char** argv){
  makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  check(PlayerBuild&&!audioSystem.available,"loot controls use player code with no audio device");
  auto reset=[](){
-  game=Game(9876);game.props.clear();game.enemies.clear();game.forage.clear();game.bag={};game.player={15,15};game.messageTime=0;
+  game=Game(9876);game.props.clear();game.enemies.clear();game.forage.clear();std::fill(game.bag.begin(),game.bag.end(),Item{});game.player={15,15};game.messageTime=0;
   intro={};towerStory={};clearStoryMenus();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;developerActive=developerMenuOpen=false;dragging={};inventoryClicks.clear();mouse={0,0};nearbyPage=corpsePage=0;corpsePageOwner=-1;
  };
  auto point=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};

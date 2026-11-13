@@ -4,7 +4,7 @@ bool merchantReachable()const{return towerUseAllowed()&&towerFloor==MerchantFloo
 std::int64_t goldBalance()const{
  std::int64_t balance=gold;for(const auto& value:bag)if(!value.empty()&&value.kind==Kind::Gold)balance+=value.count;return balance;
 }
-TradeResult merchantPurchasePlan(int index,int quantity,std::array<Item,BagSize>& result,std::int64_t& wallet)const{
+TradeResult merchantPurchasePlan(int index,int quantity,std::vector<Item>& result,std::int64_t& wallet)const{
  if(!merchantReachable())return TradeResult::Unavailable;
  Item offer=merchantOfferItem(index);if(offer.empty())return TradeResult::InvalidItem;
  if(quantity<1||quantity>99||(!stackable(offer.kind)&&quantity!=1))return TradeResult::InvalidQuantity;
@@ -23,14 +23,14 @@ TradeResult merchantPurchasePlan(int index,int quantity,std::array<Item,BagSize>
  return remaining>0?TradeResult::NoSpace:TradeResult::Success;
 }
 TradeResult buyMerchantItem(int index,int quantity=1){
- std::array<Item,BagSize> result{};std::int64_t wallet=0;TradeResult status=merchantPurchasePlan(index,quantity,result,wallet);
+ std::vector<Item> result;std::int64_t wallet=0;TradeResult status=merchantPurchasePlan(index,quantity,result,wallet);
  if(status!=TradeResult::Success){say(tradeMessage(status));sound(Cue::Reject,player);return status;}
  Item bought=merchantOfferItem(index);bag=result;gold=wallet;if(bought.kind==Kind::Arrow)merchantArrows-=quantity;cancelBow();sound(Cue::Pickup,player);
  say("Kupiono: "+itemName(bought)+" × "+std::to_string(quantity)+".");return status;
 }
 TradeResult merchantSaleStatus(Slot source,int quantity)const{
  if(!merchantReachable())return TradeResult::Unavailable;
- const Item* value=source.place==Place::Bag&&source.index>=0&&source.index<BagSize?&bag[source.index]:
+ const Item* value=source.place==Place::Bag&&source.index>=0&&source.index<int(bag.size())?&bag[source.index]:
   source.place==Place::Equip&&source.index>=0&&source.index<EquipSize?&equipment[source.index]:nullptr;
  if(!value||value->empty())return TradeResult::InvalidItem;
  if(value->kind==Kind::DawnShard)return TradeResult::Protected;

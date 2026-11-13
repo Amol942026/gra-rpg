@@ -1,7 +1,6 @@
 #pragma once
 #include "game.hpp"
 #include <cctype>
-#include <iterator>
 namespace ember {
 struct DeveloperDestination {const char* id;const char* name;const char* hint;WorldLocation location;V spawn;int floor;};
 inline constexpr int DeveloperDestinationCount=19;
@@ -47,28 +46,24 @@ inline constexpr int DeveloperLevel=100;
 inline constexpr std::array<std::pair<Kind,int>,3> DeveloperSupplies{{
  {Kind::Arrow,100},{Kind::Health,50},{Kind::Mana,50}
 }};
-inline constexpr std::array<Kind,5> DeveloperWeapons{{Kind::Sword,Kind::Axe,Kind::Dagger,Kind::Bow,Kind::Spear}};
-inline int developerWeaponCount(const Game& game,Kind type){
- auto matches=[type](Item value){return !value.empty()&&archetype(value.kind)==type;};
- return int(matches(game.equipment[0]))+int(std::count_if(game.bag.begin(),game.bag.end(),matches));
-}
 inline Item& developerBagSlot(Game& game){
  auto slot=std::find_if(game.bag.begin(),game.bag.end(),[](Item value){return value.empty();});
  if(slot!=game.bag.end())return *slot;
- auto spare=std::find_if(game.bag.rbegin(),game.bag.rend(),[&](Item value){
-  for(auto [supply,count]:DeveloperSupplies)
-   if(value.kind==supply)return game.bagCount(supply)-value.count>=count;
-  if(gearSlot(value.kind)==0)return developerWeaponCount(game,archetype(value.kind))>1;
-  return value.kind!=Kind::DawnShard;
- });
- if(spare==game.bag.rend()){
-  spare=std::find_if(game.bag.rbegin(),game.bag.rend(),[](Item value){return value.kind==Kind::DawnShard;});
+ const auto nextPage=game.bag.size();
+ game.bag.resize(nextPage+BagSize);
+ return game.bag[nextPage];
+}
+inline void replenishDeveloperEquipment(Game& game){
+ std::array<bool,ItemKindCount> owned{};
+ for(const auto& value:game.bag)if(!value.empty())owned[int(value.kind)]=true;
+ for(const auto& value:game.equipment)if(!value.empty())owned[int(value.kind)]=true;
+ for(int slot=0;slot<EquipSize;slot++)for(int id=1;id<ItemKindCount;id++){
+  const Kind kind=Kind(id);
+  if(!owned[id]&&gearSlot(kind)==slot)developerBagSlot(game)=item(kind);
  }
- // Supplies are consolidated first, so a full pack always has an overflow
- // slot beyond its required stacks and five weapon types.
- slot=std::prev(spare.base());
- game.addGround(*slot,game.player);
- return *slot;
+ // Leave room to test picking up loot even when the catalogue fills a page.
+ if(std::none_of(game.bag.begin(),game.bag.end(),[](const Item& value){return value.empty();}))
+  game.bag.resize(game.bag.size()+BagSize);
 }
 inline void replenishDeveloperSupplies(Game& game){
  std::array<int,DeveloperSupplies.size()> missing{};
@@ -130,11 +125,9 @@ inline bool developerStart(Game& current,int destination,bool reset,unsigned see
  for(int& rank:candidate.skillRanks)rank=std::max(rank,1);
  for(int i=1;i<int(Spell::Count);i++)candidate.learnedSpells|=spellBit(Spell(i));
  if(!candidate.knowsSpell(candidate.selectedSpell))candidate.chooseSpell(Spell::Fireball);
- auto groundCount=candidate.ground.size();
  replenishDeveloperSupplies(candidate);
- for(Kind kind:DeveloperWeapons)if(!developerWeaponCount(candidate,kind))developerBagSlot(candidate)=item(kind);
- candidate.say(groundCount==candidate.ground.size()?std::string("DEV — ")+target.name:
-     "DEV — pełny plecak. Przedmioty odłożono obok bohatera.");
+ replenishDeveloperEquipment(candidate);
+ candidate.say(std::string("DEV — ")+target.name);
  current=std::move(candidate);return true;
 }
 }

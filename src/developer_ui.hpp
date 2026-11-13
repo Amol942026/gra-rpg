@@ -13,7 +13,7 @@ void closeDeveloperMenu(){developerMenuOpen=false;developerError.clear();}
 bool startDeveloperSession(bool reset){
  if(welcome&&!reset)return false;
  if(!developerStart(game,developerSelection,reset,std::random_device{}())){developerError="Nie ma bezpiecznego miejsca startu. Wybierz inną lokację.";return false;}
- intro={};towerStory={};clearStoryMenus();developerActive=true;developerMenuOpen=false;developerError.clear();
+ intro={};towerStory={};clearStoryMenus();bagPage=0;developerActive=true;developerMenuOpen=false;developerError.clear();
  statDraft={};skillDraft={};draftForLevel=skillDraftLevel=-1;mouse={0,0};
  startupLog.write((std::string("Developer session: ")+DeveloperDestinations[developerSelection].id+(reset?" / new character":" / current character")).c_str());return true;
 }

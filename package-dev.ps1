@@ -26,7 +26,9 @@ PRZENIES OBECNA POSTAC zachowuje sprzet, statystyki, zdobyte punkty i postep wal
 W obu opcjach postac ma poziom 100 i zna wszystkie umiejetnosci oraz czary.
 Domyslnie ma pelne 920 HP i 510 many. Postac DEV jest odporna na obrazenia.
 Plecak jest uzupelniany do 100 strzal i po 50 mikstur zdrowia oraz many.
-Gdy plecak jest pelny, przedmioty potrzebne do zwolnienia miejsca trafiaja na ziemie obok postaci.
+Plecak zawiera wszystkie rodzaje wyposazenia z aktualnego katalogu gry.
+Strzalki pod plecakiem przelaczaja strony po 25 pol.
+Zapisy z menu pauzy w sesji DEV korzystaja z osobnych slotow.
 Aktywne pociski, erupcje i przewrocenie sa czyszczone podczas teleportu.
 Start DEV w kalderze ustawia testowy postep drugiego aktu,
 aby mozna bylo wracac tam takze przez Eldrina.

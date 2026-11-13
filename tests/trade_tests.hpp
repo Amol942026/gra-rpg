@@ -20,7 +20,7 @@ void tradeTests(){
   check(g.sellMerchantItem({Place::Bag,10})==TradeResult::Success&&g.bag[10].empty()&&g.goldBalance()==before+itemSellValue(value)-(value.kind==Kind::Gold?1:0),"merchant buys each equipment and monster material kind at its displayed value");
  }
  for(int index=0;index<int(MerchantOffers.size());index++){
-  g=trader();g.bag={};g.gold=100000;Item offered=merchantOfferItem(index);auto money=g.goldBalance();
+  g=trader();std::fill(g.bag.begin(),g.bag.end(),Item{});g.gold=100000;Item offered=merchantOfferItem(index);auto money=g.goldBalance();
   check(g.buyMerchantItem(index)==TradeResult::Success&&g.bagCount(offered.kind)==1&&g.goldBalance()==money-itemBuyPrice(offered),"each stocked item can be bought for its quoted price");
   check(itemBuyPrice(offered)>itemSellValue(offered),"buying and immediately reselling cannot create gold");
   auto spent=g.goldBalance();check(g.sellMerchantItem({Place::Bag,0})==TradeResult::Success&&g.goldBalance()<money&&g.goldBalance()==spent+itemSellValue(offered),"round trip through the merchant conserves inventory and loses only the trading margin");
@@ -35,11 +35,11 @@ void tradeTests(){
  g=trader();auto worn=g.equipment[0];g.weaponWheel[0]={worn.kind,worn.tier};
  check(g.sellMerchantItem({Place::Equip,0})==TradeResult::Success&&g.equipment[0].empty()&&g.gold==itemSellValue(worn),"worn equipment can be sold and its stats are removed");
  check(g.weaponSource(0).place==Place::None,"selling a bound weapon cannot leave a usable ghost wheel entry");
- g=trader();g.bag={};g.gold=10;g.bag[0]=item(Kind::Gold,0,30);
+ g=trader();std::fill(g.bag.begin(),g.bag.end(),Item{});g.gold=10;g.bag[0]=item(Kind::Gold,0,30);
  check(g.goldBalance()==40&&g.buyMerchantItem(0)==TradeResult::Success&&g.goldBalance()==16&&g.gold==0&&g.bagCount(Kind::Gold)==16&&g.bagCount(Kind::Health)==1,"buying pays from wallet and then existing coin stacks");
- g=trader();g.bag={};for(auto& value:g.bag)value=item(Kind::Crystal,0,99);g.bag[0]=item(Kind::Gold,0,itemBuyPrice(merchantOfferItem(0)));
+ g=trader();std::fill(g.bag.begin(),g.bag.end(),Item{});for(auto& value:g.bag)value=item(Kind::Crystal,0,99);g.bag[0]=item(Kind::Gold,0,itemBuyPrice(merchantOfferItem(0)));
  check(g.buyMerchantItem(0)==TradeResult::Success&&g.bag[0].kind==Kind::Health,"spending an entire coin stack can free the slot needed by a purchased item");
- g=trader();g.bag={};g.gold=10000;g.bag[0]=item(Kind::Health,0,98);
+ g=trader();std::fill(g.bag.begin(),g.bag.end(),Item{});g.gold=10000;g.bag[0]=item(Kind::Health,0,98);
  check(g.buyMerchantItem(0,3)==TradeResult::Success&&g.bag[0].count==99&&g.bag[1].kind==Kind::Health&&g.bag[1].count==2,"purchased potions fill the old stack and spill into a new slot without exceeding 99");
  g=trader();g.bag[10]=item(Kind::Gold,0,20);auto balance=g.goldBalance();
  check(g.sellMerchantItem({Place::Bag,10},20)==TradeResult::Success&&g.goldBalance()==balance&&g.bag[10].empty(),"exchanging bag coins for wallet gold does not create extra currency");
@@ -62,7 +62,7 @@ void tradeTests(){
   if(state==3)g.hp=0;if(state==4)g.allocationRequired=true;if(state==5)g.dawnQuest=DawnQuest::Returning;
   check(g.buyMerchantItem(0)==TradeResult::Unavailable&&g.sellMerchantItem({Place::Bag,0})==TradeResult::Unavailable&&same(old,g.bag)&&same(gear,g.equipment)&&g.gold==1000,"wrong location, distance, death and locked story states cannot trade");
  }
- g=trader();g.gold=10000;g.bag={};beforeGold=g.gold;
+ g=trader();g.gold=10000;std::fill(g.bag.begin(),g.bag.end(),Item{});beforeGold=g.gold;
  check(g.merchantArrows==20&&g.buyMerchantItem(2,21)==TradeResult::OutOfStock&&g.gold==beforeGold&&g.bagCount(Kind::Arrow)==0,"arrow shop rejects quantities above its total stock atomically");
  check(g.buyMerchantItem(2,7)==TradeResult::Success&&g.merchantArrows==13&&g.bagCount(Kind::Arrow)==7,"partial arrow purchase decrements the shared stock");
  for(int n=0;n<13;n++)check(g.buyMerchantItem(2)==TradeResult::Success,"single purchases consume the same finite arrow stock");

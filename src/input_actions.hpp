@@ -85,6 +85,7 @@ Rectangle quickPickerTile(int slot){
 }
 void leftClickGameplay(V movement,double now=GetTime()){
     if(!gameplayInputAllowed()||dragging.place!=Place::None){inventoryClicks.clear();return;}
+    if(clickBagPage())return;
     for(int i=0;i<QuickPickerSlotCount;i++)if(inside(quickPickerTile(i))){
         inventoryClicks.clear();game.cancelBow();quickPickerSlot=i;return;
     }

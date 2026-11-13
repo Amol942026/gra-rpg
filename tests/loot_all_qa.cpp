@@ -10,7 +10,7 @@ int main(int argc,char** argv){
  audioSystem.init(false,false);makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  int checks=0,failures=0;auto check=[&](bool ok,const char* label){checks++;if(!ok){failures++;std::cerr<<"FAIL: "<<label<<'\n';}};
  auto reset=[&](){
-  game=Game{};game.props.clear();game.enemies.clear();game.forage.clear();game.chests={};game.bag={};game.player={20,20};game.messageTime=0;
+  game=Game{};game.props.clear();game.enemies.clear();game.forage.clear();game.chests={};std::fill(game.bag.begin(),game.bag.end(),Item{});game.player={20,20};game.messageTime=0;
   intro={};towerStory={};clearStoryMenus();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=developerMenuOpen=false;
   towerPanelOpen=false;quickPickerSlot=-1;dragging={};inventoryClicks.clear();corpsePage=0;corpsePageOwner=-1;
  };

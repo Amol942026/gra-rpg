@@ -2,7 +2,7 @@
 #include "../src/inventory_click.hpp"
 void lootControlsTests(){
  auto arena=[](bool chest){
-  Game g=emptyArena();g.bag={};
+  Game g=emptyArena();std::fill(g.bag.begin(),g.bag.end(),Item{});
   if(chest){g.player=g.chests[0].pos+V{1.5f,0};g.openChest(0);g.chests[0].loot={};}
   else{V p=g.player+V{.5f,0};g.enemies.push_back({77,1,p,p,0,100});g.enemies.back().alive=false;g.enemies.back().loot={};g.openCorpse(77);}
   return g;

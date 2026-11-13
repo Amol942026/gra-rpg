@@ -202,7 +202,7 @@ struct Game {
  bool rollCritical(){return std::uniform_int_distribution<int>(1,100)(combatRng)<=CriticalChancePercent;}
  V player=ForestArrival,facing{0,-1};
  AnimationState animation{};
- std::array<Item,BagSize> bag{};std::array<Item,EquipSize> equipment{};
+ std::vector<Item> bag=std::vector<Item>(BagSize);std::array<Item,EquipSize> equipment{};
  std::vector<Ground> ground,forage;std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Effect> effects;
  std::array<WeaponBinding,WeaponWheelSize> weaponWheel{};
  std::vector<Arrow> arrows;bool bowDrawing=false;float bowDrawTime=0,bowReleaseTime=0,lastBowCharge=0;V bowAim{0,-1};
@@ -244,7 +244,7 @@ struct Game {
   say("Piaskowe więzienie! Ruch i ataki zablokowane na 3 sekundy.");
  }
  int level=1;std::int64_t xp=0;int kills=0,nextGround=1;bool bossDead=false;
- bool developerSession=false; // Runtime only. A test session keeps its starting level.
+ bool developerSession=false; // Test sessions use separate save slots.
  int merchantArrows=MerchantArrowCapacity;
  WorldLocation location=WorldLocation::Forest;DawnQuest dawnQuest=DawnQuest::Seeking;
  int towerFloor=0,towerRuneMask=0;std::int64_t gold=0;
@@ -404,7 +404,7 @@ struct Game {
  void closeCorpse(){openedCorpse=-1;openedChest=-1;}
  Item* get(Slot s){
   if(s.place==Place::Chest){auto* c=findChest(s.owner);return c&&c->opened&&s.index>=0&&s.index<ChestLootSize?&c->loot[s.index]:nullptr;}
-  if(s.place==Place::Bag&&s.index>=0&&s.index<BagSize)return &bag[s.index];if(s.place==Place::Equip&&s.index>=0&&s.index<EquipSize)return &equipment[s.index];if(s.place==Place::Forage&&!inTower())for(auto&g:forage)if(g.id==s.index)return &g.value;if(s.place==Place::Ground)for(auto&g:ground)if(g.id==s.index&&groundVisible(g))return &g.value;if(s.place==Place::Corpse&&!inTower()&&s.index>=0&&s.index<CorpseLootSize)if(Enemy* e=findCorpse(s.owner))return &e->loot[s.index];return nullptr;
+  if(s.place==Place::Bag&&s.index>=0&&s.index<int(bag.size()))return &bag[s.index];if(s.place==Place::Equip&&s.index>=0&&s.index<EquipSize)return &equipment[s.index];if(s.place==Place::Forage&&!inTower())for(auto&g:forage)if(g.id==s.index)return &g.value;if(s.place==Place::Ground)for(auto&g:ground)if(g.id==s.index&&groundVisible(g))return &g.value;if(s.place==Place::Corpse&&!inTower()&&s.index>=0&&s.index<CorpseLootSize)if(Enemy* e=findCorpse(s.owner))return &e->loot[s.index];return nullptr;
  }
  bool reachable(Slot s)const{if(s.place==Place::Chest)return openedChest==s.owner&&chestReachable(s.owner);if(s.place==Place::Corpse)return corpseReachable(s.owner);if(s.place==Place::Forage){if(inTower())return false;for(const auto&g:forage)if(g.id==s.index)return distance(player,g.pos)<=2.5f;return false;}if(s.place!=Place::Ground)return true;for(const auto&g:ground)if(g.id==s.index&&groundVisible(g))return distance(player,g.pos)<=2.5f;return false;}
  static bool accepts(Slot s,Item i){if(!i.empty()&&i.kind==Kind::DawnShard&&s.place!=Place::Bag&&s.place!=Place::Corpse)return false;return s.place!=Place::Equip||i.empty()||gearSlot(i.kind)==s.index;}
@@ -428,7 +428,7 @@ struct Game {
   if(!reachable(from)||!reachable(to)){say("Podejdź bliżej przedmiotu (maks. 2,5 pola).");return false;}
   if(!accepts(to,*a)||!accepts(from,*b)){say("Ten przedmiot nie pasuje do wybranego miejsca.");return false;}
   if(equipLoot){
-   int spare=-1;if(!b->empty()){for(int i=0;i<BagSize;i++)if(bag[i].empty()){spare=i;break;}
+   int spare=-1;if(!b->empty()){for(int i=0;i<int(bag.size());i++)if(bag[i].empty()){spare=i;break;}
     if(spare<0){say("Brak miejsca w plecaku na zdejmowany sprzęt.");return false;}}
    if(spare>=0)bag[spare]=*b;*b=*a;*a={};
   }
@@ -448,11 +448,11 @@ struct Game {
   if(source.place==Place::Corpse&&openedCorpse!=source.owner)return false;
   if(!reachable(source)){say("Podejdź bliżej, aby podnieść przedmiot.");return false;}
   bool moved=false;
-  if(stackable(value->kind))for(int i=0;i<BagSize;i++){
+  if(stackable(value->kind))for(int i=0;i<int(bag.size());i++){
    value=get(source);if(!value||value->empty())return moved;
    if(!bag[i].empty()&&bag[i].kind==value->kind&&bag[i].tier==value->tier&&bag[i].count<99)moved=transfer(source,{Place::Bag,i})||moved;
   }
-  for(int i=0;i<BagSize;i++){
+  for(int i=0;i<int(bag.size());i++){
    value=get(source);if(!value||value->empty())return moved;
    if(bag[i].empty())moved=transfer(source,{Place::Bag,i})||moved;
   }
@@ -499,7 +499,7 @@ struct Game {
  #include "spear_system.hpp"
  #include "power_attack_system.hpp"
  bool potion(Kind k){
-  for(int i=0;i<BagSize;i++)if(bag[i].kind==k&&!bag[i].empty())return use({Place::Bag,i});
+  for(int i=0;i<int(bag.size());i++)if(bag[i].kind==k&&!bag[i].empty())return use({Place::Bag,i});
   say("Brak mikstury w plecaku.");return false;
  }
  bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inVolcano()&&(volcanoLava(p)||nearVolcanoFountain(p)))return false;if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}

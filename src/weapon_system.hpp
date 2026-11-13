@@ -5,7 +5,7 @@ Slot weaponSource(int index)const{
  const auto& ref=weaponWheel[index];if(ref.kind==Kind::None)return {};
  auto matches=[&](Item value){return !value.empty()&&gearSlot(value.kind)==0&&value.kind==ref.kind&&value.tier==ref.tier;};
  if(matches(equipment[0]))return {Place::Equip,0};
- for(int i=0;i<BagSize;i++)if(matches(bag[i]))return {Place::Bag,i};return {};
+ for(int i=0;i<int(bag.size());i++)if(matches(bag[i]))return {Place::Bag,i};return {};
 }
 bool bindWeapon(Slot source,int index){
  if(dead()||allocationRequired||index<0||index>=WeaponWheelSize||(source.place!=Place::Bag&&!(source.place==Place::Equip&&source.index==0)))return false;

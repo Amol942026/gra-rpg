@@ -98,7 +98,20 @@ V toWorld(Vector2 p){
  else high=low;
  y=(low+high)*.5;return {float((x+y)/2),float((y-x)/2)};
 }
-Rectangle bagRect(int i){return{1080.f+(i%5)*65,366.f+(i/5)*44,57,40};}
+int bagPage=0;
+int bagPages(){return game.developerSession?int(game.bag.size()+BagSize-1)/BagSize:1;}
+int bagIndex(int slot){return std::clamp(bagPage,0,bagPages()-1)*BagSize+slot;}
+Rectangle bagRect(int i){return {1080.f+(i%5)*65,366.f+(i/5)*(bagPages()>1?40:44),57,bagPages()>1?36.f:40.f};}
+Rectangle bagPageRect(bool next){return {next?1363.f:1080.f,564,37,18};}
+bool clickBagPage(){
+ if(bagPages()<=1)return false;
+ for(bool next:{false,true})if(inside(bagPageRect(next))){
+  bagPage=std::clamp(bagPage+(next?1:-1),0,bagPages()-1);
+  inventoryClicks.clear();
+  return true;
+ }
+ return false;
+}
 Rectangle equipRect(int i){return{1080.f+(i%3)*109,207.f+(i/3)*51,98,44};}
 std::vector<int> nearby(){std::vector<int> a;for(auto&g:game.ground)if(game.groundVisible(g)&&!g.value.empty()&&distance(g.pos,game.player)<=2.5f)a.push_back(g.id);return a;}
 std::vector<Slot> nearbySlots(){
@@ -129,7 +142,7 @@ bool towerPanelOpen=false;int towerPanelObject=-1,towerPage=0;
 void openMerchantSelection();bool clickMerchantPanel(double now=GetTime());void drawMerchantPanel();
 Slot hoverSlot(){
  if(weaponWheelOpen){int sector=weaponWheelHit(mouse);if(sector>=0)return game.weaponSource(sector);}
- for(int i=0;i<BagSize;i++)if(inside(bagRect(i)))return{Place::Bag,i};for(int i=0;i<EquipSize;i++)if(inside(equipRect(i)))return{Place::Equip,i};
+ for(int i=0;i<BagSize;i++)if(inside(bagRect(i)))return{Place::Bag,bagIndex(i)};for(int i=0;i<EquipSize;i++)if(inside(equipRect(i)))return{Place::Equip,i};
  if(game.findChest(game.openedChest)){for(int i=0;i<ChestLootSize;i++)if(inside(lootRect(i)))return{Place::Chest,i,game.openedChest};}
  else if(game.findCorpse(game.openedCorpse)){syncCorpsePage();for(int i=0;i<5;i++)if(inside(lootRect(i)))return{Place::Corpse,corpsePage*5+i,game.openedCorpse};}
  else {auto n=nearbySlots();for(int i=0;i<5;i++){int j=nearbyPage*5+i;if(j<(int)n.size()&&inside(lootRect(i)))return n[j];}}
@@ -499,8 +512,20 @@ void drawUI(){
  bar(1139,310,std::min(173.f,experienceX-1147.f),9,float(game.xp),float(nextLevelExperience),rgb(38,91,56));
  txt(experience,experienceX,305,12,Text);
  txt(TextFormat("ATAK  %d",game.damage()),1080,327,11,Gold);txt(TextFormat("PANCERZ  %d",game.defense()),1242,327,11,Muted);
- line(1080,342,1400,342,Line);txt("PLECAK",1080,350,11,Gold);int occupied=0;for(auto&i:game.bag)if(!i.empty())occupied++;txt(TextFormat("%02d / 25",occupied),1348,350,11,Muted);
- for(int i=0;i<BagSize;i++)slotDraw({Place::Bag,i},bagRect(i));
+ line(1080,342,1400,342,Line);txt("PLECAK",1080,350,11,Gold);
+ const int occupied=int(std::count_if(game.bag.begin(),game.bag.end(),[](const Item& value){return !value.empty();}));
+ const char* capacity=TextFormat("%02d / %d",occupied,int(game.bag.size()));
+ txt(capacity,1400-textWidth(capacity,11),350,11,Muted);
+ for(int i=0;i<BagSize;i++)slotDraw({Place::Bag,bagIndex(i)},bagRect(i));
+ if(bagPages()>1){
+  for(bool next:{false,true}){
+   const Rectangle button=bagPageRect(next);
+   const bool enabled=next?bagIndex(0)/BagSize+1<bagPages():bagIndex(0)>0;
+   panel(button,enabled&&inside(button)?Card:Panel);DrawRectangleLinesEx(button,1,Line);
+   center(next?">":"<",button.x+button.width/2,button.y+1,14,enabled?Gold:Muted);
+  }
+  center(TextFormat("%d / %d",bagIndex(0)/BagSize+1,bagPages()),1240,565,14,Muted);
+ }
  line(1080,612,1400,612,Line);
  if(auto* chest=game.findChest(game.openedChest)){
   panel({1076,584,328,116},rgb(17,29,30));

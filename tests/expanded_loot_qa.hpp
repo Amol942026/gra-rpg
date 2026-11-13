@@ -23,7 +23,7 @@ template<class Check>void expandedLootChecks(const fs::path& root,Check check){
   if(index%12==11||k==ItemKindCount-1)saveTexture(sheet,(root/("new-items-"+std::to_string(index/12+1)+".png")).string());
   UnloadImage(before);UnloadImage(after);UnloadImage(portraitBefore);UnloadImage(portraitAfter);
   unsigned seed=0;bool found=false;for(;seed<20000&&!found;seed++){std::mt19937 random(seed);for(Item value:rollEnemyLoot(owner,random))found|=value.kind==kind;}
-  check(found,"seeded new item appears in its source beast's random loot");reset();game.bag={};game.rng.seed(seed-1);V at=game.player+V{.5f,0};game.enemies.push_back({910,owner,at,at,1,enemyInfo(owner).health});game.hit(game.enemies[0],10000);game.openCorpse(910);
+  check(found,"seeded new item appears in its source beast's random loot");reset();std::fill(game.bag.begin(),game.bag.end(),Item{});game.rng.seed(seed-1);V at=game.player+V{.5f,0};game.enemies.push_back({910,owner,at,at,1,enemyInfo(owner).health});game.hit(game.enemies[0],10000);game.openCorpse(910);
   int source=-1;for(int n=0;n<CorpseLootSize;n++)if(game.enemies[0].loot[n].kind==kind)source=n;
   check(source>=0,"actual killed beast contains the new item");corpsePage=source/5;corpsePageOwner=910;point(lootRect(source%5));
   leftClickGameplay({},20);dragging={};leftClickGameplay({},20.15);

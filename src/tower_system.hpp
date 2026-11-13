@@ -40,8 +40,8 @@ bool brewTowerPotion(int index,Kind output){
  if(bagCount(ingredient)<3){say(output==Kind::Health?"Potrzebujesz 3 borowików.":"Potrzebujesz 3 esencji lasu.");return false;}
  auto result=bag;int remaining=3;
  for(auto& value:result)if(value.kind==ingredient&&!value.empty()){int count=std::min(remaining,value.count);value.count-=count;remaining-=count;if(value.count==0)value={};if(!remaining)break;}
- int target=-1;for(int i=0;i<BagSize;i++)if(result[i].kind==output&&result[i].tier==0&&result[i].count<99){target=i;break;}
- if(target<0)for(int i=0;i<BagSize;i++)if(result[i].empty()){target=i;break;}
+ int target=-1;for(int i=0;i<int(result.size());i++)if(result[i].kind==output&&result[i].tier==0&&result[i].count<99){target=i;break;}
+ if(target<0)for(int i=0;i<int(result.size());i++)if(result[i].empty()){target=i;break;}
  if(target<0){say("Zwolnij pole lub miejsce w stosie mikstur.");return false;}
  if(result[target].empty())result[target]=item(output);else result[target].count++;
  bag=result;sound(Cue::Pickup,player);effects.push_back({towerFurnishings(towerFloor)[index].pos,"MIKSTURA GOTOWA",1.2f,2});say("Mikstura gotowa — znajdziesz ją w plecaku.");return true;

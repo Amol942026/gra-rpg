@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=21; // Cinderhorn charge clocks and sound cue.
+constexpr int StandardVersion=21,CurrentVersion=22;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -91,7 +91,10 @@ EF_SAVE(IntroSequence,v.phase,v.line,v.age,v.time,v.revealed,v.arrivalPending)
 inline void visit(Archive& a,TowerSequence& v){a(v.phase,v.line,v.age,v.time,v.returning,v.revealed,v.arrivalPending,v.completionPending,v.offerDesert,v.desertArrivalPending,v.fragments);if(a.version>=9)a(v.offerVolcano,v.travelVolcano);if(a.version>=11)a(v.missingDesertShard,v.missingVolcanoShard);}
 inline void visit(Archive& a,Game& v){
  if(a.version>=9)a(v.chests);else for(int i=0;i<4;i++)a(v.chests[i]);
- a(v.openedChest,v.rng,v.combatRng,v.player,v.facing,v.animation,v.bag,v.equipment,v.ground,v.forage,v.enemies,v.props,v.effects,v.weaponWheel,v.arrows,v.bowDrawing,v.bowDrawTime,v.bowReleaseTime,v.lastBowCharge,v.bowAim,v.fireballs,v.explosions,v.attributes,v.attributePoints,v.allocationRequired,v.skillRanks,v.skillPoints,v.healingCd,v.healingPulse,v.strongCutCd,v.piercingArrowCd,v.meleeDuration,v.swingStrong,v.piercingArrowArmed,v.lastBowPiercing,v.pierceFlashes,v.selectedSpell,v.manaRegenTime,v.sounds,v.stepDistance,v.hp,v.mana,v.attackCd,v.spellCd,v.potionCd,v.swing,v.hurt,v.time,v.rollRemaining,v.rollCd,v.rollDirection,v.sandPrisonRemaining,v.level,v.xp,v.kills,v.nextGround,v.bossDead,v.location,v.dawnQuest,v.towerFloor,v.towerRuneMask,v.gold,v.towerReturnPending,v.desertBossDead,v.desertCreated,v.collectedFragments,v.fieldLocation,v.forestState,v.desertState,v.openedCorpse,v.message,v.messageTime);
+ a(v.openedChest,v.rng,v.combatRng,v.player,v.facing,v.animation);
+ if(a.version>=22)a(v.developerSession,v.bag);
+ else for(auto& item:v.bag)a(item);
+ a(v.equipment,v.ground,v.forage,v.enemies,v.props,v.effects,v.weaponWheel,v.arrows,v.bowDrawing,v.bowDrawTime,v.bowReleaseTime,v.lastBowCharge,v.bowAim,v.fireballs,v.explosions,v.attributes,v.attributePoints,v.allocationRequired,v.skillRanks,v.skillPoints,v.healingCd,v.healingPulse,v.strongCutCd,v.piercingArrowCd,v.meleeDuration,v.swingStrong,v.piercingArrowArmed,v.lastBowPiercing,v.pierceFlashes,v.selectedSpell,v.manaRegenTime,v.sounds,v.stepDistance,v.hp,v.mana,v.attackCd,v.spellCd,v.potionCd,v.swing,v.hurt,v.time,v.rollRemaining,v.rollCd,v.rollDirection,v.sandPrisonRemaining,v.level,v.xp,v.kills,v.nextGround,v.bossDead,v.location,v.dawnQuest,v.towerFloor,v.towerRuneMask,v.gold,v.towerReturnPending,v.desertBossDead,v.desertCreated,v.collectedFragments,v.fieldLocation,v.forestState,v.desertState,v.openedCorpse,v.message,v.messageTime);
  if(a.version>=2)a(v.boulders,v.boulderImpacts);
  if(a.version>=3)a(v.heroKnockback,v.heroKnockbackRemaining);
  if(a.version>=4)a(v.heroKnockdownRemaining,v.heroKnockdownFacing);
@@ -158,6 +161,7 @@ inline void validate(const Snapshot& s){
  require(g.merchantArrows>=0&&g.merchantArrows<=MerchantArrowCapacity);
  for(int n:g.attributes)require(n>=0&&n<=1000000);for(int n:g.skillRanks)require(n>=0&&n<=1000000);
  require(g.attributePoints>=0&&g.attributePoints<=1000000&&g.skillPoints>=0&&g.skillPoints<=1000000&&g.hp>=0&&g.hp<=g.maxHp()&&g.mana>=0&&g.mana<=g.maxMana());
+ require(g.bag.size()==BagSize||(g.developerSession&&g.bag.size()>BagSize&&g.bag.size()<=MaxEntries&&g.bag.size()%BagSize==0));
  validatePos(g.player);validateAnimation(g.animation);for(auto& i:g.bag)validateItem(i);
  for(int n=0;n<EquipSize;n++){validateItem(g.equipment[n]);require(g.equipment[n].empty()||gearSlot(g.equipment[n].kind)==n);}
  for(int i=0;i<int(g.potionAssigned.size());i++)require(g.potionAssigned[i]==Kind::None||potionSlotFor(g.potionAssigned[i])==i);
@@ -192,13 +196,10 @@ inline void validate(const Snapshot& s){
 }
 inline uint64_t checksum(const std::string& data){uint64_t h=14695981039346656037ULL;for(unsigned char c:data){h^=c;h*=1099511628211ULL;}return h;}
 inline std::string encode(Snapshot snapshot){
- auto& game=snapshot.game;
- if(game.developerSession){
-  game.developerSession=false;
-  game.hp=std::min(game.hp,float(game.maxHp()));
-  game.mana=std::min(game.mana,float(game.maxMana()));
- }
- validate(snapshot);Archive payload(false);payload(snapshot);Archive out(false);std::string magic="EMBERFALL-SAVE";int version=CurrentVersion;size_t size=payload.bytes.size();uint64_t hash=checksum(payload.bytes);out(magic,version,size,hash);out.bytes+=payload.bytes;return out.bytes;
+ validate(snapshot);
+ int version=snapshot.game.developerSession?CurrentVersion:StandardVersion;
+ Archive payload(false,{},version);payload(snapshot);
+ Archive out(false);std::string magic="EMBERFALL-SAVE";size_t size=payload.bytes.size();uint64_t hash=checksum(payload.bytes);out(magic,version,size,hash);out.bytes+=payload.bytes;return out.bytes;
 }
 inline Snapshot decode(const std::string& bytes){
  require(bytes.size()<=MaxBytes);Archive in(true,bytes);std::string magic;int version=0;size_t size=0;uint64_t hash=0;in(magic,version,size,hash);require(magic=="EMBERFALL-SAVE"&&version>=1&&version<=CurrentVersion&&size==bytes.size()-in.at);std::string payload=bytes.substr(in.at);require(checksum(payload)==hash);Archive data(true,std::move(payload),version);Snapshot result;data(result);require(data.at==data.bytes.size());
@@ -248,18 +249,26 @@ inline void atomicWrite(const fs::path& path,const std::string& bytes){
 }
 struct Entry {bool exists=false,valid=false,backup=false;std::string date,location,error;int level=0;};
 struct Store {
- fs::path root;explicit Store(fs::path folder=defaultRoot()):root(std::move(folder)){}
+ fs::path root;
+ bool developer;
+ explicit Store(fs::path folder=defaultRoot(),bool dev=false):root(std::move(folder)),developer(dev){
+  if(developer)root/="developer";
+ }
  fs::path path(int slot)const{require(slot>=0&&slot<3);return root/("slot-"+std::to_string(slot+1)+".efs");}
+ Snapshot readSlot(const fs::path& file)const{
+  auto result=read(file);require(result.game.developerSession==developer);return result;
+ }
  Snapshot load(int slot,bool* backup=nullptr)const{
-  if(backup)*backup=false;try{return read(path(slot));}catch(...){fs::path b=path(slot);b+=L".bak";if(!fs::exists(b))throw;if(backup)*backup=true;return read(b);}
+  if(backup)*backup=false;try{return readSlot(path(slot));}catch(...){fs::path b=path(slot);b+=L".bak";if(!fs::exists(b))throw;if(backup)*backup=true;return readSlot(b);}
  }
  Entry inspect(int slot)const{
   Entry entry;try{entry.exists=fs::exists(path(slot))||fs::exists(fs::path(path(slot).wstring()+L".bak"));if(!entry.exists)return entry;auto s=load(slot,&entry.backup);entry.valid=true;entry.date=s.date;entry.level=s.game.level;entry.location=s.intro.active()?"Prolog":s.game.inTower()?"Wieża Eldrina · piętro "+std::to_string(s.game.towerFloor+1):s.game.inVolcano()?"Kaldera Popiołu":s.game.inDesert()?"Morze Piasków":"Wielka Knieja";}catch(...){entry.exists=true;entry.error="Nie można odczytać zapisu";}return entry;
  }
  void save(int slot,Snapshot snapshot)const{
+  require(snapshot.game.developerSession==developer);
   snapshot.date=now();std::string bytes=encode(std::move(snapshot));fs::create_directories(root);auto target=path(slot);
   // Only a validated previous save may replace the recovery copy.
-  bool oldValid=false;if(fs::exists(target)){try{read(target);oldValid=true;}catch(const Error&){}}
+  bool oldValid=false;if(fs::exists(target)){try{readSlot(target);oldValid=true;}catch(const Error&){}}
   if(oldValid){auto backup=target;backup+=L".bak";atomicWrite(backup,readBytes(target));}
   atomicWrite(target,bytes);
  }

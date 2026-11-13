@@ -41,7 +41,7 @@ int main(int argc,char** argv){
  EndTextureMode();saveTexture(preview,(root/"icons-player-renderer.png").string().c_str());UnloadRenderTexture(preview);
  game=Game{};intro={};towerStory={};clearStoryMenus();game.enemies.clear();game.props.clear();game.messageTime=0;mouse={0,0};
  for(size_t page=0;page<(kinds.size()+BagSize-1)/BagSize;page++){
-  game.bag={};for(int slot=0;slot<BagSize&&page*BagSize+slot<kinds.size();slot++){Kind kind=kinds[page*BagSize+slot];game.bag[slot]=item(kind,0,stackable(kind)?37:1);}
+  std::fill(game.bag.begin(),game.bag.end(),Item{});for(int slot=0;slot<BagSize&&page*BagSize+slot<kinds.size();slot++){Kind kind=kinds[page*BagSize+slot];game.bag[slot]=item(kind,0,stackable(kind)?37:1);}
   renderScene();saveTexture(canvas,(root/("inventory-page-"+std::to_string(page)+".png")).string().c_str());
  }
  auto count=[](Cue cue){return std::count_if(game.sounds.begin(),game.sounds.end(),[&](auto event){return event.cue==cue;});};
