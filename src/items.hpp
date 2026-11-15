@@ -8,17 +8,27 @@ enum class Kind { None,Sword,Axe,Helmet,Armor,Shield,Boots,Ring,Health,Mana,Crys
  BanditJack,SporeHarness,GroveBarkArmor,DuneLamellar,ScorpionCarapace,SunwardCuirass,
  AshBrigandine,CinderhornMail,ObsidianPlate,RiftCarapace,
  BriarSword,SporeDagger,OathAxe,ReedBow,MirageSword,SunDagger,AshHookAxe,CinderBow,EmberSword,RiftBow,
- Spear,BriarSpear,OasisSpear,BasaltSpear,DawnSpear,Count };
+ Spear,BriarSpear,OasisSpear,BasaltSpear,DawnSpear,
+ IronwoodRoundshield,SunwheelShield,ObsidianRoundshield,RivetedGreathelm,SunwardHelm,AshenVisor,Count };
 constexpr int ItemKindCount=int(Kind::Count);
 constexpr int FirstAdditionalArmor=int(Kind::BanditJack);
 constexpr int FirstRealmWeapon=int(Kind::BriarSword);
 constexpr int FirstSpear=int(Kind::Spear);
+constexpr int FirstProtectiveGear=int(Kind::IronwoodRoundshield);
 constexpr int AdditionalArmorCount=FirstRealmWeapon-FirstAdditionalArmor;
 constexpr int RealmWeaponCount=FirstSpear-FirstRealmWeapon;
-constexpr int SpearCount=ItemKindCount-FirstSpear;
+constexpr int SpearCount=FirstProtectiveGear-FirstSpear;
+constexpr int ProtectiveGearCount=ItemKindCount-FirstProtectiveGear;
 inline constexpr bool additionalArmor(Kind kind){return kind>=Kind::BanditJack&&kind<Kind::BriarSword;}
 inline constexpr bool realmWeapon(Kind kind){return kind>=Kind::BriarSword&&kind<Kind::Spear;}
-inline constexpr bool spearVariant(Kind kind){return kind>=Kind::Spear&&kind<Kind::Count;}
+inline constexpr bool spearVariant(Kind kind){return kind>=Kind::Spear&&kind<Kind::IronwoodRoundshield;}
+inline constexpr bool protectiveGear(Kind kind){return kind>=Kind::IronwoodRoundshield&&kind<Kind::Count;}
+inline constexpr std::array<Kind,7> OpenHelmetKinds{Kind::Helmet,Kind::BoneHelmet,Kind::GuardianHelmet,
+ Kind::ScarabHelmet,Kind::BoarHelm,Kind::BarkHelm,Kind::DuneHelmet};
+inline constexpr bool openHelmetKind(Kind kind){
+ for(Kind helmet:OpenHelmetKinds)if(helmet==kind)return true;
+ return false;
+}
 inline constexpr std::array<Kind,2> DefaultPotions{{Kind::Health,Kind::Mana}};
 struct PotionType { Kind kind; int slot; };
 inline constexpr PotionType PotionTypes[]={{Kind::Health,0},{Kind::Mana,1}};
@@ -28,7 +38,7 @@ inline constexpr int potionSlotFor(Kind kind){
 }
 enum class Rarity { Common, Rare, VeryRare, ExtremelyRare };
 struct GearDefinition { const char* name; Kind shape; Rarity rarity; int basePower; const char* description; };
-inline constexpr std::array<GearDefinition,99> BeastGear{{
+inline constexpr std::array<GearDefinition,105> BeastGear{{
  {"Sztylet wilczego kła",Kind::Dagger,Rarity::Rare,12,"Ostrze oprawione w srebrzysty wilczy kieł."},
  {"Płaszcz tropiciela",Kind::Cloak,Rarity::Rare,7,"Ciepły płaszcz z futra leśnych wilków."},
  {"Łuk księżycowego łowcy",Kind::Bow,Rarity::VeryRare,19,"Łuk z jasnego drewna i wilczej cięciwy."},
@@ -128,6 +138,12 @@ inline constexpr std::array<GearDefinition,99> BeastGear{{
  {"Włócznia bursztynowej oazy",Kind::Spear,Rarity::Rare,21,"Grot z bursztynowego szkła lśni nad turkusową owijką."},
  {"Włócznia bazaltowego grotu",Kind::Spear,Rarity::VeryRare,25,"Obsydianowy grot przecina wąska, pomarańczowa żyła."},
  {"Włócznia Ostatniego Świtu",Kind::Spear,Rarity::ExtremelyRare,31,"Jasny grot i runy wokół oprawy mienią się fioletem."},
+ {"Krąg żelaznego drewna",Kind::Shield,Rarity::Rare,7,"Drewniany krąg spięty stalową obręczą i nitami."},
+ {"Słoneczny dysk wydm",Kind::Shield,Rarity::VeryRare,11,"Mosiężne promienie zbiegają się przy turkusowym umbie."},
+ {"Obsydianowy krąg kuźni",Kind::Shield,Rarity::ExtremelyRare,15,"Ciemny dysk wzmocniony miedzianymi okuciami."},
+ {"Hełm nitowanej straży",Kind::Helmet,Rarity::Rare,7,"Nitowana stal osłania głowę i twarz dawnego strażnika."},
+ {"Przyłbica słonecznej warty",Kind::Helmet,Rarity::VeryRare,11,"Mosiężna przyłbica z wąską szczeliną do patrzenia."},
+ {"Hełm popielnej kuźni",Kind::Helmet,Rarity::ExtremelyRare,15,"Ciemna przyłbica z okuciami kutymi w ogniu Kaldery."},
 }};
 static_assert(BeastGear.size()==ItemKindCount-int(Kind::WolfKnife));
 inline constexpr bool beastGear(Kind k){return k>=Kind::WolfKnife&&k<Kind::Count;}

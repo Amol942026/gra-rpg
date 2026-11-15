@@ -12,25 +12,51 @@ bool trainSkills(const SkillRanks& points){
 float strongCutMultiplier()const{return 1.5f+.1f*std::max(0,skillRank(Skill::StrongCut)-1);}
 float strongCutDamage()const{return damage()*strongCutMultiplier();}
 int piercingTargets()const{return 2+skillRank(Skill::PiercingArrow);}
-bool skillWeaponMatches(Skill skill)const{if(skill==Skill::Healing)return true;return !equipment[0].empty()&&archetype(equipment[0].kind)==(skill==Skill::StrongCut?Kind::Sword:Kind::Bow);}
+Skill skillForSlot(int slot)const{
+ if(slot!=0)return Skill(slot);
+ switch(archetype(equipment[0].kind)){
+ case Kind::Axe:return Skill::Cleave;
+ case Kind::Dagger:return Skill::DoubleThrust;
+ case Kind::Spear:return Skill::Skewer;
+ default:return Skill::StrongCut;
+ }
+}
+float skillCooldown(Skill skill)const{
+ switch(skill){
+ case Skill::StrongCut:return strongCutCd;
+ case Skill::PiercingArrow:return piercingArrowCd;
+ case Skill::Healing:return healingCd;
+ default:return weaponSkillCds[int(skill)-SkillSlotCount];
+ }
+}
+bool skillWeaponMatches(Skill skill)const{
+ return skill==Skill::Healing||(!equipment[0].empty()&&archetype(equipment[0].kind)==skillProfile(skill).weapon);
+}
 bool skillAllowed(Skill skill)const{
  if(dead()||knockedBack()||allocationRequired||storyBlocked()||rolling()||skillRank(skill)<=0||!skillWeaponMatches(skill))return false;
  if(skill==Skill::Healing)return healingCd<=0&&mana>=HealingCost&&hp<maxHp();
  if(inTower()||sandTrapped())return false;
- if(skill==Skill::StrongCut)return strongCutCd<=0&&attackCd<=0&&mana>=StrongCutCost;
  if(skill==Skill::PiercingArrow)return piercingArrowCd<=0&&mana>=PiercingArrowCost&&ammoCount()>0;
- return false;
+ return skillCooldown(skill)<=0&&attackCd<=0&&mana>=skillProfile(skill).mana;
 }
 bool strongSwingActive()const{return swingStrong&&swing>0;}
-bool empoweredPose()const{return (archetype(equipment[0].kind)==Kind::Sword&&strongSwingActive())||(archetype(equipment[0].kind)==Kind::Bow&&(piercingArrowArmed||(lastBowPiercing&&bowReleaseTime>0)));}
+bool empoweredPose()const{return strongSwingActive()||(archetype(equipment[0].kind)==Kind::Bow&&(piercingArrowArmed||(lastBowPiercing&&bowReleaseTime>0)));}
 bool strongCut(V aim={}){
  if(!skillAllowed(Skill::StrongCut))return false;
- aimMelee(aim);
+ cancelMeleeHold();aimMelee(aim);faceThrust();
  animation.swordStow=0;
  mana-=StrongCutCost;strongCutCd=StrongCutCooldown;attackCd=.6f;meleeDuration=StrongCutDuration;swing=StrongCutDuration;swingStrong=true;sound(Cue::HeavySwing,player);
- // Capture damage before a kill can award a level during this same area cut.
- const float amount=strongCutDamage();const bool critical=rollCritical();
- for(auto& enemy:enemies)if(enemy.alive&&distance(player,enemy.pos)<=MeleeRange+.00001f)hit(enemy,amount,DamageType::Physical,critical);
+ hitMeleeArea(strongCutDamage(),true);
+ return true;
+}
+bool useMeleeSkill(Skill skill,V aim){
+ if(skill==Skill::StrongCut)return strongCut(aim);
+ if(int(skill)<SkillSlotCount||!skillAllowed(skill))return false;
+ const auto& profile=skillProfile(skill);
+ cancelMeleeHold();aimMelee(aim);faceThrust();
+ if(skill==Skill::Skewer)startSpear();else startAxeOrDagger(profile.weapon);
+ swingStrong=true;mana-=profile.mana;
+ weaponSkillCds[int(skill)-SkillSlotCount]=profile.cooldown;
  return true;
 }
 bool preparePiercingArrow(){

@@ -52,9 +52,11 @@ int total(const Game&g){int n=0;for(auto&i:g.bag)if(!i.empty())n+=i.count;for(au
 #include "volcano_tests.hpp"
 #include "dialogue_context_tests.hpp"
 #include "enemy_ability_tests.hpp"
+#include "enemy_death_tests.hpp"
 int main(){
  spellLearningTests();
  enemyAbilityTests();
+ enemyDeathTests();
  dialogueContextTests();
  volcanoTests();
  boarChargeTests();

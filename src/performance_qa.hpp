@@ -15,12 +15,15 @@ bool runPerformanceQA(){
         game.player=camera;
         Image first=drawSurface(.4f),second=drawSurface(1.8f);
         auto* a=static_cast<Color*>(first.data);auto* b=static_cast<Color*>(second.data);
-        int changed=0,dark=0,bright=0;
+        int changed=0,dark=0,bright=0,covered=0;
         for(int i=0;i<WorldW*H;i++)if(a[i].a){
-            dark+=a[i].g<95;bright+=a[i].g>155;changed+=std::abs(int(a[i].g)-b[i].g)>8;
+            covered++;dark+=a[i].g<95;bright+=a[i].g>155;
+            changed+=std::abs(int(a[i].g)-b[i].g)>(forest_water::valley.id?2:8);
         }
         report<<"Coast "<<camera.x<<','<<camera.y<<"; wave pixels="<<changed<<"; bright crests="<<bright<<'\n';
-        check(changed>12000&&dark>10000&&bright>1000,"each shore has varied, readable and time-dependent wave crests");
+        if(forest_water::valley.id)
+            check(covered>100000&&changed>12000&&dark>10000,"each painted riverbank has opaque, subdued water reflections that change over time");
+        else check(changed>12000&&dark>10000&&bright>1000,"each shore has varied, readable and time-dependent wave crests");
         UnloadImage(first);UnloadImage(second);
     }
     game.player={72,72};Image inland=drawSurface(1.f);
@@ -85,7 +88,9 @@ bool runPerformanceQA(){
         if(scenario==7)openSpellBook();
         if(scenario==8)audioOpen=true;
         if(scenario==9)game.hp=0;
-        renderScene();check(typography.atlasCount()==prepared,"first use of combat, hover and menu text does not load font atlases mid-frame");
+        renderScene();
+        report<<"Typography scenario "<<scenario<<": "<<prepared<<" -> "<<typography.atlasCount()<<'\n';
+        check(typography.atlasCount()==prepared,"first use of combat, hover and menu text does not load font atlases mid-frame");
     }
     game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;mouse={0,0};dragging={};refreshDisplayLayout();renderScene();
     BeginDrawing();ClearBackground(BLACK);presentCanvas();Image screenshot=presentedImage();ExportImage(screenshot,"qa-v18/optimized-fullscreen.png");UnloadImage(screenshot);EndDrawing();finishFramePacing();

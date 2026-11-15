@@ -38,8 +38,8 @@ int main(int argc,char** argv){
  check(exact("PD")&&!contains("STRAŻNIK ŻARU")&&!exact("01")&&!exact("N"),"04/06/07: HUD omits region numbering, title and minimap N");
  check(exact("UMIEJĘTNOŚCI")&&exact("STATYSTYKI")&&!contains("UMIEJĘTNOŚCI ·")&&!contains("STATYSTYKI ·"),"11: HUD buttons have plain names");
  float xpY=0,attackY=0,armorY=0;for(auto& t:uiText){if(t.value=="PD")xpY=t.box.y;if(t.value.find("ATAK  ")==0)attackY=t.box.y;if(t.value.find("PANCERZ  ")==0)armorY=t.box.y;}
- check(xpY>0&&attackY>xpY+10&&armorY==attackY,"05: attack and armor are below the experience bar");
- Image hud=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&hud);int green=0;for(int y=310;y<319;y++)for(int x=1139;x<1225;x++){Color c=GetImageColor(hud,x,y);green+=std::abs(int(c.r)-38)<4&&std::abs(int(c.g)-91)<4&&std::abs(int(c.b)-56)<4;}UnloadImage(hud);
+ check(xpY>175&&attackY>xpY+10&&armorY==attackY&&armorY<equipRect(0).y,"05: experience, attack and armor are between mana and equipment");
+ Image hud=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&hud);int green=0;for(int y=int(xpY)+3;y<int(xpY)+12;y++)for(int x=1139;x<1225;x++){Color c=GetImageColor(hud,x,y);green+=std::abs(int(c.r)-38)<4&&std::abs(int(c.g)-91)<4&&std::abs(int(c.b)-56)<4;}UnloadImage(hud);
  check(green>300,"05: the GPU draws a dark green filled experience bar");
  check(!contains("POD KURSOREM")&&exact("Najedź na przeciwnika lub obiekt.")&&exact("Tutaj zobaczysz informacje o nim."),"09: empty inspection wording matches requested text");
  game.level=100000;game.xp=experienceForLevel(game.level)-1;shot("13-long-experience");

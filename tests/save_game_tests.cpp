@@ -24,6 +24,41 @@ int main(int argc,char** argv){
   boarSaveTests();
   volcanoSaveTests();
   saves::Snapshot s;roundtrip(s);
+  auto recoil=s;
+  recoil.game.player={20,20};recoil.game.props.clear();recoil.game.enemies.clear();
+  const V recoilOrigin=recoil.game.player;
+  recoil.game.takeMonsterDamage(4,recoil.game.player,.2f,{1,1});
+  recoil.game.advanceHeroHitReaction(.05f);
+  const auto recoilBytes=saves::encode(recoil);
+  auto resumed=saves::decode(recoilBytes);
+  check(recoil.game.hitReactionProgress()>0&&resumed.game.hitReactionProgress()==recoil.game.hitReactionProgress()&&
+        distance(resumed.game.heroHitDirection,recoil.game.heroHitDirection)==0&&distance(resumed.game.player,recoilOrigin)==0&&
+        saves::encode(resumed)==recoilBytes,"saving during the lean retains its exact phase, direction, position and damage");
+  bool sameLean=true;
+  for(int i=0;i<20;i++){
+   recoil.game.update(1.f/60,{},false);resumed.game.update(1.f/60,{},false);
+   sameLean&=resumed.game.hitReactionProgress()==recoil.game.hitReactionProgress()&&distance(resumed.game.player,recoilOrigin)==0;
+  }
+  check(sameLean&&resumed.game.hitReactionProgress()<0&&saves::encode(recoil)==saves::encode(resumed),
+        "loading mid-lean completes the same reaction in place");
+  auto fallen=s;
+  auto& body=fallen.game.enemies.front();
+  body.animation.direction=Direction::E;
+  fallen.game.hit(body,10000,DamageType::Physical,false,flankImpulse(body.animation,-1));fallen.game.advanceEnemyDeaths(.05f);
+  check(body.dying()&&body.deathProgress()>0,"save fixture contains a partially animated death");
+  const auto settled=saves::decode(saves::encode(fallen));
+  const auto* loaded=settled.game.findCorpse(body.id);
+  check(loaded&&!loaded->dying()&&loaded->loot[0].kind==body.loot[0].kind&&settled.game.kills==fallen.game.kills&&
+        loaded->deathSide()==-1&&distance(loaded->deathDirection,body.deathDirection)<.0001f,
+        "reloading during a death restores the settled body, its side, the kill and the rolled loot");
+  saves::Archive previousBody(false,{},27),bodyHeader(false);
+  previousBody(fallen);
+  std::string saveMagic="EMBERFALL-SAVE";int previousVersion=27;size_t bodySize=previousBody.bytes.size();
+  uint64_t bodyHash=saves::checksum(previousBody.bytes);
+  bodyHeader(saveMagic,previousVersion,bodySize,bodyHash);
+  const auto importedBody=saves::decode(bodyHeader.bytes+previousBody.bytes);
+  const auto* older=importedBody.game.findCorpse(body.id);
+  check(older&&length(older->deathDirection)==0&&older->loot[0].kind==body.loot[0].kind,"old saves retain bodies and loot with a default resting side");
   for(int k=int(Kind::SlimeBlade);k<ItemKindCount;k++){
    const Kind kind=Kind(k);const int slot=gearSlot(kind);
    auto extra=s;extra.game.bag[10]=item(kind,2);extra.game.equipment.at(slot)=item(kind,1);
@@ -35,7 +70,7 @@ int main(int argc,char** argv){
   auto spear=s;
   spear.game.props.clear();spear.game.player={20,20};spear.game.equipment[0]=item(Kind::DawnSpear);
   spear.game.enemies.resize(1);auto& target=spear.game.enemies[0];
-  target.pos=target.home=spear.game.player+V{2.6f,0};target.hp=target.maxHp=150;target.windup=3;
+  target.pos=target.home=spear.game.player+V{1.64f,0};target.hp=target.maxHp=150;target.windup=3;
   check(spear.game.attack({1,0}),"save fixture starts a real spear thrust");
   for(int i=0;i<SpearImpactFrame-1;i++)spear.game.update(1.f/60,{},false);
   auto beforeContact=saves::decode(saves::encode(spear));
@@ -49,6 +84,10 @@ int main(int argc,char** argv){
         std::none_of(afterContact.game.sounds.begin(),afterContact.game.sounds.end(),
             [](auto e){return e.cue==Cue::DawnSpearImpact;}),"loading in recovery does not repeat the spear hit");
   auto assignments=s;assignments.game.skillAssigned={false,true,false};
+  auto weaponSkills=s;weaponSkills.game.skillRanks={1,2,1,3,4,5};weaponSkills.game.weaponSkillCds={.4f,.7f,1.3f};
+  auto loadedSkills=saves::decode(saves::encode(weaponSkills)).game;
+  check(loadedSkills.skillRanks==weaponSkills.game.skillRanks&&loadedSkills.weaponSkillCds==weaponSkills.game.weaponSkillCds,
+        "all weapon skill ranks and separate cooldowns survive save and load");
   check(saves::decode(saves::encode(assignments)).game.skillAssigned==assignments.game.skillAssigned,"skill slot choices persist in current saves");
   assignments.game.potionAssigned={Kind::Health,Kind::None};
   check(saves::decode(saves::encode(assignments)).game.potionAssigned==assignments.game.potionAssigned,"potion assignment and unassignment persist in current saves");
@@ -144,11 +183,29 @@ int main(int argc,char** argv){
          "a restored charged melee swing advances at the new release speed");
   }
   auto envelope=[](saves::Snapshot snapshot,int version){saves::Archive payload(false,{},std::min(version,saves::CurrentVersion));payload(snapshot);saves::Archive file(false);std::string magic="EMBERFALL-SAVE";size_t size=payload.bytes.size();uint64_t hash=saves::checksum(payload.bytes);file(magic,version,size,hash);return file.bytes+payload.bytes;};
+  {
+   saves::Snapshot beforeMove;
+   auto& chest=beforeMove.game.chests[ForestCircleChestId];
+   chest.pos={57,57};chest.opened=true;chest.loot={Item{},item(Kind::Cloak),Item{}};
+   beforeMove.game.player=ForestRitualCircle;
+   auto migrated=saves::decode(envelope(beforeMove,24));
+   const auto* moved=migrated.game.findChest(ForestCircleChestId);
+   check(moved&&distance(moved->pos,ForestRitualCircle)==0&&moved->opened&&
+         moved->loot[0].empty()&&moved->loot[1].kind==Kind::Cloak&&moved->loot[2].empty(),
+         "moving the circle chest preserves existing loot, empty slots and open state");
+   check(migrated.game.walkable(migrated.game.player)&&migrated.game.chestReachable(ForestCircleChestId),
+         "old hero position inside relocated chest moves to a walkable point nearby");
+   roundtrip(migrated);
+  }
+  check(saves::decode(envelope(weaponSkills,21)).game.skillRanks==SkillRanks{1,2,1},
+        "normal v21 saves preserve their three ranks and start new weapon skills locked");
+  check(saves::decode(envelope(dev,22)).game.skillRanks==SkillRanks{0,0,0,1,1,1},
+        "v22 developer saves automatically unlock the added weapon skills");
   check(!saves::decode(envelope(powerBow,18)).game.arrows[0].power,"version 18 arrows load without a power marker");
   auto oldDesert=s;oldDesert.game=Game{};oldDesert.game.activateField(WorldLocation::Desert);oldDesert.game.player=DesertArrival;
   oldDesert.game.props.clear();oldDesert.game.props.push_back({DesertFountains[0],7,1});oldDesert.game.props.push_back({{35,35},8,1});
   auto migrated=saves::decode(envelope(oldDesert,5));
-  check(migrated.game.fountainUsed==std::array<bool,FountainCount>{}&&migrated.game.props.size()>1&&distance(migrated.game.props[0].pos,{35,35})==0&&std::all_of(migrated.game.props.begin()+1,migrated.game.props.end(),[](const Prop& p){return p.pos.x>=71.5f||p.pos.y>=71.5f;}),"legacy desert save gains unused fountains, removes overlapping scenery and adds only new-territory props");roundtrip(migrated);
+  check(migrated.game.fountainUsed==std::array<bool,FountainCount>{}&&migrated.game.props.size()>1&&distance(migrated.game.props[0].pos,{35,35})==0&&std::all_of(migrated.game.props.begin()+1,migrated.game.props.end(),[](const Prop& p){return (p.type>=DesertDecorationStart&&p.type<VolcanoDecorationStart)||p.pos.x>=71.5f||p.pos.y>=71.5f;}),"legacy desert save retains safe old scenery and gains unused fountains, expanded terrain and new desert designs");roundtrip(migrated);
   auto fountains=migrated;fountains.game.player=DesertFountains[0]+V{1.6f,0};fountains.game.mana=7;check(fountains.game.useFountain(0),"save fixture uses actual mana fountain");roundtrip(fountains);
   fountains.game.update(.05f,{},false);roundtrip(fountains);
   auto badFountain=fountains;badFountain.game.fountainUsed[0]=false;rejects([&]{saves::encode(badFountain);},"draining unused fountain rejected");
@@ -159,7 +216,7 @@ int main(int argc,char** argv){
   check(oldProgressLoaded.game.level==5&&oldProgressLoaded.game.xp==experienceForLevel(5)/2&&oldProgressLoaded.game.attributes[0]==12,"legacy saves retain earned levels, allocated stats and proportional XP progress");roundtrip(oldProgressLoaded);
   auto scarce=s;scarce.game.merchantArrows=7;roundtrip(scarce);scarce.game.merchantArrows=0;scarce.game.desertBossDead=true;roundtrip(scarce);
   auto badStock=s;badStock.game.merchantArrows=-1;rejects([&]{saves::encode(badStock);},"negative shop stock rejected");badStock.game.merchantArrows=21;rejects([&]{saves::encode(badStock);},"oversized shop stock rejected");
-  check(saves::decode(envelope(assignments,15)).game.skillAssigned==std::array<bool,SkillCount>{true,true,true},
+  check(saves::decode(envelope(assignments,15)).game.skillAssigned==std::array<bool,SkillSlotCount>{true,true,true},
         "v15 saves use the previous Z X V assignments");
   const auto legacyPotions=saves::decode(envelope(assignments,16)).game;
   check(legacyPotions.potionAssigned==DefaultPotions&&legacyPotions.skillAssigned==assignments.game.skillAssigned,
@@ -169,6 +226,14 @@ int main(int argc,char** argv){
   wrongPotion.game.potionAssigned={Kind::Sword,Kind::None};
   rejects([&]{saves::decode(envelope(wrongPotion,17));},"non-potion items cannot be assigned to a potion slot");
   rejects([&]{saves::decode(envelope(s,saves::CurrentVersion+1));},"unknown future version refused");
+  auto oldRecoil=saves::decode(envelope(saves::decode(recoilBytes),28));
+  check(oldRecoil.game.hitReactionProgress()<0&&length(oldRecoil.game.heroHitDirection)==0&&
+        distance(oldRecoil.game.player,recoilOrigin)==0,"v28 saves retain the saved position with an inactive light hit reaction");
+  auto invalidRecoil=saves::decode(recoilBytes);
+  invalidRecoil.game.heroHitReactionRemaining=HeroHitReactionDuration+.01f;
+  rejects([&]{saves::encode(invalidRecoil);},"oversized light hit timer rejected");
+  invalidRecoil.game.heroHitReactionRemaining=.1f;invalidRecoil.game.heroHitDirection={.4f,.4f};
+  rejects([&]{saves::encode(invalidRecoil);},"non-normalized light hit direction rejected");
   invalid=s;invalid.game.heroKnockback={100,0};rejects([&]{saves::encode(invalid);},"oversized knockback vector rejected");
   invalid=s;invalid.game.heroKnockbackRemaining=BoulderKnockbackDuration+.1f;rejects([&]{saves::encode(invalid);},"oversized knockback timer rejected");
   invalid=s;invalid.game.heroKnockdownRemaining=HeroKnockdownDuration+.1f;rejects([&]{saves::encode(invalid);},"oversized fall/get-up timer rejected");
@@ -180,7 +245,12 @@ int main(int argc,char** argv){
   bool backup=false;auto recovered=store.load(0,&backup);check(backup&&recovered.game.gold==567&&store.inspect(0).backup,"corrupted primary recovers valid backup");
   store.save(0,s);check(saves::readBytes(fs::path(store.path(0).wstring()+L".bak"))==previous,"corrupted primary cannot replace good backup");
   invalid=s;invalid.game.gold=-1;auto before=saves::readBytes(store.path(0));rejects([&]{store.save(0,invalid);},"invalid replacement refused");check(saves::readBytes(store.path(0))==before,"failed save preserves target");
-  rejects([&]{store.path(-1);},"negative slot refused");rejects([&]{store.path(3);},"extra slot refused");
+  rejects([&]{store.path(-1);},"negative slot refused");rejects([&]{store.path(saves::Store::LegacySaveSlot+1);},"extra slot refused");
+  const auto manualBefore=saves::readBytes(store.path(0));
+  const int legacySlot=saves::Store::LegacySaveSlot;
+  saves::atomicWrite(store.path(legacySlot),envelope(s,23));
+  rejects([&]{store.save(legacySlot,s);},"legacy checkpoint can no longer be written");
+  check(store.inspect(legacySlot).valid&&saves::readBytes(store.path(0))==manualBefore,"old checkpoints remain readable without changing any manual slot");
   fs::path blocked=root/"file-instead-of-directory";{std::ofstream out(blocked);out<<"keep";}saves::Store blockedStore(blocked);rejects([&]{blockedStore.save(0,s);},"filesystem failure surfaced");check(saves::readBytes(blocked)=="keep","unrelated file preserved");
   std::ofstream report(root/"report.txt");report<<"PASS: "<<checks<<" persistence checks\nAudio device opened: no\n";std::cout<<"PASS: "<<checks<<" persistence checks; "<<root.string()<<'\n';return 0;
  }catch(const std::exception& e){std::cerr<<"FAIL after "<<checks<<" checks: "<<e.what()<<'\n';return 2;}

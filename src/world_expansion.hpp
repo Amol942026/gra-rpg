@@ -23,6 +23,8 @@ void expandWorld(){
   }
   if(realm==WorldLocation::Volcano)continue; // Its independent scenery revision preserves the old volcanic placement.
   for(const auto& p:authored.props){
+   if(p.type>=ForestDecorationStart)continue;
+   if(realm==WorldLocation::Desert&&desertGroveProp(p.type))continue; // Older saves plant these after migration around the saved positions.
    if(p.pos.x<previousSize-.5f&&p.pos.y<previousSize-.5f)continue;
    if(std::any_of(scenery.begin(),scenery.end(),[&](const auto& old){return distance(old.pos,p.pos)<.01f;}))continue;
    float radius=propRadius(p.type);bool clear=true;

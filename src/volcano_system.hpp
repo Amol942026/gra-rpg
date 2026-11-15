@@ -41,7 +41,7 @@ void appendVolcanoScenery(std::vector<Prop>& result,const std::vector<Enemy>& in
    else if(p.x>51)type=roll<53?17:roll<83?14:16;
    else type=roll<38?14:roll<70?16:17;
    const float radius=propRadius(type);
-   if(volcanoLava(p,radius+.8f)||nearVolcanoFountain(p,3)||nearTreasure(p,WorldLocation::Volcano)||distance(p,VolcanoArrival)<6||distance(p,VolcanoPortal)<4||distance(p,VolcanoBossHome)<8)continue;
+   if(volcanoLava(p,radius+.8f)||nearVolcanoFountain(p,3)||nearTreasure(p,WorldLocation::Volcano)||distance(p,VolcanoArrival)<6||distance(p,VolcanoPortal)<4||distance(p,VolcanoBossHome)<8||nearFieldSite(WorldLocation::Volcano,p,2.4f))continue;
    const Prop prop{p,type,.74f+float(hash(n,519)%25)*.01f};
    if(extension&&volcanoPropCoversBridge(prop))continue;
    bool clear=true;
@@ -99,12 +99,13 @@ void buildVolcano(){
  addRegionalEnemies(WorldLocation::Volcano,enemies,props,forage);
  std::rotate(enemies.begin()+guardianIndex,enemies.begin()+guardianIndex+1,enemies.end());
  volcanoCreated=true;volcanoSceneryVersion=VolcanoSceneryRevision;
+ addRealmDecorations(WorldLocation::Volcano);
 }
 bool canTravelVolcano()const{return mageReachable()&&desertBossDead;}
 void resetFieldArrival(V arrival){
  player=arrival;facing={1,0};animation={};animation.face(1,0);cancelBow();closeCorpse();openedChest=-1;
  rollRemaining=rollCd=swing=attackCd=spellCd=hurt=stepDistance=0;
- arrows.clear();fireballs.clear();explosions.clear();effects.clear();pierceFlashes.clear();healingPulse=0;cinders.clear();fissures.clear();
+ arrows.clear();fireballs.clear();explosions.clear();effects.clear();combatImpacts.clear();pierceFlashes.clear();healingPulse=0;cinders.clear();fissures.clear();
 }
 bool travelToVolcano(){
  if(!canTravelVolcano())return false;activateField(WorldLocation::Volcano);resetFieldArrival(VolcanoArrival);
@@ -147,7 +148,7 @@ void updateVolcanoAttacks(float dt,V heroBefore,bool wasRolling,float rollAge){
   if(hit&&!dead()){
    V at=heroBefore+(player-heroBefore)*contact;
    if(wasRolling&&rollAge+dt*contact<RollProtection){sound(Cue::Dodge,at);effects.push_back({at,"UNIK",.65f,3});}
-   else takeMonsterDamage(incomingDamage(b.damage,DamageType::Magic),player,.22f);
+   else takeMonsterDamage(incomingDamage(b.damage,DamageType::Magic),at,.22f,b.velocity,DamageType::Magic);
   }
   b.pos=b.pos+delta;b.remaining-=length(delta);
   if(hit||first<=1||b.remaining<=0||b.pos.x<MapWalkMin||b.pos.y<MapWalkMin||b.pos.x>MapWalkMax||b.pos.y>MapWalkMax)cinders.erase(cinders.begin()+i);else i++;
@@ -158,7 +159,10 @@ void updateVolcanoAttacks(float dt,V heroBefore,bool wasRolling,float rollAge){
    f.struck=true;float t=std::clamp((f.delay-before)/dt,0.f,1.f);V at=heroBefore+(player-heroBefore)*t;
    if(distance(at,f.pos)<1.35f&&clearEnemySegment(f.pos,at,0)&&!dead()){
     if(wasRolling&&rollAge+dt*t<RollProtection){sound(Cue::Dodge,at);effects.push_back({at,"UNIK",.65f,3});}
-    else takeMonsterDamage(incomingDamage(f.damage,DamageType::Magic),at,.3f);
+    else{
+     const V away=at-f.pos;
+     takeMonsterDamage(incomingDamage(f.damage,DamageType::Magic),at,.3f,length(away)>.001f?away:facing*-1,DamageType::Magic);
+    }
    }sound(Cue::StoneHit,f.pos);
   }
  }

@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\desert-plants-20261115\\pack.json",
+  "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\desert-plants",
+  "files": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\desert-plants\\desert-saguaro.png",
+      "sha256": "c127337af94e71766c543f7fb798b09c21449546c2405633ed96c7e63fbbebf7",
+      "bytes": 258149,
+      "role": "desert-plant-sprite"
+    },
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\desert-plants\\desert-opuntia.png",
+      "sha256": "6b2882e1a839f9331a45899548c54ff94947eb8a3c31e8aabce3496cc0730ffd",
+      "bytes": 210074,
+      "role": "desert-plant-sprite"
+    },
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\desert-plants\\desert-palm.png",
+      "sha256": "5d4640e07575045e35cb8ccf5c7bf71252d9f360de0b2e9702d4a110d779807e",
+      "bytes": 331965,
+      "role": "desert-plant-sprite"
+    }
+  ],
+  "provenance": {
+    "prompt_path": "C:/AI2D/pipeline/runs/desert-plants-20261115/imagegen-prompt.txt",
+    "imagegen_sha256": "9460315c1d862deb26cfaea2f7b8b5777445863b5a0a57e8bbe59a224e46d38c",
+    "root_pivot": [
+      270,
+      624
+    ],
+    "art": "Built-in ImageGen, new full-size painting from the in-game desert palette reference",
+    "krita_masters": [
+      {
+        "path": "C:\\AI2D\\sprites\\desert-plants-20261115\\desert-opuntia.kra",
+        "sha256": "36c5d06517d3a736314a3595bbd89a342652759c7d934333fe138b9490aab639"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\desert-plants-20261115\\desert-palm.kra",
+        "sha256": "8f120c8860b3b10480fb6ae207cbef6dc6966fc59691f1e50be4273c12f32f8b"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\desert-plants-20261115\\desert-saguaro.kra",
+        "sha256": "0e3582cd50dd04ac167c8d2d9a946f9cda5330a7d2720960493da0a7092cd36f"
+      }
+    ],
+    "rgba_size": [
+      540,
+      690
+    ],
+    "finish": "RGB edge decontamination, transparent crop and rooted canvas composition in Krita 5.3.4.1"
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false
+}

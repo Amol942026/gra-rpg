@@ -105,13 +105,14 @@ int main(int argc,char** argv){
   if(!e){check(false,"encounter after attack "+slug);continue;}
   game.sounds.clear();
   game.hit(*e,10000);
-  check(playCount(game,enemyHitCue(type))==1&&playCount(game,enemyFallCue(type))==1,"hit and fall cues "+slug);
-  check(e->strike>0&&game.findCorpse(id),"fall clock and permanent corpse "+slug);
+  check(playCount(game,enemyHitCue(type))==1&&playCount(game,enemyFallCue(type))==0,"hit cue leads the landing cue "+slug);
+  check(e->dying()&&game.findCorpse(id),"fall clock and permanent corpse "+slug);
   game.player=e->pos;
   game.allocationRequired=false;
   check(game.openCorpse(id),"corpse opens its own loot "+slug);
-  for(int step=0;step<30;step++)game.update(.02f,{},false);
-  check(regional_enemy_art::frame(*e)==regional_enemy_art::FallStart+regional_enemy_art::FallFrames-1,"fall settles "+slug);
+  for(int step=0;step<50;step++)game.update(.02f,{},false);
+  check(!e->dying()&&regional_enemy_art::frame(*e)==regional_enemy_art::FallStart+regional_enemy_art::FallFrames-1,"fall settles "+slug);
+  check(playCount(game,enemyFallCue(type))==1,"ground contact emits one fall sound "+slug);
   for(Cue cue:{enemyAttackCue(type),enemyHitCue(type),enemyFallCue(type)}){
    for(int variant=1;variant<=3;variant++){
     const std::string stem=AudioSystem::Names[int(cue)];

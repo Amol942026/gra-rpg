@@ -12,10 +12,9 @@ foreach($asset in Get-ChildItem -LiteralPath $assetRoot -Recurse -File){
  $relative=$asset.FullName.Substring($assetRoot.Length+1);$target=Join-Path (Join-Path $root 'assets') $relative
  if(!(Test-Path -LiteralPath $target) -or (Get-FileHash -LiteralPath $target).Hash -ne (Get-FileHash -LiteralPath $asset.FullName).Hash){throw ('Wrong packaged asset: '+$relative)};$assetCount++
 }
-foreach($launcher in @('Tryb_deweloperski.bat','Test_kaldery.bat','Test_Varkhora.bat')){
- $text=Get-Content -LiteralPath (Join-Path $root $launcher) -Raw
- if($text.Contains('dist\Emberfall.exe') -or !$text.Contains('"Emberfall.exe"')){throw ('Wrong packaged launcher path: '+$launcher)}
-}
+$launchers=@(Get-ChildItem -LiteralPath $root -File -Filter '*.bat')
+if($launchers.Count -ne 1 -or $launchers[0].Name -ne 'Uruchom.bat' -or
+   (Get-FileHash -LiteralPath $launchers[0].FullName).Hash -ne (Get-FileHash -LiteralPath 'Uruchom.bat').Hash){throw 'Wrong packaged launcher'}
 $settings=Join-Path $root 'audio-settings.cfg';[IO.File]::WriteAllText($settings,'0.31 0.67 0 0 1'+[Environment]::NewLine);$settingsHash=(Get-FileHash -LiteralPath $settings).Hash
 function Invoke-Hidden([string]$program,[string[]]$arguments){
  if('--no-audio' -notin $arguments -or '--background-test' -notin $arguments){throw 'Missing silent/hidden test arguments'}

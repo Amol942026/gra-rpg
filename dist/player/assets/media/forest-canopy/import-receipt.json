@@ -1,0 +1,140 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\forest-wood-20261115\\pack.json",
+  "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\forest-canopy",
+  "files": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\forest-canopy\\forest-spruce.png",
+      "sha256": "c8a740c0ef18c282cbdda82bdcbd31697be5efd81818c68d06e78502da15e15c",
+      "bytes": 350942,
+      "role": "forest-tree-sprite"
+    },
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\forest-canopy\\forest-birch.png",
+      "sha256": "47bae81dbf47856ef1afe242e977bf22128e2f83f91db7b82c43bc42c6857d6b",
+      "bytes": 445051,
+      "role": "forest-tree-sprite"
+    },
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\forest-canopy\\forest-oak.png",
+      "sha256": "e83bce0975fa7db60f5d4c305780d0b6165084abfa7fb42657b9991f82ceceb5",
+      "bytes": 328306,
+      "role": "forest-tree-sprite"
+    }
+  ],
+  "provenance": {
+    "art": "Built-in ImageGen (GPT Image), new painting with the existing oak as style reference",
+    "rgba_size": [
+      540,
+      690
+    ],
+    "raster_finish": "White matte suppression, ratio-preserving downsampling, root pivot and export in Krita 5.3.4.1; residual neutral matte removed with neighboring local foreground colors on translucent pixels. Original layers and identical alpha stored in native Krita masters. Raised celadon flecks through the canopy also receive localized foreground pigment recovery, including fully covered areas with white carryover. Intact warm highlights, untouched visual alpha, and a limited protection mask for naturally pale birch bark. The spruce and birch crown pigments were refined against the realm palette to remove remaining celadon edge marks while keeping alpha and saturated gold intact. Naturally pale birch bark retains its separate mask. Oak raster unchanged in this revision.",
+    "root_pivot": [
+      270,
+      624
+    ],
+    "prompt": "Three rooted trees: mature spruce, forked white birch, and ancient oak, in Emberfall painterly isometric fantasy style, moss and olive colours, with separated silhouettes and transparent background.",
+    "imagegen_sha256": "fa9f549366951744b975365073d44cf0ea5f894f783a31a69affeef8f41fef37",
+    "krita_masters": [
+      {
+        "path": "C:\\AI2D\\sprites\\forest-crown-20261115\\forest-spruce-crown.kra",
+        "sha256": "26b25d0cae28e15dad0240bdde7441d43e6c54807f3020c092d7210096363776"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\forest-crown-20261115\\forest-birch-crown.kra",
+        "sha256": "9c4e788b62acac00db0e10c3baa6fc4f0341aadb00b1551d1caa08b9072aedf4"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\forest-fleck-20261115\\forest-oak-flecks.kra",
+        "sha256": "95b133d505816e9066c6116972c907b5a7667a2db5201ec7a2efb33ae40647f1"
+      }
+    ],
+    "previous_krita_masters": [
+      {
+        "path": "C:\\AI2D\\sprites\\forest-canopy-20261114\\forest-birch-final.kra",
+        "sha256": "a2a8b9c94ab8dfe90b556a59b11b672230a7a2d2135503ab3025d66955931a0a"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\forest-canopy-20261114\\forest-oak-final.kra",
+        "sha256": "529ab07829aa880510fb5dc7a0d44c0ec5f4bf6940cfc96b83531b2fef89d90f"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\forest-canopy-20261114\\forest-spruce-final.kra",
+        "sha256": "a3f8a32bee84e8484f2ac2288d5a80c3b9d472daebab9c006f50b4315786f1db"
+      }
+    ],
+    "earlier_matte_krita_masters": [
+      {
+        "path": "C:\\AI2D\\sprites\\forest-fringe-20261115\\forest-spruce-matte.kra",
+        "sha256": "e09dddd8a4203e28963cbbd95cc78e5e21bfe932170cc45102b7552e3049c953"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\forest-fringe-20261115\\forest-birch-matte.kra",
+        "sha256": "99fba517f7052dac1915d1c62d3ef5aeb8f30ac18c4df89d041061bc15711099"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\forest-fringe-20261115\\forest-oak-matte.kra",
+        "sha256": "d37f9bd3ea6ee32a246b707624459787347d092a890a113674574d9177080480"
+      }
+    ],
+    "earlier_fleck_krita_masters": [
+      {
+        "path": "C:\\AI2D\\sprites\\forest-fleck-20261115\\forest-spruce-flecks.kra",
+        "sha256": "4b92dc04b9ef56d4caa0dcb88df6a30723a519abf7889f12311afef5fab7d8e6"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\forest-fleck-20261115\\forest-birch-flecks.kra",
+        "sha256": "51b544d2fb1a09261da877d5a16ac6dc4602b6f9fff2a2a5ccf251c0981066e4"
+      },
+      {
+        "path": "C:\\AI2D\\sprites\\forest-fleck-20261115\\forest-oak-flecks.kra",
+        "sha256": "95b133d505816e9066c6116972c907b5a7667a2db5201ec7a2efb33ae40647f1"
+      }
+    ],
+    "vegetation_palette_20261115": {
+      "type": "Color refinement of existing game-owned raster assets",
+      "editing": "Krita 5.3.4.1, separate palette layers with prior art layers retained",
+      "render_intent": "Darker moss and olive foliage harmonized with the forest floor while retaining readable bark, berries and leaf detail",
+      "alpha": "Byte-exact relative to the source sprite masks",
+      "atlas_scope": "Only first-row fifth cell, rowan shrub. Remaining cells byte-exact in decoded RGBA.",
+      "masters": [
+        {
+          "source": "C:\\AI2D\\sprites\\forest-palette-20261115\\forest-spruce.kra",
+          "sha256": "02a3bfd83b4c21e3d9fb518b734caaa6996a100da853e45f0113ec1b745e05ab"
+        },
+        {
+          "source": "C:\\AI2D\\sprites\\forest-palette-20261115\\forest-birch.kra",
+          "sha256": "f772e09a042c1b480af27e4f71167bb49cf73dbef0db8233de672df39d3682a0"
+        },
+        {
+          "source": "C:\\AI2D\\sprites\\forest-palette-20261115\\forest-oak.kra",
+          "sha256": "52e5233a459a9e4769621220ba531d5c49bbdfd79f8d838757a21cc048820372"
+        }
+      ]
+    },
+    "wood_palette_20261115": {
+      "type": "Korekta palety istniejących malowanych zasobów Emberfall",
+      "editing": "Krita 5.3.4.1, nowa warstwa palety i zachowane wcześniejsze warstwy",
+      "render_intent": "Światła przygaszone szczególnie na drewnie; cienie w zgaszonym brązie i oliwce zgodnym z leśną glebą. Zachowane ślady kory oraz kontrast okuć i monet.",
+      "alpha": "Alfa wszystkich pikseli, proporcje i kotwice zachowane dokładnie",
+      "atlas_scope": "Trzy drzewa, pola kłody i pnia oraz pierwszy rząd skrzyń. Pozostałe pola zachowane pikselowo w RGBA.",
+      "masters": [
+        {
+          "source": "C:\\AI2D\\sprites\\forest-wood-20261115\\forest-spruce.kra",
+          "sha256": "b4d83e6cf5517cb435bf9f29562047d493231281e0d864459559ca3de40182d9"
+        },
+        {
+          "source": "C:\\AI2D\\sprites\\forest-wood-20261115\\forest-birch.kra",
+          "sha256": "f28d9aa0495ffdeeb0e47d20aac1b397a8d0e0aa4c23072bcdf3eea080eca7cc"
+        },
+        {
+          "source": "C:\\AI2D\\sprites\\forest-wood-20261115\\forest-oak.kra",
+          "sha256": "b86fe993796b53846f306ec70d788e87345ed850de6b408ecb2576060560e868"
+        }
+      ]
+    }
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false,
+  "previous_source_manifest": "C:\\AI2D\\pipeline\\runs\\forest-palette-20261115\\pack.json"
+}

@@ -1,14 +1,22 @@
 #pragma once
 namespace forest_tree_art {
-// Three native Krita paintings share the legacy root anchor and wind mesh.
+// The high-resolution sprites share the legacy root anchor and wind mesh.
 // Sources only live during makeArt; gameplay uses the ordinary propArt cache.
 inline std::array<Texture2D,3> sources{};
 inline std::array<bool,3> baked{};
 inline int slot(int type){return type==0?0:type==4?1:type==5?2:-1;}
+inline float scale(int type){return type==0?1.8f:type==4?1.7f:type==5?1.85f:1.f;}
+inline constexpr const char* files[]={
+  "assets/media/forest-canopy/forest-spruce.png",
+  "assets/media/forest-canopy/forest-birch.png",
+  "assets/media/forest-canopy/forest-oak.png"
+};
 inline void load(){
- const char* files[]={"assets/sprites/forest-spruce.png","assets/sprites/forest-birch.png","assets/sprites/forest-oak.png"};
  baked={};
- for(int i=0;i<3;i++){sources[i]=LoadTexture(files[i]);if(sources[i].id)SetTextureFilter(sources[i],TEXTURE_FILTER_BILINEAR);}
+ for(int i=0;i<3;i++){
+  sources[i]=LoadTexture(files[i]);
+  if(sources[i].id)SetTextureFilter(sources[i],TEXTURE_FILTER_BILINEAR);
+ }
 }
 inline bool draw(int type,float x,float y,float size){
  int i=slot(type);if(i<0||!sources[i].id)return false;const auto& source=sources[i];

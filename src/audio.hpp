@@ -35,7 +35,8 @@ public:
         "cinderhorn-attack","cinderhorn-hit","cinderhorn-fall","spear-thrust","spear-impact",
         "spear-briar-thrust","spear-briar-impact","spear-oasis-thrust","spear-oasis-impact",
         "spear-basalt-thrust","spear-basalt-impact","spear-dawn-thrust","spear-dawn-impact",
-        "power-sword","power-axe","power-dagger","power-spear","power-bow","cinderhorn-charge"
+        "power-sword","power-axe","power-dagger","power-spear","power-bow","cinderhorn-charge",
+        "land-slime","land-beast","land-bone","land-stone","land-wood","land-shell","land-sand","land-ember"
     };
     static constexpr int ScoreCount=4;
     inline static constexpr const char* ScoreNames[ScoreCount]={"echoes-of-the-ruins","desert","volcano","tower"};
@@ -109,7 +110,7 @@ public:
         if(!available||!effectsEnabled()||effectsVolume<=0||suspended)return;
         int i=int(cue);if(i<0||i>=CueCount)return;
         auto& bank=banks[i];if(!IsSoundValid(bank.sources[0]))return;
-        double now=GetTime();if(now-bank.last<(cue==ember::Cue::Step?.085:.045))return;
+        double now=GetTime();if(!ember::enemyLandingCue(cue)&&now-bank.last<(cue==ember::Cue::Step?.085:.045))return;
         float attenuation=1,pan=.5f;
         if(spatial){
             ember::V delta=position-listener;float d=ember::length(delta);if(d>=12)return;
@@ -146,7 +147,7 @@ public:
             else if(IsMusicStreamPlaying(scores[i]))StopMusicStream(scores[i]);
         }
         if(focused)for(const auto& event:world.sounds)
-            if((event.cue!=ember::Cue::BowDraw||world.bowDrawing)&&(!blocked||event.cue==ember::Cue::LevelUp||event.cue==ember::Cue::Victory||event.cue==ember::Cue::SpellLearn||(cinematicArrival&&event.cue==ember::Cue::TeleportArrival)))
+            if((event.cue!=ember::Cue::BowDraw||world.bowDrawing)&&(!blocked||(world.allocationRequired&&ember::enemyLandingCue(event.cue))||event.cue==ember::Cue::LevelUp||event.cue==ember::Cue::Victory||event.cue==ember::Cue::SpellLearn||(cinematicArrival&&event.cue==ember::Cue::TeleportArrival)))
                 play(event.cue,{event.x,event.y},world.player,true);
         world.sounds.clear();
     }

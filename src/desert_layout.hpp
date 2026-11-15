@@ -40,9 +40,9 @@ inline const std::array<DesertRoad,11>& desertRoads(){
   }return result;
  }();return roads;
 }
-inline bool desertPath(V p){
+inline bool desertPath(V p,float padding=0.f){
  for(const auto& road:desertRoads()){
-  float width=1.95f*road.width;
+  float width=1.95f*road.width+padding;
   if(p.x<road.low.x-width||p.y<road.low.y-width||p.x>road.high.x+width||p.y>road.high.y+width)continue;
   for(size_t i=1;i<road.points.size();i++){
   V a=road.points[i-1],b=road.points[i];

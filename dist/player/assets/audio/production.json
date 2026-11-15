@@ -1016,5 +1016,191 @@
       }
     ],
     "audio_played": false
+  },
+  "landing_sync_20261115": {
+    "new_cues": [
+      "land-slime",
+      "land-beast",
+      "land-bone",
+      "land-stone",
+      "land-wood",
+      "land-shell",
+      "land-sand",
+      "land-ember"
+    ],
+    "runtime_cues": 83,
+    "variants_per_cue": 3,
+    "sources": "Kenney Impact Sounds and RPG Audio, artisticdude Swishes Sound Pack. CC0.",
+    "source_credits": "assets/licenses/audio-foley-CC0.txt",
+    "production_tool": "Csound 6.18.1 offline layering and Python PCM contact alignment",
+    "master_root": "C:/AI2D/audio/enemy-landings-20261115-033849",
+    "backup_receipt": "art/pipeline/backups/20261115_033912_285ba644/binding-receipt.json",
+    "cinderhorn_primary_impact_advanced_ms": 30,
+    "primary_onset_max_ms": 10,
+    "files": [
+      {
+        "file": "cinderhorn-fall-v2.wav",
+        "sha256": "3b971c767e03f3d7db828d7b4c5e064ad9533939210da9db45c7b0f8ab78d189",
+        "frames": 36000,
+        "bytes": 144044
+      },
+      {
+        "file": "cinderhorn-fall-v3.wav",
+        "sha256": "cf15565ba09965c272dce9819e9ef9b11fa8435488ee896effb80ff4c72ed839",
+        "frames": 36000,
+        "bytes": 144044
+      },
+      {
+        "file": "cinderhorn-fall.wav",
+        "sha256": "e3382e8ac3631e5e5809e3c20cf3254a158ceaf94df3a983dee235b49a4976c6",
+        "frames": 36000,
+        "bytes": 144044
+      },
+      {
+        "file": "land-beast-v2.wav",
+        "sha256": "22d0a039dadd55ec0b240d77689889050e9ba259cd412db08ebbed5d543ffc01",
+        "frames": 24000,
+        "bytes": 96044
+      },
+      {
+        "file": "land-beast-v3.wav",
+        "sha256": "ff648f9668c70606fc421c46ff51c4bc04f8358dec54cc8c529486d511fd55c9",
+        "frames": 24000,
+        "bytes": 96044
+      },
+      {
+        "file": "land-beast.wav",
+        "sha256": "69e30ea7bfb073f6beebb41f3b4b67a43bf16e85d4cdadb2613e97d47c772703",
+        "frames": 24000,
+        "bytes": 96044
+      },
+      {
+        "file": "land-bone-v2.wav",
+        "sha256": "1892f6ea98121deb64471aa8271eb4c87d5c622d68ee5508f27a49a9c9916fe2",
+        "frames": 21120,
+        "bytes": 84524
+      },
+      {
+        "file": "land-bone-v3.wav",
+        "sha256": "8485d639f44aec6abd3e6b247d99d596583979c68181c5ce5f14565c544ecd42",
+        "frames": 21120,
+        "bytes": 84524
+      },
+      {
+        "file": "land-bone.wav",
+        "sha256": "bc69206b0db0adc25f257e993f69c0c444dd58afa6546143f3b8fab960d7d943",
+        "frames": 21120,
+        "bytes": 84524
+      },
+      {
+        "file": "land-ember-v2.wav",
+        "sha256": "7143440940b70650688ba4b2ffd2379934d2e218bd75a323baab98bbf9e9cfe5",
+        "frames": 22560,
+        "bytes": 90284
+      },
+      {
+        "file": "land-ember-v3.wav",
+        "sha256": "8529fb700e941e04ddccdb5da2a5cdf7e1165f4a0f8c8216c04e9acc9aea613a",
+        "frames": 22560,
+        "bytes": 90284
+      },
+      {
+        "file": "land-ember.wav",
+        "sha256": "1f475617fc86d55c396a9aae6d1699809c6c2b1271e8568530a806d44fb0bba2",
+        "frames": 22560,
+        "bytes": 90284
+      },
+      {
+        "file": "land-sand-v2.wav",
+        "sha256": "dd90995e85248c0b2d7211c0b297fe7a00e9eaf0beaa74029622c7c3dab24da0",
+        "frames": 28320,
+        "bytes": 113324
+      },
+      {
+        "file": "land-sand-v3.wav",
+        "sha256": "63b1f14e57e1eb56e96127da0e7fd8f9b77ca0e66e407f55756759d0f07bcbc4",
+        "frames": 28320,
+        "bytes": 113324
+      },
+      {
+        "file": "land-sand.wav",
+        "sha256": "dc5e5346a85d2b0b61238ccd7b73cb8b1da8a0eef37b5efc74d0ae38f1adfca6",
+        "frames": 28320,
+        "bytes": 113324
+      },
+      {
+        "file": "land-shell-v2.wav",
+        "sha256": "9612f40c9e0c55732cc109ef12e26266bee42f91a7e246c943b5408313b587bb",
+        "frames": 20160,
+        "bytes": 80684
+      },
+      {
+        "file": "land-shell-v3.wav",
+        "sha256": "7f8af0d92a2727cead66ad5809e18b8315c9f43cd5bb258574eb8ad2036909ca",
+        "frames": 20160,
+        "bytes": 80684
+      },
+      {
+        "file": "land-shell.wav",
+        "sha256": "fcbd6738669c9c263ef5c592ae843b18a746d7efe26f3dce8f2ace259d50f455",
+        "frames": 20160,
+        "bytes": 80684
+      },
+      {
+        "file": "land-slime-v2.wav",
+        "sha256": "73b4c43f0ed497abe9ee044a5b85ffb70f5a3d55ea1d952e3587e9875cf29931",
+        "frames": 19200,
+        "bytes": 76844
+      },
+      {
+        "file": "land-slime-v3.wav",
+        "sha256": "5c259bef83d04b5a3f897bbfd83bd4513120d1fbd28bb9c635edfecb521772ea",
+        "frames": 19200,
+        "bytes": 76844
+      },
+      {
+        "file": "land-slime.wav",
+        "sha256": "0df351497bcdb6a2bdbc118ccc2e73eaa7219193dcc456d97f9bb64c8c7f3dfb",
+        "frames": 19200,
+        "bytes": 76844
+      },
+      {
+        "file": "land-stone-v2.wav",
+        "sha256": "9fd08877dfb96fa07ea6ca5a3ca83cec3745e800a4b9a412cf3fbdaaa39592b6",
+        "frames": 27840,
+        "bytes": 111404
+      },
+      {
+        "file": "land-stone-v3.wav",
+        "sha256": "8d02a1aa848f3542112fb4a809af0a3f259a27aa7f39606e2609167c0aec1d58",
+        "frames": 27840,
+        "bytes": 111404
+      },
+      {
+        "file": "land-stone.wav",
+        "sha256": "18778eec21c5d55aab3a1a137628583094250d6b2eda81454a95b58f41d58a49",
+        "frames": 27840,
+        "bytes": 111404
+      },
+      {
+        "file": "land-wood-v2.wav",
+        "sha256": "c742c4e6a83e8dfe90ee3caa8793894e4d6715e52ec5e87be5dcfea15e81d62d",
+        "frames": 25440,
+        "bytes": 101804
+      },
+      {
+        "file": "land-wood-v3.wav",
+        "sha256": "c7b439422b29ae2085c61c8d5d7f763288bbfb34795421624de0d8c8da0f592d",
+        "frames": 25440,
+        "bytes": 101804
+      },
+      {
+        "file": "land-wood.wav",
+        "sha256": "eaeca771c9d52a82a8d3b8076cce53393959b1168df2e619ce82289b4a88b9ac",
+        "frames": 25440,
+        "bytes": 101804
+      }
+    ],
+    "audio_played": false
   }
 }

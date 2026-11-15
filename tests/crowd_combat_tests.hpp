@@ -18,7 +18,7 @@ bool enemiesClearOfScenery(const Game& g) {
 }
 void crowdCombatTests() {
     const V directions[]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};
-    Game area=emptyArena();area.animation.direction=Direction::NW;
+    Game area=emptyArena();area.aimMelee({1,0});
     for(int i=0;i<8;i++){
         V pos=area.player+normalized(directions[i])*1.9f;
         area.enemies.push_back({i,i%4,pos,pos,100,100});
@@ -27,30 +27,36 @@ void crowdCombatTests() {
     area.enemies.push_back({8,0,far,far,100,100});
     area.enemies.push_back({9,0,edge,edge,100,100});
     area.enemies.push_back({10,0,area.player,area.player,0,100});area.enemies.back().alive=false;
+    const Direction aimed=area.animation.direction;
     check(area.attack(),"one swing can hit a group without selecting a target");
-    for(int i=0;i<8;i++)check(std::abs(area.enemies[i].hp-(100-damageAfterArmor(14,area.enemies[i].defense())))<.001f,
-        "AoE hits every direction once, applying each monster's armor");
+    for(int i=0;i<8;i++){
+        const float damage=i<=3||i==7?damageAfterArmor(14,area.enemies[i].defense()):0;
+        check(std::abs(area.enemies[i].hp-(100-damage))<.001f,"sword sweep hits the front group only, applying each monster's armor");
+    }
     check(area.enemies[8].hp==100&&area.enemies[9].hp==86,"AoE respects the inclusive 2.1 field radius");
     check(area.enemies[10].hp==0&&area.kills==0,"AoE ignores corpses");
-    check(cueCount(area,Cue::Swing)==1&&area.animation.direction==Direction::NW,"one swing sound and no automatic turn toward a target");
+    check(cueCount(area,Cue::Swing)==1&&area.animation.direction==aimed,"one swing sound and no automatic turn toward a target");
     check(!area.attack()&&area.enemies[0].hp==86,"cooldown prevents repeated group damage");
 
     Game kills=emptyArena();kills.xp=experienceForLevel(1)-5;
-    for(int i=0;i<5;i++){V p=kills.player+normalized(directions[i])*1.5f;
+    const V killPositions[]={{1.1f,-1.2f},{.8f,-.55f},{1.15f,.05f},{.95f,.85f},{1.02f,1.58f}};
+    for(int i=0;i<5;i++){V p=kills.player+killPositions[i];
         kills.enemies.push_back({i,0,p,p,i==0||i==4?100.f:1.f,100});}
-    kills.attack();
+    kills.attack({1,0});
     check(kills.kills==3&&kills.level==2&&kills.ground.empty()&&kills.findCorpse(kills.enemies[1].id)&&kills.findCorpse(kills.enemies[2].id)&&kills.findCorpse(kills.enemies[3].id),"one swing awards XP and corpse loot for every defeated enemy");
     check(kills.enemies[0].hp==86&&kills.enemies[4].hp==86,"level-up mid-swing cannot change damage for later victims");
 
     Game presses=emptyArena();
-    for(int i=0;i<4;i++){V p=presses.player+normalized(directions[i*2])*1.5f;
-        presses.enemies.push_back({i,0,p,p,500,500});}
+    presses.aimMelee({1,0});
+    const V pressPositions[]={{.6f,-1.5f},{1.3f,-.5f},{1.3f,.55f},{.65f,1.55f},{-1.5f,0}};
+    for(int i=0;i<5;i++){V p=presses.player+pressPositions[i];
+        presses.enemies.push_back({i,0,p,p,500,500});presses.enemies.back().windup=100;}
     presses.update(1.f/60,{},true);
     for(int frame=0;frame<120;frame++){presses.hp=100;presses.update(1.f/60,{},false);}
-    bool once=true;for(auto& e:presses.enemies)once&=e.hp==486;
-    check(once&&cueCount(presses,Cue::Swing)==1,"group receives only one hit with no new left mouse press");
-    presses.update(1.f/60,{},true);bool twice=true;for(auto& e:presses.enemies)twice&=e.hp==472;
-    check(twice&&cueCount(presses,Cue::Swing)==2,"second press hits the whole group once again");
+    bool once=true;for(int i=0;i<4;i++)once&=presses.enemies[i].hp==486;
+    check(once&&presses.enemies.back().hp==500&&cueCount(presses,Cue::Swing)==1,"front group receives only one hit with no new left mouse press");
+    presses.update(1.f/60,{},true);bool twice=true;for(int i=0;i<4;i++)twice&=presses.enemies[i].hp==472;
+    check(twice&&presses.enemies.back().hp==500&&cueCount(presses,Cue::Swing)==2,"second press hits the front group once again");
 
     for(int type=0;type<EnemyTypeCount;type++){
         Game overlap=emptyArena();overlap.player={2,2};

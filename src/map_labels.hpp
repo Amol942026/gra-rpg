@@ -41,6 +41,9 @@ void drawMapNameplate(const MapNameplate& label){
 void drawWorldLabels(){
  clip(0,0,WorldW,H);
  forEachMapNameplate([](const MapNameplate& label){drawMapNameplate(label);});
+ drawImpactBursts();
  drawCombatEffects();
+ if(hovered.kind==HoverKind::Enemy)if(const Enemy* target=game.findEnemy(hovered.index))
+  enemyVitals(*target,screen(target->pos),true);
  EndScissorMode();
 }

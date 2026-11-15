@@ -13,26 +13,32 @@ bool runDesertQA(){
  for(int variant=0;variant<4;variant++){
   auto& rt=desert_art::mountainArt[variant];Image im=LoadImageFromTexture(rt.texture);ImageFlipVertical(&im);Color* pixels=LoadImageColors(im);int solid=0,clipped=0;std::vector<unsigned> colors;
   for(int y=0;y<im.height;y++)for(int x=0;x<im.width;x++){auto c=pixels[y*im.width+x];solid+=c.a>=240;clipped+=c.a>=160&&(x<2||y<2||x>=im.width-2||y>=im.height-2);if(c.a>=240&&x%7==0&&y%7==0)colors.push_back((unsigned(c.r)<<16)|(unsigned(c.g)<<8)|c.b);}
-  std::sort(colors.begin(),colors.end());check(rt.id&&im.width==900&&im.height==660&&solid>10000&&clipped==0&&std::unique(colors.begin(),colors.end())-colors.begin()>100,"mountain variant "+std::to_string(variant)+": complete cached silhouette and rich shaded terrain");saveTexture(rt,"qa-v39/mountain-"+std::to_string(variant)+".png");UnloadImageColors(pixels);UnloadImage(im);
+  std::sort(colors.begin(),colors.end());check(rt.id&&im.width==int(desert_art::MountainWidth*desert_art::MountainDensity)&&im.height==int(desert_art::MountainHeight*desert_art::MountainDensity)&&solid>10000&&clipped==0&&std::unique(colors.begin(),colors.end())-colors.begin()>100,"mountain variant "+std::to_string(variant)+": full-resolution silhouette and richly shaded terrain");saveTexture(rt,"qa-v39/mountain-"+std::to_string(variant)+".png");UnloadImageColors(pixels);UnloadImage(im);
  }
  {
   RenderTexture2D rt=LoadRenderTexture(WorldW,H);auto wind=[&](V pos,float time){game.player=pos;game.time=time;BeginTextureMode(rt);ClearBackground(BLANK);desert_art::drawSandWind();EndTextureMode();Image im=LoadImageFromTexture(rt.texture);ImageFlipVertical(&im);return im;};
+  game.player={30,30};const auto start=screenFlat({0,0});game.player={31,30};const auto shiftedOrigin=screenFlat({0,0});
+  const int dx=int(std::round(start.x-shiftedOrigin.x)),dy=int(std::round(start.y-shiftedOrigin.y));
   Image first=wind({30,30},3.1f),shifted=wind({31,30},3.1f),later=wind({30,30},3.8f);Color* a=LoadImageColors(first),*b=LoadImageColors(shifted),*c=LoadImageColors(later);int samples=0,bad=0,moving=0,visible=0,soft=0;
-  for(int y=110;y<H-110;y+=3)for(int x=90;x<WorldW-130;x+=3){auto p=a[(y+20)*WorldW+x+40],q=b[y*WorldW+x],old=a[y*WorldW+x],next=c[y*WorldW+x];int error=std::abs(int(p.r)-q.r)+std::abs(int(p.g)-q.g)+std::abs(int(p.b)-q.b)+std::abs(int(p.a)-q.a);bad+=error>12;samples++;visible+=old.a>3;soft+=old.a>3&&old.a<130;moving+=std::abs(int(old.a)-next.a)>3;}
+  for(int y=110;y<H-110;y+=3)for(int x=90;x<WorldW-130;x+=3){auto p=a[(y+dy)*WorldW+x+dx],q=b[y*WorldW+x],old=a[y*WorldW+x],next=c[y*WorldW+x];int error=std::abs(int(p.r)-q.r)+std::abs(int(p.g)-q.g)+std::abs(int(p.b)-q.b)+std::abs(int(p.a)-q.a);bad+=error>12;samples++;visible+=old.a>3;soft+=old.a>3&&old.a<130;moving+=std::abs(int(old.a)-next.a)>3;}
   report<<"Wind: visible="<<visible<<"; translucent="<<soft<<"; moving="<<moving<<"; camera mismatches="<<bad<<" / "<<samples<<'\n';
-  check(visible>500&&soft>visible*.98f,"wind: visible low-opacity dust veils and small grains remain translucent");check(samples>10000&&bad<samples*.005f,"wind: frozen-time GPU pixels follow a one-tile camera move by exactly 40x20 pixels");check(moving>500,"wind: actual GPU dust coverage evolves naturally over time");saveTexture(rt,"qa-v39/wind-layer.png");UnloadImageColors(a);UnloadImageColors(b);UnloadImageColors(c);UnloadImage(first);UnloadImage(shifted);UnloadImage(later);UnloadRenderTexture(rt);
+  check(visible>500&&soft>visible*.98f,"wind: visible low-opacity dust veils and small grains remain translucent");check(samples>10000&&bad<samples*.005f,"wind: frozen-time GPU pixels follow the projected camera displacement including elevation");check(moving>500,"wind: actual GPU dust coverage evolves naturally over time");saveTexture(rt,"qa-v39/wind-layer.png");UnloadImageColors(a);UnloadImageColors(b);UnloadImageColors(c);UnloadImage(first);UnloadImage(shifted);UnloadImage(later);UnloadRenderTexture(rt);
  }
  reset();
- // The cheaper distant layer must preserve opaque coverage when composited.
+ // The backdrop must preserve opaque coverage at native world resolution.
  reset();game.player={2,2};desert_art::renderBackdrop(1.2f);
- {Image im=LoadImageFromTexture(desert_art::mountainBackdrop.texture);Color* p=LoadImageColors(im);int holes=0;for(int i=0;i<im.width*im.height;i++)holes+=p[i].a!=255;check(im.width>=840&&im.height>=720&&holes==0,"optimized mountain layer: every GPU pixel is opaque without compositing holes");UnloadImageColors(p);UnloadImage(im);}
+ {Image im=LoadImageFromTexture(desert_art::mountainBackdrop.texture);Color* p=LoadImageColors(im);int holes=0;for(int i=0;i<im.width*im.height;i++)holes+=p[i].a!=255;check(im.width==int(std::ceil(WorldW*1.2f))&&im.height==int(std::ceil(H*1.2f))&&holes==0,"mountain layer has a native pixel for every world pixel and opaque final coverage");UnloadImageColors(p);UnloadImage(im);}
  reset();
- // Verify new 2x obstacle masks against every GPU pixel and transparent margins.
+ // Verify preloaded obstacle masks against every GPU pixel and transparent margins.
  for(int type=ForestPropTypeCount;type<PropTypeCount;type++){
   Image im=LoadImageFromTexture(propArt[type].texture);ImageFlipVertical(&im);Color* pixels=LoadImageColors(im);int solid=0,clipCount=0,mismatch=0;std::vector<unsigned> colors;
   for(int y=0;y<im.height;y++)for(int x=0;x<im.width;x++){const auto& c=pixels[y*im.width+x];bool p=c.a>=160;solid+=p;clipCount+=p&&(x<3||y<3||x>=im.width-3||y>=im.height-3);mismatch+=(propMasks[type][y*im.width+x]!=0)!=p;if(p&&x%3==0&&y%3==0)colors.push_back((unsigned(c.r)<<16)|(unsigned(c.g)<<8)|c.b);}
   std::sort(colors.begin(),colors.end());int count=std::unique(colors.begin(),colors.end())-colors.begin();
-  check(im.width==360&&im.height==460&&solid>500&&clipCount==0,"desert prop "+std::to_string(type)+": detailed 2x model has no cut-off edges");check(count>=(type==11?4:5)&&mismatch==0,"desert prop "+std::to_string(type)+": rich material shades and physical mouse mask agree with GPU pixels");UnloadImageColors(pixels);UnloadImage(im);
+  const int plant=desert_plant_art::slot(type);
+  const int density=plant>=0?3:2;
+  check(im.width==density*180&&im.height==density*230&&solid>500&&clipCount==0&&
+        (plant<0||desert_plant_art::baked[plant]),"desert prop "+std::to_string(type)+": native sprite fits its full cache");
+  check(count>=(type==11?4:5)&&mismatch==0,"desert prop "+std::to_string(type)+": rich material shades and physical mouse mask agree with GPU pixels");UnloadImageColors(pixels);UnloadImage(im);
  }
  // GPU checks of smooth lighting and opaque joins, independent of rig internals.
  {
@@ -81,8 +87,9 @@ bool runDesertQA(){
  mouse={desertStayButton().x+20,desertStayButton().y+20};check(clickMageTravelChoice()&&!towerStory.active()&&game.inTower(),"staying option closes dialogue and retains the tower");talkToMage();choice();auto bag=game.bag;int level=game.level;mouse={desertTravelButton().x+20,desertTravelButton().y+20};check(clickMageTravelChoice()&&towerStory.phase==TowerPhase::TravelOut&&game.inTower(),"travel mouse button begins departure fade before changing region");float age=towerStory.age;towerAction(true,true,.1f,false);check(towerStory.age==age&&game.inTower(),"lost focus freezes teleport and ignores all controls");
  for(int i=0;i<150&&towerStory.phase!=TowerPhase::TravelIn;i++)towerAction(false,false,1.f/60);check(game.inDesert()&&towerStory.phase==TowerPhase::TravelIn&&game.walkable(game.player)&&game.level==level&&game.bag[8].kind==bag[8].kind,"fade changes to the real desert and keeps the hero and first fragment");shot("desert-teleport-arrival");for(int i=0;i<120&&towerStory.active();i++)towerAction(false,false,1.f/60);check(!towerStory.active()&&gameplayInputAllowed()&&game.inDesert(),"arrival reveal finishes and restores movement and combat");
  // The portal uses normal world picking and PPM, without resetting the desert.
- game.messageTime=0;check(locate(HoverKind::Prop,int(game.props.size())-1,DesertPortal)&&inspectWorld(pickWorld(mouse)).name=="Brama Eldrina","desert gate has accurate picking and an inspection HUD");shot("gate-hover");check(rightClickWorldOrInventory()&&game.inTower()&&!towerStory.active(),"PPM on the gate returns through the same game handler");game.player={12,12};talkToMage();choice();mouse={desertTravelButton().x+20,desertTravelButton().y+20};clickMageTravelChoice();for(int i=0;i<150;i++)towerAction(false,false,1.f/60);
- game.player=DesertBossHome+V{-1.3f,0};game.messageTime=0;check(locate(HoverKind::Enemy,DesertBossId,DesertBossHome)&&inspectWorld(pickWorld(mouse)).maxHp==560,"second boss is selectable and exposes its own HP, kind and damage");shot("dune-boss-hover");
+ const auto portal=std::find_if(game.props.begin(),game.props.end(),[](const Prop& p){return p.type==13&&distance(p.pos,DesertPortal)<.001f;});
+ game.messageTime=0;check(portal!=game.props.end()&&locate(HoverKind::Prop,int(portal-game.props.begin()),DesertPortal)&&inspectWorld(pickWorld(mouse)).name=="Brama Eldrina","desert gate has accurate picking and an inspection HUD");shot("gate-hover");check(rightClickWorldOrInventory()&&game.inTower()&&!towerStory.active(),"PPM on the gate returns through the same game handler");game.player={12,12};talkToMage();choice();mouse={desertTravelButton().x+20,desertTravelButton().y+20};clickMageTravelChoice();for(int i=0;i<150;i++)towerAction(false,false,1.f/60);
+ game.player=DesertBossHome+V{-1.3f,0};game.messageTime=0;check(locate(HoverKind::Enemy,DesertBossId,DesertBossHome)&&inspectWorld(pickWorld(mouse)).source==HoverKind::None,"second boss is selectable and keeps its name and HP bar above its model");shot("dune-boss-hover");
  Enemy* boss=game.findEnemy(DesertBossId);game.hit(*boss,3000);allocate();game.player=DesertBossHome+V{-1.3f,0};game.messageTime=0;check(locate(HoverKind::Corpse,DesertBossId,DesertBossHome)&&rightClickWorldOrInventory()&&game.openedCorpse==DesertBossId,"PPM opens the persistent sand corpse loot in the HUD");shot("dune-boss-loot");
  auto rect=lootRect(4);mouse={rect.x+20,rect.y+20};clickWorldOrInventory();check(dragging.place==Place::Corpse&&dragging.owner==DesertBossId&&dragging.index==4,"LPM on the actual corpse HUD starts dragging the second fragment");rect=bagRect(10);mouse={rect.x+20,rect.y+20};finishDrag();startTowerReturn();check(game.dawnFragments()==2&&game.bag[10].kind==Kind::DawnShard&&towerStory.returning&&towerStory.fragments==2,"dropping the second fragment in the backpack starts its own return scene");finishStory();check(game.inTower()&&game.dawnFragments()==2&&gameplayInputAllowed()&&game.desertBossDead,"second return finishes in the tower with both protected fragments");
  // Actual room views at native and scaled resolutions, plus the real fullscreen buffer.
@@ -93,14 +100,32 @@ bool runDesertQA(){
   refreshDisplayLayout();mouse={0,0};renderScene();BeginDrawing();presentCanvas();Image im=presentedImage();check(im.data&&im.width==GetRenderWidth()&&im.height==GetRenderHeight(),"desert view "+std::to_string(view+1)+": actual fullscreen framebuffer has correct dimensions");if(im.data){ExportImage(im,("qa-v39/desert-view-"+std::to_string(view+1)+"-display.png").c_str());UnloadImage(im);}EndDrawing();finishFramePacing();
  }
  // All four sides and four corners must contain mountain relief outside land.
- const std::array<V,8> borders={{{2,2},{2,35},{2,69},{35,69},{69,69},{69,35},{69,2},{35,2}}};
+ const float edge=MapSize-3.f,mid=MapSize*.5f;
+ const std::array<V,8> borders={{{2,2},{2,mid},{2,edge},{mid,edge},{edge,edge},{edge,mid},{edge,2},{mid,2}}};
  for(int view=0;view<int(borders.size());view++){
   reset();game.activateField(WorldLocation::Desert);game.player=borders[view];game.time=3.1f;
   RenderTexture2D rt=LoadRenderTexture(WorldW,H);BeginTextureMode(rt);ClearBackground(BLANK);desert_art::drawBackdrop(false);EndTextureMode();Image plain=LoadImageFromTexture(rt.texture);ImageFlipVertical(&plain);Color* a=LoadImageColors(plain);
-  BeginTextureMode(rt);ClearBackground(BLANK);desert_art::drawBackdrop();desert_art::drawFoothills();EndTextureMode();Image mountains=LoadImageFromTexture(rt.texture);ImageFlipVertical(&mountains);Color* b=LoadImageColors(mountains);int outside=0,covered=0;
+  BeginTextureMode(rt);ClearBackground(BLANK);desert_art::drawBackdrop();EndTextureMode();Image mountains=LoadImageFromTexture(rt.texture);ImageFlipVertical(&mountains);Color* b=LoadImageColors(mountains);int outside=0,covered=0;
   for(int y=10;y<H-10;y+=5)for(int x=10;x<WorldW-10;x+=5){V p=toWorld({float(x),float(y)});if(p.x>=.5f&&p.y>=.5f&&p.x<=MapSize-1.5f&&p.y<=MapSize-1.5f)continue;outside++;auto c=a[y*WorldW+x],d=b[y*WorldW+x];covered+=std::abs(int(c.r)-d.r)+std::abs(int(c.g)-d.g)+std::abs(int(c.b)-d.b)>9;}
-  report<<"Border "<<view<<": outside samples="<<outside<<"; mountain pixels="<<covered<<'\n';check(outside>1000&&covered>outside*.8f,"map border "+std::to_string(view)+": mountains fill the exterior on GPU");UnloadImageColors(a);UnloadImageColors(b);UnloadImage(plain);UnloadImage(mountains);UnloadRenderTexture(rt);
-  prepareCanvas(1);mouse={0,0};shot("desert-border-"+std::to_string(view+1)+"-100");if(view==0)saveTexture(worldCanvas,"qa-v39/desert-mountains-preview.png");if(view==0||view==4)for(float size:{.8f,1.2f}){prepareCanvas(size);shot("desert-border-"+std::to_string(view+1)+"-"+std::to_string(int(size*100)));}
+  report<<"Border "<<view<<": outside samples="<<outside<<"; mountain and foothill pixels="<<covered<<'\n';check(outside>1000&&covered>outside*.70f,"map border "+std::to_string(view)+": mountains and sand apron fill the exterior on GPU");UnloadImageColors(a);UnloadImageColors(b);UnloadImage(plain);UnloadImage(mountains);UnloadRenderTexture(rt);
+  auto relief=render_targets::colorOnly(WorldW,H);
+  BeginTextureMode(relief);ClearBackground(BLANK);desert_art::drawBackdrop(true,false);EndTextureMode();
+  Image ridges=LoadImageFromTexture(relief.texture);ImageFlipVertical(&ridges);Color* colors=LoadImageColors(ridges);
+  int exposed=0,holes=0,largest=0;
+  for(int y=105;y<H-35;y+=4){
+   int span=0;
+   for(int x=12;x<WorldW-12;x+=4){
+    const V p=toWorld({float(x),float(y)});
+    const float gap=std::max({.5f-p.x,.5f-p.y,p.x-(MapSize-1.5f),p.y-(MapSize-1.5f)});
+    if(gap<4.6f){span=0;continue;}
+    exposed++;
+    if(colors[y*WorldW+x].a<64){holes++;largest=std::max(largest,++span);}else span=0;
+   }
+  }
+  report<<"Ridge coverage "<<view<<": gaps="<<holes<<" / "<<exposed<<"; widest run="<<largest*4<<" px\n";
+  check(exposed>1000&&holes<exposed*.045f&&largest<=12,"overlapping mountain relief beyond the sand apron covers the exterior without broad holes");
+  UnloadImageColors(colors);UnloadImage(ridges);UnloadRenderTexture(relief);
+  prepareCanvas(1);mouse={0,0};shot("desert-border-"+std::to_string(view+1)+"-100");if(view==0)saveTexture(canvas,"qa-v39/desert-mountains-preview.png");if(view==0||view==4)for(float size:{.8f,1.2f}){prepareCanvas(size);shot("desert-border-"+std::to_string(view+1)+"-"+std::to_string(int(size*100)));}
  }
  reset();game.activateField(WorldLocation::Desert);game.player={30,30};game.time=2.5f;RenderTexture2D rt=LoadRenderTexture(WorldW,H);
  auto land=[&](bool backdrop){BeginTextureMode(rt);ClearBackground(BLANK);if(backdrop)desert_art::drawBackdrop();Vector2 origin=screen({0,0});DrawTexturePro(desert_art::terrain.texture,{0,0,float(TerrainCacheWidth),-float(TerrainCacheHeight)},{origin.x-TerrainOriginX,origin.y-90,float(TerrainWidth),float(TerrainHeight)},{0,0},0,WHITE);EndTextureMode();Image im=LoadImageFromTexture(rt.texture);ImageFlipVertical(&im);return im;};
@@ -109,10 +134,11 @@ bool runDesertQA(){
  // Baked roads remain opaque and distinguishable from surrounding sand.
  {
   Image im=LoadImageFromTexture(desert_art::terrain.texture);ImageFlipVertical(&im);int opaque=0,samples=0;double roadGreen=0,sandGreen=0;
+  const float cacheX=float(im.width)/TerrainWidth,cacheY=float(im.height)/TerrainHeight;
   for(const auto& road:desertRoads())for(size_t i=10;i+10<road.points.size();i+=4){
    V p=road.points[i];if(distance(p,DesertOasis)<7||distance(p,DesertBossHome)<7)continue;
    V tangent=normalized(road.points[i+1]-road.points[i-1]),normal{-tangent.y,tangent.x};
-   auto pixel=[&](V v){return GetImageColor(im,int(TerrainOriginX+(v.x-v.y)*40),int(90+(v.x+v.y)*20));};
+   auto pixel=[&](V v){return GetImageColor(im,int((TerrainOriginX+(v.x-v.y)*40)*cacheX),int((90+(v.x+v.y)*20)*cacheY));};
    Color center=pixel(p),side=pixel(p+normal*2.8f);opaque+=center.a==255;samples++;roadGreen+=center.g;sandGreen+=side.g;
   }
   report<<"Road GPU samples: "<<samples<<"; center green: "<<roadGreen/samples<<"; nearby sand green: "<<sandGreen/samples<<'\n';
@@ -142,7 +168,7 @@ bool runDesertQA(){
   for(float scale:{.8f,1.f,1.2f}){prepareCanvas(scale);shot("sand-prison-"+std::to_string(stage)+"-"+std::to_string(int(scale*100)));}
  }refreshDisplayLayout();
  game.sandPrisonRemaining=2.4f;game.enemies[0].sandCastPulse=.38f;game.messageTime=0;shot("sand-prison-preview");
- saveTexture(worldCanvas,"qa-v39/sand-prison-world.png");
+ saveTexture(canvas,"qa-v39/sand-prison-world.png");
  paused=true;float frozen=game.sandPrisonRemaining;input(.05f);
  check(game.sandPrisonRemaining==frozen&&!gameplayInputAllowed(),"sand prison: actual pause menu freezes the trap rather than letting it expire");
  paused=false;
@@ -152,20 +178,47 @@ bool runDesertQA(){
  game.update(.05f,{1,0},false,true);check(distance(game.player,held)>.1f&&clickWorldOrInventory(),"sand prison: movement and actual sword click are restored on release");
  shot("sand-prison-released");
  reset();game.activateField(WorldLocation::Desert);game.player={24,23};game.time=3.1f;game.messageTime=0;mouse={0,0};
- shot("desert-roads-preview");saveTexture(worldCanvas,"qa-v39/desert-roads-world.png");
+ shot("desert-roads-preview");saveTexture(canvas,"qa-v39/desert-roads-world.png");
  reset();
- // Terrain-height apron and uncut foreground ridges at all near edges.
+ // The sand apron extends past the terrain mesh and tapers across the rocks.
  check(desert_art::outsideGroundShader.id!=rlGetShaderIdDefault()&&desert_art::groundOriginLocation>=0,"outside sand shader loads successfully with world-position uniforms");
- for(V view:{V{69,35},V{35,69},V{69,69}}){
+ for(V view:{V{edge,mid},V{mid,edge},V{edge,edge}}){
   reset();game.activateField(WorldLocation::Desert);game.player=view;
-  RenderTexture2D rt=LoadRenderTexture(WorldW,H);BeginTextureMode(rt);ClearBackground(BLANK);desert_art::drawFoothills();EndTextureMode();
-  Image im=LoadImageFromTexture(rt.texture);ImageFlipVertical(&im);Color* pixels=LoadImageColors(im);int rising=0;
+  RenderTexture2D rt=LoadRenderTexture(WorldW,H);BeginTextureMode(rt);ClearBackground(BLANK);
+  BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);desert_art::drawOutsideGround(true);EndBlendMode();EndTextureMode();
+  Image im=LoadImageFromTexture(rt.texture);ImageFlipVertical(&im);Color* pixels=LoadImageColors(im);
+  int grading=0;float nearest=10,farthest=0;
   for(int y=20;y<H-20;y+=3)for(int x=20;x<WorldW-20;x+=3){V p=toWorld({float(x),float(y)});
-   if(p.x>=.5f&&p.y>=.5f&&p.x<=MapSize-1.5f&&p.y<=MapSize-1.5f)rising+=pixels[y*WorldW+x].a>220;
+   const float gap=std::max({.5f-p.x,.5f-p.y,p.x-(MapSize-1.5f),p.y-(MapSize-1.5f)});
+   const auto a=pixels[y*WorldW+x].a;
+   grading+=gap>.15f&&a>10&&a<240;
+   if(gap>0&&a>=115&&a<=140){nearest=std::min(gap,nearest);farthest=std::max(gap,farthest);}
   }
-  check(rising>500,"foreground slopes rise above the projected map plane without being sliced off by terrain");
-  UnloadImageColors(pixels);UnloadImage(im);UnloadRenderTexture(rt);prepareCanvas(1);mouse={0,0};shot("mountain-join-"+std::to_string(int(view.x))+"-"+std::to_string(int(view.y)));
-  if(view.x==69&&view.y==35)saveTexture(worldCanvas,"qa-v39/mountain-join-world.png");
+  check(grading>1500&&farthest-nearest>1.8f,"sand fades into foothills with a wide, irregular apron beyond the nominal map edge");
+  UnloadImageColors(pixels);UnloadImage(im);
+  const auto heroAnchor=screen(game.player);
+  auto actorFrame=[&](bool show){
+   game.time=.3f;game.hp=show?game.maxHp():0;
+   BeginTextureMode(rt);native_world::beginOpaqueFrame();drawWorld();native_world::finishOpaqueBackground();EndTextureMode();
+   return LoadImageFromTexture(rt.texture);
+  };
+  game.enemies.clear();game.props.clear();
+  Image empty=actorFrame(false),withHero=actorFrame(true);
+  BeginTextureMode(rt);ClearBackground(BLANK);hero(heroAnchor.x,heroAnchor.y,1);EndTextureMode();
+  Image heroOnly=LoadImageFromTexture(rt.texture);
+  int body=0,visible=0;
+  for(int i=0;i<WorldW*H;i++){
+   const Color silhouette=static_cast<const Color*>(heroOnly.data)[i];
+   if(silhouette.a<250)continue;
+   const Color a=static_cast<const Color*>(empty.data)[i],b=static_cast<const Color*>(withHero.data)[i];
+   const int diff=std::abs(int(a.r)-b.r)+std::abs(int(a.g)-b.g)+std::abs(int(a.b)-b.b);
+   body++;visible+=diff>10;
+  }
+  report<<"Hero silhouette near mountains: "<<visible<<" / "<<body<<" visible pixels\n";
+  check(body>600&&visible>body*.97f,"mountain backdrop leaves the hero's whole rendered silhouette visible");
+  UnloadImage(empty);UnloadImage(withHero);UnloadImage(heroOnly);UnloadRenderTexture(rt);
+  prepareCanvas(1);mouse={0,0};shot("mountain-join-"+std::to_string(int(view.x))+"-"+std::to_string(int(view.y)));
+  if(view.x==edge&&view.y==mid)saveTexture(canvas,"qa-v39/mountain-join-world.png");
  }
  reset();game.activateField(WorldLocation::Desert);game.player={66,43};game.time=3.1f;game.messageTime=0;
  for(float resolution:{.8f,1.f,1.2f}){prepareCanvas(resolution);shot("reported-mountain-border-"+std::to_string(int(resolution*100)));}

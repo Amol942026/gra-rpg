@@ -7,7 +7,7 @@ bool stairReachable(int direction)const{return towerUseAllowed()&&stairPresent(d
 bool climbTower(int direction){
  if(!stairReachable(direction))return false;
  towerFloor+=direction;player=towerStairApproach(-direction);
- cancelBow();closeCorpse();swing=rollRemaining=stepDistance=0;animation={};effects.clear();arrows.clear();fireballs.clear();explosions.clear();pierceFlashes.clear();
+ cancelBow();closeCorpse();swing=rollRemaining=stepDistance=0;animation={};effects.clear();combatImpacts.clear();arrows.clear();fireballs.clear();explosions.clear();pierceFlashes.clear();
  facing=direction==1?V{-1,0}:V{1,0};animation.face(facing.x,facing.y);sound(Cue::Ui,player);
  say(std::string("Piętro ")+std::to_string(towerFloor+1)+" / 5 — "+TowerFloors[towerFloor].name);return true;
 }

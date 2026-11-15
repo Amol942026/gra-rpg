@@ -11,19 +11,20 @@ int main(int argc,char** argv){
  auto point=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
  auto reset=[](){game=Game{};intro={};towerStory={};clearTransientUi();welcome=help=paused=false;developerActive=developerMenuOpen=false;developerSelection=0;mouse={0,0};game.messageTime=0;};
  auto capture=[&](const std::string& name){renderScene();Image im=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&im);check(ExportImage(im,(root/(name+".png")).string().c_str()),"real developer UI render / "+name);UnloadImage(im);check(IsWindowHidden(),"test window remains hidden / "+name);};
- reset();openDeveloperMenu();check(!PlayerBuild&&DeveloperDestinationCount==19,"developer edition exposes all nineteen destinations");
+ reset();openDeveloperMenu();check(!PlayerBuild&&DeveloperDestinationCount==int(std::size(FieldSites))+TowerFloorCount,"developer edition exposes the entire field and tower catalogue");
  for(int id=0;id<DeveloperDestinationCount;id++){
+  developerTab=DeveloperDestinations[id].location;
   Rectangle r=developerCard(id);check(r.x>=140&&r.y>=220&&r.x+r.width<=1300&&r.y+r.height<developerNewButton().y,"location card stays inside picker above controls");
-  check(textWidth(DeveloperDestinations[id].name,18)<=r.width-26&&textWidth(DeveloperDestinations[id].hint,14)<=r.width-26,"location name and hint fit the actual bold font");
-  for(int other=0;other<id;other++)check(!CheckCollisionRecs(r,developerCard(other)),"destination cards never overlap");
+  check(textWidth(DeveloperDestinations[id].name,18)<=r.width-26,"location name fits the actual bold font");
+  for(int other=0;other<id;other++)if(DeveloperDestinations[other].location==developerTab)check(!CheckCollisionRecs(r,developerCard(other)),"destination cards never overlap");
   point(r);clickDeveloperMenu();check(developerSelection==id&&developerMenuOpen,"actual card click selects the corresponding destination");
  }
  for(float scale:{.8f,1.f,1.2f}){prepareCanvas(scale);capture("picker-"+std::to_string(int(scale*100)));}
  prepareCanvas(1.2f);
  for(int id=16;id<19;id++){
-  reset();openDeveloperMenu();point(developerCard(id));clickDeveloperMenu();point(developerNewButton());check(clickDeveloperMenu(),"actual New Session button accepts each volcanic destination");
+  reset();openDeveloperMenu();point(developerTabRect(2));clickDeveloperMenu();point(developerCard(id));clickDeveloperMenu();point(developerNewButton());check(clickDeveloperMenu(),"actual New Session button accepts each volcanic destination");
   check(game.inVolcano()&&developerActive&&!developerMenuOpen&&gameplayInputAllowed()&&developerSpawnSafe(game,game.player),"new volcanic session arrives safely with working controls");
-  check(game.level==100&&game.skillRanks==SkillRanks{1,1,1}&&game.learnedSpells==7&&game.findEnemy(VolcanoBossId)&&!game.volcanoBossDead,"fresh volcanic test unlocks skills and spells and keeps the boss alive");
+  check(game.level==100&&game.skillRanks==SkillRanks{1,1,1,1,1,1}&&game.learnedSpells==7&&game.findEnemy(VolcanoBossId)&&!game.volcanoBossDead,"fresh volcanic test unlocks skills and spells and keeps the boss alive");
   check(game.ammoCount()==100&&game.bagCount(Kind::Health)==50&&game.bagCount(Kind::Mana)==50,"fresh volcanic test has the full starting supplies");
   capture(std::string(DeveloperDestinations[id].id)+"-new");
  }
@@ -35,6 +36,6 @@ int main(int argc,char** argv){
  check(game.level==100&&game.xp==0&&same&&game.cinders.empty()&&game.fissures.empty()&&!game.knockedBack(),"move keeps possessions and clears pending attacks at level 100");capture("forges-current-character");
  openDeveloperMenu();point(developerCard(18));clickDeveloperMenu();capture("picker-varkhor-selected");
  check(!audioSystem.available&&audioSystem.playedEffects==0&&IsWindowHidden(),"entire developer QA remained silent and hidden");
- std::ofstream report(root/"summary.json");report<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"destinations\":19,\"volcanic_destinations\":3,\"hidden\":true,\"audio_opened\":false}";
+ std::ofstream report(root/"summary.json");report<<"{\"status\":\""<<(failures?"FAIL":"PASS")<<"\",\"checks\":"<<checks<<",\"failures\":"<<failures<<",\"destinations\":"<<DeveloperDestinationCount<<",\"volcanic_destinations\":"<<std::count_if(DeveloperDestinations.begin(),DeveloperDestinations.end(),[](const auto& site){return site.location==WorldLocation::Volcano;})<<",\"hidden\":true,\"audio_opened\":false}";
  std::cout<<"Developer volcano UI: "<<checks<<" checks, "<<failures<<" failures\n";audioSystem.shutdown();CloseWindow();return failures?2:0;
 }

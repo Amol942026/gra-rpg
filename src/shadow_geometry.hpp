@@ -33,14 +33,17 @@ inline void flushBatch(Shader shader){
  Matrix identity{};identity.m0=identity.m5=identity.m10=identity.m15=1;
  DrawMesh(drawing,material,identity);
 }
-inline void raster(const Polygons& polygons,Vector2 shift={0,0}){
+inline void raster(const Polygons& polygons,float opacity=1,Vector2 shift={0,0}){
+ const auto alpha=static_cast<unsigned char>(std::clamp(opacity,0.f,1.f)*255+.5f);
+ if(!alpha)return;
+ const bool batch=recording&&alpha==255;
  rlSetTexture(rlGetTextureIdDefault());
  for(const auto& p:polygons)for(size_t j=1;j+1<p.size();j++){
   int a=0,b=int(j),c=int(j+1);
   if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
-  if(recording){for(int k:{a,b,c}){packed.push_back(p[k].x+shift.x);packed.push_back(p[k].y+shift.y);packed.push_back(0.f);}}
+  if(batch){for(int k:{a,b,c}){packed.push_back(p[k].x+shift.x);packed.push_back(p[k].y+shift.y);packed.push_back(0.f);}}
   else{
-   rlCheckRenderBatchLimit(3);rlBegin(RL_TRIANGLES);rlColor4ub(255,255,255,255);
+   rlCheckRenderBatchLimit(3);rlBegin(RL_TRIANGLES);rlColor4ub(255,255,255,alpha);
    for(int k:{a,b,c}){rlTexCoord2f(0,0);rlVertex2f(p[k].x+shift.x,p[k].y+shift.y);}rlEnd();
   }
  }rlSetTexture(0);
@@ -52,11 +55,11 @@ inline Sprite bake(const Polygons& polygons){
  l=std::floor(l)-2;t=std::floor(t)-2;r=std::ceil(r)+2;b=std::ceil(b)+2;
  Sprite result;result.origin={-l,-t};result.art=LoadRenderTexture(int((r-l)*2),int((b-t)*2));
  BeginTextureMode(result.art);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,2});
- raster(polygons,result.origin);EndMode2D();EndTextureMode();SetTextureFilter(result.art.texture,TEXTURE_FILTER_BILINEAR);return result;
+ raster(polygons,1,result.origin);EndMode2D();EndTextureMode();SetTextureFilter(result.art.texture,TEXTURE_FILTER_BILINEAR);return result;
 }
-inline void draw(const Sprite& sprite,Vector2 base){
- if(!sprite.art.id)return;const auto& tex=sprite.art.texture;
- DrawTexturePro(tex,{0,0,float(tex.width),-float(tex.height)},{base.x-sprite.origin.x,base.y-sprite.origin.y,tex.width*.5f,tex.height*.5f},{0,0},0,WHITE);
+inline void draw(const Sprite& sprite,Vector2 base,float opacity=1){
+ if(!sprite.art.id||opacity<=0)return;const auto& tex=sprite.art.texture;
+ DrawTexturePro(tex,{0,0,float(tex.width),-float(tex.height)},{base.x-sprite.origin.x,base.y-sprite.origin.y,tex.width*.5f,tex.height*.5f},{0,0},0,Fade(WHITE,opacity));
 }
 inline void unload(Sprite& s){if(s.art.id)UnloadRenderTexture(s.art);s={};}
 }

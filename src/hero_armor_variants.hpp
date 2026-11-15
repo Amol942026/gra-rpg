@@ -121,11 +121,63 @@ inline void shoulder(Rig& rig,Kind kind,P3 pivot,float side,const Finish& f){
         rig.rounded(p+P3{side*.8f,0,-3.1f},{width-.7f,13.5f,3.4f},shade(f.trim,.88f));
     if(kind==Kind::DuneLamellar||kind==Kind::ScorpionCarapace||kind==Kind::CinderhornMail)
         rig.rounded(p+P3{side*1.25f,0,-5.7f},{width-1.7f,11.1f,4.1f},f.shell);
-    if(kind==Kind::CinderhornMail||kind==Kind::ScorpionCarapace||kind==Kind::RiftCarapace){
-        const P3 base=p+P3{side*3,-.5f,2.5f},bend=p+P3{side*5.3f,-2,5.4f};
-        const Color horn=kind==Kind::CinderhornMail?f.accent:f.trim;
-        rig.tapered(base,bend,3.2f,2.9f,horn,.66f);
-        rig.spike(bend,p+P3{side*5.1f,-4,8.3f},2.1f,1.9f,horn);
+    switch(kind){
+    case Kind::SporeHarness:
+        for(int i=0;i<3;i++){
+            const P3 stalk=p+P3{side*(3.f+i*.9f),4.f-i*4,3.1f+i*.6f};
+            rig.tapered(stalk,stalk+P3{side*1.2f,0,3.7f},2.4f,1.9f,f.shell);
+            rig.rounded(stalk+P3{side*1.2f,0,4.4f},{5.7f,4.7f,2.7f},i==1?f.accent:f.trim);
+        }
+        break;
+    case Kind::GroveBarkArmor:
+        for(float fwd:{-1.f,1.f}){
+            const P3 root=p+P3{side*3,fwd*3,2.5f};
+            const P3 joint=root+P3{side*3,fwd*1.7f,3.6f};
+            rig.tapered(root,joint,4.2f,3.1f,f.shell,.7f);
+            rig.spike(joint,joint+P3{side*2,fwd*3.9f,3.8f},3.3f,2.3f,f.trim);
+        }
+        break;
+    case Kind::ScorpionCarapace:
+    case Kind::CinderhornMail: {
+        const bool cinder=kind==Kind::CinderhornMail;
+        const P3 root=p+P3{side*3,1,2.8f},bend=p+P3{side*7.1f,-1.7f,5.2f};
+        const Color horn=cinder?f.accent:f.trim;
+        rig.tapered(root,bend,5.f,3.6f,horn,.72f);
+        rig.tapered(bend,p+P3{side*8.8f,cinder?-4.f:-6.f,cinder?10.f:7.7f},3.5f,1.9f,horn,.69f);
+        rig.spike(p+P3{side*8.8f,cinder?-4.f:-6.f,cinder?10.f:7.7f},
+                  p+P3{side*(cinder?8.6f:7.4f),cinder?-5.8f:-8.f,cinder?12.5f:10.f},2.2f,1.9f,horn);
+        break;
     }
+    case Kind::SunwardCuirass:
+        for(int i=-1;i<=1;i++){
+            const P3 root=p+P3{side*4.6f,i*4.0f,2.9f};
+            rig.spike(root,root+P3{side*(5.2f-std::abs(i)),i*3.0f,7.4f-std::abs(i)*2.f},4.7f,2.8f,f.trim);
+        }
+        break;
+    case Kind::ObsidianPlate:
+    case Kind::RiftCarapace:
+        for(int i=0;i<2;i++){
+            const bool rift=kind==Kind::RiftCarapace;
+            const P3 root=p+P3{side*(3.1f+i*2.f),3.f-i*7.f,2.4f};
+            const P3 tip=root+P3{side*(4.4f+i),-1.f-i*3.f,6.1f+i*3.f};
+            rig.spike(root,tip,rift?5.7f:6.8f,4.7f,shade(f.shell,1.28f));
+            seam(rig,root+P3{0,.8f,1.8f},tip*.76f+root*.24f,.95f,rift?f.accent:f.trim);
+        }
+        break;
+    default:break;
+    }
+}
+inline void legacyCrest(Rig& rig,Kind kind,P3 p,float side,const Finish& f){
+    if(kind==Kind::BoarArmor||kind==Kind::BoneArmor){
+        const P3 root=p+P3{side*3,-1,2.4f},bend=root+P3{side*4.3f,1.3f,3.7f};
+        rig.tapered(root,bend,4.9f,3.1f,f.trim,.70f);
+        rig.spike(bend,bend+P3{side*1.1f,kind==Kind::BoarArmor?4.f:-4.f,3.4f},3.2f,2.4f,f.accent);
+        return;
+    }
+    const bool stone=kind==Kind::GuardianArmor;
+    const P3 root=p+P3{side*3.3f,0,2.9f};
+    rig.form(root+P3{side*2.8f,0,1.1f},{7.6f,stone?13.f:10.f,6.2f},f.shell);
+    rig.spike(root+P3{side*4.5f,-2,2},root+P3{side*8.4f,-4,stone?7.7f:5.f},5.f,4.5f,f.trim);
+    if(stone)rig.form(root+P3{side*4.4f,1.3f,5.f},{4,3.7f,5.9f},f.accent);
 }
 }

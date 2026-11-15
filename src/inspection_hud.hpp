@@ -2,10 +2,8 @@
 
 struct Inspection {
     HoverKind source=HoverKind::None;
-    std::string name,kind,detail,secondary,loot;
+    std::string name,kind,detail,secondary;
     Color nameColor=Text;
-    float hp=0,maxHp=0,speed=0;
-    int attack=0,defense=0,magicDefense=0;DamageType attackType=DamageType::Physical;
 };
 Inspection inspectWorld(WorldHover hit) {
     Inspection info;
@@ -25,21 +23,11 @@ Inspection inspectWorld(WorldHover hit) {
         info.source=hit.kind;info.name="Eldrin";info.kind="Mag / przyjazny NPC";
         info.detail="Strażnik Pieczęci Popiołu.";
         info.secondary=game.mageReachable()?"E / PPM: porozmawiaj.":"Podejdź bliżej, aby porozmawiać.";
-    }else if(hit.kind==HoverKind::Enemy){
-        const Enemy* enemy=game.findEnemy(hit.index);if(!enemy)return info;
-        const auto& stats=enemyInfo(enemy->type);
-        info.source=hit.kind;info.name=stats.name;info.kind=stats.kind;
-        info.hp=std::clamp(enemy->hp,0.f,enemy->maxHp);info.maxHp=enemy->maxHp;
-        info.attack=enemy->damage();info.defense=enemy->defense();info.speed=stats.speed;
-        info.magicDefense=enemy->magicDefense();info.attackType=enemy->attackType();
-        if(enemy->type==BoarType)info.secondary="Szarża: 2× obrażenia · co 4,5 s";
-        if(enemyAbility(enemy->type)!=EnemyAbility::None){info.secondary=enemy->type==10?"Wachlarz jadu · unik lub osłona":enemy->type==9?"Fala dookoła · unik lub wycofanie":enemy->type==16?"Cios na wprost · zejdź na bok":"Ognisty oddech · omiń z boku";info.detail=std::string(enemyAbilityProfile(enemy->type).name)+(enemy->abilityBusy()?(enemy->abilityAge<enemyAbilityProfile(enemy->type).windup?" · przygotowanie":" · atak / odsłonięcie"):" · zdolność specjalna");}
-        info.loot=lootHint(enemy->type);
     }else if(hit.kind==HoverKind::Corpse){
         const Enemy* e=game.findCorpse(hit.index);if(!e)return info;
         info.source=hit.kind;info.name=std::string("Ciało: ")+enemyInfo(e->type).name;info.kind="Pokonany potwór";
         int count=0;for(const auto& value:e->loot)if(!value.empty())count++;
-        info.detail=count?"PPM: otwórz łup w HUD.":"Ciało jest puste.";
+        info.detail=count?"Otwórz łup w panelu W zasięgu.":"Ciało jest puste.";
         info.secondary=game.corpseReachable(e->id)?"Przeciągnij przedmioty do plecaka.":"Podejdź do ciała (maks. 2,5 pola).";
     }else if(hit.kind==HoverKind::Chest){
         const auto* c=game.findChest(hit.index);if(!c)return info;
@@ -65,7 +53,9 @@ Inspection inspectWorld(WorldHover hit) {
     return info;
 }
 void drawInspectionHud() {
-    const Inspection info=inspectWorld(hovered);
+    if(hovered.kind==HoverKind::Enemy)return;
+    const WorldHover nearbyTarget=nearbyUnderPointer().target;
+    const Inspection info=inspectWorld(nearbyTarget.kind==HoverKind::None?hovered:nearbyTarget);
     panel({1078,705,326,169},rgb(16,26,28));
     if(info.source==HoverKind::None){
         txt("Najedź na przeciwnika lub obiekt.",1090,750,16,Text);
@@ -74,14 +64,5 @@ void drawInspectionHud() {
     }
     txt(info.name,1090,735,info.name.size()>24?16:22,info.nameColor);
     txt("Rodzaj: "+info.kind,1090,760,14,Muted);
-    if(info.source==HoverKind::Enemy){
-        txt(TextFormat("HP  %d / %d",int(std::ceil(info.hp)),int(info.maxHp)),1090,780,14,Text);
-        bar(1090,801,301,6,info.hp,info.maxHp,rgb(181,86,73));
-        txt(TextFormat(info.attackType==DamageType::Magic?"MAGIA  %d":"ATAK  %d",info.attack),1090,817,14,Gold);
-        txt(TextFormat("OBRONA  %d",info.defense),1242,817,14,Gold);
-        txt(info.secondary.empty()?TextFormat("Obr. mag.: %d  ·  Ruch: %.2f",info.magicDefense,info.speed):info.secondary,1090,837,14,Muted);
-        txt(info.loot,1090,857,14,Green);
-    }else{
-        txt(info.detail,1090,796,14,Gold);txt(info.secondary,1090,826,14,Muted);
-    }
+    txt(info.detail,1090,796,14,Gold);txt(info.secondary,1090,826,14,Muted);
 }

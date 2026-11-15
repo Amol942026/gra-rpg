@@ -15,7 +15,7 @@ in vec2 fragTexCoord;
 in vec4 fragColor;
 uniform sampler2D texture0;
 out vec4 finalColor;
-void main(){if(texture(texture0,fragTexCoord).a*fragColor.a<0.62)discard;finalColor=vec4(1.0);}
+void main(){if(texture(texture0,fragTexCoord).a<0.62)discard;finalColor=vec4(fragColor.a);}
 )GLSL";
  const char* softCode=R"GLSL(#version 330
 in vec2 fragTexCoord;
@@ -60,18 +60,19 @@ inline void sprite(Texture2D texture,Rectangle bounds,Vector2 base,bool inverted
 }
 inline void prop(const Prop& value){
  Vector2 base=screen(value.pos);Texture2D texture=propArt[value.type].texture;visibleCasters++;
- if(value.type==13&&game.inVolcano()){sprite(volcano_art::portalFrame,{base.x-90*value.size,base.y-208*value.size,180*value.size,230*value.size},base,false);return;}
- if(value.type>=14){Rectangle s=volcano_art::source(value);auto t=volcano_art::propTexture(value);float x=base.x-90*value.size,y=base.y-208*value.size,w=180*value.size,h=230*value.size;
+ if(value.type==13&&volcano_art::gateFrame().id){sprite(volcano_art::gateFrame(),{base.x-90*value.size,base.y-208*value.size,180*value.size,230*value.size},base,false);return;}
+ if(volcanoSceneryProp(value.type)){Rectangle s=volcano_art::source(value);auto t=volcano_art::propTexture(value);float x=base.x-90*value.size,y=base.y-208*value.size,w=180*value.size,h=230*value.size;
   quad(t,{{projected({x,y},base.y),projected({x,y+h},base.y),projected({x+w,y+h},base.y),projected({x+w,y},base.y)}},{{{s.x/t.width,s.y/t.height},{s.x/t.width,(s.y+s.height)/t.height},{(s.x+s.width)/t.width,(s.y+s.height)/t.height},{(s.x+s.width)/t.width,s.y/t.height}}});return;}
- if(!treeProp(value.type)){sprite(texture,{base.x-90*value.size,base.y-208*value.size,180*value.size,230*value.size},base);return;}
+ const float size=propArtSize(value);
+ if(!tree_wind::moves(value.type)){sprite(texture,{base.x-90*size,base.y-208*size,180*size,230*size},base);return;}
  // Use the exact same connected wind strips as the crown artwork.
  const auto& wind=tree_wind::samples(value,game.time);
  for(int y=0;y<230;y+=5){
-  float top=base.y+(y-208)*value.size,bottom=top+5*value.size;
-  float left0=base.x+(-90+(tree_wind::cached?wind.bends[y/5]:treeBend(value,float(y),game.time)))*value.size;
-  float left1=base.x+(-90+(tree_wind::cached?wind.bends[y/5+1]:treeBend(value,float(y+5),game.time)))*value.size;
+  float top=base.y+(y-208)*size,bottom=top+5*size;
+  float left0=base.x+(-90+(tree_wind::cached?wind.bends[y/5]:treeBend(value,float(y),game.time)))*size;
+  float left1=base.x+(-90+(tree_wind::cached?wind.bends[y/5+1]:treeBend(value,float(y+5),game.time)))*size;
   std::array<Vector2,4> p={projected({left0,top},base.y),projected({left1,bottom},base.y),
-      projected({left1+180*value.size,bottom},base.y),projected({left0+180*value.size,top},base.y)};
+      projected({left1+180*size,bottom},base.y),projected({left0+180*size,top},base.y)};
   quad(texture,p,{{{0,1-y/230.f},{0,1-(y+5)/230.f},{1,1-(y+5)/230.f},{1,1-y/230.f}}});
  }
 }
@@ -82,12 +83,8 @@ template<class Draw>inline void billboard(float anchorY,Draw draw){
  rlPushMatrix();rlMultMatrixf(matrix);draw();rlPopMatrix();
 }
 inline void player(Vector2 p,float size=1,const AnimationState* special=nullptr){
- AnimationState state=special?*special:game.animation;
- float progress=special?-1:game.swingProgress(),attack=progress>=0?std::sin(progress*PI):0;
  actor_art::shadowCacheKey=0;
- float fall=special?-1:game.knockdownProgress(),fallR=0,fallF=-1;if(fall>=0)actor_art::prepareKnockdown(game,state,fallR,fallF);
- actor_art::draw(0,p.x,p.y,size,state,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,nullptr,
- special?-1:game.rollProgress(),progress,special?-1:game.visibleBowCharge(),game.ammoCount(),!special&&game.empoweredPose(),&game.equipment,-1,fall,fallR,fallF,special?PowerStyle::Count:game.activePowerVisual(),game.powerVisualAge(),special?-1:game.powerWindupProgress());
+ actor_art::drawPlayer(game,p.x,p.y,size,special);
  actor_art::shadowCacheKey=-1;visibleCasters++;
 }
 inline void mage(Vector2 p,float size,float time,float casting){
@@ -115,6 +112,63 @@ inline void arrow(const Arrow& shot){
  for(float side:{-1.f,1.f})DrawLineEx({tail.x+direction.x*5,tail.y+direction.y*5},{tail.x+cross.x*side*4,tail.y+cross.y*side*4},2,WHITE);
 }
 inline bool near(Vector2 p,float extent=240){return p.x>-extent&&p.x<WorldW+extent&&p.y>-extent*.5f&&p.y<H+extent*.6f;}
+inline void beginMaskBlend(){
+ // Treat overlapping faces and casters as a coverage union, including during a fade.
+ rlSetBlendFactors(RL_ONE,RL_ONE,RL_MAX);
+ BeginBlendMode(BLEND_CUSTOM);
+}
+inline void legacyCorpseShadow(const Enemy& e,Vector2 p){
+ const float progress=e.deathProgress(),weight=enemy_death::restingBlend(e.type,progress);
+ const auto& ground=fallen_art::spriteFor(e).ground;
+ // Overlap full-strength intervals so shared silhouette pixels keep their density.
+ const float outgoing=ground.art.id?enemy_death::ease(2*(1-weight)):1.f;
+ const float incoming=enemy_death::ease(2*weight);
+ animatedLegacyCorpse(e,p.x,p.y,progress,BLANK,nullptr,true,outgoing);
+ if(e.type==3&&incoming>0&&actor_art::guardianSpread(progress)<1){
+  actor_art::Rig fragments(p.x,p.y,GuardianBodyScale,e.animation.direction,true);
+  actor_art::buildFallenGuardian(fragments,e.deathSide(),actor_art::guardianSpread(progress));
+  fragments.drawShadow(incoming);
+ }else shadow_geometry::draw(ground,p,incoming);
+}
+inline void contactShadow(Vector2 p,Rectangle base,float coverage){
+ if(coverage<=0)return;
+ const Vector2 center{p.x+base.x+base.width*.5f,p.y+base.y+base.height*.5f};
+ constexpr int Segments=24;
+ std::array<Vector2,Segments+2> fan;
+ fan[0]=center;
+ for(int i=0;i<=Segments;i++){
+  const float angle=i*(2*PI/Segments);
+  fan[i+1]={center.x+std::cos(angle)*base.width*.5f,center.y+std::sin(angle)*base.height*.5f};
+ }
+ DrawTriangleFan(fan.data(),int(fan.size()),Fade(WHITE,coverage));
+}
+inline Rectangle paintedGroundFootprint(const Enemy& e){
+ if(e.type==CinderhornType)return regional_enemy_art::cinderhornFootprint(e);
+ if(e.type==SporekinType)return regional_enemy_art::sporekinFootprint(e);
+ return {};
+}
+inline bool paintedCorpseShadow(const Enemy& e,Vector2 p){
+ const auto base=paintedGroundFootprint(e);
+ if(base.width<=0)return false;
+ const float progress=e.deathProgress(),weight=e.corpseGrounded()?1.f:enemy_death::restingBlend(e.type,progress);
+ if(weight<1){
+  billboard(p.y,[&]{regionalCorpse(e,p.x,p.y,BLANK,nullptr,true,enemy_death::ease(2*(1-weight)));});
+ }
+ contactShadow(p,base,enemy_death::ease(2*weight));
+ return true;
+}
+inline void calderaCorpseShadow(const Enemy& e,Vector2 p){
+ const auto base=volcano_actors::groundFootprint(e);
+ if(base.width<=0){
+  volcano_actors::death(e,p.x,p.y,e.deathProgress(),BLANK,nullptr,true);
+  return;
+ }
+ const float weight=e.corpseGrounded()?1.f:enemy_death::restingBlend(e.type,e.deathProgress());
+ if(weight<1)volcano_actors::death(e,p.x,p.y,e.deathProgress(),BLANK,nullptr,true,enemy_death::ease(2*(1-weight)));
+ // The silhouette is painted from an elevated camera. Its full height must
+ // not be cast as though the corpse were still standing over the terrain.
+ contactShadow(p,base,enemy_death::ease(2*weight));
+}
 inline void prepare(bool chamber=false){
  tree_wind::beginFrame();
  init();ready=false;chamberFrame=chamber;visibleCasters=0;preparedActors=0;
@@ -135,7 +189,7 @@ inline void prepare(bool chamber=false){
  if(!mask.id||!IsShaderValid(maskShader)||!IsShaderValid(softShader))return;
  struct FlatScope{bool previous;FlatScope(bool active):previous(flatGroundProjection){flatGroundProjection=active;}~FlatScope(){flatGroundProjection=previous;}} flatScope(raised);
  actor_art::beginShadowFrame();shadow_geometry::beginBatch();BeginTextureMode(mask);ClearBackground(BLANK);BeginMode2D({{maskOffset.x*maskScale,maskOffset.y*maskScale},{0,0},0,maskScale});
- BeginShaderMode(maskShader);rlDisableBackfaceCulling();
+ BeginShaderMode(maskShader);beginMaskBlend();rlDisableBackfaceCulling();
  if(chamber){
   float time=intro.chamber()?intro.time:towerStory.time;
   float charge=intro.chamber()?(intro.phase==IntroPhase::Charging?storyEase(intro.age/IntroSequence::ChargeTime):intro.phase==IntroPhase::Departing?1:0):0;
@@ -152,12 +206,23 @@ inline void prepare(bool chamber=false){
   for(const auto& p:game.props){
    Vector2 q=screen(p.pos);
    // Projected bounds include the crown, ground pivot and maximum wind bend.
-   if(q.x>-260*p.size&&q.x<WorldW+115*p.size&&q.y>-70*p.size&&q.y<H+12*p.size)prop(p);
+   const float size=propArtSize(p);
+   if(q.x>-260*size&&q.x<WorldW+115*size&&q.y>-70*size&&q.y<H+12*size)prop(p);
   }
   for(const auto& e:game.enemies){
    Vector2 p=screen(e.pos);
+   if(!e.alive)p=corpseDrawPoint(e,p);
+   if(!e.alive&&!e.corpseGrounded()&&e.type<LegacyEnemyTypeCount){
+    if(near(p,270)){legacyCorpseShadow(e,p);visibleCasters++;}
+    continue;
+   }
    if(regionalEnemy(e.type)){
-    if(near(p,180)){billboard(p.y,[&]{regional_enemy_art::draw(e,p.x,p.y,BLANK,nullptr,true);});visibleCasters++;}
+    if(near(p,215)){
+     if(e.alive||!paintedCorpseShadow(e,p))
+      billboard(p.y,[&]{if(e.alive)regional_enemy_art::draw(e,p.x,p.y,BLANK,nullptr,true);else regionalCorpse(e,p.x,p.y,BLANK,nullptr,true);});
+     if(!e.alive)beginMaskBlend();
+     visibleCasters++;
+    }
     continue;
    }
    if(e.alive){
@@ -170,12 +235,9 @@ inline void prepare(bool chamber=false){
     actor_art::drawEnemy(e,p.x,p.y);
     actor_art::shadowCacheKey=-1;actor_art::shadowCasting=true;
    }else if(e.type>=VolcanoFirstType){
-    if(near(p,200))billboard(p.y,[&]{corpseArt(e,p.x,p.y);});
-   }else if(e.type==DesertBossType){
-    const auto& tex=fallen_art::sprites[e.type][std::clamp(int(e.animation.direction),0,7)].body;
-    if(near(p,200))sprite(tex,{p.x-fallen_art::OriginX,p.y-fallen_art::OriginY,float(fallen_art::Width),float(fallen_art::Height)},p,false);
+    if(near(p,200))calderaCorpseShadow(e,p);
    }else{
-    const auto& shadow=fallen_art::sprites[std::clamp(e.type,0,LegacyEnemyTypeCount-1)][std::clamp(int(e.animation.direction),0,7)].ground;
+    const auto& shadow=fallen_art::spriteFor(e).ground;
     const auto& tex=shadow.art.texture;
     if(p.x+tex.width*.5f-shadow.origin.x<0||p.x-shadow.origin.x>WorldW||p.y+tex.height*.5f-shadow.origin.y<0||p.y-shadow.origin.y>H)continue;
     shadow_geometry::draw(shadow,p);
@@ -202,7 +264,8 @@ inline void prepare(bool chamber=false){
   Vector2 p=screen(item.pos);billboard(p.y,[&]{icon(item.value,p.x,p.y-14,.58f);});visibleCasters++;
  }
  shadow_geometry::flushBatch(maskShader);
- rlEnableBackfaceCulling();EndShaderMode();EndMode2D();EndTextureMode();
+ // A sprite-only batch may still be queued when there are no mesh casters.
+ EndBlendMode();EndShaderMode();rlEnableBackfaceCulling();EndMode2D();EndTextureMode();
  preparedActors=int(actor_art::frameRigs.size());actor_art::endShadowPreparation();ready=true;soften();
 }
 inline void soften(){

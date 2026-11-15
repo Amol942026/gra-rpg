@@ -4,7 +4,8 @@ void expandedLootTests(){
  static_assert(int(Kind::DawnBow)==98&&int(Kind::TrailFalchion)==99&&int(Kind::AshBow)==108);
  static_assert(int(Kind::BanditJack)==109&&AdditionalArmorCount==10);
  static_assert(int(Kind::BriarSword)==119&&RealmWeaponCount==10);
- check(ItemKindCount==134&&EquipmentKindCount==110,"catalogue includes five spears with stable earlier IDs");
+ static_assert(int(Kind::Spear)==129&&int(Kind::DawnSpear)==133&&FirstProtectiveGear==134);
+ check(ItemKindCount==140&&EquipmentKindCount==116,"catalogue adds six pieces of protective gear with stable earlier IDs");
  for(int type=0;type<LegacyEnemyTypeCount;type++){
   int added=0,count=0;for(const auto& rule:enemyLootTable(type)){count+=rule.kind!=Kind::None;added+=rule.kind>=Kind::SlimeBlade&&rule.kind<Kind::TrailFalchion;}
   check(added==3&&count<=CorpseLootSize,"each beast gains three loot entries without overflowing its corpse");

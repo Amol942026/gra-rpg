@@ -8,7 +8,11 @@ static BoulderSocket guardianSocket(const Enemy& e,float side,float forward,floa
  float dy=(-side*fx+forward*fy)*.52f*GuardianBodyScale;
  float walk=s.motionInitialized?s.moveBlend:s.moving?1.f:0;
  float bob=(creature_motion::sample(2,s.phase).bob*walk+std::sin(s.idleTime*2.1f)*.25f*(1-walk))*.5f;
- return {e.pos+V{dx/80+dy/40,-dx/80+dy/40},(up+bob)*GuardianBodyScale};
+ bob+=(guardian_gait::hipHeight(s.phase)-31-bob)*walk;
+ const float height=(up+bob)*GuardianBodyScale;
+ const V lean=e.hitLean();
+ dx+=height*lean.x;dy+=height*lean.y;
+ return {e.pos+V{dx/80+dy/40,-dx/80+dy/40},height};
 }
 static BoulderSocket boulderHand(const Enemy& e,float progress){
  // Central boulder socket shared by both grips, rendering, shadows and release.
@@ -19,6 +23,7 @@ void cancelBoulderAttacks(){
  cancelVolcanoAttacks();
  cancelCharges();
  boulders.clear();boulderImpacts.clear();
+ clearHeroHitReaction();
  heroKnockback={};heroKnockbackRemaining=heroKnockdownRemaining=0;heroKnockdownFacing=0;
  for(auto& e:enemies){if(e.boulderWindup>0||e.boulderRecovery>0)e.boulderCd=std::max(e.boulderCd,BoulderFirstDelay);e.boulderWindup=e.boulderRecovery=0;}
 }
@@ -89,9 +94,13 @@ void updateBoulders(float dt,V playerBefore,bool wasRolling=false,float rollElap
    if(!blocked&&!dead()&&proximity<=BoulderKnockbackRadius&&clearEnemySegment(impact,heroAtImpact,0)){
     if(dodged){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else{
-     if(proximity<=BoulderImpactRadius)takeMonsterDamage(incomingDamage(amount,DamageType::Physical),player);
+     V away=heroAtImpact-impact;
+     if(length(away)<.001f)away=incoming;
+     if(length(away)<.001f)away={1,0};
+     if(proximity<=BoulderImpactRadius)
+      takeMonsterDamage(incomingDamage(amount,DamageType::Physical),heroAtImpact,0,away);
      if(!dead()){
-      V away=heroAtImpact-impact;if(length(away)<.001f)away=incoming;if(length(away)<.001f)away={1,0};
+      clearHeroHitReaction();
       heroKnockback=normalized(away)*(BoulderKnockbackDistance*(1-.6f*std::clamp(proximity/BoulderKnockbackRadius,0.f,1.f)));
       heroKnockbackRemaining=BoulderKnockbackDuration;heroKnockdownRemaining=HeroKnockdownDuration;
       heroKnockdownFacing=animation.facingInitialized?animation.facingAngle:int(animation.direction)*3.14159265f/4;player=heroAtImpact;

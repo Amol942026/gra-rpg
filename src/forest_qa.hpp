@@ -32,9 +32,12 @@ bool runForestQA(){
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
  game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};mouse={0,0};refreshDisplayLayout();
  check(!audioSystem.available,"forest diagnostic opens no audio device");
- check(IsRenderTextureValid(terrain)&&terrain.texture.width==TerrainCacheWidth&&IsTextureValid(minimapTerrain),"GPU loads the enlarged terrain and the cached minimap successfully");
+ check(terrain.id&&IsTextureValid(terrain.texture)&&terrain.texture.width==TerrainCacheWidth&&
+       terrain.texture.height==TerrainCacheHeight&&IsTextureValid(minimapTerrain),
+       "GPU loads the enlarged color-only terrain and the cached minimap");
  exportForestOverview();
  for(const auto& glade:ForestGlades){V camera=glade.center;
+  if(distance(camera,ForestRitualCircle)<.01f)camera=ForestRitualApproach;
   game.player=camera;game.time=.9f;game.messageTime=0;renderScene();BeginDrawing();presentCanvas();Image actual=presentedImage();
   ExportImage(actual,TextFormat("qa-v25/forest-region-%d.png",checks));UnloadImage(actual);EndDrawing();finishFramePacing();
   check(game.walkable(camera),"added forest region renders at a traversable camera location");
@@ -61,7 +64,7 @@ bool runForestQA(){
   bool found=false;Vector2 base=screen(pos);
   for(int y=-int(enemyInfo(type).visualHeight);y<5&&!found;y+=3)for(int x=-55;x<55&&!found;x+=3){Vector2 p{base.x+x,base.y+y};auto hit=pickWorld(p);if(hit.kind==HoverKind::Enemy&&hit.index==e.id){mouse=p;found=true;}}
   check(found,"new species is selectable through its actual rendered geometry");
-  Inspection info=inspectWorld(pickWorld(mouse));check(info.name==enemyInfo(type).name&&info.maxHp==enemyInfo(type).health&&!info.loot.empty(),"new species exposes correct HP, identity and drop-rate summary in HUD");
+  check(inspectWorld(pickWorld(mouse)).source==HoverKind::None,"living species only shows its overhead vitals");
   renderScene();saveTexture(canvas,TextFormat("qa-v25/species-%d-hud.png",type));
   game.hit(e,1000);game.allocationRequired=false;game.attributePoints=0;
   found=false;for(int y=-35;y<20&&!found;y+=2)for(int x=-55;x<55&&!found;x+=2){Vector2 p{base.x+x,base.y+y};auto hit=pickWorld(p);if(hit.kind==HoverKind::Corpse&&hit.index==e.id){mouse=p;found=true;}}

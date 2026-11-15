@@ -54,6 +54,14 @@ inline constexpr std::array<RealmWeaponPaint,SpearCount> spearPaints{{
  {{0x625a68,0x684736,0xb47958,0xf7a050},{{7,4,1},{8,6,1},{7,8,1}}},
  {{0xd6cfac,0x665275,0xddbd76,0x92dfcf},{{8,4,1},{7,5,3},{8,6,1}}}
 }};
+inline constexpr std::array<RealmWeaponPaint,ProtectiveGearCount> protectivePaints{{
+ {{0x6f5139,0x3f4c39,0x7f9380,0xc8b57e},{{6,5,5},{7,7,3},{8,9,1}}},
+ {{0xa76139,0x78452c,0xd8aa62,0x75c5b1},{{8,4,1},{5,7,7},{8,10,1}}},
+ {{0x343340,0x4e3941,0xa2694e,0xe88851},{{6,4,2},{7,6,2},{8,8,2}}},
+ {{0x667471,0x353b3e,0xac9b78,0xd6c5a7},{{5,4,1},{10,4,1},{6,9,4}}},
+ {{0x966240,0x463832,0xd1a15f,0x72b7a6},{{8,3,1},{7,5,3},{6,9,5}}},
+ {{0x454352,0x2d2a35,0x966352,0xe48b62},{{5,4,2},{9,4,2},{8,9,1}}}
+}};
 struct GearInlay {
  const equipment_paint_data::Stroke* first;
  const equipment_paint_data::Stroke* last;
@@ -75,6 +83,10 @@ inline GearInlay equipmentInlay(Kind kind){
   const auto& strokes=spearPaints[index-FirstSpear].motif;
   return {std::begin(strokes),std::end(strokes)};
  }
+ if(protectiveGear(kind)){
+  const auto& strokes=protectivePaints[index-FirstProtectiveGear].motif;
+  return {std::begin(strokes),std::end(strokes)};
+ }
  const bool added=index>=FirstAdditionalWeapon;
  auto span=added?additional_weapon_paint_data::spans[index-FirstAdditionalWeapon]:equipment_paint_data::spans[index];
  auto first=(added?additional_weapon_paint_data::strokes:equipment_paint_data::strokes)+span.start;
@@ -93,7 +105,8 @@ inline unsigned tierPaint(unsigned color,int tier){
 inline GearAppearance gearAppearance(Item value){
  if(value.empty()||int(value.kind)<0||int(value.kind)>=ItemKindCount||gearSlot(value.kind)<0)return {};
  const int index=int(value.kind);
- auto paint=spearVariant(value.kind)?spearPaints[index-FirstSpear].colors:
+ auto paint=protectiveGear(value.kind)?protectivePaints[index-FirstProtectiveGear].colors:
+            spearVariant(value.kind)?spearPaints[index-FirstSpear].colors:
             realmWeapon(value.kind)?realmWeaponPaints[index-FirstRealmWeapon].colors:
             additionalArmor(value.kind)?armorPaints[index-FirstAdditionalArmor]:
             index>=FirstAdditionalWeapon?additional_weapon_paint_data::paints[index-FirstAdditionalWeapon]:equipment_paint_data::paints[index];

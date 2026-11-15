@@ -70,7 +70,7 @@ void updateArrows(float dt){
    Enemy* enemy=findEnemy(contact.second);if(!enemy)continue;
    shot.hitIds.push_back(enemy->id);V impact=shot.pos+delta*contact.first;
    if(shot.piercing)pierceFlashes.push_back({impact});
-   hit(*enemy,shot.damage,DamageType::Physical,shot.critical);
+   hit(*enemy,shot.damage,DamageType::Physical,shot.critical,shot.velocity);
    if(int(shot.hitIds.size())>=shot.maxTargets){stop=contact.first;stopped=true;break;}
    if(inTower()||storyBlocked()){stopped=true;stop=contact.first;break;}
   }

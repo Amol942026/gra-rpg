@@ -11,8 +11,8 @@ int main(int argc,char** argv){
  int checks=0,failures=0;std::ofstream log(root/"checks.txt");auto check=[&](bool ok,const std::string& label){checks++;failures+=!ok;log<<(ok?"PASS ":"FAIL ")<<label<<'\n';log.flush();};
  auto reset=[](){game=Game{};intro={};towerStory={};clearTransientUi();welcome=help=paused=false;mouse={0,0};game.messageTime=0;};
  auto capture=[&](const std::string& name){renderScene();Image im=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&im);check(ExportImage(im,(root/(name+".png")).string().c_str()),"integrated screenshot / "+name);UnloadImage(im);check(IsWindowHidden(),"window remains hidden / "+name);};
- check(volcano_art::terrain.id&&volcano_art::terrain.depth.id==0&&volcano_art::lava.id,"third terrain and Synfig lava are preloaded without unused depth");
- check(volcano_art::lavaStrips.size()>100&&volcano_art::lavaFrames[59].id&&volcano_art::steam.id,"continuous lava ribbons and native steam loop preloaded");
+ check(volcano_art::terrain.id&&volcano_art::terrain.depth.id==0&&volcano_art::lava.id,"third terrain and lava material are preloaded without unused depth");
+ check(volcano_art::lavaStrips.size()>100&&volcano_art::lavaClock>=0&&volcano_art::steam.id,"continuous shader-driven lava ribbons and native steam loop preloaded");
  check(volcano_art::channelWall.id&&volcano_art::canyonFronts.size()==volcano_art::lavaStrips.size(),"recessed river has preloaded rock faces for every visible lower segment");
  check(volcano_art::BoundaryLow<MapWalkMin&&volcano_art::BoundaryHigh>MapWalkMax,"visible rock perimeter lies immediately outside the existing movement boundary");
  for(int count:volcano_art::boundarySides)check(count>=30,"deep cliff strips cover every side of the playable platform");

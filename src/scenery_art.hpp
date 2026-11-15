@@ -1,6 +1,10 @@
 #pragma once
 #include "forest_bush_art.hpp"
 #include "forest_tree_art.hpp"
+#include "desert_plant_art.hpp"
+
+inline float propArtScale(int type){return forest_tree_art::scale(type)*desert_plant_art::scale(type);}
+inline float propArtSize(const Prop& prop){return prop.size*propArtScale(prop.type);}
 
 // Static detail is baked once at startup; wind still deforms the finished
 // crown texture and the pointer mask follows exactly the same deformation.
@@ -87,7 +91,7 @@ void mushrooms(float x,float y,float s){
 }
 // Paint the verge from continuous routes, independently of the gameplay grid.
 float forestRoadEdge(V p){
- float edge=std::min(distance(p,{21,5})-3.4f,distance(p,{59,57})-3.3f);
+ float edge=std::min(distance(p,{21,5})-3.4f,distance(p,ForestRitualCircle)-3.3f);
  for(const auto& trail:ForestTrails)edge=std::min(edge,desertSegmentDistance(p,trail.a,trail.b)-1.55f);
  return std::min(edge,desertSegmentDistance(p,{39,62},{66,64})-1.55f);
 }

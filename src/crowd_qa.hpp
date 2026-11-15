@@ -11,16 +11,22 @@ bool runCrowdQA() {
     for(int i=0;i<7;i++){int type=i==6?3:i%3;V p=game.player+positions[i];float hp=enemyInfo(type).health;
         game.enemies.push_back({i,type,p,p,hp,hp});}
     game.animation.direction=Direction::E;
-    game.say("LPM — jeden zamach, wszyscy przeciwnicy w promieniu 2,1 pola.");
+    game.say("LPM — jeden zamach trafia przeciwników z przodu w zasięgu 2,1 pola.");
     renderScene();saveTexture(canvas,"qa-v13/area-before.png");
     for(int i=0;i<2;i++){
-        Vector2 p=screen(game.enemies[i].pos);mouse={p.x,p.y-(i==0?18.f:36.f)};
-        check(pickWorld(mouse).kind==HoverKind::Enemy,"test pointer is over a monster");
+        const Vector2 p=screen(game.enemies[i].pos);
+        bool found=false;
+        for(int y=8;y<=42&&!found;y+=2)for(int x=-16;x<=16&&!found;x+=2){
+            const Vector2 point{p.x+x,p.y-y};
+            const auto hit=pickWorld(point);
+            if(hit.kind==HoverKind::Enemy&&hit.index==game.enemies[i].id){mouse=point;found=true;}
+        }
+        check(found,"test pointer is over the intended monster");
     }
     clickWorldOrInventory();releaseWorldAttack();mouse={0,0};
     check(game.swing>0&&game.attackCd>0,"left tap releases one sword swing");
     check(inspectWorld(pickWorld(mouse)).source==HoverKind::None,"moving the pointer away leaves no selected enemy in HUD");
-    for(int i=0;i<6;i++)check(game.enemies[i].hp<game.enemies[i].maxHp,"one left click hits every nearby monster");
+    for(int i=0;i<6;i++)check((game.enemies[i].hp<game.enemies[i].maxHp)==(i<3),"one left click hits nearby monsters in the aimed half of the ring");
     check(game.enemies[6].hp==game.enemies[6].maxHp,"distant boss is outside the attack area");
     game.swing=SwingDuration*.5f;for(auto& e:game.enemies)e.flash=0;
     renderScene();saveTexture(canvas,"qa-v13/area-swing.png");

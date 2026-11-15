@@ -2,13 +2,14 @@
 // Included after V and WorldLocation. Stable IDs keep loot with its realm.
 constexpr int TreasureCount=6,ChestLootSize=3;
 constexpr float ChestUseRange=2.5f,ChestRadius=.65f;
+inline constexpr int ForestCircleChestId=1;
 struct TreasureChest {
  int id;V pos;WorldLocation location;bool opened=false;
  std::array<Item,ChestLootSize> loot{};
 };
 inline constexpr std::array<TreasureChest,TreasureCount> TreasureLayout{{
  {0,{12,41},WorldLocation::Forest},
- {1,{57,57},WorldLocation::Forest},
+ {ForestCircleChestId,ForestRitualCircle,WorldLocation::Forest},
  {2,{23,43},WorldLocation::Desert},
  {3,{44,15},WorldLocation::Desert},
  {4,{17,23},WorldLocation::Volcano},

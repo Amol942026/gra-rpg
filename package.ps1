@@ -1,6 +1,7 @@
+param([switch]$NoBuild)
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
-& (Join-Path $PSScriptRoot 'build.ps1') -Player
+if (!$NoBuild) { & (Join-Path $PSScriptRoot 'build.ps1') -Player }
 Add-Type -AssemblyName System.IO.Compression,System.IO.Compression.FileSystem
 $packagePath = Join-Path $PSScriptRoot 'Emberfall-Windows-x64.zip'
 $temporaryPackage = Join-Path $PSScriptRoot ('Emberfall-package-' + [guid]::NewGuid().ToString('N') + '.zip')
@@ -8,7 +9,7 @@ $versionManifest = [IO.File]::ReadAllText((Join-Path $PSScriptRoot 'resources/Em
 $releaseVersion = [regex]::Match($versionManifest, 'assemblyIdentity version="([0-9]+\.[0-9]+)').Groups[1].Value
 $archive = [IO.Compression.ZipFile]::Open($temporaryPackage, [IO.Compression.ZipArchiveMode]::Create)
 try {
-    foreach ($entry in @(@('dist/player/Emberfall.exe','Emberfall.exe'), @('LICENSES.md','LICENSES.md'), @('LOOT.md','LOOT.md'))) {
+    foreach ($entry in @(@('dist/player/Emberfall.exe','Emberfall.exe'), @('Uruchom.bat','Uruchom.bat'), @('LICENSES.md','LICENSES.md'), @('LOOT.md','LOOT.md'))) {
         [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $PSScriptRoot $entry[0]), ('Emberfall/' + $entry[1]), [IO.Compression.CompressionLevel]::Optimal) | Out-Null
     }
     # Package the canonical asset manifest. A reused build directory may also
@@ -135,6 +136,7 @@ PPM otwiera cialo w zasiegu 2,5 pola. Strony lupu: < / > lub rolka.
 Po zwyciestwie mozesz znalezc bronie, zbroje, helmy i materialy bestii.
 
 Zapisz gre / Wczytaj gre: trzy sloty z data, poziomem i lokacja.
+F5 otwiera menu zapisu w dowolnym miejscu, takze w trakcie walki.
 Zapisy: %LOCALAPPDATA%\Emberfall\saves\slot-1.efs (oraz slot-2 i slot-3).
 Poprzedni poprawny zapis pozostaje w .bak; uszkodzony plik odzyska sie z kopii.
 Po wczytaniu wybierz Wroc do gry. Wyjscie nie zapisuje automatycznie.
@@ -146,9 +148,6 @@ Licencje: LICENSES.md i pliki w assets. Tabele lupu: LOOT.md.
     $entry = $archive.CreateEntry('Emberfall/JAK_URUCHOMIC.txt')
     $writer = New-Object IO.StreamWriter($entry.Open(), (New-Object Text.UTF8Encoding($true)))
     try { $writer.Write($instructions) } finally { $writer.Dispose() }
-    $entry = $archive.CreateEntry('Emberfall/Uruchom.bat')
-    $writer = New-Object IO.StreamWriter($entry.Open(), [Text.Encoding]::ASCII)
-    try { $writer.Write("@echo off`r`ncd /d `"%~dp0`"`r`nstart `"Emberfall`" `"Emberfall.exe`" %*`r`n") } finally { $writer.Dispose() }
 } finally { $archive.Dispose() }
 Move-Item -LiteralPath $temporaryPackage -Destination $packagePath -Force
 Write-Output ('Gotowe: {0} ({1:N2} MB)' -f $packagePath, ((Get-Item -LiteralPath $packagePath).Length / 1000000))

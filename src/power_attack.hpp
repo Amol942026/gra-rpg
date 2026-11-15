@@ -9,7 +9,7 @@ inline constexpr PowerAttack PowerAttacks[]={
  {Kind::Sword,.64f,.23f,0,.76f,2.15f,1.60f},
  {Kind::Axe,.74f,.31f,0,.89f,2.60f,1.85f},
  {Kind::Dagger,.60f,.18f,.38f,.72f,2.35f,.97f},
- {Kind::Spear,.68f,.26f,0,.81f,4.25f,1.60f},
+ {Kind::Spear,.68f,.26f,0,.81f,0,1.60f}, // Reach is sampled from the rendered blade tip.
  {Kind::Bow,.30f,0,0,.62f,1.15f,1.45f}
 };
 static_assert(std::size(PowerAttacks)==int(PowerStyle::Count));

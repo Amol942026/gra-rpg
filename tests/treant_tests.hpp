@@ -111,20 +111,26 @@ void treantTests(){
    V step=dir*(enemySpeed(type)/60);
    AnimationState a;a.phase=.12f;a.moveBlend=1;a.motionInitialized=true;
    auto b=a;advance(b,step.x,step.y,1.f/60,contact);
-   auto old=type==1?forest_gait::wolfLeg(a.phase,1,false,true,28):fromStanding(a,1,contact).legs[0];
-   auto next=type==1?forest_gait::wolfLeg(b.phase,1,false,true,28):fromStanding(b,1,contact).legs[0];
+   const auto footPoint=[&](const AnimationState& state){
+    if(type==1){const auto paw=forest_gait::wolfFoot(state.phase,1,false,true);return std::pair{paw.forward,paw.height};}
+    const auto leg=fromStanding(state,1,contact).legs[0];return std::pair{leg.forward,leg.height};
+   };
+   const auto [oldForward,oldHeight]=footPoint(a);
+   const auto [nextForward,nextHeight]=footPoint(b);
    float projected=2*contact.stride*phaseDistance(step.x,step.y,contact)/contact.support;
-   check(old.height==next.height&&std::abs(next.forward-old.forward+projected)<.0001f,
+   check(oldHeight==nextHeight&&std::abs(nextForward-oldForward+projected)<.0001f,
          "wolf and skeleton stance travel cancels actual ground displacement");
   }
  }
  for(int frame=0;frame<120;frame++)for(bool front:{false,true})for(bool right:{false,true}){
   const float hip=front?28.5f:25.5f;
-  const auto leg=forest_gait::wolfLeg(frame/120.f,1,right,front,hip);
-  const auto joint=leg.joint;
-  check(leg.height>=forest_gait::PawHeight&&
-        std::abs(std::hypot(joint.forward,joint.height-hip)-forest_gait::Wolf.legLength)<.001f&&
-        std::abs(std::hypot(leg.forward-joint.forward,leg.height-joint.height)-forest_gait::Wolf.legLength)<.001f,
-        "wolf four-paw cycle preserves anatomical segment lengths and ground clearance");
+  const auto paw=forest_gait::wolfFoot(frame/120.f,1,right,front);
+  const auto [root,joint,wrist]=forest_gait::solveWolfLeg(paw,hip,0,front);
+  const float bend=(wrist.forward-root.forward)*(joint.height-root.height)
+           -(wrist.height-root.height)*(joint.forward-root.forward);
+  check(paw.height>=forest_gait::PawHeight&&wrist.height>paw.height&&
+        std::abs(std::hypot(joint.forward-root.forward,joint.height-root.height)-forest_gait::wolfUpper(front))<.001f&&
+        std::abs(std::hypot(wrist.forward-joint.forward,wrist.height-joint.height)-forest_gait::wolfLower(front))<.001f&&
+        (front?bend<0:bend>0),"wolf keeps short, correctly bent joints and fixed leg lengths throughout all four steps");
  }
 }

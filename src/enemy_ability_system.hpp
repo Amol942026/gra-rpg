@@ -17,10 +17,10 @@ bool prepareEnemyAbility(Enemy& e,float dt,bool visible,float range){
  e.abilityAge=0;e.abilityCd=spec.cooldown;e.abilityMask=0;e.abilityCasts++;e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.recoil={};
  faceEnemyAbility(e);sound(enemyAttackCue(e.type),e.pos);return true;
 }
-void enemyAbilityDamage(float amount,DamageType type,V at,bool wasRolling,float rollAge,float impactTime){
+void enemyAbilityDamage(float amount,DamageType type,V at,bool wasRolling,float rollAge,float impactTime,V away={}){
  if(dead())return;
  if(wasRolling&&!sandTrapped()&&rollAge+impactTime<RollProtection){sound(Cue::Dodge,at);effects.push_back({at,"UNIK",.65f,3});return;}
- takeMonsterDamage(incomingDamage(amount,type),at,.25f);
+ takeMonsterDamage(incomingDamage(amount,type),at,.25f,away,type);
 }
 void advanceEnemyAbility(Enemy& e,float dt,V casterBefore,V heroBefore,bool wasRolling,float rollAge){
  if(e.abilityAge<0||!e.alive||dt<=0)return;
@@ -34,12 +34,14 @@ void advanceEnemyAbility(Enemy& e,float dt,V casterBefore,V heroBefore,bool wasR
  }
  if(kind==EnemyAbility::ObsidianCleave&&!(e.abilityMask&1)&&after+.000001f>=spec.windup){
   e.abilityMask|=1;auto [origin,hero]=point(spec.windup);
-  if(insideEnemyCleave(hero-origin,e.abilityDirection)&&clearEnemySegment(origin,hero,.04f))enemyAbilityDamage(e.damage()*spec.damageScale,spec.damageType,hero,wasRolling,rollAge,std::clamp(spec.windup-before,0.f,dt));
+  if(insideEnemyCleave(hero-origin,e.abilityDirection)&&clearEnemySegment(origin,hero,.04f))
+   enemyAbilityDamage(e.damage()*spec.damageScale,spec.damageType,hero,wasRolling,rollAge,std::clamp(spec.windup-before,0.f,dt),hero-origin);
   sound(Cue::ObsidianCleave,e.pos);
  }
  if(kind==EnemyAbility::EmberBreath)for(int pulse=0;pulse<3;pulse++){
   float event=spec.windup+pulse*.35f;if((e.abilityMask&(1<<pulse))||after+.000001f<event)continue;e.abilityMask|=1<<pulse;auto [origin,hero]=point(event);
-  if(insideEmberBreath(hero-origin,e.abilityDirection)&&clearEnemySegment(origin,hero,.04f))enemyAbilityDamage(e.damage()*spec.damageScale/3,spec.damageType,hero,wasRolling,rollAge,std::clamp(event-before,0.f,dt));
+  if(insideEmberBreath(hero-origin,e.abilityDirection)&&clearEnemySegment(origin,hero,.04f))
+   enemyAbilityDamage(e.damage()*spec.damageScale/3,spec.damageType,hero,wasRolling,rollAge,std::clamp(event-before,0.f,dt),e.abilityDirection);
   if(pulse==0)sound(Cue::FireBreath,origin);
  }
  if(kind==EnemyAbility::CopperWave&&!(e.abilityMask&1)&&after>=spec.windup&&before<spec.windup+spec.active){
@@ -47,7 +49,7 @@ void advanceEnemyAbility(Enemy& e,float dt,V casterBefore,V heroBefore,bool wasR
   V centerA=casterBefore+(e.pos-casterBefore)*from,centerB=casterBefore+(e.pos-casterBefore)*to,heroA=heroBefore+(player-heroBefore)*from,heroB=heroBefore+(player-heroBefore)*to;
   float radius=.65f+2.75f*(a-spec.windup)/spec.active,growth=2.75f*(b-a)/spec.active;
   float t=expandingWaveContact(heroA-centerA,(heroB-heroA)-(centerB-centerA),radius,growth,.16f+HeroBodyRadius);
-  if(t<=1){V at=heroA+(heroB-heroA)*t,origin=centerA+(centerB-centerA)*t;if(clearEnemySegment(origin,at,.04f)){e.abilityMask|=1;enemyAbilityDamage(e.damage()*spec.damageScale,spec.damageType,at,wasRolling,rollAge,(a-before)+(b-a)*t);}}
+  if(t<=1){V at=heroA+(heroB-heroA)*t,origin=centerA+(centerB-centerA)*t;if(clearEnemySegment(origin,at,.04f)){e.abilityMask|=1;enemyAbilityDamage(e.damage()*spec.damageScale,spec.damageType,at,wasRolling,rollAge,(a-before)+(b-a)*t,at-origin);}}
   if(before<spec.windup)sound(Cue::CopperWave,e.pos);
  }
  e.abilityAge=after;
@@ -61,7 +63,7 @@ void updateVenomGlobs(float dt,V heroBefore,bool wasRolling,float rollAge){
   for(V fountain:fountains())obstacle=std::min(obstacle,segmentCircle(glob.pos,delta,fountain,FountainRadius+.12f));
   float contact=segmentCircle(glob.pos-heroBefore,delta-(player-heroBefore),{},.42f);bool hit=contact<=1&&contact<=obstacle;
   if(hit){
-   enemyAbilityDamage(glob.damage,DamageType::Magic,heroBefore+(player-heroBefore)*contact,wasRolling,rollAge,dt*contact);
+   enemyAbilityDamage(glob.damage,DamageType::Magic,heroBefore+(player-heroBefore)*contact,wasRolling,rollAge,dt*contact,glob.velocity);
    // A fan is one attack: overlapping bolts at melee range cannot triple-hit.
    int owner=glob.owner;size_t next=0;for(size_t j=0;j<i;j++)next+=venomGlobs[j].owner!=owner;
    venomGlobs.erase(std::remove_if(venomGlobs.begin(),venomGlobs.end(),[&](const auto& shot){return shot.owner==owner;}),venomGlobs.end());i=next;continue;

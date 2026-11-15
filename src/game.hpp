@@ -1,16 +1,19 @@
 #pragma once
 #include "animation.hpp"
+#include "spear_motion.hpp"
 #include "spear_timing.hpp"
 #include "weapon_attack_timing.hpp"
 #include "sound_events.hpp"
 #include "power_attack.hpp"
 #include "spell_definitions.hpp"
 #include "entity_info.hpp"
+#include "enemy_death_motion.hpp"
 #include "loot.hpp"
 #include "commerce.hpp"
 #include "treant_gait.hpp"
 #include "guardian_gait.hpp"
 #include "forest_gait.hpp"
+#include "forest_boar_motion.hpp"
 #include "cinderhorn_gait.hpp"
 #include <algorithm>
 #include <array>
@@ -21,6 +24,8 @@
 #include "generated/guardian_throw_data.hpp"
 #include "generated/guardian_shatter_data.hpp"
 #include "generated/creature_motion_data.hpp"
+#include "generated/hero_hit_reaction_data.hpp"
+#include "generated/hero_impact_data.hpp"
 
 namespace ember {
 constexpr int LegacyMapSize=72,PreviousMapSize=102,MapSize=144, BagSize=25, EquipSize=6;
@@ -36,6 +41,10 @@ constexpr float WalkSpeed=3.8f, BootsSpeed=4.3f;
 constexpr float RunMultiplier=1.5f;
 constexpr float EnemySightRange=6.5f,PatrolRadius=2.5f,PatrolSpeedFactor=.6f;
 constexpr int BoarType=4;
+constexpr float GuardianPunchWindup=36.f/60,GuardianPunchRecovery=22.f/60;
+constexpr float TreantSwingWindup=47.f/60,TreantSwingRecovery=25.f/60;
+inline constexpr float meleeWindup(int type){return type==3?GuardianPunchWindup:type==7?TreantSwingWindup:.42f;}
+inline constexpr float meleeRecovery(int type){return type==3?GuardianPunchRecovery:type==7?TreantSwingRecovery:.22f;}
 constexpr float BoarChargeFirstDelay=.65f,BoarChargeCooldown=4.5f,BoarChargeWindup=.55f;
 constexpr float BoarChargeDuration=.7f,BoarChargeRecovery=.6f,BoarChargeSpeed=9.5f;
 constexpr float BoarChargeMinRange=2.2f,BoarChargeDamageMultiplier=2.f,HeroBodyRadius=.28f;
@@ -53,27 +62,44 @@ constexpr float BoulderMinRange=2.5f,BoulderMaxRange=EnemySightRange,BoulderSpee
 constexpr float BoulderDamage=24,BoulderImpactRadius=.72f,BoulderRadius=.38f,GuardianBodyScale=guardian_gait::Scale,BoulderSpriteSize=76;
 constexpr float BoulderKnockbackRadius=1.6f,BoulderKnockbackDuration=.48f,BoulderKnockbackDistance=1.35f;
 constexpr float HeroKnockdownDuration=1.85f;
+constexpr float HeroHitReactionDuration=hero_hit_reaction::data::Duration;
 constexpr size_t MaxBoulders=8,MaxBoulderImpacts=24;
 constexpr float BoulderImpactClock=.4f; // Preserve the v2 save clock; phase spans the longer Synfig clip.
 enum class Attribute { Strength,MagicPower,Defense,MagicDefense,Vitality,Mana,Count };
 constexpr int AttributeCount=int(Attribute::Count),PointsPerLevel=5;
 using Attributes=std::array<int,AttributeCount>;
-enum class Skill { StrongCut,PiercingArrow,Healing,Count };
-constexpr int SkillCount=int(Skill::Count),SkillPointsPerLevel=1;
+enum class Skill { StrongCut,PiercingArrow,Healing,Cleave,DoubleThrust,Skewer,Count };
+constexpr int SkillCount=int(Skill::Count),SkillSlotCount=3,SkillPointsPerLevel=1;
 using SkillRanks=std::array<int,SkillCount>;
 constexpr float StrongCutCost=10,PiercingArrowCost=20,StrongCutDuration=.50f,StrongCutCooldown=1.2f,PiercingArrowCooldown=1.5f;
 constexpr int CriticalChancePercent=5;
 constexpr float CriticalMultiplier=2.5f,HealingCost=20,HealingAmount=30,HealingCooldown=1.f,HealingDuration=.85f;
-inline const char* skillName(Skill skill){switch(skill){case Skill::StrongCut:return "Mocne cięcie";case Skill::PiercingArrow:return "Przeszywająca strzała";case Skill::Healing:return "Leczenie";default:return "";}}
+struct SkillProfile {const char* name;const char* weaponName;const char* label;Kind weapon;int mana;float cooldown;const char* effect;};
+inline constexpr std::array<SkillProfile,SkillCount> SkillProfiles{{
+ {"Mocne cięcie","Miecz","CIĘCIE",Kind::Sword,10,StrongCutCooldown,"Trafia przeciwników przed bohaterem w zasięgu miecza."},
+ {"Przeszywająca strzała","Łuk","STRZAŁA",Kind::Bow,20,PiercingArrowCooldown,"Przygotuj X, następnie naciągnij i puść LPM."},
+ {"Leczenie","Każda broń","LECZENIE",Kind::None,20,HealingCooldown,"Przywraca do 30 HP."},
+ {"Rozłupanie","Topór","ROZŁUPANIE",Kind::Axe,14,1.6f,"Szeroki cios trafia cele przed bohaterem."},
+ {"Podwójne pchnięcie","Sztylet","PCHNIĘCIA",Kind::Dagger,12,1.25f,"Dwa szybkie pchnięcia w najbliższy cel."},
+ {"Przebicie","Włócznia","PRZEBICIE",Kind::Spear,16,1.8f,"Długie pchnięcie przebija cele w jednej linii."}
+}};
+inline const SkillProfile& skillProfile(Skill skill){return SkillProfiles[int(skill)];}
+inline const char* skillName(Skill skill){return skillProfile(skill).name;}
+inline constexpr float SkillAxeReach=2.55f,SkillDaggerReach=1.85f;
+inline constexpr float SkillDaggerSecond=14.f/60;
 struct V { float x=0,y=0; V operator+(V b)const{return{x+b.x,y+b.y};} V operator-(V b)const{return{x-b.x,y-b.y};} V operator*(float s)const{return{x*s,y*s};} };
+struct SpearContact {V ray;float height;};
 inline float length(V v){return std::sqrt(v.x*v.x+v.y*v.y);}
 inline float distance(V a,V b){return length(a-b);}
 inline V normalized(V v){float n=length(v);return n>.001f?v*(1/n):V{};}
+inline constexpr float EnemyImpactLife=.24f;
+inline constexpr float EnemyHitRecovery=.18f;
 #include "forest_layout.hpp"
 #include "tower_layout.hpp"
 #include "desert_layout.hpp"
 #include "volcano_layout.hpp"
 enum class WorldLocation {Forest,MageTower,Desert,Volcano};
+#include "field_sites.hpp"
 #include "treasure.hpp"
 #include "terrain_height.hpp"
 #include "volcano_roads.hpp"
@@ -82,6 +108,11 @@ enum class DawnQuest {Seeking,Returning,AtTower};
 struct Ground { int id; Item value; V pos; WorldLocation location=WorldLocation::Forest; int floor=0; };
 struct Prop { V pos; int type; float size; };
 enum class EnemyBehavior { Idle,Patrol,Chase,Return };
+inline V flankImpulse(const AnimationState& state,int side){
+ const auto forward=actorFacing(state.facingInitialized?state.facingAngle:int(state.direction)*AnimationPi/4);
+ const float x=forward.y*.5f,y=-forward.x*ActorGroundSquash;
+ return normalized({x+y,-x+y})*float(side);
+}
 struct Enemy {
  int id,type; V pos,home; float hp,maxHp,attack=0,flash=0,windup=0; bool alive=true; AnimationState animation{}; float strike=0;
  V recoil{};
@@ -96,6 +127,47 @@ struct Enemy {
  bool chargeBusy()const{return chargingSpecies(type)&&(boarWindup>0||boarRush>0||boarRecovery>0);}
  float eruptionCd=2.8f,eruptionWindup=0;int eruptions=0;
  float abilityCd=3.f,abilityAge=-1;V abilityDirection{};int abilityMask=0,abilityCasts=0;
+ V hitDirection{}; // Short-lived visual impulse, independent of collision recoil.
+ V deathDirection{}; // World-space impulse of the last hit, retained by the corpse.
+ // The live pose is captured on a lethal hit. The presentation finishes on
+ // load, while the corpse and its loot already exist at the moment of death.
+ AnimationState deathMotion{};
+ float deathElapsed=-1,deathAttack=0,deathAction=-1,deathSpecial=-1;
+ float deathWindup=0,deathStrike=0,deathFlash=0,deathCharge=-1;
+ bool deathChargeHit=false;
+ bool dying()const{return !alive&&deathElapsed>=0;}
+ // Body, hover mask and shadow lock on the cue frame. The remaining time
+ // is available to ground particles while the corpse stays still.
+ bool corpseGrounded()const{return !alive&&(!dying()||deathElapsed>=enemy_death::groundContactTime(type));}
+ float deathProgress()const{return dying()?std::min(1.f,deathElapsed/enemy_death::duration(type)):1.f;}
+ int deathSide()const{
+  if(deathDirection.x==0&&deathDirection.y==0)return 1;
+  const float angle=animation.facingInitialized?animation.facingAngle:int(animation.direction)*AnimationPi/4;
+  const auto forward=actorFacing(angle);
+  const float x=deathDirection.x-deathDirection.y,y=(deathDirection.x+deathDirection.y)*.5f/ActorGroundSquash;
+  const float lateral=x*forward.y-y*forward.x;
+  if(std::abs(lateral)>.0001f)return lateral<0?-1:1;
+  return x*forward.x+y*forward.y<0?-1:1;
+ }
+ int deathScreenSide()const{
+  if(deathDirection.x==0&&deathDirection.y==0)return 0;
+  const float x=deathDirection.x-deathDirection.y;
+  // Clockwise screen rotation moves an upright sprite's top to the right.
+  if(std::abs(x)>.0001f)return x<0?-1:1;
+  return deathDirection.x+deathDirection.y<0?-1:1;
+ }
+ float volcanoAction()const{
+  return abilityBusy()?abilityAction():eruptionWindup>0?1-eruptionWindup/.95f:
+         windup>0?.45f*(1-windup/.42f):strike>0?.45f+.55f*(1-strike/.22f):-1;
+ }
+ V hitLean()const{
+  if(!alive||flash<=0)return {};
+  const float age=std::clamp(1-flash/EnemyHitRecovery,0.f,1.f);
+  const bool heavy=type==3||type==11||type==18;
+  const float strength=(heavy?.058f:.105f)*(1-age)*std::cos(age*AnimationPi*1.65f);
+  const V projected=normalized({(hitDirection.x-hitDirection.y)*2,hitDirection.x+hitDirection.y});
+  return {strength*projected.x,strength*.62f*projected.y};
+ }
  bool abilityBusy()const{return abilityAge>=0&&enemyAbility(type)!=EnemyAbility::None;}
  float abilityAction()const{
   if(!abilityBusy())return -1;const auto& spec=enemyAbilityProfile(type);
@@ -120,6 +192,24 @@ struct Enemy {
   float regular=windup>0?-std::clamp(1-windup/.42f,0.f,1.f):strike>0?std::sin((1-strike/.22f)*3.14159265f):0;
   return sandCastPulse>0?std::sin((1-sandCastPulse/SandCastDuration)*3.14159265f):regular;
  }
+ float boarVisualPhase()const{
+  using forest_boar_motion::Action;
+  using forest_boar_motion::encoded;
+  if(boarWindup>0)return encoded(Action::Windup,1-boarWindup/BoarChargeWindup);
+  if(boarRush>0)return encoded(Action::Rush,1-boarRush/BoarChargeDuration);
+  if(boarRecovery>0)return encoded(Action::Recovery,1-boarRecovery/BoarChargeRecovery);
+  const float preparation=meleeWindup(BoarType),recovery=meleeRecovery(BoarType);
+  if(windup>0)return encoded(Action::Melee,(preparation-windup)/(preparation+recovery));
+  if(strike>0)return encoded(Action::Melee,1-strike/(preparation+recovery));
+  return 0;
+ }
+ float heavyMeleePhase()const{
+  if(type!=1&&type!=3&&type!=7)return -1;
+  const float preparation=meleeWindup(type),recovery=meleeRecovery(type);
+  if(windup>0)return (preparation-windup)/(preparation+recovery);
+  if(strike>0)return (preparation+recovery-strike)/(preparation+recovery);
+  return -1;
+ }
  // Map units sized to the complete body footprint (including a wolf's muzzle
  // and tail), so separated centers also keep the rendered bodies apart.
  float radius()const{return enemyInfo(type).radius;}
@@ -130,6 +220,21 @@ struct Enemy {
 };
 struct FieldState {std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Ground> forage;};
 struct Effect { V pos; std::string text; float life; int color; bool damageNumber=false,critical=false;float height=75; };
+enum class ImpactMaterial {Spark,Stone,Bark,Slime,Bone,Sand,Shell,Ember,Fur,Armor};
+inline constexpr ImpactMaterial impactMaterial(int type){
+ switch(type){
+ case 0:return ImpactMaterial::Slime;
+ case 2:return ImpactMaterial::Bone;
+ case 3:case 12:case 16:return ImpactMaterial::Stone;
+ case 7:case SporekinType:return ImpactMaterial::Bark;
+ case DesertBossType:case DuneEyeType:return ImpactMaterial::Sand;
+ case 5:case 8:case 9:case 10:case 13:return ImpactMaterial::Shell;
+ case 14:case 15:case 17:case 18:case CinderhornType:return ImpactMaterial::Ember;
+ case 1:case 4:return ImpactMaterial::Fur;
+ default:return ImpactMaterial::Spark;
+ }
+}
+struct CombatImpact {V pos,direction;float height,life;DamageType type;bool critical;ImpactMaterial material;};
 struct Fireball { V pos,velocity;float remaining=FireballRange,damage=0;bool critical=false;Spell spell=Spell::Fireball;float age=0; };
 struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
 struct Arrow {V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false,power=false;};
@@ -204,6 +309,7 @@ struct Game {
  AnimationState animation{};
  std::vector<Item> bag=std::vector<Item>(BagSize);std::array<Item,EquipSize> equipment{};
  std::vector<Ground> ground,forage;std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Effect> effects;
+ std::vector<CombatImpact> combatImpacts;
  std::array<WeaponBinding,WeaponWheelSize> weaponWheel{};
  std::vector<Arrow> arrows;bool bowDrawing=false;float bowDrawTime=0,bowReleaseTime=0,lastBowCharge=0;V bowAim{0,-1};
  Item heldAttackWeapon{};float heldAttackTime=0;
@@ -212,7 +318,8 @@ struct Game {
  std::vector<Boulder> boulders;std::vector<BoulderImpact> boulderImpacts;
  Attributes attributes{};int attributePoints=0;bool allocationRequired=false;
  SkillRanks skillRanks{};int skillPoints=0;
- std::array<bool,SkillCount> skillAssigned{{true,true,true}};
+ std::array<bool,SkillSlotCount> skillAssigned{{true,true,true}};
+ std::array<float,SkillCount-SkillSlotCount> weaponSkillCds{};
  std::array<Kind,DefaultPotions.size()> potionAssigned=DefaultPotions;
  float healingCd=0,healingPulse=0;
  float strongCutCd=0,piercingArrowCd=0,meleeDuration=SwingDuration;bool swingStrong=false,piercingArrowArmed=false,lastBowPiercing=false;
@@ -222,6 +329,11 @@ struct Game {
  void sound(Cue cue,V position){if(sounds.size()<64)sounds.push_back({cue,position.x,position.y});}
  float hp=100,mana=100,attackCd=0,spellCd=0,potionCd=0,swing=0,hurt=0,time=0;
  float rollRemaining=0,rollCd=0;V rollDirection{};
+ V heroHitDirection{};float heroHitReactionRemaining=0;
+ float hitReactionProgress()const{
+  return heroHitReactionRemaining>0?1-heroHitReactionRemaining/HeroHitReactionDuration:-1;
+ }
+ void clearHeroHitReaction(){heroHitDirection={};heroHitReactionRemaining=0;}
  V heroKnockback{};float heroKnockbackRemaining=0;
  float heroKnockdownRemaining=0,heroKnockdownFacing=0;
  bool knockedBack()const{return heroKnockbackRemaining>0||heroKnockdownRemaining>0;}
@@ -269,17 +381,19 @@ struct Game {
  int recoveredDawnFragments()const{int count=0;for(int i=0;i<dawnFragments();i++)count+=recoveredDawnPart(i);return count;}
  bool inDesert()const{return location==WorldLocation::Desert;}
  bool inVolcano()const{return location==WorldLocation::Volcano;}
- const char* currentRegion()const{return inVolcano()?volcanoRegion(player):inDesert()?desertRegion(player):forestRegion(player);}
+ const char* currentRegion()const{return fieldRegion(location,player).name;}
+ #include "realm_decorations.hpp"
  #include "volcano_system.hpp"
  #include "desert_system.hpp"
  #include "regional_enemy_spawns.hpp"
  bool mageReachable()const{return inTower()&&towerFloor==0&&!dead()&&!allocationRequired&&!storyBlocked()&&distance(player,MagePosition)<=MageTalkRange;}
  bool takeTowerReturn(){bool pending=towerReturnPending;towerReturnPending=false;return pending;}
  void enterMageTower(){
+  settleEnemyDeaths();
   cancelBoulderAttacks();
   clearSandPrison();location=WorldLocation::MageTower;towerFloor=0;player=TowerArrival;facing=normalized(MagePosition-player);animation={};animation.face(facing.x,facing.y);
   cancelBow();closeCorpse();rollRemaining=rollCd=swing=attackCd=spellCd=hurt=stepDistance=0;
-  arrows.clear();fireballs.clear();explosions.clear();effects.clear();pierceFlashes.clear();sounds.clear();healingPulse=0;
+  arrows.clear();fireballs.clear();explosions.clear();effects.clear();combatImpacts.clear();pierceFlashes.clear();sounds.clear();healingPulse=0;
  }
  void finishTowerReturn(){if(inTower()&&dawnQuest==DawnQuest::Returning){dawnQuest=DawnQuest::AtTower;say("Wieża Eldrina. Podejdź do maga i naciśnij E lub PPM, aby porozmawiać.");}}
  int openedCorpse=-1;
@@ -295,19 +409,21 @@ struct Game {
   for(int x=2;x<MapSize-2;x++)for(int y=2;y<MapSize-2;y++){
    unsigned h=hash(x,y);V p{float(x),float(y)};ForestZone zone=forestZone(p);
    int density=zone==ForestZone::Ruins?17:zone==ForestZone::Wolves?14:zone==ForestZone::Heart?10:zone==ForestZone::Trail?16:12;
-   if(h%density!=0||onPath(x,y)||forestClearing(p)||nearTreasure(p,WorldLocation::Forest))continue;
+   if(h%density!=0||onPath(x,y)||forestClearing(p)||nearTreasure(p,WorldLocation::Forest)||nearFieldSite(WorldLocation::Forest,p,2.4f))continue;
    bool near=false;for(auto&e:enemies)if(distance(p,e.home)<2.2f)near=true;
    const int mixed[]={0,4,5,0,4,5,1,2},birches[]={4,4,4,5,4,0,1,2},pines[]={0,0,0,0,5,0,1,2},oaks[]={5,5,0,5,5,4,1,2};
    const int* varieties=zone==ForestZone::Birches||zone==ForestZone::Grove?birches:zone==ForestZone::Wolves?pines:zone==ForestZone::Heart?oaks:mixed;
    if(!near)props.push_back({p,varieties[(h>>8)%8],.8f+(h%6)*.09f});
   }
   props.push_back({{19,4},3,1});props.push_back({{23,4},3,1});props.push_back({{19,7},3,1});props.push_back({{23,7},3,1});
-  for(int i=0;i<8;i++){float angle=(i+.5f)*2*3.14159265f/8;props.push_back({V{59,57}+V{std::cos(angle),std::sin(angle)}*4.1f,3,.85f+i%3*.08f});}
+  for(int i=0;i<8;i++){float angle=(i+.5f)*2*3.14159265f/8;props.push_back({ForestRitualCircle+V{std::cos(angle),std::sin(angle)}*4.1f,3,.85f+i%3*.08f});}
   for(V p:{V{42,6},V{46,6},V{37,60},V{41,60}})props.push_back({p,3,.8f});
   plantMushrooms(seed);
   const size_t guardianIndex=enemies.size()-1;
   addRegionalEnemies(WorldLocation::Forest,enemies,props,forage);
   std::rotate(enemies.begin()+guardianIndex,enemies.begin()+guardianIndex+1,enemies.end());
+  addRealmDecorations(WorldLocation::Forest);
+  refreshForestScenery();
  }
  void plantMushrooms(unsigned seed){
   // A separate generator keeps gathering independent from monster drop rolls.
@@ -329,18 +445,32 @@ struct Game {
   trim(forestState.forage);
  }
  static unsigned hash(int x,int y){unsigned n=unsigned(x)*374761393u+unsigned(y)*668265263u+8713u;n=(n^(n>>13))*1274126177u;return n^(n>>16);}
+ #include "forest_scenery.hpp"
  #include "world_expansion.hpp"
  static bool onPath(int x,int y){return forestPath({float(x),float(y)});}
- static const char* region(V pos){return forestRegion(pos);}
+ static const char* region(V pos){return fieldRegion(WorldLocation::Forest,pos).name;}
  int attribute(Attribute a)const{return attributes[int(a)];}
  // DEV uses the resource attributes of an evenly developed character at this level.
  int developerResourceFloor()const{return developerSession?(level-1)*PointsPerLevel/AttributeCount:0;}
  int maxHp()const{return 100+std::max(attribute(Attribute::Vitality),developerResourceFloor())*10;}
  int maxMana()const{return 100+std::max(attribute(Attribute::Mana),developerResourceFloor())*5;}
- void takeMonsterDamage(float damage,V at,float hurtDuration=0){
-  if(developerSession)return;
+ void addCombatImpact(const CombatImpact& impact){
+  if(combatImpacts.size()==64)combatImpacts.erase(combatImpacts.begin());
+  combatImpacts.push_back(impact);
+ }
+ void takeMonsterDamage(float damage,V at,float hurtDuration=0,V away={},DamageType type=DamageType::Physical){
+  if(developerSession||dead()||damage<=0)return;
   hp=std::max(0.f,hp-damage);
   if(hurtDuration>0)hurt=hurtDuration;
+  const V recoil=normalized(away);
+  if(dead())clearHeroHitReaction();
+  else if(!knockedBack()&&length(recoil)>.5f){
+   heroHitDirection=recoil;
+   heroHitReactionRemaining=HeroHitReactionDuration;
+  }
+  V direction=length(recoil)>.5f?recoil:normalized(facing)*-1;
+  if(length(direction)<.5f)direction={1,0};
+  addCombatImpact({at-direction*.10f,direction,48.f,hero_impact::data::Duration,type,false,ImpactMaterial::Armor});
   sound(dead()?Cue::Death:Cue::Hurt,at);
   effects.push_back({at,"-"+std::to_string(int(damage)),.8f,4});
  }
@@ -502,7 +632,7 @@ struct Game {
   for(int i=0;i<int(bag.size());i++)if(bag[i].kind==k&&!bag[i].empty())return use({Place::Bag,i});
   say("Brak mikstury w plecaku.");return false;
  }
- bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inVolcano()&&(volcanoLava(p)||nearVolcanoFountain(p)))return false;if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<1.6f||p.y<1.6f||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
+ bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inVolcano()&&(volcanoLava(p)||nearVolcanoFountain(p)))return false;if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<MapWalkMin||p.y<MapWalkMin||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
  float elevation(V p)const{return terrain_height::height(location,p);}
  float surfaceDistance(V a,V b)const{return terrain_height::surfaceDistance(location,a,b);}
  void move(V delta,bool turn=true,terrain_height::Travel travel=terrain_height::Travel::Surface){
@@ -512,23 +642,72 @@ struct Game {
   for(int i=0;i<steps;i++){V p=player+pace(player,step);if(walkable(p))player=p;else{p=player+pace(player,{step.x,0});if(walkable(p))player=p;p=player+pace(player,{0,step.y});if(walkable(p))player=p;}}
   if(turn&&length(delta)>.001f&&!combatFacingActive())facing=normalized(delta);
  }
+ void advanceHeroHitReaction(float dt){
+  if(heroHitReactionRemaining<=0||dt<=0)return;
+  heroHitReactionRemaining=std::max(0.f,heroHitReactionRemaining-dt);
+  if(heroHitReactionRemaining<.00001f)clearHeroHitReaction();
+ }
  Enemy* findEnemy(int id){for(auto&e:enemies)if(e.id==id&&e.alive)return &e;return nullptr;}
- void hit(Enemy& e,float amount,DamageType type=DamageType::Physical,bool critical=false){
+ float volcanoSpecialPose(const Enemy& e)const{
+  if(e.type==VolcanoBossType){
+   if(e.eruptionWindup>0)return (.95f-e.eruptionWindup)/1.37f;
+   for(const auto& fissure:fissures)if(fissure.owner==e.id&&fissure.age<1.37f)return fissure.age/1.37f;
+  }
+  return e.abilityBusy()?e.abilityAge/enemyAbilityProfile(e.type).duration():-1.f;
+ }
+ void beginEnemyDeath(Enemy& e,float previousFlash){
+  e.deathMotion=e.animation;e.deathDirection=e.hitDirection;e.deathElapsed=0;
+  e.deathAttack=e.attackPose();e.deathWindup=e.windup;e.deathStrike=e.strike;e.deathFlash=previousFlash;
+  if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType){
+   e.deathAction=e.volcanoAction();e.deathSpecial=volcanoSpecialPose(e);
+  }else{
+   e.deathAction=e.type==BoarType?e.boarVisualPhase():regionalEnemy(e.type)?e.abilityAction():e.heavyMeleePhase();
+   e.deathSpecial=e.boulderProgress();
+  }
+  if(e.type==CinderhornType&&e.chargeBusy()){
+   using namespace forest_boar_motion;
+   const auto& charge=chargeProfile(e.type);
+   if(e.boarWindup>0)e.deathCharge=encoded(Action::Windup,1-e.boarWindup/charge.windup);
+   else if(e.boarRush>0)e.deathCharge=encoded(Action::Rush,1-e.boarRush/charge.duration);
+   else if(e.boarRecovery>0)e.deathCharge=encoded(Action::Recovery,1-e.boarRecovery/charge.recovery);
+   e.deathChargeHit=e.boarHit;
+  }
+ }
+ void advanceEnemyDeaths(float dt){
+  const float step=std::clamp(dt,0.f,.05f);
+  for(auto& e:enemies)if(e.dying()){
+   const float before=e.deathElapsed,contact=enemy_death::groundContactTime(e.type);
+   e.deathElapsed+=step;
+   if(before<contact&&e.deathElapsed>=contact)sound(enemyFallCue(e.type),e.pos);
+   if(e.deathElapsed>=enemy_death::endTime(e.type))e.deathElapsed=-1;
+  }
+ }
+ void settleEnemyDeaths(){for(auto& e:enemies)if(e.dying())e.deathElapsed=-1;}
+ void hit(Enemy& e,float amount,DamageType type=DamageType::Physical,bool critical=false,V direction={}){
   if(!e.alive)return;
+  direction=normalized(length(direction)>.001f?direction:e.pos-player);
+  if(length(direction)<.001f)direction=normalized(facing);
+  if(length(direction)<.001f)direction={1,0};
+  e.hitDirection=direction;
+  addCombatImpact({e.pos-direction*(e.radius()*.34f),direction,enemyInfo(e.type).visualHeight*.47f,
+                   EnemyImpactLife,type,critical,impactMaterial(e.type)});
   // Multiply the armor-reduced normal hit, so a critical is exactly +150%.
   amount=damageAfterArmor(amount,type==DamageType::Magic?e.magicDefense():e.defense())*(critical?CriticalMultiplier:1.f);
-  e.hp-=amount;e.flash=.18f;
+  const float previousFlash=e.flash;
+  e.hp-=amount;e.flash=EnemyHitRecovery;
   float lift=0;for(const auto& effect:effects)if(effect.damageNumber&&distance(effect.pos,e.pos)<.1f)lift=std::max(lift,effect.height-enemyInfo(e.type).visualHeight+24);
   effects.push_back({e.pos,std::to_string(int(std::round(amount))),critical?1.25f:.95f,0,true,critical,enemyInfo(e.type).visualHeight+18+std::min(lift,90.f)});
   sound(enemyHitCue(e.type),e.pos);
-  if(e.hp>0)return;e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=e.boulderWindup=e.boulderRecovery=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;
+  if(e.hp>0)return;
+  beginEnemyDeath(e,previousFlash);
+  e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=e.boulderWindup=e.boulderRecovery=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;
   e.boarWindup=e.boarRush=e.boarRecovery=0;e.boarDirection=e.boarAim={};e.boarHit=false;e.eruptionWindup=0;
   e.abilityAge=-1;e.abilityMask=0;e.abilityDirection={};venomGlobs.erase(std::remove_if(venomGlobs.begin(),venomGlobs.end(),[&](const auto& p){return p.owner==e.id;}),venomGlobs.end());
   cinders.erase(std::remove_if(cinders.begin(),cinders.end(),[&](const auto& b){return b.owner==e.id;}),cinders.end());
   fissures.erase(std::remove_if(fissures.begin(),fissures.end(),[&](const auto& b){return b.owner==e.id;}),fissures.end());
   boulders.erase(std::remove_if(boulders.begin(),boulders.end(),[&](const Boulder& b){return b.owner==e.id;}),boulders.end());
-  if(regionalEnemy(e.type))e.strike=RegionalEnemyFallTime;
-  sound(enemyFallCue(e.type),e.pos);kills++;
+  if(enemyBoss(e.type))sound(Cue::Victory,e.pos);
+  kills++;
   if(!developerSession)xp+=enemyInfo(e.type).experience;
   e.loot=rollEnemyLoot(e.type,rng);
   if(e.type==3){bossDead=true;say("Kamienny Strażnik pokonany! PPM na ciele: łup i część Serca Świtu.");}
@@ -543,13 +722,18 @@ struct Game {
   if(weapon==Kind::Spear)return startSpear();
   if(weapon==Kind::Axe||weapon==Kind::Dagger)return startAxeOrDagger(weapon);
   animation.swordStow=0;attackCd=.46f;meleeDuration=SwingDuration;swingStrong=false;swing=SwingDuration;sound(Cue::Swing,player);
-  hitMeleeArea();
+  hitMeleeArea(float(damage()),weapon==Kind::Sword);
   return true;
  }
- void hitMeleeArea(){
-  // Capture once: a kill can level up the player during this same swing.
-  const float amount=float(damage());const bool critical=rollCritical();
-  for(auto&e:enemies)if(e.alive&&distance(player,e.pos)<=MeleeRange+.00001f)hit(e,amount,DamageType::Physical,critical);
+ void hitMeleeArea(float amount,bool forwardOnly=false){
+  // Keep the same attack roll and damage for the whole sweep, even on level-up.
+  const bool critical=rollCritical();
+  const V axis=normalized(facing);
+  for(auto& enemy:enemies)if(enemy.alive){
+   const V offset=enemy.pos-player;
+   if(forwardOnly&&offset.x*axis.x+offset.y*axis.y<0)continue;
+   if(length(offset)<=MeleeRange+.00001f)hit(enemy,amount,DamageType::Physical,critical);
+  }
  }
  bool spell(V aim={}){
   if(sandTrapped()||knockedBack()||dead()||allocationRequired||storyBlocked()||inTower()||rolling()||spellCd>0||bowDrawing)return false;
@@ -565,7 +749,7 @@ struct Game {
  void explode(V position,float amount,bool critical=false,Spell spell=Spell::Fireball){
   sound(spell==Spell::IceShard?Cue::IceImpact:spell==Spell::LightningOrb?Cue::LightningImpact:Cue::FireballImpact,position);
   explosions.push_back({position,spellDefinition(spell).impactLife,spell});
-  for(auto& e:enemies)if(e.alive&&distance(e.pos,position)<=spellDefinition(spell).radius+e.radius())hit(e,amount,DamageType::Magic,critical);
+  for(auto& e:enemies)if(e.alive&&distance(e.pos,position)<=spellDefinition(spell).radius+e.radius())hit(e,amount,DamageType::Magic,critical,e.pos-position);
  }
  void updateFireballs(float dt){
   for(size_t i=0;i<fireballs.size();){
@@ -658,12 +842,16 @@ struct Game {
  }
  // attackPressed is a single press event, never a held button.
  void update(float dt,V input,bool attackPressed,bool running=false){
+  advanceEnemyDeaths(dt);
   if(allocationRequired||storyBlocked())return;
   const float previousSwing=swing;
   dt=std::clamp(dt,0.f,.05f);time+=dt;auto tick=[dt](float&v){v=std::max(0.f,v-dt);};tick(attackCd);tick(spellCd);tick(potionCd);tick(hurt);tick(messageTime);tick(rollCd);tick(bowReleaseTime);tick(strongCutCd);tick(piercingArrowCd);tick(healingCd);tick(healingPulse);
+  for(float& cd:weaponSkillCds)tick(cd);
   swing=std::max(0.f,swing-dt*powerAttackRate(activePowerMelee()));
   for(auto& flash:pierceFlashes)flash.life-=dt;pierceFlashes.erase(std::remove_if(pierceFlashes.begin(),pierceFlashes.end(),[](const auto& flash){return flash.life<=0;}),pierceFlashes.end());
   for(auto&e:effects)e.life-=dt;effects.erase(std::remove_if(effects.begin(),effects.end(),[](auto&e){return e.life<=0;}),effects.end());
+  for(auto& impact:combatImpacts)tick(impact.life);
+  combatImpacts.erase(std::remove_if(combatImpacts.begin(),combatImpacts.end(),[](const auto& impact){return impact.life<=0;}),combatImpacts.end());
   for(auto& e:explosions)e.life-=dt;explosions.erase(std::remove_if(explosions.begin(),explosions.end(),[](auto& e){return e.life<=0;}),explosions.end());
   for(auto& e:boulderImpacts)e.life-=dt*(BoulderImpactClock/guardian_break::Duration);boulderImpacts.erase(std::remove_if(boulderImpacts.begin(),boulderImpacts.end(),[](const auto& e){return e.life<=0;}),boulderImpacts.end());
   if(inDesert())for(auto& drain:fountainDrain)tick(drain);
@@ -677,6 +865,7 @@ struct Game {
   const bool wasRolling=rolling(),wasKnockedBack=knockedBack();const float rollElapsed=RollDuration-rollRemaining;
   V before=player;float walkTime=movementDt;
   walkTime=std::max(0.f,walkTime-updateHeroKnockback(dt));
+  advanceHeroHitReaction(dt);
   if(wasRolling){
    float stepTime=std::min(dt,rollRemaining);walkTime-=stepTime;
    // Small collision steps prevent a fast roll from skipping thin obstacles.
@@ -684,7 +873,8 @@ struct Game {
    for(int i=0;i<steps;i++)move(rollDirection*(stepTime*RollSpeed/steps));
    rollRemaining=std::max(0.f,rollRemaining-stepTime);if(rollRemaining<.00001f)rollRemaining=0;
   }
-  const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(running&&!spearActive()?RunMultiplier:1.f)
+  const bool sprinting=running&&!bowDrawing&&!holdingMelee()&&!spearActive();
+  const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(sprinting?RunMultiplier:1.f)
                     *(bowDrawing?.55f:spearActive()?.62f:1.f);
   move(normalized(input)*(walkTime*speed));
   if(openedCorpse>=0&&!corpseReachable(openedCorpse))closeCorpse();
@@ -695,11 +885,11 @@ struct Game {
   else {
    // Resolve combat aim before smoothing; locomotion still advances the gait.
    const bool aiming=combatFacingActive();
-   const bool drawingSword=holdingMelee()&&archetype(equipment[0].kind)==Kind::Sword;
+   const bool drawingWeapon=holdingMelee()&&!equipment[0].empty();
    const float previousStow=animation.swordStow;
    if(bowDrawing||bowReleaseTime>0)animation.face(bowAim.x,bowAim.y);
-   animation.advance(player.x-before.x,player.y-before.y,dt,running&&!bowDrawing&&!spearActive(),!aiming,swing<=0&&!holdingMelee());
-   if(drawingSword)animation.swordStow=sword_stow::advance(previousStow,false,dt*2);
+   animation.advance(player.x-before.x,player.y-before.y,dt,sprinting,!aiming,swing<=0&&!holdingMelee());
+   if(drawingWeapon)animation.swordStow=sword_stow::advance(previousStow,false,dt*2);
   }
   if(!wasRolling&&!wasKnockedBack){
    stepDistance+=surfaceDistance(player,before);
@@ -737,17 +927,23 @@ struct Game {
    const bool ranged=inVolcano()&&volcanoRanged(e.type);
    const bool large=e.type==DesertBossType||e.type==VolcanoBossType;
    const float reach=enemyInfo(e.type).attackReach;
-   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=0){e.strike=.22f;if(!ranged)sound(enemyAttackCue(e.type),e.pos);if(ranged){if(visible&&d<EnemySightRange)launchCinder(e);}
+   const bool heavyMelee=e.type==3||e.type==7;
+   if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=(heavyMelee?.00001f:0.f)){e.windup=0;e.strike=meleeRecovery(e.type)-(heavyMelee?std::max(0.f,dt-impactTime):0.f);if(!ranged)sound(enemyAttackCue(e.type),e.pos);if(ranged){if(visible&&d<EnemySightRange)launchCinder(e);}
    else if(d<(large?2.15f:reach+.35f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
-    else if(!dead())takeMonsterDamage(incomingDamage(float(e.damage()),e.attackType()),player,.2f);
+    else if(!dead()){
+     const V away=player-e.pos;
+     const auto type=e.attackType();
+     takeMonsterDamage(incomingDamage(float(e.damage()),type),player,.2f,length(away)>.001f?away:facing*-1,type);
+    }
    }}else if(e.type==CinderhornType&&dt>0&&e.windup<=.14f&&visible&&d>e.radius()+HeroBodyRadius+.12f){
     const V lunge=normalized(player-e.pos)*std::min(3.4f,(d-e.radius()-HeroBodyRadius)/dt);
     if(clearEnemySegment(e.pos,e.pos+lunge*dt,e.radius()))desired[i]=lunge;
    }continue;}
+   if(heavyMelee&&e.strike>0)continue;
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
-    if(d<(ranged?4.5f:large?1.9f:reach)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=.42f;}
+    if(d<(ranged?4.5f:large?1.9f:reach)&&e.attack<=0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.attack=enemyInfo(e.type).cooldown;e.windup=meleeWindup(e.type);}
     else if(e.sandCastPulse<=0&&d>(ranged?3.5f:large?1.7f:reach-.2f))desired[i]=normalized(player-e.pos)*enemySpeed(e.type);
    }else desired[i]=patrolVelocity(e,dt);
   }
@@ -762,6 +958,8 @@ struct Game {
    }
    if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType)advanceVolcanoAnimation(e,movement,dt);
    else if(e.type==CinderhornType)cinderhorn_gait::advance(e.animation,movement.x,movement.y,dt,e.windup<=0&&e.strike<=0&&!e.chargeBusy(),e.boarRush>0);
+   else if(e.type==BoarType)forest_boar_motion::advance(e.animation,movement.x,movement.y,dt,
+       forest_boar_motion::phase(e.boarVisualPhase()),!e.boarBusy()&&e.windup<=0&&e.strike<=0);
    else if(e.type==3)guardian_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==7)treant_gait::advance(e.animation,movement.x,movement.y,dt);
    else if(e.type==6)grounded_gait::advance(e.animation,movement.x,movement.y,dt,grounded_gait::Bandit);
@@ -771,7 +969,7 @@ struct Game {
    if(e.chargeBusy())faceCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);
    if(e.abilityBusy())faceEnemyAbility(e);
    if(e.boulderWindup>0||e.boulderRecovery>0)e.animation.face(e.boulderTarget.x-e.pos.x,e.boulderTarget.y-e.pos.y);
-   else if(e.windup>0)e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
+   else if(e.windup>0&&((e.type!=3&&e.type!=7)||e.windup>.12f))e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
   }
  }
 };

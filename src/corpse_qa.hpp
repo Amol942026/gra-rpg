@@ -25,7 +25,7 @@ bool runCorpseQA(){
     for(int type=0;type<4;type++){
         int id=101+type;check(pointAtBody(id),"actual fallen artwork can be picked for every monster species");
         Inspection info=inspectWorld(pickWorld(mouse));
-        check(info.source==HoverKind::Corpse&&info.name==std::string("Ciało: ")+enemyInfo(type).name&&info.maxHp==0,"hover HUD identifies the body without living combat stats");
+        check(info.source==HoverKind::Corpse&&info.name==std::string("Ciało: ")+enemyInfo(type).name,"hover HUD identifies the body");
         float mana=game.mana;check(rightClickWorldOrInventory()&&game.openedCorpse==id,"PPM on the body opens its own loot panel");
         check(game.mana==mana&&game.fireballs.empty()&&game.swing==0,"opening bodies never casts or swings a weapon");
         pointAt(lootRect(0));Slot slot=hoverSlot();
@@ -63,15 +63,23 @@ bool runCorpseQA(){
     check(pointAtBody(101)&&!rightClickWorldOrInventory()&&game.openedCorpse==-1,"distant body cannot be opened even when visible under the cursor");
     game.player={15,15};pointAtBody(101);paused=true;
     check(!rightClickWorldOrInventory()&&!castGameplaySpell(),"pause blocks body opening and C magic");paused=false;
-    game.props.push_back({game.enemies[0].pos,0,1});
-    Vector2 p=screen(game.enemies[0].pos);mouse={p.x,p.y-9};
-    check(pickWorld(mouse).kind!=HoverKind::Corpse,"a foreground tree prevents picking a body through its artwork");game.props.clear();
+    game.props.push_back({body->pos+V{.1f,.1f},0,1});
+    Vector2 p=screen(body->pos);bool overlap=false;
+    for(int y=-36;y<=10&&!overlap;y++)for(int x=-30;x<=30&&!overlap;x++){
+        const Vector2 point{p.x+x,p.y+y};
+        if(worldPointerAllowed(point)&&propContains(game.props.back(),point)&&corpseArt(*body,p.x,p.y,BLANK,&point)){
+            mouse=point;overlap=true;
+        }
+    }
+    check(overlap&&pickWorld(mouse).kind==HoverKind::Prop,"a foreground tree prevents picking a falling body through its artwork");game.props.clear();
     // C aims at living targets; PPM on them has no combat action.
     V target=game.player+V{3,-2};game.enemies.push_back({200,0,target,target,100,100});
     p=screen(target);mouse={p.x,p.y-18};game.mana=100;game.spellCd=0;
+    game.learnedSpells=spellBit(Spell::Fireball);game.chooseSpell(Spell::Fireball);
     check(!rightClickWorldOrInventory()&&game.mana==100&&game.fireballs.empty(),"PPM over a living monster no longer casts magic");
-    check(castGameplaySpell()&&game.mana==90&&game.fireballs.size()==1,"C handler casts the chosen fireball for ten mana");
-    check(distance(normalized(game.fireballs[0].velocity),normalized(target-game.player))<.001f,"C fireball aims at the actual living monster under the cursor");
+    const bool cast=castGameplaySpell()&&game.mana==90&&game.fireballs.size()==1;
+    check(cast,"C handler casts the chosen fireball for ten mana");
+    check(cast&&distance(normalized(game.fireballs.front().velocity),normalized(target-game.player))<.001f,"C fireball aims at the actual living monster under the cursor");
     game.enemies.pop_back();game.fireballs.clear();game.mana=100;game.spellCd=0;game.openCorpse(104);mouse={0,0};
     for(float factor:{.8f,1.f,1.2f}){prepareCanvas(factor);renderScene();saveTexture(canvas,TextFormat("qa-v13/corpse-panel-%d.png",int(factor*100)));}
     report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;

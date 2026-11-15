@@ -32,7 +32,7 @@ public:
         // including sizes first used by combat, tooltips and modal menus.
         if(fonts.empty()){
             for(float size:{14.f,15.f,16.f,17.f,18.f,19.f,20.f,21.f,22.f,23.f,24.f})font(size,false);
-            for(float size:{14.f,15.f,20.f,23.f,24.f,25.f,27.f,28.f,29.f,30.f,31.f,32.f,34.f,39.f,76.f,92.f})font(size,true);
+            for(float size:{14.f,15.f,20.f,22.f,23.f,24.f,25.f,27.f,28.f,29.f,30.f,31.f,32.f,34.f,39.f,76.f,92.f})font(size,true);
         }
     }
     size_t atlasCount()const{return fonts.size();}

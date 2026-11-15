@@ -1,21 +1,34 @@
 #pragma once
 namespace volcano_art {
 inline Texture2D tiles{},scenery{},sceneryEdge{},sky{},lava{},minimap{},macro{},road{},bank{},bridge{},steam{},channelWall{};inline RenderTexture2D terrain{};
-inline Shader bridgeBlend{};
+inline Shader bridgeBlend{},lavaMaterial{};
+inline int lavaClock=-1;
 inline Texture2D extraScenery{},extraSceneryEdge{};inline std::vector<unsigned char> extraSceneryAlpha;
 inline Texture2D abyssCliff{},abyssDistance{};
-inline constexpr int FlowFrames=60;inline constexpr float FlowFPS=30;
-inline std::array<Texture2D,60> lavaFrames{};
 inline std::vector<unsigned char> sceneryAlpha;
-inline Texture2D portalFrame{},portalLoop{},portalOutline{};inline std::vector<unsigned char> portalMask;
+inline Texture2D portalFrame{},portalLoop{},portalOutline{},desertPortalFrame{},desertPortalOutline{},portalAperture{},desertPortalAperture{};
+inline Shader portalClip{};
+inline int portalMaskLocation=-1,portalCellLocation=-1;
+inline std::vector<unsigned char> portalMask,desertPortalMask;
+inline Texture2D gateFrame(){return game.inDesert()?desertPortalFrame:portalFrame;}
 inline int portalSample(float time){return int(std::floor(std::fmod(std::max(0.f,time)*60+.0001f,120.f)));}
 inline void drawPortal(const Prop& p,bool outline,Color tint){
  Vector2 at=screen(p.pos);Rectangle bounds{at.x-90*p.size,at.y-208*p.size,180*p.size,230*p.size};
- if(outline){DrawTexturePro(portalOutline,{0,0,360,460},bounds,{0,0},0,tint);return;}
- int f=portalSample(game.time);DrawTexturePro(portalLoop,{float(f%15*132+2),float(f/15*212+2),128,208},{at.x-55*p.size,at.y-190*p.size,110*p.size,195*p.size},{0,0},0,tint);
- DrawTexturePro(portalFrame,{0,0,360,460},bounds,{0,0},0,tint);
+ if(outline){DrawTexturePro(game.inDesert()?desertPortalOutline:portalOutline,{0,0,360,460},bounds,{0,0},0,tint);return;}
+ int f=portalSample(game.time);
+ Rectangle cell{float(f%15*132+2),float(f/15*212+2),128,208};
+ const Texture2D aperture=game.inDesert()?desertPortalAperture:portalAperture;
+ if(aperture.id&&IsShaderValid(portalClip)){
+  float uv[]={cell.x/portalLoop.width,cell.y/portalLoop.height,cell.width/portalLoop.width,cell.height/portalLoop.height};
+  BeginShaderMode(portalClip);
+  SetShaderValueTexture(portalClip,portalMaskLocation,aperture);
+  SetShaderValue(portalClip,portalCellLocation,uv,SHADER_UNIFORM_VEC4);
+  DrawTexturePro(portalLoop,cell,bounds,{0,0},0,tint);
+  EndShaderMode();
+ }else DrawTexturePro(portalLoop,cell,{at.x-48*p.size,at.y-163*p.size,96*p.size,142*p.size},{0,0},0,tint);
+ DrawTexturePro(gateFrame(),{0,0,360,460},bounds,{0,0},0,tint);
 }
-inline bool portalContains(const Prop& p,Vector2 point){Vector2 at=screen(p.pos);int x=int(std::floor(((point.x-at.x)/p.size+90)*2)),y=int(std::floor(((point.y-at.y)/p.size+208)*2));return x>=0&&x<360&&y>=0&&y<460&&!portalMask.empty()&&portalMask[y*360+x];}
+inline bool portalContains(const Prop& p,Vector2 point){Vector2 at=screen(p.pos);int x=int(std::floor(((point.x-at.x)/p.size+90)*2)),y=int(std::floor(((point.y-at.y)/p.size+208)*2));const auto& mask=game.inDesert()?desertPortalMask:portalMask;return x>=0&&x<360&&y>=0&&y<460&&!mask.empty()&&mask[y*360+x];}
 struct Strip{std::array<V,4> corners;float from,to;};inline std::vector<Strip> lavaStrips;
 struct CanyonFace{std::array<V,4> corners;std::array<float,4> depth;float from,to;};inline std::vector<CanyonFace> canyonFronts;
 inline Vector2 projected(V p){return {TerrainOriginX+(p.x-p.y)*40,90+(p.x+p.y)*20};}
@@ -51,6 +64,39 @@ void main(){
  finalColor=vec4(mix(flagstone.rgb,dust,fade),flagstone.a*(1.0-fade)*(1.0-shoulder)*(1.0-smoothstep(.93,1.0,end)));
 }
 )GLSL");
+}
+inline void initLavaMaterial(){
+ lavaMaterial=LoadShaderFromMemory(nullptr,R"GLSL(#version 330
+in vec2 fragTexCoord;
+in vec4 fragColor;
+out vec4 finalColor;
+uniform sampler2D texture0;
+uniform float age;
+void main(){
+ vec2 p=fragTexCoord;
+ float crossFlow=sin(p.y*1.83-age*.54+sin(p.x*6.3)*.48);
+ float mid=1.-smoothstep(.22,.53,abs(p.x-.5));
+ vec2 crustUV=vec2(p.x*.86+crossFlow*.043,p.y*.74-age*.058+crossFlow*.027);
+ vec2 meltUV=vec2(p.x*.97-.03*cos(p.y*3.1-age*.69),p.y*.87-age*.108);
+ vec3 crust=texture(texture0,crustUV).rgb;
+ vec3 melt=texture(texture0,meltUV).rgb;
+ float heat=smoothstep(.22,.74,melt.r);
+ float pulse=.90+.10*sin(age*1.24+p.y*1.67+crossFlow);
+ vec3 color=mix(crust,melt,heat*(.21+.33*mid));
+ color*=.66+.34*mid;
+ color+=vec3(.11,.033,.006)*heat*pulse;
+ color=mix(color,vec3(.13,.063,.044),(1.-mid)*.21);
+ finalColor=vec4(color,fragColor.a);
+}
+)GLSL");
+ if(IsShaderValid(lavaMaterial)&&lavaMaterial.id!=rlGetShaderIdDefault())
+  lavaClock=GetShaderLocation(lavaMaterial,"age");
+}
+inline bool beginLava(){
+ if(lavaClock<0)return false;
+ BeginShaderMode(lavaMaterial);
+ SetShaderValue(lavaMaterial,lavaClock,&game.time,SHADER_UNIFORM_FLOAT);
+ return true;
 }
 inline void canyonFace(const CanyonFace& face){std::array<Vector2,4> p;for(int i=0;i<4;i++){p[i]=projected(face.corners[i]);p[i].y+=face.depth[i];}textured(channelWall,p,face.from,0,face.to,1);}
 inline int variant(const Prop& p){return Game::hash(int(std::round(p.pos.x*4))+p.type*131,int(std::round(p.pos.y*4))+53)%8;}
@@ -106,17 +152,56 @@ inline void drawAbyssFaces(Texture2D texture,const std::vector<CanyonFace>& face
 #include "volcano_road_art.hpp"
 inline void make(){
  if(terrain.id)return;
- portalFrame=LoadTexture("assets/volcano/portal-frame.png");portalLoop=LoadTexture("assets/volcano/portal-loop.png");portalOutline=LoadTexture("assets/volcano/portal-outline.png");for(auto t:{portalFrame,portalLoop,portalOutline})SetTextureFilter(t,TEXTURE_FILTER_BILINEAR);
- Image gateMask=LoadImage("assets/volcano/portal-mask.png");Color* gatePixels=LoadImageColors(gateMask);portalMask.resize(gateMask.width*gateMask.height);for(size_t i=0;i<portalMask.size();i++)portalMask[i]=gatePixels[i].r>=160;UnloadImageColors(gatePixels);UnloadImage(gateMask);
+ portalFrame=LoadTexture("assets/volcano/portal-frame.png");portalLoop=LoadTexture("assets/volcano/portal-loop.png");portalOutline=LoadTexture("assets/volcano/portal-outline.png");
+ desertPortalFrame=LoadTexture("assets/sprites/desert-portal-frame.png");desertPortalOutline=LoadTexture("assets/sprites/desert-portal-outline.png");
+ portalAperture=LoadTexture("assets/volcano/portal-aperture.png");desertPortalAperture=LoadTexture("assets/sprites/desert-portal-aperture.png");
+ for(auto t:{portalFrame,portalLoop,portalOutline,desertPortalFrame,desertPortalOutline,portalAperture,desertPortalAperture})if(t.id)SetTextureFilter(t,TEXTURE_FILTER_BILINEAR);
+ portalClip=LoadShaderFromMemory(nullptr,R"GLSL(#version 330
+in vec2 fragTexCoord;
+in vec4 fragColor;
+uniform sampler2D texture0;
+uniform sampler2D aperture;
+uniform vec4 frameUv;
+out vec4 finalColor;
+void main(){
+ vec2 local=(fragTexCoord-frameUv.xy)/frameUv.zw;
+ vec2 flow=clamp((local-vec2(.16,.22))/vec2(.68,.69),vec2(0.),vec2(1.));
+ vec4 color=texture(texture0,frameUv.xy+flow*frameUv.zw)*fragColor;
+ color.a=texture(aperture,local).r*fragColor.a;
+ finalColor=color;
+}
+)GLSL");
+ portalMaskLocation=GetShaderLocation(portalClip,"aperture");
+ portalCellLocation=GetShaderLocation(portalClip,"frameUv");
+ auto loadPortalMask=[](const char* path,std::vector<unsigned char>& target){
+  Image mask=LoadImage(path);
+  if(mask.data&&mask.width==360&&mask.height==460){
+   Color* pixels=LoadImageColors(mask);target.resize(mask.width*mask.height);
+   for(size_t i=0;i<target.size();i++)target[i]=pixels[i].r>=160;
+   UnloadImageColors(pixels);
+  }
+  if(mask.data)UnloadImage(mask);
+ };
+ loadPortalMask("assets/volcano/portal-mask.png",portalMask);
+ loadPortalMask("assets/sprites/desert-portal-mask.png",desertPortalMask);
  tiles=LoadTexture("assets/volcano/ground.png");scenery=LoadTexture("assets/volcano/scenery.png");sceneryEdge=LoadTexture("assets/volcano/scenery-edge.png");sky=LoadTexture("assets/volcano/sky.png");macro=LoadTexture("assets/volcano/macro.png");road=LoadTexture("assets/volcano/road.png");bank=LoadTexture("assets/volcano/bank.png");bridge=LoadTexture("assets/volcano/bridge.png");steam=LoadTexture("assets/volcano/steam-flow.png");
  channelWall=LoadTexture("assets/volcano/channel-wall.png");SetTextureFilter(channelWall,TEXTURE_FILTER_BILINEAR);SetTextureWrap(channelWall,TEXTURE_WRAP_REPEAT);
  extraScenery=LoadTexture("assets/volcano/scenery-extra.png");extraSceneryEdge=LoadTexture("assets/volcano/scenery-extra-edge.png");SetTextureFilter(extraScenery,TEXTURE_FILTER_BILINEAR);SetTextureFilter(extraSceneryEdge,TEXTURE_FILTER_BILINEAR);
- abyssCliff=LoadTexture("assets/volcano/abyss-cliff.png");abyssDistance=LoadTexture("assets/volcano/abyss-distance.png");
+ const Texture2D basaltPaint=terrain_paint::load("caldera-ground.png",true);
+ const Texture2D trackPaint=terrain_paint::load("caldera-path.png",true);
+ if(basaltPaint.id){UnloadTexture(tiles);tiles=basaltPaint;}
+ if(trackPaint.id){UnloadTexture(road);road=trackPaint;}
+ abyssCliff=terrain_paint::load("caldera-cliff.png");abyssDistance=terrain_paint::load("caldera-distance.png");
+ if(!abyssCliff.id)abyssCliff=LoadTexture("assets/volcano/abyss-cliff.png");
+ if(!abyssDistance.id)abyssDistance=LoadTexture("assets/volcano/abyss-distance.png");
  SetTextureFilter(abyssCliff,TEXTURE_FILTER_BILINEAR);
  rlTextureParameters(abyssCliff.id,RL_TEXTURE_WRAP_S,RL_TEXTURE_WRAP_REPEAT);
  rlTextureParameters(abyssCliff.id,RL_TEXTURE_WRAP_T,RL_TEXTURE_WRAP_CLAMP);
  SetTextureFilter(abyssDistance,TEXTURE_FILTER_BILINEAR);prepareAbyss();
- Image atlas=LoadImage("assets/volcano/lava-flow.png");for(int f=0;f<60;f++){Image frame=ImageFromImage(atlas,{float(f%8*256),float(f/8*256),256,256});lavaFrames[f]=LoadTextureFromImage(frame);UnloadImage(frame);SetTextureFilter(lavaFrames[f],TEXTURE_FILTER_BILINEAR);SetTextureWrap(lavaFrames[f],TEXTURE_WRAP_REPEAT);}UnloadImage(atlas);lava=lavaFrames[0];
+ lava=LoadTexture("assets/media/realm-fluids-20261114/lava-crust.png");
+ if(!lava.id)lava=LoadTexture("assets/volcano/lava-surface.png");
+ if(lava.id){SetTextureFilter(lava,TEXTURE_FILTER_BILINEAR);SetTextureWrap(lava,TEXTURE_WRAP_REPEAT);}
+ initLavaMaterial();
  for(Texture2D t:{tiles,scenery,sceneryEdge,sky,macro,road,bank,bridge,steam})if(t.id)SetTextureFilter(t,TEXTURE_FILTER_BILINEAR);
  for(Texture2D t:{tiles,road,bank,bridge})SetTextureWrap(t,TEXTURE_WRAP_REPEAT);
  initBridgeBlend();
@@ -130,7 +215,8 @@ inline void make(){
  // The surface ends at its actual cliff edge. Transparent surroundings reveal
  // the panorama and the deep faces underneath, instead of continuing the land.
  std::array<V,4> land={V{BoundaryLow,BoundaryLow},V{BoundaryLow,BoundaryHigh},V{BoundaryHigh,BoundaryHigh},V{BoundaryHigh,BoundaryLow}};
- groundQuad(tiles,land,BoundaryLow/5,BoundaryLow/5,BoundaryHigh/5,BoundaryHigh/5);groundQuad(macro,land);
+ groundQuad(tiles,land,BoundaryLow/5,BoundaryLow/5,BoundaryHigh/5,BoundaryHigh/5);
+ if(!basaltPaint.id)groundQuad(macro,land);
  bakeRoad();
  lavaStrips.reserve(VolcanoRiverSegments*2);canyonFronts.reserve(VolcanoRiverSegments*2);
  for(int river=0;river<2;river++)for(int segment=0;segment<VolcanoRiverSegments;segment++){
@@ -160,23 +246,22 @@ inline void make(){
 inline void prop(int type,float x,float y){if(scenery.id)DrawTexturePro(scenery,{float((type-14)*360),0,360,460},{x-90,y-208,180,230},{0,0},0,WHITE);}
 inline void backdrop(){
  if(sky.id)DrawTexturePro(sky,{0,0,float(sky.width),float(sky.height)},{0,0,float(WorldW),float(H)},{0,0},0,WHITE);
- if(abyssDistance.id){float drift=(game.player.x-game.player.y)*1.3f;
-  DrawTexturePro(abyssDistance,{0,0,float(abyssDistance.width),float(abyssDistance.height)},{-WorldW*.3f+drift,-H*.1f-(game.player.x+game.player.y)*.3f,WorldW*1.6f,H*1.2f},{0,0},0,WHITE);}
+ terrain_paint::drawPanorama(abyssDistance);
  drawAbyssFaces(abyssCliff,abyssFaces);
- drawAbyssFaces(lavaFrames[int(std::fmod(std::max(0.f,game.time)*FlowFPS,float(FlowFrames)))],abyssFalls,true);
+ const bool animated=beginLava();
+ drawAbyssFaces(lava,abyssFalls,true);
+ if(animated)EndShaderMode();
 }
 inline void flow(bool ambience=true){
  struct Visible {std::array<Vector2,4> points;float from,to;};std::array<Visible,VolcanoRiverSegments*2> visible{};int count=0;
  for(const auto& strip:lavaStrips){std::array<Vector2,4> p;float left=1e9f,right=-1e9f,top=1e9f,bottom=-1e9f;for(int i=0;i<4;i++){p[i]=screen(strip.corners[i]);p[i].y+=VolcanoRiverDepth;left=std::min(left,p[i].x);right=std::max(right,p[i].x);top=std::min(top,p[i].y);bottom=std::max(bottom,p[i].y);}if(right<0||left>WorldW||bottom<0||top>H)continue;visible[count++]={p,strip.from,strip.to};}
- float sample=std::fmod(game.time*FlowFPS,float(FlowFrames)),blend=sample-std::floor(sample);int first=int(sample);
- // Two preloaded native Synfig samples interpolate smoothly at the game's rate.
- // Batch each pass: no alternating textures, per-frame allocations or file I/O.
- for(int pass=0;pass<2;pass++){
-  unsigned char alpha=pass?static_cast<unsigned char>(std::round(blend*255)):255;if(!alpha)continue;
-  rlSetTexture(lavaFrames[(first+pass)%FlowFrames].id);rlBegin(RL_QUADS);rlColor4ub(255,255,255,alpha);
+ if(count){
+  const bool animated=beginLava();
+  rlSetTexture(lava.id);rlBegin(RL_QUADS);rlColor4ub(255,255,255,255);
   for(int n=0;n<count;n++){const auto& q=visible[n];const Vector2 uv[]={{0,q.from},{0,q.to},{1,q.to},{1,q.from}};
    for(int i=0;i<4;i++){rlTexCoord2f(uv[i].x,uv[i].y);rlVertex2f(q.points[i].x,q.points[i].y);}}
   rlEnd();rlSetTexture(0);
+  if(animated)EndShaderMode();
  }
  // Foreground canyon faces occlude the lower molten surface. One texture batch,
  // precomputed geometry, no per-frame allocations, extra render target or I/O.
@@ -239,5 +324,5 @@ inline void bolt(const CinderBolt& b){Vector2 p=screen(b.pos),v{(b.velocity.x-b.
  if(caldera_attack_art::draw(caldera_attack_art::Clip::Cinder,{p.x,p.y-35},{80,48},std::atan2(v.y,v.x)*RAD2DEG,phase,1,{.64f,.5f}))return;
  for(int i=4;i>=0;i--)ellipse(p.x-v.x*i*5,p.y-35-v.y*i*5,6-i*.7f,5-i*.6f,Fade(rgb(255,110+i*15,48),1-i*.16f));ellipse(p.x,p.y-35,2.3f,2.3f,rgb(255,239,183));
 }
-inline void unload(){for(auto t:{tiles,scenery,sceneryEdge,extraScenery,extraSceneryEdge,sky,minimap,macro,road,bank,bridge,steam,channelWall,portalFrame,portalLoop,portalOutline,abyssCliff,abyssDistance})if(t.id)UnloadTexture(t);for(auto t:lavaFrames)if(t.id)UnloadTexture(t);if(terrain.id)UnloadRenderTexture(terrain);if(IsShaderValid(bridgeBlend))UnloadShader(bridgeBlend);bridgeBlend={};tiles=scenery=sceneryEdge=extraScenery=extraSceneryEdge=sky=lava=minimap=macro=road=bank=bridge=steam=channelWall=portalFrame=portalLoop=portalOutline=abyssCliff=abyssDistance={};lavaFrames={};terrain={};lavaStrips.clear();canyonFronts.clear();abyssFaces.clear();abyssFalls.clear();abyssLips.clear();sceneryAlpha.clear();extraSceneryAlpha.clear();portalMask.clear();}
+inline void unload(){for(auto t:{tiles,scenery,sceneryEdge,extraScenery,extraSceneryEdge,sky,lava,minimap,macro,road,bank,bridge,steam,channelWall,portalFrame,portalLoop,portalOutline,desertPortalFrame,desertPortalOutline,portalAperture,desertPortalAperture,abyssCliff,abyssDistance})if(t.id)UnloadTexture(t);if(terrain.id)UnloadRenderTexture(terrain);if(IsShaderValid(bridgeBlend))UnloadShader(bridgeBlend);bridgeBlend={};if(lavaClock>=0)UnloadShader(lavaMaterial);lavaMaterial={};lavaClock=-1;if(IsShaderValid(portalClip))UnloadShader(portalClip);portalClip={};tiles=scenery=sceneryEdge=extraScenery=extraSceneryEdge=sky=lava=minimap=macro=road=bank=bridge=steam=channelWall=portalFrame=portalLoop=portalOutline=desertPortalFrame=desertPortalOutline=portalAperture=desertPortalAperture=abyssCliff=abyssDistance={};terrain={};lavaStrips.clear();canyonFronts.clear();abyssFaces.clear();abyssFalls.clear();abyssLips.clear();sceneryAlpha.clear();extraSceneryAlpha.clear();portalMask.clear();desertPortalMask.clear();}
 }

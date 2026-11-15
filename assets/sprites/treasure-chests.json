@@ -1,7 +1,7 @@
 {
-  "authoring": "Original 2D artwork painted inside Krita 5.3.4 native Python/Qt runtime",
-  "master": "C:\\AI2D\\sprites\\emberfall-abyss-chests-20261108-v1\\realm-treasure-chests.kra",
-  "sha256": "b6aab9f545b2196049b8d516117063963d880ae528b87935c3617637231d962e",
+  "authoring": "GPT Image sprite sources composed and exported with Krita 5.3.4.1",
+  "master": "C:\\AI2D\\sprites\\forest-wood-20261115\\treasure-chests.kra",
+  "sha256": "fd1c0935b8bb98694a887a833e5663fbda1438f9a370d82a5981e9fe7414d42e",
   "size": [
     768,
     768
@@ -26,11 +26,24 @@
     "volcano"
   ],
   "master_size": [
-    1536,
-    1536
+    768,
+    768
   ],
-  "layers": 7,
+  "layers": 2,
   "external_inputs": [],
-  "native_worker": "C:/AI2D/pipeline/krita-worker-20261108-v2",
-  "retained_saved_documents": true
+  "retained_saved_documents": true,
+  "previous_master": "C:/AI2D/sprites/scenery-refresh-20261114/chests.kra",
+  "forest_palette_20261115": {
+    "type": "Korekta palety istniejących malowanych zasobów Emberfall",
+    "editing": "Krita 5.3.4.1, nowa warstwa palety i zachowane wcześniejsze warstwy",
+    "render_intent": "Światła przygaszone szczególnie na drewnie; cienie w zgaszonym brązie i oliwce zgodnym z leśną glebą. Zachowane ślady kory oraz kontrast okuć i monet.",
+    "alpha": "Alfa wszystkich pikseli, proporcje i kotwice zachowane dokładnie",
+    "atlas_scope": "Trzy drzewa, pola kłody i pnia oraz pierwszy rząd skrzyń. Pozostałe pola zachowane pikselowo w RGBA.",
+    "masters": [
+      {
+        "source": "C:\\AI2D\\sprites\\forest-wood-20261115\\treasure-chests.kra",
+        "sha256": "3931f474385fc8f503c6085694bac91f8b7eb4567df7cc5bf6000cf74008a3ec"
+      }
+    ]
+  }
 }

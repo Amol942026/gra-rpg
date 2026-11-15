@@ -7,7 +7,7 @@ bool runSkillsQA(){
  auto gain=[](){game.xp=experienceForLevel(game.level)-1;Enemy victim{999,0,game.player,game.player,1,1};game.hit(victim,100);syncAdvancement();};
  reset();refreshDisplayLayout();check(!audioSystem.available,"skills diagnostic opens no audio device");
  game.hp=60;
- for(int i=0;i<SkillCount;i++){
+ for(int i=0;i<SkillSlotCount;i++){
   game.selectWeapon(i==1?1:0);point(skillActionRect(i));leftClickGameplay({});
   check(quickPickerSlot==i&&!worldPointerAllowed({600,430})&&game.skillRank(Skill(i))==0&&game.hp==60&&game.mana==100&&game.swing==0&&!game.piercingArrowArmed&&game.healingPulse==0,"each locked tile opens its picker and consumes neither HP, mana nor combat input");
   point(quickPickerOption(quickPickerBounds(i,2),0));quickPickerEvent(false,true);check(quickPickerSlot==i&&game.skillRank(Skill(i))==0,"the picker cannot unlock a skill");
@@ -37,6 +37,7 @@ bool runSkillsQA(){
  check(quickPickerSlot<0&&!game.skillAssigned[0]&&!activateSkillSlot(Skill::StrongCut)&&game.mana==mana,"unassigned slot blocks its hotkey without spending mana");
  point(skillActionRect(0));leftClickGameplay({});point(quickPickerOption(quickPickerBounds(0,2),0));quickPickerEvent(false,true);
  check(quickPickerSlot<0&&game.skillAssigned[0]&&game.mana==mana&&!game.strongSwingActive(),"reassigning a learned skill preserves cooldown and does not cast");
+ game.aimMelee(foe-game.player);
  activateSkillSlot(Skill::StrongCut);
  check(game.strongSwingActive()&&game.mana==mana-10&&std::abs(game.enemies[0].hp-(500-damageAfterArmor(damage,game.enemies[0].defense())))<.001f,"assigned Z shortcut uses learned sword skill for ten mana and greater damage");
  for(int i=0;i<3;i++)game.update(.05f,{},false);mouse={0,0};renderScene();saveTexture(canvas,"qa-v27/strong-cut.png");

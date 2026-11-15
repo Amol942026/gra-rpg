@@ -7,7 +7,9 @@ bool exitRequested=false;
 int menuSelection=0,menuSlot=0;
 float menuClock=0;
 std::string menuNotice;
-std::array<ember::saves::Entry,3> menuSaves{};
+constexpr int ManualSaveSlots=saves::Store::ManualSlots;
+constexpr int LegacySaveSlot=saves::Store::LegacySaveSlot;
+std::array<ember::saves::Entry,ManualSaveSlots+1> menuSaves{};
 // Empty in production. Native QA supplies its own isolated save directory.
 fs::path menuSaveRoot;
 ember::saves::Store menuStore(){
@@ -16,7 +18,7 @@ ember::saves::Store menuStore(){
 bool gameMenuActive(){return welcome||paused;}
 void menuPageTo(MenuPage page){menuPage=page;menuSelection=page==MenuPage::Exit&&paused?2:0;menuNotice.clear();}
 void refreshMenuSaves(){
- try{auto store=menuStore();for(int i=0;i<3;i++)menuSaves[i]=store.inspect(i);}catch(...){menuSaves={};menuNotice="Katalog zapisów jest niedostępny.";}
+ try{auto store=menuStore();for(int i=0;i<=LegacySaveSlot;i++)menuSaves[i]=store.inspect(i);}catch(...){menuSaves={};menuNotice="Katalog zapisów jest niedostępny.";}
 }
 void clearTransientUi(){
  quickPickerSlot=-1;dragging={};inventoryClicks.clear();audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=help=false;
@@ -24,6 +26,7 @@ void clearTransientUi(){
  statDraft={};skillDraft={};draftForLevel=skillDraftLevel=-1;
 }
 void openPauseMenu(){game.cancelBow();clearTransientUi();paused=true;menuPageTo(MenuPage::Home);}
+void openSaveMenu(){openPauseMenu();menuPageTo(MenuPage::Save);refreshMenuSaves();}
 void resumeFromMenu(){paused=false;menuPageTo(MenuPage::Home);}
 void menuReturnToTitle(){
  clearTransientUi();invalidatePausedWorld();
@@ -40,7 +43,7 @@ void menuLoad(){
  try{
   bool backup=false;auto saved=menuStore().load(menuSlot,&backup);saved.game.limitForestForage();saved.game.ensureTowerPosition();
 #ifndef EMBERFALL_PLAYER_BUILD
-  if(saved.game.developerSession)replenishDeveloperEquipment(saved.game);
+  if(saved.game.developerSession)refreshDeveloperLoadout(saved.game);
 #endif
   clearTransientUi();game=std::move(saved.game);bagPage=0;intro=saved.intro;towerStory=saved.tower;
   // Never replay queued sound events from the frame before saving.
@@ -57,7 +60,8 @@ void menuBack(){
 }
 Rectangle menuHomeButton(int i){return welcome?Rectangle{946,309.f+i*75,364,58}:Rectangle{518,285.f+i*78,404,60};}
 Rectangle menuBackButton(){return {559,718,322,46};}
-Rectangle menuSlotButton(int i){return {380,300.f+i*116,680,96};}
+int menuSaveSlotCount(){return ManualSaveSlots+(menuPage==MenuPage::Load&&menuSaves[LegacySaveSlot].exists?1:0);}
+Rectangle menuSlotButton(int i){return {380,300.f+i*100,680,88};}
 Rectangle menuOption(int i){return {395,307.f+i*67,650,51};}
 Rectangle menuScreenChoice(bool fullscreen){return {fullscreen?852.f:660.f,menuOption(2).y+7,184,37};}
 Rectangle menuConfirmButton(int i){return {405.f+i*325,532,305,58};}
@@ -67,12 +71,12 @@ void menuHomeAction(int index){
  if(welcome&&index==5){openDeveloperMenu();return;}
 #endif
  if(welcome){if(index==0){menuNewGame();return;}if(index==1){menuPageTo(MenuPage::Load);refreshMenuSaves();return;}if(index==2)menuPageTo(MenuPage::Options);if(index==3)menuPageTo(MenuPage::Credits);if(index==4)menuPageTo(MenuPage::Exit);}
- else{if(index==0){menuPageTo(MenuPage::Save);refreshMenuSaves();return;}if(index==1){menuPageTo(MenuPage::Load);refreshMenuSaves();return;}if(index==2)menuPageTo(MenuPage::Options);if(index==3)menuPageTo(MenuPage::Exit);}
+ else{if(index==0){openSaveMenu();return;}if(index==1){menuPageTo(MenuPage::Load);refreshMenuSaves();return;}if(index==2)menuPageTo(MenuPage::Options);if(index==3)menuPageTo(MenuPage::Exit);}
 }
 void activateMenuRow(int row){
  if(menuPage==MenuPage::Home){menuHomeAction(row);return;}
  if(menuPage==MenuPage::Load||menuPage==MenuPage::Save){
-  if(row==3){menuBack();return;}menuSlot=row;
+  if(row==menuSaveSlotCount()){menuBack();return;}menuSlot=row;
   if(menuPage==MenuPage::Save){if(menuSaves[row].exists)menuPageTo(MenuPage::Overwrite);else menuSave();}
   else if(!menuSaves[row].valid)menuNotice=menuSaves[row].exists?"Zapis jest uszkodzony lub pochodzi z niezgodnej wersji gry.":"Ten slot jest pusty. Najpierw rozpocznij nową grę.";
   else if(welcome)menuLoad();else menuPageTo(MenuPage::ReplaceSession);
@@ -104,11 +108,11 @@ int menuRowCount(){
  if(welcome&&menuPage==MenuPage::Home)return 6;
 #endif
  if(menuPage==MenuPage::Exit&&!welcome)return 3;
- switch(menuPage){case MenuPage::Home:return 5;case MenuPage::Load:case MenuPage::Save:return 4;case MenuPage::Options:return 6;case MenuPage::Credits:case MenuPage::Controls:return 1;default:return 2;}
+ switch(menuPage){case MenuPage::Home:return 5;case MenuPage::Load:case MenuPage::Save:return menuSaveSlotCount()+1;case MenuPage::Options:return 6;case MenuPage::Credits:case MenuPage::Controls:return 1;default:return 2;}
 }
 Rectangle menuRowRect(int i){
  if(menuPage==MenuPage::Home)return !welcome&&i==4?menuBackButton():menuHomeButton(i);
- if(menuPage==MenuPage::Load||menuPage==MenuPage::Save)return i==3?menuBackButton():menuSlotButton(i);
+ if(menuPage==MenuPage::Load||menuPage==MenuPage::Save)return i==menuSaveSlotCount()?menuBackButton():menuSlotButton(i);
  if(menuPage==MenuPage::Options)return i==5?menuBackButton():menuOption(i);
  if(menuPage==MenuPage::Credits||menuPage==MenuPage::Controls)return menuBackButton();
  return menuPage==MenuPage::Exit&&!welcome?menuExitButton(i):menuConfirmButton(i);
@@ -163,7 +167,8 @@ struct ControlBinding {const char* key;const char* action;};
 constexpr ControlBinding expeditionControls[]={
  {"WSAD","Ruch"},{"Shift","Bieg (przytrzymaj)"},{"Spacja","Unik"},{"LPM","Kliknij: atak · przytrzymaj i puść: mocny atak"},
  {"C / K","Rzuć czar / otwórz księgę czarów"},{"Z / X / V","Użyj przypisanej umiejętności"},
- {"1 / 2","Użyj przypisanej mikstury HP / MP"},{"Q","Koło wyboru broni"},{"E","Interakcja z pobliskim obiektem"}
+ {"1 / 2","Użyj przypisanej mikstury HP / MP"},{"Q","Koło wyboru broni"},{"E","Interakcja z pobliskim obiektem"},
+ {"F5","Otwórz menu zapisu gry"}
 };
 constexpr ControlBinding interfaceControls[]={
  {"PPM","Otwórz ciało / użyj przedmiotu"},{"2× LPM","Zbierz łup / załóż wyposażenie"},
@@ -212,11 +217,14 @@ void drawGameMenu(){
   bool save=menuPage==MenuPage::Save;
   menuHeading(save?"KRONIKA WĘDROWCA":"POWRÓT DO KRONIKI",game.developerSession?"Oddzielne zapisy trybu deweloperskiego":
               save?"Wybierz miejsce zapisu wyprawy":"Wybierz zapisaną wyprawę");
-  for(int i=0;i<3;i++){auto r=menuSlotButton(i);auto& s=menuSaves[i];bool active=menuSelection==i;
-   panel(r,active?rgb(40,50,47):Card);DrawRectangleLinesEx(r,1,active?Gold:Line);txt("0"+std::to_string(i+1),r.x+20,r.y+22,30,Gold,true);
+  for(int i=0;i<menuSaveSlotCount();i++){auto r=menuSlotButton(i);auto& s=menuSaves[i];bool active=menuSelection==i;
+   panel(r,active?rgb(40,50,47):Card);DrawRectangleLinesEx(r,1,active?Gold:Line);
+   if(i==LegacySaveSlot)diamond(r.x+37,r.y+40,10,14,Gold);
+   else txt("0"+std::to_string(i+1),r.x+20,r.y+22,30,Gold,true);
    txt(s.valid?s.location:s.exists?"Zapis niedostępny":"Pusty slot",r.x+87,r.y+15,22,s.valid||save?Text:Muted);
-   txt(s.valid?"Poziom "+std::to_string(s.level)+"  ·  "+s.date+(s.backup?"  ·  kopia zapasowa":""):s.exists?"Plik zachowano na dysku":save?"Zapisz tutaj bieżącą wyprawę":"Brak zapisanej wyprawy",r.x+88,r.y+54,16,Muted);
-  }menuButton(menuBackButton(),"Wstecz · ESC",3);
+   const std::string detail=s.valid?"Poziom "+std::to_string(s.level)+"  ·  "+s.date+(s.backup?"  ·  kopia zapasowa":""):s.exists?"Plik zachowano na dysku":save?"Zapisz tutaj bieżącą wyprawę":"Brak zapisanej wyprawy";
+   txt(i==LegacySaveSlot?"Zapis ze starszej wersji · "+detail:detail,r.x+88,r.y+49,16,Muted);
+  }menuButton(menuBackButton(),"Wstecz · ESC",menuSaveSlotCount());
  }else if(menuPage==MenuPage::Options){
   menuHeading("OPCJE","Dźwięk, obraz i sterowanie");
   const char* labels[]={"Muzyka","Efekty dźwiękowe","Tryb ekranu","Wycisz wszystko"};

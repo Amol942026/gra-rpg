@@ -15,8 +15,9 @@ void skillTests(){
  check(multi.trainSkills({2,0})&&multi.skillRank(Skill::StrongCut)==2&&!multi.allocationRequired,"multiple earned points may increase chosen skill rank without deadlocking");
  auto ready=[](){Game g=emptyArena();g.skillRanks={1,1};return g;};
  Game g=ready();float damage=g.damage();g.enemies.push_back({80,0,g.player+V{1,0},g.player+V{1,0},500,500});g.enemies.push_back({81,0,g.player+V{-1,0},g.player+V{-1,0},500,500});
- check(g.strongCut()&&g.mana==90&&g.strongSwingActive()&&g.meleeDuration==StrongCutDuration,"strong cut spends exactly ten mana and starts its own longer animation");
- for(const auto& e:g.enemies)check(std::abs(e.hp-(500-damageAfterArmor(damage*1.5f,e.defense())))<.001f,"rank-one strong cut deals greater physical damage to every enemy in melee area");
+ check(g.strongCut({1,0})&&g.mana==90&&g.strongSwingActive()&&g.meleeDuration==StrongCutDuration,"strong cut spends exactly ten mana and starts its own longer animation");
+ check(std::abs(g.enemies[0].hp-(500-damageAfterArmor(damage*1.5f,g.enemies[0].defense())))<.001f&&g.enemies[1].hp==500,
+       "rank-one strong cut deals greater physical damage forward and leaves the enemy behind unharmed");
  check(!g.strongCut()&&g.mana==90,"strong-cut cooldown prevents duplicate cast and mana spending");
  g=ready();g.mana=9;check(!g.strongCut()&&g.mana==9&&g.swing==0&&g.strongCutCd==0,"insufficient mana leaves strong cut entirely unchanged");
  for(Kind weapon:{Kind::Bow,Kind::Axe,Kind::Dagger,Kind::None}){g=ready();g.equipment[0]=item(weapon);check(!g.strongCut()&&g.mana==100&&g.swing==0,"strong cut requires a sword specifically, not any other melee or ranged weapon");}
@@ -48,4 +49,37 @@ void skillTests(){
  check(g.kills==3&&g.allocationRequired&&g.skillPoints>=1&&g.findCorpse(100)&&g.findCorpse(102)&&g.ground.empty(),"piercing segment completes its hits, corpse loot and XP before level pause");
  g=ready();g.hp=0;check(!g.strongCut()&&!g.preparePiercingArrow(),"dead hero cannot activate skills");
  g=ready();g.enterMageTower();check(!g.strongCut()&&!g.preparePiercingArrow(),"safe tower blocks both combat skills");
+ for(auto skill:{Skill::Cleave,Skill::DoubleThrust,Skill::Skewer}){
+  g=emptyArena();const auto& profile=skillProfile(skill);
+  g.equipment[0]=item(skill==Skill::Skewer?Kind::Spear:profile.weapon);
+  check(g.skillForSlot(0)==skill&&!g.useMeleeSkill(skill,{1,0}),"Z resolves to the equipped weapon skill but still requires training");
+  earnLevel(g);g.distribute({5,0,0,0,0,0});SkillRanks points{};points[int(skill)]=1;
+  check(g.trainSkills(points)&&g.skillRank(skill)==1,"new weapon skill can be purchased at level-up");
+  const V firstTarget{skill==Skill::Skewer?.80f:1.1f,0};
+  const V secondTarget=skill==Skill::Cleave?V{1.5f,.85f}:V{skill==Skill::Skewer?1.81f:2.6f,0};
+  for(V offset:{firstTarget,secondTarget,V{-1,0}}){
+   V p=g.player+offset;g.enemies.push_back({100+int(g.enemies.size()),0,p,p,500,500});
+   g.enemies.back().windup=100;
+  }
+  const float full=g.mana;
+  check(g.useMeleeSkill(skill,{1,0})&&g.mana==full-profile.mana&&g.strongSwingActive()&&g.skillCooldown(skill)==profile.cooldown,"weapon skill spends mana once and starts its own cooldown");
+  for(int frame=0;frame<10;frame++)g.update(1.f/60,{},false);
+  const float first=g.enemies[0].hp;
+  check(skill!=Skill::DoubleThrust||first<500,"dagger first impact lands before its second");
+  for(int frame=10;frame<33;frame++)g.update(1.f/60,{},false);
+  check(g.enemies[0].hp<(skill==Skill::DoubleThrust?first:500)&&g.enemies[2].hp==500,"weapon skill damages forward target and keeps rear target safe");
+  check((g.enemies[1].hp<500)==(skill!=Skill::DoubleThrust),"axe cleave and spear line can hit multiple enemies");
+  check(!g.useMeleeSkill(skill,{1,0}),"individual cooldown remains after the ordinary attack delay expires");
+ }
+ for(Kind weapon:{Kind::Sword,Kind::Axe,Kind::Dagger,Kind::Spear,Kind::Bow}){
+  Game walking=emptyArena();walking.equipment[0]=item(weapon);
+  auto held=walking;
+  check(weapon==Kind::Bow?held.beginBow({1,0}):held.beginMeleeHold({1,0}),"weapon starts an LPM hold");
+  walking.update(.05f,{1,0},false);
+  held.update(.05f,{1,0},false,true);
+  const float pace=distance(emptyArena().player,walking.player);
+  check(!held.animation.sprinting&&held.animation.moving&&std::abs(distance(emptyArena().player,held.player)-pace*(weapon==Kind::Bow?.55f:1.f))<.001f,"holding an attack keeps the legs moving at walking speed with Shift pressed");
+  held.cancelBow();held.update(.05f,{1,0},false,true);
+  check(held.animation.sprinting,"sprint resumes when attack hold ends");
+ }
 }

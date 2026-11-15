@@ -21,6 +21,10 @@ inline void arrow(Vector2 tip,Vector2 direction){
  DrawLineEx({tip.x-direction.x*72,tip.y-direction.y*72},tip,1.7f,Fade(gold,.68f));
  DrawCircleV(tip,3.2f,Fade(gold,.72f));
 }
+inline Vector2 spearPoint(Vector2 feet,SpearContact contact,float fraction){
+ const V offset=contact.ray*fraction;
+ return {feet.x+(offset.x-offset.y)*40,feet.y+(offset.x+offset.y)*20-contact.height};
+}
 inline void world(const Game& game){
  const PowerStyle style=game.activePowerVisual();
  if(style==PowerStyle::Count||game.dead()||game.knockedBack()||game.rolling())return;
@@ -66,10 +70,12 @@ inline void world(const Game& game){
   stamp(style,point(1.02f+t*.40f,second?.21f:-.21f,43),86+18*t,44,angle+(second?-14:14),alpha);
   break;
  case PowerStyle::Spear:{
-  const float end=profile.reach*std::min(1.f,game.weaponContactBlock(direction*profile.reach,SpearTipRadius));
-  const Vector2 a=point(std::min(.55f,end),0,43),b=point(end,0,43);
+  const auto contact=game.spearContact(true);
+  const float end=std::min(1.f,game.weaponContactBlock(contact.ray,0));
+  const Vector2 a=spearPoint(origin,contact,std::min(.34f,end)),b=spearPoint(origin,contact,end);
   const float extent=std::hypot(b.x-a.x,b.y-a.y);
-  if(extent>1){stamp(style,{(a.x+b.x)*.5f,(a.y+b.y)*.5f},extent+16,28,angle,alpha);
+  if(extent>1){stamp(style,{(a.x+b.x)*.5f,(a.y+b.y)*.5f},extent,28,
+     std::atan2(b.y-a.y,b.x-a.x)*RAD2DEG,alpha);
    DrawLineEx(a,b,1.5f,Fade(tint,alpha*.55f));}
   break;
  }
@@ -77,6 +83,66 @@ inline void world(const Game& game){
   stamp(style,point(.52f+t*.5f,0,44),78+24*t,34,angle,alpha);
   break;
  case PowerStyle::Count:break;
+ }
+}
+inline void weaponSkill(const Game& game){
+ if(!game.strongSwingActive()||game.dead()||game.knockedBack()||game.rolling())return;
+ const Skill skill=game.skillForSlot(0);
+ const bool sword=skill==Skill::StrongCut,axe=skill==Skill::Cleave,dagger=skill==Skill::DoubleThrust;
+ const float elapsed=game.meleeDuration-game.swing;
+ const bool second=dagger&&elapsed>=SkillDaggerSecond;
+ const float contact=sword?.07f:axe?AxeImpactFrame/60.f:dagger?(second?SkillDaggerSecond:DaggerImpactFrame/60.f):SpearImpactTime;
+ const float life=dagger?.13f:.23f;
+ const float t=(elapsed-contact)/life;
+ if(t<0||t>=1)return;
+ const V axis=normalized(game.facing),side{-axis.y,axis.x};
+ const float opacity=(1-t)*(1-t);
+ const Color tint=sword?rgb(255,211,122):axe?rgb(255,150,87):dagger?rgb(207,164,255):rgb(133,240,225);
+ auto at=[&](V delta,float height){
+  auto p=screen(game.player+delta);p.y-=height;return p;
+ };
+ if(sword||axe){
+  const float spread=sword?PI*.5f:1.20f,radius=(sword?MeleeRange:SkillAxeReach)*(.80f+.16f*t);
+  const float span=sword?1.7f:1.15f;
+  const float start=-spread+(2*spread-span)*t;
+  Vector2 previous{};
+  for(int i=0;i<=18;i++){
+   const float along=i/18.f,angle=start+span*along;
+   const V ray=axis*std::cos(angle)+side*std::sin(angle);
+   const Vector2 tip=at(ray*radius,(sword?48.f:37.f)+6*std::sin(angle));
+   if(i>0){
+    const float brightness=opacity*std::sin((.18f+.78f*along)*PI);
+    DrawLineEx(previous,tip,8.f*brightness+.9f,Fade(tint,brightness*.7f));
+    DrawLineEx(previous,tip,1.8f,Fade(WHITE,brightness));
+   }
+   if(i%4==0){
+    const Vector2 ember=at(ray*(radius+.18f+t*.45f),46+22*t+(i%3)*7);
+    DrawCircleV(ember,1.6f,Fade(tint,opacity*.8f));
+   }
+   previous=tip;
+  }
+  return;
+ }
+ if(skill==Skill::Skewer){
+  const auto tip=game.spearContact(false);
+  const float end=std::min(1.f,game.weaponContactBlock(tip.ray,0));
+  const Vector2 feet=screen(game.player);
+  const Vector2 from=spearPoint(feet,tip,std::min(.26f,end)),to=spearPoint(feet,tip,end);
+  for(int i=-1;i<=1;i++){
+   const float offset=i*3.5f;
+   DrawLineEx({from.x,from.y+offset},{to.x,to.y+offset},i==0?5.f:2.f,Fade(tint,opacity*(i==0?.9f:.48f)));
+  }
+  DrawLineEx(from,to,1.5f,Fade(WHITE,opacity));
+  return;
+ }
+ const float end=SkillDaggerReach*std::min(1.f,game.weaponContactBlock(axis*SkillDaggerReach,SpearTipRadius));
+ const float start=std::min(.38f,end);
+ for(int i=-1;i<=1;i++){
+  const float lateral=(dagger?(second?.18f:-.18f):0.f)+i*.13f;
+  const Vector2 from=at(axis*start+side*lateral,42+i*3.f);
+  const Vector2 tip=at(axis*(end*(.89f+.11f*t))+side*lateral,42+i*3.f);
+  DrawLineEx(from,tip,i==0?5.f:2.f,Fade(tint,opacity*(i==0?.9f:.48f)));
+  if(i==0)DrawLineEx(from,tip,1.5f,Fade(WHITE,opacity));
  }
 }
 inline Rectangle chargeBarRect(PowerStyle style,Vector2 feet){

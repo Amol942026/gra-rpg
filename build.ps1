@@ -32,22 +32,15 @@ foreach ($sourceAsset in Get-ChildItem -LiteralPath $sourceAssetRoot -File -Recu
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $targetAsset) | Out-Null
     Copy-Item -LiteralPath $sourceAsset.FullName -Destination $targetAsset -Force
 }
-if (!$Player) {
-    # Local developer launchers point to the adjacent EXE.
-    foreach ($launcher in @('Tryb_deweloperski.bat','Test_wiezy.bat','Test_bossa.bat','Test_pustyni.bat','Test_kaldery.bat','Test_Varkhora.bat')) {
-        $launcherText = [IO.File]::ReadAllText((Join-Path $PSScriptRoot $launcher)).Replace('"dist\Emberfall.exe"','"Emberfall.exe"')
-        [IO.File]::WriteAllText((Join-Path $PSScriptRoot ('dist/' + $launcher)), $launcherText, [Text.Encoding]::ASCII)
-    }
-}
 # Like assets, identical documents may be mapped by an open preview. Leave them
 # in place instead of needlessly rewriting the same bytes and failing the build.
-$documents = @('LOOT.md','LICENSES.md')
-if (!$Player) { $documents += 'README.md' }
-foreach ($documentName in $documents) {
-    $targetDocument = Join-Path $outputDirectory $documentName
-    if ((Test-Path -LiteralPath $targetDocument) -and
-        (Get-FileHash -LiteralPath $documentName).Hash -eq (Get-FileHash -LiteralPath $targetDocument).Hash) { continue }
-    Copy-Item -LiteralPath $documentName -Destination $targetDocument -Force
+$runtimeFiles = @('Uruchom.bat','LOOT.md','LICENSES.md')
+if (!$Player) { $runtimeFiles += 'README.md' }
+foreach ($fileName in $runtimeFiles) {
+    $targetFile = Join-Path $outputDirectory $fileName
+    if ((Test-Path -LiteralPath $targetFile) -and
+        (Get-FileHash -LiteralPath $fileName).Hash -eq (Get-FileHash -LiteralPath $targetFile).Hash) { continue }
+    Copy-Item -LiteralPath $fileName -Destination $targetFile -Force
 }
 if ($Test) {
     & $compiler '-std=c++17' '-O2' '-Wall' '-Wextra' '-Wno-misleading-indentation' '-static' 'tests\game_tests.cpp' '-o' 'dist\game_tests.exe'

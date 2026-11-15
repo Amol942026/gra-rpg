@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\forest-wood-20261115\\pack.json",
+  "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\realm-decorations-20261114",
+  "files": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\realm-decorations-20261114\\realm-decorations.png",
+      "sha256": "dc043b10b0abd7fb36d366c93a4218ef5e3779e06fc5af94eb4e138bdb9933f7",
+      "bytes": 959075,
+      "role": "2D terrain decoration atlas"
+    }
+  ],
+  "provenance": {
+    "generation": "Built-in GPT Image",
+    "layout": "5 columns by 3 rows; RGBA8; 360 x 460 cells",
+    "assets": [
+      "mossy log; ferns; ivy arch; decaying stump; berry shrub",
+      "buried amphorae; rib cage; agave; sun relief; abandoned cart",
+      "ember crystals; charred tree; sulfur crust; forge anvil; basalt arch"
+    ],
+    "master": "C:/AI2D/sprites/realm-decorations-20261114/realm-decorations.kra",
+    "editing": "Krita 5.3.4.1, per-realm layers",
+    "vegetation_palette_20261115": {
+      "type": "Color refinement of existing game-owned raster assets",
+      "editing": "Krita 5.3.4.1, separate palette layers with prior art layers retained",
+      "render_intent": "Darker moss and olive foliage harmonized with the forest floor while retaining readable bark, berries and leaf detail",
+      "alpha": "Byte-exact relative to the source sprite masks",
+      "atlas_scope": "Only first-row fifth cell, rowan shrub. Remaining cells byte-exact in decoded RGBA.",
+      "masters": [
+        {
+          "source": "C:\\AI2D\\sprites\\forest-palette-20261115\\realm-decorations.kra",
+          "sha256": "762f0bec7d21f8dd0505d5b02746791dd5bd3ab047df76ee70e94bbf32708727"
+        }
+      ]
+    },
+    "wood_palette_20261115": {
+      "type": "Korekta palety istniejących malowanych zasobów Emberfall",
+      "editing": "Krita 5.3.4.1, nowa warstwa palety i zachowane wcześniejsze warstwy",
+      "render_intent": "Światła przygaszone szczególnie na drewnie; cienie w zgaszonym brązie i oliwce zgodnym z leśną glebą. Zachowane ślady kory oraz kontrast okuć i monet.",
+      "alpha": "Alfa wszystkich pikseli, proporcje i kotwice zachowane dokładnie",
+      "atlas_scope": "Trzy drzewa, pola kłody i pnia oraz pierwszy rząd skrzyń. Pozostałe pola zachowane pikselowo w RGBA.",
+      "masters": [
+        {
+          "source": "C:\\AI2D\\sprites\\forest-wood-20261115\\realm-decorations.kra",
+          "sha256": "7b094eeaafcd60300169306a073a25e5e5a518412fa104325ff9926b7115993a"
+        }
+      ]
+    }
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false,
+  "previous_source_manifest": "C:\\AI2D\\pipeline\\runs\\forest-palette-20261115\\pack.json"
+}

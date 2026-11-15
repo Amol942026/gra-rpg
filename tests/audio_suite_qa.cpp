@@ -94,6 +94,13 @@ int main(int argc,char** argv){
  int played=audio.playedEffects;audio.toggleEffects();world.sound(ember::Cue::ChestOpen,world.player);audio.update(.05f,world,false,true);
  check(audio.playedEffects==played&&world.sounds.empty()&&audio.effectiveMusicVolume()>0,"disabled effects discard events while music continues");audio.toggleEffects();
  world.sound(ember::Cue::Swing,world.player);audio.update(.05f,world,true,true);check(audio.playedEffects==played&&world.sounds.empty(),"pause drains queued combat without replay");
+ world.sound(ember::Cue::LandStone,world.player);audio.update(.05f,world,true,true);
+ check(audio.playedEffects==played&&world.sounds.empty(),"pause drops queued landings while the world is frozen");
+ world.allocationRequired=true;
+ world.sound(ember::Cue::LandStone,world.player);world.sound(ember::Cue::LandStone,world.player+ember::V{1,0});
+ world.sound(ember::Cue::Swing,world.player);audio.update(.05f,world,true,true);
+ check(audio.playedEffects==played+2&&world.sounds.empty(),"same-material landings use separate voices during visible level allocation");
+ world.allocationRequired=false;
  for(int frame=0;frame<80;frame++)audio.update(.05f,world,true,true);check(std::abs(audio.effectiveMusicVolume()-audio.musicVolume*.65f)<.001f,"menu and pause retain sixty-five percent music instead of excessively ducking it");
  audio.update(.05f,world,false,false);silent=true;for(auto* s:offline::scores)silent&=!s->playing;check(audio.isSuspended()&&silent,"focus loss pauses every active score");
  audio.update(.05f,world,false,true);check(!audio.isSuspended()&&offline::playing(audio.music),"focus return resumes the existing selected score");

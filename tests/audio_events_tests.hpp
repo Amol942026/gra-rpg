@@ -39,7 +39,8 @@ void audioEventTests() {
         Game e=emptyArena();Enemy enemy{0,type,{15,15},{15,15},1,1};
         e.hit(enemy,10);
         check(cueCount(e,materials[type])==1,"each enemy material emits its own hit sound");
-        check(cueCount(e,type==3?Cue::Victory:Cue::EnemyFall)==1,"death or victory cue emitted once");
+        check(cueCount(e,Cue::Victory)==int(type==3)&&cueCount(e,enemyFallCue(type))==0,
+              "the boss reward still cues on defeat while impacts wait for the terrain");
         auto count=e.sounds.size();e.hit(enemy,10);check(e.sounds.size()==count,"dead enemies cannot emit repeated deaths");
     }
     Game level=emptyArena();level.xp=experienceForLevel(1)-1;Enemy enemy{0,0,{15,15},{15,15},1,1};level.hit(enemy,5);
@@ -66,13 +67,51 @@ void audioEventTests() {
     check(portal.useVolcanoPortal()&&cueCount(portal,Cue::TeleportArrival)==1,"return from the volcano plays arrival exactly once");
     Game hurt=emptyArena();hurt.enemies.push_back({0,0,{15.2f,15},{15.2f,15},100,100});
     hurt.enemies[0].windup=.01f;hurt.update(.02f,{},false);
-    check(cueCount(hurt,Cue::Hurt)==1,"enemy impact emits player hurt");
+    check(cueCount(hurt,Cue::Hurt)==1&&hurt.hitReactionProgress()==0&&hurt.heroHitDirection.x<-.99f,
+          "enemy impact emits player hurt and starts a lean away from the attacker");
     hurt.sounds.clear();hurt.hp=1;hurt.enemies[0].windup=.01f;hurt.update(.02f,{},false);
-    check(cueCount(hurt,Cue::Death)==1&&cueCount(hurt,Cue::Hurt)==0,"lethal impact emits death instead of duplicate hurt");
+    check(cueCount(hurt,Cue::Death)==1&&cueCount(hurt,Cue::Hurt)==0&&hurt.hitReactionProgress()<0,
+          "lethal impact clears the hit reaction and emits death instead of duplicate hurt");
     hurt.update(.02f,{},false);check(cueCount(hurt,Cue::Death)==1,"death audio does not loop");
     Game dodge=emptyArena();dodge.enemies.push_back({0,0,{15.2f,15},{15.2f,15},100,100});
     dodge.startRoll({1,0});dodge.enemies[0].windup=.01f;dodge.update(.02f,{},false);
-    check(cueCount(dodge,Cue::Dodge)==1&&cueCount(dodge,Cue::Hurt)==0,"protected roll emits dodge without hurt");
+    check(cueCount(dodge,Cue::Dodge)==1&&cueCount(dodge,Cue::Hurt)==0&&dodge.hitReactionProgress()<0,
+          "protected roll emits dodge without hurt or recoil");
+
+    const V hitPosition{15,15};
+    auto meleeHit=[hitPosition](V away){
+        Game arena=emptyArena();
+        arena.player=hitPosition;
+        const V foe=arena.player-away;
+        arena.enemies.push_back({0,0,foe,foe,100,100});
+        arena.enemies.front().windup=.01f;
+        arena.enemies.front().attack=2;
+        arena.update(.02f,{},false);
+        return arena;
+    };
+    const V away=normalized(V{1,1});
+    for(float rate:{30.f,60.f,120.f}){
+        Game reacting=meleeHit(away);
+        const V facingBefore=reacting.facing;
+        check(reacting.hitReactionProgress()==0&&distance(reacting.heroHitDirection,away)<.0001f&&!reacting.knockedBack(),
+              "ordinary melee starts a directed reaction without the boulder control lock");
+        Game walking=reacting,walkControl=reacting;
+        walkControl.clearHeroHitReaction();
+        walking.update(1/rate,{1,0},false);walkControl.update(1/rate,{1,0},false);
+        check(walking.hitReactionProgress()>0&&walking.player.x>hitPosition.x&&distance(walking.player,walkControl.player)==0,
+              "the lean leaves the first walking step unchanged");
+        bool planted=distance(reacting.player,hitPosition)==0;
+        for(int frame=0;frame<int(rate*HeroHitReactionDuration)+1;frame++){
+            reacting.update(1/rate,{},false);
+            planted&=distance(reacting.player,hitPosition)==0;
+        }
+        check(planted&&distance(reacting.facing,facingBefore)==0&&
+              reacting.hitReactionProgress()<0&&cueCount(reacting,Cue::Step)==0,
+              "idle hit keeps the hero planted throughout the lean at 30, 60 and 120 Hz");
+    }
+    Game travel=meleeHit({1,0});travel.activateField(WorldLocation::Desert);
+    check(travel.hitReactionProgress()<0&&length(travel.heroHitDirection)==0,
+          "travelling to another realm clears the temporary hit reaction");
     Game bounded=emptyArena();for(int i=0;i<1000;i++)bounded.sound(Cue::Step,bounded.player);
     check(bounded.sounds.size()==64,"unconsumed sound queue is bounded");
     Game chest;chest.player=chest.chests[0].pos+V{1,0};
@@ -85,7 +124,7 @@ void audioEventTests() {
         check(cueCount(hit,enemyHitCue(type))==1,"all enemy species emit their assigned material impact");
         Game attack=emptyArena();attack.enemies.push_back({0,type,{15.2f,15},{15.2f,15},100,100});attack.update(.01f,{},false);
         check(cueCount(attack,enemyAttackCue(type))==0&&attack.enemies[0].windup>0,"ordinary attack sound waits for the actual strike instead of playing during preparation");
-        for(int frame=0;frame<25;frame++)attack.update(.02f,{},false);
+        for(int frame=0;frame<2+int(meleeWindup(type)/.02f);frame++)attack.update(.02f,{},false);
         check(cueCount(attack,enemyAttackCue(type))==1,"all enemy species emit one physical attack sound at their strike");
     }
     check(enemyHitCue(9)==Cue::ChitinHit&&enemyHitCue(15)==Cue::FireHit&&enemyAttackCue(16)==Cue::ArmoredAttack&&enemyAttackCue(17)==Cue::ReptileAttack&&enemyAttackCue(6)==Cue::BladeAttack&&enemyAttackCue(10)==Cue::SerpentAttack,"enemy gestures match their actual body, weapon and material");

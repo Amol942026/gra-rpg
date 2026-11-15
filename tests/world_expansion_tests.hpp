@@ -37,6 +37,27 @@ void worldExpansionTests(){
    check(!Game::volcanoPropCoversBridge(p),"original and extended scenery silhouettes leave bridge decks clear");
   }
   bool extended=false;for(V p:queue)extended|=p.x>135&&p.y>135;check(extended,"the far corner of the expanded field is reachable without crossing invisible borders or lava");
+  std::array<int,4> quadrants{};
+  std::array<int,DecorationsPerRealm> decorations{};
+  const int first=realm==WorldLocation::Forest?ForestDecorationStart:realm==WorldLocation::Desert?DesertDecorationStart:VolcanoDecorationStart;
+  for(const auto& prop:g.props)if(prop.type>=ForestDecorationStart){
+   check(prop.type>=first&&prop.type<first+DecorationsPerRealm,"new scenery belongs to its realm");
+   if(prop.type>=first&&prop.type<first+DecorationsPerRealm)decorations[prop.type-first]++;
+  }
+  check(std::all_of(decorations.begin(),decorations.end(),[](int n){return n>=2;}),"all five new designs are distributed across the realm");
+  for(const auto& site:FieldSites)if(site.realm==realm){
+   const V p=site.position;
+   const int x=int(std::round(p.x)),y=int(std::round(p.y));
+   quadrants[(p.x>=72?1:0)+(p.y>=72?2:0)]++;
+   bool accessible=false;
+   for(int dy=-3;dy<=3;dy++)for(int dx=-3;dx<=3;dx++){
+    const int nx=x+dx,ny=y+dy;
+    if(nx<2||ny<2||nx>=MapSize-2||ny>=MapSize-2)continue;
+    accessible|=reached[ny*MapSize+nx]&& &fieldRegion(realm,{float(nx),float(ny)})==&site;
+   }
+   check(accessible,"named area has reachable terrain and retains its original label");
+  }
+  check(std::all_of(quadrants.begin(),quadrants.end(),[](int count){return count>=2;}),"all four quadrants have multiple named sites");
  }
  for(size_t bridge=0;bridge<VolcanoBridges.size();bridge++){
   float y=VolcanoBridges[bridge].y;int river=VolcanoBridgeRivers[bridge];bool clear=true;

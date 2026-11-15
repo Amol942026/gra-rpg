@@ -5,7 +5,7 @@ void roadTriangle(Vector2 a,Vector2 b,Vector2 c,Color ca,Color cb,Color cc){
  rlCheckRenderBatchLimit(3);rlBegin(RL_TRIANGLES);
  for(auto v:{std::pair<Vector2,Color>{a,ca},{b,cb},{c,cc}}){rlColor4ub(v.second.r,v.second.g,v.second.b,v.second.a);rlTexCoord2f(0,0);rlVertex2f(v.first.x,v.first.y);}rlEnd();
 }
-void drawRoads(){
+void drawRoads(bool paintBase=true){
  auto project=[](V p){return Vector2{TerrainOriginX+(p.x-p.y)*40,90+(p.x+p.y)*20};};
  beginTransparentLayer();
  for(const auto& road:desertRoads()){
@@ -20,7 +20,7 @@ void drawRoads(){
   auto color=[&](size_t i,int band){float fade=std::min({1.f,along[i]/1.2f,(along.back()-along[i])/1.2f});float noise=std::sin(along[i]*1.9f)*5;
    return rgb(169+noise,125+noise,76+noise,opacity[band]*std::max(0.f,fade));};
   rlSetTexture(rlGetTextureIdDefault());
-  for(size_t i=1;i<points.size();i++)for(int band=0;band<6;band++){
+  if(paintBase)for(size_t i=1;i<points.size();i++)for(int band=0;band<6;band++){
    Vector2 a=project(points[i-1]+normals[i-1]*(lateral[band]*width(i-1))),b=project(points[i]+normals[i]*(lateral[band]*width(i)));
    Vector2 c=project(points[i]+normals[i]*(lateral[band+1]*width(i))),d=project(points[i-1]+normals[i-1]*(lateral[band+1]*width(i-1)));
    roadTriangle(a,b,c,color(i-1,band),color(i,band),color(i,band+1));roadTriangle(a,c,d,color(i-1,band),color(i,band+1),color(i-1,band+1));

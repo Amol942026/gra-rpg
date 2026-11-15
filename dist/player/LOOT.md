@@ -15,6 +15,17 @@ Każda pozycja jest losowana **niezależnie raz przy śmierci**. Wilk może pozo
 
 Podejdź do ciała na maksymalnie 2,5 pola i otwórz je PPM. Przeciągnij przedmioty do plecaka. Większy łup ma do trzech stron po pięć kratek: przyciski < / > lub rolka myszy nad oknem ciała. Każdy przedmiot ma kolorową nazwę, opis rzadkości i szansę w podpowiedzi. Stosy materiałów, monet, mikstur i strzał mieszczą do 99 sztuk.
 
+## Okrągłe tarcze i zamknięte hełmy
+
+| Kraina | Przedmiot | Pancerz | Przeciwnik | Rzadkość | Szansa z ciała |
+|---|---|---:|---|---|---:|
+| Las | Krąg żelaznego drewna | +7 | Ożywione drzewo | Rzadki | 15% |
+| Las | Hełm nitowanej straży | +7 | Szkielet | Rzadki | 15% |
+| Pustynia | Słoneczny dysk wydm | +11 | Skarabeusz miedziany | Bardzo rzadki | 4% |
+| Pustynia | Przyłbica słonecznej warty | +11 | Oko Wydm | Bardzo rzadki | 4% |
+| Kaldera | Obsydianowy krąg kuźni | +15 | Rogacz Żaru | Niezwykle rzadki | 1% |
+| Kaldera | Hełm popielnej kuźni | +15 | Obsydianowy wojownik | Niezwykle rzadki | 1% |
+
 ## Dziesięć dodatkowych pancerzy
 
 | Kraina | Pancerz | Obrona | Przeciwnik | Rzadkość | Szansa z ciała |

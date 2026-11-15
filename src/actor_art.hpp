@@ -3,10 +3,15 @@
 #include "sword_pose.hpp"
 #include "hero_motion.hpp"
 #include "hero_sheath.hpp"
+#include "shield_stow.hpp"
+#include "weapon_profiles.hpp"
+#include "weapon_stow.hpp"
 #include "spear_motion.hpp"
 #include "power_motion.hpp"
 #include "hero_weapon_motion.hpp"
 #include "hero_knockdown.hpp"
+#include "hero_hit_reaction.hpp"
+#include "enemy_death_settle.hpp"
 #include "shadow_geometry.hpp"
 #include "volcano_actors.hpp"
 #include "regional_enemy_art.hpp"
@@ -15,6 +20,7 @@
 #include "bandit_gait.hpp"
 #include "generated/creature_motion_data.hpp"
 #include "generated/forest_motion_data.hpp"
+#include "generated/wolf_motion_data.hpp"
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 
 // Small geometric character rigs: all parts turn in depth, including the face,
@@ -36,9 +42,11 @@ struct P3 {
     P3 operator*(float n) const { return {r*n, f*n, z*n}; }
 };
 struct WeaponPose {P3 hand,elbow,blade;};
+struct HeroReaction {float progress=-1;hero_motion::Vec away{};};
 inline P3 swordPoint(sword_pose::Point p){return {p.r,p.f,p.z};}
-inline WeaponPose forwardStrike(float progress,float lift=0,bool heavy=false){
+inline WeaponPose forwardStrike(float progress,float lift=0,bool heavy=false,HeroReaction reaction={}){
  (void)lift;auto pose=hero_motion::evaluate(0,0,0,0,progress,heavy);
+ if(reaction.progress>=0)hero_hit_reaction::apply(pose,reaction.progress,reaction.away);
  auto hand=pose.world[hero_motion::data::HandR].p,elbow=pose.world[hero_motion::data::ForearmR].p;
  auto v=sword_pose::idleBlade(0);auto blade=pose.vector(hero_motion::data::Weapon,{v.r,v.f,v.z});
  return {{hand.x,hand.y,hand.z},{elbow.x,elbow.y,elbow.z},{blade.x,blade.y,blade.z}};
@@ -53,6 +61,25 @@ struct Face {
     bool smooth=false;
     unsigned textureId=0;
     std::array<Vector2,4> uv{};
+};
+struct Silhouette {
+    static constexpr int Step=2,Width=128,Height=102;
+    std::array<unsigned char,Width*Height> covered;
+    Vector2 origin{};
+    int left=Width,right=-1,top=Height,bottom=-1,count=0;
+    bool ready=false;
+    Vector2 point(int col,int row)const{return {origin.x+(col+.5f)*Step,origin.y+(row+.5f)*Step};}
+    bool has(int col,int row)const{return covered[row*Width+col]!=0;}
+    void reset(Vector2 anchor){
+        origin={anchor.x-Width*Step*.5f,anchor.y-156.f};
+        covered.fill(0);left=Width;right=-1;top=Height;bottom=-1;count=0;ready=true;
+    }
+    void mark(int col,int row){
+        covered[row*Width+col]=1;
+        count++;
+        left=std::min(left,col);right=std::max(right,col);
+        top=std::min(top,row);bottom=std::max(bottom,row);
+    }
 };
 // Reuse one bounded dynamic GPU buffer across live creature draws. The meshes
 // still come from the same CPU rig used for picking and physical shadows.
@@ -76,7 +103,7 @@ inline void prepareCreatureBatch(int count=196608){
  creatureVertices.resize(creatureCapacity*3);creatureUV.resize(creatureCapacity*2);creatureColors.resize(creatureCapacity*4);
  if(!creatureMaterial.maps)creatureMaterial=LoadMaterialDefault();
 }
-inline void submitActorBatch(unsigned texture,int count=-1){
+inline void submitActorBatch(unsigned texture,int count=-1,unsigned char opacity=255){
  if(count<0)count=int(creatureVertices.size()/3);if(!count)return;
  if(count>creatureCapacity)prepareCreatureBatch(count);
  rlDrawRenderBatchActive();
@@ -94,9 +121,10 @@ inline void submitActorBatch(unsigned texture,int count=-1){
  }
  Mesh drawing=creatureMesh;drawing.vertexCount=count;drawing.triangleCount=count/3;
  Material material=creatureMaterial;material.maps[MATERIAL_MAP_DIFFUSE].texture={texture,1,1,1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
+ material.maps[MATERIAL_MAP_DIFFUSE].color={255,255,255,opacity};
  Matrix identity{};identity.m0=identity.m5=identity.m10=identity.m15=1;DrawMesh(drawing,material,identity);
 }
-inline void drawCreatureFacesLegacy(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale){
+inline void drawCreatureFacesLegacy(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale,unsigned char opacity=255){
  creatureVertices.clear();creatureUV.clear();creatureColors.clear();unsigned texture=rlGetTextureIdDefault();
  for(const auto& f:faces){
   if(bool(f.textureId)!=paint)continue;if(f.textureId)texture=f.textureId;
@@ -111,7 +139,7 @@ inline void drawCreatureFacesLegacy(const std::vector<Face>& faces,bool paint,fl
    }
   }
  }
- submitActorBatch(texture);
+ submitActorBatch(texture,int(creatureVertices.size()/3),opacity);
 }
 inline void drawActorOutlineLegacy(const std::vector<Face>& faces,Color color){
  creatureVertices.clear();creatureUV.clear();creatureColors.clear();
@@ -132,8 +160,8 @@ inline void beginPacking(int maximum){
  if(creatureUV.size()<size_t(creatureCapacity)*2)creatureUV.resize(creatureCapacity*2);
  if(creatureColors.size()<size_t(creatureCapacity)*4)creatureColors.resize(creatureCapacity*4);
 }
-inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale){
- if(!fastPacking){drawCreatureFacesLegacy(faces,paint,depthBase,depthScale);return;}
+inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale,unsigned char opacity=255){
+ if(!fastPacking){drawCreatureFacesLegacy(faces,paint,depthBase,depthScale,opacity);return;}
  beginPacking(int(faces.size())*6);int count=0;unsigned texture=rlGetTextureIdDefault();
  float* vertices=creatureVertices.data();float* uv=creatureUV.data();unsigned char* colors=creatureColors.data();
  for(const auto& f:faces){
@@ -149,7 +177,7 @@ inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float de
    }
   }
  }
- submitActorBatch(texture,count);
+ submitActorBatch(texture,count,opacity);
 }
 inline void drawActorOutline(const std::vector<Face>& faces,Color color){
  if(!fastPacking){drawActorOutlineLegacy(faces,color);return;}
@@ -168,20 +196,26 @@ inline void drawActorOutline(const std::vector<Face>& faces,Color color){
  submitActorBatch(rlGetTextureIdDefault(),count);
 }
 class Rig {
+public:
+    using Deform=P3(*)(P3,const void*);
+private:
     float x, y, scale, fx, fy, rx, ry;
     float rollAngle=0, tuck=0,runLean=0,runSin=0,runCos=1,bodySin=0,bodyCos=1;
     bool smoothSurfaces=false,bodyRotating=false,softBeams=false,groundBounded=false;
     const hero_motion::Pose* skeleton=nullptr;int skinBone=-1;
+    const hero_motion::Transform* attachment=nullptr;
+    Deform deform=nullptr;
+    const void* deformContext=nullptr;
+    unsigned char opacity=255;
     std::vector<Face> faces;
     shadow_geometry::Polygons shadowFaces;
     bool collectShadow=false,closedShadow=false;
     float shadowLift=shadowElevation;
+    Vector2 hitLean{};
     Vector2 depthMin{1e9f,1e9f},depthMax{-1e9f,-1e9f};
 public:
     Rig(float px,float py,float size,Direction dir,bool collect=false):x(px),y(py),scale(size),collectShadow(collect||(shadowBuilding&&shadowCasting)) {
-        float angle=int(dir)*PI/4;
-        fx=std::cos(angle);fy=std::sin(angle)/.52f;
-        float len=std::hypot(fx,fy);fx/=len;fy/=len;rx=fy;ry=-fx;
+        setFacing(int(dir)*PI/4);
     }
     void setSkeleton(const hero_motion::Pose* pose){skeleton=pose;skinBone=-1;}
     void reuseStorage(Rig& other){faces.swap(other.faces);faces.clear();shadowFaces.swap(other.shadowFaces);shadowFaces.clear();}
@@ -191,17 +225,47 @@ public:
         for(auto& face:faces)for(auto& p:face.points){p.x+=dx;p.y+=dy;}
         depthMin.x+=dx;depthMin.y+=dy;depthMax.x+=dx;depthMax.y+=dy;x=px;y=py;
     }
+    void fitProjectedBounds(Rectangle body,Rectangle shadow,float amount){
+        if(amount<=0)return;
+        const auto fitting=[amount](Vector2 low,Vector2 high,Rectangle target){
+            const float w=high.x-low.x,h=high.y-low.y;
+            if(w<=0||h<=0||target.width<=0||target.height<=0)return std::array<float,4>{1,1,0,0};
+            const float sx=1+amount*(std::clamp(target.width/w,.48f,1.8f)-1),sy=1+amount*(std::clamp(target.height/h,.48f,1.8f)-1);
+            const float mx=(low.x+high.x)*.5f,my=(low.y+high.y)*.5f;
+            return std::array<float,4>{sx,sy,mx+amount*(target.x+target.width*.5f-mx)-sx*mx,
+               my+amount*(target.y+target.height*.5f-my)-sy*my};
+        };
+        const auto apply=[](Vector2& p,const std::array<float,4>& fit){p={p.x*fit[0]+fit[2],p.y*fit[1]+fit[3]};};
+        const auto shape=fitting(depthMin,depthMax,body);
+        for(auto& face:faces)for(auto& p:face.points)apply(p,shape);
+        apply(depthMin,shape);apply(depthMax,shape);
+        if(shadowFaces.empty()||shadow.width<=0||shadow.height<=0)return;
+        Vector2 low{1e9f,1e9f},high{-1e9f,-1e9f};
+        for(const auto& face:shadowFaces)for(auto p:face){
+            low.x=std::min(low.x,p.x);low.y=std::min(low.y,p.y);high.x=std::max(high.x,p.x);high.y=std::max(high.y,p.y);
+        }
+        const auto floor=fitting(low,high,shadow);
+        for(auto& face:shadowFaces)for(auto& p:face)apply(p,floor);
+    }
     void setBone(int bone){skinBone=bone;}
+    void setAttachment(const hero_motion::Transform* transform){attachment=transform;}
+    void setDeformation(Deform transform,const void* context=nullptr){deform=transform;deformContext=context;}
+    void setVisibility(float value){opacity=static_cast<unsigned char>(std::clamp(value,0.f,1.f)*255+.5f);}
     void setFacing(float angle){
-        fx=std::cos(angle);fy=std::sin(angle)/.52f;
-        float n=std::hypot(fx,fy);fx/=n;fy/=n;rx=fy;ry=-fx;
+        const auto axis=actorFacing(angle);
+        fx=axis.x;fy=axis.y;rx=fy;ry=-fx;
     }
     void setSmoothSurfaces(){smoothSurfaces=true;}
     void setCreatureSurfaces(){smoothSurfaces=true;softBeams=true;}
+    void setHitLean(Vector2 lean){hitLean=lean;}
     void setGroundBounded(){groundBounded=true;}
     void setRun(float amount){runLean=std::clamp(amount,0.f,1.f)*.12f;runSin=std::sin(runLean);runCos=std::cos(runLean);}
     void setBodyYaw(float angle){bodyRotating=angle!=0;if(bodyRotating){bodySin=std::sin(angle);bodyCos=std::cos(angle);}else{bodySin=0;bodyCos=1;}}
     P3 bodyPoint(P3 p)const{
+        if(attachment){
+            auto v=attachment->p+hero_motion::rotate(attachment->q,{p.r,p.f,p.z});
+            return {v.x,v.y,v.z};
+        }
         if(skeleton&&skinBone>=0){auto v=skeleton->point(skinBone,{p.r,p.f,p.z});return {v.x,v.y,v.z};}
         if(skeleton&&skinBone==-2){
             float w=std::clamp((p.z-15)/43.f,0.f,1.f);
@@ -223,16 +287,18 @@ public:
                 38-9*tuck+z*std::cos(rollAngle)-f*std::sin(rollAngle)};
     }
     Vector2 project(P3 p) const {
-        return {x+(p.r*rx+p.f*fx)*scale,y+((p.r*ry+p.f*fy)*.52f-p.z)*scale};
+        return {x+(p.r*rx+p.f*fx+p.z*hitLean.x)*scale,y+((p.r*ry+p.f*fy)*ActorGroundSquash-p.z+p.z*hitLean.y)*scale};
     }
     Vector2 groundProject(P3 p) const {
-        auto q=shadow_math::ground(x+(p.r*rx+p.f*fx)*scale,y+(p.r*ry+p.f*fy)*.52f*scale+shadowLift,p.z*scale+shadowLift);
+        auto q=shadow_math::ground(x+(p.r*rx+p.f*fx+p.z*hitLean.x)*scale,
+                                   y+((p.r*ry+p.f*fy)*.52f+p.z*hitLean.y)*scale+shadowLift,p.z*scale+shadowLift);
         return {q.x,q.y};
     }
     const shadow_geometry::Polygons& shadows()const{return shadowFaces;}
-    void drawShadow()const{shadow_geometry::raster(shadowFaces);}
+    void drawShadow(float opacity=1)const{shadow_geometry::raster(shadowFaces,opacity);}
     void face(P3 a,P3 b,P3 c,P3 d,Color col,float lighting=1) {
         a=rollPoint(bodyPoint(a));b=rollPoint(bodyPoint(b));c=rollPoint(bodyPoint(c));d=rollPoint(bodyPoint(d));
+        if(deform){a=deform(a,deformContext);b=deform(b,deformContext);c=deform(c,deformContext);d=deform(d,deformContext);}
         if(groundBounded){a.z=std::max(.5f,a.z);b.z=std::max(.5f,b.z);c.z=std::max(.5f,c.z);d.z=std::max(.5f,d.z);}
         // Capture every physical surface, including surfaces hidden from the camera.
         if(collectShadow&&col.a>=160){
@@ -272,6 +338,15 @@ public:
         if(faces.size()!=before){auto& f=faces.back();f.textureId=creature_paint::atlas.id;
             f.uv={creature_paint::uv(cell,u0,v0),creature_paint::uv(cell,u1,v0),creature_paint::uv(cell,u1,v1),creature_paint::uv(cell,u0,v1)};}
     }
+    void wrapCreatureFace(int cell,float u0,float v0,float u1,float v1,Color lightA,Color lightB,Color lightC,Color lightD){
+        faces.push_back(faces.back());
+        auto& painted=faces.back();
+        painted.textureId=creature_paint::atlas.id;
+        painted.uv={creature_paint::uv(cell,u0,v0),creature_paint::uv(cell,u1,v0),
+                    creature_paint::uv(cell,u1,v1),creature_paint::uv(cell,u0,v1)};
+        painted.smooth=true;
+        painted.vertexColors={lightA,lightB,lightC,lightD};
+    }
     // Paint follows the same articulated surfaces and depth test as equipment.
     // Decals add no shadow geometry; their silhouette is already in the body.
     void decal(P3 a,P3 b,P3 c,P3 d,int cell,float u0=0,float v0=0,float u1=1,float v1=1,Color tint=WHITE,bool back=false){
@@ -285,20 +360,39 @@ public:
         f.uv=back?std::array<Vector2,4>{coords[3],coords[2],coords[1],coords[0]}:coords;
     }
     // Continuous skin along a bent path, with shared lighting at each ring.
-    void tube(const std::vector<P3>& path,float width,float depth,Color col){
+    void tube(const std::vector<P3>& path,float width,float depth,Color col,int material=-1){
         if(path.size()<2)return;constexpr int sides=12;
         bool savedClosed=closedShadow;if(softBeams)closedShadow=true;
         int step=softBeams&&scale<1.6f?2:1;
         std::vector<std::array<P3,sides>> points(path.size());std::vector<std::array<Color,sides>> colors(path.size());
+        const bool paint=creature_paint::available(material);
+        std::vector<std::array<Color,sides>> lights(paint?path.size():0);
         static const auto circle=[](){std::array<P3,sides> result{};for(int i=0;i<sides;i++)result[i]={std::cos(i*2*PI/sides),std::sin(i*2*PI/sides),0};return result;}();
         for(size_t j=0;j<path.size();j++){
             P3 axis=path[std::min(j+1,path.size()-1)]-path[j?j-1:0];float len=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);axis=axis*(1/std::max(.001f,len));
             float flat=std::hypot(axis.r,axis.f);P3 u=flat>.001f?P3{axis.f/flat,-axis.r/flat,0}:P3{1,0,0};
             P3 v{axis.f*u.z-axis.z*u.f,axis.z*u.r-axis.r*u.z,axis.r*u.f-axis.f*u.r};
-            for(int i=0;i<sides;i+=step){P3 normal=u*circle[i].r+v*circle[i].f;points[j][i]=path[j]+u*(circle[i].r*width*.5f)+v*(circle[i].f*depth*.5f);colors[j][i]=shade(col,surfaceLight(normal));}
+            for(int i=0;i<sides;i+=step){
+                P3 normal=u*circle[i].r+v*circle[i].f;
+                points[j][i]=path[j]+u*(circle[i].r*width*.5f)+v*(circle[i].f*depth*.5f);
+                const float lighting=surfaceLight(normal);
+                colors[j][i]=shade(col,lighting);
+                if(paint)lights[j][i]=shade(WHITE,lighting);
+            }
         }
-        for(size_t j=0;j+1<path.size();j++)for(int i=0;i<sides;i+=step){int n=(i+step)%sides;surfaceQuad(points[j][i],points[j][n],points[j+1][n],points[j+1][i],colors[j][i],colors[j][n],colors[j+1][n],colors[j+1][i]);}
-        rounded(path.front(),{width,depth,std::min(width,depth)},col);rounded(path.back(),{width,depth,std::min(width,depth)},col);
+        for(size_t j=0;j+1<path.size();j++)for(int i=0;i<sides;i+=step){
+            int n=(i+step)%sides;
+            const size_t before=faces.size();
+            surfaceQuad(points[j][i],points[j][n],points[j+1][n],points[j+1][i],colors[j][i],colors[j][n],colors[j+1][n],colors[j+1][i]);
+            if(paint&&faces.size()!=before){
+                const float column=float((i+sides*3/4)%sides),segments=float(path.size()-1);
+                wrapCreatureFace(material,column/sides,float(j)/segments,(column+step)/sides,float(j+1)/segments,
+                                 lights[j][i],lights[j][n],lights[j+1][n],lights[j+1][i]);
+            }
+        }
+        const P3 cap{width,depth,std::min(width,depth)};
+        rounded(path.front(),cap,col,paint?100+material:-1,false,-1,true);
+        rounded(path.back(),cap,col,paint?100+material:-1,false,-1,true);
         closedShadow=savedClosed;
 
     }
@@ -435,7 +529,7 @@ public:
 
         closedShadow=savedClosed;
     }
-    void tapered(P3 a,P3 b,float width,float depth,Color col,float tipScale=1){
+    void tapered(P3 a,P3 b,float width,float depth,Color col,float tipScale=1,int material=-1){
         P3 axis=b-a;float length=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);if(length<.001f)return;
         bool savedClosed=closedShadow;if(softBeams)closedShadow=true;
         axis=axis*(1/length);float flat=std::hypot(axis.r,axis.f);
@@ -444,11 +538,19 @@ public:
         static const auto ring=[](){std::array<Vector2,16> points{};for(int i=0;i<16;i++)points[i]={std::cos(i*2*PI/16),std::sin(i*2*PI/16)};return points;}();
         auto radial=[&](int i,float scale){return u*(ring[i].x*width*.5f*scale)+v*(ring[i].y*depth*.5f*scale);};
         int step=softBeams&&scale<1.6f?2:1;
+        const bool paint=creature_paint::available(material);
         for(int i=0;i<16;i+=step){
             int n=(i+step)%16;P3 normal=u*((ring[i].x+ring[n].x)*.5f)+v*((ring[i].y+ring[n].y)*.5f);
-            if(softBeams){
-                Color ca=shade(col,surfaceLight(u*ring[i].x+v*ring[i].y)),cb=shade(col,surfaceLight(u*ring[n].x+v*ring[n].y));
+            if(softBeams||paint){
+                const float lightA=surfaceLight(u*ring[i].x+v*ring[i].y),lightB=surfaceLight(u*ring[n].x+v*ring[n].y);
+                Color ca=shade(col,lightA),cb=shade(col,lightB);
+                const size_t before=faces.size();
                 surfaceQuad(a+radial(i,1),a+radial(n,1),b+radial(n,tipScale),b+radial(i,tipScale),ca,cb,cb,ca);
+                if(paint&&faces.size()!=before){
+                    const float column=float((i+12)%16);
+                    const Color la=shade(WHITE,lightA),lb=shade(WHITE,lightB);
+                    wrapCreatureFace(material,column/16,0,(column+step)/16,1,la,lb,lb,la);
+                }
             }else face(a+radial(i,1),a+radial(n,1),b+radial(n,tipScale),b+radial(i,tipScale),col,surfaceLight(normal));
             face(a,a+radial(n,1),a+radial(i,1),a,col,surfaceLight(axis*-1));
             face(b,b+radial(i,tipScale),b+radial(n,tipScale),b,col,surfaceLight(axis));
@@ -512,6 +614,39 @@ public:
         }
         return false;
     }
+    void rasterize(Silhouette& mask)const{
+        mask.reset(anchor());
+        for(const Face& face:faces){
+            if(!face.smooth&&face.color.a<128)continue;
+            for(int t=0;t<2;t++){
+                const int ib=t+1,ic=t+2;
+                const Vector2 a=face.points[0],b=face.points[ib],c=face.points[ic];
+                const float bx=b.x-a.x,by=b.y-a.y,cx=c.x-a.x,cy=c.y-a.y;
+                const float det=bx*cy-by*cx;
+                if(std::abs(det)<.00001f)continue;
+                const auto grid=[](float bound,float origin){return (bound-origin)/Silhouette::Step-.5f;};
+                const int left=std::max(0,int(std::ceil(grid(std::min({a.x,b.x,c.x}),mask.origin.x))));
+                const int right=std::min(Silhouette::Width-1,int(std::floor(grid(std::max({a.x,b.x,c.x}),mask.origin.x))));
+                const int top=std::max(0,int(std::ceil(grid(std::min({a.y,b.y,c.y}),mask.origin.y))));
+                const int bottom=std::min(Silhouette::Height-1,int(std::floor(grid(std::max({a.y,b.y,c.y}),mask.origin.y))));
+                const float inv=1/det;
+                for(int row=top;row<=bottom;row++)for(int col=left;col<=right;col++){
+                    if(mask.has(col,row))continue;
+                    const Vector2 point=mask.point(col,row);
+                    const float rx=point.x-a.x,ry=point.y-a.y;
+                    const float u=(rx*cy-ry*cx)*inv,v=(bx*ry-by*rx)*inv,w=1-u-v;
+                    if(u<0||v<0||w<0)continue;
+                    if(face.smooth&&face.vertexColors[0].a*w+face.vertexColors[ib].a*u+face.vertexColors[ic].a*v<128)continue;
+                    if(face.textureId){
+                        const auto& uv=face.uv;
+                        const Vector2 texel{uv[0].x*w+uv[ib].x*u+uv[ic].x*v,uv[0].y*w+uv[ib].y*u+uv[ic].y*v};
+                        if(!hero_paint::opaque(texel))continue;
+                    }
+                    mask.mark(col,row);
+                }
+            }
+        }
+    }
     void clearDepth(void(*clear)(unsigned))const{
         if(!clear)return;
         static const auto get=reinterpret_cast<void(*)(unsigned,int*)>(glfwGetProcAddress("glGetIntegerv"));
@@ -534,6 +669,7 @@ public:
         rlScissor(previous[0],previous[1],previous[2],previous[3]);if(!clipped)rlDisableScissorTest();
     }
     void draw(Color outline=BLANK) {
+        if(!opacity)return;
         float depthBase=sceneDepth?-.95f+sceneDepthOrder++*sceneDepthStep:0,depthScale=sceneDepthStep*.5f;
         if(!smoothSurfaces)std::stable_sort(faces.begin(),faces.end(),[](const Face&a,const Face&b){return a.depth<b.depth;});
         // Outline pass goes behind the entire opaque body, so internal edges
@@ -550,7 +686,7 @@ public:
         // Equal depth is intentional for paint on the original hair surface;
         // no geometric extrusion or positional bias is needed.
         if(paintPass&&smoothSurfaces&&depthFunction){rlDrawRenderBatchActive();depthFunction(0x0203);}
-        if(smoothSurfaces&&(softBeams||gpuHeroDraw)&&gpuCreatureDraw){drawCreatureFaces(faces,paintPass!=0,depthBase,depthScale);continue;}
+        if(smoothSurfaces&&(softBeams||gpuHeroDraw)&&gpuCreatureDraw){drawCreatureFaces(faces,paintPass!=0,depthBase,depthScale,opacity);continue;}
         unsigned activeTexture=0;int remaining=0;
         for(const auto& f:faces){
             if(bool(f.textureId)!=bool(paintPass))continue;
@@ -569,7 +705,7 @@ public:
             for(int triangle=0;triangle<2;triangle++){
                 int a=0,b=triangle+1,c=triangle+2;const auto& p=f.points;
                 if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
-                for(int index:{a,b,c}){Color color=f.smooth?f.vertexColors[index]:f.color;rlColor4ub(color.r,color.g,color.b,color.a);rlTexCoord2f(f.uv[index].x,f.uv[index].y);if(smoothSurfaces)rlVertex3f(p[index].x,p[index].y,sceneDepth?depthBase+(f.vertexDepth[index]+.5f)*depthScale:f.vertexDepth[index]);else rlVertex2f(p[index].x,p[index].y);}
+                for(int index:{a,b,c}){Color color=f.smooth?f.vertexColors[index]:f.color;rlColor4ub(color.r,color.g,color.b,opacity==255?color.a:color.a*opacity/255);rlTexCoord2f(f.uv[index].x,f.uv[index].y);if(smoothSurfaces)rlVertex3f(p[index].x,p[index].y,sceneDepth?depthBase+(f.vertexDepth[index]+.5f)*depthScale:f.vertexDepth[index]);else rlVertex2f(p[index].x,p[index].y);}
             }remaining--;
         }if(activeTexture)rlEnd();}rlSetTexture(0);
         if(smoothSurfaces){rlDrawRenderBatchActive();if(depthFunction)depthFunction(0x0201);rlDisableDepthTest();}
@@ -594,13 +730,16 @@ inline void prepareKnockdown(const Game& g,AnimationState& state,float& fallR,fl
 }
 #include "hero_art.hpp"
 #include "desert_actors.hpp"
+#include "generated/forest_melee_data.hpp"
 #include "forest_creatures.hpp"
+#include "legacy_death_art.hpp"
 
 // species: player, slime, wolf, skeleton, guardian, boar, spider, bandit, treant.
 inline bool draw(int species,float x,float y,float size,const AnimationState& state,
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
                  Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1,
-                 PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1) {
+                 PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1,float enemyMelee=-1,Vector2 hitLean={},
+                 Silhouette* fallbackSilhouette=nullptr,HeroReaction reaction={}) {
     if(regionalEnemy(species-1)){
         if(shadowBuilding&&!shadowCasting)return false;
         Enemy e{};e.type=species-1;e.animation=state;e.strike=attack>0?.14f:0;e.flash=flash?.1f:0;
@@ -631,13 +770,14 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     if(cached)rig.moveAnchor(x,y);
     if(!cached){
     if(shadowBuilding&&!recycledRigs.empty()){working.reuseStorage(recycledRigs.back());recycledRigs.pop_back();}
+    rig.setHitLean(hitLean);
 
     if(species==0){
-        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF,power,powerAge,windup);
+        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF,power,powerAge,windup,reaction);
     } else if(species>=9){
         buildDesert(rig,species-1,state,attack,flash);
     } else {
-        buildForestCreature(rig,species-1,state,attack,flash,guardianThrow);
+        buildForestCreature(rig,species-1,state,attack,flash,guardianThrow,enemyMelee);
     }
     }
     if(shadowBuilding&&!probe){
@@ -646,6 +786,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
         return false;
     }
     if(probe)return rig.contains(*probe);
+    if(fallbackSilhouette&&!cached)rig.rasterize(*fallbackSilhouette);
     float trail=striking&&weapon==Kind::Sword&&power!=PowerStyle::Sword?sword_pose::trailStrength(strikeProgress,empowered):0;
     if(trail>0){
         // One short ribbon follows the exact physical edge during the cut.
@@ -654,7 +795,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
         float start=std::max(sword_pose::cutStart(empowered),finish-(empowered?.16f:.13f));
         for(int i=0;i<10;i++){
             float a=start+(finish-start)*i/10,b=start+(finish-start)*(i+1)/10;
-            auto first=forwardStrike(a,lift,empowered),second=forwardStrike(b,lift,empowered);
+            auto first=forwardStrike(a,lift,empowered,reaction),second=forwardStrike(b,lift,empowered,reaction);
             Vector2 innerA=rig.project(first.hand+first.blade*.68f),outerA=rig.project(first.hand+first.blade);
             Vector2 innerB=rig.project(second.hand+second.blade*.68f),outerB=rig.project(second.hand+second.blade);
             float opacity=trail*(.025f+i*.023f)*(empowered?1.2f:1.f);
@@ -665,19 +806,57 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     rig.draw(outline);
     return false;
 }
+inline bool drawPlayer(const Game& g,float x,float y,float size=1,const AnimationState* special=nullptr,
+                       const Vector2* probe=nullptr,Silhouette* fallbackSilhouette=nullptr){
+ AnimationState state=special?*special:g.animation;
+ const float swing=special?-1:g.swingProgress(),attack=swing>=0?std::sin(swing*PI):0;
+ const float roll=special?-1:g.rollProgress(),fall=special?-1:g.knockdownProgress();
+ float fallR=0,fallF=-1;
+ if(fall>=0)prepareKnockdown(g,state,fallR,fallF);
+ HeroReaction reaction;
+ if(!special&&roll<0&&fall<0&&g.hitReactionProgress()>=0){
+  const float angle=state.facingInitialized?state.facingAngle:int(state.direction)*AnimationPi/4;
+  const auto forward=actorFacing(angle);
+  const auto d=g.heroHitDirection;
+  const auto away=normalized(V{d.x-d.y,(d.x+d.y)*.5f/ActorGroundSquash});
+  const float side=away.x*forward.y-away.y*forward.x;
+  reaction={g.hitReactionProgress(),{.35f*side,-1,0}};
+ }
+ return draw(0,x,y,size,state,attack,!g.equipment[1].empty(),!g.equipment[2].empty(),archetype(g.equipment[0].kind),
+             false,BLANK,probe,roll,swing,special?-1:g.visibleBowCharge(),g.ammoCount(),!special&&g.empoweredPose(),
+             &g.equipment,-1,fall,fallR,fallF,special?PowerStyle::Count:g.activePowerVisual(),g.powerVisualAge(),
+             special?-1:g.powerWindupProgress(),-1,{},fallbackSilhouette,reaction);
+}
+template<class Draw> bool drawHitSprite(float y,Vector2 lean,const Vector2* probe,Draw draw){
+ if(shadowBuilding||(lean.x==0&&lean.y==0))return draw(probe);
+ if(probe){
+  const float dy=(probe->y-y)/(1-lean.y);
+  const Vector2 source{probe->x+lean.x*dy,y+dy};
+  return draw(&source);
+ }
+ rlPushMatrix();
+ const float matrix[]={1,0,0,0,-lean.x,1-lean.y,0,0,0,0,1,0,lean.x*y,lean.y*y,0,1};
+ rlMultMatrixf(matrix);
+ const bool hit=draw(nullptr);
+ rlPopMatrix();
+ return hit;
+}
 inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
- if(regionalEnemy(e.type))return regional_enemy_art::draw(e,x,y,outline,probe,shadowBuilding);
+ const V impulse=e.hitLean();
+ const Vector2 lean{impulse.x,impulse.y};
+ if(regionalEnemy(e.type))return drawHitSprite(y,lean,probe,[&](const Vector2* point){
+  return regional_enemy_art::draw(e,x,y,outline,point,shadowBuilding);
+ });
  if(e.type>=VolcanoFirstType){
   if(shadowBuilding&&!shadowCasting)return false;
-  float action=e.abilityBusy()?e.abilityAction():e.eruptionWindup>0?1-e.eruptionWindup/.95f:e.windup>0?.45f*(1-e.windup/.42f):e.strike>0?.45f+.55f*(1-e.strike/.22f):-1;
-  float special=e.abilityBusy()?e.abilityAge/enemyAbilityProfile(e.type).duration():-1.f;
-  if(e.type==VolcanoBossType){
-   if(e.eruptionWindup>0)special=(.95f-e.eruptionWindup)/1.37f;
-   else for(const auto& fissure:game.fissures)if(fissure.owner==e.id&&fissure.age<1.37f){special=fissure.age/1.37f;break;}
-  }
-  return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,probe,shadowBuilding,false,e.flash>0,special);
+  const float action=e.volcanoAction(),special=game.volcanoSpecialPose(e);
+  return drawHitSprite(y,lean,probe,[&](const Vector2* point){
+   return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,point,shadowBuilding,false,false,special);
+  });
  }
  int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;
- bool hit=draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,e.flash>0,outline,probe,-1,-1,-1,3,false,nullptr,e.boulderProgress());shadowCacheKey=previous;return hit;
+ bool hit=draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,false,outline,probe,-1,-1,-1,3,false,nullptr,
+               e.boulderProgress(),-1,0,-1,PowerStyle::Count,0,-1,e.type==BoarType?e.boarVisualPhase():e.heavyMeleePhase(),lean);
+ shadowCacheKey=previous;return hit;
 }
 }

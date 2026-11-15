@@ -6,7 +6,16 @@ bool runProgressionQA(){
     auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
     game=Game{};game.props.clear();game.enemies.clear();game.ground.clear();game.player={15,15};game.learnedSpells=spellBit(Spell::Fireball);
     welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;statDraft={};draftForLevel=-1;dragging={};
-    prepareCanvas(1.2f);pointAt(statsButton());
+    prepareCanvas(1.2f);
+    const Rectangle journal=journalRect(),lastAction=actionRect(4),lastEquip=equipRect(EquipSize-1);
+    check(journal.x>lastAction.x+lastAction.width&&journal.x+journal.width<WorldW&&
+          !worldPointerAllowed({journal.x+8,journal.y+5})&&worldPointerAllowed({29,730}),
+          "journal fits beside the action bar and only its new position blocks world selection");
+    check(skillsButton().y>lastEquip.y+lastEquip.height&&statsButton().y==skillsButton().y&&
+          skillsButton().y+skillsButton().height<bagRect(0).y&&statsButton().y+statsButton().height<bagRect(0).y,
+          "skill and stats buttons fit between equipment and backpack");
+    mouse={0,0};renderScene();saveTexture(canvas,"qa-v13/field-hud.png");
+    pointAt(statsButton());
     check(clickProgression()&&statsOpen,"HUD stats button opens the level-one character sheet");
     check(!worldPointerAllowed(mouse),"character sheet blocks world interactions");
     renderScene();saveTexture(canvas,"qa-v13/character-sheet.png");

@@ -1,4 +1,5 @@
 #pragma once
+#include "wind_motion.hpp"
 // Native geometry: sand, waxy cactus ribs, weathered stone and oasis fronds.
 namespace desert_art {
 RenderTexture2D terrain{};Texture2D minimap{};
@@ -103,6 +104,7 @@ diamond(x,y,64,18,rgb(162,113,74));oval(x,y-83,39,63,rgb(65,49,87));oval(x-4,y-8
 void prop(int type,float x,float y){switch(type){case 7:cactus(x,y,false);break;case 8:cactus(x,y,true);break;case 9:sandstone(x,y);break;case 10:obelisk(x,y);break;case 11:shrub(x,y);break;case 12:palm(x,y);break;case 13:portal(x,y);break;}}
 #include "desert_scenery.hpp"
 #include "desert_roads.hpp"
+#include "oasis_water.hpp"
 
 void groundTile(int x,int y,float sx,float sy){
  V pos{float(x),float(y)};float wave=std::sin(x*.17f+y*.095f)+.38f*std::sin(x*.11f-y*.25f);bool path=desertPath(pos);
@@ -114,19 +116,24 @@ void groundTile(int x,int y,float sx,float sy){
 }
 void make(){
  makeScenery();
+ oasis_water::init();
  terrain=render_targets::colorOnly(TerrainCacheWidth,TerrainCacheHeight);BeginTextureMode(terrain);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,TerrainBakeScale});
- for(int sum=0;sum<MapSize*2;sum++)for(int x=1;x<MapSize-1;x++){int y=sum-x;if(y<1||y>=MapSize-1)continue;groundTile(x,y,TerrainOriginX+(x-y)*40,90+(x+y)*20);}
- drawRoads();
+ const bool painted=terrain_paint::bake(false);
+ if(!painted)for(int sum=0;sum<MapSize*2;sum++)for(int x=1;x<MapSize-1;x++){int y=sum-x;if(y<1||y>=MapSize-1)continue;groundTile(x,y,TerrainOriginX+(x-y)*40,90+(x+y)*20);}
+ drawRoads(!painted);
  // Large smooth ridges are baked across tile boundaries; no square sand grid.
- for(int i=0;i<420*MapSize*MapSize/(PreviousMapSize*PreviousMapSize);i++){unsigned h=Game::hash(i,443);V pos{4.f+h%(MapSize-8),4.f+(h>>8)%(MapSize-8)};if(desertPath(pos)||distance(pos,DesertOasis)<6||distance(pos,DesertBossHome)<7)continue;
+ if(!painted)for(int i=0;i<420*MapSize*MapSize/(PreviousMapSize*PreviousMapSize);i++){unsigned h=Game::hash(i,443);V pos{4.f+h%(MapSize-8),4.f+(h>>8)%(MapSize-8)};if(desertPath(pos)||distance(pos,DesertOasis)<6||distance(pos,DesertBossHome)<7)continue;
   float x=TerrainOriginX+(pos.x-pos.y)*40,y=90+(pos.x+pos.y)*20,w=38+h%54,hh=8+(h>>15)%13;
-  softShape({{x-w,y},{x-w*.48f,y-hh*.7f},{x+w*.12f,y-hh},{x+w*.74f,y-hh*.3f},{x+w,y+2},{x+w*.2f,y+hh*.7f},{x-w*.52f,y+hh*.4f}},rgb(220,173,109));
-  curve({x-w*.94f,y},{x-w*.25f,y-hh*1.23f},{x+w*.22f,y-hh*1.27f},{x+w*.91f,y+1},rgb(244,203,143),1.1f);
-  for(int ridge=0;ridge<3;ridge++)curve({x-w*.55f,y+ridge*2},{x-w*.18f,y+ridge*2-3},{x+w*.18f,y+ridge*2},{x+w*.52f,y+ridge*2+2},rgb(195,148,90),.6f);
+   softShape({{x-w,y},{x-w*.48f,y-hh*.7f},{x+w*.12f,y-hh},{x+w*.74f,y-hh*.3f},{x+w,y+2},{x+w*.2f,y+hh*.7f},{x-w*.52f,y+hh*.4f}},rgb(220,173,109));
+   curve({x-w*.94f,y},{x-w*.25f,y-hh*1.23f},{x+w*.22f,y-hh*1.27f},{x+w*.91f,y+1},rgb(244,203,143),1.1f);
+   for(int ridge=0;ridge<3;ridge++)curve({x-w*.55f,y+ridge*2},{x-w*.18f,y+ridge*2-3},{x+w*.18f,y+ridge*2},{x+w*.52f,y+ridge*2+2},rgb(195,148,90),.6f);
  }
  float x=TerrainOriginX+(DesertOasis.x-DesertOasis.y)*40,y=90+(DesertOasis.x+DesertOasis.y)*20;
- for(int layer=0;layer<15;layer++)oval(x,y,220+(14-layer)*6,110+(14-layer)*3,rgb(136,154,91,10));oval(x,y,153,78,rgb(151,166,108));oval(x,y,140,70,rgb(209,192,128));oval(x,y,137,68,rgb(91,141,132));oval(x,y,126,61,rgb(41,112,132));oval(x-9,y-7,103,45,rgb(51,141,157));ovalOutline(x,y,135,66,rgb(196,214,173));
- for(int i=0;i<28;i++){unsigned h=Game::hash(i,711);float a=i*2*PI/28,xx=x+std::cos(a)*144,yy=y+std::sin(a)*73;oval(xx,yy,3+h%4,2+h%2,rgb(127,149,83));line(xx,yy,xx+2,yy-7-h%6,rgb(103,129,63),1);}
+ beginTransparentLayer();
+ for(int layer=0;layer<12;layer++)oval(x,y,158+(11-layer)*5,78+(11-layer)*2.5f,rgb(137,121,76,14));
+ oval(x,y,143,72,rgb(121,116,77,182));
+ if(!oasis_water::ready())oval(x,y,137,68,rgb(46,99,102));
+ native_world::endBlendMode();
  x=TerrainOriginX+(DesertBossHome.x-DesertBossHome.y)*40;y=90+(DesertBossHome.x+DesertBossHome.y)*20;
  oval(x,y,213,105,rgb(189,136,79));oval(x-8,y-6,194,91,rgb(220,174,108));for(int i=0;i<4;i++)ovalOutline(x,y,173-i*9,82-i*4,rgb(200-i*3,145-i*2,81));
  for(int i=0;i<12;i++){float a=i*PI/6;diamond(x+std::cos(a)*192,y+std::sin(a)*94,5,3,rgb(148,104,66));}
@@ -134,10 +141,9 @@ void make(){
  terrain_surface::prepare(WorldLocation::Desert,terrain.texture);
  Image mini=GenImageColor(180,112,BLANK);for(int y=0;y<112;y++)for(int x=0;x<180;x++){float delta=(x-90)*(MapSize-2)/78.f,sum=(y-6)*(MapSize-2)/48.f+2;V p{(sum+delta)*.5f,(sum-delta)*.5f};if(p.x>=1&&p.y>=1&&p.x<MapSize-1&&p.y<MapSize-1)ImageDrawPixel(&mini,x,y,desertWater(p)?rgb(64,168,181):desertPath(p)?rgb(136,100,64):rgb(202,160,101));}minimap=LoadTextureFromImage(mini);UnloadImage(mini);
 }
-void unload(){unloadScenery();if(terrain.id)UnloadRenderTexture(terrain);if(minimap.id)UnloadTexture(minimap);terrain={};minimap={};}
+void unload(){unloadScenery();oasis_water::unload();if(terrain.id)UnloadRenderTexture(terrain);if(minimap.id)UnloadTexture(minimap);terrain={};minimap={};}
 void atmosphere(){
  drawSandWind();
- Vector2 p=screen(DesertOasis);for(int i=0;i<5;i++){float age=std::fmod(game.time*.13f+i*.2f,1.f);ovalOutline(p.x,p.y,24+age*89,12+age*40,Fade(rgb(175,223,218),(1-age)*.32f));}
- p=screen(DesertPortal);if(p.x>-90&&p.x<WorldW+90){ovalOutline(p.x,p.y-82,27+std::sin(game.time*1.4f)*2,49,Fade(rgb(194,158,244),.55f));for(int i=0;i<8;i++){float age=std::fmod(game.time*.19f+i*.125f,1.f);oval(p.x+std::sin(i*2.4f+game.time)*24,p.y-13-age*140,1.5f,2,Fade(rgb(231,203,250),(1-age)*.8f));}}
+ Vector2 p=screen(DesertPortal);if(p.x>-90&&p.x<WorldW+90){ovalOutline(p.x,p.y-82,27+std::sin(game.time*1.4f)*2,49,Fade(rgb(194,158,244),.55f));for(int i=0;i<8;i++){float age=std::fmod(game.time*.19f+i*.125f,1.f);oval(p.x+std::sin(i*2.4f+game.time)*24,p.y-13-age*140,1.5f,2,Fade(rgb(231,203,250),(1-age)*.8f));}}
 }
 }

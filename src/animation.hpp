@@ -8,6 +8,13 @@ namespace ember {
 // Clockwise screen directions, not the axes of the isometric map.
 enum class Direction { E, SE, S, SW, W, NW, N, NE };
 constexpr float AnimationPi = 3.14159265358979323846f;
+inline constexpr float ActorGroundSquash=.52f;
+struct ActorFacing {float x,y;};
+inline ActorFacing actorFacing(float angle){
+ const float x=std::cos(angle),y=std::sin(angle)/ActorGroundSquash;
+ const float length=std::hypot(x,y);
+ return {x/length,y/length};
+}
 
 inline Direction directionFor(float worldX, float worldY, Direction previous) {
     if (std::hypot(worldX, worldY) < 0.0001f) return previous;
@@ -23,7 +30,7 @@ struct AnimationState {
     bool moving = false;
     bool sprinting = false;
     float runBlend = 0;
-    float swordStow = 0; // Reversible Synfig timeline: 0 in hand, 1 in scabbard.
+    float swordStow = 0; // Saved melee carry timeline: 0 in hand, 1 stored.
     float moveBlend = 0, facingAngle = AnimationPi/4, targetAngle = AnimationPi/4;
     bool motionInitialized = false, facingInitialized = false;
     void stopSprint(){sprinting=false;runBlend=0;}

@@ -1,12 +1,28 @@
 #pragma once
-void hero(float x,float y,float s,bool portrait) {
-    AnimationState state=game.animation;
-    if(portrait){state={};state.direction=Direction::SE;}
-    float progress=portrait?-1:game.swingProgress();
-    float attack=progress>=0?std::sin(progress*PI):0;
+Rectangle enemyHealthBar(const Enemy& enemy,Vector2 p){
+    const float w=enemyBoss(enemy.type)||enemy.type==7?98.f:48.f;
+    float y=p.y-enemyInfo(enemy.type).visualHeight;
+    if(enemy.type==3&&enemy.boulderWindup>0){
+        const auto socket=Game::boulderHand(enemy,enemy.boulderProgress());
+        y=std::min(y,screen(socket.ground).y-socket.height-BoulderSpriteSize*.5f-10);
+    }
+    return {p.x-w/2,y,w,5};
+}
+void enemyVitals(const Enemy& enemy,Vector2 p,bool name){
+    const Rectangle bar=enemyHealthBar(enemy,p);
+    if(name){
+        const char* label=enemyInfo(enemy.type).name;
+        const float width=textWidth(label,15);
+        rect(p.x-width*.5f-5,bar.y-20,width+10,18,Fade(Ink,.86f));
+        center(label,p.x,bar.y-19,15,Text);
+    }
+    rect(bar.x-1,bar.y-1,bar.width+2,7,Ink);
+    rect(bar.x,bar.y,bar.width*std::clamp(enemy.hp/enemy.maxHp,0.f,1.f),bar.height,rgb(175,86,75));
+}
+void hero(float x,float y,float s,bool portrait,actor_art::Silhouette* fallbackSilhouette) {
+    AnimationState portraitState{};
+    portraitState.direction=Direction::SE;
     float roll=portrait?-1:game.rollProgress();
-    float fall=portrait?-1:game.knockdownProgress(),fallR=0,fallF=-1;
-    if(fall>=0)actor_art::prepareKnockdown(game,state,fallR,fallF);
     if(roll>=0){
         Vector2 heading{(game.rollDirection.x-game.rollDirection.y)*40,(game.rollDirection.x+game.rollDirection.y)*20};
         float len=std::hypot(heading.x,heading.y);if(len>0){heading.x/=len;heading.y/=len;}
@@ -18,7 +34,7 @@ void hero(float x,float y,float s,bool portrait) {
         if(roll*RollDuration<RollProtection)ellipseOutline(x,y+2*s,28*s,13*s,Fade(Gold,.8f));
     }
     actor_art::shadowCacheKey=portrait?-1:0;
-    actor_art::draw(0,x,y,s,state,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,nullptr,roll,progress,portrait?-1:game.visibleBowCharge(),game.ammoCount(),!portrait&&game.empoweredPose(),&game.equipment,-1,fall,fallR,fallF,portrait?PowerStyle::Count:game.activePowerVisual(),game.powerVisualAge(),portrait?-1:game.powerWindupProgress());
+    actor_art::drawPlayer(game,x,y,s,portrait?&portraitState:nullptr,nullptr,fallbackSilhouette);
     actor_art::shadowCacheKey=-1;
 }
 void monster(Enemy& e,float x,float y) {
@@ -55,7 +71,7 @@ void monster(Enemy& e,float x,float y) {
     }
     bool underMouse=hovered.kind==HoverKind::Enemy&&hovered.index==e.id;
     actor_art::shadowCacheKey=100+e.id;
-    actor_art::drawEnemy(e,x,y,underMouse?rgb(255,140,104):BLANK);
+    actor_art::drawEnemy(e,x,y,underMouse?Gold:BLANK);
     actor_art::shadowCacheKey=-1;
     if(regionalEnemy(e.type)&&e.strike>0){
         float age=std::clamp(1-e.strike/.22f,0.f,1.f);
@@ -75,10 +91,6 @@ void monster(Enemy& e,float x,float y) {
         if(sand)ellipseOutline(origin.x,origin.y,6+radius,(6+radius)*.34f,Fade(rgb(98,225,207),(1-age)*.73f));
     }
     guardian_art::held(e);
-    if(e.hp<e.maxHp||underMouse){
-          float w=enemyBoss(e.type)||e.type==7?98:48,yy=y-enemyInfo(e.type).visualHeight;
-          if(e.type==3&&e.boulderWindup>0){auto socket=Game::boulderHand(e,e.boulderProgress());yy=std::min(yy,screen(socket.ground).y-socket.height-BoulderSpriteSize*.5f-10);}
-        rect(x-w/2,yy,w,5,Ink);rect(x-w/2,yy,w*std::max(0.f,e.hp)/e.maxHp,5,rgb(175,86,75));
-    }
+    if(e.hp<e.maxHp&&!underMouse)enemyVitals(e,{x,y},false);
 }
 

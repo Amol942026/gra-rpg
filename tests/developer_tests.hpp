@@ -5,7 +5,8 @@ void developerTests(){
  auto catalogueComplete=[](const Game& g){
   for(int id=1;id<ItemKindCount;id++){
    const Kind kind=Kind(id);const int slot=gearSlot(kind);
-   if(slot>=0&&g.equipment[slot].kind!=kind&&g.bagCount(kind)==0)return false;
+   if(kind==Kind::DawnShard)continue;
+   if((slot<0||g.equipment[slot].kind!=kind)&&g.bagCount(kind)==0)return false;
   }
   return true;
  };
@@ -45,14 +46,27 @@ void developerTests(){
  }
  Game g;check(!g.developerSession&&g.bag.size()==BagSize&&g.level==1&&g.skillRanks==SkillRanks{}&&g.learnedSpells==0&&g.ammoCount()==20,"normal character starts with ordinary progression and one page");
  check(developerStart(g,10,true)&&g.inTower()&&g.towerFloor==2&&unlocked(g),"developer tower start grants the standard test character");
- check(catalogueComplete(g)&&g.bag.size()>BagSize&&g.bag.size()%BagSize==0,"fresh DEV session contains every gear kind across full pages");
+ check(catalogueComplete(g)&&g.bag.size()>BagSize&&g.bag.size()%BagSize==0,"fresh DEV session contains every ordinary item across full pages");
+ Game earlierCatalogue=g;
+ for(auto& value:earlierCatalogue.bag)if(protectiveGear(value.kind))value={};
+ check(!catalogueComplete(earlierCatalogue)&&developerStart(earlierCatalogue,11,false)&&catalogueComplete(earlierCatalogue),
+       "moving an existing DEV character replenishes all six newly introduced items");
+ Game arena;
+ for(Skill skill:{Skill::Cleave,Skill::DoubleThrust,Skill::Skewer}){
+  check(developerStart(arena,0,true),"fresh combat test session starts");
+  const Kind weapon=skillProfile(skill).weapon;
+  const auto binding=std::find_if(arena.weaponWheel.begin(),arena.weaponWheel.end(),[&](auto value){return archetype(value.kind)==weapon;});
+  check(binding!=arena.weaponWheel.end()&&arena.selectWeapon(int(binding-arena.weaponWheel.begin())),
+        "each new weapon skill has its weapon on the developer wheel");
+  check(arena.skillForSlot(0)==skill&&arena.useMeleeSkill(skill,{1,0}),"developer can use the corresponding skill before gaining any experience");
+ }
  auto later=std::find_if(g.bag.begin()+BagSize,g.bag.end(),[](Item value){return gearSlot(value.kind)==0;});
  const int laterIndex=int(later-g.bag.begin());
  check(later!=g.bag.end()&&g.bindWeapon({Place::Bag,laterIndex},7)&&g.weaponSource(7).index==laterIndex&&g.selectWeapon(7),
        "a weapon on a later page can be assigned and equipped through the wheel");
  g.skillRanks={3,2};g.level=7;g.xp=56;g.attributes={8,7,6,5,4,3};auto attrs=g.attributes;g.towerRuneMask=7;developerBagSlot(g)=item(Kind::DawnShard);developerBagSlot(g)=item(Kind::Sword,2);g.addGround(item(Kind::Gold),g.player);int dropped=g.ground.back().id;auto supplies=g.bag;
  g.bag[0].count-=5;g.bag[1].count-=4;g.bag[5].count-=7;
- check(developerStart(g,12,false)&&same(g.bag,supplies)&&unlocked(g)&&g.xp==0&&g.attributes==attrs&&g.skillRanks==SkillRanks{3,2,1}&&g.towerRuneMask==7,"moving upgrades the character and preserves gear, attributes and higher ranks");
+ check(developerStart(g,12,false)&&same(g.bag,supplies)&&unlocked(g)&&g.xp==0&&g.attributes==attrs&&g.skillRanks==SkillRanks{3,2,1,1,1,1}&&g.towerRuneMask==7,"moving upgrades the character and preserves gear, attributes and higher ranks");
  check(!g.get({Place::Ground,dropped})&&developerStart(g,10,false)&&g.get({Place::Ground,dropped}),"developer transitions retain floor-local ground items for return");
  g.towerReturnPending=true;g.dawnQuest=DawnQuest::Returning;g.openedCorpse=13;g.rollRemaining=.3f;g.swing=.2f;g.bowDrawing=true;g.piercingArrowArmed=true;g.fireballs.push_back({g.player,{1,0}});g.arrows.push_back({g.player,{1,0},4,10});g.effects.push_back({g.player,"test",1,2});
  check(developerStart(g,0,false)&&!g.inTower()&&!g.storyBlocked()&&!g.towerReturnPending&&!g.rolling()&&!g.bowDrawing&&!g.piercingArrowArmed&&g.openedCorpse==-1&&g.fireballs.empty()&&g.arrows.empty()&&g.effects.empty(),"jump during active story or combat clears old transient actions without leaving blocked control");
@@ -81,7 +95,7 @@ void developerTests(){
  auto* boss=g.findEnemy(VolcanoBossId);boss->hp-=23;float bossHp=boss->hp;boss->eruptionWindup=.8f;
  g.cinders.push_back({g.player,{7.5f,0},7,20,2002});g.fissures.push_back({g.player,0,.95f,48,VolcanoBossId,false});g.heroKnockdownRemaining=.5f;g.heroKnockbackRemaining=.2f;g.sandPrisonRemaining=1;g.openedChest=4;
  check(developerStart(g,18,false)&&g.inVolcano()&&developerSpawnSafe(g,g.player)&&distance(g.player,VolcanoBossHome)<6,"current character can move directly to the volcanic boss safely");
- check(same(g.bag,inventory)&&same(g.equipment,equipment)&&unlocked(g)&&g.xp==0&&g.attributes==Attributes{3,2,4,1,5,6}&&g.skillRanks==SkillRanks{2,1,1}&&g.findEnemy(VolcanoBossId)->hp==bossHp,"same-realm warp keeps gear and enemy progress with all developer unlocks");
+ check(same(g.bag,inventory)&&same(g.equipment,equipment)&&unlocked(g)&&g.xp==0&&g.attributes==Attributes{3,2,4,1,5,6}&&g.skillRanks==SkillRanks{2,1,1,1,1,1}&&g.findEnemy(VolcanoBossId)->hp==bossHp,"same-realm warp keeps gear and enemy progress with all developer unlocks");
  check(g.cinders.empty()&&g.fissures.empty()&&g.findEnemy(VolcanoBossId)->eruptionWindup==0&&!g.knockedBack()&&!g.sandTrapped()&&g.openedChest==-1,"same-realm warp cancels eruptions, projectiles, old knockdown and open loot");
  g.player=VolcanoPortal;check(g.useVolcanoPortal()&&g.inTower(),"volcanic developer session can return through the ordinary portal");g.player=MagePosition;check(g.canTravelVolcano(),"developer story setup permits returning to the third realm through Eldrin");
 }

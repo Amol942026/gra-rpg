@@ -1,7 +1,10 @@
 #pragma once
+#include "animation.hpp"
 #include "hero_carry.hpp"
 #include "items.hpp"
+#include "power_motion.hpp"
 #include "spear_timing.hpp"
+#include "weapon_profiles.hpp"
 #include "generated/spear_motion_data.hpp"
 
 namespace ember::spear_motion {
@@ -34,5 +37,30 @@ inline float apply(hero_motion::Pose& pose,Kind kind,float progress,float gait,f
  hero_carry::placeGrip(pose,false,pose.point(bone::Pelvis,rear),pose.vector(bone::Pelvis,{1,-.52f,-.2f}),grip);
  hero_carry::placeGrip(pose,true,pose.point(bone::Pelvis,front),pose.vector(bone::Pelvis,{-1,-.50f,-.33f}),grip);
  return key.slide;
+}
+
+inline hero_motion::Vec bladeTip(const hero_motion::Pose& pose,Kind kind,float slide){
+ using namespace hero_motion;
+ const Vec rear=pose.world[hero_motion::data::HandR].p;
+ const Vec shaft=pose.world[hero_motion::data::HandL].p-rear;
+ const Vec axis=shaft*(1/std::max(.001f,length(shaft)));
+ const Vec across=Vec{axis.y,-axis.x,0}*(1/std::max(.001f,std::hypot(axis.x,axis.y)));
+ const auto profile=weapon_profiles::spear(kind);
+ return rear+axis*(slide+profile.tipOffset())+across*(profile.halfWidth*profile.point[3].x);
+}
+
+inline hero_motion::Vec impactTip(const AnimationState& state,Kind kind,bool charged){
+ const float gait=state.motionInitialized?state.moveBlend:(state.moving?1.f:0.f);
+ auto pose=hero_motion::evaluate(state.phase,gait,0,state.idleTime);
+ float progress=float(SpearImpactFrame)/SpearFrames;
+ if(charged){
+  const auto& attack=powerAttack(PowerStyle::Spear);
+  const auto powerKey=power_motion::sample(PowerStyle::Spear,attack.contact/attack.duration);
+  power_motion::body(pose,powerKey);
+  progress=powerKey.phase;
+ }
+ const float stride=state.moving?std::sin(state.phase*(2*AnimationPi)):0;
+ const float slide=apply(pose,kind,progress,gait,stride);
+ return bladeTip(pose,kind,slide);
 }
 }

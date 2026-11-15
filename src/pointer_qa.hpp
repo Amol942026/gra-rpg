@@ -60,7 +60,7 @@ bool runPointerQA(){
         check(game.equipment[0].tier==1&&game.bag[24].tier==0,"drag from the bottom-right bag cell equips the weapon");
         V target=game.player+V{2,-2};game.enemies.push_back({901,0,target,target,100,100});
         Vector2 enemyPoint=screen(target);enemyPoint.y-=18;point(enemyPoint);
-        check(pickWorld(mouse).kind==HoverKind::Enemy&&inspectWorld(pickWorld(mouse)).maxHp==100,"presented monster hover matches the information HUD");
+        check(pickWorld(mouse).kind==HoverKind::Enemy&&inspectWorld(pickWorld(mouse)).source==HoverKind::None,"presented monster is picked without a second set of vitals in the sidebar");
         check(castGameplaySpell()&&distance(normalized(game.fireballs.back().velocity),normalized(target-game.player))<.001f,"fireball aims at the monster under the presented pointer");
         game.enemies[0].pos=game.player+V{1,-1};game.hit(game.enemies[0],1000);
         Enemy* body=game.findCorpse(901);body->loot={};body->loot[0]=item(Kind::Gold,0,11);

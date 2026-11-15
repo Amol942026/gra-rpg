@@ -16,7 +16,8 @@ enum class Cue {
     CinderhornAttack, CinderhornHit, CinderhornFall, SpearThrust, SpearImpact,
     BriarSpearThrust, BriarSpearImpact, OasisSpearThrust, OasisSpearImpact,
     BasaltSpearThrust, BasaltSpearImpact, DawnSpearThrust, DawnSpearImpact,
-    PowerSword, PowerAxe, PowerDagger, PowerSpear, PowerBow, CinderhornCharge, Count
+    PowerSword, PowerAxe, PowerDagger, PowerSpear, PowerBow, CinderhornCharge,
+    LandSlime, LandBeast, LandBone, LandStone, LandWood, LandShell, LandSand, LandEmber, Count
 };
 // Preserve the original cue numbers in older saves; new entries are appended.
 inline Cue regionalEnemyCue(int type,int offset){
@@ -46,7 +47,17 @@ inline Cue enemyAttackCue(int type){
 }
 inline Cue enemyFallCue(int type){
     if(regionalEnemy(type))return regionalEnemyCue(type,2);
-    return enemyBoss(type)?Cue::Victory:Cue::EnemyFall;
+    constexpr Cue material[]={Cue::LandSlime,Cue::LandBeast,Cue::LandBone,Cue::LandStone,
+        Cue::LandBeast,Cue::LandShell,Cue::EnemyFall,Cue::LandWood,
+        Cue::LandShell,Cue::LandShell,Cue::LandSand,Cue::LandSand,
+        Cue::LandShell,Cue::LandBeast,Cue::LandEmber,Cue::LandEmber,
+        Cue::LandStone,Cue::LandBeast,Cue::LandStone};
+    static_assert(sizeof(material)/sizeof(*material)==SporekinType);
+    return type>=0&&type<SporekinType?material[type]:Cue::EnemyFall;
+}
+inline constexpr bool enemyLandingCue(Cue cue){
+    return cue==Cue::EnemyFall||cue==Cue::SporekinFall||cue==Cue::DuneEyeFall||cue==Cue::CinderhornFall||
+           (cue>=Cue::LandSlime&&cue<=Cue::LandEmber);
 }
 struct SoundEvent { Cue cue; float x,y; };
 }

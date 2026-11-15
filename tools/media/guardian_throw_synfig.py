@@ -1,11 +1,26 @@
 """Author the native two-handed 2D cutout, then compile the saved SIF controls."""
 from pathlib import Path
-import argparse,hashlib,json,math,shutil,subprocess,xml.etree.ElementTree as ET
+import argparse,hashlib,json,math,shutil,xml.etree.ElementTree as ET
 from hero_synfig import group,image,rotate
+import synfig_cli
 
 FRAMES,RELEASE=114,90
+UPPER,FOREARM=17,16
 FIELDS='handSide handForward handUp elbowSide elbowForward elbowUp rockForward rockUp bodyForward bodyUp'.split()
 TRACKS={'hand':('handForward','handUp'),'elbow':('elbowForward','elbowUp'),'grip':('handSide','elbowSide'),'rock':('rockForward','rockUp'),'body':('bodyForward','bodyUp')}
+
+def fixed_arm(shoulder, target, upper, forearm):
+ delta=[b-a for a,b in zip(shoulder,target)]
+ distance=math.hypot(*delta)
+ axis=[value/distance for value in delta]
+ reach=max(abs(upper-forearm)+.10,min(distance,upper+forearm-.24))
+ along=(upper*upper-forearm*forearm+reach*reach)/(2*reach)
+ bend=math.sqrt(max(0,upper*upper-along*along))
+ pole=[0,axis[2],-axis[1]]
+ norm=math.hypot(*pole)
+ if norm<.001: pole,norm=[0,-1,0],1
+ return (tuple(a+b*along+c*bend/norm for a,b,c in zip(shoulder,axis,pole)),
+         tuple(a+b*reach for a,b in zip(shoulder,axis)))
 
 def vector(layer,name,coords):
  anim=ET.SubElement(ET.SubElement(layer,'param',name=name),'animated',type='vector')
@@ -16,24 +31,20 @@ def vector(layer,name,coords):
 def author(root,stone,header):
  root.mkdir(parents=True,exist_ok=False);(root/'parts').mkdir();shutil.copy2(stone,root/'parts/stone.png')
  # frame, grip half-width, hand f/z, boulder f/z, torso f/z.
- keys=[(0,27,5,33,36,8,0,0),(16,20,34,12,36,14,12,-16),
-       (29,20,43,20,44,28,12,-14),(53,20,39,64,40,76,3,-3),
-       (61,19,32,85,36,102,3,0),(70,19,8,90,8,106,0,0),(80,19,5,91,5,107,-2,1),
-       (90,19,24,86,24,102,4,-2),(98,22,35,52,24,102,7,-7),
+ keys=[(0,27,5,33,36,8,0,0),(16,20,31,13,34,14,12,-18),
+       (29,20,39,21,42,29,12,-14),(53,20,30,57,40,71,3,-3),
+       (61,19,25,77,34,91,3,0),(70,19,10,85,10,102,1,3),(80,19,6,86,6,103,-1,3),
+       (90,19,23,81,23,99,5,1),(98,22,35,52,23,99,7,-7),
        (114,27,5,33,36,8,0,0)]
  rows=[]
  for frame in range(FRAMES+1):
   i=next(i for i in range(len(keys)-1) if keys[i+1][0]>=frame);a,b=keys[i:i+2]
   t=(frame-a[0])/(b[0]-a[0]);t=t*t*(3-2*t)
   hs,hf,hz,rf,rz,bf,bz=[a[j]+(b[j]-a[j])*t for j in range(1,8)]
-  es=(23+hs)/2;link=math.sqrt(22**2-((hs-23)/2)**2)
-  dx,dy=hf-bf,hz-(53+bz);d=math.hypot(dx,dy);h=math.sqrt(max(0,link**2-d*d/4))
-  # Pick the same flexion side as the resting arm: shoulder -> elbow -> hand
-  # has positive signed area in the forward/up plane. The opposite IK branch
-  # bends behind the hinge and flips through a straight arm during the blend.
-  ef,ez=(hf+bf)/2+dy/d*h,(hz+53+bz)/2-dx/d*h
-  blend=min(1,frame/24,(FRAMES-frame)/24);blend=blend*blend*(3-2*blend)
-  es=25+(es-25)*blend;ef=1+(ef-1)*blend;ez=43+(ez-43)*blend
+  (es,ef,ez),(hs,hf,hz)=fixed_arm((23,bf,53+bz),(hs,hf,hz),UPPER,FOREARM)
+  # Roll the boulder outward around the face during the transition to overhead.
+  if 61<frame<70:
+   rf+=5*math.sin(math.pi*(frame-61)/9)**2
   rows.append(dict(zip(FIELDS,(hs,hf,hz,es,ef,ez,rf,rz,bf,bz))))
  canvas=ET.Element('canvas',version='1.2',width='480',height='400',xres='2834.645669',yres='2834.645669',**{'view-box':'-65 145 145 -15','antialias':'2','fps':'60','begin-time':'0f','end-time':f'{FRAMES-1}f','bgcolor':'0 0 0 0'})
  ET.SubElement(canvas,'name').text='Emberfall / Stone Guardian / uproot and two-handed overhead throw'
@@ -62,7 +73,8 @@ def author(root,stone,header):
  for frame,p in enumerate(rows):
   if frame<=RELEASE:flight.append(project(0,p['rockForward'],p['rockUp']))
   else:
-   t=(frame-RELEASE)/(FRAMES-RELEASE);flight.append(project(0,24+t*140,102*(1-t)+math.sin(t*math.pi)*25))
+   t=(frame-RELEASE)/(FRAMES-RELEASE);release=rows[RELEASE]
+   flight.append(project(0,release['rockForward']+t*140,release['rockUp']*(1-t)+math.sin(t*math.pi)*25))
  cutout('large uprooted boulder',(55,55),flight)
  for name,fields in TRACKS.items():
   part=group(canvas,'Authority / '+name)
@@ -76,13 +88,16 @@ def author(root,stone,header):
  for frame in range(FRAMES+1):
   p={field:tracks[track][frame][i] for track,fields in TRACKS.items() for i,field in enumerate(fields)};saved.append(tuple(p[f] for f in FIELDS))
  assert saved[0]==saved[-1]
- lines=['#pragma once','// Compiled from saved native 2D Synfig controls. Mirrored two-hand grip; no runtime I/O.','namespace guardian_motion {','struct Pose {float '+','.join(FIELDS)+';};','inline constexpr Pose poses[]={']
+ lines=['#pragma once','#include "../enemy_arm.hpp"','// Compiled from saved native 2D Synfig controls.','namespace guardian_motion {','struct Pose {float '+','.join(FIELDS)+';};','inline constexpr Pose poses[]={']
  lines+=['{'+','.join(f'{v:.7f}f' for v in row)+'},' for row in saved]
  lerps=','.join(f'a.{f}+(b.{f}-a.{f})*t' for f in FIELDS)
- lines+=['};',f'inline Pose sample(float progress){{float f=std::clamp(progress,0.f,1.f)*{FRAMES};int i=std::min({FRAMES-1},int(f));float t=f-i;auto a=poses[i],b=poses[i+1];return {{{lerps}}};}}',f'inline constexpr int Frames={FRAMES},ReleaseFrame={RELEASE};',f'inline constexpr float Windup={RELEASE}/60.f,Recovery=({FRAMES}-{RELEASE})/60.f;',f'inline constexpr Pose Release=poses[{RELEASE}];','}']
+ lines+=['};',f'inline Pose sample(float progress){{float f=std::clamp(progress,0.f,1.f)*{FRAMES};int i=std::min({FRAMES-1},int(f));float t=f-i;auto a=poses[i],b=poses[i+1];Pose p{{{lerps}}};',
+         ' auto arm=enemy_arm::solve({23,p.bodyForward,53+p.bodyUp},{p.handSide,p.handForward,p.handUp},enemy_arm::GuardianUpper,enemy_arm::GuardianForearm);',
+         ' p.elbowSide=arm.elbow.side;p.elbowForward=arm.elbow.forward;p.elbowUp=arm.elbow.up;',
+         ' p.handSide=arm.hand.side;p.handForward=arm.hand.forward;p.handUp=arm.hand.up;return p;}',
+         f'inline constexpr int Frames={FRAMES},ReleaseFrame={RELEASE};',f'inline constexpr float Windup={RELEASE}/60.f,Recovery=({FRAMES}-{RELEASE})/60.f;',f'inline constexpr Pose Release=poses[{RELEASE}];','}']
  header.write_text('\n'.join(lines)+'\n',encoding='utf-8')
- result=subprocess.run(['pwsh','-NoProfile','-File',r'C:\AI2D\animations\Render-Synfig.ps1','-ProjectPath',str(path),'-OutputRoot',str(root/'renders'),'-ExpectedFrames',str(FRAMES),'-Threads','2','-RequireMotion'],capture_output=True,text=True)
- (root/'render.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8');assert result.returncode==0,result.stderr
+ synfig_cli.render(path,output_root=root/'renders',threads=2,expected_frames=FRAMES,require_motion=True)
  (root/'motion-receipt.json').write_text(json.dumps({'status':'PASS','source':'Synfig 1.4.5 native 2D mirrored cutout and controls','samples':FRAMES+1,'frames':FRAMES,'release_frame':RELEASE,'fields':FIELDS,'tracks':TRACKS,'master':str(root),'source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'header_sha256':hashlib.sha256(header.read_bytes()).hexdigest()},indent=2),encoding='utf-8')
  print(f'PASS: {FRAMES} Synfig frames, {FRAMES+1} saved control samples',flush=True)
 

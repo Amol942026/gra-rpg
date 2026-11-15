@@ -4,6 +4,8 @@ bool runMushroomQA(){
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
  game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;dragging={};nearbyPage=0;game.messageTime=0;
  check(!audioSystem.available,"mushroom diagnostic opens no audio device");
+ check(wildMushrooms.id&&wildMushrooms.width==112&&wildMushrooms.height==90&&wildMushroomAlpha.size()==112*90,
+       "the recolored forest porcini uses its original anchor size and alpha mask");
  check(game.forage.size()==MushroomCount,"real game creates 48 collectible mushrooms");
  V plant=game.forage[0].pos;game.player=plant+V{1,0};refreshDisplayLayout();mouse={0,0};renderScene();saveTexture(canvas,"qa-v22/mushrooms-in-forest.png");
  game.props.clear();game.enemies.clear();game.forage.resize(2);game.forage[1].pos=plant+V{0,1};game.hp=40;
@@ -18,7 +20,7 @@ bool runMushroomQA(){
  check(!game.forage[0].value.empty()&&game.bag[24].empty()&&dragging.place==Place::None,"walking out of range cancels collection without losing mushroom");
  game.player=player;pointAtPlant(game.forage[0]);leftClickGameplay({});pointAt(bagRect(24));finishDrag();
  check(game.forage[0].value.empty()&&game.bag[24].kind==Kind::Mushroom&&game.hp==40,"map-to-backpack drag harvests mushroom without healing immediately");
- auto slots=nearbySlots();int j=-1;for(int i=0;i<int(slots.size());i++)if(slots[i].place==Place::Forage&&slots[i].index==game.forage[1].id)j=i;
+ auto entries=nearbyEntries();int j=-1;for(int i=0;i<int(entries.size());i++)if(entries[i].slot.place==Place::Forage&&entries[i].slot.index==game.forage[1].id)j=i;
  check(j>=0,"uncollected mushrooms appear in the nearby HUD tray");
  if(j>=0){nearbyPage=j/5;pointAt(lootRect(j%5));check(hoverSlot().place==Place::Forage,"nearby HUD slot points to a growing mushroom");leftClickGameplay({});pointAt(bagRect(24));finishDrag();}
  check(game.bag[24].count==2&&game.forage[1].value.empty(),"HUD-to-backpack drag stacks the second harvested mushroom");

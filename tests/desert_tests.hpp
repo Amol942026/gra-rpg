@@ -12,6 +12,14 @@ void desertTests(){
  for(size_t i=0;i<g.enemies.size();i++)for(size_t j=i+1;j<g.enemies.size();j++)check(distance(g.enemies[i].home,g.enemies[j].home)>g.enemies[i].radius()+g.enemies[j].radius()+.5f,"initial desert bodies have distinct non-overlapping spaces");
  std::array<bool,PropTypeCount> present{};for(const auto& p:g.props){present[p.type]=true;check(p.type>=7&&!g.walkable(p.pos),"every desert obstacle uses its own type and a real collision");}for(int i=7;i<LegacyPropTypeCount;i++)check(present[i],"cacti, sandstone, obelisks, dry shrubs, palms and the gate all occur on the map");
  check(!g.walkable(DesertOasis)&&g.walkable(DesertOasis+V{0,-3.4f}),"oasis water is impassable while its shore remains accessible");
+ int palms=0,pairedCacti=0;bool plantsClearRoads=true;
+ for(const auto& p:g.props){
+  if(!Game::desertGroveProp(p.type))continue;
+  plantsClearRoads&=!desertPath(p.pos,propRadius(p.type));
+  if(p.type==12){palms++;check(distance(p.pos,DesertOasis)<8.5f&&!desertWater(p.pos,propRadius(12)),"palms stand on the oasis banks");}
+  else if(std::any_of(g.props.begin(),g.props.end(),[&](const Prop& q){return &p!=&q&&(q.type==7||q.type==8)&&distance(p.pos,q.pos)<5.f;}))pairedCacti++;
+ }
+ check(palms>=6&&pairedCacti>=100&&plantsClearRoads,"oasis palms and cactus patches leave caravan routes open");
  std::array<bool,MapSize*MapSize> visited{};std::vector<V> queue{DesertArrival};visited[int(DesertArrival.y)*MapSize+int(DesertArrival.x)]=true;
  for(size_t head=0;head<queue.size();head++)for(V step:{V{1,0},V{-1,0},V{0,1},V{0,-1}}){V p=queue[head]+step;if(p.x<2||p.y<2||p.x>MapSize-3||p.y>MapSize-3)continue;int cell=int(p.y)*MapSize+int(p.x);if(!visited[cell]&&g.walkable(p)){visited[cell]=true;queue.push_back(p);}}
  for(const auto& e:g.enemies)check(visited[int(e.home.y)*MapSize+int(e.home.x)],"walkable desert routes connect arrival to every encounter including the second boss");

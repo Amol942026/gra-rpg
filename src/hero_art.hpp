@@ -1,6 +1,8 @@
 #pragma once
 #include "hero_weapon_art.hpp"
 #include "hero_armor_variants.hpp"
+#include "hero_headwear.hpp"
+#include "round_shield_art.hpp"
 
 // Included inside actor_art after Rig. Every view and pointer query uses this
 // same articulated model, including equipment, bow poses and roll transforms.
@@ -42,7 +44,7 @@ inline int armorMaterial(Kind kind){
 inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
                       bool helmet,bool shield,Kind weapon,bool flash,bool rolling,bool striking,
                       float strikeProgress,float bowDraw,int quiverArrows,float run,bool empowered,const AnimationState& state,float rollProgress,const HeroAppearance& appearance,float knockdown=-1,float fallR=0,float fallF=-1,
-                      PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1){
+                      PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1,HeroReaction reaction={}){
     rig.reserve(1800);
     rig.setSmoothSurfaces();
     const auto& held=appearance[0];const auto& headwear=appearance[1];const auto& ward=appearance[2];
@@ -56,18 +58,19 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     const int material=armorMaterial(armor.value.kind);
     const bool hide=material==hero_paint::Hide,bone=material==hero_paint::Bone,scales=material==hero_paint::Scales;
     const Color skin=flash?Text:rgb(202,158,121),skinLight=flash?Text:rgb(227,186,148);
-    const Color metal=plated?paint(armor.paint.primary):paint(0x657f79),edge=plated?shade(metal,1.3f):paint(0x9bb5aa);
+    const Color metal=plated?paint(armor.paint.primary):paint(0x657f79);
     const Color cloth=travelCoat?paint(0x354c62):armor.present()?paint(armor.paint.secondary):paint(0x454c55);
     const Color mantle=travelCoat?paint(0x326e70):armor.present()?paint(armor.paint.primary):cloth,clothLight=shade(cloth,1.25f);
     const Color trim=armor.present()?paint(armor.paint.trim):paint(0xa49370);
     const hero_armor_variants::Finish realmFinish{metal,cloth,trim,paint(armor.paint.accent),
         !realmArmor||flash?-1:hero_paint::NewArmorFirstCell+int(armor.value.kind)-FirstAdditionalArmor};
-    const Color weaponMetal=held.present()?paint(held.paint.primary):edge,weaponTrim=held.present()?paint(held.paint.trim):Gold;
+    const Color weaponTrim=held.present()?paint(held.paint.trim):Gold;
     const Color weaponGrip=held.present()?paint(held.paint.secondary):paint(0x60452e);
-    const hero_weapon_art::Finish weaponFinish{weaponMetal,weaponGrip,weaponTrim,paint(held.paint.accent),flash};
+    const auto weaponFinish=hero_weapon_art::finish(held,flash);
     const Color leather=paint(0x744b38),pants=paint(0x5d5746);
     if(rolling||knockdown>=0){power=PowerStyle::Count;windup=-1;}
-    const float stowPhase=weapon==Kind::Sword&&!striking?(rolling?1.f:state.motionInitialized?state.swordStow:std::clamp(run,0.f,1.f)):0;
+    const bool extraStow=weapon_stow::supported(weapon);
+    const float stowPhase=(weapon==Kind::Sword||extraStow)&&!striking?(rolling?1.f:state.motionInitialized?state.swordStow:std::clamp(run,0.f,1.f)):0;
     const bool charging=windup>=0;
     if(charging)power=powerStyle(weapon);
     const bool overhead=power_motion::usesOverheadGrip(power);
@@ -75,6 +78,17 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     const auto powerKey=power_motion::sample(power,powerProgress,charging);
     if(power!=PowerStyle::Count)strikeProgress=powerKey.phase;
     if(power==PowerStyle::Sword)empowered=true;
+    if(weapon==Kind::Dagger&&striking&&empowered&&power==PowerStyle::Count){
+        const float first=float(DaggerImpactFrame)/DaggerAttackFrames;
+        const float second=SkillDaggerSecond/DaggerAttackDuration;
+        const float pullback=(first+second)*.5f;
+        if(strikeProgress>first&&strikeProgress<pullback)
+            strikeProgress=first-(strikeProgress-first)/(pullback-first)*.28f;
+        else if(strikeProgress>=pullback&&strikeProgress<second)
+            strikeProgress=first-.28f+(strikeProgress-pullback)/(second-pullback)*.28f;
+        else if(strikeProgress>=second)
+            strikeProgress=first+(1-first)*(strikeProgress-second)/(1-second);
+    }
     bool archer=weapon==Kind::Bow;float drawCharge=std::clamp(bowDraw,0.f,1.f);
     if(power==PowerStyle::Bow)drawCharge=std::clamp(drawCharge+.20f*powerKey.recoil,0.f,1.f);
     const float bowLift=charging&&archer?powerKey.phase:1;
@@ -86,23 +100,36 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     const float sprintBlend=attackPose||bowDraw>=0?0:state.runBlend;
     auto pose=hero_motion::evaluate(state.phase,moving,sprintBlend,state.idleTime,swordStrike?strikeProgress:-1,empowered,rollProgress);
     if(power!=PowerStyle::Count)power_motion::body(pose,powerKey);
+    auto natural=pose;
     if(!rolling){
         if(archer&&(bowDraw<0||bowLift<1))hero_carry::bow(pose);
         if(axeOrDagger){
-            if(attackPose&&!overhead)hero_weapon_motion::apply(pose,weapon,strikeProgress);
+            if(attackPose&&!overhead&&stowPhase<=0)hero_weapon_motion::apply(pose,weapon,strikeProgress);
             else hero_weapon_motion::carry(pose,weapon);
         }
     }
     if(swordStrike)hero_carry::melee(pose,1-hero_motion::ease(strikeProgress/.12f)*hero_motion::ease((1-strikeProgress)/.20f));
-    const float spearSlide=spearing?spear_motion::apply(pose,held.value.kind,attackPose?strikeProgress:-1,moving,stride):0;
+    const float spearSlide=spearing?spear_motion::apply(pose,held.value.kind,attackPose&&stowPhase<=0?strikeProgress:-1,moving,stride):0;
     auto stow=weapon==Kind::Sword&&(!swordStrike||stowPhase>0)?hero_sheath::apply(pose,stowPhase):sword_stow::sample(0);
-    if(overhead)power_motion::overheadGrip(pose,power,powerProgress,charging,1-hero_motion::ease(stowPhase/.26f));
+    if(overhead)power_motion::overheadGrip(pose,power,powerProgress,charging,1-hero_motion::ease(stowPhase/(extraStow?.08f:.26f)));
+    const bool reacting=!rolling&&knockdown<0&&reaction.progress>=0;
+    const auto spineBeforeReaction=pose.world[hero_motion::data::Spine];
     if(knockdown>=0){
         pose=hero_knockdown::evaluate(pose,knockdown,{fallR,fallF,0});
+        if(extraStow&&stowPhase>0)natural=hero_knockdown::evaluate(natural,knockdown,{fallR,fallF,0});
         if(weapon==Kind::Sword&&stowPhase>=.999f)stow=hero_sheath::apply(pose,1);
         if(knockdown>0&&knockdown<1)rig.setGroundBounded();
+    }else if(reacting){
+        hero_hit_reaction::apply(pose,reaction.progress,reaction.away);
+        if((extraStow&&stowPhase>0)||(shield&&weapon==Kind::Sword))
+            hero_hit_reaction::apply(natural,reaction.progress,reaction.away);
+        if(weapon==Kind::Sword&&stowPhase>=.999f)stow=hero_sheath::apply(pose,1);
     }
-    float exposedBlade=weapon==Kind::Sword?sword_stow::visibleFraction(stow):1;
+    weapon_stow::Mount extra{};
+    const float backDepth=cape?12.3f:realmArmor?
+        hero_armor_variants::cuts[int(armor.value.kind)-FirstAdditionalArmor].depth*.5f+1.4f:plated?11.85f:10.5f;
+    if(extraStow&&stowPhase>0)extra=weapon_stow::apply(pose,natural,weapon,stowPhase,spearSlide,backDepth);
+    float exposedBlade=weapon==Kind::Sword?sword_stow::visibleFraction(stow):extra.daggerVisible;
     if(archer&&bowDraw>=0&&bowLift>0&&!rolling){
         for(int side=0;side<2;side++){
             int upper=side?hero_motion::data::UpperArmR:hero_motion::data::UpperArmL;
@@ -110,6 +137,11 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
             int handBone=side?hero_motion::data::HandR:hero_motion::data::HandL;
             auto sh=pose.world[upper].p;
             hero_motion::Vec target=side?hero_motion::Vec{4-12*drawCharge,16-23*drawCharge,47}:hero_motion::Vec{-10,27,47};
+            if(reacting){
+                const auto& spine=pose.world[hero_motion::data::Spine];
+                const auto tilt=hero_motion::mul(spine.q,hero_motion::conjugate(spineBeforeReaction.q));
+                target=spine.p+hero_motion::rotate(tilt,target-spineBeforeReaction.p);
+            }
             const auto carried=pose.world[handBone];
             target=carried.p*(1-bowLift)+target*bowLift;
             auto arm=sword_pose::solveArm({sh.x,sh.y,sh.z},{target.x,target.y,target.z},side?1:-1);
@@ -120,9 +152,11 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         }
         pose.bind();
     }
-    // Keep the left side free until the sword hand finishes crossing the hip.
-    const bool shieldOnBack=archer||spearing||run>.1f||rolling||stowPhase>0;
-    if(shield&&!shieldOnBack&&knockdown<0)hero_carry::shield(pose);
+    const bool shieldFixed=archer||spearing||rolling;
+    const float shieldPhase=shieldFixed?1.f:(state.motionInitialized?state.swordStow:std::clamp(run,0.f,1.f));
+    hero_motion::Transform shieldMount{};
+    if(shield)shieldMount=shield_stow::apply(pose,weapon,shieldPhase,backDepth,!shieldFixed&&knockdown<0,
+                                           weapon==Kind::Sword&&knockdown<0?&natural:nullptr);
     auto rest=[](int bone){auto p=hero_motion::restHead(bone);return P3{p.x,p.y,p.z};};
     auto world=[](hero_motion::Vec p){return P3{p.x,p.y,p.z};};
     lift=0;stride*=moving;
@@ -153,8 +187,16 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         float length=travelCoat?34.f:45.f;
         float hem=travelCoat?std::sin(u*4*PI)*1.5f:
             edge<=.45f?-1.6f+edge*(3.7f/.45f):2.1f*(1-(edge-.45f)/.55f);
-        return P3{r+sway+clothMotion.capeSway*.44f*tip,
-                  -10-down*(3+run*9)-fold-clothMotion.capeLift*.50f*tip,
+        float back=-10-down*(3+run*9)-fold-clothMotion.capeLift*.50f*tip;
+        if(weapon==Kind::Axe||spearing){
+            const float contact=hero_motion::ease((stowPhase-.52f)/.2f);
+            const auto mount=weapon_stow::socket(weapon,backDepth);
+            const auto shaft=weapon_stow::storedAxis(weapon);
+            const float restingLine=mount.x+(58-down*length-mount.z)*shaft.x/shaft.z;
+            const float flatten=(1-hero_motion::ease((std::abs(r-restingLine)-5)/13))*contact;
+            back=back+(1.1f-backDepth-back)*flatten;
+        }
+        return P3{r+sway+clothMotion.capeSway*.44f*tip,back,
                   58+lift-down*(length-run*7-tuck*13)+hem*tip+clothMotion.capeLift*.25f*tip};
     };
     if(cape){
@@ -313,6 +355,13 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
         rig.tapered(mouth+axis*9,mouth+axis*10,5.9f,5.9f,leather);
         rig.tapered(mouth+axis*23,mouth+axis*24,5.2f,5.2f,leather);
         rig.setBone(hero_motion::data::Spine);
+    }else if(weapon==Kind::Dagger){
+        rig.setBone(hero_motion::data::Pelvis);
+        const P3 mouth=world(weapon_stow::DaggerMouth),axis=world(weapon_stow::storedAxis(weapon));
+        rig.tapered({13,5,33},mouth+axis*6,2.2f,1.9f,leather);
+        rig.tapered(mouth, mouth+axis*22,4.4f,2.5f,shade(weaponGrip,.63f));
+        rig.tapered(mouth, mouth+axis*2,5.f,4.7f,weaponTrim);
+        rig.tapered(mouth+axis*19,mouth+axis*22,3.15f,2.5f,metal);
     }
     for(float side:{-1.f,1.f}){
         int upper=side>0?hero_motion::data::UpperArmR:hero_motion::data::UpperArmL;
@@ -337,6 +386,8 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
             rig.rounded(shell+P3{side*.6f,0,-3.5f},{width-.6f,14.2f,4.1f},shade(trim,.87f));
             if(scales||bone)rig.rounded(shell+P3{side*.9f,0,-6},{width-1.8f,11.8f,4.7f},metal);
             for(float f:{-1.f,1.f})rig.rounded(shell+P3{side*2.2f,f*6.9f,-.3f},{2,2,2},trim);
+            if(itemRarity(armor.value)>=Rarity::Rare||(armor.value.kind==Kind::Armor&&armor.value.tier>=2))
+                hero_armor_variants::legacyCrest(rig,armor.value.kind,shell,side,realmFinish);
         }
         rig.setBone(fore);
         rig.tapered(hand,elbow,6,7,cloth,1.15f);
@@ -359,38 +410,46 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
             P3 axis=world(pose.vector(hero_motion::data::HandL,{0,0,1}));
             P3 forward=world(pose.vector(hero_motion::data::HandL,{0,1,0}));
             const bool nocked=bowDraw>=0&&bowLift>.58f&&!rolling;
-            const float curve=equipment_shape::BowCurve*(1-.15f*drawCharge);
+            const auto profile=weapon_profiles::bow(held.value.kind);
+            const float curve=profile.curve*(1-.15f*drawCharge)-profile.recurve*.29f;
             P3 string=grip-forward*curve;
             if(bowDraw>=0&&!rolling)
                 string=string*(1-bowLift)+world(pose.world[hero_motion::data::HandR].p)*bowLift;
-            hero_weapon_art::bow(rig,grip,axis,forward,string,weaponFinish,held.value.kind,drawCharge,nocked);
+            hero_weapon_art::bow(rig,grip,axis,forward,string,weaponFinish,held.value.kind,bowDraw<0?-1.f:drawCharge,nocked);
         }
         if(side>0&&spearing){
             rig.setBone(-1);
-            hero_weapon_art::spear(rig,world(pose.world[hero_motion::data::HandR].p),
+            if(stowPhase>0)hero_weapon_art::spear(rig,world(extra.grip),hero_weapon_art::basis(world(extra.axis),world(extra.across)),extra.spearSlide,weaponFinish,held.value.kind);
+            else hero_weapon_art::spear(rig,world(pose.world[hero_motion::data::HandR].p),
                  world(pose.world[hero_motion::data::HandL].p),spearSlide,weaponFinish,held.value.kind);
         }else if(side>0&&held.present()&&!archer){
             rig.setBone(hero_motion::data::Weapon);
             hero_weapon_art::melee(rig,hand,held.value.kind,exposedBlade,weaponFinish);
         }
         if(side<0&&shield){
-            bool stored=shieldOnBack;float front=stored?-1.f:1.f;
-            rig.setBone(stored?hero_motion::data::Spine:handBone);
-            P3 p=stored?P3{archer?7.f:0.f,-15,archer?42.f:45.f}:hand+P3{-2,hero_carry::ShieldOffset,1};
-            if(!stored){
-                // The fist closes around a leather handle mounted on the inner face.
-                rig.tapered(hand+P3{-2,2,-2.3f},p+P3{0,-1.5f,-3.3f},1.7f,1.6f,leather);
-                rig.tapered(hand+P3{-2,2,2.3f},p+P3{0,-1.5f,3.3f},1.7f,1.6f,leather);
+            rig.setAttachment(&shieldMount);
+            for(float z:{-3.3f,1.3f}){
+                rig.tapered({0,-5,z},{0,-1.5f,z},1.7f,1.6f,leather);
             }
-            gearPlate(rig,equipment_shape::Shield,equipment_shape::ShieldTriangles,p,{8.7f,0,0},{0,0,8.7f},{0,front*hero_carry::ShieldRimDepth,0},paint(ward.paint.trim));
-            gearPlate(rig,equipment_shape::Shield,equipment_shape::ShieldTriangles,p+P3{0,front*2,0},{7.45f,0,0},{0,0,7.45f},{0,front*1.4f,0},paint(ward.paint.primary));
-            for(float x:{-.6f,0.f,.6f}){rig.tapered(p+P3{x*8.7f,front*3,8},p+P3{x*8.7f,front*3,0},.65f,.65f,paint(ward.paint.secondary));rig.tapered(p+P3{x*8.7f,front*3,0},p+P3{x*3.9f,front*3,-10},.65f,.65f,paint(ward.paint.secondary));}
-            rig.rounded(p+P3{0,front*3.6f,1.3f},{5.5f,2.5f,5.5f},paint(ward.paint.trim));
-            rig.rounded(p+P3{0,front*5,1.3f},{2.4f,1.3f,2.4f},paint(ward.paint.accent));
+            if(round_shield_art::has(ward.value.kind))round_shield_art::draw(rig,ward,flash);
+            else{
+                gearPlate(rig,equipment_shape::Shield,equipment_shape::ShieldTriangles,{},{8.7f,0,0},{0,0,8.7f},{0,hero_carry::ShieldRimDepth,0},paint(ward.paint.trim));
+                gearPlate(rig,equipment_shape::Shield,equipment_shape::ShieldTriangles,{0,2,0},{7.45f,0,0},{0,0,7.45f},{0,1.4f,0},paint(ward.paint.primary));
+                for(float x:{-.6f,0.f,.6f}){rig.tapered({x*8.7f,3,8},{x*8.7f,3,0},.65f,.65f,paint(ward.paint.secondary));rig.tapered({x*8.7f,3,0},{x*3.9f,3,-10},.65f,.65f,paint(ward.paint.secondary));}
+                rig.rounded({0,3.6f,1.3f},{5.5f,2.5f,5.5f},paint(ward.paint.trim));
+                rig.rounded({0,5,1.3f},{2.4f,1.3f,2.4f},paint(ward.paint.accent));
+            }
+            rig.setAttachment(nullptr);
         }
     }
     rig.setBone(hero_motion::data::Head);
     float head=70+lift;
+    const Kind headgear=headwear.value.kind;
+    if(helmet&&hero_headwear::closed(headgear)){
+        hero_headwear::drawClosed(rig,head,headwear,flash);
+        rig.setSkeleton(nullptr);
+        return;
+    }
     rig.rounded({0,0,head},{17,16,20},skin,flash?-1:0);
     for(float side:{-1.f,1.f}){
         rig.rounded({side*8.2f,-.1f,head-.8f},{2.8f,3.5f,5.3f},skin);
@@ -406,25 +465,17 @@ inline void buildHero(Rig& rig,float lift,float stride,float cycle,float tuck,
     rig.tapered({-2.3f,8.3f,head-5},{2.3f,8.3f,head-5},.65f,.65f,rgb(134,88,78));
     rig.rounded({0,6.5f,head-8},{9,3,2.5f},shade(skin,.82f));
     }
-    Color hood=helmet?paint(headwear.paint.primary):flash?Text:hero_paint::HairColor;
+    if(helmet&&hero_headwear::hood(headgear)){
+        hero_headwear::drawHood(rig,head,headwear,flash);
+        rig.setSkeleton(nullptr);
+        return;
+    }
     if(helmet){
-        rig.rounded({0,-3,head+2},{20,17,24},hood);
-        gearPlate(rig,equipment_shape::Helmet,equipment_shape::HelmetTriangles,{0,6,head},{8.5f,0,0},{0,0,8.5f},{0,4,0},hood);
-        gearPlate(rig,equipment_shape::Visor,equipment_shape::VisorTriangles,{0,8.2f,head},{8.5f,0,0},{0,0,8.5f},{0,.6f,0},paint(0x17212a));
+        hero_headwear::drawOpen(rig,head,headwear,flash);
     }else{
-        rig.rounded({-.85f,-3.45f,head+4.2f},{19.5f,18,17.6f},hood,flash?-1:1,false,flash?-1:2);
-        rig.rounded({-5.4f,3.6f,head+6.4f},{6.8f,8.1f,5.4f},hood,flash?-1:1);
-    }
-    for(float side:{-1.f,1.f}){
-        P3 a{side*8,6,head+8},b{side*10,4,head-5};
-        if(helmet)rig.tapered(a,b,.8f,.8f,paint(headwear.paint.trim));
-    }
-    if(helmet){
-        Color helmetTrim=paint(headwear.paint.trim);
-        rig.tapered({0,9,head+4},{0,9,head-10},1.6f,1.6f,helmetTrim);
-        rig.tapered({-9,8.8f,head+3.6f},{0,9.2f,head+5.3f},1.1f,1.1f,helmetTrim);
-        rig.tapered({0,9.2f,head+5.3f},{9,8.8f,head+3.6f},1.1f,1.1f,helmetTrim);
-        rig.rounded({0,8.7f,head+8},{2.8f,1.6f,2.8f},paint(headwear.paint.accent));
+        const Color hair=flash?Text:hero_paint::HairColor;
+        rig.rounded({-.85f,-3.45f,head+4.2f},{19.5f,18,17.6f},hair,flash?-1:1,false,flash?-1:2);
+        rig.rounded({-5.4f,3.6f,head+6.4f},{6.8f,8.1f,5.4f},hair,flash?-1:1);
     }
     rig.setSkeleton(nullptr);
 }

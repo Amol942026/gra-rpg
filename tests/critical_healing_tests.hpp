@@ -15,11 +15,11 @@ void criticalHealingTests(){
    check(g.combatRng==rng,"applying damage never rerolls the already determined attack outcome");
   }
   Game g=combatArena(critical);for(int i=0;i<3;i++){V p=g.player+V{float(i-1),.5f};g.enemies.push_back({800+i,i,p,p,5000,5000});}
-  auto expected=g.combatRng;std::uniform_int_distribution<int>(1,100)(expected);float amount=g.damage();check(g.attack()&&g.combatRng==expected,"one successful area sword swing consumes exactly one attack roll");
+  auto expected=g.combatRng;std::uniform_int_distribution<int>(1,100)(expected);float amount=g.damage();check(g.attack({0,1})&&g.combatRng==expected,"one successful area sword swing consumes exactly one attack roll");
   for(const auto& enemy:g.enemies)check(std::abs((5000-enemy.hp)-damageAfterArmor(amount,enemy.defense())*multiplier)<.001f,"all targets of a sword swing share its critical outcome");
   auto after=g.combatRng;check(!g.attack()&&g.combatRng==after,"blocked repeat swing cannot roll or deal another critical");
   g=combatArena(critical);for(int i=0;i<3;i++){V p=g.player+V{float(i-1),.5f};g.enemies.push_back({800+i,i,p,p,5000,5000});}amount=g.strongCutDamage();expected=g.combatRng;std::uniform_int_distribution<int>(1,100)(expected);
-  check(g.strongCut()&&g.combatRng==expected&&g.mana==90,"strong cut rolls once and spends unchanged ten mana");
+  check(g.strongCut({0,1})&&g.combatRng==expected&&g.mana==90,"strong cut rolls once and spends unchanged ten mana");
   for(const auto& enemy:g.enemies)check(std::abs((5000-enemy.hp)-damageAfterArmor(amount,enemy.defense())*multiplier)<.001f,"strong cut applies critical to its own stronger base damage for every target");
   for(bool piercing:{false,true}){
    g=combatArena(critical);g.selectWeapon(1);for(int i=0;i<3;i++){V p=g.player+V{3.f+i*2,0};g.enemies.push_back({800+i,1,p,p,5000,5000});}

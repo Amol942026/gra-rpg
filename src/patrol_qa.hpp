@@ -17,22 +17,24 @@ bool runPatrolQA(){
     renderScene();saveTexture(canvas,"qa-v13/map-patrols.png");
     check(game.drop({Place::Bag,2},game.player)&&game.ground.size()==1,"player can still intentionally drop an inventory item");
     reset();check(game.ground.empty(),"a new expedition clears dropped items and starts empty again");
-    for(int type=0;type<4;type++){
+    for(int type:{0,1,2,3,BoarType}){
         reset();game.props.clear();game.enemies.clear();game.player={15,15};
         V home=game.player+V{1,7.5f};float hp=enemyInfo(type).health;
         game.enemies.push_back({31,type,home,home,hp,hp});Enemy& e=game.enemies[0];
-        // A known valid patrol leg keeps all four rendered walk poses visible.
+        // A known valid patrol leg keeps the moving silhouette outside sight range.
         e.behavior=EnemyBehavior::Patrol;e.patrolGoal=home+V{1.5f,-.3f};e.patrolGoalActive=true;
         for(int i=0;i<24;i++)game.update(1.f/60,{},false);
         check(!game.canSeePlayer(e)&&e.behavior==EnemyBehavior::Patrol&&e.animation.moving&&distance(e.pos,home)>.2f,"every species animates a real patrol leg while the hero is outside sight range");
         Vector2 p=screen(e.pos);bool picked=false;
-        // Squashing and facing move the visible slime surface. Find an opaque
-        // part of the current pose rather than assuming a fixed idle pixel.
+        // Motion and facing change the selectable silhouette. Find an opaque
+        // part of the current pose using the same picking path as gameplay.
         for(int y=-122;y<=10&&!picked;y+=2)for(int x=-54;x<=54&&!picked;x+=2){
             Vector2 point{p.x+x,p.y+y};WorldHover hit=pickWorld(point);
             if(hit.kind==HoverKind::Enemy&&hit.index==e.id){mouse=point;picked=true;}
         }
-        check(picked&&inspectWorld(pickWorld(mouse)).source==HoverKind::Enemy,"patrolling monster retains mouse hover and HUD inspection");
+        check(picked,"patrolling monster remains selectable by its animated silhouette");
+        check(picked&&inspectWorld(pickWorld(mouse)).source==HoverKind::None,
+              "hovered enemies use overhead name and health without a duplicate inspection card");
         game.say("Potwór patroluje okolicę respawnu, gdy nie widzi bohatera.");renderScene();saveTexture(canvas,TextFormat("qa-v13/patrol-species-%d.png",type));
     }
     reset();

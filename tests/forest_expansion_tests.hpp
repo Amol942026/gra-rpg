@@ -25,7 +25,8 @@ void forestExpansionTests(){
         }
     }
     for(const auto& glade:ForestGlades){
-        int goal=int(std::round(glade.center.y))*MapSize+int(std::round(glade.center.x));bool reachable=parent[goal]>=0;
+        const V destination=distance(glade.center,ForestRitualCircle)<.01f?ForestRitualApproach:glade.center;
+        int goal=int(std::round(destination.y))*MapSize+int(std::round(destination.x));bool reachable=parent[goal]>=0;
         check(reachable,"every landmark clearing connects to the arrival through traversable forest");
         if(!reachable)continue;
         Game walking=forest;std::vector<int> route;for(int cell=goal;cell!=start;cell=parent[cell])route.push_back(cell);

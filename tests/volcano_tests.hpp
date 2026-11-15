@@ -7,14 +7,14 @@ void volcanoTests(){
  check(g.enemies.size()==121+RegionalEncountersPerRealm&&g.volcanoCreated&&g.forage.empty(),"third realm includes the original population and new regional enemies");
  {
   int portal=0,fractional=0;std::array<int,4> types{};
-  for(const auto& p:g.props){if(p.type==13){portal++;continue;}types[p.type-14]++;fractional+=std::abs(p.pos.x-std::round(p.pos.x))>.01f;
+  for(const auto& p:g.props){if(p.type==13)portal++;if(!volcanoSceneryProp(p.type))continue;types[p.type-14]++;fractional+=std::abs(p.pos.x-std::round(p.pos.x))>.01f;
    check(!volcanoLava(p.pos,propRadius(p.type)+.8f)&&!nearVolcanoFountain(p.pos,3),"clustered scenery keeps river banks and shrines clear");
    const size_t roads=(p.pos.x>=PreviousMapSize-.5f||p.pos.y>=PreviousMapSize-.5f)?VolcanoRoads.size():9;
    for(size_t road=0;road<roads;road++)for(int i=1;i<6;i++)check(desertSegmentDistance(p.pos,VolcanoRoads[road][i-1],VolcanoRoads[road][i])>=1.7f+propRadius(p.type),"scenery preserves the clearance of roads in its region");
   }
-  check(portal==1&&fractional>100&&g.props.size()<=417,"irregular scenery covers the expanded realm and retains one return portal");
+  check(portal==1&&fractional>100&&std::count_if(g.props.begin(),g.props.end(),[](const Prop& p){return volcanoSceneryProp(p.type);})<=416,"irregular scenery covers the expanded realm and retains one return portal");
   for(int count:types)check(count>=8,"all four scenery families form visible groups");
-  for(size_t i=0;i<g.props.size();i++)for(size_t j=i+1;j<g.props.size();j++)if(g.props[i].type>=14&&g.props[j].type>=14)
+  for(size_t i=0;i<g.props.size();i++)for(size_t j=i+1;j<g.props.size();j++)if(volcanoSceneryProp(g.props[i].type)&&volcanoSceneryProp(g.props[j].type))
    check(distance(g.props[i].pos,g.props[j].pos)>4.4f,"large scenery silhouettes are separated instead of forming crowded clumps");
  }
  for(const auto& road:VolcanoRoads)for(int section=1;section<6;section++)for(int sample=0;sample<=100;sample++)check(!volcanoLava(road[section-1]+(road[section]-road[section-1])*(sample/100.f)),"every marked road section crosses lava only at an actual safe bridge");

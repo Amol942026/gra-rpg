@@ -21,8 +21,17 @@ bool releaseWorldAttack(){
  if(!game.holdingMelee())return false;
  return game.releaseMeleeHold(combatAimFromPointer());
 }
+bool openNearbyTarget(WorldHover hit){
+ if(hit.kind==HoverKind::Chest)return game.openChest(hit.index);
+ if(hit.kind==HoverKind::Corpse)return game.openCorpse(hit.index);
+ return false;
+}
 bool clickWorldOrInventory(double now=GetTime()) {
     if(!gameplayInputAllowed()||dragging.place!=Place::None){inventoryClicks.clear();return false;}
+    if(!worldPointerAllowed(mouse)){
+        const auto target=nearbyUnderPointer().target;
+        if(target.kind!=HoverKind::None){inventoryClicks.clear();return openNearbyTarget(target);}
+    }
     Slot slot=hoverSlot();Item* value=game.get(slot);
     if(slot.place!=Place::None){
         if(value&&!value->empty()){
@@ -59,18 +68,22 @@ bool rightClickWorldOrInventory(){
         if(hit.kind==HoverKind::Ground)return game.use({Place::Ground,hit.index});
         return false;
     }
-    return game.use(hoverSlot());
+    const auto target=nearbyUnderPointer().target;
+    return target.kind==HoverKind::None?game.use(hoverSlot()):openNearbyTarget(target);
 }
 bool castGameplaySpell(){return gameplayInputAllowed()&&dragging.place==Place::None&&castSelectedSpell();}
 bool activateGameplaySkill(Skill skill){
  if(!gameplayInputAllowed()||dragging.place!=Place::None)return false;
- bool used=skill==Skill::StrongCut?game.strongCut(worldPointerAllowed(mouse)?combatAimFromPointer():game.facing):skill==Skill::PiercingArrow?game.preparePiercingArrow():skill==Skill::Healing&&game.heal();
+ bool used=skill==Skill::PiercingArrow?game.preparePiercingArrow():skill==Skill::Healing?game.heal():
+           game.useMeleeSkill(skill,worldPointerAllowed(mouse)?combatAimFromPointer():game.facing);
  if(!used){game.say(game.sandTrapped()&&skill!=Skill::Healing?"Piaskowe więzienie blokuje ataki.":game.skillRank(skill)<=0?"Najpierw naucz się tej umiejętności (U).":!game.skillWeaponMatches(skill)?"Ta umiejętność wymaga odpowiedniej broni.":skill==Skill::Healing&&game.hp>=game.maxHp()?"Zdrowie jest już pełne.":"Za mało many, brak strzał lub odnowienie umiejętności.");game.sound(Cue::Reject,game.player);}
  return used;
 }
 bool activateSkillSlot(Skill skill){
  if(!gameplayInputAllowed()||dragging.place!=Place::None)return false;
- if(game.skillAssigned[int(skill)])return activateGameplaySkill(skill);
+ const int slot=int(skill);
+ if(slot>=SkillSlotCount)return false;
+ if(game.skillAssigned[slot])return activateGameplaySkill(game.skillForSlot(slot));
  game.say("Brak przypisania. Kliknij kafelek, aby wybrać umiejętność.");return false;
 }
 bool activatePotionSlot(int slot){
@@ -79,9 +92,9 @@ bool activatePotionSlot(int slot){
  if(kind!=Kind::None)return game.potion(kind);
  game.say("Brak przypisania. Kliknij kafelek, aby wybrać miksturę.");return false;
 }
-constexpr int QuickPickerSlotCount=SkillCount+int(DefaultPotions.size());
+constexpr int QuickPickerSlotCount=SkillSlotCount+int(DefaultPotions.size());
 Rectangle quickPickerTile(int slot){
- return slot<SkillCount?skillActionRect(slot):actionRect(slot-SkillCount+2);
+ return slot<SkillSlotCount?skillActionRect(slot):actionRect(slot-SkillSlotCount+2);
 }
 void leftClickGameplay(V movement,double now=GetTime()){
     if(!gameplayInputAllowed()||dragging.place!=Place::None){inventoryClicks.clear();return;}

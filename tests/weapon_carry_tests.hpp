@@ -5,6 +5,7 @@
 #include "../src/hero_weapon_motion.hpp"
 #include "../src/power_motion.hpp"
 #include "../src/spear_motion.hpp"
+#include "../src/weapon_profiles.hpp"
 #include "sword_stow_clearance.hpp"
 namespace carry_checks {
 using namespace ember;
@@ -157,14 +158,21 @@ inline void weaponCarryTests(){
    }
   }
  }
- for(int id=FirstSpear;id<ItemKindCount;id++)for(int frame=0;frame<=SpearFrames;frame++)for(float stride:{-1.f,0.f,1.f}){
+ for(int id=FirstSpear;id<FirstSpear+SpearCount;id++){
+  const auto profile=weapon_profiles::spear(Kind(id));
+  const float previous=34.3f+25.5f+profile.point[3].y*profile.length;
+  check(std::abs(profile.tipOffset()-weapon_profiles::SpearHeel-previous*1.15f)<.001f,
+        "each spear measures exactly 15 percent longer from heel to tip");
+ }
+ for(int id=FirstSpear;id<FirstSpear+SpearCount;id++)for(int frame=0;frame<=SpearFrames;frame++)for(float stride:{-1.f,0.f,1.f}){
   auto pose=evaluate(.25f,1,0,0);
   const float slide=spear_motion::apply(pose,Kind(id),frame/float(SpearFrames),1,stride);
   const Vec rear=pose.world[data::HandR].p,front=pose.world[data::HandL].p;
   check(length(front-rear)>8&&length(front-rear)<14,"both hands hold the same spear shaft through the thrust");
   if(frame==SpearImpactFrame){
    const auto axis=(front-rear)*(1/length(front-rear));
-   check(front.y-rear.y>8&&std::abs(front.z-rear.z)<5&&rear.y+axis.y*(42.4f+slide)>74,
+   const auto profile=weapon_profiles::spear(Kind(id));
+   check(front.y-rear.y>8&&std::abs(front.z-rear.z)<5&&rear.y+axis.y*(profile.tipOffset()+slide)>80,
          "spear tip reaches farther ahead of the hero at contact");
   }
   for(int side=0;side<2;side++){

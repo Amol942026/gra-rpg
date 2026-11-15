@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "art_authoring": [
+    "ImageGen",
+    "ComfyUI FLUX.1 Schnell",
+    "Krita"
+  ],
+  "only_cells_changed": [
+    1,
+    4,
+    13,
+    14
+  ],
+  "source_atlas_sha256": "3b609b1a6899fbd7d5cf9a0f2ab39631ce8a37613e56559b8cc9ab27356fcfaa",
+  "runtime_atlas_sha256": "c337ca4b62a4662d024620bb737ad8ef3a9e74d7a4f390fee4e5d02b3132218e",
+  "master": "C:\\AI2D\\sprites\\emberfall-forest-beasts-20261115\\zwierzeta-las.kra",
+  "master_sha256": "129c606bccfe009d5c23dd258b95ff4fcb8ee19b229b6893b1f05e81048f2130",
+  "imagegen_source": "C:\\AI2D\\sprites\\emberfall-forest-beasts-20261115\\imagegen-materials.png",
+  "imagegen_sha256": "487828c61e86be5870c1562a1bdc96ad788227d72a6b4252f93220622c783ec5",
+  "comfyui_source": "C:\\AI2D\\pipeline\\runs\\forest-creatures-20261110\\concepts\\wolf.png",
+  "comfyui_sha256": "6aafa61ef3038d66ba6c92c9ea83b1993a004725ca2596fb681d39bc87e6ac13",
+  "imagegen_prompt": "Create one raster trim sheet for the material textures of a hand-painted 2D isometric dark-fantasy RPG. Square image in a strict 2 by 2 arrangement, with each quadrant completely filled edge to edge with a flat animal material in technical close-up, oriented so hairs descend roughly from top to bottom. Upper left: finely layered strokes of gray-brown wolf guard fur, slate and charcoal with warm brown at the roots. Upper right: shorter soft wolf cheek fur in warm silver gray and subdued oatmeal. Lower left: dense coarse, dark brown wild boar bristles with a subtle copper cast and scattered tawny tips. Lower right: tactile muted umber-brown boar snout leather with small organic pores and a little fine short fur. Painterly, clear directional detail and restrained contrast at 128x128 tile scale, flat even lighting with no hot spots. Four true square trim panels meet cleanly at the center. No borders, framing, dividers, individual animal parts, eyes, faces, text, ground, background, shadows, or lettering.",
+  "runtime_atlas": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\sprites\\creature-paints.png"
+}

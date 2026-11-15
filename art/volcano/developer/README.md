@@ -28,11 +28,10 @@ Varkhor pozostaje żywy w nowej wyprawie.
 
 Uruchamianie:
 
-- W projekcie: `Tryb_deweloperski.bat`, następnie F3 i prawa kolumna.
-- Szybko: `Test_kaldery.bat` albo `Test_Varkhora.bat`.
+- W projekcie: `Uruchom.bat`, następnie F3 i zakładka **Kaldera Popiołu**.
+- Szybko: `Uruchom.bat --start=volcano` albo `Uruchom.bat --start=volcano-boss`.
 - Oddzielna paczka: `Emberfall-DEV-Windows-x64.zip`. Po wypakowaniu
-  uruchom `Tryb_deweloperski.bat`; oba nowe skróty są obok EXE.
-- CLI: `Emberfall.exe --start=volcano-boss`.
+  uruchom `Uruchom.bat`. Z `--dev` otworzy od razu wybór lokacji.
 
 Produkcja paczki: `pwsh -NoProfile -File package-dev.ps1`.
 Używa kompilacji deweloperskiej i zachowuje kopię poprzedniego archiwum DEV.

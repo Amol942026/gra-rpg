@@ -43,10 +43,28 @@ void volcanoSaveTests(){
  auto oldBytes=saves::readBytes("art/volcano/fixtures/legacy-v8.efs");saves::Archive oldFile(true,oldBytes);std::string magic;int version;size_t size;uint64_t hash;oldFile(magic,version,size,hash);
  saves::Archive rawPayload(true,oldBytes.substr(oldFile.at),8);saves::Snapshot raw;rawPayload(raw);auto projected=legacy;
  auto cut=[](auto& a,const auto& b){a.enemies.resize(b.enemies.size());a.props.resize(b.props.size());};
- projected.game.enemies.resize(raw.game.enemies.size());projected.game.props.resize(raw.game.props.size());cut(projected.game.forestState,raw.game.forestState);cut(projected.game.desertState,raw.game.desertState);cut(projected.game.volcanoState,raw.game.volcanoState);
+ auto restoreDesertScenery=[](std::vector<Prop>& current,const std::vector<Prop>& previous){
+  size_t index=0;
+  for(const auto& old:previous){
+   if(Game::legacyDesertGroveProp(old))continue;
+   check(index<current.size()&&current[index].type==old.type&&current[index].size==old.size&&
+         distance(current[index].pos,old.pos)==0,"v8 desert keeps scenery outside the grove redesign");
+   ++index;
+  }
+  current=previous;
+ };
+ projected.game.enemies.resize(raw.game.enemies.size());
+ if(raw.game.fieldLocation==WorldLocation::Forest)projected.game.props=raw.game.props;
+ else if(raw.game.fieldLocation==WorldLocation::Desert)restoreDesertScenery(projected.game.props,raw.game.props);
+ else projected.game.props.resize(raw.game.props.size());
+ cut(projected.game.forestState,raw.game.forestState);projected.game.forestState.props=raw.game.forestState.props;
+ projected.game.desertState.enemies.resize(raw.game.desertState.enemies.size());
+ restoreDesertScenery(projected.game.desertState.props,raw.game.desertState.props);
+ cut(projected.game.volcanoState,raw.game.volcanoState);
  projected.game.selectedSpell=raw.game.selectedSpell; // Restore only the intentionally cleared pre-lesson selection for byte comparison.
+ projected.game.chests[ForestCircleChestId].pos=raw.game.chests[ForestCircleChestId].pos;
  saves::Archive oldPayload(false,{},8);oldPayload(projected);
- check(version==8&&oldPayload.bytes==oldBytes.substr(oldFile.at),"legacy v8 migration preserves every previously serialized byte");
+ check(version==8&&oldPayload.bytes==oldBytes.substr(oldFile.at),"legacy v8 migration preserves bytes outside intentional migrations");
  saves::Snapshot s;s.game.activateField(WorldLocation::Volcano);s.game.player=VolcanoArrival;s.game.collectedFragments=2;s.game.desertBossDead=true;s.game.dawnQuest=DawnQuest::AtTower;roundtrip(s);
  s.game.player=VolcanoFountains[0]+V{1.6f,0};s.game.mana=2;check(s.game.useFountain(0),"save fixture uses actual third-realm mana shrine");s.game.update(.05f,{},false);roundtrip(s);
  s.game.player=TreasureLayout[4].pos+V{1.6f,0};check(s.game.openChest(4)&&s.game.quickTransfer({Place::Chest,0,4}),"save fixture opens and loots actual third-realm chest");roundtrip(s);

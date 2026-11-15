@@ -4,6 +4,8 @@
 // randomness, so a new expedition keeps its roads and distinct encounters.
 inline constexpr V ForestArrival{MapWalkMin,MapWalkMax};
 inline constexpr V PreviousForestArrival{MapWalkMin,PreviousMapSize-2.6f};
+inline constexpr V ForestRitualCircle{59,57};
+inline constexpr V ForestRitualApproach{ForestRitualCircle.x+1.5f,ForestRitualCircle.y};
 enum class ForestZone { Ruins,Wolves,Birches,Spiders,Heart,Grove,Trail };
 inline ForestZone forestZone(V p){
     if(p.x>=PreviousMapSize)return p.y<48?ForestZone::Ruins:p.y<96?ForestZone::Wolves:ForestZone::Heart;
@@ -38,9 +40,9 @@ inline constexpr std::array<ForestTrail,56> ForestTrails={{
     {{8,19},{35,19}},{{35,19},{55,21}},{{55,21},{66,25}},
     {{8,19},{12,35}},{{12,35},{14,43}},{{14,43},{14,61}},
     {{35,19},{35,42}},{{35,42},{39,62}},{{14,43},{35,42}},
-    {{35,42},{59,57}},{{55,21},{59,40}},{{59,40},{59,57}},{{14,61},{39,62}},
+    {{35,42},ForestRitualCircle},{{55,21},{59,40}},{{59,40},ForestRitualCircle},{{14,61},{39,62}},
     {{10,92},{18,82}},{{18,82},{14,61}},{{18,82},{39,84}},{{39,84},{59,84}},
-    {{59,84},{80,84}},{{80,84},{94,92}},{{39,62},{39,84}},{{59,57},{80,55}},
+    {{59,84},{80,84}},{{80,84},{94,92}},{{39,62},{39,84}},{ForestRitualCircle,{80,55}},
     {{80,55},{94,55}},{{94,55},{94,32}},{{94,32},{83,14}},{{63,8},{83,14}},
     {{83,14},{79,34}},{{79,34},{80,55}},{{80,55},{80,84}},{{59,84},{66,64}},
     {{94,55},{94,76}},{{94,76},{94,92}},
@@ -55,24 +57,26 @@ inline constexpr std::array<ForestGlade,19> ForestGlades={{
     {ForestArrival,3.6f,"Przesieka Wędrowca"},
     {{8,19},3.6f,"Stara przesieka"},{{21,5},3.4f,"Ruiny Mchu"},
     {{14,43},4.4f,"Brzozowa polana"},{{14,61},5.f,"Zaciszny zagajnik"},
-    {{59,57},4.8f,"Zapomniany krąg"},{{39,62},3.5f,"Stary trakt"},
+    {ForestRitualCircle,4.8f,"Zapomniany krąg"},{{39,62},3.5f,"Stary trakt"},
     {{18,82},4.2f,"Południowy Zagajnik"},{{39,84},4.f,"Korzenne Rozdroża"},
     {{83,14},4.f,"Wschodnie Ruiny"},{{80,55},4.5f,"Głęboka Knieja"},{{94,92},4.f,"Korzenne Wzgórza"},
     {PreviousForestArrival,3.6f,"Stara przesieka"},{{107,15},4.f,"Ruiny Kamiennego Brodu"},
     {{115,60},4.6f,"Sosnowe Grzbiety"},{{128,79},4.f,"Sosnowa Polana"},{{115,103},4.8f,"Prastara Knieja"},
     {{37,129},4.6f,"Wąwóz Paproci"},{{88,121},4.2f,"Wzgórza Starego Traktu"}
 }};
-inline bool forestClearing(V p){for(const auto& glade:ForestGlades)if(distance(p,glade.center)<glade.radius)return true;return false;}
-inline bool forestPath(V p){
+inline bool forestClearing(V p,float margin=0){for(const auto& glade:ForestGlades)if(distance(p,glade.center)<glade.radius+margin)return true;return false;}
+inline bool forestPath(V p,float halfWidth=1.55f){
     for(const auto& trail:ForestTrails){
         V edge=trail.b-trail.a,offset=p-trail.a;
         float t=std::clamp((offset.x*edge.x+offset.y*edge.y)/(edge.x*edge.x+edge.y*edge.y),0.f,1.f);
-        V delta=p-(trail.a+edge*t);if(delta.x*delta.x+delta.y*delta.y<1.55f*1.55f)return true;
+        V delta=p-(trail.a+edge*t);if(delta.x*delta.x+delta.y*delta.y<halfWidth*halfWidth)return true;
     }
     // The southern route continues from the crossroads into the deep forest.
-    if(p.x>=39&&p.x<=66&&std::abs(p.y-(62+(p.x-39)*2/27))<1.55f)return true;
-    return distance(p,{21,5})<3.4f||distance(p,{59,57})<3.3f;
+    if(p.x>=39&&p.x<=66&&std::abs(p.y-(62+(p.x-39)*2/27))<halfWidth)return true;
+    return distance(p,{21,5})<3.4f||distance(p,ForestRitualCircle)<3.3f;
 }
+inline constexpr bool forestCanopy(int type){return type==0||type==4||type==5;}
+inline constexpr bool forestGroveProp(int type){return forestCanopy(type)||type==1||type==2;}
 struct ForestSpawn {int type;V pos;};
 inline constexpr float EnemyHomeSpacing=8.f;
 inline constexpr V ForestGuardian{21,5};

@@ -7,20 +7,21 @@ $folder=Join-Path $stage 'Emberfall-DEV'
 New-Item -ItemType Directory -Path $folder | Out-Null
 Copy-Item -LiteralPath 'dist/Emberfall.exe' -Destination (Join-Path $folder 'Emberfall.exe')
 Copy-Item -LiteralPath 'dist/assets' -Destination (Join-Path $folder 'assets') -Recurse
-foreach($file in @('Tryb_deweloperski.bat','Test_kaldery.bat','Test_Varkhora.bat','LICENSES.md','LOOT.md')){
- $source=if($file.EndsWith('.bat')){Join-Path 'dist' $file}else{$file}
- Copy-Item -LiteralPath $source -Destination (Join-Path $folder $file)
+foreach($file in @('Uruchom.bat','LICENSES.md','LOOT.md')){
+ Copy-Item -LiteralPath $file -Destination (Join-Path $folder $file)
 }
 $instructions=@'
 EMBERFALL — WERSJA DEWELOPERSKA
 
-Rozpakuj caly folder Emberfall-DEV. Uruchom Tryb_deweloperski.bat.
-F3 otwiera wybor lokacji. Prawa kolumna: KALDERA POPIOLU.
-- Kaldera — Brama Popiolu: poczatek trzeciej krainy.
+Rozpakuj caly folder Emberfall-DEV i uruchom Uruchom.bat.
+W menu glownym wybierz Tryb deweloperski albo nacisnij F3.
+Wybierz zakladke krainy i lokacje. W zakladce Kaldera Popiolu znajdziesz m.in.:
+- Brama Popiolu: poczatek trzeciej krainy.
 - Obsydianowe Kuznie: wschodni szlak kaldery.
-- Boss — Varkhor: bezposrednio przy trzecim bossie.
+- Tron Serca Kaldery: bezposrednio przy Varkhorze.
 
-Test_kaldery.bat i Test_Varkhora.bat uruchamiaja wybrany punkt od razu.
+W wierszu polecen Uruchom.bat --dev otwiera wybor lokacji,
+a Uruchom.bat --start=volcano-boss uruchamia sesje przy Varkhorze.
 NOWA SESJA TESTOWA tworzy nowa wyprawe i zywych bossow.
 PRZENIES OBECNA POSTAC zachowuje sprzet, statystyki, zdobyte punkty i postep walk.
 W obu opcjach postac ma poziom 100 i zna wszystkie umiejetnosci oraz czary.
@@ -29,6 +30,7 @@ Plecak jest uzupelniany do 100 strzal i po 50 mikstur zdrowia oraz many.
 Plecak zawiera wszystkie rodzaje wyposazenia z aktualnego katalogu gry.
 Strzalki pod plecakiem przelaczaja strony po 25 pol.
 Zapisy z menu pauzy w sesji DEV korzystaja z osobnych slotow.
+F5 otwiera menu zapisu w dowolnym miejscu.
 Aktywne pociski, erupcje i przewrocenie sa czyszczone podczas teleportu.
 Start DEV w kalderze ustawia testowy postep drugiego aktu,
 aby mozna bylo wracac tam takze przez Eldrina.

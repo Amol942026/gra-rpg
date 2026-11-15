@@ -1,4 +1,5 @@
 #pragma once
+#include "wind_motion.hpp"
 
 namespace wind_post {
 struct Weather {
@@ -13,7 +14,7 @@ inline constexpr std::array<Weather,3> weather={{
 }};
 inline std::array<Texture2D,weather.size()> masks{};
 inline Shader shader{};
-inline int driftUniform=-1,shapeUniform=-1,actorUniform=-1,fieldUniform=-1;
+inline int driftUniform=-1,shapeUniform=-1,actorUniform=-1,fieldUniform=-1,spacingUniform=-1;
 
 inline void load(){
  if(shader.id)return;
@@ -25,13 +26,14 @@ uniform vec4 drift;
 uniform vec4 shape;
 uniform vec4 actor;
 uniform vec4 field;
+uniform vec2 frequencies;
 out vec4 finalColor;
 void main(){
  vec2 uv=fragTexCoord;
  vec2 world=uv+field.xy;
  float bend=sin(world.y*9.0+world.x*4.0+shape.y)*field.w;
- vec2 nearUV=vec2(world.x*1.24,world.y*2.12+world.x*shape.z+bend)*field.z+drift.xy;
- vec2 farUV=vec2(world.x*1.84,world.y*3.18+world.x*shape.z*.75-bend*.66)*field.z+drift.zw;
+ vec2 nearUV=vec2(world.x*1.24,world.y*2.12+world.x*shape.z+bend)*frequencies*field.z+drift.xy;
+ vec2 farUV=vec2(world.x*1.84,world.y*3.18+world.x*shape.z*.75-bend*.66)*frequencies*field.z+drift.zw;
  float nearDust=texture(texture0,nearUV).a;
  float farDust=texture(texture0,farUV).a;
  float veil=clamp(nearDust*1.22+farDust*.65,0.0,1.0);
@@ -45,7 +47,8 @@ void main(){
  shapeUniform=GetShaderLocation(shader,"shape");
  actorUniform=GetShaderLocation(shader,"actor");
  fieldUniform=GetShaderLocation(shader,"field");
- if(driftUniform<0||shapeUniform<0||actorUniform<0||fieldUniform<0)return;
+ spacingUniform=GetShaderLocation(shader,"frequencies");
+ if(driftUniform<0||shapeUniform<0||actorUniform<0||fieldUniform<0||spacingUniform<0)return;
  for(size_t i=0;i<weather.size();i++){
   const std::string path=std::string("assets/sprites/wind/")+weather[i].file+".png";
   if(!FileExists(path.c_str()))continue;
@@ -70,11 +73,15 @@ inline void draw(){
  const Texture2D mask=masks[index];
  if(!mask.id)return;
  const Weather& wind=weather[index];
- const float time=game.time;
+ const float time=game.time*wind_motion::Rate;
  // Undo the exact projection used by the terrain before evaluating either
  // layer. Camera movement only selects a different view of the same field.
  const Vector2 origin=screenFlat({0,0});
  const float field[]={-origin.x/WorldW,-origin.y/H,wind.textureScale,wind.bend};
+ // A wider separation between horizontal streaks leaves the wind visible
+ // at the same opacity. Scatter the Caldera's ash on both axes.
+ const float ashFrequency=1/wind_motion::ParticleSpacing;
+ const float frequencies[]={index==2?ashFrequency:1.f,index==2?ashFrequency:wind_motion::StreakDensity};
  auto wrap=[](float offset){return offset-std::floor(offset);};
  const float drift[]={wrap(-time*wind.speed),wrap(time*wind.rise),
                       wrap(.41f-time*wind.speed*.56f),wrap(.56f+time*wind.rise*.64f)};
@@ -87,6 +94,7 @@ inline void draw(){
  SetShaderValue(shader,shapeUniform,shape,SHADER_UNIFORM_VEC4);
  SetShaderValue(shader,actorUniform,actor,SHADER_UNIFORM_VEC4);
  SetShaderValue(shader,fieldUniform,field,SHADER_UNIFORM_VEC4);
+ SetShaderValue(shader,spacingUniform,frequencies,SHADER_UNIFORM_VEC2);
  DrawTexturePro(mask,{0,0,float(mask.width),float(mask.height)},{0,0,WorldW,H},{},0,wind.tint);
  EndShaderMode();
 }

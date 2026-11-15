@@ -8,15 +8,17 @@ bool runControlsQA(){
         welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;quickPickerSlot=-1;dragging={};inventoryClicks.clear();mouse={0,0};nearbyPage=0;};
     auto pointAt=[](Rectangle r){mouse={r.x+r.width/2,r.y+r.height/2};};
     reset();prepareCanvas(1.f);
-    for(int i=0;i<3;i++){V p=game.player+V{float(i-1),-.8f};game.enemies.push_back({i,0,p,p,500,500});game.enemies.back().windup=100;}
+    const V offsets[]={{1.15f,0},{1.1f,1.05f},{-1.1f,0}};
+    for(int i=0;i<3;i++){V p=game.player+offsets[i];game.enemies.push_back({i,0,p,p,500,500});game.enemies.back().windup=100;}
     Vector2 target=screen(game.enemies[0].pos);mouse={target.x,target.y-18};
     leftClickGameplay({});
     check(game.holdingMelee()&&game.swing==0&&releaseWorldAttack()&&game.swing>0&&game.attackCd>0,"short LPM release starts a sword swing");
-    for(const auto& e:game.enemies)check(e.hp<500,"one LPM press damages every nearby enemy");
+    check(game.enemies[0].hp<500&&game.enemies[1].hp<500&&game.enemies[2].hp==500,
+          "one LPM press damages both forward enemies and leaves the nearby rear enemy unharmed");
     float hp=game.enemies[0].hp;
     for(int i=0;i<120;i++)game.update(1.f/60,{},false);
     check(game.enemies[0].hp==hp&&game.swing==0,"held mouse without another press never repeats the swing");
-    leftClickGameplay({});releaseWorldAttack();check(game.enemies[0].hp<hp,"a new LPM tap starts another swing after cooldown");
+    leftClickGameplay({});releaseWorldAttack();check(game.enemies[0].hp<hp&&game.enemies[2].hp==500,"a new LPM tap starts another forward swing after cooldown");
 
     reset();V position=game.player+V{3,-2};game.enemies.push_back({44,0,position,position,100,100});
     target=screen(position);mouse={target.x,target.y-18};
@@ -50,7 +52,7 @@ bool runControlsQA(){
     }
     for(int slot=0;slot<int(DefaultPotions.size());slot++){
         reset();game.hp=20;game.mana=30;
-        const int picker=SkillCount+slot;
+        const int picker=SkillSlotCount+slot;
         const auto bounds=quickPickerBounds(picker,2);
         const int count=game.bag[slot].count;
         const auto untouched=[&](){return game.hp==20&&game.mana==30&&game.bag[slot].count==count&&game.potionCd==0;};
@@ -76,7 +78,7 @@ bool runControlsQA(){
     }
     reset();pointAt(actionRect(2));leftClickGameplay({});
     pointAt(actionRect(3));quickPickerEvent(false,true);
-    check(quickPickerSlot==SkillCount+1,"LPM switches directly between potion pickers");
+    check(quickPickerSlot==SkillSlotCount+1,"LPM switches directly between potion pickers");
     pointAt(skillActionRect(0));quickPickerEvent(false,true);
     check(quickPickerSlot==0,"LPM switches from a potion picker to a skill picker");
     mouse={400,390};quickPickerEvent(false,true);

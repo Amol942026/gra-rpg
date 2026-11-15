@@ -5,7 +5,7 @@ std::array<Texture2D,PropTypeCount> propOutlines{};
 
 void initHoverArt(){
  for(int type=0;type<PropTypeCount;type++){
-  Image source=LoadImageFromTexture(propArt[type].texture);ImageFlipVertical(&source);Color* pixels=LoadImageColors(source);int w=source.width,h=source.height,radius=3*w/180;
+  Image source=LoadImageFromTexture(propArt[type].texture);ImageFlipVertical(&source);Color* pixels=LoadImageColors(source);int w=source.width,h=source.height,radius=int(3*w/(180*propArtScale(type)));
   auto& mask=propMasks[type];mask.resize(w*h);for(int i=0;i<w*h;i++)mask[i]=pixels[i].a>=160?255:0;UnloadImageColors(pixels);UnloadImage(source);
   Image border=GenImageColor(w,h,BLANK);auto* out=static_cast<Color*>(border.data);
   for(int y=0;y<h;y++)for(int x=0;x<w;x++)if(!mask[y*w+x]){bool edge=false;for(int dy=-radius;dy<=radius&&!edge;dy++)for(int dx=-radius;dx<=radius;dx++){int xx=x+dx,yy=y+dy;if(dx*dx+dy*dy<=radius*radius+1&&xx>=0&&xx<w&&yy>=0&&yy<h&&mask[yy*w+xx]){edge=true;break;}}if(edge)out[y*w+x]=WHITE;}
@@ -56,7 +56,7 @@ bool worldPointerAllowed(Vector2 p) {
     if(!CheckCollisionPointRec(p,{0,116,WorldW,678}))return false;
     if(archetype(game.equipment[0].kind)==Kind::Bow&&CheckCollisionPointRec(p,{195,112,515,36}))return false;
     if(CheckCollisionPointRec(p,minimapRect()))return false; // minimap
-    if(CheckCollisionPointRec(p,{22,675,310,119}))return false; // journal
+    if(CheckCollisionPointRec(p,journalRect()))return false;
     if(game.messageTime>0){
         float width=std::min(760.f,textWidth(game.message,13)+32);
         if(CheckCollisionPointRec(p,{WorldW/2.f-width/2,744,width,29}))return false;
@@ -64,15 +64,60 @@ bool worldPointerAllowed(Vector2 p) {
     return true;
 }
 
+struct PropMaskRow {
+    const unsigned char* pixels=nullptr;
+    float left=0,pixelsPerPoint=0;
+    int width=0;
+    bool contains(float x)const{
+        const float local=(x-left)*pixelsPerPoint;
+        return pixels&&local>=0&&local<width&&pixels[int(local)];
+    }
+};
+PropMaskRow propMaskRow(const Prop& prop,Vector2 base,float worldY){
+    const float size=propArtSize(prop);
+    const float sourceY=(worldY-base.y)/size+208;
+    const auto texture=propArt[prop.type].texture;
+    const auto& pixels=propMasks[prop.type];
+    if(sourceY<0||sourceY>=230||pixels.empty())return {};
+    const int row=int(sourceY*texture.height/230);
+    const float shift=tree_wind::moves(prop.type)?treeShift(prop,sourceY,game.time):0;
+    return {pixels.data()+row*texture.width,base.x+(shift-90)*size,texture.width/(180*size),texture.width};
+}
 bool propContains(const Prop& prop,Vector2 point) {
-    if(prop.type==13&&game.inVolcano())return volcano_art::portalContains(prop,point);
-    if(prop.type>=14)return volcano_art::propContains(prop,point);
-    Vector2 base=screen(prop.pos);
-    float sourceY=(point.y-base.y)/prop.size+208;
-    float shift=treeProp(prop.type)?treeShift(prop,sourceY,game.time):0;
-    int w=propArt[prop.type].texture.width,h=propArt[prop.type].texture.height;
-    int x=int(std::floor(((point.x-base.x)/prop.size+90-shift)*w/180)),y=int(std::floor(sourceY*h/230));
-    return x>=0&&x<w&&y>=0&&y<h&&!propMasks[prop.type].empty()&&propMasks[prop.type][y*w+x];
+    if(prop.type==13&&volcano_art::gateFrame().id)return volcano_art::portalContains(prop,point);
+    if(volcanoSceneryProp(prop.type))return volcano_art::propContains(prop,point);
+    return propMaskRow(prop,screen(prop.pos),point.y).contains(point.x);
+}
+float propOpacity(const Prop& prop,Vector2 base,Vector2 player,bool inFront,actor_art::Silhouette& silhouette){
+    if(!inFront)return 1.f;
+    const float size=propArtSize(prop);
+    const Rectangle art={base.x-110*size,base.y-208*size,220*size,230*size};
+    const Rectangle heroBounds={player.x-actor_art::Silhouette::Width,player.y-156,
+                                actor_art::Silhouette::Width*2,actor_art::Silhouette::Height*2};
+    if(!CheckCollisionRecs(art,heroBounds))return 1.f;
+    if(!silhouette.ready){
+        const auto heroRig=std::find_if(actor_art::frameRigs.begin(),actor_art::frameRigs.end(),
+                                       [](const auto& entry){return entry.first==0;});
+        if(heroRig==actor_art::frameRigs.end())return 1.f;
+        heroRig->second.rasterize(silhouette);
+    }
+    const bool atlas=(prop.type==13&&volcano_art::gateFrame().id)||volcanoSceneryProp(prop.type);
+    // Incidental contact with a leaf or a weapon tip does not hide the hero.
+    const int hidden=std::max(12,(silhouette.count+9)/10);
+    int covered=0;
+    for(int row=silhouette.top;row<=silhouette.bottom;row++){
+        const float y=silhouette.point(0,row).y;
+        if(y<art.y||y>=art.y+art.height)continue;
+        const PropMaskRow mask=atlas?PropMaskRow{}:propMaskRow(prop,base,y);
+        if(!atlas&&!mask.pixels)continue;
+        for(int col=silhouette.left;col<=silhouette.right;col++){
+            if(!silhouette.has(col,row))continue;
+            const Vector2 point=silhouette.point(col,row);
+            const bool blocks=atlas?propContains(prop,point):mask.contains(point.x);
+            if(blocks&&++covered>=hidden)return .38f;
+        }
+    }
+    return 1.f;
 }
 
 WorldHover pickWorld(Vector2 point) {
@@ -117,13 +162,15 @@ WorldHover pickWorld(Vector2 point) {
         }else if(it->type==4){
             const Enemy& e=game.enemies[it->index];position=e.pos;kind=HoverKind::Corpse;id=e.id;
             Vector2 p=screen(position);
-            float half=e.type==VolcanoBossType?170:enemyBoss(e.type)?110:85;
-            if(regionalEnemy(e.type)||CheckCollisionPointRec(point,{p.x-half,p.y-65,half*2,109}))touched=corpseArt(e,p.x,p.y,BLANK,&point);
+            float half=e.type==VolcanoBossType?170:enemyBoss(e.type)?120:96;
+            float height=!e.corpseGrounded()?enemyInfo(e.type).visualHeight+28:enemyBoss(e.type)?115.f:92.f;
+            const Rectangle area=e.corpseGrounded()&&fallen_art::cachedBody(e.type)?cachedCorpseBounds(e,p):
+                Rectangle{p.x-half,p.y-height,half*2,height+52};
+            if(regionalEnemy(e.type)||CheckCollisionPointRec(point,area))touched=corpseArt(e,p.x,p.y,BLANK,&point);
         }else{
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){
-                float progress=game.swingProgress();float attack=progress>=0?std::sin(progress*PI):0;
-                touched=actor_art::draw(0,p.x,p.y,1,game.animation,attack,!game.equipment[1].empty(),!game.equipment[2].empty(),archetype(game.equipment[0].kind),false,BLANK,&point,game.rollProgress(),progress,game.visibleBowCharge(),game.ammoCount(),game.empoweredPose(),&game.equipment,-1,-1,0,-1,game.activePowerVisual(),game.powerVisualAge(),game.powerWindupProgress());
+                touched=actor_art::drawPlayer(game,p.x,p.y,1,nullptr,&point);
             }
         }
         if(touched){
@@ -142,7 +189,7 @@ WorldHover pickWorld(Vector2 point) {
     for(auto it=game.forage.rbegin();it!=game.forage.rend();++it){
         if(game.inTower())break;
         Vector2 p=screen(it->pos);
-        if(!it->value.empty()&&CheckCollisionPointRec(point,{p.x-15,p.y-27,30,30})){
+        if(!it->value.empty()&&wildMushroomContains(p,point)){
             hit.kind=HoverKind::Forage;hit.index=it->id;hit.tile={std::round(it->pos.x),std::round(it->pos.y)};hit.tileValid=true;return hit;
         }
     }
@@ -150,26 +197,22 @@ WorldHover pickWorld(Vector2 point) {
 }
 
 void drawHoveredTile() {
-    if(!hovered.tileValid)return;
-    Color color=hovered.kind==HoverKind::Enemy?rgb(255,140,104):Gold;
+    if(!hovered.tileValid||hovered.kind==HoverKind::Enemy)return;
+    Color color=Gold;
     Vector2 corners[]={screen(hovered.tile+V{-.5f,-.5f}),screen(hovered.tile+V{.5f,-.5f}),screen(hovered.tile+V{.5f,.5f}),screen(hovered.tile+V{-.5f,.5f})};
     poly({corners[0],corners[1],corners[2],corners[3]},Fade(color,.20f));
     for(int i=0;i<4;i++)DrawLineEx(corners[i],corners[(i+1)%4],2,Fade(color,.95f));
 }
 
 void drawHoveredName() {
-    if(hovered.kind!=HoverKind::Enemy&&hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage&&hovered.kind!=HoverKind::Mage&&hovered.kind!=HoverKind::TowerObject&&hovered.kind!=HoverKind::TowerStair&&hovered.kind!=HoverKind::Chest&&hovered.kind!=HoverKind::Fountain)return;
+    if(hovered.kind!=HoverKind::Prop&&hovered.kind!=HoverKind::Corpse&&hovered.kind!=HoverKind::Forage&&hovered.kind!=HoverKind::Mage&&hovered.kind!=HoverKind::TowerObject&&hovered.kind!=HoverKind::TowerStair&&hovered.kind!=HoverKind::Chest&&hovered.kind!=HoverKind::Fountain)return;
     std::string name;Color color=Gold;
     if(hovered.kind==HoverKind::Fountain){name=std::string(fountainName(hovered.index))+(game.fountainUsed[hovered.index]?" · wyczerpane":" · E / LPM / PPM");color=hovered.index==0?Blue:rgb(238,123,123);}
     else if(hovered.kind==HoverKind::TowerStair){name=hovered.index==1?"Schody w górę · E / PPM":"Schody w dół · E / PPM";}
     else if(hovered.kind==HoverKind::Chest){name="Skrzynia skarbów · E / LPM / PPM";}
     else if(hovered.kind==HoverKind::TowerObject){const auto& object=towerFurnishings(game.towerFloor)[hovered.index];name=towerObjectName(object.type);if(towerInteractive(object.type))name+=" · E / PPM";}
     else if(hovered.kind==HoverKind::Mage){name=game.mageReachable()?"Eldrin · E / PPM: porozmawiaj":"Eldrin · podejdź bliżej";}
-    else if(hovered.kind==HoverKind::Enemy){
-        Enemy* e=game.findEnemy(hovered.index);if(!e)return;
-        name=std::string(enemyInfo(e->type).name)+"  "+std::to_string(int(std::ceil(e->hp)))+" / "+std::to_string(int(e->maxHp))+" HP";
-        color=rgb(255,166,132);
-    }else if(hovered.kind==HoverKind::Corpse){
+    else if(hovered.kind==HoverKind::Corpse){
         Enemy* e=game.findCorpse(hovered.index);if(!e)return;
         name=std::string("Ciało: ")+enemyInfo(e->type).name+" · PPM: otwórz";
     }else if(hovered.kind==HoverKind::Forage){

@@ -35,16 +35,17 @@ void powerAttackTests(){
   }
  }
  auto g=setup(Kind::Spear);
- enemy(g,1,{2.5f,0});enemy(g,2,{4.0f,0});enemy(g,3,{5.2f,0});
+ enemy(g,1,{.82f,0});enemy(g,2,{1.79f,0});enemy(g,3,{2.77f,0});
  g.beginMeleeHold({1,0});advance(g,34);g.releaseMeleeHold({1,0});advance(g,18);
- check(g.enemies[0].hp<500&&g.enemies[1].hp<500&&g.enemies[2].hp==500,"charged spear reaches two lined-up enemies at extended range");
+ check(g.enemies[0].hp<500&&g.enemies[1].hp<500&&g.enemies[2].hp==500,"charged spear reaches two lined-up enemies within the rendered tip");
  g=setup(Kind::Sword);enemy(g,1,{1.5f,0});
  check(g.beginMeleeHold({1,0})&&g.releaseMeleeHold({1,0})&&g.activePowerMelee()==PowerStyle::Count&&g.enemies[0].hp<500,
        "a quick tap still uses the original sword attack");
  g=setup(Kind::Sword);
- enemy(g,1,{2.10f,0});enemy(g,2,{2.42f,0});
- g.beginMeleeHold({1,0});advance(g,34);g.releaseMeleeHold({1,0});advance(g,10);
- check(g.enemies[0].hp<500&&g.enemies[1].hp==500,"charged sword keeps its inner reach and misses at the old outer edge");
+ enemy(g,1,{2.10f,0});enemy(g,2,{2.42f,0});enemy(g,3,{-1.05f,0});
+ g.beginMeleeHold({-1,0});advance(g,34);g.releaseMeleeHold({1,0});advance(g,10);
+ check(g.enemies[0].hp<500&&g.enemies[1].hp==500&&g.enemies[2].hp==500,
+       "charged sword uses release aim, keeps its inner reach and misses both the old outer edge and a close rear target");
  g=setup(Kind::Axe);g.beginMeleeHold({1,0});advance(g,34);g.startRoll({0,1});
  check(!g.holdingMelee()&&!g.releaseMeleeHold({1,0}),"rolling clears pending charge");
  g=setup(Kind::Dagger);g.beginMeleeHold({1,0});advance(g,34);

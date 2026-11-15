@@ -3,6 +3,7 @@ import argparse
 import json
 import math
 from pathlib import Path
+import shutil
 import xml.etree.ElementTree as ET
 
 from PIL import Image
@@ -22,7 +23,12 @@ def offsets(clip, t):
     if clip == "idle":
         return (.18*wave, .35*wave), (.25*wave, 0), (.24*wave, 0)
     if clip == "walk":
-        return (1.2+.28*wave, .48*math.sin(t*math.tau*2)), (-5.4*wave, .5*wave), (1.5*math.sin((t-.12)*math.tau), 0)
+        # The opposite arm leads the planted leg. The hips already absorb
+        # heel strike in the runtime rig, so the chest only adds a small recoil.
+        counter = math.cos((t-.05)*math.tau)
+        return (.85+.24*math.cos((t-.09)*math.tau*2), -.32*math.cos((t-.025)*math.tau*2)), (
+            6.2*counter, .55*math.sin((t-.04)*math.tau*2)
+        ), (1.15*math.sin((t-.14)*math.tau), 0)
     if clip == "windup":
         load = math.sin(t*math.pi)**2
         return (-2.3*load, .55*load), (-8*load, 4.6*load), (.9*load, -1.1*load)
@@ -72,17 +78,22 @@ def read_tracks(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, required=True)
-    parser.add_argument("--concept", type=Path, required=True)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--concept", type=Path)
+    source.add_argument("--parts", type=Path)
     parser.add_argument("--synfig", type=Path, required=True)
     parser.add_argument("--no-audio", action="store_true", required=True)
     args = parser.parse_args()
     args.root.mkdir(parents=True, exist_ok=False)
     parts = args.root / "parts"
-    parts.mkdir()
-    with Image.open(args.concept) as source:
-        for name, box in [("cloth", (220, 26, 296, 144)), ("body", (189, 78, 313, 270)),
-                          ("arm", (310, 148, 341, 270))]:
-            source.crop(box).save(parts / (name+".png"))
+    if args.parts:
+        shutil.copytree(args.parts, parts)
+    else:
+        parts.mkdir()
+        with Image.open(args.concept) as concept:
+            for name, box in [("cloth", (220, 26, 296, 144)), ("body", (189, 78, 313, 270)),
+                              ("arm", (310, 148, 341, 270))]:
+                concept.crop(box).save(parts / (name+".png"))
     synfig_cli.SYNFIG = args.synfig
     lines = ["#pragma once", "// Native Synfig waypoints from tools/media/bandit_motion.py.",
              "namespace ember::bandit_motion {", "struct Key {float lean,bob,arm,raise,cloth,hip;};"]

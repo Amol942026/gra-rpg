@@ -2,11 +2,17 @@
 
 Edytuj ten plik po polsku. Przed zadaniem związanym z mediami przeczytaj `art/pipeline/ASSET_PIPELINE.md`, `art/pipeline/STYLE.md` i aktualny `art/pipeline/REPORT.md`. Stosuj opisany tam tryb pozostawiania zapisanych projektów Audacity otwartych.
 
+## Tryb deweloperski
+
+- Każdy nowy przedmiot dodaj do wyposażenia lub plecaka testowego, a każdą nową umiejętność i zaklęcie odblokuj od startu. Sprawdź też dostęp po przeniesieniu postaci i wczytaniu zapisu DEV. Przedmioty powiązane z postępem fabuły udostępniaj w miejscu, w którym można przetestować ich zdobycie i użycie.
+
 ## Cisza i testy
 
+- Gdy test wykryje błąd związany z bieżącym zadaniem, od razu ustal przyczynę, napraw ją i powtórz test przed zakończeniem pracy. Dotyczy to także istniejących wcześniej błędów w sprawdzanej funkcji.
 - Uruchomienia gry, benchmarki, testy startu oraz diagnostyka grafiki i audio inicjowane przez agenta wymagają `--no-audio`. EXE gry uruchamiaj z `--background-test`, a pomocnicze programy QA w ukrytych oknach. Nie uaktywniaj ani nie przywracaj okien testowych.
 - Nie odtwarzaj dźwięku gry przez głośniki laptopa ani nie zmieniaj zapisanych preferencji w celu wyciszenia. Zwykły start przez użytkownika zachowuje audio.
 - Raportuj osobno czas ukończenia renderu. Ukryte lub zminimalizowane okno oraz eksport w 60 Hz nie dowodzą wyświetlanego FPS ani płynności na pierwszym planie.
+- W czacie pokazuj samą wykadrowaną animację, w najkrótszym ujęciu i najmniejszym czytelnym rozmiarze.
 - AVG CyberCapture analizuje przy uruchomieniu świeże kompilacje gry i pomocnicze EXE. Grupuj zmiany przed kompilacją, korzystaj z istniejących narzędzi QA i łącz powiązane próby w jednym uruchomieniu, gdy dany test na to pozwala. Każde wydanie sprawdzaj po rozpakowaniu obu paczek. Przy ostrzeżeniu sprawdź nazwę zdarzenia i ścieżkę w dzienniku AVG.
 - Pomocnicze EXE i rozpakowane paczki do uruchomień testowych przygotowuj w `dist/qa-local/` wewnątrz repozytorium. Katalog `C:\AI2D\pipeline\runs` służy do przechowywania raportów i podglądów.
 

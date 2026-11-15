@@ -70,13 +70,13 @@ Image presentedImage(){
 }
 // Native-resolution frozen world for allocation/character sheets only. The
 // normal moving world still draws directly to canvas; no resampling is used.
-struct PausedWorldCache {RenderTexture2D art{};bool ready=false;float time=-1;V player{};WorldLocation location=WorldLocation::Forest;int floor=-1;unsigned builds=0;} pausedWorldCache;
+struct PausedWorldCache {RenderTexture2D art{};bool ready=false,fallingBodies=false;float time=-1;V player{};WorldLocation location=WorldLocation::Forest;int floor=-1;unsigned builds=0;} pausedWorldCache;
 void invalidatePausedWorld(){pausedWorldCache.ready=false;}
 void unloadPausedWorld(){if(pausedWorldCache.art.id)UnloadRenderTexture(pausedWorldCache.art);pausedWorldCache={};}
 void prepareLiveWorld(){
  // The distant desert panorama has its own economical buffer. It never
  // contains characters, their shadows, or the immediate terrain.
- if(game.inDesert())desert_art::renderBackdrop(std::min(renderScale,1.f));
+ if(game.inDesert())desert_art::renderBackdrop(renderScale);
  performance.end(RenderStage::Backdrop,true);
  world_shadows::prepare();performance.end(RenderStage::Shadows,true);
 }
@@ -114,7 +114,8 @@ void renderScene() {
         renderScale=worldScale;
     }
     if(freeze)hovered={};
-    bool refresh=!pausedWorldCache.ready||pausedWorldCache.time!=game.time||distance(pausedWorldCache.player,game.player)>0||pausedWorldCache.location!=game.location||pausedWorldCache.floor!=game.towerFloor;
+    const bool fallingBodies=freeze&&game.allocationRequired&&std::any_of(game.enemies.begin(),game.enemies.end(),[](const Enemy& e){return e.dying();});
+    bool refresh=!pausedWorldCache.ready||fallingBodies||pausedWorldCache.fallingBodies||pausedWorldCache.time!=game.time||distance(pausedWorldCache.player,game.player)>0||pausedWorldCache.location!=game.location||pausedWorldCache.floor!=game.towerFloor;
     if(freeze){
         if(!pausedWorldCache.art.id||pausedWorldCache.art.texture.width!=canvas.texture.width||pausedWorldCache.art.texture.height!=canvas.texture.height){
             if(pausedWorldCache.art.id)UnloadRenderTexture(pausedWorldCache.art);
@@ -124,7 +125,7 @@ void renderScene() {
             prepareLiveWorld();
             BeginTextureMode(pausedWorldCache.art);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,renderScale});
             native_world::beginOpaqueFrame();drawWorld();native_world::finishOpaqueBackground();actor_art::finishShadowFrame();EndMode2D();EndTextureMode();
-            pausedWorldCache.ready=true;pausedWorldCache.time=game.time;pausedWorldCache.player=game.player;pausedWorldCache.location=game.location;pausedWorldCache.floor=game.towerFloor;pausedWorldCache.builds++;
+            pausedWorldCache.ready=true;pausedWorldCache.fallingBodies=fallingBodies;pausedWorldCache.time=game.time;pausedWorldCache.player=game.player;pausedWorldCache.location=game.location;pausedWorldCache.floor=game.towerFloor;pausedWorldCache.builds++;
         }
     }else{invalidatePausedWorld();prepareLiveWorld();}
     actor_art::pickingFromPreparedFrame=!freeze||refresh;hovered=pickWorld(mouse);actor_art::pickingFromPreparedFrame=false;

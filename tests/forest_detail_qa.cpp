@@ -60,6 +60,21 @@ int main(int argc,char** argv){
    capture(type,state,attack,root/"frames"/TextFormat("attack-%d-%02d.png",type,frame));
   }
  }
+ for(int type:{3,7}){
+  const float windup=meleeWindup(type),recovery=meleeRecovery(type);
+  for(int direction=0;direction<8;direction++)for(float elapsed:{windup*.8f,windup,windup+recovery*.5f}){
+   Enemy enemy{};enemy.type=type;enemy.animation.direction=Direction(direction);
+   enemy.windup=std::max(0.f,windup-elapsed);
+   enemy.strike=enemy.windup>0?0.f:windup+recovery-elapsed;
+   BeginTextureMode(target);ClearBackground(BLANK);
+   actor_art::drawEnemy(enemy,200,354);
+   EndTextureMode();
+   Image image=LoadImageFromTexture(target.texture);ImageFlipVertical(&image);
+   const auto file=root/TextFormat("heavy-%d-%d-%02d.png",type,direction,int(std::round(elapsed*60)));
+   check(ExportImage(image,file.string().c_str()),"authored windup, impact and recovery render through live enemy pose");
+   UnloadImage(image);
+  }
+ }
  UnloadRenderTexture(target);
  bakeForestBodies(root,types,check);
 
@@ -73,6 +88,18 @@ int main(int argc,char** argv){
  check(world_shadows::ready,"actual forest scene used projected shadows");
  saveTexture(canvas,(root/"forest-field.png").string().c_str());
  check(fs::exists(root/"forest-field.png"),"actual forest view exported");
+ game.props.clear();game.enemies.clear();game.forage.clear();game.player={20,20};
+ for(int type:{0,3,7,12,21}){
+  const V position=game.player+V{.8f,0};
+  game.enemies={{100,type,position,position,500,500}};
+  auto& target=game.enemies[0];
+  target.animation.direction=Direction::E;
+  game.hit(target,10);
+  check(length(target.hitLean())>.01f&&game.combatImpacts.size()==1,"runtime enemy receives both lean and impact event");
+  game.update(.05f,{},false);game.update(.025f,{},false);
+  renderScene();saveTexture(canvas,(root/TextFormat("impact-%d.png",type)).string().c_str());
+  game.effects.clear();game.combatImpacts.clear();
+ }
  fallen_art::unload();creature_paint::unload();actor_art::unloadCreatureBatch();
  sync_present::shutdown();CloseWindow();
  log<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';

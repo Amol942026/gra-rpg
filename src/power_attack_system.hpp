@@ -67,14 +67,16 @@ void updatePowerMelee(float previousSwing){
   }
   return;
  }
- const V ray=axis*attack.reach;
- const float block=weaponContactBlock(ray,SpearTipRadius);
+ const bool spear=style==PowerStyle::Spear;
+ const V ray=spear?spearContact(true).ray:axis*attack.reach;
+ const float padding=spear?0.f:SpearTipRadius;
+ const float block=weaponContactBlock(ray,padding);
  Enemy* first=nullptr;Enemy* second=nullptr;float near=block,far=block;
  for(auto& enemy:enemies)if(enemy.alive){
-  const float t=segmentCircle(player,ray,enemy.pos,enemy.radius()+SpearTipRadius);
+  const float t=segmentCircle(player,ray,enemy.pos,enemy.radius()+padding);
   if(t<near){far=near;second=first;near=t;first=&enemy;}
   else if(t<far){far=t;second=&enemy;}
  }
- if(first&&near<=1)hit(*first,amount,DamageType::Physical,critical);
- if(style==PowerStyle::Spear&&second&&far<=1)hit(*second,amount*.62f,DamageType::Physical,critical);
+ if(first&&near<=1)hit(*first,amount,DamageType::Physical,critical,ray);
+ if(spear&&second&&far<=1)hit(*second,amount*.62f,DamageType::Physical,critical,ray);
 }

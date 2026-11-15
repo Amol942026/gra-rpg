@@ -95,7 +95,7 @@ void advanceCharge(Enemy& e,float dt,V heroFrom,V heroTo,bool wasRolling,float r
    e.boarHit=true;V heroAt=from+(to-from)*contact;
    if(wasRolling&&!sandTrapped()&&rollAge+elapsed+used*contact<RollProtection){sound(Cue::Dodge,heroAt);effects.push_back({heroAt,"UNIK",.65f,3});}
    else{
-    takeMonsterDamage(incomingDamage(float(e.damage()),DamageType::Physical)*charge.multiplier,heroAt,.25f);
+    takeMonsterDamage(incomingDamage(float(e.damage()),DamageType::Physical)*charge.multiplier,heroAt,.25f,e.boarDirection);
     if(e.type==CinderhornType){sound(Cue::CinderhornAttack,e.pos+delta*contact);travel=contact;stoppedOnHero=true;}
    }
   }

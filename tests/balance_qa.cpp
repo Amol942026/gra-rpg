@@ -25,7 +25,12 @@ int main(int argc,char** argv){
  check(edits==0,"stat sheet has no adjustment buttons or symbols when there are no points");UnloadImageColors(pixels);UnloadImage(im);
  point(statAdjust(0,true));clickProgression();check(statDraft==Attributes{}&&game.attributes==Attributes{},"read-only stat clicks cannot create or spend points");confirmStats();openSkills();mouse={0,0};shot("skills-readonly");
  im=LoadImageFromTexture(canvas.texture);ImageFlipVertical(&im);pixels=LoadImageColors(im);edits=0;
- for(int row=0;row<SkillCount;row++)for(int y=313+row*133;y<341+row*133;y++)for(int x=986;x<1118;x++){Color c=pixels[y*im.width+x];edits+=c.r!=Panel.r||c.g!=Panel.g||c.b!=Panel.b;}
+ for(int row=0;row<SkillCount;row++)for(bool add:{false,true}){
+  const Rectangle button=skillAdjust(row,add);
+  for(int y=int(button.y);y<int(button.y+button.height);y++)for(int x=int(button.x);x<int(button.x+button.width);x++){
+   Color c=pixels[y*im.width+x];edits+=c.r!=Panel.r||c.g!=Panel.g||c.b!=Panel.b;
+  }
+ }
  check(edits==0,"skill sheet has no disabled plus/minus or editing controls without points");UnloadImageColors(pixels);UnloadImage(im);
  point(skillAdjust(0,true));clickSkills();check(skillDraft==SkillRanks{}&&game.skillRanks==SkillRanks{},"read-only skill clicks leave every skill locked");
  reset();game.xp=experienceForLevel(1)-1;Enemy victim{900,0,game.player,game.player,1,1};game.hit(victim,100);syncAdvancement();mouse={0,0};shot("stats-allocation");

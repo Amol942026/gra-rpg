@@ -120,6 +120,8 @@ Menu startowe przedstawia **leśną Bramę Świtu**, narysowaną warstwowo w Kri
 
 Gra zaczyna się w menu **Nowa gra / Wczytaj grę / Opcje / Twórcy / Wyjdź z gry**. Nowa gra rozpoczyna pełny prolog Eldrina. **Escape** zatrzymuje rozgrywkę i otwiera **Zapisz grę / Wczytaj grę / Opcje / Wyjdź z gry**; przycisk **Wróć do gry** lub ponowne Escape wznawia wyprawę. Menu działa także podczas prologu i rozmów. Pomijanie rozmowy pozostaje dostępne przez jej widoczny przycisk.
 
+**F5** otwiera od razu wybór slotu zapisu. Możesz zapisać wyprawę w dowolnym miejscu, także w trakcie walki. Jeśli masz zapis z dawnego punktu kontrolnego, znajdziesz go pod pozycją **Zapis ze starszej wersji** w menu wczytywania.
+
 Są **trzy ręczne sloty** z datą, poziomem i lokacją. Zapisy znajdują się w **`%LOCALAPPDATA%\Emberfall\saves`**, wspólnie dla kolejnych rozpakowań gry. Zachowują postać, ekwipunek, złoto, przydzielone i niewydane punkty, zadania, oba światy, potwory i ich łup, grzyby, skrzynie, piętra i pieczęcie wieży, aktywne efekty oraz dokładny moment rozmowy. Niezatwierdzone wybory punktów trzeba wybrać ponownie; nie są przydzielane automatycznie. Nadpisanie slotu i wczytanie podczas gry wymagają zatwierdzenia. Opcja **Wyjdź z gry** w pauzie pozwala wrócić do menu głównego lub zamknąć grę. Obie opcje ostrzegają o utracie niezapisanego postępu.
 
 Pliki `.efs` mają wersjonowany format i kontrolę integralności. Zapis używa pliku tymczasowego i atomowej podmiany. Poprzedni poprawny zapis pozostaje w `.bak`; jeśli główny plik jest uszkodzony, wczytywana jest kopia i pojawia się informacja. Po odczycie gra pozostaje w pauzie do wybrania **Wróć do gry**. Uszkodzony odczyt nie podmienia bieżącej wyprawy.
@@ -262,7 +264,7 @@ Drugi boss, **Żywa Wydma**, czeka na **południowym wschodzie**. Jest dużą, a
 
 **Brama Eldrina w miejscu przybycia** pozwala wracać do wieży przez **E / LPM / PPM** z odległości do 2,8 pola. Zdrowie, mana, poziom, umiejętności i ekwipunek są zachowane. Ponowna podróż przywraca stan pustyni: martwe potwory, ciała i pozostawione przedmioty. Las zachowuje swój własny stan i grzyby; łup nie przenika między krainami ani piętrami.
 
-**Szybki test** przez `Test_pustyni.bat` albo **F3 → Pustynia**. Lista ma **19 miejsc**, w tym trzy punkty Kaldery Popiołu. Bezpośredni start umożliwiają `--start desert`, `--start desert-oasis` i `--start desert-boss`.
+**Szybki test** przez **F3 → Morze Piasków**. Bezpośredni start umożliwiają `Uruchom.bat --start desert`, `Uruchom.bat --start desert-oasis` i `Uruchom.bat --start desert-boss`.
 
 Cichy test `--desert-qa --no-audio` sprawdza faktyczne przyciski dialogowe, teleportację, powrót przez bramę, otwieranie ciała bossa, przeciąganie fragmentu i drugi powrót do Eldrina, grafiki GPU, wskazywanie oraz trzy skale i pełny ekran. `--desert-benchmark --no-audio` mierzy 900 klatek w pięciu obszarach pustyni. Raporty i galerie: `dist/qa-v33/`. Testy modelu: `tests/desert_tests.hpp`. Cała grafika powstaje z kodu; gra nie pobiera zasobów z sieci.
 
@@ -296,7 +298,7 @@ Cichy test `--combat-qa --no-audio` sprawdza oba etapy awansu, naukę Leczenia, 
 
 ## Wersja 0.29 — tryb deweloperski i szybki start w lokacji
 
-Naciśnij **F3** albo kliknij **DEV · F3**. Wybór działa także podczas prologu, scenki powrotu, pauzy, rozdawania punktów i po śmierci. Dostępnych jest **19 miejsc startu**: osiem punktów lasu, pięć pięter wieży, trzy punkty pustyni i trzy Kaldery Popiołu. Zaznacz miejsce, następnie wybierz:
+Naciśnij **F3** albo kliknij **Tryb deweloperski** w menu głównym. Wybór działa także podczas prologu, scenki powrotu, pauzy, rozdawania punktów i po śmierci. Punkty startowe są w czterech zakładkach: Wielka Knieja, Morze Piasków, Kaldera Popiołu i Wieża Eldrina. Zaznacz miejsce, następnie wybierz:
 
 - **NOWA SESJA TESTOWA** — resetuje wyprawę, postać i przeciwników, pomija prolog i uruchamia wybraną lokację. ENTER robi to samo.
 - **PRZENIEŚ OBECNĄ POSTAĆ** — zachowuje założony sprzęt, statystyki, zdobyte punkty, wyższe rangi i postęp walk. Pozostawione przedmioty i ciała zostają w swojej lokacji.
@@ -307,31 +309,22 @@ Każda sesja DEV ustawia **poziom 100**, odblokowuje wszystkie umiejętności or
 
 **ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu. Otwarta lista zatrzymuje symulację. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. Prolog otwiera **Nowa gra** w głównym menu.
 
-W folderze projektu są poniższe launchery. Osobna paczka
-**Emberfall-DEV-Windows-x64.zip** zawiera menu DEV oraz skróty do kaldery i Varkhora:
-
-- `Tryb_deweloperski.bat` — od razu otwiera wybór lokacji.
-- `Test_wiezy.bat` — zaczyna na pierwszym piętrze; F3 wybiera kolejne.
-- `Test_bossa.bat` — zaczyna przy Kamiennym Strażniku.
-- `Test_kaldery.bat` — zaczyna przy Bramie Popiołu.
-- `Test_Varkhora.bat` — zaczyna przy trzecim bossie.
-
-Prawa kolumna menu F3 obejmuje Bramę Popiołu, Obsydianowe Kuźnie i Varkhora.
+W projekcie i w wypakowanej paczce **Emberfall-DEV-Windows-x64.zip** grę uruchamia `Uruchom.bat`.
+Zakładka **Kaldera Popiołu** obejmuje m.in. Bramę Popiołu, Obsydianowe Kuźnie i Tron Serca Kaldery, gdzie czeka Varkhor.
 Przeniesienie postaci usuwa aktywne pociski, erupcje i przewrócenie. Start DEV w kalderze
 przygotowuje testowy postęp wcześniejszych aktów, aby działał powrót przez
 Eldrina. Testy i instrukcje paczki są opisane w
 [art/volcano/developer/README.md](art/volcano/developer/README.md).
 
-Bezpośredni start w projekcie (Windows CMD). W wypakowanej paczce DEV użyj
-`Emberfall.exe` zamiast `dist\Emberfall.exe`:
+Bezpośredni start w projekcie lub wypakowanej paczce DEV (Windows CMD):
 
 ```bat
-dist\Emberfall.exe --start tower-3
-dist\Emberfall.exe --start tower-5
-dist\Emberfall.exe --start ruins
-Test_kaldery.bat
-Test_Varkhora.bat
-dist\Emberfall.exe --dev
+Uruchom.bat --dev
+Uruchom.bat --start tower-1
+Uruchom.bat --start ruins
+Uruchom.bat --start desert
+Uruchom.bat --start=volcano
+Uruchom.bat --start=volcano-boss
 ```
 
 Identyfikatory lokacji obejmują `forest`, `ruins` (także `boss`), `birches`, `grove`, `heart`, `trail`, `wolves`, `spiders` oraz `tower-1` do `tower-5` (`tower` oznacza pierwsze piętro). Obsługiwane jest również `--start=tower-3`. Błędna lub brakująca lokacja otwiera listę z komunikatem.
@@ -356,7 +349,7 @@ Cichy test `--tower-floors-qa --no-audio` zapisuje pięć pomieszczeń, księgę
 
 Każdy zdobyty poziom daje **5 punktów statystyk oraz 1 punkt umiejętności**. Po zatwierdzeniu statystyk automatycznie otwiera się okno umiejętności. Gra pozostaje zatrzymana do rozdania i zatwierdzenia wszystkich punktów. Kliknij kartę lub przycisk +, a przyciskiem - popraw wybór. Pierwszy punkt odblokowuje umiejętność; kolejne zwiększają jej rangę. Awans o kilka poziomów jednocześnie zachowuje wszystkie należne punkty.
 
-- **Mocne cięcie — Z po przypisaniu.** Działa wyłącznie z mieczem i kosztuje **10 many**. Ranga 1 zadaje **150% obrażeń zwykłego ataku**; każda kolejna dodaje 10 punktów procentowych tego mnożnika. Trafia przeciwników w dotychczasowym zasięgu miecza i uwzględnia obronę fizyczną. Ma dłuższy, szerszy zamach z pomarańczową smugą i odnowienie **1,2 s**. Łuk, topór i sztylet blokują tę umiejętność.
+- **Mocne cięcie — Z po przypisaniu.** Działa wyłącznie z mieczem i kosztuje **10 many**. Ranga 1 zadaje **150% obrażeń zwykłego ataku**. Każda kolejna dodaje 10 punktów procentowych tego mnożnika. Trafia przeciwników przed bohaterem w zasięgu miecza i uwzględnia obronę fizyczną. Ma dłuższy zamach z pomarańczową smugą i odnowienie **1,2 s**. Łuk, topór i sztylet blokują tę umiejętność.
 - **Przeszywająca strzała — X po przypisaniu.** Działa wyłącznie z łukiem. X przygotowuje następny strzał; następnie **przytrzymaj i puść LPM**, tak jak przy zwykłym strzale. Skuteczne wypuszczenie kosztuje **20 many i 1 strzałę**. Ranga 1 trafia do **3 kolejnych przeciwników**, każda kolejna zwiększa limit o 1. **Obrażenia, zasięg i prędkość są takie same jak dla zwykłej strzały przy tym samym naciągu.** Każdy cel otrzymuje obrażenia tylko raz. Przeszkody i granice mapy nadal zatrzymują pocisk. Ma błękitną cięciwę, smugę, celownik i pierścienie trafień oraz odnowienie **1,5 s**. Ponowne X wyłącza przygotowanie bez kosztu.
 
 **U** lub przycisk **UMIEJĘTNOŚCI** na prawym HUD otwiera podgląd rang. Nieznane umiejętności i umiejętności niewłaściwe dla broni są przygaszone. Najechanie na kafelek wyjaśnia sterowanie, koszt i blokadę. LPM otwiera wybór przypisania w danej kategorii. Menu, zmiana broni, unik i anulowanie strzału nie pobierają kosztu przygotowanej strzały. Koszt jest sprawdzany ponownie przed wypuszczeniem. Oba ataki są fizyczne; zabójstwa zachowują dotychczasowy łup, doświadczenie, awans i fabułę. Walka pozostaje zablokowana w wieży Eldrina.
@@ -497,7 +490,7 @@ Ciała pozostają na mapie również po opróżnieniu. Można zamknąć okienko 
 
 **Spacja** uruchamia dotychczasowe przeturlanie w kierunku WSAD lub ostatniego ustawienia. **Przytrzymany lewy lub prawy Shift + WSAD** daje bieg o **50% szybszy** od chodu (5,7 pola/s, z butami 6,45). Puszczenie Shifta od razu przywraca chód. Bieg nie zwiększa dystansu przewrotu.
 
-**LPM na mapie** wykonuje jeden zamach mieczem, trafiający wszystkich przeciwników w promieniu 2,1 pola. Każdy zamach wymaga nowego kliknięcia i gotowej broni; przytrzymanie myszy nie powtarza ataku. **C** rzuca wybrany czar w stronę kursora. Klawisz R nie jest już przypisany do rzucania czaru.
+**LPM na mapie** wykonuje jeden zamach mieczem, trafiający przeciwników do 2,1 pola przed bohaterem w kierunku kursora. Każdy zamach wymaga nowego kliknięcia i gotowej broni. Puszczenie przycisku po przytrzymaniu wykonuje mocniejszy atak. **C** rzuca wybrany czar w stronę kursora. Klawisz R nie jest już przypisany do rzucania czaru.
 
 LPM na przedmiocie nadal rozpoczyna przeciąganie. Kliknięcia w HUD, minimapę i menu nie uruchamiają walki. PPM na miksturze w plecaku lub w panelu przedmiotów na ziemi nadal ją wypija; na ciele otwiera jego zawartość. Rzucanie czaru i atak są zablokowane podczas przewrotu, pauzy i przeciągania przedmiotu. Pasek akcji, pomoc i księga czarów pokazują nowe przypisania.
 
@@ -528,7 +521,7 @@ Przełączniki zachowują wartości suwaków głośności. Oba stany zapisują s
 
 ## Wersja 0.8 — atak obszarowy i kolizje potworów
 
-**Jeden zamach trafia wszystkich żywych przeciwników w promieniu 2,1 pola wokół bohatera**, także z boku i z tyłu. Każdy otrzymuje obrażenia tylko raz, z uwzględnieniem własnej obrony. Każdy pokonany potwór zostawia ciało z łupem i daje doświadczenie. Broń zachowuje wysuniętą animację z wersji 0.7 oraz odnowienie 0,46 s.
+**Jeden zamach trafia żywych przeciwników do 2,1 pola przed bohaterem.** Każdy otrzymuje obrażenia tylko raz, z uwzględnieniem własnej obrony. Każdy pokonany potwór zostawia ciało z łupem i daje doświadczenie. Broń zachowuje wysuniętą animację z wersji 0.7 oraz odnowienie 0,46 s.
 
 Usunięto wybór celu kliknięciem i stały pierścień zaznaczenia. Bohater macha w kierunku swojego ustawienia. Najazd myszą nadal podświetla obiekt i pokazuje jego informacje w prawym HUD; odsunięcie kursora usuwa wskazanie.
 
@@ -581,7 +574,7 @@ Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/E
 | W / S / A / D | Ruch: góra / dół / lewo / prawo; możliwe kierunki ukośne |
 | Shift (lewy lub prawy, przytrzymany) + WSAD | Bieg o 50% szybszy od chodu |
 | Spacja (pojedyncze naciśnięcie) | Przeturlanie w kierunku ruchu lub ustawienia; odnowienie 1,2 s |
-| LPM na mapie (pojedyncze kliknięcie) | Jeden zamach; wszyscy przeciwnicy w promieniu 2,1 pola |
+| LPM na mapie (pojedyncze kliknięcie) | Jeden zamach mieczem, przeciwnicy do 2,1 pola przed bohaterem |
 | Najazd kursorem na potwora lub obiekt | Informacje w sekcji POD KURSOREM po prawej |
 | V | Przypisane Leczenie przywraca do 30 HP za 20 many |
 | LPM na kafelku Z, X lub V | Menu przypisania umiejętności do danej kategorii |

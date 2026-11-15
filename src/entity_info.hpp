@@ -2,7 +2,12 @@
 #include <algorithm>
 
 namespace ember {
-constexpr int ForestEnemyTypeCount=8,ForestPropTypeCount=7,LegacyEnemyTypeCount=12,LegacyPropTypeCount=14,PropTypeCount=18;
+constexpr int ForestEnemyTypeCount=8,ForestPropTypeCount=7,LegacyEnemyTypeCount=12,LegacyPropTypeCount=14;
+constexpr int StoneGuardianType=3;
+constexpr int VolcanoFirstType=12,VolcanoBossType=18;
+constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;
+constexpr int DecorationsPerRealm=5,PropTypeCount=VolcanoDecorationStart+DecorationsPerRealm;
+inline constexpr bool volcanoSceneryProp(int type){return type>=LegacyPropTypeCount&&type<ForestDecorationStart;}
 constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21,EnemyTypeCount=22;
 constexpr int RegionalEnemyTypeCount=EnemyTypeCount-SporekinType;
 inline constexpr bool regionalEnemy(int type){return type>=SporekinType&&type<EnemyTypeCount;}
@@ -63,13 +68,24 @@ inline const PropInfo& propInfo(int type) {
         {"Warstwowy piaskowiec","Skała pustynna"},{"Obelisk Słońca","Ruina pustynna"},
         {"Suchy krzew","Roślinność pustynna"},{"Palma oazy","Drzewo pustynne"},{"Brama Eldrina","Portal do wieży"},
         {"Bazaltowe formacje","Skała wulkaniczna"},{"Zwęglone pogorzelisko","Pogorzelisko"},
-        {"Siarkowy wyziew","Wulkaniczny wyziew"},{"Obsydianowe formacje","Skała wulkaniczna"}
+        {"Siarkowy wyziew","Wulkaniczny wyziew"},{"Obsydianowe formacje","Skała wulkaniczna"},
+        {"Omszała kłoda","Martwe drewno"},{"Kępa paproci","Leśne runo"},
+        {"Łuk opleciony bluszczem","Ruina · budowla"},{"Spróchniały pień","Martwe drewno"},{"Krzew jarzębiny","Roślinność"},
+        {"Zagrzebane amfory","Ślad dawnej osady"},{"Żebra pustynnej bestii","Szczątki"},
+        {"Rozeta agawy","Roślinność pustynna"},{"Płyta Słońca","Ruina pustynna"},{"Porzucony wóz","Ślad karawany"},
+        {"Kryształy żaru","Skała wulkaniczna"},{"Zwęglone drzewko","Martwe drewno"},
+        {"Skorupa siarki","Naciek wulkaniczny"},{"Kowadło obsydianowej kuźni","Ruina kuźni"},{"Pęknięta brama bazaltowa","Ruina · budowla"}
     };
     static_assert(sizeof(entries)/sizeof(entries[0])==PropTypeCount);
     return entries[std::clamp(type,0,PropTypeCount-1)];
 }
 inline bool treeProp(int type){return type==0||type==4||type==5||type==12;}
-inline float propRadius(int type){return type==14?.82f:type==15?.45f:type==16?.75f:type==17?.62f:type==13?.78f:type==9?.65f:type==7||type==8?.58f:type==11?.28f:treeProp(type)?.52f:type==6?.27f:.4f;}
+inline float propRadius(int type){
+    static constexpr float decorations[]={.65f,.32f,.74f,.49f,.35f,.42f,.60f,.32f,.54f,.75f,.56f,.49f,.46f,.59f,.73f};
+    static_assert(sizeof(decorations)/sizeof(*decorations)==PropTypeCount-ForestDecorationStart);
+    if(type>=ForestDecorationStart&&type<PropTypeCount)return decorations[type-ForestDecorationStart];
+    return type==14?.82f:type==15?.45f:type==16?.75f:type==17?.62f:type==13?.78f:type==9?.65f:type==7||type==8?.58f:type==11?.28f:treeProp(type)?.52f:type==6?.27f:.4f;
+}
 }
 
 namespace ember { inline bool enemyBoss(int type){return type==3||type==11||type==18;} }

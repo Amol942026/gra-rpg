@@ -1,6 +1,6 @@
 #pragma once
 
-Rectangle statsButton(){return {1238,16,169,29};}
+Rectangle statsButton(){return {1238,ProgressionButtonsY,169,29};}
 Rectangle statAdjust(int row,bool add){return {add?951.f:878.f,273.f+row*56,add?72.f:68.f,36};}
 Rectangle statAddFive(int row){return {1028,273.f+row*56,84,36};}
 Rectangle statRow(int row){return {330,266.f+row*56,782,54};}
