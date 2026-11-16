@@ -56,6 +56,7 @@ bool worldPointerAllowed(Vector2 p) {
     if(!CheckCollisionPointRec(p,{0,116,WorldW,678}))return false;
     if(archetype(game.equipment[0].kind)==Kind::Bow&&CheckCollisionPointRec(p,{195,112,515,36}))return false;
     if(CheckCollisionPointRec(p,minimapRect()))return false; // minimap
+    if(developerSummonHudHit(p))return false;
     if(CheckCollisionPointRec(p,journalRect()))return false;
     if(game.messageTime>0){
         float width=std::min(760.f,textWidth(game.message,13)+32);

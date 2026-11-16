@@ -1,6 +1,7 @@
 #pragma once
 #include "game.hpp"
 #include <cctype>
+#include <limits>
 namespace ember {
 struct DeveloperDestination {const char* id;const char* name;WorldLocation location;V spawn;int floor;};
 inline constexpr auto DeveloperDestinations=[] {
@@ -128,6 +129,36 @@ inline bool developerSpawnSafe(const Game& g,V pos){
  if(!g.walkable(pos))return false;
  if(!g.inTower())for(const auto& enemy:g.enemies)if(enemy.alive&&distance(enemy.pos,pos)<enemy.radius()+.75f)return false;
  return true;
+}
+inline bool summonDeveloperEnemy(Game& game,int type){
+ if(!game.developerSession||game.inTower()||game.dead()||game.storyBlocked()||type<0||type>=EnemyTypeCount)return false;
+ const auto& info=enemyInfo(type);
+ int id=FirstSummonedEnemyId;
+ for(const auto& enemy:game.enemies)if(summonedEnemyId(enemy.id)){
+  if(enemy.id==std::numeric_limits<int>::max())return false;
+  id=std::max(id,enemy.id+1);
+ }
+ const V forward=normalized(length(game.facing)>.001f?game.facing:V{1,1});
+ // Leave enough room for a charge or a melee approach after the menu closes.
+ for(float range=std::max(3.f,info.radius+HeroBodyRadius+.5f);range<=6.f;range+=.5f)
+  for(int step=0;step<24;step++){
+   const int direction=step%2?(step+1)/2:-step/2;
+   const V pos=game.player+rotateAbilityDirection(forward,direction*AnimationPi/12)*range;
+   if(!game.enemyPositionClear(pos,info.radius)||!game.clearEnemySegment(game.player,pos,0))continue;
+   if(std::any_of(game.chests.begin(),game.chests.end(),[&](const auto& chest){
+     return chest.location==game.location&&distance(chest.pos,pos)<ChestRadius+info.radius;
+    }))continue;
+   if(std::any_of(game.enemies.begin(),game.enemies.end(),[&](const Enemy& enemy){
+     return distance(enemy.pos,pos)<enemy.radius()+info.radius+.2f;
+    }))continue;
+   Enemy enemy{id,type,pos,pos,info.health,info.health};
+   const V toward=game.player-pos;
+   enemy.animation.face(toward.x,toward.y);
+   enemy.behavior=EnemyBehavior::Chase;
+   game.enemies.push_back(enemy);
+   return true;
+  }
+ return false;
 }
 inline bool developerStart(Game& current,int destination,bool reset,unsigned seed=12593){
  if(destination<0||destination>=DeveloperDestinationCount)return false;

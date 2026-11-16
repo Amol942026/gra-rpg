@@ -17,9 +17,9 @@ inline constexpr Contact Bandit{2,.64f,19.f,1.f,7.f,16.7f,32.f,.999f,.55f,14.f};
 inline float phaseDistance(float dx,float dy,const Contact& contact){
     return std::hypot((dx-dy)*40.f,(dx+dy)*20.f/.52f)*contact.support/(2*contact.stride*contact.scale);
 }
-inline void advance(AnimationState& state,float dx,float dy,float dt,const Contact& contact){
+inline void advance(AnimationState& state,float dx,float dy,float dt,const Contact& contact,bool faceMovement=true){
     const float previous=state.phase;
-    if(std::hypot(dx,dy)>.00001f){
+    if(faceMovement&&std::hypot(dx,dy)>.00001f){
         const bool initialized=state.facingInitialized;
         state.face(dx,dy);
         state.targetAngle=std::atan2((dx+dy)*20.f,(dx-dy)*40.f);

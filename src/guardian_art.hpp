@@ -44,7 +44,7 @@ inline void target(V position,float progress){
  line(p.x-5,p.y,p.x+5,p.y,amber,1);line(p.x,p.y-3,p.x,p.y+3,amber,1);
 }
 inline void ground(){
- if(game.location!=WorldLocation::Forest)return;
+ if(game.location!=WorldLocation::Forest&&!game.developerSession)return;
  for(const auto& e:game.enemies)if(e.alive&&e.type==3){if(e.boulderWindup>0||e.boulderRecovery>0)uproot(e);if(e.boulderWindup>0)target(e.boulderTarget,1-e.boulderWindup/BoulderWindup);}
  for(const auto& b:game.boulders)target(b.target,1);
  for(const auto& b:game.boulderImpacts){

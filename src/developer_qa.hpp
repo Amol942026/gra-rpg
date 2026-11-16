@@ -38,6 +38,8 @@ bool runDeveloperQA(){
  };
  impactShot(0,"impact-slime");impactShot(3,"impact-stone");impactShot(7,"impact-bark");
  reset();refreshDisplayLayout();check(!audioSystem.available,"developer tests open no audio device");startIntro();float age=intro.age;openDeveloperMenu();
+ point(developerSummonTab());clickDeveloperMenu();
+ check(!developerSummonMenu,"ordinary play cannot open the summon panel");
  check(developerMenuOpen&&intro.active()&&!developerActive&&!gameplayInputAllowed()&&!worldPointerAllowed({525,428}),"opening developer picker during prologue blocks world input without prematurely replacing normal play");
  check(!castGameplaySpell()&&!clickWorldOrInventory()&&!rightClickWorldOrInventory(),"developer picker blocks spells, combat and inventory handlers");
  for(float s:{.8f,1.f,1.2f}){prepareCanvas(s);renderScene();saveTexture(canvas,TextFormat("qa-v29/menu-%d.png",int(s*100)));check(canvas.texture.width==int(W*s),"developer picker renders at each supported interface scale");}
@@ -112,6 +114,85 @@ bool runDeveloperQA(){
  const int farSite=developerDestination("volcano-obsidian-waste");
  openDeveloperMenu();chooseDestination(farSite);point(developerMoveButton());clickDeveloperMenu();
  check(game.inVolcano()&&std::string(game.currentRegion())==DeveloperDestinations[farSite].name,"far caldera warp and world HUD use the same site name");
+ point(developerSummonHudRect());
+ check(developerSummonHudHit(mouse)&&!worldPointerAllowed(mouse),"visible DEV summon button intercepts world pointer");
+ shot("summon-hud");
+ leftClickGameplay({});
+ check(developerSummonMenu&&developerMenuOpen&&!gameplayInputAllowed()&&!game.holdingMelee(),
+       "a single gameplay HUD click opens the summon panel without starting a world attack");
+ const double summonRender=GetTime();
+ shot("summon-menu");
+ report<<"Summon menu render and export: "<<GetTime()-summonRender<<" s\n";
+ const auto initialEnemies=game.enemies.size();
+ for(int n=0;n<EnemyTypeCount;n++){
+  if(n&&n%DeveloperSummonPageSize==0){point(developerSummonPageButton(true));clickDeveloperMenu();}
+  const int slot=n%DeveloperSummonPageSize,type=DeveloperSummonTypes[n];
+  const auto card=developerSummonCard(slot);
+  check(textWidth(enemyInfo(type).name,18)<card.width-(enemyBoss(type)?70:26),"full enemy name fits the summon card");
+  if(game.enemies.size()>initialEnemies)game.enemies.pop_back();
+  point(card);clickDeveloperMenu();
+  check(developerSummonSucceeded&&game.enemies.size()==initialEnemies+1&&game.enemies.back().type==type,
+        "clicking each named card creates the correct enemy in the world");
+ }
+ point(developerSummonReturn());clickDeveloperMenu();check(!developerMenuOpen&&gameplayInputAllowed(),"return button resumes combat after a summon");
+ if(game.enemies.size()==initialEnemies+1){
+  const auto id=game.enemies.back().id;
+  game.enemies.erase(game.enemies.begin(),game.enemies.end()-1);
+  game.combatImpacts.clear();
+  const float hp=game.hp;
+  for(int frame=0;frame<480&&game.combatImpacts.empty();frame++)game.update(1.f/60,{},false);
+  check(game.enemies.front().id==id&&!game.combatImpacts.empty()&&!game.effects.empty()&&
+        game.effects.back().text=="TRAFIENIE"&&game.hp==hp,
+        "an enemy summoned through the HUD chases and hits the hero when play resumes");
+  const double hitRender=GetTime();
+  shot("summoned-enemy-hit");
+  report<<"Summoned enemy hit render and export: "<<GetTime()-hitRender<<" s\n";
+ }
+ point(developerSummonHudRect());leftClickGameplay({});
+ check(developerSummonMenu&&developerMenuOpen,"the DEV HUD button can reopen the panel after combat resumes");
+ point(developerSummonReturn());clickDeveloperMenu();
+ shot("summoned-enemy");
+ openDeveloperMenu();chooseDestination(developerDestination("forest-deep"));
+ point(developerNewButton());clickDeveloperMenu();
+ game.props.clear();game.player={20,20};game.facing={1,0};
+ const auto wolf=std::find_if(game.enemies.begin(),game.enemies.end(),[](const Enemy& e){return e.type==1&&e.alive;});
+ check(wolf!=game.enemies.end(),"forest fixture contains an authored wolf");
+ if(wolf!=game.enemies.end()){
+  Enemy original=*wolf;
+  original.pos=original.home=game.player+V{2.f,.075f};
+  game.enemies={original};
+  for(int i=0;i<120;i++)game.update(1.f/60,{},false);
+  point(developerSummonHudRect());leftClickGameplay({});
+  const auto wolfCard=std::find(DeveloperSummonTypes.begin(),DeveloperSummonTypes.end(),1);
+  const int slot=int(wolfCard-DeveloperSummonTypes.begin());
+  developerSummonPage=slot/DeveloperSummonPageSize;
+  point(developerSummonCard(slot%DeveloperSummonPageSize));clickDeveloperMenu();
+  point(developerSummonReturn());clickDeveloperMenu();
+  check(game.enemies.size()==2&&game.enemies[0].id==original.id&&game.testSummon(game.enemies[1].id),
+        "HUD summoning adds a wolf to the ongoing encounter");
+  if(game.enemies.size()==2){
+   std::array<bool,2> struck{};
+   float largestTurn=0,largestStep=0;
+   for(int frame=0;frame<360;frame++){
+    const auto before=game.enemies;
+    game.update(1.f/60,{},false);
+    for(int i=0;i<2;i++){
+     const auto& a=before[i];const auto& b=game.enemies[i];
+     struck[i]|=a.windup>0&&b.strike>0;
+     largestStep=std::max(largestStep,distance(a.pos,b.pos));
+     if(a.plantedAttack())largestTurn=std::max(largestTurn,
+       std::abs(std::remainder(b.animation.facingAngle-a.animation.facingAngle,2*AnimationPi)));
+    }
+   }
+   check(struck[0]&&struck[1]&&largestTurn<.12f&&largestStep<.05f,
+         "authored and summoned wolves keep stable movement and facing during attacks");
+   report<<"Mixed fight max step: "<<largestStep<<" world units\n"
+         <<"Mixed fight max attack turn: "<<largestTurn*180/AnimationPi<<" degrees per simulation step\n";
+   const double renderStart=GetTime();
+   shot("mixed-fight");
+   report<<"Mixed fight render and export: "<<GetTime()-renderStart<<" s\n";
+  }
+ }
  const int desertSite=developerDestination("desert-buried");
  openDeveloperMenu();chooseDestination(desertSite);point(developerMoveButton());clickDeveloperMenu();
  menuSaveRoot=fs::absolute("qa-v29/field-saves");
@@ -141,6 +222,50 @@ bool runDeveloperQA(){
  openPauseMenu();menuHomeAction(3);activateMenuRow(0);
  check(welcome&&!paused&&!developerActive&&!developerMenuOpen&&!game.developerSession,"return to main menu clears the developer session and its protection");
  check(bagPages()==1&&!clickBagPage(),"normal play has no backpack paging controls");
+ welcome=false;point(developerSummonHudRect());
+ check(!developerSummonHudHit(mouse)&&worldPointerAllowed(mouse),"the DEV summon button leaves the same area playable in ordinary mode");
  menuNewGame();check(!game.developerSession&&game.maxHp()==100&&intro.active(),"a new expedition from the title uses normal resources and rules");
+ reset();
+ check(startDeveloperSession(true),"start a silent scene for the copper scarab");
+ game.activateField(WorldLocation::Desert);game.player={32,24};game.props.clear();game.enemies.clear();
+ game.dawnQuest=DawnQuest::AtTower;
+ const V scarabAt=game.player+V{2.5f,0};
+ const auto& spec=enemyAbilityProfile(9);
+ game.enemies.push_back({240,9,scarabAt,scarabAt,96,96});
+ auto& scarab=game.enemies.front();
+ scarab.animation.face(-1,0);scarab.abilityCd=0;
+ check(creature_paint::available(9)&&scarab_wave_art::crest.id,"scarab material and wave crest are loaded by the real renderer");
+ for(int direction=0;direction<fallen_art::Directions;direction++)for(int flank:{1,-1}){
+  const auto& sprite=fallen_art::spriteFor(9,direction,flank);
+  check(sprite.body.id&&sprite.ground.art.id&&sprite.footprint.width>35&&sprite.footprint.height>18,
+        "each scarab corpse direction and flank has a detailed body and a ground shadow");
+ }
+ shot("scarab-live");
+ const double scarabRender=GetTime();
+ while(scarab.abilityAge<.55f&&game.time<2.4f)game.update(1.f/60,{},false);
+ check(scarab.abilityBusy()&&scarab.abilityAge<spec.windup,"copper scarab coils up during the warning");
+ shot("scarab-wave-warning");
+ while(scarab.abilityAge<spec.windup+.48f&&game.time<2.4f)game.update(1.f/60,{},false);
+ check(scarab.abilityBusy()&&scarab.abilityMask==1&&game.hp==game.maxHp(),"wave reaches the player once at the familiar radius");
+ shot("scarab-wave-active");
+ game.hit(scarab,10000,DamageType::Physical,false,{1,.2f});
+ check(scarab.dying()&&scarab.deathSpecial>=0,"death begins in the current casting pose");
+ game.effects.clear();
+ const float contact=enemy_death::groundContactTime(9);
+ for(int i=0;i<8;i++)game.advanceEnemyDeaths(contact/16);
+ check(!scarab.corpseGrounded()&&scarab.deathProgress()>0,"the shell rolls and sheds weight before landing");
+ shot("scarab-fall");
+ for(int i=0;i<10;i++)game.advanceEnemyDeaths(contact/16);
+ const Vector2 bodyPoint=corpseDrawPoint(scarab,screen(scarab.pos));
+ const auto& body=fallen_art::spriteFor(scarab);
+ bool bodyHit=false;
+ for(float y=body.footprint.y;y<body.footprint.y+body.footprint.height&&!bodyHit;y+=2)
+  for(float x=body.footprint.x;x<body.footprint.x+body.footprint.width&&!bodyHit;x+=2){
+   const Vector2 probe{bodyPoint.x+x,bodyPoint.y+y};
+   bodyHit=restingCorpseArt(scarab,bodyPoint.x,bodyPoint.y,BLANK,&probe);
+  }
+ check(scarab.corpseGrounded()&&bodyHit&&game.findCorpse(scarab.id),"settled copper scarab uses a pickable corpse with the new shell");
+ shot("scarab-rest");
+ report<<"Copper scarab render and export (four views): "<<GetTime()-scarabRender<<" s\n";
  reset();report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
 }

@@ -16,6 +16,8 @@ inline bool enemyAbilityRealm(int type,WorldLocation realm){return (type==9||typ
 inline V rotateAbilityDirection(V p,float angle){float c=std::cos(angle),s=std::sin(angle);return {p.x*c-p.y*s,p.x*s+p.y*c};}
 inline bool insideEnemyCleave(V relative,V direction){float along=relative.x*direction.x+relative.y*direction.y,side=relative.x*direction.y-relative.y*direction.x;return along>=.3f&&along<=5.2f&&std::abs(side)<=.72f;}
 inline bool insideEmberBreath(V relative,V direction){float radius=length(relative);return radius<=4.8f&&(radius<.15f||relative.x*direction.x+relative.y*direction.y>=radius*.819152f);}
+constexpr float CopperWaveInner=.65f,CopperWaveOuter=3.4f;
+inline float copperWaveRadius(float phase){return CopperWaveInner+(CopperWaveOuter-CopperWaveInner)*std::clamp(phase,0.f,1.f);}
 // Earliest contact with an expanding annulus, including a moving hero/caster.
 // Both circle boundaries have quadratic roots; endpoint-only tests tunnel.
 inline float expandingWaveContact(V relative,V delta,float radius,float growth,float margin){

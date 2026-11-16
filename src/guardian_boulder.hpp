@@ -49,7 +49,7 @@ float updateHeroKnockback(float dt){
  return lockedTime;
 }
 bool updateGuardianThrow(Enemy& e,float dt,bool visible,float distanceToPlayer){
- if(location!=WorldLocation::Forest||e.type!=3||!e.alive)return false;
+ if(e.type!=StoneGuardianType||!e.alive||(location!=WorldLocation::Forest&&!testSummon(e.id)))return false;
  if(visible)e.boulderCd=std::max(0.f,e.boulderCd-dt);
  if(e.boulderWindup>0){
   // Track the live hero through the lift, including displacement from a prior hit.
@@ -77,7 +77,7 @@ bool updateGuardianThrow(Enemy& e,float dt,bool visible,float distanceToPlayer){
  return false;
 }
 void updateBoulders(float dt,V playerBefore,bool wasRolling=false,float rollElapsed=0){
- if(dt<=0||location!=WorldLocation::Forest)return;
+ if(dt<=0||boulders.empty())return;
  for(size_t i=0;i<boulders.size();){
   auto& b=boulders[i];float elapsed=std::min(dt,std::max(0.f,b.duration-b.age));
   float next=std::min(b.duration,b.age+elapsed),progress=std::clamp(next/b.duration,0.f,1.f);

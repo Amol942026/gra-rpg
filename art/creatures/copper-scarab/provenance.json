@@ -1,0 +1,30 @@
+{
+  "description": "Skarabeusz miedziany i Miedziana fala",
+  "imagegen": {
+    "mode": "built-in",
+    "prompt": "Use case: stylized-concept. A texture artist's flat orthographic copper scarab chitin material sample for the Emberfall isometric hand-painted action RPG. Edge-to-edge macro of a SINGLE old copper scarab wing plate, filling the full square; opaque texture swatch without a beetle silhouette, legs, border, text or external objects. Warm sunset copper and ochre oxidation, fine layered shallow scored growth ridges following the diagonal, sparing shallow turquoise verdigris deposits along narrow grooves, a very dark underlying desaturated plum metal in pitted edges, small dulled gold edge catches. Subtle natural shell texture, clear midtones, strategic variation without noisy scratches. Sophisticated hand-painted fantasy game material, softly brushed, visible at normal sprite scale, broad diffuse neutral illumination, no hard cast shadows, no vignette, no glaring hotspots. A reusable flat texture for a 2D segmented scarab sprite, not a scene."
+  },
+  "comfyui": {
+    "role": "Istniejący lokalny podkład użyty ponownie bez nowego zadania",
+    "provenance": "art/creatures/desert-comfy/provenance.json"
+  },
+  "krita": {
+    "role": "Warstwowy materiał i grzbiet fali",
+    "workflow": "tools/media/krita_copper_scarab.py"
+  },
+  "synfig": {
+    "version": "1.4.5",
+    "controls_rendered": 48,
+    "render_seconds": 14.516,
+    "workflow": "tools/media/enemy_death_synfig.py"
+  },
+  "sha256": {
+    "art/creatures/copper-scarab/copper-source.png": "11a95d7d0e3843cb8f4c9b94a14cadf94d72b92eee3a445ca0f0b2928adf071d",
+    "art/creatures/copper-scarab/skarabeusz-miedziany-atlas.kra": "1639df573b0b7d6c283bd7e600e96a8d9651c4e14ae993fc5db70dbcfff8d501",
+    "art/creatures/copper-scarab/miedziana-fala-grzbiet.kra": "ce139fc660c92606ee84658ebc7251976d18479e903cafbf6c968ddbee228949",
+    "art/creatures/copper-scarab/upadki-przeciwnikow.sif": "fd4160c7b9e7a8e2baf63750cd0de11d6d8d35b684dbad2bfa6a839f61004682",
+    "assets/sprites/creature-paints.png": "8c49e0355110ad513146d84368d121578170c2a27c1163735c52708c70d2c9d2",
+    "assets/sprites/copper-wave-crest.png": "a971566cc29a67b07166bc109a631f1b98f36c36cf8e189f2ae9831bb3256276",
+    "src/generated/enemy_death_data.hpp": "bbd9e65bf40228fcccf657b1165534e8f7b44b0e705217c32498d6526a209497"
+  }
+}

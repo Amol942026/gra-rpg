@@ -11,12 +11,43 @@ bool clearEnemySegment(V from,V to,float padding)const{
 bool canSeePlayer(const Enemy& e)const{
  return e.alive&&!dead()&&distance(e.pos,player)<EnemySightRange&&clearEnemySegment(e.pos,player,0);
 }
+static void faceEnemyTowards(Enemy& e,V aim){
+ if(length(aim)<=.05f)return;
+ e.animation.face(aim.x,aim.y);
+ e.animation.targetAngle=std::atan2((aim.x+aim.y)*.5f,aim.x-aim.y);
+}
 bool enemyPositionClear(V p,float radius)const{
  if(inVolcano()&&(volcanoLava(p,radius)||nearVolcanoFountain(p,radius)))return false;
  if(inDesert()&&(desertWater(p,radius)||nearDesertFountain(p,radius)))return false;
  if(p.x<1.6f+radius||p.y<1.6f+radius||p.x>MapWalkMax-radius||p.y>MapWalkMax-radius)return false;
  for(const auto& prop:props){float gap=radius+propRadius(prop.type)+.003f;if(!outsideCircleBounds(p-prop.pos,gap)&&distance(p,prop.pos)<gap)return false;}
  return true;
+}
+V chaseDirection(const Enemy& enemy)const{
+ const V aim=player-enemy.pos;
+ const float distanceToHero=length(aim);
+ if(distanceToHero<=.00001f)return {};
+ const V forward=aim*(1.f/distanceToHero),side{-forward.y,forward.x};
+ float nearest=distanceToHero,offset=0;
+ const Enemy* blocker=nullptr;
+ for(const auto& other:enemies){
+  if(!other.alive||other.id==enemy.id)continue;
+  const V delta=other.pos-enemy.pos;
+  const float clearance=enemy.radius()+other.radius();
+  if(outsideCircleBounds(delta,clearance+.75f))continue;
+  const float ahead=delta.x*forward.x+delta.y*forward.y;
+  const float lateral=delta.x*side.x+delta.y*side.y;
+  if(ahead<=.02f||ahead>=nearest||std::abs(lateral)>=clearance*.88f)continue;
+  nearest=ahead;offset=lateral;blocker=&other;
+ }
+ if(!blocker)return forward;
+ // Pass on the open side instead of pushing the first attacker into the hero.
+ const float sign=std::abs(offset)>.035f?(offset>0?-1.f:1.f):(hash(enemy.id,blocker->id)&1?1.f:-1.f);
+ for(float turn:{sign,-sign}){
+  const V bypass=normalized(forward*.46f+side*turn);
+  if(enemyPositionClear(enemy.pos+bypass*.20f,enemy.radius()))return bypass;
+ }
+ return {};
 }
 // Direct return is cheap. A blocked return uses a small map-grid search, only
 // when selecting the next waypoint, with clearance for the creature's body.

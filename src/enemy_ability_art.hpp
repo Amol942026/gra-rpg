@@ -1,4 +1,5 @@
 #pragma once
+#include "scarab_wave_art.hpp"
 // Combat indicators follow the same height projection as feet and paths.
 namespace enemy_ability_art {
 inline Color color(EnemyAbility ability){return ability==EnemyAbility::VenomFan?rgb(144,231,103):ability==EnemyAbility::CopperWave?rgb(242,177,103):ability==EnemyAbility::ObsidianCleave?rgb(196,175,253):rgb(255,154,69);}
@@ -17,15 +18,14 @@ inline void cleave(const Enemy& e,Color fill,Color edge){
  Vector2 p[]={screen(a-side),screen(b-side),screen(b+side),screen(a+side)};poly({p[0],p[1],p[2],p[3]},fill);for(int i=0;i<4;i++)DrawLineEx(p[i],p[(i+1)%4],2,edge);
 }
 inline void ground(){
- for(const auto& e:game.enemies){if(!e.alive||!e.abilityBusy()||!enemyAbilityRealm(e.type,game.location))continue;
+ for(const auto& e:game.enemies){if(!e.alive||!e.abilityBusy()||!game.enemyAbilityAvailable(e))continue;
   Vector2 at=screen(e.pos);if(at.x<-340||at.x>WorldW+340||at.y<-180||at.y>H+300)continue;
   const auto& spec=enemyAbilityProfile(e.type);EnemyAbility ability=enemyAbility(e.type);Color tint=color(ability);float progress=std::min(1.f,e.abilityAge/spec.windup);bool warning=e.abilityAge<spec.windup,active=e.abilityAge<spec.windup+spec.active;
   float alpha=warning?.1f+.12f*progress:active?.3f:.08f;
   if(ability==EnemyAbility::VenomFan){
    if(warning){cone(e.pos,e.abilityDirection,6,.34f,Fade(tint,alpha*.65f),Fade(tint,.7f));for(float angle:{-.28f,0.f,.28f})DrawLineEx(screen(e.pos+e.abilityDirection*.5f),screen(e.pos+rotateAbilityDirection(e.abilityDirection,angle)*6),1.3f,Fade(tint,.55f));}
   }else if(ability==EnemyAbility::CopperWave){
-   if(warning){ring(e.pos,3.4f,Fade(tint,.6f));ring(e.pos,.65f+2.75f*progress,Fade(tint,.35f),1.4f);}
-   else if(active){float radius=.65f+2.75f*(e.abilityAge-spec.windup)/spec.active;ring(e.pos,radius,Fade(tint,.95f),4);ring(e.pos,std::max(.2f,radius-.22f),Fade(tint,.42f),2);}
+   scarab_wave_art::draw(e,spec);
   }else if(ability==EnemyAbility::ObsidianCleave){
    cleave(e,Fade(tint,alpha),Fade(tint,warning?.8f:active?1.f:.18f));
    if(warning){

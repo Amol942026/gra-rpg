@@ -307,6 +307,8 @@ Każdy start odnawia HP i manę oraz usuwa stary naciąg, unik, pociski, efekty 
 
 Każda sesja DEV ustawia **poziom 100**, odblokowuje wszystkie umiejętności oraz czary i uzupełnia zdrowie oraz manę. Standardowa postać DEV ma **920 HP i 510 many**, z zachowaniem wyższych wartości wynikających z jej atrybutów. Postać DEV jest odporna na obrażenia. Trafienia nadal mogą ją odrzucić lub przewrócić. Start i przeniesienie uzupełniają plecak do **100 strzał, 50 mikstur zdrowia i 50 mikstur many**. Zużycie działa podczas walki. Plecak DEV uzupełnia brakujące rodzaje broni, pancerzy i pozostałego wyposażenia z aktualnego katalogu gry. Strzałki pod plecakiem przełączają strony po 25 pól. Zapisy w menu pauzy podczas sesji DEV korzystają z osobnych slotów.
 
+W aktywnej sesji DEV kliknij **Przyzywanie bestii** pod minimapą, a następnie nazwę przeciwnika. Listę można też otworzyć przez **F3 → Przyzwij potwora**. Każde kliknięcie tworzy na wolnym terenie kolejnego wrogiego przeciwnika. Po wybraniu **Wróć do walki** przeciwnicy atakują bohatera. Trafienia wywołują reakcję postaci i komunikat „TRAFIENIE”. Ochrona DEV zachowuje punkty życia. Lista zawiera wszystkie typy z katalogu gry, także bossów. Przyzwani bossowie zachowują swoje ataki, a ich pokonanie nie zalicza starć fabularnych. Przyzywanie działa we wszystkich trzech krainach walki.
+
 **ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu. Otwarta lista zatrzymuje symulację. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. Prolog otwiera **Nowa gra** w głównym menu.
 
 W projekcie i w wypakowanej paczce **Emberfall-DEV-Windows-x64.zip** grę uruchamia `Uruchom.bat`.

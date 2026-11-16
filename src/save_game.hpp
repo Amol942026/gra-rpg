@@ -188,16 +188,16 @@ inline void validate(const Snapshot& s){
  validateField(g.enemies,g.props,g.forage);validateField(g.forestState.enemies,g.forestState.props,g.forestState.forage);validateField(g.desertState.enemies,g.desertState.props,g.desertState.forage);
  validateField(g.volcanoState.enemies,g.volcanoState.props,g.volcanoState.forage);
  require(!g.inVolcano()||g.volcanoCreated);require(g.cinders.size()<=24&&g.fissures.size()<=12);
- require(g.venomGlobs.size()<=24);for(const auto& p:g.venomGlobs){validatePos(p.pos);require(g.inDesert()&&std::abs(length(p.velocity)-6)<.01f&&p.remaining>0&&p.remaining<=7&&p.damage>=0&&p.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==p.owner&&e.alive&&e.type==10;}));}
+ require(g.venomGlobs.size()<=24);for(const auto& p:g.venomGlobs){validatePos(p.pos);require((g.inDesert()||g.testSummon(p.owner))&&std::abs(length(p.velocity)-6)<.01f&&p.remaining>0&&p.remaining<=7&&p.damage>=0&&p.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==p.owner&&e.alive&&e.type==10;}));}
  require(g.volcanoSceneryVersion>=0&&g.volcanoSceneryVersion<=VolcanoSceneryRevision);
  require(g.worldExpansionVersion>=0&&g.worldExpansionVersion<=WorldExpansionRevision);
- for(const auto& b:g.cinders){validatePos(b.pos);require(g.inVolcano()&&std::abs(length(b.velocity)-7.5f)<.01f&&b.remaining>0&&b.remaining<=7&&b.damage>=0&&b.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.alive&&Game::volcanoRanged(e.type);}));}
- for(const auto& f:g.fissures){validatePos(f.pos);require(g.inVolcano()&&f.age>=0&&f.delay>=.9f&&f.delay<=1.5f&&f.age<=f.delay+.651f&&f.damage>=0&&f.damage<=1000&&f.struck==(f.age>=f.delay)&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==f.owner&&e.alive&&e.type==VolcanoBossType;}));}
+ for(const auto& b:g.cinders){validatePos(b.pos);require((g.inVolcano()||g.testSummon(b.owner))&&std::abs(length(b.velocity)-7.5f)<.01f&&b.remaining>0&&b.remaining<=7&&b.damage>=0&&b.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.alive&&Game::volcanoRanged(e.type);}));}
+ for(const auto& f:g.fissures){validatePos(f.pos);require((g.inVolcano()||g.testSummon(f.owner))&&f.age>=0&&f.delay>=.9f&&f.delay<=1.5f&&f.age<=f.delay+.651f&&f.damage>=0&&f.damage<=1000&&f.struck==(f.age>=f.delay)&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==f.owner&&e.alive&&e.type==VolcanoBossType;}));}
  for(int i=0;i<FountainCount;i++)require(g.volcanoFountainDrain[i]>=0&&g.volcanoFountainDrain[i]<=FountainDrainDuration&&(!g.volcanoFountainDrain[i]||g.volcanoFountainUsed[i]));
  for(auto& e:g.sounds)require(range(e.cue,int(Cue::Count)));for(auto& a:g.arrows)require(a.maxTargets>=1&&a.maxTargets<=1000);
  require(g.boulders.size()<=MaxBoulders&&g.boulderImpacts.size()<=MaxBoulderImpacts);
  for(const auto& b:g.boulders){
-  require(g.location==WorldLocation::Forest&&b.age>=0&&b.duration>=BoulderMinFlight&&b.duration<=30&&b.age<=b.duration&&b.height>=0&&b.height<=250&&b.startHeight>=0&&b.startHeight<=200&&b.damage>=0&&b.damage<=1000000);
+  require((g.location==WorldLocation::Forest||g.testSummon(b.owner))&&b.age>=0&&b.duration>=BoulderMinFlight&&b.duration<=30&&b.age<=b.duration&&b.height>=0&&b.height<=250&&b.startHeight>=0&&b.startHeight<=200&&b.damage>=0&&b.damage<=1000000);
   validatePos(b.origin);validatePos(b.target);validatePos(b.pos);
   require(std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.type==3&&e.alive;}));
   require(distance(b.pos,b.origin+(b.target-b.origin)*(b.age/b.duration))<.001f);
@@ -205,12 +205,12 @@ inline void validate(const Snapshot& s){
  for(const auto& b:g.boulderImpacts){validatePos(b.pos);require(b.life>=0&&b.life<=.401f);}
  for(int i=0;i<FountainCount;i++)require(g.fountainDrain[i]>=0&&g.fountainDrain[i]<=FountainDrainDuration&&(!g.fountainDrain[i]||g.fountainUsed[i]));
  require(g.heroKnockbackRemaining>=0&&g.heroKnockbackRemaining<=BoulderKnockbackDuration+.00001f&&length(g.heroKnockback)<=BoulderKnockbackDistance+.001f);
- require(!g.knockedBack()||g.location==WorldLocation::Forest);
+ require(!g.knockedBack()||g.location==WorldLocation::Forest||(g.developerSession&&!g.inTower()));
  require(g.heroKnockdownRemaining>=0&&g.heroKnockdownRemaining<=HeroKnockdownDuration+.00001f&&std::abs(g.heroKnockdownFacing)<=7);
  require(g.heroHitReactionRemaining>=0&&g.heroHitReactionRemaining<=HeroHitReactionDuration);
  const float hitDirectionLength=length(g.heroHitDirection);
  if(g.heroHitReactionRemaining>0)
-  require(std::abs(hitDirectionLength-1.f)<.001f&&!g.inTower()&&!g.knockedBack()&&!g.dead()&&!g.developerSession);
+  require(std::abs(hitDirectionLength-1.f)<.001f&&!g.inTower()&&!g.knockedBack()&&!g.dead());
  else require(hitDirectionLength==0);
  require(range(s.intro.phase,6)&&s.intro.line<IntroDialogue.size()&&s.intro.age>=0&&s.intro.time>=0);
  require(range(s.tower.phase,9)&&s.tower.fragments>=0&&s.tower.fragments<=5&&s.tower.line<s.tower.lineCount()&&s.tower.age>=0&&s.tower.time>=0);

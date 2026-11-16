@@ -117,15 +117,15 @@ bool useVolcanoPortal(){
  enterMageTower();sound(Cue::TeleportArrival,player);dawnQuest=DawnQuest::AtTower;say("Eldrin może ponownie otworzyć drogę do Kaldery Popiołu.");return true;
 }
 static bool volcanoRanged(int type){return type==14||type==15;}
-static void advanceVolcanoAnimation(Enemy& e,V movement,float dt){
- float phase=e.animation.phase;e.animation.advance(movement.x,movement.y,dt,false,e.eruptionWindup<=0&&e.windup<=0);
+static void advanceVolcanoAnimation(Enemy& e,V movement,float dt,bool faceMovement){
+ float phase=e.animation.phase;e.animation.advance(movement.x,movement.y,dt,false,faceMovement);
  e.animation.phase=std::fmod(phase+std::hypot((movement.x-movement.y)*40,(movement.x+movement.y)*20)/VolcanoStrides[e.type-VolcanoFirstType],1.f);
 }
 void cancelVolcanoAttacks(){
  cinders.clear();fissures.clear();for(auto& e:enemies){if(e.eruptionWindup>0)e.eruptionCd=std::max(e.eruptionCd,2.8f);e.eruptionWindup=0;}
 }
 bool prepareEruption(Enemy& e,float dt,bool visible){
- if(!inVolcano()||e.type!=VolcanoBossType)return false;
+ if(e.type!=VolcanoBossType||(!inVolcano()&&!testSummon(e.id)))return false;
  if(visible||e.eruptionWindup>0)e.eruptionCd=std::max(0.f,e.eruptionCd-dt);
  if(e.eruptionWindup>0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.eruptionWindup=std::max(0.f,e.eruptionWindup-dt);return true;}
  if(dt>0&&visible&&e.eruptionCd<=.00001f&&e.windup<=0&&e.attack<=0&&fissures.size()<=9){
@@ -137,12 +137,12 @@ bool prepareEruption(Enemy& e,float dt,bool visible){
 }
 void launchCinder(const Enemy& e){if(cinders.size()<24){cinders.push_back({e.pos,normalized(player-e.pos)*7.5f,7,float(e.damage()),e.id});sound(Cue::MagicAttack,e.pos);}}
 void updateVolcanoAttacks(float dt,V heroBefore,bool wasRolling,float rollAge){
- if(!inVolcano()||dt<=0)return;
+ if((cinders.empty()&&fissures.empty())||dt<=0)return;
  for(size_t i=0;i<cinders.size();){
   auto& b=cinders[i];V delta=b.velocity*dt;float first=2;
   for(const auto& p:props)first=std::min(first,segmentCircle(b.pos,delta,p.pos,propRadius(p.type)+.12f));
   for(const auto& c:chests)if(c.location==location)first=std::min(first,segmentCircle(b.pos,delta,c.pos,ChestRadius+.12f));
-  for(V p:fountains())first=std::min(first,segmentCircle(b.pos,delta,p,FountainRadius+.12f));
+  if(hasFountains())for(V p:fountains())first=std::min(first,segmentCircle(b.pos,delta,p,FountainRadius+.12f));
   float contact=segmentCircle(b.pos-heroBefore,delta-(player-heroBefore),{},.42f);
   bool hit=contact<=1&&contact<=first;
   if(hit&&!dead()){

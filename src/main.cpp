@@ -43,6 +43,10 @@ TowerSequence towerStory;
 #include "performance.hpp"
 bool developerActive=false,developerMenuOpen=false,nativeWorldRendering=true;int developerSelection=0;std::string developerError;
 void drawDeveloperUi();
+namespace scarab_wave_art { inline void load(); inline void unload(); }
+void drawDeveloperSummonHud();
+bool developerSummonHudHit(Vector2 point);
+bool clickDeveloperSummonHud();
 Vector2 mouse{};Slot dragging{};bool paused=false,help=false,welcome=true;int nearbyPage=0,corpsePage=0,corpsePageOwner=-1;float scale=1;Rectangle viewport{};
 InventoryClicks inventoryClicks;
 bool weaponWheelOpen=false;
@@ -328,7 +332,7 @@ void makeArt(){
  inventory_icons::bakeWeapons();
  inventory_icons::bakeGear();
  forest_bush_art::load();forest_tree_art::load();desert_plant_art::load();guardian_art::load();
- treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();regional_enemy_art::load();caldera_attack_art::load();
+ treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();regional_enemy_art::load();caldera_attack_art::load();scarab_wave_art::load();
  terrain=render_targets::colorOnly(TerrainCacheWidth,TerrainCacheHeight);BeginTextureMode(terrain);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,TerrainBakeScale});
  const bool paintedForest=terrain_paint::bake(true);
  if(paintedForest){
@@ -466,7 +470,7 @@ void drawWorld(){
  world_shadows::draw();
  Vector2 pp=screen(game.player);terrain_surface::ring(game.player,.44f,Fade(Gold,.7f));
  drawHoveredTile();
- guardian_art::ground();if(game.inVolcano())volcano_art::groundAttacks();
+ guardian_art::ground();if(!game.fissures.empty())volcano_art::groundAttacks();
  enemy_ability_art::ground();
  for(const auto& plant:game.forage){
   if(plant.value.empty())continue;Vector2 p=screen(plant.pos);if(p.x<-40||p.x>WorldW+40||p.y<0||p.y>H)continue;
@@ -520,7 +524,8 @@ void drawWorld(){
   else if(obj.type==11)guardian_art::fragment(game.boulderImpacts[obj.index/guardian_break::Pieces],obj.index%guardian_break::Pieces);
   else if(!game.dead()||int(game.time*5)%2==0){sand_prison::drawMound(pp,false);hero(pp.x,pp.y,1,false,&heroSilhouette);heroDrawn=true;sand_prison::drawMound(pp,true);}
  }
- if(game.inVolcano()){enemy_ability_art::air();volcano_art::eruptionPlumes();}
+ if(game.inVolcano()||game.developerSession)enemy_ability_art::air();
+ if(!game.fissures.empty())volcano_art::eruptionPlumes();
  // Composite the regional wind over the world. Combat flashes and HUD follow.
  wind_post::draw();
  power_fx::world(game);
@@ -583,6 +588,7 @@ void drawUI(){
  txt(game.inTower()?TowerFloors[game.towerFloor].name:game.currentRegion(),335,29,20,Text);txt(game.inTower()?TowerFloors[game.towerFloor].theme:game.inVolcano()?"TRZECIA KRAINA / PIEŚŃ KALDERY":game.inDesert()?"DRUGA KRAINA / SZLAK ŻYWEJ WYDMY":"POGRANICZE  /  STREFA DZIKICH",336,56,10,Muted);
  DrawCircle(755,39,3,Green);txt(TextFormat("%d FPS",GetFPS()),766,30,13,Green);
  minimap();
+ drawDeveloperSummonHud();
  const Rectangle journal=journalRect();
  panel(journal,Fade(Panel,.91f));
  const float journalLeft=journal.x+13;
@@ -798,7 +804,7 @@ void input(float dt){
  if(towerStory.active()||towerPanelOpen)return;
  if(mouse.x>WorldW&&mouse.y>=594&&mouse.y<702){float wheel=GetMouseWheelMove();if(wheel!=0){if(game.findCorpse(game.openedCorpse)){syncCorpsePage();corpsePage=std::clamp(corpsePage+(wheel<0?1:-1),0,corpsePages()-1);}else nearbyPage+=wheel<0?1:-1;}}
  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))leftClickGameplay(move);
- if(towerStory.active()||towerPanelOpen||quickPickerSlot>=0)return;
+ if(developerMenuOpen||towerStory.active()||towerPanelOpen||quickPickerSlot>=0)return;
  if(game.bowDrawing){if(worldPointerAllowed(mouse))game.aimBow(combatAimFromPointer());else game.cancelBow();}
  if(game.holdingMelee()){if(worldPointerAllowed(mouse))game.aimMelee(combatAimFromPointer());else game.cancelMeleeHold();}
  if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){if(dragging.place!=Place::None)finishDrag();else releaseWorldAttack();}
@@ -1149,7 +1155,7 @@ int main(int argc,char**argv) {
     sync_present::shutdown();
     enemy_death_fx::unload();
     spell_art::unload();inventory_icons::unload();world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    hero_portrait::unload();regional_enemy_art::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    hero_portrait::unload();regional_enemy_art::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();scarab_wave_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
     power_fx::unload();wind_post::unload();forest_water::unload();forest_cliff::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     if(wildMushrooms.id)UnloadTexture(wildMushrooms);
     typography.clear();CloseWindow();return deathPassed&&worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;

@@ -10,6 +10,7 @@ struct Pose {
  AnimationState state{};
  float attack=0;
  bool flash=false;
+ float special=-1;
  float lower(float begin,float end)const{return enemy_death::window(time,begin,end);}
  float stride()const{return (state.motionInitialized?state.moveBlend:(state.moving?1.f:0.f))*(1-fold);}
  P3 point(float r,float f,float z)const{return {r*side,f,z};}
@@ -97,50 +98,74 @@ inline void scorpion(Rig& rig,Pose pose){
 }
 
 inline void scarab(Rig& rig,Pose pose){
- const Color blue=pose.flash?Text:rgb(66,113,109),teal=pose.flash?Text:rgb(89,139,124),copper=pose.flash?Text:rgb(166,105,62);
- const Color bright=rgb(231,176,99),under=rgb(90,67,53),patina=rgb(49,92,84);
+ const Color copper=pose.flash?Text:rgb(167,95,57),bright=rgb(222,157,101),under=rgb(52,42,46);
+ const Color patina=rgb(51,116,107),deep=rgb(42,68,69);
+ const Color seam=rgb(64,39,40);
  const auto p=[&](float r,float f,float z){return pose.point(r,f,z);};
- const float walk=pose.stride(),front=pose.attack*(1-pose.fold);
+ const auto& ability=enemyAbilityProfile(9);
+ const float recover=pose.special-ability.windup;
+ const float charge=(pose.special<0?0:recover<0?enemy_death::window(pose.special,0,ability.windup):
+                  1-enemy_death::window(recover,0,.24f))*(1-pose.fold);
+ const float stomp=(pose.special<0?0:enemy_death::window(recover,0,.085f)*
+                         (1-enemy_death::window(recover,.085f,.30f)))*(1-pose.fold);
+ const float walk=pose.stride()*(1-charge),front=pose.attack*(1-pose.fold);
  const float walkBob=creature_motion::sample(3,pose.state.phase).bob*walk;
- const float tip=pose.lower(.13f,.86f);
+ const float tip=pose.lower(.18f,.88f),release=pose.lower(.03f,.24f)*(1-pose.lower(.28f,.60f));
  for(int i=0;i<3;i++)for(float side:{-1.f,1.f}){
   const float f=-16+i*13.7f;const bool uphill=side<0;
-  auto step=creature_motion::sample(3,pose.state.phase+i/3.f+(side*pose.side<0?.5f:0));
-  const float fold=pose.lower(uphill?.30f:.08f,uphill?.93f:.69f),reach=step.travel*walk*6;
-  const auto root=p(side*11,f,17+walkBob-(uphill?3:8)*tip);
-  const auto knee=p(side*(25+fold*(-2+i*.8f)),f+reach-fold*(i==1?4:7),10-(uphill?3:5.1f)*fold);
-  const auto ankle=p(side*(33-(uphill?8:3)*fold),f+reach-7+(uphill?8:12)*fold,2.7f+step.lift*walk*5);
-  rig.tapered(root,knee,5.2f,5,copper,.81f,8);
-  rig.rounded(knee,{5.6f,5.2f,5.4f},under,108);
-  rig.tapered(knee,ankle,4.25f,3.65f,shade(copper,1.11f),.54f);
-  rig.tapered(ankle,ankle+p(-side*4,4+fold*(uphill?1:3),-1.25f),2.1f,2.1f,under,.22f);
+  const auto step=creature_motion::sample(3,pose.state.phase+(i%2?.5f:0)+(side*pose.side<0?.5f:0));
+  const float fold=pose.lower(uphill?.35f:.11f,uphill?.94f:.73f),reach=step.travel*walk*7;
+  const float brace=(i==2?charge*3+stomp*3:0);
+  const auto root=p(side*11.5f,f,17+walkBob-(uphill?3:9)*tip);
+  const auto knee=p(side*(25+brace-fold*(uphill?6:1.5f)),f+reach-fold*(i==1?5:8),10+3*release-(uphill?2.4f:6)*fold);
+  const auto ankle=p(side*(33+brace-(uphill?12:3)*fold),f+reach-7+(uphill?10:14)*fold,
+                    2.7f+step.lift*walk*5+release*(uphill?6:2)+(uphill?2:0)*tip);
+  rig.tapered(root,knee,5.3f,4.8f,deep,.83f);
+  rig.tapered(root+(knee-root)*.20f,knee,4.8f,4.6f,copper,.73f,9);
+  rig.rounded(knee,{5.3f,4.9f,5.0f},under);
+  rig.tapered(knee,ankle,4.15f,3.4f,shade(copper,1.12f),.48f);
+  rig.tapered(ankle,ankle+p(-side*4,4+fold*(uphill?1:3),-1.25f),2.2f,2.0f,under,.22f);
+  if(i!=1)rig.spike(ankle,ankle+p(side*2.0f,-2,-.65f),1.4f,1.4f,patina);
  }
- const auto bank=pose.tilt({2*pose.recoil,-2,24+walkBob-8.1f*tip},32*tip-12*pose.recoil,-8*tip);
+ const auto bank=pose.tilt({2*pose.recoil+3*tip,-3+2*tip,25+walkBob-10.1f*tip+4.5f*charge-2.8f*stomp},
+                            48*tip-12*pose.recoil,-12*tip,13*charge-7*stomp-5*tip);
  rig.setAttachment(&bank);
- rig.rounded({0,0,-4},{34,42,15},under,108);
- rig.rounded({0,0,0},{40,44,26},patina,109);
- rig.rounded({-8.3f,-1.2f,3},{19.6f,41.8f,29},blue,109);
- rig.rounded({8.3f,-1.7f,2},{19.6f,40.4f,27},teal,109);
- rig.tube({{0,-21,4},{0,-13,12.8f},{0,0,17.5f},{0,12,12.8f},{0,19,5}},1.55f,1.0f,under);
+ rig.rounded({0,-1,-5.5f},{38,44,16},under);
+ rig.rounded({0,-1,-1},{41,48,24},deep);
  for(float side:{-1.f,1.f}){
-  const Color sidePaint=side<0?bright:shade(copper,1.18f);
-  rig.tube({{side*6,-20,4},{side*14,-16,8},{side*18,-7,9.2f},{side*18,4,9.5f},{side*15,13,7.2f},{side*9,18,4}},1.45f,1.2f,sidePaint);
-  for(int i=0;i<5;i++){
-   const float f=-13+i*6.f;
-   const float bow=std::sin((i+1)/6.f*PI);
-   rig.tapered({side*5,f,12.6f+bow*3.5f},{side*10.1f,f-1.3f,12.5f+bow*3.6f},1.05f,1.05f,sidePaint);
-   rig.tapered({side*10.0f,f-1.3f,12.5f+bow*3.6f},{side*15,f-3,10.4f+bow*2.7f},.8f,.8f,sidePaint);
+  const float gap=1.6f*tip+1.15f*charge;
+  rig.rounded({side*(9.6f+gap),-3+side*.9f,3+side*.48f},{18.7f,42.8f,28.5f},copper,109);
+  rig.tube({{side*6,-23,7},{side*13,-19,10.7f},{side*17,-12,13},
+            {side*18,-3,14},{side*16,7,13.1f},{side*11,15,9}},1.35f,1.34f,bright);
+  for(int i=0;i<4;i++){
+   const float f=-14+i*6.5f;
+   const float bow=std::sin((i+1)/5.f*PI);
+   const P3 a{side*(5+gap),f+2,13.4f+bow*3.5f};
+   const P3 b{side*(10.5f+gap),f+.3f,14.8f+bow*2.6f};
+   const P3 c{side*(16+gap),f-3,10.6f+bow*3.6f};
+   rig.tube({a,b,c},.72f,.76f,i%2?shade(bright,.94f):patina);
   }
  }
+ rig.tube({{0,-23,6},{0,-15,11},{0,-4,15.5f},{0,8,13.7f},{0,16,9}},1.4f,1.29f,seam);
+ rig.rounded({0,15,1.5f},{30,18,20.5f},patina,109,false,-1,false,true);
+ rig.tube({{-12,16,7},{-7,14,11},{0,14,12.3f},{7,14,11},{12,16,7}},
+          1.5f,1.5f,bright);
  rig.setAttachment(nullptr);
- const auto head=pose.tilt({5*tip,19.9f+5*front,19-11.9f*tip},14*tip,-18*tip);
+ const auto head=pose.tilt({5*tip,20+4.5f*front+stomp*3,19-11.9f*tip+6*charge-3.6f*stomp},
+                           19*tip,-16*tip,11*charge-9*stomp);
  rig.setAttachment(&head);
- rig.rounded({0,0,0},{24,20,14},copper,108);
- rig.rounded({0,2,2.1f},{15,14,9.7f},shade(copper,1.18f),108);
+ rig.rounded({0,0,0},{23,20,14},deep);
+ rig.rounded({0,2,2.6f},{18,16,10.7f},shade(copper,1.16f),109);
  for(float side:{-1.f,1.f}){
-  rig.tapered({side*5,5.2f,4.8f},{side*8.6f,4.7f,4.4f},1.02f,1.2f,under);
-  rig.tapered({side*7,6,-1},{side*11,14+front*11,-1.8f+front*3},4.1f,3.7f,shade(copper,.86f),.30f);
-  rig.tube({{side*7,6.6f,3.5f},{side*12,11,2.8f},{side*17,12,0}},1.25f,1.2f,under);
+  const float glow=(1-tip)*(.35f+.65f*std::max(charge,stomp));
+  const P3 eye{side*7.3f,6.5f,5.4f};
+  rig.rounded(eye,{5.3f,5.4f,3.3f},under);
+  rig.rounded(eye+P3{side*.4f,1.3f,.6f},{3.4f,3.1f,2.35f},rgb(67+int(glow*94),108+int(glow*124),95+int(glow*105)));
+  const P3 jaw{side*6.9f,7,-1},elbow{side*(10.7f+3*charge),14+6*front,-1.5f+3*front};
+  rig.tapered(jaw,elbow,4.6f,3.9f,copper,.62f);
+  rig.spike(elbow,{side*(6.5f+4*charge),19+8*front,-1+2.5f*front},2.6f,2.75f,bright);
+  rig.tube({{side*6,6.8f,5.9f},{side*10,11,5.9f-2.5f*tip},
+            {side*14,13.2f,4.8f-3.3f*tip}},1.25f,1.2f,patina);
  }
  rig.setAttachment(nullptr);
 }
@@ -270,8 +295,8 @@ inline void drawPose(Rig& rig,int type,const Pose& pose){
 }
 }
 
-inline void buildDesert(Rig& rig,int type,const AnimationState& state,float attack,bool flash){
- desert_fallen_art::drawPose(rig,type,{1,0,0,0,state,std::max(0.f,attack),flash});
+inline void buildDesert(Rig& rig,int type,const AnimationState& state,float attack,bool flash,float special=-1){
+ desert_fallen_art::drawPose(rig,type,{1,0,0,0,state,std::max(0.f,attack),flash,special});
 }
 
 inline void buildDesertCorpse(Rig& rig,int type,int side=1){
@@ -286,5 +311,6 @@ inline void buildDesertDeath(Rig& rig,const Enemy& e,float progress){
  rig.setFacing(facing+std::remainder(rest-facing,2*PI)*enemy_death::window(time,.05f,.90f));
  const float fold=enemy_death::window(time,.06f,.89f);
  const float recoil=.45f*enemy_death::window(time,0,.21f)*(1-enemy_death::window(time,.24f,.58f));
- desert_fallen_art::drawPose(rig,e.type,{float(e.deathSide()),time,fold,recoil,e.deathMotion,std::max(0.f,e.deathAttack)});
+ desert_fallen_art::drawPose(rig,e.type,{float(e.deathSide()),time,fold,recoil,e.deathMotion,std::max(0.f,e.deathAttack),
+                                       false,e.type==9?e.deathSpecial:-1.f});
 }

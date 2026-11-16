@@ -10,9 +10,9 @@ constexpr float Support=.64f,Stride=18.f,Scale=1.38f,LegLength=17.5f;
 inline float phaseDistance(float dx,float dy){
  return std::hypot((dx-dy)*40.f,(dx+dy)*20.f/.52f)*Support/(2*Stride*Scale);
 }
-inline void advance(AnimationState& state,float dx,float dy,float dt){
+inline void advance(AnimationState& state,float dx,float dy,float dt,bool faceMovement=true){
  float previous=state.phase;
- if(std::hypot(dx,dy)>.00001f){
+ if(faceMovement&&std::hypot(dx,dy)>.00001f){
   bool initialized=state.facingInitialized;state.face(dx,dy);
   state.targetAngle=std::atan2((dx+dy)*20.f,(dx-dy)*40.f);
   if(!initialized)state.facingAngle=state.targetAngle;

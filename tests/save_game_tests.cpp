@@ -1,4 +1,5 @@
 #include "../src/save_game.hpp"
+#include "../src/developer_mode.hpp"
 #include <iostream>
 using namespace ember;
 namespace fs=std::filesystem;
@@ -23,7 +24,48 @@ int main(int argc,char** argv){
   check(!fs::exists(root),"fresh isolated test directory");fs::create_directories(root);
   boarSaveTests();
   volcanoSaveTests();
+  for(int type:{StoneGuardianType,DesertBossType,VolcanoBossType,10,14,CinderhornType,BoarType}){
+   saves::Snapshot summoned;
+   Game& g=summoned.game;
+   check(developerStart(g,type==StoneGuardianType||type==BoarType?13:0,true),"start a DEV realm outside the creature's native habitat");
+   g.player={20,20};g.facing={1,0};g.props.clear();g.enemies.clear();
+   check(summonDeveloperEnemy(g,type),"spawn a creature to test special attacks and save");
+   auto& e=g.enemies.back();
+   const int id=e.id;
+   // Place the caster inside every tested ability's range, including the longer charge startup.
+   e.pos=e.home=g.player+V{3.f,0};
+   e.boulderCd=e.eruptionCd=e.boarChargeCd=e.abilityCd=0;e.sandPrisonCd=0;
+   for(int i=0;i<150;i++){
+    g.update(1.f/60,{},false);
+    if(!g.boulders.empty()||g.sandTrapped()||!g.fissures.empty()||!g.venomGlobs.empty()||!g.cinders.empty()||e.chargeBusy())break;
+   }
+   check(type==StoneGuardianType?!g.boulders.empty():type==DesertBossType?g.sandTrapped():
+         type==VolcanoBossType?!g.fissures.empty():type==10?!g.venomGlobs.empty():
+         type==14?!g.cinders.empty():e.chargeBusy(),
+         (std::string(enemyInfo(type).name)+" uses its special attack outside its native realm").c_str());
+   const auto restored=saves::decode(saves::encode(summoned));
+   check(restored.game.developerSession&&restored.game.enemies.back().id==id&&restored.game.enemies.back().type==type&&
+         restored.game.boulders.size()==g.boulders.size()&&restored.game.sandTrapped()==g.sandTrapped()&&
+         restored.game.fissures.size()==g.fissures.size()&&restored.game.venomGlobs.size()==g.venomGlobs.size()&&
+         restored.game.cinders.size()==g.cinders.size(),"a DEV save preserves the summoned enemy and its active special attack");
+   if(type==StoneGuardianType){
+    for(int frame=0;frame<90&&!g.knockedBack();frame++)g.update(1.f/60,{},false);
+    check(g.knockedBack()&&g.inDesert(),"summoned guardian knocks down the DEV hero in the desert");
+    const auto afterImpact=saves::decode(saves::encode(summoned));
+    check(afterImpact.game.heroKnockdownRemaining==g.heroKnockdownRemaining&&afterImpact.game.hp==g.maxHp(),
+          "save after a cross-realm boulder impact keeps the knockdown and full health");
+   }
+  }
   saves::Snapshot s;roundtrip(s);
+  {
+   saves::Snapshot devHit;
+   check(developerStart(devHit.game,0,true),"start the DEV save with a live hit reaction");
+   const auto hp=devHit.game.hp;
+   devHit.game.takeMonsterDamage(20,devHit.game.player,.2f,{1,0});
+   const auto restored=saves::decode(saves::encode(devHit));
+   check(restored.game.hp==hp&&restored.game.hitReactionProgress()==0&&restored.game.effects.back().text=="TRAFIENIE",
+         "save during a DEV hit keeps the visible reaction and full health");
+  }
   auto recoil=s;
   recoil.game.player={20,20};recoil.game.props.clear();recoil.game.enemies.clear();
   const V recoilOrigin=recoil.game.player;

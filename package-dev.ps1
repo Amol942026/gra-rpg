@@ -34,7 +34,12 @@ F5 otwiera menu zapisu w dowolnym miejscu.
 Aktywne pociski, erupcje i przewrocenie sa czyszczone podczas teleportu.
 Start DEV w kalderze ustawia testowy postep drugiego aktu,
 aby mozna bylo wracac tam takze przez Eldrina.
-F3 wraca do wyboru lokacji.
+Podczas sesji DEV kliknij PRZYZYWANIE BESTII pod minimapa.
+Liste mozesz rowniez otworzyc przez F3 i PRZYZWIJ POTWORA.
+Kliknij nazwe, aby przyzwac przeciwnika obok postaci w dowolnej krainie walki.
+WROC DO WALKI wznawia symulacje. Przyzwane bestie atakuja gracza.
+Trafienia sa widoczne, a postac DEV zachowuje zdrowie.
+Bossowie zachowuja ataki, ale testowe starcia nie zmieniaja fabuly.
 Folder assets musi pozostac obok Emberfall.exe.
 '@
 [IO.File]::WriteAllText((Join-Path $folder 'JAK_URUCHOMIC_DEV.txt'),$instructions,[Text.UTF8Encoding]::new($true))

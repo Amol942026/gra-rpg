@@ -739,7 +739,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
                  Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1,
                  PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1,float enemyMelee=-1,Vector2 hitLean={},
-                 Silhouette* fallbackSilhouette=nullptr,HeroReaction reaction={}) {
+                 Silhouette* fallbackSilhouette=nullptr,HeroReaction reaction={},float special=-1) {
     if(regionalEnemy(species-1)){
         if(shadowBuilding&&!shadowCasting)return false;
         Enemy e{};e.type=species-1;e.animation=state;e.strike=attack>0?.14f:0;e.flash=flash?.1f:0;
@@ -775,7 +775,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     if(species==0){
         buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF,power,powerAge,windup,reaction);
     } else if(species>=9){
-        buildDesert(rig,species-1,state,attack,flash);
+        buildDesert(rig,species-1,state,attack,flash,special);
     } else {
         buildForestCreature(rig,species-1,state,attack,flash,guardianThrow,enemyMelee);
     }
@@ -856,7 +856,8 @@ inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const V
  }
  int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;
  bool hit=draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,false,outline,probe,-1,-1,-1,3,false,nullptr,
-               e.boulderProgress(),-1,0,-1,PowerStyle::Count,0,-1,e.type==BoarType?e.boarVisualPhase():e.heavyMeleePhase(),lean);
+               e.boulderProgress(),-1,0,-1,PowerStyle::Count,0,-1,e.type==BoarType?e.boarVisualPhase():e.heavyMeleePhase(),lean,
+               nullptr,{},e.type==9&&e.abilityBusy()?e.abilityAge:-1.f);
  shadowCacheKey=previous;return hit;
 }
 }

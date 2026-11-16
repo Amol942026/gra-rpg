@@ -16,7 +16,8 @@ void cancelCharges(){
  }
 }
 bool prepareCharge(Enemy& e,float dt,bool visible,float range){
- if(!e.alive||!((e.type==BoarType&&location==WorldLocation::Forest)||(e.type==CinderhornType&&inVolcano())))return false;
+ if(!e.alive||!chargingSpecies(e.type)||
+    !(testSummon(e.id)||(e.type==BoarType&&location==WorldLocation::Forest)||(e.type==CinderhornType&&inVolcano())))return false;
  const auto& charge=chargeProfile(e.type);
  if(visible||e.chargeBusy())e.boarChargeCd=std::max(0.f,e.boarChargeCd-dt);
  if(e.boarWindup>0){e.boarAim=player;faceCharge(e,e.boarAim-e.pos);return true;}

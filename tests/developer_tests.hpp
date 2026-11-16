@@ -22,6 +22,95 @@ void developerTests(){
   check(g.maxHp()==920&&g.maxMana()==510,"new level 100 developer gets balanced health and mana pools");
   check(unlocked(g)&&g.xp==0&&g.ammoCount()==100&&g.bagCount(Kind::Health)==50&&g.bagCount(Kind::Mana)==50,"each fresh developer start has all unlocks and exact supplies");
  }
+ {
+  Game arena;
+  check(!summonDeveloperEnemy(arena,0),"ordinary mode rejects summoning");
+  check(developerStart(arena,8,true)&&!summonDeveloperEnemy(arena,0),"tower remains a sanctuary in DEV");
+  for(int destination:{0,13,16}){
+   check(developerStart(arena,destination,true),"start each realm to test the full summon catalogue");
+   const auto base=arena.enemies.size();
+   check(!summonDeveloperEnemy(arena,-1)&&!summonDeveloperEnemy(arena,EnemyTypeCount)&&arena.enemies.size()==base,
+         "unknown types do not modify the encounters");
+   for(int type=0;type<EnemyTypeCount;type++){
+    if(arena.enemies.size()>base)arena.enemies.pop_back();
+    const bool created=summonDeveloperEnemy(arena,type);
+    check(created,"every enemy is available beside the real arrival in every combat realm");
+    if(!created)continue;
+    const auto& e=arena.enemies.back();
+    check(e.type==type&&e.alive&&e.hp==enemyInfo(type).health&&e.maxHp==e.hp&&
+          arena.testSummon(e.id)&&e.behavior==EnemyBehavior::Chase&&arena.canSeePlayer(e)&&
+          arena.enemyPositionClear(e.pos,e.radius())&&distance(e.pos,arena.player)<=6.001f&&
+          distance(e.pos,arena.player)>e.radius()+HeroBodyRadius&&distance(e.pos,e.home)<.001f,
+          "summon uses real health, walkable terrain and a local home");
+   }
+  }
+  check(developerStart(arena,0,true),"start a fresh forest for simultaneous summons");
+  arena.props.clear();arena.player={20,20};arena.enemies.clear();arena.merchantArrows=0;
+  for(int type:{StoneGuardianType,DesertBossType,VolcanoBossType,StoneGuardianType}){
+   const bool created=summonDeveloperEnemy(arena,type);
+   check(created,"repeated calls summon multiple bosses");
+   if(!created)continue;
+   const auto& e=arena.enemies.back();
+   for(auto i=arena.enemies.begin();i!=arena.enemies.end()-1;i++)
+    check(i->id!=e.id&&distance(i->pos,e.pos)>i->radius()+e.radius(),"simultaneous summons have separate IDs and bodies");
+  }
+  for(auto& e:arena.enemies){
+   arena.hit(e,10000);
+   check(!e.alive&&std::none_of(e.loot.begin(),e.loot.end(),[](Item drop){return drop.kind==Kind::DawnShard;}),
+         "a summoned boss drops ordinary loot without a quest fragment");
+  }
+  check(!arena.bossDead&&!arena.desertBossDead&&!arena.volcanoBossDead&&arena.merchantArrows==0,
+        "summoned boss deaths preserve story and merchant stock");
+  const auto count=arena.enemies.size();
+  arena.props.push_back({arena.player,0,1});
+  check(!summonDeveloperEnemy(arena,0)&&arena.enemies.size()==count,"a blocked location does not create an enemy through scenery");
+ }
+ {
+  Game arena;
+  check(developerStart(arena,0,true),"start the developer combat arena");
+  arena.enemies.clear();arena.props.clear();arena.player={20,20};arena.facing={1,0};
+  for(int type=0;type<EnemyTypeCount;type++){
+   Game trial=arena;
+   check(summonDeveloperEnemy(trial,type),"summon one enemy from the catalogue for a live attack");
+   const float hp=trial.hp;
+   for(int frame=0;frame<480&&trial.combatImpacts.empty();frame++)trial.update(1.f/60,{},false);
+   check(!trial.combatImpacts.empty()&&trial.combatImpacts.back().material==ImpactMaterial::Armor&&
+         trial.hp==hp&&!trial.dead(),
+         (std::string(enemyInfo(type).name)+" lands a real hostile attack while the DEV hero stays protected").c_str());
+  }
+ }
+ for(int fps:{30,60,120})for(bool walk:{false,true}){
+  Game duel;
+  check(developerStart(duel,0,true),"start a DEV encounter with an existing wolf");
+  duel.props.clear();duel.enemies.clear();duel.player={20,20};duel.facing={1,0};
+  const V original=duel.player+V{2.f,.075f};
+  duel.enemies.push_back({23,1,original,original,54,54});
+  const float dt=1.f/fps;
+  for(int frame=0;frame<2*fps;frame++)duel.update(dt,{},false);
+  check(summonDeveloperEnemy(duel,1),"place a summoned wolf behind the attacking one");
+  const float hp=duel.hp;
+  std::array<bool,2> struck{};
+  float largestTurn=0,largestStep=0,smallestGap=100;
+  bool clear=true;
+  for(int frame=0;frame<6*fps;frame++){
+   const auto old=duel.enemies;
+   duel.update(dt,walk&&frame<fps?V{.55f,.25f}:V{},false);
+   clear&=separatedEnemies(duel);
+   for(int i=0;i<2;i++){
+    const auto& a=old[i];const auto& b=duel.enemies[i];
+    largestStep=std::max(largestStep,distance(a.pos,b.pos));
+    smallestGap=std::min(smallestGap,distance(b.pos,duel.player)-b.radius());
+    struck[i]|=a.windup>0&&b.strike>0;
+    if(a.plantedAttack()){
+     const float turn=std::abs(std::remainder(b.animation.facingAngle-a.animation.facingAngle,2*AnimationPi));
+     largestTurn=std::max(largestTurn,turn);
+    }
+   }
+  }
+  check(clear&&struck[0]&&struck[1]&&duel.hp==hp,"both wolves attack, keep separate bodies and preserve DEV protection");
+  check(largestStep<3.f*dt&&largestTurn<(walk?18.f*dt:.12f)&&
+        (walk||smallestGap>0),"a new summon does not spin, teleport or push the current attacker through the hero");
+ }
  for(bool dev:{false,true}){
   Game hit;hit.developerSession=dev;hit.player={15,15};hit.enemies.clear();hit.props.clear();
   hit.enemies.push_back({20,0,{16,15},{16,15},100,100});hit.enemies.back().windup=.01f;hit.hp=1;
@@ -30,18 +119,21 @@ void developerTests(){
   hit.hp=70;hit.sounds.clear();hit.effects.clear();hit.hurt=0;
   hit.enemies[0].windup=.01f;
   hit.update(.02f,{},false);
-  check(dev?hit.hp==70&&hit.effects.empty()&&hit.hurt==0:hit.hp<70&&!hit.effects.empty()&&hit.hurt>0,
-        "ordinary hits do not reduce developer HP or display false damage");
+  check(dev?hit.hp==70&&hit.effects.size()==1&&hit.effects[0].text=="TRAFIENIE"&&hit.hitReactionProgress()==0&&hit.hurt==0:
+            hit.hp<70&&!hit.effects.empty()&&hit.hurt>0,
+        "DEV shows contact and the regular hit reaction without reducing HP");
   hit.hp=70;hit.effects.clear();hit.sounds.clear();
   hit.enemyAbilityDamage(200,DamageType::Magic,hit.player,false,0,0);
-  check(dev?hit.hp==70&&!hit.dead()&&hit.effects.empty()&&hit.sounds.empty():hit.dead(),
-        "lethal magic retains normal damage outside DEV and no damage or death cue inside DEV");
+  check(dev?hit.hp==70&&!hit.dead()&&hit.effects.size()==1&&hit.effects[0].text=="TRAFIENIE"&&
+            hit.sounds.size()==1&&hit.sounds[0].cue==Cue::Hurt:hit.dead(),
+        "lethal magic gives contact feedback in DEV and retains normal damage in player mode");
  }
  {
   Game rock;rock.developerSession=true;rock.enemies.clear();rock.props.clear();rock.player={20,20};
   rock.boulders.push_back({{17,20},{20,20},{19.7f,20},.45f,.5f,25,70,BoulderDamage,13});
   rock.update(.05f,{},false);
-  check(rock.hp==rock.maxHp()&&rock.knockedBack()&&rock.heroKnockdownRemaining>0&&rock.effects.empty(),
+  check(rock.hp==rock.maxHp()&&rock.knockedBack()&&rock.heroKnockdownRemaining>0&&
+        rock.effects.size()==1&&rock.effects[0].text=="TRAFIENIE",
         "rock impact keeps its knockdown for testing without reducing developer HP");
  }
  Game g;check(!g.developerSession&&g.bag.size()==BagSize&&g.level==1&&g.skillRanks==SkillRanks{}&&g.learnedSpells==0&&g.ammoCount()==20,"normal character starts with ordinary progression and one page");

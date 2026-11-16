@@ -7,8 +7,11 @@ static void faceEnemyAbility(Enemy& e){
 void cancelEnemyAbilities(){
  venomGlobs.clear();for(auto& e:enemies){if(e.abilityAge>=0)e.abilityCd=std::max(e.abilityCd,1.2f);e.abilityAge=-1;e.abilityMask=0;e.abilityDirection={};}
 }
+bool enemyAbilityAvailable(const Enemy& e)const{
+ return enemyAbilityRealm(e.type,location)||(testSummon(e.id)&&enemyAbility(e.type)!=EnemyAbility::None);
+}
 bool prepareEnemyAbility(Enemy& e,float dt,bool visible,float range){
- if(!enemyAbilityRealm(e.type,location))return false;
+ if(!enemyAbilityAvailable(e))return false;
  if(visible||e.abilityAge>=0)e.abilityCd=std::max(0.f,e.abilityCd-dt);
  if(e.abilityAge>=0)return true;
  const auto& spec=enemyAbilityProfile(e.type);
@@ -24,7 +27,7 @@ void enemyAbilityDamage(float amount,DamageType type,V at,bool wasRolling,float 
 }
 void advanceEnemyAbility(Enemy& e,float dt,V casterBefore,V heroBefore,bool wasRolling,float rollAge){
  if(e.abilityAge<0||!e.alive||dt<=0)return;
- if(!enemyAbilityRealm(e.type,location)){e.abilityAge=-1;e.abilityMask=0;e.abilityDirection={};return;}
+ if(!enemyAbilityAvailable(e)){e.abilityAge=-1;e.abilityMask=0;e.abilityDirection={};return;}
  const auto& spec=enemyAbilityProfile(e.type);EnemyAbility kind=enemyAbility(e.type);float before=e.abilityAge,after=before+dt;
  auto point=[&](float event){float t=std::clamp((event-before)/dt,0.f,1.f);return std::pair<V,V>{casterBefore+(e.pos-casterBefore)*t,heroBefore+(player-heroBefore)*t};};
  if(kind==EnemyAbility::VenomFan&&!(e.abilityMask&1)&&after+.000001f>=spec.windup){
@@ -47,7 +50,8 @@ void advanceEnemyAbility(Enemy& e,float dt,V casterBefore,V heroBefore,bool wasR
  if(kind==EnemyAbility::CopperWave&&!(e.abilityMask&1)&&after>=spec.windup&&before<spec.windup+spec.active){
   float a=std::max(before,spec.windup),b=std::min(after,spec.windup+spec.active),from=(a-before)/dt,to=(b-before)/dt;
   V centerA=casterBefore+(e.pos-casterBefore)*from,centerB=casterBefore+(e.pos-casterBefore)*to,heroA=heroBefore+(player-heroBefore)*from,heroB=heroBefore+(player-heroBefore)*to;
-  float radius=.65f+2.75f*(a-spec.windup)/spec.active,growth=2.75f*(b-a)/spec.active;
+  const float radius=copperWaveRadius((a-spec.windup)/spec.active);
+  const float growth=copperWaveRadius((b-spec.windup)/spec.active)-radius;
   float t=expandingWaveContact(heroA-centerA,(heroB-heroA)-(centerB-centerA),radius,growth,.16f+HeroBodyRadius);
   if(t<=1){V at=heroA+(heroB-heroA)*t,origin=centerA+(centerB-centerA)*t;if(clearEnemySegment(origin,at,.04f)){e.abilityMask|=1;enemyAbilityDamage(e.damage()*spec.damageScale,spec.damageType,at,wasRolling,rollAge,(a-before)+(b-a)*t,at-origin);}}
   if(before<spec.windup)sound(Cue::CopperWave,e.pos);
@@ -56,11 +60,11 @@ void advanceEnemyAbility(Enemy& e,float dt,V casterBefore,V heroBefore,bool wasR
  if(e.abilityAge>=spec.duration()){e.abilityAge=-1;e.abilityMask=0;e.abilityDirection={};}
 }
 void updateVenomGlobs(float dt,V heroBefore,bool wasRolling,float rollAge){
- if(!inDesert()||dt<=0)return;
+ if(venomGlobs.empty()||dt<=0)return;
  for(size_t i=0;i<venomGlobs.size();){auto& glob=venomGlobs[i];V delta=glob.velocity*dt;float obstacle=2;
   for(const auto& p:props)obstacle=std::min(obstacle,segmentCircle(glob.pos,delta,p.pos,propRadius(p.type)+.12f));
   for(const auto& chest:chests)if(chest.location==location)obstacle=std::min(obstacle,segmentCircle(glob.pos,delta,chest.pos,ChestRadius+.12f));
-  for(V fountain:fountains())obstacle=std::min(obstacle,segmentCircle(glob.pos,delta,fountain,FountainRadius+.12f));
+  if(hasFountains())for(V fountain:fountains())obstacle=std::min(obstacle,segmentCircle(glob.pos,delta,fountain,FountainRadius+.12f));
   float contact=segmentCircle(glob.pos-heroBefore,delta-(player-heroBefore),{},.42f);bool hit=contact<=1&&contact<=obstacle;
   if(hit){
    enemyAbilityDamage(glob.damage,DamageType::Magic,heroBefore+(player-heroBefore)*contact,wasRolling,rollAge,dt*contact,glob.velocity);

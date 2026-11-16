@@ -8,7 +8,7 @@ inline constexpr float Support=Contact.support,Stride=Contact.stride,Scale=Conta
 inline float phaseDistance(float dx,float dy){
     return grounded_gait::phaseDistance(dx,dy,Contact);
 }
-inline void advance(AnimationState& state,float dx,float dy,float dt){
-    grounded_gait::advance(state,dx,dy,dt,Contact);
+inline void advance(AnimationState& state,float dx,float dy,float dt,bool faceMovement=true){
+    grounded_gait::advance(state,dx,dy,dt,Contact,faceMovement);
 }
 }
