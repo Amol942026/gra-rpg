@@ -5,6 +5,18 @@ void volcanoTests(){
  g.desertBossDead=true;g.collectedFragments=1;check(g.canTravelVolcano()&&g.travelToVolcano()&&g.inVolcano(),"killing the second boss unlocks explicit mage travel, independent of moving its loot");
  check(distance(g.player,VolcanoArrival)==0&&g.walkable(g.player)&&distance(g.player,VolcanoBossHome)>45,"third arrival is safe and far from its boss");
  check(g.enemies.size()==121+RegionalEncountersPerRealm&&g.volcanoCreated&&g.forage.empty(),"third realm includes the original population and new regional enemies");
+ std::array<int,VolcanoLandmarkCount> landmarks{};
+ unsigned landmarkQuadrants=0;
+ for(const auto& prop:g.props)if(volcanoLandmark(prop.type)){
+  ++landmarks[prop.type-VolcanoLandmarkStart];
+  landmarkQuadrants|=1u<<((prop.pos.x>=72?1:0)+(prop.pos.y>=72?2:0));
+  const float radius=propRadius(prop.type);
+  check(!g.walkable(prop.pos)&&!volcanoLava(prop.pos,radius+1.4f)&&
+        volcano_roads::distanceTo(prop.pos)>=2.55f+radius&&!nearVolcanoFountain(prop.pos,3.4f),
+        "new volcanic landmarks have collision and leave roads, lava banks and fountains clear");
+ }
+ check(std::all_of(landmarks.begin(),landmarks.end(),[](int count){return count==4;})&&landmarkQuadrants==15,
+       "each of the four new landmarks is placed four times, spread over all map quadrants");
  {
   int portal=0,fractional=0;std::array<int,4> types{};
   for(const auto& p:g.props){if(p.type==13)portal++;if(!volcanoSceneryProp(p.type))continue;types[p.type-14]++;fractional+=std::abs(p.pos.x-std::round(p.pos.x))>.01f;

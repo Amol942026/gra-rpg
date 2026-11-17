@@ -360,9 +360,11 @@ public:
         f.uv=back?std::array<Vector2,4>{coords[3],coords[2],coords[1],coords[0]}:coords;
     }
     // Continuous skin along a bent path, with shared lighting at each ring.
-    void tube(const std::vector<P3>& path,float width,float depth,Color col,int material=-1){
+    void tube(const std::vector<P3>& path,float width,float depth,Color col,int material=-1,bool twoSidedShadow=false){
         if(path.size()<2)return;constexpr int sides=12;
-        bool savedClosed=closedShadow;if(softBeams)closedShadow=true;
+        bool savedClosed=closedShadow;
+        // At a tight bend the ring frames can twist a quad across the light.
+        closedShadow=softBeams&&!twoSidedShadow;
         int step=softBeams&&scale<1.6f?2:1;
         std::vector<std::array<P3,sides>> points(path.size());std::vector<std::array<Color,sides>> colors(path.size());
         const bool paint=creature_paint::available(material);
@@ -670,6 +672,10 @@ public:
     }
     void draw(Color outline=BLANK) {
         if(!opacity)return;
+        // In transparent targets material decals must not erase the solid
+        // skin's alpha where their texture fades out.
+        const bool transparentTarget=smoothSurfaces&&!native_world::drawingWorld;
+        if(transparentTarget)native_world::beginSourceOver();
         float depthBase=sceneDepth?-.95f+sceneDepthOrder++*sceneDepthStep:0,depthScale=sceneDepthStep*.5f;
         if(!smoothSurfaces)std::stable_sort(faces.begin(),faces.end(),[](const Face&a,const Face&b){return a.depth<b.depth;});
         // Outline pass goes behind the entire opaque body, so internal edges
@@ -709,6 +715,7 @@ public:
             }remaining--;
         }if(activeTexture)rlEnd();}rlSetTexture(0);
         if(smoothSurfaces){rlDrawRenderBatchActive();if(depthFunction)depthFunction(0x0201);rlDisableDepthTest();}
+        if(transparentTarget)EndBlendMode();
     }
 };
 

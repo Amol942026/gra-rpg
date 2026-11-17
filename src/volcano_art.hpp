@@ -107,6 +107,21 @@ inline void drawProp(const Prop& p,bool outline,Color tint){
  if(!outline&&p.type==16&&steam.id){int frame=(int(game.time*24)+variant(p)*9)%36;DrawTexturePro(steam,{float(frame%6*128),float(frame/6*128),128,128},{at.x-49*p.size,at.y-147*p.size,98*p.size,154*p.size},{0,0},0,Fade(WHITE,tint.a/255.f*.65f));}
 }
 inline bool propContains(const Prop& p,Vector2 point){Vector2 at=screen(p.pos);int x=int(std::floor(((point.x-at.x)/p.size+90)*2)),y=int(std::floor(((point.y-at.y)/p.size+208)*2));if(x<0||x>=360||y<0||y>=460)return false;Rectangle s=source(p);const auto& alpha=variant(p)>=4?extraSceneryAlpha:sceneryAlpha;return alpha[(int(s.y)+y)*scenery.width+int(s.x)+x]>=160;}
+inline void drawPropContact(const Prop& prop){
+ if(!volcanoSceneryProp(prop.type)&&prop.type<VolcanoDecorationStart)return;
+ const Vector2 base=screen(prop.pos);
+ const float radius=(9+propRadius(prop.type)*39)*prop.size;
+ if(base.x+radius<0||base.x-radius>WorldW||base.y+radius<0||base.y-radius>H)return;
+ // Keep the near-black contact under the foot even when the sun casts a long
+ // shadow or the rock sits on a slope.
+ const V slope=terrain_height::gradient(WorldLocation::Volcano,prop.pos);
+ const float shear=(slope.y-slope.x)*terrain_height::PixelsPerUnit/80;
+ const float surface[]={1,shear,0,0,0,.27f,0,0,0,0,1,0,base.x,base.y+2*prop.size,0,1};
+ rlPushMatrix();rlMultMatrixf(surface);
+ DrawCircleGradient(0,0,radius,{17,14,19,164},{17,14,19,0});
+ DrawCircleGradient(0,0,radius*.68f,{17,14,19,148},{17,14,19,0});
+ rlPopMatrix();
+}
 inline constexpr float BoundaryLow=MapWalkMin-.25f,BoundaryHigh=MapWalkMax+.25f;
 inline std::array<int,4> boundarySides{};
 inline std::vector<CanyonFace> abyssFaces,abyssFalls;

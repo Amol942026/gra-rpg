@@ -109,17 +109,22 @@ inline void scarab(Rig& rig,Pose pose){
  const float stomp=(pose.special<0?0:enemy_death::window(recover,0,.085f)*
                          (1-enemy_death::window(recover,.085f,.30f)))*(1-pose.fold);
  const float walk=pose.stride()*(1-charge),front=pose.attack*(1-pose.fold);
- const float walkBob=creature_motion::sample(3,pose.state.phase).bob*walk;
+ const float walkBob=std::cos(pose.state.phase*4*PI)*.85f*walk;
+ const auto walkAxis=desert_motion::scarabStepAxis(pose.state);
  const float tip=pose.lower(.18f,.88f),release=pose.lower(.03f,.24f)*(1-pose.lower(.28f,.60f));
  for(int i=0;i<3;i++)for(float side:{-1.f,1.f}){
   const float f=-16+i*13.7f;const bool uphill=side<0;
-  const auto step=creature_motion::sample(3,pose.state.phase+(i%2?.5f:0)+(side*pose.side<0?.5f:0));
-  const float fold=pose.lower(uphill?.35f:.11f,uphill?.94f:.73f),reach=step.travel*walk*7;
+  const auto step=desert_motion::sample(pose.state.phase+(i%2?.5f:0)+(side*pose.side<0?.5f:0));
+  const float fold=pose.lower(uphill?.35f:.11f,uphill?.94f:.73f);
+  const float stride=step.travel*walk*desert_motion::ScarabStride;
+  const float right=stride*walkAxis.x*pose.side,forward=stride*walkAxis.y;
+  const float lift=step.lift*walk*8.3f;
   const float brace=(i==2?charge*3+stomp*3:0);
   const auto root=p(side*11.5f,f,17+walkBob-(uphill?3:9)*tip);
-  const auto knee=p(side*(25+brace-fold*(uphill?6:1.5f)),f+reach-fold*(i==1?5:8),10+3*release-(uphill?2.4f:6)*fold);
-  const auto ankle=p(side*(33+brace-(uphill?12:3)*fold),f+reach-7+(uphill?10:14)*fold,
-                    2.7f+step.lift*walk*5+release*(uphill?6:2)+(uphill?2:0)*tip);
+  const auto knee=p(side*(25+brace-fold*(uphill?6:1.5f))+right*.56f,
+                    f+forward*.58f-fold*(i==1?5:8),10+lift*.24f+3*release-(uphill?2.4f:6)*fold);
+  const auto ankle=p(side*(33+brace-(uphill?12:3)*fold)+right,f+forward-7+(uphill?10:14)*fold,
+                    2.7f+lift+release*(uphill?6:2)+(uphill?2:0)*tip);
   rig.tapered(root,knee,5.3f,4.8f,deep,.83f);
   rig.tapered(root+(knee-root)*.20f,knee,4.8f,4.6f,copper,.73f,9);
   rig.rounded(knee,{5.3f,4.9f,5.0f},under);
@@ -176,22 +181,29 @@ inline void cobra(Rig& rig,Pose pose){
  const auto p=[&](float r,float f,float z){return pose.point(r,f,z);};
  const auto mix=[](P3 a,P3 b,float t){return a*(1-t)+b*t;};
  const float walk=pose.stride(),strike=pose.attack*(1-pose.fold),body=pose.lower(.16f,.91f);
- const auto step=creature_motion::sample(4,pose.state.phase);
+ const float phase=pose.state.phase;
+ const float wave=desert_motion::sample(phase).sway*walk;
  std::vector<P3> coil;
+ coil.reserve(30);
  for(int i=0;i<=29;i++){
   const float t=i/29.f,angle=.28f+t*PI*1.94f;
   const float r=8.5f+16.5f*t,f=8+13*t;
-  const auto raised=P3{std::cos(angle)*(23-8*t)+step.sway*walk*std::sin(i*.25f)*2,
-                       std::sin(angle)*(19-8*t)-9,3.1f+7.9f*t};
-  coil.push_back(mix(raised,p(std::cos(angle)*r,std::sin(angle)*f-13,3.1f+5.3f*t),body));
+  const P3 raised{std::cos(angle)*(23-8*t),std::sin(angle)*(19-8*t)-9,3.1f+7.9f*t};
+  const float back=1-t;
+  const float lateral=desert_motion::sample(phase-back*.88f).sway*(2.8f+17.2f*back);
+  const P3 slither{lateral,-8-56*back,3.1f+7.9f*t*t*t};
+  coil.push_back(mix(mix(raised,slither,walk),p(std::cos(angle)*r,std::sin(angle)*f-13,3.1f+5.3f*t),body));
  }
  for(int i=0;i<8;i++){
   const float width=3.0f+.87f*i;
   rig.tapered(coil[i],coil[i+1],width,width*.89f,scales,(width+.87f)/width,10);
  }
  const std::vector<P3> outer(coil.begin()+8,coil.end());
- rig.tube(outer,12.3f,12.5f,scales,10);
- rig.spike(coil.front(),mix(coil.front()+P3{-4,3,-1.4f},p(4.2f,-11,1.55f),body),2.7f,2.f,dark);
+ rig.tube(outer,12.3f,12.5f,scales,10,true);
+ const P3 tail=coil.front()-coil[1];
+ const P3 tailTip=coil.front()+mix(P3{-4,3,-1.4f},
+     tail*(5/std::max(.75f,std::hypot(tail.r,tail.f)))+P3{0,0,-1.3f},walk);
+ rig.spike(coil.front(),mix(tailTip,p(4.2f,-11,1.55f),body),2.7f,2.f,dark);
  for(int i=9;i<=29;i+=2){
   const auto root=coil[i];const auto next=coil[i<29?i+1:i-1];
   const P3 delta=next-root;
@@ -204,10 +216,11 @@ inline void cobra(Rig& rig,Pose pose){
  for(int i=1;i<=5;i++){
   const float n=i/5.f,fold=pose.lower(.27f-.17f*n,.93f-.09f*n);
   const float sway=std::sin(pose.state.idleTime*1.5f+i*.12f)*2*(1-body);
-  const P3 raised{sway+n*pose.recoil*pose.side*9,4+step.sway*walk*3+strike*n*24,11+n*59};
+  const P3 raised{sway+wave*(1.65f-n*.95f)+n*pose.recoil*pose.side*9,
+                  4+wave*2.5f+strike*n*24,11+n*59};
   neck.push_back(mix(raised,settled[i],fold));
  }
- rig.tube(neck,15.4f,13.0f,gold,10);
+ rig.tube(neck,15.4f,13.0f,gold,10,true);
  for(int i=0;i<4;i++){
   const auto root=neck[i+1];const auto forward=neck[i+2]-root;
   const P3 across{forward.f,-forward.r,0};const float k=7.f/std::max(1.f,std::hypot(across.r,across.f));
@@ -253,7 +266,8 @@ inline void dune(Rig& rig,Pose pose){
   for(int i=0;i<6;i++){
    const float side=i%2?1.f:-1.f,f=-29+i/2*25.f;
    const float step=creature_motion::sample(5,pose.state.phase+i/6.f).travel*walk;
-   const auto knee=at({side*(43+step*5-19*sink),f,14}),foot=at({side*(59+step*7-26*sink),f+step*10,3});
+   const auto placement=desert_motion::duneFoot(i,step,sink);
+   const auto knee=at({side*(43+step*5-19*sink),f,14}),foot=at({placement.right,placement.forward,3});
    rig.rounded(knee,P3{30,25,25}*shrink,sand,111);
    rig.tapered(knee,foot,21*shrink,18*shrink,dark,.35f);
   }
@@ -288,8 +302,8 @@ inline void drawPose(Rig& rig,int type,const Pose& pose){
  if(pose.time>0)rig.setGroundBounded();
  switch(type){
  case 8:scorpion(rig,pose);break;
- case 9:scarab(rig,pose);break;
- case 10:cobra(rig,pose);break;
+ case CopperScarabType:scarab(rig,pose);break;
+ case SandCobraType:cobra(rig,pose);break;
  case DesertBossType:dune(rig,pose);break;
  }
 }
@@ -312,5 +326,5 @@ inline void buildDesertDeath(Rig& rig,const Enemy& e,float progress){
  const float fold=enemy_death::window(time,.06f,.89f);
  const float recoil=.45f*enemy_death::window(time,0,.21f)*(1-enemy_death::window(time,.24f,.58f));
  desert_fallen_art::drawPose(rig,e.type,{float(e.deathSide()),time,fold,recoil,e.deathMotion,std::max(0.f,e.deathAttack),
-                                       false,e.type==9?e.deathSpecial:-1.f});
+                                       false,e.type==CopperScarabType?e.deathSpecial:-1.f});
 }

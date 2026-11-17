@@ -4,6 +4,38 @@
 namespace desert_art {
 RenderTexture2D terrain{};Texture2D minimap{};
 inline const auto& ovalCircle(){static const auto circle=[](){std::array<Vector2,128> points{};for(int i=0;i<128;i++)points[i]={std::cos(i*2*PI/128),std::sin(i*2*PI/128)};return points;}();return circle;}
+void duneFootDust(const DuneDust& dust){
+ const Vector2 origin=screen(dust.center());
+ if(origin.x<-70||origin.x>WorldW+70||origin.y<-70||origin.y>H+70)return;
+ constexpr Color sand[]={{248,219,155,255},{143,91,52,255},{225,166,98,255},{255,230,174,255}};
+ const float age=dust.age(),opening=1-(1-age)*(1-age);
+ const float lift=4*age*(1-age);
+ const Vector2 radial{(dust.drift.x-dust.drift.y)*40,(dust.drift.x+dust.drift.y)*20};
+ const Vector2 tangent{(dust.drift.x+dust.drift.y)*40,(dust.drift.y-dust.drift.x)*20};
+ const float pixel=1/renderScale;
+ rlSetTexture(rlGetTextureIdDefault());
+ rlCheckRenderBatchLimit(int(dust.grains)*4);
+ rlBegin(RL_QUADS);
+ rlTexCoord2f(0,0);
+ for(unsigned i=0;i<dust.grains;i++){
+  const unsigned seed=Game::hash(int(dust.seed&0x7FFFFFFFu),int(i));
+  const float distance=(float(seed&127u)/127-.5f)*(.09f+1.22f*opening);
+  const float spread=(float((seed>>7)&127u)/127-.5f)*(.19f+1.22f*opening);
+  const float height=lift*(2+((seed>>14)&63u)*.24f);
+  const float x=std::floor((origin.x+radial.x*distance+tangent.x*spread)*renderScale)*pixel;
+  const float y=std::floor((origin.y+radial.y*distance+tangent.y*spread-height)*renderScale)*pixel;
+  const float alpha=(1-age)*(.38f+((seed>>20)&31u)*.018f);
+  const Color tint=Fade(sand[i%4],alpha);
+  rlColor4ub(tint.r,tint.g,tint.b,tint.a);
+  // Pixel-aligned specks keep their scale and do not blink at fractional positions.
+  rlVertex2f(x,y);
+  rlVertex2f(x,y+pixel);
+  rlVertex2f(x+pixel,y+pixel);
+  rlVertex2f(x+pixel,y);
+ }
+ rlEnd();
+ rlSetTexture(0);
+}
 // The wide oasis exposes the corners of raylib's default ellipse. Use cached
 // fine curves for shores, ripples and the organic silhouettes in this realm.
 void oval(float x,float y,float rx,float ry,Color col){

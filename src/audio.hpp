@@ -36,7 +36,32 @@ public:
         "spear-briar-thrust","spear-briar-impact","spear-oasis-thrust","spear-oasis-impact",
         "spear-basalt-thrust","spear-basalt-impact","spear-dawn-thrust","spear-dawn-impact",
         "power-sword","power-axe","power-dagger","power-spear","power-bow","cinderhorn-charge",
-        "land-slime","land-beast","land-bone","land-stone","land-wood","land-shell","land-sand","land-ember"
+        "land-slime","land-beast","land-bone","land-stone","land-wood","land-shell","land-sand","land-ember",
+        "slime-voice-attack","slime-voice-hit","slime-voice-fall",
+        "wolf-voice-attack","wolf-voice-hit","wolf-voice-fall",
+        "skeleton-voice-attack","skeleton-voice-hit","skeleton-voice-fall",
+        "stone-guardian-voice-attack","stone-guardian-voice-hit","stone-guardian-voice-fall",
+        "boar-voice-attack","boar-voice-hit","boar-voice-fall",
+        "forest-spider-voice-attack","forest-spider-voice-hit","forest-spider-voice-fall",
+        "forest-bandit-voice-attack","forest-bandit-voice-hit","forest-bandit-voice-fall",
+        "treant-voice-attack","treant-voice-hit","treant-voice-fall",
+        "amber-scorpion-voice-attack","amber-scorpion-voice-hit","amber-scorpion-voice-fall",
+        "copper-scarab-voice-attack","copper-scarab-voice-hit","copper-scarab-voice-fall",
+        "sand-cobra-voice-attack","sand-cobra-voice-hit","sand-cobra-voice-fall",
+        "living-dune-voice-attack","living-dune-voice-hit","living-dune-voice-fall",
+        "slag-crawler-voice-attack","slag-crawler-voice-hit","slag-crawler-voice-fall",
+        "lava-salamander-voice-attack","lava-salamander-voice-hit","lava-salamander-voice-fall",
+        "fire-imp-voice-attack","fire-imp-voice-hit","fire-imp-voice-fall",
+        "ash-wraith-voice-attack","ash-wraith-voice-hit","ash-wraith-voice-fall",
+        "obsidian-sentinel-voice-attack","obsidian-sentinel-voice-hit","obsidian-sentinel-voice-fall",
+        "ember-drake-voice-attack","ember-drake-voice-hit","ember-drake-voice-fall",
+        "varkhor-voice-attack","varkhor-voice-hit","varkhor-voice-fall",
+        "slime-dying","wolf-dying","skeleton-dying","stone-guardian-dying",
+        "boar-dying","forest-spider-dying","forest-bandit-dying","treant-dying",
+        "amber-scorpion-dying","copper-scarab-dying","sand-cobra-dying","living-dune-dying",
+        "slag-crawler-dying","lava-salamander-dying","fire-imp-dying","ash-wraith-dying",
+        "obsidian-sentinel-dying","ember-drake-dying","varkhor-dying","sporekin-dying",
+        "dune-eye-dying","cinderhorn-dying"
     };
     static constexpr int ScoreCount=4;
     inline static constexpr const char* ScoreNames[ScoreCount]={"echoes-of-the-ruins","desert","volcano","tower"};
@@ -106,15 +131,19 @@ public:
         if(!available)return;
         for(Sound voice:banks[int(cue)].voices)if(IsSoundValid(voice))StopSound(voice);
     }
-    void play(ember::Cue cue,ember::V position={},ember::V listener={},bool spatial=false) {
+    void play(ember::Cue cue,ember::V position={},ember::V listener={},bool spatial=false,float gain=1) {
         if(!available||!effectsEnabled()||effectsVolume<=0||suspended)return;
         int i=int(cue);if(i<0||i>=CueCount)return;
         auto& bank=banks[i];if(!IsSoundValid(bank.sources[0]))return;
-        double now=GetTime();if(!ember::enemyLandingCue(cue)&&now-bank.last<(cue==ember::Cue::Step?.085:.045))return;
+        const bool dying=ember::enemyDyingCue(cue);
+        double now=GetTime();if(!dying&&!ember::enemyLandingCue(cue)&&now-bank.last<(cue==ember::Cue::Step?.085:.045))return;
         float attenuation=1,pan=.5f;
         if(spatial){
-            ember::V delta=position-listener;float d=ember::length(delta);if(d>=12)return;
-            attenuation=std::clamp(1-d/12,.05f,1.f);
+            const ember::V delta=position-listener;
+            const float d=ember::length(delta),range=dying?17.f:12.f;
+            if(d>=range)return;
+            // Keep the cry legible at bow range, then fade it towards the edge.
+            attenuation=dying?1.f-(d/range)*(d/range):std::clamp(1-d/range,.05f,1.f);
             // raylib's pan=0 is right; isometric screen X increases with x-y.
             pan=std::clamp(.5f-(delta.x-delta.y)*.045f,.1f,.9f);
         }
@@ -125,7 +154,7 @@ public:
             variation=variation*1664525u+1013904223u;pitch=.975f+(variation%51)/1000.f;
         }
         SetSoundPitch(voice,pitch);SetSoundPan(voice,pan);
-        bank.gains[slot]=attenuation*(cue==ember::Cue::Step?.52f:1.f);
+        bank.gains[slot]=gain*attenuation*(cue==ember::Cue::Step?.52f:1.f);
         SetSoundVolume(voice,effectsVolume*bank.gains[slot]);
         PlaySound(voice);bank.last=now;playedEffects++;
     }
@@ -137,7 +166,7 @@ public:
         if(focused&&suspended){for(int i=0;i<ScoreCount;i++)if(IsMusicValid(scores[i])&&musicBlend.weights[i]>.001f)ResumeMusicStream(scores[i]);suspended=false;}
         int desired=scoreFor(world);if(!IsMusicValid(scores[desired]))desired=0;
         musicBlend.update(dt,desired);music=scores[desired];
-        float target=!musicEnabled()||!focused?0:musicVolume*(blocked?.65f:world.dead()?.3f:1.f);
+        float target=!musicEnabled()||!focused?0:musicVolume*((blocked||world.allocationRequired)?.65f:world.dead()?.3f:1.f);
         for(auto& bank:banks)for(int i=0;i<3;i++)if(IsSoundValid(bank.voices[i]))
             SetSoundVolume(bank.voices[i],effectsEnabled()?effectsVolume*bank.gains[i]:0);
         currentMusicVolume+=(target-currentMusicVolume)*std::min(1.f,std::max(0.f,dt)*5);
@@ -146,9 +175,19 @@ public:
             if(musicBlend.weights[i]>.001f){if(!IsMusicStreamPlaying(scores[i]))PlayMusicStream(scores[i]);UpdateMusicStream(scores[i]);}
             else if(IsMusicStreamPlaying(scores[i]))StopMusicStream(scores[i]);
         }
-        if(focused)for(const auto& event:world.sounds)
-            if((event.cue!=ember::Cue::BowDraw||world.bowDrawing)&&(!blocked||(world.allocationRequired&&ember::enemyLandingCue(event.cue))||event.cue==ember::Cue::LevelUp||event.cue==ember::Cue::Victory||event.cue==ember::Cue::SpellLearn||(cinematicArrival&&event.cue==ember::Cue::TeleportArrival)))
-                play(event.cue,{event.x,event.y},world.player,true);
+        if(focused){
+            const bool audibleDeath=!blocked&&std::any_of(world.sounds.begin(),world.sounds.end(),[&](const auto& event){
+                return ember::enemyDyingCue(event.cue)&&ember::distance({event.x,event.y},world.player)<17.f;
+            });
+            for(const auto& event:world.sounds){
+                const bool fanfare=event.cue==ember::Cue::LevelUp||event.cue==ember::Cue::Victory;
+                const bool deathSound=ember::enemyDyingCue(event.cue)||ember::enemyLandingCue(event.cue);
+                const bool gameplaySound=!blocked&&(!world.allocationRequired||deathSound);
+                if((event.cue!=ember::Cue::BowDraw||world.bowDrawing)&&
+                   (gameplaySound||fanfare||event.cue==ember::Cue::SpellLearn||(cinematicArrival&&event.cue==ember::Cue::TeleportArrival)))
+                    play(event.cue,{event.x,event.y},world.player,true,audibleDeath&&fanfare?.58f:1.f);
+            }
+        }
         world.sounds.clear();
     }
     void toggleMute(){muted=!muted;if(muted)stopEffects();}

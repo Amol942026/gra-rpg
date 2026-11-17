@@ -25,7 +25,7 @@ bool prepareCharge(Enemy& e,float dt,bool visible,float range){
  if(dt>0&&visible&&range>=charge.minRange&&range<=EnemySightRange&&e.boarChargeCd<=.00001f&&e.attack<=0&&e.windup<=0&&e.strike<=0){
   e.boarAim=player;e.boarDirection=normalized(player-e.pos);e.boarHit=false;e.boarWindup=charge.windup;
   e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;e.recoil={};
-  faceCharge(e,e.boarDirection);if(e.type==BoarType)sound(enemyAttackCue(e.type),e.pos);return true;
+  faceCharge(e,e.boarDirection);if(e.type==BoarType)sound(Cue::BeastAttack,e.pos);return true;
  }
  return false;
 }
@@ -82,7 +82,7 @@ void advanceCharge(Enemy& e,float dt,V heroFrom,V heroTo,bool wasRolling,float r
    else{
     e.boarRush=charge.duration;e.boarCharges++;faceCharge(e,e.boarDirection);e.animation.facingAngle=e.animation.targetAngle;
     if(e.type==CinderhornType)e.animation.phase=0;
-    sound(e.type==CinderhornType?Cue::CinderhornCharge:Cue::BeastAttack,e.pos);
+    sound(e.type==CinderhornType?Cue::CinderhornCharge:enemyAttackCue(e.type),e.pos);
    }
   }
  }

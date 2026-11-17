@@ -178,7 +178,7 @@ inline bool developerStart(Game& current,int destination,bool reset,unsigned see
  candidate.rollRemaining=candidate.rollCd=candidate.swing=candidate.attackCd=candidate.spellCd=candidate.potionCd=candidate.strongCutCd=candidate.piercingArrowCd=candidate.healingCd=candidate.healingPulse=candidate.hurt=candidate.stepDistance=0;
  candidate.meleeDuration=SwingDuration;candidate.swingStrong=candidate.lastBowPiercing=false;candidate.manaRegenTime=0;
  candidate.weaponSkillCds={};
- candidate.arrows.clear();candidate.fireballs.clear();candidate.explosions.clear();candidate.effects.clear();candidate.combatImpacts.clear();candidate.pierceFlashes.clear();candidate.sounds.clear();
+ candidate.arrows.clear();candidate.fireballs.clear();candidate.explosions.clear();candidate.effects.clear();candidate.combatImpacts.clear();candidate.duneDust.clear();candidate.pierceFlashes.clear();candidate.sounds.clear();
  candidate.developerSession=true;
  candidate.level=DeveloperLevel;
  candidate.hp=float(candidate.maxHp());candidate.mana=float(candidate.maxMana());

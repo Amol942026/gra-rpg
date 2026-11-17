@@ -8,7 +8,7 @@ Edytuj ten plik po polsku. Przed zadaniem związanym z mediami przeczytaj `art/p
 
 ## Cisza i testy
 
-- Gdy test wykryje błąd związany z bieżącym zadaniem, od razu ustal przyczynę, napraw ją i powtórz test przed zakończeniem pracy. Dotyczy to także istniejących wcześniej błędów w sprawdzanej funkcji.
+- Gdy test wykryje błąd renderowania lub inny błąd w sprawdzanej funkcji, od razu ustal przyczynę, napraw ją i ponów test przed zakończeniem pracy. Dotyczy to również błędów, które występowały wcześniej.
 - Uruchomienia gry, benchmarki, testy startu oraz diagnostyka grafiki i audio inicjowane przez agenta wymagają `--no-audio`. EXE gry uruchamiaj z `--background-test`, a pomocnicze programy QA w ukrytych oknach. Nie uaktywniaj ani nie przywracaj okien testowych.
 - Nie odtwarzaj dźwięku gry przez głośniki laptopa ani nie zmieniaj zapisanych preferencji w celu wyciszenia. Zwykły start przez użytkownika zachowuje audio.
 - Raportuj osobno czas ukończenia renderu. Ukryte lub zminimalizowane okno oraz eksport w 60 Hz nie dowodzą wyświetlanego FPS ani płynności na pierwszym planie.

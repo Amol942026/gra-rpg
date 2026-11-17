@@ -374,6 +374,8 @@ void makeArt(){
  const bool paintedScenery=sceneryPaint.id&&sceneryPaint.width==1440&&sceneryPaint.height==1380;
  const Texture2D decorationPaint=LoadTexture("assets/media/realm-decorations-20261114/realm-decorations.png");
  const bool paintedDecorations=decorationPaint.id&&decorationPaint.width==1800&&decorationPaint.height==1380;
+ const Texture2D volcanoLandmarkPaint=LoadTexture("assets/media/caldera-landmarks-20261117/caldera-landmarks.png");
+ const bool paintedLandmarks=volcanoLandmarkPaint.id&&volcanoLandmarkPaint.width==VolcanoLandmarkCount*360&&volcanoLandmarkPaint.height==460;
  const Shader forestPalette=LoadShaderFromMemory(nullptr,R"GLSL(#version 330
 in vec2 fragTexCoord;
 in vec4 fragColor;
@@ -397,16 +399,18 @@ void main(){
   propArt[i]=LoadRenderTexture(width,height);
   BeginTextureMode(propArt[i]);
   ClearBackground(BLANK);
-  const int decoration=i-ForestDecorationStart;
+  const int decoration=i>=ForestDecorationStart&&i<VolcanoLandmarkStart?i-ForestDecorationStart:-1;
+  const bool landmark=volcanoLandmark(i)&&paintedLandmarks;
   const bool forestColour=paletteReady&&(i<ForestPropTypeCount||(i>=ForestDecorationStart&&i<DesertDecorationStart));
   if(forestColour)BeginShaderMode(forestPalette);
   if(desertPlant){
    desert_plant_art::draw(i,width,height);
-  }else if((paintedScenery&&slot>=0)||(paintedDecorations&&decoration>=0)){
+  }else if(landmark||(paintedScenery&&slot>=0)||(paintedDecorations&&decoration>=0)){
    // The painted cells already contain the cache's edge coverage.
    rlSetBlendFactors(RL_ONE,RL_ZERO,RL_FUNC_ADD);
    BeginBlendMode(BLEND_CUSTOM);
-   if(decoration>=0)DrawTextureRec(decorationPaint,{float(decoration%DecorationsPerRealm*360),
+   if(landmark)DrawTextureRec(volcanoLandmarkPaint,{float((i-VolcanoLandmarkStart)*360),0,float(width),float(height)},{0,0},WHITE);
+   else if(decoration>=0)DrawTextureRec(decorationPaint,{float(decoration%DecorationsPerRealm*360),
     float(decoration/DecorationsPerRealm*460),float(width),float(height)},{0,0},WHITE);
    else DrawTextureRec(sceneryPaint,{float(slot%4*360),float(slot/4*460),float(width),float(height)},{0,0},WHITE);
    EndBlendMode();
@@ -420,6 +424,7 @@ void main(){
    if(i==5)deciduousTree(90,208,1,false);
    if(i==6)mushrooms(90,208,1);
    if(volcanoSceneryProp(i))volcano_art::prop(i,90,208);
+   else if(volcanoLandmark(i))volcano_art::prop(14,90,208);
    else if(i>=ForestPropTypeCount&&i<LegacyPropTypeCount)desert_art::prop(i,90,208);
    EndMode2D();
   }
@@ -429,6 +434,7 @@ void main(){
  if(paletteReady)UnloadShader(forestPalette);
  if(sceneryPaint.id)UnloadTexture(sceneryPaint);
  if(decorationPaint.id)UnloadTexture(decorationPaint);
+ if(volcanoLandmarkPaint.id)UnloadTexture(volcanoLandmarkPaint);
  forest_bush_art::unload();forest_tree_art::unload();desert_plant_art::unload();
  for(auto& art:propArt)SetTextureFilter(art.texture,TEXTURE_FILTER_BILINEAR);
  fs::create_directories("assets/generated");
@@ -468,6 +474,7 @@ void drawWorld(){
  if(game.inVolcano())volcano_art::flow();
  if(!game.inDesert()&&!game.inVolcano())for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
  world_shadows::draw();
+ if(game.inVolcano())for(const auto& prop:game.props)volcano_art::drawPropContact(prop);
  Vector2 pp=screen(game.player);terrain_surface::ring(game.player,.44f,Fade(Gold,.7f));
  drawHoveredTile();
  guardian_art::ground();if(!game.fissures.empty())volcano_art::groundAttacks();
@@ -520,6 +527,7 @@ void drawWorld(){
   else if(obj.type==12)fountain_art::draw(obj.index);
   else if(obj.type==14)volcano_art::bolt(game.cinders[obj.index]);
   else if(obj.type==15)enemy_ability_art::glob(game.venomGlobs[obj.index]);
+  else if(obj.type==16)desert_art::duneFootDust(game.duneDust[obj.index]);
   else if(obj.type==10)guardian_art::projectile(game.boulders[obj.index]);
   else if(obj.type==11)guardian_art::fragment(game.boulderImpacts[obj.index/guardian_break::Pieces],obj.index%guardian_break::Pieces);
   else if(!game.dead()||int(game.time*5)%2==0){sand_prison::drawMound(pp,false);hero(pp.x,pp.y,1,false,&heroSilhouette);heroDrawn=true;sand_prison::drawMound(pp,true);}
@@ -558,6 +566,39 @@ void slotDraw(Slot s,Rectangle r,std::string label=""){
  if(p&&!p->empty()&&!same){rect(r.x+1,r.y+r.height-3,r.width-2,2,Fade(rarity(*p),.85f));icon(*p,r.x+r.width*.5f,r.y+r.height*.48f,.78f);if(p->count>1)txt(std::to_string(p->count),r.x+r.width-20,r.y+r.height-18,12,Text);}
  else if(!label.empty())center(label,r.x+r.width/2,r.y+r.height/2-7,11,Muted);
 }
+Vector2 fieldMinimapPoint(Rectangle map,V p){
+ return {map.x+90+(p.x-p.y)*(78.f/(MapSize-2)),map.y+43+(p.x+p.y-2)*(48.f/(MapSize-2))};
+}
+const FieldSite* hoveredFieldSite(WorldLocation realm,Vector2 pointer){
+ const Rectangle map=minimapRect();
+ if(!CheckCollisionPointRec(pointer,map))return nullptr;
+ const FieldSite* closest=nullptr;
+ float best=5.f*5.f;
+ for(const auto& site:FieldSites)if(site.realm==realm){
+  const Vector2 p=fieldMinimapPoint(map,site.position);
+  const float dx=p.x-pointer.x,dy=p.y-pointer.y,distance=dx*dx+dy*dy;
+  if(distance<best){best=distance;closest=&site;}
+ }
+ return closest;
+}
+void drawFieldSiteMarkers(Rectangle map,WorldLocation realm){
+ for(const auto& site:FieldSites)if(site.realm==realm){
+  const Vector2 p=fieldMinimapPoint(map,site.position);
+  DrawCircleV(p,3,Ink);
+  DrawCircleV(p,1.7f,rgb(231,219,186));
+ }
+}
+void drawFieldSiteTooltip(){
+ if(!gameplayInputAllowed()||game.inTower()||dragging.place!=Place::None)return;
+ const auto* site=hoveredFieldSite(game.location,mouse);
+ if(!site)return;
+ const Vector2 p=fieldMinimapPoint(minimapRect(),site->position);
+ const float width=textWidth(site->name,15)+24;
+ const Rectangle label{p.x-width-11,std::max(8.f,p.y-14),width,28};
+ DrawCircleLinesV(p,4.4f,Gold);
+ panel(label,rgb(12,22,25,250));
+ txt(site->name,label.x+12,label.y+6,15,Text);
+}
 void minimap(){const Rectangle r=minimapRect();panel(r,Fade(Panel,.92f));
  if(game.inTower()){
   rect(r.x+1,r.y+1,r.width-2,r.height-2,rgb(24,23,40));txt("WIEŻA ELDRINA",r.x+14,r.y+11,11,Gold);
@@ -575,13 +616,20 @@ void minimap(){const Rectangle r=minimapRect();panel(r,Fade(Panel,.92f));
   if(game.stairPresent(1))DrawCircleV(point(TowerStairUp),3,Gold);if(game.stairPresent(-1))DrawCircleV(point(TowerStairDown),3,Blue);DrawCircleV(point(game.player),3,Text);txt(TextFormat("PIĘTRO %d / 5",game.towerFloor+1),r.x+45,r.y+135,14,Gold);return;
  }
  txt(game.inVolcano()?"KALDERA POPIOŁU":game.inDesert()?"MORZE PIASKÓW":"WIELKA KNIEJA",r.x+14,r.y+11,11,Gold);
- const float sx=78.f/(MapSize-2),sy=48.f/(MapSize-2);
- auto point=[&](V p){return Vector2{r.x+90+(p.x-p.y)*sx,r.y+43+(p.x+p.y-2)*sy};};
+ auto point=[&](V p){return fieldMinimapPoint(r,p);};
  DrawTexture(game.inVolcano()?volcano_art::minimap:game.inDesert()?desert_art::minimap:minimapTerrain,int(r.x),int(r.y+37),WHITE);
- if(!game.inDesert()&&!game.inVolcano())for(const auto& glade:ForestGlades){Vector2 p=point(glade.center);diamond(p.x,p.y,2,2,Fade(Gold,.7f));}
- for(auto&e:game.enemies)if(e.alive){Vector2 p=point(e.pos);DrawCircleV(p,enemyBoss(e.type)?3:1.6f,enemyBoss(e.type)?Gold:rgb(166,90,75));}
- for(const auto& c:game.chests)if(c.location==game.location)diamond(point(c.pos).x,point(c.pos).y,2.8f,2.8f,c.opened?Muted:Gold);
- if(game.inVolcano()){DrawCircleV(point(VolcanoPortal),3,rgb(192,153,240));for(int i=0;i<2;i++)DrawCircleV(point(VolcanoFountains[i]),2,i==0?Blue:rgb(238,123,123));}if(game.inDesert()){DrawCircleV(point(DesertPortal),3,rgb(192,153,240));DrawCircleV(point(DesertOasis),2,Blue);}DrawCircleV(point(game.player),3,Text);}
+ for(const auto& e:game.enemies)if(e.alive&&!enemyBoss(e.type))DrawCircleV(point(e.pos),1.25f,rgb(166,90,75));
+ drawFieldSiteMarkers(r,game.location);
+ for(const auto& c:game.chests)if(c.location==game.location){
+  const Vector2 p=point(c.pos);diamond(p.x,p.y,1.7f,1.7f,c.opened?Muted:Gold);
+ }
+ for(const auto& e:game.enemies)if(e.alive&&enemyBoss(e.type)){
+  const Vector2 p=point(e.pos);diamond(p.x,p.y,3,3,Gold);
+ }
+ if(game.inVolcano()){DrawCircleV(point(VolcanoPortal),2.45f,rgb(192,153,240));for(int i=0;i<2;i++)DrawCircleV(point(VolcanoFountains[i]),2,i==0?Blue:rgb(238,123,123));}
+ if(game.inDesert()){DrawCircleV(point(DesertPortal),2.45f,rgb(192,153,240));DrawCircleV(point(DesertOasis),2,Blue);}
+ DrawCircleV(point(game.player),3,Text);
+}
 void drawUI(){
  sand_prison::drawStatus();
  txt("EMBERFALL",28,22,34,Text,true);txt("ECHA ZAPOMNIANYCH RUIN",31,66,10,Gold);line(29,92,308,92,Fade(Gold,.35f));
@@ -1087,7 +1135,7 @@ int main(int argc,char**argv) {
             bool fullscreen=fullScreen();input(dt);
             if(fullscreen!=fullScreen())refreshDisplayLayout();
         }
-        audioSystem.update(dt,game,developerMenuOpen||towerPanelOpen||towerStory.active()||intro.active()||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||quickPickerSlot>=0||game.allocationRequired,smoke||benchmark||IsWindowFocused(),(intro.active()||towerStory.active())&&!paused&&!help&&!welcome);
+        audioSystem.update(dt,game,developerMenuOpen||towerPanelOpen||towerStory.active()||intro.active()||welcome||help||paused||audioOpen||statsOpen||skillsOpen||spellBookOpen||weaponWheelOpen||quickPickerSlot>=0,smoke||benchmark||IsWindowFocused(),(intro.active()||towerStory.active())&&!paused&&!help&&!welcome);
         performance.end(RenderStage::Update);
         renderScene();
         if(frame==0)startupLog.write("First scene rendered");

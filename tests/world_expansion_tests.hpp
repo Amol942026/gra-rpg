@@ -40,8 +40,9 @@ void worldExpansionTests(){
   std::array<int,4> quadrants{};
   std::array<int,DecorationsPerRealm> decorations{};
   const int first=realm==WorldLocation::Forest?ForestDecorationStart:realm==WorldLocation::Desert?DesertDecorationStart:VolcanoDecorationStart;
+  const int limit=realm==WorldLocation::Volcano?PropTypeCount:first+DecorationsPerRealm;
   for(const auto& prop:g.props)if(prop.type>=ForestDecorationStart){
-   check(prop.type>=first&&prop.type<first+DecorationsPerRealm,"new scenery belongs to its realm");
+   check(prop.type>=first&&prop.type<limit,"new scenery belongs to its realm");
    if(prop.type>=first&&prop.type<first+DecorationsPerRealm)decorations[prop.type-first]++;
   }
   check(std::all_of(decorations.begin(),decorations.end(),[](int n){return n>=2;}),"all five new designs are distributed across the realm");

@@ -15,6 +15,7 @@
 #include "forest_gait.hpp"
 #include "forest_boar_motion.hpp"
 #include "cinderhorn_gait.hpp"
+#include "desert_motion.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -242,6 +243,11 @@ inline constexpr ImpactMaterial impactMaterial(int type){
  }
 }
 struct CombatImpact {V pos,direction;float height,life;DamageType type;bool critical;ImpactMaterial material;};
+struct DuneDust {
+ V pos,drift;float life;unsigned seed,grains;
+ float age()const{return std::clamp(1-life/desert_motion::DuneDustDuration,0.f,1.f);}
+ V center()const{const float remaining=1-age();return pos+drift*(1-remaining*remaining);}
+};
 struct Fireball { V pos,velocity;float remaining=FireballRange,damage=0;bool critical=false;Spell spell=Spell::Fireball;float age=0; };
 struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
 struct Arrow {V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false,power=false;};
@@ -317,6 +323,7 @@ struct Game {
  std::vector<Item> bag=std::vector<Item>(BagSize);std::array<Item,EquipSize> equipment{};
  std::vector<Ground> ground,forage;std::vector<Enemy> enemies;std::vector<Prop> props;std::vector<Effect> effects;
  std::vector<CombatImpact> combatImpacts;
+ std::vector<DuneDust> duneDust;
  std::array<WeaponBinding,WeaponWheelSize> weaponWheel{};
  std::vector<Arrow> arrows;bool bowDrawing=false;float bowDrawTime=0,bowReleaseTime=0,lastBowCharge=0;V bowAim{0,-1};
  Item heldAttackWeapon{};float heldAttackTime=0;
@@ -399,7 +406,7 @@ struct Game {
  void enterMageTower(){
   settleEnemyDeaths();
   cancelBoulderAttacks();
-  clearSandPrison();location=WorldLocation::MageTower;towerFloor=0;player=TowerArrival;facing=normalized(MagePosition-player);animation={};animation.face(facing.x,facing.y);
+  clearSandPrison();duneDust.clear();location=WorldLocation::MageTower;towerFloor=0;player=TowerArrival;facing=normalized(MagePosition-player);animation={};animation.face(facing.x,facing.y);
   cancelBow();closeCorpse();rollRemaining=rollCd=swing=attackCd=spellCd=hurt=stepDistance=0;
   arrows.clear();fireballs.clear();explosions.clear();effects.clear();combatImpacts.clear();pierceFlashes.clear();sounds.clear();healingPulse=0;
  }
@@ -693,6 +700,36 @@ struct Game {
   }
  }
  void settleEnemyDeaths(){for(auto& e:enemies)if(e.dying())e.deathElapsed=-1;}
+ void duneFootfalls(const Enemy& e,V previous,float oldPhase,float dt){
+  if(!e.animation.moving||dt<=0)return;
+  const V movement=e.pos-previous,travel=normalized(movement);
+  const auto forward=actorFacing(e.animation.facingInitialized?e.animation.facingAngle:int(e.animation.direction)*AnimationPi/4);
+  const float phase=e.animation.phase;
+  const float advanced=phase-oldPhase+(phase<oldPhase?1.f:0.f);
+  if(advanced<=0)return;
+  constexpr std::size_t emittersPerStep=1+std::size(desert_motion::DuneDustRim);
+  constexpr std::size_t DustLimit=4*emittersPerStep;
+  for(int leg=0;leg<6&&duneDust.size()+emittersPerStep<=DustLimit;leg++){
+   const float start=oldPhase+leg/6.f,next=std::floor(start)+1;
+   if(next>start+advanced)continue;
+   const float fraction=std::clamp((next-start)/advanced,0.f,1.f);
+   const V support=previous+movement*fraction;
+   const float life=desert_motion::DuneDustDuration-dt*(1-fraction);
+   int emitter=0;
+   const auto emit=[&](desert_motion::DuneFoot foot,unsigned grains){
+    const float sx=foot.right*forward.y+foot.forward*forward.x;
+    const float sy=(foot.forward*forward.y-foot.right*forward.x)*ActorGroundSquash;
+    const V offset{sx/80+sy/40,sy/40-sx/80};
+    const V outward=normalized(offset);
+    const V at=support+offset;
+    const unsigned seed=hash(e.id*7+leg,int(at.x*21+at.y*39)+977*emitter++);
+    duneDust.push_back({at,outward*1.12f-travel*.24f,life,seed,grains});
+   };
+   emit(desert_motion::duneFoot(leg,e.animation.moveBlend),desert_motion::DuneDustGrains);
+   // The body compresses the sand around its whole base with each footfall.
+   for(const auto rim:desert_motion::DuneDustRim)emit(rim,desert_motion::DuneRimGrains);
+  }
+ }
  void hit(Enemy& e,float amount,DamageType type=DamageType::Physical,bool critical=false,V direction={}){
   if(!e.alive)return;
   direction=normalized(length(direction)>.001f?direction:e.pos-player);
@@ -710,6 +747,7 @@ struct Game {
   sound(enemyHitCue(e.type),e.pos);
   if(e.hp>0)return;
   beginEnemyDeath(e,previousFlash);
+  sound(enemyDyingCue(e.type),e.pos);
   e.alive=false;e.hp=0;e.animation.moving=false;e.windup=e.strike=e.flash=e.boulderWindup=e.boulderRecovery=0;e.recoil={};e.patrolGoalActive=false;e.behavior=EnemyBehavior::Idle;
   e.boarWindup=e.boarRush=e.boarRecovery=0;e.boarDirection=e.boarAim={};e.boarHit=false;e.eruptionWindup=0;
   e.abilityAge=-1;e.abilityMask=0;e.abilityDirection={};venomGlobs.erase(std::remove_if(venomGlobs.begin(),venomGlobs.end(),[&](const auto& p){return p.owner==e.id;}),venomGlobs.end());
@@ -868,6 +906,8 @@ struct Game {
   for(auto&e:effects)e.life-=dt;effects.erase(std::remove_if(effects.begin(),effects.end(),[](auto&e){return e.life<=0;}),effects.end());
   for(auto& impact:combatImpacts)tick(impact.life);
   combatImpacts.erase(std::remove_if(combatImpacts.begin(),combatImpacts.end(),[](const auto& impact){return impact.life<=0;}),combatImpacts.end());
+  for(auto& dust:duneDust)tick(dust.life);
+  duneDust.erase(std::remove_if(duneDust.begin(),duneDust.end(),[](const auto& dust){return dust.life<=0;}),duneDust.end());
   for(auto& e:explosions)e.life-=dt;explosions.erase(std::remove_if(explosions.begin(),explosions.end(),[](auto& e){return e.life<=0;}),explosions.end());
   for(auto& e:boulderImpacts)e.life-=dt*(BoulderImpactClock/guardian_break::Duration);boulderImpacts.erase(std::remove_if(boulderImpacts.begin(),boulderImpacts.end(),[](const auto& e){return e.life<=0;}),boulderImpacts.end());
   if(inDesert())for(auto& drain:fountainDrain)tick(drain);
@@ -976,6 +1016,7 @@ struct Game {
    const bool planted=e.plantedAttack();
    const bool stepping=length(desired[i])>.00001f||e.boarRush>0;
    const V gait=stepping?movement:V{};
+   const float previousPhase=e.animation.phase;
    // Body separation is not a step or a change of attack direction.
    const bool faceMovement=stepping&&!chasing&&!planted&&!e.chargeBusy();
    if(chasing&&!planted&&!e.chargeBusy())faceEnemyTowards(e,player-e.pos);
@@ -989,7 +1030,12 @@ struct Game {
    else if(e.type==6)grounded_gait::advance(e.animation,gait.x,gait.y,dt,grounded_gait::Bandit,faceMovement);
    else if(e.type==1||e.type==2)grounded_gait::advance(e.animation,gait.x,gait.y,dt,
        e.type==1?forest_gait::Wolf:forest_gait::Skeleton,faceMovement);
+   else if(e.type==CopperScarabType)desert_motion::advance(e.animation,gait.x,gait.y,dt,faceMovement,
+       2*desert_motion::ScarabStride/desert_motion::data::Support);
+   else if(e.type==SandCobraType)desert_motion::advance(e.animation,gait.x,gait.y,dt,
+       faceMovement||(!planted&&!e.abilityBusy()),desert_motion::CobraWavelength);
    else e.animation.advance(gait.x,gait.y,dt,false,faceMovement);
+   if(e.type==DesertBossType)duneFootfalls(e,oldPositions[i],previousPhase,dt);
    if(e.chargeBusy())faceCharge(e,e.boarWindup>0?e.boarAim-e.pos:e.boarDirection);
    if(e.abilityBusy())faceEnemyAbility(e);
    if(e.boulderWindup>0||e.boulderRecovery>0)e.animation.face(e.boulderTarget.x-e.pos.x,e.boulderTarget.y-e.pos.y);

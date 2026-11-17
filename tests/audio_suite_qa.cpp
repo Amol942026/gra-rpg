@@ -98,8 +98,19 @@ int main(int argc,char** argv){
  check(audio.playedEffects==played&&world.sounds.empty(),"pause drops queued landings while the world is frozen");
  world.allocationRequired=true;
  world.sound(ember::Cue::LandStone,world.player);world.sound(ember::Cue::LandStone,world.player+ember::V{1,0});
- world.sound(ember::Cue::Swing,world.player);audio.update(.05f,world,true,true);
+ world.sound(ember::Cue::Swing,world.player);audio.update(.05f,world,false,true);
  check(audio.playedEffects==played+2&&world.sounds.empty(),"same-material landings use separate voices during visible level allocation");
+ audio.stopEffects();offline::clock+=2;played=audio.playedEffects;
+ world.sound(ember::enemyDyingCue(1),world.player+ember::V{13,0});
+ world.sound(ember::enemyDyingCue(1),world.player+ember::V{13,0});
+ world.sound(ember::Cue::LevelUp,world.player);
+ audio.update(.05f,world,false,true);
+ check(audio.playedEffects==played+3&&world.sounds.empty(),"distinct death voices carry beyond other effects and both play during level-up");
+ played=audio.playedEffects;world.sound(ember::enemyDyingCue(1),world.player);
+ audio.update(.05f,world,true,true);
+ check(audio.playedEffects==played&&world.sounds.empty()&&
+       std::none_of(offline::voices.begin(),offline::voices.end(),[](auto* voice){return voice->playing;}),
+       "actual pause stops and drains death voices even while allocating a level");
  world.allocationRequired=false;
  for(int frame=0;frame<80;frame++)audio.update(.05f,world,true,true);check(std::abs(audio.effectiveMusicVolume()-audio.musicVolume*.65f)<.001f,"menu and pause retain sixty-five percent music instead of excessively ducking it");
  audio.update(.05f,world,false,false);silent=true;for(auto* s:offline::scores)silent&=!s->playing;check(audio.isSuspended()&&silent,"focus loss pauses every active score");

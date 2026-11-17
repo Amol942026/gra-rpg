@@ -33,6 +33,7 @@ struct AnimationState {
     float swordStow = 0; // Saved melee carry timeline: 0 in hand, 1 stored.
     float moveBlend = 0, facingAngle = AnimationPi/4, targetAngle = AnimationPi/4;
     bool motionInitialized = false, facingInitialized = false;
+    ActorFacing travelAxis{}; // Transient locomotion direction in unsquashed screen coordinates.
     void stopSprint(){sprinting=false;runBlend=0;}
 
     void face(float dx, float dy) {

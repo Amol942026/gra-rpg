@@ -62,7 +62,7 @@ bool updateGuardianThrow(Enemy& e,float dt,bool visible,float distanceToPlayer){
     auto socket=boulderHand(e,BoulderWindup/(BoulderWindup+BoulderRecovery));
     float flight=std::max(BoulderMinFlight,distance(socket.ground,e.boulderTarget)/BoulderSpeed);
     boulders.push_back({socket.ground,e.boulderTarget,socket.ground,0,flight,socket.height,socket.height,BoulderDamage,e.id});
-    e.boulderThrows++;sound(Cue::StoneAttack,e.pos);
+    e.boulderThrows++;sound(enemyAttackCue(e.type),e.pos);
    }
   }
   return true;
@@ -72,7 +72,7 @@ bool updateGuardianThrow(Enemy& e,float dt,bool visible,float distanceToPlayer){
     &&boulders.size()<MaxBoulders&&clearEnemySegment(e.pos,player,BoulderRadius)){
   e.boulderTarget=player;e.boulderWindup=BoulderWindup;e.animation.face(player.x-e.pos.x,player.y-e.pos.y);
   e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
-  sound(enemyAttackCue(e.type),e.pos);return true;
+  sound(Cue::StoneAttack,e.pos);return true;
  }
  return false;
 }

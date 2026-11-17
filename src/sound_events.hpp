@@ -17,47 +17,56 @@ enum class Cue {
     BriarSpearThrust, BriarSpearImpact, OasisSpearThrust, OasisSpearImpact,
     BasaltSpearThrust, BasaltSpearImpact, DawnSpearThrust, DawnSpearImpact,
     PowerSword, PowerAxe, PowerDagger, PowerSpear, PowerBow, CinderhornCharge,
-    LandSlime, LandBeast, LandBone, LandStone, LandWood, LandShell, LandSand, LandEmber, Count
+    LandSlime, LandBeast, LandBone, LandStone, LandWood, LandShell, LandSand, LandEmber,
+    SlimeVoiceAttack, SlimeVoiceHit, SlimeVoiceFall,
+    WolfVoiceAttack, WolfVoiceHit, WolfVoiceFall,
+    SkeletonVoiceAttack, SkeletonVoiceHit, SkeletonVoiceFall,
+    StoneGuardianVoiceAttack, StoneGuardianVoiceHit, StoneGuardianVoiceFall,
+    BoarVoiceAttack, BoarVoiceHit, BoarVoiceFall,
+    ForestSpiderVoiceAttack, ForestSpiderVoiceHit, ForestSpiderVoiceFall,
+    ForestBanditVoiceAttack, ForestBanditVoiceHit, ForestBanditVoiceFall,
+    TreantVoiceAttack, TreantVoiceHit, TreantVoiceFall,
+    AmberScorpionVoiceAttack, AmberScorpionVoiceHit, AmberScorpionVoiceFall,
+    CopperScarabVoiceAttack, CopperScarabVoiceHit, CopperScarabVoiceFall,
+    SandCobraVoiceAttack, SandCobraVoiceHit, SandCobraVoiceFall,
+    LivingDuneVoiceAttack, LivingDuneVoiceHit, LivingDuneVoiceFall,
+    SlagCrawlerVoiceAttack, SlagCrawlerVoiceHit, SlagCrawlerVoiceFall,
+    LavaSalamanderVoiceAttack, LavaSalamanderVoiceHit, LavaSalamanderVoiceFall,
+    FireImpVoiceAttack, FireImpVoiceHit, FireImpVoiceFall,
+    AshWraithVoiceAttack, AshWraithVoiceHit, AshWraithVoiceFall,
+    ObsidianSentinelVoiceAttack, ObsidianSentinelVoiceHit, ObsidianSentinelVoiceFall,
+    EmberDrakeVoiceAttack, EmberDrakeVoiceHit, EmberDrakeVoiceFall,
+    VarkhorVoiceAttack, VarkhorVoiceHit, VarkhorVoiceFall,
+    SlimeDying,WolfDying,SkeletonDying,StoneGuardianDying,
+    BoarDying,ForestSpiderDying,ForestBanditDying,TreantDying,
+    AmberScorpionDying,CopperScarabDying,SandCobraDying,LivingDuneDying,
+    SlagCrawlerDying,LavaSalamanderDying,FireImpDying,AshWraithDying,
+    ObsidianSentinelDying,EmberDrakeDying,VarkhorDying,SporekinDying,
+    DuneEyeDying,CinderhornDying,
+    Count
 };
 // Preserve the original cue numbers in older saves; new entries are appended.
-inline Cue regionalEnemyCue(int type,int offset){
-    return Cue(int(Cue::SporekinAttack)+(type-SporekinType)*3+offset);
+static_assert(int(Cue::SlimeDying)-int(Cue::SlimeVoiceAttack)==3*SporekinType);
+static_assert(int(Cue::Count)-int(Cue::SlimeDying)==EnemyTypeCount);
+static_assert(int(Cue::CinderhornFall)-int(Cue::SporekinAttack)+1==3*RegionalEnemyTypeCount);
+inline constexpr Cue enemyGestureCue(int type,int offset,Cue fallback){
+    if(type<0||type>=EnemyTypeCount)return fallback;
+    if(regionalEnemy(type))return Cue(int(Cue::SporekinAttack)+(type-SporekinType)*3+offset);
+    return Cue(int(Cue::SlimeVoiceAttack)+type*3+offset);
 }
-inline Cue enemyHitCue(int type){
-    if(regionalEnemy(type))return regionalEnemyCue(type,1);
-    constexpr Cue material[]={Cue::SlimeHit,Cue::WolfHit,Cue::BoneHit,Cue::StoneHit,
-        Cue::WolfHit,Cue::SlimeHit,Cue::WolfHit,Cue::StoneHit,
-        Cue::ChitinHit,Cue::ChitinHit,Cue::WolfHit,Cue::StoneHit,
-        Cue::ChitinHit,Cue::WolfHit,Cue::WolfHit,Cue::FireHit,Cue::StoneHit,Cue::WolfHit,Cue::StoneHit};
-    return type>=0&&type<19?material[type]:Cue::StoneHit;
-}
-inline Cue enemyAttackCue(int type){
-    if(regionalEnemy(type))return regionalEnemyCue(type,0);
-    if(type==2)return Cue::BoneAttack;
-    if(type==5||type==8||type==9||type==12)return Cue::ChitinAttack;
-    if(type==6)return Cue::BladeAttack;
-    if(type==7)return Cue::WoodAttack;
-    if(type==10)return Cue::SerpentAttack;
-    if(type==13||type==17)return Cue::ReptileAttack;
-    if(type==16)return Cue::ArmoredAttack;
-    if(type==14||type==15)return Cue::MagicAttack;
-    if(type==3||type==11||type==18)return Cue::StoneAttack;
-    if(type==1||type==4)return Cue::BeastAttack;
-    return Cue::EnemyAttack;
-}
-inline Cue enemyFallCue(int type){
-    if(regionalEnemy(type))return regionalEnemyCue(type,2);
-    constexpr Cue material[]={Cue::LandSlime,Cue::LandBeast,Cue::LandBone,Cue::LandStone,
-        Cue::LandBeast,Cue::LandShell,Cue::EnemyFall,Cue::LandWood,
-        Cue::LandShell,Cue::LandShell,Cue::LandSand,Cue::LandSand,
-        Cue::LandShell,Cue::LandBeast,Cue::LandEmber,Cue::LandEmber,
-        Cue::LandStone,Cue::LandBeast,Cue::LandStone};
-    static_assert(sizeof(material)/sizeof(*material)==SporekinType);
-    return type>=0&&type<SporekinType?material[type]:Cue::EnemyFall;
+inline constexpr Cue enemyAttackCue(int type){return enemyGestureCue(type,0,Cue::EnemyAttack);}
+inline constexpr Cue enemyHitCue(int type){return enemyGestureCue(type,1,Cue::StoneHit);}
+inline constexpr Cue enemyFallCue(int type){return enemyGestureCue(type,2,Cue::EnemyFall);}
+inline constexpr Cue enemyDyingCue(int type){return Cue(int(Cue::SlimeDying)+type);}
+inline constexpr bool enemyDyingCue(Cue cue){return cue>=Cue::SlimeDying&&cue<Cue::Count;}
+inline constexpr bool enemyAttackSound(Cue cue){
+    return (cue>=Cue::SlimeVoiceAttack&&cue<Cue::SlimeDying&&(int(cue)-int(Cue::SlimeVoiceAttack))%3==0)||
+           (cue>=Cue::SporekinAttack&&cue<=Cue::CinderhornFall&&(int(cue)-int(Cue::SporekinAttack))%3==0);
 }
 inline constexpr bool enemyLandingCue(Cue cue){
     return cue==Cue::EnemyFall||cue==Cue::SporekinFall||cue==Cue::DuneEyeFall||cue==Cue::CinderhornFall||
-           (cue>=Cue::LandSlime&&cue<=Cue::LandEmber);
+           (cue>=Cue::LandSlime&&cue<=Cue::LandEmber)||
+           (cue>=Cue::SlimeVoiceAttack&&cue<Cue::SlimeDying&&(int(cue)-int(Cue::SlimeVoiceAttack))%3==2);
 }
 struct SoundEvent { Cue cue; float x,y; };
 }

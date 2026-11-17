@@ -117,7 +117,7 @@ bool activateField(WorldLocation next){
   enemies=std::move(restore.enemies);props=std::move(restore.props);forage=std::move(restore.forage);
   fieldLocation=next;if(next==WorldLocation::Desert&&!desertCreated)buildDesert();if(next==WorldLocation::Volcano&&!volcanoCreated)buildVolcano();
  }
- if(location!=next){clearSandPrison();closeCorpse();}location=next;towerFloor=0;refreshVolcanoScenery();return true;
+ if(location!=next){clearSandPrison();duneDust.clear();closeCorpse();}location=next;towerFloor=0;refreshVolcanoScenery();return true;
 }
 bool canTravelDesert()const{return mageReachable()&&dawnFragments()>=1;}
 bool travelToDesert(){

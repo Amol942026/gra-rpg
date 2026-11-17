@@ -28,11 +28,13 @@ void enemyDeathTests(){
   const float contact=enemy_death::groundContactTime(type);
   const float restingTime=enemy_death::duration(type)-contact;
   const int transformationFrames=type==StoneGuardianType?16:type==AshWraithType?24:
-                                 type==9||type==ObsidianSentinelType?25:type==VolcanoBossType?39:0;
+                                 type==FireImpType?23:type==9||type==ObsidianSentinelType?25:
+                                 type==VolcanoBossType?39:0;
   const bool contactTiming=transformationFrames
        ? std::abs(contact-transformationFrames/52.f)<.0001f
        : contact>=.15f&&contact<=.33f;
-  const bool restingTiming=type==9?std::abs(restingTime-13.f/52)<.0001f:
+  const bool restingTiming=type==FireImpType?std::abs(restingTime-7.f/52)<.0001f:
+                           type==9?std::abs(restingTime-13.f/52)<.0001f:
                            type==StoneGuardianType?std::abs(restingTime-10.f/52)<.0001f:restingTime>=.11f&&restingTime<=.12f;
   check(contactTiming&&restingTiming,
         "the fall uses the slightly slower timing and holds the contact pose for ground particles");
@@ -42,15 +44,16 @@ void enemyDeathTests(){
    const V anchor{21.25f,20};
    arena.enemies.push_back({42,type,anchor,anchor,100,100});
    Enemy& e=arena.enemies.front();e.animation.phase=.25f;e.animation.moving=true;e.animation.direction=Direction::NW;e.windup=.2f;
+   const auto cry=enemyDyingCue(type);
    arena.hit(e,4);
-   check(e.alive&&!e.dying(),"ordinary hit never starts a death clip");
+   check(e.alive&&!e.dying()&&cueCount(arena,cry)==0,"ordinary damage never starts the death clip or voice");
    arena.hit(e,10000);
    check(!e.alive&&e.dying()&&!e.corpseGrounded()&&e.deathProgress()==0&&e.deathMotion.phase==.25f&&e.deathMotion.moving&&e.deathWindup==.2f,
          "lethal damage captures the live pose and immediately marks the enemy dead");
    check(arena.findEnemy(e.id)==nullptr&&arena.findCorpse(e.id)==&e&&arena.openCorpse(e.id),"corpse and loot are available throughout the visual clip");
    const auto landing=enemyFallCue(type);
-   check(enemyLandingCue(landing)&&landing!=Cue::Victory&&cueCount(arena,landing)==0,
-         "the assigned ground sound is independent of the lethal hit and boss victory");
+   check(enemyDyingCue(cry)&&cueCount(arena,cry)==1&&enemyLandingCue(landing)&&cueCount(arena,landing)==0,
+         "the death voice starts with the lethal pose, before a separate ground contact cue");
    const auto rng=arena.rng;arena.hit(e,10000);
    check(arena.kills==1&&arena.rng==rng&&e.deathProgress()==0,"dead enemy cannot restart death or reroll loot");
    const float dt=1/rate;
@@ -69,15 +72,15 @@ void enemyDeathTests(){
    check(advancing&&!e.dying()&&std::abs(elapsed-enemy_death::endTime(type))<dt+.001f,
          "the body and its particles reach the same endpoint at 30, 60 and 120 Hz");
    arena.update(.05f,{},false);
-   check(landed>=contact-.0001f&&landed<=contact+dt+.0001f&&cueCount(arena,landing)==1,
-         "ground contact emits exactly one material sound in the correct visual frame at 30/60/120 Hz");
+   check(landed>=contact-.0001f&&landed<=contact+dt+.0001f&&cueCount(arena,landing)==1&&cueCount(arena,cry)==1,
+         "death voice and subsequent material contact each play once at 30/60/120 Hz");
    check(groundedOnCue&&e.corpseGrounded(),"the body locks on exactly the world update that emits the ground cue");
   }
  }
  const auto contact=enemy_death::groundContactTime;
  for(const auto& pair:std::array<std::array<int,2>,7>{{
      {7,6},{BoarType,1},{DesertBossType,8},{8,9},
-     {CinderhornType,13},{17,14},{DesertBossType,10}}})
+     {CinderhornType,13},{17,FireImpType},{DesertBossType,10}}})
   check(contact(pair[0])<contact(pair[1]),"a heavier creature reaches the ground sooner than a lighter creature");
  Game travel;
  const int id=travel.enemies.front().id;

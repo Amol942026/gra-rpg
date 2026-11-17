@@ -22,7 +22,7 @@ CLIPS = (
     ("Skorpion bursztynowy", 20, 2, 14, 17), ("Skarabeusz miedziany", 38, 3, 25, 31),
     ("Kobra piaskowa", 22, 2, 16, 19), ("Żywa Wydma", 15, 1, 9, 12),
     ("Żużlowy pełzacz", 20, 2, 14, 17), ("Salamandra lawowa", 21, 2, 15, 18),
-    ("Ognisty chochlik", 22, 2, 16, 19), ("Popielny upiór", 30, 2, 24, 27),
+    ("Ognisty chochlik", 30, 2, 23, 26), ("Popielny upiór", 30, 2, 24, 27),
     ("Obsydianowy wojownik", 31, 1, 25, 28), ("Żarowy drak", 17, 1, 11, 14),
     ("Varkhor", 45, 1, 39, 42), ("Zarodnik kniei", 22, 2, 16, 19),
     ("Oko Wydm", 19, 2, 13, 16), ("Rogacz Żaru", 17, 1, 11, 14),

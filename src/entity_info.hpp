@@ -4,9 +4,14 @@
 namespace ember {
 constexpr int ForestEnemyTypeCount=8,ForestPropTypeCount=7,LegacyEnemyTypeCount=12,LegacyPropTypeCount=14;
 constexpr int StoneGuardianType=3;
+constexpr int CopperScarabType=9,SandCobraType=10;
 constexpr int VolcanoFirstType=12,VolcanoBossType=18;
+constexpr int FireImpType=14;
 constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;
-constexpr int DecorationsPerRealm=5,PropTypeCount=VolcanoDecorationStart+DecorationsPerRealm;
+constexpr int DecorationsPerRealm=5,VolcanoLandmarkCount=4;
+constexpr int VolcanoLandmarkStart=VolcanoDecorationStart+DecorationsPerRealm;
+constexpr int PropTypeCount=VolcanoLandmarkStart+VolcanoLandmarkCount;
+inline constexpr bool volcanoLandmark(int type){return type>=VolcanoLandmarkStart&&type<PropTypeCount;}
 inline constexpr bool volcanoSceneryProp(int type){return type>=LegacyPropTypeCount&&type<ForestDecorationStart;}
 constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21,EnemyTypeCount=22;
 constexpr int RegionalEnemyTypeCount=EnemyTypeCount-SporekinType;
@@ -74,14 +79,17 @@ inline const PropInfo& propInfo(int type) {
         {"Zagrzebane amfory","Ślad dawnej osady"},{"Żebra pustynnej bestii","Szczątki"},
         {"Rozeta agawy","Roślinność pustynna"},{"Płyta Słońca","Ruina pustynna"},{"Porzucony wóz","Ślad karawany"},
         {"Kryształy żaru","Skała wulkaniczna"},{"Zwęglone drzewko","Martwe drewno"},
-        {"Skorupa siarki","Naciek wulkaniczny"},{"Kowadło obsydianowej kuźni","Ruina kuźni"},{"Pęknięta brama bazaltowa","Ruina · budowla"}
+        {"Skorupa siarki","Naciek wulkaniczny"},{"Kowadło obsydianowej kuźni","Ruina kuźni"},{"Pęknięta brama bazaltowa","Ruina · budowla"},
+        {"Lawa poduszkowa","Skała wulkaniczna"},{"Zastygła kaskada","Zastygła lawa"},
+        {"Skamieniały pancerz","Skamieniałość"},{"Latarnia górnicza","Ślad dawnej kopalni"}
     };
     static_assert(sizeof(entries)/sizeof(entries[0])==PropTypeCount);
     return entries[std::clamp(type,0,PropTypeCount-1)];
 }
 inline bool treeProp(int type){return type==0||type==4||type==5||type==12;}
 inline float propRadius(int type){
-    static constexpr float decorations[]={.65f,.32f,.74f,.49f,.35f,.42f,.60f,.32f,.54f,.75f,.56f,.49f,.46f,.59f,.73f};
+    static constexpr float decorations[]={.65f,.32f,.74f,.49f,.35f,.42f,.60f,.32f,.54f,.75f,.56f,.49f,.46f,.59f,.73f,
+                                          .78f,.91f,.69f,.34f};
     static_assert(sizeof(decorations)/sizeof(*decorations)==PropTypeCount-ForestDecorationStart);
     if(type>=ForestDecorationStart&&type<PropTypeCount)return decorations[type-ForestDecorationStart];
     return type==14?.82f:type==15?.45f:type==16?.75f:type==17?.62f:type==13?.78f:type==9?.65f:type==7||type==8?.58f:type==11?.28f:treeProp(type)?.52f:type==6?.27f:.4f;

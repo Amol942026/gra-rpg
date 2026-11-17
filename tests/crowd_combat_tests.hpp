@@ -96,7 +96,7 @@ void crowdCombatTests() {
         for(int frame=0;frame<fps*12;frame++){
             crowd.hp=100;crowd.update(1.f/fps,{},false);
             clear&=separatedEnemies(crowd);worldClear&=enemiesClearOfScenery(crowd);
-            for(auto& sound:crowd.sounds)if(sound.cue==Cue::EnemyAttack||sound.cue==Cue::BeastAttack||sound.cue==Cue::StoneAttack||sound.cue==Cue::MagicAttack||sound.cue==Cue::BoneAttack)strikes++;
+            for(const auto& sound:crowd.sounds)if(enemyAttackSound(sound.cue))strikes++;
             crowd.sounds.clear();
         }
         check(clear,"14 chasing monsters do not overlap throughout a 12 second crowd simulation");

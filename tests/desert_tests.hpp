@@ -1,5 +1,55 @@
 #pragma once
 void desertTests(){
+ AnimationState sideStep;
+ sideStep.face(1,-1);
+ const float strideCycle=2*desert_motion::ScarabStride/desert_motion::data::Support;
+ desert_motion::advance(sideStep,.12f,.12f,.05f,false,strideCycle);
+ const auto stepAxis=desert_motion::scarabStepAxis(sideStep);
+ const auto footLift=desert_motion::sample(.80f);
+ check(sideStep.moving&&std::abs(stepAxis.x)>.99f&&std::abs(stepAxis.y)<.01f&&
+       std::abs(sideStep.phase-4.8f/(ActorGroundSquash*strideCycle))<.0001f&&footLift.lift>.95f,
+       "scarab footfalls advance through lateral travel with full swing height");
+ const float phase=sideStep.phase;
+ desert_motion::advance(sideStep,0,0,.05f,false,strideCycle);
+ check(!sideStep.moving&&sideStep.phase==phase,"the desert stride stops when collision stops actual travel");
+ check(desert_motion::sample(.25f).sway>.99f&&desert_motion::sample(.75f).sway<-.99f&&
+       desert_motion::sample(0).sway==desert_motion::sample(1).sway,
+       "cobra side travel crosses both extremes and loops continuously");
+ {
+  Game sand=emptyArena();
+  sand.activateField(WorldLocation::Desert);
+  sand.enemies.clear();sand.props.clear();
+  const V home{35,27};
+  sand.player=home+V{5,-5};
+  sand.enemies.push_back({DesertBossId,DesertBossType,home,home,560,560});
+  auto& dune=sand.enemies.front();
+  dune.attack=10;dune.sandPrisonCd=100;
+  int footfalls=0;
+  bool bounded=true,allSides=true;
+  for(int i=0;i<80;i++){
+   sand.update(.02f,{},false);
+   const auto facing=actorFacing(dune.animation.facingAngle);
+   int stepCount=0,rimCount=0,sides=0;
+   for(const auto& dust:sand.duneDust){
+    bounded&=distance(dust.pos,dune.pos)<3&&dust.life>0&&dust.life<=desert_motion::DuneDustDuration;
+    if(dust.life<=desert_motion::DuneDustDuration-.02f)continue;
+    if(dust.grains==desert_motion::DuneDustGrains){++stepCount;continue;}
+    if(dust.grains==desert_motion::DuneRimGrains)++rimCount;
+    const V delta=dust.pos-dune.pos;
+    const float x=(delta.x-delta.y)*40,y=(delta.x+delta.y)*20/ActorGroundSquash;
+    const float right=x*facing.y-y*facing.x,front=x*facing.x+y*facing.y;
+    sides|=std::abs(right)>std::abs(front)?(right>0?1:2):(front>0?4:8);
+   }
+   footfalls+=stepCount;
+   if(stepCount)allSides&=sides==15&&rimCount==int(std::size(desert_motion::DuneDustRim))*stepCount;
+  }
+  check(distance(dune.pos,home)>.5f&&footfalls>=2&&bounded,
+        "the advancing dune releases bounded grains on successive foot contacts");
+  check(footfalls>=2&&allSides,"each footfall releases sand along all four sides of the base together");
+  dune.strike=2;
+  for(int i=0;i<=int(desert_motion::DuneDustDuration/.02f);i++)sand.update(.02f,{},false);
+  check(!dune.animation.moving&&sand.duneDust.empty(),"a stationary dune leaves no fresh dust and the last particles expire");
+ }
  auto allocate=[](Game& g){if(g.attributePoints){Attributes points{};points[int(Attribute::Vitality)]=g.attributePoints;g.distribute(points);}if(g.skillPoints){SkillRanks ranks{};ranks[0]=g.skillPoints;g.trainSkills(ranks);}};
  Game g;g.enterMageTower();g.player={12,12};check(!g.travelToDesert()&&g.inTower(),"normal travel is locked before the first story fragment");
  g=Game{};int firstId=g.enemies.back().id;g.player=g.enemies.back().pos;g.hit(g.enemies.back(),1000);allocate(g);check(g.bossDead&&g.dawnFragments()==0&&!g.towerReturnPending,"first boss death preserves the existing loot-before-return flow");g.openCorpse(firstId);check(g.transfer({Place::Corpse,4,firstId},{Place::Bag,8})&&g.dawnFragments()==1&&g.takeTowerReturn(),"first boss fragment unlocks the next story step exactly once");

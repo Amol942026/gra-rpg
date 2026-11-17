@@ -11,13 +11,62 @@ bool runDeveloperQA(){
  auto standardStart=[](){return game.level==100&&game.skillRanks==SkillRanks{1,1,1,1,1,1}&&game.learnedSpells==7&&game.ammoCount()==100&&game.bagCount(Kind::Health)==50&&game.bagCount(Kind::Mana)==50;};
  auto shot=[&](const char* name){std::string path=std::string("qa-v29/")+name+".png";renderScene();BeginDrawing();presentCanvas();Image im=presentedImage();check(im.data&&im.width==GetRenderWidth()&&im.height==GetRenderHeight(),"developer screen reaches real presentation at current window size");if(im.data)ExportImage(im,path.c_str());UnloadImage(im);EndDrawing();finishFramePacing();};
  refreshDisplayLayout();
+ for(const auto realm:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano}){
+  const Rectangle map{0,0,180,155};
+  const auto marks=LoadRenderTexture(180,155);
+  BeginTextureMode(marks);ClearBackground(BLANK);drawFieldSiteMarkers(map,realm);EndTextureMode();
+  Image pixels=LoadImageFromTexture(marks.texture);ImageFlipVertical(&pixels);
+  unsigned quadrants=0;int sites=0,drawn=0;bool hoveredNames=true;
+  const FieldSite* previewSite=nullptr;
+  for(const auto& site:FieldSites)if(site.realm==realm){
+   const Vector2 point=fieldMinimapPoint(map,site.position);
+   quadrants|=1u<<((site.position.x>=MapSize/2?1:0)+(site.position.y>=MapSize/2?2:0));
+   sites++;
+   const Color sample=GetImageColor(pixels,int(point.x),int(point.y));
+   drawn+=sample.r==231&&sample.g==219&&sample.b==186;
+   hoveredNames&=hoveredFieldSite(realm,fieldMinimapPoint(minimapRect(),site.position))==&site;
+   if(!previewSite&&site.position.x>70&&site.position.y>70)previewSite=&site;
+  }
+  check(sites>=14&&drawn==sites&&quadrants==15,"every named field site renders at its real minimap position and all four quarters are marked");
+  check(hoveredNames&&!hoveredFieldSite(realm,{0,0})&&!hoveredFieldSite(realm,{minimapRect().x+90,25}),
+        "each marker picks its real field site and blank minimap space clears the hover");
+  UnloadImage(pixels);UnloadRenderTexture(marks);
+  game=Game{};game.activateField(realm);game.messageTime=0;
+  welcome=paused=help=false;renderScene();
+  saveTexture(canvas,TextFormat("qa-v29/minimap-%d.png",int(realm)));
+  if(previewSite){
+   mouse=fieldMinimapPoint(minimapRect(),previewSite->position);
+   check(!worldPointerAllowed(mouse),"a hovered minimap marker never targets the world");
+   renderScene();saveTexture(canvas,TextFormat("qa-v29/minimap-hover-%d.png",int(realm)));
+   mouse={0,0};
+  }
+ }
+ {
+  game=Game{};game.activateField(WorldLocation::Volcano);
+  const auto target=LoadRenderTexture(160,80);
+  for(int type:{14,17,VolcanoDecorationStart,VolcanoLandmarkStart,VolcanoLandmarkStart+3}){
+   const auto prop=std::find_if(game.props.begin(),game.props.end(),[=](const Prop& p){return p.type==type;});
+   check(prop!=game.props.end(),"Caldera contact shadow has a world prop");
+   if(prop==game.props.end())continue;
+   game.player=prop->pos;const Vector2 base=screen(prop->pos);
+   BeginTextureMode(target);ClearBackground(WHITE);BeginMode2D({{80,40},base,0,1});
+   volcano_art::drawPropContact(*prop);
+   EndMode2D();EndTextureMode();
+   Image pixels=LoadImageFromTexture(target.texture);ImageFlipVertical(&pixels);
+   check(GetImageColor(pixels,80,42).r<115&&GetImageColor(pixels,80,8).r==255,
+         "Caldera contact darkens the ground directly under the rock and fades away");
+   UnloadImage(pixels);
+  }
+  UnloadRenderTexture(target);
+ }
  const auto decorationStart=GetTime();
  for(const auto& group:{std::pair{WorldLocation::Forest,ForestDecorationStart},
                         std::pair{WorldLocation::Desert,DesertDecorationStart},
                         std::pair{WorldLocation::Volcano,VolcanoDecorationStart}}){
   game=Game{};game.activateField(group.first);game.messageTime=0;
   welcome=paused=help=false;
-  for(int type=group.second;type<group.second+DecorationsPerRealm;type++){
+  const int limit=group.first==WorldLocation::Volcano?PropTypeCount:group.second+DecorationsPerRealm;
+  for(int type=group.second;type<limit;type++){
    const auto found=std::find_if(game.props.begin(),game.props.end(),[&](const Prop& prop){return prop.type==type;});
    check(found!=game.props.end(),"new decoration is present in its native realm");
    if(found==game.props.end())continue;

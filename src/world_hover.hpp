@@ -23,7 +23,7 @@ std::vector<DrawObject> worldDrawOrder() {
         if(game.stairPresent(-1))objects.push_back({TowerStairDown.x+TowerStairDown.y,8,-1});objects.push_back({game.player.x+game.player.y,2,0});
         std::stable_sort(objects.begin(),objects.end(),[](const auto& a,const auto& b){return a.depth<b.depth;});return objects;
     }
-    objects.reserve(game.props.size()+game.enemies.size()+1+game.boulderImpacts.size()*guardian_break::Pieces);
+    objects.reserve(game.props.size()+game.enemies.size()+1+game.duneDust.size()+game.boulderImpacts.size()*guardian_break::Pieces);
     for(int i=0;i<int(game.props.size());i++)objects.push_back({game.props[i].pos.x+game.props[i].pos.y,0,i});
     for(int i=0;i<int(game.enemies.size());i++)
         objects.push_back({game.enemies[i].pos.x+game.enemies[i].pos.y+(game.enemies[i].alive?0.f:-.03f),game.enemies[i].alive?1:4,i});
@@ -33,6 +33,10 @@ std::vector<DrawObject> worldDrawOrder() {
     for(int i=0;i<int(game.fireballs.size());i++)objects.push_back({game.fireballs[i].pos.x+game.fireballs[i].pos.y,3,i});
     for(int i=0;i<int(game.cinders.size());i++)objects.push_back({game.cinders[i].pos.x+game.cinders[i].pos.y,14,i});
     for(int i=0;i<int(game.venomGlobs.size());i++)objects.push_back({game.venomGlobs[i].pos.x+game.venomGlobs[i].pos.y,15,i});
+    for(int i=0;i<int(game.duneDust.size());i++){
+        const V at=game.duneDust[i].center();
+        objects.push_back({at.x+at.y+game.elevation(at)*.8f,16,i});
+    }
     for(int i=0;i<int(game.arrows.size());i++)objects.push_back({game.arrows[i].pos.x+game.arrows[i].pos.y,5,i});
     for(int i=0;i<int(game.boulders.size());i++)objects.push_back({game.boulders[i].pos.x+game.boulders[i].pos.y,10,i});
     for(int i=0;i<int(game.boulderImpacts.size());i++)for(int piece=0;piece<guardian_break::Pieces;piece++){
@@ -131,7 +135,7 @@ WorldHover pickWorld(Vector2 point) {
     // Reverse of the actual drawing order: never select an enemy through a tree.
     auto objects=worldDrawOrder();
     for(auto it=objects.rbegin();it!=objects.rend();++it){
-        if(it->type==10||it->type==11)continue; // Stones and fragments are not inventory/hover targets.
+        if(it->type==10||it->type==11||it->type==16)continue; // Scattered particles do not obstruct inspection.
         if(it->type==3||it->type==5||it->type==14||it->type==15)continue; // Projectiles do not obstruct mouse inspection.
         V position{};bool touched=false;HoverKind kind=HoverKind::None;int id=it->index;
         if(it->type==12){

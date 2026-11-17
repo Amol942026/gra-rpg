@@ -2,6 +2,7 @@
 #include "generated/volcano_motion.hpp"
 #include "generated/basalt_swing.hpp"
 #include "generated/caldera_attack_motion.hpp"
+#include "generated/fire_imp_fall_data.hpp"
 #include "enemy_death_settle.hpp"
 #include "volcano_corpse_material.hpp"
 namespace varkhor_death_art {
@@ -169,6 +170,16 @@ inline float stagedFall(float t,float delay,float first){
  return first*enemy_death::window(t,0.f,delay)+(1-first)*enemy_death::window(t,delay,1.f);
 }
 
+inline fire_imp_fall::Key impFall(float phase){
+ const float frame=phase*fire_imp_fall::ContactFrame;
+ const int first=std::min(int(frame),fire_imp_fall::ContactFrame-1);
+ const float mix=frame-first;
+ const auto a=fire_imp_fall::keys[first],b=fire_imp_fall::keys[first+1];
+ const auto sample=[mix](float start,float end){return start+(end-start)*mix;};
+ return {sample(a.roll,b.roll),sample(a.sag,b.sag),sample(a.chest,b.chest),sample(a.nearKnee,b.nearKnee),
+         sample(a.farKnee,b.farKnee),sample(a.nearArm,b.nearArm),sample(a.farArm,b.farArm),sample(a.tail,b.tail)};
+}
+
 struct BrokenPart {Vector2 offset{};float turn=0,visibility=1;};
 using BrokenParts=std::array<BrokenPart,6>;
 
@@ -182,8 +193,10 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const float forward=std::cos(heading),side=std::sin(heading);
  const float turn=deathScreenSide?float(deathScreenSide):direction>3?-1.f:1.f;
  const float t=std::clamp(deathPhase,0.f,1.f);
- const float tip=dead?1.f:stagedFall(t,fall.tip,.24f);
- const float knees=enemy_death::window(t,fall.buckle,fall.tip+.12f)*(1-tip);
+ const bool impFalling=type==FireImpType&&deathPose&&!dead;
+ const auto imp=impFalling?impFall(t):fire_imp_fall::Key{};
+ const float tip=dead?1.f:impFalling?imp.roll:stagedFall(t,fall.tip,.24f);
+ const float knees=impFalling?imp.sag:enemy_death::window(t,fall.buckle,fall.tip+.12f)*(1-tip);
  const auto towardRest=[collapse](float current,float rest){return current*(1-collapse)+rest*collapse;};
  auto control=volcano_motion::sample(id,state.phase),opposite=volcano_motion::sample(id,std::fmod(state.phase+.5f,1.f));
  auto strike=volcano_motion::sample(id,std::max(0.f,action),true);
@@ -225,15 +238,23 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
    const float delay=p==3?fall.tip:p==0?fall.headLag:far?fall.farLag:fall.nearLag;
    const float fold=dead?1.f:stagedFall(t,delay,.16f);
    const auto join=[fold](float start,float rest){return start+(rest-start)*fold;};
-   const float headNod=p==0?fall.headSnap*enemy_death::window(t,delay,delay+.19f)*(1-fold):0;
+   const float headNod=p==0&&!impFalling?fall.headSnap*enemy_death::window(t,delay,delay+.19f)*(1-fold):0;
    const bool leg=p==1||p==2||(p>=4&&fourLegs);
-   const float buckle=leg?knees*(far?.65f:1.f):0;
-   const float follow=fall.recoil[p]*recoil*(1-fold)+fall.settle[p]*settle+headNod;
+   const float buckle=leg?(impFalling?(far?imp.farKnee:imp.nearKnee):knees*(far?.65f:1.f)):0;
+   const float follow=impFalling?(p==0?imp.tail:p==3?imp.chest:p>=4?(far?imp.farArm:imp.nearArm):0.f):
+                                     fall.recoil[p]*recoil*(1-fold)+fall.settle[p]*settle+headNod;
    part.pivot={join(part.pivot.x,pivot.x),join(part.pivot.y,pivot.y)};
    part.shift={join(part.shift.x,turn*limb.x)+(follow*.13f+7*buckle)*forward,
                join(part.shift.y,limb.y)+std::abs(headNod)*.19f-std::abs(follow)*.10f-8*buckle};
    part.angle=join(part.angle,turn*limb.angle)+turn*(follow+(far?19.f:-24.f)*buckle);
    part.scaleX=join(1,limb.scaleX);part.scaleY=join(1,limb.scaleY);
+   if(impFalling&&p>=4){
+    // Pivot the shoulder with the chest, then add the arm's own delayed swing.
+    const float angle=turn*imp.chest*DEG2RAD;
+    const Vector2 shoulder{part.pivot.x-64,part.pivot.y-90};
+    part.shift.x+=shoulder.x*(std::cos(angle)-1)-shoulder.y*std::sin(angle);
+    part.shift.y+=shoulder.x*std::sin(angle)+shoulder.y*(std::cos(angle)-1);
+   }
   }
   if(broken){
    part.shift.x+=(*broken)[p].offset.x;
@@ -241,7 +262,7 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
    part.angle+=(*broken)[p].turn;
   }
  }
- const float fallAngle=turn*(rest.turn*tip+fall.twist*recoil*(1-tip));
+ const float fallAngle=turn*(rest.turn*tip+(impFalling?0.f:fall.twist*recoil*(1-tip)));
  const float fallOffset=rest.pivotHeight*s*tip;
  const float squash=towardRest(1,rest.squash)-fall.compression*knees;
  const float slide=fall.slide*(recoil+settle*.25f)*s;

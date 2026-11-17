@@ -78,12 +78,57 @@ void upgradeVolcanoScenery(std::vector<Prop>& scenery,const std::vector<Enemy>& 
  clearVolcanoBridgeProps(scenery);
  appendVolcanoScenery(scenery,inhabitants,true,protectPlayer);
 }
+void addVolcanoLandmarks(std::vector<Prop>& scenery,const std::vector<Enemy>& inhabitants,bool protectPlayer)const{
+ if(std::any_of(scenery.begin(),scenery.end(),[](const Prop& prop){return volcanoLandmark(prop.type);}))return;
+ // Places of interest are spread across the four corners and old mining routes.
+ struct Placement{V around;int design;};
+ static constexpr Placement placements[]={
+  {{17,29},0},{{55,69},0},{{91,89},0},{{130,121},0},
+  {{14,49},1},{{34,94},1},{{85,114},1},{{132,28},1},
+  {{14,102},2},{{40,19},2},{{81,132},2},{{132,100},2},
+  {{14,63},3},{{40,76},3},{{93,54},3},{{115,67},3}
+ };
+ const auto clear=[&](V p,float radius){
+  if(p.x<4||p.y<4||p.x>MapWalkMax-3||p.y>MapWalkMax-3||
+     distance(p,VolcanoArrival)<4||distance(p,VolcanoPortal)<3.4f||distance(p,VolcanoBossHome)<9||
+     nearFieldSite(WorldLocation::Volcano,p,2.75f)||nearTreasure(p,WorldLocation::Volcano,3.6f)||
+     volcanoLava(p,radius+1.4f)||nearVolcanoFountain(p,3.4f)||volcano_roads::distanceTo(p)<2.55f+radius||
+     (protectPlayer&&distance(p,player)<radius+1.4f))return false;
+  for(size_t i=0;i<VolcanoBridges.size();i++){
+   const float y=VolcanoBridges[i].y;
+   if(distance(p,{lavaCenter(VolcanoBridgeRivers[i],y),y})<8.6f)return false;
+  }
+  for(const auto& prop:scenery){
+   const float gap=volcanoLandmark(prop.type)?5.5f:radius+propRadius(prop.type)+1.05f;
+   if(distance(p,prop.pos)<gap)return false;
+  }
+  for(const auto& enemy:inhabitants){
+   const float gap=radius+enemy.radius()+1.f;
+   if(distance(p,enemy.home)<gap||distance(p,enemy.pos)<gap)return false;
+  }
+  for(const auto& drop:ground)if(drop.location==WorldLocation::Volcano&&distance(p,drop.pos)<radius+1.4f)return false;
+  return true;
+ };
+ for(size_t i=0;i<std::size(placements);i++){
+  const auto& plan=placements[i];
+  const int type=VolcanoLandmarkStart+plan.design;
+  const float phase=float(hash(int(i),812)%360)*AnimationPi/180;
+  for(int attempt=0;attempt<=96;attempt++){
+   const float reach=1.25f*((attempt+11)/12),angle=phase+attempt*(2*AnimationPi/12);
+   const V p=plan.around+V{std::cos(angle),std::sin(angle)}*reach;
+   if(!clear(p,propRadius(type)))continue;
+   scenery.push_back({p,type,.91f+float(hash(int(i),512)%15)*.01f});
+   break;
+  }
+ }
+}
 void refreshVolcanoScenery(){
  if(!volcanoCreated||volcanoSceneryVersion>=VolcanoSceneryRevision)return;
  const bool active=fieldLocation==WorldLocation::Volcano;
  auto& scenery=active?props:volcanoState.props;
  if(volcanoSceneryVersion<6)upgradeVolcanoScenery(scenery,active?enemies:volcanoState.enemies,volcanoSceneryVersion>=5,inVolcano());
  else clearVolcanoBridgeProps(scenery);
+ addVolcanoLandmarks(scenery,active?enemies:volcanoState.enemies,inVolcano());
  volcanoSceneryVersion=VolcanoSceneryRevision;
 }
 void buildVolcano(){
@@ -100,6 +145,7 @@ void buildVolcano(){
  std::rotate(enemies.begin()+guardianIndex,enemies.begin()+guardianIndex+1,enemies.end());
  volcanoCreated=true;volcanoSceneryVersion=VolcanoSceneryRevision;
  addRealmDecorations(WorldLocation::Volcano);
+ addVolcanoLandmarks(props,enemies,false);
 }
 bool canTravelVolcano()const{return mageReachable()&&desertBossDead;}
 void resetFieldArrival(V arrival){
@@ -135,7 +181,7 @@ bool prepareEruption(Enemy& e,float dt,bool visible){
   return true;
  }return false;
 }
-void launchCinder(const Enemy& e){if(cinders.size()<24){cinders.push_back({e.pos,normalized(player-e.pos)*7.5f,7,float(e.damage()),e.id});sound(Cue::MagicAttack,e.pos);}}
+void launchCinder(const Enemy& e){if(cinders.size()<24){cinders.push_back({e.pos,normalized(player-e.pos)*7.5f,7,float(e.damage()),e.id});sound(enemyAttackCue(e.type),e.pos);}}
 void updateVolcanoAttacks(float dt,V heroBefore,bool wasRolling,float rollAge){
  if((cinders.empty()&&fissures.empty())||dt<=0)return;
  for(size_t i=0;i<cinders.size();){

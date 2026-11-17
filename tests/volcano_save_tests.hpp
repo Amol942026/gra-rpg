@@ -38,6 +38,26 @@ void volcanoSaveTests(){
   decorations.resize(clearCount);g.volcanoSceneryVersion=VolcanoSceneryRevision;
   check(saves::encode(old)==saves::encode(upgraded),"revision six clears the crater and stalagmite without shifting other props or saved progress");
  }
+ for(bool active:{false,true}){
+  saves::Snapshot old;auto& g=old.game;g.activateField(WorldLocation::Volcano);
+  auto expected=std::find_if(g.props.begin(),g.props.end(),[](const Prop& p){return volcanoLandmark(p.type);});
+  check(expected!=g.props.end(),"new Caldera provides a landmark to occupy in the migration fixture");
+  if(active)g.player=expected->pos;
+  else g.activateField(WorldLocation::Desert);
+  auto& original=active?g.props:g.volcanoState.props;
+  original.erase(std::remove_if(original.begin(),original.end(),[](const Prop& p){return volcanoLandmark(p.type);}),original.end());
+  g.volcanoSceneryVersion=7;
+  auto migrated=saves::decode(saves::encode(old));
+  auto& scenery=active?migrated.game.props:migrated.game.volcanoState.props;
+  std::array<int,VolcanoLandmarkCount> received{};
+  for(const auto& prop:scenery)if(volcanoLandmark(prop.type))received[prop.type-VolcanoLandmarkStart]++;
+  check(std::all_of(received.begin(),received.end(),[](int count){return count==4;})&&
+        (!active||migrated.game.walkable(g.player)),"revision seven gains the four designs without blocking the loaded hero");
+  const auto once=saves::encode(migrated);
+  check(saves::encode(saves::decode(once))==once,"new Caldera landmarks are added once");
+  scenery.resize(original.size());g.volcanoSceneryVersion=VolcanoSceneryRevision;
+  check(saves::encode(old)==saves::encode(migrated),"adding landmarks leaves existing scenery and all other save bytes intact");
+ }
  auto legacy=saves::read("art/volcano/fixtures/legacy-v8.efs");
  check(!legacy.game.volcanoCreated&&!legacy.game.volcanoBossDead&&legacy.game.chests.size()==6&&legacy.game.chests[4].location==WorldLocation::Volcano,"real v8 save gains an unexplored third realm and two fresh chests");roundtrip(legacy);
  auto oldBytes=saves::readBytes("art/volcano/fixtures/legacy-v8.efs");saves::Archive oldFile(true,oldBytes);std::string magic;int version;size_t size;uint64_t hash;oldFile(magic,version,size,hash);

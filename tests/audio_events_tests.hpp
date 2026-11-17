@@ -34,11 +34,10 @@ void audioEventTests() {
     check(cueCount(p,Cue::Drop)==1,"dropping emits impact");
     p.sounds.clear();p.transfer({Place::Bag,0},{Place::Equip,0});
     check(p.sounds.empty(),"rejected inventory transfer emits no success sound");
-    const Cue materials[]={Cue::SlimeHit,Cue::WolfHit,Cue::BoneHit,Cue::StoneHit};
     for(int type=0;type<4;type++){
         Game e=emptyArena();Enemy enemy{0,type,{15,15},{15,15},1,1};
         e.hit(enemy,10);
-        check(cueCount(e,materials[type])==1,"each enemy material emits its own hit sound");
+        check(cueCount(e,enemyHitCue(type))==1,"a lethal hit still plays the enemy's impact sound");
         check(cueCount(e,Cue::Victory)==int(type==3)&&cueCount(e,enemyFallCue(type))==0,
               "the boss reward still cues on defeat while impacts wait for the terrain");
         auto count=e.sounds.size();e.hit(enemy,10);check(e.sounds.size()==count,"dead enemies cannot emit repeated deaths");
@@ -119,7 +118,14 @@ void audioEventTests() {
     chest.sounds.clear();chest.player={1,1};check(!chest.openChest(chest.chests[0].id)&&chest.sounds.empty(),"out-of-range chest interaction cannot emit a success sound");
     Game weapon=emptyArena();weapon.bag[12]=item(Kind::Bow);weapon.transfer({Place::Bag,12},{Place::Equip,0});
     check(cueCount(weapon,Cue::WeaponEquip)==1&&cueCount(weapon,Cue::Equip)==0,"changing a weapon emits a distinct draw and fastening sound");
+    std::array<bool,int(Cue::Count)> enemyCues{};
     for(int type=0;type<EnemyTypeCount;type++){
+        for(Cue cue:{enemyAttackCue(type),enemyHitCue(type),enemyFallCue(type),enemyDyingCue(type)}){
+            check(!enemyCues[int(cue)],"every enemy gesture has its own sound bank");
+            enemyCues[int(cue)]=true;
+        }
+        check(enemyAttackSound(enemyAttackCue(type))&&enemyLandingCue(enemyFallCue(type))&&
+              !enemyLandingCue(enemyHitCue(type)),"attack and landing retain their mixer categories");
         Game hit=emptyArena();Enemy target{0,type,{15,15},{15,15},10000,10000};hit.hit(target,10);
         check(cueCount(hit,enemyHitCue(type))==1,"all enemy species emit their assigned material impact");
         Game attack=emptyArena();attack.enemies.push_back({0,type,{15.2f,15},{15.2f,15},100,100});attack.update(.01f,{},false);
@@ -127,7 +133,6 @@ void audioEventTests() {
         for(int frame=0;frame<2+int(meleeWindup(type)/.02f);frame++)attack.update(.02f,{},false);
         check(cueCount(attack,enemyAttackCue(type))==1,"all enemy species emit one physical attack sound at their strike");
     }
-    check(enemyHitCue(9)==Cue::ChitinHit&&enemyHitCue(15)==Cue::FireHit&&enemyAttackCue(16)==Cue::ArmoredAttack&&enemyAttackCue(17)==Cue::ReptileAttack&&enemyAttackCue(6)==Cue::BladeAttack&&enemyAttackCue(10)==Cue::SerpentAttack,"enemy gestures match their actual body, weapon and material");
     for(int fps:{30,60,120}){
         MusicBlend blend;
         for(int target:{1,2,3,0}){
