@@ -240,6 +240,39 @@ Procedurę i testy opisują `art/hero/README.md` oraz `art/hero/WALK_QA.md`.
 
 ## Muzyka i efekty
 
+### Stable Audio 3.0 Small SFX przez ComfyUI MCP
+
+Graf API `tools/media/presets/stable_audio_3_small_sfx_api.json` generuje
+krótki efekt z opisu. Współdzielony katalog Comfy Desktop to
+`%LOCALAPPDATA%/Comfy-Desktop/ComfyUI-Shared/models`. Umieść w nim
+[Small SFX](https://huggingface.co/Comfy-Org/stable-audio-3/blob/main/checkpoints/stable_audio_3_small_sfx.safetensors)
+w `checkpoints` i [T5Gemma](https://huggingface.co/Comfy-Org/stable-audio-3/blob/main/text_encoders/t5gemma_b_b_ul2.safetensors)
+w `text_encoders`. Dekoder audio SAME jest w pliku modelu.
+
+Na Ryzen 5 7530U uruchamiaj serwer w tle na `127.0.0.1:8188` z `--cpu
+--offline --disable-auto-launch`. Jeśli uruchamiasz backend poza Desktop,
+podaj katalog współdzielony przez `--extra-model-paths-config`. Przykładowe
+mapowanie jest w `C:/AI2D/pipeline/runs/stable-audio-3-small-sfx-20261117/models.yaml`.
+W tym środowisku zmienna `SSLKEYLOGFILE` powodowała błąd OpenSSL przy starcie.
+Usuń ją z otoczenia procesu uruchamiającego ComfyUI.
+
+W kopii grafu ustaw opis w węźle 3, długość w węźle 5, ziarno w węźle 6
+i prefiks pliku w węźle 8. Przez `comfy_local` sprawdź `server_info` i
+`validate_workflow`, następnie użyj `run_workflow(wait=false)`, `job` oraz
+`fetch_outputs`. Węzeł `SaveAudio` zapisuje FLAC. Zdekoduj go i przekonwertuj
+do stereo WAV PCM16 48 kHz przed obróbką i sprawdź liczbę próbek, szczyt,
+RMS oraz przesterowanie bez odtwarzania. Zachowaj graf, ziarno, FLAC i raport.
+
+Test z 17.11.2026 przeszedł na ComfyUI 0.44.2. Generacja na CPU trwała
+11,41 s i dała 2,60 s audio. Obie wagi zweryfikowano przez SHA-256.
+Plik, identyfikator zadania i metryki są w
+`C:/AI2D/pipeline/runs/stable-audio-3-small-sfx-20261117`.
+Komercyjne użycie modelu podlega
+[Stability AI Community License](https://kb.stability.ai/knowledge-base/stable-audio-commerical-and-usage-licensing),
+w tym rejestracji i limitowi przychodu w bezpłatnym wariancie licencji.
+
+### LMMS, Csound i obróbka
+
     & $mediaPython 'tools\media\media_pipeline.py' --no-audio music new_composition
     & $mediaPython 'tools\media\media_pipeline.py' --no-audio sfx new_sfx_set
 

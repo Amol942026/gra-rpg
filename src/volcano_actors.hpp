@@ -3,6 +3,7 @@
 #include "generated/basalt_swing.hpp"
 #include "generated/caldera_attack_motion.hpp"
 #include "generated/fire_imp_fall_data.hpp"
+#include "generated/fire_imp_motion_data.hpp"
 #include "enemy_death_settle.hpp"
 #include "volcano_corpse_material.hpp"
 namespace varkhor_death_art {
@@ -12,6 +13,7 @@ inline void unload();
 // The original cutouts retain their walk cycles. Special gestures add Blender pose curves.
 namespace volcano_actors {
 inline constexpr const char* names[]={"slag-crawler","lava-salamander","fire-imp","ash-wraith","obsidian-sentinel","ember-drake","varkhor"};
+inline constexpr float facingAngles[]={0,.4636476f,1.5707963f,2.677945f,3.14159265f,3.6052403f,4.712389f,5.8195377f};
 struct GroundPose {float lift=0;Rectangle footprint{};};
 struct Atlas {
  Texture2D art{},silhouette{},relief{};
@@ -102,7 +104,14 @@ inline constexpr RestPose restingPoses[]={
 static_assert(std::size(restingPoses)==std::size(names));
 
 inline bool quadruped(int species){return species==0||species==1||species==5;}
-inline Vector2 restPivot(int species,int part){
+inline Vector2 restPivot(int species,int part,int direction=0){
+ if(species==FireImpType-VolcanoFirstType){
+  const float sign=part==1||part==4?-1.f:1.f;
+  const float forward=std::cos(facingAngles[direction]),across=std::abs(std::sin(facingAngles[direction]));
+  if(part>=4)return {64+sign*(10+8*across),67-sign*forward*2};
+  if(part==1||part==2)return {64+sign*(7+4*across),88-sign*forward*1.6f};
+  return {64,88};
+ }
  if(part>=4&&!quadruped(species))return {64+(part==4?-1.f:1.f)*(species==6?25:18),67};
  return {64,90};
 }
@@ -127,7 +136,7 @@ inline void calibrateContact(Atlas& atlas,int species){
   float extremity=-1e6f;
   for(int p=0;p<6;p++){
    const auto& part=rest.parts[p];
-   const auto pivot=restPivot(species,p);
+   const auto pivot=restPivot(species,p,direction);
    const float b=(rest.turn+part.angle)*side*DEG2RAD;
    const float sb=std::sin(b),cb=std::cos(b);
    const float px=pivot.x-64+side*part.x,py=pivot.y-115+part.y+rest.pivotHeight;
@@ -183,10 +192,56 @@ inline fire_imp_fall::Key impFall(float phase){
 struct BrokenPart {Vector2 offset{};float turn=0,visibility=1;};
 using BrokenParts=std::array<BrokenPart,6>;
 
+inline fire_imp_motion::Key impMotion(const fire_imp_motion::Key* keys,float phase){
+ const float frame=std::clamp(phase,0.f,1.f)*60;
+ const int first=std::min(int(frame),59);
+ const float u=frame-first;
+ const auto& a=keys[first];const auto& b=keys[first+1];
+ const auto sample=[u](float start,float end){return start+(end-start)*u;};
+ return {sample(a.travel,b.travel),sample(a.lift,b.lift),sample(a.rise,b.rise),sample(a.tilt,b.tilt),
+         sample(a.tail,b.tail),sample(a.guard,b.guard),sample(a.cast,b.cast),sample(a.reach,b.reach),sample(a.ember,b.ember)};
+}
+
+struct Part {Vector2 pivot,shift;float angle=0,scaleX=1,scaleY=1;};
+struct ImpAnimation {fire_imp_motion::Key idle,walk,opposite,cast;};
+
+inline Part impPart(int part,int direction,float forward,float across,float blend,const ImpAnimation& motion){
+ const float sign=part==1||part==4?-1.f:1.f;
+ const float facing=forward<-.05f?-1.f:1.f;
+ const auto& [idle,walk,opposite,cast]=motion;
+ const float bodyTilt=(walk.tilt*blend+idle.tilt*(1-blend)+cast.tilt)*forward;
+ const float rise=walk.rise*blend+idle.rise*(1-blend)+cast.rise;
+ const Vector2 bodyShift{forward*cast.reach*.72f,across*cast.reach*.32f-rise};
+ Part pose{restPivot(FireImpType-VolcanoFirstType,part,direction),bodyShift,bodyTilt};
+ if(part==1||part==2){
+  // The stance segment moves linearly backwards by the actual projected stride.
+  const auto& foot=part==1?walk:opposite;
+  const float travel=foot.travel*blend;
+  pose.shift={forward*travel,across*travel-foot.lift*blend};
+  pose.angle=sign*foot.lift*1.55f*blend*forward;
+ }else if(part==0){
+  pose.angle+=facing*(idle.tail*(1-blend)+walk.tail*blend+cast.tail);
+ }else if(part>=4){
+  const float rotation=bodyTilt*DEG2RAD;
+  const Vector2 pivotDelta{pose.pivot.x-64,pose.pivot.y-88};
+  pose.shift.x+=(std::cos(rotation)-1)*pivotDelta.x-std::sin(rotation)*pivotDelta.y;
+  pose.shift.y+=std::sin(rotation)*pivotDelta.x+(std::cos(rotation)-1)*pivotDelta.y;
+  if(part==4){
+   pose.angle+=forward*(walk.guard*blend+idle.guard*(1-blend))+sign*cast.guard;
+   pose.shift.y-=cast.guard*.15f;
+  }else{
+   const float point=cast.cast;
+   pose.angle+=forward*(walk.cast*blend+idle.cast*(1-blend))-facing*point*(.26f+.74f*std::abs(forward));
+   pose.shift.y-=point*.16f*(1-std::abs(forward));
+  }
+ }
+ return pose;
+}
+
 inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false,float special=-1,const enemy_death::Key* deathPose=nullptr,int deathScreenSide=0,float opacity=1,float deathPhase=0,const BrokenParts* broken=nullptr){
  int id=std::clamp(type-VolcanoFirstType,0,6),direction=std::clamp(int(state.direction),0,7);const auto& atlas=atlases[id];if(!atlas.art.id)return false;
  const float scale=bodyScale(id),s=size*scale;
- static constexpr float angles[]={0,.4636476f,1.5707963f,2.677945f,3.14159265f,3.6052403f,4.712389f,5.8195377f};float heading=angles[direction];
+ const float heading=facingAngles[direction];
  const auto& fall=falls[id];
  const auto& rest=restingPoses[id];
  const float collapse=dead?1.f:deathPose?deathPose->collapse:0.f,recoil=deathPose?deathPose->recoil:0.f,settle=deathPose?deathPose->settle:0.f;
@@ -198,15 +253,23 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const float tip=dead?1.f:impFalling?imp.roll:stagedFall(t,fall.tip,.24f);
  const float knees=impFalling?imp.sag:enemy_death::window(t,fall.buckle,fall.tip+.12f)*(1-tip);
  const auto towardRest=[collapse](float current,float rest){return current*(1-collapse)+rest*collapse;};
- auto control=volcano_motion::sample(id,state.phase),opposite=volcano_motion::sample(id,std::fmod(state.phase+.5f,1.f));
- auto strike=volcano_motion::sample(id,std::max(0.f,action),true);
+ const bool fireImp=type==FireImpType;
+ const float halfPhase=std::fmod(state.phase+.5f,1.f);
+ const auto control=fireImp?volcano_motion::Key{}:volcano_motion::sample(id,state.phase);
+ const auto opposite=fireImp?volcano_motion::Key{}:volcano_motion::sample(id,halfPhase);
+ const auto strike=fireImp?volcano_motion::Key{}:volcano_motion::sample(id,std::max(0.f,action),true);
+ const auto impAnimation=fireImp?ImpAnimation{impMotion(fire_imp_motion::idle,std::fmod(state.idleTime/1.42f,1.f)),
+     impMotion(fire_imp_motion::walk,state.phase),impMotion(fire_imp_motion::walk,halfPhase),
+     action>=0?impMotion(fire_imp_motion::cast,action):fire_imp_motion::Key{}}:ImpAnimation{};
  float blend=dead?0:state.moveBlend;
  const bool fourLegs=quadruped(id);
  bool specialPose=id>=4&&special>=0&&!dead;
  auto gesture=specialPose?caldera_attack_motion::pose(id-4,special):caldera_attack_motion::Pose{};
- struct Part {Vector2 pivot,shift;float angle=0,scaleX=1,scaleY=1;};std::array<Part,6> parts{};
+ std::array<Part,6> parts{};
  for(int p=0;p<6;p++){
   auto& part=parts[p];part.pivot={64,90};
+  if(fireImp)part=impPart(p,direction,forward,side,blend,impAnimation);
+  else{
   if(p==1||p==2||(fourLegs&&p>=4)){auto k=p==1||p==5?control:opposite;float travel=k.travel*(VolcanoStrides[id]*.31f/scale)*blend;part.shift={std::cos(heading)*travel,std::sin(heading)*travel-k.lift*5*blend};}
   else{part.shift={control.sway*.45f*blend,-control.bob*1.2f*(.25f+.75f*blend)};}
   if(p>=4&&!fourLegs){part.pivot=restPivot(id,p);part.angle=control.sway*(p==4?-1:1)*4*blend;if(action>=0){part.angle+=strike.sway*(p==4?-2.5f:3.8f);part.shift.x+=strike.sway*std::cos(heading)*.55f;part.shift.y+=strike.sway*std::sin(heading)*.3f;}}
@@ -231,8 +294,9 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
    if(p==3){part.pivot={64+forward*12,79};part.angle+=mirror*gesture.drive*.64f;}
    if(p>=4)part.angle+=mirror*gesture.drive*(p==4?-.36f:.72f);
   }
+  }
   if(dead||deathPose){
-   const auto pivot=restPivot(id,p);
+   const auto pivot=restPivot(id,p,direction);
    const auto& limb=rest.parts[p];
    const bool far=turn>0?(p==1||p==4):(p==2||p==5);
    const float delay=p==3?fall.tip:p==0?fall.headLag:far?fall.farLag:fall.nearLag;
@@ -296,6 +360,12 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  // A raised sword passes behind the helmet during anticipation; the shield
  // remains in front. The forward cut returns the blade to the foreground.
  const int* order=direction>=5?backOrder:id==4&&collapse<.64f&&action>=.08f&&action<.53f?raisedSwordOrder:frontOrder;
+ const int farArm=forward>.3f?5:4;
+ const int nearArm=9-farArm;
+ const int impOrder[]={0,1,2,farArm,3,nearArm};
+ const int castingOrder[]={0,1,2,4,3,5};
+ const int impBackOrder[]={1,2,4,3,0,5};
+ if(fireImp)order=direction>=5?impBackOrder:action>=.32f&&action<.68f?castingOrder:impOrder;
  if(!shadow&&outline.a)for(Vector2 delta:{Vector2{-1.5f,0},Vector2{1.5f,0},Vector2{0,-1.5f},Vector2{0,1.5f}})for(int n=0;n<6;n++)paint(order[n],atlas.silhouette,outline,delta.x,delta.y);
  const bool relit=!shadow&&volcano_corpse_material::begin(atlas.relief,enemy_death::ease(collapse),atlas.authoredRest);
  for(int n=0;n<6;n++){
@@ -308,6 +378,20 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
   paint(p,shadow?atlas.silhouette:atlas.art,tint);
  }
  if(relit)EndShaderMode();
+ if(fireImp&&!dead&&!deathPose&&!shadow&&action>=0&&action<.45f){
+  const float ember=impAnimation.cast.ember;
+  if(ember>.08f){
+   const auto& palm=parts[5];
+   const float angle=palm.angle*DEG2RAD;
+   const Vector2 local{6+forward*4,35},point{
+       (palm.pivot.x-64+palm.shift.x+local.x*std::cos(angle)-local.y*std::sin(angle))*s,
+       (palm.pivot.y-115+palm.shift.y+local.x*std::sin(angle)+local.y*std::cos(angle))*s};
+   const float energy=(3.8f+ember*4.6f)*s;
+   DrawCircleV(point,energy,Fade(rgb(230,63,19),ember*.22f));
+   DrawCircleV(point,energy*.56f,Fade(rgb(255,151,44),ember*.85f));
+   DrawCircleV({point.x-.7f*s,point.y-.5f*s},energy*.25f,Fade(rgb(255,233,162),ember));
+  }
+ }
  if(flash&&!shadow)for(int n=0;n<6;n++)paint(order[n],atlas.silhouette,Fade(WHITE,.48f));
  rlPopMatrix();return false;
 }

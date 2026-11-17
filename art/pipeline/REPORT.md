@@ -1,5 +1,39 @@
 # Raport konfiguracji — 19.10.2026
 
+**17.11.2026 — nowy Ognisty chochlik.** Lokalny DreamShaper 8 przygotował
+koncepcję i faktury, a natywna Krita zapisała sześć warstw wycinanki w ośmiu
+kierunkach. Synfig dostarczył oddech, krok zależny od pokonanego dystansu,
+zebranie żaru, wyrzut pocisku i stopniowy upadek na bok. Materiał ciała
+przygasa po śmierci. Budżet atlasu, maski i materiału szczątków to nadal
+16,5 MiB RGBA8.
+
+PASS: 185 kontroli renderera i 112 klatek podglądu, 5891 kontroli śmierci
+i 8 trybu bezdźwiękowego w ukrytej kompilacji. Render, odczyt i eksport
+zadania podglądu trwały 0,76 s, a pełnego testu śmierci 32,65 s. Nowa
+kompilacja jest w `dist/Emberfall.exe`. KRA, kopie i zgłoszenie ComfyUI są
+w `C:/AI2D/sprites/emberfall-fire-imp-20261117`, projekty SIF w
+`C:/AI2D/animations/emberfall-fire-imp-20261117`, a podgląd i raport w
+`C:/AI2D/pipeline/runs/emberfall-fire-imp-20261117`.
+
+**17.11.2026 — dźwięki 22 przeciwników Emberfall.** Stable Audio 3.0
+Small SFX wygenerował niezależne ujęcia ataku, trafienia, umierania i
+kontaktu ciała z podłożem oraz sześciu ataków specjalnych. Audacity 3.7.9
+usunął składową stałą i skompresował trzy taśmy, zapisując otwarte AUP3.
+Do bieżącej gry podłączono 94 sygnały i 282 warianty 48 kHz stereo PCM16.
+Najwyższy true peak wyniósł −3,73 dBTP, a początek kontaktu z podłożem
+następuje w ciągu 20,69 ms. Raylib potwierdził wszystkie 486 wariantów gry
+w 1658 kontrolach bez otwierania urządzenia audio. Ukryty EXE przeszedł
+5891 kontroli animacji śmierci oraz 8 kontroli trybu bez dźwięku. Test
+renderowania, odczytu i eksportu klatek zajął 32,11 s.
+
+Opisy brzmień są w `tools/media/presets/creature_sfx.txt`, generacja w
+`tools/media/stable_creature_audio.py`, a montaż, kontrola i podpinanie w
+`tools/media/master_creature_audio.py`. Grafy, pliki źródłowe FLAC, mastery,
+receptury, raport WAV i potwierdzenia kopii są w
+`C:/AI2D/audio/emberfall-creature-sfx-20261117`. Raport integracji znajduje się w
+`C:/AI2D/pipeline/runs/emberfall-creature-sfx-20261117/report.json`.
+[Warunki wykorzystania komercyjnego](https://kb.stability.ai/knowledge-base/stable-audio-commerical-and-usage-licensing).
+
 **12.11.2026 — pięć włóczni.** Zachowano dostarczone ikony, materiały i
 źródła łupu. Pięć projektów Synfig daje osobne przygotowanie i powrót
 do gardy, ze wspólną klatką kontaktu. Dla czterech odmian Csound
