@@ -946,8 +946,9 @@ inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const V
  if(e.type>=VolcanoFirstType){
   if(shadowBuilding&&!shadowCasting)return false;
   const float action=e.volcanoAction(),special=game.volcanoSpecialPose(e);
+  const bool impactFlash=e.type==SlagCrawlerType&&e.flash>EnemyHitRecovery-.045f;
   return drawHitSprite(y,lean,probe,[&](const Vector2* point){
-   return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,point,shadowBuilding,false,false,special);
+   return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,point,shadowBuilding,false,impactFlash,special);
   });
  }
  int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;

@@ -17,6 +17,10 @@ inline void cleave(const Enemy& e,Color fill,Color edge){
  V side{-e.abilityDirection.y*.72f,e.abilityDirection.x*.72f},a=e.pos+e.abilityDirection*.3f,b=e.pos+e.abilityDirection*5.2f;
  Vector2 p[]={screen(a-side),screen(b-side),screen(b+side),screen(a+side)};poly({p[0],p[1],p[2],p[3]},fill);for(int i=0;i<4;i++)DrawLineEx(p[i],p[(i+1)%4],2,edge);
 }
+inline bool breathBehind(const Enemy& e){
+ return e.type==EmberDrakeType&&volcano_actors::drake_turn::view(e.animation).nearestBase()>=int(Direction::NW);
+}
+inline void drakeBreath(const Enemy& e);
 inline void ground(){
  for(const auto& e:game.enemies){if(!e.alive||!e.abilityBusy()||!game.enemyAbilityAvailable(e))continue;
   Vector2 at=screen(e.pos);if(at.x<-340||at.x>WorldW+340||at.y<-180||at.y>H+300)continue;
@@ -39,6 +43,7 @@ inline void ground(){
    }
   }else{
    if(warning||active)cone(e.pos,e.abilityDirection,4.8f,.610865f,Fade(tint,alpha),Fade(tint,warning?.8f:.45f));
+   if(breathBehind(e))drakeBreath(e);
   }
   if(warning){std::string name=spec.name;float width=textWidth(name,15);rect(at.x-width/2-7,at.y-enemyInfo(e.type).visualHeight-35,width+14,23,rgb(15,20,28,220));txt(name,at.x-width/2,at.y-enemyInfo(e.type).visualHeight-32,15,tint);}
  }
@@ -55,6 +60,39 @@ inline void breathFallback(const Enemy& e){
    poly({{p.x-size*.7f,p.y},{p.x+wave*3,p.y-size*(1.7f+.2f*wave)},{p.x+size*.7f,p.y}},Fade(tint,.65f));
    if(part<5)ellipse(p.x,p.y-1,size*.4f,size*.4f,Fade(rgb(255,236,165),.65f));
   }
+}
+inline void drakeBreath(const Enemy& e){
+ const auto& spec=enemyAbilityProfile(e.type);
+ const float elapsed=e.abilityAge-spec.windup;
+ const auto feet=screen(e.pos);
+ const auto mouth=volcano_actors::drake_art::mouth(e,feet,e.abilityAge/spec.duration());
+ const auto tip=e.pos+e.abilityDirection*4.73f;
+ auto end=screen(tip);
+ end.y-=std::max(26.f,(feet.y-mouth.y)*.68f);
+ // Over a descending slope the ground target can project onto the jaw.
+ // Keep the hot plume above the target with readable depth in that view.
+ const auto flatStart=screenFlat(e.pos),flatEnd=screenFlat(tip);
+ const Vector2 axis{flatEnd.x-flatStart.x,flatEnd.y-flatStart.y};
+ const float axisLength=std::max(1.f,std::hypot(axis.x,axis.y));
+ const float depth=((end.x-mouth.x)*axis.x+(end.y-mouth.y)*axis.y)/axisLength;
+ const float correction=std::max(0.f,.55f*axisLength-depth)/axisLength;
+ end.x+=axis.x*correction;end.y+=axis.y*correction;
+ const float dx=end.x-mouth.x,dy=end.y-mouth.y;
+ const float angle=std::atan2(dy,dx)*RAD2DEG;
+ using caldera_attack_art::Clip;
+ if(elapsed<0){
+  const float charge=e.abilityAge/spec.windup;
+  caldera_attack_art::draw(Clip::Cinder,mouth,{13+20*charge,13+14*charge},angle,charge,.12f+.68f*charge,{.64f,.5f});
+ }else if(elapsed<spec.active){
+  if(!caldera_attack_art::atlas.id){breathFallback(e);return;}
+  const auto left=screen(e.pos+rotateAbilityDirection(e.abilityDirection,-.610865f)*4.73f);
+  const auto right=screen(e.pos+rotateAbilityDirection(e.abilityDirection,.610865f)*4.73f);
+  const float width=std::abs((right.y-left.y)*dx-(right.x-left.x)*dy)/std::max(1.f,std::hypot(dx,dy));
+  caldera_attack_art::drawBreath(mouth,end,width,elapsed,spec.active);
+ }else{
+  const float fade=std::max(0.f,1-(elapsed-spec.active)/.24f);
+  if(fade>0)caldera_attack_art::draw(Clip::Cinder,mouth,{24,16},angle,.72f,fade*.30f,{.64f,.5f});
+ }
 }
 inline void air(){
  using caldera_attack_art::Clip;
@@ -85,25 +123,7 @@ inline void air(){
     float travel=std::hypot(end.x-start.x,end.y-start.y);
     caldera_attack_art::draw(Clip::Cleave,center,{travel*1.05f,94},angle,elapsed/.60f);
    }
-  }else if(enemyAbility(e.type)==EnemyAbility::EmberBreath){
-   Vector2 mouth=screen(e.pos+direction*.45f);mouth.y-=33;
-   if(elapsed<0){
-    float charge=e.abilityAge/spec.windup;
-    caldera_attack_art::draw(Clip::Cinder,mouth,{28+33*charge,26+15*charge},angle,charge,.16f+.77f*charge,{.64f,.5f});
-   }else if(elapsed<spec.active){
-    if(!caldera_attack_art::atlas.id){breathFallback(e);continue;}
-    const float phase=elapsed/spec.active;
-    for(float offset:{-.36f,.36f,0.f}){
-     Vector2 end=screen(e.pos+rotateAbilityDirection(direction,offset)*4.73f);end.y-=14;
-     const float dx=end.x-mouth.x,dy=end.y-mouth.y;
-     caldera_attack_art::draw(Clip::Breath,mouth,{std::hypot(dx,dy)*1.10f,offset==0?91.f:76.f},
-        std::atan2(dy,dx)*RAD2DEG,phase,offset==0?.96f:.72f,{.08f,.5f});
-    }
-   }else{
-    float fade=std::max(0.f,1-(elapsed-spec.active)/.27f);
-    if(fade>0)caldera_attack_art::draw(Clip::Cinder,mouth,{50,29},angle,.72f,fade*.36f,{.64f,.5f});
-   }
-  }
+  }else if(e.type==EmberDrakeType&&!breathBehind(e))drakeBreath(e);
  }
 }
 }

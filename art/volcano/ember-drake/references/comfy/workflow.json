@@ -1,0 +1,86 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "DreamShaper_8_pruned.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 640,
+      "height": 512,
+      "batch_size": 1
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "Hand-painted isometric dark fantasy bestiary painting, full body of a single ferocious adult volcanic drake, muscular low stalking four-legged dragon, intentional elegant twisting tail, predatory wedge-shaped reptilian head, two long swept bone-ivory horns, tightly overlapping ridged blue-black basalt scales, warm copper edge light on each plate, sculpted shoulder and ribcage, two broad leathery russet copper bat wings half unfurled with clearly articulated fingers and thin veins, glowing orange eye and narrow molten amber throat slits, head turns to the right, 3/4 overhead camera, light from top left, bold graphic grouping with fine surface brushwork, all feet tail wings fully visible centered isolated against muted slate-gray ground, detailed natural history atlas creature painting"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "human, rider, logo, text, letters, symbols, cropped, body cut off at edge, multiple dragons, extra heads, disconnected limbs, hazy blurry detail, low contrast, noisy background, scenery, rock platform, flames covering body, enormous turrets, toys, glossy plastic, chibi, cartoon mascot"
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "3",
+        0
+      ],
+      "negative": [
+        "4",
+        0
+      ],
+      "latent_image": [
+        "2",
+        0
+      ],
+      "seed": 47135219,
+      "steps": 22,
+      "cfg": 6.7,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "6",
+        0
+      ],
+      "filename_prefix": "emberfall-ember-drake-20261118/paint"
+    }
+  }
+}

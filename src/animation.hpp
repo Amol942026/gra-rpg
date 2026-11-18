@@ -16,11 +16,13 @@ inline ActorFacing actorFacing(float angle){
  return {x/length,y/length};
 }
 
-inline Direction directionFor(float worldX, float worldY, Direction previous) {
-    if (std::hypot(worldX, worldY) < 0.0001f) return previous;
-    float angle = std::atan2((worldX + worldY) * 0.5f, worldX - worldY);
+inline Direction directionAtScreenAngle(float angle) {
     int sector = int(std::round(angle / (AnimationPi / 4)));
     return static_cast<Direction>((sector + 8) % 8);
+}
+inline Direction directionFor(float worldX, float worldY, Direction previous) {
+    if (std::hypot(worldX, worldY) < 0.0001f) return previous;
+    return directionAtScreenAngle(std::atan2((worldX + worldY) * 0.5f, worldX - worldY));
 }
 
 struct AnimationState {
@@ -34,6 +36,8 @@ struct AnimationState {
     float moveBlend = 0, facingAngle = AnimationPi/4, targetAngle = AnimationPi/4;
     bool motionInitialized = false, facingInitialized = false;
     ActorFacing travelAxis{}; // Transient locomotion direction in unsquashed screen coordinates.
+    float turnLean=0; // Filtered turning velocity for articulated directional sprites.
+    float pivotPhase=0; // Transient footwork driven by angular travel while turning.
     void stopSprint(){sprinting=false;runBlend=0;}
 
     struct SprintStep {float end, average;};
@@ -62,7 +66,33 @@ struct AnimationState {
         targetAngle = int(direction)*(AnimationPi/4);
         if(!facingInitialized){facingAngle=targetAngle;facingInitialized=true;}
     }
-    void advance(float dx, float dy, float dt, bool sprint = false, bool faceMovement = true,bool allowStow=true) {
+    void faceAim(float dx,float dy,bool alignOnSpawn) {
+        targetAngle=std::atan2((dx+dy)*.5f,dx-dy);
+        if(dx*dx+dy*dy>=1.e-8f)direction=directionAtScreenAngle(targetAngle);
+        if(!facingInitialized){
+            facingAngle=alignOnSpawn?targetAngle:int(direction)*(AnimationPi/4);
+            facingInitialized=true;
+        }
+    }
+    void advanceFacing(float dt,float maxTurnRate) {
+        const float turn=std::remainder(targetAngle-facingAngle,2*AnimationPi);
+        if(maxTurnRate<=0) {
+            facingAngle+=turn*(1-std::exp(-22.f*dt));
+            return;
+        }
+        if(dt<=0)return;
+        // Travel at a bounded rate, then ease into the target. Integrating the
+        // two stages separately keeps the same heading across different frame rates.
+        constexpr float response=15.f;
+        const float angle=std::abs(turn),knee=maxTurnRate/response;
+        const float cruise=std::min(dt,std::max(0.f,(angle-knee)/maxTurnRate));
+        const float remaining=(angle-maxTurnRate*cruise)*std::exp(-response*(dt-cruise));
+        const float step=std::copysign(angle-remaining,turn);
+        facingAngle=std::remainder(facingAngle+step,2*AnimationPi);
+        const float lean=std::clamp(step/(maxTurnRate*dt),-1.f,1.f);
+        turnLean+=(lean-turnLean)*(1-std::exp(-12.f*dt));
+    }
+    void advance(float dx, float dy, float dt, bool sprint = false, bool faceMovement = true,bool allowStow=true,float maxTurnRate=0) {
         float travelled = std::hypot(dx, dy);
         moving = travelled > 0.00001f;
         idleTime += dt;
@@ -74,11 +104,13 @@ struct AnimationState {
         const auto pace=sprintStep(sprinting,dt);
         runBlend=pace.end;
         if (moving) {
-            if(faceMovement)face(dx, dy);
+            if(faceMovement){
+                if(maxTurnRate>0)faceAim(dx,dy,true);
+                else face(dx,dy);
+            }
             phase = std::fmod(phase + travelled * (0.38f-0.07f*pace.average), 1.0f);
         }
-        float turn=std::remainder(targetAngle-facingAngle,2*AnimationPi);
-        facingAngle+=turn*(1-std::exp(-22.f*std::max(0.f,dt)));
+        advanceFacing(std::max(0.f,dt),maxTurnRate);
     }
     int walkFrame() const { return moving ? int(phase * 8) % 8 : 0; }
 };

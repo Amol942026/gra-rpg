@@ -160,14 +160,14 @@ WorldHover pickWorld(Vector2 point) {
         }else if(it->type==1){
             const Enemy& e=game.enemies[it->index];position=e.pos;
             Vector2 p=screen(e.pos);kind=HoverKind::Enemy;id=e.id;
-            float half=enemyBoss(e.type)?125:75;
+            float half=enemyBoss(e.type)?125:e.type==EmberDrakeType?90:75;
             if(regionalEnemy(e.type)||CheckCollisionPointRec(point,{p.x-half,p.y-enemyInfo(e.type).visualHeight,half*2,enemyInfo(e.type).visualHeight+14})){
                 touched=actor_art::drawEnemy(e,p.x,p.y,BLANK,&point);
             }
         }else if(it->type==4){
             const Enemy& e=game.enemies[it->index];position=e.pos;kind=HoverKind::Corpse;id=e.id;
             Vector2 p=screen(position);
-            float half=e.type==VolcanoBossType?170:enemyBoss(e.type)?120:96;
+            float half=e.type==VolcanoBossType?170:enemyBoss(e.type)?120:e.type==EmberDrakeType?110:96;
             float height=!e.corpseGrounded()?enemyInfo(e.type).visualHeight+28:enemyBoss(e.type)?115.f:92.f;
             const Rectangle area=e.corpseGrounded()&&fallen_art::cachedBody(e.type)?cachedCorpseBounds(e,p):
                 Rectangle{p.x-half,p.y-height,half*2,height+52};

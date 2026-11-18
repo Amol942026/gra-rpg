@@ -154,12 +154,13 @@ inline bool paintedCorpseShadow(const Enemy& e,Vector2 p){
 }
 inline void calderaCorpseShadow(const Enemy& e,Vector2 p){
  const auto base=volcano_actors::groundFootprint(e);
- if(base.width<=0){
-  volcano_actors::death(e,p.x,p.y,e.deathProgress(),BLANK,nullptr,true);
-  return;
+ const float weight=base.width<=0?0.f:e.corpseGrounded()?1.f:enemy_death::restingBlend(e.type,e.deathProgress());
+ if(weight<1){
+  volcano_actors::death(e,p.x,p.y,e.deathProgress(),BLANK,nullptr,true,enemy_death::ease(2*(1-weight)));
+  // Restore coverage before drawing the fading contact patch; it needs
+  // the caster's opacity in the red channel, just like the next object.
+  if(volcano_actors::turn_art::forType(e.type)&&volcano_actors::turn_art::filtered())BeginShaderMode(maskShader);
  }
- const float weight=e.corpseGrounded()?1.f:enemy_death::restingBlend(e.type,e.deathProgress());
- if(weight<1)volcano_actors::death(e,p.x,p.y,e.deathProgress(),BLANK,nullptr,true,enemy_death::ease(2*(1-weight)));
  // The silhouette is painted from an elevated camera. Its full height must
  // not be cast as though the corpse were still standing over the terrain.
  contactShadow(p,base,enemy_death::ease(2*weight));
@@ -237,6 +238,8 @@ inline void prepare(bool chamber=false){
     if(p.x+tex.width*.5f-shadow.origin.x<0||p.x-shadow.origin.x>WorldW||p.y+tex.height*.5f-shadow.origin.y<0||p.y-shadow.origin.y>H)continue;
     shadow_geometry::draw(shadow,p);
    }
+   // Directional cutouts merge their layers with a dedicated coverage shader.
+   if(e.alive&&volcano_actors::turn_art::forType(e.type)&&volcano_actors::turn_art::filtered())BeginShaderMode(maskShader);
    visibleCasters++;
    if(e.alive&&e.type==3&&e.boulderWindup>0&&guardian_art::stone.id){
     auto socket=Game::boulderHand(e,e.boulderProgress());Vector2 p=screen(socket.ground);

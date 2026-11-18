@@ -1,0 +1,230 @@
+{
+  "status": "PASS",
+  "comfyui": {
+    "prompt_id": "206b41cd-3156-4289-9a6a-c771840fb6fb",
+    "engine": "ComfyUI 0.44.2",
+    "execution_seconds": 470.094,
+    "source_sha256": "b0630c7af068ec26189ba99fbc8dd06180821b91806aa2eafbbb56d8395a68d8"
+  },
+  "image_generation": {
+    "method": "built-in generation, separate concept, turnaround, rear, lateral and flame",
+    "prompts": "references/prompts.json",
+    "flame_prompt": "references/flame-prompt.json"
+  },
+  "painting": {
+    "master": "C:\\AI2D\\sprites\\emberfall-ember-drake-20261118\\krita-restored\\zarowy-drak.kra",
+    "layers": [
+      "06 Głowa, rogi i szyja",
+      "05 Skrzydło bliższe",
+      "04 Korpus, zbroja i ogon",
+      "03 Łapy po przekątnej B",
+      "02 Łapy po przekątnej A",
+      "01 Skrzydło dalsze"
+    ],
+    "source_art_sha256": {
+      "sunburst-concept.png": "e3bc0fbc7fcbb434df76f2c8c779c0b18cfa653a8de2a7efa3c85b5c3e67603d",
+      "sunburst-profile.png": "91391ff7204fd758c7ee7a997379c2bbb2d97de80c938ef05b9ffd62329b09de",
+      "sunburst-rear-right.png": "52684e83b1ef8e2c13d53042604a2ddb6eb29c9d10a161e5e21567a8c52ba333",
+      "sunburst-turnaround.png": "2d4b0b8680a443cd123ac5fbf73cc34eec39c1ef8f82fd38d25744197cbc4ad6",
+      "drake-paint.png": "b0630c7af068ec26189ba99fbc8dd06180821b91806aa2eafbbb56d8395a68d8"
+    },
+    "native_krita_sha256": "4a90ab63c3867fac2207b755c988f97f29f704185742d71d8035bf562c253770",
+    "runtime_sha256": "00eeb5977cc77b6eb71346487837e6c13e8a9b4976942486ac4e0100fa2b416d",
+    "corpse_sha256": "cc942549f09ceff6f6652beb28a9742a7ea1ba7942a0dd59389c896d7df4fcea",
+    "atlas_dimensions": [
+      1536,
+      1152
+    ],
+    "corpse_dimensions": [
+      1024,
+      768
+    ],
+    "checked_parts": 48,
+    "min_edge_padding_pixels": 9,
+    "min_mean_rgb_change_from_material_brushes": 5.63,
+    "max_mean_rgb_change_from_material_brushes": 11.0,
+    "jaw": {
+      "dimensions": [
+        480,
+        768
+      ],
+      "directions": 5,
+      "stages": 8,
+      "distinct_cells": 40,
+      "atlas_sha256": "8f3caaa1a83bd83f989294053508b98c31b27bc42efe0f3bc5459ff16a22c18a",
+      "master": "C:\\AI2D\\sprites\\emberfall-ember-drake-20261118\\krita-jaw\\ember-drake-mouth.kra"
+    }
+  },
+  "jaw": {
+    "name": "ember-drake-mouth",
+    "master": "C:\\AI2D\\sprites\\emberfall-ember-drake-20261118\\krita-jaw\\ember-drake-mouth.kra",
+    "png": "C:\\AI2D\\sprites\\emberfall-ember-drake-20261118\\krita-jaw\\ember-drake-mouth.png",
+    "layers": [
+      "Gardziel i kły",
+      "Górny pysk",
+      "Żuchwa"
+    ],
+    "size": [
+      480,
+      768
+    ],
+    "runtime_size": [
+      480,
+      768
+    ],
+    "kra_sha256": "aa0dc366da8fd4c0a758ab08f12711930a9a8800a0763b8afdb659e666833994",
+    "png_sha256": "8f3caaa1a83bd83f989294053508b98c31b27bc42efe0f3bc5459ff16a22c18a",
+    "retained": true
+  },
+  "synfig": {
+    "idle": {
+      "ActualFrames": 49,
+      "Fps": 24.0,
+      "ElapsedSeconds": 15.756,
+      "DistinctFramesByFacing": [
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48
+      ],
+      "VisibleMarginPixels": 12
+    },
+    "walk": {
+      "ActualFrames": 41,
+      "Fps": 60.0,
+      "ElapsedSeconds": 12.605,
+      "DistinctFramesByFacing": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40
+      ],
+      "VisibleMarginPixels": 9
+    },
+    "bite": {
+      "ActualFrames": 61,
+      "Fps": 60.0,
+      "ElapsedSeconds": 21.086,
+      "DistinctFramesByFacing": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "VisibleMarginPixels": 7
+    },
+    "breath": {
+      "ActualFrames": 54,
+      "Fps": 20.0,
+      "ElapsedSeconds": 19.935,
+      "DistinctFramesByFacing": [
+        53,
+        53,
+        53,
+        53,
+        53,
+        53,
+        53,
+        53
+      ],
+      "VisibleMarginPixels": 9
+    },
+    "fall": {
+      "ActualFrames": 12,
+      "Fps": 52.0,
+      "ElapsedSeconds": 10.111,
+      "DistinctFramesByFacing": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "VisibleMarginPixels": 7
+    }
+  },
+  "renderer": {
+    "checks": 227,
+    "failures": 0,
+    "frames": 146,
+    "directions": 8,
+    "render_readback_export_seconds": 4.77335
+  },
+  "packages": {
+    "dev": {
+      "canonical_assets": 730,
+      "startup_frames": 180,
+      "hidden": true,
+      "audio": false,
+      "startup_test_seconds": 10.688,
+      "archive_sha256": "de853fd8a4aa0fc1bc5c43fb51ca12fb92c6bca1af212f01d36fb663f96aaba5",
+      "exe_sha256": "39dad73181345ef4a0083bf0ccd7e1bd63fbafbc1ef6fed918c13b0e8ea87f4b",
+      "death_checks": 5891,
+      "death_render_seconds": 29.0994,
+      "audio_checks": 8,
+      "secondary_test_seconds": 34.454
+    },
+    "player": {
+      "canonical_assets": 730,
+      "startup_frames": 180,
+      "hidden": true,
+      "audio": false,
+      "startup_test_seconds": 10.031,
+      "archive_sha256": "3bd909d9d33affc796d8afe33405b07e8d0964a406ae2d20c34f9804ad54c923",
+      "exe_sha256": "c76568c1fd617eda5566063b91e643480d7d76e6d8c4c7d4f65211b0eb54fb1e"
+    }
+  },
+  "files": {
+    "assets/volcano/ember-drake.png": {
+      "sha256": "00eeb5977cc77b6eb71346487837e6c13e8a9b4976942486ac4e0100fa2b416d",
+      "pixels": [
+        1536,
+        1152
+      ]
+    },
+    "assets/volcano/corpses/ember-drake.png": {
+      "sha256": "cc942549f09ceff6f6652beb28a9742a7ea1ba7942a0dd59389c896d7df4fcea",
+      "pixels": [
+        1024,
+        768
+      ]
+    },
+    "assets/volcano/ember-drake-mouth.png": {
+      "sha256": "8f3caaa1a83bd83f989294053508b98c31b27bc42efe0f3bc5459ff16a22c18a",
+      "pixels": [
+        480,
+        768
+      ]
+    },
+    "assets/volcano/caldera-attack-fx.png": {
+      "sha256": "8d0249edb1ec244671c56b7412b03a989b96770d4ff5cd5a3e0a60c056cef122",
+      "pixels": [
+        2048,
+        512
+      ]
+    }
+  },
+  "preview": {
+    "frames": 50,
+    "pixels": [
+      317,
+      217
+    ],
+    "file": "preview.gif"
+  }
+}

@@ -1,15 +1,22 @@
 #pragma once
+#include <optional>
+#include "generated/ember_drake_turn_atlas.hpp"
+#include "generated/slag_crawler_turn_atlas.hpp"
 #include "generated/volcano_motion.hpp"
 #include "generated/basalt_swing.hpp"
 #include "generated/caldera_attack_motion.hpp"
+#include "generated/ember_drake_motion.hpp"
+#include "generated/slag_crawler_motion.hpp"
 #include "generated/fire_imp_fall_data.hpp"
 #include "generated/fire_imp_motion_data.hpp"
 #include "enemy_death_settle.hpp"
 #include "volcano_corpse_material.hpp"
+#include "ember_drake_mouth.hpp"
 namespace varkhor_death_art {
 inline void init();
 inline void unload();
 }
+namespace volcano_actors::turn_art {inline void load();inline void unload();}
 // The original cutouts retain their walk cycles. Special gestures add Blender pose curves.
 namespace volcano_actors {
 inline constexpr const char* names[]={"slag-crawler","lava-salamander","fire-imp","ash-wraith","obsidian-sentinel","ember-drake","varkhor"};
@@ -39,6 +46,8 @@ inline void load(){
  a.silhouette=LoadTextureFromImage(im);UnloadImage(im);SetTextureFilter(a.art,TEXTURE_FILTER_BILINEAR);SetTextureFilter(a.silhouette,TEXTURE_FILTER_BILINEAR);
 }
  varkhor_death_art::init();
+ drake_mouth::load();
+ turn_art::load();
 }
 inline void unload(){
  for(auto& a:atlases){
@@ -48,6 +57,8 @@ inline void unload(){
   a={};
  }
  volcano_corpse_material::unload();
+ drake_mouth::unload();
+ turn_art::unload();
  varkhor_death_art::unload();
 }
 struct FallStyle {
@@ -94,9 +105,8 @@ inline constexpr RestPose restingPoses[]={
  // The raised breastplate bears against the far shoulder and bent greaves.
  {78,1.00f,36,9,{234,243,253,255}, {{{-7,2,12,1.11f,1.02f},{-9,-4,-39,1.03f,.93f},{8,-2,39,1.08f,.99f},
     {-4,2,-17,1.22f,1.06f},{9,-3,33,1.06f,.96f},{-11,9,-20,1.09f,1.03f}}}},
- // Only the wing membranes narrow as they fold around the rib cage and talons.
- {16,1.f,20,7,{247,233,218,255}, {{{3,-5,-10,1.01f,.68f},{3,-14,-38,1.01f,.98f},{-5,-16,36,1.01f,.98f},
-    {0,0,-13,1.045f,1.38f},{4,-17,44,1.02f,.98f},{-6,-15,-41,1.02f,.98f}}}},
+ // The six drake rest transforms are the final authored Synfig fall key.
+ {16,1.f,20,7,{247,233,218,255}, {}},
  // One fallen forearm and the far knee brace the bullhorn-shaped chest.
  {81,1.00f,42,9,{243,234,220,255}, {{{-7,6,15,1.12f,1.03f},{-10,-4,-24,1.05f,.97f},{8,-3,40,1.09f,.98f},
     {-4,2,-12,1.23f,1.07f},{4,-4,7,1.13f,1.05f},{-8,7,-31,1.13f,1.03f}}}},
@@ -105,6 +115,14 @@ static_assert(std::size(restingPoses)==std::size(names));
 
 inline bool quadruped(int species){return species==0||species==1||species==5;}
 inline Vector2 restPivot(int species,int part,int direction=0){
+ if(species==SlagCrawlerType-VolcanoFirstType){
+  const auto& xy=slag_crawler_motion::pivots[direction][part];
+  return {xy[0],xy[1]};
+ }
+ if(species==EmberDrakeType-VolcanoFirstType){
+  const auto& xy=ember_drake_motion::pivots[direction][part];
+  return {xy[0],xy[1]};
+ }
  if(species==FireImpType-VolcanoFirstType){
   const float sign=part==1||part==4?-1.f:1.f;
   const float forward=std::cos(facingAngles[direction]),across=std::abs(std::sin(facingAngles[direction]));
@@ -116,7 +134,7 @@ inline Vector2 restPivot(int species,int part,int direction=0){
  return {64,90};
 }
 
-inline float bodyScale(int species){return species==6?1.85f:species==3?1.12f:species==4?1.1f:1.f;}
+inline float bodyScale(int species){return species==6?1.85f:species==5?1.15f:species==3?1.12f:species==4?1.1f:1.f;}
 inline int flank(int direction,int impact){return impact?impact<0:direction>3;}
 
 // Project the chest edge and the deepest extremity once, using the same
@@ -135,7 +153,12 @@ inline void calibrateContact(Atlas& atlas,int species){
   std::vector<float> contour;
   float extremity=-1e6f;
   for(int p=0;p<6;p++){
-   const auto& part=rest.parts[p];
+   auto part=rest.parts[p];
+   if(species==EmberDrakeType-VolcanoFirstType){
+    const auto& clip=ember_drake_motion::fall;
+    const auto& key=clip.frames[clip.count-1][direction][p];
+    part={key.x/128.f,key.y/128.f,key.turn/128.f,1+key.scaleX/4096.f,1+key.scaleY/4096.f};
+   }
    const auto pivot=restPivot(species,p,direction);
    const float b=(rest.turn+part.angle)*side*DEG2RAD;
    const float sb=std::sin(b),cb=std::cos(b);
@@ -203,6 +226,11 @@ inline fire_imp_motion::Key impMotion(const fire_imp_motion::Key* keys,float pha
 }
 
 struct Part {Vector2 pivot,shift;float angle=0,scaleX=1,scaleY=1;};
+#include "volcano_turn.hpp"
+#include "ember_drake_turn.hpp"
+#include "ember_drake_turn_gesture.hpp"
+#include "ember_drake_pose.hpp"
+#include "slag_crawler_pose.hpp"
 struct ImpAnimation {fire_imp_motion::Key idle,walk,opposite,cast;};
 
 inline Part impPart(int part,int direction,float forward,float across,float blend,const ImpAnimation& motion){
@@ -241,7 +269,13 @@ inline Part impPart(int part,int direction,float forward,float across,float blen
 inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false,float special=-1,const enemy_death::Key* deathPose=nullptr,int deathScreenSide=0,float opacity=1,float deathPhase=0,const BrokenParts* broken=nullptr){
  int id=std::clamp(type-VolcanoFirstType,0,6),direction=std::clamp(int(state.direction),0,7);const auto& atlas=atlases[id];if(!atlas.art.id)return false;
  const float scale=bodyScale(id),s=size*scale;
- const float heading=facingAngles[direction];
+ const bool drake=type==EmberDrakeType;
+ const auto* artwork=turn_art::forType(type);
+ const bool directionalDrake=drake&&artwork;
+ const bool directionalCrawler=type==SlagCrawlerType&&artwork;
+ const auto view=artwork?turn_art::view(state,*artwork):turn_art::View{direction,direction*4,0,0};
+ if(artwork)direction=view.nearestBase();
+ const float heading=artwork?turn_art::mix(facingAngles[view.base],view.base==7?2*PI:facingAngles[view.nextBase()],view.t):facingAngles[direction];
  const auto& fall=falls[id];
  const auto& rest=restingPoses[id];
  const float collapse=dead?1.f:deathPose?deathPose->collapse:0.f,recoil=deathPose?deathPose->recoil:0.f,settle=deathPose?deathPose->settle:0.f;
@@ -254,21 +288,43 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const float knees=impFalling?imp.sag:enemy_death::window(t,fall.buckle,fall.tip+.12f)*(1-tip);
  const auto towardRest=[collapse](float current,float rest){return current*(1-collapse)+rest*collapse;};
  const bool fireImp=type==FireImpType;
+ const auto drakePose=drake?drake_art::sample(state,action,special,view.base):drake_art::Motion{};
+ const auto nextPose=directionalDrake?drake_art::sample(state,action,special,view.nextBase()):drake_art::Motion{};
+ const auto crawlerPose=directionalCrawler?crawler_art::sample(state,action,view.base):crawler_art::Motion{};
+ const auto nextCrawler=directionalCrawler?crawler_art::sample(state,action,view.nextBase()):crawler_art::Motion{};
+ const int jaw=drake&&(directionalDrake||(drake_mouth::art.id&&direction<drake_mouth::Views))&&!dead?
+     int(std::lround(drakePose.gape*drake_mouth::Levels*(deathPose?1-enemy_death::ease(t):1))):0;
+ const auto drakeFall=drake&&(dead||deathPose)?drake_art::locate(ember_drake_motion::fall,dead?1.f:t,view.base):drake_art::Bracket{};
+ const auto nextFall=directionalDrake&&(dead||deathPose)?drake_art::locate(ember_drake_motion::fall,dead?1.f:t,view.nextBase()):drake_art::Bracket{};
  const float halfPhase=std::fmod(state.phase+.5f,1.f);
- const auto control=fireImp?volcano_motion::Key{}:volcano_motion::sample(id,state.phase);
- const auto opposite=fireImp?volcano_motion::Key{}:volcano_motion::sample(id,halfPhase);
- const auto strike=fireImp?volcano_motion::Key{}:volcano_motion::sample(id,std::max(0.f,action),true);
+ const bool legacyMotion=!fireImp&&!drake&&!directionalCrawler;
+ const auto control=legacyMotion?volcano_motion::sample(id,state.phase):volcano_motion::Key{};
+ const auto opposite=legacyMotion?volcano_motion::sample(id,halfPhase):volcano_motion::Key{};
+ const auto strike=legacyMotion?volcano_motion::sample(id,std::max(0.f,action),true):volcano_motion::Key{};
  const auto impAnimation=fireImp?ImpAnimation{impMotion(fire_imp_motion::idle,std::fmod(state.idleTime/1.42f,1.f)),
      impMotion(fire_imp_motion::walk,state.phase),impMotion(fire_imp_motion::walk,halfPhase),
      action>=0?impMotion(fire_imp_motion::cast,action):fire_imp_motion::Key{}}:ImpAnimation{};
  float blend=dead?0:state.moveBlend;
  const bool fourLegs=quadruped(id);
- bool specialPose=id>=4&&special>=0&&!dead;
+ bool specialPose=id>=4&&!drake&&special>=0&&!dead;
  auto gesture=specialPose?caldera_attack_motion::pose(id-4,special):caldera_attack_motion::Pose{};
  std::array<Part,6> parts{};
  for(int p=0;p<6;p++){
   auto& part=parts[p];part.pivot={64,90};
   if(fireImp)part=impPart(p,direction,forward,side,blend,impAnimation);
+  else if(directionalCrawler){
+   part=turn_art::interpolate(crawler_art::livingPart(crawlerPose,p),crawler_art::livingPart(nextCrawler,p),view.t);
+  }
+  else if(directionalDrake){
+   const int a=drake_turn::sheet::authoredPart(view.base,p),b=drake_turn::sheet::authoredPart(view.nextBase(),p);
+   Part left=drake_art::livingPart(drakePose,a),right=drake_art::livingPart(nextPose,b);
+   if(dead||deathPose){
+    const float release=dead?0.f:1-enemy_death::ease(t);
+    left=drake_art::fallPart(left,drakeFall,a,turn,release);
+    right=drake_art::fallPart(right,nextFall,b,turn,release);
+   }
+   part=turn_art::interpolate(left,right,view.t);
+  }else if(drake)part=drake_art::livingPart(drakePose,p);
   else{
   if(p==1||p==2||(fourLegs&&p>=4)){auto k=p==1||p==5?control:opposite;float travel=k.travel*(VolcanoStrides[id]*.31f/scale)*blend;part.shift={std::cos(heading)*travel,std::sin(heading)*travel-k.lift*5*blend};}
   else{part.shift={control.sway*.45f*blend,-control.bob*1.2f*(.25f+.75f*blend)};}
@@ -295,8 +351,15 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
    if(p>=4)part.angle+=mirror*gesture.drive*(p==4?-.36f:.72f);
   }
   }
-  if(dead||deathPose){
-   const auto pivot=restPivot(id,p,direction);
+  if(!directionalDrake&&drake&&(dead||deathPose)){
+   const float release=dead?0.f:1-enemy_death::ease(t);
+   part=drake_art::fallPart(part,drakeFall,p,turn,release);
+  }else if(!drake&&(dead||deathPose)){
+   auto pivot=restPivot(id,p,direction);
+   if(directionalCrawler){
+    const auto a=restPivot(id,p,view.base),b=restPivot(id,p,view.nextBase());
+    pivot={turn_art::mix(a.x,b.x,view.t),turn_art::mix(a.y,b.y,view.t)};
+   }
    const auto& limb=rest.parts[p];
    const bool far=turn>0?(p==1||p==4):(p==2||p==5);
    const float delay=p==3?fall.tip:p==0?fall.headLag:far?fall.farLag:fall.nearLag;
@@ -311,7 +374,7 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
    part.shift={join(part.shift.x,turn*limb.x)+(follow*.13f+7*buckle)*forward,
                join(part.shift.y,limb.y)+std::abs(headNod)*.19f-std::abs(follow)*.10f-8*buckle};
    part.angle=join(part.angle,turn*limb.angle)+turn*(follow+(far?19.f:-24.f)*buckle);
-   part.scaleX=join(1,limb.scaleX);part.scaleY=join(1,limb.scaleY);
+   part.scaleX=join(part.scaleX,limb.scaleX);part.scaleY=join(part.scaleY,limb.scaleY);
    if(impFalling&&p>=4){
     // Pivot the shoulder with the chest, then add the arm's own delayed swing.
     const float angle=turn*imp.chest*DEG2RAD;
@@ -320,6 +383,8 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
     part.shift.y+=shoulder.x*std::sin(angle)+shoulder.y*(std::cos(angle)-1);
    }
   }
+  if(directionalCrawler&&deathPose&&!dead&&t>0&&t<1)
+   crawler_art::settlePart(part,p,view.base,view.nextBase(),view.t,t,turn);
   if(broken){
    part.shift.x+=(*broken)[p].offset.x;
    part.shift.y+=(*broken)[p].offset.y;
@@ -330,18 +395,26 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const float fallOffset=rest.pivotHeight*s*tip;
  const float squash=towardRest(1,rest.squash)-fall.compression*knees;
  const float slide=fall.slide*(recoil+settle*.25f)*s;
- const float groundedY=atlas.ground[direction][turn<0].lift;
+ const float groundedY=artwork?turn_art::mix(atlas.ground[view.base][turn<0].lift,
+                        atlas.ground[view.nextBase()][turn<0].lift,view.t):atlas.ground[direction][turn<0].lift;
  const float shiftX=turn*slide,shiftY=side*slide*.45f+(fall.dip*knees+groundedY*tip)*s;
+ std::optional<turn_art::Rig> turnRig;
+ if(artwork)turnRig.emplace(*artwork,view,jaw,parts,rest.light,turn);
  Vector2 localProbe{};
  if(probe){
   localProbe={probe->x-x-shiftX,(probe->y-y-shiftY)/squash};
   const float r=-fallAngle*DEG2RAD;
   localProbe={localProbe.x*std::cos(r)-localProbe.y*std::sin(r),localProbe.x*std::sin(r)+localProbe.y*std::cos(r)-fallOffset};
+  if(turnRig)return turnRig->hit({localProbe.x/s,localProbe.y/s});
   for(int p=5;p>=0;p--){
    if(broken&&(*broken)[p].visibility<=0)continue;
    const auto& k=parts[p];Vector2 q{localProbe.x/s-(k.pivot.x-64+k.shift.x),localProbe.y/s-(k.pivot.y-115+k.shift.y)};float r=-k.angle*DEG2RAD;
    float u=(q.x*std::cos(r)-q.y*std::sin(r))/k.scaleX+k.pivot.x;
    float v=(q.x*std::sin(r)+q.y*std::cos(r))/k.scaleY+k.pivot.y;
+   if(p==5&&jaw){
+    if(drake_mouth::pick(direction,jaw,u,v))return true;
+    continue;
+   }
    int px=int(std::floor(u*atlas.cell/128)),py=int(std::floor(v*atlas.cell/128));
    if(px>=0&&px<atlas.cell&&py>=0&&py<atlas.cell&&atlas.alpha[(p*atlas.cell+py)*atlas.art.width+direction*atlas.cell+px]>=100)return true;
   }return false;
@@ -350,9 +423,31 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  if(shadow){float matrix[]={1,0,0,0,-shadow_math::LightX,-shadow_math::LightY,0,0,0,0,1,0,shadow_math::LightX*y,(1+shadow_math::LightY)*y,0,1};rlMultMatrixf(matrix);}
  rlTranslatef(x+shiftX,y+shiftY,0);
  if(dead||deathPose){rlScalef(1,squash,1);rlRotatef(fallAngle,0,0,1);rlTranslatef(0,fallOffset,0);}
+ if(turnRig){
+  rlScalef(s,s,1);
+  turnRig->begin(atlas.relief,shadow?0.f:enemy_death::ease(collapse));
+  if(!shadow&&outline.a)for(Vector2 delta:{Vector2{-1.5f,0},Vector2{1.5f,0},Vector2{0,-1.5f},Vector2{0,1.5f}})
+      turnRig->paint(true,outline,delta.x/s,delta.y/s);
+  Color tint=WHITE;tint.a=static_cast<unsigned char>(std::clamp(opacity,0.f,1.f)*255+.5f);
+  turnRig->paint(shadow,tint,0,0,shadow);
+  if(flash&&!shadow)turnRig->paint(true,Fade(WHITE,.48f));
+  if(turn_art::filtered())EndShaderMode();
+  rlPopMatrix();return false;
+ }
  auto paint=[&](int p,Texture2D texture,Color tint,float dx=0,float dy=0){auto k=parts[p];Rectangle source{float(direction*atlas.cell),float(p*atlas.cell),float(atlas.cell),float(atlas.cell)};
   if(broken)tint.a=static_cast<unsigned char>(std::lround(tint.a*(*broken)[p].visibility));
   if(!tint.a)return;
+  if(p==5&&jaw){
+   // The open skull replaces the closed cutout within the same draw call.
+   const auto& crop=drake_mouth::origin[direction];
+   const float width=drake_mouth::Tile/1.5f;
+   source={float(direction*drake_mouth::Tile),float((jaw-1)*drake_mouth::Tile),
+           float(drake_mouth::Tile),float(drake_mouth::Tile)};
+   DrawTexturePro(texture.id==atlas.silhouette.id?drake_mouth::mask:drake_mouth::art,source,
+       {(k.pivot.x-64+k.shift.x)*s+dx,(k.pivot.y-115+k.shift.y)*s+dy,width*s*k.scaleX,width*s*k.scaleY},
+       {(k.pivot.x-crop[0]/1.5f)*s*k.scaleX,(k.pivot.y-crop[1]/1.5f)*s*k.scaleY},k.angle,tint);
+   return;
+  }
   DrawTexturePro(texture,source,{(k.pivot.x-64+k.shift.x)*s+dx,(k.pivot.y-115+k.shift.y)*s+dy,128*s*k.scaleX,128*s*k.scaleY},
                  {k.pivot.x*s*k.scaleX,k.pivot.y*s*k.scaleY},k.angle,tint);
  };
@@ -366,6 +461,8 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const int castingOrder[]={0,1,2,4,3,5};
  const int impBackOrder[]={1,2,4,3,0,5};
  if(fireImp)order=direction>=5?impBackOrder:action>=.32f&&action<.68f?castingOrder:impOrder;
+ const int drakeBackOrder[]={0,1,2,5,3,4};
+ if(drake)order=direction>=5?drakeBackOrder:frontOrder;
  if(!shadow&&outline.a)for(Vector2 delta:{Vector2{-1.5f,0},Vector2{1.5f,0},Vector2{0,-1.5f},Vector2{0,1.5f}})for(int n=0;n<6;n++)paint(order[n],atlas.silhouette,outline,delta.x,delta.y);
  const bool relit=!shadow&&volcano_corpse_material::begin(atlas.relief,enemy_death::ease(collapse),atlas.authoredRest);
  for(int n=0;n<6;n++){
@@ -375,6 +472,12 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
   Color tint=shadow?WHITE:!collapse?WHITE:rgb(int(std::lround(towardRest(255,rest.light.r*light))),
       int(std::lround(towardRest(255,rest.light.g*light))),int(std::lround(towardRest(255,rest.light.b*light))));
   tint.a=static_cast<unsigned char>(std::clamp(opacity,0.f,1.f)*255+.5f);
+  if(relit&&p==5&&jaw){
+   // This head is the final layer in the five frontal views. Its painted
+   // pixels supply matching UVs while the captured jaw relaxes during death.
+   EndShaderMode();
+   volcano_corpse_material::begin(drake_mouth::art,enemy_death::ease(collapse),false);
+  }
   paint(p,shadow?atlas.silhouette:atlas.art,tint);
  }
  if(relit)EndShaderMode();
@@ -419,6 +522,14 @@ inline Rectangle groundFootprint(const Enemy& e){
  default:break;
  }
  const int species=e.type-VolcanoFirstType,direction=int(e.animation.direction);
+ if(const auto* art=turn_art::forType(e.type)){
+  const auto v=turn_art::view(e.animation,*art);
+  const int side=flank(v.nearestBase(),e.deathScreenSide());
+  const auto& a=atlases[species].ground[v.base][side].footprint;
+  const auto& b=atlases[species].ground[v.nextBase()][side].footprint;
+  return {turn_art::mix(a.x,b.x,v.t),turn_art::mix(a.y,b.y,v.t),
+          turn_art::mix(a.width,b.width,v.t),turn_art::mix(a.height,b.height,v.t)};
+ }
  return atlases[species].ground[direction][flank(direction,e.deathScreenSide())].footprint;
 }
 inline bool rest(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,float opacity=1){

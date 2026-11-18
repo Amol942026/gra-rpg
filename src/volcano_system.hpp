@@ -164,7 +164,15 @@ bool useVolcanoPortal(){
 }
 static bool volcanoRanged(int type){return type==14||type==15;}
 static void advanceVolcanoAnimation(Enemy& e,V movement,float dt,bool faceMovement){
- float phase=e.animation.phase;e.animation.advance(movement.x,movement.y,dt,false,faceMovement);
+ const float phase=e.animation.phase;
+ const float previousAngle=e.animation.facingAngle;
+ const bool plantedTurn=e.type==SlagCrawlerType&&e.animation.facingInitialized;
+ const float maxTurnRate=smoothVolcanoTurn(e.type)?7.f:0.f;
+ e.animation.advance(movement.x,movement.y,dt,false,faceMovement,true,maxTurnRate);
+ if(plantedTurn){
+  const float arc=std::abs(std::remainder(e.animation.facingAngle-previousAngle,2*AnimationPi));
+  e.animation.pivotPhase=std::fmod(e.animation.pivotPhase+arc*(1.9f/AnimationPi),1.f);
+ }
  e.animation.phase=std::fmod(phase+std::hypot((movement.x-movement.y)*40,(movement.x+movement.y)*20)/VolcanoStrides[e.type-VolcanoFirstType],1.f);
 }
 void cancelVolcanoAttacks(){

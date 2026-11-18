@@ -1,0 +1,33 @@
+{
+  "master": "C:\\AI2D\\sprites\\emberfall-ember-drake-20261118\\krita-restored\\zarowy-drak.kra",
+  "layers": [
+    "06 Głowa, rogi i szyja",
+    "05 Skrzydło bliższe",
+    "04 Korpus, zbroja i ogon",
+    "03 Łapy po przekątnej B",
+    "02 Łapy po przekątnej A",
+    "01 Skrzydło dalsze"
+  ],
+  "source_art_sha256": {
+    "sunburst-concept.png": "e3bc0fbc7fcbb434df76f2c8c779c0b18cfa653a8de2a7efa3c85b5c3e67603d",
+    "sunburst-profile.png": "91391ff7204fd758c7ee7a997379c2bbb2d97de80c938ef05b9ffd62329b09de",
+    "sunburst-rear-right.png": "52684e83b1ef8e2c13d53042604a2ddb6eb29c9d10a161e5e21567a8c52ba333",
+    "sunburst-turnaround.png": "2d4b0b8680a443cd123ac5fbf73cc34eec39c1ef8f82fd38d25744197cbc4ad6",
+    "drake-paint.png": "b0630c7af068ec26189ba99fbc8dd06180821b91806aa2eafbbb56d8395a68d8"
+  },
+  "native_krita_sha256": "4a90ab63c3867fac2207b755c988f97f29f704185742d71d8035bf562c253770",
+  "runtime_sha256": "00eeb5977cc77b6eb71346487837e6c13e8a9b4976942486ac4e0100fa2b416d",
+  "corpse_sha256": "cc942549f09ceff6f6652beb28a9742a7ea1ba7942a0dd59389c896d7df4fcea",
+  "atlas_dimensions": [
+    1536,
+    1152
+  ],
+  "corpse_dimensions": [
+    1024,
+    768
+  ],
+  "checked_parts": 48,
+  "min_edge_padding_pixels": 9,
+  "min_mean_rgb_change_from_material_brushes": 5.63,
+  "max_mean_rgb_change_from_material_brushes": 11.0
+}

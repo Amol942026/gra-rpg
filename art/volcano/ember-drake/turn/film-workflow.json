@@ -1,0 +1,38 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "ember-drake-angular-materials.png"
+    }
+  },
+  "2": {
+    "class_type": "FrameInterpolationModelLoader",
+    "inputs": {
+      "model_name": "film_net_fp16.safetensors"
+    }
+  },
+  "3": {
+    "class_type": "FrameInterpolate",
+    "inputs": {
+      "images": [
+        "1",
+        0
+      ],
+      "interp_model": [
+        "2",
+        0
+      ],
+      "multiplier": 4
+    }
+  },
+  "4": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "3",
+        0
+      ],
+      "filename_prefix": "ember-drake-angular-materials/turn"
+    }
+  }
+}

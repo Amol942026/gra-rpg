@@ -1,0 +1,28 @@
+{
+  "prompt_id": "206b41cd-3156-4289-9a6a-c771840fb6fb",
+  "engine": "ComfyUI 0.44.2",
+  "host": "127.0.0.1:8188",
+  "cpu": true,
+  "offline": true,
+  "paid_nodes": [],
+  "source_checkpoint": {
+    "folder": "checkpoints",
+    "filename": "DreamShaper_8_pruned.safetensors",
+    "repo": "Lykon/DreamShaper",
+    "revision": "228d79cb20811466f5c5710aa91f05dabd0b8a14",
+    "original_filename": "DreamShaper_8_pruned.safetensors",
+    "bytes": 2132625894,
+    "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+    "download": "https://huggingface.co/Lykon/DreamShaper/resolve/228d79cb20811466f5c5710aa91f05dabd0b8a14/DreamShaper_8_pruned.safetensors",
+    "license": "Creator conditions permitting commercial use of generated images",
+    "license_source": "https://civitai.com/api/v1/models/4384"
+  },
+  "workflow": "workflow.json",
+  "source_png": "drake-paint.png",
+  "size_px": [
+    640,
+    512
+  ],
+  "source_sha256": "b0630c7af068ec26189ba99fbc8dd06180821b91806aa2eafbbb56d8395a68d8",
+  "execution_seconds": 470.094
+}

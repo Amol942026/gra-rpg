@@ -1,5 +1,40 @@
 # Raport konfiguracji — 19.10.2026
 
+**18.11.2026 — nowy wygląd i ruch [Żużlowego Pełzacza](../volcano/slag-crawler/README.md).**
+Pięć oryginalnych ilustracji posłużyło do opracowania 32 widoków. Lokalny FILM w ComfyUI ukończył 33 klatki w 36,783 s. Z końcowego projektu Krity wyeksportowano 192 wycinki. Synfig wyrenderował 227 klatek siedmiu klipów w 126,925 s. Kontrola podparcia objęła 4016 próbek. Największe odchylenie podpartego pazura od zakładanego toru wyniosło 0,045 px.
+
+W grze spoczywający Pełzacz zachował 94 × 53 px z boku i 52 × 61 px od przodu. Obrót w chodzie daje 360 zmian obrazu przy 360 kolejnych krokach o jeden stopień. Render 120 klatek z czterema Pełzaczami na ukrytym celu trwał 0,038 s. Osobny przebieg 2071 klatek z odczytem, eksportem i kontrolami trwał 3,550 s. Po rozpakowaniu wydań gracza i DEV sprawdzono po 732 zasoby i 180 klatek startu. Ukryte próby uruchomiono z wyłączonym dźwiękiem. [Animacja](../volcano/slag-crawler/obrot.gif) · [Pomiary i sumy kontrolne](../volcano/slag-crawler/qa.json)
+
+**18.11.2026 — płynny obrót [Żarowego Draka](../volcano/ember-drake/README.md).**
+Drak jest większy o 15%. Obrót wykorzystuje 32 widoki sześciu części ciała
+i przechył skrzydeł oraz tułowia z nowego klipu Synfiga. Kierunek zmienia
+się płynnie także podczas ugryzienia, a struga ognia zaczyna się przy pysku.
+Lokalny FILM wykonał 33 klatki w 48,07 s. Synfig wyrenderował 17 klatek
+przechyłu w 8,738 s. Eksport 192 wycinków z [projektu Krity](../volcano/ember-drake/turn/drake-turn.kra)
+odtworzył dokładną sumę kontrolną atlasu używanego w grze.
+
+Przy obrocie co 1° renderer odróżnił 360 kolejnych ujęć w spoczynku i chodzie.
+Przy nagłym nawrocie największy krok zmalał z 55,25° do 6,68° w symulacji 60 Hz.
+W ukrytym teście czterech Draków ukończenie renderu 120 klatek trwało 0,058 s.
+Osobna próba ze zmianami kierunku, odczytem i eksportem obrazu zajęła 2,911 s
+dla 2015 klatek. Łącznie obie próby funkcjonalne wykonały 444 pomyślne kontrole.
+Po rozpakowaniu paczki gracza i paczki deweloperskiej sprawdzono po 731 zasobów
+i po 180 klatek startu w ukrytym oknie bez dźwięku.
+[Podgląd obrotu](../volcano/ember-drake/turn/obrot.gif) · [Wyniki](../volcano/ember-drake/turn/qa.json)
+
+**18.11.2026 — [Żarowy Drak z Kaldery](../volcano/ember-drake/README.md).**
+Pięć malowanych ujęć z wbudowanego generatora i faktury lokalnego DreamShapera 8
+posłużyły do przygotowania w Kricie postaci w ośmiu kierunkach. Dwa projekty KRA
+zawierają wycinanki ciała oraz czterdzieści ujęć ruchomej paszczy. Synfig
+wyrenderował 217 klatek pięciu klipów w 79,493 s łącznie z kontrolą sekwencji.
+W grze sprawdzono ugryzienie, chód, fazy żarowego oddechu, widoczność ognia
+na stoku oraz osiadanie skrzydeł i ciała. Render, odczyt i eksport 146 kadrów
+trwały 4,773 s. Wszystkie 227 kontroli draka zakończyło się pomyślnie.
+Obie rozpakowane paczki miały po 730 zgodnych zasobów i wykonały po 180 klatek
+bez dźwięku w ukrytym oknie. Deweloperska przeszła także 5891 kontroli śmierci
+i osiem kontroli wyłączonego dźwięku. [Podgląd](../volcano/ember-drake/preview.gif)
+i [wyniki](../volcano/ember-drake/qa.json).
+
 **18.11.2026 — wyjmowanie strzały z kołczanu.** Prawa ręka Wędrowca
 sięga za bark, wysuwa strzałę wzdłuż kołczanu i po wyjściu grotu
 obraca ją w stronę łuku. Dłoń zakłada nasadkę w miejscu spoczynku

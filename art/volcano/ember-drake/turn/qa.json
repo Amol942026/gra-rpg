@@ -1,0 +1,209 @@
+{
+  "before": {
+    "idle": {
+      "changed_degree_steps": 8,
+      "max_delta_per_visible_pixel": 58.8117,
+      "metric": "mean absolute RGB difference",
+      "worst_from_degree": 22,
+      "mean_visible_pixels": 4546,
+      "width_east": 113,
+      "height_east": 75
+    },
+    "walk": {
+      "changed_degree_steps": 8,
+      "max_delta_per_visible_pixel": 59.4956,
+      "metric": "mean absolute RGB difference",
+      "worst_from_degree": 22,
+      "mean_visible_pixels": 4319.12,
+      "width_east": 112,
+      "height_east": 72
+    },
+    "reverse": {
+      "changed_degree_steps": 8,
+      "max_delta_per_visible_pixel": 58.8117,
+      "metric": "mean absolute RGB difference",
+      "worst_from_degree": -337,
+      "mean_visible_pixels": 4546,
+      "width_east": 113,
+      "height_east": 75
+    },
+    "shadow": {
+      "changed_degree_steps": 8,
+      "max_delta_per_visible_pixel": 151.922,
+      "metric": "absolute mask alpha difference",
+      "worst_from_degree": 22,
+      "mean_visible_pixels": 1409.25,
+      "width_east": 128,
+      "height_east": 24
+    },
+    "bite": {
+      "changed_degree_steps": 8,
+      "max_delta_per_visible_pixel": 58.8107,
+      "metric": "mean absolute RGB difference",
+      "worst_from_degree": 157,
+      "mean_visible_pixels": 4388.25,
+      "width_east": 118,
+      "height_east": 72
+    }
+  },
+  "after": {
+    "idle": {
+      "changed_degree_steps": 360,
+      "max_delta_per_visible_pixel": 13.3342,
+      "metric": "mean absolute RGB difference",
+      "worst_from_degree": 25,
+      "mean_visible_pixels": 5809.22,
+      "width_east": 131,
+      "height_east": 86
+    },
+    "walk": {
+      "changed_degree_steps": 360,
+      "max_delta_per_visible_pixel": 13.8534,
+      "metric": "mean absolute RGB difference",
+      "worst_from_degree": 179,
+      "mean_visible_pixels": 5541.41,
+      "width_east": 130,
+      "height_east": 82
+    },
+    "reverse": {
+      "changed_degree_steps": 360,
+      "max_delta_per_visible_pixel": 13.3341,
+      "metric": "mean absolute RGB difference",
+      "worst_from_degree": -334,
+      "mean_visible_pixels": 5809.22,
+      "width_east": 131,
+      "height_east": 86
+    },
+    "shadow": {
+      "changed_degree_steps": 360,
+      "max_delta_per_visible_pixel": 30.5869,
+      "metric": "absolute mask alpha difference",
+      "worst_from_degree": 323,
+      "mean_visible_pixels": 1759.34,
+      "width_east": 148,
+      "height_east": 27
+    },
+    "bite": {
+      "changed_degree_steps": 360,
+      "max_delta_per_visible_pixel": 13.3747,
+      "metric": "mean absolute RGB difference",
+      "worst_from_degree": 180,
+      "mean_visible_pixels": 5591.2,
+      "width_east": 136,
+      "height_east": 83
+    }
+  },
+  "checks": {
+    "idle_has_more_angles": true,
+    "idle_smaller_worst_jump": true,
+    "walk_has_more_angles": true,
+    "walk_smaller_worst_jump": true,
+    "reverse_has_more_angles": true,
+    "reverse_smaller_worst_jump": true,
+    "shadow_has_more_angles": true,
+    "shadow_smaller_worst_jump": true,
+    "bite_has_more_angles": true,
+    "bite_smaller_worst_jump": true,
+    "larger_width_east": true,
+    "larger_height_east": true,
+    "runtime_probes_pass": true,
+    "old_art_behaviors_pass": true
+  },
+  "renderer": {
+    "before": {
+      "checks": 107,
+      "failures": 0,
+      "rendered_frames": 1871,
+      "simulation_max_step_degrees": 55.2527,
+      "four_drake_batch_frames": 120,
+      "four_drake_batch_seconds": 0.0439719,
+      "render_readback_export_and_check_seconds": 2.62909
+    },
+    "after": {
+      "checks": 217,
+      "failures": 0,
+      "rendered_frames": 2015,
+      "simulation_max_step_degrees": 6.68451,
+      "four_drake_batch_frames": 120,
+      "four_drake_batch_seconds": 0.0579345,
+      "render_readback_export_and_check_seconds": 2.91112
+    }
+  },
+  "runtime_atlas_sha256": {
+    "parts-0.png": "757154451b860ef3cc57b3f6fa07377e437502b880f8c48f3bba0d7ac663dbd2"
+  },
+  "preview": {
+    "frames": 66,
+    "duration_ms": 2200,
+    "size": [
+      150,
+      148
+    ],
+    "loop_seam_vs_mean_frame_change": 1.008,
+    "sha256": "bb0fd10ca1d7579cd29d305875214b25ddf35844a4c0ece6dc4e2bf63749d383"
+  },
+  "attacks_and_death": {
+    "checks": 227,
+    "failures": 0,
+    "frames": 146,
+    "directions": 8,
+    "render_readback_export_seconds": 5.73879
+  },
+  "krita": {
+    "cells": 192,
+    "max_alpha_delta": 0,
+    "max_visible_rgb_lsb": 0,
+    "page_shape": [
+      690,
+      2048
+    ],
+    "native_kra_sha256": "febe5f983e08689831ddb40a749622de0ac5b2dfbc31ee93cd88cc5891b36d3b",
+    "packed_atlas_sha256": "757154451b860ef3cc57b3f6fa07377e437502b880f8c48f3bba0d7ac663dbd2",
+    "game_atlas_sha256": "757154451b860ef3cc57b3f6fa07377e437502b880f8c48f3bba0d7ac663dbd2",
+    "pixel_identical_visible": true
+  },
+  "synfig": {
+    "Fps": 24.0,
+    "ActualFrames": 17,
+    "UniquePixelFrames": 17,
+    "ElapsedSeconds": 8.738,
+    "VisibleMarginPixels": 12,
+    "DistinctFramesByFacing": [
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17
+    ],
+    "sif_sha256": "9173ebb8e9c66e4db8c15488773136bba1268e4937cedb785d27b4702f77c71e"
+  },
+  "archives": {
+    "dev": {
+      "canonical_assets": 731,
+      "startup_frames": 180,
+      "hidden": true,
+      "audio": false,
+      "startup_test_seconds": 13.578,
+      "archive_sha256": "f033c7eee1f1acf02d63126b832ad43dab5c0974f8ccc327fb66412d808cad4a",
+      "exe_sha256": "589d8c73fcfe8e04df620df632ab3d2beb57a2398efba14afafc34f9654027b1",
+      "death_checks": 5891,
+      "death_render_seconds": 29.9852,
+      "audio_checks": 8,
+      "secondary_test_seconds": 36.156
+    },
+    "player": {
+      "canonical_assets": 731,
+      "startup_frames": 180,
+      "hidden": true,
+      "audio": false,
+      "startup_test_seconds": 11.844,
+      "archive_sha256": "bb0c4638257eb74dd3ab39017f259c5755254c146406f4a44b5b5dd90e30114e",
+      "exe_sha256": "86bb04f9224ce53cf81ce5804c722ff69713136ce4a3f095a28f4f03d3ac9d51"
+    }
+  },
+  "gameplay_checks": 558558,
+  "persistence_checks": 10776
+}

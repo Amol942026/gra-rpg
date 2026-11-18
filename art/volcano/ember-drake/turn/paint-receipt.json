@@ -1,0 +1,63 @@
+{
+  "sources": {
+    "assets/volcano/ember-drake.png": "00eeb5977cc77b6eb71346487837e6c13e8a9b4976942486ac4e0100fa2b416d",
+    "assets/volcano/ember-drake-mouth.png": "8f3caaa1a83bd83f989294053508b98c31b27bc42efe0f3bc5459ff16a22c18a",
+    "art/volcano/ember-drake/zarowy-drak.kra": "4a90ab63c3867fac2207b755c988f97f29f704185742d71d8035bf562c253770",
+    "art/volcano/ember-drake/ember-drake-mouth.kra": "aa0dc366da8fd4c0a758ab08f12711930a9a8800a0763b8afdb659e666833994"
+  },
+  "generated_with": {
+    "pillow": "13.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "coordinates": "160 px RGBA, 32 angles beginning at screen east, clockwise"
+  },
+  "comfy": {
+    "model": "FILM",
+    "weights": "film_net_fp16.safetensors",
+    "sha256": "f226e51375dc839d4b40e5c3d63da560dd1ea1c962364ec78f5adf2d05db05c0",
+    "bytes": 68882302,
+    "revision": "aa7009be4d1471ea0bac91d6fe4d7e4b637cbbfc",
+    "source": "https://huggingface.co/Comfy-Org/Frame-Interpolation/tree/aa7009be4d1471ea0bac91d6fe4d7e4b637cbbfc/frame_interpolation",
+    "upstream": "https://github.com/google-research/frame-interpolation",
+    "upstream_license": "Apache-2.0",
+    "license_url": "https://github.com/google-research/frame-interpolation/blob/main/LICENSE",
+    "workflow": "film-workflow.json",
+    "job": "cb33bde3-0b7a-4c13-8d6a-bb4f6316d4cd",
+    "mode": "local CPU",
+    "wall_seconds": 48.07,
+    "outputs": 33,
+    "resolution": [
+      448,
+      224
+    ],
+    "use": "Pigment flow inside moving wing membranes and paws; silhouette, tail attachment and skull features registered separately."
+  },
+  "artwork": {
+    "facings": 32,
+    "original_facings": 8,
+    "inbetween_facings": 24,
+    "body_cutouts": 192,
+    "mouth_cells": 256,
+    "unique_cutouts": 379,
+    "padding_px": 2,
+    "texture_size": [
+      2048,
+      690
+    ],
+    "rgba8_bytes": 5652480,
+    "largest_disconnected_tail_fragment_in_new_angles_px": 2,
+    "tail_test_alpha_threshold": 100
+  },
+  "delivered": {
+    "assets/volcano/drake-turn/parts-0.png": "757154451b860ef3cc57b3f6fa07377e437502b880f8c48f3bba0d7ac663dbd2",
+    "src/generated/ember_drake_turn_atlas.hpp": "351e45e8f22a45db7476c40f10de135e2de4d9fc7c0cbfe38b16710de42b4766"
+  },
+  "run": "C:\\AI2D\\pipeline\\runs\\emberfall-drake-turn-20261118\\turn-production",
+  "generator": "tools/media/ember_drake_turn.py",
+  "generator_sha256": "e7b854688b6729f797e739b0212595a435f2f6a8c37e9dc33e9677ec303529b5",
+  "checks": {
+    "identical_repack_from_192_exported_cells": true,
+    "distinct_jaw_levels_in_each_of_23_visible_angles": 8,
+    "identical_hidden_jaw_levels_in_rear_angles": 9
+  }
+}

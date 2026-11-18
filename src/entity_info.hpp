@@ -6,7 +6,8 @@ constexpr int ForestEnemyTypeCount=8,ForestPropTypeCount=7,LegacyEnemyTypeCount=
 constexpr int StoneGuardianType=3;
 constexpr int CopperScarabType=9,SandCobraType=10;
 constexpr int VolcanoFirstType=12,VolcanoBossType=18;
-constexpr int FireImpType=14;
+constexpr int SlagCrawlerType=VolcanoFirstType,FireImpType=14,EmberDrakeType=17;
+constexpr bool smoothVolcanoTurn(int type){return type==SlagCrawlerType||type==EmberDrakeType;}
 constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;
 constexpr int DecorationsPerRealm=5,VolcanoLandmarkCount=4;
 constexpr int VolcanoLandmarkStart=VolcanoDecorationStart+DecorationsPerRealm;
@@ -48,7 +49,7 @@ inline const EnemyInfo& enemyInfo(int type) {
         {"Ognisty chochlik","Demon żaru",104,2.35f,27,3,10,DamageType::Magic,.46f,82,2.1f,97},
         {"Popielny upiór","Duch pogorzeliska",135,1.75f,30,4,13,DamageType::Magic,.5f,90,2.5f,103},
         {"Obsydianowy wojownik","Strażnik kuźni",205,1.65f,33,14,6,DamageType::Physical,.62f,100,1.55f,109},
-        {"Żarowy drak","Skrzydlata bestia",155,2.65f,31,7,9,DamageType::Magic,.83f,96,1.2f,90},
+        {"Żarowy drak","Skrzydlata bestia",155,2.65f,31,7,9,DamageType::Magic,.83f,96,1.2f,126},
         {"Varkhor, Serce Kaldery","Władca wulkanu · boss",940,1.3f,42,17,12,DamageType::Magic,1.3f,390,1.85f,205},
         {"Zarodnik kniei","Zarodnikowiec",65,2.2f,13,1,4,DamageType::Magic,.55f,39,1.45f,92,1.45f},
         {"Oko Wydm","Konstrukt piaskowca",115,1.65f,20,5,6,DamageType::Magic,.64f,62,1.7f,112,2.05f},

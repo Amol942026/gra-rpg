@@ -1,0 +1,393 @@
+{
+  "creature": "slag-crawler",
+  "scale": 1.0,
+  "art_provenance": "paint/provenance.json",
+  "kra_sha256": "08c7bd2857a6311ea6a292a75705020203b47bb76be2d3aaf8acdac417ed66a0",
+  "preview_sha256": "6601bd29805f3c3e527a47d3ff4665d79ff00a36c0021c019832167d000eadd4",
+  "runtime_asset_sha256": {
+    "volcano/crawler-turn/parts-0.png": "64000a90fa77fe6208263415aeb9e885b89509fe91e299577af0e952ff7f857a",
+    "volcano/slag-crawler.png": "4fba593c35c6b2997d176e92bbf71319c387d4b0d3565105125b3ae2bb530b39",
+    "volcano/corpses/slag-crawler.png": "373fd7056101529bfb97fb5fb492637222a8e9297eae2136093cc2c894022cb5"
+  },
+  "synfig": {
+    "idle": {
+      "ProjectSha256": "5d8ff673b68fa1ca305b1dde21e0f73bd9cf37ac39d5244351c35dd6f26f99a4",
+      "Status": "PASS",
+      "ActualFrames": 41,
+      "UniquePixelFrames": 40,
+      "ElapsedSeconds": 18.146,
+      "Fps": 20.0
+    },
+    "walk": {
+      "ProjectSha256": "56a957bc9abd1d42ff7dc51942acc3785e2603234ded19bd2b3f375ce52dda30",
+      "Status": "PASS",
+      "ActualFrames": 41,
+      "UniquePixelFrames": 40,
+      "ElapsedSeconds": 20.481,
+      "Fps": 40.0
+    },
+    "bite": {
+      "ProjectSha256": "7cc57a1a22144337423e1ce81f8fba8c03b0a80bdf21509c74f81fe22586d2f6",
+      "Status": "PASS",
+      "ActualFrames": 41,
+      "UniquePixelFrames": 40,
+      "ElapsedSeconds": 19.828,
+      "Fps": 40.0
+    },
+    "bank": {
+      "ProjectSha256": "7733dd0cdef9e14ce769b46da6b237dfc115d9277334f10451aa429955c7265e",
+      "Status": "PASS",
+      "ActualFrames": 17,
+      "UniquePixelFrames": 17,
+      "ElapsedSeconds": 14.159,
+      "Fps": 20.0
+    },
+    "fall": {
+      "ProjectSha256": "3e561c80e3ba20c4b324688ece6612e9820b605a50981511e88964b53df17081",
+      "Status": "PASS",
+      "ActualFrames": 21,
+      "UniquePixelFrames": 20,
+      "ElapsedSeconds": 15.703,
+      "Fps": 40.0
+    },
+    "pivot_cw": {
+      "ProjectSha256": "fb9885f52fa498f874c16426503426c6753db3f0b55c2f8245a369dabf195d92",
+      "Status": "PASS",
+      "ActualFrames": 33,
+      "UniquePixelFrames": 32,
+      "ElapsedSeconds": 19.079,
+      "Fps": 32.0
+    },
+    "pivot_ccw": {
+      "ProjectSha256": "c4f207fcd57ac6406f1d89f14dd9f4b6418f5bae3c49b566fb7a682dbfb52696",
+      "Status": "PASS",
+      "ActualFrames": 33,
+      "UniquePixelFrames": 32,
+      "ElapsedSeconds": 19.529,
+      "Fps": 32.0
+    }
+  },
+  "synfig_render_total_seconds": 126.925,
+  "footwork": {
+    "support_samples": 4016,
+    "max_planted_toe_drift_px": 0.045,
+    "minimum_swing_lift_px": 3.424,
+    "minimum_pivot_lift_px": 2.758
+  },
+  "renderer_qa": {
+    "before": {
+      "idle": {
+        "changed_degree_steps": 8,
+        "max_delta_per_visible_pixel": 48.3114,
+        "metric": "mean absolute RGB difference",
+        "worst_from_degree": 67,
+        "mean_visible_pixels": 2865.5,
+        "width_east": 94,
+        "height_east": 53
+      },
+      "walk": {
+        "changed_degree_steps": 8,
+        "max_delta_per_visible_pixel": 47.6455,
+        "metric": "mean absolute RGB difference",
+        "worst_from_degree": 112,
+        "mean_visible_pixels": 2790.25,
+        "width_east": 95,
+        "height_east": 53
+      },
+      "reverse": {
+        "changed_degree_steps": 8,
+        "max_delta_per_visible_pixel": 48.3114,
+        "metric": "mean absolute RGB difference",
+        "worst_from_degree": -292,
+        "mean_visible_pixels": 2865.5,
+        "width_east": 94,
+        "height_east": 53
+      },
+      "shadow": {
+        "changed_degree_steps": 8,
+        "max_delta_per_visible_pixel": 101.611,
+        "metric": "absolute mask alpha difference",
+        "worst_from_degree": 292,
+        "mean_visible_pixels": 894.88,
+        "width_east": 101,
+        "height_east": 17
+      },
+      "bite": {
+        "changed_degree_steps": 8,
+        "max_delta_per_visible_pixel": 48.8393,
+        "metric": "mean absolute RGB difference",
+        "worst_from_degree": 67,
+        "mean_visible_pixels": 2872.88,
+        "width_east": 95,
+        "height_east": 53
+      }
+    },
+    "after": {
+      "idle": {
+        "changed_degree_steps": 360,
+        "max_delta_per_visible_pixel": 11.5346,
+        "metric": "mean absolute RGB difference",
+        "worst_from_degree": 20,
+        "mean_visible_pixels": 2646.64,
+        "width_east": 95,
+        "height_east": 54
+      },
+      "walk": {
+        "changed_degree_steps": 360,
+        "max_delta_per_visible_pixel": 11.7463,
+        "metric": "mean absolute RGB difference",
+        "worst_from_degree": 20,
+        "mean_visible_pixels": 2612.6,
+        "width_east": 95,
+        "height_east": 53
+      },
+      "reverse": {
+        "changed_degree_steps": 360,
+        "max_delta_per_visible_pixel": 11.5349,
+        "metric": "mean absolute RGB difference",
+        "worst_from_degree": -339,
+        "mean_visible_pixels": 2646.64,
+        "width_east": 95,
+        "height_east": 54
+      },
+      "shadow": {
+        "changed_degree_steps": 360,
+        "max_delta_per_visible_pixel": 18.0931,
+        "metric": "absolute mask alpha difference",
+        "worst_from_degree": 36,
+        "mean_visible_pixels": 815.66,
+        "width_east": 106,
+        "height_east": 17
+      },
+      "bite": {
+        "changed_degree_steps": 360,
+        "max_delta_per_visible_pixel": 11.8373,
+        "metric": "mean absolute RGB difference",
+        "worst_from_degree": 20,
+        "mean_visible_pixels": 2783.27,
+        "width_east": 99,
+        "height_east": 55
+      }
+    },
+    "checks": {
+      "idle_has_more_angles": true,
+      "idle_smaller_worst_jump": true,
+      "walk_has_more_angles": true,
+      "walk_smaller_worst_jump": true,
+      "reverse_has_more_angles": true,
+      "reverse_smaller_worst_jump": true,
+      "shadow_has_more_angles": true,
+      "shadow_smaller_worst_jump": true,
+      "bite_has_more_angles": true,
+      "bite_smaller_worst_jump": true,
+      "all_eight_original_views_replaced": true,
+      "connected_idle_silhouettes": true,
+      "preserved_average_width": true,
+      "preserved_eight_widths": true,
+      "preserved_average_height": true,
+      "preserved_eight_heights": true,
+      "runtime_probes_pass": true,
+      "old_art_behaviors_pass": true,
+      "drake_regression": true
+    },
+    "renderer": {
+      "before": {
+        "checks": 144,
+        "failures": 0,
+        "rendered_frames": 1911,
+        "simulation_max_step_degrees": 55.2527,
+        "four_crawler_batch_frames": 120,
+        "four_crawler_batch_seconds": 0.0193349,
+        "render_readback_export_and_check_seconds": 2.55222
+      },
+      "after": {
+        "checks": 270,
+        "failures": 0,
+        "rendered_frames": 2071,
+        "simulation_max_step_degrees": 6.68451,
+        "four_crawler_batch_frames": 120,
+        "four_crawler_batch_seconds": 0.0383558,
+        "render_readback_export_and_check_seconds": 3.54992
+      }
+    },
+    "runtime_atlas_sha256": {
+      "parts-0.png": "64000a90fa77fe6208263415aeb9e885b89509fe91e299577af0e952ff7f857a"
+    },
+    "preview": {
+      "frames": 66,
+      "duration_ms": 2200,
+      "size": [
+        116,
+        98
+      ],
+      "loop_seam_vs_mean_frame_change": 1.155
+    },
+    "eight_canonical_views": {
+      "E": {
+        "old_xywh": [
+          75,
+          103,
+          94,
+          53
+        ],
+        "new_xywh": [
+          75,
+          103,
+          94,
+          53
+        ],
+        "difference_over_union_rgb": 49.634
+      },
+      "SE": {
+        "old_xywh": [
+          80,
+          103,
+          86,
+          57
+        ],
+        "new_xywh": [
+          80,
+          103,
+          86,
+          56
+        ],
+        "difference_over_union_rgb": 52.039
+      },
+      "S": {
+        "old_xywh": [
+          102,
+          103,
+          52,
+          61
+        ],
+        "new_xywh": [
+          102,
+          103,
+          52,
+          61
+        ],
+        "difference_over_union_rgb": 44.047
+      },
+      "SW": {
+        "old_xywh": [
+          92,
+          103,
+          84,
+          57
+        ],
+        "new_xywh": [
+          90,
+          103,
+          86,
+          56
+        ],
+        "difference_over_union_rgb": 46.687
+      },
+      "W": {
+        "old_xywh": [
+          90,
+          103,
+          91,
+          53
+        ],
+        "new_xywh": [
+          87,
+          103,
+          94,
+          53
+        ],
+        "difference_over_union_rgb": 47.199
+      },
+      "NW": {
+        "old_xywh": [
+          92,
+          103,
+          83,
+          57
+        ],
+        "new_xywh": [
+          90,
+          103,
+          85,
+          56
+        ],
+        "difference_over_union_rgb": 52.015
+      },
+      "N": {
+        "old_xywh": [
+          102,
+          103,
+          52,
+          61
+        ],
+        "new_xywh": [
+          102,
+          103,
+          51,
+          61
+        ],
+        "difference_over_union_rgb": 48.612
+      },
+      "NE": {
+        "old_xywh": [
+          80,
+          103,
+          86,
+          57
+        ],
+        "new_xywh": [
+          81,
+          103,
+          85,
+          56
+        ],
+        "difference_over_union_rgb": 51.546
+      }
+    },
+    "silhouette_continuity": {
+      "largest_detached_fraction": 0.0,
+      "worst_angle": 0
+    },
+    "drake_regression": {
+      "checks": 217,
+      "failures": 0,
+      "same_dimensions_and_frames": true,
+      "max_channel_difference": 0
+    }
+  },
+  "previous_art_suite": {
+    "checks": 227,
+    "failures": 0,
+    "frames": 146,
+    "directions": 8,
+    "render_readback_export_seconds": 5.56123
+  },
+  "game_and_saves": {
+    "game_tests": 558607,
+    "save_game_tests": 10776
+  },
+  "verified_installed_archives": {
+    "dev": {
+      "canonical_assets": 732,
+      "startup_frames": 180,
+      "hidden": true,
+      "audio": false,
+      "startup_test_seconds": 14.817,
+      "archive_sha256": "09e6ac0b6e2d778b3ceaa8ff11356e17dfd64da2789e3d16409079dda3c439a6",
+      "exe_sha256": "ffe8dbce04594fc093a2054dc89afb3c15e4e78e03452f714b95adc483ae37fa",
+      "death_checks": 5891,
+      "death_render_seconds": 33.5728,
+      "audio_checks": 8,
+      "secondary_test_seconds": 39.588
+    },
+    "player": {
+      "canonical_assets": 732,
+      "startup_frames": 180,
+      "hidden": true,
+      "audio": false,
+      "startup_test_seconds": 11.741,
+      "archive_sha256": "b1fc86e7ae141443bd12b3396b9619d034b906dff00bca6ec54988d43717dd39",
+      "exe_sha256": "5137026b993bf52941ac4921e596cf715a326fa5078d4faffdc80d47c861409e"
+    }
+  }
+}

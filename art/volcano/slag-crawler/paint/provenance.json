@@ -1,0 +1,118 @@
+{
+  "source": {
+    "image": "../references/sunburst-turnaround.png",
+    "sha256": "ca763ad7838a711bb35772e13998928edf7996930215334262a908fbf5ce9c86",
+    "panels": 5,
+    "source_geometry": "fully new, derived from five Sunburst illustrations; original eight silhouette extents only used for placement and size"
+  },
+  "comfyui": {
+    "workflow": "film-workflow.json",
+    "engine": "local ComfyUI CPU",
+    "model": "film_net_fp16.safetensors",
+    "weights_sha256": "f226e51375dc839d4b40e5c3d63da560dd1ea1c962364ec78f5adf2d05db05c0",
+    "job": "4536c601-00ab-4599-bfef-a3d8b68ed9c0",
+    "model_source": "https://huggingface.co/Comfy-Org/Frame-Interpolation/tree/aa7009be4d1471ea0bac91d6fe4d7e4b637cbbfc/frame_interpolation",
+    "upstream": "https://github.com/google-research/frame-interpolation",
+    "model_license": "Apache-2.0",
+    "elapsed_s": 36.783,
+    "frames": 33,
+    "material_inbetweens_changed_by_FILM": 120
+  },
+  "krita": {
+    "version": "5.3.4.1 (git bd6e8d0)",
+    "layer_count": 21,
+    "nominal_tile_px": 160,
+    "logical_parts": 6,
+    "directions": 32,
+    "cutouts_exported": 192,
+    "directions_with_native_eye_retakes": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15
+    ],
+    "preserved_alpha_all_192": true,
+    "editable_master": "../pelzacz.kra",
+    "checked": "Native KRA reopened; output cells were repacked to the published runtime PNG."
+  },
+  "artwork": {
+    "atlas_pixels": [
+      1024,
+      400
+    ],
+    "rgba8_bytes": 1638400,
+    "source_facing_extents_192": [
+      [
+        16,
+        87,
+        158,
+        167
+      ],
+      [
+        24,
+        87,
+        154,
+        172
+      ],
+      [
+        56,
+        87,
+        135,
+        179
+      ],
+      [
+        42,
+        87,
+        168,
+        172
+      ],
+      [
+        39,
+        87,
+        175,
+        167
+      ],
+      [
+        42,
+        87,
+        167,
+        172
+      ],
+      [
+        56,
+        87,
+        135,
+        179
+      ],
+      [
+        25,
+        87,
+        154,
+        172
+      ]
+    ],
+    "body_shape_checks": 32,
+    "largest_detached_island_pixels_at_alpha_110": 1,
+    "mirrored_headings": [
+      "SW",
+      "W",
+      "NW"
+    ],
+    "intermediate_body": "Thin plate spline registration of eye, ivory beak, tusk and interlocking plates; 2-D painted limbs preserve socket and toe correspondences. No shading model is loaded at runtime."
+  },
+  "files": {
+    "assets/volcano/slag-crawler.png": "4fba593c35c6b2997d176e92bbf71319c387d4b0d3565105125b3ae2bb530b39",
+    "assets/volcano/corpses/slag-crawler.png": "373fd7056101529bfb97fb5fb492637222a8e9297eae2136093cc2c894022cb5",
+    "assets/volcano/crawler-turn/parts-0.png": "64000a90fa77fe6208263415aeb9e885b89509fe91e299577af0e952ff7f857a",
+    "src/generated/slag_crawler_turn_atlas.hpp": "d2092a36383cf5be9a7af6c055b31e88cad954888341cafe070b95e4368f00c1",
+    "art/volcano/slag-crawler/pelzacz.kra": "08c7bd2857a6311ea6a292a75705020203b47bb76be2d3aaf8acdac417ed66a0"
+  }
+}

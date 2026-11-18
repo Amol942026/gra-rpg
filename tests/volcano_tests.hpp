@@ -1,6 +1,37 @@
 #pragma once
 Game volcanoArena(int type=VolcanoBossType){Game g;g.activateField(WorldLocation::Volcano);g.props.clear();g.enemies.clear();g.player={16,50};float hp=enemyInfo(type).health;g.enemies.push_back({2099,type,{12,50},{12,50},hp,hp});return g;}
 void volcanoTests(){
+ for(int type:{SlagCrawlerType,EmberDrakeType}){
+  Enemy patroller{2099,type,{12,50},{12,50},100,100};
+  Game::advanceVolcanoAnimation(patroller,{.04f,.012f},1.f/60,true);
+  const float precise=std::atan2((.04f+.012f)*.5f,.04f-.012f);
+  check(std::abs(patroller.animation.facingAngle-precise)<.0001f,
+        "a continuous-turn creature spawns facing its actual patrol path between the eight compass bearings");
+  const float oldPhase=patroller.animation.phase;
+  Game::faceEnemyTowards(patroller,{-1.f,-.6f});
+  Enemy coarse=patroller;
+  for(int i=0;i<42;++i){
+   const float before=patroller.animation.facingAngle;
+   Game::advanceVolcanoAnimation(patroller,{},1.f/60,false);
+   check(std::abs(std::remainder(patroller.animation.facingAngle-before,2*AnimationPi))<=7.f/60+.00001f,
+         "an abrupt reversal advances through intermediate poses at 60 Hz");
+  }
+  for(int i=0;i<21;++i)Game::advanceVolcanoAnimation(coarse,{},1.f/30,false);
+  check(std::abs(patroller.animation.facingAngle-coarse.animation.facingAngle)<.0001f&&patroller.animation.phase==oldPhase,
+        "the turn reaches the same angle at 30 and 60 Hz without moving the planted feet");
+  patroller.animation.facingAngle=AnimationPi-.02f;patroller.animation.targetAngle=-AnimationPi+.02f;
+  Game::advanceVolcanoAnimation(patroller,{},.05f,false);
+  const float crossed=std::remainder(patroller.animation.facingAngle-(AnimationPi-.02f),2*AnimationPi);
+  check(crossed>0&&crossed<.04f,"turning through west crosses the angular seam by the short arc");
+  for(float side:{-1.f,1.f}){
+   Enemy turning=patroller;
+   turning.animation.facingAngle=0;turning.animation.targetAngle=side*2;turning.animation.turnLean=0;
+   for(int i=0;i<10;++i)Game::advanceVolcanoAnimation(turning,{},1.f/60,false);
+   check(turning.animation.turnLean*side>.65f,"the weight shifts into either turn");
+   for(int i=0;i<90;++i)Game::advanceVolcanoAnimation(turning,{},1.f/60,false);
+   check(std::abs(turning.animation.turnLean)<.001f,"bank settles to the neutral pose after turning");
+  }
+ }
  Game g;g.enterMageTower();g.player=MagePosition;check(!g.canTravelVolcano()&&!g.travelToVolcano(),"third realm is locked before second boss dies");
  g.desertBossDead=true;g.collectedFragments=1;check(g.canTravelVolcano()&&g.travelToVolcano()&&g.inVolcano(),"killing the second boss unlocks explicit mage travel, independent of moving its loot");
  check(distance(g.player,VolcanoArrival)==0&&g.walkable(g.player)&&distance(g.player,VolcanoBossHome)>45,"third arrival is safe and far from its boss");

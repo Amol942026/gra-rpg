@@ -13,8 +13,7 @@ bool canSeePlayer(const Enemy& e)const{
 }
 static void faceEnemyTowards(Enemy& e,V aim){
  if(length(aim)<=.05f)return;
- e.animation.face(aim.x,aim.y);
- e.animation.targetAngle=std::atan2((aim.x+aim.y)*.5f,aim.x-aim.y);
+ e.animation.faceAim(aim.x,aim.y,smoothVolcanoTurn(e.type));
 }
 bool enemyPositionClear(V p,float radius)const{
  if(inVolcano()&&(volcanoLava(p,radius)||nearVolcanoFountain(p,radius)))return false;
