@@ -41,7 +41,16 @@ inline void overheadGrip(hero_motion::Pose& pose,PowerStyle style,float progress
  const Vec shaft=heading*std::cos(pitch)+Vec{0,0,std::sin(pitch)};
  // The cutting edge is on the negative width axis of the axe head.
  const Vec width=axe?Vec{0,-shaft.z,shaft.y}:Vec{heading.y,-heading.x,0};
- const Vec grip=pose.point(bones::Pelvis,{blend(&Key::handR),blend(&Key::handF),blend(&Key::handZ)});
+ const float height=blend(&Key::handZ);
+ Vec grip=pose.point(bones::Pelvis,{blend(&Key::handR),blend(&Key::handF),height});
+ if(!axe){
+  // Above the brow the sword's crossguard follows the side-to-side
+  // movement of the head. Below it the authored cut follows its own arc.
+  const Vec brow{0,0,72};
+  const Vec sway=pose.point(bones::Head,brow)-pose.point(bones::Pelvis,brow);
+  const Vec side=pose.vector(bones::Pelvis,{1,0,0});
+  grip=grip+side*((sway.x*side.x+sway.y*side.y+sway.z*side.z)*ease((height-60)/12));
+ }
  const Vec carried=pose.world[bones::HandR].p;
  const Vec shoulder=pose.world[bones::UpperArmR].p;
  const Vec carryPole=(pose.world[bones::ForearmR].p-shoulder)*(1.f/13);

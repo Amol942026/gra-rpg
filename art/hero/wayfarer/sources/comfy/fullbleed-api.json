@@ -1,0 +1,1068 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "DreamShaper_8_pruned.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "person face full character, backdrop, scene, cutout, white background, montage, lettering, photoshoot, garment model, object silhouette"
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "tunic.png"
+    }
+  },
+  "11": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "10",
+        0
+      ],
+      "width": 221,
+      "height": 279,
+      "x": 163,
+      "y": 141
+    }
+  },
+  "12": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "11",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "13": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "12",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "14": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. a field of warm ivory linen fabric, tawny edges, naturally weighty vertical folds, very fine diagonal woven linen stitches, an understated rows of embroidery near one edge"
+    }
+  },
+  "15": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "13",
+        0
+      ],
+      "seed": 27111800,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "16": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "15",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "17": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "16",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/tunic"
+    }
+  },
+  "18": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "bracer.png"
+    }
+  },
+  "19": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "18",
+        0
+      ],
+      "width": 190,
+      "height": 208,
+      "x": 149,
+      "y": 152
+    }
+  },
+  "20": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "19",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "21": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "20",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "22": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. a copper-brown oiled leather bracer surface, full-bleed brown worn leather with two broad dark overlapping leather straps running diagonally across, fine waxed double stitching on each strip, worn pale leather edges"
+    }
+  },
+  "23": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "22",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "21",
+        0
+      ],
+      "seed": 27111801,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "24": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "23",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "25": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "24",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/bracer"
+    }
+  },
+  "26": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "boot.png"
+    }
+  },
+  "27": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "26",
+        0
+      ],
+      "width": 86,
+      "height": 155,
+      "x": 166,
+      "y": 39
+    }
+  },
+  "28": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "27",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "29": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "28",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "30": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. dark espresso brown thick work-boot leather creased around an ankle, tight shallow parallel compression creases, one hand-stitched welt and a soft dry highlight on raised leather"
+    }
+  },
+  "31": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "30",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "29",
+        0
+      ],
+      "seed": 27111802,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "32": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "31",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "33": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "32",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/boot"
+    }
+  },
+  "34": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "copper.png"
+    }
+  },
+  "35": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "34",
+        0
+      ],
+      "width": 204,
+      "height": 113,
+      "x": 69,
+      "y": 148
+    }
+  },
+  "36": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "35",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "37": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "36",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "38": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. a single ancient hammered copper armor plate face, burnished red-gold arched lamella, shallow fluted scallop lines, worn raised outer bead, warm glints, minute peening indentations"
+    }
+  },
+  "39": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "38",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "37",
+        0
+      ],
+      "seed": 27111803,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "40": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "39",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "41": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "40",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/copper"
+    }
+  },
+  "42": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "mantle.png"
+    }
+  },
+  "43": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "42",
+        0
+      ],
+      "width": 145,
+      "height": 254,
+      "x": 197,
+      "y": 117
+    }
+  },
+  "44": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "43",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "45": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "44",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "46": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. a piece of weathered deep petrol-teal wool cloak fabric, graceful heavy broad vertical folds with a softly lit crest, narrow golden ochre woven herringbone border along an edge, medieval tailor work"
+    }
+  },
+  "47": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "46",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "45",
+        0
+      ],
+      "seed": 27111804,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "48": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "47",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "49": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "48",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/mantle"
+    }
+  },
+  "50": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "skirts.png"
+    }
+  },
+  "51": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "50",
+        0
+      ],
+      "width": 135,
+      "height": 78,
+      "x": 277,
+      "y": 381
+    }
+  },
+  "52": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "51",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "53": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "52",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "54": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. dark peacock-teal long tunic cloth panel, two graceful diagonal overlapping tailored folds ending in a narrow woven border, muted bronze thread, dark teal raw linen weave"
+    }
+  },
+  "55": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "54",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "53",
+        0
+      ],
+      "seed": 27111805,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "56": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "55",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "57": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "56",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/skirts"
+    }
+  },
+  "58": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "hair.png"
+    }
+  },
+  "59": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "58",
+        0
+      ],
+      "width": 173,
+      "height": 131,
+      "x": 114,
+      "y": 99
+    }
+  },
+  "60": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "59",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "61": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "60",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "62": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. a macro field of matte dark chestnut wavy human hair, a few sweeping sculpted locks flow down diagonally rightwards, tapered hair ends, fine umber directional strands, low contrast and diffused highlights"
+    }
+  },
+  "63": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "62",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "61",
+        0
+      ],
+      "seed": 27111806,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "64": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "63",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "65": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "64",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/hair"
+    }
+  },
+  "66": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "trousers.png"
+    }
+  },
+  "67": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "66",
+        0
+      ],
+      "width": 80,
+      "height": 134,
+      "x": 183,
+      "y": 11
+    }
+  },
+  "68": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "67",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "69": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "68",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "70": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. deep slate grey fitted wool trouser cloth, naturally compressed in a few overlapping diagonal folds around a bent knee, fine coarse twill weave, soft worn knees"
+    }
+  },
+  "71": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "70",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "69",
+        0
+      ],
+      "seed": 27111807,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "72": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "71",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "73": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "72",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/trousers"
+    }
+  },
+  "74": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "sleeves.png"
+    }
+  },
+  "75": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "74",
+        0
+      ],
+      "width": 97,
+      "height": 109,
+      "x": 128,
+      "y": 7
+    }
+  },
+  "76": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "75",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "77": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "76",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "78": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. an undyed flax linen sleeve gathered into shallow diagonal tapered folds, warm muted parchment, narrow woven seam, slightly golden threads"
+    }
+  },
+  "79": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "78",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "77",
+        0
+      ],
+      "seed": 27111808,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "80": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "79",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "81": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "80",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/sleeves"
+    }
+  },
+  "82": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "pouch.png"
+    }
+  },
+  "83": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "82",
+        0
+      ],
+      "width": 90,
+      "height": 159,
+      "x": 38,
+      "y": 254
+    }
+  },
+  "84": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "83",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled"
+    }
+  },
+  "85": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "84",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "86": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A flat full bleed square close-up texture swatch, hand painted detailed matte fantasy game asset, fine tactile brushwork, aged fibers and edge wear, cohesive tonal modeling. worn russet leather pouch flap, curved double-stitched saddle seam following the oval rim, pressed leather edges and small brass nail accents, dark amber leather pores"
+    }
+  },
+  "87": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "86",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "85",
+        0
+      ],
+      "seed": 27111809,
+      "steps": 18,
+      "cfg": 5.6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.42
+    }
+  },
+  "88": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "87",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "89": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "88",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster-clean/pouch"
+    }
+  }
+}

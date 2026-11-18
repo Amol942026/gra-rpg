@@ -47,25 +47,44 @@ def boot_bottom(pitch):
  # Exact support function of the three existing rounded boot volumes.
  a=math.radians(pitch);s,c=math.sin(a),math.cos(a)
  return min(y*s+z*c-math.hypot(ry*s,rz*c) for y,z,ry,rz in [(3,-1,8.5,4),(1,4,5,4.5),(5,-3,7,1)])
-def controls(t):
+def controls(t, running=False):
  w=t*2*math.pi
- row=dict(zip(NAMES[:10],[-.4*math.sin(w),32.9-.45*math.cos(2*w),
-      .8*math.sin(w),-2*math.cos(w),-.45*math.sin(w),-1.5,1.5*math.cos(w),
-      -.35*math.sin(w),1.2,.5*math.cos(w)]))
+ # Weight reaches the supporting hip after heel strike. The chest rotates
+ # against the pelvis; the neck absorbs a portion of that motion.
+ if running:
+  load=math.cos(2*(w-.52))
+  body=(-1.35*math.sin(w+.15),29.65-1.90*load,
+        2.1*math.sin(w+.08),-4.6*math.cos(w),-3.0*math.sin(w-.12),
+        -13.2-1.50*load,8.6*math.cos(w-.15),1.6*math.sin(w-.18),
+        9.4+.85*load,-3.0*math.cos(w-.20))
+ else:
+  load=math.cos(2*(w-.45))
+  body=(-1.32*math.sin(w-.12),32.12-.94*load,
+        2.15*math.sin(w-.03),-4.6*math.cos(w),-3.1*math.sin(w-.12),
+        -2.4-.8*load,7.4*math.cos(w-.17),1.3*math.sin(w-.18),
+        1.6+.4*load,-2.1*math.cos(w-.24))
+ row=dict(zip(NAMES[:10],body))
  for index,side in enumerate('lr'):
-  sign=-1 if side=='l' else 1;u=(t+index*.5)%1;support=.62;half=7.5
-  pitch=keyed([(0,8),(.08,0),(.46,0),(.62,-16),(.79,0),(.94,8),(1,8)],u)
+  sign=-1 if side=='l' else 1;u=(t+index*.5)%1
+  support,half=(.42,11.7) if running else (.62,7.5)
+  pitch_keys=([(0,10),(.10,0),(.24,-2),(.42,-29),(.58,-32),(.76,-8),(.94,10),(1,10)] if running else
+              [(0,10),(.095,0),(.43,0),(.62,-20),(.70,-22),(.84,2),(.96,10),(1,10)])
+  pitch=keyed(pitch_keys,u)
   if u<=support:f=half-2*half*u/support;lift=0
   else:
    v=(u-support)/(1-support);v2=v*v;v3=v2*v;velocity=-2*half/support*(1-support)
    f=(2*v3-3*v2+1)*-half+(v3-2*v2+v)*velocity+(-2*v3+3*v2)*half+(v3-v2)*velocity
-   lift=3.7*math.sin(math.pi*v)**2
+   # The heel folds sooner than the knee advances. The foot then unfolds
+   # into contact with zero vertical speed at both ends of the swing.
+   lift=(13.4 if running else 5.3)*math.sin(math.pi*v)**2*(1+.32*math.sin(2*math.pi*v))
+   if running:
+    f-=3.4*math.sin(math.pi*v)**2*math.sin(2*math.pi*v)
   arm_phase=w-.12 if side=='l' else w
   arm_swing=math.cos(arm_phase)
   hand_f=-12.5*arm_swing if side=='l' else 3+10.5*arm_swing
   # The wrist rises along its arc instead of reaching farther by stretching
   # the arm. The two sides retain their opposite phases.
-  hand_z=(31.8 if side=='l' else 32.8)+4*arm_swing*arm_swing
+  hand_z=(32.4 if side=='l' else 34.6)+4.35*arm_swing*arm_swing+.72*arm_swing
   row.update({f'{side}_foot_r':sign*5.8,f'{side}_foot_f':f,f'{side}_foot_z':-boot_bottom(pitch)+lift,
               f'{side}_foot_pitch':pitch,f'{side}_hand_r':-17.5 if side=='l' else 22,
               f'{side}_hand_f':hand_f,f'{side}_hand_z':hand_z})
@@ -153,18 +172,36 @@ def read_controls(path):
   values={int(w.get('time')[:-1]):float(w.find('real').get('value')) for w in a};assert set(values)==set(range(FRAMES+1))
   channels[n]=values
  return [{n:channels[n][i] for n in NAMES} for i in range(FRAMES+1)]
-def compile_clip(path,output):
- rows=read_controls(path);layout=rig_layout();lines=['#pragma once','// Baked from native Synfig walk.sif controls; tools/media/walk_synfig.py.','namespace ember::hero_motion::walk_synfig {','inline constexpr data::Key keys[] = {']
- for i in range(FRAMES*2+1):
-  f=i*.5;a=min(int(f),FRAMES-1);v=f-a;row={n:rows[a][n]*(1-v)+rows[a+1][n]*v for n in NAMES}
+def write_clip(rows,output,namespace,source):
+ frames=len(rows)-1
+ layout=rig_layout();lines=['#pragma once',f'// Baked from native Synfig {source} controls; tools/media/walk_synfig.py.',f'namespace ember::hero_motion::{namespace} {{','inline constexpr data::Key keys[] = {']
+ for i in range(frames*2+1):
+  f=i*.5;a=min(int(f),frames-1);v=f-a;row={n:rows[a][n]*(1-v)+rows[a+1][n]*v for n in NAMES}
+  # Interpolate the sole clearance, then recover the ankle height. During
+  # push-off the boot pivots onto a different rounded part of the toe.
+  for side in 'lr':
+   pitch=side+'_foot_pitch'
+   row[side+'_foot_z']+=(1-v)*boot_bottom(rows[a][pitch])+v*boot_bottom(rows[a+1][pitch])-boot_bottom(row[pitch])
   local,_=pose(row,layout)
   for bone in local:lines.append('{{'+','.join(f'{x:.8f}f' for x in bone[:3])+'},{'+','.join(f'{x:.8f}f' for x in bone[3:])+'}},')
- lines+=['};','inline constexpr data::Clip clip = {keys,121,1.f,true};','}']
+ lines+=['};',f'inline constexpr data::Clip clip = {{keys,{frames*2+1},1.f,true}};','}']
  output.parent.mkdir(parents=True,exist_ok=True);output.write_text('\n'.join(lines)+'\n',encoding='utf-8')
+def compile_clip(path,output):
+ rows=read_controls(path);write_clip(rows,output,'walk_synfig',path.name)
  return rows
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--parts',type=Path,required=True);p.add_argument('--header',type=Path,required=True);p.add_argument('--render',action='store_true');p.add_argument('--no-audio',action='store_true',required=True);a=p.parse_args()
+ p=argparse.ArgumentParser()
+ source_args=p.add_mutually_exclusive_group(required=True)
+ source_args.add_argument('--root',type=Path,help='Create a new Synfig project in this directory')
+ source_args.add_argument('--export-project',type=Path,help='Rebake an existing edited walk.sif')
+ p.add_argument('--parts',type=Path);p.add_argument('--header',type=Path,required=True)
+ p.add_argument('--render',action='store_true');p.add_argument('--no-audio',action='store_true',required=True);a=p.parse_args()
+ if a.export_project:
+  if a.render or a.parts:p.error('--export-project takes only --header and --no-audio')
+  compile_clip(a.export_project,a.header)
+  raise SystemExit(0)
+ if not a.parts:p.error('--parts is required when authoring a new project')
  source=author(a.root,a.parts);rows=compile_clip(source,a.header)
  if a.render:
   from synfig_cli import render

@@ -2,7 +2,7 @@
 #include "../src/hero_motion.hpp"
 void heroMotionTests(){
  using namespace hero_motion;
- const data::Clip* clips[]={&data::IdleClip,&data::WalkClip,&data::RunClip,&data::SlashClip,&data::HeavyClip,&data::RollClip};
+ const data::Clip* clips[]={&data::IdleClip,&walk_synfig::clip,&run_gait_synfig::clip,&data::SlashClip,&data::HeavyClip,&data::RollClip};
  for(auto clip:clips){
   Pose previous=forward(sample(*clip,0));
   for(int frame=0;frame<=240;frame++){
@@ -35,14 +35,17 @@ void heroMotionTests(){
   for(int b=0;b<data::BoneCount;b++)valid&=std::isfinite(p.world[b].p.z);
   check(valid,"idle walk and run blend continuously in the shared skeleton");
  }
- // The new upper-body run pose keeps the original leg timing and arm lengths.
- float backSwing=0,frontSwing=0,frontWrist=0;
+ // The arm layer keeps the authored foot contacts and arm lengths.
+ float backSwing=0,frontSwing=0,frontWrist=0,rearWrist=0;
  int raisedForwardSamples=0;
  for(int frame=0;frame<=120;frame++){
   const float phase=frame/120.f;
-  const auto p=evaluate(phase,1,1,0),base=forward(sample(data::RunClip,phase));
+  const auto p=evaluate(phase,1,1,0),base=forward(sample(run_gait_synfig::clip,phase));
+  const auto chest=p.vector(data::Spine,{0,0,1});
+  const float lean=std::atan2(chest.y,chest.z)*180.f/AnimationPi;
+  check(lean>12.f&&lean<18.f,"sprint maintains a modest forward trunk lean through loading and flight");
   for(int bone=data::ThighL;bone<=data::FootR;bone++)
-   check(length(p.world[bone].p-base.world[bone].p)<.0001f,"run arm edit preserves the original leg cycle");
+   check(length(p.world[bone].p-base.world[bone].p)<.0001f,"running arm swing preserves the authored leg cycle");
   for(int side=0;side<2;side++){
    const int upper=side?data::UpperArmR:data::UpperArmL;
    const int fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;
@@ -53,6 +56,7 @@ void heroMotionTests(){
    frontSwing=std::max(frontSwing,upperLocal.y);
    const auto wrist=rotate(conjugate(p.skin[data::Spine].q),p.world[hand].p-p.world[data::Spine].p);
    frontWrist=std::max(frontWrist,wrist.y);
+   rearWrist=std::min(rearWrist,wrist.y);
    raisedForwardSamples+=wrist.y>25&&wrist.z>18;
    const float sideSign=side?1.f:-1.f;
    const float elbowOffset=sideSign*upperLocal.x;
@@ -67,6 +71,8 @@ void heroMotionTests(){
  }
  check(backSwing<-6.8f&&frontSwing>12.f&&frontWrist>27.4f&&raisedForwardSamples>20,
        "both wrists sustain the higher forward stroke while preserving forward reach");
+ check(rearWrist<-10.f&&frontWrist-rearWrist>37.f,
+       "the returning running hand swings behind the waist before coming forward again");
  for(float phase:{.25f,.375f,.625f,.75f})
   check(std::abs(runArmKey(phase+1.f/240).swing-runArmKey(phase-1.f/240).swing)>.45f,
         "running arm moves through intermediate key poses without a pause");
@@ -77,7 +83,7 @@ void heroMotionTests(){
  check(std::abs(state.facingAngle-angle)<1&&std::abs(state.facingAngle-angle)>.001f,"facing turns through intermediate angles while gameplay keeps its directional state");
  // Synfig secondary tracks must never lift a planted foot or stretch an arm.
  for(float phase:{0.f,.13f,.25f,.5f,.73f,.99f})for(float running:{0.f,1.f}){
-  Pose base=forward(sample(running?data::RunClip:data::WalkClip,phase)),p=base;
+  Pose base=forward(sample(running?run_gait_synfig::clip:walk_synfig::clip,phase)),p=base;
   secondary(p,hero_secondary::evaluate(phase,1,running,0));
   for(int b=data::ThighL;b<=data::FootR;b++)check(length(p.world[b].p-base.world[b].p)<.00001f,"Synfig torso motion preserves exact primary foot contact and leg pose");
   for(int side=0;side<2;side++){

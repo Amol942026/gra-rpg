@@ -34,7 +34,7 @@ inline void bakeWeapons(){
         rig.setSmoothSurfaces();
         const P3 grip=axis*-center;
         if(spearItem)spear(rig,grip,frame,0,finish,kind);
-        else if(look.shape==Kind::Bow)bow(rig,grip,axis,right,{},finish,kind,-1,false);
+        else if(look.shape==Kind::Bow)bow(rig,grip,axis,right,{},finish,kind,-1);
         else melee(rig,grip,frame,kind,1,finish);
         BeginTextureMode(sample);
         ClearBackground(BLANK);

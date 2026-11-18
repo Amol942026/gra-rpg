@@ -23,8 +23,8 @@ void swordStowTests(){
   previous=p;
  }
  Game g;g.props.clear();g.enemies.clear();g.forage.clear();g.player={20,20};g.animation.swordStow=1;
- for(int gait=0;gait<16;gait++)for(int f=23;f<=45;f++){
-  float phase=f/60.f;auto p=hero_motion::evaluate(gait/16.f,1,phase,0);auto key=hero_sheath::apply(p,phase);auto m=sword_stow::Mouth;auto blade=sword_pose::idleBlade(0);
+ for(int gait=0;gait<16;gait++)for(int f=23;f<=45;f++)for(float run:{f/60.f,1.f}){
+  float phase=f/60.f;auto p=hero_motion::evaluate(gait/16.f,1,run,0);auto key=hero_sheath::apply(p,phase);auto m=sword_stow::Mouth;auto blade=sword_pose::idleBlade(0);
   auto mouth=p.point(hero_motion::data::Pelvis,{m.r,m.f,m.z});auto tip=p.world[hero_motion::data::HandR].p+p.vector(hero_motion::data::Weapon,{blade.r,blade.f,blade.z})*sword_stow::visibleFraction(key);
   check(hero_motion::length(tip-mouth)<.65f,"gait variations preserve hand/blade alignment during physical insertion");
  }

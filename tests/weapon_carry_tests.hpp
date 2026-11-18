@@ -47,7 +47,8 @@ inline Clearance measure(const Pose& pose,Kind kind){
  Kind shape=archetype(kind);
  if(shape==Kind::Bow){
   float half=equipment_shape::BowHalfLength,curve=equipment_shape::BowCurve;
-  Vec grip=pose.world[data::HandL].p,axis=pose.vector(data::HandL,{0,0,1}),forward=pose.vector(data::HandL,{0,1,0});
+  constexpr auto bowHand=hero_quiver::BowHand;
+  Vec grip=pose.world[bowHand].p,axis=pose.vector(bowHand,{0,0,1}),forward=pose.vector(bowHand,{0,1,0});
   Vec bottom=grip-axis*half-forward*curve,top=grip+axis*half-forward*curve,previous=bottom;
   for(int part=1;part<=16;part++){
    float t=part/16.f;Vec next=grip+axis*(-half+2*half*t)+forward*(curve*(std::sin(t*3.14159265358979323846f)-1));
@@ -114,7 +115,7 @@ inline void weaponCarryTests(){
    auto clearance=carry_checks::measure(pose,Kind(k));
    check(clearance.arms>=1&&clearance.body>=1,"all held weapon variants clear shoulders, upper arms, forearms, head and torso throughout locomotion");
    auto v=sword_pose::idleBlade(0);
-   Vec axis=archetype(Kind(k))==Kind::Bow?pose.vector(data::HandL,{0,0,1}):pose.vector(data::Weapon,{v.r,v.f,v.z});
+   Vec axis=archetype(Kind(k))==Kind::Bow?pose.vector(hero_quiver::BowHand,{0,0,1}):pose.vector(data::Weapon,{v.r,v.f,v.z});
    axis=rotate(conjugate(pose.skin[data::Spine].q),axis);
    check(axis.z>0&&std::abs(std::atan2(axis.x,axis.z))*180/3.14159265358979323846f<6.1f,
          "held weapons remain upright without excessive lateral flare at any gait phase");
@@ -122,7 +123,7 @@ inline void weaponCarryTests(){
     check(carry_checks::dot(pose.vector(data::Weapon,{-1,0,0}),pose.vector(data::Spine,{0,1,0}))>.9f,
           "axe cutting edge faces forward in every carry pose");
    if(archetype(Kind(k))==Kind::Bow)
-    check(carry_checks::dot(pose.vector(data::HandL,{0,1,0}),pose.vector(data::Spine,{0,1,0}))>.99f,
+    check(carry_checks::dot(pose.vector(hero_quiver::BowHand,{0,1,0}),pose.vector(data::Spine,{0,1,0}))>.99f,
           "every carried bow faces forward with its string behind the grip");
    for(int side=0;side<2;side++){
     int upper=side?data::UpperArmR:data::UpperArmL,fore=side?data::ForearmR:data::ForearmL,hand=side?data::HandR:data::HandL;

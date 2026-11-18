@@ -161,7 +161,8 @@ public:
     void update(float dt,ember::Game& world,bool blocked,bool focused,bool cinematicArrival=false) {
         if(!available){world.sounds.clear();return;}
         if(blocked&&!wasBlocked)stopEffects();wasBlocked=blocked;
-        if(!world.bowDrawing)stopCue(ember::Cue::BowDraw);
+        const bool stringUnderTension=world.bowDrawing&&world.bowDrawTime>=0;
+        if(!stringUnderTension)stopCue(ember::Cue::BowDraw);
         if(!focused&&!suspended){stopEffects();for(auto score:scores)if(IsMusicValid(score))PauseMusicStream(score);suspended=true;}
         if(focused&&suspended){for(int i=0;i<ScoreCount;i++)if(IsMusicValid(scores[i])&&musicBlend.weights[i]>.001f)ResumeMusicStream(scores[i]);suspended=false;}
         int desired=scoreFor(world);if(!IsMusicValid(scores[desired]))desired=0;
@@ -183,7 +184,7 @@ public:
                 const bool fanfare=event.cue==ember::Cue::LevelUp||event.cue==ember::Cue::Victory;
                 const bool deathSound=ember::enemyDyingCue(event.cue)||ember::enemyLandingCue(event.cue);
                 const bool gameplaySound=!blocked&&(!world.allocationRequired||deathSound);
-                if((event.cue!=ember::Cue::BowDraw||world.bowDrawing)&&
+                if((event.cue!=ember::Cue::BowDraw||stringUnderTension)&&
                    (gameplaySound||fanfare||event.cue==ember::Cue::SpellLearn||(cinematicArrival&&event.cue==ember::Cue::TeleportArrival)))
                     play(event.cue,{event.x,event.y},world.player,true,audibleDeath&&fanfare?.58f:1.f);
             }

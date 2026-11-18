@@ -52,7 +52,9 @@ void powerAttackTests(){
  g.bag[10]=item(Kind::Sword);g.transfer({Place::Bag,10},{Place::Equip,0});
  check(!g.holdingMelee()&&!g.releaseMeleeHold({1,0}),"changing weapon clears pending charge");
  g=setup(Kind::Bow);g.bag[10]=item(Kind::Arrow,0,9);
- const int ammo=g.ammoCount();g.beginBow({1,0});advance(g,34);
+ const int ammo=g.ammoCount();g.beginBow({1,0});advance(g,int(std::lround(BowNockDuration*60)));
+ check(g.powerHoldFraction()<.00001f,"drawing an arrow from the quiver does not charge a power shot");
+ advance(g,34);
  const float normal=g.arrowDamage(g.bowCharge());
  check(g.releaseBow(true)&&g.arrows.size()==1&&g.arrows[0].power&&g.arrows[0].damage>normal&&g.ammoCount()==ammo-1&&
        g.activePowerVisual()==PowerStyle::Bow&&g.sounds.back().cue==Cue::PowerBow,"charged bow fires one enhanced arrow and spends one");

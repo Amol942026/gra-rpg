@@ -31,6 +31,10 @@ inline sword_stow::Key apply(hero_motion::Pose& pose,float phase){
   Vec pole=(pose.world[data::ForearmR].p-shoulder)*(1-key.reach)+Vec{13,-1.56f,1.56f}*key.reach;
   auto solved=sword_pose::solveArm({shoulder.x,shoulder.y,shoulder.z},{target.x,target.y,target.z},{pole.x,pole.y,pole.z});
   Vec elbow{solved.elbow.r,solved.elbow.f,solved.elbow.z},hand{solved.hand.r,solved.hand.f,solved.hand.z};
+  // The running shoulder rolls forward and back. As the blade meets the
+  // scabbard the clavicle follows the remaining reach of the fixed-length arm.
+  const Vec clavicleFollow=(target-hand)*key.reach;
+  shoulder=shoulder+clavicleFollow;elbow=elbow+clavicleFollow;hand=hand+clavicleFollow;
   attach(pose,data::UpperArmR,shoulder,elbow,restHead(data::ForearmR));
   attach(pose,data::ForearmR,elbow,hand,restHead(data::HandR));
   pose.world[data::HandR]={hand,mix(pose.world[data::HandR].q,mul(orientation,restRotation(data::HandR)),key.reach)};

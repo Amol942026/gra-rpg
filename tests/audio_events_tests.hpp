@@ -48,8 +48,12 @@ void audioEventTests() {
     spell.sounds.clear();spell.spell();check(spell.sounds.empty(),"magic cooldown does not repeat sound");
     spell.explode({18,15},20);check(cueCount(spell,Cue::FireballImpact)==1,"fireball impact emits an explosion even when it hits terrain or expires");
     Game bow=emptyArena();bow.equipment[0]=item(Kind::Bow);
-    check(bow.beginBow({1,0})&&cueCount(bow,Cue::BowDraw)==1&&cueCount(bow,Cue::BowShot)==0,"drawing begins with wood and string tension, without a release sound");
-    check(!bow.beginBow({1,0})&&cueCount(bow,Cue::BowDraw)==1,"held mouse cannot retrigger bow tension");
+    check(bow.beginBow({1,0})&&!bow.beginBow({1,0})&&cueCount(bow,Cue::BowDraw)==0&&cueCount(bow,Cue::BowShot)==0,"taking the arrow from the quiver makes no string or release sound");
+    const int nockFrames=int(std::lround(BowNockDuration*60));
+    for(int i=1;i<nockFrames;i++)bow.update(1.f/60,{},false);
+    check(cueCount(bow,Cue::BowDraw)==0,"the string stays silent until the nock arrives");
+    bow.update(1.f/60,{},false);
+    check(cueCount(bow,Cue::BowDraw)==1&&cueCount(bow,Cue::BowShot)==0,"tension starts once on the transition from nocking to pulling");
     for(int i=0;i<40;i++)bow.update(.05f,{},false);
     check(cueCount(bow,Cue::BowDraw)==1,"fully drawn bow does not restart a looping tension sound");
     bow.sounds.clear();bow.releaseBow();check(cueCount(bow,Cue::BowShot)==1&&cueCount(bow,Cue::BowDraw)==0,"release emits only the separate arrow shot");

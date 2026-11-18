@@ -45,13 +45,17 @@ inline void apply(hero_motion::Pose& pose,Kind kind,float progress){
  namespace bone=hero_motion::data;
  const auto key=sample(kind,progress);
  const float weight=ease(progress/.15f)*ease((1-progress)/.18f);
+ // A close dagger guard follows the shoulder as it rolls forward over
+ // the planted foot. Its fully extended strike still aims from the pelvis.
+ const Vec shoulderLead=pose.world[bone::UpperArmR].p-pose.point(bone::Pelvis,restHead(bone::UpperArmR));
  bend(pose,bone::Spine,mul(axisAngle({0,0,1},key.torsoYaw),axisAngle({1,0,0},-key.lean)));
  bend(pose,bone::Head,axisAngle({0,0,1},-key.torsoYaw*.72f));
  pose.bind();
  carry(pose,kind);
  if(weight<=0)return;
  const Vec wrist=pose.world[bone::HandR].p;
- const Vec target=pose.point(bone::Pelvis,{key.handR,key.handF,key.handZ});
+ Vec target=pose.point(bone::Pelvis,{key.handR,key.handF,key.handZ});
+ if(kind==Kind::Dagger)target=target+shoulderLead*(1-ease((key.handF-8)/15));
  const float yaw=key.yaw*sword_pose::Pi/180,pitch=key.pitch*sword_pose::Pi/180;
  const Vec heading{std::sin(yaw),std::cos(yaw),0};
  const Vec up{0,0,1};

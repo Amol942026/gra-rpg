@@ -9,11 +9,13 @@ FRAMES = 48
 CHANNELS = ("swing", "flex", "tuck", "shoulder")
 PREVIEW_SCALE = .06
 KEYS = (
-    [-33, -28, -5, 42, 76, 50, 8, -20, -33],
-    [48, 46, 49, 61, 54, 69, 63, 54, 48],
+    # The elbow drives back past the hip. The forearm folds on the return
+    # so the rising hand and the trailing elbow describe different arcs.
+    [-49, -36, -2, 43, 77, 51, 8, -30, -49],
+    [51, 48, 53, 64, 62, 69, 64, 56, 51],
     # Negative tuck angles open the elbows away from the torso.
     [-9, -10, -12, -13, -14, -13, -12, -10, -9],
-    [-.75, -.7, -.25, 2.25, 5.45, 3, .65, -.35, -.75],
+    [-1.8, -1.3, -.25, 3.15, 7.05, 3.75, .55, -.95, -1.8],
 )
 
 

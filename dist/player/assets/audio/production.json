@@ -1202,5 +1202,25 @@
       }
     ],
     "audio_played": false
+  },
+  "creature_sfx_20261117": {
+    "model": "Stable Audio 3.0 Small SFX",
+    "weights": "https://huggingface.co/Comfy-Org/stable-audio-3",
+    "license": "https://kb.stability.ai/knowledge-base/stable-audio-commerical-and-usage-licensing",
+    "production": [
+      "ComfyUI 0.44.2 CPU",
+      "Audacity 3.7.9"
+    ],
+    "species": 22,
+    "bosses": 3,
+    "species_cues": 88,
+    "special_attack_cues": 6,
+    "variants_per_cue": 3,
+    "new_variants": 282,
+    "maximum_true_peak_dbtp": -3.73,
+    "maximum_landing_onset_ms": 20.69,
+    "master_root": "C:/AI2D/audio/emberfall-creature-sfx-20261117",
+    "source_manifest": "C:/AI2D/audio/emberfall-creature-sfx-20261117/manifest.json",
+    "audio_played": false
   }
 }

@@ -104,12 +104,7 @@ inline void furniture(int type,Vector2 base,float time,int floor){
  }visibleCasters++;
 }
 inline void arrow(const Arrow& shot){
- Vector2 p=screen(shot.pos),direction{(shot.velocity.x-shot.velocity.y)*40,(shot.velocity.x+shot.velocity.y)*20};
- float length=std::hypot(direction.x,direction.y);if(length<.001f)return;direction.x/=length;direction.y/=length;
- auto ground=shadow_math::ground(p.x,p.y,35);Vector2 tip{ground.x,ground.y},tail{tip.x-direction.x*27,tip.y-direction.y*27},cross{-direction.y,direction.x};
- DrawLineEx(tail,tip,2,WHITE);
- poly({tip,{tip.x-direction.x*8+cross.x*3,tip.y-direction.y*8+cross.y*3},{tip.x-direction.x*8-cross.x*3,tip.y-direction.y*8-cross.y*3}},WHITE);
- for(float side:{-1.f,1.f})DrawLineEx({tail.x+direction.x*5,tail.y+direction.y*5},{tail.x+cross.x*side*4,tail.y+cross.y*side*4},2,WHITE);
+ arrow_art::draw(shot,true);
 }
 inline bool near(Vector2 p,float extent=240){return p.x>-extent&&p.x<WorldW+extent&&p.y>-extent*.5f&&p.y<H+extent*.6f;}
 inline void beginMaskBlend(){

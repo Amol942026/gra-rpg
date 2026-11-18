@@ -159,7 +159,67 @@ inline void spear(Rig& rig,P3 rear,P3 front,float slide,const Finish& finish,Kin
     spear(rig,rear,basis(axis,across),slide,finish,kind);
 }
 
-inline void bow(Rig& rig,P3 grip,P3 axis,P3 forward,P3 string,const Finish& finish,Kind kind,float charge,bool arrow){
+inline void quiver(Rig& rig,Color leather,Color trim){
+    const auto n=hero_quiver::Nock,d=hero_quiver::Shaft;
+    const P3 nock{n.x,n.y,n.z},inward{d.x,d.y,d.z},across{-d.z,0,d.x},back{0,-1,0};
+    constexpr float depths[]={hero_quiver::MouthDepth,13.5f,15.0f,28.0f,30.3f,37.0f,39.0f};
+    constexpr float widths[]={5.35f,5.35f,4.9f,4.35f,4.35f,3.8f,3.2f};
+    const Color body[]={trim,shade(trim,.77f),leather,shade(leather,.65f),leather,shade(trim,.7f)};
+    constexpr int sides=12;
+    const auto& ring=Rig::unitSphere<sides,2>()[1];
+    auto point=[&](int i,float along,float radius){
+        return nock+inward*along+across*(ring[i].r*radius)+back*(ring[i].f*radius*.80f);
+    };
+    for(int i=0;i<sides;i++){
+        const int j=(i+1)%sides;
+        const float shadeSide=.90f+.13f*ring[i].r;
+        for(int band=0;band<6;band++){
+            rig.face(point(i,depths[band],widths[band]),point(j,depths[band],widths[band]),
+                     point(j,depths[band+1],widths[band+1]),point(i,depths[band+1],widths[band+1]),
+                     body[band],shadeSide);
+        }
+        // A narrow metal rim surrounds the recessed leather lining.
+        rig.face(point(j,depths[0],widths[0]),point(i,depths[0],widths[0]),
+                 point(i,depths[0],4.4f),point(j,depths[0],4.4f),trim,1.08f);
+        rig.face(point(j,depths[0],4.4f),point(i,depths[0],4.4f),
+                 point(i,16.f,3.9f),point(j,16.f,3.9f),shade(leather,.46f));
+        const P3 floor=nock+inward*16.f,end=nock+inward*depths[6];
+        rig.face(point(i,16.f,3.9f),floor,floor,point(j,16.f,3.9f),shade(leather,.34f));
+        rig.face(point(i,depths[6],widths[6]),point(j,depths[6],widths[6]),end,end,leather);
+    }
+    rig.tapered({-11,2,56},{10,6,35},2.8f,1.6f,shade(leather,.72f));
+}
+
+// The same shaft, fletching and metal point pass from quiver to fingers to
+// string. Only the portion above the quiver mouth is submitted while stored.
+inline void arrow(Rig& rig,P3 nock,P3 direction,P3 across,Color metal,float exposed){
+    const auto frame=basis(direction,across);
+    constexpr float length=hero_quiver::ArrowLength,head=length-4.5f;
+    if(exposed<=0)return;
+    const auto along=[&](float distance){return nock+frame.axis*distance;};
+    rig.beam(nock,along(std::min(exposed,head)),1.08f,1.08f,rgb(169,126,77));
+    const P3 fins[]={frame.across,frame.across*-.5f+frame.normal*.866f,frame.across*-.5f-frame.normal*.866f};
+    for(int i=0;i<3&&exposed>1.1f;i++){
+        const P3 vane=fins[i];
+        const float a=1.1f,b=3.4f,c=8.6f;
+        const float end=std::min(exposed,c),crest=std::min(end,b);
+        const float height=2.45f*(crest-a)/(b-a);
+        const float endHeight=end<=b?height:2.45f*(c-end)/(c-b);
+        const P3 v0=along(a),v1=along(crest)+vane*height,v2=along(end)+vane*endHeight,v3=along(end);
+        const Color feather=i==1?rgb(194,153,92):Text;
+        rig.face(v0,v1,v2,v3,feather);rig.face(v3,v2,v1,v0,feather,.88f);
+    }
+    if(exposed<=head)return;
+    const float f=std::clamp((exposed-head)/(length-head),0.f,1.f);
+    const P3 ring[]={frame.across*1.65f,frame.normal*.85f,frame.across*-1.65f,frame.normal*-.85f};
+    for(int i=0;i<4;i++){
+        const int j=(i+1)%4;
+        rig.face(along(head)+ring[j],along(head)+ring[i],along(head+f*(length-head))+ring[i]*(1-f),
+                 along(head+f*(length-head))+ring[j]*(1-f),metal,.84f+.07f*i);
+    }
+}
+
+inline void bow(Rig& rig,P3 grip,P3 axis,P3 forward,P3 string,const Finish& finish,Kind kind,float charge){
     const P3 across=cross(axis,forward);
     const auto profile=weapon_profiles::bow(kind);
     const float curve=profile.curve*(1-.15f*std::max(0.f,charge));
@@ -206,16 +266,6 @@ inline void bow(Rig& rig,P3 grip,P3 axis,P3 forward,P3 string,const Finish& fini
     else{
         rig.beam(bottom,string,.57f,.57f,cord);
         rig.beam(string,top,.57f,.57f,cord);
-    }
-    if(arrow){
-        P3 tip=grip+P3{0,20,0},nock=string-P3{0,3,0};
-        P3 shaft=tip-nock;
-        rig.beam(nock,tip,1.15f,1.15f,rgb(169,126,77));
-        rig.form(tip,{3.6f,6.f,2.7f},finish.trim);
-        for(P3 vane:{P3{0,0,2.1f},across*1.75f,across*-1.75f}){
-            P3 a=nock+shaft*.06f,b=nock+shaft*.25f,c=nock+shaft*.11f+vane;
-            rig.face(a,b,c,c,Text,.94f);rig.face(c,b,a,a,Text,.78f);
-        }
     }
 }
 

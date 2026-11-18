@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=29;
+constexpr int CurrentVersion=30;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -80,7 +80,12 @@ EF_SAVE(FieldState,v.enemies,v.props,v.forage)
 EF_SAVE(Effect,v.pos,v.text,v.life,v.color,v.damageNumber,v.critical,v.height)
 inline void visit(Archive& a,Fireball& v){a(v.pos,v.velocity,v.remaining,v.damage,v.critical);if(a.version>=15)a(v.spell,v.age);}
 EF_SAVE(WeaponBinding,v.kind,v.tier)
-inline void visit(Archive& a,Arrow& v){a(v.pos,v.velocity,v.remaining,v.damage,v.piercing,v.maxTargets,v.hitIds,v.critical);if(a.version>=19)a(v.power);}
+inline void visit(Archive& a,Arrow& v){
+ a(v.pos,v.velocity,v.remaining,v.damage,v.piercing,v.maxTargets,v.hitIds,v.critical);if(a.version>=19)a(v.power);
+ auto& launch=v.launch;
+ if(a.version>=30)a(launch.charge,launch.phase,launch.moving,launch.idleTime,launch.facing,launch.bow);
+ else if(a.reading)launch={};
+}
 EF_SAVE(PierceFlash,v.pos,v.life)
 inline void visit(Archive& a,Explosion& v){a(v.pos,v.life);if(a.version>=15)a(v.spell);}
 EF_SAVE(Boulder,v.origin,v.target,v.pos,v.age,v.duration,v.height,v.startHeight,v.damage,v.owner)
@@ -121,6 +126,8 @@ inline void visit(Archive& a,Game& v){
  }
  if(a.version>=29)a(v.heroHitDirection,v.heroHitReactionRemaining);
  else if(a.reading)v.clearHeroHitReaction();
+ if(a.version>=30)a(v.bowReleaseQueued);
+ else if(a.reading)v.bowReleaseQueued=false;
  if(a.reading&&a.version<7){
   require(v.level>=1&&v.level<=100000&&v.xp>=0&&v.xp<std::int64_t(v.level)*80);
   v.xp=v.xp*experienceForLevel(v.level)/(std::int64_t(v.level)*80); // Keep legacy level and fractional progress.
@@ -168,6 +175,8 @@ inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Pr
 }
 inline void validate(const Snapshot& s){
  const auto& g=s.game;require(range(g.location,4)&&range(g.fieldLocation,4)&&g.fieldLocation!=WorldLocation::MageTower&&range(g.dawnQuest,3)&&range(g.selectedSpell,int(Spell::Count)));
+ require(g.bowDrawTime>=-BowNockDuration&&g.bowDrawTime<=BowDrawDuration);
+ require(!g.bowReleaseQueued||(g.bowDrawing&&g.bowDrawTime<=BowMinDrawTime));
  require((g.learnedSpells&~7u)==0&&(g.selectedSpell==Spell::None||g.knowsSpell(g.selectedSpell))&&g.spellCooldownTotal>=FireballCooldown&&g.spellCooldownTotal<=60);
  require(g.fireballs.size()<=MaxEntries&&g.explosions.size()<=MaxEntries);
  for(const auto& projectile:g.fireballs){validatePos(projectile.pos);require(validSpell(projectile.spell)&&projectile.age>=0&&projectile.age<=30&&projectile.remaining>=0&&projectile.remaining<=spellDefinition(projectile.spell).range+.001f&&length(projectile.velocity)<=20&&projectile.damage>=0&&projectile.damage<=1000000000);}
@@ -194,7 +203,14 @@ inline void validate(const Snapshot& s){
  for(const auto& b:g.cinders){validatePos(b.pos);require((g.inVolcano()||g.testSummon(b.owner))&&std::abs(length(b.velocity)-7.5f)<.01f&&b.remaining>0&&b.remaining<=7&&b.damage>=0&&b.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.alive&&Game::volcanoRanged(e.type);}));}
  for(const auto& f:g.fissures){validatePos(f.pos);require((g.inVolcano()||g.testSummon(f.owner))&&f.age>=0&&f.delay>=.9f&&f.delay<=1.5f&&f.age<=f.delay+.651f&&f.damage>=0&&f.damage<=1000&&f.struck==(f.age>=f.delay)&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==f.owner&&e.alive&&e.type==VolcanoBossType;}));}
  for(int i=0;i<FountainCount;i++)require(g.volcanoFountainDrain[i]>=0&&g.volcanoFountainDrain[i]<=FountainDrainDuration&&(!g.volcanoFountainDrain[i]||g.volcanoFountainUsed[i]));
- for(auto& e:g.sounds)require(range(e.cue,int(Cue::Count)));for(auto& a:g.arrows)require(a.maxTargets>=1&&a.maxTargets<=1000);
+ for(auto& e:g.sounds)require(range(e.cue,int(Cue::Count)));
+ for(const auto& arrow:g.arrows){
+  const auto& launch=arrow.launch;
+  require(arrow.maxTargets>=1&&arrow.maxTargets<=1000);
+  require(launch.charge==-1||(launch.charge>=0&&launch.charge<=1));
+  require(launch.phase>=0&&launch.phase<=1&&launch.moving>=0&&launch.moving<=1&&launch.idleTime>=0);
+  require(range(launch.bow,int(Kind::Count))&&archetype(launch.bow)==Kind::Bow);
+ }
  require(g.boulders.size()<=MaxBoulders&&g.boulderImpacts.size()<=MaxBoulderImpacts);
  for(const auto& b:g.boulders){
   require((g.location==WorldLocation::Forest||g.testSummon(b.owner))&&b.age>=0&&b.duration>=BoulderMinFlight&&b.duration<=30&&b.age<=b.duration&&b.height>=0&&b.height<=250&&b.startHeight>=0&&b.startHeight<=200&&b.damage>=0&&b.damage<=1000000);

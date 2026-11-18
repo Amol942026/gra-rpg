@@ -4,6 +4,7 @@
 #include <cmath>
 #include "generated/hero_motion_data.hpp"
 #include "generated/hero_walk_data.hpp"
+#include "generated/hero_run_gait_data.hpp"
 #include "generated/hero_run_arms_data.hpp"
 #include "hero_secondary.hpp"
 namespace ember::hero_motion {
@@ -56,8 +57,7 @@ struct Pose {
  std::array<std::array<float,12>,data::BoneCount> matrices;
  Vec point(int b,Vec p)const{auto& m=matrices[b];return {m[0]*p.x+m[1]*p.y+m[2]*p.z+m[3],m[4]*p.x+m[5]*p.y+m[6]*p.z+m[7],m[8]*p.x+m[9]*p.y+m[10]*p.z+m[11]};}
  Vec vector(int b,Vec p)const{auto& m=matrices[b];return {m[0]*p.x+m[1]*p.y+m[2]*p.z,m[4]*p.x+m[5]*p.y+m[6]*p.z,m[8]*p.x+m[9]*p.y+m[10]*p.z};}
- void bind(){
-  for(int i=0;i<data::BoneCount;i++){
+ void bindBone(int i){
    skin[i]={world[i].p,mul(world[i].q,conjugate(restRotation(i)))};
    auto q=skin[i].q;auto r=restHead(i);auto& m=matrices[i];
    m={1-2*(q.y*q.y+q.z*q.z),2*(q.x*q.y-q.z*q.w),2*(q.x*q.z+q.y*q.w),0,
@@ -66,8 +66,8 @@ struct Pose {
    m[3]=world[i].p.x-m[0]*r.x-m[1]*r.y-m[2]*r.z;
    m[7]=world[i].p.y-m[4]*r.x-m[5]*r.y-m[6]*r.z;
    m[11]=world[i].p.z-m[8]*r.x-m[9]*r.y-m[10]*r.z;
-  }
  }
+ void bind(){for(int i=0;i<data::BoneCount;i++)bindBone(i);}
 };
 inline Pose forward(const LocalPose& local){
  Pose out;
@@ -89,10 +89,12 @@ inline void bend(Pose& pose,int pivot,Quat delta){
  bend(pose,pivot,delta,pose.world[pivot].p);
 }
 inline void secondary(Pose& pose,hero_secondary::Key key){
- bend(pose,data::Spine,mul(axisAngle({0,1,0},key.spineRoll),axisAngle({1,0,0},-key.spinePitch)));
- bend(pose,data::Head,axisAngle({0,1,0},key.headRoll));
+ const auto lean=mul(axisAngle({0,1,0},key.spineRoll),axisAngle({1,0,0},-key.spinePitch));
+ bend(pose,data::Spine,mul(axisAngle({0,0,1},key.spineYaw),lean));
+ bend(pose,data::Head,mul(axisAngle({0,0,1},key.headYaw),axisAngle({0,1,0},key.headRoll)));
  bend(pose,data::UpperArmL,axisAngle({1,0,0},key.armSwing));
  bend(pose,data::UpperArmR,axisAngle({1,0,0},-key.armSwing));
+ bend(pose,data::ForearmL,axisAngle({1,0,0},key.freeElbow));
  pose.bind();
 }
 inline run_synfig::Key runArmKey(float phase){
@@ -103,7 +105,7 @@ inline run_synfig::Key runArmKey(float phase){
          a.shoulder+(b.shoulder-a.shoulder)*t};
 }
 inline LocalPose runningPose(float phase){
- auto local=sample(data::RunClip,phase);
+ auto local=sample(run_gait_synfig::clip,phase);
  auto gripRotation=[&](){
   return mul(local[data::UpperArmR].q,mul(local[data::ForearmR].q,local[data::HandR].q));
  };
@@ -132,6 +134,21 @@ inline LocalPose runningPose(float phase){
  local[data::Weapon].q=mul(conjugate(gripRotation()),swordCarry);
  return local;
 }
+// Interpolating the leg joint angles can push a planted toe through the floor
+// between the two authored gaits. Use the same boot contact envelope as Synfig.
+inline void supportBlendedStride(Pose& pose,float motion,float run){
+ float lowest=0;
+ for(int foot:{data::FootL,data::FootR}){
+  const auto& m=pose.matrices[foot];
+  const auto bottom=[&](float y,float z,float rx,float ry,float rz){
+   const float xRadius=m[8]*rx,yRadius=m[9]*ry,zRadius=m[10]*rz;
+   return pose.world[foot].p.z+m[9]*y+m[10]*z-std::sqrt(xRadius*xRadius+yRadius*yRadius+zRadius*zRadius);
+  };
+  lowest=std::min({lowest,bottom(3,-1,5,8.5f,4),bottom(1,4,4.5f,5,4.5f),bottom(5,-3,5,7,1)});
+ }
+ const float lift=std::min(-lowest,4*run*(1-run)*motion);
+ for(auto& joint:pose.world)joint.p.z+=lift;
+}
 inline Pose evaluate(float phase,float motion,float run,float idleTime,float attack=-1,bool heavy=false,float roll=-1){
  auto idle=sample(data::IdleClip,idleTime/2);
  auto locomotion=sample(walk_synfig::clip,phase);
@@ -144,11 +161,24 @@ inline Pose evaluate(float phase,float motion,float run,float idleTime,float att
   float weight=ease(attack/.12f)*ease((1-attack)/.20f);
   local=blend(local,sample(heavy?data::HeavyClip:data::SlashClip,attack),weight);
  }
- auto pose=forward(local);auto follow=hero_secondary::evaluate(phase,motion,run,idleTime,attack,heavy,roll,true);
+ auto pose=forward(local);auto follow=hero_secondary::evaluate(phase,motion,run,idleTime,attack,heavy,roll);
+ if(motion>0&&run>0&&run<1&&roll<0&&attack<0)supportBlendedStride(pose,motion,run);
  // Synfig locomotion owns the arm swing; secondary tracks add torso and cloth motion.
  secondary(pose,follow);return pose;
 }
 inline Pose action(float progress,bool heavy=false){return forward(sample(heavy?data::HeavyClip:data::SlashClip,progress));}
+// The clasp follows the chest. The loose hem also responds to the final arm
+// pose, including two-handed grips, a raised shield and the recovery from a fall.
+inline void mantleTension(hero_secondary::Key& cloth,const Pose& pose){
+ const Quat chest=conjugate(pose.skin[data::Spine].q);
+ const Vec left=rotate(chest,pose.world[data::HandL].p-pose.world[data::UpperArmL].p);
+ const Vec right=rotate(chest,pose.world[data::HandR].p-pose.world[data::UpperArmR].p);
+ const Vec up=pose.vector(data::Spine,{0,0,1});
+ const float reach=std::clamp((right.y-left.y)*.072f,-2.1f,2.1f);
+ const float raise=std::clamp((left.z+right.z+36.f)*.067f,-.8f,3.3f);
+ cloth.capeSway+=reach+up.x*2.3f;
+ cloth.capeLift+=raise+up.y*2.f;
+}
 inline void attach(Pose& pose,int bone,Vec start,Vec end,Vec restEnd){
  Quat skin=fromTo(restEnd-restHead(bone),end-start);
  pose.world[bone]={start,mul(skin,restRotation(bone))};pose.skin[bone]={start,skin};

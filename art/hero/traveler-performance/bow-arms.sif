@@ -1,0 +1,329 @@
+<?xml version='1.0' encoding='utf-8'?>
+<canvas version="1.2" width="200" height="104" fps="60" view-box="-26 79 71 28" begin-time="0f" end-time="108f" bgcolor="0 0 0 0">
+  <name>Wędrowiec · łuk, ręka łuczna i cięciwna</name>
+  <keyframe time="0f" active="true">Nałożenie strzały</keyframe>
+  <keyframe time="18f" active="true">Uniesienie</keyframe>
+  <keyframe time="52f" active="true">Naciąg</keyframe>
+  <keyframe time="84f" active="true">Kotwica pod żuchwą</keyframe>
+  <keyframe time="85f" active="true">Zwolnienie palców</keyframe>
+  <keyframe time="90f" active="true">Ręka za policzkiem</keyframe>
+  <keyframe time="108f" active="true">Powrót</keyframe>
+  <layer type="circle" active="true" version="0.1" desc="GripFront">
+    <param name="color">
+      <color>
+        <r>0.12</r>
+        <g>0.58</g>
+        <b>0.51</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="radius">
+      <real value="1.95" />
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="linear" after="linear">
+          <vector>
+            <x>-5</x>
+            <y>52</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="linear" after="linear">
+          <vector>
+            <x>-3.5</x>
+            <y>54</y>
+          </vector>
+        </waypoint>
+        <waypoint time="28f" before="linear" after="linear">
+          <vector>
+            <x>1</x>
+            <y>58</y>
+          </vector>
+        </waypoint>
+        <waypoint time="52f" before="linear" after="linear">
+          <vector>
+            <x>5</x>
+            <y>60.5</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="linear" after="linear">
+          <vector>
+            <x>6.4</x>
+            <y>61.1</y>
+          </vector>
+        </waypoint>
+        <waypoint time="84f" before="linear" after="linear">
+          <vector>
+            <x>6.7</x>
+            <y>61.2</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.1" desc="GripSide">
+    <param name="color">
+      <color>
+        <r>0.12</r>
+        <g>0.58</g>
+        <b>0.51</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="radius">
+      <real value="1.95" />
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="linear" after="linear">
+          <vector>
+            <x>56</x>
+            <y>52</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="linear" after="linear">
+          <vector>
+            <x>57</x>
+            <y>54</y>
+          </vector>
+        </waypoint>
+        <waypoint time="28f" before="linear" after="linear">
+          <vector>
+            <x>58</x>
+            <y>58</y>
+          </vector>
+        </waypoint>
+        <waypoint time="52f" before="linear" after="linear">
+          <vector>
+            <x>59.2</x>
+            <y>60.5</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="linear" after="linear">
+          <vector>
+            <x>59.8</x>
+            <y>61.1</y>
+          </vector>
+        </waypoint>
+        <waypoint time="84f" before="linear" after="linear">
+          <vector>
+            <x>60</x>
+            <y>61.2</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.1" desc="NockFront">
+    <param name="color">
+      <color>
+        <r>0.89</r>
+        <g>0.6</g>
+        <b>0.25</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="radius">
+      <real value="1.95" />
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="linear" after="linear">
+          <vector>
+            <x>0</x>
+            <y>52</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="linear" after="linear">
+          <vector>
+            <x>1.5</x>
+            <y>54.4</y>
+          </vector>
+        </waypoint>
+        <waypoint time="28f" before="linear" after="linear">
+          <vector>
+            <x>6.0</x>
+            <y>58.4</y>
+          </vector>
+        </waypoint>
+        <waypoint time="52f" before="linear" after="linear">
+          <vector>
+            <x>9.4</x>
+            <y>60.7</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="linear" after="linear">
+          <vector>
+            <x>10.4</x>
+            <y>61.5</y>
+          </vector>
+        </waypoint>
+        <waypoint time="84f" before="linear" after="linear">
+          <vector>
+            <x>10.7</x>
+            <y>61.8</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.1" desc="NockSide">
+    <param name="color">
+      <color>
+        <r>0.89</r>
+        <g>0.6</g>
+        <b>0.25</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="radius">
+      <real value="1.95" />
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="linear" after="linear">
+          <vector>
+            <x>48</x>
+            <y>52</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="linear" after="linear">
+          <vector>
+            <x>47.6</x>
+            <y>54.4</y>
+          </vector>
+        </waypoint>
+        <waypoint time="28f" before="linear" after="linear">
+          <vector>
+            <x>46.2</x>
+            <y>58.4</y>
+          </vector>
+        </waypoint>
+        <waypoint time="52f" before="linear" after="linear">
+          <vector>
+            <x>42.8</x>
+            <y>60.7</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="linear" after="linear">
+          <vector>
+            <x>38.9</x>
+            <y>61.5</y>
+          </vector>
+        </waypoint>
+        <waypoint time="84f" before="linear" after="linear">
+          <vector>
+            <x>37.7</x>
+            <y>61.8</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.1" desc="LooseFront">
+    <param name="color">
+      <color>
+        <r>0.75</r>
+        <g>0.3</g>
+        <b>0.18</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="radius">
+      <real value="1.35" />
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="85f" before="linear" after="linear">
+          <vector>
+            <x>10.7</x>
+            <y>61.8</y>
+          </vector>
+        </waypoint>
+        <waypoint time="87f" before="linear" after="linear">
+          <vector>
+            <x>11.7</x>
+            <y>62.5</y>
+          </vector>
+        </waypoint>
+        <waypoint time="90f" before="linear" after="linear">
+          <vector>
+            <x>13.7</x>
+            <y>63.05</y>
+          </vector>
+        </waypoint>
+        <waypoint time="94f" before="linear" after="linear">
+          <vector>
+            <x>14.3</x>
+            <y>62.4</y>
+          </vector>
+        </waypoint>
+        <waypoint time="101f" before="linear" after="linear">
+          <vector>
+            <x>13.8</x>
+            <y>61.5</y>
+          </vector>
+        </waypoint>
+        <waypoint time="109f" before="linear" after="linear">
+          <vector>
+            <x>10.7</x>
+            <y>61.8</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.1" desc="LooseSide">
+    <param name="color">
+      <color>
+        <r>0.75</r>
+        <g>0.3</g>
+        <b>0.18</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="radius">
+      <real value="1.35" />
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="85f" before="linear" after="linear">
+          <vector>
+            <x>37.7</x>
+            <y>61.8</y>
+          </vector>
+        </waypoint>
+        <waypoint time="87f" before="linear" after="linear">
+          <vector>
+            <x>35.2</x>
+            <y>62.5</y>
+          </vector>
+        </waypoint>
+        <waypoint time="90f" before="linear" after="linear">
+          <vector>
+            <x>31.0</x>
+            <y>63.05</y>
+          </vector>
+        </waypoint>
+        <waypoint time="94f" before="linear" after="linear">
+          <vector>
+            <x>29.5</x>
+            <y>62.4</y>
+          </vector>
+        </waypoint>
+        <waypoint time="101f" before="linear" after="linear">
+          <vector>
+            <x>32.7</x>
+            <y>61.5</y>
+          </vector>
+        </waypoint>
+        <waypoint time="109f" before="linear" after="linear">
+          <vector>
+            <x>37.7</x>
+            <y>61.8</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+</canvas>

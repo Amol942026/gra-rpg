@@ -35,6 +35,7 @@ constexpr int RegionalEncountersPerRealm=4;
 constexpr int MushroomCount=48,MushroomHealing=10;
 inline std::int64_t experienceForLevel(int level){std::int64_t n=std::clamp(level,1,100000);return 100*n+2*n*(n-1);}
 constexpr int WeaponWheelSize=8;
+constexpr float BowNockDuration=.60f,BowMinDrawTime=.12f;
 constexpr float BowDrawDuration=1.4f,BowMinRange=2,BowMaxRange=12,BowCooldown=.38f;
 constexpr float MapWalkMin=1.6f,MapWalkMax=MapSize-2.6f;
 
@@ -250,7 +251,10 @@ struct DuneDust {
 };
 struct Fireball { V pos,velocity;float remaining=FireballRange,damage=0;bool critical=false;Spell spell=Spell::Fireball;float age=0; };
 struct WeaponBinding { Kind kind=Kind::None;int tier=0; };
-struct Arrow {V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false,power=false;};
+struct Arrow {
+ V pos,velocity;float remaining,damage;bool piercing=false;int maxTargets=1;std::vector<int> hitIds{};bool critical=false,power=false;
+ struct Launch {float charge=-1,phase=0,moving=0,idleTime=0,facing=0;Kind bow=Kind::Bow;} launch{};
+};
 struct PierceFlash {V pos;float life=.26f;};
 struct Explosion { V pos;float life=.35f;Spell spell=Spell::Fireball; };
 struct CinderBolt {V pos,velocity;float remaining=7,damage=0;int owner=0;};
@@ -325,7 +329,9 @@ struct Game {
  std::vector<CombatImpact> combatImpacts;
  std::vector<DuneDust> duneDust;
  std::array<WeaponBinding,WeaponWheelSize> weaponWheel{};
- std::vector<Arrow> arrows;bool bowDrawing=false;float bowDrawTime=0,bowReleaseTime=0,lastBowCharge=0;V bowAim{0,-1};
+ std::vector<Arrow> arrows;bool bowDrawing=false,bowReleaseQueued=false;
+ // Negative time covers reaching for and nocking the arrow. Tension starts at zero.
+ float bowDrawTime=0,bowReleaseTime=0,lastBowCharge=0;V bowAim{0,-1};
  Item heldAttackWeapon{};float heldAttackTime=0;
  bool lastBowPower=false;
  std::vector<Fireball> fireballs;std::vector<Explosion> explosions;
@@ -546,7 +552,7 @@ struct Game {
  bool openCorpse(int id){
   if(dead()||allocationRequired||storyBlocked()||inTower()||!findCorpse(id))return false;
   if(!corpseReachable(id)){say("Podejdź do ciała (maks. 2,5 pola).");return false;}
-  openedChest=-1;openedCorpse=id;sound(Cue::Ui,player);return true;
+  cancelBow();openedChest=-1;openedCorpse=id;sound(Cue::Ui,player);return true;
  }
  void closeCorpse(){openedCorpse=-1;openedChest=-1;}
  Item* get(Slot s){
@@ -913,7 +919,14 @@ struct Game {
   if(inDesert())for(auto& drain:fountainDrain)tick(drain);
   if(inVolcano())for(auto& drain:volcanoFountainDrain)tick(drain);
   if(dead()){cancelBoulderAttacks();clearSandPrison();cancelBow();animation.moving=false;animation.stopSprint();rollRemaining=0;closeCorpse();return;}
-  if(bowDrawing){if(archetype(equipment[0].kind)!=Kind::Bow||ammoCount()<=0)cancelBow();else bowDrawTime=std::min(BowDrawDuration,bowDrawTime+dt);}
+  if(bowDrawing){
+   if(!canReleaseBow())cancelBow();
+   else{
+    const bool nocking=bowDrawTime<0;
+    bowDrawTime=std::min(bowReleaseQueued?BowMinDrawTime:BowDrawDuration,bowDrawTime+dt);
+    if(nocking&&bowDrawTime>=-0.000001f){bowDrawTime=std::max(0.f,bowDrawTime);sound(Cue::BowDraw,player);}
+   }
+  }
   if(holdingMelee()&&canHoldAttack())heldAttackTime=std::min(PowerHoldTime,heldAttackTime+dt);
   else cancelMeleeHold();
   const float movementDt=std::max(0.f,dt-std::min(dt,sandPrisonRemaining));
@@ -929,8 +942,10 @@ struct Game {
    for(int i=0;i<steps;i++)move(rollDirection*(stepTime*RollSpeed/steps));
    rollRemaining=std::max(0.f,rollRemaining-stepTime);if(rollRemaining<.00001f)rollRemaining=0;
   }
-  const bool sprinting=running&&!bowDrawing&&!holdingMelee()&&!spearActive();
-  const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(sprinting?RunMultiplier:1.f)
+  const bool canSprint=!bowDrawing&&!holdingMelee()&&!spearActive();
+  const bool sprinting=running&&canSprint;
+  const float pace=canSprint?animation.sprintStep(sprinting,walkTime).average:0.f;
+  const float speed=(equipment[4].empty()?WalkSpeed:BootsSpeed)*(1+(RunMultiplier-1)*pace)
                     *(bowDrawing?.55f:spearActive()?.62f:1.f);
   move(normalized(input)*(walkTime*speed));
   if(openedCorpse>=0&&!corpseReachable(openedCorpse))closeCorpse();
@@ -963,6 +978,7 @@ struct Game {
   if(attackPressed&&!wasRolling&&!wasKnockedBack)attack();
   if(allocationRequired)return;
   updateArrows(dt);if(allocationRequired)return;
+  if(bowReleaseQueued&&bowDrawTime>=BowMinDrawTime)shootBow(false);
   updateFireballs(dt);if(allocationRequired)return;
   updateBoulders(dt,before,wasRolling,rollElapsed);
   updateVolcanoAttacks(dt,before,wasRolling,rollElapsed);

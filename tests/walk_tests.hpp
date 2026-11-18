@@ -1,16 +1,5 @@
 #pragma once
-namespace walk_checks {
-using namespace ember::hero_motion;
-inline float soleHeight(const Pose& p,int foot){
- float lowest=100;auto y=p.vector(foot,{0,1,0}),z=p.vector(foot,{0,0,1}),x=p.vector(foot,{1,0,0});
- for(auto shape:{std::array<float,5>{3,-1,5,8.5f,4},std::array<float,5>{1,4,4.5f,5,4.5f},std::array<float,5>{5,-3,5,7,1}}){
-  Vec c=p.point(foot,restHead(foot)+Vec{0,shape[0],shape[1]});
-  float radius=std::sqrt(std::pow(x.z*shape[2],2)+std::pow(y.z*shape[3],2)+std::pow(z.z*shape[4],2));
-  lowest=std::min(lowest,c.z-radius);
- }
- return lowest;
-}
-}
+#include "hero_gait_sole.hpp"
 void walkTests(){
  using namespace hero_motion;float worstFloor=100,highestSupport=0;
  auto initial=evaluate(0,1,0,0),last=evaluate(.999999f,1,0,0);float motionJump=0;
@@ -33,6 +22,11 @@ void walkTests(){
   highestSupport=std::max(highestSupport,support);
  }
  check(worstFloor>-.04f&&highestSupport<.04f,"at least one real boot supports the body throughout walking with no flight phase");
+ for(int blend=1;blend<16;blend++)for(int frame=0;frame<80;frame++){
+  const auto pose=evaluate(frame/80.f,1,blend/16.f,0);
+  check(std::min(walk_checks::soleHeight(pose,data::FootL),walk_checks::soleHeight(pose,data::FootR))>-.04f,
+        "the weight-bearing sole clears the floor between the walk and run clips");
+ }
  auto base=forward(sample(walk_synfig::clip,.25f));
  check(std::abs(base.world[data::FootL].p.x+5.8f)<.002f&&std::abs(base.world[data::FootR].p.x-5.8f)<.002f,"foot lanes are narrower and parallel instead of spread to hip width");
  for(int side=0;side<2;side++){
@@ -55,4 +49,21 @@ void walkTests(){
  }
  check(high[0]-low[0]>24&&high[1]-low[1]>20,
        "both walking wrists have a pronounced forward and backward swing");
+ // In a run each push-off leaves a short flight before the other boot lands.
+ for(int side=0;side<2;side++){
+  const int foot=side?data::FootR:data::FootL;
+  const float offset=side*.5f,sign=side?1.f:-1.f;
+  for(int f=0;f<=40;f++){
+   auto run=evaluate(offset+f/100.f,1,1,0);
+   check(std::abs(walk_checks::soleHeight(run,foot))<.045f,
+         "the supporting running boot rolls through contact without sinking");
+  }
+  auto loaded=evaluate(offset+.08f,1,1,0),extended=evaluate(offset+.32f,1,1,0);
+  auto flying=evaluate(offset+.46f,1,1,0);
+  check(extended.world[data::Pelvis].p.z-loaded.world[data::Pelvis].p.z>3 &&
+        sign*extended.world[data::Pelvis].p.x>.9f,
+        "run compresses after landing and rises over the supporting hip");
+  check(std::min(walk_checks::soleHeight(flying,data::FootL),walk_checks::soleHeight(flying,data::FootR))>.35f,
+        "both boots clear the ground between opposing running contacts");
+ }
 }

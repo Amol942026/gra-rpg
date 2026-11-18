@@ -11,7 +11,7 @@ V combatAimFromPointer(){
  return toWorld({mouse.x,mouse.y+35})-game.player;
 }
 bool releaseWorldBow(){
- if(!game.bowDrawing)return false;
+ if(!game.bowDrawing||game.bowReleaseQueued)return false;
  if(!gameplayInputAllowed()||!worldPointerAllowed(mouse)||dragging.place!=Place::None){game.cancelBow();return false;}
  game.aimBow(combatAimFromPointer());return game.releaseBow(true);
 }

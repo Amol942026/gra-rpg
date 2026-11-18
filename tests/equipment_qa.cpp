@@ -12,6 +12,29 @@ int main(int argc,char** argv){
  if(!IsWindowReady())return 4;audioSystem.init(false,false);
  makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  check(PlayerBuild&&!audioSystem.available,"equipment QA runs real player code without an audio device");
+ check(hero_paint::headsLoaded&&hero_paint::cuirassLoaded,"directional head paintings and starter breastplate are preloaded");
+ {
+  namespace turn=hero_paint::turn;
+  const bool loaded=turn::atlas.id&&turn::coverage.size()==turn::Size*turn::Size;
+  check(loaded,"continuous head atlas and shader load in the player renderer");
+  if(loaded)for(int i=0;i<turn::Views;i++){
+   const float angle=(i+.5f)*2*PI/turn::Views;
+   const auto pose=turn::sample(angle),wrapped=turn::sample(angle-2*PI);
+   const bool sameView=pose.index==i&&wrapped.index==i&&std::abs(int(pose.blend)-128)<=1;
+   const bool correctMask=turn::opaque(turn::uv(i,.5f,.5f),pose.blend)&&!turn::opaque(turn::uv(i,0,0),pose.blend);
+   check(sameView&&correctMask,"adjacent painted views share an angle and a usable picking mask across the full circle");
+  }
+ }
+ for(int view=0;view<hero_paint::HeadViews;view++){
+  const int mask=hero_paint::headMaskCells[view];bool same=mask>=0;int coverage=0;
+  if(same)for(int y=0;y<128;y++)for(int x=0;x<hero_paint::HeadCellWidth;x++){
+   const int row=y*hero_paint::Width;
+   const auto visible=hero_paint::alpha[hero_paint::HeadTop*hero_paint::Width+row+view*hero_paint::HeadCellWidth+x];
+   const auto impact=hero_paint::alpha[(mask/4*128)*hero_paint::Width+row+mask%4*128+x];
+   same&=visible==impact;coverage+=visible>64;
+  }
+  check(same&&coverage>3000,"an impact keeps the exact painted silhouette of each head view");
+ }
  game=Game{};intro={};towerStory={};clearStoryMenus();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;dragging={};
  game.props.clear();game.enemies.clear();game.forage.clear();game.player={20,20};game.messageTime=0;
  RenderTexture2D sample=LoadRenderTexture(400,300);
@@ -19,6 +42,11 @@ int main(int argc,char** argv){
   actor_art::finishShadowFrame();BeginTextureMode(sample);ClearBackground(BLANK);hero(200,245,2.1f,portrait);EndTextureMode();
   Image im=LoadImageFromTexture(sample.texture);ImageFlipVertical(&im);return im;
  };
+ for(int d=0;d<8;d++){
+  game.animation.direction=Direction(d);
+  auto starter=capture();
+  ExportImage(starter,TextFormat("qa-equipment/starter-%d.png",d));UnloadImage(starter);
+ }
  auto different=[](const Image& a,const Image& b){
   Color* x=LoadImageColors(a);Color* y=LoadImageColors(b);int n=0;
   for(int i=0;i<a.width*a.height;i++)if(std::abs(int(x[i].r)-y[i].r)+std::abs(int(x[i].g)-y[i].g)+std::abs(int(x[i].b)-y[i].b)+std::abs(int(x[i].a)-y[i].a)>25)n++;

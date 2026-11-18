@@ -2,6 +2,8 @@
 #include <type_traits>
 #include "sword_pose.hpp"
 #include "hero_motion.hpp"
+#include "hero_bow_motion.hpp"
+#include "hero_quiver.hpp"
 #include "hero_sheath.hpp"
 #include "shield_stow.hpp"
 #include "weapon_profiles.hpp"
@@ -11,6 +13,7 @@
 #include "hero_weapon_motion.hpp"
 #include "hero_knockdown.hpp"
 #include "hero_hit_reaction.hpp"
+#include "traveler_gestures.hpp"
 #include "enemy_death_settle.hpp"
 #include "shadow_geometry.hpp"
 #include "volcano_actors.hpp"
@@ -62,6 +65,10 @@ struct Face {
     unsigned textureId=0;
     std::array<Vector2,4> uv{};
 };
+inline bool paintCovers(const Face& face,Vector2 uv){
+    if(face.textureId==hero_paint::turn::atlas.id)return hero_paint::turn::opaque(uv,face.color.r);
+    return face.textureId==creature_paint::atlas.id?creature_paint::opaque(uv):hero_paint::opaque(uv);
+}
 struct Silhouette {
     static constexpr int Step=2,Width=128,Height=102;
     std::array<unsigned char,Width*Height> covered;
@@ -121,13 +128,18 @@ inline void submitActorBatch(unsigned texture,int count=-1,unsigned char opacity
  }
  Mesh drawing=creatureMesh;drawing.vertexCount=count;drawing.triangleCount=count/3;
  Material material=creatureMaterial;material.maps[MATERIAL_MAP_DIFFUSE].texture={texture,1,1,1,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
+ if(texture==hero_paint::turn::atlas.id)material.shader=hero_paint::turn::shader;
  material.maps[MATERIAL_MAP_DIFFUSE].color={255,255,255,opacity};
  Matrix identity{};identity.m0=identity.m5=identity.m10=identity.m15=1;DrawMesh(drawing,material,identity);
 }
 inline void drawCreatureFacesLegacy(const std::vector<Face>& faces,bool paint,float depthBase,float depthScale,unsigned char opacity=255){
  creatureVertices.clear();creatureUV.clear();creatureColors.clear();unsigned texture=rlGetTextureIdDefault();
  for(const auto& f:faces){
-  if(bool(f.textureId)!=paint)continue;if(f.textureId)texture=f.textureId;
+  if(bool(f.textureId)!=paint)continue;
+  if(f.textureId&&f.textureId!=texture){
+   submitActorBatch(texture,int(creatureVertices.size()/3),opacity);
+   creatureVertices.clear();creatureUV.clear();creatureColors.clear();texture=f.textureId;
+  }
   for(int triangle=0;triangle<2;triangle++){
    int a=0,b=triangle+1,c=triangle+2;const auto& p=f.points;
    if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
@@ -165,7 +177,11 @@ inline void drawCreatureFaces(const std::vector<Face>& faces,bool paint,float de
  beginPacking(int(faces.size())*6);int count=0;unsigned texture=rlGetTextureIdDefault();
  float* vertices=creatureVertices.data();float* uv=creatureUV.data();unsigned char* colors=creatureColors.data();
  for(const auto& f:faces){
-  if(bool(f.textureId)!=paint)continue;if(f.textureId)texture=f.textureId;
+  if(bool(f.textureId)!=paint)continue;
+  if(f.textureId&&f.textureId!=texture){
+   submitActorBatch(texture,count,opacity);count=0;texture=f.textureId;
+   vertices=creatureVertices.data();uv=creatureUV.data();colors=creatureColors.data();
+  }
   for(int triangle=0;triangle<2;triangle++){
    int a=0,b=triangle+1,c=triangle+2;const auto& p=f.points;
    if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
@@ -358,6 +374,71 @@ public:
         auto& f=faces.back();f.textureId=hero_paint::atlas.id;
         std::array<Vector2,4> coords={hero_paint::uv(cell,u0,v0),hero_paint::uv(cell,u1,v0),hero_paint::uv(cell,u1,v1),hero_paint::uv(cell,u0,v1)};
         f.uv=back?std::array<Vector2,4>{coords[3],coords[2],coords[1],coords[0]}:coords;
+    }
+    // The head is a painted cutout. Its pivot and tilt follow the head joint,
+    // while the active view follows the direction of the face relative to
+    // the camera, including during a backfall or a turn of the shoulders.
+    void paintedHead(P3 center,bool flash,bool covered){
+        if(collectShadow){
+            const auto before=faces.size();
+            rounded(center,{18.5f,17.4f,22.4f},WHITE);
+            faces.resize(before);
+        }
+        const auto posed=[&](P3 offset){return rollPoint(bodyPoint(center+offset));};
+        const P3 origin=posed({}),across=posed({1,0,0})-origin;
+        const P3 forward=posed({0,1,0})-origin,up=posed({0,0,1})-origin;
+        const auto depth=[&](P3 p){return (p.r*ry+p.f*fy)*.86f+p.z*.52f;};
+        const float sideView=depth(across),frontView=depth(forward);
+        const float yaw=std::atan2(-sideView,frontView);
+        const bool turning=hero_paint::turn::atlas.id!=0;
+        const auto frame=hero_paint::turn::sample(yaw);
+        const int view=std::clamp(int(std::round(std::abs(yaw)/(PI*.25f))),0,hero_paint::HeadViews-1);
+        const bool mirror=sideView>0&&view!=0&&view!=hero_paint::HeadViews-1;
+        const float flat=std::max(.0001f,std::hypot(sideView,frontView));
+        const P3 right=across*(frontView/flat)-forward*(sideView/flat);
+        const Vector2 pivot=project(origin),upper=project(origin+up),edge=project(origin+right);
+        Vector2 vertical{(upper.x-pivot.x)/scale,(upper.y-pivot.y)/scale};
+        const float projectedLength=std::hypot(vertical.x,vertical.y);
+        if(projectedLength>.08f){
+            vertical.x/=projectedLength;vertical.y/=projectedLength;
+        }else{
+            const float len=std::max(.0001f,std::hypot(edge.x-pivot.x,edge.y-pivot.y));
+            vertical={(edge.y-pivot.y)/len,(pivot.x-edge.x)/len};
+        }
+        const Vector2 horizontal{-vertical.y,vertical.x};
+        const float span=covered?22.4f:24.9f;
+        const float height=span*(.88f+.12f*std::min(1.10f,projectedLength));
+        // The gentle depth crown lets a weapon pass in front or behind the
+        // face just as it does at the temples. UV alpha also drives picking.
+        constexpr int grid=4;
+        struct Vertex {Vector2 point,uv;float distance;};
+        std::array<std::array<Vertex,grid+1>,grid+1> vertices{};
+        const float base=depth(origin),rise=depth(up);
+        for(int row=0;row<=grid;row++)for(int col=0;col<=grid;col++){
+            const float u=float(col)/grid;
+            // The crown sits inside an open helmet or hood. Keeping the
+            // exposed face as one painting preserves eyes, cheeks and ears.
+            const float v=(covered?.21f:0.f)+(covered?.79f:1.f)*row/grid;
+            const float dx=(u-.5f)*span,dy=(.5f-v)*height;
+            const float relief=std::sqrt(std::max(0.f,1.f-4.f*((u-.5f)*(u-.5f)+(v-.5f)*(v-.5f))));
+            vertices[row][col]={{pivot.x+scale*(horizontal.x*dx+vertical.x*dy),
+                                 pivot.y+scale*(horizontal.y*dx+vertical.y*dy)},
+                                turning?hero_paint::turn::uv(frame.index,u,v):hero_paint::headUV(view,mirror?1-u:u,v,flash),
+                                base+dy*rise+5.2f*relief};
+        }
+        for(int row=0;row<grid;row++)for(int col=0;col<grid;col++){
+            Face face{};
+            const Vertex* corners[]={&vertices[row][col],&vertices[row][col+1],
+                                     &vertices[row+1][col+1],&vertices[row+1][col]};
+            face.color=turning?Color{frame.blend,static_cast<unsigned char>(flash?255:0),0,255}:(flash?Text:WHITE);
+            face.textureId=turning?hero_paint::turn::atlas.id:hero_paint::atlas.id;
+            for(int k=0;k<4;k++){
+                face.points[k]=corners[k]->point;face.uv[k]=corners[k]->uv;
+                face.vertexDepth[k]=-.5f+corners[k]->distance*.001f;
+                face.depth+=corners[k]->distance*.25f;
+            }
+            faces.push_back(face);
+        }
     }
     // Continuous skin along a bent path, with shared lighting at each ring.
     void tube(const std::vector<P3>& path,float width,float depth,Color col,int material=-1,bool twoSidedShadow=false){
@@ -607,7 +688,7 @@ public:
                     float u=((p[b].y-p[c].y)*(point.x-p[c].x)+(p[c].x-p[b].x)*(point.y-p[c].y))/den;
                     float v=((p[c].y-p[a].y)*(point.x-p[c].x)+(p[a].x-p[c].x)*(point.y-p[c].y))/den;
                     Vector2 uv{face.uv[a].x*u+face.uv[b].x*v+face.uv[c].x*(1-u-v),face.uv[a].y*u+face.uv[b].y*v+face.uv[c].y*(1-u-v)};
-                    if((face.textureId==creature_paint::atlas.id?creature_paint::opaque(uv):hero_paint::opaque(uv)))return true;
+                    if(paintCovers(face,uv))return true;
                 }
                 continue;
             }
@@ -642,7 +723,7 @@ public:
                     if(face.textureId){
                         const auto& uv=face.uv;
                         const Vector2 texel{uv[0].x*w+uv[ib].x*u+uv[ic].x*v,uv[0].y*w+uv[ib].y*u+uv[ic].y*v};
-                        if(!hero_paint::opaque(texel))continue;
+                        if(!paintCovers(face,texel))continue;
                     }
                     mask.mark(col,row);
                 }
@@ -705,6 +786,10 @@ public:
             // and material passes stay identical, including on a batch flush.
             if(texture!=activeTexture||remaining==0){
                 if(activeTexture)rlEnd();
+                if(texture!=activeTexture){
+                    if(activeTexture&&activeTexture==hero_paint::turn::atlas.id)EndShaderMode();
+                    if(texture==hero_paint::turn::atlas.id)BeginShaderMode(hero_paint::turn::shader);
+                }
                 rlCheckRenderBatchLimit(256*6);rlSetTexture(texture);rlBegin(RL_TRIANGLES);rlSetTexture(texture);
                 activeTexture=texture;remaining=256;
             }
@@ -713,7 +798,9 @@ public:
                 if((p[b].x-p[a].x)*(p[c].y-p[a].y)-(p[b].y-p[a].y)*(p[c].x-p[a].x)>0)std::swap(b,c);
                 for(int index:{a,b,c}){Color color=f.smooth?f.vertexColors[index]:f.color;rlColor4ub(color.r,color.g,color.b,opacity==255?color.a:color.a*opacity/255);rlTexCoord2f(f.uv[index].x,f.uv[index].y);if(smoothSurfaces)rlVertex3f(p[index].x,p[index].y,sceneDepth?depthBase+(f.vertexDepth[index]+.5f)*depthScale:f.vertexDepth[index]);else rlVertex2f(p[index].x,p[index].y);}
             }remaining--;
-        }if(activeTexture)rlEnd();}rlSetTexture(0);
+        }
+        if(activeTexture){rlEnd();if(activeTexture==hero_paint::turn::atlas.id)EndShaderMode();}
+        }rlSetTexture(0);
         if(smoothSurfaces){rlDrawRenderBatchActive();if(depthFunction)depthFunction(0x0201);rlDisableDepthTest();}
         if(transparentTarget)EndBlendMode();
     }
@@ -746,7 +833,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
                  float attack=0,bool helmet=false,bool shield=false,Kind weapon=Kind::Sword,bool flash=false,
                  Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1,
                  PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1,float enemyMelee=-1,Vector2 hitLean={},
-                 Silhouette* fallbackSilhouette=nullptr,HeroReaction reaction={},float special=-1) {
+                 Silhouette* fallbackSilhouette=nullptr,HeroReaction reaction={},float special=-1,float bowRelease=-1,float bowPreparation=1.f) {
     if(regionalEnemy(species-1)){
         if(shadowBuilding&&!shadowCasting)return false;
         Enemy e{};e.type=species-1;e.animation=state;e.strike=attack>0?.14f:0;e.flash=flash?.1f:0;
@@ -780,7 +867,7 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
     rig.setHitLean(hitLean);
 
     if(species==0){
-        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF,power,powerAge,windup,reaction);
+        buildHero(rig,lift,stride,cycle,tuck,helmet,shield,weapon,flash,rolling,striking,strikeProgress,bowDraw,quiverArrows,run,empowered,state,roll,appearance,knockdown,fallR,fallF,power,powerAge,windup,reaction,bowRelease,bowPreparation);
     } else if(species>=9){
         buildDesert(rig,species-1,state,attack,flash,special);
     } else {
@@ -832,7 +919,9 @@ inline bool drawPlayer(const Game& g,float x,float y,float size=1,const Animatio
  return draw(0,x,y,size,state,attack,!g.equipment[1].empty(),!g.equipment[2].empty(),archetype(g.equipment[0].kind),
              false,BLANK,probe,roll,swing,special?-1:g.visibleBowCharge(),g.ammoCount(),!special&&g.empoweredPose(),
              &g.equipment,-1,fall,fallR,fallF,special?PowerStyle::Count:g.activePowerVisual(),g.powerVisualAge(),
-             special?-1:g.powerWindupProgress(),-1,{},fallbackSilhouette,reaction);
+             special?-1:g.powerWindupProgress(),-1,{},fallbackSilhouette,reaction,-1,
+             !special&&g.bowReleaseTime>0?1-g.bowReleaseTime/(g.lastBowPower?powerAttack(PowerStyle::Bow).duration:.18f):-1,
+             special?-1.f:g.bowNockProgress());
 }
 template<class Draw> bool drawHitSprite(float y,Vector2 lean,const Vector2* probe,Draw draw){
  if(shadowBuilding||(lean.x==0&&lean.y==0))return draw(probe);

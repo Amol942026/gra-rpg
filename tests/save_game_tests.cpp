@@ -24,6 +24,22 @@ int main(int argc,char** argv){
   check(!fs::exists(root),"fresh isolated test directory");fs::create_directories(root);
   boarSaveTests();
   volcanoSaveTests();
+  for(bool reverse:{false,true}){
+   saves::Snapshot stepping;auto& g=stepping.game;
+   g.player={20,20};g.props.clear();g.enemies.clear();g.forage.clear();
+   for(int i=0;i<14;i++)g.update(1.f/60,{1,0},false,true);
+   if(reverse)for(int i=0;i<6;i++)g.update(1.f/60,{1,0},false,false);
+   auto loaded=saves::decode(saves::encode(stepping));
+   check(g.animation.runBlend>0&&g.animation.runBlend<1,"save contains a partial walk-to-run transition");
+   for(int i=0;i<25;i++){
+    g.update(1.f/60,{1,0},false,i<9);
+    loaded.game.update(1.f/60,{1,0},false,i<9);
+    const auto& a=loaded.game.animation;
+    check(distance(g.player,loaded.game.player)==0&&g.animation.runBlend==a.runBlend&&
+          g.animation.phase==a.phase&&g.animation.swordStow==a.swordStow,
+          "restored pace, foot phase and weapon attachment resume exactly through a Shift reversal");
+   }
+  }
   for(int type:{StoneGuardianType,DesertBossType,VolcanoBossType,10,14,CinderhornType,BoarType}){
    saves::Snapshot summoned;
    Game& g=summoned.game;
@@ -225,6 +241,40 @@ int main(int argc,char** argv){
          "a restored charged melee swing advances at the new release speed");
   }
   auto envelope=[](saves::Snapshot snapshot,int version){saves::Archive payload(false,{},std::min(version,saves::CurrentVersion));payload(snapshot);saves::Archive file(false);std::string magic="EMBERFALL-SAVE";size_t size=payload.bytes.size();uint64_t hash=saves::checksum(payload.bytes);file(magic,version,size,hash);return file.bytes+payload.bytes;};
+  {
+   saves::Snapshot nocking;auto& archer=nocking.game;
+   archer.props.clear();archer.enemies.clear();archer.forage.clear();archer.selectWeapon(1);
+   archer.beginBow({1,0});archer.update(.05f,{},false);
+   auto held=saves::decode(saves::encode(nocking));
+   check(held.game.bowNockProgress()==archer.bowNockProgress()&&!held.game.bowReleaseQueued&&held.game.bowCharge()==0,
+         "loading a held arrow preserves the exact reach into the quiver");
+   archer.releaseBow(true);
+   auto pending=saves::decode(saves::encode(nocking));
+   for(int i=0;i<60;i++){
+    archer.update(1.f/60,{},false);pending.game.update(1.f/60,{},false);
+    check(archer.bowNockProgress()==pending.game.bowNockProgress()&&archer.bowCharge()==pending.game.bowCharge()&&
+          archer.bowReleaseQueued==pending.game.bowReleaseQueued&&archer.ammoCount()==pending.game.ammoCount(),
+          "restored quick shot keeps its phase and fires on the same frame");
+   }
+   check(archer.ammoCount()==19&&pending.game.ammoCount()==19&&!pending.game.lastBowPower,
+         "resuming a queued tap spends just one arrow");
+   held.game.bowDrawTime=.37f;held.game.equipment[0]=item(Kind::MirageBow);
+   held.game.animation.motionInitialized=true;held.game.animation.moveBlend=.68f;held.game.animation.phase=.73f;
+   held.game.animation.idleTime=1.6f;held.game.animation.facingInitialized=true;held.game.animation.facingAngle=-1.17f;
+   auto legacyDraw=saves::decode(envelope(held,29));
+   check(legacyDraw.game.bowDrawing&&!legacyDraw.game.bowReleaseQueued&&legacyDraw.game.bowNockProgress()==1&&
+         legacyDraw.game.bowDrawTime==.37f&&legacyDraw.game.releaseBow()&&legacyDraw.game.ammoCount()==19,
+         "v29 saves with an arrow already on the string keep their tension and release normally");
+   legacyDraw.game.equipment[0]=item(Kind::Sword);legacyDraw.game.animation={};
+   auto restoredShot=saves::decode(saves::encode(legacyDraw));
+   const auto& launch=restoredShot.game.arrows.at(0).launch;
+   check(launch.charge==.37f/BowDrawDuration&&launch.bow==Kind::MirageBow&&launch.phase==.73f&&
+         launch.moving==.68f&&launch.facing==-1.17f&&launch.idleTime==1.6f,
+         "in-flight arrow preserves its original bow and release pose after a gear change and save");
+   auto oldFlight=saves::decode(envelope(legacyDraw,29));
+   check(oldFlight.game.arrows.at(0).launch.charge==-1&&oldFlight.game.arrows[0].remaining==restoredShot.game.arrows[0].remaining,
+         "v29 in-flight arrows keep their trajectory without inventing a visual launch pose");
+  }
   {
    saves::Snapshot beforeMove;
    auto& chest=beforeMove.game.chests[ForestCircleChestId];

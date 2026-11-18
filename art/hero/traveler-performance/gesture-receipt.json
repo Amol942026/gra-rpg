@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "audio": false,
+  "source_sha256": "0a9d6fd10083eb576d5b365b9b808fb911657096f7ae1e008b85c922bb5687cc",
+  "header_sha256": "5979a7a1f1815141e24e8f85f44ee711cca4006bc3f4dfede3df9e73721a0b8d",
+  "synfig_render_s": 1.555,
+  "frames": 500,
+  "distinct_pixel_frames": {
+    "Axe": 24,
+    "Dagger": 24,
+    "Spear": 24,
+    "BowDraw": 25,
+    "BowLoose": 25,
+    "SwordCharge": 25,
+    "AxeCharge": 25,
+    "DaggerCharge": 25,
+    "SpearCharge": 25,
+    "SwordPower": 25,
+    "AxePower": 25,
+    "DaggerPower": 25,
+    "SpearPower": 25,
+    "BowPower": 25,
+    "BeltStow": 24,
+    "BeltDraw": 24,
+    "BackStow": 24,
+    "BackDraw": 24,
+    "Flinch": 24,
+    "Fall": 24
+  }
+}

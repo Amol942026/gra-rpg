@@ -1,5 +1,70 @@
 # Raport konfiguracji — 19.10.2026
 
+**18.11.2026 — wyjmowanie strzały z kołczanu.** Prawa ręka Wędrowca
+sięga za bark, wysuwa strzałę wzdłuż kołczanu i po wyjściu grotu
+obraca ją w stronę łuku. Dłoń zakłada nasadkę w miejscu spoczynku
+cięciwy danego łuku. Siła strzału zaczyna rosnąć po 0,60 s. Krótkie
+kliknięcie kończy przygotowanie i wypuszcza jedną strzałę po krótkim naciągu.
+[Edytowalny ruch w Synfigu](../hero/traveler-performance/bow-nock.sif)
+ma 37 klatek. Natywny render trwał 1,503 s. W 156 384 próbkach pozy
+sprawdzono wyjęcie grotu, położenie nasadki na cięciwie oraz przejście
+do naciągu w spoczynku i ruchu. W grze sprawdzono, po której stronie
+widać sięgającą rękę z przodu i z tyłu, także z hełmem i tarczą.
+Render 1312 klatek w ośmiu kierunkach, w dwóch zestawach wyposażenia,
+trwał 4,814 s. Testy geometrii objęły wszystkie 13 łuków.
+
+**18.11.2026 — bieg Wędrowca i naciąganie łuku.** W cyklu biegu
+pochylenie tułowia wzrosło średnio z 9,9° do 14,6°, a zakres ruchu dłoni
+przód–tył o 21%. Rozbieg i wyhamowanie trwają po 0,42 s. Prędkość świata
+i rytm nóg korzystają z tej samej krzywej. Zwolnienie i ponowne wciśnięcie
+Shiftu oraz zapis i wczytanie zachowują fazę kroku. W 7080 pośrednich pozach
+sprawdzono podparcie stóp. Synfig wyrenderował 48 klatek biegu w ośmiu
+kierunkach w 3,309 s, a osobne 48 klatek ruchu ramion w 0,619 s.
+
+Prawa dłoń łucznika naciąga cięciwę do policzka. Po wypuszczeniu ruch palców
+i powrót cięciwy mają osobne tory. Zaktualizowano także przejście od biegu
+do podniesienia łuku. Edytowalne tory obu dłoni i klipu wypuszczenia są w
+[`bow-arms.sif`](../hero/traveler-performance/bow-arms.sif).
+Natywny render 109 klatek trwał 0,454 s. Wcześniej w 13 z 24 próbek
+naciągu dłoń znikała ze wszystkich ośmiu rzutów. Po zmianie była widoczna
+z co najmniej sześciu kierunków w każdej próbce, także w zestawie z hełmem
+i tarczą. Sprawdzono 73 zachowania łuku w wersji gry oraz 10 711 kontroli
+zapisu. [Źródła i odtworzenie ruchu](../hero/traveler-performance/README.md)
+
+**18.11.2026 — chód, bieg i obrót głowy Wędrowca.** W Synfigu zmieniono
+podparcie pięty i noska, ugięcie nóg, przenoszenie ciężaru oraz ruch barków.
+Render końcowych klipów w ośmiu kierunkach trwał 3,576 s dla chodu (60 klatek)
+i 3,293 s dla biegu (48 klatek). Sunburst i Krita dostarczyły dodatkowe
+ujęcia głowy. Lokalny FILM wyrenderował klatki pośrednie w 4,462 s.
+Runtime interpoluje sąsiednie spośród 64 ujęć pełnego obrotu.
+
+W diagnostyce renderera gry obraz samej głowy zmieniał się w 360 z 360
+kroków po 1° w obu kierunkach. W poprzedniej wersji zmieniał się osiem razy.
+Największa zmiana między klatkami spadła z 12,04 do 2,29 poziomu kanału
+na piksel kadru. Próba 4122 klatek objęła też otwarty i zamknięty hełm,
+kaptur, chód, przejście do sprintu i nawrót. Render z eksportem trwał
+13,88 s w ukrytym oknie. Test logiki i animacji zaliczył 555 921 kontroli,
+renderer postaci 868, a wyposażenie 820. Każda z dwóch rozpakowanych paczek
+zawierała 729 zgodnych zasobów i wykonała 180 klatek bez dźwięku.
+[Źródła obrotu](../hero/wayfarer/turn/README.md) · [Źródła ruchu](../hero/traveler-performance/README.md)
+
+**17.11.2026 — nowy Wędrowiec.** Sunburst dostarczył widoki głowy,
+projekt stroju i kirysu. Lokalny DreamShaper 8 dostarczył dziesięć materiałów.
+Trzy edytowalne projekty Krity odpowiadają piksel w piksel trzem arkuszom gry.
+Synfig wyrenderował sześć klipów w ośmiu kierunkach (302 plansze, 20,197 s)
+i dwadzieścia gestów bojowych oraz przejść (500 klatek, 1,555 s).
+Ekspozycja twarzy zależy od założonego hełmu. Broń, tarcza, ubranie
+i dodatki podążają za mocowaniami animowanej postaci.
+
+Renderer bohatera przeszedł 868 kontroli w 22,37 s, w tym 1536 ujęć
+32 akcji specjalistycznych. Renderer wyposażenia przeszedł 755 kontroli
+w 8,07 s, w tym założenie i zdjęcie 116 przedmiotów oraz obie sceny
+z Eldrinem. Pełna diagnostyka grafiki przeszła 1414 kontroli. Obie
+lokalne paczki po wypakowaniu zachowały wszystkie 728 zasobów i wykonały
+po 180 klatek w ukrytym oknie bez dźwięku. Źródła i podgląd są w
+[`art/hero/wayfarer`](../hero/wayfarer/README.md), a logi w
+`C:/AI2D/pipeline/runs/emberfall-wayfarer-20261118`.
+
 **17.11.2026 — nowy Ognisty chochlik.** Lokalny DreamShaper 8 przygotował
 koncepcję i faktury, a natywna Krita zapisała sześć warstw wycinanki w ośmiu
 kierunkach. Synfig dostarczył oddech, krok zależny od pokonanego dystansu,

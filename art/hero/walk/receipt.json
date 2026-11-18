@@ -1,12 +1,14 @@
 {
   "status": "PASS",
   "source": "native Synfig real waypoints; existing joint layout; no 3D authoring",
-  "project": "C:\\AI2D\\animations\\emberfall_walk_20261021_v1\\walk.sif",
-  "project_sha256": "76a755baff01b77b007803f851eb026f9e614550c63feea0b6676c265eefa183",
-  "header_sha256": "6f9092f5dc570506b82f9d39e8dbad414456b670552fbbb27eebc97491693fcf",
+  "project": "C:\\AI2D\\animations\\wanderer-gait-20261118-000434\\primary\\walk.sif",
+  "project_sha256": "6ee6ad5ab5457eda25e4090e65f9414e41e114babba4382ab03aec8c2dd58d50",
+  "header_sha256": "8331d38e78323d622ab3e953b1d5c9dd8288b4c6ebed6cf8dd360f633215281a",
   "loop": true,
   "control_samples": 61,
   "pose_samples": 121,
   "rendered_frames": 60,
-  "external_assets": []
+  "external_assets": [],
+  "render_and_verify_s": 16.63,
+  "synfig_render_s": 2.769
 }

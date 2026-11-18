@@ -123,8 +123,13 @@ int main(int argc,char** argv){
  check(audio.playedEffects==played&&world.sounds.empty(),"actual pause drops arrival instead of replaying it later");
  offline::clock+=2;world.sound(ember::Cue::TeleportArrival,world.player);audio.update(.05f,world,true,false,true);
  check(audio.playedEffects==played&&world.sounds.empty(),"unfocused cinematic cannot emit arrival audio");
- audio.update(.05f,world,false,true);world.bowDrawing=true;world.sound(ember::Cue::BowDraw,world.player);offline::clock+=2;played=audio.playedEffects;audio.update(.05f,world,false,true);
+ audio.update(.05f,world,false,true);world.props.clear();world.enemies.clear();world.forage.clear();world.equipment[0]=ember::item(ember::Kind::Bow);
+ world.beginBow({1,0});offline::clock+=2;played=audio.playedEffects;
  auto bowPlaying=[](){int active=0;for(auto* p:offline::voices)if(p->alias&&p->playing&&p->wave.frameCount==67200)active++;return active;};
+ const int nockFrames=int(std::lround(ember::BowNockDuration*60));
+ for(int i=1;i<nockFrames;i++){world.update(1.f/60,{},false);offline::clock+=1.f/60;audio.update(1.f/60,world,false,true);}
+ check(audio.playedEffects==played&&bowPlaying()==0,"reaching back, extracting and placing an arrow on the string keep the tension voice silent");
+ world.update(1.f/60,{},false);offline::clock+=1.f/60;audio.update(1.f/60,world,false,true);
  check(audio.playedEffects==played+1&&bowPlaying()==1,"real bow draw event starts exactly one authored 1.4-second tension voice");
  world.cancelBow();audio.update(.05f,world,false,true);check(bowPlaying()==0,"bow cancellation stops the tension voice immediately");
  world.bowDrawing=true;world.sound(ember::Cue::BowDraw,world.player);world.cancelBow();played=audio.playedEffects;audio.update(.05f,world,false,true);

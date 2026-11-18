@@ -36,6 +36,27 @@ struct AnimationState {
     ActorFacing travelAxis{}; // Transient locomotion direction in unsquashed screen coordinates.
     void stopSprint(){sprinting=false;runBlend=0;}
 
+    struct SprintStep {float end, average;};
+    SprintStep sprintStep(bool sprint,float dt)const {
+        constexpr double duration=.42;
+        const float target=sprint?1.f:0.f;
+        if(runBlend==target||dt<=0)return {runBlend,runBlend};
+        // The saved weight uniquely determines the position on this reversible
+        // ease-in/out. Feet, pace and equipment never restart when Shift changes.
+        const double start=runBlend<.5f?std::sqrt(.5*runBlend):1-std::sqrt(.5*(1-runBlend));
+        const double delta=(sprint?1:-1)*dt/duration;
+        const double end=std::clamp(start+delta,0.,1.);
+        const double edge=std::min(end,1-end);
+        const double weight=end<.5?2*edge*edge:1-2*edge*edge;
+        const auto integral=[](double u){
+            const double edge=std::min(u,1-u);
+            return std::max(0.,u-.5)+(2./3)*edge*edge*edge;
+        };
+        // Include any part of the step spent at full running/walking speed.
+        const double mean=(integral(end)-integral(start)+(delta-end+start)*target)/delta;
+        return {float(weight),float(std::clamp(mean,0.,1.))};
+    }
+
     void face(float dx, float dy) {
         direction = directionFor(dx, dy, direction);
         targetAngle = int(direction)*(AnimationPi/4);
@@ -50,15 +71,11 @@ struct AnimationState {
         if(moveBlend<.0001f)moveBlend=0;
         sprinting=moving&&sprint;
         swordStow=sword_stow::advance(swordStow,sprinting&&allowStow,dt);
-        float target=sprinting?1.f:0.f;
-        float before=runBlend,decay=std::exp(-14.f*std::max(0.f,dt));
-        float meanBlend=dt>0?target+(before-target)*(1-decay)/(14.f*dt):before;
-        runBlend=target+(before-target)*decay;
-        if(runBlend<.0001f)runBlend=0;
-        if(runBlend>.9999f)runBlend=1;
+        const auto pace=sprintStep(sprinting,dt);
+        runBlend=pace.end;
         if (moving) {
             if(faceMovement)face(dx, dy);
-            phase = std::fmod(phase + travelled * (0.38f-0.07f*meanBlend), 1.0f);
+            phase = std::fmod(phase + travelled * (0.38f-0.07f*pace.average), 1.0f);
         }
         float turn=std::remainder(targetAngle-facingAngle,2*AnimationPi);
         facingAngle+=turn*(1-std::exp(-22.f*std::max(0.f,dt)));

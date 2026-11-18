@@ -1,0 +1,626 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "DreamShaper_8_pruned.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "person, scene, head, entire clothing, photograph, display, swatch on backdrop, frame, grid, text, watermark, weapon, dramatic spotlight, plastic, 3d rendering, multiple swatches, extreme contrast"
+    }
+  },
+  "3": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    }
+  },
+  "10": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, a field of warm ivory linen fabric, tawny edges, naturally weighty vertical folds, very fine diagonal woven linen stitches, an understated rows of embroidery near one edge"
+    }
+  },
+  "11": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111700,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "10",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "12": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "13": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "12",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/tunic"
+    }
+  },
+  "14": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, a copper-brown oiled leather bracer surface, full-bleed brown worn leather with two broad dark overlapping leather straps running diagonally across, fine waxed double stitching on each strip, worn pale leather edges"
+    }
+  },
+  "15": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111701,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "16": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "15",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "17": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "16",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/bracer"
+    }
+  },
+  "18": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, dark espresso brown thick work-boot leather creased around an ankle, tight shallow parallel compression creases, one hand-stitched welt and a soft dry highlight on raised leather"
+    }
+  },
+  "19": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111702,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "18",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "20": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "19",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "21": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "20",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/boot"
+    }
+  },
+  "22": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, a single ancient hammered copper armor plate face, burnished red-gold arched lamella, shallow fluted scallop lines, worn raised outer bead, warm glints, minute peening indentations"
+    }
+  },
+  "23": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111703,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "22",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "24": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "23",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "25": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "24",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/copper"
+    }
+  },
+  "26": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, a piece of weathered deep petrol-teal wool cloak fabric, graceful heavy broad vertical folds with a softly lit crest, narrow golden ochre woven herringbone border along an edge, medieval tailor work"
+    }
+  },
+  "27": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111704,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "26",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "28": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "27",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "29": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "28",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/mantle"
+    }
+  },
+  "30": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, dark peacock-teal long tunic cloth panel, two graceful diagonal overlapping tailored folds ending in a narrow woven border, muted bronze thread, dark teal raw linen weave"
+    }
+  },
+  "31": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111705,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "30",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "32": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "31",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "33": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "32",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/skirts"
+    }
+  },
+  "34": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, a macro field of matte dark chestnut wavy human hair, a few sweeping sculpted locks flow down diagonally rightwards, tapered hair ends, fine umber directional strands, low contrast and diffused highlights"
+    }
+  },
+  "35": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111706,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "34",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "36": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "35",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "37": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "36",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/hair"
+    }
+  },
+  "38": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, deep slate grey fitted wool trouser cloth, naturally compressed in a few overlapping diagonal folds around a bent knee, fine coarse twill weave, soft worn knees"
+    }
+  },
+  "39": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111707,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "38",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "40": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "39",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "41": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "40",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/trousers"
+    }
+  },
+  "42": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, an undyed flax linen sleeve gathered into shallow diagonal tapered folds, warm muted parchment, narrow woven seam, slightly golden threads"
+    }
+  },
+  "43": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111708,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "42",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "44": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "43",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "45": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "44",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/sleeves"
+    }
+  },
+  "46": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "hand painted material closeup for an isometric dark fantasy game, no perspective distortion, tactile painterly gouache strokes, balanced upper-left light, cropped extremely close, material fills image edge to edge, worn russet leather pouch flap, curved double-stitched saddle seam following the oval rim, pressed leather edges and small brass nail accents, dark amber leather pores"
+    }
+  },
+  "47": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 27111709,
+      "steps": 19,
+      "cfg": 6,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "46",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ],
+      "denoise": 1
+    }
+  },
+  "48": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "47",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "49": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "48",
+        0
+      ],
+      "filename_prefix": "emberfall-wanderer-remaster/pouch"
+    }
+  }
+}

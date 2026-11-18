@@ -16,6 +16,29 @@ void sprintTests(){
   check(std::hypot(a.footForward-b.footForward,a.footHeight-b.footHeight)<.01f,"running foot trajectory stays continuous at contact and cycle boundaries");
  }
  auto arena=[](){Game g;g.props.clear();g.enemies.clear();g.forage.clear();g.player={20,20};return g;};
+ // Real input alternates twice mid-transition. Compare displacement and phase
+ // across frame rates, including the first and last fractions of a step.
+ float transitionDistance=-1,transitionPhase=0;
+ for(int fps:{30,60,120}){
+  Game g=arena();float travelled=0;
+  for(int f=0;f<fps;f++){
+   const bool held=f<fps/5||(f>=fps/3&&f<fps*2/3);
+   const V before=g.player;const float previous=g.animation.runBlend,phase=g.animation.phase;
+   g.update(1.f/fps,{1,0},false,held);
+   const float delta=g.surfaceDistance(before,g.player),now=g.animation.runBlend;
+   const float speed=delta*fps;
+   check(speed>=WalkSpeed*(1+(RunMultiplier-1)*std::min(previous,now))-.001f&&
+         speed<=WalkSpeed*(1+(RunMultiplier-1)*std::max(previous,now))+.001f,
+         "travel speed follows the same intermediate gait as the body through repeated Shift reversals");
+   const float advance=std::fmod(g.animation.phase-phase+1.f,1.f);
+   check(advance>.0f&&advance<.09f,"alternating Shift preserves advancing foot phase through both reversals");
+   if(f==0)check(now<.015f,"the first sprint frame eases out of a walk");
+   travelled+=delta;
+  }
+  if(transitionDistance>=0)check(std::abs(transitionDistance-travelled)<.002f&&std::abs(g.animation.phase-transitionPhase)<.001f,
+      "interrupted running pace and foot timing match at 30, 60 and 120 updates per second");
+  transitionDistance=travelled;transitionPhase=g.animation.phase;
+ }
  float referencePhase=-1;
  for(int fps:{30,60,120}){
   Game g=arena();

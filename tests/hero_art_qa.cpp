@@ -4,6 +4,8 @@
 #include "../src/main.cpp"
 #include <iostream>
 #undef main
+#include "traveler_views_qa.hpp"
+#include "bow_nock_views_qa.hpp"
 int main(int argc,char** argv){
  if(argc!=2||std::string(argv[1])!="--no-audio")return 3;
  fs::current_path(fs::absolute(argv[0]).parent_path());fs::create_directories("qa-hero-art/frames");
@@ -12,7 +14,7 @@ int main(int argc,char** argv){
  SetTraceLogLevel(LOG_ERROR);SetConfigFlags(FLAG_WINDOW_HIDDEN);sync_present::useOpenGL();InitWindow(W,H,"Emberfall hero art --no-audio");
  if(!IsWindowReady())return 4;audioSystem.init(false,false);makeArt();fallen_art::init();desert_art::make();sand_prison::make();initHoverArt();makeSkillArt();makeTowerRoomArt();tower_stairs::make();tower_furniture::make();prepareCanvas(1);
  check(PlayerBuild&&!audioSystem.available,"real player renderer uses no audio device");
- check(hero_paint::atlas.id&&hero_paint::atlas.width==512&&hero_paint::atlas.height==384,"Krita atlas decodes and is preloaded once");
+ check(hero_paint::atlas.id&&hero_paint::atlas.width==hero_paint::Width&&hero_paint::atlas.height==hero_paint::Height&&hero_paint::headsLoaded,"complete material atlas and five directional head paintings preload");
  Image original=LoadImage("assets/sprites/hero-paints.png"),material=LoadImageFromTexture(hero_paint::atlas);
  Color* source=LoadImageColors(original);Color* corrected=LoadImageColors(material);
  bool sameAlpha=true,sameOtherParts=true,hairTone=true;int changedHair=0,minHair=255,maxHair=0;
@@ -30,7 +32,7 @@ int main(int argc,char** argv){
  check(sameOtherParts,"face, clothes and all other atlas cells remain identical");
  check(hairTone&&changedHair>5000,"both hair panels share crown brown without pale highlights");
  check(maxHair-minHair>=10,"subtle individual strand contrast survives highlight removal");
- UnloadImageColors(source);UnloadImageColors(corrected);UnloadImage(material);
+ UnloadImageColors(source);UnloadImageColors(corrected);
  game=Game{};intro={};towerStory={};clearStoryMenus();welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=weaponWheelOpen=false;
  game.props.clear();game.enemies.clear();game.forage.clear();game.messageTime=0;
  const std::array<Item,6> outfit={item(Kind::Sword),{},item(Kind::Shield),item(Kind::WolfCloak),item(Kind::Boots),{}};
@@ -51,13 +53,18 @@ int main(int argc,char** argv){
   if(mode==8)game.heroKnockdownRemaining=(1-phase)*HeroKnockdownDuration;
   actor_art::finishShadowFrame();BeginTextureMode(sample);ClearBackground(BLANK);hero(200,320,2.7f,false);EndTextureMode();
  };
- Texture2D rawHair=LoadTextureFromImage(original);SetTextureFilter(rawHair,TEXTURE_FILTER_BILINEAR);UnloadImage(original);
+ // Both versions must have the exact same UV layout, including current equipment.
+ ImageDraw(&material,original,{128,0,256,128},{128,0,256,128},WHITE);
+ Texture2D rawHair=LoadTextureFromImage(material);SetTextureFilter(rawHair,TEXTURE_FILTER_BILINEAR);UnloadImage(original);UnloadImage(material);
  Texture2D fixedHair=hero_paint::atlas;
+ const bool paintedHeads=hero_paint::headsLoaded;
+ hero_paint::headsLoaded=false;
  for(int dir=0;dir<8;dir++){
   hero_paint::atlas=rawHair;draw(.1f,0,Direction(dir));saveTexture(sample,("qa-hero-art/hair-before-"+std::to_string(dir)+".png").c_str());
   hero_paint::atlas=fixedHair;draw(.1f,0,Direction(dir));saveTexture(sample,("qa-hero-art/hair-after-"+std::to_string(dir)+".png").c_str());
  }
  UnloadTexture(rawHair);
+ hero_paint::headsLoaded=paintedHeads;
  for(int dir=0;dir<8;dir++){
   draw(.1f,0,Direction(dir));BeginTextureMode(sheet);DrawTexturePro(sample.texture,{0,0,400,-420},{float(dir%4)*400,float(dir/4)*420,400,420},{0,0},0,WHITE);EndTextureMode();
  }
@@ -65,6 +72,37 @@ int main(int argc,char** argv){
  for(int dir=0;dir<8;dir++){
   draw(.1f,0,Direction(dir),true);
   saveTexture(sample,("qa-hero-art/wanderer-"+std::to_string(dir)+".png").c_str());
+  Image paintedFace=LoadImageFromTexture(sample.texture);
+  hero_paint::headsLoaded=false;
+  draw(.1f,0,Direction(dir),true);
+  Image oldFace=LoadImageFromTexture(sample.texture);
+  hero_paint::headsLoaded=paintedHeads;
+  ImageFlipVertical(&paintedFace);ImageFlipVertical(&oldFace);
+  Color* withFace=LoadImageColors(paintedFace);Color* withoutFace=LoadImageColors(oldFace);
+  int altered=0,belowNeck=0;
+  for(int y=0;y<sample.texture.height;y++)for(int x=0;x<sample.texture.width;x++){
+   const int pos=y*sample.texture.width+x;Color a=withFace[pos],b=withoutFace[pos];
+   if(std::abs(int(a.r)-b.r)+std::abs(int(a.g)-b.g)+std::abs(int(a.b)-b.b)+std::abs(int(a.a)-b.a)>28){
+    altered++;belowNeck+=y>175;
+   }
+  }
+  check(altered>400&&belowNeck==0,"directional head painting appears only at the animated head joint");
+  UnloadImageColors(withFace);UnloadImageColors(withoutFace);UnloadImage(paintedFace);UnloadImage(oldFace);
+ }
+ for(int mode:{0,1,3})for(int dir=0;dir<8;dir++){
+  unsigned long long previous=0;int distinct=0;
+  for(int key=0;key<4;key++){
+   draw((key+.25f)/4,mode,Direction(dir),true);
+   Image image=LoadImageFromTexture(sample.texture);Color* pixels=LoadImageColors(image);
+   unsigned long long hash=14695981039346656037ull;int solid=0;
+   for(int i=0;i<image.width*image.height;i++){
+    Color c=pixels[i];solid+=c.a>128;
+    hash=(hash^c.r)*1099511628211ull;hash=(hash^c.a)*1099511628211ull;
+   }
+   check(solid>1600,"directional key pose has a complete rendered character");
+   distinct+=key&&previous!=hash;previous=hash;UnloadImageColors(pixels);UnloadImage(image);
+  }
+  check(distinct==3,"idle, stride and sword cut animate in each of eight directions");
  }
  draw(0,0,Direction::S,true);Image face=LoadImageFromTexture(sample.texture);ImageFlipVertical(&face);Color* facePixels=LoadImageColors(face);int faceSolid=0,faceWhite=0;
  for(int y=87;y<170;y++)for(int x=168;x<232;x++){Color c=facePixels[y*400+x];if(c.a>200){faceSolid++;faceWhite+=c.r>240&&c.g>240&&c.b>240;}}
@@ -100,6 +138,8 @@ int main(int argc,char** argv){
  UnloadImageColors(a);UnloadImageColors(b);UnloadImage(painted);UnloadImage(plain);
  game=Game{};game.player={8,19};game.messageTime=0;renderScene();saveTexture(canvas,"qa-hero-art/forest.png");
  game.activateField(WorldLocation::Desert);game.player=DesertArrival;renderScene();saveTexture(canvas,"qa-hero-art/desert.png");
+ verifyTravelerViews(check);
+ verifyBowNockingViews(check);
  UnloadRenderTexture(sample);report<<checks-failed<<"/"<<checks<<" passed\n";report.close();
  hero_paint::unload();audioSystem.shutdown();sync_present::shutdown();CloseWindow();std::cout<<"Hero renderer: "<<checks-failed<<"/"<<checks<<" passed\n";return failed?2:0;
 }

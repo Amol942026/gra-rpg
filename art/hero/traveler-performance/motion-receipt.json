@@ -1,0 +1,118 @@
+{
+  "status": "PASS",
+  "version": "synfig 1.4.5",
+  "audio": false,
+  "header_sha256": "d14fbbca66017948cc354496bd987ad69830702fc434002ef22e0f3f624f5979",
+  "clips": [
+    {
+      "clip": "idle",
+      "frames": 120,
+      "directions": 8,
+      "unique_directional_frames": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "synfig_render_s": 4.426,
+      "sha256": "f7f7a9227365035eed608f73e5843ae0289e6d88c35cf2da6b39a2d52aec5bc4"
+    },
+    {
+      "clip": "walk",
+      "frames": 60,
+      "directions": 8,
+      "unique_directional_frames": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "synfig_render_s": 3.576,
+      "sha256": "3c598b3868f2bde3e3a8b7d89359bc716384bf54845f71643009cc76b9fb1d53"
+    },
+    {
+      "clip": "slash",
+      "frames": 20,
+      "directions": 8,
+      "unique_directional_frames": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "synfig_render_s": 2.954,
+      "sha256": "fed4b40bd845713dc1e96dcc1496ce03f5f411b386ad22c4dec95b37af57349d"
+    },
+    {
+      "clip": "run",
+      "frames": 48,
+      "directions": 8,
+      "unique_directional_frames": [
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48
+      ],
+      "synfig_render_s": 3.309,
+      "sha256": "b365a307d4ebefa6a1ffe37db065b78447560a12642a671afe0bd99f5abce718"
+    },
+    {
+      "clip": "heavy",
+      "frames": 30,
+      "directions": 8,
+      "unique_directional_frames": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "synfig_render_s": 3.153,
+      "sha256": "6519350e480945a977212a3a5b714a017214d4425cebaac050eca446fe850469"
+    },
+    {
+      "clip": "roll",
+      "frames": 24,
+      "directions": 8,
+      "unique_directional_frames": [
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24
+      ],
+      "synfig_render_s": 3.006,
+      "sha256": "5cf30f91824eba5f6a6e035bfe5c9eb1365d6273ab06330ea5fad3ceac3d878e"
+    }
+  ],
+  "synfig_render_s": 20.424,
+  "run_gait_header_sha256": "697c4c19b8012f9919c114fc2e0ce44a802f9e4d7cd6209f132d16b6a3c5ca03",
+  "locomotion_render_dir": "C:\\AI2D\\animations\\wanderer-gait-20261118-000434\\verified-final",
+  "run_arm_source_sha256": "dab59a031334f1c38a5eccb693aa8ce7521dad14b15c41cdb72231a755706527",
+  "run_arm_header_sha256": "de2bbdb5ea341de2694fe4dc7ea6c32e17ace86273a42db98c851427f40217ba",
+  "run_render_dir": "C:\\AI2D\\animations\\wayfarer-run-archery-20261118\\sprint\\run-frames",
+  "run_arm_render_dir": "C:\\AI2D\\animations\\wayfarer-run-archery-20261118\\sprint\\arm-frames",
+  "run_arm_render_s": 0.619
+}

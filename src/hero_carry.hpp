@@ -1,5 +1,6 @@
 #pragma once
 #include "hero_motion.hpp"
+#include "hero_quiver.hpp"
 #include "sword_pose.hpp"
 namespace ember::hero_carry {
 // Equipment needs a carrying grip: a free wrist swing can put an upright
@@ -86,7 +87,7 @@ inline void melee(hero_motion::Pose& pose,float weight=1){
 inline void bow(hero_motion::Pose& pose){
  using namespace hero_motion;
  // Keep the stave facing forward and move the elbow inside the bow's plane.
- const Quat carry=axisAngle({0,1,0},-6);
- grip(pose,true,24,mul(pose.skin[data::Spine].q,carry),{.65f,-1,.12f});
+ const Quat carry=axisAngle({0,1,0},6);
+ grip(pose,hero_quiver::BowHand==data::HandL,24,mul(pose.skin[data::Spine].q,carry),{-.65f,-1,.12f});
 }
 }

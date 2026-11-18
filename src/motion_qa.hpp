@@ -15,7 +15,7 @@ bool runMotionQA(bool expectedFullscreen){
     for(int frame=0;frame<264;frame++){
         double begin=GetTime();
         if(frame>60)times.push_back((begin-previous)*1000);previous=begin;
-        if(frame==60)runStart=game.player;
+        if(frame==90)runStart=game.player;
         if(frame==150){runEnd=game.player;rollStart=game.player;game.startRoll({1,-1});}
         if(frame==174)rollEnd=game.player;
         V move=frame<60?V{}:frame<174?V{1,-1}:V{-1,1};
@@ -24,7 +24,7 @@ bool runMotionQA(bool expectedFullscreen){
         game.update(1.f/60,move,false,true);
         renderScene();BeginDrawing();presentCanvas();EndDrawing();finishFramePacing();
     }
-    check(std::abs(distance(runEnd,runStart)-WalkSpeed*RunMultiplier*1.5f)<.02f,"running keeps its intended speed while the camera scrolls");
+    check(std::abs(distance(runEnd,runStart)-WalkSpeed*RunMultiplier)<.02f,"after accelerating the hero holds the authored running speed for one second while the camera scrolls");
     check(std::abs(distance(rollEnd,rollStart)-RollDuration*RollSpeed)<.02f,"rolling keeps its distance while the camera scrolls");
     std::sort(times.begin(),times.end());double mean=std::accumulate(times.begin(),times.end(),0.0)/times.size();
     double p95=times[size_t(times.size()*.95)],nominal=1000.0*swapInterval/refreshHz;

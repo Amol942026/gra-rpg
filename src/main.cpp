@@ -853,11 +853,11 @@ void input(float dt){
  if(mouse.x>WorldW&&mouse.y>=594&&mouse.y<702){float wheel=GetMouseWheelMove();if(wheel!=0){if(game.findCorpse(game.openedCorpse)){syncCorpsePage();corpsePage=std::clamp(corpsePage+(wheel<0?1:-1),0,corpsePages()-1);}else nearbyPage+=wheel<0?1:-1;}}
  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))leftClickGameplay(move);
  if(developerMenuOpen||towerStory.active()||towerPanelOpen||quickPickerSlot>=0)return;
- if(game.bowDrawing){if(worldPointerAllowed(mouse))game.aimBow(combatAimFromPointer());else game.cancelBow();}
+ if(game.bowDrawing&&!game.bowReleaseQueued){if(worldPointerAllowed(mouse))game.aimBow(combatAimFromPointer());else game.cancelBow();}
  if(game.holdingMelee()){if(worldPointerAllowed(mouse))game.aimMelee(combatAimFromPointer());else game.cancelMeleeHold();}
  if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){if(dragging.place!=Place::None)finishDrag();else releaseWorldAttack();}
  startTowerReturn();if(towerStory.active()||towerPanelOpen)return;
- if(game.bowDrawing&&!IsMouseButtonDown(MOUSE_BUTTON_LEFT))game.cancelBow();
+ if(game.bowDrawing&&!game.bowReleaseQueued&&!IsMouseButtonDown(MOUSE_BUTTON_LEFT))game.cancelBow();
  if(game.holdingMelee()&&!IsMouseButtonDown(MOUSE_BUTTON_LEFT))game.cancelMeleeHold();
  if(!statsOpen&&!skillsOpen&&!spellBookOpen)game.update(dt,move,false,running);
  if(dragging.place==Place::Corpse&&game.openedCorpse!=dragging.owner)dragging={};

@@ -12,12 +12,20 @@ void rollTests() {
     }
     for(bool boots:{false,true})for(int fps:{30,60,120})for(V direction:{V{1,0},V{1,-1}}){
         Game runner=emptyArena();if(boots)runner.equipment[4]=item(Kind::Boots);
+        for(int i=0;i<fps/2;i++)runner.update(1.f/fps,direction,false,true);
+        const V start=runner.player;
         float travelled=0;for(int i=0;i<fps;i++){V before=runner.player;runner.update(1.f/fps,direction,false,true);travelled+=runner.surfaceDistance(before,runner.player);}
         const float expected=(boots?BootsSpeed:WalkSpeed)*RunMultiplier;
-        check(std::abs(travelled-expected)<.002f&&distance(normalized(runner.player-V{15,15}),normalized(direction))<.002f,"held run adds 50% ground speed, normalizes diagonals and is FPS independent with boots");
+        check(std::abs(travelled-expected)<.002f&&distance(normalized(runner.player-start),normalized(direction))<.002f,"steady run adds 50% ground speed, normalizes diagonals and is FPS independent with boots");
         check(!runner.rolling()&&runner.swing==0&&runner.mana==100,"running does not roll, attack or spend mana");
-        V before=runner.player;runner.update(.05f,direction,false,false);
-        check(std::abs(runner.surfaceDistance(before,runner.player)-(boots?BootsSpeed:WalkSpeed)*.05f)<.001f,"releasing run immediately restores walking speed along the slope");
+        float walk=boots?BootsSpeed:WalkSpeed,previousSpeed=expected;
+        for(int i=0;i<fps/2;i++){
+            V before=runner.player;runner.update(1.f/fps,direction,false,false);
+            const float speed=runner.surfaceDistance(before,runner.player)*fps;
+            check(speed<=previousSpeed+.003f&&speed>=walk-.003f,"releasing Shift decelerates monotonically along the slope");
+            previousSpeed=speed;
+        }
+        check(std::abs(previousSpeed-walk)<.003f,"completed deceleration restores walking speed with or without boots");
     }
     Game idleRun=emptyArena();idleRun.update(.05f,{},false,true);
     check(distance(idleRun.player,V{15,15})==0&&!idleRun.animation.moving,"holding run while idle does not move the hero");

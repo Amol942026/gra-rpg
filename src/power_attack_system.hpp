@@ -26,7 +26,7 @@ float powerVisualAge()const{
 }
 float powerWindupProgress()const{
  if(!canHoldAttack())return -1;
- if(bowDrawing&&!piercingArrowArmed)return std::min(1.f,bowDrawTime/PowerHoldTime);
+ if(bowDrawing&&bowDrawTime>=0&&!piercingArrowArmed)return std::min(1.f,bowDrawTime/PowerHoldTime);
  if(holdingMelee()&&powerStyle(archetype(equipment[0].kind))!=PowerStyle::Count)return heldAttackTime/PowerHoldTime;
  return -1;
 }

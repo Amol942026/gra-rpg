@@ -1,0 +1,111 @@
+{
+  "inputs": {
+    "illustrations": "Sunburst (built-in image generation)",
+    "material_model": {
+      "folder": "checkpoints",
+      "filename": "DreamShaper_8_pruned.safetensors",
+      "repo": "Lykon/DreamShaper",
+      "revision": "228d79cb20811466f5c5710aa91f05dabd0b8a14",
+      "original_filename": "DreamShaper_8_pruned.safetensors",
+      "bytes": 2132625894,
+      "sha256": "879db523c30d3b9017143d56705015e15a2cb5628762c11d086fed9538abd7fd",
+      "download": "https://huggingface.co/Lykon/DreamShaper/resolve/228d79cb20811466f5c5710aa91f05dabd0b8a14/DreamShaper_8_pruned.safetensors",
+      "license": "Creator conditions permitting commercial use of generated images",
+      "license_source": "https://civitai.com/api/v1/models/4384"
+    },
+    "comfyui_version": "0.44.2",
+    "comfyui_jobs": [
+      {
+        "id": "bb479a22-659a-4221-a095-16a5f13374f5",
+        "seconds": 36.114
+      },
+      {
+        "id": "9c2da7ab-4254-45f4-8155-06f285a1dc4f",
+        "seconds": 28.304
+      }
+    ],
+    "paint_and_export": "Krita 5.3.4.1 RGBA U8",
+    "source_sha256": {
+      "sources/comfy/boot.png": "d20a8739269d9a22220a8ccdefdec4f49866fb923c6bb136140d8a47b2178f00",
+      "sources/comfy/bracer.png": "3f5294dcd8cc2c9173aa4c807fee43ded4ec385c63ba07009aed2f7c033121e3",
+      "sources/comfy/copper.png": "05765bf8f770b8f5536c7cf34aafac7a271ed7e8231cfecadb55eb41a8038bd9",
+      "sources/comfy/fullbleed-api.json": "baa65cf0ea24e29c65fa4d78a8b7ca1af3ee8ae5d73ece7131b13b9aa6578df0",
+      "sources/comfy/hair.png": "db6cb69b81bf6cc902347c07fe1d19ebda9613e5d43f3a54d8cc2e0082892f28",
+      "sources/comfy/mantle.png": "3640a6f3fb7de3eab316891ad9e02f382ef1ad09163830ef5323860f8f6cde04",
+      "sources/comfy/materials-api.json": "02a1c01f118d1adb10dfe3c04760aaa1dbb0bb45ce3b003929e1cb52461d3c01",
+      "sources/comfy/pouch.png": "ba69a993af04a8b7ae3e1849c305118a2332a762b362218ea2c6a82773caceab",
+      "sources/comfy/skirts.png": "eaeabe45dcf35f5407b1c172dc2a1cc828e928afc924d15ff09a41f344268aaf",
+      "sources/comfy/sleeves.png": "f97f7b1a72503047a4bef3eb0f74400477a0e193614d9d8b537a07392fe9957c",
+      "sources/comfy/trousers.png": "f5f0d3e29fe23492a38017a2b1678019fbd866490bb95faed59616a3b0a6b4fe",
+      "sources/comfy/tunic.png": "1e9a3bbbd89428216973f9ae9c9fe757a184e1f41eb18cd3f6f4f924d4082d6b",
+      "sources/sunburst-garments.png": "79cc1512baa05e57248e9ff3b675483eddba975d6d1649dba29d4152af47d788",
+      "sources/sunburst-heads.png": "42432c261d6d048489b12fb33f6680178d0b81c3c658710070e3245c78bc1a56",
+      "sources/sunburst-plate.png": "8ef8781dbf9ce60fc069bb6281066ea370c90384b5994f50b4a4f9793396857c"
+    }
+  },
+  "sprites": [
+    {
+      "master": "heads.kra",
+      "master_sha256": "94b493d3f3a5db1644003c7268215705ce43dced7baf604a373d2af26f66fb13",
+      "texture": "assets/sprites/hero-heads.png",
+      "texture_sha256": "457b8705d856040f8bb5230699013fbd9b20f5dfa59991341fe45ba2536e5a23",
+      "width": 640,
+      "height": 128
+    },
+    {
+      "master": "materials.kra",
+      "master_sha256": "219f4f38d585a5aa3095f66e87e147439d47efd3bf2f4b6dc8b723137bc7dc2c",
+      "texture": "assets/sprites/hero-paints.png",
+      "texture_sha256": "caf0d772156acd925da4391842be6761073b104a6960372f1e885664b1be61da",
+      "width": 512,
+      "height": 384
+    },
+    {
+      "master": "armor.kra",
+      "master_sha256": "0218d72f102300a22daa4820a69cbaff45ef6791a1e6ec9c08fe40e6e123e720",
+      "texture": "assets/sprites/hero-armor-paints.png",
+      "texture_sha256": "3605b475ac30297423e3f72e26453d5bf25328ef48f10e6e5b6b120bcc0f9d7c",
+      "width": 512,
+      "height": 256
+    }
+  ],
+  "projection": {
+    "direction_order": [
+      "E",
+      "SE",
+      "S",
+      "SW",
+      "W",
+      "NW",
+      "N",
+      "NE"
+    ],
+    "head_sheet_views": [
+      "front",
+      "three-quarter right",
+      "right",
+      "three-quarter back right",
+      "back"
+    ],
+    "cell_px": 128,
+    "painted_head_height_px": 120
+  },
+  "continuous_head_turn": {
+    "painted_intermediate_views": "turn/sunburst-inbetweens.png",
+    "layered_source": "turn/turn-keys.kra",
+    "painted_keys": "turn/turn-keys.png",
+    "key_count": 16,
+    "frames": 64,
+    "angles": "clockwise from front toward the right profile, 5.625 degrees per cell",
+    "layout": "8 by 8 row-major, 128 square pixels per cell",
+    "workflow": "turn/film-workflow.json",
+    "interpolator": "Comfy-Org/Frame-Interpolation, FILM FP16",
+    "model_revision": "aa7009be4d1471ea0bac91d6fe4d7e4b637cbbfc",
+    "model_sha256": "f226e51375dc839d4b40e5c3d63da560dd1ea1c962364ec78f5adf2d05db05c0",
+    "comfyui_job": "0786f2ff-7fce-4437-8ede-a3b532b35b46",
+    "comfyui_seconds": 4.462,
+    "runtime_sheet": "assets/sprites/hero-head-turn.png",
+    "runtime_sha256": "f5aa3615d6355aecc44ad4b5b6bd288664f64ddf04bbc9f02cc91583c4d26809"
+  },
+  "synfig_sources": "../traveler-performance"
+}

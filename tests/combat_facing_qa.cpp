@@ -34,7 +34,8 @@ int main(int argc,char** argv){
   check(pointAtEnemy(42),"enemy silhouette is selectable in every direction");
   check(distance(normalized(combatAimFromPointer()),normalized(aim))<.0001f,"cursor on enemy aims at its world position, independent of body height");
   leftClickGameplay(aim*-1);
-  check(game.swing>0&&distance(game.facing,normalized(aim))<.0001f&&game.enemies[0].hp<500,"real sword click attacks and faces the selected enemy");
+  check(game.holdingMelee()&&game.swing==0&&game.enemies[0].hp==500,"sword press aims and waits for the release before dealing damage");
+  check(releaseWorldAttack()&&game.swing>0&&distance(game.facing,normalized(aim))<.0001f&&game.enemies[0].hp<500,"releasing a short sword click attacks and faces the selected enemy");
   game.enemies.clear();V before=game.player;
   for(int i=0;i<15;i++)game.update(1.f/60,aim*-1,false,true);
   check(game.animation.direction==directionFor(aim.x,aim.y,Direction::SE)&&aimError()<.02f&&distance(before,game.player)>1,"rendered sword facing survives opposite sprint input");
@@ -45,7 +46,7 @@ int main(int argc,char** argv){
  reset();game.selectWeapon(1);
  auto pointAtGround=[](V aim){Vector2 p=screen(game.player+normalized(aim)*4);mouse={p.x,p.y-35};};
  pointAtGround({-1,1});leftClickGameplay({1,-1});check(game.bowDrawing,"real world press starts an aimed bow draw");
- for(int frame=0;frame<36;frame++){
+ for(int frame=0;frame<int(std::ceil((BowNockDuration+BowMinDrawTime)*60))+1;frame++){
   V aim=frame<18?V{-1,1}:V{1,1};pointAtGround(aim);game.aimBow(combatAimFromPointer());game.update(1.f/60,{1,-1},false);
   if(frame==17||frame==35){
    check(game.animation.direction==directionFor(aim.x,aim.y,Direction::SE)&&aimError()<.01f,"moving bow visually tracks the current pointer instead of the movement vector");
@@ -62,7 +63,8 @@ int main(int argc,char** argv){
  for(int row=0;row<3;row++)for(int d=0;d<8;d++){
   reset();V aim=aims[d];game.facing=normalized(aim*-1);game.animation.face(-aim.x,-aim.y);
   if(row==0)game.attack(aim);else{game.selectWeapon(1);game.beginBow(aim);}
-  for(int i=0;i<15;i++)game.update(1.f/60,aim*-1,false);
+  const int frames=row==0?15:int(std::lround(BowNockDuration*60))+15;
+  for(int i=0;i<frames;i++)game.update(1.f/60,aim*-1,false);
   if(row==2){game.releaseBow();game.update(1.f/60,aim*-1,false);}
   actor_art::finishShadowFrame();
   BeginTextureMode(sheet);float x=d*240+120.f,y=row*210+185.f;
