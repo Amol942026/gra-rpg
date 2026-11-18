@@ -189,23 +189,52 @@ bool prepareEruption(Enemy& e,float dt,bool visible){
   return true;
  }return false;
 }
-void launchCinder(const Enemy& e){if(cinders.size()<24){cinders.push_back({e.pos,normalized(player-e.pos)*7.5f,7,float(e.damage()),e.id});sound(enemyAttackCue(e.type),e.pos);}}
+void setCinderLaunch(CinderBolt& b,const Enemy& owner,V aim){
+ if(owner.type!=FireImpType&&owner.type!=AshWraithType)return;
+ const float angle=int(owner.animation.direction)*AnimationPi/4;
+ if(owner.type==FireImpType)b.aimRange=std::clamp(distance(aim,owner.pos),.01f,7.f);
+ b.castFacing=owner.animation.facingInitialized?owner.animation.facingAngle:std::atan2(.5f*std::sin(angle),std::cos(angle));
+}
+void launchCinder(const Enemy& e){
+ if(cinders.size()>=24)return;
+ CinderBolt bolt{e.pos,normalized(player-e.pos)*7.5f,7,float(e.damage()),e.id};
+ setCinderLaunch(bolt,e,player);
+ cinders.push_back(bolt);sound(enemyAttackCue(e.type),e.pos);
+}
 void updateVolcanoAttacks(float dt,V heroBefore,bool wasRolling,float rollAge){
  if((cinders.empty()&&fissures.empty())||dt<=0)return;
  for(size_t i=0;i<cinders.size();){
-  auto& b=cinders[i];V delta=b.velocity*dt;float first=2;
-  for(const auto& p:props)first=std::min(first,segmentCircle(b.pos,delta,p.pos,propRadius(p.type)+.12f));
-  for(const auto& c:chests)if(c.location==location)first=std::min(first,segmentCircle(b.pos,delta,c.pos,ChestRadius+.12f));
-  if(hasFountains())for(V p:fountains())first=std::min(first,segmentCircle(b.pos,delta,p,FountainRadius+.12f));
-  float contact=segmentCircle(b.pos-heroBefore,delta-(player-heroBefore),{},.42f);
-  bool hit=contact<=1&&contact<=first;
-  if(hit&&!dead()){
-   V at=heroBefore+(player-heroBefore)*contact;
-   if(wasRolling&&rollAge+dt*contact<RollProtection){sound(Cue::Dodge,at);effects.push_back({at,"UNIK",.65f,3});}
+  auto& b=cinders[i];
+  // Use the same time interval for the missile and the moving hero. A long
+  // simulation step must stop at the spell's range, even if the hero moved.
+  const float speed=length(b.velocity);
+  const float step=speed>0?std::min(dt,b.remaining/speed):0;
+  const V delta=b.velocity*step,heroTravel=(player-heroBefore)*(step/dt);
+  float obstacle=2;
+  for(const auto& p:props)obstacle=std::min(obstacle,segmentCircle(b.pos,delta,p.pos,propRadius(p.type)+.12f));
+  for(const auto& c:chests)if(c.location==location)obstacle=std::min(obstacle,segmentCircle(b.pos,delta,c.pos,ChestRadius+.12f));
+  if(hasFountains())for(V p:fountains())obstacle=std::min(obstacle,segmentCircle(b.pos,delta,p,FountainRadius+.12f));
+  const float contact=dead()?2:segmentCircle(b.pos-heroBefore,delta-heroTravel,{},.42f);
+  const bool hit=contact<=1&&contact<=obstacle;
+  const float fraction=std::min({1.f,contact,obstacle});
+  b.pos=b.pos+delta*fraction;b.remaining-=speed*step*fraction;
+  const bool dodged=hit&&wasRolling&&rollAge+step*contact<RollProtection;
+  if(hit){
+   const V at=heroBefore+heroTravel*contact;
+   if(dodged){sound(Cue::Dodge,at);effects.push_back({at,"UNIK",.65f,3});}
    else takeMonsterDamage(incomingDamage(b.damage,DamageType::Magic),at,.22f,b.velocity,DamageType::Magic);
   }
-  b.pos=b.pos+delta;b.remaining-=length(delta);
-  if(hit||first<=1||b.remaining<=0||b.pos.x<MapWalkMin||b.pos.y<MapWalkMin||b.pos.x>MapWalkMax||b.pos.y>MapWalkMax)cinders.erase(cinders.begin()+i);else i++;
+  if((hit||obstacle<=1)&&!dodged){
+   const auto* owner=findEnemy(b.owner);
+   if(owner&&owner->type==FireImpType){
+    if(b.aimRange<=0)setCinderLaunch(b,*owner,player);
+    explosions.push_back({b.pos,spellDefinition(Spell::Fireball).impactLife,Spell::Fireball,b.handWeight(),b.castFacing});
+    sound(Cue::FireballImpact,b.pos);
+   }
+  }
+  if(hit||obstacle<=1||b.remaining<=.00001f||b.pos.x<MapWalkMin||b.pos.y<MapWalkMin||b.pos.x>MapWalkMax||b.pos.y>MapWalkMax)
+   cinders.erase(cinders.begin()+i);
+  else ++i;
  }
  for(auto& f:fissures){
   float before=f.age;f.age+=dt;

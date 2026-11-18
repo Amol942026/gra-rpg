@@ -14,13 +14,15 @@ import synfig_cli
 FRAMES = 60
 CHANNELS = ("travel", "lift", "rise", "tilt", "tail", "guard", "cast", "reach", "ember")
 CAST = {
-    "rise": ((0, 0), (14, -3.2), (22, -5), (27, 3.1), (33, 1.2), (46, -1.6), (60, 0)),
-    "tilt": ((0, 0), (18, -8), (22, -13), (27, 12), (35, 7), (49, -2.4), (60, 0)),
-    "tail": ((0, 0), (15, 10), (23, 20), (29, -11), (36, -18), (48, 5), (60, 0)),
-    "guard": ((0, 0), (11, 23), (22, 45), (28, 20), (36, -14), (50, 6), (60, 0)),
-    "cast": ((0, 0), (8, 17), (17, 34), (22, 14), (27, 81), (32, 88), (41, 40), (60, 0)),
-    "reach": ((0, 0), (15, -3), (22, -6), (27, 6), (33, 8.1), (45, 1.5), (60, 0)),
-    "ember": ((0, 0), (10, .15), (18, .55), (24, 1), (26, .89), (27, 0), (60, 0)),
+    "rise": ((0,0),(8,-.5),(15,-1.55),(20,-2.15),(23,-1.5),(27,.75),(32,1.65),(40,.45),(49,-.4),(60,0)),
+    "tilt": ((0,0),(9,-1.3),(16,-3.6),(20,-4.7),(23,-3.1),(27,2.8),(32,5.4),(39,3.7),(51,-.8),(60,0)),
+    "tail": ((0,0),(8,-1),(16,5),(24,16),(29,15),(37,-12),(43,-15),(52,2),(60,0)),
+    # Both shoulders rotate toward a shared target; guard is the hand-cupping weight.
+    "guard": ((0,0),(4,.13),(8,.55),(13,.94),(17,1),(26,1),(28,.974),(32,.845),(37,.683),(42,.517),(48,.327),(55,.11),(60,0)),
+    # The thrust advances the cupped hands as one, then lets the fingers fall away.
+    "cast": ((0,0),(9,0),(17,-.18),(20,-.21),(23,.12),(27,.88),(30,1),(36,.81),(44,.38),(53,.055),(60,0)),
+    "reach": ((0,0),(8,-.45),(16,-1.2),(20,-1.65),(23,-.9),(27,1.75),(32,2.6),(41,1.25),(50,-.22),(60,0)),
+    "ember": ((0,0),(5,0),(8,.15),(12,.40),(16,.65),(20,.87),(23,.98),(26,1),(27,1),(28,0),(60,0)),
 }
 
 
@@ -34,12 +36,18 @@ def poses(clip):
         a = math.tau * phase
         if clip == "walk":
             travel, lift = walking_foot(phase)
-            result.append((travel * (8.12 / 17.6), lift * 1.08, .9 * math.sin(2*a - .6),
-                           5.5 * math.sin(a), 8.2 * math.sin(a-.7), 14 * math.sin(a+.28),
-                           -17 * math.sin(a+.28), 0, 0))
+            # The supporting hoof covers the ground distance of one half-step.
+            # The hips recover after heel contact, the long tail follows the pelvis.
+            weight = 1.7 * math.cos(2*a-.72) + .28 * math.sin(4*a-.4)
+            arm = math.sin(a+.19)
+            result.append((travel * (8.12 / 17.6), lift * 1.22, weight,
+                           4.8 * math.sin(a-.16), 9.6 * math.sin(a-.98)+2.2*math.sin(2*a-.75),
+                           19.4*arm-1.8*math.sin(2*a), -21.2*arm+2.2*math.sin(2*a+.32), 0, 0))
         else:
-            result.append((0, 0, .75 * (1-math.cos(a)), 1.4*math.sin(a),
-                           5.3*math.sin(a-.8), 2.1*math.sin(a-.2), 2.7*math.sin(a+.35), 0, 0))
+            breath=.77*(1-math.cos(a))+.15*(1-math.cos(2*a))
+            result.append((0, 0, breath, 1.5*math.sin(a-.30),
+                           6.7*math.sin(a-.88)+1.15*math.sin(2*a-.54),
+                           2.4*math.sin(a-.33), 3.4*math.sin(a+.39), 0, 0))
     return [*result, result[0]]
 
 
@@ -67,7 +75,7 @@ def read_tracks(path):
 
 
 def export(header, clips):
-    if clips["cast"][27][-1] or not all(rows[0] == rows[-1] for rows in clips.values()):
+    if clips["cast"][27][-1]<.99 or clips["cast"][28][-1] or not all(rows[0] == rows[-1] for rows in clips.values()):
         raise ValueError("A cast must release at .45 and every timeline must return to its first pose")
     key = ",".join(CHANNELS)
     source = ["#pragma once", "// Exported by fire_imp_motion_synfig.py from native Synfig waypoints.",

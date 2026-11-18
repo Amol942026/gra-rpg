@@ -1,7 +1,7 @@
 #pragma once
 Game volcanoArena(int type=VolcanoBossType){Game g;g.activateField(WorldLocation::Volcano);g.props.clear();g.enemies.clear();g.player={16,50};float hp=enemyInfo(type).health;g.enemies.push_back({2099,type,{12,50},{12,50},hp,hp});return g;}
 void volcanoTests(){
- for(int type:{SlagCrawlerType,EmberDrakeType}){
+ for(int type:{SlagCrawlerType,FireImpType,AshWraithType,ObsidianSentinelType,EmberDrakeType}){
   Enemy patroller{2099,type,{12,50},{12,50},100,100};
   Game::advanceVolcanoAnimation(patroller,{.04f,.012f},1.f/60,true);
   const float precise=std::atan2((.04f+.012f)*.5f,.04f-.012f);
@@ -98,9 +98,24 @@ void volcanoTests(){
  check(g.hp<g.maxHp()&&boss.eruptions==1,"eruption damages the target once and respects its cooldown");
  g=volcanoArena();g.enemies[0].eruptionCd=0;g.update(.05f,{},false);g.player={20,55};for(int i=0;i<25;i++)g.update(.05f,{},false);check(g.hp==g.maxHp(),"moving out of the marked eruption avoids damage");
  for(int type:{14,15}){
-  g=volcanoArena(type);for(int i=0;i<50;i++)g.update(.02f,{},false);check(g.hp<g.maxHp(),"both volcanic casters fire real damaging projectiles");
+  g=volcanoArena(type);for(int i=0;i<68;i++)g.update(.02f,{},false);check(g.hp<g.maxHp(),"both volcanic casters fire real damaging projectiles");
   g=volcanoArena(type);g.launchCinder(g.enemies[0]);g.props.push_back({{14,50},14,1});for(int i=0;i<30;i++)g.updateVolcanoAttacks(.02f,g.player,false,0);check(g.hp==g.maxHp()&&g.cinders.empty(),"cover intercepts caster projectiles");
  }
+ for(const int caster:{FireImpType,AshWraithType}){
+  g=volcanoArena(caster);const auto origin=g.enemies[0].pos;
+  g.launchCinder(g.enemies[0]);g.updateVolcanoAttacks(1.6f,g.player,false,0);
+  check(g.hp<g.maxHp()&&g.cinders.empty()&&g.explosions.size()==size_t(caster==FireImpType),"only the imp fireball bursts on swept contact");
+  if(!g.explosions.empty()){
+   check(std::abs(distance(g.explosions.front().pos,g.player)-.42f)<.001f,"fireball burst appears at the near surface of the hero");
+   const float after=g.hp;g.updateVolcanoAttacks(.1f,g.player,false,0);check(g.hp==after&&g.explosions.size()==1,"impact and visual fireburst happen exactly once");
+  }
+  g=volcanoArena(caster);g.player=origin+V{10,0};g.launchCinder(g.enemies[0]);g.updateVolcanoAttacks(2,g.player,false,0);
+  check(g.hp==g.maxHp()&&g.explosions.empty()&&g.cinders.empty(),"large time step cannot carry a hostile fireball past maximum range");
+ }
+ g=volcanoArena(FireImpType);g.props.push_back({{14,50},14,1});g.launchCinder(g.enemies[0]);g.updateVolcanoAttacks(1.f,g.player,false,0);
+ check(g.hp==g.maxHp()&&g.explosions.size()==1&&g.explosions[0].pos.x<14&&g.explosions[0].pos.x>12,"imp fireball bursts on the first physical obstruction");
+ g=volcanoArena(FireImpType);g.player={13,50};g.launchCinder(g.enemies[0]);g.updateVolcanoAttacks(.2f,g.player,true,0);
+ check(g.hp==g.maxHp()&&g.explosions.empty()&&g.cinders.empty(),"protected dodge avoids the imp fireball and a false impact");
  g=volcanoArena();g.collectedFragments=2;g.level=30;g.dawnQuest=DawnQuest::AtTower;g.hit(g.enemies[0],10000);g.allocationRequired=false;g.player=g.enemies[0].pos;
  check(g.volcanoBossDead&&g.enemies[0].loot[QuestLootSlot].kind==Kind::DawnShard&&g.enemies[0].loot[QuestLootSlot].tier==4,"third boss leaves guaranteed third story fragment");
  check(g.openCorpse(VolcanoBossId)&&g.quickTransfer({Place::Corpse,QuestLootSlot,VolcanoBossId})&&g.dawnFragments()==3&&g.takeTowerReturn(),"taking third fragment triggers exactly the third tower return");

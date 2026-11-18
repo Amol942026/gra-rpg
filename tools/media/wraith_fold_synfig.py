@@ -35,7 +35,12 @@ def author(path):
         for first, last, a, b in zip(FRAMES, FRAMES[1:], marks, marks[1:]):
             for frame in range(first, last + 1):
                 t = (frame - first) / (last - first)
-                position[frame] = a + (b-a) * t*t*(3-2*t)
+                weight = t*t*(3-2*t)
+                if last == CONTACT:
+                    # The hem is already supported. Let friction arrest the
+                    # remaining long hood and sleeve travel before touchdown.
+                    weight = 1-(1-weight)**2
+                position[frame] = a + (b-a) * weight
         points = [(-20+30*x, 11-index*4.3) for x in position]
         color = (.46 + index*.051, .70 - index*.055, .82 - index*.048)
         control(canvas, name, points, .65, color)

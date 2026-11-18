@@ -1,0 +1,3027 @@
+<?xml version='1.0' encoding='utf-8'?>
+<canvas version="1.2" width="240" height="264" fps="60" antialias="2" view-box="-60 55 60 -77" begin-time="0f" end-time="72f" bgcolor="0 0 0 0">
+  <name>Emberfall / Popielny Upiór / flight</name>
+  <layer type="PasteCanvas" active="true" version="0.1" desc="Tylna poła">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="origin">
+      <vector>
+        <x>0</x>
+        <y>0</y>
+      </vector>
+    </param>
+    <param name="canvas">
+      <canvas>
+        <layer type="import" version="0.1" active="true" desc="parts/cloth-0.png">
+          <param name="amount">
+            <real value="1" />
+          </param>
+          <param name="blend_method">
+            <integer value="0" />
+          </param>
+          <param name="filename">
+            <string>parts/cloth-0.png</string>
+          </param>
+          <param name="tl">
+            <vector>
+              <x>-13.333333333333336</x>
+              <y>21.333333333333336</y>
+            </vector>
+          </param>
+          <param name="br">
+            <vector>
+              <x>19.33333333333333</x>
+              <y>-49.33333333333333</y>
+            </vector>
+          </param>
+        </layer>
+        <layer type="warp" version="0.1" active="true" desc="Ugięcie tkaniny">
+          <param name="src_tl">
+            <vector>
+              <x>-13.333333333333336</x>
+              <y>21.333333333333336</y>
+            </vector>
+          </param>
+          <param name="src_br">
+            <vector>
+              <x>19.33333333333333</x>
+              <y>-49.33333333333333</y>
+            </vector>
+          </param>
+          <param name="clip">
+            <bool value="false" />
+          </param>
+          <param name="dest_tl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-13.80617</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-12.97855</x>
+                  <y>22.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-12.24600</x>
+                  <y>23.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-11.80479</x>
+                  <y>24.13333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-11.77316</x>
+                  <y>23.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-12.15958</x>
+                  <y>22.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-12.86050</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-13.68812</x>
+                  <y>19.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-14.42067</x>
+                  <y>18.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-14.86187</x>
+                  <y>18.53333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-14.89350</x>
+                  <y>18.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-14.50709</x>
+                  <y>19.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-13.80617</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_tr">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>18.86050</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>19.68812</x>
+                  <y>22.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.42067</x>
+                  <y>23.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.86187</x>
+                  <y>24.13333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.89350</x>
+                  <y>23.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.50709</x>
+                  <y>22.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>19.80617</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>18.97855</x>
+                  <y>19.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>18.24600</x>
+                  <y>18.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>17.80479</x>
+                  <y>18.53333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>17.77316</x>
+                  <y>18.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>18.15958</x>
+                  <y>19.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>18.86050</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_br">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>12.04357</x>
+                  <y>-51.45316</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>12.98927</x>
+                  <y>-49.47491</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>15.63486</x>
+                  <y>-47.45872</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>19.27146</x>
+                  <y>-45.94484</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.92463</x>
+                  <y>-45.33889</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>25.61552</x>
+                  <y>-45.80326</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>26.62310</x>
+                  <y>-47.21351</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>25.67739</x>
+                  <y>-49.19176</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>23.03180</x>
+                  <y>-51.20794</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>19.39521</x>
+                  <y>-52.72183</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>15.74204</x>
+                  <y>-53.32777</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>13.05115</x>
+                  <y>-52.86341</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>12.04357</x>
+                  <y>-51.45316</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_bl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-20.62310</x>
+                  <y>-51.45316</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-19.67739</x>
+                  <y>-49.47491</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-17.03180</x>
+                  <y>-47.45872</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-13.39521</x>
+                  <y>-45.94484</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-9.74204</x>
+                  <y>-45.33889</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-7.05115</x>
+                  <y>-45.80326</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-6.04357</x>
+                  <y>-47.21351</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-6.98927</x>
+                  <y>-49.19176</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-9.63486</x>
+                  <y>-51.20794</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-13.27146</x>
+                  <y>-52.72183</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-16.92463</x>
+                  <y>-53.32777</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-19.61552</x>
+                  <y>-52.86341</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-20.62310</x>
+                  <y>-51.45316</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+        </layer>
+      </canvas>
+    </param>
+  </layer>
+  <layer type="PasteCanvas" active="true" version="0.1" desc="Lewa poła">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="origin">
+      <vector>
+        <x>0</x>
+        <y>0</y>
+      </vector>
+    </param>
+    <param name="canvas">
+      <canvas>
+        <layer type="import" version="0.1" active="true" desc="parts/cloth-1.png">
+          <param name="amount">
+            <real value="1" />
+          </param>
+          <param name="blend_method">
+            <integer value="0" />
+          </param>
+          <param name="filename">
+            <string>parts/cloth-1.png</string>
+          </param>
+          <param name="tl">
+            <vector>
+              <x>9.333333333333329</x>
+              <y>20.666666666666664</y>
+            </vector>
+          </param>
+          <param name="br">
+            <vector>
+              <x>22.66666666666667</x>
+              <y>-30.66666666666667</y>
+            </vector>
+          </param>
+        </layer>
+        <layer type="warp" version="0.1" active="true" desc="Ugięcie tkaniny">
+          <param name="src_tl">
+            <vector>
+              <x>9.333333333333329</x>
+              <y>20.666666666666664</y>
+            </vector>
+          </param>
+          <param name="src_br">
+            <vector>
+              <x>22.66666666666667</x>
+              <y>-30.66666666666667</y>
+            </vector>
+          </param>
+          <param name="clip">
+            <bool value="false" />
+          </param>
+          <param name="dest_tl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>8.86050</x>
+                  <y>20.66667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>9.68812</x>
+                  <y>22.06667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.42067</x>
+                  <y>23.09154</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.86187</x>
+                  <y>23.46667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.89350</x>
+                  <y>23.09154</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.50709</x>
+                  <y>22.06667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>9.80617</x>
+                  <y>20.66667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>8.97855</x>
+                  <y>19.26667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>8.24600</x>
+                  <y>18.24180</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>7.80479</x>
+                  <y>17.86667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>7.77316</x>
+                  <y>18.24180</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>8.15958</x>
+                  <y>19.26667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>8.86050</x>
+                  <y>20.66667</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_tr">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.19383</x>
+                  <y>20.66667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>23.02145</x>
+                  <y>22.06667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>23.75400</x>
+                  <y>23.09154</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>24.19521</x>
+                  <y>23.46667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>24.22684</x>
+                  <y>23.09154</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>23.84042</x>
+                  <y>22.06667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>23.13950</x>
+                  <y>20.66667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.31188</x>
+                  <y>19.26667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.57933</x>
+                  <y>18.24180</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.13813</x>
+                  <y>17.86667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.10650</x>
+                  <y>18.24180</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.49291</x>
+                  <y>19.26667</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.19383</x>
+                  <y>20.66667</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_br">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>17.51808</x>
+                  <y>-32.29236</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>19.37536</x>
+                  <y>-30.95225</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.11454</x>
+                  <y>-29.53563</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>25.00166</x>
+                  <y>-28.42206</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>27.26313</x>
+                  <y>-27.90994</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>28.29298</x>
+                  <y>-28.13647</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>27.81526</x>
+                  <y>-29.04098</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>25.95798</x>
+                  <y>-30.38108</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>23.21879</x>
+                  <y>-31.79771</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.33167</x>
+                  <y>-32.91127</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>18.07020</x>
+                  <y>-33.42340</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>17.04036</x>
+                  <y>-33.19686</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>17.51808</x>
+                  <y>-32.29236</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_bl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>4.18474</x>
+                  <y>-32.29236</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>6.04202</x>
+                  <y>-30.95225</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>8.78121</x>
+                  <y>-29.53563</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>11.66833</x>
+                  <y>-28.42206</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>13.92980</x>
+                  <y>-27.90994</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>14.95964</x>
+                  <y>-28.13647</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>14.48192</x>
+                  <y>-29.04098</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>12.62464</x>
+                  <y>-30.38108</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>9.88546</x>
+                  <y>-31.79771</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>6.99834</x>
+                  <y>-32.91127</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>4.73687</x>
+                  <y>-33.42340</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>3.70702</x>
+                  <y>-33.19686</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>4.18474</x>
+                  <y>-32.29236</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+        </layer>
+      </canvas>
+    </param>
+  </layer>
+  <layer type="PasteCanvas" active="true" version="0.1" desc="Lewy rękaw">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="origin">
+      <vector>
+        <x>0</x>
+        <y>0</y>
+      </vector>
+    </param>
+    <param name="canvas">
+      <canvas>
+        <layer type="import" version="0.1" active="true" desc="parts/cloth-4.png">
+          <param name="amount">
+            <real value="1" />
+          </param>
+          <param name="blend_method">
+            <integer value="0" />
+          </param>
+          <param name="filename">
+            <string>parts/cloth-4.png</string>
+          </param>
+          <param name="tl">
+            <vector>
+              <x>11.333333333333329</x>
+              <y>21.333333333333336</y>
+            </vector>
+          </param>
+          <param name="br">
+            <vector>
+              <x>34.0</x>
+              <y>-18.0</y>
+            </vector>
+          </param>
+        </layer>
+        <layer type="warp" version="0.1" active="true" desc="Ugięcie tkaniny">
+          <param name="src_tl">
+            <vector>
+              <x>11.333333333333329</x>
+              <y>21.333333333333336</y>
+            </vector>
+          </param>
+          <param name="src_br">
+            <vector>
+              <x>34.0</x>
+              <y>-18.0</y>
+            </vector>
+          </param>
+          <param name="clip">
+            <bool value="false" />
+          </param>
+          <param name="dest_tl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.86050</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>11.68812</x>
+                  <y>22.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>12.42067</x>
+                  <y>23.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>12.86187</x>
+                  <y>24.13333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>12.89350</x>
+                  <y>23.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>12.50709</x>
+                  <y>22.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>11.80617</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.97855</x>
+                  <y>19.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.24600</x>
+                  <y>18.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>9.80479</x>
+                  <y>18.53333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>9.77316</x>
+                  <y>18.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.15958</x>
+                  <y>19.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>10.86050</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_tr">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>33.44158</x>
+                  <y>21.29505</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>34.31462</x>
+                  <y>22.70654</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>35.10336</x>
+                  <y>23.75008</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>35.59645</x>
+                  <y>24.14605</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>35.66178</x>
+                  <y>23.78836</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>35.28183</x>
+                  <y>22.77285</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>34.55842</x>
+                  <y>21.37162</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>33.68538</x>
+                  <y>19.96013</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>32.89664</x>
+                  <y>18.91659</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>32.40355</x>
+                  <y>18.52061</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>32.33822</x>
+                  <y>18.87830</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>32.71817</x>
+                  <y>19.89382</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>33.44158</x>
+                  <y>21.29505</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_br">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>28.43554</x>
+                  <y>-20.27756</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>31.96554</x>
+                  <y>-18.19404</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>36.04067</x>
+                  <y>-16.05853</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>39.56900</x>
+                  <y>-14.44323</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>41.60513</x>
+                  <y>-13.78096</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>41.60346</x>
+                  <y>-14.24919</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>39.56446</x>
+                  <y>-15.72244</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>36.03446</x>
+                  <y>-17.80596</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>31.95933</x>
+                  <y>-19.94147</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>28.43100</x>
+                  <y>-21.55677</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>26.39487</x>
+                  <y>-22.21904</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>26.39654</x>
+                  <y>-21.75081</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>28.43554</x>
+                  <y>-20.27756</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_bl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.76888</x>
+                  <y>-20.27756</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>9.29887</x>
+                  <y>-18.19404</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>13.37400</x>
+                  <y>-16.05853</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>16.90234</x>
+                  <y>-14.44323</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>18.93846</x>
+                  <y>-13.78096</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>18.93680</x>
+                  <y>-14.24919</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>16.89779</x>
+                  <y>-15.72244</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>13.36779</x>
+                  <y>-17.80596</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>9.29266</x>
+                  <y>-19.94147</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.76433</x>
+                  <y>-21.55677</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>3.72821</x>
+                  <y>-22.21904</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>3.72987</x>
+                  <y>-21.75081</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.76888</x>
+                  <y>-20.27756</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+        </layer>
+      </canvas>
+    </param>
+  </layer>
+  <layer type="PasteCanvas" active="true" version="0.1" desc="Prawa poła">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="origin">
+      <vector>
+        <x>0</x>
+        <y>0</y>
+      </vector>
+    </param>
+    <param name="canvas">
+      <canvas>
+        <layer type="import" version="0.1" active="true" desc="parts/cloth-2.png">
+          <param name="amount">
+            <real value="1" />
+          </param>
+          <param name="blend_method">
+            <integer value="0" />
+          </param>
+          <param name="filename">
+            <string>parts/cloth-2.png</string>
+          </param>
+          <param name="tl">
+            <vector>
+              <x>-22.666666666666664</x>
+              <y>20.0</y>
+            </vector>
+          </param>
+          <param name="br">
+            <vector>
+              <x>4.0</x>
+              <y>-45.33333333333333</y>
+            </vector>
+          </param>
+        </layer>
+        <layer type="warp" version="0.1" active="true" desc="Ugięcie tkaniny">
+          <param name="src_tl">
+            <vector>
+              <x>-22.666666666666664</x>
+              <y>20.0</y>
+            </vector>
+          </param>
+          <param name="src_br">
+            <vector>
+              <x>4.0</x>
+              <y>-45.33333333333333</y>
+            </vector>
+          </param>
+          <param name="clip">
+            <bool value="false" />
+          </param>
+          <param name="dest_tl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-23.13950</x>
+                  <y>20.00000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-22.31188</x>
+                  <y>21.40000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-21.57933</x>
+                  <y>22.42487</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-21.13813</x>
+                  <y>22.80000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-21.10650</x>
+                  <y>22.42487</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-21.49291</x>
+                  <y>21.40000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-22.19383</x>
+                  <y>20.00000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-23.02145</x>
+                  <y>18.60000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-23.75400</x>
+                  <y>17.57513</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-24.19521</x>
+                  <y>17.20000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-24.22684</x>
+                  <y>17.57513</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-23.84042</x>
+                  <y>18.60000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-23.13950</x>
+                  <y>20.00000</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_tr">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>3.52717</x>
+                  <y>20.00000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>4.35478</x>
+                  <y>21.40000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.08734</x>
+                  <y>22.42487</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.52854</x>
+                  <y>22.80000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.56017</x>
+                  <y>22.42487</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.17375</x>
+                  <y>21.40000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>4.47283</x>
+                  <y>20.00000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>3.64522</x>
+                  <y>18.60000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>2.91266</x>
+                  <y>17.57513</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>2.47146</x>
+                  <y>17.20000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>2.43983</x>
+                  <y>17.57513</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>2.82625</x>
+                  <y>18.60000</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>3.52717</x>
+                  <y>20.00000</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_br">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>0.74462</x>
+                  <y>-46.00303</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-0.36761</x>
+                  <y>-45.45514</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-0.30954</x>
+                  <y>-44.87461</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>0.90327</x>
+                  <y>-44.41699</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>2.94584</x>
+                  <y>-44.20491</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.27088</x>
+                  <y>-44.29519</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>7.25538</x>
+                  <y>-44.66364</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>8.36761</x>
+                  <y>-45.21153</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>8.30954</x>
+                  <y>-45.79206</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>7.09673</x>
+                  <y>-46.24967</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>5.05416</x>
+                  <y>-46.46176</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>2.72912</x>
+                  <y>-46.37148</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>0.74462</x>
+                  <y>-46.00303</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_bl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-25.92205</x>
+                  <y>-46.00303</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.03427</x>
+                  <y>-45.45514</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.97620</x>
+                  <y>-44.87461</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-25.76340</x>
+                  <y>-44.41699</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-23.72083</x>
+                  <y>-44.20491</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-21.39579</x>
+                  <y>-44.29519</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-19.41129</x>
+                  <y>-44.66364</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-18.29906</x>
+                  <y>-45.21153</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-18.35713</x>
+                  <y>-45.79206</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-19.56993</x>
+                  <y>-46.24967</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-21.61251</x>
+                  <y>-46.46176</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-23.93754</x>
+                  <y>-46.37148</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-25.92205</x>
+                  <y>-46.00303</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+        </layer>
+      </canvas>
+    </param>
+  </layer>
+  <layer type="PasteCanvas" active="true" version="0.1" desc="Prawy rękaw">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="origin">
+      <vector>
+        <x>0</x>
+        <y>0</y>
+      </vector>
+    </param>
+    <param name="canvas">
+      <canvas>
+        <layer type="import" version="0.1" active="true" desc="parts/cloth-5.png">
+          <param name="amount">
+            <real value="1" />
+          </param>
+          <param name="blend_method">
+            <integer value="0" />
+          </param>
+          <param name="filename">
+            <string>parts/cloth-5.png</string>
+          </param>
+          <param name="tl">
+            <vector>
+              <x>-34.0</x>
+              <y>21.333333333333336</y>
+            </vector>
+          </param>
+          <param name="br">
+            <vector>
+              <x>-2.6666666666666643</x>
+              <y>-19.33333333333333</y>
+            </vector>
+          </param>
+        </layer>
+        <layer type="warp" version="0.1" active="true" desc="Ugięcie tkaniny">
+          <param name="src_tl">
+            <vector>
+              <x>-34.0</x>
+              <y>21.333333333333336</y>
+            </vector>
+          </param>
+          <param name="src_br">
+            <vector>
+              <x>-2.6666666666666643</x>
+              <y>-19.33333333333333</y>
+            </vector>
+          </param>
+          <param name="clip">
+            <bool value="false" />
+          </param>
+          <param name="dest_tl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-35.65563</x>
+                  <y>20.96208</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-35.05634</x>
+                  <y>22.20918</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-34.17401</x>
+                  <y>23.22159</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-33.24505</x>
+                  <y>23.72805</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-32.51838</x>
+                  <y>23.59284</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-32.18871</x>
+                  <y>22.85220</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-32.34437</x>
+                  <y>21.70458</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-32.94366</x>
+                  <y>20.45749</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-33.82599</x>
+                  <y>19.44508</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-34.75495</x>
+                  <y>18.93862</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-35.48162</x>
+                  <y>19.07383</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-35.81129</x>
+                  <y>19.81447</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-35.65563</x>
+                  <y>20.96208</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_tr">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-3.13950</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-2.31188</x>
+                  <y>22.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-1.57933</x>
+                  <y>23.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-1.13813</x>
+                  <y>24.13333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-1.10650</x>
+                  <y>23.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-1.49291</x>
+                  <y>22.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-2.19383</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-3.02145</x>
+                  <y>19.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-3.75400</x>
+                  <y>18.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-4.19521</x>
+                  <y>18.53333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-4.22684</x>
+                  <y>18.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-3.84042</x>
+                  <y>19.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-3.13950</x>
+                  <y>21.33333</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_br">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-9.03556</x>
+                  <y>-21.18395</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-9.34612</x>
+                  <y>-20.54616</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-7.86693</x>
+                  <y>-19.58339</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-4.99433</x>
+                  <y>-18.55362</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-1.49804</x>
+                  <y>-17.73278</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>1.68512</x>
+                  <y>-17.34080</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>3.70222</x>
+                  <y>-17.48272</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>4.01279</x>
+                  <y>-18.12051</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>2.53360</x>
+                  <y>-19.08327</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-0.33900</x>
+                  <y>-20.11304</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-3.83529</x>
+                  <y>-20.93389</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-7.01845</x>
+                  <y>-21.32587</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-9.03556</x>
+                  <y>-21.18395</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_bl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-40.49850</x>
+                  <y>-21.22463</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-40.83409</x>
+                  <y>-20.60360</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-39.33848</x>
+                  <y>-19.64220</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-36.41244</x>
+                  <y>-18.59804</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-32.83998</x>
+                  <y>-17.75090</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-29.57835</x>
+                  <y>-17.32777</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.50150</x>
+                  <y>-17.44204</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.16591</x>
+                  <y>-18.06307</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-28.66152</x>
+                  <y>-19.02447</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-31.58756</x>
+                  <y>-20.06863</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-35.16002</x>
+                  <y>-20.91577</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-38.42165</x>
+                  <y>-21.33889</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-40.49850</x>
+                  <y>-21.22463</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+        </layer>
+      </canvas>
+    </param>
+  </layer>
+  <layer type="PasteCanvas" active="true" version="0.1" desc="Kaptur">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="origin">
+      <vector>
+        <x>0</x>
+        <y>0</y>
+      </vector>
+    </param>
+    <param name="canvas">
+      <canvas>
+        <layer type="import" version="0.1" active="true" desc="parts/cloth-3.png">
+          <param name="amount">
+            <real value="1" />
+          </param>
+          <param name="blend_method">
+            <integer value="0" />
+          </param>
+          <param name="filename">
+            <string>parts/cloth-3.png</string>
+          </param>
+          <param name="tl">
+            <vector>
+              <x>-26.666666666666664</x>
+              <y>52.0</y>
+            </vector>
+          </param>
+          <param name="br">
+            <vector>
+              <x>21.33333333333333</x>
+              <y>-11.333333333333329</y>
+            </vector>
+          </param>
+        </layer>
+        <layer type="warp" version="0.1" active="true" desc="Ugięcie tkaniny">
+          <param name="src_tl">
+            <vector>
+              <x>-26.666666666666664</x>
+              <y>52.0</y>
+            </vector>
+          </param>
+          <param name="src_br">
+            <vector>
+              <x>21.33333333333333</x>
+              <y>-11.333333333333329</y>
+            </vector>
+          </param>
+          <param name="clip">
+            <bool value="false" />
+          </param>
+          <param name="dest_tl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.03589</x>
+                  <y>51.31836</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.06712</x>
+                  <y>53.17553</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.25900</x>
+                  <y>54.71771</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.56011</x>
+                  <y>55.53169</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.88978</x>
+                  <y>55.39935</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.15966</x>
+                  <y>54.35616</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.29744</x>
+                  <y>52.68164</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.26621</x>
+                  <y>50.82447</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.07433</x>
+                  <y>49.28229</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.77322</x>
+                  <y>48.46831</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.44355</x>
+                  <y>48.60065</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.17367</x>
+                  <y>49.64384</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.03589</x>
+                  <y>51.31836</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_tr">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.96411</x>
+                  <y>51.31836</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.93288</x>
+                  <y>53.17553</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.74100</x>
+                  <y>54.71771</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.43989</x>
+                  <y>55.53169</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.11022</x>
+                  <y>55.39935</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.84034</x>
+                  <y>54.35616</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.70256</x>
+                  <y>52.68164</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.73379</x>
+                  <y>50.82447</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.92567</x>
+                  <y>49.28229</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.22678</x>
+                  <y>48.46831</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.55645</x>
+                  <y>48.60065</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.82633</x>
+                  <y>49.64384</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.96411</x>
+                  <y>51.31836</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_br">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.86050</x>
+                  <y>-11.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.68812</x>
+                  <y>-9.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.42067</x>
+                  <y>-8.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.86187</x>
+                  <y>-8.53333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.89350</x>
+                  <y>-8.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>22.50709</x>
+                  <y>-9.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>21.80617</x>
+                  <y>-11.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.97855</x>
+                  <y>-12.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.24600</x>
+                  <y>-13.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>19.80479</x>
+                  <y>-14.13333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>19.77316</x>
+                  <y>-13.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.15958</x>
+                  <y>-12.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>20.86050</x>
+                  <y>-11.33333</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+          <param name="dest_bl">
+            <animated type="vector">
+              <waypoint time="0f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.13950</x>
+                  <y>-11.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="6f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.31188</x>
+                  <y>-9.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="12f" before="clamped" after="clamped">
+                <vector>
+                  <x>-25.57933</x>
+                  <y>-8.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="18f" before="clamped" after="clamped">
+                <vector>
+                  <x>-25.13813</x>
+                  <y>-8.53333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="24f" before="clamped" after="clamped">
+                <vector>
+                  <x>-25.10650</x>
+                  <y>-8.90846</y>
+                </vector>
+              </waypoint>
+              <waypoint time="30f" before="clamped" after="clamped">
+                <vector>
+                  <x>-25.49291</x>
+                  <y>-9.93333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="36f" before="clamped" after="clamped">
+                <vector>
+                  <x>-26.19383</x>
+                  <y>-11.33333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="42f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.02145</x>
+                  <y>-12.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="48f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.75400</x>
+                  <y>-13.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="54f" before="clamped" after="clamped">
+                <vector>
+                  <x>-28.19521</x>
+                  <y>-14.13333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="60f" before="clamped" after="clamped">
+                <vector>
+                  <x>-28.22684</x>
+                  <y>-13.75820</y>
+                </vector>
+              </waypoint>
+              <waypoint time="66f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.84042</x>
+                  <y>-12.73333</y>
+                </vector>
+              </waypoint>
+              <waypoint time="72f" before="clamped" after="clamped">
+                <vector>
+                  <x>-27.13950</x>
+                  <y>-11.33333</y>
+                </vector>
+              </waypoint>
+            </animated>
+          </param>
+        </layer>
+      </canvas>
+    </param>
+  </layer>
+  <layer type="circle" version="0.2" active="false" desc="Piersi">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="radius">
+      <real value="2.3" />
+    </param>
+    <param name="color">
+      <color>
+        <r>0.47</r>
+        <g>0.59</g>
+        <b>0.66</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="clamped" after="clamped">
+          <vector>
+            <x>-0.472832</x>
+            <y>0.000000</y>
+          </vector>
+        </waypoint>
+        <waypoint time="6f" before="clamped" after="clamped">
+          <vector>
+            <x>0.354784</x>
+            <y>1.400000</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="clamped" after="clamped">
+          <vector>
+            <x>1.087337</x>
+            <y>2.424871</y>
+          </vector>
+        </waypoint>
+        <waypoint time="18f" before="clamped" after="clamped">
+          <vector>
+            <x>1.528538</x>
+            <y>2.800000</y>
+          </vector>
+        </waypoint>
+        <waypoint time="24f" before="clamped" after="clamped">
+          <vector>
+            <x>1.560169</x>
+            <y>2.424871</y>
+          </vector>
+        </waypoint>
+        <waypoint time="30f" before="clamped" after="clamped">
+          <vector>
+            <x>1.173754</x>
+            <y>1.400000</y>
+          </vector>
+        </waypoint>
+        <waypoint time="36f" before="clamped" after="clamped">
+          <vector>
+            <x>0.472832</x>
+            <y>0.000000</y>
+          </vector>
+        </waypoint>
+        <waypoint time="42f" before="clamped" after="clamped">
+          <vector>
+            <x>-0.354784</x>
+            <y>-1.400000</y>
+          </vector>
+        </waypoint>
+        <waypoint time="48f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.087337</x>
+            <y>-2.424871</y>
+          </vector>
+        </waypoint>
+        <waypoint time="54f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.528538</x>
+            <y>-2.800000</y>
+          </vector>
+        </waypoint>
+        <waypoint time="60f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.560169</x>
+            <y>-2.424871</y>
+          </vector>
+        </waypoint>
+        <waypoint time="66f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.173754</x>
+            <y>-1.400000</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="clamped" after="clamped">
+          <vector>
+            <x>-0.472832</x>
+            <y>-0.000000</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" version="0.2" active="false" desc="Kaptur">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="radius">
+      <real value="2.3" />
+    </param>
+    <param name="color">
+      <color>
+        <r>0.78</r>
+        <g>0.59</g>
+        <b>0.66</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="clamped" after="clamped">
+          <vector>
+            <x>1.103610</x>
+            <y>20.318361</y>
+          </vector>
+        </waypoint>
+        <waypoint time="6f" before="clamped" after="clamped">
+          <vector>
+            <x>0.244762</x>
+            <y>20.775528</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="clamped" after="clamped">
+          <vector>
+            <x>-0.679671</x>
+            <y>21.292842</y>
+          </vector>
+        </waypoint>
+        <waypoint time="18f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.421986</x>
+            <y>21.731689</y>
+          </vector>
+        </waypoint>
+        <waypoint time="24f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.783281</x>
+            <y>21.974481</y>
+          </vector>
+        </waypoint>
+        <waypoint time="30f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.666748</x>
+            <y>21.956161</y>
+          </vector>
+        </waypoint>
+        <waypoint time="36f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.103610</x>
+            <y>21.681639</y>
+          </vector>
+        </waypoint>
+        <waypoint time="42f" before="clamped" after="clamped">
+          <vector>
+            <x>-0.244762</x>
+            <y>21.224472</y>
+          </vector>
+        </waypoint>
+        <waypoint time="48f" before="clamped" after="clamped">
+          <vector>
+            <x>0.679671</x>
+            <y>20.707158</y>
+          </vector>
+        </waypoint>
+        <waypoint time="54f" before="clamped" after="clamped">
+          <vector>
+            <x>1.421986</x>
+            <y>20.268311</y>
+          </vector>
+        </waypoint>
+        <waypoint time="60f" before="clamped" after="clamped">
+          <vector>
+            <x>1.783281</x>
+            <y>20.025519</y>
+          </vector>
+        </waypoint>
+        <waypoint time="66f" before="clamped" after="clamped">
+          <vector>
+            <x>1.666748</x>
+            <y>20.043839</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="clamped" after="clamped">
+          <vector>
+            <x>1.103610</x>
+            <y>20.318361</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" version="0.2" active="false" desc="Tylna poła">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="radius">
+      <real value="1.6" />
+    </param>
+    <param name="color">
+      <color>
+        <r>0.47</r>
+        <g>0.59</g>
+        <b>0.66</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="clamped" after="clamped">
+          <vector>
+            <x>-6.816933</x>
+            <y>-47.119828</y>
+          </vector>
+        </waypoint>
+        <waypoint time="6f" before="clamped" after="clamped">
+          <vector>
+            <x>-6.698845</x>
+            <y>-46.541576</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="clamped" after="clamped">
+          <vector>
+            <x>-4.785806</x>
+            <y>-45.550260</y>
+          </vector>
+        </waypoint>
+        <waypoint time="18f" before="clamped" after="clamped">
+          <vector>
+            <x>-1.590415</x>
+            <y>-44.411503</y>
+          </vector>
+        </waypoint>
+        <waypoint time="24f" before="clamped" after="clamped">
+          <vector>
+            <x>2.031127</x>
+            <y>-43.430432</y>
+          </vector>
+        </waypoint>
+        <waypoint time="30f" before="clamped" after="clamped">
+          <vector>
+            <x>5.108430</x>
+            <y>-42.869926</y>
+          </vector>
+        </waypoint>
+        <waypoint time="36f" before="clamped" after="clamped">
+          <vector>
+            <x>6.816933</x>
+            <y>-42.880172</y>
+          </vector>
+        </waypoint>
+        <waypoint time="42f" before="clamped" after="clamped">
+          <vector>
+            <x>6.698845</x>
+            <y>-43.458424</y>
+          </vector>
+        </waypoint>
+        <waypoint time="48f" before="clamped" after="clamped">
+          <vector>
+            <x>4.785806</x>
+            <y>-44.449740</y>
+          </vector>
+        </waypoint>
+        <waypoint time="54f" before="clamped" after="clamped">
+          <vector>
+            <x>1.590415</x>
+            <y>-45.588497</y>
+          </vector>
+        </waypoint>
+        <waypoint time="60f" before="clamped" after="clamped">
+          <vector>
+            <x>-2.031127</x>
+            <y>-46.569568</y>
+          </vector>
+        </waypoint>
+        <waypoint time="66f" before="clamped" after="clamped">
+          <vector>
+            <x>-5.108430</x>
+            <y>-47.130074</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="clamped" after="clamped">
+          <vector>
+            <x>-6.816933</x>
+            <y>-47.119828</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" version="0.2" active="false" desc="Lewa poła">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="radius">
+      <real value="1.6" />
+    </param>
+    <param name="color">
+      <color>
+        <r>0.47</r>
+        <g>0.59</g>
+        <b>0.66</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="clamped" after="clamped">
+          <vector>
+            <x>-15.715608</x>
+            <y>-40.987230</y>
+          </vector>
+        </waypoint>
+        <waypoint time="6f" before="clamped" after="clamped">
+          <vector>
+            <x>-14.456957</x>
+            <y>-41.060446</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="clamped" after="clamped">
+          <vector>
+            <x>-12.004068</x>
+            <y>-40.581567</y>
+          </vector>
+        </waypoint>
+        <waypoint time="18f" before="clamped" after="clamped">
+          <vector>
+            <x>-9.014191</x>
+            <y>-39.678908</y>
+          </vector>
+        </waypoint>
+        <waypoint time="24f" before="clamped" after="clamped">
+          <vector>
+            <x>-6.288460</x>
+            <y>-38.594337</y>
+          </vector>
+        </waypoint>
+        <waypoint time="30f" before="clamped" after="clamped">
+          <vector>
+            <x>-4.557233</x>
+            <y>-37.618462</y>
+          </vector>
+        </waypoint>
+        <waypoint time="36f" before="clamped" after="clamped">
+          <vector>
+            <x>-4.284392</x>
+            <y>-37.012770</y>
+          </vector>
+        </waypoint>
+        <waypoint time="42f" before="clamped" after="clamped">
+          <vector>
+            <x>-5.543043</x>
+            <y>-36.939554</y>
+          </vector>
+        </waypoint>
+        <waypoint time="48f" before="clamped" after="clamped">
+          <vector>
+            <x>-7.995932</x>
+            <y>-37.418433</y>
+          </vector>
+        </waypoint>
+        <waypoint time="54f" before="clamped" after="clamped">
+          <vector>
+            <x>-10.985809</x>
+            <y>-38.321092</y>
+          </vector>
+        </waypoint>
+        <waypoint time="60f" before="clamped" after="clamped">
+          <vector>
+            <x>-13.711540</x>
+            <y>-39.405663</y>
+          </vector>
+        </waypoint>
+        <waypoint time="66f" before="clamped" after="clamped">
+          <vector>
+            <x>-15.442767</x>
+            <y>-40.381538</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="clamped" after="clamped">
+          <vector>
+            <x>-15.715608</x>
+            <y>-40.987230</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" version="0.2" active="false" desc="Prawa poła">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="radius">
+      <real value="1.6" />
+    </param>
+    <param name="color">
+      <color>
+        <r>0.47</r>
+        <g>0.59</g>
+        <b>0.66</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="clamped" after="clamped">
+          <vector>
+            <x>9.216293</x>
+            <y>-36.669976</y>
+          </vector>
+        </waypoint>
+        <waypoint time="6f" before="clamped" after="clamped">
+          <vector>
+            <x>7.275639</x>
+            <y>-37.522439</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="clamped" after="clamped">
+          <vector>
+            <x>6.600874</x>
+            <y>-37.966965</y>
+          </vector>
+        </waypoint>
+        <waypoint time="18f" before="clamped" after="clamped">
+          <vector>
+            <x>7.372801</x>
+            <y>-37.884445</y>
+          </vector>
+        </waypoint>
+        <waypoint time="24f" before="clamped" after="clamped">
+          <vector>
+            <x>9.384582</x>
+            <y>-37.296989</y>
+          </vector>
+        </waypoint>
+        <waypoint time="30f" before="clamped" after="clamped">
+          <vector>
+            <x>12.097162</x>
+            <y>-36.362006</y>
+          </vector>
+        </waypoint>
+        <waypoint time="36f" before="clamped" after="clamped">
+          <vector>
+            <x>14.783707</x>
+            <y>-35.330024</y>
+          </vector>
+        </waypoint>
+        <waypoint time="42f" before="clamped" after="clamped">
+          <vector>
+            <x>16.724361</x>
+            <y>-34.477561</y>
+          </vector>
+        </waypoint>
+        <waypoint time="48f" before="clamped" after="clamped">
+          <vector>
+            <x>17.399126</x>
+            <y>-34.033035</y>
+          </vector>
+        </waypoint>
+        <waypoint time="54f" before="clamped" after="clamped">
+          <vector>
+            <x>16.627199</x>
+            <y>-34.115555</y>
+          </vector>
+        </waypoint>
+        <waypoint time="60f" before="clamped" after="clamped">
+          <vector>
+            <x>14.615418</x>
+            <y>-34.703011</y>
+          </vector>
+        </waypoint>
+        <waypoint time="66f" before="clamped" after="clamped">
+          <vector>
+            <x>11.902838</x>
+            <y>-35.637994</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="clamped" after="clamped">
+          <vector>
+            <x>9.216293</x>
+            <y>-36.669976</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" version="0.2" active="false" desc="Lewy rękaw">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="radius">
+      <real value="1.6" />
+    </param>
+    <param name="color">
+      <color>
+        <r>0.47</r>
+        <g>0.59</g>
+        <b>0.66</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="clamped" after="clamped">
+          <vector>
+            <x>-29.091625</x>
+            <y>-10.277563</y>
+          </vector>
+        </waypoint>
+        <waypoint time="6f" before="clamped" after="clamped">
+          <vector>
+            <x>-26.389244</x>
+            <y>-9.594041</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="clamped" after="clamped">
+          <vector>
+            <x>-23.046667</x>
+            <y>-8.483396</y>
+          </vector>
+        </waypoint>
+        <waypoint time="18f" before="clamped" after="clamped">
+          <vector>
+            <x>-19.959535</x>
+            <y>-7.243226</y>
+          </vector>
+        </waypoint>
+        <waypoint time="24f" before="clamped" after="clamped">
+          <vector>
+            <x>-17.955042</x>
+            <y>-6.205833</y>
+          </vector>
+        </waypoint>
+        <waypoint time="30f" before="clamped" after="clamped">
+          <vector>
+            <x>-17.570291</x>
+            <y>-5.649186</y>
+          </vector>
+        </waypoint>
+        <waypoint time="36f" before="clamped" after="clamped">
+          <vector>
+            <x>-18.908375</x>
+            <y>-5.722437</y>
+          </vector>
+        </waypoint>
+        <waypoint time="42f" before="clamped" after="clamped">
+          <vector>
+            <x>-21.610756</x>
+            <y>-6.405959</y>
+          </vector>
+        </waypoint>
+        <waypoint time="48f" before="clamped" after="clamped">
+          <vector>
+            <x>-24.953333</x>
+            <y>-7.516604</y>
+          </vector>
+        </waypoint>
+        <waypoint time="54f" before="clamped" after="clamped">
+          <vector>
+            <x>-28.040465</x>
+            <y>-8.756774</y>
+          </vector>
+        </waypoint>
+        <waypoint time="60f" before="clamped" after="clamped">
+          <vector>
+            <x>-30.044958</x>
+            <y>-9.794167</y>
+          </vector>
+        </waypoint>
+        <waypoint time="66f" before="clamped" after="clamped">
+          <vector>
+            <x>-30.429709</x>
+            <y>-10.350814</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="clamped" after="clamped">
+          <vector>
+            <x>-29.091625</x>
+            <y>-10.277563</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" version="0.2" active="false" desc="Prawy rękaw">
+    <param name="amount">
+      <real value="1" />
+    </param>
+    <param name="blend_method">
+      <integer value="0" />
+    </param>
+    <param name="radius">
+      <real value="1.6" />
+    </param>
+    <param name="color">
+      <color>
+        <r>0.47</r>
+        <g>0.59</g>
+        <b>0.66</b>
+        <a>1</a>
+      </color>
+    </param>
+    <param name="origin">
+      <animated type="vector">
+        <waypoint time="0f" before="clamped" after="clamped">
+          <vector>
+            <x>17.974329</x>
+            <y>-10.891297</y>
+          </vector>
+        </waypoint>
+        <waypoint time="6f" before="clamped" after="clamped">
+          <vector>
+            <x>16.811128</x>
+            <y>-11.670262</y>
+          </vector>
+        </waypoint>
+        <waypoint time="12f" before="clamped" after="clamped">
+          <vector>
+            <x>17.574180</x>
+            <y>-11.733733</y>
+          </vector>
+        </waypoint>
+        <waypoint time="18f" before="clamped" after="clamped">
+          <vector>
+            <x>20.059025</x>
+            <y>-11.064702</y>
+          </vector>
+        </waypoint>
+        <waypoint time="24f" before="clamped" after="clamped">
+          <vector>
+            <x>23.599851</x>
+            <y>-9.842436</y>
+          </vector>
+        </waypoint>
+        <waypoint time="30f" before="clamped" after="clamped">
+          <vector>
+            <x>27.247897</x>
+            <y>-8.394440</y>
+          </vector>
+        </waypoint>
+        <waypoint time="36f" before="clamped" after="clamped">
+          <vector>
+            <x>30.025671</x>
+            <y>-7.108703</y>
+          </vector>
+        </waypoint>
+        <waypoint time="42f" before="clamped" after="clamped">
+          <vector>
+            <x>31.188872</x>
+            <y>-6.329738</y>
+          </vector>
+        </waypoint>
+        <waypoint time="48f" before="clamped" after="clamped">
+          <vector>
+            <x>30.425820</x>
+            <y>-6.266267</y>
+          </vector>
+        </waypoint>
+        <waypoint time="54f" before="clamped" after="clamped">
+          <vector>
+            <x>27.940975</x>
+            <y>-6.935298</y>
+          </vector>
+        </waypoint>
+        <waypoint time="60f" before="clamped" after="clamped">
+          <vector>
+            <x>24.400149</x>
+            <y>-8.157564</y>
+          </vector>
+        </waypoint>
+        <waypoint time="66f" before="clamped" after="clamped">
+          <vector>
+            <x>20.752103</x>
+            <y>-9.605560</y>
+          </vector>
+        </waypoint>
+        <waypoint time="72f" before="clamped" after="clamped">
+          <vector>
+            <x>17.974329</x>
+            <y>-10.891297</y>
+          </vector>
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+</canvas>

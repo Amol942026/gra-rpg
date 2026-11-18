@@ -2,7 +2,6 @@
 // Third realm; coordinates and IDs are independent of existing saves.
 inline constexpr V VolcanoArrival{8,62},VolcanoPortal{8,65},VolcanoBossHome{60,15};
 inline constexpr int VolcanoBossId=2099;
-inline constexpr int AshWraithType=15,ObsidianSentinelType=16;
 inline constexpr int VolcanoSceneryRevision=8;
 // Visual channels continue beyond the playable field, with no exposed end cap.
 inline constexpr float VolcanoBridgeHalfSpan=5.3f,VolcanoBridgeHalfDepth=2.8f;

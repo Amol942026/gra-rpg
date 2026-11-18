@@ -115,7 +115,8 @@ inline void air(){
   if(enemyAbility(e.type)==EnemyAbility::ObsidianCleave){
    if(elapsed<0){
     float charge=e.abilityAge/spec.windup;
-    Vector2 blade=screen(e.pos+direction*.42f);blade.y-=39+12*charge;
+    const auto socket=volcano_actors::sentinelBladePoint(e);
+    const Vector2 blade{origin.x+socket.x,origin.y+socket.y};
     caldera_attack_art::draw(Clip::Cleave,blade,{44+40*charge,32+24*charge},angle-20,charge*.23f,.18f+.54f*charge);
    }else if(elapsed<.60f){
     Vector2 start=screen(e.pos+direction*.30f),end=screen(e.pos+direction*5.2f);

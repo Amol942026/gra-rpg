@@ -1,0 +1,139 @@
+{
+  "źródła": [
+    {
+      "plik": "references/sunburst-turnaround.png",
+      "sha256": "3d8707351f8cbf2424509ce976f5e3da713271a6092ef13d3fb34d7896961d77"
+    },
+    {
+      "plik": "references/sunburst-west.png",
+      "sha256": "51df0eddeb771c4a5ea0e3816516bb1b6ecef599031a21d08372fb34718391bb"
+    }
+  ],
+  "grafika": "Osiem oryginalnych ujęć Sunburst. Przód, profile i tył mają osobne malowidła oraz sześć niezależnych warstw anatomicznych.",
+  "ComfyUI": {
+    "workflow": "comfy-film.json",
+    "model": "film_net_fp16.safetensors",
+    "model_sha256": "f226e51375dc839d4b40e5c3d63da560dd1ea1c962364ec78f5adf2d05db05c0",
+    "id_przebiegu": "b975177a-f240-4bc4-afed-803b794d77cd",
+    "czas_renderu_s": 25.242,
+    "wyjściowe_klatki": 33,
+    "źródło_modelu": "https://github.com/google-research/frame-interpolation",
+    "licencja_modelu": "Apache-2.0"
+  },
+  "Krita": {
+    "plik": "obsydianowy-wojownik.kra",
+    "sha256": "ab40bf21123eb5d69cb33d6c8d287393ee7bdd62a7f2f3f32166ad375e6eec9a",
+    "edycja": "Bursztynowy wizjer w przednich ujęciach, krawędzie hełmu i obojczyka. Warstwy projekcji ukryte za tarczą mają pełny uchwyt miecza i ciągłą tkaninę.",
+    "pancerz_pod_ramieniem": "Napierśnik, pas i folgi ukryte w spoczynku za naramiennikiem są podmalowane w obu profilach i sąsiednich widokach. Projekt przechowuje wszystkie 192 końcowe wycinki w 15 warstwach."
+  },
+  "Synfig": {
+    "projekty": "motion",
+    "pozycji_w_ruchu": {
+      "idle": 49,
+      "walk": 41,
+      "strike": 61,
+      "cleave": 97
+    },
+    "czas_renderu_s": {
+      "idle": 20.972,
+      "walk": 18.615,
+      "strike": 24.643,
+      "cleave": 41.398
+    },
+    "dodatkowe_klatki_rozpadu": 23,
+    "czas_renderu_rozpadu_s": 1.844,
+    "wyprowadzenie_miecza": {
+      "punkty_trafienia": {
+        "strike": 0.45,
+        "cleave": 0.5048076923076923
+      },
+      "zrodla_sif": {
+        "strike": "9dded5c3086390df29586c69450fdc029fa8c7f43764bf4dcd56fa866defde70",
+        "cleave": "110bfb0a6f6ab2dea6f4f4ee8151e935480768a2ffe94189a0aabd4c50a58322"
+      },
+      "generator": "tools/media/obsidian_sentinel_motion.py",
+      "podmalowka": "tools/media/obsidian_sentinel_underpaint.py",
+      "ujęcia_GPU": 656,
+      "zmierzone_zapisywanie_klatek_GPU_s": 4.32395,
+      "tor_ostrza_widok_W_px": {
+        "poprzedni": 86.5,
+        "aktualny": 154.8
+      },
+      "kontrola_wycinków_KRA": 192
+    }
+  },
+  "atlas": {
+    "kierunki": 32,
+    "części": 6,
+    "wymiary": [
+      1536,
+      392
+    ],
+    "RGBA8_bajty": 2408448,
+    "kontrole_prostokątów": 192,
+    "kontrole_pozycji_podstawowych": 48
+  },
+  "pliki_gry": [
+    {
+      "plik": "assets/volcano/sentinel-turn/parts-0.png",
+      "sha256": "e22e8ea863d022b19efdaa3182d2d9f07035cd34bf40ab781d2ef128ddc4076c"
+    },
+    {
+      "plik": "assets/volcano/corpses/obsidian-sentinel.png",
+      "sha256": "64e0e283c9d888f3211f1c3dfb0aead45d00ec62478a9ebdbae45c7ce2d75ea9"
+    },
+    {
+      "plik": "assets/volcano/obsidian-sentinel.png",
+      "sha256": "6b091903550c9e7228f25886da82d6e37232d17bb9e7be6997cf8c3487549b36"
+    },
+    {
+      "plik": "src/generated/obsidian_sentinel_turn_atlas.hpp",
+      "sha256": "a874aaa98841ae37f72a905a4423b73e3823977e475d9b9dae0c1f0919aca6e5"
+    },
+    {
+      "plik": "assets/volcano/sentinel-turn/turn-flow.png",
+      "sha256": "c823e00195f77ca6e9cce5d904e9123c940ea4ef6b041898d5d26fd3b7ed1a55"
+    }
+  ],
+  "weryfikacja_obrotu": {
+    "krok_stopnie": 1,
+    "liczba_kroków": 360,
+    "próg_alfa": 128,
+    "maks_zmiana_sylwetki_GPU": 0.106388,
+    "maks_zmiana_sylwetki_CPU": 0.10812,
+    "największa_zmiana_w_stopniu": 24,
+    "zmiana_przy_337_stopniach_CPU": 0.06281
+  },
+  "weryfikacja_rozpadu": {
+    "próby_gpu": 16,
+    "kierunki": 8,
+    "strony_upadku": 2,
+    "zachodni_profil": {
+      "osobne_części_pancerza": [
+        10,
+        8
+      ],
+      "proporcja_powierzchni_względem_stojącego": [
+        1.13531,
+        1.07383
+      ]
+    }
+  },
+  "ostrość_w_obrocie": {
+    "narzędzie": "tools/media/caldera_turn_registration.py",
+    "kierunki": 32,
+    "siatka_na_warstwę": [
+      32,
+      32
+    ],
+    "format_mapy": "RG 8 bitów na składową, zapis w PNG RGB",
+    "układ": "Przemieszczenie zarejestrowanego pigmentu w połowie kąta między kolejnymi widokami.",
+    "maska": "Bez zmian w pikselach alfa podstawowego atlasu i widoków malowanych.",
+    "macierz_GPU": {
+      "kierunki": 360,
+      "maks_zmiana_sylwetki": 0.064915,
+      "udział_miękkich_pikseli": 0.109304,
+      "średni_kontrast_detalu": 27.6104
+    }
+  }
+}

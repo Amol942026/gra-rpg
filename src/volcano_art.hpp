@@ -1,4 +1,6 @@
 #pragma once
+namespace volcano_actors {inline Vector2 impReleasePoint(const Enemy& owner);inline Vector2 impMuzzleAtHeading(float angle);}
+namespace wraith_death_art {inline Vector2 releaseAtHeading(float angle);}
 namespace volcano_art {
 inline Texture2D tiles{},scenery{},sceneryEdge{},sky{},lava{},minimap{},macro{},road{},bank{},bridge{},steam{},channelWall{};inline RenderTexture2D terrain{};
 inline Shader bridgeBlend{},lavaMaterial{};
@@ -334,10 +336,57 @@ inline void eruptionPlumes(){
   }
  }
 }
-inline void bolt(const CinderBolt& b){Vector2 p=screen(b.pos),v{(b.velocity.x-b.velocity.y)*40,(b.velocity.x+b.velocity.y)*20};float n=std::hypot(v.x,v.y);if(n<=0)return;v.x/=n;v.y/=n;
+inline const Enemy* cinderOwner(const CinderBolt& b){
+ for(const auto& e:game.enemies)if(e.id==b.owner)return &e;
+ return nullptr;
+}
+inline Vector2 cinderScreen(V world){
+ // Keep continuous flight between the renderer's world-anchored pixel rows.
+ const auto foot=screen(world);
+ const double x=(double(world.x)-world.y)*40*renderScale;
+ const double y=((double(world.x)+world.y)*20-(flatGroundProjection?0:terrain_height::pixels(game.location,world)))*renderScale;
+ return {foot.x+float((x-std::round(x))/renderScale),foot.y+float((y-std::round(y))/renderScale)};
+}
+inline constexpr float CinderChestHeight=39.f;
+inline Vector2 cinderHeightOffset(Vector2 muzzle,float weight){
+ return {muzzle.x*weight,(muzzle.y+CinderChestHeight)*weight-CinderChestHeight};
+}
+inline Vector2 boltAnchor(const CinderBolt& b,const Enemy* owner){
+ Vector2 p=cinderScreen(b.pos);
+ if(owner&&owner->type==AshWraithType){
+  const auto muzzle=wraith_death_art::releaseAtHeading(b.castFacing);
+  const float weight=std::clamp(1.f-(7.f-b.remaining)/2.8f,0.f,1.f);
+  return {p.x+muzzle.x*weight,p.y-35.f+(muzzle.y+35.f)*weight};
+ }
+ if((!owner||owner->type!=FireImpType)&&b.aimRange<=0){p.y-=35;return p;}
+ // The muzzle and target were fixed at release. Offset decays linearly
+ // with distance along that ray, so turning around cannot drag the orb.
+ const auto muzzle=b.aimRange>0?volcano_actors::impMuzzleAtHeading(b.castFacing):volcano_actors::impReleasePoint(*owner);
+ const auto offset=cinderHeightOffset(muzzle,b.handWeight());
+ return {p.x+offset.x,p.y+offset.y};
+}
+inline Vector2 boltAnchor(const CinderBolt& b){return boltAnchor(b,cinderOwner(b));}
+inline void bolt(const CinderBolt& b){
+ const Enemy* owner=cinderOwner(b);
+ const auto p=boltAnchor(b,owner);
+ Vector2 v{(b.velocity.x-b.velocity.y)*40,(b.velocity.x+b.velocity.y)*20};
+ const float n=std::hypot(v.x,v.y);if(n<=0)return;v.x/=n;v.y/=n;
+ if(owner&&owner->type==FireImpType){
+  const float age=std::max(0.f,(7-b.remaining)/7.5f);
+  const float trail=enemy_death::window(age,0,.12f);
+  if(trail>0){
+   Vector2 smoke{p.x-v.x*6,p.y-v.y*6};
+   // The full jet grows behind the orb after it clears the caster's fingers.
+   caldera_attack_art::draw(caldera_attack_art::Clip::Breath,smoke,{41*trail,14},
+                             std::atan2(v.y,v.x)*RAD2DEG,std::fmod(.53f+age*.6f,1.f),.78f*trail,{.89f,.53f});
+  }
+  const float orbScale=caldera_attack_art::heldOrbScale+(1-caldera_attack_art::heldOrbScale)*trail;
+  caldera_attack_art::fireOrb(p,orbScale,1,1+age*4,trail);
+  return;
+ }
  float phase=std::fmod(std::max(0.f,7-b.remaining)*.29f,1.f);
- if(caldera_attack_art::draw(caldera_attack_art::Clip::Cinder,{p.x,p.y-35},{80,48},std::atan2(v.y,v.x)*RAD2DEG,phase,1,{.64f,.5f}))return;
- for(int i=4;i>=0;i--)ellipse(p.x-v.x*i*5,p.y-35-v.y*i*5,6-i*.7f,5-i*.6f,Fade(rgb(255,110+i*15,48),1-i*.16f));ellipse(p.x,p.y-35,2.3f,2.3f,rgb(255,239,183));
+ if(caldera_attack_art::draw(caldera_attack_art::Clip::Cinder,p,{80,48},std::atan2(v.y,v.x)*RAD2DEG,phase,1,{.64f,.5f}))return;
+ for(int i=4;i>=0;i--)ellipse(p.x-v.x*i*5,p.y-v.y*i*5,6-i*.7f,5-i*.6f,Fade(rgb(255,110+i*15,48),1-i*.16f));ellipse(p.x,p.y,2.3f,2.3f,rgb(255,239,183));
 }
 inline void unload(){for(auto t:{tiles,scenery,sceneryEdge,extraScenery,extraSceneryEdge,sky,lava,minimap,macro,road,bank,bridge,steam,channelWall,portalFrame,portalLoop,portalOutline,desertPortalFrame,desertPortalOutline,portalAperture,desertPortalAperture,abyssCliff,abyssDistance})if(t.id)UnloadTexture(t);if(terrain.id)UnloadRenderTexture(terrain);if(IsShaderValid(bridgeBlend))UnloadShader(bridgeBlend);bridgeBlend={};if(lavaClock>=0)UnloadShader(lavaMaterial);lavaMaterial={};lavaClock=-1;if(IsShaderValid(portalClip))UnloadShader(portalClip);portalClip={};tiles=scenery=sceneryEdge=extraScenery=extraSceneryEdge=sky=lava=minimap=macro=road=bank=bridge=steam=channelWall=portalFrame=portalLoop=portalOutline=desertPortalFrame=desertPortalOutline=portalAperture=desertPortalAperture=abyssCliff=abyssDistance={};terrain={};lavaStrips.clear();canyonFronts.clear();abyssFaces.clear();abyssFalls.clear();abyssLips.clear();sceneryAlpha.clear();extraSceneryAlpha.clear();portalMask.clear();desertPortalMask.clear();}
 }

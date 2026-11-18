@@ -24,8 +24,8 @@ inline constexpr std::array<Fragment,12> fragments{{
  {3,{{{0,0},{0,59},{128,43},{128,0}}},{64,42},{44,-22},48,.80f,.15f,14},
  {4,{{{0,0},{0,74},{128,80},{128,0}}},{44,65},{-40,-34},-48,.80f,.11f,11},
  {4,{{{0,74},{0,128},{128,128},{128,80}}},{45,92},{-41,9},-39,.76f,.06f,7},
- {5,{{{0,0},{0,128},{79,128},{90,0}}},{77,76},{58,-4},61,.78f,.09f,10},
- {5,{{{90,0},{79,128},{128,128},{128,0}}},{93,79},{48,30},81,.87f,.14f,13},
+ {5,{{{-48,-48},{-48,176},{74.875f,176},{94.125f,-48}}},{77,76},{58,-4},61,.78f,.09f,10},
+ {5,{{{94.125f,-48},{74.875f,176},{176,176},{176,-48}}},{93,79},{48,30},81,.87f,.14f,13},
 }};
 
 struct FlyingChip {Vector2 origin,landing;float radius,angle,hop;};
@@ -52,65 +52,46 @@ inline Vector2 rotate(Vector2 p,float radians){
  return {p.x*c-p.y*s,p.x*s+p.y*c};
 }
 
-struct PartPose {Vector2 pivot{64,90},shift{};float angle=0;};
+using PartPose=volcano_actors::Part;
+using TurnView=volcano_actors::turn_art::View;
+using TurnRig=volcano_actors::turn_art::Rig;
 
-inline std::array<PartPose,6> startingPose(const Enemy& e,int direction){
- // Reproduce the live rig at the instant of the killing blow, including
- // a raised blade or a lifted foot. Rendered fragments share its pivots.
- const auto& state=e.deathMotion;
- constexpr float headings[]={0,.4636476f,1.5707963f,2.677945f,3.14159265f,3.6052403f,4.712389f,5.8195377f};
- const float x=std::cos(headings[direction]),y=std::sin(headings[direction]);
- const float side=x<-.1f?-1.f:1.f,walk=state.moveBlend,action=e.deathAction;
- const float scale=volcano_actors::bodyScale(Species);
- const auto stride=volcano_motion::sample(Species,state.phase);
- const auto opposite=volcano_motion::sample(Species,std::fmod(state.phase+.5f,1.f));
+inline std::array<PartPose,6> startingPose(const Enemy& e,TurnView view){
+ const auto at=[&](int d){
+  return volcano_actors::sentinel_art::sample(e.deathMotion,e.deathAction,e.deathSpecial,d);
+ };
+ const auto first=at(view.base);
+ const auto next=view.t>0?at(view.nextBase()):first;
  std::array<PartPose,6> parts{};
- for(int i=0;i<6;i++){
-  auto& part=parts[i];
-  if(i==1||i==2){
-   const auto key=i==1?stride:opposite;
-   const float travel=key.travel*(VolcanoStrides[Species]*.31f/scale)*walk;
-   part.shift={x*travel,y*travel-key.lift*5*walk};
-  }else part.shift={stride.sway*.45f*walk,-stride.bob*1.2f*(.25f+.75f*walk)};
-  if(i==0)part.angle=stride.sway*2.5f*walk;
-  if(i>=4){
-   part.pivot=volcano_actors::restPivot(Species,i);
-   part.angle=stride.sway*(i==4?-1:1)*4*walk;
-  }
-  if(action>=0){
-   const auto key=basalt_swing::sample(action);
-   part.shift={x*key.lunge,y*key.lunge*.5f};
-   part.angle=i==0||i==3?side*key.torso:0.f;
-   if(i>=4){
-    const Vector2 joint{part.pivot.x-64,part.pivot.y-90};
-    const auto turned=rotate(joint,side*key.torso*DEG2RAD);
-    part.shift.x+=turned.x-joint.x;
-    part.shift.y+=turned.y-joint.y;
-    part.angle=side*(key.torso+(i==5?key.blade:key.shield));
-   }
-  }
-  if(e.deathSpecial>=0&&(i==0||i==3||i>=4)){
-   const auto key=caldera_attack_motion::pose(0,e.deathSpecial);
-   const float weight=i==3?1.f:.56f;
-   part.shift.x+=x*key.advance*weight;
-   part.shift.y+=(y*key.advance*.44f-key.lift)*weight;
-   part.angle+=side*key.pitch;
-   if(i==3){part.pivot={64+x*12,79};part.angle+=side*key.drive*.64f;}
-   if(i>=4)part.angle+=side*key.drive*(i==4?-.36f:.72f);
-  }
+ for(int p=0;p<6;++p){
+  parts[p]=volcano_actors::sentinel_art::livingPart(first,p);
+  if(view.t>0)parts[p]=volcano_actors::turn_art::interpolate(
+      parts[p],volcano_actors::sentinel_art::livingPart(next,p),view.t);
  }
  return parts;
 }
 
 struct Pose {Vector2 center;float radians,scaleX,scaleY;};
-inline Pose place(const Fragment& piece,const PartPose& source,float phase,float side){
+inline Pose place(const Fragment& piece,const PartPose& source,float phase,float side,float shieldFacing){
  const auto key=sample((phase-piece.delay)/(.95f-piece.delay));
  const float scale=volcano_actors::bodyScale(Species);
  const float start=source.angle*DEG2RAD;
- const auto offset=rotate({piece.origin.x-source.pivot.x,piece.origin.y-source.pivot.y},start);
+ const auto offset=rotate({(piece.origin.x-source.pivot.x)*source.scaleX,(piece.origin.y-source.pivot.y)*source.scaleY},start);
  const Vector2 from{(source.pivot.x-64+source.shift.x+offset.x)*scale,(source.pivot.y-115+source.shift.y+offset.y)*scale};
- return {{blend(from.x,piece.landing.x*side,key.travel),blend(from.y,piece.landing.y,key.travel)-piece.hop*key.lift},
-         blend(start,piece.turn*side*DEG2RAD,key.spin),scale,scale*blend(1,piece.thickness,key.flatten)};
+ // The western painting shows the entire face of the pavise and conceals
+ // most of the gauntlet and cuirass. The pavise falls beside that arm; its
+ // broad upright face and the newly exposed plates then tilt towards the floor.
+ const bool shield=piece.part==4;
+ const float tilt=shield?.45f:(piece.part==3||piece.part==5)?.30f:0.f;
+ const float thickness=piece.thickness*(1-shieldFacing*tilt);
+ Vector2 landing=piece.landing;
+ if(shield){
+  landing.x+=13.f*shieldFacing;
+  landing.y+=(landing.y<0?9.f:-6.f)*shieldFacing;
+ }
+ return {{blend(from.x,landing.x*side,key.travel),blend(from.y,landing.y,key.travel)-piece.hop*key.lift},
+         blend(start,piece.turn*side*DEG2RAD,key.spin),scale*blend(source.scaleX,1,key.flatten),
+         scale*blend(source.scaleY,thickness,key.flatten)};
 }
 
 inline bool inCut(Vector2 local,const std::array<Vector2,4>& cut){
@@ -121,24 +102,39 @@ inline bool inCut(Vector2 local,const std::array<Vector2,4>& cut){
  return true;
 }
 
-inline bool probeFragment(const volcano_actors::Atlas& atlas,const Fragment& piece,Pose pose,int direction,Vector2 point){
+inline bool probeFragment(const volcano_actors::Atlas& atlas,const Fragment& piece,Pose pose,int direction,Vector2 point,const TurnRig* rig){
  const auto offset=rotate({point.x-pose.center.x,point.y-pose.center.y},-pose.radians);
- const Vector2 local{piece.origin.x+offset.x/pose.scaleX,piece.origin.y+offset.y/pose.scaleY};
- if(!inCut(local,piece.cut)||local.x<0||local.x>=Tile||local.y<0||local.y>=Tile)return false;
+ Vector2 local{piece.origin.x+offset.x/pose.scaleX,piece.origin.y+offset.y/pose.scaleY};
+ if(!inCut(local,piece.cut))return false;
+ if(rig){
+  if(piece.part==5 && rig->arms[1].angle!=0)local=rig->arms[1].map(local,true);
+  const auto& box=rig->partBox[piece.part];
+  const float u=(local.x-box.x)/box.width,v=(local.y-box.y)/box.height;
+  if(u<0||u>1||v<0||v>1)return false;
+  using namespace volcano_actors::turn_art;
+  return turnCoverage(rig->art,rig->angle,piece.part,0,u,v)>=100.f/255;
+ }
+ if(local.x<0||local.x>=Tile||local.y<0||local.y>=Tile)return false;
  const int u=int(local.x*atlas.cell/Tile),v=int(local.y*atlas.cell/Tile);
  return atlas.alpha[(piece.part*atlas.cell+v)*atlas.art.width+direction*atlas.cell+u]>=100;
 }
 
-inline void paintFragment(const Fragment& piece,Pose pose,Vector2 anchor,int direction,Texture2D texture,Color tint){
+inline void paintFragment(const Fragment& piece,Pose pose,Vector2 anchor,int direction,Texture2D texture,Color tint,const TurnRig* rig,float mode){
  std::array<Vector2,4> points{},uv{};
  for(std::size_t i=0;i<piece.cut.size();i++){
-  const auto p=piece.cut[i];
+  auto p=piece.cut[i];
+  if(!rig && piece.part==5){
+   const float bounded=std::clamp(p.y,0.f,Tile);
+   if(p.x>0 && p.x<Tile)p.x-=(bounded-p.y)*11.f/Tile;
+   p={std::clamp(p.x,0.f,Tile),bounded};
+  }
   const auto rotated=rotate({(p.x-piece.origin.x)*pose.scaleX,(p.y-piece.origin.y)*pose.scaleY},pose.radians);
   points[i]={rotated.x+anchor.x+pose.center.x,rotated.y+anchor.y+pose.center.y};
-  uv[i]={(direction+p.x/Tile)/8.f,(piece.part+p.y/Tile)/6.f};
+  if(rig)uv[i]={2048.f*(piece.part+1)+mode+p.x-64,p.y-115};
+  else uv[i]={(direction+p.x/Tile)/8.f,(piece.part+p.y/Tile)/6.f};
  }
  rlCheckRenderBatchLimit(6);
- rlBegin(RL_TRIANGLES);rlSetTexture(texture.id);
+ rlBegin(RL_TRIANGLES);rlSetTexture(rig?rig->art.pages[0].color.id:texture.id);
  rlColor4ub(tint.r,tint.g,tint.b,tint.a);
  for(int i:{0,1,2,0,2,3}){
   rlTexCoord2f(uv[i].x,uv[i].y);
@@ -157,29 +153,49 @@ inline void paintChip(Vector2 base,float radius,float radians,Color outline,bool
   DrawTriangle(vertex(-.18f,-1.35f),vertex(-1.30f,.18f),vertex(.70f,.98f),outline);
   DrawTriangle(vertex(.70f,.98f),vertex(1.15f,-.25f),vertex(-.18f,-1.35f),outline);
  }
- const Color lit=shadow?WHITE:index%3==0?rgb(115,143,150):rgb(94,116,124);
- const Color dark=shadow?WHITE:rgb(32,44,55);
- DrawTriangle(top,left,crest,Fade(lit,opacity));
- DrawTriangle(left,bottom,crest,Fade(dark,opacity));
- DrawTriangle(bottom,right,crest,Fade(shadow?WHITE:rgb(53,72,84),opacity));
- DrawTriangle(right,top,crest,Fade(lit,opacity));
+ const bool bronze=index==2||index==7;
+ // The directional shader has finished. The shadow target stores opacity
+ // in red as well as alpha, including these small airborne chips.
+ const auto coverage=static_cast<unsigned char>(std::clamp(opacity,0.f,1.f)*255+.5f);
+ const Color mask{coverage,coverage,coverage,coverage};
+ const auto pigment=[&](Color paint){return shadow?mask:Fade(paint,opacity);};
+ const Color lit=pigment(bronze?rgb(175,133,79):rgb(126,124,141));
+ DrawTriangle(top,left,crest,lit);
+ DrawTriangle(left,bottom,crest,pigment(rgb(34,31,43)));
+ DrawTriangle(bottom,right,crest,pigment(bronze?rgb(105,77,51):rgb(72,71,88)));
+ DrawTriangle(right,top,crest,lit);
 }
 
 inline Rectangle footprint(const Enemy&){return {-67,-33,134,64};}
 
 inline bool draw(const Enemy& e,float x,float y,float phase,Color outline,const Vector2* probe,bool shadow,float opacity){
- const int direction=int(e.animation.direction);
+ using namespace volcano_actors;
+ const auto* art=turn_art::forType(e.type);
+ const int key=int(e.animation.direction);
+ const TurnView view=art?turn_art::view(e.animation,*art):TurnView{key,4*key,0,0};
+ const int direction=view.nearestBase();
  const auto& atlas=volcano_actors::atlases[Species];
  if(!atlas.art.id)return false;
  if(phase<=0)return volcano_actors::draw(e.type,x,y,1,e.deathMotion,e.deathAction,outline,probe,shadow,false,false,e.deathSpecial,nullptr,e.deathScreenSide(),opacity);
  const float side=volcano_actors::flank(direction,e.deathScreenSide())?-1.f:1.f;
- const auto source=phase<.95f?startingPose(e,direction):std::array<PartPose,6>{};
+ const auto source=phase<.95f?startingPose(e,view):std::array<PartPose,6>{};
+ // The shatter shader reads exactly one component of the turning sprite at
+ // its unposed local UV. Each stone then has an independent rigid transform.
+ std::array<Part,6> unposed{};
+ // Keep the bend of the captured sword arm as the plates first separate.
+ unposed[5].elbow=source[5].elbow*(1-enemy_death::window(phase,.06f,.64f));
+ std::optional<TurnRig> directional;
+ if(art)directional.emplace(*art,view,0,unposed,restingPoses[Species].light,side);
+ auto* rig=directional?&*directional:nullptr;
  std::array<Pose,fragments.size()> poses{};
- for(std::size_t i=0;i<fragments.size();i++)poses[i]=place(fragments[i],source[fragments[i].part],phase,side);
+ const float west=view.base==4?1-view.t:view.nextBase()==4?view.t:0.f;
+ const float shieldFacing=west*west*(3-2*west);
+ for(std::size_t i=0;i<fragments.size();i++)
+  poses[i]=place(fragments[i],source[fragments[i].part],phase,side,shieldFacing);
  if(probe){
   const Vector2 local{probe->x-x,probe->y-y};
   for(std::size_t i=0;i<fragments.size();i++)
-   if(probeFragment(atlas,fragments[i],poses[i],direction,local))return true;
+   if(probeFragment(atlas,fragments[i],poses[i],direction,local,rig))return true;
   return false;
  }
 
@@ -191,29 +207,30 @@ inline bool draw(const Enemy& e,float x,float y,float phase,Color outline,const 
  }
  // Match the living layering as the armor separates. Once detached each
  // panel follows its own key, so the breastplate cannot carry the limbs.
- constexpr std::array<int,12> front{0,1,2,3,4,5,6,7,8,9,10,11};
- constexpr std::array<int,12> back{0,1,2,3,4,8,9,10,11,5,6,7};
- constexpr std::array<int,12> raised{0,1,2,3,4,10,11,5,6,7,8,9};
- const bool raisedBlade=phase<.5f&&e.deathAction>=.08f&&e.deathAction<.53f;
- const auto& order=direction>=5?back:raisedBlade?raised:front;
+ int layers[6];
+ turn_art::order(turn_art::sentinel,direction,layers,phase<.5f?e.deathAction:-1.f);
+ std::array<int,fragments.size()> order{};int index=0;
+ for(int p:layers)for(size_t i=0;i<fragments.size();++i)if(fragments[i].part==p)order[index++]=int(i);
+ const float fracture=enemy_death::window(phase,.10f,.65f)*.92f;
+ if(rig)rig->begin(atlas.relief,shadow?0.f:fracture);
  if(outline.a&&!shadow)
   for(const auto delta:{Vector2{-1.4f,0},Vector2{1.4f,0},Vector2{0,-1.4f},Vector2{0,1.4f}})
-   for(int i:order)paintFragment(fragments[i],poses[i],{x+delta.x,y+delta.y},direction,atlas.silhouette,outline);
- const float fracture=enemy_death::window(phase,.10f,.65f);
- const bool relit=!shadow&&volcano_corpse_material::begin(atlas.relief,fracture*.92f,atlas.authoredRest);
+   for(int i:order)paintFragment(fragments[i],poses[i],{x+delta.x,y+delta.y},direction,atlas.silhouette,outline,rig,512.f);
+ const bool relit=!rig&&!shadow&&volcano_corpse_material::begin(atlas.relief,fracture,atlas.authoredRest);
  for(int i:order){
   const Color paint=Fade(WHITE,opacity);
-  paintFragment(fragments[i],poses[i],{x,y},direction,shadow?atlas.silhouette:atlas.art,paint);
+  paintFragment(fragments[i],poses[i],{x,y},direction,shadow?atlas.silhouette:atlas.art,paint,rig,shadow?1024.f:0.f);
  }
  rlSetTexture(0);
- if(relit)EndShaderMode();
+ if(rig||relit)EndShaderMode();
  const auto scatter=sample((phase-.10f)/.78f);
  const float visibility=enemy_death::window(phase,.10f,.36f)*opacity;
  if(visibility>0)for(std::size_t i=0;i<chips.size();i++){
   const auto& chip=chips[i];
   const Vector2 at{x+side*blend(chip.origin.x,chip.landing.x,scatter.travel),
                    y+blend(chip.origin.y,chip.landing.y,scatter.travel)-chip.hop*scatter.lift};
-  paintChip(at,chip.radius,side*chip.angle*DEG2RAD*scatter.spin,Fade(outline,visibility),shadow,visibility,int(i));
+  const Color edge=outline.a?Fade(outline,visibility*outline.a/255.f):BLANK;
+  paintChip(at,chip.radius,side*chip.angle*DEG2RAD*scatter.spin,edge,shadow,visibility,int(i));
  }
  rlPopMatrix();
  return false;

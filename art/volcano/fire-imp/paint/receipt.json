@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "original_references": 5,
+  "new_directions": 32,
+  "verified_Krita_cutouts": 192,
+  "atlas_pixels": [
+    1024,
+    818
+  ],
+  "rgba8_bytes": 3350528,
+  "Krita_retakes": 12,
+  "comfy": {
+    "model": "film_net_fp16.safetensors",
+    "model_sha256": "f226e51375dc839d4b40e5c3d63da560dd1ea1c962364ec78f5adf2d05db05c0",
+    "prompt_id": "24b82cff-9eec-4289-9b56-fce86af9972c",
+    "frames": 33,
+    "render_seconds": 24.584,
+    "device": "cpu"
+  },
+  "synfig": {
+    "idle": {
+      "frames": 61,
+      "seconds": 4.043,
+      "unique_png_frames": 60
+    },
+    "walk": {
+      "frames": 61,
+      "seconds": 3.805,
+      "unique_png_frames": 60
+    },
+    "cast": {
+      "frames": 61,
+      "seconds": 4.857,
+      "unique_png_frames": 60
+    },
+    "fall": {
+      "frames": 24,
+      "seconds": 1.785,
+      "unique_png_frames": 24
+    }
+  },
+  "synfig_render_seconds": 14.49,
+  "source_hashes": {
+    "art\\volcano\\fire-imp\\redesign\\references\\sunburst-turnaround.png": "46a098ed80642ff5a8633a4e52b800602e7d1deb092d26c6029811e0b3c0ba00",
+    "art\\volcano\\fire-imp\\paint\\chochlik.kra": "152138e434f6426d1816963391adf8d247b345fe7845594223ff50db9d7ea5a1",
+    "art\\volcano\\fire-imp\\paint\\landmarks.json": "2f280fc0e5b0ece0e7dc9cfe5272c29cde5401caa484252dc18b61445bd56e19",
+    "assets\\volcano\\fire-imp.png": "a8611b7a9fca2f4cce4cc471e3549af74155a84185070bfe4bf59d245ed49107",
+    "assets\\volcano\\corpses\\fire-imp.png": "576bbc08d822c4a3bfd25c36b3845a11ad4337f5eb20cfc9c7c11a0d594b1c9e",
+    "assets\\volcano\\imp-turn\\parts-0.png": "78ed1291337bf70b0a48018742dd4d5a17fafd1a949c43c2c8a356fd73c4ad76",
+    "src\\generated\\fire_imp_turn_atlas.hpp": "41495027b723307de6931ce2b81eee3438d24c1b6a8225ef81e00622f1c2f201",
+    "assets\\volcano\\imp-turn\\turn-flow.png": "7d65fb925dacf94c6c055c1942f3a804b946c1e498ace11a5dfbdf05673ca9d6",
+    "art\\volcano\\fire-imp\\motion\\imp-cast.sif": "3108ffb21ec722d2327a709b18ca450c8409acefa487674e3d6ba8654320d89b"
+  },
+  "uv_registration": "The single tail follows the traced line from the rump to its barb. Each other channel retains half of its common UV bounds. Gutter: two transparent pixels.",
+  "Krita_final_export": "C:\\AI2D\\sprites\\imp-flank-20261118",
+  "ostrość_w_obrocie": {
+    "narzędzie": "tools/media/fire_imp_turn_maps.py",
+    "źródło": "Osiem malowanych kierunków wyeksportowanych z projektu Krity, sześć osobnych części ciała.",
+    "prowadzenie": "32 kierunki ruchu z edytowalnych warstw. Dopasowanie konturów kończyn, rogów, oczu i szczęki.",
+    "format": "RGBA8, 1920 × 288. Dwa przesunięcia UV na punkt, po pięć węzłów na sektor i 48 × 48 punktów na warstwę.",
+    "próbkowanie": "Piksel pobiera pigment i pokrycie z pojedynczego rysunku źródłowego. Wariant bez shadera ma 32 wypalone kierunki.",
+    "macierz_GPU": {
+      "kierunki": 360,
+      "maks_zmiana_sylwetki": 0.080266,
+      "udział_miękkich_pikseli": 0.116496,
+      "średni_kontrast_detalu": 34.83602,
+      "średni_kontrast_głowy": 36.59017,
+      "punkty_myszy": 72731,
+      "błędy_myszy": 0
+    }
+  },
+  "rzut_kuli": {
+    "źródło": "Uzupełnienie odsłoniętych żeber i pasa pędzlem z sąsiedniego ujęcia. Dwie ręce z przegubami w łokciach, stała kolejność względem tułowia, początek lotu w miejscu uwolnienia.",
+    "piksele_odnowionego_tułowia_w_8_ujęciach": 4014,
+    "klatki_GPU_na_wariant": 504,
+    "kierunki": [
+      0,
+      20,
+      45,
+      90,
+      137,
+      180,
+      225,
+      270,
+      315
+    ],
+    "wyniki": {
+      "before": {
+        "gpu_capture_seconds": 1.74228,
+        "max_palm_step_px": 8.5399,
+        "p95_palm_step_px": 4.8388
+      },
+      "after": {
+        "gpu_capture_seconds": 1.80111,
+        "max_palm_step_px": 6.0134,
+        "p95_palm_step_px": 4.0928
+      }
+    }
+  }
+}

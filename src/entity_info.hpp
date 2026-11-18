@@ -7,7 +7,10 @@ constexpr int StoneGuardianType=3;
 constexpr int CopperScarabType=9,SandCobraType=10;
 constexpr int VolcanoFirstType=12,VolcanoBossType=18;
 constexpr int SlagCrawlerType=VolcanoFirstType,FireImpType=14,EmberDrakeType=17;
-constexpr bool smoothVolcanoTurn(int type){return type==SlagCrawlerType||type==EmberDrakeType;}
+constexpr int AshWraithType=15,ObsidianSentinelType=16;
+constexpr bool smoothVolcanoTurn(int type){
+ return type==SlagCrawlerType||type==EmberDrakeType||type==FireImpType||type==AshWraithType||type==ObsidianSentinelType;
+}
 constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;
 constexpr int DecorationsPerRealm=5,VolcanoLandmarkCount=4;
 constexpr int VolcanoLandmarkStart=VolcanoDecorationStart+DecorationsPerRealm;
@@ -46,8 +49,8 @@ inline const EnemyInfo& enemyInfo(int type) {
         {"Żywa Wydma","Duch piasku · boss",560,1.45f,31,10,7,DamageType::Magic,1.45f,220,1.8f,190},
         {"Żużlowy pełzacz","Pancernik kaldery",138,1.9f,26,10,5,DamageType::Physical,.68f,72,1.4f,66},
         {"Salamandra lawowa","Ognisty gad",120,2.9f,28,5,8,DamageType::Magic,.68f,76,1.1f,70},
-        {"Ognisty chochlik","Demon żaru",104,2.35f,27,3,10,DamageType::Magic,.46f,82,2.1f,97},
-        {"Popielny upiór","Duch pogorzeliska",135,1.75f,30,4,13,DamageType::Magic,.5f,90,2.5f,103},
+        {"Ognisty chochlik","Demon żaru",104,2.35f,27,3,10,DamageType::Magic,.46f,82,2.1f,119},
+        {"Popielny upiór","Duch pogorzeliska",135,1.75f,30,4,13,DamageType::Magic,.5f,90,2.5f,129},
         {"Obsydianowy wojownik","Strażnik kuźni",205,1.65f,33,14,6,DamageType::Physical,.62f,100,1.55f,109},
         {"Żarowy drak","Skrzydlata bestia",155,2.65f,31,7,9,DamageType::Magic,.83f,96,1.2f,126},
         {"Varkhor, Serce Kaldery","Władca wulkanu · boss",940,1.3f,42,17,12,DamageType::Magic,1.3f,390,1.85f,205},

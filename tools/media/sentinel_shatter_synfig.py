@@ -5,6 +5,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 from wolf_motion_synfig import control
+from hero_hit_reaction_synfig import samples
 import synfig_cli
 
 
@@ -12,7 +13,8 @@ import synfig_cli
 # outward/downward travel, Y is vertical lift, with a short second impact.
 WAYPOINTS = (
     (0, 0.00, 0.00, 0.00, 0.00),
-    (3, 0.08, 0.42, 0.10, 0.25),
+    (2, 0.025, 0.17, 0.035, 0.07),
+    (4, 0.11, 0.64, 0.15, 0.26),
     (7, 0.27, 1.00, 0.39, 0.48),
     (12, 0.62, 0.64, 0.74, 0.75),
     (16, 0.92, 0.00, 0.95, 1.00),
@@ -23,11 +25,7 @@ WAYPOINTS = (
 
 
 def curves():
-    for a, b in zip(WAYPOINTS, WAYPOINTS[1:]):
-        for frame in range(a[0], b[0]):
-            t = (frame-a[0])/(b[0]-a[0])
-            yield tuple(x+(y-x)*t for x, y in zip(a[1:], b[1:]))
-    yield WAYPOINTS[-1][1:]
+    return zip(*(samples([(row[0],row[col]) for row in WAYPOINTS]) for col in range(1,5)),strict=True)
 
 
 def author(path):
