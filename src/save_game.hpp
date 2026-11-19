@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=30;
+constexpr int CurrentVersion=31;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -87,10 +87,10 @@ inline void visit(Archive& a,Arrow& v){
  else if(a.reading)launch={};
 }
 EF_SAVE(PierceFlash,v.pos,v.life)
-inline void visit(Archive& a,Explosion& v){a(v.pos,v.life);if(a.version>=15)a(v.spell);}
+inline void visit(Archive& a,Explosion& v){a(v.pos,v.life);if(a.version>=15)a(v.spell);if(a.version>=31)a(v.cinderHandWeight,v.cinderFacing);}
 EF_SAVE(Boulder,v.origin,v.target,v.pos,v.age,v.duration,v.height,v.startHeight,v.damage,v.owner)
 EF_SAVE(BoulderImpact,v.pos,v.life)
-EF_SAVE(CinderBolt,v.pos,v.velocity,v.remaining,v.damage,v.owner)
+inline void visit(Archive& a,CinderBolt& v){a(v.pos,v.velocity,v.remaining,v.damage,v.owner);if(a.version>=31)a(v.aimRange,v.castFacing);}
 EF_SAVE(VenomGlob,v.pos,v.velocity,v.remaining,v.damage,v.owner)
 EF_SAVE(LavaFissure,v.pos,v.age,v.delay,v.damage,v.owner,v.struck)
 EF_SAVE(SoundEvent,v.cue,v.x,v.y)
@@ -110,6 +110,7 @@ inline void visit(Archive& a,Game& v){
  if(a.version>=6)a(v.fountainUsed,v.fountainDrain);
  if(a.version>=7)a(v.merchantArrows);
  if(a.version>=9)a(v.volcanoCreated,v.volcanoBossDead,v.volcanoState,v.volcanoFountainUsed,v.volcanoFountainDrain,v.cinders,v.fissures);
+ if(a.reading&&a.version<31)for(auto& b:v.cinders)if(const auto* e=v.findEnemy(b.owner))v.setCinderLaunch(b,*e,v.player);
  if(a.version>=10)a(v.volcanoSceneryVersion);
  if(a.version>=11)a(v.venomGlobs);
  if(a.version>=12)a(v.worldExpansionVersion);else if(a.reading)v.worldExpansionVersion=0;
@@ -180,7 +181,7 @@ inline void validate(const Snapshot& s){
  require((g.learnedSpells&~7u)==0&&(g.selectedSpell==Spell::None||g.knowsSpell(g.selectedSpell))&&g.spellCooldownTotal>=FireballCooldown&&g.spellCooldownTotal<=60);
  require(g.fireballs.size()<=MaxEntries&&g.explosions.size()<=MaxEntries);
  for(const auto& projectile:g.fireballs){validatePos(projectile.pos);require(validSpell(projectile.spell)&&projectile.age>=0&&projectile.age<=30&&projectile.remaining>=0&&projectile.remaining<=spellDefinition(projectile.spell).range+.001f&&length(projectile.velocity)<=20&&projectile.damage>=0&&projectile.damage<=1000000000);}
- for(const auto& impact:g.explosions){validatePos(impact.pos);require(validSpell(impact.spell)&&impact.life>=0&&impact.life<=spellDefinition(impact.spell).impactLife+.001f);}
+ for(const auto& impact:g.explosions){validatePos(impact.pos);require((impact.cinderHandWeight==-1||(impact.spell==Spell::Fireball&&impact.cinderHandWeight>=0&&impact.cinderHandWeight<=1))&&validSpell(impact.spell)&&impact.life>=0&&impact.life<=spellDefinition(impact.spell).impactLife+.001f);}
  require(g.towerFloor>=0&&g.towerFloor<5&&g.towerRuneMask>=0&&g.towerRuneMask<16&&g.collectedFragments>=0&&g.collectedFragments<=5);
  require(g.level>=1&&g.level<=100000&&g.xp>=0&&g.xp<experienceForLevel(g.level)&&g.gold>=0&&g.gold<=1000000000000LL&&g.kills>=0&&g.nextGround>=1);
  require(g.merchantArrows>=0&&g.merchantArrows<=MerchantArrowCapacity);
@@ -200,7 +201,7 @@ inline void validate(const Snapshot& s){
  require(g.venomGlobs.size()<=24);for(const auto& p:g.venomGlobs){validatePos(p.pos);require((g.inDesert()||g.testSummon(p.owner))&&std::abs(length(p.velocity)-6)<.01f&&p.remaining>0&&p.remaining<=7&&p.damage>=0&&p.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==p.owner&&e.alive&&e.type==10;}));}
  require(g.volcanoSceneryVersion>=0&&g.volcanoSceneryVersion<=VolcanoSceneryRevision);
  require(g.worldExpansionVersion>=0&&g.worldExpansionVersion<=WorldExpansionRevision);
- for(const auto& b:g.cinders){validatePos(b.pos);require((g.inVolcano()||g.testSummon(b.owner))&&std::abs(length(b.velocity)-7.5f)<.01f&&b.remaining>0&&b.remaining<=7&&b.damage>=0&&b.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.alive&&Game::volcanoRanged(e.type);}));}
+ for(const auto& b:g.cinders){validatePos(b.pos);require((g.inVolcano()||g.testSummon(b.owner))&&std::abs(length(b.velocity)-7.5f)<.01f&&b.aimRange>=0&&b.aimRange<=7&&b.remaining>0&&b.remaining<=7&&b.damage>=0&&b.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==b.owner&&e.alive&&Game::volcanoRanged(e.type);}));}
  for(const auto& f:g.fissures){validatePos(f.pos);require((g.inVolcano()||g.testSummon(f.owner))&&f.age>=0&&f.delay>=.9f&&f.delay<=1.5f&&f.age<=f.delay+.651f&&f.damage>=0&&f.damage<=1000&&f.struck==(f.age>=f.delay)&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==f.owner&&e.alive&&e.type==VolcanoBossType;}));}
  for(int i=0;i<FountainCount;i++)require(g.volcanoFountainDrain[i]>=0&&g.volcanoFountainDrain[i]<=FountainDrainDuration&&(!g.volcanoFountainDrain[i]||g.volcanoFountainUsed[i]));
  for(auto& e:g.sounds)require(range(e.cue,int(Cue::Count)));

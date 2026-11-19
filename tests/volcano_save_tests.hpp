@@ -102,6 +102,25 @@ void volcanoSaveTests(){
  s.tower.beginTalk(true,2,true);s.tower.enter(TowerPhase::Choice);roundtrip(s);check(s.tower.chooseVolcano(),"save fixture chooses volcanic teleport");roundtrip(s);
  auto invalid=s;invalid.game.volcanoCreated=false;rejects([&]{saves::encode(invalid);},"uninitialized active third realm refused");
  invalid=s;invalid.game.volcanoFountainUsed[0]=false;rejects([&]{saves::encode(invalid);},"draining unused third-realm shrine refused");
+ // Keep a snapshot in the actual previous payload layout, then let the
+ // versioned reader reconstruct an imp launch without changing a wraith bolt.
+ for(int type:{FireImpType,AshWraithType}){
+  auto shot=caster;shot.game.enemies[0].type=type;shot.game.cinders.clear();
+  shot.game.launchCinder(shot.game.enemies[0]);shot.game.updateVolcanoAttacks(.12f,shot.game.player,false,0);
+  const auto fresh=saves::decode(saves::encode(shot));
+  check(fresh.game.cinders.size()==1&&fresh.game.cinders[0].aimRange==shot.game.cinders[0].aimRange&&
+        fresh.game.cinders[0].castFacing==shot.game.cinders[0].castFacing,"v31 keeps the airborne spell's release range and facing");
+  saves::Archive old(false,{},30);old(shot);saves::Archive decodeOld(true,old.bytes,30);saves::Snapshot migrated;decodeOld(migrated);
+  check(decodeOld.at==old.bytes.size()&&migrated.game.cinders.size()==1&&
+        (migrated.game.cinders[0].aimRange>0)==(type==FireImpType),"v30 caster projectiles acquire the correct presentation from their owner");
+  migrated.game.updateVolcanoAttacks(1.2f,migrated.game.player,false,0);
+  check(migrated.game.explosions.size()==size_t(type==FireImpType),"an in-flight v30 imp fireball explodes when it reaches the hero");
+  if(!migrated.game.explosions.empty()){
+   auto loaded=saves::decode(saves::encode(migrated));const auto& before=migrated.game.explosions[0];
+   const auto& after=loaded.game.explosions[0];
+   check(after.cinderHandWeight==before.cinderHandWeight&&after.cinderFacing==before.cinderFacing&&after.life==before.life&&distance(after.pos,before.pos)==0,"v31 retains world contact, height and life of a hostile fireburst");
+  }
+ }
  invalid=caster;invalid.game.cinders.push_back({{16,50},{2,0},4,20,2000});rejects([&]{saves::encode(invalid);},"invalid projectile speed refused");
  invalid=encounter;invalid.game.enemies[0].eruptionWindup=1.2f;rejects([&]{saves::encode(invalid);},"oversized eruption preparation refused");
 }

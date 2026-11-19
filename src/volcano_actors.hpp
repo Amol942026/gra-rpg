@@ -2,6 +2,9 @@
 #include <optional>
 #include "generated/ember_drake_turn_atlas.hpp"
 #include "generated/slag_crawler_turn_atlas.hpp"
+#include "generated/fire_imp_turn_atlas.hpp"
+#include "generated/fire_imp_cels.hpp"
+#include "generated/obsidian_sentinel_turn_atlas.hpp"
 #include "generated/volcano_motion.hpp"
 #include "generated/basalt_swing.hpp"
 #include "generated/caldera_attack_motion.hpp"
@@ -9,6 +12,8 @@
 #include "generated/slag_crawler_motion.hpp"
 #include "generated/fire_imp_fall_data.hpp"
 #include "generated/fire_imp_motion_data.hpp"
+#include "generated/fire_imp_rig.hpp"
+#include "generated/obsidian_sentinel_motion.hpp"
 #include "enemy_death_settle.hpp"
 #include "volcano_corpse_material.hpp"
 #include "ember_drake_mouth.hpp"
@@ -17,6 +22,11 @@ inline void init();
 inline void unload();
 }
 namespace volcano_actors::turn_art {inline void load();inline void unload();}
+namespace wraith_death_art {
+inline void load();
+inline void unload();
+inline bool living(float,float,float,const AnimationState&,float,Color,const Vector2*,bool,bool,float);
+}
 // The original cutouts retain their walk cycles. Special gestures add Blender pose curves.
 namespace volcano_actors {
 inline constexpr const char* names[]={"slag-crawler","lava-salamander","fire-imp","ash-wraith","obsidian-sentinel","ember-drake","varkhor"};
@@ -48,6 +58,7 @@ inline void load(){
  varkhor_death_art::init();
  drake_mouth::load();
  turn_art::load();
+ wraith_death_art::load();
 }
 inline void unload(){
  for(auto& a:atlases){
@@ -59,6 +70,7 @@ inline void unload(){
  volcano_corpse_material::unload();
  drake_mouth::unload();
  turn_art::unload();
+ wraith_death_art::unload();
  varkhor_death_art::unload();
 }
 struct FallStyle {
@@ -124,11 +136,12 @@ inline Vector2 restPivot(int species,int part,int direction=0){
   return {xy[0],xy[1]};
  }
  if(species==FireImpType-VolcanoFirstType){
-  const float sign=part==1||part==4?-1.f:1.f;
-  const float forward=std::cos(facingAngles[direction]),across=std::abs(std::sin(facingAngles[direction]));
-  if(part>=4)return {64+sign*(10+8*across),67-sign*forward*2};
-  if(part==1||part==2)return {64+sign*(7+4*across),88-sign*forward*1.6f};
-  return {64,88};
+  const auto& xy=fire_imp_rig::pivots[direction][part];
+  return {xy[0],xy[1]};
+ }
+ if(species==ObsidianSentinelType-VolcanoFirstType){
+  const auto& xy=obsidian_sentinel_motion::pivots[direction][part];
+  return {xy[0],xy[1]};
  }
  if(part>=4&&!quadruped(species))return {64+(part==4?-1.f:1.f)*(species==6?25:18),67};
  return {64,90};
@@ -225,20 +238,28 @@ inline fire_imp_motion::Key impMotion(const fire_imp_motion::Key* keys,float pha
          sample(a.tail,b.tail),sample(a.guard,b.guard),sample(a.cast,b.cast),sample(a.reach,b.reach),sample(a.ember,b.ember)};
 }
 
-struct Part {Vector2 pivot,shift;float angle=0,scaleX=1,scaleY=1;};
+struct Part {Vector2 pivot,shift;float angle=0,scaleX=1,scaleY=1,elbow=0;};
 #include "volcano_turn.hpp"
 #include "ember_drake_turn.hpp"
 #include "ember_drake_turn_gesture.hpp"
 #include "ember_drake_pose.hpp"
 #include "slag_crawler_pose.hpp"
+#include "obsidian_sentinel_pose.hpp"
 struct ImpAnimation {fire_imp_motion::Key idle,walk,opposite,cast;};
 
+inline ImpAnimation impSample(const AnimationState& state,float action){
+ const float clock=state.idleTime/1.42f;
+ return {impMotion(fire_imp_motion::idle,clock-std::floor(clock)),
+         impMotion(fire_imp_motion::walk,state.phase),
+         impMotion(fire_imp_motion::walk,std::fmod(state.phase+.5f,1.f)),
+         action>=0?impMotion(fire_imp_motion::cast,action):fire_imp_motion::Key{}};
+}
 inline Part impPart(int part,int direction,float forward,float across,float blend,const ImpAnimation& motion){
  const float sign=part==1||part==4?-1.f:1.f;
  const float facing=forward<-.05f?-1.f:1.f;
  const auto& [idle,walk,opposite,cast]=motion;
- const float bodyTilt=(walk.tilt*blend+idle.tilt*(1-blend)+cast.tilt)*forward;
- const float rise=walk.rise*blend+idle.rise*(1-blend)+cast.rise;
+ const float bodyTilt=((walk.tilt*blend+idle.tilt*(1-blend))*(1-cast.guard)+cast.tilt)*forward;
+ const float rise=(walk.rise*blend+idle.rise*(1-blend))*(1-cast.guard)+cast.rise;
  const Vector2 bodyShift{forward*cast.reach*.72f,across*cast.reach*.32f-rise};
  Part pose{restPivot(FireImpType-VolcanoFirstType,part,direction),bodyShift,bodyTilt};
  if(part==1||part==2){
@@ -251,23 +272,113 @@ inline Part impPart(int part,int direction,float forward,float across,float blen
   pose.angle+=facing*(idle.tail*(1-blend)+walk.tail*blend+cast.tail);
  }else if(part>=4){
   const float rotation=bodyTilt*DEG2RAD;
-  const Vector2 pivotDelta{pose.pivot.x-64,pose.pivot.y-88};
+  const auto torso=restPivot(FireImpType-VolcanoFirstType,3,direction);
+  const Vector2 pivotDelta{pose.pivot.x-torso.x,pose.pivot.y-torso.y};
   pose.shift.x+=(std::cos(rotation)-1)*pivotDelta.x-std::sin(rotation)*pivotDelta.y;
   pose.shift.y+=std::sin(rotation)*pivotDelta.x+(std::cos(rotation)-1)*pivotDelta.y;
-  if(part==4){
-   pose.angle+=forward*(walk.guard*blend+idle.guard*(1-blend))+sign*cast.guard;
-   pose.shift.y-=cast.guard*.15f;
-  }else{
-   const float point=cast.cast;
-   pose.angle+=forward*(walk.cast*blend+idle.cast*(1-blend))-facing*point*(.26f+.74f*std::abs(forward));
-   pose.shift.y-=point*.16f*(1-std::abs(forward));
+  const float swing=part==4?walk.guard*blend+idle.guard*(1-blend):walk.cast*blend+idle.cast*(1-blend);
+  pose.angle+=forward*swing;
+  pose.scaleY=std::clamp(1+across*swing*.005f,.65f,1.18f);
+  if(cast.guard>0){
+   // Aim each painted palm at its own side of the orb, rotating about the
+   // shoulder. Foreshortening is along the forearm; the shoulder stays seated.
+   const auto& right=fire_imp_rig::palm[direction];
+   const auto& left=fire_imp_rig::guardPalm[direction];
+   const auto& palm=part==4?left:right;
+   const auto& shoulders=fire_imp_rig::pivots[direction];
+   Vector2 center{(shoulders[4][0]+shoulders[5][0])*.5f+bodyShift.x+forward*(17+12*cast.cast),
+                  (shoulders[4][1]+shoulders[5][1])*.5f+bodyShift.y+14+across*(8+8*cast.cast)-5*cast.cast};
+   const float rear=std::max(0.f,-across);
+   // A rear-facing caster cups the charge past one shoulder so its head
+   // does not cover the hands, and thrusts forward at chest height.
+   center.x+=15*rear*rear;center.y+=rear*rear*(11+10*cast.cast);
+   const float horizontal=right[0]>=left[0]?1.f:-1.f;
+   const Vector2 spacing{horizontal*(5+6*std::abs(across)),forward*8+across*1.5f};
+   const Vector2 target{center.x+sign*spacing.x,center.y+sign*spacing.y};
+   const Vector2 aim{target.x-pose.pivot.x-pose.shift.x,target.y-pose.pivot.y-pose.shift.y};
+   Vector2 posedPalm{palm[0],palm[1]};
+   if(turn_art::imp.ready()&&turn_art::filtered()){
+    auto elbow=turn_art::impElbow({direction,4*direction,0,0},part,0);
+    const Vector2 upper{elbow.center.x-pose.pivot.x,elbow.center.y-pose.pivot.y};
+    const Vector2 lower{palm[0]-elbow.center.x,palm[1]-elbow.center.y};
+    const float a=std::hypot(upper.x,upper.y),b=std::hypot(lower.x,lower.y),distance=std::hypot(aim.x,aim.y);
+    const float rest=std::atan2(upper.x*lower.y-upper.y*lower.x,upper.x*lower.x+upper.y*lower.y);
+    const float bend=std::acos(std::clamp((distance*distance-a*a-b*b)/(2*a*b),-1.f,1.f));
+    pose.elbow=std::clamp((std::copysign(bend,rest)-rest)*RAD2DEG,-56.f,56.f)*cast.guard;
+    elbow.angle=pose.elbow*DEG2RAD;
+    posedPalm=elbow.map(posedPalm,false);
+   }
+   const Vector2 arm{posedPalm.x-pose.pivot.x,posedPalm.y-pose.pivot.y};
+   const float reach=std::clamp(std::hypot(aim.x,aim.y)/std::hypot(arm.x,arm.y),.91f,1.07f);
+   const float wanted=(std::atan2(aim.y,aim.x)-std::atan2(arm.y*reach,arm.x))*RAD2DEG;
+   pose.angle+=std::remainder(wanted-pose.angle,360.f)*cast.guard;
+   pose.scaleY+=(reach-pose.scaleY)*cast.guard;
   }
  }
  return pose;
 }
+inline Part impViewPart(int layer,const turn_art::View& view,float blend,const ImpAnimation& motion){
+ const auto at=[&](int d){return impPart(layer,d,std::cos(facingAngles[d]),std::sin(facingAngles[d]),blend,motion);};
+ const Part first=at(view.base);
+ if(view.t==0)return first;
+ const Part next=at(view.nextBase());
+ auto pose=turn_art::interpolate(first,next,view.t);
+ pose.angle=first.angle+std::remainder(next.angle-first.angle,360.f)*view.t;
+ return pose;
+}
+inline Vector2 pointOnPart(const Part& hand,const turn_art::View& view,const float (&points)[8][2],int impArm=-1){
+ const auto& a=points[view.base];const auto& b=points[view.nextBase()];
+ Vector2 local{turn_art::mix(a[0],b[0],view.t),turn_art::mix(a[1],b[1],view.t)};
+ if(hand.elbow!=0){
+  const auto joint=impArm>=4?turn_art::impElbow(view,impArm,hand.elbow):turn_art::swordJoint(view,hand.elbow);
+  local=joint.map(local,false);
+ }
+ const float localX=(local.x-hand.pivot.x)*hand.scaleX;
+ const float localY=(local.y-hand.pivot.y)*hand.scaleY;
+ const float r=hand.angle*DEG2RAD,c=std::cos(r),s=std::sin(r);
+ return {hand.pivot.x-64+hand.shift.x+localX*c-localY*s,hand.pivot.y-115+hand.shift.y+localX*s+localY*c};
+}
+inline Vector2 impPalm(const Part& hand,const turn_art::View& view){return pointOnPart(hand,view,fire_imp_rig::palm,5);}
+inline Vector2 sentinelBladePoint(const Enemy& e){
+ const auto* art=turn_art::forType(e.type);
+ const int d=int(e.animation.direction);
+ const auto view=art?turn_art::view(e.animation,*art):turn_art::View{d,d*4,0,0};
+ const float special=game.volcanoSpecialPose(e);
+ const auto arm=[&](int key){return sentinel_art::livingPart(sentinel_art::sample(e.animation,e.volcanoAction(),special,key),5);};
+ auto posed=arm(view.base);
+ if(view.t>0)posed=turn_art::interpolate(posed,arm(view.nextBase()),view.t);
+ const auto local=pointOnPart(posed,view,obsidian_sentinel_motion::bladeGlow);
+ const float scale=bodyScale(ObsidianSentinelType-VolcanoFirstType);
+ return {local.x*scale,local.y*scale};
+}
+struct ImpHands {Vector2 left,right,center;};
+inline ImpHands impHands(const Part& left,const Part& right,const turn_art::View& view){
+ const auto a=pointOnPart(left,view,fire_imp_rig::guardPalm,4);
+ const auto b=impPalm(right,view);
+ return {a,b,{(a.x+b.x)*.5f,(a.y+b.y)*.5f}};
+}
+inline ImpHands impCastHands(const Enemy& owner,float phase){
+ const auto& state=owner.alive?owner.animation:owner.deathMotion;
+ const int d=int(state.direction);
+ const auto* art=turn_art::forType(FireImpType);
+ const auto view=art?turn_art::view(state,*art):turn_art::View{d,d*4,0,0};
+ const auto motion=impSample(state,phase);
+ return impHands(impViewPart(4,view,state.moveBlend,motion),impViewPart(5,view,state.moveBlend,motion),view);
+}
+inline Vector2 impReleasePoint(const Enemy& owner){return impCastHands(owner,.45f).center;}
+inline Vector2 impMuzzleAtHeading(float angle){
+ AnimationState st{};st.direction=directionAtScreenAngle(angle);st.facingInitialized=true;st.facingAngle=angle;
+ const auto* art=turn_art::forType(FireImpType);
+ const int d=int(st.direction);
+ const auto view=art?turn_art::view(st,*art):turn_art::View{d,d*4,0,0};
+ const auto motion=impSample(st,.45f);
+ return impHands(impViewPart(4,view,0,motion),impViewPart(5,view,0,motion),view).center;
+}
+
 
 inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false,float special=-1,const enemy_death::Key* deathPose=nullptr,int deathScreenSide=0,float opacity=1,float deathPhase=0,const BrokenParts* broken=nullptr){
  int id=std::clamp(type-VolcanoFirstType,0,6),direction=std::clamp(int(state.direction),0,7);const auto& atlas=atlases[id];if(!atlas.art.id)return false;
+ if(type==AshWraithType&&!dead&&!deathPose)return wraith_death_art::living(x,y,size,state,action,outline,probe,shadow,flash,opacity);
  const float scale=bodyScale(id),s=size*scale;
  const bool drake=type==EmberDrakeType;
  const auto* artwork=turn_art::forType(type);
@@ -297,21 +408,26 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const auto drakeFall=drake&&(dead||deathPose)?drake_art::locate(ember_drake_motion::fall,dead?1.f:t,view.base):drake_art::Bracket{};
  const auto nextFall=directionalDrake&&(dead||deathPose)?drake_art::locate(ember_drake_motion::fall,dead?1.f:t,view.nextBase()):drake_art::Bracket{};
  const float halfPhase=std::fmod(state.phase+.5f,1.f);
- const bool legacyMotion=!fireImp&&!drake&&!directionalCrawler;
+ const bool warrior=type==ObsidianSentinelType;
+ const auto sentinelPose=warrior?sentinel_art::sample(state,action,special,view.base):sentinel_art::Motion{};
+ const auto nextSentinel=warrior&&view.t>0?sentinel_art::sample(state,action,special,view.nextBase()):sentinel_art::Motion{};
+ const bool legacyMotion=!fireImp&&!warrior&&!drake&&!directionalCrawler;
  const auto control=legacyMotion?volcano_motion::sample(id,state.phase):volcano_motion::Key{};
  const auto opposite=legacyMotion?volcano_motion::sample(id,halfPhase):volcano_motion::Key{};
  const auto strike=legacyMotion?volcano_motion::sample(id,std::max(0.f,action),true):volcano_motion::Key{};
- const auto impAnimation=fireImp?ImpAnimation{impMotion(fire_imp_motion::idle,std::fmod(state.idleTime/1.42f,1.f)),
-     impMotion(fire_imp_motion::walk,state.phase),impMotion(fire_imp_motion::walk,halfPhase),
-     action>=0?impMotion(fire_imp_motion::cast,action):fire_imp_motion::Key{}}:ImpAnimation{};
+ const auto impAnimation=fireImp?impSample(state,action):ImpAnimation{};
  float blend=dead?0:state.moveBlend;
  const bool fourLegs=quadruped(id);
- bool specialPose=id>=4&&!drake&&special>=0&&!dead;
+ bool specialPose=id==6&&special>=0&&!dead;
  auto gesture=specialPose?caldera_attack_motion::pose(id-4,special):caldera_attack_motion::Pose{};
  std::array<Part,6> parts{};
  for(int p=0;p<6;p++){
   auto& part=parts[p];part.pivot={64,90};
-  if(fireImp)part=impPart(p,direction,forward,side,blend,impAnimation);
+  if(fireImp)part=impViewPart(p,view,blend,impAnimation);
+  else if(warrior){
+   part=sentinel_art::livingPart(sentinelPose,p);
+   if(view.t>0)part=turn_art::interpolate(part,sentinel_art::livingPart(nextSentinel,p),view.t);
+  }
   else if(directionalCrawler){
    part=turn_art::interpolate(crawler_art::livingPart(crawlerPose,p),crawler_art::livingPart(nextCrawler,p),view.t);
   }
@@ -331,16 +447,6 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
   if(p>=4&&!fourLegs){part.pivot=restPivot(id,p);part.angle=control.sway*(p==4?-1:1)*4*blend;if(action>=0){part.angle+=strike.sway*(p==4?-2.5f:3.8f);part.shift.x+=strike.sway*std::cos(heading)*.55f;part.shift.y+=strike.sway*std::sin(heading)*.3f;}}
   if(fourLegs&&action>=0&&(p==3||p>=4)){part.shift.x+=strike.sway*std::cos(heading)*.3f;part.shift.y+=strike.sway*std::sin(heading)*.3f;}
   if(p==0)part.angle=control.sway*2.5f*blend;
-  if(id==4&&action>=0&&!dead){
-   auto key=basalt_swing::sample(action);float sign=std::cos(heading)<-.1f?-1.f:1.f;
-   part.shift={std::cos(heading)*key.lunge,std::sin(heading)*key.lunge*.5f};part.angle=0;
-   if(p==0||p==3)part.angle=sign*key.torso;
-   if(p==4||p==5){
-    float r=sign*key.torso*DEG2RAD;Vector2 joint{part.pivot.x-64,part.pivot.y-90};
-    part.shift.x+=joint.x*std::cos(r)-joint.y*std::sin(r)-joint.x;part.shift.y+=joint.x*std::sin(r)+joint.y*std::cos(r)-joint.y;
-    part.angle=sign*(key.torso+(p==5?key.blade:key.shield));
-   }
-  }
   if(specialPose&&(p==0||p==3||(!fourLegs&&p>=4))){
    const float forward=std::cos(heading),side=std::sin(heading),mirror=forward<-.1f?-1.f:1.f;
    const float weight=p==3?1.f:.56f;
@@ -356,7 +462,7 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
    part=drake_art::fallPart(part,drakeFall,p,turn,release);
   }else if(!drake&&(dead||deathPose)){
    auto pivot=restPivot(id,p,direction);
-   if(directionalCrawler){
+   if(directionalCrawler||fireImp){
     const auto a=restPivot(id,p,view.base),b=restPivot(id,p,view.nextBase());
     pivot={turn_art::mix(a.x,b.x,view.t),turn_art::mix(a.y,b.y,view.t)};
    }
@@ -376,9 +482,11 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
    part.angle=join(part.angle,turn*limb.angle)+turn*(follow+(far?19.f:-24.f)*buckle);
    part.scaleX=join(part.scaleX,limb.scaleX);part.scaleY=join(part.scaleY,limb.scaleY);
    if(impFalling&&p>=4){
+    part.elbow*=1-fold;
     // Pivot the shoulder with the chest, then add the arm's own delayed swing.
     const float angle=turn*imp.chest*DEG2RAD;
-    const Vector2 shoulder{part.pivot.x-64,part.pivot.y-90};
+    const auto joint=parts[3].pivot;
+    const Vector2 shoulder{part.pivot.x-joint.x,part.pivot.y-joint.y};
     part.shift.x+=shoulder.x*(std::cos(angle)-1)-shoulder.y*std::sin(angle);
     part.shift.y+=shoulder.x*std::sin(angle)+shoulder.y*(std::cos(angle)-1);
    }
@@ -398,8 +506,11 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const float groundedY=artwork?turn_art::mix(atlas.ground[view.base][turn<0].lift,
                         atlas.ground[view.nextBase()][turn<0].lift,view.t):atlas.ground[direction][turn<0].lift;
  const float shiftX=turn*slide,shiftY=side*slide*.45f+(fall.dip*knees+groundedY*tip)*s;
+ const float layerAction=dead||(deathPose&&collapse>=.64f)?-1.f:action;
  std::optional<turn_art::Rig> turnRig;
- if(artwork)turnRig.emplace(*artwork,view,jaw,parts,rest.light,turn);
+ if(artwork)turnRig.emplace(*artwork,view,jaw,parts,rest.light,turn,layerAction);
+ const float ember=fireImp&&!dead&&action>=0&&action<.45f?
+     impAnimation.cast.ember*(deathPose?1-enemy_death::window(t,0,.18f):1.f):0.f;
  Vector2 localProbe{};
  if(probe){
   localProbe={probe->x-x-shiftX,(probe->y-y-shiftY)/squash};
@@ -432,6 +543,7 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
   turnRig->paint(shadow,tint,0,0,shadow);
   if(flash&&!shadow)turnRig->paint(true,Fade(WHITE,.48f));
   if(turn_art::filtered())EndShaderMode();
+  if(ember>0&&!shadow)caldera_attack_art::fireOrb(impHands(parts[4],parts[5],view).center,caldera_attack_art::heldOrbScale,ember,action/.45f,0);
   rlPopMatrix();return false;
  }
  auto paint=[&](int p,Texture2D texture,Color tint,float dx=0,float dy=0){auto k=parts[p];Rectangle source{float(direction*atlas.cell),float(p*atlas.cell),float(atlas.cell),float(atlas.cell)};
@@ -451,16 +563,14 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
   DrawTexturePro(texture,source,{(k.pivot.x-64+k.shift.x)*s+dx,(k.pivot.y-115+k.shift.y)*s+dy,128*s*k.scaleX,128*s*k.scaleY},
                  {k.pivot.x*s*k.scaleX,k.pivot.y*s*k.scaleY},k.angle,tint);
  };
- int frontOrder[]={0,1,2,3,4,5},backOrder[]={0,1,2,4,5,3},raisedSwordOrder[]={0,1,2,5,3,4};
- // A raised sword passes behind the helmet during anticipation; the shield
- // remains in front. The forward cut returns the blade to the foreground.
- const int* order=direction>=5?backOrder:id==4&&collapse<.64f&&action>=.08f&&action<.53f?raisedSwordOrder:frontOrder;
+ int frontOrder[]={0,1,2,3,4,5},backOrder[]={0,1,2,4,5,3},warriorLayers[6];
+ const int* order=direction>=5?backOrder:frontOrder;
+ if(warrior){turn_art::order(turn_art::sentinel,direction,warriorLayers,layerAction);order=warriorLayers;}
  const int farArm=forward>.3f?5:4;
  const int nearArm=9-farArm;
  const int impOrder[]={0,1,2,farArm,3,nearArm};
- const int castingOrder[]={0,1,2,4,3,5};
  const int impBackOrder[]={1,2,4,3,0,5};
- if(fireImp)order=direction>=5?impBackOrder:action>=.32f&&action<.68f?castingOrder:impOrder;
+ if(fireImp)order=direction>=5?impBackOrder:impOrder;
  const int drakeBackOrder[]={0,1,2,5,3,4};
  if(drake)order=direction>=5?drakeBackOrder:frontOrder;
  if(!shadow&&outline.a)for(Vector2 delta:{Vector2{-1.5f,0},Vector2{1.5f,0},Vector2{0,-1.5f},Vector2{0,1.5f}})for(int n=0;n<6;n++)paint(order[n],atlas.silhouette,outline,delta.x,delta.y);
@@ -481,19 +591,9 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
   paint(p,shadow?atlas.silhouette:atlas.art,tint);
  }
  if(relit)EndShaderMode();
- if(fireImp&&!dead&&!deathPose&&!shadow&&action>=0&&action<.45f){
-  const float ember=impAnimation.cast.ember;
-  if(ember>.08f){
-   const auto& palm=parts[5];
-   const float angle=palm.angle*DEG2RAD;
-   const Vector2 local{6+forward*4,35},point{
-       (palm.pivot.x-64+palm.shift.x+local.x*std::cos(angle)-local.y*std::sin(angle))*s,
-       (palm.pivot.y-115+palm.shift.y+local.x*std::sin(angle)+local.y*std::cos(angle))*s};
-   const float energy=(3.8f+ember*4.6f)*s;
-   DrawCircleV(point,energy,Fade(rgb(230,63,19),ember*.22f));
-   DrawCircleV(point,energy*.56f,Fade(rgb(255,151,44),ember*.85f));
-   DrawCircleV({point.x-.7f*s,point.y-.5f*s},energy*.25f,Fade(rgb(255,233,162),ember));
-  }
+ if(ember>0&&!shadow){
+  const auto point=impHands(parts[4],parts[5],view).center;
+  caldera_attack_art::fireOrb({point.x*s,point.y*s},s*caldera_attack_art::heldOrbScale,ember,action/.45f,0);
  }
  if(flash&&!shadow)for(int n=0;n<6;n++)paint(order[n],atlas.silhouette,Fade(WHITE,.48f));
  rlPopMatrix();return false;

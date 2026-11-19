@@ -271,7 +271,7 @@ def author(root, clip):
     return path
 
 
-def read_keys(path, times, part_names=PARTS, pivot_for=pivot):
+def read_keys(path, times, part_names=PARTS, pivot_for=pivot, grid=GRID, margin=MARGIN):
     frames = [[{} for _ in NAMES] for _ in times]
     for facing in ET.parse(path).getroot().findall("layer"):
         if facing.get("desc")=="runtime:gape":
@@ -291,7 +291,7 @@ def read_keys(path, times, part_names=PARTS, pivot_for=pivot):
                                tuple(float(m.findtext("vector/"+axis)) for axis in ("x", "y")) for m in marks]
             px, py = pivot_for(p, d)
             for frame, (angle, (x, y), (sx, sy)) in enumerate(zip(tracks["turn"], tracks["place"], tracks["scale"], strict=True)):
-                row = ((x-d%4*GRID-MARGIN)*64-px, (-y-d//4*GRID-MARGIN)*64-py, -angle, sx-1, sy-1)
+                row = ((x-d%4*grid-margin)*64-px, (-y-d//4*grid-margin)*64-py, -angle, sx-1, sy-1)
                 frames[frame][d][p] = tuple(round(v*k) for v, k in zip(row, (128, 128, 128, 4096, 4096)))
     return frames
 

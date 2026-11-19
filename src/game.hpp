@@ -45,7 +45,7 @@ constexpr float EnemySightRange=6.5f,PatrolRadius=2.5f,PatrolSpeedFactor=.6f;
 constexpr int BoarType=4;
 constexpr float GuardianPunchWindup=36.f/60,GuardianPunchRecovery=22.f/60;
 constexpr float TreantSwingWindup=47.f/60,TreantSwingRecovery=25.f/60;
-inline constexpr float meleeWindup(int type){return type==3?GuardianPunchWindup:type==7?TreantSwingWindup:.42f;}
+inline constexpr float meleeWindup(int type){return type==3?GuardianPunchWindup:type==7?TreantSwingWindup:type==FireImpType?.66f:.42f;}
 inline constexpr float meleeRecovery(int type){return type==3?GuardianPunchRecovery:type==7?TreantSwingRecovery:.22f;}
 constexpr float BoarChargeFirstDelay=.65f,BoarChargeCooldown=4.5f,BoarChargeWindup=.55f;
 constexpr float BoarChargeDuration=.7f,BoarChargeRecovery=.6f,BoarChargeSpeed=9.5f;
@@ -163,7 +163,7 @@ struct Enemy {
  }
  float volcanoAction()const{
   return abilityBusy()?abilityAction():eruptionWindup>0?1-eruptionWindup/.95f:
-         windup>0?.45f*(1-windup/.42f):strike>0?.45f+.55f*(1-strike/.22f):-1;
+         windup>0?.45f*(1-windup/meleeWindup(type)):strike>0?.45f+.55f*(1-strike/meleeRecovery(type)):-1;
  }
  V hitLean()const{
   if(!alive||flash<=0)return {};
@@ -256,8 +256,18 @@ struct Arrow {
  struct Launch {float charge=-1,phase=0,moving=0,idleTime=0,facing=0;Kind bow=Kind::Bow;} launch{};
 };
 struct PierceFlash {V pos;float life=.26f;};
-struct Explosion { V pos;float life=.35f;Spell spell=Spell::Fireball; };
-struct CinderBolt {V pos,velocity;float remaining=7,damage=0;int owner=0;};
+struct Explosion {
+ V pos;float life=.35f;Spell spell=Spell::Fireball;
+ float cinderHandWeight=-1,cinderFacing=0;
+};
+struct CinderBolt {
+ V pos,velocity;float remaining=7,damage=0;int owner=0;
+ float aimRange=0,castFacing=0;
+ float handWeight()const{
+  // Reserve enough flight for the hands to recede, even at point blank.
+  return std::clamp(1-(7-remaining)/std::max(2.05f,aimRange-.42f),0.f,1.f);
+ }
+};
 struct VenomGlob {V pos,velocity;float remaining=7,damage=0;int owner=0;};
 struct LavaFissure {V pos;float age=0,delay=.95f,damage=48;int owner=VolcanoBossId;bool struck=false;};
 struct Boulder {V origin,target,pos;float age=0,duration=1,height=0,startHeight=0,damage=BoulderDamage;int owner=-1;};

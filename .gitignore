@@ -13,3 +13,8 @@
 /tools/narrative/Emberfall.DialogueBridge/bin/
 /tools/narrative/Emberfall.DialogueBridge/obj/
 /tools/narrative/__pycache__/
+
+# Gotowe kompilacje Emberfall
+Emberfall-DEV-Windows-x64.zip
+Emberfall-Windows-x64.zip
+/art/pipeline/backups/

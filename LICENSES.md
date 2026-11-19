@@ -1,5 +1,13 @@
 # Zależności i zasoby
 
+- Popielny Upiór z Kaldery otrzymał autorską ilustrację przygotowaną dla
+  Emberfall w Sunburst. Plansza pięciu widoków znajduje się w
+  `art/volcano/ash-wraith/redesign/references/sunburst-turnaround.png`.
+
+- Ognisty chochlik i Obsydianowy wojownik z Kaldery Popiołu powstali z ilustracji
+  przygotowanych dla Emberfall w Sunburst. Plansze referencyjne i źródła ich
+  animacji znajdują się w `art/volcano/fire-imp` i `art/volcano/obsidian-sentinel`.
+
 - Wizerunek Wędrowca, pelerynę z różą wiatrów i napierśnik zaprojektowano
   w Sunburst. Materiały włosów, tkanin, skóry i metalu powstały także
   w lokalnym ComfyUI z modelem DreamShaper 8 Lykona. Malowane części

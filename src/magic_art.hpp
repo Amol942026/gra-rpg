@@ -29,6 +29,13 @@ void drawFireball(const Fireball& ball){
 }
 void drawExplosion(const Explosion& blast){
     Vector2 p=screen(blast.pos);float age=1-blast.life/spellDefinition(blast.spell).impactLife;
+    if(blast.cinderHandWeight>=0){
+        p=volcano_art::cinderScreen(blast.pos);
+        const auto muzzle=volcano_actors::impMuzzleAtHeading(blast.cinderFacing);
+        const auto offset=volcano_art::cinderHeightOffset(muzzle,blast.cinderHandWeight);
+        caldera_attack_art::impFireburst({p.x+offset.x,p.y+offset.y},age);
+        return;
+    }
     float alpha=std::clamp(1-age,0.f,1.f);
     Color color=spell_art::tint(blast.spell);float radius=(blast.spell==Spell::LightningOrb?125:blast.spell==Spell::IceShard?92:100)*(0.5f+age);
     if(spell_art::draw(blast.spell,2,{p.x,p.y-24},radius,radius,age*23,alpha)){

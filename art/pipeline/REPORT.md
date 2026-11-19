@@ -1,5 +1,35 @@
 # Raport konfiguracji — 19.10.2026
 
+**18.11.2026 — płynny obrót Popielnego Upiora i czytelny rzut Ognistego Chochlika.**
+
+Kaptur, rękawy i poły szaty poruszają się przez cały obrót. W próbie z nieruchomą szatą silnik wyrenderował 360 różnych obrazów dla 360 kierunków, wcześniej 32. Przy zmianie kierunku o stopień największe przesunięcie brzegu rękawa spadło z 12 do 1 piksela. Największa zmiana obrysu spadła z 23,16% do 2,18%. Sprawdzono także przejście przez 0°, cień, obrys pod kursorem i ułożenie szaty po upadku. [420 kontroli Upiora](C:/AI2D/pipeline/runs/wraith-continuous-20261118/report.json)
+
+Chochlik formuje kulę, zginając obie ręce w łokciach. Uzupełniono malowane detale odsłaniane przez ruch ramion. Przy pełnym naładowaniu płomień zajmuje 16,3% widocznego obszaru wokół dłoni, poprzednio 34,2%. W scenie walki kula opuszcza dłonie, trafia bohatera i wybucha. Synfig wyrenderował 61 klatek rzutu w 4,86 s. Render 108 klatek podglądu sceny z odczytem i zapisem PNG zajął 6,32 s. [462 kontrole chochlika i wojownika](C:/AI2D/pipeline/runs/imp-cast-clarity-20261118/pair-final/summary.json) · [Podgląd i pomiary](C:/AI2D/pipeline/runs/kaldera-kontrola-ruchu-20261118/report.json)
+
+Pełne wydanie przeszło 1414 kontroli grafiki i 5891 kontroli animacji śmierci. Obie paczki Windows sprawdzono po rozpakowaniu, porównując 740 zasobów i uruchamiając po 180 klatek. [Raport wydania](C:/AI2D/pipeline/runs/kaldera-obrot-upiora-rzut-chochlika-20261118/report.json)
+
+**18.11.2026 — obrót Ognistego chochlika i nowa szata Popielnego Upiora w Kalderze.**
+
+Podczas obrotu chochlika położenia oczu, szczęki, rogów i kończyn zmieniają się płynnie. Każdy punkt zachowuje kolor i krycie z pojedynczej malowanej ilustracji. W próbie GPU obejmującej 360 kątów co 1° kontrast detali głowy na granicy najsłabszych 10% ujęć wzrósł z 78,0% do 96,2% kontrastu sąsiednich widoków głównych. Odczyt i zapis obrotu zajął 1,28 s. [Źródła i pomiary chochlika](../volcano/fire-imp/paint/receipt.json)
+
+Płaszcz Upiora podzielono na tren, dwie przednie poły, kaptur z peleryną i dwa puste rękawy. Pięć ilustracji Sunburst posłużyło do opracowania 32 kierunków w Kricie i ComfyUI. Lokalny FILM wyrenderował 33 klatki materiału w 18,37 s. Synfig wyrenderował spoczynek, lot, rzut i opadanie szaty w 42,32 s (268 klatek). Podczas rzutu żar wydobywa się z prawego rękawa. Przy upadku tren pierwszy dotyka podłoża, po nim osiadają rękawy i kaptur. [Grafika i projekty Krity](../volcano/ash-wraith/paint/README.md) · [Animacje Synfiga](../volcano/ash-wraith/motion)
+
+Upiór przeszedł 417 kontroli obrysu, rzutu, cienia i opadania szaty, a chochlik i wojownik 446 kontroli grafiki i walki. W pełnym wydaniu zaliczono 1414 kontroli grafiki i 5891 kontroli śmierci. W obu rozpakowanych wydaniach sprawdzono zgodność 738 zasobów i 180 klatek uruchomienia. Render sceny w Kalderze wraz z odczytem i zapisem 123 klatek trwał 3,61 s. [Podgląd z gry](C:/AI2D/pipeline/runs/kaldera-upior-i-chochlik-20261118/chochlik-i-upior.webp) · [Pomiary](C:/AI2D/pipeline/runs/kaldera-upior-i-chochlik-20261118/report.json)
+
+**18.11.2026 — ostre krawędzie podczas obrotu, zamach mieczem i kula ognia w Kalderze.**
+U chochlika i wojownika malowane detale podążają teraz za obrotem dzięki mapom przesunięć. W próbie z krokiem 1° udział częściowo przezroczystych pikseli zmalał z 31,7% do 17,6% u chochlika i z 20,8% do 10,9% u wojownika. Render, odczyt i eksport 720 klatek obu obrotów trwał 3,047 s. Pod napierśnikiem i przy biodrach wojownika uzupełniono fragmenty widoczne przy podniesieniu ręki. Zwykły atak i Rozłupujący cios mają osobne ruchy barku, łokcia i klingi.
+
+Chochlik przez 0,66 s zbiera ogień między dłońmi. Centrum płomienia wyznacza początek lotu. Trafienie gracza lub osłony zapala wybuch dokładnie na końcu toru. Sprawdzono 56 torów w ośmiu kierunkach oraz ciągłość przy wczytaniu zapisu. Format v31 zapamiętuje biegnący pocisk i wygasający rozbłysk. Sprawdzono również zapis wykonany w poprzedniej grze (v30) podczas jednoczesnego lotu kuli chochlika i pocisku upiora. [Animacja rzutu](../volcano/fire-imp/motion/imp-cast.sif) · [Animacje miecza](../volcano/obsidian-sentinel/redesign/motion)
+
+W zachodnim profilu droga ostrza od szczytu zamachu do wyhamowania wynosi 154,8 px, poprzednio 86,5 px. Synfig ukończył 61 klatek zwykłego cięcia w 24,643 s, 97 klatek Rozłupującego ciosu w 41,398 s i 61 klatek rzutu w 5,166 s. Kontrola obu przeciwników zaliczyła 445 prób. Render, odczyt i eksport 194 klatek zajęły 4,259 s. Bezstratny podgląd rzeczywistego pojedynku i wyniki są w `C:\AI2D\pipeline\runs\kaldera-ostry-obrot-i-ataki-20261118`.
+
+**18.11.2026 — Ognisty chochlik i Obsydianowy wojownik w Kalderze Popiołu.**
+Chochlik ugina nogi, przenosi ciężar między kopytami i prowadzi ruch ogonem. Żar zapala się w dłoni, z której wylatuje pocisk. Wojownik osłania się tarczą na lewym przedramieniu. Zwykłe cięcie jest krótkie, a przed Rozłupującym ciosem wojownik przenosi ciężar i unosi miecz. Po śmierci chochlik osiada na boku, a wojownik rozpada się na fragmenty pancerza z pozy, w której trafił go ostatni cios.
+
+Ilustracje Sunburst opracowano w Kricie. Każda postać ma 32 widoki złożone z sześciu ruchomych części. Lokalny FILM w ComfyUI wyrenderował po 33 klatki, w 24,584 s dla chochlika i 25,242 s dla wojownika. Render w Synfigu trwał odpowiednio 13,504 s dla 207 klatek i 96,460 s dla 261 klatek. W próbie chodu sprawdzono po osiem faz w ośmiu kierunkach dla obu postaci. [Źródła chochlika](../volcano/fire-imp/README.md) · [Źródła i pomiary wojownika](../volcano/obsidian-sentinel/redesign/pochodzenie.json)
+
+Renderer zaliczył 407 kontroli obu przeciwników. Render, odczyt i eksport 185 klatek zajęły 3,817 s. We wszystkich 32 kombinacjach kierunku i strony trafienia ostatnia klatka upadku była pikselowo identyczna z leżącym ciałem. Ogólne testy grafiki (1414) i śmierci (5891) zakończyły się bez błędów. W obu rozpakowanych wydaniach sprawdzono po 734 zasoby i 180 klatek uruchomienia. Raport i krótki podgląd są w `C:\AI2D\pipeline\runs\kaldera-chochlik-wojownik-20261118`.
+
 **18.11.2026 — nowy wygląd i ruch [Żużlowego Pełzacza](../volcano/slag-crawler/README.md).**
 Pięć oryginalnych ilustracji posłużyło do opracowania 32 widoków. Lokalny FILM w ComfyUI ukończył 33 klatki w 36,783 s. Z końcowego projektu Krity wyeksportowano 192 wycinki. Synfig wyrenderował 227 klatek siedmiu klipów w 126,925 s. Kontrola podparcia objęła 4016 próbek. Największe odchylenie podpartego pazura od zakładanego toru wyniosło 0,045 px.
 
