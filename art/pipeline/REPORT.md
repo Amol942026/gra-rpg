@@ -1,5 +1,17 @@
 # Raport konfiguracji — 19.10.2026
 
+**20.11.2026 — płynna zmiana kierunku Rogacza Żaru.**
+
+Głowa, tułów i cztery nogi przechodzą pomiędzy 32 ujęciami. Synfig przygotował ruch kopyt i pochylenie głowy. Kąt biegu i obrotu zmienia się ciągle także w chwili rozpoczęcia szarży. W teście co 1° obraz w chodzie zmienił się 360 razy, wcześniej osiem. Największa zmiana obrysu spadła z 69,75% do 6,72%. [Źródła](../volcano/cinderhorn/README.md)
+
+Render ujęć testowych gry z odczytem i zapisem trwał 1,90 s. Synfig wyrenderował 61 klatek w 4,04 s. Lokalny FILM wygenerował 33 ujęcia w 55,48 s. [Podgląd](C:/AI2D/pipeline/runs/rogacz-plynny-skret-20261120/rogacz-obrot.webp) · [Wyniki](C:/AI2D/pipeline/runs/rogacz-plynny-skret-20261120/report.json)
+
+**20.11.2026 — retusz twarzy Ognistego Chochlika.**
+
+Zewnętrzne cieniowanie policzków, czoła i brody wynika teraz z koloru czaszki. Warstwy Krity zachowują osobne światło wewnątrz oczu, nosa i ust. Ponowny eksport odtworzył oba atlasy bajt w bajt. Oba atlasy i 150 ujęć renderera zachowały istniejący kanał alfa.
+
+Lokalne kompilacje gracza i DEV zaliczyły po 180 klatek startu. Zaliczone zostały 498 prób grafiki i ruchu w Kalderze, 1414 kontroli grafiki oraz 5906 kontroli śmierci. Render testu Kaldery z odczytem i zapisem klatek trwał 4,02 s. [Podgląd](C:/AI2D/pipeline/runs/chochlik-twarz-20261120/twarz-chochlika.webp) · [Raport](C:/AI2D/pipeline/runs/chochlik-twarz-20261120/report.json)
+
 **20.11.2026 — animacje Ognistego Chochlika w Synfigu.**
 
 Natywne klucze Synfiga sterują spoczynkiem, podparciem i przenoszeniem nóg, obrotem, przygotowaniem kuli ognia i upadkiem. Gra korzysta z kluczy wyeksportowanych z `klucze-chochlika.sif`. Próbkowanie koloru w grze ogranicza migotanie łusek. [Źródła i eksport](../volcano/puppets/README.md)

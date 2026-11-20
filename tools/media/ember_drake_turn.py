@@ -368,7 +368,7 @@ def skull_between(a, b, first, nextkey, t):
     return sharp
 
 
-def inbetween(a, b, t, film=None):
+def inbetween(a, b, t, film=None, *, retain_detail=False):
     def lerp(left, right):
         return (1 - t) * left + t * right
 
@@ -400,6 +400,18 @@ def inbetween(a, b, t, film=None):
         neural = sample(film, u * (UV - 1), np.broadcast_to(v[:, None], u.shape))
         weight = 0.72 * (4 * t * (1 - t)) * np.clip(np.minimum(sd0, sd1), 0, 1)
         color += (neural - color) * weight[..., None]
+    if retain_detail:
+        # The local model determines the broad paint. Preserve the defined
+        # edges of the ram's fur and plates from an aligned nearby painting.
+        limit = .52 + .33 * (u - .5) + .16 * (v[:, None] / (UV - 1) - .5)
+        blend = np.clip((t - limit + .075) / .15, 0, 1)
+        blend = np.where(sd0 < -.5, 1, np.where(sd1 < -.5, 0, blend))
+        low = nd.gaussian_filter(color, (1.35, 1.35, 0))
+        d0 = rgb0 - nd.gaussian_filter(rgb0, (1.35, 1.35, 0))
+        d1 = rgb1 - nd.gaussian_filter(rgb1, (1.35, 1.35, 0))
+        detailed = low + 1.12 * (d0 + blend[..., None] * (d1 - d0))
+        w = (.57 + .30 * (4 * t * (1 - t))) * np.clip(distance + .2, 0, 1)
+        color += (detailed - color) * w[..., None]
     return Image.fromarray(np.uint8(np.rint(np.dstack((np.clip(color, 0, 255), 255 * alpha)))))
 
 

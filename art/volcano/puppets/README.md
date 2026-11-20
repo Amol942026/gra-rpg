@@ -14,10 +14,13 @@ Po edycji kluczy zapisz nowy nagłówek i przebuduj obie lokalne kompilacje.
 & $mediaPython tools/media/fire_imp_synfig_rig.py 'C:/AI2D/animations/chochlik-synfig-20261120' --from-master 'C:/AI2D/animations/chochlik-synfig-20261120/klucze-chochlika.sif' --header src/generated/fire_imp_synfig.hpp --no-audio
 ```
 
-Atlas tułowia można odtworzyć następującym poleceniem.
+Twarz Chochlika korzysta z cieniowania tej samej skóry co czaszka. [Warstwy Krity](face-retouch/rysy.kra) wyznaczają zachowane światło oczu, nosa i ust. Wokół policzków i czoła do skóry dodawana jest tylko drobna faktura. Przy eksporcie zachowaj przezroczystość maski 160 × 160 px.
+
+Atlasy głowy i tułowia można odtworzyć Pythonem z Pillow, NumPy i SciPy.
 
 ```powershell
-& $mediaPython tools/media/fire_imp_core_turn.py assets/volcano/fire-imp-puppet.png assets/volcano/fire-imp-head.png 'C:/AI2D/sprites/fire-imp-core.png' --no-audio
+& $mediaPython tools/media/fire_imp_head_turn.py assets/volcano/fire-imp-puppet.png 'C:/AI2D/sprites/fire-imp-head.png' --feature-matte art/volcano/puppets/face-retouch/rysy.png --no-audio
+& $mediaPython tools/media/fire_imp_core_turn.py assets/volcano/fire-imp-puppet.png 'C:/AI2D/sprites/fire-imp-head.png' 'C:/AI2D/sprites/fire-imp-core.png' --no-audio
 ```
 
 Mastery lotu, rzutu i osiadania tkaniny Upiora są w `C:/AI2D/animations/kaldera-nowe-rigi-20261119`. Po zmianie jego kluczy użyj poniższego eksportu. Argument `--atlases assets/volcano` tworzy projekty z atlasów w nowym katalogu wyjściowym.

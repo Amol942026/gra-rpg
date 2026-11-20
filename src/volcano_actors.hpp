@@ -5,6 +5,8 @@
 #include "generated/fire_imp_turn_atlas.hpp"
 #include "generated/fire_imp_cels.hpp"
 #include "generated/obsidian_sentinel_turn_atlas.hpp"
+#include "generated/cinderhorn_turn_atlas.hpp"
+#include "generated/cinderhorn_synfig.hpp"
 #include "generated/volcano_motion.hpp"
 #include "generated/basalt_swing.hpp"
 #include "generated/caldera_attack_motion.hpp"
@@ -244,6 +246,7 @@ inline fire_imp_motion::Key impMotion(const fire_imp_motion::Key* keys,float pha
 
 struct Part {Vector2 pivot,shift;float angle=0,scaleX=1,scaleY=1,elbow=0;};
 #include "volcano_turn.hpp"
+#include "cinderhorn_turn_pose.hpp"
 #include "ember_drake_turn.hpp"
 #include "ember_drake_turn_gesture.hpp"
 #include "ember_drake_pose.hpp"

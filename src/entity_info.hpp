@@ -8,8 +8,10 @@ constexpr int CopperScarabType=9,SandCobraType=10;
 constexpr int VolcanoFirstType=12,VolcanoBossType=18;
 constexpr int SlagCrawlerType=VolcanoFirstType,FireImpType=14,EmberDrakeType=17;
 constexpr int AshWraithType=15,ObsidianSentinelType=16;
+constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21,EnemyTypeCount=22;
 constexpr bool smoothVolcanoTurn(int type){
- return type==SlagCrawlerType||type==EmberDrakeType||type==FireImpType||type==AshWraithType||type==ObsidianSentinelType;
+ return type==SlagCrawlerType||type==EmberDrakeType||type==FireImpType||type==AshWraithType||
+        type==ObsidianSentinelType||type==CinderhornType;
 }
 constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;
 constexpr int DecorationsPerRealm=5,VolcanoLandmarkCount=4;
@@ -17,7 +19,6 @@ constexpr int VolcanoLandmarkStart=VolcanoDecorationStart+DecorationsPerRealm;
 constexpr int PropTypeCount=VolcanoLandmarkStart+VolcanoLandmarkCount;
 inline constexpr bool volcanoLandmark(int type){return type>=VolcanoLandmarkStart&&type<PropTypeCount;}
 inline constexpr bool volcanoSceneryProp(int type){return type>=LegacyPropTypeCount&&type<ForestDecorationStart;}
-constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21,EnemyTypeCount=22;
 constexpr int RegionalEnemyTypeCount=EnemyTypeCount-SporekinType;
 inline constexpr bool regionalEnemy(int type){return type>=SporekinType&&type<EnemyTypeCount;}
 constexpr float RegionalEnemyFallTime=.48f;

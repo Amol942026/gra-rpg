@@ -214,6 +214,8 @@ inline bool drawFrame(SpriteFrame chosen,int type,Direction direction,float x,fl
 }
 inline bool draw(const Enemy& e,float x,float y,Color outline=BLANK,
                  const Vector2* probe=nullptr,bool shadow=false,float scale=1){
+ if(e.type==CinderhornType&&e.alive&&volcano_actors::cinderhorn_turn::ready())
+  return volcano_actors::cinderhorn_turn::draw(e,x,y,outline,probe,shadow,scale,1);
  return drawFrame(spriteFrame(e),e.type,e.animation.direction,x,y,outline,probe,shadow,scale);
 }
 
@@ -263,7 +265,7 @@ inline bool rest(const Enemy& e,float x,float y,Color outline=BLANK,const Vector
  return drawFrame(spriteFrame(e),e.type,e.animation.direction,x,y,outline,probe,shadow,1,opacity);
 }
 
-inline SpriteFrame finalHitFrame(const Enemy& e){
+inline Enemy finalHitPose(const Enemy& e){
  Enemy pose{};
  pose.type=e.type;
  pose.animation=e.deathMotion;
@@ -279,8 +281,9 @@ inline SpriteFrame finalHitFrame(const Enemy& e){
   if(state.action==Action::Recovery)pose.boarRecovery=CinderhornCharge.recovery*remaining;
   pose.boarHit=e.deathChargeHit;
  }
- return spriteFrame(pose);
+ return pose;
 }
+inline SpriteFrame finalHitFrame(const Enemy& e){return spriteFrame(finalHitPose(e));}
 
 inline bool duneEyeDeath(const Enemy& e,float x,float y,float time,Color outline,
                          const Vector2* probe,bool shadow,float opacity){
@@ -312,11 +315,18 @@ inline bool cinderhornFallLayer(const Enemy& e,float x,float y,float progress,Co
  const float t=cinderhornFallPhase(e,progress);
  if(t>=1)return rest(e,x,y,outline,probe,shadow,opacity);
  const auto direction=e.animation.direction;
- const auto living=finalHitFrame(e);
- if(living.index<0||living.index>=int(living.atlas.cellExtents.size()))
+ const auto pose=finalHitPose(e);
+ const auto living=spriteFrame(pose);
+ const bool articulated=volcano_actors::cinderhorn_turn::ready();
+ const auto drawLiving=[&](float ox,float oy,const Vector2* pick){
+  if(articulated)return volcano_actors::cinderhorn_turn::draw(pose,ox,oy,outline,pick,shadow,1,opacity);
+  return drawFrame(living,e.type,direction,ox,oy,outline,pick,shadow,1,opacity);
+ };
+ if(!articulated&&(living.index<0||living.index>=int(living.atlas.cellExtents.size())))
   return rest(e,x,y,outline,probe,shadow,opacity);
- if(t<=0&&!settled)return drawFrame(living,e.type,direction,x,y,outline,probe,shadow,1,opacity);
- const auto from=worldBounds(living.atlas.cellExtents[living.index],e.type,direction);
+ if(t<=0&&!settled)return drawLiving(x,y,probe);
+ const auto from=articulated?volcano_actors::cinderhorn_turn::bounds(pose):
+                             worldBounds(living.atlas.cellExtents[living.index],e.type,direction);
  const auto to=paintedRestBounds(e);
  if(from.width<=0||to.width<=0)return rest(e,x,y,outline,probe,shadow,opacity);
  const auto resting=SpriteFrame{cinderhornRest,paintedRestCell(e)};
@@ -341,10 +351,12 @@ inline bool cinderhornFallLayer(const Enemy& e,float x,float y,float progress,Co
  if(probe){
   const float dx=(probe->x-midX)/sx,dy=(probe->y-midY)/sy;
   const Vector2 local{c*dx+s*dy+origin.x,c*dy-s*dx+origin.y};
+  if(!settled)return drawLiving(0,0,&local);
   return frameAlpha(frame,e.type,direction,local,1,!settled)*opacity>=110;
  }
  rlPushMatrix();rlTranslatef(midX,midY,0);rlScalef(sx,sy,1);rlRotatef(angle,0,0,1);
- drawFrame(frame,e.type,direction,-origin.x,-origin.y,outline,nullptr,shadow,1,opacity,!settled);
+ if(settled)drawFrame(frame,e.type,direction,-origin.x,-origin.y,outline,nullptr,shadow,1,opacity,false);
+ else drawLiving(-origin.x,-origin.y,nullptr);
  rlPopMatrix();
  return false;
 }

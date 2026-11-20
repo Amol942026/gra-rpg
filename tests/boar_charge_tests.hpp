@@ -119,6 +119,31 @@ void cinderhornChargeTests(){
   check(cues(game,Cue::CinderhornCharge)==1&&cues(game,Cue::CinderhornAttack)==1,
         "hoof rush and horn impact have separate audio events");
  }
+ for(int hz:{30,60,120}){
+  AnimationState state;
+  state.faceAim(1,-1,true);
+  float maxRotation=0;
+  constexpr float turn=3.f*AnimationPi/4;
+  state.targetAngle=turn;
+  for(int i=0;i<hz;i++){
+   const float before=state.facingAngle;
+   cinderhorn_gait::advance(state,0,0,1.f/hz,false);
+   maxRotation=std::max(maxRotation,std::abs(state.facingAngle-before));
+  }
+  check(maxRotation>0&&maxRotation<=cinderhorn_gait::TurnRate/hz+.0001f&&
+        std::abs(state.facingAngle-turn)<.001f,
+        "Cinderhorn turns towards its target at a continuous rate");
+ }
+ {
+  auto arena=cinderhornArena();
+  auto& horn=arena.enemies[0];
+  horn.animation.faceAim(1,-1,true);
+  horn.boarWindup=.005f;
+  const float before=horn.animation.facingAngle;
+  arena.update(1.f/60,{},false);
+  check(horn.boarRush>0&&std::abs(std::remainder(horn.animation.facingAngle-before,2*AnimationPi))
+        <=cinderhorn_gait::TurnRate/60+.0001f,"Cinderhorn does not snap to its strike axis at charge release");
+ }
  auto game=cinderhornArena();
  auto& horn=game.enemies[0];
  horn.pos={22,20};horn.boarRush=.5f;horn.boarDirection={1,0};horn.boarAim={30,20};

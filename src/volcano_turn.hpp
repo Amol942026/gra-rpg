@@ -52,6 +52,13 @@ inline Artwork imp{"assets/volcano/imp-turn/",imp_data::PageCount,
  [](int view,int part,int){return imp_data::tiles[view][part];},imp_data::authoredPart,impOrder};
 inline Artwork sentinel{"assets/volcano/sentinel-turn/",sentinel_data::PageCount,
  [](int view,int part,int){return sentinel_data::tiles[view][part];},sentinel_data::authoredPart,obsidian_sentinel_motion::order};
+inline constexpr int cinderhornOrder[8][6]={
+ {0,4,3,1,5,2},{0,4,3,1,5,2},{0,1,3,4,5,2},{1,5,3,0,4,2},
+ {1,5,3,0,4,2},{5,4,2,3,1,0},{4,5,2,3,0,1},{4,5,2,3,0,1}
+};
+inline Artwork cinderhorn{"assets/volcano/cinderhorn-turn/",cinderhorn_turn_atlas::PageCount,
+ [](int view,int part,int){return cinderhorn_turn_atlas::tiles[view][part];},
+ cinderhorn_turn_atlas::authoredPart,cinderhornOrder};
 inline Shader program{};
 inline bool filtered(){return program.id && program.id!=rlGetShaderIdDefault();}
 inline bool continuousImp(){return impCels.color.id&&impContour.ready()&&filtered();}
@@ -191,7 +198,7 @@ inline void unload(){
  if(impCels.mask.id)UnloadTexture(impCels.mask);
  impContour.unload();
  impCels={};
- unloadPages(drake);unloadPages(crawler);unloadPages(imp);unloadPages(sentinel);
+ unloadPages(drake);unloadPages(crawler);unloadPages(imp);unloadPages(sentinel);unloadPages(cinderhorn);
  if(filtered())UnloadShader(program);
  program={};
 }
@@ -394,7 +401,7 @@ inline void loadImpCels(){
  if(filtered())impContour.load("assets/volcano/imp-turn/shape",impCels.color.width,impCels.color.height);
 }
 inline void load(){
- loadProgram();loadPages(drake);loadPages(crawler);
+ loadProgram();loadPages(drake);loadPages(crawler);loadPages(cinderhorn);
  if(!caldera_puppets::ready(caldera_puppets::Imp)){loadPages(imp);loadImpCels();}
  if(filtered())loadPages(sentinel);
 }

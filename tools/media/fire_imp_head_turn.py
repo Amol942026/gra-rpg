@@ -21,7 +21,7 @@ def sample(part, u, v):
     coords = (v * 158 + .5, u * 158 + .5)
     return np.stack([ndimage.map_coordinates(part[:, :, n], coords, order=1,
                                            mode="constant", prefilter=False)
-                     for n in range(4)], axis=-1)
+                     for n in range(part.shape[2])], axis=-1)
 
 
 def over(front, back):
@@ -36,7 +36,24 @@ def sprite(part, x, y, width, height, angle, pivot, mirror=False):
     return sample(part, u, v)
 
 
-def head(degrees, skull, horn, face):
+def face_layers(face, feature_matte):
+    """Split the facial painting into texture, lighting and feature coverage."""
+    alpha = face[..., 3]
+    smooth_alpha = ndimage.gaussian_filter(alpha, 7)
+    smooth_color = np.stack(
+        [ndimage.gaussian_filter(face[..., channel], 7) for channel in range(3)],
+        axis=-1,
+    ) / np.maximum(smooth_alpha[..., None], 1.e-5)
+    # The old cutout included its own forehead, cheeks and chin with a hard
+    # outer edge. Only the inner features carry their own broad shading.
+    distance = ndimage.distance_transform_edt(alpha > .65)
+    inside = np.clip((distance - 3) / 16, 0, 1)
+    inside = inside**2 * (3 - 2 * inside)
+    features = ndimage.gaussian_filter(feature_matte, 7)
+    return np.dstack((smooth_color * alpha[..., None], inside * alpha, features * alpha))
+
+
+def head(degrees, skull, horn, face, lighting):
     angle = math.radians(degrees)
     x, y = math.cos(angle), math.sin(angle) / .52
     length = math.hypot(x, y)
@@ -49,12 +66,21 @@ def head(degrees, skull, horn, face):
     across = X - snout
     skin = sample(skull, .5 + across / 24.6, .5 + (Y - .1) / 24.2)
     arc = np.arcsin(np.clip(across / 12.5, -1, 1)) - yaw
-    painted = sample(face, .5 + arc / 2.38, .5 + (Y - .4) / 20.4)
-    # Work inside the skull's coverage. At the profile only the near part
-    # of the muzzle and the near eye can reach the visible surface.
-    weight = painted[:, :, 3:] * np.clip((skin[:, :, 3:] - .3) * 1.65, 0, 1)
-    pigment = painted[:, :, :3] / np.maximum(painted[:, :, 3:], 1.e-5)
-    skin[:, :, :3] = skin[:, :, :3] * (1 - weight) + pigment * skin[:, :, 3:] * weight
+    u, v = .5 + arc / 2.38, .5 + (Y - .4) / 20.4
+    painted = sample(face, u, v)
+    tones = sample(lighting, u, v)
+    face_alpha = np.maximum(painted[..., 3:], 1.e-5)
+    skull_alpha = skin[..., 3:]
+    scalp = skin[..., :3] / np.maximum(skull_alpha, 1.e-5)
+    broad = tones[..., :3] / face_alpha
+    texture = (painted[..., :3] - tones[..., :3]) / face_alpha
+    feature_weight = np.clip(tones[..., 4:] / face_alpha, 0, 1)
+    # Eyes, nose and mouth retain their painted modelling. The surrounding
+    # scales inherit the colour of the skull, with a little facial texture.
+    pigment = scalp * (1 - feature_weight) + broad * feature_weight + texture
+    weight = tones[..., 3:4] * (.32 + .68 * feature_weight)
+    weight *= np.clip((skull_alpha - .3) * 1.65, 0, 1)
+    skin[..., :3] = skin[..., :3] * (1 - weight) + np.clip(pigment, 0, 1) * skull_alpha * weight
 
     horns = np.zeros_like(skin)
     for side in (-1, 1):
@@ -81,17 +107,22 @@ def tile(image):
     return Image.fromarray(np.rint(np.clip(result, 0, 1) * 255).astype(np.uint8))
 
 
-def bake(path, destination, review):
+def bake(path, destination, review, feature_matte):
     with Image.open(path) as source:
         paint = np.asarray(source.convert("RGBA"), dtype=np.float32) / 255
     assert paint.shape == (640, 480, 4), path
     paint[:, :, :3] *= paint[:, :, 3:]
     skull, horn, face = (paint[:160, start:start + 160] for start in (0, 160, 320))
+    with Image.open(feature_matte) as source:
+        if source.size != (160, 160) or "A" not in source.getbands():
+            raise ValueError("Maska rysów musi być plikiem RGBA 160 × 160 z Krity.")
+        matte = np.asarray(source.getchannel("A"), dtype=np.float32) / 255
+    lighting = face_layers(face, matte)
     atlas = Image.new("RGBA", (CELL * COLS, CELL * ROWS))
     sheet = Image.new("RGBA", (CELL * 8, CELL * 2), (65, 61, 58, 255))
     for degrees in range(COLS * ROWS):
         try:
-            view = tile(head(degrees, skull, horn, face))
+            view = tile(head(degrees, skull, horn, face, lighting))
         except ValueError as error:
             raise ValueError(f"{degrees}°: {error}") from error
         atlas.paste(view, (degrees % COLS * CELL, degrees // COLS * CELL))
@@ -108,6 +139,7 @@ if __name__ == "__main__":
     parser.add_argument("source", type=Path)
     parser.add_argument("destination", type=Path)
     parser.add_argument("--review", type=Path)
+    parser.add_argument("--feature-matte", type=Path, required=True)
     parser.add_argument("--no-audio", action="store_true", required=True)
     args = parser.parse_args()
-    bake(args.source, args.destination, args.review)
+    bake(args.source, args.destination, args.review, args.feature_matte)

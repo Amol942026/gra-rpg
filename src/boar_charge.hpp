@@ -1,8 +1,7 @@
 // Included inside Game. The charge shares ordinary creature collision steps.
 static void faceCharge(Enemy& e,V direction){
  if(length(direction)<.001f)return;
- e.animation.face(direction.x,direction.y);
- e.animation.targetAngle=std::atan2((direction.x+direction.y)*.5f,direction.x-direction.y);
+ e.animation.faceAim(direction.x,direction.y,e.type==CinderhornType);
 }
 static void finishCharge(Enemy& e){
  const float recovery=chargeProfile(e.type).recovery;
@@ -80,7 +79,8 @@ void advanceCharge(Enemy& e,float dt,V heroFrom,V heroTo,bool wasRolling,float r
    e.boarChargeCd=charge.cooldown;e.boarHit=false;
    if(length(e.boarDirection)<.5f||dead()){finishCharge(e);}
    else{
-    e.boarRush=charge.duration;e.boarCharges++;faceCharge(e,e.boarDirection);e.animation.facingAngle=e.animation.targetAngle;
+    e.boarRush=charge.duration;e.boarCharges++;faceCharge(e,e.boarDirection);
+    if(e.type==BoarType)e.animation.facingAngle=e.animation.targetAngle;
     if(e.type==CinderhornType)e.animation.phase=0;
     sound(e.type==CinderhornType?Cue::CinderhornCharge:enemyAttackCue(e.type),e.pos);
    }
