@@ -1,0 +1,42 @@
+{
+  "tool": "ImageGen (tryb wbudowany, GPT-Image-2.6 Sunburst)",
+  "editor": "Krita 5.3.4.1",
+  "animation": "Synfig 1.4.5",
+  "prompts": {
+    "imp": "Create NEW production atlas artwork of separate painted 2D paper-doll pieces for a fire imp enemy in an indie isometric dark fantasy RPG \"Emberfall\". Main character is compact, muscular ratlike/satyr fire devil, charcoal-red volcanic scales, dark sienna skin, muted copper and coal plates, amber glow cracks and eyes, sharp obsidian horns, hoofed feet, long tapering tail, patched dark leather belt. Hand-painted CRPG illustration with fine chipped/scaled finish and hard clean outlines, metallic burnt copper highlights, no pixel-grid, no soft glows, no text. These are pieces to be put on separate pivoted layers. Exact layout is a portrait 3 by 4 evenly spaced grid (12 objects), every cell isolated by substantial transparent margins, object may not touch cell sides. For all sides assume slightly elevated isometric perspective with light from above left. The first row, left to right: (1) roundish dark scruffy imp head skull cap without eyes, nose or horns, painted with leathery small scales, facing camera base volume only. (2) separate curved ridged obsidian horn with bronze cracks at base, only one horn, drawn diagonal with root lower right and tip upper left. (3) separate imp face patch, eyebrow ridges, two amber eyes, pointed leathery muzzle, snarling mouth and cheekbones facing camera, cropped flush into its own dark scales, no head outline. Second row: (4) muscular charcoal brick-red upper body and pelvis with scorched leather belt and bronze buckle, no head, no arms, no legs, no tail. (5) muscular scaled upper arm segment, straight vertical, shoulder upper, elbow lower, rounded at both ends. (6) lower arm segment, elbow above and a slightly open black clawed hand below. Third row: (7) muscular upper thigh segment standing straight vertical, hip above and knee below. (8) scaly narrow shin segment including cloven dark hoof below it, straight vertical. (9) short rounded wide obsidian amber-veined armor shell for shoulder, isolated. Fourth row: (10) tapered naturally curved single leathery imp tail from upper left root down to the rightward lower tip, no sharp barbs. (11) weaponless open black claw hand for punching, only hand. (12) detached tip of tail like an arrow point with ember marks, points right. Use translucent-free flesh and clean opaque edges, genuine transparent background, no checker texture, no shadows outside shapes. Huge margins between each object. Precisely 12 assets numbered here only for layout, no typography in image. Cohesive and detailed.",
+    "wraith": "A NEW silent ash wraith enemy, empty ragged cloak, production cut-out parts painted for an isometric original 2D dark fantasy RPG called Emberfall. Transparent portrait sheet with an EXACT four rows by three columns evenly spaced grid of 12 isolated objects. Very ample margins so that NO object touches its cell boundary. Gritty crisp brushwork and dramatic dark blue slate / ash-grey layered fabric, subtle burnt copper geometric embroidery and little fabric stitches, hand-painted medieval CRPG, no pixel grid, no fuzzy aura, hard material edges, soft tonal modelling only inside, no text or external shadows. A hollow garment, NO face, NO humanoid body or hands. Light upper left, camera slightly elevated. First row, left to right: (1) back-facing compact rounded pointed blue slate hood top with rippling folds, isolated collarless. (2) hood opening ONLY as black empty inverse teardrop with its sharply stitched copper-edged fabric rim and split crooked point at top, facing camera, small feature to be layered on top of hood. (3) thin rumpled isolated blue charcoal shoulder mantle with folded fabric, styled with a single small bronze clasp low center, neckline free of head. Second row (4) skirt-like isolated long front charcoal robe flap with a few copper stitches, narrow at the hip and wider lower, tattered hem; (5) wider tattered rear charcoal cloak train, narrow rounded shoulders at top and pointed fraying tips below, no head; (6) side robe flap, narrower flowing charcoal blue vertical cloth strip with layered folds and finely frayed hem. Third row (7) upper sleeve, wide curved fabric from shoulder upper to elbow lower, vertical with rounded ends; (8) long hanging separate lower sleeve tapering at top and widening around empty dark stitched cuff angled down and left, threadbare edge; (9) small battered antique spoked bronze brooch with grey stone. Fourth row (10) strip of ash-grey charred twisted fabric, narrow curve, ragged ends; (11) flattened folded ash blue cloak fabric laid on its side, one piece; (12) smaller vertical ragged blue ash strip doubling as small hanging ribbon. These are twelve distinct, isolated pieces for separate pivoted animation. True transparent background. No cast shadows, no floating particles, no border, no ground plane.",
+    "impBack": "An individual 2D paper-doll game sprite piece, a volcanic demon's torso strictly BACK VIEW, centered and isolated on true transparent background, no head, legs, tail or arms. The back of the compact muscular ratlike fire imp is charcoal russet overlapping jagged obsidian scapular scales at trapezius and shoulders with a slightly sawlike spine panel, dark orange and copper speckle and a few thin amber fissures. A dark stitched leather belt with plain copper rivets at the waist as seen from behind, no visible buckle. Thick volumetric shape, painted texture, crisp silhouette and edges, subtle top-left overhead highlights, Isometric CRPG. Crop to the neck and hip joints including opaque attachment margins. Only one object, no background shading, no floor, no glow, no outer aura and no text. Match a very dark fantasy game with muted natural tonal range."
+  },
+  "files": {
+    "imp": {
+      "path": "C:/AI2D/pipeline/runs/kaldera-nowe-rigi-20261119/imp-source.png",
+      "sha256": "065e81e2b899d2b7e8286e5451b00bc8c0b143cde7691d15a59bfb2157e432bd"
+    },
+    "wraith": {
+      "path": "C:/AI2D/pipeline/runs/kaldera-nowe-rigi-20261119/wraith-source.png",
+      "sha256": "623d3fd3058fc9245175203d636121d5b5d4540f6d12799bdbcd7030932e2fb2"
+    },
+    "impBack": {
+      "path": "C:/AI2D/pipeline/runs/kaldera-nowe-rigi-20261119/imp-back-source.png",
+      "sha256": "8fa0ceb8b514e22f7c8b7032db875e46800340540334a3d3c6b7860675750cd1"
+    },
+    "impAtlas": {
+      "path": "assets/volcano/fire-imp-puppet.png",
+      "sha256": "98152c66d87b2a2316a19ec7d50648926e7bb7b68ea2c8fac9ed39177e080451"
+    },
+    "wraithAtlas": {
+      "path": "assets/volcano/ash-wraith-puppet.png",
+      "sha256": "7098ce58671dc5eef41a8a6def404925925ad412865de0d16280b99789ab5558"
+    },
+    "impMaster": {
+      "path": "C:/AI2D/sprites/kaldera-nowe-rigi-20261119-gotowy/imp.kra",
+      "sha256": "bb72a400c9ab6028f0a1d998d51106613862fff26f62dc5a34b1fccd70437a65"
+    },
+    "wraithMaster": {
+      "path": "C:/AI2D/sprites/kaldera-nowe-rigi-20261119/wraith.kra",
+      "sha256": "87b4b7a1e598e5e1d1caa3e0556407a4248928571fc3827cf04544d11f212976"
+    }
+  },
+  "synfigProjects": "C:/AI2D/animations/kaldera-nowe-rigi-20261119",
+  "rights": "Autorskie zasoby artystyczne przygotowane dla Emberfall."
+}

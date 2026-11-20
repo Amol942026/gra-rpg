@@ -1,22 +1,24 @@
 #pragma once
+#include "generated/ash_wraith_cels.hpp"
 
 namespace world_shadows { extern Shader maskShader; }
 
 namespace wraith_death_art::rotation {
 static_assert(ash_wraith_turn_atlas::PageCount==1,"Both registered cloth views must share one texture");
 inline Shader shader{};
-inline Texture2D flow{},edges{},weave{};
+inline Texture2D flow{},edges{},weave{},robeCels{};
 inline std::vector<Color> vectors;
 inline std::vector<unsigned char> distance;
-struct Uniforms {int rectA,rectB,motion,edge,relief,phase;};
+struct Uniforms {int rectA,rectB,motion,edge,relief,phase,celBounds,celMap,celOffset;};
 inline Uniforms uniforms{};
 inline bool ready(){return flow.id&&edges.id&&weave.id&&shader.id&&shader.id!=rlGetShaderIdDefault();}
 inline void unload(){
  if(flow.id)UnloadTexture(flow);
  if(edges.id)UnloadTexture(edges);
  if(weave.id)UnloadTexture(weave);
+ if(robeCels.id)UnloadTexture(robeCels);
  if(shader.id&&shader.id!=rlGetShaderIdDefault())UnloadShader(shader);
- flow={};edges={};weave={};shader={};vectors.clear();distance.clear();
+ flow={};edges={};weave={};robeCels={};shader={};vectors.clear();distance.clear();
 }
 inline void load(){
  Image f=LoadImage("assets/volcano/wraith-turn/registration.png");
@@ -36,6 +38,8 @@ inline void load(){
  if(!flow.id||!edges.id||!weave.id)return;
  SetTextureFilter(weave,TEXTURE_FILTER_BILINEAR);
  SetTextureWrap(weave,TEXTURE_WRAP_REPEAT);
+ robeCels=LoadTexture("assets/volcano/wraith-turn/directional-robe.png");
+ if(robeCels.id)SetTextureFilter(robeCels,TEXTURE_FILTER_BILINEAR);
  shader=LoadShaderFromMemory(nullptr,R"GLSL(#version 330
 in vec2 fragTexCoord;
 in vec4 fragColor;
@@ -43,6 +47,8 @@ out vec4 finalColor;
 uniform sampler2D texture0, motionMap, edgeMap, clothRelief;
 uniform vec4 rectA[6], rectB[6];
 uniform vec4 phase; // geometry view, fraction, settled weight, cloth longitude in turns
+uniform vec4 celBounds[6],celMap[6];
+uniform float celOffset;
 vec2 displacement(int p,vec2 uv){
  vec2 cell=clamp(uv,vec2(.5/32.),vec2(1.-.5/32.));
  return (texture(motionMap,(vec2(phase.x,p)+cell)/vec2(32.,6.)).rg*255.-128.)/384.;
@@ -75,24 +81,30 @@ void main(){
  if(mode==1){finalColor=vec4(fragColor.rgb,coverage*fragColor.a);return;}
  vec2 shape=vec2(textureSize(edgeMap,0));
  vec2 pa=pixel(a,clamp(qa,0.,1.))/shape,pb=pixel(b,clamp(qb,0.,1.))/shape;
- // The two charts locate one point on the same wraparound cloth. A single
- // pigment lookup follows the fold through the turn, including the back seam.
- vec2 chart=mix(texture(edgeMap,pixel(a,at)/shape).gb,texture(edgeMap,pixel(b,at)/shape).gb,t);
- float rows=float(textureSize(texture0,0).y)/6.;
- // Keep the fold and its outline resolved at game scale. Only distant fibers
- // spanning several source pixels get a short directional integration.
- const float hem=16.;
- float v=(float(part)*rows+hem+.5+clamp(chart.y,0.,1.)*(rows-2.*hem-1.))/(6.*rows);
- vec2 dye=vec2(phase.w+.5*(chart.x-.5),v);
- vec2 dims=vec2(textureSize(texture0,0));
- vec2 dx=dFdx(dye)*dims,dy=dFdy(dye)*dims;
- vec2 along=dot(dx,dx)>dot(dy,dy)?dx:dy;
- float footprint=length(along);
- vec3 color=textureLod(texture0,dye,0.).rgb;
- if(footprint>4.){
-  vec2 tap=along/max(footprint,.01)*min(.92,.12*footprint)/dims;
-  vec3 side=.5*(textureLod(texture0,dye-tap,0.).rgb+textureLod(texture0,dye+tap,0.).rgb);
-  color=mix(color,side,.25*smoothstep(4.,9.,footprint));
+ vec3 color;
+ if(celBounds[part].z>0.){
+  // The fold pigment is an already painted cel. Offset the one drawing by
+  // the residual angle; the edge and the loose fabric still follow the rig.
+  vec2 original=at+vec2(celOffset,0.);
+  vec2 coords=celMap[part].xy+original*celMap[part].zw;
+  vec4 limits=celBounds[part];
+  color=texture(texture0,clamp(coords,limits.xy,limits.zw)).rgb;
+ }else{
+  vec2 chart=mix(texture(edgeMap,pixel(a,at)/shape).gb,texture(edgeMap,pixel(b,at)/shape).gb,t);
+  float rows=float(textureSize(texture0,0).y)/6.;
+  const float hem=16.;
+  float v=(float(part)*rows+hem+.5+clamp(chart.y,0.,1.)*(rows-2.*hem-1.))/(6.*rows);
+  vec2 dye=vec2(phase.w+.5*(chart.x-.5),v);
+  vec2 dims=vec2(textureSize(texture0,0));
+  vec2 dx=dFdx(dye)*dims,dy=dFdy(dye)*dims;
+  vec2 along=dot(dx,dx)>dot(dy,dy)?dx:dy;
+  float footprint=length(along);
+  color=textureLod(texture0,dye,0.).rgb;
+  if(footprint>4.){
+   vec2 tap=along/max(footprint,.01)*min(.92,.12*footprint)/dims;
+   vec3 side=.5*(textureLod(texture0,dye-tap,0.).rgb+textureLod(texture0,dye+tap,0.).rgb);
+   color=mix(color,side,.25*smoothstep(4.,9.,footprint));
+  }
  }
  if(phase.z>0.){
   vec4 material=mix(texture(clothRelief,pa),texture(clothRelief,pb),t);
@@ -109,10 +121,11 @@ void main(){
 })GLSL");
  if(ready()){
   const auto loc=[](const char* s){return GetShaderLocation(shader,s);};
-  uniforms={loc("rectA[0]"),loc("rectB[0]"),loc("motionMap"),loc("edgeMap"),loc("clothRelief"),loc("phase")};
+  uniforms={loc("rectA[0]"),loc("rectB[0]"),loc("motionMap"),loc("edgeMap"),loc("clothRelief"),loc("phase"),
+            loc("celBounds[0]"),loc("celMap[0]"),loc("celOffset")};
  }
 }
-inline void begin(int left,int right,float t,float angle,float folds,Texture2D relief){
+inline void begin(int left,int right,float t,float angle,float folds,Texture2D relief,bool useCels=true){
  Vector4 rects[2][6];
  for(int i=0;i<2;i++)for(int p=0;p<6;p++){
   const auto& tile=ash_wraith_turn_atlas::tiles[i?right:left][p];
@@ -123,9 +136,26 @@ inline void begin(int left,int right,float t,float angle,float folds,Texture2D r
  SetShaderValueV(shader,uniforms.rectB,rects[1],SHADER_UNIFORM_VEC4,6);
  Vector4 phase{float(left),t,folds,angle/(2*PI)};
  SetShaderValue(shader,uniforms.phase,&phase,SHADER_UNIFORM_VEC4);
+ Vector4 bounds[6]{},mapping[6]{};
+ if(robeCels.id&&useCels){
+  const float position=phase.w*ash_wraith_cels::Directions;
+  const int pose=int(std::lround(position));
+  const int key=pose%ash_wraith_cels::Directions;
+  const float offset=(position-pose)*2/ash_wraith_cels::Directions;
+  for(int p=0;p<6;p++){
+   const auto& tile=ash_wraith_cels::tiles[key][p];
+   const float w=float(robeCels.width),h=float(robeCels.height);
+   bounds[p]={(tile.x+.5f)/w,(tile.y+.5f)/h,(tile.x+tile.w-.5f)/w,(tile.y+tile.h-.5f)/h};
+   mapping[p]={(tile.x-tile.ox)/w,(tile.y-tile.oy)/h,tile.canvasWidth/w,tile.canvasHeight/h};
+  }
+  SetShaderValue(shader,uniforms.celOffset,&offset,SHADER_UNIFORM_FLOAT);
+ }
+ SetShaderValueV(shader,uniforms.celBounds,bounds,SHADER_UNIFORM_VEC4,6);
+ SetShaderValueV(shader,uniforms.celMap,mapping,SHADER_UNIFORM_VEC4,6);
  SetShaderValueTexture(shader,uniforms.motion,flow);SetShaderValueTexture(shader,uniforms.edge,edges);
  if(folds>0&&relief.id)SetShaderValueTexture(shader,uniforms.relief,relief);
 }
+inline Texture2D paintTexture(){return robeCels.id?robeCels:weave;}
 template<typename Sample>
 inline float bilinear(float x,float y,Sample sample){
  const int ix=int(std::floor(x)),iy=int(std::floor(y));const float fx=x-ix,fy=y-iy;

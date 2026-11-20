@@ -119,6 +119,16 @@
       ]
     }
   },
+  "chód_i_cięcia_2026_11_20": {
+    "generator": "tools/media/obsidian_sentinel_motion.py",
+    "projekty": "C:/AI2D/animations/obsydianowy-wojownik-naturalny-ruch-20261120",
+    "nagłówek": "src/generated/obsidian_sentinel_motion.hpp",
+    "klatki": {"walk": 41, "strike": 61, "cleave": 97},
+    "czas_renderu_s": {"walk": 18.513, "strike": 25.057, "cleave": 35.741},
+    "maks_uniesienie_buta_px": 7.755,
+    "maks_błąd_podparcia_px": 0.009,
+    "skręt_napierśnika_w_profilu_stopnie": 41.813
+  },
   "ostrość_w_obrocie": {
     "narzędzie": "tools/media/caldera_turn_registration.py",
     "kierunki": 32,

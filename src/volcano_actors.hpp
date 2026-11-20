@@ -17,6 +17,8 @@
 #include "enemy_death_settle.hpp"
 #include "volcano_corpse_material.hpp"
 #include "ember_drake_mouth.hpp"
+#include "painted_turn_shape.hpp"
+#include "caldera_puppets.hpp"
 namespace varkhor_death_art {
 inline void init();
 inline void unload();
@@ -57,8 +59,9 @@ inline void load(){
 }
  varkhor_death_art::init();
  drake_mouth::load();
+ caldera_puppets::load();
  turn_art::load();
- wraith_death_art::load();
+ if(!caldera_puppets::ready(caldera_puppets::Wraith))wraith_death_art::load();
 }
 inline void unload(){
  for(auto& a:atlases){
@@ -69,6 +72,7 @@ inline void unload(){
  }
  volcano_corpse_material::unload();
  drake_mouth::unload();
+ caldera_puppets::unload();
  turn_art::unload();
  wraith_death_art::unload();
  varkhor_death_art::unload();
@@ -359,6 +363,10 @@ inline ImpHands impHands(const Part& left,const Part& right,const turn_art::View
 }
 inline ImpHands impCastHands(const Enemy& owner,float phase){
  const auto& state=owner.alive?owner.animation:owner.deathMotion;
+ if(caldera_puppets::ready(caldera_puppets::Imp)){
+  const auto pose=caldera_puppets::fireImp(state,phase);
+  return {pose.palms[0],pose.palms[1],caldera_puppets::mix(pose.palms[0],pose.palms[1],.5f)};
+ }
  const int d=int(state.direction);
  const auto* art=turn_art::forType(FireImpType);
  const auto view=art?turn_art::view(state,*art):turn_art::View{d,d*4,0,0};
@@ -367,6 +375,7 @@ inline ImpHands impCastHands(const Enemy& owner,float phase){
 }
 inline Vector2 impReleasePoint(const Enemy& owner){return impCastHands(owner,.45f).center;}
 inline Vector2 impMuzzleAtHeading(float angle){
+ if(caldera_puppets::ready(caldera_puppets::Imp))return caldera_puppets::muzzleAtHeading(caldera_puppets::Imp,angle);
  AnimationState st{};st.direction=directionAtScreenAngle(angle);st.facingInitialized=true;st.facingAngle=angle;
  const auto* art=turn_art::forType(FireImpType);
  const int d=int(st.direction);
@@ -375,8 +384,34 @@ inline Vector2 impMuzzleAtHeading(float angle){
  return impHands(impViewPart(4,view,0,motion),impViewPart(5,view,0,motion),view).center;
 }
 
+inline bool puppetAlive(caldera_puppets::Species species,float x,float y,float size,const AnimationState& state,
+                        float action,Color outline,const Vector2* probe,bool shadow,bool flash,float opacity){
+ const auto pose=caldera_puppets::living(species,state,action);
+ const bool hit=caldera_puppets::draw(species,pose,x,y,size,outline,probe,shadow,flash,opacity);
+ if(!probe&&!shadow&&action>0&&action<.45f){
+  const auto hand=species==caldera_puppets::Imp?caldera_puppets::mix(pose.palms[0],pose.palms[1],.5f):pose.palms[1];
+  const Vector2 anchor{x+size*hand.x,y+size*hand.y};
+  const float flame=enemy_death::window(action,.06f,.39f)*opacity;
+  if(species==caldera_puppets::Imp)
+   caldera_attack_art::fireOrb(anchor,.91f*size*caldera_attack_art::heldOrbScale,flame,action/.45f,0);
+  else if(flame>0){
+   DrawCircleV(anchor,5.6f*size*flame,Fade({255,117,50,255},.26f*opacity));
+   DrawCircleV(anchor,2.7f*size*flame,Fade({255,184,87,255},.92f*opacity));
+  }
+ }
+ return hit;
+}
 
 inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false,float special=-1,const enemy_death::Key* deathPose=nullptr,int deathScreenSide=0,float opacity=1,float deathPhase=0,const BrokenParts* broken=nullptr){
+ if(type==FireImpType||type==AshWraithType){
+  const auto species=type==FireImpType?caldera_puppets::Imp:caldera_puppets::Wraith;
+  if(caldera_puppets::ready(species)){
+   if(!dead&&!deathPose)return puppetAlive(species,x,y,size,state,action,outline,probe,shadow,flash,opacity);
+   const float side=deathScreenSide?float(deathScreenSide):int(state.direction)>3?-1.f:1.f;
+   const auto pose=caldera_puppets::fall(species,state,action,dead?1.f:deathPhase,side);
+   return caldera_puppets::draw(species,pose,x,y,size,outline,probe,shadow,false,opacity);
+  }
+ }
  int id=std::clamp(type-VolcanoFirstType,0,6),direction=std::clamp(int(state.direction),0,7);const auto& atlas=atlases[id];if(!atlas.art.id)return false;
  if(type==AshWraithType&&!dead&&!deathPose)return wraith_death_art::living(x,y,size,state,action,outline,probe,shadow,flash,opacity);
  const float scale=bodyScale(id),s=size*scale;
@@ -606,15 +641,29 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
 
 namespace volcano_actors {
 using DeathDraw=bool(*)(const Enemy&,float,float,float,Color,const Vector2*,bool,float);
+inline bool puppetDeath(const Enemy& e,float x,float y,float progress,Color outline,const Vector2* probe,bool shadow,float opacity){
+ const auto species=e.type==FireImpType?caldera_puppets::Imp:caldera_puppets::Wraith;
+ const float side=e.deathScreenSide()?float(e.deathScreenSide()):int(e.animation.direction)>3?-1.f:1.f;
+ const bool landed=progress>=1.f;
+ const auto pose=caldera_puppets::fall(species,landed?e.animation:e.deathMotion,landed?-1.f:e.deathAction,progress,side);
+ return caldera_puppets::draw(species,pose,x,y,1,outline,probe,shadow,false,opacity);
+}
 inline DeathDraw specialDeathArt(int type){
  switch(type){
- case AshWraithType:return wraith_death_art::draw;
+ case FireImpType:return caldera_puppets::ready(caldera_puppets::Imp)?puppetDeath:nullptr;
+ case AshWraithType:return caldera_puppets::ready(caldera_puppets::Wraith)?puppetDeath:wraith_death_art::draw;
  case ObsidianSentinelType:return sentinel_death_art::draw;
  case VolcanoBossType:return varkhor_death_art::ash.id?varkhor_death_art::draw:nullptr;
  default:return nullptr;
  }
 }
 inline Rectangle groundFootprint(const Enemy& e){
+ if((e.type==FireImpType&&caldera_puppets::ready(caldera_puppets::Imp))||
+    (e.type==AshWraithType&&caldera_puppets::ready(caldera_puppets::Wraith))){
+  const float side=e.deathScreenSide()?float(e.deathScreenSide()):int(e.animation.direction)>3?-1.f:1.f;
+  if(e.type==FireImpType)return caldera_puppets::impContact(e.animation,side);
+  return {side>0?-8.f:-46.f,-3,54,9};
+ }
  switch(e.type){
  case AshWraithType:return wraith_death_art::footprint(e);
  case ObsidianSentinelType:return sentinel_death_art::footprint(e);

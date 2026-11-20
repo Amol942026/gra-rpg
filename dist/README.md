@@ -186,7 +186,7 @@ ZIP pozostaje kompilacją dla gracza bez trybu developerskiego. Postęp i złoto
 
 Archiwum **Emberfall-Windows-x64.zip** zawiera osobną wersję gry dla gracza: bez przycisku DEV, menu F3, zestawu testowego i wyboru miejsca startu przez parametry. Parametry sesji developerskich i diagnostyki scen nie są obsługiwane w tej kompilacji. Gra rozpoczyna się menu głównym, a Nowa gra uruchamia pełny prolog. ZIP zawiera wyłącznie grę, zasoby, zwykły launcher oraz instrukcje i licencje.
 
-**Projekt zachowuje tryb developerski.** Zwykłe uruchomienie **build.ps1** buduje wersję developerską w **dist/Emberfall.exe**. **build.ps1 -Player** buduje wersję gracza w **dist/player/Emberfall.exe**. **package.ps1** zawsze najpierw kompiluje świeżą wersję gracza, a następnie pakuje ją do ZIP. Nie zastępuje przy tym developerskiego EXE. **build.ps1 -Player -Test** sprawdza mechanikę gry i interfejs wersji gracza bez dźwięku.
+**Lokalne kompilacje.** Zwykłe uruchomienie **build.ps1** buduje wersję developerską w **dist/Emberfall.exe**. **build.ps1 -Player** buduje wersję gracza w **dist/player/Emberfall.exe**. **build.ps1 -Player -Test** sprawdza mechanikę gry i interfejs wersji gracza bez dźwięku.
 
 ## Wersja 0.40 — cienie sylwetek
 
@@ -311,7 +311,7 @@ W aktywnej sesji DEV kliknij **Przyzywanie bestii** pod minimapą, a następnie 
 
 **ESC, F3 lub X** zamyka wybór i wraca do poprzedniego stanu. Otwarta lista zatrzymuje symulację. Po śmierci **ENTER** rozpoczyna ponownie test w ostatnio wybranej lokacji. Prolog otwiera **Nowa gra** w głównym menu.
 
-W projekcie i w wypakowanej paczce **Emberfall-DEV-Windows-x64.zip** grę uruchamia `Uruchom.bat`.
+W projekcie grę uruchamia `Uruchom.bat`.
 Zakładka **Kaldera Popiołu** obejmuje m.in. Bramę Popiołu, Obsydianowe Kuźnie i Tron Serca Kaldery, gdzie czeka Varkhor.
 Przeniesienie postaci usuwa aktywne pociski, erupcje i przewrócenie. Start DEV w kalderze
 przygotowuje testowy postęp wcześniejszych aktów, aby działał powrót przez
@@ -682,8 +682,6 @@ W wersji 0.25 aktualne raporty wydajności i ekwipunku mają przyrostek `v25`. E
 `--performance-qa --no-audio` porównuje zoptymalizowaną wodę z algorytmem wersji 0.17 w 24 ujęciach przy brzegach i narożnikach. Sprawdza też pierwsze użycie tekstów walki, inspekcji, ekwipunku i menu bez ładowania nowych atlasów czcionek. Raport: `dist/qa-v18/performance-tests.txt`.
 
 `--benchmark-long --no-audio` wykonuje 1800 klatek i zapisuje również P99 oraz liczbę klatek ponad 25 ms. `--profile --no-audio` mierzy osobno symulację, wskazywanie, wodę, świat, HUD i prezentację. Ten ostatni test używa celowych barier GPU (`glFinish`), które zmieniają przebieg klatki; raport `dist/performance-profile.txt` służy do porównań etapów, a nie oceny rzeczywistego FPS. Zwykła gra nie stosuje tych barier.
-
-Paczka dla znajomych: `powershell -ExecutionPolicy Bypass -File .\package.ps1`. Powstaje `Emberfall-Windows-x64.zip` z folderem gry, instrukcją i zasobami, bez kompilatora, generatora audio i plików testowych.
 
 `--inspection-qa` sprawdza wskazywanie potworów i obiektów, bieżące HP w HUD, atak po kliknięciu potwora i brak ataku po kliknięciu wskaźnika miecza i wszystkie pola plecaka po zmianie układu. Raport i obrazy zapisuje w `dist/qa-v13`. `tests/combat_press_tests.hpp` sprawdza pojedyncze ataki i zgodność statystyk obrony/ataku z walką.
 

@@ -61,27 +61,32 @@ int main(int argc,char** argv){
  volcano_actors::load();caldera_attack_art::load();world_shadows::init();auto target=render_targets::colorOnly(FrameWidth,FrameHeight);
  int checks=0,failures=0;
  auto check=[&](bool ok,std::string s){++checks;failures+=!ok;log<<(ok?"PASS ":"FAIL ")<<s<<'\n';};
- check(wraith_death_art::pages[0].art.id&&wraith_death_art::pages[0].authoredRest,"painted directions and material loaded");
- check(wraith_death_art::rotation::ready(),"registered turn material and edge-distance fields loaded");
+ check(caldera_puppets::ready(caldera_puppets::Wraith),"new painted garment and sleeves loaded");
+ check(!wraith_death_art::paintedReady(),"old directional atlas is skipped with the new garment installed");
+ check(caldera_puppets::solidColor.id!=0,"matching hover mask is loaded");
  const auto start=std::chrono::steady_clock::now();
- {
-  // A woven stripe has only one colour at its surface location. With point
+ if(caldera_puppets::ready(caldera_puppets::Wraith)){
+  // A painted stripe has only one colour at its surface location. With point
   // filtering, a second colour in the interior reveals a double exposure;
   // opaque interiors can be tested separately from antialiasing at the hems.
-  auto& weave=wraith_death_art::rotation::weave;
-  const auto production=weave;
-  Image bands=GenImageColor(256,6*96,BLANK);
+  auto& atlas=caldera_puppets::artwork[caldera_puppets::Wraith];
+  const auto production=atlas.texture;
+  Image bands=LoadImageFromTexture(production);
+  ImageFormat(&bands,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
   auto* ink=static_cast<Color*>(bands.data);
-  for(int y=0;y<bands.height;y++)for(int x=0;x<bands.width;x++)
-   ink[y*bands.width+x]=((x/8+y/5)&1)?Color{240,21,0,255}:Color{0,21,240,255};
-  weave=LoadTextureFromImage(bands);
+  for(int y=0;y<bands.height;y++)for(int x=0;x<bands.width;x++){
+   const auto i=y*bands.width+x;
+   const int tile=(y/caldera_puppets::Cell)*caldera_puppets::Columns+x/caldera_puppets::Cell;
+   const auto a=ink[i].a;
+   ink[i]=tile%2?Color{0,0,255,a}:Color{255,0,0,a};
+  }
+  atlas.texture=LoadTextureFromImage(bands);
   UnloadImage(bands);
-  SetTextureWrap(weave,TEXTURE_WRAP_REPEAT);
-  SetTextureFilter(weave,TEXTURE_FILTER_POINT);
+  SetTextureFilter(atlas.texture,TEXTURE_FILTER_BILINEAR);
   game=enemyAbilityArena(AshWraithType);auto& e=game.enemies.front();
   e.animation.facingInitialized=true;e.animation.idleTime=.5f;
-  for(float degrees:{24.5f,66.25f,115.5f,165.25f,205.25f,246.25f,288.5f,337.5f}){
-   e.animation.facingAngle=degrees*DEG2RAD;
+  for(int d=0;d<16;d++){
+   e.animation.facingAngle=(d+.5f)*PI/8;
    int red=0,blue=0,mixed=0;
    for(auto c:capture(e,target,Pass::Living,0)){
     if(c.a<253)continue;
@@ -89,11 +94,11 @@ int main(int argc,char** argv){
     else if(c.b>208&&c.r<32)++blue;
     else ++mixed;
    }
-   check(red>180&&blue>180&&mixed<.08f*(red+blue),std::to_string(degrees)+
-         " one woven pigment across the body, red/blue/mixed "+std::to_string(red)+"/"+
+   check(red+blue>800&&mixed<.06f*(red+blue),std::to_string(d)+
+         " contour motion keeps individual painted marks, red/blue/mixed "+std::to_string(red)+"/"+
          std::to_string(blue)+"/"+std::to_string(mixed));
   }
-  UnloadTexture(weave);weave=production;
+  UnloadTexture(atlas.texture);atlas.texture=production;
  }
  {
   game=enemyAbilityArena(AshWraithType);auto& e=game.enemies.front();
@@ -102,25 +107,20 @@ int main(int argc,char** argv){
    e.animation.facingAngle=a;e.animation.direction=directionAtScreenAngle(a);
    return capture(e,target,Pass::Living,0);
   };
-  auto previous=frame(0);int repeats=0;float worstOverlap=1;
-  for(int deg=1;deg<=360;deg++){
-   auto image=frame(deg*PI/180.f);
-   repeats+=difference(previous,image)==0;
-   worstOverlap=std::min(worstOverlap,compareLate(previous,image).overlap);
-   previous=std::move(image);
+  const auto first=frame(0);
+  auto last=first;
+  int motion=0,worstAngle=0;
+  float smallestOverlap=1.f;
+  for(int d=1;d<=360;d++){
+   auto next=frame(d*DEG2RAD);
+   motion+=difference(last,next)>0;
+   const float overlap=compareLate(last,next).overlap;
+   if(overlap<smallestOverlap){smallestOverlap=overlap;worstAngle=d;}
+   last=std::move(next);
   }
-  check(!repeats&&worstOverlap>.96f,"360 frozen-phase one-degree steps, repeated frames "+
-        std::to_string(repeats)+", worst silhouette overlap "+std::to_string(worstOverlap));
-  int discontinuity=0;
-  for(int key=0;key<32;key++){
-   const int sector=key/4;const float left=wraith_death_art::paintedAngles[sector];
-   const float right=sector==7?2*PI:wraith_death_art::paintedAngles[sector+1];
-   const float center=left+(right-left)*(key%4)*.25f;
-   const auto before=frame(center-.0001f),after=frame(center+.0001f);
-   discontinuity=std::max(discontinuity,difference(before,after,24));
-  }
-  check(discontinuity<30,"largest painted seam, including 359/0, pixels changing by >24 at +/-0.006 deg: "+
-        std::to_string(discontinuity));
+  check(motion>=350&&smallestOverlap>.88f&&difference(first,last)==0,
+        "complete turn moves through every heading, minimum step overlap "+
+        std::to_string(smallestOverlap)+" at "+std::to_string(worstAngle)+", changed="+std::to_string(motion));
  }
  for(int k=0;k<32;k++){
   game=enemyAbilityArena(AshWraithType);
@@ -130,7 +130,8 @@ int main(int argc,char** argv){
   e.animation.facingAngle=a+(b-a)*t;e.animation.direction=Direction((base+(t>=.5f))%8);
   e.animation.idleTime=.4f;e.animation.phase=.3f;e.animation.moveBlend=.8f;
   const auto id=std::to_string(k);
-  check(wraith_death_art::at(e.animation).index==k,id+" heading selects one painted view");
+  const auto garment=caldera_puppets::ashWraith(e.animation,-1);
+  check(garment.count>=10,id+" complete articulated garment at this heading");
   auto live=capture(e,target,Pass::Living,0,k==5?dir/"flight.png":fs::path{});
   const auto shadow=capture(e,target,Pass::Shadow,0,k==5?dir/"shadow.png":fs::path{});
   const auto outlined=capture(e,target,Pass::Outline,0);
@@ -153,15 +154,19 @@ int main(int argc,char** argv){
   game.launchCinder(e);
   const auto& bolt=game.cinders.back();
   const auto point=volcano_art::boltAnchor(bolt,&e);const auto projected=volcano_art::cinderScreen(e.pos);
-  const auto pose=wraith_death_art::samplePose(e.animation,.45f);
-  auto palm=wraith_death_art::suspended(pose,5,pose.palm[1]);const float scale=volcano_actors::bodyScale(3);
-  check(std::hypot(point.x-projected.x-palm.x*scale,point.y-projected.y-palm.y*scale)<.01f&&bolt.aimRange==0,id+" ember originates in throwing sleeve");
+  const auto palm=caldera_puppets::muzzle(caldera_puppets::Wraith,e.animation,.45f);
+  check(std::hypot(point.x-projected.x-palm.x,point.y-projected.y-palm.y)<.01f&&bolt.aimRange==0,id+" ember originates in throwing sleeve");
   game.beginEnemyDeath(e,0);e.alive=false;
   const float contact=enemy_death::groundContact(e.type);
   auto early=capture(e,target,Pass::Falling,.00001f);
   auto almost=capture(e,target,Pass::Falling,contact*.9999f);
   auto at=capture(e,target,Pass::Falling,contact);
   auto rest=capture(e,target,Pass::Rest,1,k==5?dir/"rest.png":fs::path{});
+  saves::Archive stored(false);stored(e);
+  saves::Archive input(true,std::move(stored.bytes));
+  Enemy loaded;input(loaded);
+  check(input.at==input.bytes.size()&&difference(rest,capture(loaded,target,Pass::Rest,1))==0,
+        id+" the fallen cloth keeps its pose after reading the saved enemy");
   check(difference(releasing,early,16)<area*.05f,id+" continuous first fall pose");
   check(difference(almost,at,16)<area*.03f&&difference(at,rest)==0,id+" last settling frame and permanent corpse share pose");
   check(filled(rest)>area*.13f&&filled(rest)<area*.92f,id+" hollow robe settles into a visible pile");

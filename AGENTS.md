@@ -13,8 +13,8 @@ Edytuj ten plik po polsku. Przed zadaniem związanym z mediami przeczytaj `art/p
 - Nie odtwarzaj dźwięku gry przez głośniki laptopa ani nie zmieniaj zapisanych preferencji w celu wyciszenia. Zwykły start przez użytkownika zachowuje audio.
 - Raportuj osobno czas ukończenia renderu. Ukryte lub zminimalizowane okno oraz eksport w 60 Hz nie dowodzą wyświetlanego FPS ani płynności na pierwszym planie.
 - W czacie pokazuj samą wykadrowaną animację, w najkrótszym ujęciu i najmniejszym czytelnym rozmiarze.
-- AVG CyberCapture analizuje przy uruchomieniu świeże kompilacje gry i pomocnicze EXE. Grupuj zmiany przed kompilacją, korzystaj z istniejących narzędzi QA i łącz powiązane próby w jednym uruchomieniu, gdy dany test na to pozwala. Każde wydanie sprawdzaj po rozpakowaniu obu paczek. Przy ostrzeżeniu sprawdź nazwę zdarzenia i ścieżkę w dzienniku AVG.
-- Pomocnicze EXE i rozpakowane paczki do uruchomień testowych przygotowuj w `dist/qa-local/` wewnątrz repozytorium. Katalog `C:\AI2D\pipeline\runs` służy do przechowywania raportów i podglądów.
+- AVG CyberCapture analizuje przy uruchomieniu świeże kompilacje gry i pomocnicze EXE. Grupuj zmiany przed kompilacją, korzystaj z istniejących narzędzi QA i łącz powiązane próby w jednym uruchomieniu, gdy dany test na to pozwala. Przy ostrzeżeniu sprawdź nazwę zdarzenia i ścieżkę w dzienniku AVG.
+- Nie twórz ani nie aktualizuj `Emberfall-Windows-x64.zip` i `Emberfall-DEV-Windows-x64.zip`. Testuj gotowe kompilacje z `dist/` i `dist/player/`. Pomocnicze EXE i kopie robocze do testów przygotowuj w `dist/qa-local/`. Raporty i podglądy zapisuj w `C:\AI2D\pipeline\runs`.
 
 ## Produkcja mediów
 

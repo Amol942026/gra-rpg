@@ -1,5 +1,10 @@
 # Zależności i zasoby
 
+- Atlasy `assets/volcano/fire-imp-puppet.png` i `assets/volcano/ash-wraith-puppet.png`
+  powstały z autorskich wycinanek Sunburst przygotowanych dla Emberfall,
+  opracowanych w Kricie i animowanych w Synfigu. Pochodzenie plików podaje
+  `art/volcano/puppets/provenance.json`.
+
 - Popielny Upiór z Kaldery otrzymał autorską ilustrację przygotowaną dla
   Emberfall w Sunburst. Plansza pięciu widoków znajduje się w
   `art/volcano/ash-wraith/redesign/references/sunburst-turnaround.png`.

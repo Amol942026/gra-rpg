@@ -150,7 +150,10 @@ inline bool opaque(const Mesh& mesh,const View& view,int part,const Patch& textu
   const float u=cross(b.point,c.point,probe)/area,v=cross(c.point,a.point,probe)/area,w=1-u-v;
   if(u<0||v<0||w<0)return false;
   const Vector2 uv{u*a.u+v*b.u+w*c.u,u*a.v+v*b.v+w*c.v};
-  if(rotation::ready())return rotation::solid(view.left,view.right,view.fraction,part,uv);
+  if(painted_motion::ready())
+   return painted_motion::surface.coverage(painted_motion::pixels(view.paintedLeft,part),painted_motion::pixels(view.paintedRight,part),
+                                           view.paintedLeft,part,view.paintedT,uv)>=.4f;
+  if(registeredTurn())return rotation::solid(view.left,view.right,view.fraction,part,uv);
   const auto& atlas=*texture.atlas;
   const int column=int(texture.image.x+uv.x*texture.image.width);
   const int row=int(texture.image.y+uv.y*texture.image.height);
@@ -160,7 +163,7 @@ inline bool opaque(const Mesh& mesh,const View& view,int part,const Patch& textu
 }
 
 inline void paint(const Mesh& mesh,const Patch& texture,Texture2D art,int part,float x,float y,bool shadow,unsigned char alpha,Color solid=BLANK){
- const bool registered=rotation::ready();
+ const bool registered=registeredTurn()||painted_motion::ready();
  const float textureTag=(shadow?32.f:solid.a?16.f:0.f)+2.f*part;
  rlCheckRenderBatchLimit(int((RowCount-1)*(ColCount-1)*6));
  rlSetTexture(art.id);rlBegin(RL_TRIANGLES);rlSetTexture(art.id);
@@ -186,19 +189,21 @@ inline bool drawRobe(const Robe& mesh,const Pose& pose,float x,float y,float siz
  // Left and right are anatomical layers across the turn. The hood always
  // covers both shoulder seams, including the transition to a profile.
  constexpr int fixedOrder[]={0,1,2,4,5,3};
- const auto& order=rotation::ready()?fixedOrder:ash_wraith_rig::order[pose.view.base];
+ const bool movingPaint=painted_motion::ready();
+ const bool registered=registeredTurn();
+ const auto& order=movingPaint||registered?fixedOrder:paintedReady()?painted::order[pose.view.paintedKey]:ash_wraith_rig::order[pose.view.base];
  if(probe){
   const Vector2 local{(probe->x-x)/size,(probe->y-y)/size};
   for(int part:order)if(opaque(mesh[part],pose.view,part,patch(pose.view,part),local))return true;
   return false;
  }
  rlPushMatrix();rlTranslatef(x,y,0);rlScalef(size,size,1);
- const bool registered=rotation::ready();
- if(registered)rotation::begin(pose.view.left,pose.view.right,pose.view.fraction,pose.view.angle,enemy_death::ease(folds),pages[0].relief);
+ if(movingPaint)painted_motion::begin(pose.view.paintedLeft,pose.view.paintedRight,pose.view.paintedT,enemy_death::ease(folds),paintedPage.relief);
+ else if(registered)rotation::begin(pose.view.left,pose.view.right,pose.view.fraction,pose.view.angle,enemy_death::ease(folds),pages[0].relief);
  const auto mask=[&](float dx,float dy,Color c){
   for(int part:order){
    const auto texture=patch(pose.view,part);
-   paint(mesh[part],texture,registered?rotation::weave:texture.atlas->silhouette,part,dx,dy,shadow,alpha,c);
+   paint(mesh[part],texture,movingPaint?painted_motion::surface.ink:registered?rotation::paintTexture():texture.atlas->silhouette,part,dx,dy,shadow,alpha,c);
   }
  };
  if(shadow)mask(0,0,WHITE);
@@ -208,13 +213,13 @@ inline bool drawRobe(const Robe& mesh,const Pose& pose,float x,float y,float siz
   for(int part:order){
    const auto texture=patch(pose.view,part);
    const auto& atlas=*texture.atlas;
-   const bool lit=!registered&&volcano_corpse_material::begin(atlas.relief,enemy_death::ease(folds),atlas.authoredRest);
-   paint(mesh[part],texture,registered?rotation::weave:atlas.art,part,0,0,false,alpha);
+   const bool lit=!registered&&!movingPaint&&volcano_corpse_material::begin(atlas.relief,enemy_death::ease(folds),atlas.authoredRest);
+   paint(mesh[part],texture,movingPaint?painted_motion::surface.ink:registered?rotation::paintTexture():atlas.art,part,0,0,false,alpha);
    if(lit)EndShaderMode();
   }
   if(flash)mask(0,0,Fade(WHITE,.48f));
  }
- if(registered){if(shadow)BeginShaderMode(world_shadows::maskShader);else EndShaderMode();}
+ if(registered||movingPaint){if(shadow)BeginShaderMode(world_shadows::maskShader);else EndShaderMode();}
  rlPopMatrix();return false;
 }
 inline unsigned char opacityByte(float opacity){

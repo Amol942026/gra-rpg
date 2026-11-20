@@ -1,5 +1,7 @@
 # Popielny Upiór
 
+Bieżący model i animacje opisano w [projektach wycinankowych Kaldery](../../puppets/README.md). Poniżej zachowano źródła poprzednich atlasów.
+
 Pięć autorskich ilustracji przedstawia pustą szatę z wypalonym haftem, miedzianą broszą i otwartymi rękawami. Zostały wygenerowane w GPT-Image-2.6 Sunburst dla Emberfall. Podstawą ośmiu kierunków są profil, oba przednie ujęcia, tylny skos i plecy. Symetryczne ujęcia korzystają z odbicia i zamiany anatomicznej stron. [Źródło](../redesign/references/sunburst-turnaround.png)
 
 Projekt Krity zawiera sześć edytowalnych warstw. Tren, dwie poły, peleryna z kapturem i oba rękawy mają oddzielnie podmalowane miejsca, które odsłania ruch. Miedziane bliki na broszy zostały naniesione w Kricie i wyeksportowane z powrotem do atlasu. [Projekt Krity](plaszcz.kra)
@@ -20,3 +22,13 @@ Do ponownego przygotowania mediów, z katalogu głównego projektu i interpreter
 Drugi skrypt zapisuje obraz i relief 32 × 6 części, osiem podstawowych kierunków dla trybu zapasowego oraz współrzędne prostokątów dla renderera. Po przepakowaniu atlasu przebuduj grę z nowym nagłówkiem.
 
 Skrypt zapisuje pole przemieszczeń obrysu w pliku `registration.png`. W `edges.png` kanał czerwony przechowuje odległość od brzegu, a zielony i niebieski pozycję na pasie tkaniny. Z tego samego obrysu korzystają cień i wykrywanie trafienia kursorem.
+
+Obrót wykorzystuje 16 malowanych pozycji. Cztery nowe ilustracje podzielono na sześć warstw w projekcie Krity. Obrysy i kotwice fałd zmieniają się płynnie, a poszczególne detale zachowują kolor z jednego ujęcia. Rig animuje rękawy i poły także podczas lotu, rzutu i opadania. [Nowe ujęcia w Kricie](turn-keys/kierunki.kra) · [Źródło i prompt](turn-keys/source.json)
+
+```powershell
+& $mediaPython tools/media/ash_wraith_painted_keys.py <katalog-wyjsciowy> --no-audio
+```
+
+Oba pliki `painted-turn*.png` należą do `assets/volcano/wraith-turn`, a `ash_wraith_painted.hpp` do `src/generated`.
+
+Po przygotowaniu malowanych atlasów obu przeciwników `tools/media/painted_turn_geometry.py <katalog-wyjsciowy> --no-audio` tworzy pola konturu i jego lokalnych przemieszczeń. Pliki `wraith-ink.png` i `wraith-flow.png` umieść w `assets/volcano/wraith-turn` jako `shape-ink.png` i `shape-flow.png`.

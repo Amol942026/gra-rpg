@@ -1,5 +1,85 @@
 # Raport konfiguracji — 19.10.2026
 
+**20.11.2026 — animacje Ognistego Chochlika w Synfigu.**
+
+Natywne klucze Synfiga sterują spoczynkiem, podparciem i przenoszeniem nóg, obrotem, przygotowaniem kuli ognia i upadkiem. Gra korzysta z kluczy wyeksportowanych z `klucze-chochlika.sif`. Próbkowanie koloru w grze ogranicza migotanie łusek. [Źródła i eksport](../volcano/puppets/README.md)
+
+Synfig wyrenderował 365 klatek pięciu projektów. Render pełnego obrotu trwał 22,61 s. Sprawdzono sylwetki z Synfiga i z renderera gry na tych samych pozach. Podgląd został wykadrowany z renderera gry. [Podgląd](C:/AI2D/pipeline/runs/chochlik-synfig-20261120/chochlik-obrot-synfig.webp) · [Raport](C:/AI2D/pipeline/runs/chochlik-synfig-20261120/report.json)
+
+**20.11.2026 — nowy obrót całego ciała Ognistego Chochlika.**
+
+Atlas 360 ujęć łączy głowę i tułów. W grze wspólny kąt steruje całym ciałem, a oba segmenty przy każdym stawie korzystają ze wspólnego mocowania. Chód ma fazę podparcia i przenoszenia nóg. Punkt startowy kuli ognia podąża za dłońmi, a całe ciało przewraca się wokół wspólnej osi. [Źródła atlasu i animacji](../volcano/puppets/README.md)
+
+Sprawdzono 3240 póz w trzech skalach w spoczynku, w chodzie i podczas rzutu. Maksymalna zmiana obrysu w próbie co 1° wyniosła 4,88%. Render wykadrowanego podglądu z odczytem i zapisem klatek trwał 0,85 s, render 60 klatek referencyjnych w Synfigu 3,08 s, a pełnego obrotu w scenie 3,61 s. Są to czasy ukończenia renderów. [Podgląd](C:/AI2D/pipeline/runs/chochlik-nowy-obrot-ciala-20261120/chochlik-obrot-calego-ciala.webp)
+
+Zaliczono 498 prób przeciwników Kaldery, 1414 kontroli grafiki i 5906 kontroli śmierci. Obie lokalne kompilacje mają ten sam zweryfikowany atlas i przeszły po 180 klatek testu startu. [Raport](C:/AI2D/pipeline/runs/chochlik-nowy-obrot-ciala-20261120/report.json)
+
+**20.11.2026 — głowa chochlika jako jeden sprite.**
+
+Z oryginalnych wycinanek powstało 360 kompletnych dwuwymiarowych ujęć głowy. Malowanie oczu i pyska podąża za powierzchnią czaszki, a nasady rogów są osadzone pod jej krawędzią. Silnik obraca całą głowę w jednym kawałku i używa tego samego sprite’a do cienia, podświetlenia i wyboru kursorem. Zachowano geometrię tułowia i kończyn oraz tory chodu i rzutu. [Źródła atlasu](../volcano/puppets/README.md)
+
+Maksymalna zmiana obrysu głowy między kolejnymi kątami w atlasie wyniosła 1,96%. W 361 ujęciach renderera głowa zachowała jeden obrys, a w 120 ujęciach w chodzie największy dodatkowy fragment miał jeden piksel. Render wykadrowanego podglądu wraz z odczytem i zapisem trwał 1,00 s. [Podgląd](C:/AI2D/pipeline/runs/chochlik-jedna-glowa-20261120/chochlik-pelna-glowa.webp)
+
+Zaliczono 498 prób grafiki przeciwników Kaldery, 1414 kontroli grafiki i 5906 kontroli śmierci. Obie kompilacje zawierają zweryfikowany atlas i przeszły po 180 klatek testu startu. [Raport](C:/AI2D/pipeline/runs/chochlik-jedna-glowa-20261120/report.json)
+
+**20.11.2026 — przywrócenie pierwszej animacji chochlika z wyostrzeniem koloru.**
+
+Przywrócono kod geometrii i animacji zapisany przed pierwszą korektą ostrości. Suma kontrolna oryginalnego atlasu jest zgodna. Shader wzmacnia lokalny kontrast koloru wewnątrz wycinanek. Porównano 361 klatek obrotu w spoczynku i 120 klatek obrotu w chodzie z zapisanym renderem pierwszej wersji. Wszystkie klatki zachowały identyczne piksele alfa, w tym pierwotne odstępy między warstwami. Render podglądu z odczytem i zapisem klatek trwał 0,96 s. [Podgląd](C:/AI2D/pipeline/runs/chochlik-pierwsza-animacja-20261120/pierwsza-animacja-chochlika-wyostrzona.webp)
+
+Zaliczono 496 prób przeciwników Kaldery, 1414 kontroli grafiki i 5906 kontroli śmierci. Lokalne kompilacje gracza i DEV przeszły po 180 klatek testu startu. [Raport](C:/AI2D/pipeline/runs/chochlik-pierwsza-animacja-20261120/report.json)
+
+**20.11.2026 — spójna sylwetka chochlika przy obrocie.**
+
+Nasady rogów i pysk mają punkty mocowania wewnątrz czaszki. Uda osadzono głębiej w biodrach, a uda i golenie mają wspólny punkt wewnątrz kolana. Zachowano poprzednie filtrowanie tekstury i fazy ruchu. Renderer przeszedł test 3240 póz w trzech skalach, obejmujący spoczynek, chód i rzut. Dodatkowa próba obrotu co 1° potwierdziła ciągłość sylwetki. Render wykadrowanego podglądu z odczytem i zapisem klatek trwał 0,38 s. [Podgląd](C:/AI2D/pipeline/runs/chochlik-spojna-sylwetka-20261120/obrot-chochlika.webp)
+
+Zaliczono 496 prób obu modeli Kaldery, 1414 kontroli grafiki i 5906 kontroli śmierci. Lokalne kompilacje gracza i DEV przeszły po 180 klatek testu startu. [Raport](C:/AI2D/pipeline/runs/chochlik-spojna-sylwetka-20261120/report.json)
+
+**20.11.2026 — ostrzejszy chochlik i naturalniejszy ruch Obsydianowego Wojownika.**
+
+Tekstura chochlika korzysta z oddzielnie filtrowanych poziomów pomniejszenia i przezroczystych marginesów między częściami. Shader wzmacnia kontrast detali wewnątrz sylwetki. Dla 12 ujęć w skali gry średnia różnica względem obrazu wyrenderowanego w czterokrotnie wyższej rozdzielczości i pomniejszonego uśrednianiem pikseli spadła z 9,53 do 3,93 w skali kanałów RGBA od 0 do 255.
+
+Wojownik wyżej unosi but przy przenoszeniu nogi i kołysze biodrami. Płaszcz i ramiona podążają z opóźnieniem, a przy cięciu napierśnik skręca mocniej. Po cięciu miecz i tarcza wyhamowują osobno. Synfig wyrenderował 41 klatek chodu w 18,51 s, 61 klatek zwykłego cięcia w 25,06 s i 97 klatek Rozłupującego ciosu w 35,74 s. [Źródła ruchu](../volcano/obsidian-sentinel/redesign/pochodzenie.json)
+
+Zaliczono 495 prób obu przeciwników, 1414 kontroli grafiki i 5906 kontroli śmierci. Lokalne kompilacje gracza i DEV przeszły po 180 klatek testu startu. Render wykadrowanego podglądu w skali gry trwał 0,72 s wraz z odczytem i zapisem klatek. [Podgląd](C:/AI2D/pipeline/runs/kaldera-ostre-animacje-20261120/kaldera-chochlik-i-wojownik.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-ostre-animacje-20261120/report.json)
+
+**20.11.2026 — nowe modele 2D Ognistego Chochlika i Popielnego Upiora.**
+
+Sunburst przygotował nowe osobno malowane części. Atlasy powstały z dwóch warstwowych projektów Krity. Podczas obrotu silnik przesuwa i obraca wycinanki o stałych współrzędnych tekstury. Synfig wyrenderował sześć klipów po 60 klatek. Render poszczególnych klipów trwał od 2,44 s do 3,71 s. [Źródła i przygotowanie atlasów](../volcano/puppets/README.md)
+
+W próbie co 1° największa zmiana obrysu chochlika spadła z 13,99% do 5,97%, a udział półprzezroczystych pikseli z 16,12% do 4,80%. Dla Upiora zmiana obrysu spadła z 3,98% do 2,54%. Pełna scena potwierdziła po jednym rzucie i trafieniu obu pocisków. Render pełnego obrotu w polu trwał 3,51 s. Render wykadrowanego podglądu w skali gry wraz z odczytem i zapisem klatek trwał 2,61 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-nowe-rigi-20261119/nowe-modele-kaldery.webp)
+
+Zaliczono 494 kontrole chochlika i wojownika oraz 468 kontroli Upiora. Po odczytaniu zapisu ciała obu przeciwników zachowują te same piksele i kotwicę co w chwili zetknięcia z ziemią. Pełne wydanie przeszło 1414 kontroli grafiki i 5906 kontroli śmierci. Po rozpakowaniu obu wersji Windows sprawdzono po 752 zasoby i 180 klatek uruchomienia. [Raport wydania](C:/AI2D/pipeline/runs/kaldera-nowe-rigi-20261119/report.json)
+
+**19.11.2026 — płynne obrysy Ognistego Chochlika i Popielnego Upiora.**
+
+Silnik przesuwa kotwice i obrysy części pomiędzy 16 malowanymi pozami. Każdy detal zachowuje kolor jednego ujęcia. W porównaniu pełnych obrotów co 1° największa zmiana obrysu między sąsiednimi klatkami spadła z 82,45% do 13,99% u chochlika i z 32,75% do 3,98% u Upiora. Render dwusekundowego podglądu wraz z odczytem i zapisem klatek trwał 1,98 s. Render pełnego obrotu w scenie Kaldery trwał 4,07 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-ciagly-kontur-20261119/pelne-obroty.webp)
+
+Zaliczono 479 kontroli chochlika i wojownika, 436 kontroli Upiora, 1414 kontroli grafiki oraz 5891 kontroli śmierci. W pełnej scenie sprawdzono rzuty i trafienia obu przeciwników. Po rozpakowaniu obu wydań Windows sprawdzono po 750 zasobów i 180 klatek uruchomienia. [Raport wydania](C:/AI2D/pipeline/runs/kaldera-ciagly-kontur-20261119/report.json)
+
+**19.11.2026 — 16 malowanych kierunków obu przeciwników Kaldery.**
+
+Chochlik korzysta z 16 pełnych pozycji zaczerpniętych z malowanych ujęć. Atlas zawiera jedynie ich ruchome warstwy. Wszystkie części, obrys i cień wybierają ten sam kierunek. Popielny Upiór ma cztery nowe ilustracje z Sunburst i ich odbicia. Każda została podzielona na kaptur, poły, tren i rękawy w projekcie Krity. Zasadnicze ruchy podczas ataku, lotu i upadku prowadzi istniejący rig. Przejście do sąsiedniego kierunku jest widocznym krokiem.
+
+Testy z naprzemiennym kolorem całej postaci potwierdziły, że podczas obrotu silnik wybiera jedno ujęcie. Przeszło 479 kontroli chochlika i wojownika oraz 451 kontroli Upiora. Podgląd z nieruchomą kamerą obejmuje pełne 360° i trwa dwie sekundy. Render z odczytem i zapisem trwał 2,06 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-malowane-kierunki-20261119/pelne-obroty.webp) · [Projekt Krity i prompt Upiora](../volcano/ash-wraith/paint/turn-keys/)
+
+W pełnej scenie Kaldery sprawdzono oba rzuty, trafienia i zmianę kierunku przeciwników. Gotowe wydanie przeszło 1414 kontroli grafiki i 5891 kontroli śmierci. Obie rozpakowane paczki Windows zweryfikowano na 746 zasobach i 180 klatkach uruchomienia. [Raport wydania](C:/AI2D/pipeline/runs/kaldera-malowane-kierunki-20261119/report.json)
+
+**19.11.2026 — pojedyncze sylwetki w obrocie chochlika i Upiora.**
+
+Każda część chochlika wybiera pełny obrys jednego z 96 ujęć. Rejestracja przesuwa ten obrys, a malowanie przechodzi na kolejny kierunek w różnym momencie na poszczególnych częściach. U Upiora pojedyncze ujęcie haftu i fałd pochodzi z nowego atlasu 96 kierunków. Rig nadal prowadzi obrys szaty podczas lotu, rzutu i opadania.
+
+Do prób obu modeli dodano zamianę malowania na kontrastowe kolory. Test wykrywa nakładanie kilku ujęć także wtedy, gdy średnia ostrość całej sylwetki pozostaje wysoka. Przeszło 471 kontroli chochlika i wojownika oraz 429 kontroli Upiora. W teście chochlika największa zmiana wewnątrz obrysu pomiędzy kolejnymi stopniami wyniosła 17,40 punktu RGB przy limicie 18. Wykadrowany podgląd zawiera 120 klatek na postać i trwa dwie sekundy. Render z odczytem i zapisem trwał 2,18 s. [Podgląd obu obrotów](C:/AI2D/pipeline/runs/kaldera-czyste-pozy-20261119/pelne-obroty.webp)
+
+Ponowne przechwycenie i spakowanie szaty odtworzyło sumę SHA-256. Gotowe wydanie przeszło 1414 kontroli grafiki i 5891 kontroli śmierci. W obu paczkach Windows sprawdzono zgodność 744 zasobów i po 180 klatek uruchomienia. [Raport wydania](C:/AI2D/pipeline/runs/kaldera-czyste-pozy-20261119/report.json)
+
+**19.11.2026 — czytelny obrót całych sylwetek Ognistego Chochlika i Popielnego Upiora.**
+
+Cztery nowe ilustracje kierunkowe z wbudowanego Sunburst zostały rozdzielone na głowę z tułowiem, ręce, nogi i ogon. Projekt Krity zachowuje te części w osobnych warstwach i zawiera dodatkowe malowanie pod stawami. Silnik korzysta z 96 gotowych ujęć. Dopasowuje sąsiednie klatki i utrzymuje ostre detale podczas krótkiego przejścia. Chochlik i Obsydianowy Wojownik przeszli 463 próby grafiki, ataków i upadku. [Projekt Krity](../volcano/fire-imp/paint/inbetweens/polobroty.kra) · [Źródło i prompt](../volcano/fire-imp/paint/inbetweens/source.json)
+
+Upiór korzysta ze wspólnej tekstury ubrania z osobnymi pasami dla kaptura, rękawów i pół szaty. Wzór podąża za materiałem przez pełny obrót. Sprawdzono 428 przypadków, w tym obrys, cień i ułożenie szaty po upadku. Pełne obroty obu modeli sprawdzono co 1° w powiększeniu i co 3° w natywnej skali. Render 120 klatek każdego modelu z odczytem i zapisem trwał łącznie 2,42 s. [Raport Upiora](C:/AI2D/pipeline/runs/wraith-woven-turn-20261118/report.json) · [Dwusekundowy podgląd i pomiary](C:/AI2D/pipeline/runs/kaldera-ostrosc-ruchu-weryfikacja-20261118/v6/report.json)
+
+Ponowny eksport atlasu chochlika i mapy ruchu odtworzył sumy kontrolne. Wydanie przeszło 1414 kontroli grafiki i 5891 kontroli śmierci. W obu rozpakowanych paczkach Windows sprawdzono 743 zasoby i po 180 klatek uruchomienia. [Raport wydania](C:/AI2D/pipeline/runs/kaldera-wyrazne-obroty-20261118/report.json)
+
 **18.11.2026 — płynny obrót Popielnego Upiora i czytelny rzut Ognistego Chochlika.**
 
 Kaptur, rękawy i poły szaty poruszają się przez cały obrót. W próbie z nieruchomą szatą silnik wyrenderował 360 różnych obrazów dla 360 kierunków, wcześniej 32. Przy zmianie kierunku o stopień największe przesunięcie brzegu rękawa spadło z 12 do 1 piksela. Największa zmiana obrysu spadła z 23,16% do 2,18%. Sprawdzono także przejście przez 0°, cień, obrys pod kursorem i ułożenie szaty po upadku. [420 kontroli Upiora](C:/AI2D/pipeline/runs/wraith-continuous-20261118/report.json)

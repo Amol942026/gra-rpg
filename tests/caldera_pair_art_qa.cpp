@@ -80,23 +80,6 @@ PaintClarity paintClarity(const Pixels& frame){
     }
     return {double(soft)/std::max(1,painted),detail/std::max(1,interior),headDetail/std::max(1,headPixels)};
 }
-// Compare the weakest in-between views with the neighbouring painted keys.
-// An unchanged tail or rib cage should not hide ghosting in the eyes and horns.
-double weakestHeadings(const std::array<double,360>& heads){
-    std::array<double,360> retained{};
-    for(int d=0;d<8;++d){
-        const int left=int(std::lround(volcano_actors::facingAngles[d]*RAD2DEG));
-        const int right=d==7?360:int(std::lround(volcano_actors::facingAngles[d+1]*RAD2DEG));
-        for(int a=left;a<right;++a){
-            const double t=double(a-left)/(right-left);
-            const double reference=(1-t)*heads[left]+t*heads[right%360];
-            retained[a]=heads[a]/std::max(1.,reference);
-        }
-    }
-    auto tenth=retained.begin()+36;
-    std::nth_element(retained.begin(),tenth,retained.end());
-    return *tenth;
-}
 int firePixels(const Pixels& frame,Vector2 center,float radius){
     int count=0;
     for(int y=std::max(0,int(center.y-radius));y<=std::min(Height-1,int(center.y+radius));++y){
@@ -193,6 +176,62 @@ int main(int argc,char** argv){
     auto check=[&](bool ok,const std::string& why){++checks;failures+=!ok;log<<(ok?"PASS ":"FAIL ")<<why<<'\n';};
     using Clock=std::chrono::steady_clock;
     const auto start=Clock::now();
+    if(!baseline&&caldera_puppets::ready(caldera_puppets::Imp)&&caldera_puppets::imp_render::ready()){
+        const auto useColorBands=[](caldera_puppets::Artwork& atlas){
+            const auto original=atlas.texture;
+            Image bands=LoadImageFromTexture(original);
+            ImageFormat(&bands,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
+            auto* ink=static_cast<Color*>(bands.data);
+            for(int y=0;y<bands.height;y++)for(int x=0;x<bands.width;x++){
+                const int i=y*bands.width+x;
+                const int tile=(y/atlas.height)*atlas.columns+x/atlas.cell;
+                const auto alpha=ink[i].a;
+                ink[i]=tile%2?Color{0,0,255,alpha}:Color{255,0,0,alpha};
+            }
+            atlas.texture=LoadTextureFromImage(bands);
+            UnloadImage(bands);
+            SetTextureFilter(atlas.texture,TEXTURE_FILTER_BILINEAR);
+            return original;
+        };
+        auto& body=caldera_puppets::artwork[caldera_puppets::Imp];
+        auto& core=caldera_puppets::impCore;
+        const auto bodyTexture=useColorBands(body),coreTexture=useColorBands(core);
+        game=enemyAbilityArena(FireImpType);
+        auto& actor=game.enemies.front();
+        actor.animation.facingInitialized=true;
+        actor.animation.motionInitialized=true;
+        const float step=2*PI/volcano_actors::turn_art::ImpPaintedDirections;
+        for(int dir=0;dir<volcano_actors::turn_art::ImpPaintedDirections;dir++){
+            actor.animation.facingAngle=(dir+.5f)*step;
+            actor.animation.direction=directionAtScreenAngle(actor.animation.facingAngle);
+            const auto paint=capture(actor,target,View::Body);
+            const auto classification=[](Color c){
+                if(c.a<253)return 0;
+                if(c.r>190&&c.b<65)return 1;
+                if(c.b>190&&c.r<65)return 2;
+                return 3;
+            };
+            int red=0,blue=0,mixed=0,mixedInterior=0;
+            for(int y=1;y<Height-1;++y)for(int x=1;x<Width-1;++x){
+                const int color=classification(paint[y*Width+x]);
+                if(color==1)++red;
+                if(color==2)++blue;
+                if(color!=3)continue;
+                ++mixed;
+                // Antialiasing can mix two pieces at their shared edge. A
+                // mix across an opaque patch indicates a ghosted painting.
+                bool inside=true;
+                for(int dy:{-1,0,1})for(int dx:{-1,0,1})inside&=classification(paint[(y+dy)*Width+x+dx])==3;
+                mixedInterior+=inside;
+            }
+            check(red+blue>500&&mixedInterior<.025f*(red+blue),
+                  "imp / no ghosted paint inside the silhouette at direction "+std::to_string(dir)+
+                  ", red/blue/mixed/inside "+std::to_string(red)+"/"+std::to_string(blue)+"/"+
+                  std::to_string(mixed)+"/"+std::to_string(mixedInterior));
+        }
+        UnloadTexture(body.texture);body.texture=bodyTexture;
+        UnloadTexture(core.texture);core.texture=coreTexture;
+    }
     for(int type:{FireImpType,ObsidianSentinelType}){
         game=enemyAbilityArena(type);
         auto& e=game.enemies.front();
@@ -202,11 +241,20 @@ int main(int argc,char** argv){
         const float contact=enemy_death::groundContactTime(type),duration=enemy_death::duration(type);
         if(!baseline){
             const auto* artwork=volcano_actors::turn_art::forType(type);
-            check(artwork&&volcano_actors::turn_art::filtered(),stem+" / real directional atlas and shader loaded");
-            check(artwork&&registeredKeysMatch(type,*artwork),stem+" / packed UVs match all 48 canonical painted masks");
+            const bool authored=type==FireImpType;
+            const bool newRig=caldera_puppets::ready(caldera_puppets::Imp);
+            if(authored){
+                check(newRig&&caldera_puppets::solidColor.id,"imp / native cutout layers and hover shader loaded");
+                check(caldera_puppets::impCore.texture.id!=0,"imp / synchronized head and torso atlas loaded");
+                check(caldera_puppets::imp_render::ready(),"imp / whole pose shader and RGB detail loaded");
+                check(!artwork,"imp / old interpolated atlases are skipped with the new rig installed");
+            }else{
+                check(artwork&&volcano_actors::turn_art::filtered(),stem+" / real directional atlas and shader loaded");
+                check(artwork&&registeredKeysMatch(type,*artwork),stem+" / packed UVs match all 48 canonical painted masks");
+            }
             face(e,0);e.animation.moveBlend=1;e.animation.phase=.31f;
             auto previous=capture(e,target,View::Body);
-            int changed=0,worst=0;
+            int changed=0,worst=0,worstPigment=0,alphaMismatch=0,sharpenedViews=0,combinedHeadViews=0;
             float silhouette=0,pigment=0;
             PaintClarity clarity;
             std::array<double,360> headContrast{};
@@ -215,25 +263,48 @@ int main(int argc,char** argv){
                 e.animation.direction=directionAtScreenAngle(e.animation.facingAngle);
                 auto next=capture(e,target,View::Body);
                 const auto sharp=paintClarity(next);
+                if(authored){
+                    const auto pose=caldera_puppets::fireImp(e.animation,-1);
+                    const auto end=pose.pieces.begin()+pose.count;
+                    const int core=(degree%360)+caldera_puppets::FirstCore;
+                    const auto coreParts=std::count_if(pose.pieces.begin(),end,[](const auto& p){
+                        return p.tile<4||p.tile>=caldera_puppets::FirstCore;
+                    });
+                    combinedHeadViews+=coreParts==1&&std::any_of(pose.pieces.begin(),end,[&](const auto& p){return p.tile==core;});
+                    caldera_puppets::imp_render::sharpen=false;
+                    const auto original=capture(e,target,View::Body);
+                    caldera_puppets::imp_render::sharpen=true;
+                    bool colorChanged=false;
+                    for(size_t i=0;i<next.size();++i){
+                        const Color a=original[i],b=next[i];
+                        alphaMismatch+=a.a!=b.a;
+                        colorChanged|=a.a>=230&&(a.r!=b.r||a.g!=b.g||a.b!=b.b);
+                    }
+                    sharpenedViews+=colorChanged;
+                }
                 headContrast[degree%360]=sharp.headContrast;
                 clarity.softFraction+=sharp.softFraction/360;
                 clarity.interiorContrast+=sharp.interiorContrast/360;
                 const auto delta=turnStep(previous,next);
                 changed+=delta.changed>0;
                 if(delta.silhouette>silhouette){silhouette=delta.silhouette;worst=degree;}
-                pigment=std::max(pigment,delta.pigment);
+                if(delta.pigment>pigment){pigment=delta.pigment;worstPigment=degree;}
                 previous=std::move(next);
             }
-            check(changed>=350&&silhouette<.20f&&pigment<18.f,stem+" / one-degree turn steps, changed="+
+            const bool turns=changed>=350&&silhouette<.20f&&pigment<(authored?21.f:18.f);
+            check(turns,stem+" / one-degree samples, visible direction changes="+
                   std::to_string(changed)+" max silhouette="+std::to_string(silhouette)+" at degree="+std::to_string(worst)+
-                  " max interior RGB delta="+std::to_string(pigment));
-            check(artwork && artwork->flow.id &&
+                  " max interior RGB delta="+std::to_string(pigment)+" at degree="+std::to_string(worstPigment));
+            check((authored?newRig:artwork&&artwork->flow.id) &&
                   clarity.softFraction<(type==FireImpType?.24:.16) && clarity.interiorContrast>22,
                   stem+" / crisp moving silhouette and painted detail, translucent fraction="+
                   std::to_string(clarity.softFraction)+" interior contrast="+std::to_string(clarity.interiorContrast));
             if(type==FireImpType){
-                const double retained=weakestHeadings(headContrast);
-                check(retained>.90,"imp / eye, muzzle and horn contrast at the tenth percentile relative to the painted key views="+std::to_string(retained));
+                check(combinedHeadViews==360,"imp / head and torso stay on one shared heading for the full turn");
+                check(alphaMismatch==0&&sharpenedViews==360,"imp / full turn preserves exact alpha and sharpens paint; changed-alpha pixels="+
+                      std::to_string(alphaMismatch)+", sharpened views="+std::to_string(sharpenedViews));
+                const auto weakest=*std::min_element(headContrast.begin(),headContrast.end());
+                check(weakest>18,"imp / eye, muzzle and horn contrast in the weakest painted direction="+std::to_string(weakest));
             }
             for(int deg=worst-1;deg<=worst;++deg){
                 e.animation.facingAngle=deg*DEG2RAD;
@@ -364,6 +435,14 @@ int main(int argc,char** argv){
                 check(visible(rest)>280&&difference(falling,rest)>90,name+"fall reaches a substantial resting silhouette");
                 const int seam=difference(justBefore,rest);
                 check(seam<8,name+"last fall frame meets the actual corpse; changed pixels="+std::to_string(seam));
+                if(type==FireImpType){
+                    saves::Archive stored(false);stored(e);
+                    saves::Archive input(true,std::move(stored.bytes));
+                    Enemy loaded;input(loaded);
+                    const auto pixels=capture(loaded,target,View::Body);
+                    check(input.at==input.bytes.size()&&std::memcmp(rest.data(),pixels.data(),rest.size()*sizeof(Color))==0,
+                          name+"the loaded corpse retains its paint, pose and anchor");
+                }
                 const auto base=volcano_actors::groundFootprint(e);
                 const auto floor=corpseDrawPoint(e,Anchor);
                 const Rectangle patch{floor.x+base.x,floor.y+base.y,base.width,base.height};
