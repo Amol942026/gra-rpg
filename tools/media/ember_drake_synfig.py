@@ -4,6 +4,7 @@ import argparse
 import json
 import math
 from pathlib import Path
+from statistics import median
 import xml.etree.ElementTree as ET
 
 from PIL import Image
@@ -91,24 +92,37 @@ GAPE = {
 }
 
 
-def pose(clip, frame, part, direction):
+def rigid_pose(anchor, center, angle, x, y):
+    """Express a shared screen-plane transform at a cutout's local pivot."""
+    dx, dy = anchor[0]-center[0], anchor[1]-center[1]
+    radians = math.radians(angle)
+    c, s = math.cos(radians), math.sin(radians)
+    return (x+c*dx-s*dy-dx, y+s*dx+c*dy-dy, angle, 1, 1)
+
+
+def painted_toe(path):
+    with Image.open(path) as source:
+        alpha = source.getchannel("A")
+        width = alpha.width
+        ink = [(i%width, i//width) for i, a in enumerate(alpha.tobytes()) if a>=144]
+        if not ink:
+            raise ValueError(f"No painted paw in {path}")
+        edge = ink[int(.92*len(ink))][1]
+        contact = [(x, y) for x,y in ink if y>=edge]
+        return tuple((median(axis)+.5)*128/width for axis in zip(*contact, strict=True))
+
+
+def pose(clip, frame, part, direction, toe=None):
     phase = frame / CLIPS[clip][1][-1]
     f, s = math.cos(FACINGS[direction]), math.sin(FACINGS[direction])
     wing = part == 0 or part == 4
     near = (1 if part == 4 else -1)*(-1 if direction in (3, 4, 5) else 1)
     if clip == "bank":
-        # The middle frame is neutral. The signed turning speed places the
-        # dragon between these two banks without restarting the walking cycle.
         lean = 2*phase-1
-        outer = near*lean
-        if wing:
-            return (-s*.75*lean, -outer*1.25, lean*(2.4+.9*f),
-                    1+.014*outer, 1+.072*outer)
-        if part == 5:
-            return (-s*2.4*lean, f*1.15*lean, 2.6*lean, 1, 1)
-        if part == 3:
-            return (-s*.8*lean, f*.38*lean, lean*1.45, 1, 1)
-        return (0, 0, 0, 1, 1)
+        # During a turn, the folded wings and neck ride on the same torso.
+        if part in (1, 2):
+            return (0, 0, 0, 1, 1)
+        return rigid_pose(pivot(part,direction), pivot(3,direction), .85*lean, -.36*s*lean, 0)
     if clip == "fall":
         delay = (.15, .08, 0, .04, .20, .14)[part]
         weight = ease((phase-delay)/(.94-delay))
@@ -123,36 +137,19 @@ def pose(clip, frame, part, direction):
     dx = dy = angle = 0.
     sx = sy = 1.
     if clip == "walk" and part in (1, 2):
-        # The diagonally opposed feet share a stance. Rotate about the leg roots so
-        # the shoulder attachment stays under the plates during the projected stride.
+        # Move the painted contact point by the step distance, without changing
+        # the length of the paired legs as the heading changes.
         travel, clearance = walking_foot((phase+(.5 if part == 2 else 0)) % 1.)
         travel *= 36*.58/(2*17.6)
-        dx = f*travel*.32
-        dy = s*travel*.28-clearance*.46
-        angle = -f*travel*1.22
-        sy += (s*travel*.72-clearance*.54)/29
+        return rigid_pose(pivot(part,direction), toe, -f*travel*.72, f*travel, s*travel-clearance*.69)
     elif clip == "walk":
-        rise = .97*math.cos(2*a-.35)
-        wave = math.sin(a-.6)
-        dy = -rise*(.56 if part == 5 else 1)
-        angle = f*1.35*math.sin(2*a-.4)
-        if wing:
-            angle += near*(3.3*wave+1.5*math.sin(2*a-.61))
-            sy += .047*math.cos(a-.78*near)
-        if part == 5:
-            dx += f*1.25*math.sin(2*a-.65)
-            angle -= f*2.4*math.sin(2*a-.62)
+        rise = .32*math.cos(2*a-.35)
+        return rigid_pose(pivot(part,direction), pivot(3,direction), .55*f*math.sin(2*a-.4), 0, -rise)
     elif clip == "idle":
         inhale = (1-math.cos(a))*.5
-        dy = -.95*inhale if part not in (1, 2) else 0
-        if wing:
-            sy += .054*inhale
-            angle = near*(2.4*inhale+.66*math.sin(a))
-        if part == 3:
-            sy += .025*inhale
-        if part == 5:
-            dy -= .7*inhale
-            angle = -f*(1.65*inhale+.5*math.sin(a))
+        if part in (1, 2):
+            return (0, 0, 0, 1, 1)
+        return rigid_pose(pivot(part,direction), pivot(3,direction), -.43*f*inhale, 0, -.70*inhale)
     else:
         lift, reach, flare, lunge = GESTURES[clip][frame]
         if part in (1, 2):
@@ -254,7 +251,8 @@ def author(root, clip):
                     cutout(layer,f"jaw-{name}-{level}",crop,[v==level for v in gape])
             else:
                 cutout(layer,name+"-"+label,rect)
-            poses = [pose(clip, frame, p, d) for frame in times]
+            toe = painted_toe(root/"parts"/f"{name}-{label}.png") if clip == "walk" and p in (1, 2) else None
+            poses = [pose(clip, frame, p, d, toe) for frame in times]
             track(layer, "stretch", "amount", "scale", times, [(r[3], r[4]) for r in poses])
             track(layer, "rotate", "amount", "turn", times, [-r[2] for r in poses])
             track(layer, "translate", "origin", "place", times,

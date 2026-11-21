@@ -24,7 +24,12 @@ struct Artwork {
  std::array<Page,2> pages{};
  Texture2D flow{};
  std::vector<Color> vectors;
+ bool signedEdges=false;
+ std::array<Tile,8> shell{};
+ std::array<float,32> standingHeight{};
+ std::array<Page,2> cels{};
  bool ready()const{return pages[0].color.id!=0;}
+ bool directCels()const{return cels[0].color.id!=0;}
 };
 inline constexpr int drakeOrder[8][6]={
  {0,1,2,3,4,5},{0,1,2,3,4,5},{0,1,2,3,4,5},{0,1,2,3,4,5},
@@ -84,6 +89,42 @@ struct View {
  int nextSample()const{return (sample+1)%32;}
  int nearestBase()const{return t<.5f?base:nextBase();}
 };
+inline float heading(View view){
+ return mix(facingAngles[view.base],view.base==7?2*PI:facingAngles[view.nextBase()],view.t);
+}
+inline bool rigidShell(const Artwork& art,int part){return &art==&crawler&&(art.signedEdges||art.directCels())&&part==3;}
+inline Rectangle shellBounds(View view){
+ const auto direction=actorFacing(heading(view));
+ // A single isometric projection of the same shell as the body turns.
+ const float width=std::hypot(102.f*direction.x,68.f*direction.y);
+ const float depth=62+12*direction.y*direction.y;
+ return {64-.4f*width,72*.8f,.8f*width,.8f*depth};
+}
+inline float drakeHeightScale(View view){
+ if(!drake.signedEdges&&!drake.directCels())return 1;
+ const auto& height=drake.standingHeight;
+ const int i=view.sample;
+ const float prev=height[(i+31)%32],start=height[i],end=height[(i+1)%32],next=height[(i+2)%32];
+ const float t=view.mix;
+ const float observed=start+.5f*t*(end-prev+t*(2*prev-5*start+4*end-next+t*(3*(start-end)+next-prev)));
+ return 98.f/std::max(1.f,observed);
+}
+static_assert(drake_direction_cels::Count==crawler_direction_cels::Count);
+struct DirectionCels {
+ static constexpr int Count=drake_direction_cels::Count;
+ int first,next;
+ float fraction;
+ explicit DirectionCels(View view){
+  const float position=(view.sample+view.mix)*(Count/32);
+  const int index=int(position);
+  first=index%Count;next=(index+1)%Count;fraction=position-index;
+ }
+ int orderCel()const{return fraction<.5f?first:next;}
+};
+inline Tile celTile(const Artwork& art,int cel,int part,int jaw){
+ if(&art==&crawler)return crawler_direction_cels::tiles[cel][part];
+ return drake_direction_cels::tiles[cel][part==5&&jaw>0?5+jaw:part];
+}
 struct ImpCelView {
  int first,next,nearest;
  float t;
@@ -185,13 +226,20 @@ inline SwordJoint impElbow(View view,int part,float angle){
 }
 struct Locations {
  int uv0,uv1,axisU,axisV,guide0,guide1,order0,order1,lighting,phase,page1,material,flow,flowView;
- int elbowBox,elbowAxis,impNode;
+ int elbowBox,elbowAxis,impNode,edgeJaw,shellAngle;
 };
 inline Locations loc{};
+inline void unloadCelPages(Artwork& art){
+ for(auto& page:art.cels){
+  if(page.color.id)UnloadTexture(page.color);
+  page={};
+ }
+}
 inline void unloadPages(Artwork& art){
  for(auto& p:art.pages){if(p.color.id)UnloadTexture(p.color);if(p.mask.id)UnloadTexture(p.mask);p={};}
  if(art.flow.id)UnloadTexture(art.flow);
- art.flow={};art.vectors.clear();
+ art.flow={};art.vectors.clear();art.signedEdges=false;
+ unloadCelPages(art);
 }
 inline void unload(){
  if(impCels.color.id)UnloadTexture(impCels.color);
@@ -204,15 +252,14 @@ inline void unload(){
 }
 inline void loadProgram(){
  if(program.id)return;
- // Sample both registered paintings into a single premultiplied layer. Resolve
- // their two possible wing/head depth orders inside the sprite, before it is
- // composited over the ground. This also keeps its coverage solid at mid-turn.
+ // Resolve the projected parts and their depth before compositing over the ground.
  const auto fragment=std::string("#version 330\n")+painted_turn_shape::shaderCode+R"GLSL(
 in vec2 fragTexCoord;
 in vec4 fragColor;
 out vec4 finalColor;
 uniform sampler2D texture0, page1, material, turnFlow;
-uniform int flowView,impNode;
+uniform int flowView,impNode,edgeJaw;
+uniform float shellAngle;
 uniform vec4 uv0[6], uv1[6], guide0[6], guide1[6];
 uniform vec3 axisU[6], axisV[6], lighting[6];
 uniform int order0[6],order1[6];
@@ -233,16 +280,51 @@ vec2 unbend(vec2 uv,vec4 box,vec3 axis){
 vec4 pigment(vec4 tile,vec2 uv) {
     if(any(lessThan(uv,vec2(0))) || any(greaterThan(uv,vec2(1))))return vec4(0.0);
     vec2 coords=vec2(fract(tile.x),tile.y)+uv*tile.zw;
-    if(impNode>=0){
-        vec2 dim=vec2(textureSize(texture0,0)),px=coords*dim-.5;
+    if(impNode>=0 || impNode==-5){
+        vec2 dim=vec2(tile.x>=1.0?textureSize(page1,0):textureSize(texture0,0));
+        vec2 px=coords*dim-.5;
         coords=(floor(px)+smoothstep(vec2(.13),vec2(.87),fract(px))+.5)/dim;
     }
     return tile.x>=1.0?texture(page1,coords):texture(texture0,coords);
 }
+vec4 directPaint(int part,vec2 at,float t){
+    vec4 a=pigment(uv0[part],at),b=pigment(uv1[part],at);
+    float opacity=mix(a.a,b.a,t);
+    if(opacity<.0039)return vec4(0);
+    vec3 ca=a.rgb/max(a.a,.0039),cb=b.rgb/max(b.a,.0039);
+    float share=t*b.a/opacity;
+    // Nearby cels agree on broad tone. Keep a narrow transition at contrast
+    // edges so eyes, teeth and plate ridges do not trail a second image.
+    float detail=smoothstep(.13,.42,length(ca-cb));
+    float pigmentMix=mix(share,smoothstep(.30,.70,share),detail);
+    float solid=smoothstep(.12,.88,opacity);
+    return vec4(mix(ca,cb,pigmentMix)*solid,solid);
+}
 vec2 displacement(vec2 uv,int part){
     vec2 cell=clamp(uv,vec2(.5/32.),vec2(1.-.5/32.));
-    vec2 sampleAt=(vec2(float(flowView),float(part))+cell)/vec2(32.,6.);
+    if(part==5 && edgeJaw>1)part+=edgeJaw-1;
+    vec2 sampleAt=(vec2(float(flowView),float(part))+cell)*32./vec2(textureSize(turnFlow,0));
     return (texture(turnFlow,sampleAt).rg*255.-128.)/384.;
+}
+vec4 registeredTexel(vec4 tile,vec2 uv){
+    vec2 dim=vec2(textureSize(texture0,0));
+    vec2 top=tile.xy*dim,size=tile.zw*dim;
+    vec2 at=top+uv*size;
+    vec2 inside=clamp(at,top+.5,top+size-.5);
+    vec4 paint=texture(texture0,inside/dim);
+    paint.a=(255.*paint.a-128.)/12.-length(at-inside);
+    return paint;
+}
+vec4 registeredPaint(int part,vec2 uv,vec2 a,vec2 b,float turn){
+    vec4 one=registeredTexel(uv0[part],a),two=registeredTexel(uv1[part],b);
+    float coverage=clamp(.5+mix(one.a,two.a,turn),0.,1.);
+    // The edge follows the registered shape. One painting supplies the brush
+    // detail at a time, including when the head passes in front of a wing.
+    float seam=clamp(.50+.36*(uv.y-.5)+.24*(uv.x-.5),.12,.88);
+    bool next=turn>=seam;
+    if(one.a<-.30&&two.a>.18)next=true;
+    if(two.a<-.30&&one.a>.18)next=false;
+    return vec4((next?two.rgb:one.rgb)*coverage,coverage);
 }
 vec4 impPaint(vec2 at,int part){
     // Only coordinates move between the four guide intervals. Each point
@@ -270,7 +352,8 @@ void main() {
         if(i>=4 && elbowAxis[i-4].z!=0.)at=unbend(at,elbowBox[i-4],elbowAxis[i-4]);
         if(any(lessThan(at,vec2(0))) || any(greaterThan(at,vec2(1))))continue;
         vec2 a=at,b=at;
-        if(impNode!=-4 && flowView>=0 && phase.x>0. && phase.x<1.){
+        bool shell=i==3&&shellAngle>=0.;
+        if(!shell && impNode!=-4 && flowView>=0 && phase.x>0. && phase.x<1.){
             // Follow the same painted feature from both views. Blending at a
             // fixed UV leaves two sword edges, horns or visors in one frame.
             vec2 d=displacement(at,i);
@@ -278,17 +361,19 @@ void main() {
             a-=phase.x*d;b+=(1.-phase.x)*d;
         }
         vec4 paint;
-        if(impNode==-4){
+        if(edgeJaw>0)paint=registeredPaint(i,at,a,b,shell?shellAngle:phase.x);
+        else if(impNode==-4){
             vec2 dim=vec2(textureSize(texture0,0));
             vec4 size=dim.xyxy;
             paint=paintedShape(texture0,turnFlow,flowView,i,uv0[i]*size,uv1[i]*size,phase.x,at);
             paint.rgb*=paint.a;
         }
+        else if(impNode==-5)paint=directPaint(i,at,phase.x);
         else if(impNode==-3)paint=pigment(uv0[i],at);
         else if(impNode>=0)paint=impPaint(at,i);
         else if(impNode==-2)paint=phase.x<.5?pigment(uv0[i],a):pigment(uv1[i],b);
         else paint=mix(pigment(uv0[i],a),pigment(uv1[i],b),phase.x);
-        if(impNode!=-4 && flowView>=0 && paint.a>.001){
+        if(edgeJaw==0 && impNode!=-4 && flowView>=0 && paint.a>.001){
             float k=4.*phase.x*(1.-phase.x);
             float opacity=mix(paint.a,smoothstep(.10,.90,paint.a),k);
             paint*=opacity/paint.a;
@@ -316,19 +401,22 @@ void main() {
     if(group>0)mixed=layers[group-1];
     else{
         for(int i=0;i<6;i++){
-            vec4 a=layers[order0[i]],b=layers[order1[i]];
+            vec4 a=layers[order0[i]];
             left=a+left*(1.-a.a);
-            right=b+right*(1.-b.a);
+            if(impNode!=-5){
+                vec4 b=layers[order1[i]];
+                right=b+right*(1.-b.a);
+            }
         }
         // An opaque shield passes in front of the torso along its edge.
         // A dissolve between depth orders would show the cuirass through it.
         float orderMix=phase.y;
-        if(impNode!=-1)orderMix=step(clamp(.5+point.x/112.,.24,.76),phase.y);
+        if(edgeJaw>0||impNode!=-1)orderMix=step(clamp(.5+point.x/112.,.24,.76),phase.y);
         else if(flowView>=0){
             float crossAt=clamp(.5+point.x/112.,.24,.76);
             orderMix=smoothstep(crossAt-.045,crossAt+.045,phase.y);
         }
-        mixed=mix(left,right,orderMix);
+        mixed=impNode==-5?left:mix(left,right,orderMix);
     }
     if(shadow){
         if(mixed.a<.62)discard;
@@ -344,8 +432,94 @@ void main() {
   loc={location("uv0[0]"),location("uv1[0]"),location("axisU[0]"),location("axisV[0]"),
        location("guide0[0]"),location("guide1[0]"),location("order0[0]"),location("order1[0]"),
        location("lighting[0]"),location("phase"),location("page1"),location("material"),
-       location("turnFlow"),location("flowView"),location("elbowBox[0]"),location("elbowAxis[0]"),location("impNode")};
+       location("turnFlow"),location("flowView"),location("elbowBox[0]"),location("elbowAxis[0]"),location("impNode"),location("edgeJaw"),location("shellAngle")};
  }
+}
+inline void calibrateRegisteredViews(Artwork& art){
+ const auto& page=art.pages[0];
+ const auto alpha=[&](const Tile& tile,int x,int y){return page.alpha[(tile.y+y)*page.color.width+tile.x+x];};
+ if(&art==&crawler){
+  for(int key=0;key<8;key++){
+   const auto tile=art.tile(key*4,3,0);
+   int left=tile.w,top=tile.h,right=0,bottom=0;
+   for(int y=0;y<tile.h;y++)for(int x=0;x<tile.w;x++)if(alpha(tile,x,y)>=128){
+    left=std::min(left,x);top=std::min(top,y);right=std::max(right,x+1);bottom=std::max(bottom,y+1);
+   }
+   auto fitted=tile;
+   if(right>left&&bottom>top){
+    left=std::max(0,left-1);top=std::max(0,top-1);
+    right=std::min(int(tile.w),right+1);bottom=std::min(int(tile.h),bottom+1);
+    fitted.x+=left;fitted.y+=top;fitted.w=right-left;fitted.h=bottom-top;
+   }
+   art.shell[key]=fitted;
+  }
+  return;
+ }
+ for(int view=0;view<32;view++){
+  constexpr int extent=160;
+  std::array<bool,extent*extent> opaque{};
+  for(int p=0;p<6;p++){
+   const auto tile=art.tile(view,p,0);
+   for(int y=0;y<tile.h;y++)for(int x=0;x<tile.w;x++)
+    if(alpha(tile,x,y)>180)opaque[(tile.oy+y)*extent+tile.ox+x]=true;
+  }
+  std::array<int,extent> rows{};
+  for(size_t i=0;i<opaque.size();i++)rows[i/extent]+=opaque[i];
+  const int fringe=int(std::count(opaque.begin(),opaque.end(),true)*.012f);
+  // Small horn and claw antialiasing pixels cannot move the measure.
+  int first=0,last=extent-1,above=0,below=0;
+  while(first<last&&(above+=rows[first])<=fringe)++first;
+  while(last>first&&(below+=rows[last])<=fringe)--last;
+  art.standingHeight[view]=float(last-first);
+ }
+}
+inline void loadRegisteredPaint(Artwork& art){
+ const std::string folder=art.folder;
+ Image ink=LoadImage((folder+"turn-ink.png").c_str()),map=LoadImage((folder+"turn-flow.png").c_str());
+ auto& page=art.pages[0];
+ const int rows=&art==&drake?14:6;
+ if(ink.data&&map.data&&ink.width==page.color.width&&ink.height==page.color.height&&
+    map.width==32*32&&map.height==rows*32){
+  ImageFormat(&ink,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
+  ImageFormat(&map,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
+  const auto paint=LoadTextureFromImage(ink),flow=LoadTextureFromImage(map);
+  if(paint.id&&flow.id){
+   calibrateRegisteredViews(art);
+   UnloadTexture(page.color);page.color=paint;art.flow=flow;art.signedEdges=true;
+   SetTextureFilter(paint,TEXTURE_FILTER_BILINEAR);
+   SetTextureFilter(flow,TEXTURE_FILTER_BILINEAR);
+   const auto* pigment=static_cast<const Color*>(ink.data);
+   for(size_t i=0;i<page.alpha.size();++i)page.alpha[i]=pigment[i].a;
+   const auto* vectors=static_cast<const Color*>(map.data);
+   art.vectors.assign(vectors,vectors+map.width*map.height);
+  }else{
+   if(paint.id)UnloadTexture(paint);
+   if(flow.id)UnloadTexture(flow);
+  }
+ }
+ if(ink.data)UnloadImage(ink);
+ if(map.data)UnloadImage(map);
+}
+inline bool loadDirectionalCels(Artwork& art){
+ const int count=&art==&drake?drake_direction_cels::PageCount:crawler_direction_cels::PageCount;
+ for(int i=0;i<count;i++){
+  const std::string path=std::string(art.folder)+"turn-cels-"+std::to_string(i)+".png";
+  if(!FileExists(path.c_str())){unloadCelPages(art);return false;}
+  Image image=LoadImage(path.c_str());
+  if(!image.data){unloadCelPages(art);return false;}
+  ImageFormat(&image,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
+  auto& page=art.cels[i];
+  const auto* pixels=static_cast<const Color*>(image.data);
+  page.alpha.resize(size_t(image.width)*image.height);
+  for(size_t n=0;n<page.alpha.size();n++)page.alpha[n]=pixels[n].a;
+  ImageAlphaPremultiply(&image);
+  page.color=LoadTextureFromImage(image);
+  UnloadImage(image);
+  if(!page.color.id){unloadCelPages(art);return false;}
+  SetTextureFilter(page.color,TEXTURE_FILTER_BILINEAR);
+ }
+ if(&art==&drake)calibrateRegisteredViews(art);
+ return true;
 }
 inline void loadPages(Artwork& art){
  if(art.ready())return;
@@ -368,6 +542,7 @@ inline void loadPages(Artwork& art){
   if(!page.color.id){unloadPages(art);return;}
   SetTextureFilter(page.color,TEXTURE_FILTER_BILINEAR);
  }
+ if(filtered()&&(&art==&drake||&art==&crawler)&&!loadDirectionalCels(art))loadRegisteredPaint(art);
  if(filtered() && (&art==&imp || &art==&sentinel)){
   const std::string path=std::string(art.folder)+"turn-flow.png";
   Image directions=LoadImage(path.c_str());
@@ -401,12 +576,17 @@ inline void loadImpCels(){
  if(filtered())impContour.load("assets/volcano/imp-turn/shape",impCels.color.width,impCels.color.height);
 }
 inline void load(){
- loadProgram();loadPages(drake);loadPages(crawler);loadPages(cinderhorn);
+ loadProgram();loadPages(cinderhorn);
  if(!caldera_puppets::ready(caldera_puppets::Imp)){loadPages(imp);loadImpCels();}
  if(filtered())loadPages(sentinel);
 }
 inline Vector4 textureRect(const Artwork& art,const Tile& t){
  const auto& page=art.pages[t.page].color;
+ return {float(t.page)+float(t.x)/page.width,float(t.y)/page.height,
+         float(t.w)/page.width,float(t.h)/page.height};
+}
+inline Vector4 celRect(const Artwork& art,const Tile& t){
+ const auto& page=art.cels[t.page].color;
  return {float(t.page)+float(t.x)/page.width,float(t.y)/page.height,
          float(t.w)/page.width,float(t.h)/page.height};
 }
@@ -434,6 +614,11 @@ inline float coverage(const Page& p,const Tile& t,float u,float v,bool sharp){
 inline float coverage(const Artwork& art,const Tile& t,float u,float v){
  return coverage(art.pages[t.page],t,u,v,&art==&imp&&art.flow.id);
 }
+inline float signedEdge(const Artwork& art,const Tile& t,float u,float v){
+ const float x=std::clamp(u,.5f/t.w,1-.5f/t.w),y=std::clamp(v,.5f/t.h,1-.5f/t.h);
+ const float encoded=coverage(art.pages[t.page],t,x,y,false)*255;
+ return (encoded-128)/12-std::hypot((u-x)*t.w,(v-y)*t.h);
+}
 inline Vector2 flowSample(const std::vector<Color>& vectors,int width,int n,int view,int part,float u,float v,bool right,float range){
  const float x=std::clamp(u*n-.5f,0.f,float(n-1)),y=std::clamp(v*n-.5f,0.f,float(n-1));
  const int ix=int(x),iy=int(y),jx=std::min(ix+1,n-1),jy=std::min(iy+1,n-1);
@@ -451,8 +636,22 @@ inline Vector2 displacement(const Artwork& art,int view,int part,float u,float v
  return flowSample(art.vectors,art.flow.width,impMap?48:32,view,part,u,v,right,impMap?255.f:384.f);
 }
 inline float turnCoverage(const Artwork& art,View angle,int part,int jaw,float u,float v){
+ if(art.directCels()){
+  const DirectionCels cells(angle);
+  const auto alpha=[&](int index){
+   const auto tile=celTile(art,index,part,jaw);
+   return coverage(art.cels[tile.page],tile,u,v,true);
+  };
+  const float t=cells.fraction,opacity=mix(alpha(cells.first),alpha(cells.next),t);
+  const float f=std::clamp((opacity-.12f)/.76f,0.f,1.f);
+  return f*f*(3-2*f);
+ }
  float ax=u,ay=v,bx=u,by=v;
  const float t=angle.mix;
+ if(rigidShell(art,part)){
+  const float a=signedEdge(art,art.shell[angle.base],u,v),b=signedEdge(art,art.shell[angle.nextBase()],u,v);
+  return std::clamp(.5f+mix(a,b,angle.t),0.f,1.f);
+ }
  if(&art==&imp){
   if(impCels.color.id){
    const ImpCelView cel(angle);
@@ -470,9 +669,15 @@ inline float turnCoverage(const Artwork& art,View angle,int part,int jaw,float u
   return f*f*(3-2*f);
  }
  if(art.flow.id && t>0 && t<1){
-  auto d=displacement(art,angle.sample,part,u,v);
-  d=displacement(art,angle.sample,part,u+(.5f-t)*d.x,v+(.5f-t)*d.y);
+  const int row=art.signedEdges&&part==5?part+jaw:part;
+  auto d=displacement(art,angle.sample,row,u,v);
+  d=displacement(art,angle.sample,row,u+(.5f-t)*d.x,v+(.5f-t)*d.y);
   ax-=t*d.x;ay-=t*d.y;bx+=(1-t)*d.x;by+=(1-t)*d.y;
+ }
+ if(art.signedEdges){
+  const float a=signedEdge(art,art.tile(angle.sample,part,jaw),ax,ay);
+  const float b=signedEdge(art,art.tile(angle.nextSample(),part,jaw),bx,by);
+  return std::clamp(.5f+mix(a,b,t),0.f,1.f);
  }
  const float a=coverage(art,art.tile(angle.sample,part,jaw),ax,ay);
  const float b=coverage(art,art.tile(angle.nextSample(),part,jaw),bx,by);
@@ -510,7 +715,16 @@ struct Rig {
        art(artwork),angle(view),jaw(gape),parts(pose){
   float left=1e6f,top=1e6f,right=-left,bottom=-top;
   constexpr float unit=128.f/160.f;
-  order(art,view.base,order0,action);order(art,view.nextBase(),order1,action);
+  const bool cels=art.directCels();
+  const DirectionCels cells(view);
+  if(cels){
+   const int cell=cells.orderCel();
+   const auto& layers=&art==&drake?drake_direction_cels::order[cell]:crawler_direction_cels::order[cell];
+   std::copy_n(layers,6,order0);
+   std::copy_n(layers,6,order1);
+  }else{
+   order(art,view.base,order0,action);order(art,view.nextBase(),order1,action);
+  }
   for(int p=0;p<6;p++){
    const auto& a=art.tile(view.sample,p,jaw);const auto& b=art.tile(view.nextSample(),p,jaw);
    const auto blend=[&](float a,float b){return mix(a,b,view.mix)*unit;};
@@ -519,6 +733,17 @@ struct Rig {
    const bool donor=&art==&imp && art.flow.id;
    uv0[p]=textureRect(art,donor?art.tile(view.base*4,p,jaw):a);
    uv1[p]=textureRect(art,donor?art.tile(view.nextBase()*4,p,jaw):b);
+   if(rigidShell(art,p)){
+    bounds=shellBounds(view);
+    if(!cels){
+     uv0[p]=textureRect(art,art.shell[view.base]);
+     uv1[p]=textureRect(art,art.shell[view.nextBase()]);
+    }
+   }
+   if(cels){
+    uv0[p]=celRect(art,celTile(art,cells.first,p,jaw));
+    uv1[p]=celRect(art,celTile(art,cells.next,p,jaw));
+   }
    if(&art==&imp&&impCels.color.id){
     const ImpCelView cel(view);
     bounds=cel.bounds(p);
@@ -597,16 +822,21 @@ struct Rig {
    send(loc.guide0,guide0,SHADER_UNIFORM_VEC4);send(loc.guide1,guide1,SHADER_UNIFORM_VEC4);
    send(loc.lighting,lighting,SHADER_UNIFORM_VEC3);SetShaderValueTexture(program,loc.material,relief);
   }
-  if(art.pageCount>1)SetShaderValueTexture(program,loc.page1,art.pages[1].color);
+  if(art.directCels()&&art.cels[1].color.id)SetShaderValueTexture(program,loc.page1,art.cels[1].color);
+  else if(art.pageCount>1)SetShaderValueTexture(program,loc.page1,art.pages[1].color);
   const bool deform=&art==&imp&&continuousImp();
-  const int impNode=&art!=&imp?-1:deform?-4:impCels.color.id?-3:art.flow.id?angle.base*5+angle.sample%4:-2;
+  const int impNode=art.directCels()?-5:&art!=&imp?-1:deform?-4:impCels.color.id?-3:art.flow.id?angle.base*5+angle.sample%4:-2;
   SetShaderValue(program,loc.impNode,&impNode,SHADER_UNIFORM_INT);
+  const int edgeJaw=art.signedEdges?jaw+1:0;
+  SetShaderValue(program,loc.edgeJaw,&edgeJaw,SHADER_UNIFORM_INT);
+  const float shell=rigidShell(art,3)?angle.t:-1;
+  SetShaderValue(program,loc.shellAngle,&shell,SHADER_UNIFORM_FLOAT);
   const ImpCelView cel(angle);
   const int flowView=deform?cel.first:art.flow.id&& &art!=&imp?angle.sample:-1;
   SetShaderValue(program,loc.flowView,&flowView,SHADER_UNIFORM_INT);
   if(deform)SetShaderValueTexture(program,loc.flow,impContour.flow);
   else if(art.flow.id&&impNode!=-3)SetShaderValueTexture(program,loc.flow,art.flow);
-  const Vector3 phase{deform?cel.t:angle.mix,angle.t,collapse};
+  const Vector3 phase{art.directCels()?DirectionCels(angle).fraction:deform?cel.t:angle.mix,angle.t,collapse};
   SetShaderValue(program,loc.phase,&phase,SHADER_UNIFORM_VEC3);
  }
  void paint(bool mask,Color tint,float dx=0,float dy=0,bool shadow=false)const{
@@ -630,7 +860,7 @@ struct Rig {
    return;
   }
   const auto& page=&art==&imp&&impCels.color.id?impCels:art.pages[0];
-  const auto texture=&art==&imp&&continuousImp()?impContour.ink:page.color;
+  const auto texture=art.directCels()?art.cels[0].color:&art==&imp&&continuousImp()?impContour.ink:page.color;
   rlSetTexture(texture.id);rlBegin(RL_QUADS);rlColor4ub(tint.r,tint.g,tint.b,tint.a);
   auto vertex=[&](float x,float y){rlTexCoord2f(x+(shadow?1024.f:mask?512.f:0.f),y);rlVertex2f(x+dx,y+dy);};
   vertex(box.x,box.y);vertex(box.x,box.y+box.height);

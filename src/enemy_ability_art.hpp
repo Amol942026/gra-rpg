@@ -18,7 +18,7 @@ inline void cleave(const Enemy& e,Color fill,Color edge){
  Vector2 p[]={screen(a-side),screen(b-side),screen(b+side),screen(a+side)};poly({p[0],p[1],p[2],p[3]},fill);for(int i=0;i<4;i++)DrawLineEx(p[i],p[(i+1)%4],2,edge);
 }
 inline bool breathBehind(const Enemy& e){
- return e.type==EmberDrakeType&&volcano_actors::drake_turn::view(e.animation).nearestBase()>=int(Direction::NW);
+ return e.type==EmberDrakeType&&caldera_quadruped::pose(e.type,e.animation,-1,-1).axes.y<-.42f;
 }
 inline void drakeBreath(const Enemy& e);
 inline void ground(){

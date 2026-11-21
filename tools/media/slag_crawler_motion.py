@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from ember_drake_synfig import FACINGS, GRID, MARGIN, NAMES, cutout, group, read_keys, track, verify_views
+from ember_drake_synfig import FACINGS, GRID, MARGIN, NAMES, cutout, group, read_keys, rigid_pose, track, verify_views
 from wolf_motion_synfig import walking_foot
 import synfig_cli
 
@@ -58,7 +58,7 @@ def anatomy(root):
     return pivots, toes
 
 
-def pose(clip, t, p, d, pivot, toe, center):
+def pose(clip, t, p, d, pivot, toe, center, shell):
     cs, sn = math.cos(FACINGS[d]), math.sin(FACINGS[d])
     beat = math.tau*t
     foot = p in FEET
@@ -66,17 +66,13 @@ def pose(clip, t, p, d, pivot, toe, center):
         breath = .5-.5*math.cos(beat)
         if foot:
             return 0, 0, 0, 1, 1
-        if p == 0:
-            return 0, -.25*breath, cs*1.65*math.sin(beat), 1, 1
-        return 0, -.62*breath, .4*cs*math.sin(beat), 1, 1+.013*breath
+        return rigid_pose(pivot, shell, .34*cs*math.sin(beat), 0, -.36*breath)
     if clip == "bank":
         lean = 2*t-1
         if foot:
             # Weight transfer belongs to the trunk; the supporting claw stays put.
             return 0, 0, 0, 1, 1
-        if p == 0:
-            return .32*sn*lean, -.32*cs*lean, -7.5*lean, 1, 1
-        return -.8*sn*lean, .33*cs*lean, 2.5*lean, 1, 1
+        return rigid_pose(pivot, shell, 1.08*lean, -.28*sn*lean, 0)
     if clip.startswith("pivot_"):
         if not foot:
             return 0, 0, 0, 1, 1
@@ -121,18 +117,10 @@ def pose(clip, t, p, d, pivot, toe, center):
         # the planted toe travels back by exactly the ground covered by the body.
         travel *= STRIDE*.58/(2*17.6)
         lift *= .85 if p >= 4 else .72
-        dx, dy = toe-pivot
-        length = max(8, dy)
-        angle = np.clip(-math.degrees(math.atan2(cs*travel, length)), -23, 23)
-        sy = float(np.clip(1+(sn*travel-lift)/length, .75, 1.22))
-        a = math.radians(angle)
-        shift_x = cs*travel+dx-(math.cos(a)*dx-math.sin(a)*dy*sy)
-        shift_y = sn*travel-lift+dy-(math.sin(a)*dx+math.cos(a)*dy*sy)
-        return shift_x, shift_y, angle, 1, sy
-    weight = math.sin(2*beat-.22)
-    if p == 0:
-        return cs*.35*weight, -.8*weight, math.sin(beat-.65)*3.9, 1, 1
-    return -.3*sn*math.sin(beat), -.85*weight, cs*.8*math.sin(beat+.2), 1, 1
+        return rigid_pose(pivot, toe, -cs*travel*1.25, cs*travel, sn*travel-lift)
+    pitch = .36*cs*math.sin(2*beat-.22)
+    x,y,angle,sx,sy = rigid_pose(pivot, shell, pitch, 0, -.28*math.cos(2*beat-.22))
+    return x, y, angle+(1.25*math.sin(beat-.65) if p==0 else 0), sx, sy
 
 
 def author(root, clip, pivots, toes):
@@ -149,7 +137,7 @@ def author(root, clip, pivots, toes):
             layer = group(facing, PARTS[p])
             px, py = pivots[p,d]
             cutout(layer, f"{name}-{PARTS[p]}", (-px/64,py/64,(128-px)/64,(py-128)/64))
-            keys = [pose(clip, frame/times[-1], p, d, pivots[p,d], toes[p,d],center) for frame in times]
+            keys = [pose(clip, frame/times[-1], p, d, pivots[p,d], toes[p,d], center, pivots[3,d]) for frame in times]
             track(layer, "stretch", "amount", "scale", times, [(k[3],k[4]) for k in keys])
             track(layer, "rotate", "amount", "turn", times, [-k[2] for k in keys])
             track(layer, "translate", "origin", "place", times,

@@ -29,14 +29,72 @@ inline bool runCalderaTurnQA(Enemy& creature, bool baseline) {
 #if __has_include("../src/ember_drake_turn.hpp")
     if (!baseline && !crawler) check(volcano_actors::drake_turn::filtered(), "continuous direction shader linked on this GPU");
 #endif
-#if __has_include("../src/volcano_turn.hpp")
+#if __has_include("../src/volcano_turn.hpp") && !__has_include("../src/caldera_quadruped.hpp")
     if (!baseline && crawler) check(volcano_actors::turn_art::crawler.ready() && volcano_actors::turn_art::filtered(),
                                     "crawler directional sheets and shared shader are active");
 #endif
+#if __has_include("../src/caldera_quadruped.hpp")
+    if (!baseline) {
+        const auto& art = crawler ? volcano_actors::turn_art::crawler : volcano_actors::turn_art::drake;
+        const auto atlas = caldera_quadruped::materialAtlas(!crawler);
+        check(atlas.id && !art.ready(), "new rig uses painted materials with no directional body atlas");
+        check(crawler ? atlas.width == 1024 && atlas.height == 512 : atlas.width == 2048 && atlas.height == 1024,
+              "crawler and drake bind their own full-resolution material atlases");
+        AnimationState test{};
+        test.facingInitialized = true;
+        test.moveBlend = 1;
+        bool jointsCovered = true;
+        caldera_quadruped::Mesh mesh;
+        for (int angle = 0; angle < 360; angle += 5) {
+            test.facingAngle = float(angle) * DEG2RAD;
+            for (int step = 0; step < 16; ++step) {
+                test.phase = step / 16.f;
+                const auto pose = caldera_quadruped::pose(type, test, -1, -1);
+                mesh.triangles.clear();
+                caldera_quadruped::build(mesh, pose);
+                for (int axle : {-1, 1}) for (int side : {-1, 1}) {
+                    const auto paw = caldera_quadruped::leg(pose, axle, side);
+                    jointsCovered &= mesh.includes(paw.socket) && mesh.includes(paw.knee) && mesh.includes(paw.toe);
+                }
+            }
+        }
+        check(jointsCovered, "all four legs stay connected at shoulder, knee and toe throughout the turn and stride");
+        if (!crawler) {
+            bool plantedPaws = true;
+            for (int view = 0; view < 8; ++view) {
+                const float heading = view * PI / 4;
+                const auto axes = actorFacing(heading);
+                const float step = VolcanoStrides[type - VolcanoFirstType] / 60;
+                const V advance = displacement(heading, step * std::hypot(axes.x, axes.y * ActorGroundSquash));
+                for (int axle : {-1, 1}) for (int side : {-1, 1}) {
+                    Enemy walking = creature;
+                    walking.animation = test;
+                    walking.animation.facingAngle = walking.animation.targetAngle = heading;
+                    const float offset = (side > 0 ? 0.f : .5f) + (axle > 0 ? 0.f : .23f);
+                    walking.animation.phase = caldera_quadruped::loopPhase(.04f - offset);
+                    const auto paw = [&] {
+                        return caldera_quadruped::leg(caldera_quadruped::pose(type, walking.animation, -1, -1), axle, side).toe;
+                    };
+                    const auto planted = paw();
+                    for (int frame = 1; frame <= 32; ++frame) {
+                        Game::advanceVolcanoAnimation(walking, advance, 1.f / 60, true);
+                        const auto foot = paw();
+                        const float x = foot.x + frame * (advance.x - advance.y) * 40;
+                        const float y = foot.y + frame * (advance.x + advance.y) * 20;
+                        plantedPaws &= std::hypot(x - planted.x, y - planted.y) < .06f;
+                    }
+                }
+            }
+            check(plantedPaws, "the drake's four paws maintain their planted contact in all eight headings");
+        }
+    }
+#endif
     if (crawler) check(volcano_actors::bodyScale(type - VolcanoFirstType) == 1.f, "crawler retains its gameplay render scale");
+    bool drawQuadFirst = false;
     auto render = [&](bool shadow, Vector2 at, const std::string& capture = "", float fall = -1.f, Color outline = BLANK) {
         BeginTextureMode(target);
         ClearBackground(capture.rfind("turn-walk/", 0) == 0 ? rgb(49, 44, 47) : BLANK);
+        if (drawQuadFirst) DrawRectangle(0, 0, 1, 1, BLACK);
         if (capture.rfind("turn-walk/", 0) == 0) {
             DrawEllipse(int(at.x), int(at.y), 42, 9, rgb(42, 37, 39));
             DrawEllipse(int(at.x), int(at.y), 32, 6, rgb(37, 31, 34));
@@ -74,6 +132,35 @@ inline bool runCalderaTurnQA(Enemy& creature, bool baseline) {
     };
     creature.deathAction = creature.deathSpecial = creature.abilityAge = -1;
     creature.windup = creature.strike = 0;
+#if __has_include("../src/caldera_quadruped.hpp")
+    auto& boundAtlas = caldera_quadruped::materialAtlas(!crawler);
+    if (!baseline && boundAtlas.id) {
+        creature.animation = {};
+        spin(38);
+        drawQuadFirst = true;
+        const auto painted = render(false, anchor);
+        auto testImage = GenImageColor(1024, 512, Color{16, 210, 41, 255});
+        const auto testAtlas = LoadTextureFromImage(testImage);
+        UnloadImage(testImage);
+        const auto originalAtlas = boundAtlas;
+        boundAtlas = testAtlas;
+        const auto colored = render(false, anchor);
+        boundAtlas = originalAtlas;
+        UnloadTexture(testAtlas);
+        drawQuadFirst = false;
+        int covered = 0, different = 0;
+        bool sameAlpha = true;
+        for (size_t i = 0; i < painted.size(); i++) {
+            const Color a = painted[i], b = colored[i];
+            sameAlpha &= a.a == b.a;
+            if (a.a < 245 || i == 0) continue;
+            ++covered;
+            different += abs(int(a.r)-b.r)+abs(int(a.g)-b.g)+abs(int(a.b)-b.b) >= 40;
+        }
+        check(testAtlas.id && sameAlpha && covered > 850 && different > covered*.75f,
+              "after a normal sprite draw the rig binds the material atlas while preserving its silhouette");
+    }
+#endif
     for (const std::string pose : {"idle", "walk", "reverse", "shadow", "bite"}) {
         creature.animation = {};
         creature.animation.motionInitialized = true;
@@ -109,9 +196,15 @@ inline bool runCalderaTurnQA(Enemy& creature, bool baseline) {
             if (!previous.empty()) distinctSteps += sum > 0;
             metrics << pose << ',' << degree << ',' << (sum > 0) << ',' << sum / (3. * std::max(1, united))
                     << ',' << right-left+1 << ',' << bottom-top+1 << ',' << visible << '\n';
-            if (crawler && pose != "shadow")
+            if (crawler && pose != "shadow") {
+#if __has_include("../src/caldera_quadruped.hpp")
+                const float topExtent = caldera_quadruped::hoverAbove(type), bottomExtent = caldera_quadruped::HoverBelow;
+#else
+                const float topExtent = enemyInfo(type).visualHeight, bottomExtent = 14;
+#endif
                 withinHoverBounds &= left >= anchor.x-75 && right < anchor.x+75 &&
-                                     top >= anchor.y-enemyInfo(type).visualHeight && bottom < anchor.y+14;
+                                     top >= anchor.y-topExtent && bottom < anchor.y+bottomExtent;
+            }
             if (pose != "shadow" && frame % 15 == 0 && frame != 360) {
                 for (int y = top; y <= bottom; y += 7) for (int x = left; x <= right; x += 7) {
                     const auto opacity = current[y*width+x].a;
@@ -157,6 +250,8 @@ inline bool runCalderaTurnQA(Enemy& creature, bool baseline) {
                     stray += idle[j].a == 0 && flash[j].a > 10;
                 }
                 check(rim > 20, "selection outline traces the painted contour");
+                if (brighter <= 100 || stray != 0)
+                    checksLog << "Hit flash facing " << i << ": brighter=" << brighter << ", outside=" << stray << '\n';
                 check(brighter > 100 && stray == 0, "damage flash visibly lights only the body");
             }
             creature.animation.moveBlend = 1;

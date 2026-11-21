@@ -148,31 +148,31 @@
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="-0.9698457" />
+                      <angle value="-0.1998470" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="-1.5692433" />
+                      <angle value="-0.3233592" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="-1.5692433" />
+                      <angle value="-0.3233592" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="-0.9698457" />
+                      <angle value="-0.1998470" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="0.9698457" />
+                      <angle value="0.1998470" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="1.5692433" />
+                      <angle value="0.3233592" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="1.5692433" />
+                      <angle value="0.3233592" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="0.9698457" />
+                      <angle value="0.1998470" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="0.0000000" />
@@ -191,56 +191,56 @@
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
-                        <x>0.8437500</x>
-                        <y>-1.6058770</y>
+                        <x>0.8435347</x>
+                        <y>-1.6041865</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
-                        <x>0.8437500</x>
-                        <y>-1.6049004</y>
+                        <x>0.8434042</x>
+                        <y>-1.6018365</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
-                        <x>0.8437500</x>
-                        <y>-1.6036933</y>
+                        <x>0.8434042</x>
+                        <y>-1.6000983</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
-                        <x>0.8437500</x>
-                        <y>-1.6027168</y>
+                        <x>0.8435347</x>
+                        <y>-1.5996358</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>0.8437500</x>
-                        <y>-1.6023438</y>
+                        <y>-1.6006250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
-                        <x>0.8437500</x>
-                        <y>-1.6027168</y>
+                        <x>0.8439707</x>
+                        <y>-1.6026878</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
-                        <x>0.8437500</x>
-                        <y>-1.6036933</y>
+                        <x>0.8441097</x>
+                        <y>-1.6050365</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
-                        <x>0.8437500</x>
-                        <y>-1.6049004</y>
+                        <x>0.8441097</x>
+                        <y>-1.6067747</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
-                        <x>0.8437500</x>
-                        <y>-1.6058770</y>
+                        <x>0.8439707</x>
+                        <y>-1.6072385</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -792,55 +792,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0130000</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -865,31 +865,31 @@
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="-0.2351141" />
+                      <angle value="-0.1998470" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="-0.3804226" />
+                      <angle value="-0.3233592" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="-0.3804226" />
+                      <angle value="-0.3233592" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="-0.2351141" />
+                      <angle value="-0.1998470" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="0.2351141" />
+                      <angle value="0.1998470" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="0.3804226" />
+                      <angle value="0.3233592" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="0.3804226" />
+                      <angle value="0.3233592" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="0.2351141" />
+                      <angle value="0.1998470" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="0.0000000" />
@@ -909,55 +909,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5428249</y>
+                        <y>-1.5432129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5404031</y>
+                        <y>-1.5418066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5374094</y>
+                        <y>-1.5400684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5349876</y>
+                        <y>-1.5386621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5340625</y>
+                        <y>-1.5381250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5349876</y>
+                        <y>-1.5386621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5374094</y>
+                        <y>-1.5400684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5404031</y>
+                        <y>-1.5418066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.2812500</x>
-                        <y>-1.5428249</y>
+                        <y>-1.5432129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -1600,31 +1600,31 @@
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="-0.8674563" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="-1.4035738" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="-1.4035738" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="-0.8674563" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="0.8674563" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="1.4035738" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="1.4035738" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="0.8674563" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="0.0000000" />
@@ -1643,56 +1643,56 @@
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
-                        <x>3.3062500</x>
-                        <y>-1.5933770</y>
+                        <x>3.3061354</x>
+                        <y>-1.5916918</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
-                        <x>3.3062500</x>
-                        <y>-1.5924004</y>
+                        <x>3.3060669</x>
+                        <y>-1.5893453</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
-                        <x>3.3062500</x>
-                        <y>-1.5911933</y>
+                        <x>3.3060669</x>
+                        <y>-1.5876071</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
-                        <x>3.3062500</x>
-                        <y>-1.5902168</y>
+                        <x>3.3061354</x>
+                        <y>-1.5871411</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>3.3062500</x>
-                        <y>-1.5898438</y>
+                        <y>-1.5881250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
-                        <x>3.3062500</x>
-                        <y>-1.5902168</y>
+                        <x>3.3063694</x>
+                        <y>-1.5901828</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
-                        <x>3.3062500</x>
-                        <y>-1.5911933</y>
+                        <x>3.3064455</x>
+                        <y>-1.5925287</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
-                        <x>3.3062500</x>
-                        <y>-1.5924004</y>
+                        <x>3.3064455</x>
+                        <y>-1.5942670</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
-                        <x>3.3062500</x>
-                        <y>-1.5933770</y>
+                        <x>3.3063694</x>
+                        <y>-1.5947336</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -2244,55 +2244,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0130000</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -2317,31 +2317,31 @@
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="-0.2102924" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="-0.3402603" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="-0.3402603" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="-0.2102924" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="0.2102924" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="0.3402603" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="0.3402603" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="0.2102924" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="0.0000000" />
@@ -2361,55 +2361,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5553249</y>
+                        <y>-1.5557129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5529031</y>
+                        <y>-1.5543066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5499094</y>
+                        <y>-1.5525684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5474876</y>
+                        <y>-1.5511621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5465625</y>
+                        <y>-1.5506250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5474876</y>
+                        <y>-1.5511621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5499094</y>
+                        <y>-1.5525684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5529031</y>
+                        <y>-1.5543066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>3.7937500</x>
-                        <y>-1.5553249</y>
+                        <y>-1.5557129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -3096,55 +3096,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6058770</y>
+                        <y>-1.6057129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6049004</y>
+                        <y>-1.6043066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6036933</y>
+                        <y>-1.6025684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6027168</y>
+                        <y>-1.6011621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6023438</y>
+                        <y>-1.6006250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6027168</y>
+                        <y>-1.6011621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6036933</y>
+                        <y>-1.6025684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6049004</y>
+                        <y>-1.6043066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>6.2687500</x>
-                        <y>-1.6058770</y>
+                        <y>-1.6057129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -3696,55 +3696,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0130000</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -3813,55 +3813,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5928249</y>
+                        <y>-1.5932129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5904031</y>
+                        <y>-1.5918066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5874094</y>
+                        <y>-1.5900684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5849876</y>
+                        <y>-1.5886621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5840625</y>
+                        <y>-1.5881250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5849876</y>
+                        <y>-1.5886621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5874094</y>
+                        <y>-1.5900684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5904031</y>
+                        <y>-1.5918066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-1.5928249</y>
+                        <y>-1.5932129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -4504,31 +4504,31 @@
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="0.8674563" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="1.4035738" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="1.4035738" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="0.8674563" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="-0.8674563" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="-1.4035738" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="-1.4035738" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="-0.8674563" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="-0.0000000" />
@@ -4547,56 +4547,56 @@
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
-                        <x>9.1937500</x>
-                        <y>-1.5933770</y>
+                        <x>9.1938646</x>
+                        <y>-1.5916918</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
-                        <x>9.1937500</x>
-                        <y>-1.5924004</y>
+                        <x>9.1939331</x>
+                        <y>-1.5893453</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
-                        <x>9.1937500</x>
-                        <y>-1.5911933</y>
+                        <x>9.1939331</x>
+                        <y>-1.5876071</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
-                        <x>9.1937500</x>
-                        <y>-1.5902168</y>
+                        <x>9.1938646</x>
+                        <y>-1.5871411</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>9.1937500</x>
-                        <y>-1.5898438</y>
+                        <y>-1.5881250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
-                        <x>9.1937500</x>
-                        <y>-1.5902168</y>
+                        <x>9.1936306</x>
+                        <y>-1.5901828</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
-                        <x>9.1937500</x>
-                        <y>-1.5911933</y>
+                        <x>9.1935545</x>
+                        <y>-1.5925287</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
-                        <x>9.1937500</x>
-                        <y>-1.5924004</y>
+                        <x>9.1935545</x>
+                        <y>-1.5942670</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
-                        <x>9.1937500</x>
-                        <y>-1.5933770</y>
+                        <x>9.1936306</x>
+                        <y>-1.5947336</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -5148,55 +5148,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0130000</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -5221,31 +5221,31 @@
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="0.2102924" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="0.3402603" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="0.3402603" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="0.2102924" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="-0.2102924" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="-0.3402603" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="-0.3402603" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="-0.2102924" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="-0.0000000" />
@@ -5265,55 +5265,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5553249</y>
+                        <y>-1.5557129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5529031</y>
+                        <y>-1.5543066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5499094</y>
+                        <y>-1.5525684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5474876</y>
+                        <y>-1.5511621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5465625</y>
+                        <y>-1.5506250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5474876</y>
+                        <y>-1.5511621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5499094</y>
+                        <y>-1.5525684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5529031</y>
+                        <y>-1.5543066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>8.7062500</x>
-                        <y>-1.5553249</y>
+                        <y>-1.5557129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -5956,31 +5956,31 @@
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="0.9698457" />
+                      <angle value="0.1998470" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="1.5692433" />
+                      <angle value="0.3233592" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="1.5692433" />
+                      <angle value="0.3233592" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="0.9698457" />
+                      <angle value="0.1998470" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="-0.9698457" />
+                      <angle value="-0.1998470" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="-1.5692433" />
+                      <angle value="-0.3233592" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="-1.5692433" />
+                      <angle value="-0.3233592" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="-0.9698457" />
+                      <angle value="-0.1998470" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="-0.0000000" />
@@ -5999,56 +5999,56 @@
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
-                        <x>1.6562500</x>
-                        <y>-4.1058770</y>
+                        <x>1.6564653</x>
+                        <y>-4.1041865</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
-                        <x>1.6562500</x>
-                        <y>-4.1049004</y>
+                        <x>1.6565958</x>
+                        <y>-4.1018365</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
-                        <x>1.6562500</x>
-                        <y>-4.1036933</y>
+                        <x>1.6565958</x>
+                        <y>-4.1000983</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
-                        <x>1.6562500</x>
-                        <y>-4.1027168</y>
+                        <x>1.6564653</x>
+                        <y>-4.0996358</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.6562500</x>
-                        <y>-4.1023438</y>
+                        <y>-4.1006250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
-                        <x>1.6562500</x>
-                        <y>-4.1027168</y>
+                        <x>1.6560293</x>
+                        <y>-4.1026878</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
-                        <x>1.6562500</x>
-                        <y>-4.1036933</y>
+                        <x>1.6558903</x>
+                        <y>-4.1050365</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
-                        <x>1.6562500</x>
-                        <y>-4.1049004</y>
+                        <x>1.6558903</x>
+                        <y>-4.1067747</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
-                        <x>1.6562500</x>
-                        <y>-4.1058770</y>
+                        <x>1.6560293</x>
+                        <y>-4.1072385</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -6600,55 +6600,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0130000</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -6673,31 +6673,31 @@
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="0.2351141" />
+                      <angle value="0.1998470" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="0.3804226" />
+                      <angle value="0.3233592" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="0.3804226" />
+                      <angle value="0.3233592" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="0.2351141" />
+                      <angle value="0.1998470" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="-0.2351141" />
+                      <angle value="-0.1998470" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="-0.3804226" />
+                      <angle value="-0.3233592" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="-0.3804226" />
+                      <angle value="-0.3233592" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="-0.2351141" />
+                      <angle value="-0.1998470" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="-0.0000000" />
@@ -6717,55 +6717,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0428249</y>
+                        <y>-4.0432129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0404031</y>
+                        <y>-4.0418066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0374094</y>
+                        <y>-4.0400684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0349876</y>
+                        <y>-4.0386621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0340625</y>
+                        <y>-4.0381250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0349876</y>
+                        <y>-4.0386621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0374094</y>
+                        <y>-4.0400684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0404031</y>
+                        <y>-4.0418066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.2187500</x>
-                        <y>-4.0428249</y>
+                        <y>-4.0432129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -8052,55 +8052,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0130000</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -8125,31 +8125,31 @@
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="0.2102924" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="0.3402603" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="0.3402603" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="0.2102924" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="-0.2102924" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="-0.3402603" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="-0.3402603" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="-0.2102924" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="-0.0000000" />
@@ -8169,55 +8169,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0428249</y>
+                        <y>-4.0432129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0404031</y>
+                        <y>-4.0418066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0374094</y>
+                        <y>-4.0400684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0349876</y>
+                        <y>-4.0386621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0340625</y>
+                        <y>-4.0381250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0349876</y>
+                        <y>-4.0386621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0374094</y>
+                        <y>-4.0400684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0404031</y>
+                        <y>-4.0418066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>3.6937500</x>
-                        <y>-4.0428249</y>
+                        <y>-4.0432129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -8364,31 +8364,31 @@
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="0.8674563" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="1.4035738" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="1.4035738" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="0.8674563" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="-0.8674563" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="-1.4035738" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="-1.4035738" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="-0.8674563" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="-0.0000000" />
@@ -8407,56 +8407,56 @@
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
-                        <x>3.9687500</x>
-                        <y>-4.0683770</y>
+                        <x>3.9688267</x>
+                        <y>-4.0673548</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
-                        <x>3.9687500</x>
-                        <y>-4.0674004</y>
+                        <x>3.9688727</x>
+                        <y>-4.0654181</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
-                        <x>3.9687500</x>
-                        <y>-4.0661933</y>
+                        <x>3.9688727</x>
+                        <y>-4.0636799</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
-                        <x>3.9687500</x>
-                        <y>-4.0652168</y>
+                        <x>3.9688267</x>
+                        <y>-4.0628041</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>3.9687500</x>
-                        <y>-4.0648437</y>
+                        <y>-4.0631250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
-                        <x>3.9687500</x>
-                        <y>-4.0652168</y>
+                        <x>3.9686707</x>
+                        <y>-4.0645199</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
-                        <x>3.9687500</x>
-                        <y>-4.0661933</y>
+                        <x>3.9686203</x>
+                        <y>-4.0664562</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
-                        <x>3.9687500</x>
-                        <y>-4.0674004</y>
+                        <x>3.9686203</x>
+                        <y>-4.0681944</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
-                        <x>3.9687500</x>
-                        <y>-4.0683770</y>
+                        <x>3.9686707</x>
+                        <y>-4.0690707</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -9265,55 +9265,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0130000</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -9382,55 +9382,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0678249</y>
+                        <y>-4.0682129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0654031</y>
+                        <y>-4.0668066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0624094</y>
+                        <y>-4.0650684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0599876</y>
+                        <y>-4.0636621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0590625</y>
+                        <y>-4.0631250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0599876</y>
+                        <y>-4.0636621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0624094</y>
+                        <y>-4.0650684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0654031</y>
+                        <y>-4.0668066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.0678249</y>
+                        <y>-4.0682129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -10099,55 +10099,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1683770</y>
+                        <y>-4.1682129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1674004</y>
+                        <y>-4.1668066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1661933</y>
+                        <y>-4.1650684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1652168</y>
+                        <y>-4.1636621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1648438</y>
+                        <y>-4.1631250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1652168</y>
+                        <y>-4.1636621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1661933</y>
+                        <y>-4.1650684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1674004</y>
+                        <y>-4.1668066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>6.2312500</x>
-                        <y>-4.1683770</y>
+                        <y>-4.1682129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -10956,55 +10956,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0130000</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0117586</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0085086</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0044914</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>1.0000000</x>
-                        <y>1.0012414</y>
+                        <y>1.0000000</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -11029,31 +11029,31 @@
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="-0.2102924" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="-0.3402603" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="-0.3402603" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="-0.2102924" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="0.2102924" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="0.3402603" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="0.3402603" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="0.2102924" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="0.0000000" />
@@ -11073,55 +11073,55 @@
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0428249</y>
+                        <y>-4.0432129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0404031</y>
+                        <y>-4.0418066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0374094</y>
+                        <y>-4.0400684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0349876</y>
+                        <y>-4.0386621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0340625</y>
+                        <y>-4.0381250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0349876</y>
+                        <y>-4.0386621</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0374094</y>
+                        <y>-4.0400684</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0404031</y>
+                        <y>-4.0418066</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
                         <x>8.8062500</x>
-                        <y>-4.0428249</y>
+                        <y>-4.0432129</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
@@ -11268,31 +11268,31 @@
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
-                      <angle value="-0.8674563" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
-                      <angle value="-1.4035738" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
-                      <angle value="-1.4035738" />
+                      <angle value="-0.2892213" />
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
-                      <angle value="-0.8674563" />
+                      <angle value="-0.1787486" />
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <angle value="-0.0000000" />
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
-                      <angle value="0.8674563" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
-                      <angle value="1.4035738" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
-                      <angle value="1.4035738" />
+                      <angle value="0.2892213" />
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
-                      <angle value="0.8674563" />
+                      <angle value="0.1787486" />
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">
                       <angle value="0.0000000" />
@@ -11311,56 +11311,56 @@
                     </waypoint>
                     <waypoint time="4f" before="linear" after="linear">
                       <vector>
-                        <x>8.5312500</x>
-                        <y>-4.0683770</y>
+                        <x>8.5311733</x>
+                        <y>-4.0673548</y>
                       </vector>
                     </waypoint>
                     <waypoint time="8f" before="linear" after="linear">
                       <vector>
-                        <x>8.5312500</x>
-                        <y>-4.0674004</y>
+                        <x>8.5311273</x>
+                        <y>-4.0654181</y>
                       </vector>
                     </waypoint>
                     <waypoint time="12f" before="linear" after="linear">
                       <vector>
-                        <x>8.5312500</x>
-                        <y>-4.0661933</y>
+                        <x>8.5311273</x>
+                        <y>-4.0636799</y>
                       </vector>
                     </waypoint>
                     <waypoint time="16f" before="linear" after="linear">
                       <vector>
-                        <x>8.5312500</x>
-                        <y>-4.0652168</y>
+                        <x>8.5311733</x>
+                        <y>-4.0628041</y>
                       </vector>
                     </waypoint>
                     <waypoint time="20f" before="linear" after="linear">
                       <vector>
                         <x>8.5312500</x>
-                        <y>-4.0648437</y>
+                        <y>-4.0631250</y>
                       </vector>
                     </waypoint>
                     <waypoint time="24f" before="linear" after="linear">
                       <vector>
-                        <x>8.5312500</x>
-                        <y>-4.0652168</y>
+                        <x>8.5313293</x>
+                        <y>-4.0645199</y>
                       </vector>
                     </waypoint>
                     <waypoint time="28f" before="linear" after="linear">
                       <vector>
-                        <x>8.5312500</x>
-                        <y>-4.0661933</y>
+                        <x>8.5313797</x>
+                        <y>-4.0664562</y>
                       </vector>
                     </waypoint>
                     <waypoint time="32f" before="linear" after="linear">
                       <vector>
-                        <x>8.5312500</x>
-                        <y>-4.0674004</y>
+                        <x>8.5313797</x>
+                        <y>-4.0681944</y>
                       </vector>
                     </waypoint>
                     <waypoint time="36f" before="linear" after="linear">
                       <vector>
-                        <x>8.5312500</x>
-                        <y>-4.0683770</y>
+                        <x>8.5313293</x>
+                        <y>-4.0690707</y>
                       </vector>
                     </waypoint>
                     <waypoint time="40f" before="linear" after="linear">

@@ -2,6 +2,8 @@
 #include <optional>
 #include "generated/ember_drake_turn_atlas.hpp"
 #include "generated/slag_crawler_turn_atlas.hpp"
+#include "generated/drake_direction_cels.hpp"
+#include "generated/crawler_direction_cels.hpp"
 #include "generated/fire_imp_turn_atlas.hpp"
 #include "generated/fire_imp_cels.hpp"
 #include "generated/obsidian_sentinel_turn_atlas.hpp"
@@ -21,6 +23,7 @@
 #include "ember_drake_mouth.hpp"
 #include "painted_turn_shape.hpp"
 #include "caldera_puppets.hpp"
+#include "caldera_quadruped.hpp"
 namespace varkhor_death_art {
 inline void init();
 inline void unload();
@@ -62,6 +65,7 @@ inline void load(){
  varkhor_death_art::init();
  drake_mouth::load();
  caldera_puppets::load();
+ caldera_quadruped::load();
  turn_art::load();
  if(!caldera_puppets::ready(caldera_puppets::Wraith))wraith_death_art::load();
 }
@@ -75,6 +79,7 @@ inline void unload(){
  volcano_corpse_material::unload();
  drake_mouth::unload();
  caldera_puppets::unload();
+ caldera_quadruped::unload();
  turn_art::unload();
  wraith_death_art::unload();
  varkhor_death_art::unload();
@@ -406,6 +411,10 @@ inline bool puppetAlive(caldera_puppets::Species species,float x,float y,float s
 }
 
 inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false,float special=-1,const enemy_death::Key* deathPose=nullptr,int deathScreenSide=0,float opacity=1,float deathPhase=0,const BrokenParts* broken=nullptr){
+ if(caldera_quadruped::handles(type)){
+  const float fall=dead?1.f:deathPose?deathPhase:0.f;
+  return caldera_quadruped::draw(type,x,y,size,state,action,special,fall,deathScreenSide,outline,probe,shadow,flash,opacity);
+ }
  if(type==FireImpType||type==AshWraithType){
   const auto species=type==FireImpType?caldera_puppets::Imp:caldera_puppets::Wraith;
   if(caldera_puppets::ready(species)){
@@ -424,7 +433,8 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const bool directionalCrawler=type==SlagCrawlerType&&artwork;
  const auto view=artwork?turn_art::view(state,*artwork):turn_art::View{direction,direction*4,0,0};
  if(artwork)direction=view.nearestBase();
- const float heading=artwork?turn_art::mix(facingAngles[view.base],view.base==7?2*PI:facingAngles[view.nextBase()],view.t):facingAngles[direction];
+ const float heading=turn_art::heading(view);
+ const float heightScale=directionalDrake?turn_art::drakeHeightScale(view):1.f;
  const auto& fall=falls[id];
  const auto& rest=restingPoses[id];
  const float collapse=dead?1.f:deathPose?deathPose->collapse:0.f,recoil=deathPose?deathPose->recoil:0.f,settle=deathPose?deathPose->settle:0.f;
@@ -539,11 +549,11 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  }
  const float fallAngle=turn*(rest.turn*tip+(impFalling?0.f:fall.twist*recoil*(1-tip)));
  const float fallOffset=rest.pivotHeight*s*tip;
- const float squash=towardRest(1,rest.squash)-fall.compression*knees;
+ const float squash=(towardRest(1,rest.squash)-fall.compression*knees)*heightScale;
  const float slide=fall.slide*(recoil+settle*.25f)*s;
  const float groundedY=artwork?turn_art::mix(atlas.ground[view.base][turn<0].lift,
                         atlas.ground[view.nextBase()][turn<0].lift,view.t):atlas.ground[direction][turn<0].lift;
- const float shiftX=turn*slide,shiftY=side*slide*.45f+(fall.dip*knees+groundedY*tip)*s;
+ const float shiftX=turn*slide,shiftY=(side*slide*.45f+(fall.dip*knees+groundedY*tip)*s)*heightScale;
  const float layerAction=dead||(deathPose&&collapse>=.64f)?-1.f:action;
  std::optional<turn_art::Rig> turnRig;
  if(artwork)turnRig.emplace(*artwork,view,jaw,parts,rest.light,turn,layerAction);
@@ -572,6 +582,7 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  if(shadow){float matrix[]={1,0,0,0,-shadow_math::LightX,-shadow_math::LightY,0,0,0,0,1,0,shadow_math::LightX*y,(1+shadow_math::LightY)*y,0,1};rlMultMatrixf(matrix);}
  rlTranslatef(x+shiftX,y+shiftY,0);
  if(dead||deathPose){rlScalef(1,squash,1);rlRotatef(fallAngle,0,0,1);rlTranslatef(0,fallOffset,0);}
+ else if(heightScale!=1)rlScalef(1,heightScale,1);
  if(turnRig){
   rlScalef(s,s,1);
   turnRig->begin(atlas.relief,shadow?0.f:enemy_death::ease(collapse));
@@ -661,6 +672,7 @@ inline DeathDraw specialDeathArt(int type){
  }
 }
 inline Rectangle groundFootprint(const Enemy& e){
+ if(caldera_quadruped::handles(e.type))return caldera_quadruped::footprint(e.type,e.animation,e.deathScreenSide());
  if((e.type==FireImpType&&caldera_puppets::ready(caldera_puppets::Imp))||
     (e.type==AshWraithType&&caldera_puppets::ready(caldera_puppets::Wraith))){
   const float side=e.deathScreenSide()?float(e.deathScreenSide()):int(e.animation.direction)>3?-1.f:1.f;
@@ -679,8 +691,9 @@ inline Rectangle groundFootprint(const Enemy& e){
   const int side=flank(v.nearestBase(),e.deathScreenSide());
   const auto& a=atlases[species].ground[v.base][side].footprint;
   const auto& b=atlases[species].ground[v.nextBase()][side].footprint;
-  return {turn_art::mix(a.x,b.x,v.t),turn_art::mix(a.y,b.y,v.t),
-          turn_art::mix(a.width,b.width,v.t),turn_art::mix(a.height,b.height,v.t)};
+  const float heightScale=e.type==EmberDrakeType?turn_art::drakeHeightScale(v):1.f;
+  return {turn_art::mix(a.x,b.x,v.t),turn_art::mix(a.y,b.y,v.t)*heightScale,
+          turn_art::mix(a.width,b.width,v.t),turn_art::mix(a.height,b.height,v.t)*heightScale};
  }
  return atlases[species].ground[direction][flank(direction,e.deathScreenSide())].footprint;
 }

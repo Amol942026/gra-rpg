@@ -1,5 +1,71 @@
 # Raport konfiguracji — 19.10.2026
 
+**21.11.2026 — chód i ostrość łusek Żarowego Draka.**
+
+Oddzielne krzywe przednich i tylnych łap prowadzą podparcie, ugięcie i przestawienie łap. Krok jest powiązany z dystansem na podłożu, a tułów, skrzydła i ogon przenoszą ciężar z przesunięciem fazy. Sprawdzono podparcie wszystkich łap w ośmiu kierunkach. Synfig wyrenderował 61 klatek kontrolnych w 3,45 s. [Projekt Synfiga](../volcano/quadruped-rigs/drake-ruch.sif)
+
+Łuski tułowia i szyi mają indywidualne krawędzie oraz matowe powierzchnie. Pole 512 × 512 w dotychczasowym atlasie przygotowano w Sunburst, ComfyUI i Kricie. Render podglądu z gry z odczytem i zapisem 66 klatek trwał 3,47 s. [Projekt Krity](C:/AI2D/sprites/kaldera-drak-krok-20261121/drak-luski.kra) · [Podgląd z Kaldery](C:/AI2D/pipeline/runs/kaldera-drak-krok-20261121/zarowy-drak.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-drak-krok-20261121/report.json)
+
+**21.11.2026 — połączenie szyi i klatki Żarowego Draka.**
+
+Nasada szyi zwęża się od klatki ku głowie, a gardło łagodnie wznosi się ku żuchwie. Szyja i tułów korzystają ze wspólnych przekrojów, współrzędnych tekstury i cieniowania. Zachowano atlas HD oraz kotwice głowy i łap.
+
+W 24 ujęciach sylwetka pozostała spójna. Render podglądu z odczytem i zapisem 66 klatek trwał 3,68 s. [Podgląd z Kaldery](C:/AI2D/pipeline/runs/kaldera-drak-szyja-20261121/zarowy-drak.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-drak-szyja-20261121/report.json)
+
+**21.11.2026 — malowanie Żarowego Draka w wyższej rozdzielczości.**
+
+Drak używa atlasu RGBA8 2048 × 1024 z polami 512 × 512 i filtrowaniem anizotropowym. Łuski klatki i pyska, skórę łap oraz błony skrzydeł przygotowano w Sunburst, przetworzono w lokalnym ComfyUI i wykończono w Kricie. W grze podkreślono oko i nozdrze. [Projekt Krity](C:/AI2D/sprites/kaldera-drak-hd-20261121/drak-hd.kra) · [Prompt](C:/AI2D/pipeline/runs/kaldera-drak-hd-20261121/prompt-sunburst.txt)
+
+Kontury draka pokryły się w 24 kierunkach, a 90 porównanych ujęć pełzacza pokryło się piksel w piksel. Render podglądu z odczytem i zapisem 66 klatek trwał 3,47 s. [Podgląd z gry](C:/AI2D/pipeline/runs/kaldera-drak-hd-20261121/zarowy-drak.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-drak-hd-20261121/report.json)
+
+**21.11.2026 — proporcje tułowia draka i pełzacza.**
+
+Profil draka ma szerszą klatkę piersiową, wcięcie brzucha i osobną linię bioder. Pełzacz ma wydłużony, spłaszczony pancerz z zachodzącymi na siebie płytami i podwiniętym podbrzuszem. Przekroje są osadzone na istniejących kotwicach ruchu. Zachowano dotychczasowe malowanie atlasu.
+
+W 48 próbkach z renderera sylwetki pozostały spójne, a ślad pozycji i kierunku chodu obu stworzeń pokrył się z poprzednią wersją. Render z odczytem i zapisem 66 klatek trwał 3,36 s. [Podgląd z Kaldery](C:/AI2D/pipeline/runs/kaldera-tulowie-20261121/drak-i-pelzacz.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-tulowie-20261121/report.json)
+
+**21.11.2026 — nowe sylwetki i malowanie draka oraz pełzacza.**
+
+Drak ma dłuższy pysk ze szczęką i osobnymi zębami, zwężający się ogon oraz skrzydła z łukowatymi wcięciami między żebrami. Pełzacz ma niższą, szerszą skorupę z nieregularnymi płytami i wyraźnym podbrzuszem. Osiem malowanych powierzchni z Sunburst przeskalowano lokalnie w ComfyUI i dopracowano w Kricie. [Projekt Krity](C:/AI2D/sprites/kaldera-anatomia-czworonogow-20261121/kaldera-anatomia.kra)
+
+W 48 ujęciach z renderera nie wykryto oderwanych części sylwetki. Ślad ruchu obu stworzeń pokrywa się z poprzednią wersją. Render podglądu z odczytem i zapisem 66 klatek trwał 3,43 s. [Podgląd z Kaldery](C:/AI2D/pipeline/runs/kaldera-anatomia-czworonogow-20261121/drak-i-pelzacz.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-anatomia-czworonogow-20261121/report.json)
+
+**21.11.2026 — nowe malowanie draka i pełzacza.**
+
+Sunburst przygotował osiem malowanych powierzchni. Lokalny ComfyUI przetworzył je modelem Real-ESRGAN x2plus. W Kricie rozdzielono części, skorygowano oświetlenie i domalowano przetarcia na łuskach, żyłkowanie błon i krawędzie płyt. Gra ładuje atlas RGBA 1024 × 512. Współrzędne malowania obracają się razem z pancerzem, a rysowanie ciała i efektów zachowuje tekstury przy zmianie materiału. [Master Krity](C:/AI2D/sprites/kaldera-czworonogi-malowanie-20261121/kaldera-retusz-czworonogow.kra) · [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN/releases/tag/v0.2.1)
+
+Porównano 24 ujęcia każdego modelu w rzeczywistym rendererze. Wszystkie 48 masek alfa pokrywa się piksel w piksel. Oba potwory pokonały ten sam tor w podglądzie Kaldery. Odczyt i zapis 66 klatek renderu trwał 3,60 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-czworonogi-malowanie-20261121/drak-i-pelzacz.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-czworonogi-malowanie-20261121/report.json)
+
+**20.11.2026 — nowe animacje i rigi 2D draka oraz pełzacza.**
+
+Każda łapa ma wspólny punkt mocowania uda do tułowia, kolana do podudzia i pazurów do stopy. Żarowy drak opiera błony i żebra skrzydeł na wspólnych konturach. Pancerz pełzacza ma jeden kontur i zachodzące na siebie płyty. Silnik rysuje te same części podczas chodu, ataku, upadku i spoczynku, a kąt obrotu przesuwa wspólne punkty wszystkich części. Cztery malowane materiały wygenerowano w Sunburst i rozdzielono na warstwy w Kricie. [Materiały](C:/AI2D/sprites/kaldera-nowe-rigi-czworonogow-20261120/materialy-czworonogow.kra)
+
+Nowe klucze kroku, oddechu, ugryzienia, ognia i upadku zapisano w Synfigu. Render kontroli 122 klatek krzywych trwał 5,93 s. Render pełnego obrotu w chodzie z odczytem i zapisem 66 klatek Kaldery trwał 3,70 s. W zestawie 24 sprawdzonych sylwetek każdego stworzenia nie wykryto osobnych fragmentów po uwzględnieniu jednopikselowej krawędzi. [Projekty Synfiga](../volcano/quadruped-rigs/) · [Podgląd](C:/AI2D/pipeline/runs/kaldera-nowe-rigi-czworonogow-20261120/drak-i-pelzacz.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-nowe-rigi-czworonogow-20261120/report.json)
+
+**20.11.2026 — przejścia kierunkowe draka i pełzacza.**
+
+Z ośmiu malowanych kierunków i istniejących ujęć pośrednich przygotowano po 128 gotowych póz kierunkowych RGBA. Silnik dobiera ujęcia bez mapy odkształceń i stosuje jedną kolejność warstw w obrębie każdej klatki. Atlas zasila kolor, wybór kursorem i cień. Klucze Synfiga prowadzą krok również w trakcie skrętu. [Eksport atlasu](../../tools/media/caldera_direction_cels.py)
+
+W próbie co 1° udział półprzezroczystych pikseli spadł z 8,9% do 5,8% u pełzacza i z 11,7% do 9,2% u draka. Maksymalna różnica koloru kolejnych ujęć wzrosła u obu modeli. Render z gry z odczytem i zapisem 54 klatek trwał 2,79 s. [Podgląd](C:/AI2D/pipeline/runs/drak-pelzacz-czyste-przejscia-20261120/drak-i-pelzacz.webp) · [Raport](C:/AI2D/pipeline/runs/drak-pelzacz-czyste-przejscia-20261120/report.json)
+
+**20.11.2026 — chód draka i pełzacza przy zmianie kierunku.**
+
+W Synfigu poprawiono klucze spoczynku, chodu i przechyłu. Skrzydła i szyja draka poruszają się razem z tułowiem, a pancerz i nasada ogona pełzacza korzystają ze wspólnej osi przechyłu. Łapy zachowują stałe wymiary, a punkty podparcia podążają za krokiem.
+
+Synfig wyrenderował 206 klatek w 59,53 s. Render ujęcia z Kaldery z odczytem i zapisem 54 klatek trwał 3,04 s. [Podgląd](C:/AI2D/pipeline/runs/drak-pelzacz-synfig-chod-20261120/drak-i-pelzacz.webp) · [Raport](C:/AI2D/pipeline/runs/drak-pelzacz-synfig-chod-20261120/report.json)
+
+**20.11.2026 — stabilna bryła pancerza pełzacza i skala draka.**
+
+Obrys pancerza pełzacza korzysta z ośmiu dopasowanych kierunków bazowych i wspólnego rzutu bryły 2D. Łapy i ogon korzystają z dotychczasowych kluczy ruchu. Różnicę wysokości draka skorygowano względem kotwicy na podłożu. Paszcza, obrys kursora i cień uwzględniają tę samą korektę.
+
+Przy stałej fazie chodu wysokość draka w próbie co 1° mieści się w zakresie 95–102 px. Przed korektą zakres wynosił 81–107 px. W porównaniu samego pancerza pełzacza zmienność pola obrysu w kolejnych odcinkach obrotu spadła o 22%. Render podglądu chodu z odczytem i zapisem 54 klatek trwał 2,80 s. [Podgląd](C:/AI2D/pipeline/runs/drak-pelzacz-stabilne-bryly-20261120/drak-i-pelzacz.webp) · [Raport](C:/AI2D/pipeline/runs/drak-pelzacz-stabilne-bryly-20261120/report.json)
+
+**20.11.2026 — ostrość ruchu Żarowego Draka i Żużlowego Pełzacza.**
+
+Silnik dopasowuje detale sąsiednich kierunków, prowadzi jeden kontur między nimi i rysuje pigment z wybranego ujęcia. Paszcza draka ma osobne dopasowanie dla każdego stopnia otwarcia. Cień i wybór myszą korzystają z tego samego konturu co sylwetka. [Generator atlasu](../../tools/media/caldera_crisp_turn.py)
+
+W teście chodu co 1° maksymalna zmiana obrysu spadła z 13,1% do 7,2% u draka oraz z 8,0% do 3,4% u pełzacza. Cztery ujęcia z Kaldery pokazują obrót w miejscu, chód, ugryzienie i ognisty oddech oraz upadek i końcową pozycję obu ciał. Render 233 klatek z odczytem i zapisem trwał 12,69 s. [Raport](C:/AI2D/pipeline/runs/drak-pelzacz-ostry-ruch-20261120/report.json)
+
 **20.11.2026 — płynna zmiana kierunku Rogacza Żaru.**
 
 Głowa, tułów i cztery nogi przechodzą pomiędzy 32 ujęciami. Synfig przygotował ruch kopyt i pochylenie głowy. Kąt biegu i obrotu zmienia się ciągle także w chwili rozpoczęcia szarży. W teście co 1° obraz w chodzie zmienił się 360 razy, wcześniej osiem. Największa zmiana obrysu spadła z 69,75% do 6,72%. [Źródła](../volcano/cinderhorn/README.md)

@@ -55,6 +55,11 @@ inline Part fallPart(const Part& live,const Bracket& clip,int part,float side,fl
          1+(live.scaleX-1)*release+fold.sx,1+(live.scaleY-1)*release+fold.sy};
 }
 inline Vector2 mouth(const Enemy& e,Vector2 anchor,float special){
+ if(caldera_quadruped::handles(e.type)){
+  const auto socket=caldera_quadruped::pose(e.type,e.animation,e.volcanoAction(),special).fireSocket();
+  const V lean=e.hitLean();
+  return {anchor.x+socket.x-lean.x*socket.y,anchor.y+(1-lean.y)*socket.y};
+ }
  const auto view=drake_turn::view(e.animation);
  const auto motion=sample(e.animation,e.volcanoAction(),special,view.base);
  const auto other=sample(e.animation,e.volcanoAction(),special,view.nextBase());
@@ -70,7 +75,7 @@ inline Vector2 mouth(const Enemy& e,Vector2 anchor,float special){
  const float dy=(drake_turn::mix(tip[1],nextTip[1],view.t)-head.pivot.y+(.8f-1.2f*std::sin(heading))*gape)*head.scaleY;
  const float angle=head.angle*DEG2RAD,c=std::cos(angle),sn=std::sin(angle);
  const float x=head.pivot.x-64+head.shift.x+c*dx-sn*dy;
- const float y=head.pivot.y-115+head.shift.y+sn*dx+c*dy;
+ const float y=(head.pivot.y-115+head.shift.y+sn*dx+c*dy)*turn_art::drakeHeightScale(view);
  const V lean=e.hitLean();
  const float scale=bodyScale(EmberDrakeType-VolcanoFirstType);
  return {anchor.x+(x-lean.x*y)*scale,anchor.y+y*(1-lean.y)*scale};

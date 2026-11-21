@@ -39,7 +39,7 @@ inline void drawBreath(Vector2 mouth,Vector2 end,float footprintWidth,float elap
  };
  auto edge=section(0);
  const float topV=1.5f/atlas.height,bottomV=510.5f/atlas.height;
- rlCheckRenderBatchLimit(strips*4);rlSetTexture(atlas.id);rlBegin(RL_QUADS);
+ rlCheckRenderBatchLimit(strips*4);rlBegin(RL_QUADS);rlSetTexture(atlas.id);
  rlColor4ub(255,255,255,static_cast<unsigned char>(255*std::sqrt(dissipate)));
  for(int i=1;i<=strips;++i){
   const auto next=section(i);
@@ -64,7 +64,7 @@ inline void fireOrb(Vector2 at,float scale,float energy,float time,float freeFla
   constexpr int Segments=24,Rings=4;
   constexpr float tau=2*PI;
   const float spin=time*2.8f;
-  rlCheckRenderBatchLimit(Segments*Rings*4);rlSetTexture(atlas.id);rlBegin(RL_QUADS);
+  rlCheckRenderBatchLimit(Segments*Rings*4);rlBegin(RL_QUADS);rlSetTexture(atlas.id);
   auto vertex=[&](int segment,int ring){
    const float a=tau*segment/Segments,t=ring/float(Rings);
    const float u=std::cos(a),v=std::sin(a);

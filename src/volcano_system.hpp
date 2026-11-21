@@ -173,7 +173,11 @@ static void advanceVolcanoAnimation(Enemy& e,V movement,float dt,bool faceMoveme
   const float arc=std::abs(std::remainder(e.animation.facingAngle-previousAngle,2*AnimationPi));
   e.animation.pivotPhase=std::fmod(e.animation.pivotPhase+arc*(1.9f/AnimationPi),1.f);
  }
- e.animation.phase=std::fmod(phase+std::hypot((movement.x-movement.y)*40,(movement.x+movement.y)*20)/VolcanoStrides[e.type-VolcanoFirstType],1.f);
+ const float screenX=(movement.x-movement.y)*40,screenY=(movement.x+movement.y)*20;
+ // The drake's contact curves are in ground units, so its cadence is
+ // independent of how much the camera foreshortens a step.
+ const float strideY=e.type==EmberDrakeType?screenY/ActorGroundSquash:screenY;
+ e.animation.phase=std::fmod(phase+std::hypot(screenX,strideY)/VolcanoStrides[e.type-VolcanoFirstType],1.f);
 }
 void cancelVolcanoAttacks(){
  cinders.clear();fissures.clear();for(auto& e:enemies){if(e.eruptionWindup>0)e.eruptionCd=std::max(e.eruptionCd,2.8f);e.eruptionWindup=0;}

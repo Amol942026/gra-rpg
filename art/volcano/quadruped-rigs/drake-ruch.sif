@@ -1,0 +1,1250 @@
+<?xml version='1.0' encoding='utf-8'?>
+<canvas version="1.2" width="256" height="160" fps="60" view-box="-16 145 240 -15" begin-time="0f" end-time="60f" antialias="1" bgcolor="0 0 0 0">
+  <name>Emberfall / Kaldera / Żarowy Drak / tory ruchu</name>
+  <defs>
+    <animated id="foreReach" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="12.0" />
+      </waypoint>
+      <waypoint time="40f" before="linear" after="linear">
+        <real value="-12.0" />
+      </waypoint>
+      <waypoint time="43f" before="linear" after="linear">
+        <real value="-12.45" />
+      </waypoint>
+      <waypoint time="46f" before="linear" after="linear">
+        <real value="-9.2" />
+      </waypoint>
+      <waypoint time="50f" before="linear" after="linear">
+        <real value="-0.8" />
+      </waypoint>
+      <waypoint time="54f" before="linear" after="linear">
+        <real value="8.0" />
+      </waypoint>
+      <waypoint time="57f" before="linear" after="linear">
+        <real value="12.2" />
+      </waypoint>
+      <waypoint time="59f" before="linear" after="linear">
+        <real value="12.55" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="12.0" />
+      </waypoint>
+    </animated>
+    <animated id="foreLift" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="40f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="43f" before="linear" after="linear">
+        <real value="1.45" />
+      </waypoint>
+      <waypoint time="46f" before="linear" after="linear">
+        <real value="5.0" />
+      </waypoint>
+      <waypoint time="50f" before="linear" after="linear">
+        <real value="9.6" />
+      </waypoint>
+      <waypoint time="53f" before="linear" after="linear">
+        <real value="10.2" />
+      </waypoint>
+      <waypoint time="56f" before="linear" after="linear">
+        <real value="6.7" />
+      </waypoint>
+      <waypoint time="59f" before="linear" after="linear">
+        <real value="0.7" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="foreCurl" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="40f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="44f" before="linear" after="linear">
+        <real value="1.25" />
+      </waypoint>
+      <waypoint time="48f" before="linear" after="linear">
+        <real value="3.2" />
+      </waypoint>
+      <waypoint time="52f" before="linear" after="linear">
+        <real value="2.35" />
+      </waypoint>
+      <waypoint time="55f" before="linear" after="linear">
+        <real value="0.54" />
+      </waypoint>
+      <waypoint time="57f" before="linear" after="linear">
+        <real value="-0.5" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="hindReach" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="11.4" />
+      </waypoint>
+      <waypoint time="38f" before="linear" after="linear">
+        <real value="-11.4" />
+      </waypoint>
+      <waypoint time="41f" before="linear" after="linear">
+        <real value="-12.0" />
+      </waypoint>
+      <waypoint time="44f" before="linear" after="linear">
+        <real value="-9.9" />
+      </waypoint>
+      <waypoint time="49f" before="linear" after="linear">
+        <real value="-0.7" />
+      </waypoint>
+      <waypoint time="54f" before="linear" after="linear">
+        <real value="8.9" />
+      </waypoint>
+      <waypoint time="57f" before="linear" after="linear">
+        <real value="11.75" />
+      </waypoint>
+      <waypoint time="59f" before="linear" after="linear">
+        <real value="11.93" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="11.4" />
+      </waypoint>
+    </animated>
+    <animated id="hindLift" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="38f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="41f" before="linear" after="linear">
+        <real value="1.1" />
+      </waypoint>
+      <waypoint time="44f" before="linear" after="linear">
+        <real value="3.4" />
+      </waypoint>
+      <waypoint time="48f" before="linear" after="linear">
+        <real value="6.6" />
+      </waypoint>
+      <waypoint time="52f" before="linear" after="linear">
+        <real value="7.65" />
+      </waypoint>
+      <waypoint time="55f" before="linear" after="linear">
+        <real value="5.5" />
+      </waypoint>
+      <waypoint time="59f" before="linear" after="linear">
+        <real value="0.62" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="hindCurl" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="38f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="42f" before="linear" after="linear">
+        <real value="1.85" />
+      </waypoint>
+      <waypoint time="46f" before="linear" after="linear">
+        <real value="3.8" />
+      </waypoint>
+      <waypoint time="50f" before="linear" after="linear">
+        <real value="2.6" />
+      </waypoint>
+      <waypoint time="55f" before="linear" after="linear">
+        <real value="0.65" />
+      </waypoint>
+      <waypoint time="58f" before="linear" after="linear">
+        <real value="-0.55" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="weight" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="-0.9" />
+      </waypoint>
+      <waypoint time="5f" before="linear" after="linear">
+        <real value="-1.28" />
+      </waypoint>
+      <waypoint time="11f" before="linear" after="linear">
+        <real value="-0.18" />
+      </waypoint>
+      <waypoint time="16f" before="linear" after="linear">
+        <real value="1.32" />
+      </waypoint>
+      <waypoint time="21f" before="linear" after="linear">
+        <real value="0.58" />
+      </waypoint>
+      <waypoint time="27f" before="linear" after="linear">
+        <real value="-0.4" />
+      </waypoint>
+      <waypoint time="32f" before="linear" after="linear">
+        <real value="-0.96" />
+      </waypoint>
+      <waypoint time="37f" before="linear" after="linear">
+        <real value="-1.1" />
+      </waypoint>
+      <waypoint time="43f" before="linear" after="linear">
+        <real value="0.34" />
+      </waypoint>
+      <waypoint time="47f" before="linear" after="linear">
+        <real value="1.22" />
+      </waypoint>
+      <waypoint time="51f" before="linear" after="linear">
+        <real value="0.48" />
+      </waypoint>
+      <waypoint time="56f" before="linear" after="linear">
+        <real value="-0.45" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="-0.9" />
+      </waypoint>
+    </animated>
+    <animated id="pitch" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="-0.033" />
+      </waypoint>
+      <waypoint time="6f" before="linear" after="linear">
+        <real value="-0.017" />
+      </waypoint>
+      <waypoint time="12f" before="linear" after="linear">
+        <real value="0.035" />
+      </waypoint>
+      <waypoint time="18f" before="linear" after="linear">
+        <real value="0.03" />
+      </waypoint>
+      <waypoint time="24f" before="linear" after="linear">
+        <real value="-0.013" />
+      </waypoint>
+      <waypoint time="30f" before="linear" after="linear">
+        <real value="-0.035" />
+      </waypoint>
+      <waypoint time="37f" before="linear" after="linear">
+        <real value="-0.014" />
+      </waypoint>
+      <waypoint time="42f" before="linear" after="linear">
+        <real value="0.035" />
+      </waypoint>
+      <waypoint time="49f" before="linear" after="linear">
+        <real value="0.029" />
+      </waypoint>
+      <waypoint time="55f" before="linear" after="linear">
+        <real value="-0.018" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="-0.033" />
+      </waypoint>
+    </animated>
+    <animated id="roll" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="-0.033" />
+      </waypoint>
+      <waypoint time="8f" before="linear" after="linear">
+        <real value="0.038" />
+      </waypoint>
+      <waypoint time="15f" before="linear" after="linear">
+        <real value="0.081" />
+      </waypoint>
+      <waypoint time="23f" before="linear" after="linear">
+        <real value="0.04" />
+      </waypoint>
+      <waypoint time="30f" before="linear" after="linear">
+        <real value="0.008" />
+      </waypoint>
+      <waypoint time="38f" before="linear" after="linear">
+        <real value="-0.051" />
+      </waypoint>
+      <waypoint time="45f" before="linear" after="linear">
+        <real value="-0.09" />
+      </waypoint>
+      <waypoint time="53f" before="linear" after="linear">
+        <real value="-0.058" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="-0.033" />
+      </waypoint>
+    </animated>
+    <animated id="lead" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="-0.86" />
+      </waypoint>
+      <waypoint time="7f" before="linear" after="linear">
+        <real value="0.12" />
+      </waypoint>
+      <waypoint time="15f" before="linear" after="linear">
+        <real value="1.22" />
+      </waypoint>
+      <waypoint time="23f" before="linear" after="linear">
+        <real value="0.45" />
+      </waypoint>
+      <waypoint time="30f" before="linear" after="linear">
+        <real value="-0.65" />
+      </waypoint>
+      <waypoint time="36f" before="linear" after="linear">
+        <real value="-0.12" />
+      </waypoint>
+      <waypoint time="45f" before="linear" after="linear">
+        <real value="1.04" />
+      </waypoint>
+      <waypoint time="53f" before="linear" after="linear">
+        <real value="0.16" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="-0.86" />
+      </waypoint>
+    </animated>
+    <animated id="wingYield" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="-1.86" />
+      </waypoint>
+      <waypoint time="9f" before="linear" after="linear">
+        <real value="-2.91" />
+      </waypoint>
+      <waypoint time="18f" before="linear" after="linear">
+        <real value="-0.9" />
+      </waypoint>
+      <waypoint time="27f" before="linear" after="linear">
+        <real value="1.83" />
+      </waypoint>
+      <waypoint time="36f" before="linear" after="linear">
+        <real value="2.35" />
+      </waypoint>
+      <waypoint time="45f" before="linear" after="linear">
+        <real value="0.87" />
+      </waypoint>
+      <waypoint time="53f" before="linear" after="linear">
+        <real value="-0.59" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="-1.86" />
+      </waypoint>
+    </animated>
+    <animated id="tailSwing" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="-0.37" />
+      </waypoint>
+      <waypoint time="8f" before="linear" after="linear">
+        <real value="0.42" />
+      </waypoint>
+      <waypoint time="16f" before="linear" after="linear">
+        <real value="0.9" />
+      </waypoint>
+      <waypoint time="23f" before="linear" after="linear">
+        <real value="0.64" />
+      </waypoint>
+      <waypoint time="30f" before="linear" after="linear">
+        <real value="0.09" />
+      </waypoint>
+      <waypoint time="38f" before="linear" after="linear">
+        <real value="-0.65" />
+      </waypoint>
+      <waypoint time="46f" before="linear" after="linear">
+        <real value="-0.92" />
+      </waypoint>
+      <waypoint time="53f" before="linear" after="linear">
+        <real value="-0.76" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="-0.37" />
+      </waypoint>
+    </animated>
+    <animated id="idle" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="14f" before="linear" after="linear">
+        <real value="0.28" />
+      </waypoint>
+      <waypoint time="29f" before="linear" after="linear">
+        <real value="0.95" />
+      </waypoint>
+      <waypoint time="39f" before="linear" after="linear">
+        <real value="0.71" />
+      </waypoint>
+      <waypoint time="51f" before="linear" after="linear">
+        <real value="0.13" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="bite" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="10f" before="linear" after="linear">
+        <real value="-0.42" />
+      </waypoint>
+      <waypoint time="19f" before="linear" after="linear">
+        <real value="-0.75" />
+      </waypoint>
+      <waypoint time="23f" before="linear" after="linear">
+        <real value="-0.49" />
+      </waypoint>
+      <waypoint time="28f" before="linear" after="linear">
+        <real value="0.95" />
+      </waypoint>
+      <waypoint time="31f" before="linear" after="linear">
+        <real value="1" />
+      </waypoint>
+      <waypoint time="37f" before="linear" after="linear">
+        <real value="0.62" />
+      </waypoint>
+      <waypoint time="51f" before="linear" after="linear">
+        <real value="0.09" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="biteJaw" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="11f" before="linear" after="linear">
+        <real value="0.16" />
+      </waypoint>
+      <waypoint time="20f" before="linear" after="linear">
+        <real value="0.75" />
+      </waypoint>
+      <waypoint time="26f" before="linear" after="linear">
+        <real value="1" />
+      </waypoint>
+      <waypoint time="31f" before="linear" after="linear">
+        <real value="0.09" />
+      </waypoint>
+      <waypoint time="38f" before="linear" after="linear">
+        <real value="0.04" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="breath" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="13f" before="linear" after="linear">
+        <real value="-0.41" />
+      </waypoint>
+      <waypoint time="24f" before="linear" after="linear">
+        <real value="-0.72" />
+      </waypoint>
+      <waypoint time="27f" before="linear" after="linear">
+        <real value="-0.42" />
+      </waypoint>
+      <waypoint time="32f" before="linear" after="linear">
+        <real value="0.88" />
+      </waypoint>
+      <waypoint time="40f" before="linear" after="linear">
+        <real value="0.91" />
+      </waypoint>
+      <waypoint time="50f" before="linear" after="linear">
+        <real value="0.26" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="breathJaw" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="17f" before="linear" after="linear">
+        <real value="0.14" />
+      </waypoint>
+      <waypoint time="25f" before="linear" after="linear">
+        <real value="0.53" />
+      </waypoint>
+      <waypoint time="31f" before="linear" after="linear">
+        <real value="1" />
+      </waypoint>
+      <waypoint time="45f" before="linear" after="linear">
+        <real value="0.91" />
+      </waypoint>
+      <waypoint time="53f" before="linear" after="linear">
+        <real value="0.3" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+    </animated>
+    <animated id="fall" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="8f" before="linear" after="linear">
+        <real value="0.016" />
+      </waypoint>
+      <waypoint time="17f" before="linear" after="linear">
+        <real value="0.12" />
+      </waypoint>
+      <waypoint time="25f" before="linear" after="linear">
+        <real value="0.43" />
+      </waypoint>
+      <waypoint time="37f" before="linear" after="linear">
+        <real value="0.85" />
+      </waypoint>
+      <waypoint time="48f" before="linear" after="linear">
+        <real value="0.99" />
+      </waypoint>
+      <waypoint time="56f" before="linear" after="linear">
+        <real value="1" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="1" />
+      </waypoint>
+    </animated>
+    <animated id="fold" type="real">
+      <waypoint time="0f" before="linear" after="linear">
+        <real value="0" />
+      </waypoint>
+      <waypoint time="9f" before="linear" after="linear">
+        <real value="0.01" />
+      </waypoint>
+      <waypoint time="18f" before="linear" after="linear">
+        <real value="0.28" />
+      </waypoint>
+      <waypoint time="28f" before="linear" after="linear">
+        <real value="0.7" />
+      </waypoint>
+      <waypoint time="40f" before="linear" after="linear">
+        <real value="0.91" />
+      </waypoint>
+      <waypoint time="56f" before="linear" after="linear">
+        <real value="1" />
+      </waypoint>
+      <waypoint time="60f" before="linear" after="linear">
+        <real value="1" />
+      </waypoint>
+    </animated>
+  </defs>
+  <layer type="circle" active="true" version="0.2" desc="foreReach">
+    <param name="origin">
+      <vector>
+        <x>16</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="9.20000" />
+        </waypoint>
+        <waypoint time="40f" before="linear" after="linear">
+          <real value="9.20000" />
+        </waypoint>
+        <waypoint time="43f" before="linear" after="linear">
+          <real value="9.47000" />
+        </waypoint>
+        <waypoint time="46f" before="linear" after="linear">
+          <real value="7.52000" />
+        </waypoint>
+        <waypoint time="50f" before="linear" after="linear">
+          <real value="2.48000" />
+        </waypoint>
+        <waypoint time="54f" before="linear" after="linear">
+          <real value="6.80000" />
+        </waypoint>
+        <waypoint time="57f" before="linear" after="linear">
+          <real value="9.32000" />
+        </waypoint>
+        <waypoint time="59f" before="linear" after="linear">
+          <real value="9.53000" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="9.20000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="foreLift">
+    <param name="origin">
+      <vector>
+        <x>41</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="40f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="43f" before="linear" after="linear">
+          <real value="2.87000" />
+        </waypoint>
+        <waypoint time="46f" before="linear" after="linear">
+          <real value="5.00000" />
+        </waypoint>
+        <waypoint time="50f" before="linear" after="linear">
+          <real value="7.76000" />
+        </waypoint>
+        <waypoint time="53f" before="linear" after="linear">
+          <real value="8.12000" />
+        </waypoint>
+        <waypoint time="56f" before="linear" after="linear">
+          <real value="6.02000" />
+        </waypoint>
+        <waypoint time="59f" before="linear" after="linear">
+          <real value="2.42000" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="foreCurl">
+    <param name="origin">
+      <vector>
+        <x>66</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="40f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="44f" before="linear" after="linear">
+          <real value="2.75000" />
+        </waypoint>
+        <waypoint time="48f" before="linear" after="linear">
+          <real value="3.92000" />
+        </waypoint>
+        <waypoint time="52f" before="linear" after="linear">
+          <real value="3.41000" />
+        </waypoint>
+        <waypoint time="55f" before="linear" after="linear">
+          <real value="2.32400" />
+        </waypoint>
+        <waypoint time="57f" before="linear" after="linear">
+          <real value="2.30000" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="hindReach">
+    <param name="origin">
+      <vector>
+        <x>91</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="8.84000" />
+        </waypoint>
+        <waypoint time="38f" before="linear" after="linear">
+          <real value="8.84000" />
+        </waypoint>
+        <waypoint time="41f" before="linear" after="linear">
+          <real value="9.20000" />
+        </waypoint>
+        <waypoint time="44f" before="linear" after="linear">
+          <real value="7.94000" />
+        </waypoint>
+        <waypoint time="49f" before="linear" after="linear">
+          <real value="2.42000" />
+        </waypoint>
+        <waypoint time="54f" before="linear" after="linear">
+          <real value="7.34000" />
+        </waypoint>
+        <waypoint time="57f" before="linear" after="linear">
+          <real value="9.05000" />
+        </waypoint>
+        <waypoint time="59f" before="linear" after="linear">
+          <real value="9.15800" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="8.84000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="hindLift">
+    <param name="origin">
+      <vector>
+        <x>116</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="38f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="41f" before="linear" after="linear">
+          <real value="2.66000" />
+        </waypoint>
+        <waypoint time="44f" before="linear" after="linear">
+          <real value="4.04000" />
+        </waypoint>
+        <waypoint time="48f" before="linear" after="linear">
+          <real value="5.96000" />
+        </waypoint>
+        <waypoint time="52f" before="linear" after="linear">
+          <real value="6.59000" />
+        </waypoint>
+        <waypoint time="55f" before="linear" after="linear">
+          <real value="5.30000" />
+        </waypoint>
+        <waypoint time="59f" before="linear" after="linear">
+          <real value="2.37200" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="hindCurl">
+    <param name="origin">
+      <vector>
+        <x>141</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="38f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="42f" before="linear" after="linear">
+          <real value="3.11000" />
+        </waypoint>
+        <waypoint time="46f" before="linear" after="linear">
+          <real value="4.28000" />
+        </waypoint>
+        <waypoint time="50f" before="linear" after="linear">
+          <real value="3.56000" />
+        </waypoint>
+        <waypoint time="55f" before="linear" after="linear">
+          <real value="2.39000" />
+        </waypoint>
+        <waypoint time="58f" before="linear" after="linear">
+          <real value="2.33000" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="weight">
+    <param name="origin">
+      <vector>
+        <x>166</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.54000" />
+        </waypoint>
+        <waypoint time="5f" before="linear" after="linear">
+          <real value="2.76800" />
+        </waypoint>
+        <waypoint time="11f" before="linear" after="linear">
+          <real value="2.10800" />
+        </waypoint>
+        <waypoint time="16f" before="linear" after="linear">
+          <real value="2.79200" />
+        </waypoint>
+        <waypoint time="21f" before="linear" after="linear">
+          <real value="2.34800" />
+        </waypoint>
+        <waypoint time="27f" before="linear" after="linear">
+          <real value="2.24000" />
+        </waypoint>
+        <waypoint time="32f" before="linear" after="linear">
+          <real value="2.57600" />
+        </waypoint>
+        <waypoint time="37f" before="linear" after="linear">
+          <real value="2.66000" />
+        </waypoint>
+        <waypoint time="43f" before="linear" after="linear">
+          <real value="2.20400" />
+        </waypoint>
+        <waypoint time="47f" before="linear" after="linear">
+          <real value="2.73200" />
+        </waypoint>
+        <waypoint time="51f" before="linear" after="linear">
+          <real value="2.28800" />
+        </waypoint>
+        <waypoint time="56f" before="linear" after="linear">
+          <real value="2.27000" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.54000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="pitch">
+    <param name="origin">
+      <vector>
+        <x>191</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.01980" />
+        </waypoint>
+        <waypoint time="6f" before="linear" after="linear">
+          <real value="2.01020" />
+        </waypoint>
+        <waypoint time="12f" before="linear" after="linear">
+          <real value="2.02100" />
+        </waypoint>
+        <waypoint time="18f" before="linear" after="linear">
+          <real value="2.01800" />
+        </waypoint>
+        <waypoint time="24f" before="linear" after="linear">
+          <real value="2.00780" />
+        </waypoint>
+        <waypoint time="30f" before="linear" after="linear">
+          <real value="2.02100" />
+        </waypoint>
+        <waypoint time="37f" before="linear" after="linear">
+          <real value="2.00840" />
+        </waypoint>
+        <waypoint time="42f" before="linear" after="linear">
+          <real value="2.02100" />
+        </waypoint>
+        <waypoint time="49f" before="linear" after="linear">
+          <real value="2.01740" />
+        </waypoint>
+        <waypoint time="55f" before="linear" after="linear">
+          <real value="2.01080" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.01980" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="roll">
+    <param name="origin">
+      <vector>
+        <x>216</x>
+        <y>20</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.01980" />
+        </waypoint>
+        <waypoint time="8f" before="linear" after="linear">
+          <real value="2.02280" />
+        </waypoint>
+        <waypoint time="15f" before="linear" after="linear">
+          <real value="2.04860" />
+        </waypoint>
+        <waypoint time="23f" before="linear" after="linear">
+          <real value="2.02400" />
+        </waypoint>
+        <waypoint time="30f" before="linear" after="linear">
+          <real value="2.00480" />
+        </waypoint>
+        <waypoint time="38f" before="linear" after="linear">
+          <real value="2.03060" />
+        </waypoint>
+        <waypoint time="45f" before="linear" after="linear">
+          <real value="2.05400" />
+        </waypoint>
+        <waypoint time="53f" before="linear" after="linear">
+          <real value="2.03480" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.01980" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="lead">
+    <param name="origin">
+      <vector>
+        <x>16</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.51600" />
+        </waypoint>
+        <waypoint time="7f" before="linear" after="linear">
+          <real value="2.07200" />
+        </waypoint>
+        <waypoint time="15f" before="linear" after="linear">
+          <real value="2.73200" />
+        </waypoint>
+        <waypoint time="23f" before="linear" after="linear">
+          <real value="2.27000" />
+        </waypoint>
+        <waypoint time="30f" before="linear" after="linear">
+          <real value="2.39000" />
+        </waypoint>
+        <waypoint time="36f" before="linear" after="linear">
+          <real value="2.07200" />
+        </waypoint>
+        <waypoint time="45f" before="linear" after="linear">
+          <real value="2.62400" />
+        </waypoint>
+        <waypoint time="53f" before="linear" after="linear">
+          <real value="2.09600" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.51600" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="wingYield">
+    <param name="origin">
+      <vector>
+        <x>41</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="3.11600" />
+        </waypoint>
+        <waypoint time="9f" before="linear" after="linear">
+          <real value="3.74600" />
+        </waypoint>
+        <waypoint time="18f" before="linear" after="linear">
+          <real value="2.54000" />
+        </waypoint>
+        <waypoint time="27f" before="linear" after="linear">
+          <real value="3.09800" />
+        </waypoint>
+        <waypoint time="36f" before="linear" after="linear">
+          <real value="3.41000" />
+        </waypoint>
+        <waypoint time="45f" before="linear" after="linear">
+          <real value="2.52200" />
+        </waypoint>
+        <waypoint time="53f" before="linear" after="linear">
+          <real value="2.35400" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="3.11600" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="tailSwing">
+    <param name="origin">
+      <vector>
+        <x>66</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.22200" />
+        </waypoint>
+        <waypoint time="8f" before="linear" after="linear">
+          <real value="2.25200" />
+        </waypoint>
+        <waypoint time="16f" before="linear" after="linear">
+          <real value="2.54000" />
+        </waypoint>
+        <waypoint time="23f" before="linear" after="linear">
+          <real value="2.38400" />
+        </waypoint>
+        <waypoint time="30f" before="linear" after="linear">
+          <real value="2.05400" />
+        </waypoint>
+        <waypoint time="38f" before="linear" after="linear">
+          <real value="2.39000" />
+        </waypoint>
+        <waypoint time="46f" before="linear" after="linear">
+          <real value="2.55200" />
+        </waypoint>
+        <waypoint time="53f" before="linear" after="linear">
+          <real value="2.45600" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.22200" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="idle">
+    <param name="origin">
+      <vector>
+        <x>91</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="14f" before="linear" after="linear">
+          <real value="2.16800" />
+        </waypoint>
+        <waypoint time="29f" before="linear" after="linear">
+          <real value="2.57000" />
+        </waypoint>
+        <waypoint time="39f" before="linear" after="linear">
+          <real value="2.42600" />
+        </waypoint>
+        <waypoint time="51f" before="linear" after="linear">
+          <real value="2.07800" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="bite">
+    <param name="origin">
+      <vector>
+        <x>116</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="10f" before="linear" after="linear">
+          <real value="2.25200" />
+        </waypoint>
+        <waypoint time="19f" before="linear" after="linear">
+          <real value="2.45000" />
+        </waypoint>
+        <waypoint time="23f" before="linear" after="linear">
+          <real value="2.29400" />
+        </waypoint>
+        <waypoint time="28f" before="linear" after="linear">
+          <real value="2.57000" />
+        </waypoint>
+        <waypoint time="31f" before="linear" after="linear">
+          <real value="2.60000" />
+        </waypoint>
+        <waypoint time="37f" before="linear" after="linear">
+          <real value="2.37200" />
+        </waypoint>
+        <waypoint time="51f" before="linear" after="linear">
+          <real value="2.05400" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="biteJaw">
+    <param name="origin">
+      <vector>
+        <x>141</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="11f" before="linear" after="linear">
+          <real value="2.09600" />
+        </waypoint>
+        <waypoint time="20f" before="linear" after="linear">
+          <real value="2.45000" />
+        </waypoint>
+        <waypoint time="26f" before="linear" after="linear">
+          <real value="2.60000" />
+        </waypoint>
+        <waypoint time="31f" before="linear" after="linear">
+          <real value="2.05400" />
+        </waypoint>
+        <waypoint time="38f" before="linear" after="linear">
+          <real value="2.02400" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="breath">
+    <param name="origin">
+      <vector>
+        <x>166</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="13f" before="linear" after="linear">
+          <real value="2.24600" />
+        </waypoint>
+        <waypoint time="24f" before="linear" after="linear">
+          <real value="2.43200" />
+        </waypoint>
+        <waypoint time="27f" before="linear" after="linear">
+          <real value="2.25200" />
+        </waypoint>
+        <waypoint time="32f" before="linear" after="linear">
+          <real value="2.52800" />
+        </waypoint>
+        <waypoint time="40f" before="linear" after="linear">
+          <real value="2.54600" />
+        </waypoint>
+        <waypoint time="50f" before="linear" after="linear">
+          <real value="2.15600" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="breathJaw">
+    <param name="origin">
+      <vector>
+        <x>191</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="17f" before="linear" after="linear">
+          <real value="2.08400" />
+        </waypoint>
+        <waypoint time="25f" before="linear" after="linear">
+          <real value="2.31800" />
+        </waypoint>
+        <waypoint time="31f" before="linear" after="linear">
+          <real value="2.60000" />
+        </waypoint>
+        <waypoint time="45f" before="linear" after="linear">
+          <real value="2.54600" />
+        </waypoint>
+        <waypoint time="53f" before="linear" after="linear">
+          <real value="2.18000" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="fall">
+    <param name="origin">
+      <vector>
+        <x>216</x>
+        <y>58</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="8f" before="linear" after="linear">
+          <real value="2.00960" />
+        </waypoint>
+        <waypoint time="17f" before="linear" after="linear">
+          <real value="2.07200" />
+        </waypoint>
+        <waypoint time="25f" before="linear" after="linear">
+          <real value="2.25800" />
+        </waypoint>
+        <waypoint time="37f" before="linear" after="linear">
+          <real value="2.51000" />
+        </waypoint>
+        <waypoint time="48f" before="linear" after="linear">
+          <real value="2.59400" />
+        </waypoint>
+        <waypoint time="56f" before="linear" after="linear">
+          <real value="2.60000" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.60000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+  <layer type="circle" active="true" version="0.2" desc="fold">
+    <param name="origin">
+      <vector>
+        <x>16</x>
+        <y>96</y>
+      </vector>
+    </param>
+    <param name="radius">
+      <animated type="real">
+        <waypoint time="0f" before="linear" after="linear">
+          <real value="2.00000" />
+        </waypoint>
+        <waypoint time="9f" before="linear" after="linear">
+          <real value="2.00600" />
+        </waypoint>
+        <waypoint time="18f" before="linear" after="linear">
+          <real value="2.16800" />
+        </waypoint>
+        <waypoint time="28f" before="linear" after="linear">
+          <real value="2.42000" />
+        </waypoint>
+        <waypoint time="40f" before="linear" after="linear">
+          <real value="2.54600" />
+        </waypoint>
+        <waypoint time="56f" before="linear" after="linear">
+          <real value="2.60000" />
+        </waypoint>
+        <waypoint time="60f" before="linear" after="linear">
+          <real value="2.60000" />
+        </waypoint>
+      </animated>
+    </param>
+  </layer>
+</canvas>

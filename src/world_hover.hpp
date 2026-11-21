@@ -163,8 +163,10 @@ WorldHover pickWorld(Vector2 point) {
             float half=enemyBoss(e.type)?125:e.type==EmberDrakeType?90:75;
             const bool raisedBlade=e.type==ObsidianSentinelType&&(e.volcanoAction()>=0||e.abilityBusy());
             if(raisedBlade)half=110;
-            const float height=enemyInfo(e.type).visualHeight+(raisedBlade?46.f:0.f);
-            if(regionalEnemy(e.type)||CheckCollisionPointRec(point,{p.x-half,p.y-height,half*2,height+(raisedBlade?45.f:14.f)})){
+            const bool newRig=caldera_quadruped::handles(e.type);
+            const float height=newRig?caldera_quadruped::hoverAbove(e.type):enemyInfo(e.type).visualHeight+(raisedBlade?46.f:0.f);
+            const float low=newRig?caldera_quadruped::HoverBelow:raisedBlade?45.f:14.f;
+            if(regionalEnemy(e.type)||CheckCollisionPointRec(point,{p.x-half,p.y-height,half*2,height+low})){
                 touched=actor_art::drawEnemy(e,p.x,p.y,BLANK,&point);
             }
         }else if(it->type==4){
