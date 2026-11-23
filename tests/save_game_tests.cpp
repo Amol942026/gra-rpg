@@ -40,7 +40,7 @@ int main(int argc,char** argv){
           "restored pace, foot phase and weapon attachment resume exactly through a Shift reversal");
    }
   }
-  for(int type:{StoneGuardianType,DesertBossType,VolcanoBossType,10,14,CinderhornType,BoarType}){
+  for(int type:{StoneGuardianType,DesertBossType,VolcanoBossType,10,14,CinderhornType,BoarType,DuneJackalType,GlassReaperType}){
    saves::Snapshot summoned;
    Game& g=summoned.game;
    check(developerStart(g,type==StoneGuardianType||type==BoarType?13:0,true),"start a DEV realm outside the creature's native habitat");
@@ -53,17 +53,19 @@ int main(int argc,char** argv){
    e.boulderCd=e.eruptionCd=e.boarChargeCd=e.abilityCd=0;e.sandPrisonCd=0;
    for(int i=0;i<150;i++){
     g.update(1.f/60,{},false);
-    if(!g.boulders.empty()||g.sandTrapped()||!g.fissures.empty()||!g.venomGlobs.empty()||!g.cinders.empty()||e.chargeBusy())break;
+    if(!g.boulders.empty()||g.sandTrapped()||!g.fissures.empty()||!g.venomGlobs.empty()||!g.cinders.empty()||
+       e.chargeBusy()||(newDesertEnemy(type)&&e.strike>0))break;
    }
    check(type==StoneGuardianType?!g.boulders.empty():type==DesertBossType?g.sandTrapped():
          type==VolcanoBossType?!g.fissures.empty():type==10?!g.venomGlobs.empty():
-         type==14?!g.cinders.empty():e.chargeBusy(),
-         (std::string(enemyInfo(type).name)+" uses its special attack outside its native realm").c_str());
+         type==14?!g.cinders.empty():newDesertEnemy(type)?e.strike>0:e.chargeBusy(),
+         (std::string(enemyInfo(type).name)+" uses its attack outside its native realm").c_str());
    const auto restored=saves::decode(saves::encode(summoned));
    check(restored.game.developerSession&&restored.game.enemies.back().id==id&&restored.game.enemies.back().type==type&&
          restored.game.boulders.size()==g.boulders.size()&&restored.game.sandTrapped()==g.sandTrapped()&&
          restored.game.fissures.size()==g.fissures.size()&&restored.game.venomGlobs.size()==g.venomGlobs.size()&&
-         restored.game.cinders.size()==g.cinders.size(),"a DEV save preserves the summoned enemy and its active special attack");
+         restored.game.cinders.size()==g.cinders.size()&&restored.game.enemies.back().strike==e.strike,
+         "a DEV save preserves the summoned enemy and its active attack");
    if(type==StoneGuardianType){
     for(int frame=0;frame<90&&!g.knockedBack();frame++)g.update(1.f/60,{},false);
     check(g.knockedBack()&&g.inDesert(),"summoned guardian knocks down the DEV hero in the desert");
@@ -303,6 +305,24 @@ int main(int argc,char** argv){
   auto badFountain=fountains;badFountain.game.fountainUsed[0]=false;rejects([&]{saves::encode(badFountain);},"draining unused fountain rejected");
   badFountain=fountains;badFountain.game.fountainDrain[0]=1.1f;rejects([&]{saves::encode(badFountain);},"oversized drain clock rejected");
   badFountain=fountains;badFountain.game.fountainDrain[0]=-.01f;rejects([&]{saves::encode(badFountain);},"negative drain clock rejected");
+  for(bool active:{true,false}){
+   saves::Snapshot previous;auto& g=previous.game;g.activateField(WorldLocation::Desert);g.player=DesertArrival;
+   g.enemies.erase(std::remove_if(g.enemies.begin(),g.enemies.end(),[](const Enemy& e){return newDesertEnemy(e.type);}),g.enemies.end());
+   g.hit(g.enemies.front(),10000);
+   const int defeated=g.enemies.front().id;
+   if(!active){g.activateField(WorldLocation::Forest);g.player=ForestArrival;}
+   auto restored=saves::decode(envelope(previous,32));
+   auto& desert=restored.game;
+   desert.activateField(WorldLocation::Desert);desert.player=DesertArrival;
+   for(int type:{DuneJackalType,GlassReaperType})
+    check(std::count_if(desert.enemies.begin(),desert.enemies.end(),[=](const Enemy& e){return e.type==type;})==6,
+          "v32 migration adds the distributed species to active and stored desert maps");
+   check(std::any_of(desert.enemies.begin(),desert.enemies.end(),[=](const Enemy& e){return e.id==defeated&&!e.alive;}),
+         "v32 migration keeps defeated original enemies");
+   auto killed=std::find_if(desert.enemies.begin(),desert.enemies.end(),[](const Enemy& e){return newDesertEnemy(e.type);});
+   desert.hit(*killed,10000);
+   roundtrip(restored);
+  }
   auto oldProgress=s;oldProgress.game=Game{};oldProgress.game.level=5;oldProgress.game.xp=200;oldProgress.game.attributes[0]=12;
   auto oldProgressLoaded=saves::decode(envelope(oldProgress,6));
   check(oldProgressLoaded.game.level==5&&oldProgressLoaded.game.xp==experienceForLevel(5)/2&&oldProgressLoaded.game.attributes[0]==12,"legacy saves retain earned levels, allocated stats and proportional XP progress");roundtrip(oldProgressLoaded);

@@ -47,17 +47,21 @@ enum class Cue {
 };
 // Preserve the original cue numbers in older saves; new entries are appended.
 static_assert(int(Cue::SlimeDying)-int(Cue::SlimeVoiceAttack)==3*SporekinType);
-static_assert(int(Cue::Count)-int(Cue::SlimeDying)==EnemyTypeCount);
+static_assert(int(Cue::Count)-int(Cue::SlimeDying)==CinderhornType+1);
 static_assert(int(Cue::CinderhornFall)-int(Cue::SporekinAttack)+1==3*RegionalEnemyTypeCount);
+inline constexpr int enemyVoiceType(int type){
+    return type==DuneJackalType?1:type==GlassReaperType?ObsidianSentinelType:type;
+}
 inline constexpr Cue enemyGestureCue(int type,int offset,Cue fallback){
     if(type<0||type>=EnemyTypeCount)return fallback;
+    type=enemyVoiceType(type);
     if(regionalEnemy(type))return Cue(int(Cue::SporekinAttack)+(type-SporekinType)*3+offset);
     return Cue(int(Cue::SlimeVoiceAttack)+type*3+offset);
 }
 inline constexpr Cue enemyAttackCue(int type){return enemyGestureCue(type,0,Cue::EnemyAttack);}
 inline constexpr Cue enemyHitCue(int type){return enemyGestureCue(type,1,Cue::StoneHit);}
 inline constexpr Cue enemyFallCue(int type){return enemyGestureCue(type,2,Cue::EnemyFall);}
-inline constexpr Cue enemyDyingCue(int type){return Cue(int(Cue::SlimeDying)+type);}
+inline constexpr Cue enemyDyingCue(int type){return Cue(int(Cue::SlimeDying)+enemyVoiceType(type));}
 inline constexpr bool enemyDyingCue(Cue cue){return cue>=Cue::SlimeDying&&cue<Cue::Count;}
 inline constexpr bool enemyAttackSound(Cue cue){
     return (cue>=Cue::SlimeVoiceAttack&&cue<Cue::SlimeDying&&(int(cue)-int(Cue::SlimeVoiceAttack))%3==0)||

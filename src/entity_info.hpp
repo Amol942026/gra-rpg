@@ -10,10 +10,12 @@ inline constexpr float LargeBossMeleeReach=2.15f,VarkhorFissureReach=1.35f;
 inline constexpr float VarkhorFirstFissure=.95f,VarkhorEruptionGesture=1.37f;
 constexpr int SlagCrawlerType=VolcanoFirstType,LavaSalamanderType=13,FireImpType=14,EmberDrakeType=17;
 constexpr int AshWraithType=15,ObsidianSentinelType=16;
-constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21,EnemyTypeCount=22;
+constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21;
+constexpr int DuneJackalType=22,GlassReaperType=23,EnemyTypeCount=24;
+constexpr bool newDesertEnemy(int type){return type==DuneJackalType||type==GlassReaperType;}
 constexpr bool smoothVolcanoTurn(int type){
  return type==SlagCrawlerType||type==LavaSalamanderType||type==EmberDrakeType||type==FireImpType||type==AshWraithType||
-        type==ObsidianSentinelType||type==CinderhornType;
+        type==ObsidianSentinelType||type==CinderhornType||newDesertEnemy(type);
 }
 constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;
 constexpr int DecorationsPerRealm=5,VolcanoLandmarkCount=4;
@@ -21,7 +23,7 @@ constexpr int VolcanoLandmarkStart=VolcanoDecorationStart+DecorationsPerRealm;
 constexpr int PropTypeCount=VolcanoLandmarkStart+VolcanoLandmarkCount;
 inline constexpr bool volcanoLandmark(int type){return type>=VolcanoLandmarkStart&&type<PropTypeCount;}
 inline constexpr bool volcanoSceneryProp(int type){return type>=LegacyPropTypeCount&&type<ForestDecorationStart;}
-constexpr int RegionalEnemyTypeCount=EnemyTypeCount-SporekinType;
+constexpr int RegionalEnemyTypeCount=CinderhornType-SporekinType+1;
 inline constexpr bool regionalEnemy(int type){return type>=SporekinType&&type<EnemyTypeCount;}
 constexpr float RegionalEnemyFallTime=.48f;
 enum class DamageType { Physical, Magic };
@@ -59,7 +61,9 @@ inline const EnemyInfo& enemyInfo(int type) {
         {"Varkhor, Serce Kaldery","Władca wulkanu · boss",940,1.3f,42,17,12,DamageType::Magic,1.3f,390,1.85f,205},
         {"Zarodnik kniei","Zarodnikowiec",65,2.2f,13,1,4,DamageType::Magic,.55f,39,1.45f,92,1.45f},
         {"Oko Wydm","Konstrukt piaskowca",115,1.65f,20,5,6,DamageType::Magic,.64f,62,1.7f,112,2.05f},
-        {"Rogacz Żaru","Bestia wulkaniczna",174,1.95f,32,9,7,DamageType::Physical,.75f,95,1.65f,145,1.55f}
+        {"Rogacz Żaru","Bestia wulkaniczna",174,1.95f,32,9,7,DamageType::Physical,.75f,95,1.65f,145,1.55f},
+        {"Szakal wydmowy","Bestia pustyni",108,2.65f,21,4,2,DamageType::Physical,.64f,57,1.35f,82,1.60f},
+        {"Szklany żniwiarz","Widmo mirażu",147,1.78f,28,8,6,DamageType::Physical,.54f,76,1.55f,115,1.95f}
     };
     static_assert(sizeof(entries)/sizeof(entries[0])==EnemyTypeCount);
     return entries[std::clamp(type,0,EnemyTypeCount-1)];

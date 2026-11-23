@@ -26,6 +26,7 @@ CLIPS = (
     ("Obsydianowy wojownik", 31, 1, 25, 28), ("Żarowy drak", 17, 1, 11, 14),
     ("Varkhor", 45, 1, 39, 42), ("Zarodnik kniei", 22, 2, 16, 19),
     ("Oko Wydm", 19, 2, 13, 16), ("Rogacz Żaru", 17, 1, 11, 14),
+    ("Szakal wydmowy", 32, 2, 23, 27), ("Szklany żniwiarz", 43, 2, 32, 36),
 )
 GUARDIAN_SMOKE = (
     (0, 0, 0, 0), (4, 0, 0, 0), (12, .86, .36, .34),

@@ -8,6 +8,9 @@
 #include "generated/fire_imp_cels.hpp"
 #include "generated/obsidian_sentinel_turn_atlas.hpp"
 #include "generated/cinderhorn_turn_atlas.hpp"
+#include "generated/desert_jackal_turn_atlas.hpp"
+#include "generated/desert_reaper_turn_atlas.hpp"
+#include "generated/desert_enemy_motion.hpp"
 #include "generated/cinderhorn_synfig.hpp"
 #include "generated/cinderhorn_fall_synfig.hpp"
 #include "generated/volcano_motion.hpp"
@@ -34,6 +37,7 @@ inline void unload();
 namespace volcano_actors::turn_art {inline void load();inline void unload();}
 namespace volcano_actors::cinderhorn_turn {inline void load();inline void unload();}
 namespace volcano_actors::salamander_art {inline void load();inline void unload();}
+namespace volcano_actors::desert_enemy_art {inline void load();inline void unload();}
 namespace actor_art {inline Vector2 reserveSpriteDepth();}
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 namespace wraith_death_art {
@@ -76,6 +80,7 @@ inline void load(){
  cinderhorn_turn::load();
  salamander_art::load();
  turn_art::load();
+ desert_enemy_art::load();
  if(!caldera_puppets::ready(caldera_puppets::Wraith))wraith_death_art::load();
 }
 inline void unload(){
@@ -92,6 +97,7 @@ inline void unload(){
  cinderhorn_turn::unload();
  salamander_art::unload();
  turn_art::unload();
+ desert_enemy_art::unload();
  wraith_death_art::unload();
  varkhor_death_art::unload();
 }
@@ -323,6 +329,7 @@ inline std::optional<varkhor_punch::Target> punchTarget(const Enemy& e){
  return varkhor_punch::Target{{(delta.x-delta.y)*40,(delta.x+delta.y)*20-elevation-72},e.varkhorPunch.arm};
 }
 #include "volcano_turn.hpp"
+#include "desert_enemy_art.hpp"
 #include "cinderhorn_turn_pose.hpp"
 #include "lava_salamander_art.hpp"
 #include "ember_drake_turn.hpp"

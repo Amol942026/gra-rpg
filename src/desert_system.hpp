@@ -103,6 +103,7 @@ void buildDesert(){
  }
  const size_t guardianIndex=enemies.size()-1;
  addRegionalEnemies(WorldLocation::Desert,enemies,props,forage);
+ addDesertReinforcements(enemies,props,forage);
  std::rotate(enemies.begin()+guardianIndex,enemies.begin()+guardianIndex+1,enemies.end());
  desertCreated=true;
  addRealmDecorations(WorldLocation::Desert);

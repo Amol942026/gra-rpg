@@ -73,14 +73,15 @@ void monster(Enemy& e,float x,float y) {
     actor_art::shadowCacheKey=100+e.id;
     actor_art::drawEnemy(e,x,y,underMouse?Gold:BLANK);
     actor_art::shadowCacheKey=-1;
-    if(regionalEnemy(e.type)&&e.strike>0){
-        float age=std::clamp(1-e.strike/.22f,0.f,1.f);
+    if(regionalEnemy(e.type)&&e.type!=GlassReaperType&&e.strike>0){
+        float age=std::clamp(1-e.strike/meleeRecovery(e.type),0.f,1.f);
         const bool spores=e.type==SporekinType;
         const bool sand=e.type==DuneEyeType;
-        Color dust=spores?rgb(218,183,106):sand?rgb(223,179,106):rgb(253,111,62);
-        float heading=int(e.animation.direction)*PI/4;
+        const bool jackal=e.type==DuneJackalType;
+        Color dust=spores?rgb(218,183,106):sand||jackal?rgb(223,179,106):rgb(253,111,62);
+        float heading=jackal&&e.animation.facingInitialized?e.animation.facingAngle:int(e.animation.direction)*PI/4;
         Vector2 forward{std::cos(heading),std::sin(heading)};
-        Vector2 origin{x+forward.x*22,y+forward.y*12-(sand?33:spores?20:27)};
+        Vector2 origin{x+forward.x*22,y+forward.y*12-(sand?33:spores?20:jackal?11:27)};
         float radius=(sand?32:spores?21:17)*age;
         for(int i=0;i<9;i++){
             float a=heading+(i-4)*.25f;

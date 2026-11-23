@@ -36,6 +36,8 @@ inline const LootTable& enemyLootTable(int type){
   {{{Kind::Gold,5,16},{Kind::Mushroom,1,2},{Kind::ForestEssence},{Kind::Health},{Kind::GroveAmulet},{Kind::DewSword},{Kind::SporeHarness},{Kind::SporeDagger}}},
   {{{Kind::Gold,10,26},{Kind::SandEssence,1,2},{Kind::Crystal},{Kind::Mana},{Kind::AmberRing},{Kind::DuneShield},{Kind::MirageSword},{Kind::SunwardHelm}}},
   {{{Kind::Gold,18,36},{Kind::RuneStone},{Kind::Crystal,1,2},{Kind::Health},{Kind::BasaltCleaver},{Kind::GuardianBoots},{Kind::CinderhornMail},{Kind::CinderBow},{Kind::ObsidianRoundshield}}},
+  {{{Kind::Gold,9,24},{Kind::SandEssence},{Kind::Health},{Kind::CobraBoots},{Kind::OasisSpear},{Kind::MirageBow}}},
+  {{{Kind::Gold,14,29},{Kind::Crystal},{Kind::Mana},{Kind::GlassDagger},{Kind::SunTrailSword},{Kind::DuneLamellar},{Kind::MirageSword}}},
  };
  static_assert(sizeof(tables)/sizeof(tables[0])==EnemyTypeCount);
  return tables[std::clamp(type,0,EnemyTypeCount-1)];

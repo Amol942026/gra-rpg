@@ -4,7 +4,25 @@ void worldExpansionTests(){
  check(terrain_height::Count==150&&VolcanoBridges.size()==12,"expansion adds 62 hills and knolls and four new lava bridges");
  for(auto realm:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano}){
   Game g;g.activateField(realm);int expected=realm==WorldLocation::Forest?181:realm==WorldLocation::Desert?109:121;
-  check(int(g.enemies.size())==expected+RegionalEncountersPerRealm,"each realm retains its expanded population and receives its new species");
+  const int desertAdditions=realm==WorldLocation::Desert?12:0;
+  check(int(g.enemies.size())==expected+RegionalEncountersPerRealm+desertAdditions,
+        "each realm retains its expanded population and receives its new species");
+  if(realm==WorldLocation::Desert){
+   std::array<std::array<int,2>,6> census{};
+   for(const auto& enemy:g.enemies)if(newDesertEnemy(enemy.type)){
+    const auto p=enemy.home;
+    const int sector=int(p.x)/(MapSize/3)+3*(int(p.y)/(MapSize/2));
+    census[sector][enemy.type-DuneJackalType]++;
+    check(g.enemyPositionClear(p,enemy.radius()),"new desert homes have walkable clearance");
+    check(distance(p,DesertArrival)>=12&&distance(p,DesertOasis)>=8&&distance(p,DesertBossHome)>=12&&
+          !nearDesertFountain(p,3)&&!nearTreasure(p,WorldLocation::Desert,4),
+          "new desert encounters leave travel landmarks and treasure approaches safe");
+    for(const auto& other:g.enemies)if(other.id!=enemy.id)
+     check(distance(other.home,p)>=8,"new desert homes fill gaps between encounters");
+   }
+   check(std::all_of(census.begin(),census.end(),[](const auto& count){return count[0]==1&&count[1]==1;}),
+         "both desert species occur once in each of the six sectors");
+  }
   int guardian=realm==WorldLocation::Forest?3:realm==WorldLocation::Desert?11:18,guardians=0,addedEnemies=0,addedProps=0;
   std::array<int,10> creatures{},objects{};
   auto sector=[](V p){

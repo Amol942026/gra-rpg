@@ -214,6 +214,8 @@ inline bool drawFrame(SpriteFrame chosen,int type,Direction direction,float x,fl
 }
 inline bool draw(const Enemy& e,float x,float y,Color outline=BLANK,
                  const Vector2* probe=nullptr,bool shadow=false,float scale=1){
+ if(newDesertEnemy(e.type))
+  return volcano_actors::desert_enemy_art::draw(e,x,y,outline,probe,shadow,scale,1,e.alive?-1.f:1.f);
  if(e.type==CinderhornType&&e.alive&&volcano_actors::cinderhorn_turn::ready())
   return volcano_actors::cinderhorn_turn::draw(e,x,y,outline,probe,shadow,scale,1);
  return drawFrame(spriteFrame(e),e.type,e.animation.direction,x,y,outline,probe,shadow,scale);
@@ -256,6 +258,7 @@ inline Rectangle cinderhornFootprint(const Enemy& e){
  return worldBounds(cinderhornGroundPatches[paintedRestCell(e)],e.type,e.animation.direction,false);
 }
 inline bool rest(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,float opacity=1){
+ if(newDesertEnemy(e.type))return volcano_actors::desert_enemy_art::draw(e,x,y,outline,probe,shadow,1,opacity,1);
  if(e.type==DuneEyeType&&duneEyeFall.art.id)
   return drawFrame({duneEyeFall,duneEyeFallStart(e)+DuneEyeFallFrames-1},e.type,e.animation.direction,x,y,outline,probe,shadow,1,opacity);
  if(e.type==SporekinType){
@@ -397,6 +400,10 @@ inline FrameFit fitFallFrame(SpriteFrame frame,int type,Direction direction,floa
 }
 inline bool death(const Enemy& e,float x,float y,float progress,Color outline=BLANK,
                   const Vector2* probe=nullptr,bool shadow=false,float opacity=1,const Rectangle* target=nullptr){
+ if(newDesertEnemy(e.type)){
+  const float contact=enemy_death::groundContact(e.type);
+  return volcano_actors::desert_enemy_art::draw(e,x,y,outline,probe,shadow,1,opacity,std::min(1.f,progress/contact));
+ }
  if(e.type==DuneEyeType&&duneEyeFall.art.id)
   return duneEyeDeath(e,x,y,progress/enemy_death::groundContact(e.type),outline,probe,shadow,opacity);
  if(e.type==CinderhornType&&(volcano_actors::cinderhorn_turn::ready()||cinderhornRest.art.id))

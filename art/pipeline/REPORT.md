@@ -1,5 +1,17 @@
 # Raport konfiguracji — 19.10.2026
 
+**23.11.2026 — chód, ataki i upadki pustynnych bestii.**
+
+Przy skręcie Żniwiarz zachowuje pełny napierśnik pod unoszącym się ramieniem. Sierp ma osobny atlas z przezroczystym tłem i porusza się razem z dłonią przy zgięciu łokcia. Usunięto dawną smugę cięcia. Szakal stawia łapy z przesunięciem fazy, a jego głowa pozostaje połączona z karkiem podczas skoku i obrotu. W upadku zwierzę podkurcza łapy. Żniwiarz zgina kończyny i opiera broń przy ciele. Oba tułowie zachowują grubość, a zetknięcie z podłożem wyznacza obrys grafiki.
+
+Sprawdzono osiem kierunków każdego gatunku, rzeczywiste trafienia i wybór ciała kursorem. W 64 próbkach ataku malowane części tworzyły po jednym połączonym obrysie przy tolerancji dwóch pikseli na krawędź. Synfig wyrenderował 61 klatek krzywych w 8,44 s. Przechwycenie 1184 klatek z gry wraz z symulacją i zapisem trwało 14,80 s. Testy startu wersji gracza i DEV wykonano w ukrytym oknie i z wyłączonym dźwiękiem. [Animowany podgląd](C:/AI2D/pipeline/runs/pustynne-bestie-ruch-20261123/pustynne-bestie-osiem-stron.webp) · [Pomiary](C:/AI2D/pipeline/runs/pustynne-bestie-ruch-20261123/report.json) · [Źródła](../desert/new-enemies/README.md)
+
+**23.11.2026 — dwa nowe gatunki na pustyni.**
+
+Szakal wydmowy przywiera do ziemi przed krótkim skokiem do ugryzienia. Szklany żniwiarz cofa zakrzywiony sierp, przenosi ciężar i wyprowadza szerokie cięcie. Każdy gatunek ma 32 widoki, osobne klucze ruchu i jeden atlas. W tle zarejestrowano chód ze zmianą kierunku, trafienia oraz upadki na piasku. Testy potwierdziły wystąpienie obu gatunków w każdym z sześciu sektorów oraz zachowanie pokonanych przeciwników przy migracji starszych zapisów i ponownym wczytaniu.
+
+Synfig wyrenderował 61 próbek krzywych w 13,90 s. Przechwycenie 149 klatek z gry wraz z symulacją i zapisem trwało 10,66 s przy ukrytym oknie i wyłączonym audio. [Źródła i integracja](../desert/new-enemies/README.md) · [Podgląd z gry](C:/AI2D/pipeline/runs/pustynne-bestie-20261123/pustynne-bestie.webp) · [Wynik przechwycenia](C:/AI2D/pipeline/runs/pustynne-bestie-20261123/capture-receipt.json)
+
 **23.11.2026 — celowanie pięścią Varkhora.**
 
 Varkhor wybiera ramię przy rozpoczęciu zamachu. Tor pięści uwzględnia położenie bohatera z dokładnością do jego rzeczywistego kierunku i wysokości podłoża. W trakcie odtwarzania końca ciosu ramię zachowuje ostatni cel. Zapis w wersji 32 przechowuje ramię i cel, a zapis w wersji 31 nadal odtwarza stan walki. Sprawdzono trafienie, tor pięści i zachowanie celu po ciosie w ośmiu kierunkach. Przechwycenie czterech ujęć z Kaldery wraz z symulacją prób trwało 5,40 s. [Podgląd](C:/AI2D/pipeline/runs/varkhor-kierunek-ciosu-20261123/varkhor-kierunki-ciosu.webp) · [Raport](C:/AI2D/pipeline/runs/varkhor-kierunek-ciosu-20261123/report.json)

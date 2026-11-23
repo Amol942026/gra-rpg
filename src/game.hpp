@@ -45,8 +45,14 @@ constexpr float EnemySightRange=6.5f,PatrolRadius=2.5f,PatrolSpeedFactor=.6f;
 constexpr int BoarType=4;
 constexpr float GuardianPunchWindup=36.f/60,GuardianPunchRecovery=22.f/60;
 constexpr float TreantSwingWindup=47.f/60,TreantSwingRecovery=25.f/60;
-inline constexpr float meleeWindup(int type){return type==3?GuardianPunchWindup:type==7?TreantSwingWindup:type==FireImpType?.66f:.42f;}
-inline constexpr float meleeRecovery(int type){return type==3?GuardianPunchRecovery:type==7?TreantSwingRecovery:.22f;}
+inline constexpr float meleeWindup(int type){
+ return type==3?GuardianPunchWindup:type==7?TreantSwingWindup:type==FireImpType?.66f:
+        type==DuneJackalType?.54f:type==GlassReaperType?.68f:.42f;
+}
+inline constexpr float meleeRecovery(int type){
+ return type==3?GuardianPunchRecovery:type==7?TreantSwingRecovery:
+        type==DuneJackalType?.34f:type==GlassReaperType?.42f:.22f;
+}
 constexpr float BoarChargeFirstDelay=.65f,BoarChargeCooldown=4.5f,BoarChargeWindup=.55f;
 constexpr float BoarChargeDuration=.7f,BoarChargeRecovery=.6f,BoarChargeSpeed=9.5f;
 constexpr float BoarChargeMinRange=2.2f,BoarChargeDamageMultiplier=2.f,HeroBodyRadius=.28f;
@@ -241,7 +247,8 @@ inline constexpr ImpactMaterial impactMaterial(int type){
  case DesertBossType:case DuneEyeType:return ImpactMaterial::Sand;
  case 5:case 8:case 9:case 10:case 13:return ImpactMaterial::Shell;
  case 14:case 15:case 17:case 18:case CinderhornType:return ImpactMaterial::Ember;
- case 1:case 4:return ImpactMaterial::Fur;
+ case 1:case 4:case DuneJackalType:return ImpactMaterial::Fur;
+ case GlassReaperType:return ImpactMaterial::Armor;
  default:return ImpactMaterial::Spark;
  }
 }
@@ -696,7 +703,8 @@ struct Game {
   if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType){
    e.deathAction=e.volcanoAction();e.deathSpecial=volcanoSpecialPose(e);
   }else{
-   e.deathAction=e.type==BoarType?e.boarVisualPhase():regionalEnemy(e.type)?e.abilityAction():e.heavyMeleePhase();
+   e.deathAction=e.type==BoarType?e.boarVisualPhase():newDesertEnemy(e.type)?e.volcanoAction():
+                 regionalEnemy(e.type)?e.abilityAction():e.heavyMeleePhase();
    e.deathSpecial=e.type==9&&e.abilityBusy()?e.abilityAge:e.boulderProgress();
   }
   if(e.type==CinderhornType&&e.chargeBusy()){
@@ -1028,8 +1036,9 @@ struct Game {
      const auto type=e.attackType();
      takeMonsterDamage(incomingDamage(float(e.damage()),type),player,.2f,length(away)>.001f?away:facing*-1,type);
     }
-   }}else if(e.type==CinderhornType&&dt>0&&e.windup<=.14f&&visible&&d>e.radius()+HeroBodyRadius+.12f){
-    const V lunge=normalized(player-e.pos)*std::min(3.4f,(d-e.radius()-HeroBodyRadius)/dt);
+   }}else if((e.type==CinderhornType||e.type==DuneJackalType)&&dt>0&&e.windup<=.14f&&visible&&d>e.radius()+HeroBodyRadius+.12f){
+    const float speed=e.type==DuneJackalType?5.2f:3.4f;
+    const V lunge=normalized(player-e.pos)*std::min(speed,(d-e.radius()-HeroBodyRadius)/dt);
     if(clearEnemySegment(e.pos,e.pos+lunge*dt,e.radius()))desired[i]=lunge;
    }continue;}
    if(e.strike>0)continue;
@@ -1063,6 +1072,8 @@ struct Game {
    if(e.windup>0&&e.type!=VolcanoBossType&&((e.type!=3&&e.type!=7)||e.windup>.12f))faceEnemyTowards(e,player-e.pos);
    if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType)advanceVolcanoAnimation(e,gait,dt,faceMovement);
    else if(e.type==CinderhornType)cinderhorn_gait::advance(e.animation,gait.x,gait.y,dt,faceMovement,e.boarRush>0);
+   else if(newDesertEnemy(e.type))desert_motion::advance(e.animation,gait.x,gait.y,dt,faceMovement,
+       e.type==DuneJackalType?43.f:37.f,e.type==DuneJackalType?9.f:7.4f);
    else if(e.type==BoarType)forest_boar_motion::advance(e.animation,gait.x,gait.y,dt,
        forest_boar_motion::phase(e.boarVisualPhase()),faceMovement);
    else if(e.type==3)guardian_gait::advance(e.animation,gait.x,gait.y,dt,faceMovement);

@@ -29,13 +29,15 @@ void enemyDeathTests(){
   const float restingTime=enemy_death::duration(type)-contact;
   const int transformationFrames=type==StoneGuardianType?16:type==AshWraithType?24:
                                  type==FireImpType?23:type==9||type==ObsidianSentinelType?25:
-                                 type==VolcanoBossType?39:0;
+                                 type==VolcanoBossType?39:type==DuneJackalType?23:type==GlassReaperType?32:0;
   const bool contactTiming=transformationFrames
        ? std::abs(contact-transformationFrames/52.f)<.0001f
        : contact>=.15f&&contact<=.33f;
   const bool restingTiming=type==FireImpType?std::abs(restingTime-7.f/52)<.0001f:
                            type==9?std::abs(restingTime-13.f/52)<.0001f:
-                           type==StoneGuardianType?std::abs(restingTime-10.f/52)<.0001f:restingTime>=.11f&&restingTime<=.12f;
+                           type==StoneGuardianType?std::abs(restingTime-10.f/52)<.0001f:
+                           type==DuneJackalType?std::abs(restingTime-9.f/52)<.0001f:
+                           type==GlassReaperType?std::abs(restingTime-11.f/52)<.0001f:restingTime>=.11f&&restingTime<=.12f;
   check(contactTiming&&restingTiming,
         "the fall uses the slightly slower timing and holds the contact pose for ground particles");
   for(float rate:{30.f,60.f,120.f}){

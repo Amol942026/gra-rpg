@@ -62,3 +62,55 @@ void restoreRegionalEnemies(WorldLocation realm,bool relocate=false){
  if(std::none_of(inhabitants.begin(),inhabitants.end(),[&](const Enemy& e){return e.id==guardian&&enemyBoss(e.type);}))return;
  addRegionalEnemies(realm,inhabitants,active?props:saved.props,active?forage:saved.forage,relocate);
 }
+
+inline static constexpr int DesertReinforcementStart=3100;
+void addDesertReinforcements(std::vector<Enemy>& inhabitants,const std::vector<Prop>& scenery,
+                             const std::vector<Ground>& plants){
+ const auto squared=[](V v){return v.x*v.x+v.y*v.y;};
+ for(int sector=0;sector<6;sector++){
+  const int left=sector%3*MapSize/3,top=sector/3*MapSize/2;
+  const V center{left+MapSize/6.f,top+MapSize/4.f};
+  for(int slot=0;slot<2;slot++){
+   const int id=DesertReinforcementStart+2*sector+slot;
+   const int type=(slot+sector)%2==0?DuneJackalType:GlassReaperType;
+   const auto& info=enemyInfo(type);
+   if(std::any_of(inhabitants.begin(),inhabitants.end(),[=](const Enemy& e){return e.id==id;}))continue;
+   float best=-1e6f;
+   V home{};
+   for(int y=top+6;y<top+MapSize/2-5;y+=2)for(int x=left+6;x<left+MapSize/3-5;x+=2){
+    const V p{float(x),float(y)};
+    if(squared(p-DesertArrival)<144||squared(p-DesertOasis)<64||squared(p-DesertBossHome)<144||
+       (location==WorldLocation::Desert&&squared(p-player)<100))continue;
+    float nearest=1e6f;
+    for(const auto& e:inhabitants){
+     nearest=std::min({nearest,squared(p-e.home),squared(p-e.pos)});
+     if(nearest<64)break;
+    }
+    if(nearest<64)continue;
+    // Prefer the largest gap but keep the sector edges from becoming a second cluster.
+    const float score=std::min(nearest,576.f)-.24f*squared(p-center);
+    if(score<=best||desertWater(p,info.radius+.6f)||nearDesertFountain(p,3)||
+       nearTreasure(p,WorldLocation::Desert,4)||nearFieldSite(WorldLocation::Desert,p,4))continue;
+    if(std::any_of(scenery.begin(),scenery.end(),[&](const Prop& prop){
+      const float radius=propRadius(prop.type)+info.radius+.65f;
+      return squared(p-prop.pos)<radius*radius;
+    })||std::any_of(plants.begin(),plants.end(),[&](const Ground& plant){return squared(p-plant.pos)<2.25f;}))continue;
+    best=score;
+    home=p;
+   }
+   if(best==-1e6f)continue;
+   inhabitants.push_back({id,type,home,home,info.health,info.health});
+   inhabitants.back().patrolWait=.55f+.17f*sector+.29f*slot;
+  }
+ }
+}
+void restoreDesertReinforcements(){
+ if(!desertCreated)return;
+ const bool active=fieldLocation==WorldLocation::Desert;
+ auto& field=storedField(WorldLocation::Desert);
+ auto& inhabitants=active?enemies:field.enemies;
+ if(std::none_of(inhabitants.begin(),inhabitants.end(),[](const Enemy& e){
+     return e.id==DesertBossId&&e.type==DesertBossType;
+ }))return;
+ addDesertReinforcements(inhabitants,active?props:field.props,active?forage:field.forage);
+}

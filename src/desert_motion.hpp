@@ -19,7 +19,7 @@ inline data::Key sample(float phase){
  return {a.travel+(b.travel-a.travel)*t,a.lift+(b.lift-a.lift)*t,a.sway+(b.sway-a.sway)*t};
 }
 
-inline void advance(AnimationState& state,float dx,float dy,float dt,bool faceMovement,float cycleLength){
+inline void advance(AnimationState& state,float dx,float dy,float dt,bool faceMovement,float cycleLength,float turnRate=0){
  const float phase=state.phase;
  const float x=(dx-dy)*40.f,y=(dx+dy)*20.f;
  const float travelled=std::hypot(x,y/ActorGroundSquash);
@@ -32,7 +32,7 @@ inline void advance(AnimationState& state,float dx,float dy,float dt,bool faceMo
    if(!known)state.facingAngle=state.targetAngle;
   }
  }
- state.advance(dx,dy,dt,false,false,false);
+ state.advance(dx,dy,dt,false,false,false,turnRate);
  if(state.moving)state.phase=std::fmod(phase+travelled/cycleLength,1.f);
 }
 

@@ -108,7 +108,7 @@ void worldExpansionSaveTests(){
   check(version==11&&original.game.worldExpansionVersion==0&&expanded.game.worldExpansionVersion==WorldExpansionRevision,"real previous-release 72x72 fixture gains the new territory");
   verifyAndAlignWorldExpansion(original,expanded);original.game.volcanoSceneryVersion=expanded.game.volcanoSceneryVersion;
   check(saves::encode(original)==saves::encode(expanded),"complete snapshot retains every other byte: player, items, chest contents, shrines, quests and both RNG streams");
-  auto& g=expanded.game;check(g.enemies.size()==(g.inDesert()?109:g.inVolcano()?121:181)+RegionalEncountersPerRealm,"legacy active field receives the complete expanded population");
+  auto& g=expanded.game;check(g.enemies.size()==(g.inDesert()?121:g.inVolcano()?121:181)+RegionalEncountersPerRealm,"legacy active field receives the complete expanded population");
   check(g.player.x==(g.inDesert()?DesertArrival.x:g.inVolcano()?VolcanoArrival.x:1.6f)&&g.player.y==(g.inDesert()?DesertArrival.y:g.inVolcano()?VolcanoArrival.y:69.4f)&&g.walkable(g.player),"loaded hero stays at the exact old position with clear terrain");
   check(g.hp==67&&g.mana==43&&g.gold==127&&g.bag[12].kind==Kind::GuardianSword&&g.chests[4].loot[0].empty()&&g.fountainUsed[0]&&g.volcanoFountainUsed[1],"legacy resources, equipment, looted chest and consumed shrines are retained");
   auto once=saves::encode(expanded);check(saves::encode(saves::decode(once))==once,"expanded world saves exactly and does not append content a second time");roundtrip(expanded);

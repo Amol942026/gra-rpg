@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=32;
+constexpr int CurrentVersion=33;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -272,6 +272,7 @@ inline Snapshot decode(const std::string& bytes){
   result.game.addRealmDecorations(realm);
  if(version<26)result.game.refreshForestScenery();
  if(version<27)result.game.refreshDesertGroves();
+ if(version<33)result.game.restoreDesertReinforcements();
  if(movedCircleChest&&result.game.location==WorldLocation::Forest&&distance(result.game.player,ForestRitualCircle)<ChestRadius){
   for(V offset:{V{1.5f,0},V{0,1.5f},V{-1.5f,0},V{0,-1.5f}}){
    const V approach=ForestRitualCircle+offset;

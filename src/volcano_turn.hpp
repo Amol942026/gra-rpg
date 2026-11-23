@@ -12,6 +12,7 @@ static_assert(crawler_data::Count==32 && crawler_data::Parts==6 && crawler_data:
 static_assert(imp_data::Count==32 && imp_data::Parts==6 && imp_data::Cell==160 && imp_data::PageCount<=2);
 static_assert(sentinel_data::Count==32 && sentinel_data::Parts==6 && sentinel_data::Cell==160 && sentinel_data::PageCount<=2);
 struct Page {Texture2D color{},mask{};std::vector<unsigned char> alpha;};
+using SupportContour=std::array<Vector2,24>;
 inline Page impCels{};
 inline constexpr int ImpPaintedDirections=16;
 inline painted_turn_shape::Material impContour;
@@ -28,6 +29,7 @@ struct Artwork {
  std::array<Tile,8> shell{};
  std::array<float,32> standingHeight{};
  std::array<Page,2> cels{};
+ std::vector<SupportContour> contactContours;
  bool ready()const{return pages[0].color.id!=0;}
  bool directCels()const{return cels[0].color.id!=0;}
 };
@@ -64,6 +66,20 @@ inline constexpr int cinderhornOrder[8][6]={
 inline Artwork cinderhorn{"assets/volcano/cinderhorn-turn/",cinderhorn_turn_atlas::PageCount,
  [](int view,int part,int){return cinderhorn_turn_atlas::tiles[view][part];},
  cinderhorn_turn_atlas::authoredPart,cinderhornOrder};
+inline constexpr int jackalOrder[8][6]={
+ {1,4,3,2,5,0},{1,4,3,2,5,0},{1,2,3,4,5,0},{2,5,3,1,4,0},
+ {2,5,3,1,4,0},{5,4,0,2,3,1},{4,5,0,3,1,2},{4,5,0,1,3,2}
+};
+inline constexpr int reaperOrder[8][6]={
+ {1,4,2,3,0,5},{2,4,1,3,0,5},{1,2,3,0,4,5},{1,5,2,3,0,4},
+ {2,5,1,3,0,4},{4,1,3,2,0,5},{4,1,2,3,0,5},{4,1,3,2,0,5}
+};
+inline Artwork jackal{"assets/desert/jackal-turn/",dune_jackal_turn_atlas::PageCount,
+ [](int view,int part,int){return dune_jackal_turn_atlas::tiles[view][part];},
+ dune_jackal_turn_atlas::authoredPart,jackalOrder};
+inline Artwork reaper{"assets/desert/reaper-turn/",glass_reaper_turn_atlas::PageCount,
+ [](int view,int part,int){return glass_reaper_turn_atlas::tiles[view][part];},
+ glass_reaper_turn_atlas::authoredPart,reaperOrder};
 inline Shader program{};
 inline bool filtered(){return program.id && program.id!=rlGetShaderIdDefault();}
 inline bool continuousImp(){return impCels.color.id&&impContour.ready()&&filtered();}
@@ -224,9 +240,21 @@ inline SwordJoint impElbow(View view,int part,float angle){
  const float length=std::hypot(axis.x,axis.y);
  return {center,{axis.x/length,axis.y/length},angle*DEG2RAD};
 }
+inline Vector2 reaperJoint(View view,int joint){
+ const auto& a=glass_reaper_turn_atlas::joints[view.base][joint];
+ const auto& b=glass_reaper_turn_atlas::joints[view.nextBase()][joint];
+ return {.8f*mix(a[0],b[0],view.t),.8f*mix(a[1],b[1],view.t)};
+}
+inline SwordJoint reaperElbow(View view,int part,float angle){
+ const int row=2*(part-4);
+ const auto center=reaperJoint(view,row),palm=reaperJoint(view,row+1);
+ const float dx=palm.x-center.x,dy=palm.y-center.y;
+ const float length=std::max(1.f,std::hypot(dx,dy));
+ return {center,{dx/length,dy/length},angle*DEG2RAD};
+}
 struct Locations {
  int uv0,uv1,axisU,axisV,guide0,guide1,order0,order1,lighting,phase,page1,material,flow,flowView;
- int elbowBox,elbowAxis,impNode,edgeJaw,shellAngle;
+ int elbowBox,elbowAxis,impNode,edgeJaw,shellAngle,solidLayerOrder;
 };
 inline Locations loc{};
 inline void unloadCelPages(Artwork& art){
@@ -239,6 +267,7 @@ inline void unloadPages(Artwork& art){
  for(auto& p:art.pages){if(p.color.id)UnloadTexture(p.color);if(p.mask.id)UnloadTexture(p.mask);p={};}
  if(art.flow.id)UnloadTexture(art.flow);
  art.flow={};art.vectors.clear();art.signedEdges=false;
+ art.contactContours.clear();
  unloadCelPages(art);
 }
 inline void unload(){
@@ -247,6 +276,7 @@ inline void unload(){
  impContour.unload();
  impCels={};
  unloadPages(drake);unloadPages(crawler);unloadPages(imp);unloadPages(sentinel);unloadPages(cinderhorn);
+ unloadPages(jackal);unloadPages(reaper);
  if(filtered())UnloadShader(program);
  program={};
 }
@@ -266,6 +296,7 @@ uniform int order0[6],order1[6];
 uniform vec3 phase;
 uniform vec4 elbowBox[2];
 uniform vec3 elbowAxis[2];
+uniform int solidLayerOrder;
 vec2 unbend(vec2 uv,vec4 box,vec3 axis){
     vec2 q=(uv-box.xy)*box.zw;
     if(dot(q,q)<.000001)return uv;
@@ -411,7 +442,7 @@ void main() {
         // An opaque shield passes in front of the torso along its edge.
         // A dissolve between depth orders would show the cuirass through it.
         float orderMix=phase.y;
-        if(edgeJaw>0||impNode!=-1)orderMix=step(clamp(.5+point.x/112.,.24,.76),phase.y);
+        if(edgeJaw>0||impNode!=-1||solidLayerOrder!=0)orderMix=step(clamp(.5+point.x/112.,.24,.76),phase.y);
         else if(flowView>=0){
             float crossAt=clamp(.5+point.x/112.,.24,.76);
             orderMix=smoothstep(crossAt-.045,crossAt+.045,phase.y);
@@ -432,7 +463,7 @@ void main() {
   loc={location("uv0[0]"),location("uv1[0]"),location("axisU[0]"),location("axisV[0]"),
        location("guide0[0]"),location("guide1[0]"),location("order0[0]"),location("order1[0]"),
        location("lighting[0]"),location("phase"),location("page1"),location("material"),
-       location("turnFlow"),location("flowView"),location("elbowBox[0]"),location("elbowAxis[0]"),location("impNode"),location("edgeJaw"),location("shellAngle")};
+       location("turnFlow"),location("flowView"),location("elbowBox[0]"),location("elbowAxis[0]"),location("impNode"),location("edgeJaw"),location("shellAngle"),location("solidLayerOrder")};
  }
 }
 inline void calibrateRegisteredViews(Artwork& art){
@@ -576,10 +607,38 @@ inline void loadImpCels(){
  SetTextureFilter(impCels.color,TEXTURE_FILTER_BILINEAR);
  if(filtered())impContour.load("assets/volcano/imp-turn/shape",impCels.color.width,impCels.color.height);
 }
+inline void loadContactContours(Artwork& art){
+ if(!art.ready()||!art.contactContours.empty())return;
+ art.contactContours.resize(32*6);
+ for(int view=0;view<32;view++)for(int p=0;p<6;p++){
+  const auto tile=art.tile(view,p,0);
+  const auto& page=art.pages[tile.page];
+  auto& contour=art.contactContours[view*6+p];
+  for(int row=0;row<12;row++){
+   int left=tile.w,right=-1,loY=tile.h,hiY=-1;
+   for(int y=row*tile.h/12;y<(row+1)*tile.h/12;y++){
+    const auto* alpha=page.alpha.data()+(tile.y+y)*page.color.width+tile.x;
+    for(int x=0;x<tile.w;x++)if(alpha[x]>=150){
+     left=std::min(left,x);right=std::max(right,x);
+     loY=std::min(loY,y);hiY=std::max(hiY,y);
+    }
+   }
+   const float px=right>=0?float(left+.5f)/tile.w:.5f;
+   const float qx=right>=0?float(right+.5f)/tile.w:.5f;
+   const float py=right>=0?float(loY+hiY+1)*.5f/tile.h:.5f;
+   contour[row*2]={px,py};
+   contour[row*2+1]={qx,py};
+  }
+ }
+}
 inline void load(){
  loadProgram();
  if(!caldera_puppets::ready(caldera_puppets::Imp)){loadPages(imp);loadImpCels();}
  if(filtered())loadPages(sentinel);
+ loadPages(jackal);
+ loadPages(reaper);
+ loadContactContours(jackal);
+ loadContactContours(reaper);
 }
 inline Vector4 textureRect(const Artwork& art,const Tile& t){
  const auto& page=art.pages[t.page].color;
@@ -763,9 +822,9 @@ struct Rig {
    axisU[p]={c/uw,s/uw,(k.pivot.x-bounds.x)/bounds.width-(c*px+s*py)/uw};
    axisV[p]={-s/vh,c/vh,(k.pivot.y-bounds.y)/bounds.height+(s*px-c*py)/vh};
    Rectangle envelope=bounds;
-   if(p>=4 && k.elbow!=0){
+   if(p>=4 && k.elbow!=0&&(&art!=&reaper||filtered())){
     auto& joint=arms[p-4];
-    joint=&art==&imp?impElbow(view,p,k.elbow):swordJoint(view,k.elbow);
+    joint=&art==&imp?impElbow(view,p,k.elbow):&art==&reaper?reaperElbow(view,p,k.elbow):swordJoint(view,k.elbow);
     const float rx=std::max(std::abs(bounds.x-joint.center.x),std::abs(bounds.x+bounds.width-joint.center.x));
     const float ry=std::max(std::abs(bounds.y-joint.center.y),std::abs(bounds.y+bounds.height-joint.center.y));
     const float radius=std::hypot(rx,ry);
@@ -830,6 +889,8 @@ struct Rig {
   SetShaderValue(program,loc.impNode,&impNode,SHADER_UNIFORM_INT);
   const int edgeJaw=art.signedEdges?jaw+1:0;
   SetShaderValue(program,loc.edgeJaw,&edgeJaw,SHADER_UNIFORM_INT);
+  const int solidOrder=&art==&reaper;
+  SetShaderValue(program,loc.solidLayerOrder,&solidOrder,SHADER_UNIFORM_INT);
   const float shell=rigidShell(art,3)?angle.t:-1;
   SetShaderValue(program,loc.shellAngle,&shell,SHADER_UNIFORM_FLOAT);
   const ImpCelView cel(angle);
