@@ -187,9 +187,9 @@ bool prepareEruption(Enemy& e,float dt,bool visible){
  if(visible||e.eruptionWindup>0)e.eruptionCd=std::max(0.f,e.eruptionCd-dt);
  if(e.eruptionWindup>0){e.animation.face(player.x-e.pos.x,player.y-e.pos.y);e.eruptionWindup=std::max(0.f,e.eruptionWindup-dt);return true;}
  if(dt>0&&visible&&e.eruptionCd<=.00001f&&e.windup<=0&&e.attack<=0&&fissures.size()<=9){
-  e.eruptionCd=6.f;e.eruptionWindup=.95f;e.attack=1.5f;e.eruptions++;sound(enemyAttackCue(e.type),e.pos);
+  e.eruptionCd=6.f;e.eruptionWindup=VarkhorFirstFissure;e.attack=1.5f;e.eruptions++;sound(enemyAttackCue(e.type),e.pos);
   V side=normalized(V{player.y-e.pos.y,e.pos.x-player.x});
-  for(int n=-1;n<=1;n++){V target=player+side*(n*2.6f);if(!walkable(target))target=player;fissures.push_back({target,0,.95f+std::abs(n)*.23f,48,e.id,false});}
+  for(int n=-1;n<=1;n++){V target=player+side*(n*2.6f);if(!walkable(target))target=player;fissures.push_back({target,0,VarkhorFirstFissure+std::abs(n)*.23f,48,e.id,false});}
   return true;
  }return false;
 }
@@ -244,7 +244,7 @@ void updateVolcanoAttacks(float dt,V heroBefore,bool wasRolling,float rollAge){
   float before=f.age;f.age+=dt;
   if(!f.struck&&f.age>=f.delay){
    f.struck=true;float t=std::clamp((f.delay-before)/dt,0.f,1.f);V at=heroBefore+(player-heroBefore)*t;
-   if(distance(at,f.pos)<1.35f&&clearEnemySegment(f.pos,at,0)&&!dead()){
+   if(distance(at,f.pos)<VarkhorFissureReach&&clearEnemySegment(f.pos,at,0)&&!dead()){
     if(wasRolling&&rollAge+dt*t<RollProtection){sound(Cue::Dodge,at);effects.push_back({at,"UNIK",.65f,3});}
     else{
      const V away=at-f.pos;

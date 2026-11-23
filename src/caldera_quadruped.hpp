@@ -143,7 +143,7 @@ inline Vector2 surfaceUV(Vector2 uv,ActorFacing paintAxes){
  return { .5f+d.x*paintAxes.x+d.y*paintAxes.y,.5f-d.x*paintAxes.y+d.y*paintAxes.x};
 }
 
-struct Vertex {Vector2 point,uv;Color color;};
+struct Vertex {Vector2 point,uv;Color color;float depth=0;};
 struct Triangle {Vertex a,b,c;Material material;};
 struct Joint {Vector2 point;float radius;};
 struct Mesh {
@@ -261,7 +261,7 @@ struct Mesh {
   }
   return false;
  }
- void paint(Texture2D atlas,Color tint,float opacity,bool solid,Vector2 offset={})const{
+ void paint(Texture2D atlas,Color tint,float opacity,bool solid,Vector2 offset={},Vector2 depthBand={})const{
   const bool textured=atlas.id&&!solid;
   const unsigned texture=textured?atlas.id:rlGetTextureIdDefault();
   rlCheckRenderBatchLimit(static_cast<int>(triangles.size()*4)+4);
@@ -279,7 +279,8 @@ struct Mesh {
     }
     else rlTexCoord2f((material%4+.035f+.93f*v.uv.x)/4,(material/4+.035f+.93f*v.uv.y)/2);
    }else rlTexCoord2f(0,0);
-   rlVertex2f(v.point.x+offset.x,v.point.y+offset.y);
+   if(depthBand.y>0)rlVertex3f(v.point.x+offset.x,v.point.y+offset.y,depthBand.x+v.depth*depthBand.y);
+   else rlVertex2f(v.point.x+offset.x,v.point.y+offset.y);
   };
   for(const auto& t:triangles){emit(t.a,t.material);emit(t.b,t.material);emit(t.c,t.material);emit(t.c,t.material);}
   rlEnd();
@@ -347,36 +348,55 @@ inline void drawWing(Mesh& mesh,const Pose& rig,int side){
  const float fold=rig.fold;
  const float flex=rig.pace*sample(drake::wingYield,loopPhase(rig.gait+side*.12f));
  const auto socket=rig.mount(11,side*9.f,42);
- const auto at=[&](float span,float chord){
-  const float x=11-21*span-45*chord-fold*4*chord+flex*.44f*span*span;
-  const float y=side*(9+mix(37.f,45.f,fold)*span+18*chord);
-  const float z=42+mix(40.f,13.f,fold)*span-31*chord+17*span*chord+flex*span;
-  return rig.mount(x,y,z);
+ const auto at=[&](float span,float chord,float drop=0.f){
+  const float x=11-mix(21.f,24.f,fold)*span-mix(50.f,61.f,fold)*chord+flex*.44f*span*span;
+  const float y=side*(9+mix(41.f,67.f,fold)*span+23*chord+.24f*drop);
+  const float curve=std::sin(PI*std::clamp((chord+.12f)/1.10f,0.f,1.f));
+  const float arch=12.5f*span*(1-.50f*span)*curve*(1-.47f*fold);
+  // Drop the trailing edge away from the leading arc in screen projection.
+  // The membrane exposes a broad face even towards the camera or in profile.
+  const float z=42+mix(46.f,18.f,fold)*span-mix(52.f,30.f,fold)*chord
+                +mix(9.f,15.f,fold)*span*chord+flex*span+arch-drop;
+  const float low=mix(std::max(25.f,.46f*std::hypot(x,y)+8.f),4.f,fold);
+  return rig.mount(x,y,std::max(low,z));
  };
  const float shade=rig.lightOn(float(side));
  const Color leather=light({189,100,64,255},shade);
  const Color sinew=light({160,105,69,255},shade);
  const Vector2 wristUV{.49f,.055f};
- const auto skin=[&](Vector2 p,float value){
-  return Vertex{at(p.x,p.y),{std::clamp(p.x*.94f,0.f,1.f),std::clamp((p.y+.13f)/1.17f,0.f,1.f)},light(leather,value)};
+ const auto skin=[&](Vector2 p,float value,float drop=0.f){
+  return Vertex{at(p.x,p.y,drop),{std::clamp(p.x*.94f,0.f,1.f),std::clamp((p.y+.13f)/1.17f,0.f,1.f)},light(leather,value)};
  };
- const Vertex wrist=skin(wristUV,.73f);
- constexpr std::array<Vector2,5> fingertip{{{1.07f,.158f},{.88f,.54f},{.61f,.855f},{.318f,.985f},{.067f,.685f}}};
+ const Vertex wrist=skin(wristUV,.83f);
+ constexpr std::array<Vector2,5> fingertip{{{1.07f,.185f},{.91f,.57f},{.63f,.85f},{.34f,.94f},{.08f,.70f}}};
  const auto curve=[&](Vector2 start,Vector2 guide,Vector2 end,int steps,bool leading=false){
-  auto a=skin(start,.99f-.15f*start.y);
+  const auto inner=[&](Vector2 p){
+   const auto inside=mix(wristUV,p,.60f);
+   return skin(inside,1.16f-.22f*inside.y);
+  };
+  const auto underside=[&](Vector2 p){
+   const float thickness=mix(5.5f,2.4f,std::clamp(p.x+.22f*p.y,0.f,1.f))*(1-.48f*fold);
+   return skin(p,.59f-.10f*p.y,thickness);
+  };
+  auto a=skin(start,.91f-.16f*start.y),innerA=inner(start),lowerA=underside(start);
   for(int i=1;i<=steps;i++){
    const float t=float(i)/steps;
    const auto p=mix(mix(start,guide,t),mix(guide,end,t),t);
-   const auto b=skin(p,1.02f-.18f*p.y);
-   mesh.triangle(wrist,a,b,Membrane);
-   if(leading)mesh.bone(a.point,b.point,.71f,.71f,light(sinew,.88f),Membrane);
-   a=b;
+   const auto b=skin(p,.91f-.16f*p.y),innerB=inner(p),lowerB=underside(p);
+   // The curved leather ends in a darker lip visible under foreshortening.
+   mesh.triangle(a,lowerA,lowerB,Membrane);
+   mesh.triangle(a,lowerB,b,Membrane);
+   mesh.triangle(wrist,innerA,innerB,Membrane);
+   mesh.triangle(innerA,a,b,Membrane);
+   mesh.triangle(innerA,b,innerB,Membrane);
+   if(leading)mesh.bone(a.point,b.point,mix(2.6f,1.2f,float(i-1)/steps),mix(2.6f,1.2f,t),light(sinew,.95f),Membrane);
+   a=b;innerA=innerB;lowerA=lowerB;
   }
  };
  curve({0,0},{.58f,-.34f},fingertip[0],10,true);
  for(size_t i=1;i<fingertip.size();i++){
   const auto left=fingertip[i-1],right=fingertip[i];
-  const auto hollow=mix(mix(left,right,.53f),wristUV,.37f+.035f*float(i));
+  const auto hollow=mix(mix(left,right,.53f),wristUV,.29f+.035f*float(i));
   curve(left,hollow,right,7);
  }
  curve(fingertip.back(),{.05f,.26f},{0,0},5);
@@ -385,10 +405,10 @@ inline void drawWing(Mesh& mesh,const Pose& rig,int side){
   const auto joint=mix(wristUV,tip,.60f);
   const float ridge=.019f*float(i+1);
   const auto bend=at(joint.x+ridge,joint.y-.033f);
-  mesh.ribbon(std::array<Joint,3>{{{wrist.point,1.76f-.14f*i},{bend,.98f-.073f*i},{at(tip.x,tip.y),.10f}}},sinew,Membrane);
+  mesh.ribbon(std::array<Joint,3>{{{wrist.point,3.f-.19f*i},{bend,1.72f-.12f*i},{at(tip.x,tip.y),.24f}}},sinew,Membrane);
  }
  const auto elbow=at(.22f,-.045f);
- mesh.ribbon(std::array<Joint,3>{{{socket,4.9f},{elbow,3.8f},{wrist.point,2.4f}}},light(dragonScales,shade),DrakeSkin);
+ mesh.ribbon(std::array<Joint,3>{{{socket,6.65f},{elbow,5.25f},{wrist.point,3.30f}}},light(dragonScales,shade),DrakeSkin);
  mesh.ribbon(std::array<Joint,3>{{{wrist.point,1.5f},{at(.575f,-.102f),.91f},{at(.608f,-.117f),.08f}}},light(boneColor,.72f*shade),Ivory);
 }
 
@@ -440,7 +460,7 @@ template<size_t N> void drawTorso(Mesh& mesh,const Pose& rig,const std::array<To
    const float f=s.forward+tilt-(rig.dragon?1.45f:3.35f)*side*side/(18.f*18.f);
    // On the drake's flank, the rib cage spreads under the folded wing while
    // the underside stays at the same height. Its volume survives the fall.
-   const float spread=side*(1+.29f*roll);
+   const float spread=side*(1+.39f*roll);
    const float rise=rises[i]+(rises[i]-s.belly)*.30f*roll;
    const float depth=f*rig.axes.y+spread*rig.axes.x;
    const float wrap=arc*.215f+.073f;

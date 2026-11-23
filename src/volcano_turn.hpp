@@ -484,7 +484,7 @@ inline void loadRegisteredPaint(Artwork& art){
   ImageFormat(&map,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
   const auto paint=LoadTextureFromImage(ink),flow=LoadTextureFromImage(map);
   if(paint.id&&flow.id){
-   calibrateRegisteredViews(art);
+   if(&art==&drake||&art==&crawler)calibrateRegisteredViews(art);
    UnloadTexture(page.color);page.color=paint;art.flow=flow;art.signedEdges=true;
    SetTextureFilter(paint,TEXTURE_FILTER_BILINEAR);
    SetTextureFilter(flow,TEXTURE_FILTER_BILINEAR);
@@ -543,6 +543,7 @@ inline void loadPages(Artwork& art){
   SetTextureFilter(page.color,TEXTURE_FILTER_BILINEAR);
  }
  if(filtered()&&(&art==&drake||&art==&crawler)&&!loadDirectionalCels(art))loadRegisteredPaint(art);
+ if(filtered()&& &art==&cinderhorn)loadRegisteredPaint(art);
  if(filtered() && (&art==&imp || &art==&sentinel)){
   const std::string path=std::string(art.folder)+"turn-flow.png";
   Image directions=LoadImage(path.c_str());
@@ -576,7 +577,7 @@ inline void loadImpCels(){
  if(filtered())impContour.load("assets/volcano/imp-turn/shape",impCels.color.width,impCels.color.height);
 }
 inline void load(){
- loadProgram();loadPages(cinderhorn);
+ loadProgram();
  if(!caldera_puppets::ready(caldera_puppets::Imp)){loadPages(imp);loadImpCels();}
  if(filtered())loadPages(sentinel);
 }

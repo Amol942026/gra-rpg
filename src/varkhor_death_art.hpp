@@ -183,7 +183,7 @@ inline bool cutout(const Enemy& e,float x,float y,const varkhor_ash_motion::Key&
   SetShaderValueV(dissolve,phaseLocation,wear.data(),SHADER_UNIFORM_FLOAT,int(wear.size()));
  }
  const bool picked=volcano_actors::draw(e.type,x,y,1,e.deathMotion,e.deathAction,outline,probe,shadow,false,
-                                       false,e.deathSpecial,nullptr,0,opacity,0,&parts);
+                                       false,e.deathSpecial,nullptr,0,opacity,0,&parts,volcano_actors::punchTarget(e));
  if(useShader)EndShaderMode();
  return picked;
 }

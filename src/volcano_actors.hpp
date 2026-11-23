@@ -9,7 +9,9 @@
 #include "generated/obsidian_sentinel_turn_atlas.hpp"
 #include "generated/cinderhorn_turn_atlas.hpp"
 #include "generated/cinderhorn_synfig.hpp"
+#include "generated/cinderhorn_fall_synfig.hpp"
 #include "generated/volcano_motion.hpp"
+#include "generated/varkhor_body_motion.hpp"
 #include "generated/basalt_swing.hpp"
 #include "generated/caldera_attack_motion.hpp"
 #include "generated/ember_drake_motion.hpp"
@@ -19,6 +21,7 @@
 #include "generated/fire_imp_rig.hpp"
 #include "generated/obsidian_sentinel_motion.hpp"
 #include "enemy_death_settle.hpp"
+#include "enemy_arm.hpp"
 #include "volcano_corpse_material.hpp"
 #include "ember_drake_mouth.hpp"
 #include "painted_turn_shape.hpp"
@@ -29,6 +32,10 @@ inline void init();
 inline void unload();
 }
 namespace volcano_actors::turn_art {inline void load();inline void unload();}
+namespace volcano_actors::cinderhorn_turn {inline void load();inline void unload();}
+namespace volcano_actors::salamander_art {inline void load();inline void unload();}
+namespace actor_art {inline Vector2 reserveSpriteDepth();}
+extern "C" void (*glfwGetProcAddress(const char*))(void);
 namespace wraith_death_art {
 inline void load();
 inline void unload();
@@ -66,6 +73,8 @@ inline void load(){
  drake_mouth::load();
  caldera_puppets::load();
  caldera_quadruped::load();
+ cinderhorn_turn::load();
+ salamander_art::load();
  turn_art::load();
  if(!caldera_puppets::ready(caldera_puppets::Wraith))wraith_death_art::load();
 }
@@ -80,6 +89,8 @@ inline void unload(){
  drake_mouth::unload();
  caldera_puppets::unload();
  caldera_quadruped::unload();
+ cinderhorn_turn::unload();
+ salamander_art::unload();
  turn_art::unload();
  wraith_death_art::unload();
  varkhor_death_art::unload();
@@ -250,8 +261,70 @@ inline fire_imp_motion::Key impMotion(const fire_imp_motion::Key* keys,float pha
 }
 
 struct Part {Vector2 pivot,shift;float angle=0,scaleX=1,scaleY=1,elbow=0;};
+#include "varkhor_punch_arm.hpp"
+inline varkhor_motion::Key bossMotion(float phase,const varkhor_motion::Key (&clip)[61]){
+ const float frame=std::clamp(phase,0.f,1.f)*60;
+ const int row=std::min(59,int(frame));
+ const float t=frame-row;
+ const auto& a=clip[row];const auto& b=clip[row+1];
+ const auto blend=[t](float x,float y){return x+(y-x)*t;};
+ return {blend(a.advance,b.advance),blend(a.drop,b.drop),blend(a.turn,b.turn),
+         blend(a.left,b.left),blend(a.right,b.right),blend(a.handReach,b.handReach),blend(a.handLift,b.handLift),
+         blend(a.shoulder,b.shoulder),blend(a.shoulderLift,b.shoulderLift),blend(a.lateralRaise,b.lateralRaise)};
+}
+inline void bossPlateRoot(Part& part,int plate,float forward,float side,varkhor_motion::Key k,float weight){
+ if(plate==1||plate==2)return;
+ const float turn=k.turn*(.62f+.38f*std::abs(forward))*weight;
+ const float twist=turn*DEG2RAD;
+ const Vector2 spine{64,86};
+ if(plate>=4)part.pivot={plate==4?37.f:90.f,66.5f};
+ else part.pivot=spine;
+ const Vector2 fromSpine{part.pivot.x-spine.x,part.pivot.y-spine.y};
+ part.shift={forward*k.advance*weight+(std::cos(twist)-1)*fromSpine.x-std::sin(twist)*fromSpine.y,
+             (side*k.advance*.44f+k.drop)*weight+std::sin(twist)*fromSpine.x+(std::cos(twist)-1)*fromSpine.y};
+ part.angle=turn;
+}
+inline void driveBossShoulder(Part& part,int plate,float forward,float side,varkhor_motion::Key k){
+ const float flank=plate==4?-1.f:1.f;
+ const float drive=varkhor_punch::frontView(forward)*(side>=0?1.f:.50f)*
+                   enemy_death::window(k.handReach,.35f,1.f);
+ part.shift.x+=forward*k.shoulder-flank*12.5f*drive;
+ part.shift.y+=side*k.shoulder*.44f-k.shoulderLift+4.5f*drive;
+}
+inline Vector2 bossPunchEndpoint(int plate,float forward,float side,Vector2 target){
+ constexpr auto impact=varkhor_motion::strike[27];
+ Part root;
+ bossPlateRoot(root,plate,forward,side,impact,1.f);
+ driveBossShoulder(root,plate,forward,side,impact);
+ const Vector2 local{target.x-(root.pivot.x-64+root.shift.x),target.y-(root.pivot.y-115+root.shift.y)};
+ return varkhor_punch::Arm::rotate(local,-root.angle*DEG2RAD);
+}
+inline void poseBossPlate(Part& part,int plate,float forward,float side,varkhor_motion::Key k,float weight,int punch,
+                          const Vector2* contact=nullptr){
+ bossPlateRoot(part,plate,forward,side,k,weight);
+ if(plate<4)return;
+ if(punch>=4){
+  if(plate==punch){
+   driveBossShoulder(part,plate,forward,side,k);
+   const auto joints=varkhor_punch::followFist(plate,forward,side,k.handReach,k.handLift,k.lateralRaise,contact);
+   part.angle+=joints.upper;
+   part.elbow=joints.lower;
+  }else part.angle+=(punch==5?1.f:-1.f)*k.left;
+ }else{
+  const float profile=std::clamp(std::abs(forward)*2.6f,0.f,1.f);
+  part.angle+=(plate==4?k.left:k.right)*(.72f+.28f*profile)*weight;
+ }
+}
+inline std::optional<varkhor_punch::Target> punchTarget(const Enemy& e){
+ if(e.type!=VolcanoBossType||!e.varkhorPunch.arm)return {};
+ const auto target=e.varkhorPunch.target;
+ const auto delta=target-e.pos;
+ const float elevation=terrain_height::pixels(game.location,target)-terrain_height::pixels(game.location,e.pos);
+ return varkhor_punch::Target{{(delta.x-delta.y)*40,(delta.x+delta.y)*20-elevation-72},e.varkhorPunch.arm};
+}
 #include "volcano_turn.hpp"
 #include "cinderhorn_turn_pose.hpp"
+#include "lava_salamander_art.hpp"
 #include "ember_drake_turn.hpp"
 #include "ember_drake_turn_gesture.hpp"
 #include "ember_drake_pose.hpp"
@@ -410,7 +483,10 @@ inline bool puppetAlive(caldera_puppets::Species species,float x,float y,float s
  return hit;
 }
 
-inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false,float special=-1,const enemy_death::Key* deathPose=nullptr,int deathScreenSide=0,float opacity=1,float deathPhase=0,const BrokenParts* broken=nullptr){
+inline bool draw(int type,float x,float y,float size,const AnimationState& state,float action=-1,Color outline=BLANK,const Vector2* probe=nullptr,bool shadow=false,bool dead=false,bool flash=false,float special=-1,const enemy_death::Key* deathPose=nullptr,int deathScreenSide=0,float opacity=1,float deathPhase=0,const BrokenParts* broken=nullptr,std::optional<varkhor_punch::Target> target={}){
+ if(type==LavaSalamanderType&&salamander_art::ready())
+  return salamander_art::draw(x,y,size,state,action,dead?1.f:deathPose?deathPhase:0.f,
+                             deathScreenSide,outline,probe,shadow,flash,opacity);
  if(caldera_quadruped::handles(type)){
   const float fall=dead?1.f:deathPose?deathPhase:0.f;
   return caldera_quadruped::draw(type,x,y,size,state,action,special,fall,deathScreenSide,outline,probe,shadow,flash,opacity);
@@ -433,7 +509,8 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const bool directionalCrawler=type==SlagCrawlerType&&artwork;
  const auto view=artwork?turn_art::view(state,*artwork):turn_art::View{direction,direction*4,0,0};
  if(artwork)direction=view.nearestBase();
- const float heading=turn_art::heading(view);
+ const bool varkhorMelee=type==VolcanoBossType&&action>=0&&special<0&&!dead&&!deathPose;
+ const float heading=varkhorMelee&&state.facingInitialized?state.targetAngle:turn_art::heading(view);
  const float heightScale=directionalDrake?turn_art::drakeHeightScale(view):1.f;
  const auto& fall=falls[id];
  const auto& rest=restingPoses[id];
@@ -466,8 +543,14 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const auto impAnimation=fireImp?impSample(state,action):ImpAnimation{};
  float blend=dead?0:state.moveBlend;
  const bool fourLegs=quadruped(id);
- bool specialPose=id==6&&special>=0&&!dead;
- auto gesture=specialPose?caldera_attack_motion::pose(id-4,special):caldera_attack_motion::Pose{};
+ const bool boss=type==VolcanoBossType&&!dead&&!deathPose;
+ const bool eruption=boss&&special>=0;
+ const int punch=varkhorMelee?(target?target->arm:forward<-.18f?4:5):-1;
+ std::optional<Vector2> contact;
+ if(punch>=4&&target)contact=bossPunchEndpoint(punch,forward,side,{target->fromFeet.x/s,target->fromFeet.y/s});
+ const auto bossPose=boss?(eruption?bossMotion(special,varkhor_motion::eruption):
+                      action>=0?bossMotion(action,varkhor_motion::strike):
+                                bossMotion(state.phase,varkhor_motion::walk)):varkhor_motion::Key{};
  std::array<Part,6> parts{};
  for(int p=0;p<6;p++){
   auto& part=parts[p];part.pivot={64,90};
@@ -495,15 +578,7 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
   if(p>=4&&!fourLegs){part.pivot=restPivot(id,p);part.angle=control.sway*(p==4?-1:1)*4*blend;if(action>=0){part.angle+=strike.sway*(p==4?-2.5f:3.8f);part.shift.x+=strike.sway*std::cos(heading)*.55f;part.shift.y+=strike.sway*std::sin(heading)*.3f;}}
   if(fourLegs&&action>=0&&(p==3||p>=4)){part.shift.x+=strike.sway*std::cos(heading)*.3f;part.shift.y+=strike.sway*std::sin(heading)*.3f;}
   if(p==0)part.angle=control.sway*2.5f*blend;
-  if(specialPose&&(p==0||p==3||(!fourLegs&&p>=4))){
-   const float forward=std::cos(heading),side=std::sin(heading),mirror=forward<-.1f?-1.f:1.f;
-   const float weight=p==3?1.f:.56f;
-   part.shift.x+=forward*gesture.advance*weight;
-   part.shift.y+=(side*gesture.advance*.44f-gesture.lift)*weight;
-   part.angle+=mirror*gesture.pitch;
-   if(p==3){part.pivot={64+forward*12,79};part.angle+=mirror*gesture.drive*.64f;}
-   if(p>=4)part.angle+=mirror*gesture.drive*(p==4?-.36f:.72f);
-  }
+  if(boss)poseBossPlate(part,p,forward,side,bossPose,eruption||action>=0?1.f:blend,punch,contact?&*contact:nullptr);
   }
   if(!directionalDrake&&drake&&(dead||deathPose)){
    const float release=dead?0.f:1-enemy_death::ease(t);
@@ -559,6 +634,13 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  if(artwork)turnRig.emplace(*artwork,view,jaw,parts,rest.light,turn,layerAction);
  const float ember=fireImp&&!dead&&action>=0&&action<.45f?
      impAnimation.cast.ember*(deathPose?1-enemy_death::window(t,0,.18f):1.f):0.f;
+ std::optional<varkhor_punch::Arm> punchArm;
+ if(punch>=4&&std::abs(parts[punch].elbow)>.01f)punchArm.emplace(punch,parts[punch].elbow*DEG2RAD);
+ const auto opaqueAt=[&](int part,Vector2 p){
+  const int x=int(std::floor(p.x*atlas.cell/128)),y=int(std::floor(p.y*atlas.cell/128));
+  return x>=0&&x<atlas.cell&&y>=0&&y<atlas.cell&&
+     atlas.alpha[(part*atlas.cell+y)*atlas.art.width+direction*atlas.cell+x]>=100;
+ };
  Vector2 localProbe{};
  if(probe){
   localProbe={probe->x-x-shiftX,(probe->y-y-shiftY)/squash};
@@ -574,8 +656,9 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
     if(drake_mouth::pick(direction,jaw,u,v))return true;
     continue;
    }
-   int px=int(std::floor(u*atlas.cell/128)),py=int(std::floor(v*atlas.cell/128));
-   if(px>=0&&px<atlas.cell&&py>=0&&py<atlas.cell&&atlas.alpha[(p*atlas.cell+py)*atlas.art.width+direction*atlas.cell+px]>=100)return true;
+   if(p==punch&&punchArm){
+    if(punchArm->contains({u,v},[&](Vector2 source){return opaqueAt(p,source);}))return true;
+   }else if(opaqueAt(p,{u,v}))return true;
   }return false;
  }
  rlPushMatrix();
@@ -598,6 +681,15 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  auto paint=[&](int p,Texture2D texture,Color tint,float dx=0,float dy=0){auto k=parts[p];Rectangle source{float(direction*atlas.cell),float(p*atlas.cell),float(atlas.cell),float(atlas.cell)};
   if(broken)tint.a=static_cast<unsigned char>(std::lround(tint.a*(*broken)[p].visibility));
   if(!tint.a)return;
+  if(p==punch&&punchArm){
+   rlPushMatrix();
+   rlTranslatef((k.pivot.x-64+k.shift.x)*s+dx,(k.pivot.y-115+k.shift.y)*s+dy,0);
+   rlRotatef(k.angle,0,0,1);
+   rlScalef(k.scaleX*s,k.scaleY*s,1);
+   punchArm->paint(texture,direction,p,tint,k.pivot);
+   rlPopMatrix();
+   return;
+  }
   if(p==5&&jaw){
    // The open skull replaces the closed cutout within the same draw call.
    const auto& crop=drake_mouth::origin[direction];
@@ -622,6 +714,8 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  if(fireImp)order=direction>=5?impBackOrder:impOrder;
  const int drakeBackOrder[]={0,1,2,5,3,4};
  if(drake)order=direction>=5?drakeBackOrder:frontOrder;
+ const int activeArmFront[]={0,1,2,9-punch,3,punch};
+ if(punch>=4)order=side<-.37f?backOrder:activeArmFront;
  if(!shadow&&outline.a)for(Vector2 delta:{Vector2{-1.5f,0},Vector2{1.5f,0},Vector2{0,-1.5f},Vector2{0,1.5f}})for(int n=0;n<6;n++)paint(order[n],atlas.silhouette,outline,delta.x,delta.y);
  const bool relit=!shadow&&volcano_corpse_material::begin(atlas.relief,enemy_death::ease(collapse),atlas.authoredRest);
  for(int n=0;n<6;n++){
@@ -664,6 +758,7 @@ inline bool puppetDeath(const Enemy& e,float x,float y,float progress,Color outl
 }
 inline DeathDraw specialDeathArt(int type){
  switch(type){
+ case LavaSalamanderType:return salamander_art::ready()?salamander_art::fallen:nullptr;
  case FireImpType:return caldera_puppets::ready(caldera_puppets::Imp)?puppetDeath:nullptr;
  case AshWraithType:return caldera_puppets::ready(caldera_puppets::Wraith)?puppetDeath:wraith_death_art::draw;
  case ObsidianSentinelType:return sentinel_death_art::draw;
@@ -672,6 +767,7 @@ inline DeathDraw specialDeathArt(int type){
  }
 }
 inline Rectangle groundFootprint(const Enemy& e){
+ if(e.type==LavaSalamanderType&&salamander_art::ready())return salamander_art::footprint(e);
  if(caldera_quadruped::handles(e.type))return caldera_quadruped::footprint(e.type,e.animation,e.deathScreenSide());
  if((e.type==FireImpType&&caldera_puppets::ready(caldera_puppets::Imp))||
     (e.type==AshWraithType&&caldera_puppets::ready(caldera_puppets::Wraith))){
@@ -705,7 +801,8 @@ inline bool death(const Enemy& e,float x,float y,float progress,Color outline=BL
  const float contact=enemy_death::groundContact(e.type);
  if(progress>=contact)return rest(e,x,y,outline,probe,shadow,opacity);
  if(auto render=specialDeathArt(e.type)){
-  if(progress<=0)return draw(e.type,x,y,1,e.deathMotion,e.deathAction,outline,probe,shadow,false,false,e.deathSpecial,nullptr,0,opacity);
+  if(progress<=0)return draw(e.type,x,y,1,e.deathMotion,e.deathAction,outline,probe,shadow,false,false,e.deathSpecial,
+                             nullptr,0,opacity,0,nullptr,punchTarget(e));
   return render(e,x,y,progress/contact,outline,probe,shadow,opacity);
  }
  auto pose=enemy_death::sample(e.type,progress);

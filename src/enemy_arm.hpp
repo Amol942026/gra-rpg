@@ -12,15 +12,15 @@ struct Point {
 inline float length(Point p){return std::sqrt(p.side*p.side+p.forward*p.forward+p.up*p.up);}
 struct Arm {Point elbow,hand;};
 inline constexpr float GuardianUpper=17.f,GuardianForearm=16.f;
-inline Arm solve(Point shoulder,Point target,float upper,float forearm){
+inline Arm solve(Point shoulder,Point target,float upper,float forearm,float extensionMargin=.24f,float elbowPole=1.f){
  const Point delta=target-shoulder;
  const float requested=length(delta);
  const Point axis=requested>.001f?delta*(1/requested):Point{0,0,-1};
- const float reach=std::clamp(requested,std::abs(upper-forearm)+.10f,upper+forearm-.24f);
+ const float reach=std::clamp(requested,std::abs(upper-forearm)+.10f,upper+forearm-extensionMargin);
  const float along=(upper*upper-forearm*forearm+reach*reach)/(2*reach);
  const float bend=std::sqrt(std::max(0.f,upper*upper-along*along));
  Point pole{0,axis.up,-axis.forward};
  if(length(pole)<.001f)pole={0,-1,0};
- return {shoulder+axis*along+pole*(bend/length(pole)),shoulder+axis*reach};
+ return {shoulder+axis*along+pole*(elbowPole*bend/length(pole)),shoulder+axis*reach};
 }
 }

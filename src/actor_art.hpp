@@ -38,6 +38,13 @@ inline float shadowElevation=0;
 inline bool allowSceneDepth=true,sceneDepth=false;
 inline int sceneDepthOrder=0;
 inline float sceneDepthStep=.01f;
+inline Vector2 reserveSpriteDepth(){
+ rlDrawRenderBatchActive();
+ if(sceneDepth)return {-.95f+sceneDepthOrder++*sceneDepthStep,sceneDepthStep*.5f};
+ static const auto clear=reinterpret_cast<void(*)(unsigned)>(glfwGetProcAddress("glClear"));
+ if(clear)clear(0x00000100); // GL_DEPTH_BUFFER_BIT
+ return {-.95f,.90f};
+}
 struct P3 {
     float r, f, z;
     P3 operator+(P3 b) const { return {r+b.r, f+b.f, z+b.z}; }
@@ -948,7 +955,8 @@ inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const V
   const float action=e.volcanoAction(),special=game.volcanoSpecialPose(e);
   const bool impactFlash=e.type==SlagCrawlerType&&e.flash>EnemyHitRecovery-.045f;
   return drawHitSprite(y,lean,probe,[&](const Vector2* point){
-   return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,point,shadowBuilding,false,impactFlash,special);
+   return volcano_actors::draw(e.type,x,y,1,e.animation,action,outline,point,shadowBuilding,false,impactFlash,special,
+                             nullptr,0,1,0,nullptr,volcano_actors::punchTarget(e));
   });
  }
  int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;

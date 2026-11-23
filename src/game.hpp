@@ -118,6 +118,7 @@ inline V flankImpulse(const AnimationState& state,int side){
 // Authored encounters use lower IDs. Keep test summons distinguishable in saves.
 constexpr int FirstSummonedEnemyId=10000;
 constexpr bool summonedEnemyId(int id){return id>=FirstSummonedEnemyId;}
+struct VarkhorPunchAim {V target{};int arm=0;};
 struct Enemy {
  int id,type; V pos,home; float hp,maxHp,attack=0,flash=0,windup=0; bool alive=true; AnimationState animation{}; float strike=0;
  V recoil{};
@@ -131,6 +132,7 @@ struct Enemy {
  bool boarBusy()const{return type==BoarType&&(boarWindup>0||boarRush>0||boarRecovery>0);}
  bool chargeBusy()const{return chargingSpecies(type)&&(boarWindup>0||boarRush>0||boarRecovery>0);}
  float eruptionCd=2.8f,eruptionWindup=0;int eruptions=0;
+ VarkhorPunchAim varkhorPunch{};
  float abilityCd=3.f,abilityAge=-1;V abilityDirection{};int abilityMask=0,abilityCasts=0;
  V hitDirection{}; // Short-lived visual impulse, independent of collision recoil.
  V deathDirection{}; // World-space impulse of the last hit, retained by the corpse.
@@ -683,8 +685,8 @@ struct Game {
  Enemy* findEnemy(int id){for(auto&e:enemies)if(e.id==id&&e.alive)return &e;return nullptr;}
  float volcanoSpecialPose(const Enemy& e)const{
   if(e.type==VolcanoBossType){
-   if(e.eruptionWindup>0)return (.95f-e.eruptionWindup)/1.37f;
-   for(const auto& fissure:fissures)if(fissure.owner==e.id&&fissure.age<1.37f)return fissure.age/1.37f;
+   if(e.eruptionWindup>0)return (VarkhorFirstFissure-e.eruptionWindup)/VarkhorEruptionGesture;
+   for(const auto& fissure:fissures)if(fissure.owner==e.id&&fissure.age<VarkhorEruptionGesture)return fissure.age/VarkhorEruptionGesture;
   }
   return e.abilityBusy()?e.abilityAge/enemyAbilityProfile(e.type).duration():-1.f;
  }
@@ -1010,8 +1012,16 @@ struct Game {
    const bool large=e.type==DesertBossType||e.type==VolcanoBossType;
    const float reach=enemyInfo(e.type).attackReach;
    const bool heavyMelee=e.type==3||e.type==7;
+   if(e.type==VolcanoBossType){
+    if(e.windup>0){
+     const V toHero=player-e.pos;
+     if(!e.varkhorPunch.arm)e.varkhorPunch.arm=toHero.x-toHero.y<-.08f?4:5;
+     e.varkhorPunch.target=player;
+     faceEnemyTowards(e,toHero);
+    }else if(e.strike<=0)e.varkhorPunch={};
+   }
    if(e.windup>0){float impactTime=e.windup;e.windup-=dt;if(e.windup<=(heavyMelee?.00001f:0.f)){e.windup=0;e.strike=meleeRecovery(e.type)-(heavyMelee?std::max(0.f,dt-impactTime):0.f);if(!ranged)sound(enemyAttackCue(e.type),e.pos);if(ranged){if(visible&&d<EnemySightRange)launchCinder(e);}
-   else if(d<(large?2.15f:reach+.35f)&&visible){
+   else if(d<(large?LargeBossMeleeReach:reach+.35f)&&visible){
     if(wasRolling&&!sandTrapped()&&rollElapsed+impactTime<RollProtection){sound(Cue::Dodge,player);effects.push_back({player,"UNIK",.65f,3});}
     else if(!dead()){
      const V away=player-e.pos;
@@ -1025,7 +1035,11 @@ struct Game {
    if(e.strike>0)continue;
    if(visible){
     e.behavior=EnemyBehavior::Chase;e.patrolGoalActive=false;e.patrolBlocked=0;e.patrolWait=.7f;
-    if(d<(ranged?4.5f:large?1.9f:reach)&&e.attack<=0){faceEnemyTowards(e,player-e.pos);e.attack=enemyInfo(e.type).cooldown;e.windup=meleeWindup(e.type);}
+    if(d<(ranged?4.5f:large?1.9f:reach)&&e.attack<=0){
+     const V toHero=player-e.pos;
+     faceEnemyTowards(e,toHero);e.attack=enemyInfo(e.type).cooldown;e.windup=meleeWindup(e.type);
+     if(e.type==VolcanoBossType)e.varkhorPunch={player,toHero.x-toHero.y<-.08f?4:5};
+    }
     else if(e.sandCastPulse<=0&&d>(ranged?3.5f:large?1.7f:reach-.2f))desired[i]=chaseDirection(e)*enemySpeed(e.type);
    }else desired[i]=patrolVelocity(e,dt);
   }
@@ -1046,7 +1060,7 @@ struct Game {
    // Body separation is not a step or a change of attack direction.
    const bool faceMovement=stepping&&!chasing&&!planted&&!e.chargeBusy();
    if(chasing&&!planted&&!e.chargeBusy())faceEnemyTowards(e,player-e.pos);
-   if(e.windup>0&&((e.type!=3&&e.type!=7)||e.windup>.12f))faceEnemyTowards(e,player-e.pos);
+   if(e.windup>0&&e.type!=VolcanoBossType&&((e.type!=3&&e.type!=7)||e.windup>.12f))faceEnemyTowards(e,player-e.pos);
    if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType)advanceVolcanoAnimation(e,gait,dt,faceMovement);
    else if(e.type==CinderhornType)cinderhorn_gait::advance(e.animation,gait.x,gait.y,dt,faceMovement,e.boarRush>0);
    else if(e.type==BoarType)forest_boar_motion::advance(e.animation,gait.x,gait.y,dt,

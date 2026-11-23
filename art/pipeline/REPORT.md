@@ -1,5 +1,91 @@
 # Raport konfiguracji — 19.10.2026
 
+**23.11.2026 — celowanie pięścią Varkhora.**
+
+Varkhor wybiera ramię przy rozpoczęciu zamachu. Tor pięści uwzględnia położenie bohatera z dokładnością do jego rzeczywistego kierunku i wysokości podłoża. W trakcie odtwarzania końca ciosu ramię zachowuje ostatni cel. Zapis w wersji 32 przechowuje ramię i cel, a zapis w wersji 31 nadal odtwarza stan walki. Sprawdzono trafienie, tor pięści i zachowanie celu po ciosie w ośmiu kierunkach. Przechwycenie czterech ujęć z Kaldery wraz z symulacją prób trwało 5,40 s. [Podgląd](C:/AI2D/pipeline/runs/varkhor-kierunek-ciosu-20261123/varkhor-kierunki-ciosu.webp) · [Raport](C:/AI2D/pipeline/runs/varkhor-kierunek-ciosu-20261123/report.json)
+
+**23.11.2026 — boczne uniesienie ramienia Varkhora.**
+
+Podczas zamachu łokieć odchodzi od tułowia i unosi się niemal na wysokość barku. Przy ciosie na wprost bark obraca się w kierunku środka sylwetki, a pięść trafia w górną część sylwetki bohatera. Oba odcinki ręki zachowują długość. Sprawdzono osiem kierunków oraz zarejestrowano cios od przodu i pod kątem. Render 61 klatek w Synfigu trwał 6,05 s. Przechwycenie dwóch ujęć z Kaldery trwało 2,61 s. [Projekt Synfiga](C:/AI2D/animations/varkhor-lokiec-w-bok-20261123/ruch/strike.sif) · [Podgląd z gry](C:/AI2D/pipeline/runs/varkhor-lokiec-w-bok-20261123/varkhor-lokiec-w-bok.webp) · [Raport](C:/AI2D/pipeline/runs/varkhor-lokiec-w-bok-20261123/report.json)
+
+**23.11.2026 — wspólny ruch kończyny w ciosie Varkhora.**
+
+Tor pięści z Synfiga prowadzi ramię i przedramię o stałych długościach. Łokieć pozostaje po dolnej stronie tego toru, a bark przesuwa się wraz z tułowiem. W ośmiu kierunkach sprawdzono, że pięść nie cofa się w fazie uderzenia, a przy trafieniu łokieć pozostaje lekko zgięty. Render 61 klatek w Synfigu trwał 6,09 s. Przechwycenie 37 klatek z Kaldery trwało 1,44 s. [Projekt Synfiga](C:/AI2D/animations/varkhor-naturalny-cios-20261123/ruch/strike.sif) · [Podgląd z gry](C:/AI2D/pipeline/runs/varkhor-naturalny-cios-20261123/varkhor-naturalny-cios.webp) · [Raport](C:/AI2D/pipeline/runs/varkhor-naturalny-cios-20261123/report.json)
+
+**23.11.2026 — ruch barku w ciosie Varkhora.**
+
+Bark i całe ramię cofają się w zamachu. Bark rusza do przodu, ramię obraca się w stronę celu, a łokieć osiąga wyprost przy trafieniu. Obrót ramienia między końcem zamachu a trafieniem wyniósł co najmniej 51° w ośmiu kierunkach. Render 61 klatek ciosu w Synfigu trwał 6,17 s, a przechwycenie 37 klatek w Kalderze 1,46 s. [Projekt Synfiga](C:/AI2D/animations/varkhor-ruch-barku-20261123/ruch/strike.sif) · [Podgląd z gry](C:/AI2D/pipeline/runs/varkhor-ruch-barku-20261123/varkhor-ruch-barku.webp) · [Raport](C:/AI2D/pipeline/runs/varkhor-ruch-barku-20261123/report.json)
+
+**23.11.2026 — cios Varkhora z łokcia.**
+
+Ramię i przedramię mają osobne osie obrotu. Łokieć zgina się w zamachu i prostuje w kierunku bohatera w momencie trafienia. Przetestowano obrys oraz wykrywanie kursora w czterech fazach ciosu i ośmiu kierunkach. Render 61 klatek ciosu w Synfigu trwał 5,94 s, a przechwycenie 37 klatek w Kalderze 1,56 s. [Projekt Synfiga](C:/AI2D/animations/varkhor-ciosem-z-lokcia-20261123/ruch/strike.sif) · [Podgląd z gry](C:/AI2D/pipeline/runs/varkhor-ciosem-z-lokcia-20261123/varkhor-ciosem-z-lokcia.webp) · [Raport](C:/AI2D/pipeline/runs/varkhor-ciosem-z-lokcia-20261123/report.json)
+
+**23.11.2026 — pancerz i walka Varkhora.**
+
+Atlas Varkhora zachowuje obrys wszystkich części. Pory, rysy i żar w pancerzu pochodzą z tekstur Sunburst przetworzonych lokalnie przez Real-ESRGAN x2plus w ComfyUI i retuszowanych w Kricie. Klucze Synfiga prowadzą przenoszenie ciężaru w chodzie, zamach pięścią i gest erupcji. Ostrzeżenia na podłożu używają promieni trafienia z gry. Sprawdzono uderzenie i kolejność zapłonu trzech szczelin w Kalderze. Synfig wyrenderował trzy przebiegi po 61 klatek w 17,51 s. Przechwycenie 107 klatek z gry trwało 5,33 s. [Projekt Krity](C:/AI2D/sprites/varkhor-odnowa-20261122/varkhor-pancerz.kra) · [Projekty Synfiga](C:/AI2D/animations/varkhor-odnowa-20261122/ruch) · [Podgląd z gry](C:/AI2D/pipeline/runs/varkhor-odnowa-20261122/varkhor-kaldera.webp) · [Raport](C:/AI2D/pipeline/runs/varkhor-odnowa-20261122/report.json)
+
+**22.11.2026 — model Salamandry lawowej.**
+
+Salamandra ma wydłużony pysk, wyraźniejsze łapy, grzbiet z dwoma rzędami płyt i zwężający się ogon. Materiały z Sunburst wyostrzono lokalnie w ComfyUI przez Real-ESRGAN x2plus. Kontrast łusek poprawiono na osobnej warstwie w Kricie. Chód, atak i upadek korzystają z tych samych powierzchni. W 36 kierunkach sprawdzono zgodność obrysu z wykrywaniem kursora. Render i zapis 71 klatek z Kaldery trwał 1,49 s. [Materiały w Kricie](C:/AI2D/sprites/kaldera-salamandra-model-20261122/salamandra-materialy.kra) · [Podgląd](C:/AI2D/pipeline/runs/kaldera-salamandra-model-20261122/salamandra-lawowa.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-salamandra-model-20261122/report.json)
+
+**22.11.2026 — ogon Rogacza Żaru.**
+
+Krótki ogon z sierścią jest osadzony w zadzie. W Synfigu dodano osobny przebieg wychylenia końcówki w rytmie chodu. Podczas upadku ogon obraca się z tułowiem i pozostaje widoczny na ciele. W 60 klatkach skrętu sylwetka pozostała połączona, a kontrola przesłaniania objęła 216 ujęć. Render 61 klatek w Synfigu trwał 2,85 s. Odczyt i zapis 66 klatek chodu z Kaldery trwał 3,37 s, a 18 klatek upadku 0,45 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-rogacz-ogon-20261122/rogacz-ogon.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-ogon-20261122/report.json)
+
+**22.11.2026 — chód Rogacza Żaru.**
+
+W Synfigu ustawiono dłuższy krok, osobne wykresy przednich i tylnych kopyt oraz pochylenie racic w trakcie wymachu. Kolejne kopyta przejmują ciężar, a barki, zad i kark płynnie podążają za krokiem. W 1984 pomiarach prostego chodu w ośmiu kierunkach kopyto pozostawało przy punkcie oparcia. Sprawdzono też przesłanianie w 216 ujęciach. Synfig wyrenderował 61 próbek w 3,04 s, a odczyt i zapis 66 klatek z Kaldery trwał 3,43 s. [Projekt Synfiga](../volcano/cinderhorn/motion/rogacz-chod.sif) · [Podgląd](C:/AI2D/pipeline/runs/kaldera-rogacz-naturalny-chod-20261122/rogacz-chod.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-naturalny-chod-20261122/report.json)
+
+**22.11.2026 — sierść na nogach Rogacza Żaru.**
+
+Krótsze włosy na przednich i tylnych nogach są osadzone na powierzchni nad racicami. Podążają za zgięciem nóg i są przesłaniane podczas skrętu oraz upadku. Sprawdzono kolejność powierzchni w 216 ujęciach i ciągłość 60 klatek skrętu. Odczyt i zapis klatek z Kaldery podczas chodu trwał 3,40 s, a podczas upadku 0,42 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-rogacz-futro-nog-20261122/rogacz-futro-nog.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-futro-nog-20261122/report.json)
+
+**22.11.2026 — upadek i ciało Rogacza Żaru.**
+
+Rogacz przewraca się od strony trafienia. Krzywe Synfiga prowadzą zgięcie przednich i tylnych nóg, przechył i oparcie boku o podłoże. Sierść, rogi i tułów pochodzą z tego samego modelu w walce, podczas upadku i po kontakcie z ziemią. Pozycja ciała, cień, obrys kursora i miniatura korzystają z końcowej pozy. [Projekt Synfiga](../volcano/cinderhorn/motion/rogacz-upadek.sif)
+
+Sprawdzono osiem kierunków i oba boki upadku. Od kontaktu z ziemią klatki ciała i obrysu pokryły się piksel w piksel. Synfig wyrenderował 61 klatek w 2,97 s. Render podglądu z Kaldery wraz z odczytem i zapisem trwał 0,42 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-rogacz-martwe-cialo-20261122/rogacz-upadek.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-martwe-cialo-20261122/report.json)
+
+**22.11.2026 — proporcje tułowia Rogacza Żaru.**
+
+Klatka piersiowa ma głębszy profil przy przednich nogach. Lędźwie są węższe, brzuch unosi się przed tylnymi nogami, a grzbiet opada ku zadowi. Mocowania nóg dopasowano do tych przekrojów. W przednim rzucie dopasowano również rozmiar ciała po upadku. Próbka klatek skrętu potwierdziła ciągłość sylwetki i przesłanianie w 216 ujęciach. Render 66 klatek z Kaldery wraz z odczytem i zapisem trwał 3,40 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-rogacz-proporcje-20261122/rogacz-zaru.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-proporcje-20261122/report.json)
+
+**22.11.2026 — pojedyncze włosy w sierści Rogacza Żaru.**
+
+Matową sierść z Sunburst dopasowano do atlasu w lokalnym ComfyUI. W Kricie domalowano pojedyncze włosy i ich zwężające się końcówki. Dłuższe pasma na bokach, grzbiecie oraz karku są osadzone na obrysie i poruszają się wraz ze skórą. W 60 klatkach skrętu włosy były widoczne poza poprzednim obrysem, a sylwetka pozostała połączona. Ponownie sprawdzono przesłanianie w 216 ujęciach. Render 66 klatek z Kaldery wraz z odczytem i zapisem trwał 3,36 s. [Projekt Krity](C:/AI2D/sprites/kaldera-rogacz-wlosy-20261122/rogacz-wlosy.kra) · [Podgląd](C:/AI2D/pipeline/runs/kaldera-rogacz-wlosy-20261122/rogacz-zaru.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-wlosy-20261122/report.json)
+
+**22.11.2026 — obrys tułowia, głowy i nóg Rogacza Żaru.**
+
+Krzywe przekrojów prowadzą płynny obrys bioder, grzbietu, barków, karku i pyska. Nos i uszy mają łagodniejsze krawędzie. Nogi zwężają się ku racicom, a zaokrąglenia wokół kolan zachowują punkty podparcia. W 216 ujęciach sprawdzono przesłanianie części. W 60 klatkach skrętu sylwetka pozostała połączona. Render 66 klatek z Kaldery z odczytem i zapisem trwał 3,39 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-rogacz-sylwetka-20261122/rogacz-zaru.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-sylwetka-20261122/report.json)
+
+**22.11.2026 — przesłanianie rogów i nóg Rogacza Żaru.**
+
+Każdy fragment rogu, kończyny i tułowia ma własną głębię w rzucie 2D. Nasady rogów wychodzą z czaszki na boki, a bliższe powierzchnie zasłaniają dalsze podczas skrętu. Porównano 216 ujęć chodu, przygotowania do szarży i biegu z odwróconą kolejnością przekazywania trójkątów do renderera. Żaden piksel nie przekroczył progu różnicy używanego w teście. Render 66 klatek z Kaldery wraz z odczytem i zapisem trwał 3,37 s. [Podgląd](C:/AI2D/pipeline/runs/kaldera-rogacz-przeslanianie-20261122/rogacz-zaru.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-przeslanianie-20261122/report.json)
+
+**22.11.2026 — mocowania kończyn, głowa i ostrość sierści Rogacza Żaru.**
+
+Nogi są osadzone wewnątrz barków i bioder. Tułów, szyja i głowa korzystają z jednego obrysu. Nasada czaszki wyznacza obrót głowy i ugięcie szyi. W lokalnym ComfyUI wyostrzono pasma istniejącej tekstury, a w Kricie dopracowano końce kępek. Synfig wyrenderował 61 próbek nowych krzywych w 3,07 s. [Projekt Krity](C:/AI2D/sprites/kaldera-rogacz-stawy-20261122/rogacz-stawy.kra) · [Projekt Synfiga](../volcano/cinderhorn/motion/rogacz-chod.sif)
+
+Sprawdzono 8640 mocowań w różnych fazach chodu i szarży. Wszystkie 60 sprawdzonych sylwetek podczas skrętu pozostało połączonych. Średni kontrast sąsiednich pikseli w próbce futra na boku wzrósł z 10,8 do 20,3. Render 66 klatek z Kaldery wraz z odczytem i zapisem trwał 3,46 s. [Podgląd z Kaldery](C:/AI2D/pipeline/runs/kaldera-rogacz-stawy-20261122/rogacz-zaru.webp) · [Wyniki i czasy renderu](C:/AI2D/pipeline/runs/kaldera-rogacz-stawy-20261122/report.json)
+
+**22.11.2026 — sierść i ruch Rogacza Żaru.**
+
+Kępki sierści z Sunburst wyostrzono lokalnie w ComfyUI i domalowano w Kricie. Zachowano wymiary atlasu 1024 × 512 px. Wspólne przekroje barków i karku prowadzą futro od grzbietu do głowy oraz uginają się podczas przygotowania do szarży. Klucze Synfiga rozdzielają podparcie i wymach przednich i tylnych nóg. [Projekt Krity](C:/AI2D/sprites/kaldera-rogacz-futro-20261122/rogacz-futro.kra) · [Projekt Synfiga](../volcano/cinderhorn/motion/rogacz-chod.sif)
+
+Sprawdzono po 360 kątów w spoczynku, chodzie i przygotowaniu do szarży. W obu profilach szerokość wyniosła 120 px, a wysokość w spoczynku 117–120 px. Synfig wyrenderował 61 próbek w 3,13 s. Podgląd 66 klatek z gry powstał w 3,46 s wraz z odczytem i zapisem. [Podgląd z Kaldery](C:/AI2D/pipeline/runs/kaldera-rogacz-futro-20261122/rogacz-zaru.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-rogacz-futro-20261122/report.json)
+
+**22.11.2026 — profile skrzydeł Żarowego Draka i wspólny model Rogacza Żaru.**
+
+Przebieg błony i grubsza krawędź skrzydeł draka eksponują większą powierzchnię od przodu i z boku. W porównaniu klatek pole widocznego pigmentu błony wzrosło z 472 do 1053 px od przodu oraz z 881 do 1203 px w prawym profilu i z 843 do 1158 px w lewym profilu.
+
+Rogacz korzysta ze wspólnego szkieletu 2D i jednego zestawu proporcji podczas obrotu. W obu profilach ma 120 px szerokości na klatce testowej, a wysokość w spoczynku mieści się w zakresie 117–120 px. Malowanie bazaltu, sierści i rogów przygotowano w Sunburst, ComfyUI i Kricie. Render podglądu z odczytem i zapisem 66 klatek trwał 3,43 s. [Projekt Krity](C:/AI2D/sprites/kaldera-profile-20261122/rogacz-materialy-final.kra) · [Podgląd z Kaldery](C:/AI2D/pipeline/runs/kaldera-profile-20261122/drak-i-rogacz.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-profile-20261122/report.json)
+
+**22.11.2026 — objętość skrzydeł draka i ostrość skrętów rogacza.**
+
+Błony Żarowego Draka są wypukłe i mają ciemniejszy spód przy krawędzi. Nasada, przedramię i żebra skrzydła korzystają z grubszych przekrojów. W 24 ujęciach sylwetka pozostała spójna.
+
+Rogacz Żaru korzysta z dopasowanych konturów i pojedynczej próbki pigmentu na piksel. W próbie chodu z obrotem co 1° średni udział pikseli o częściowym kryciu spadł z 14,6% do 7,9%, a największa zmiana obrysu na krok z 6,7% do 5,0%. Render podglądu obu stworzeń z odczytem i zapisem 66 klatek trwał 3,54 s. [Podgląd z Kaldery](C:/AI2D/pipeline/runs/kaldera-skrzydla-rogacz-20261122/drak-i-rogacz.webp) · [Raport](C:/AI2D/pipeline/runs/kaldera-skrzydla-rogacz-20261122/report.json)
+
 **21.11.2026 — chód i ostrość łusek Żarowego Draka.**
 
 Oddzielne krzywe przednich i tylnych łap prowadzą podparcie, ugięcie i przestawienie łap. Krok jest powiązany z dystansem na podłożu, a tułów, skrzydła i ogon przenoszą ciężar z przesunięciem fazy. Sprawdzono podparcie wszystkich łap w ośmiu kierunkach. Synfig wyrenderował 61 klatek kontrolnych w 3,45 s. [Projekt Synfiga](../volcano/quadruped-rigs/drake-ruch.sif)

@@ -12,7 +12,7 @@ from scipy.ndimage import distance_transform_edt
 from caldera_turn_registration import GRID, WORK, optical, remap, restore, swatch, xy
 
 
-def contours(piece):
+def contours(piece, sharpen=0.0):
     pixels = np.asarray(piece)
     alpha = pixels[..., 3]
     solid = alpha >= 128
@@ -24,6 +24,12 @@ def contours(piece):
     distance[partial] = alpha[partial] / 255 - .5
     donor = distance_transform_edt(alpha < 96, return_distances=False, return_indices=True)
     rgb = pixels[tuple(donor)][..., :3]
+    if sharpen:
+        # Recover a little contrast on the painted fur and edges of plates.
+        # The extended pigment keeps the filter away from transparent black.
+        paint = rgb.astype(np.float32)
+        high = np.clip(paint - cv2.GaussianBlur(paint, (0, 0), .85), -24, 24)
+        rgb = np.rint(paint + sharpen * high).clip(0, 255).astype(np.uint8)
     out = np.empty_like(pixels)
     out[..., :3] = rgb
     out[..., 3] = np.rint(128 + 12 * distance).clip(0, 255).astype(np.uint8)
@@ -40,7 +46,7 @@ def registered_flow(a, b):
     return np.rint(128 + vector*(384 / WORK)).clip(0, 255).astype(np.uint8)
 
 
-def pack(source, header, output):
+def pack(source, header, output, sharpen=0.0):
     tiles = [tuple(map(int, values)) for values in re.findall(
         r"\{0,(\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\}", header.read_text(encoding="utf-8"))]
     if len(tiles) not in (32 * 6, 32 * 14):
@@ -60,7 +66,7 @@ def pack(source, header, output):
             # intermediates. The original alpha remains the source of the edge.
             if layer < 6 and i % 4:
                 piece = Image.blend(piece, restore(guides, i), .78)
-            crisp.paste(contours(piece), (x,y))
+            crisp.paste(contours(piece, sharpen), (x,y))
             block = registered_flow(guides[i][2], guides[(i+1)%32][2])
             flow[layer*GRID:(layer+1)*GRID, i*GRID:(i+1)*GRID, :2] = block
     output.mkdir(parents=True, exist_ok=True)
@@ -73,6 +79,9 @@ if __name__ == "__main__":
     parser.add_argument("source", type=Path)
     parser.add_argument("header", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--sharpen", type=float, default=0.0)
     parser.add_argument("--no-audio", action="store_true", required=True)
     args = parser.parse_args()
-    pack(args.source, args.header, args.output)
+    if not 0.0 <= args.sharpen <= 1.0:
+        parser.error("--sharpen must be between 0 and 1")
+    pack(args.source, args.header, args.output, args.sharpen)

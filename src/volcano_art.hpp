@@ -303,23 +303,79 @@ inline void flow(bool ambience=true){
  if(!ambience)return;
  for(int n=0;n<20;n++){float x=std::fmod(n*191.f+game.time*(5+n%3),float(WorldW)),y=std::fmod(n*119.f-game.time*14+H*100,float(H));ellipse(x,y,1.2f,2.5f,Fade(rgb(255,177,99),.2f+.15f*std::sin(n+game.time*2)));}
 }
+inline void varkhorCracks(V center,float reach,float progress,float visibility,float seed){
+ const Color crust=rgb(45,26,26),ember=rgb(236,94,36),hot=rgb(255,193,98);
+ for(int i=0;i<7;++i){
+  const float angle=i*2*PI/7+.35f+seed+.17f*std::sin(i*3.8f);
+  const V along{std::cos(angle),std::sin(angle)},across{-along.y,along.x};
+  const float length=reach*(.18f+progress*(.55f+.20f*std::cos(i*2.8f)));
+  const auto point=[&](float distance,float bend){return screen(center+along*(length*distance)+across*bend);};
+  const Vector2 a=point(.10f,0),b=point(.47f,length*.13f),c=point(.72f,-length*.075f),d=point(1,0);
+  const float edge=visibility*(.62f+.30f*std::cos(i*1.7f));
+  DrawLineEx(a,b,5.4f,Fade(crust,edge));
+  DrawLineEx(b,c,3.6f,Fade(crust,edge));
+  DrawLineEx(c,d,2.25f,Fade(crust,edge));
+  DrawLineEx(a,b,1.9f,Fade(hot,edge*progress));
+  DrawLineEx(b,c,1.35f,Fade(ember,edge*progress));
+  DrawLineEx(c,d,.83f,Fade(ember,edge*progress*.9f));
+  DrawLineEx(b,point(.71f,length*.29f),1.1f,Fade(ember,edge*progress*.74f));
+ }
+}
+
+inline void varkhorDebris(V center,float reach,float phase,int pieces,float seed){
+ const float ease=1-(1-phase)*(1-phase);
+ const float fade=(1-phase)*(.85f+.15f*ease);
+ for(int i=0;i<pieces;++i){
+  const float angle=i*2.399963f+seed;
+  const V direction{std::cos(angle),std::sin(angle)};
+  const float travel=(.15f+ease*(.55f+.41f*((i*7)%13)/12.f))*reach;
+  const float flight=4*phase*(1-phase)*(15+(i*13)%43);
+  auto p=screen(center+direction*travel);
+  p.y-=flight;
+  const float size=(1.2f+.62f*(i%6))*(1-.24f*phase);
+  const float spin=angle+7.f*phase;
+  const Vector2 axis{std::cos(spin)*size,std::sin(spin)*size};
+  const Vector2 left{p.x-axis.x*.75f-axis.y*.86f,p.y-axis.y*.75f+axis.x*.86f};
+  const Vector2 tip{p.x+axis.x*1.30f,p.y+axis.y*1.30f};
+  const Vector2 right{p.x-axis.x*.82f+axis.y*.56f,p.y-axis.y*.82f-axis.x*.56f};
+  DrawTriangle(left,tip,right,Fade(rgb(72,61,61),fade));
+  DrawLineEx(left,tip,1.15f,Fade(i%3==0?rgb(255,148,71):rgb(155,126,105),fade));
+  if(i%3==0)DrawLineEx({p.x-direction.x*5,p.y-direction.y*2+5},p,1.15f,Fade(rgb(238,93,34),fade*.86f));
+ }
+}
+
+inline void varkhorSlams(){
+ for(const auto& e:game.enemies){
+  if(e.type!=VolcanoBossType||!e.alive||e.eruptionWindup>0||game.volcanoSpecialPose(e)>=0||
+     (e.windup<=0&&e.strike<=0))continue;
+  const auto p=screen(e.pos);
+  if(p.x<-132||p.x>WorldW+132||p.y<-80||p.y>H+80)continue;
+  if(e.windup>0){
+   const float t=1-e.windup/meleeWindup(e.type);
+   const float weight=enemy_death::ease(t);
+   terrain_surface::ring(e.pos,LargeBossMeleeReach,Fade(rgb(248,163,85),.30f+.56f*weight));
+   varkhorCracks(e.pos,LargeBossMeleeReach,.35f+.5f*weight,.35f*weight,e.animation.facingAngle);
+  }else{
+   const float phase=std::clamp(1-e.strike/meleeRecovery(e.type),0.f,1.f);
+   const float wave=1-(1-phase)*(1-phase);
+   terrain_surface::ring(e.pos,LargeBossMeleeReach*(.24f+.76f*wave),Fade(rgb(255,217,145),.90f*(1-phase)));
+   varkhorCracks(e.pos,LargeBossMeleeReach,1,.86f*(1-phase),e.animation.facingAngle);
+   varkhorDebris(e.pos,LargeBossMeleeReach*.84f,phase,18,e.animation.facingAngle);
+  }
+ }
+}
 inline void groundAttacks(){
+ varkhorSlams();
  for(const auto& f:game.fissures){
   Vector2 p=screen(f.pos);
   if(p.x<-115||p.x>WorldW+115||p.y<-70||p.y>H+80)continue;
   float t=std::clamp(f.age/f.delay,0.f,1.f);
   float fade=f.struck?1-std::clamp((f.age-f.delay)/.65f,0.f,1.f):1.f;
-  Color hot=rgb(255,156,71);
-  ellipse(p.x,p.y,70,35,Fade(rgb(135,43,43),(.30f+.24f*t)*fade));
-  terrain_surface::ring(f.pos,1.35f,Fade(hot,(.66f+.32f*t)*fade));
-  terrain_surface::ring(f.pos,.27f+t*.94f,Fade(rgb(255,219,145),.65f*fade));
-  for(int i=0;i<7;i++){
-   float a=i*2*PI/7+.31f;
-   V direction{std::cos(a),std::sin(a)};
-   Vector2 inside=screen(f.pos+direction*(.28f+.26f*t)),outside=screen(f.pos+direction*(.61f+.58f*t));
-   Vector2 bend{(inside.x+outside.x)*.5f-4,(inside.y+outside.y)*.5f+3};
-   DrawLineEx(inside,bend,1.5f,Fade(hot,fade*t));DrawLineEx(bend,outside,1.5f,Fade(hot,fade*t));
-  }
+  const float ignite=enemy_death::ease(t);
+  ellipse(p.x,p.y,36+24*ignite,14+12*ignite,Fade(rgb(126,46,34),(.14f+.22f*ignite)*fade));
+  terrain_surface::ring(f.pos,VarkhorFissureReach,Fade(rgb(255,168,85),(.57f+.39f*ignite)*fade));
+  terrain_surface::ring(f.pos,VarkhorFissureReach*(.21f+.73f*ignite),Fade(rgb(255,224,151),.62f*ignite*fade));
+  varkhorCracks(f.pos,VarkhorFissureReach,t,(.40f+.60f*ignite)*fade,f.pos.x*.61f+f.pos.y*.44f);
  }
 }
 inline void eruptionPlumes(){
@@ -328,12 +384,21 @@ inline void eruptionPlumes(){
   Vector2 p=screen(f.pos);
   if(p.x<-130||p.x>WorldW+130||p.y<-45||p.y>H+200)continue;
   float phase=std::clamp((f.age-f.delay)/.65f,0.f,1.f);
-  if(caldera_attack_art::draw(caldera_attack_art::Clip::Eruption,p,{162,197},0,phase,1,{.5f,.83f}))continue;
-  float fade=1-phase;
-  for(int i=0;i<5;i++){
-   float off=(i-2)*16;
-   line(p.x+off,p.y+std::abs(off)*.18f,p.x+off*.8f,p.y-(35+26*std::sin(i+2))*fade,Fade(rgb(255,199,103),fade),5*fade+1);
+  const float fade=1-phase,seed=f.pos.x*.61f+f.pos.y*.44f;
+  const float flare=std::clamp(1-phase*4.8f,0.f,1.f);
+  if(flare>0)DrawCircleGradient(int(p.x),int(p.y-8),22+31*phase,Fade(rgb(255,180,75),flare*.73f),BLANK);
+  const auto clip=caldera_attack_art::Clip::Eruption;
+  if(caldera_attack_art::draw(clip,p,{163,190},0,phase,1,{.5f,.83f})){
+   for(float side:{-1.f,1.f}){
+    const Vector2 lip{p.x+side*(12+11*phase),p.y+side*4};
+    caldera_attack_art::draw(clip,lip,{78,112},side*20,std::min(1.f,phase*1.30f),.50f,{.5f,.83f});
+   }
+  }else for(int i=0;i<5;i++){
+   const float offset=(i-2)*13;
+   line(p.x+offset,p.y+std::abs(offset)*.18f,p.x+offset*.8f,p.y-(35+22*std::sin(i+2))*fade,
+        Fade(rgb(255,184,87),fade),5*fade+1);
   }
+  varkhorDebris(f.pos,VarkhorFissureReach,phase,22,seed);
  }
 }
 inline const Enemy* cinderOwner(const CinderBolt& b){

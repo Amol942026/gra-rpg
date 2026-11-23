@@ -161,6 +161,7 @@ WorldHover pickWorld(Vector2 point) {
             const Enemy& e=game.enemies[it->index];position=e.pos;
             Vector2 p=screen(e.pos);kind=HoverKind::Enemy;id=e.id;
             float half=enemyBoss(e.type)?125:e.type==EmberDrakeType?90:75;
+            if(e.type==VolcanoBossType&&(e.windup>0||e.strike>0))half=163;
             const bool raisedBlade=e.type==ObsidianSentinelType&&(e.volcanoAction()>=0||e.abilityBusy());
             if(raisedBlade)half=110;
             const bool newRig=caldera_quadruped::handles(e.type);

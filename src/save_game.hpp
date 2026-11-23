@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=31;
+constexpr int CurrentVersion=32;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -74,6 +74,8 @@ inline void visit(Archive& a,Enemy& v){
  else if(a.reading){v.abilityCd=3;v.abilityAge=-1;v.abilityDirection={};v.abilityMask=v.abilityCasts=0;}
  if(a.version>=28)a(v.deathDirection);
  else if(a.reading)v.deathDirection={};
+ if(a.version>=32&&v.type==VolcanoBossType)a(v.varkhorPunch.target,v.varkhorPunch.arm);
+ else if(a.reading)v.varkhorPunch={};
  if(a.reading&&a.version>=2&&a.version<6){v.boulderCd*=BoulderCooldown/4.5f;v.boulderWindup*=BoulderWindup/2.2f;v.boulderRecovery*=BoulderRecovery/.6f;}
 }
 EF_SAVE(FieldState,v.enemies,v.props,v.forage)
@@ -166,6 +168,10 @@ inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Pr
   require(!e.boarHit||(chargingSpecies(e.type)&&e.alive&&(e.boarRush>0||e.boarRecovery>0)));
  }
  for(const auto& e:enemies)require(e.eruptionCd>=0&&e.eruptionCd<=6.001f&&e.eruptionWindup>=0&&e.eruptionWindup<=.951f&&e.eruptions>=0&&(!e.eruptionWindup||(e.type==VolcanoBossType&&e.alive)));
+ for(const auto& e:enemies)if(e.type==VolcanoBossType){
+  require(e.varkhorPunch.arm==0||e.varkhorPunch.arm==4||e.varkhorPunch.arm==5);
+  if(e.varkhorPunch.arm)validatePos(e.varkhorPunch.target);
+ }
  for(const auto& e:enemies){const auto& spec=enemyAbilityProfile(e.type);require(e.abilityCd>=0&&e.abilityCd<=spec.cooldown+.001f&&e.abilityAge>=-1&&e.abilityCasts>=0&&e.abilityMask>=0&&e.abilityMask<=7&&length(e.abilityDirection)<=1.001f);
   require(enemyAbility(e.type)==EnemyAbility::EmberBreath?(e.abilityMask==0||e.abilityMask==1||e.abilityMask==3||e.abilityMask==7):e.abilityMask<=1);
   if(e.abilityAge>=0)require(e.alive&&enemyAbility(e.type)!=EnemyAbility::None&&e.abilityCasts>0&&e.abilityAge<spec.duration()&&std::abs(length(e.abilityDirection)-1)<.001f);

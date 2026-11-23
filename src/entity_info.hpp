@@ -6,11 +6,13 @@ constexpr int ForestEnemyTypeCount=8,ForestPropTypeCount=7,LegacyEnemyTypeCount=
 constexpr int StoneGuardianType=3;
 constexpr int CopperScarabType=9,SandCobraType=10;
 constexpr int VolcanoFirstType=12,VolcanoBossType=18;
-constexpr int SlagCrawlerType=VolcanoFirstType,FireImpType=14,EmberDrakeType=17;
+inline constexpr float LargeBossMeleeReach=2.15f,VarkhorFissureReach=1.35f;
+inline constexpr float VarkhorFirstFissure=.95f,VarkhorEruptionGesture=1.37f;
+constexpr int SlagCrawlerType=VolcanoFirstType,LavaSalamanderType=13,FireImpType=14,EmberDrakeType=17;
 constexpr int AshWraithType=15,ObsidianSentinelType=16;
 constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21,EnemyTypeCount=22;
 constexpr bool smoothVolcanoTurn(int type){
- return type==SlagCrawlerType||type==EmberDrakeType||type==FireImpType||type==AshWraithType||
+ return type==SlagCrawlerType||type==LavaSalamanderType||type==EmberDrakeType||type==FireImpType||type==AshWraithType||
         type==ObsidianSentinelType||type==CinderhornType;
 }
 constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;

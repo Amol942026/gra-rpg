@@ -477,7 +477,7 @@ void drawWorld(){
  if(game.inVolcano())for(const auto& prop:game.props)volcano_art::drawPropContact(prop);
  Vector2 pp=screen(game.player);terrain_surface::ring(game.player,.44f,Fade(Gold,.7f));
  drawHoveredTile();
- guardian_art::ground();if(!game.fissures.empty())volcano_art::groundAttacks();
+ guardian_art::ground();if(game.inVolcano()||game.developerSession||!game.fissures.empty())volcano_art::groundAttacks();
  enemy_ability_art::ground();
  for(const auto& plant:game.forage){
   if(plant.value.empty())continue;Vector2 p=screen(plant.pos);if(p.x<-40||p.x>WorldW+40||p.y<0||p.y>H)continue;

@@ -198,7 +198,7 @@ inline Rectangle cachedCorpseBounds(const Enemy& e,Vector2 anchor){
 inline bool regionalCorpse(const Enemy& e,float x,float y,Color outline,const Vector2* probe,bool shadow=false,float opacity=1){
  if(e.corpseGrounded())return restingCorpseArt(e,x,y,outline,probe,opacity,shadow);
  const float progress=e.deathProgress();
- if(e.type!=CinderhornType||!regional_enemy_art::cinderhornRest.art.id)
+ if(e.type!=CinderhornType||volcano_actors::cinderhorn_turn::ready()||!regional_enemy_art::cinderhornRest.art.id)
   return regional_enemy_art::death(e,x,y,progress,outline,probe,shadow,opacity);
  const float weight=regional_enemy_art::cinderhornFallBlend(e,progress);
  if(weight>=1)return regional_enemy_art::cinderhornFallingRest(e,x,y,progress,outline,probe,shadow,opacity);
@@ -247,7 +247,8 @@ inline void initThumbnails(){
  static_assert(W<=2048&&H<=2048);
  thumbnails=render_targets::colorOnly(W,H);
  if(!thumbnails.id)return;
- auto sample=render_targets::colorOnly(448,212);
+ // The laid-out Cinderhorn uses the same depth-tested rig as in the world.
+ auto sample=LoadRenderTexture(448,212);
  if(!sample.id){UnloadRenderTexture(thumbnails);thumbnails={};return;}
  SetTextureFilter(sample.texture,TEXTURE_FILTER_BILINEAR);
  SetTextureFilter(thumbnails.texture,TEXTURE_FILTER_BILINEAR);

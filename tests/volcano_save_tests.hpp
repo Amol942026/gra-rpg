@@ -95,6 +95,30 @@ void volcanoSaveTests(){
  encounter.game.update(.05f,{},false);check(encounter.game.fissures.size()==3,"save fixture contains actual active eruption warnings");roundtrip(encounter);
  auto resumed=saves::decode(saves::encode(encounter));for(int i=0;i<95;i++){encounter.game.update(1.f/60,{},false);resumed.game.update(1.f/60,{},false);}
  check(saves::encode(encounter)==saves::encode(resumed),"v9 restores exact eruption damage, expiry, movement and RNG");
+ {
+  auto punching=s;
+  auto& g=punching.game;
+  g.enemies={{VolcanoBossId,VolcanoBossType,{12,50},{12,50},hp,hp}};
+  auto& boss=g.enemies.front();
+  boss.strike=meleeRecovery(boss.type);
+  boss.varkhorPunch={{10.4f,50.4f},4};
+  boss.animation.faceAim(-1.6f,.4f,true);
+  const auto restored=saves::decode(saves::encode(punching));
+  const auto& saved=restored.game.enemies.front();
+  check(saved.varkhorPunch.arm==4&&distance(saved.varkhorPunch.target,boss.varkhorPunch.target)==0&&
+        saved.animation.targetAngle==boss.animation.targetAngle,"Varkhor retains the striking arm and impact aim");
+  saves::Archive previous(false,{},31);
+  previous(punching);
+  saves::Archive envelope(false);
+  std::string magic="EMBERFALL-SAVE";int version=31;
+  size_t size=previous.bytes.size();uint64_t hash=saves::checksum(previous.bytes);
+  envelope(magic,version,size,hash);
+  const auto legacy=saves::decode(envelope.bytes+previous.bytes);
+  check(legacy.game.enemies.front().varkhorPunch.arm==0&&legacy.game.enemies.front().strike==boss.strike,
+        "version 31 preserves Varkhor's attack clock without a recorded punch target");
+  boss.varkhorPunch.arm=6;
+  rejects([&]{saves::encode(punching);},"invalid Varkhor striking arm rejected");
+ }
  auto caster=s;caster.game.props.clear();caster.game.enemies.clear();caster.game.player={16,50};caster.game.enemies.push_back({2000,14,{12,50},{12,50},104,104});
  for(int i=0;i<35&&caster.game.cinders.empty();i++)caster.game.update(.02f,{},false);
  check(!caster.game.cinders.empty(),"save fixture contains a real caster projectile");roundtrip(caster);resumed=saves::decode(saves::encode(caster));
