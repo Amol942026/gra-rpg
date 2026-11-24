@@ -38,6 +38,7 @@ struct AnimationState {
     ActorFacing travelAxis{}; // Transient locomotion direction in unsquashed screen coordinates.
     float turnLean=0; // Filtered turning velocity for articulated directional sprites.
     float pivotPhase=0; // Transient footwork driven by angular travel while turning.
+    int celFacing=-1; // Hysteresis for directional cels, initialized by their locomotion.
     void stopSprint(){sprinting=false;runBlend=0;}
 
     struct SprintStep {float end, average;};

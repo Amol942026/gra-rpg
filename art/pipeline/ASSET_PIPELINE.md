@@ -178,7 +178,8 @@ w ramach tego zadania. Brak procesu w sandboxie nie dowodzi zatrzymania aplikacj
 | Program | Sprawdzona wersja | Lokalizacja i metoda |
 | --- | --- | --- |
 | Krita | 5.3.4.1 | C:\Program Files\Krita (x64)\bin\krita.exe; lokalny krita-codex-mcp 0.2.0 |
-| Synfig | 1.4.5 | C:\Program Files\Synfig\bin\synfig.exe; natywne SIF i renderer CLI |
+| Blender | 5.2.2 LTS | C:\Program Files\Blender Foundation\Blender 5.2\blender.exe; MCP for Blender przez STDIO, dodatek na localhost:9876 |
+| Synfig | 1.4.5 | C:\Program Files\Synfig\bin\synfig.exe; obsługa starszych źródeł SIF |
 | Laigter | 1.14.0 | C:\AI2D\Tools\Laigter\laigter.exe; CLI bez GUI |
 | LMMS | 1.2.2 | C:\Program Files\LMMS\lmms.exe; XML MMP i render CLI |
 | Csound | 6.18 | C:\Program Files\Csound6_x64\bin\csound.exe; CSD i render offline |
@@ -207,15 +208,13 @@ otwartych dokumentów. Skrypt tworzący sprite zapisuje i zamyka własny dokumen
 3. Mapy i animacja:
 
        & $mediaPython 'tools\media\media_pipeline.py' --no-audio maps 'C:\AI2D\sprites\new_crystal.png'
-       & $mediaPython 'tools\media\media_pipeline.py' --no-audio animate 'C:\AI2D\sprites\new_crystal.png' 'C:\AI2D\animations\new_crystal.sif'
-
-   animate tworzy przenoszalny SIF z kopią PNG obok, renderuje 60 klatek128px
-   i pakuje atlas z opisem kotwicy, prostokątów, FPS i pamięci GPU. Jest to
-   szablon animacji wycinanki/obiektu; złożone animacje postaci wymagają
-   zaprojektowania części i właściwego rigu w SIF. Nie deklaruje automatycznej
-   naturalnej animacji dowolnej postaci na podstawie jednej ilustracji.
-4. Dla innych projektów Synfig stosuj C:\AI2D\animations\Render-Synfig.ps1;
-   respektuje zakres, FPS i rozmiar z SIF/SIFZ, sprawdza klatki i ruch.
+   W Blenderze łącz płaskie części w rzucie ortograficznym. Skonfigurowany
+   serwer `mcp-for-blender` przez STDIO łączy się z otwartym Blenderem na
+   localhost:9876. Sprawdź połączenie przez `get_scene_info`. Przy Szakalu
+   wydmowym `execute_blender_code` uruchamia `tools/media/jackal_blender.py`
+   z parametrem `JOB` wskazującym JSON z polami `paint` i `output`.
+   Zachowuj projekt BLEND, klatki RGBA, kotwicę, zakres ruchu i raport renderu.
+4. Starsze projekty SIF zachowują narzędzia `animate` i `Render-Synfig.ps1`.
 5. bake_lighting w asset_tools.py przygotowuje oświetlony PNG na podstawie
    manifestu Laigtera. Obecny silnik zużywa gotowy kolor; mapy nie są
    automatycznie podłączane jako nieistniejący shader.
@@ -339,7 +338,7 @@ dist bez kompilacji, można ponownie użyć bind_audio z asset_root=repo/dist/as
 stosuj tę samą walidację i backup. Publikowanie/pakowanie wymaga osobnego zadania.
 
 Manifest paczki: schema=1, id, files[{source,path,role,sha256}], provenance.
-Dozwolone eksporty: PNG, WAV, OGG i JSON. KRA/SIF/MMP/CSD pozostają masterami
+Dozwolone eksporty: PNG, WAV, OGG i JSON. KRA/BLEND/MMP/CSD pozostają masterami
 w C:\AI2D. Nie pakuj programów i źródeł roboczych do paczki gracza.
 
 ## Kontrola i diagnostyka

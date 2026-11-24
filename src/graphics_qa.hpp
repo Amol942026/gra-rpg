@@ -2,12 +2,70 @@
 #include "sprint_qa.hpp"
 #include "fallen_qa.hpp"
 
+template<class Check>
+void verifyJackalTurn(Check check,std::ostream& report){
+ namespace jackal=volcano_actors::jackal_blender;
+ const bool ready=jackal::ready()&&!volcano_actors::jackal_rig::ready();
+ check(ready,"jackal uses baked Blender frames in the game renderer");
+ if(!ready)return;
+ Enemy e{135,DuneJackalType,{20,20},{20,20},100,100};
+ auto& a=e.animation;
+ a.facingInitialized=a.motionInitialized=true;
+ bool facings=true,walk=true,padded=true,feet=true,actions=true;
+ int sampled=0;
+ for(int i=0;i<jackal::Facings;i++){
+  const float yaw=i*2*PI/jackal::Facings;
+  a.facingAngle=std::atan2(std::sin(yaw)*ActorGroundSquash,std::cos(yaw));
+  a.moveBlend=0;
+  const auto standing=jackal::select(e,-1);
+  facings&=standing.facing==i&&standing.index==jackal::Walk;
+  a.moveBlend=1;
+  for(int p=0;p<jackal::Walk;p++){
+   a.phase=float(p)/jackal::Walk;
+   const auto frame=jackal::select(e,-1);
+   const auto& page=jackal::pages[frame.facing/jackal::PerPage];
+   const auto rect=jackal::tile(frame);
+   facings&=frame.facing==i&&frame.index==p;
+   int top=jackal::Height,bottom=-1,filled=0;
+   for(int y=0;y<jackal::Height;y++)for(int x=0;x<jackal::Width;x++){
+    const auto alpha=page.alpha[(int(rect.y)+y)*jackal::SheetWidth+int(rect.x)+x];
+    if(alpha<128)continue;
+    padded&=x>0&&x<jackal::Width-1&&y>0&&y<jackal::Height-1;
+    top=std::min(top,y);bottom=std::max(bottom,y);filled++;
+   }
+   walk&=filled>=650;
+   feet&=top<47&&bottom>=jackal::AnchorY-8&&bottom<jackal::AnchorY+22;
+   ++sampled;
+  }
+  e.windup=.25f*meleeWindup(e.type);
+  const auto bite=jackal::select(e,-1);
+  e.windup=0;
+  actions&=bite.facing==i&&bite.index>jackal::Walk&&bite.index<=jackal::Walk+jackal::Attack;
+  e.deathMotion=a;
+  for(int side:{-1,1}){
+   e.deathDirection={float(side),float(-side)};
+   const auto down=jackal::select(e,1);
+   const int first=jackal::Walk+1+jackal::Attack+(side>0?jackal::Fall:0);
+   actions&=down.facing==i&&down.index==first+jackal::Fall-1;
+  }
+ }
+ a.moveBlend=1;a.phase=1;
+ check(facings,"jackal holds the walk phase while using all baked headings");
+ check(jackal::select(e,-1).index==0,"jackal walk wraps back to the first frame");
+ check(walk,"all jackal walking frames contain a full painted silhouette");
+ check(padded,"jackal silhouette stays inside the padded atlas cells");
+ check(feet,"jackal walk stays registered to its common ground anchor");
+ check(actions,"jackal bite and both falls select baked Blender frames");
+ report<<"Jackal sampled walking frames: "<<sampled<<'\n';
+}
+
 bool runGraphicsQA(){
  fs::create_directories("qa-v21");std::ofstream report("qa-v21/graphics-tests.txt");int checks=0,failures=0;
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
  check(!audioSystem.available,"graphics diagnostic opens no audio device");
  verifySprintArt(check);
  verifyFallenArt(check);
+ verifyJackalTurn(check,report);
  {
   const double started=GetTime();
   int count=0;

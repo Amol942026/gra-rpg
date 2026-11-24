@@ -1,4 +1,5 @@
 #pragma once
+#include <cstring>
 #include <optional>
 #include "generated/ember_drake_turn_atlas.hpp"
 #include "generated/slag_crawler_turn_atlas.hpp"
@@ -11,6 +12,8 @@
 #include "generated/desert_jackal_turn_atlas.hpp"
 #include "generated/desert_reaper_turn_atlas.hpp"
 #include "generated/desert_enemy_motion.hpp"
+#include "generated/reaper_sickle_motion.hpp"
+#include "generated/jackal_rig_motion.hpp"
 #include "generated/cinderhorn_synfig.hpp"
 #include "generated/cinderhorn_fall_synfig.hpp"
 #include "generated/volcano_motion.hpp"
@@ -38,6 +41,12 @@ namespace volcano_actors::turn_art {inline void load();inline void unload();}
 namespace volcano_actors::cinderhorn_turn {inline void load();inline void unload();}
 namespace volcano_actors::salamander_art {inline void load();inline void unload();}
 namespace volcano_actors::desert_enemy_art {inline void load();inline void unload();}
+namespace volcano_actors::jackal_puppet {inline bool ready();inline void load();inline void unload();}
+namespace volcano_actors::jackal_skin {inline bool ready();inline void load();inline void unload();}
+namespace volcano_actors::jackal_cels {inline bool ready();inline void load();inline void unload();}
+namespace volcano_actors::jackal_rig {inline bool ready();inline void load();inline void unload();}
+namespace volcano_actors::jackal_blender {inline bool ready();inline void load();inline void unload();}
+namespace world_shadows {extern Shader maskShader;}
 namespace actor_art {inline Vector2 reserveSpriteDepth();}
 extern "C" void (*glfwGetProcAddress(const char*))(void);
 namespace wraith_death_art {
@@ -48,7 +57,7 @@ inline bool living(float,float,float,const AnimationState&,float,Color,const Vec
 // The original cutouts retain their walk cycles. Special gestures add Blender pose curves.
 namespace volcano_actors {
 inline constexpr const char* names[]={"slag-crawler","lava-salamander","fire-imp","ash-wraith","obsidian-sentinel","ember-drake","varkhor"};
-inline constexpr float facingAngles[]={0,.4636476f,1.5707963f,2.677945f,3.14159265f,3.6052403f,4.712389f,5.8195377f};
+inline constexpr auto& facingAngles=desert_motion::PaintedFacings;
 struct GroundPose {float lift=0;Rectangle footprint{};};
 struct Atlas {
  Texture2D art{},silhouette{},relief{};
@@ -79,6 +88,15 @@ inline void load(){
  caldera_quadruped::load();
  cinderhorn_turn::load();
  salamander_art::load();
+ jackal_blender::load();
+ if(!jackal_blender::ready()){
+  jackal_rig::load();
+  if(!jackal_rig::ready())jackal_cels::load();
+  if(!jackal_rig::ready()&&!jackal_cels::ready()){
+   jackal_skin::load();
+   if(!jackal_skin::ready())jackal_puppet::load();
+  }
+ }
  turn_art::load();
  desert_enemy_art::load();
  if(!caldera_puppets::ready(caldera_puppets::Wraith))wraith_death_art::load();
@@ -97,6 +115,11 @@ inline void unload(){
  cinderhorn_turn::unload();
  salamander_art::unload();
  turn_art::unload();
+ jackal_puppet::unload();
+ jackal_skin::unload();
+ jackal_rig::unload();
+ jackal_cels::unload();
+ jackal_blender::unload();
  desert_enemy_art::unload();
  wraith_death_art::unload();
  varkhor_death_art::unload();
@@ -329,6 +352,11 @@ inline std::optional<varkhor_punch::Target> punchTarget(const Enemy& e){
  return varkhor_punch::Target{{(delta.x-delta.y)*40,(delta.x+delta.y)*20-elevation-72},e.varkhorPunch.arm};
 }
 #include "volcano_turn.hpp"
+#include "jackal_skin.hpp"
+#include "jackal_cels.hpp"
+#include "jackal_puppet.hpp"
+#include "jackal_rig.hpp"
+#include "jackal_blender.hpp"
 #include "desert_enemy_art.hpp"
 #include "cinderhorn_turn_pose.hpp"
 #include "lava_salamander_art.hpp"

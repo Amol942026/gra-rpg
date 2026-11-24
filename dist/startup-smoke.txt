@@ -29,13 +29,13 @@ Native canvas: 1728x1080
 Desert background buffer: 0x0
 Hidden background diagnostic: yes
 Window hidden: yes
-Diagnostic loop rate (not foreground FPS): 60.5723
-CPU frame mean (ms): 16.4727
-EndDrawing mean (ms): 0.0409782
-Presentation mean (ms): 8.06723e-05
-CPU frame p95 (ms): 14.4561
-CPU frame p99 (ms): 14.9202
-Frame p95 (ms): 14.5143
-Frame p99 (ms): 15.0715
-Frame max (ms): 344.207
-Frames over 25 ms: 1
+Diagnostic loop rate (not foreground FPS): 39.2138
+CPU frame mean (ms): 25.5853
+EndDrawing mean (ms): 0.0490403
+Presentation mean (ms): 0.000157143
+CPU frame p95 (ms): 32.7999
+CPU frame p99 (ms): 33.2192
+Frame p95 (ms): 32.8364
+Frame p99 (ms): 33.2677
+Frame max (ms): 353.251
+Frames over 25 ms: 53

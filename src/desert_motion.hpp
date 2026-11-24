@@ -6,6 +6,8 @@
 namespace ember::desert_motion {
 inline constexpr float ScarabStride=16.f;
 inline constexpr float CobraWavelength=77.f;
+inline constexpr float JackalCycle=54.f,ReaperCycle=37.f;
+inline constexpr float PaintedFacings[]={0,.4636476f,1.5707963f,2.677945f,3.14159265f,3.6052403f,4.712389f,5.8195377f};
 inline constexpr float DuneDustDuration=.64f;
 inline constexpr unsigned DuneDustGrains=320;
 inline constexpr unsigned DuneRimGrains=128;
@@ -34,6 +36,29 @@ inline void advance(AnimationState& state,float dx,float dy,float dt,bool faceMo
  }
  state.advance(dx,dy,dt,false,false,false,turnRate);
  if(state.moving)state.phase=std::fmod(phase+travelled/cycleLength,1.f);
+}
+
+inline int paintedFacing(float heading){
+ const auto gap=[&](int index){return std::abs(std::remainder(heading-PaintedFacings[index],2*AnimationPi));};
+ int nearest=0;
+ for(int i=1;i<8;i++)if(gap(i)<gap(nearest))nearest=i;
+ return nearest;
+}
+
+inline constexpr int JackalFacings=16;
+inline constexpr float JackalFacingStep=2*AnimationPi/JackalFacings;
+inline int jackalFacing(float heading,int held=-1){
+ const float yaw=std::atan2(std::sin(heading)/ActorGroundSquash,std::cos(heading));
+ // The cels are spaced in world yaw. Isometric projection compresses some
+ // sectors on screen, so rounding the screen angle would skip drawings.
+ const int index=(int(std::lround(yaw/JackalFacingStep))+JackalFacings)%JackalFacings;
+ const float holdDistance=JackalFacingStep*.5f+.036f;
+ return held>=0&&held<JackalFacings&&std::abs(std::remainder(yaw-held*JackalFacingStep,2*AnimationPi))<=holdDistance?
+        held:index;
+}
+inline void advanceJackal(AnimationState& state,float dx,float dy,float dt,bool faceMovement){
+ advance(state,dx,dy,dt,faceMovement,JackalCycle,8.5f);
+ if(state.facingInitialized)state.celFacing=jackalFacing(state.facingAngle,state.celFacing);
 }
 
 inline ActorFacing scarabStepAxis(const AnimationState& state){

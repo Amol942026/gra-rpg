@@ -1072,8 +1072,9 @@ struct Game {
    if(e.windup>0&&e.type!=VolcanoBossType&&((e.type!=3&&e.type!=7)||e.windup>.12f))faceEnemyTowards(e,player-e.pos);
    if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType)advanceVolcanoAnimation(e,gait,dt,faceMovement);
    else if(e.type==CinderhornType)cinderhorn_gait::advance(e.animation,gait.x,gait.y,dt,faceMovement,e.boarRush>0);
-   else if(newDesertEnemy(e.type))desert_motion::advance(e.animation,gait.x,gait.y,dt,faceMovement,
-       e.type==DuneJackalType?43.f:37.f,e.type==DuneJackalType?9.f:7.4f);
+   else if(e.type==DuneJackalType)desert_motion::advanceJackal(e.animation,gait.x,gait.y,dt,faceMovement);
+   else if(e.type==GlassReaperType)desert_motion::advance(e.animation,gait.x,gait.y,dt,faceMovement,
+        desert_motion::ReaperCycle,7.4f);
    else if(e.type==BoarType)forest_boar_motion::advance(e.animation,gait.x,gait.y,dt,
        forest_boar_motion::phase(e.boarVisualPhase()),faceMovement);
    else if(e.type==3)guardian_gait::advance(e.animation,gait.x,gait.y,dt,faceMovement);

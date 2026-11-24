@@ -12,7 +12,8 @@ using Track=std::array<Mark,6>;
 
 namespace ember::enemy_death {
 static_assert(std::size(data::tracks)==EnemyTypeCount);
-inline float duration(int type){return data::tracks[type].back().frame/data::framesPerSecond;}
+inline constexpr float durationScale(int type){return type==DuneJackalType?.70f:1.f;}
+inline float duration(int type){return data::tracks[type].back().frame*durationScale(type)/data::framesPerSecond;}
 inline float endTime(int type){
  if(type==StoneGuardianType)return data::guardianSmoke.back().frame/data::framesPerSecond;
  return type==VolcanoBossType?float(varkhor_ash_motion::AirFrames)/varkhor_ash_motion::FramesPerSecond:duration(type);
@@ -32,5 +33,5 @@ inline Key sample(int type,float progress){
  return sampleTrack(track,progress*track.back().frame);
 }
 inline float groundContact(int type){const auto& track=data::tracks[type];return float(track[3].frame)/track.back().frame;}
-inline float groundContactTime(int type){return data::tracks[type][3].frame/data::framesPerSecond;}
+inline float groundContactTime(int type){return data::tracks[type][3].frame*durationScale(type)/data::framesPerSecond;}
 }

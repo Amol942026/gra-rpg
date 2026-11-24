@@ -2,6 +2,7 @@
 
 import argparse
 import io
+import math
 from pathlib import Path
 import shutil
 import zipfile
@@ -16,6 +17,9 @@ from slag_crawler_paint import atlas
 
 
 CELL = 160
+TURN_STEPS = 8
+TURN_ANGLES = (0, math.atan(.5), math.pi/2, math.pi-math.atan(.5), math.pi,
+               math.pi+math.atan(.5), 3*math.pi/2, 2*math.pi-math.atan(.5), 2*math.pi)
 # Head, left leg, right leg, body, left arm/foreleg, right arm/foreleg.
 JACKAL = (
     (((88,73),(89,32),(134,32),(134,68),(109,78)), (101,67),
@@ -216,7 +220,7 @@ def mirror(parts, pivots, who):
 def reproject_pair(parts, who):
     left, lp = mirror(*parts[7], who)
     right, rp = parts[7]
-    rear = [inbetween(Paint(a), Paint(b), .5, retain_detail=True) for a, b in zip(left, right)]
+    rear = [inbetween(Paint(a), Paint(b), .5, one_paint=True) for a, b in zip(left, right)]
     return rear, [(float(x+u)/2, float(y+v)/2) for (x, y), (u, v) in zip(lp, rp)]
 
 
@@ -336,38 +340,81 @@ def film_inputs(keys, folder):
     frames[0].save(folder/"flow.png", save_all=True, append_images=frames[1:], duration=100)
 
 
-def film_finish(part, colors, index):
-    x, y = index%3*CELL, index//3*CELL
-    ai = np.array(colors.crop((x,y,x+CELL,y+CELL)), dtype=np.float32)
-    pixels = np.array(part)
-    rgb = pixels[..., :3].astype(np.float32)
-    # Retain the authored silhouette and the sharp material texture. Limit
-    # FILM influence to gentle color correction inside an already opaque part.
-    delta = np.clip(ai-rgb, -18, 18)
-    rgb += .22 * delta * np.clip((pixels[..., 3:4]-np.float32(165))/90, 0, 1)
-    pixels[..., :3] = np.uint8(np.clip(rgb, 0, 255))
-    return Image.fromarray(pixels)
+def stabilize_jackal(parts, pivots, angle):
+    # Normalize the whole animal through one transform so the coat, head,
+    # tail and sockets stay registered as the painted view changes.
+    mask = np.maximum.reduce([np.asarray(part.getchannel("A")) for part in parts])
+    rows, columns = np.where(mask >= 110)
+    x0, x1 = columns.min(), columns.max() + 1
+    y0, y1 = rows.min(), rows.max() + 1
+    forward, depth = math.cos(angle), math.sin(angle)
+    width = math.hypot(101 * forward, (37 + 11 * max(0, -depth)) * depth)
+    height = 96 + 3 * depth * depth
+    sx, sy = width / (x1 - x0), height / (y1 - y0)
+    tx = 80 - 4 * forward - .5 * (x0 + x1) * sx
+    ty = 144 - y1 * sy
+    transform = (1/sx, 0, -tx/sx, 0, 1/sy, -ty/sy)
+    cels = [part.transform(part.size, Image.Transform.AFFINE, transform, Image.Resampling.BICUBIC)
+            for part in parts]
+    sockets = [(x*sx + tx, y*sy + ty) for x, y in pivots]
+    return cels, sockets
 
 
-def bake(keys, who, work, output, header, film):
+def jackal_tail_pair(part, key):
+    # Cut through the tail root with a small overlap. At the rear three-quarter
+    # turn the tail and flank occupy different scanlines and must track separately.
+    profile = ((22,142),(20,95),(41,92),(57,89),(57,102),(46,116),(44,142))
+    rear = ((29,150),(29,109),(45,97),(66,87),(68,102),(56,121),(52,149))
+    cut = profile if key in (0,4) else rear
+    if key in (4,5):
+        cut = tuple((159-x,y) for x,y in cut)
+    tail = feather_polygons(part.size,cut)
+    alpha = np.asarray(part.getchannel("A"))
+    result = []
+    for mask in (1-tail,tail):
+        layer = part.copy()
+        layer.putalpha(Image.fromarray(np.uint8(alpha*np.minimum(1,mask*1.35)+.5)))
+        result.append(Paint(layer))
+    return result
+
+
+def bake(keys, who, work, output, header):
     painted = [[Paint(part) for part in parts] for parts, _ in keys]
+    tail_pairs = ({k:jackal_tail_pair(keys[k][0][3],k) for k in (0,4,5,7)}
+                  if who == "jackal" else {})
     views = []
+    sockets = []
     for k in range(8):
-        for n in range(4):
+        for n in range(TURN_STEPS):
+            t = n / TURN_STEPS
             parts = keys[k][0] if n == 0 else [
-                inbetween(a, b, n/4, retain_detail=True)
+                inbetween(a, b, t, one_paint=True)
                 for a, b in zip(painted[k], painted[(k+1)%8])]
-            model = film/f"view_{k*4+n:03}.png"
-            if n and model.exists():
-                with Image.open(model) as colors:
-                    parts = [film_finish(p, colors, i) for i, p in enumerate(parts)]
-            views.append([one_surface(p) for p in parts])
+            if n and tail_pairs and k in (4,7):
+                near, far = tail_pairs[k],tail_pairs[(k+1)%8]
+                trunk, tail = (inbetween(a,b,t,one_paint=True) for a,b in zip(near,far))
+                tail.alpha_composite(trunk)
+                parts[3] = tail
+            parts = [one_surface(p) for p in parts]
+            if who == "jackal":
+                angle = TURN_ANGLES[k]*(1-t) + TURN_ANGLES[k+1]*t
+                points = [(x*(1-t)+u*t, y*(1-t)+v*t)
+                          for (x,y),(u,v) in zip(keys[k][1],keys[(k+1)%8][1])]
+                parts, points = stabilize_jackal(parts, points, angle)
+                sockets.append(points)
+            views.append(parts)
     name = ("dune_jackal" if who == "jackal" else "glass_reaper")
-    atlas(work, views, output, header, name=name, ordering=lambda k:ORDERS[who][k])
+    atlas(work, views, output, header, name=name, ordering=lambda k:ORDERS[who][k], width=2048)
     contents = header.read_text().replace(f"{name}_paint.py", "desert_enemy_paint.py").rstrip()
-    lines = [contents[:-1], "inline constexpr short pivots[8][6][2]={"]
-    for _, points in keys:
-        lines.append(" {"+",".join("{%d,%d}" % (x,y) for x,y in points[:6])+"},")
+    lines = [contents[:-1]]
+    if who == "jackal":
+        lines.append("inline constexpr float pivots[Count][6][2]={")
+        for points in sockets:
+            lines.append(" {"+",".join("{%.3ff,%.3ff}" % (x,y) for x,y in points)+"},")
+    else:
+        lines.append("inline constexpr short pivots[8][6][2]={")
+        for _, points in keys:
+            lines.append(" {"+",".join("{%d,%d}" % (x,y) for x,y in points[:6])+"},")
     lines.append("};")
     if who=="reaper":
         lines.append("inline constexpr short joints[8][4][2]={")
@@ -404,7 +451,7 @@ def main():
                 with Image.open(accents) as overlay:
                     add_accents(keys, overlay.convert("RGBA"))
             bake(keys,who,work,Path("assets/desert")/f"{who}-turn",
-                 Path("src/generated")/f"desert_{who}_turn_atlas.hpp",work/"film-output")
+                 Path("src/generated")/f"desert_{who}_turn_atlas.hpp")
 
 
 if __name__ == "__main__":

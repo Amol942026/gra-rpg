@@ -368,7 +368,7 @@ def skull_between(a, b, first, nextkey, t):
     return sharp
 
 
-def inbetween(a, b, t, film=None, *, retain_detail=False):
+def inbetween(a, b, t, film=None, *, retain_detail=False, one_paint=False):
     def lerp(left, right):
         return (1 - t) * left + t * right
 
@@ -391,6 +391,15 @@ def inbetween(a, b, t, film=None, *, retain_detail=False):
     distance = lerp(sd0, sd1)
     alpha = np.clip(distance + 0.5, 0, 1)
     alpha[(GRID_Y < height[0]) | (GRID_Y > height[-1])] = 0
+    if one_paint:
+        # The contour travels continuously. A moving seam reveals one set of
+        # brush marks at a time, so fur, ears and straps never have two edges.
+        seam = np.clip(.50 + .55 * (u - .5) + .22 * (v[:, None] / (UV - 1) - .5), .13, .87)
+        second = t >= seam
+        second = np.where((sd0 < -.25) & (sd1 >= -.25), True, second)
+        second = np.where((sd1 < -.25) & (sd0 >= -.25), False, second)
+        rgb = np.where(second[..., None], rgb1, rgb0)
+        return Image.fromarray(np.uint8(np.rint(np.dstack((rgb, 255 * alpha)))))
     # A tip revealed in just one key picks up that key's paint. Dark matte
     # pixels from uncovered skin cannot bleed into the highlight.
     w0 = (1 - t) * np.clip(sd0 + 1, 0.03, 1)

@@ -107,7 +107,7 @@ inline bool probeFragment(const volcano_actors::Atlas& atlas,const Fragment& pie
  Vector2 local{piece.origin.x+offset.x/pose.scaleX,piece.origin.y+offset.y/pose.scaleY};
  if(!inCut(local,piece.cut))return false;
  if(rig){
-  if(piece.part==5 && rig->arms[1].angle!=0)local=rig->arms[1].map(local,true);
+  if(piece.part==5 && rig->joints[5].angle!=0)local=rig->joints[5].map(local,true);
   const auto& box=rig->partBox[piece.part];
   const float u=(local.x-box.x)/box.width,v=(local.y-box.y)/box.height;
   if(u<0||u>1||v<0||v>1)return false;

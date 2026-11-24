@@ -39,9 +39,8 @@ Normal/specular/occlusion wykorzystuj do bake PNG; parallax zachowuj w źródła
   klipy/kierunki. Domyślne komórki testowe 128 px nie są wymogiem całej gry.
 - Metadane podają faktyczne bajty RGBA8. Tekstury NPOT ograniczają puste miejsce;
   używaj marginesu między komórkami, kontroluj alfa i bilinear filtering.
-- Synfig renderuj domyślnie dwoma wątkami; sekwencyjnie wykonuj ciężkie etapy
-  na Ryzen 5 7530U / 16 GB / zintegrowanym Radeon. Nie trzymaj wielu dużych
-  dokumentów i rendererów aktywnych równocześnie.
+- Renderuj animacje 2D w Blenderze z ograniczoną liczbą wątków. Ciężkie
+  etapy wykonuj kolejno na Ryzen 5 7530U / 16 GB / zintegrowanym Radeonie.
 
 ## Dźwięk
 

@@ -80,6 +80,9 @@ inline Artwork jackal{"assets/desert/jackal-turn/",dune_jackal_turn_atlas::PageC
 inline Artwork reaper{"assets/desert/reaper-turn/",glass_reaper_turn_atlas::PageCount,
  [](int view,int part,int){return glass_reaper_turn_atlas::tiles[view][part];},
  glass_reaper_turn_atlas::authoredPart,reaperOrder};
+static_assert(dune_jackal_turn_atlas::Count==glass_reaper_turn_atlas::Count);
+static_assert(dune_jackal_turn_atlas::Count%8==0);
+inline bool singleDirectionalPaint(const Artwork& art){return &art==&jackal||&art==&reaper;}
 inline Shader program{};
 inline bool filtered(){return program.id && program.id!=rlGetShaderIdDefault();}
 inline bool continuousImp(){return impCels.color.id&&impContour.ready()&&filtered();}
@@ -101,8 +104,10 @@ inline Part interpolate(const Part& a,const Part& b,float t){
 struct View {
  int base=0,sample=0;
  float t=0,mix=0;
+ int count=32;
  int nextBase()const{return (base+1)%8;}
- int nextSample()const{return (sample+1)%32;}
+ int nextSample()const{return (sample+1)%count;}
+ int nearestSample()const{return mix<.5f?sample:nextSample();}
  int nearestBase()const{return t<.5f?base:nextBase();}
 };
 inline float heading(View view){
@@ -173,7 +178,9 @@ struct ImpCelView {
 };
 inline View view(const AnimationState& state,const Artwork& art){
  const int key=std::clamp(int(state.direction),0,7);
- if(!art.ready()||!state.facingInitialized)return {key,key*4,0,0};
+ const bool single=singleDirectionalPaint(art);
+ const int count=single?dune_jackal_turn_atlas::Count:32,steps=count/8;
+ if(!art.ready()||!state.facingInitialized)return {key,key*steps,0,0,count};
  float radians=std::fmod(state.facingAngle,2*PI);
  if(radians<0)radians+=2*PI;
  if(&art==&imp&&impCels.color.id){
@@ -190,10 +197,10 @@ inline View view(const AnimationState& state,const Artwork& art){
  int base=int(std::upper_bound(facingAngles+1,facingAngles+8,radians)-facingAngles)-1;
  const float end=base==7?2*PI:facingAngles[base+1];
  const float t=std::clamp((radians-facingAngles[base])/(end-facingAngles[base]),0.f,1.f);
- const float f=t*4;
- const int sub=std::min(3,int(f));
- View result{base,4*base+sub,t,f-sub};
- if(!filtered()){
+ const float f=t*steps;
+ const int sub=std::min(steps-1,int(f));
+ View result{base,steps*base+sub,t,f-sub,count};
+ if(!filtered()&&!single){
   result.sample=(result.sample+int(result.mix>=.5f))%32;
   result.base=result.sample/4;result.t=(result.sample%4)*.25f;result.mix=0;
  }
@@ -254,7 +261,7 @@ inline SwordJoint reaperElbow(View view,int part,float angle){
 }
 struct Locations {
  int uv0,uv1,axisU,axisV,guide0,guide1,order0,order1,lighting,phase,page1,material,flow,flowView;
- int elbowBox,elbowAxis,impNode,edgeJaw,shellAngle,solidLayerOrder;
+ int jointBox,jointAxis,impNode,edgeJaw,shellAngle,solidLayerOrder;
 };
 inline Locations loc{};
 inline void unloadCelPages(Artwork& art){
@@ -294,8 +301,8 @@ uniform vec4 uv0[6], uv1[6], guide0[6], guide1[6];
 uniform vec3 axisU[6], axisV[6], lighting[6];
 uniform int order0[6],order1[6];
 uniform vec3 phase;
-uniform vec4 elbowBox[2];
-uniform vec3 elbowAxis[2];
+uniform vec4 jointBox[6];
+uniform vec3 jointAxis[6];
 uniform int solidLayerOrder;
 vec2 unbend(vec2 uv,vec4 box,vec3 axis){
     vec2 q=(uv-box.xy)*box.zw;
@@ -380,7 +387,7 @@ void main() {
         layers[i]=vec4(0.0);
         if(group>0 && i!=group-1)continue;
         vec2 at=vec2(dot(axisU[i],point),dot(axisV[i],point));
-        if(i>=4 && elbowAxis[i-4].z!=0.)at=unbend(at,elbowBox[i-4],elbowAxis[i-4]);
+        if(jointAxis[i].z!=0.)at=unbend(at,jointBox[i],jointAxis[i]);
         if(any(lessThan(at,vec2(0))) || any(greaterThan(at,vec2(1))))continue;
         vec2 a=at,b=at;
         bool shell=i==3&&shellAngle>=0.;
@@ -434,7 +441,7 @@ void main() {
         for(int i=0;i<6;i++){
             vec4 a=layers[order0[i]];
             left=a+left*(1.-a.a);
-            if(impNode!=-5){
+            if(impNode!=-5 && solidLayerOrder==0){
                 vec4 b=layers[order1[i]];
                 right=b+right*(1.-b.a);
             }
@@ -442,12 +449,12 @@ void main() {
         // An opaque shield passes in front of the torso along its edge.
         // A dissolve between depth orders would show the cuirass through it.
         float orderMix=phase.y;
-        if(edgeJaw>0||impNode!=-1||solidLayerOrder!=0)orderMix=step(clamp(.5+point.x/112.,.24,.76),phase.y);
+        if(edgeJaw>0||impNode!=-1)orderMix=step(clamp(.5+point.x/112.,.24,.76),phase.y);
         else if(flowView>=0){
             float crossAt=clamp(.5+point.x/112.,.24,.76);
             orderMix=smoothstep(crossAt-.045,crossAt+.045,phase.y);
         }
-        mixed=impNode==-5?left:mix(left,right,orderMix);
+        mixed=impNode==-5||solidLayerOrder!=0?left:mix(left,right,orderMix);
     }
     if(shadow){
         if(mixed.a<.62)discard;
@@ -463,7 +470,7 @@ void main() {
   loc={location("uv0[0]"),location("uv1[0]"),location("axisU[0]"),location("axisV[0]"),
        location("guide0[0]"),location("guide1[0]"),location("order0[0]"),location("order1[0]"),
        location("lighting[0]"),location("phase"),location("page1"),location("material"),
-       location("turnFlow"),location("flowView"),location("elbowBox[0]"),location("elbowAxis[0]"),location("impNode"),location("edgeJaw"),location("shellAngle"),location("solidLayerOrder")};
+       location("turnFlow"),location("flowView"),location("jointBox[0]"),location("jointAxis[0]"),location("impNode"),location("edgeJaw"),location("shellAngle"),location("solidLayerOrder")};
  }
 }
 inline void calibrateRegisteredViews(Artwork& art){
@@ -609,8 +616,9 @@ inline void loadImpCels(){
 }
 inline void loadContactContours(Artwork& art){
  if(!art.ready()||!art.contactContours.empty())return;
- art.contactContours.resize(32*6);
- for(int view=0;view<32;view++)for(int p=0;p<6;p++){
+ constexpr int count=dune_jackal_turn_atlas::Count;
+ art.contactContours.resize(count*6);
+ for(int view=0;view<count;view++)for(int p=0;p<6;p++){
   const auto tile=art.tile(view,p,0);
   const auto& page=art.pages[tile.page];
   auto& contour=art.contactContours[view*6+p];
@@ -635,9 +643,11 @@ inline void load(){
  loadProgram();
  if(!caldera_puppets::ready(caldera_puppets::Imp)){loadPages(imp);loadImpCels();}
  if(filtered())loadPages(sentinel);
- loadPages(jackal);
+ if(!jackal_blender::ready()&&!jackal_rig::ready()&&!jackal_cels::ready()&&!jackal_puppet::ready()&&!jackal_skin::ready()){
+  loadPages(jackal);
+  loadContactContours(jackal);
+ }
  loadPages(reaper);
- loadContactContours(jackal);
  loadContactContours(reaper);
 }
 inline Vector4 textureRect(const Artwork& art,const Tile& t){
@@ -696,6 +706,7 @@ inline Vector2 displacement(const Artwork& art,int view,int part,float u,float v
  return flowSample(art.vectors,art.flow.width,impMap?48:32,view,part,u,v,right,impMap?255.f:384.f);
 }
 inline float turnCoverage(const Artwork& art,View angle,int part,int jaw,float u,float v){
+ if(singleDirectionalPaint(art))return coverage(art,art.tile(angle.nearestSample(),part,jaw),u,v);
  if(art.directCels()){
   const DirectionCels cells(angle);
   const auto alpha=[&](int index){
@@ -760,12 +771,37 @@ inline void order(const Artwork& art,int base,int* rows,float action=-1){
   std::rotate(blade,blade+1,rows+6);
  }
 }
+inline Vector2 footTip(const Artwork& art,View view,int part){
+ const auto tip=[&](int frame){
+  const auto tile=art.tile(frame,part,0);
+  const auto& contour=art.contactContours[frame*6+part];
+  return Vector2{.8f*(tile.ox+tile.w*(contour[22].x+contour[23].x)*.5f),.8f*(tile.oy+tile.h)};
+ };
+ const auto a=tip(view.sample),b=tip(view.nextSample());
+ return {mix(a.x,b.x,view.mix),mix(a.y,b.y,view.mix)};
+}
+inline SwordJoint reaperKnee(Vector2 hip,Vector2 foot,float angle){
+ const Vector2 axis{foot.x-hip.x,foot.y-hip.y};
+ const float length=std::max(1.f,std::hypot(axis.x,axis.y));
+ return {{hip.x+.47f*axis.x,hip.y+.47f*axis.y},{axis.x/length,axis.y/length},angle*DEG2RAD};
+}
+inline SwordJoint jackalKnee(View view,int part,Vector2 hip,Vector2 foot,float angle){
+ const Vector2 leg{foot.x-hip.x,foot.y-hip.y};
+ const float span=part>=4?.48f:.44f;
+ // The foreleg's wrist and the hind leg's hock bend in opposite directions.
+ // Near head-on they are foreshortened, so their lateral displacement vanishes.
+ const float offset=(part>=4?-.13f:.17f)*std::cos(heading(view));
+ const Vector2 center{hip.x+span*leg.x-offset*leg.y,hip.y+span*leg.y+offset*leg.x};
+ const Vector2 shin{foot.x-center.x,foot.y-center.y};
+ const float length=std::max(1.f,std::hypot(shin.x,shin.y));
+ return {center,{shin.x/length,shin.y/length},angle*DEG2RAD};
+}
 struct Rig {
  const Artwork& art;
  View angle;
  int jaw;
  float materialWeight=0;
- SwordJoint arms[2]{};
+ SwordJoint joints[6]{};
  Rectangle box{},partBox[6]{};
  Vector4 uv0[6],uv1[6],guide0[6],guide1[6];
  Vector3 axisU[6],axisV[6],lighting[6];
@@ -782,6 +818,9 @@ struct Rig {
    const auto& layers=&art==&drake?drake_direction_cels::order[cell]:crawler_direction_cels::order[cell];
    std::copy_n(layers,6,order0);
    std::copy_n(layers,6,order1);
+  }else if(singleDirectionalPaint(art)){
+   order(art,view.nearestBase(),order0,action);
+   std::copy_n(order0,6,order1);
   }else{
    order(art,view.base,order0,action);order(art,view.nextBase(),order1,action);
   }
@@ -791,7 +830,9 @@ struct Rig {
    auto& bounds=partBox[p];
    bounds={blend(a.ox,b.ox),blend(a.oy,b.oy),blend(a.w,b.w),blend(a.h,b.h)};
    const bool donor=&art==&imp && art.flow.id;
-   uv0[p]=textureRect(art,donor?art.tile(view.base*4,p,jaw):a);
+   const auto first=singleDirectionalPaint(art)?art.tile(view.nearestSample(),p,jaw):
+                    donor?art.tile(view.base*4,p,jaw):a;
+   uv0[p]=textureRect(art,first);
    uv1[p]=textureRect(art,donor?art.tile(view.nextBase()*4,p,jaw):b);
    if(rigidShell(art,p)){
     bounds=shellBounds(view);
@@ -822,9 +863,11 @@ struct Rig {
    axisU[p]={c/uw,s/uw,(k.pivot.x-bounds.x)/bounds.width-(c*px+s*py)/uw};
    axisV[p]={-s/vh,c/vh,(k.pivot.y-bounds.y)/bounds.height+(s*px-c*py)/vh};
    Rectangle envelope=bounds;
-   if(p>=4 && k.elbow!=0&&(&art!=&reaper||filtered())){
-    auto& joint=arms[p-4];
-    joint=&art==&imp?impElbow(view,p,k.elbow):&art==&reaper?reaperElbow(view,p,k.elbow):swordJoint(view,k.elbow);
+   if(k.elbow!=0&&(p>=4||(singleDirectionalPaint(art)&&(p==1||p==2)))&&filtered()){
+    auto& joint=joints[p];
+    joint=&art==&jackal?jackalKnee(view,p,k.pivot,footTip(art,view,p),k.elbow):
+          p<3?reaperKnee(k.pivot,footTip(art,view,p),k.elbow):
+          &art==&imp?impElbow(view,p,k.elbow):&art==&reaper?reaperElbow(view,p,k.elbow):swordJoint(view,k.elbow);
     const float rx=std::max(std::abs(bounds.x-joint.center.x),std::abs(bounds.x+bounds.width-joint.center.x));
     const float ry=std::max(std::abs(bounds.y-joint.center.y),std::abs(bounds.y+bounds.height-joint.center.y));
     const float radius=std::hypot(rx,ry);
@@ -850,8 +893,8 @@ struct Rig {
   for(int p=0;p<6;p++){
    auto dot=[&](Vector3 axis){return q.x*axis.x+q.y*axis.y+axis.z;};
    float u=dot(axisU[p]),v=dot(axisV[p]);
-   if(p>=4&&arms[p-4].angle!=0){
-    const auto& joint=arms[p-4];
+   if(joints[p].angle!=0){
+    const auto& joint=joints[p];
     const auto& box=partBox[p];
     const auto source=joint.map({box.x+u*box.width,box.y+v*box.height},true);
     u=(source.x-box.x)/box.width;v=(source.y-box.y)/box.height;
@@ -866,15 +909,14 @@ struct Rig {
   materialWeight=collapse;
   if(!filtered())return;
   BeginShaderMode(program);
-  Vector3 axes[2]{};Vector4 boxes[2]{};
-  for(int arm=0;arm<2;arm++){
-   const auto& joint=arms[arm];const auto& box=partBox[arm+4];
-   axes[arm]={joint.axis.x,joint.axis.y,joint.angle};
-   if(joint.angle!=0)boxes[arm]={(joint.center.x-box.x)/box.width,(joint.center.y-box.y)/box.height,box.width,box.height};
+  Vector3 axes[6]{};Vector4 boxes[6]{};
+  for(int p=0;p<6;p++){
+   const auto& joint=joints[p];const auto& box=partBox[p];
+   axes[p]={joint.axis.x,joint.axis.y,joint.angle};
+   if(joint.angle!=0)boxes[p]={(joint.center.x-box.x)/box.width,(joint.center.y-box.y)/box.height,box.width,box.height};
   }
-  SetShaderValueV(program,loc.elbowAxis,axes,SHADER_UNIFORM_VEC3,2);
-  if(arms[0].angle!=0||arms[1].angle!=0)SetShaderValueV(program,loc.elbowBox,boxes,SHADER_UNIFORM_VEC4,2);
   auto send=[](int loc,const void* ptr,int type){SetShaderValueV(program,loc,ptr,type,6);};
+  send(loc.jointAxis,axes,SHADER_UNIFORM_VEC3);send(loc.jointBox,boxes,SHADER_UNIFORM_VEC4);
   send(loc.uv0,uv0,SHADER_UNIFORM_VEC4);send(loc.uv1,uv1,SHADER_UNIFORM_VEC4);
   send(loc.axisU,axisU,SHADER_UNIFORM_VEC3);send(loc.axisV,axisV,SHADER_UNIFORM_VEC3);
   send(loc.order0,order0,SHADER_UNIFORM_INT);send(loc.order1,order1,SHADER_UNIFORM_INT);
@@ -885,11 +927,12 @@ struct Rig {
   if(art.directCels()&&art.cels[1].color.id)SetShaderValueTexture(program,loc.page1,art.cels[1].color);
   else if(art.pageCount>1)SetShaderValueTexture(program,loc.page1,art.pages[1].color);
   const bool deform=&art==&imp&&continuousImp();
-  const int impNode=art.directCels()?-5:&art!=&imp?-1:deform?-4:impCels.color.id?-3:art.flow.id?angle.base*5+angle.sample%4:-2;
+  const int impNode=art.directCels()?-5:singleDirectionalPaint(art)?-3:&art!=&imp?-1:
+                    deform?-4:impCels.color.id?-3:art.flow.id?angle.base*5+angle.sample%4:-2;
   SetShaderValue(program,loc.impNode,&impNode,SHADER_UNIFORM_INT);
   const int edgeJaw=art.signedEdges?jaw+1:0;
   SetShaderValue(program,loc.edgeJaw,&edgeJaw,SHADER_UNIFORM_INT);
-  const int solidOrder=&art==&reaper;
+  const int solidOrder=singleDirectionalPaint(art);
   SetShaderValue(program,loc.solidLayerOrder,&solidOrder,SHADER_UNIFORM_INT);
   const float shell=rigidShell(art,3)?angle.t:-1;
   SetShaderValue(program,loc.shellAngle,&shell,SHADER_UNIFORM_FLOAT);
@@ -907,7 +950,8 @@ struct Rig {
    for(int i=0;i<6;i++){
     const int p=rows[i];const auto& k=parts[p];const auto& b=partBox[p];
     const bool cel=&art==&imp&&impCels.color.id;
-    const auto t=cel?ImpCelView(angle).tile(p):art.tile(angle.sample,p,jaw);
+    const int sample=singleDirectionalPaint(art)?angle.nearestSample():angle.sample;
+    const auto t=cel?ImpCelView(angle).tile(p):art.tile(sample,p,jaw);
     const auto& page=cel?impCels:art.pages[t.page];
     Color color=tint;
     if(!mask && materialWeight>0){

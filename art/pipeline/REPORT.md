@@ -1,5 +1,155 @@
 # Raport konfiguracji — 19.10.2026
 
+**24.11.2026 — ciągłe połączenie zadu z tylnymi nogami Szakala wydmowego.**
+
+Dolny zarys miednicy wypełnia płytki prześwit pomiędzy nasadami tylnych nóg. Górna część widocznego uda pobiera malowidło i światło z odpowiadającego punktu na zadzie. Poniżej nasady pozostaje naturalne rozdzielenie nóg. W 312 klatkach od tyłu i pod skosem porównano obszar bezpośrednio przy nasadach. W nowym eksporcie wszystkie 15 wykrytych tam przezroczystych próbek jest wypełnionych. Porównanie 4608 pozycji palców potwierdziło zachowanie przebiegu kroków.
+
+Sprawdzono 3072 klatki i 1152 pozy chodu w rendererze gry. Obie wersje gry przeszły test startu, a test grafiki zaliczył 1487 kontroli. Render w Blenderze przez MCP trwał 41,89 s. Przechwycenie sceny z gry trwało 7,25 s. [Projekt Blender](C:/AI2D/animations/szakal-ciagle-uda-20261124/Szakal-wydmowy.blend) · [Podgląd](C:/AI2D/pipeline/runs/szakal-ciagle-uda-20261124/szakal-ciagle-uda.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-ciagle-uda-20261124/report.json)
+
+**24.11.2026 — mocowanie tylnych nóg i amortyzacja chodu Szakala wydmowego.**
+
+Nasady ud prowadzone są z wnętrza zadu. Sprawdzono 2304 połączenia tylnej nogi z tułowiem w 48 kierunkach i 24 fazach chodu. Najmniejszy obszar, w którym udo zachodzi pod zad, wzrósł z 37,9 do 97,1 px² w rozdzielczości sprite'u. Po postawieniu łapy biodra i barki opadają, a stawy przejmują obciążenie w różnym czasie. Kontrola 2976 póz podparcia potwierdziła zachowanie współrzędnych palców.
+
+Sprawdzono 3072 klatki atlasów, 1152 pozy chodu w rendererze gry, trafienie atakiem i 96 nieruchomych póz po upadku. Obie wersje gry przeszły test startu, a test grafiki zaliczył 1487 kontroli. Render w Blenderze przez MCP trwał 40,87 s. Przechwycenie sceny z gry trwało 7,27 s. [Projekt Blender](C:/AI2D/animations/szakal-osadzenie-lap-20261124/Szakal-wydmowy.blend) · [Podgląd chodu](C:/AI2D/pipeline/runs/szakal-osadzenie-lap-20261124/szakal-osadzenie-lap.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-osadzenie-lap-20261124/report.json)
+
+**24.11.2026 — zaokrąglony model Szakala wydmowego.**
+
+Nowy obrys prowadzi ciągłe krzywizny przez barki, grzbiet, klatkę piersiową i zad. Kark łagodniej łączy się z policzkami. Zaokrąglono zakończenia pyska, uszu i łap oraz obrysy stawów. Światło na przekrojach podkreśla objętość sierści podczas chodu i po upadku.
+
+Sprawdzono 3072 klatki w 48 kierunkach, 1152 pozy chodu w rendererze gry, trafienie atakiem i 96 nieruchomych póz ciała po kontakcie z podłożem. Obie wersje przeszły test startu, a test grafiki zaliczył 1487 kontroli. Render w Blenderze przez MCP trwał 40,81 s. Przechwycenie sceny z gry trwało 7,29 s. [Projekt Blender](C:/AI2D/animations/szakal-zaokraglony-model-20261124/Szakal-wydmowy.blend) · [Podgląd](C:/AI2D/pipeline/runs/szakal-zaokraglony-model-20261124/szakal-zaokraglony-model.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-zaokraglony-model-20261124/report.json)
+
+**24.11.2026 — krótszy upadek i praca szyi oraz łap Szakala wydmowego.**
+
+Kontakt z ziemią następuje po 0,31 s zamiast 0,44 s. Ten sam zegar wyznacza rozpoczęcie spoczynku i wywołanie odgłosu upadku. W trakcie ataku przednie łapy kolejno podwijają się, sięgają do przodu i opierają na podłożu, a tylne wykonują odbicie i wracają pod tułów. Szyja wygina się między nasadą w klatce a głową, która przechyla się podczas wypadu i powrotu. Pozy spoczynkowe zweryfikowano we wszystkich 48 kierunkach i na obu bokach.
+
+Przechwycenie z gry potwierdziło trafienie ugryzieniem, kontakt z ziemią w 19. kroku przy 60 Hz i nieruchome ciało od chwili kontaktu. Sprawdzono 3072 klatki atlasów. Obie kompilacje przeszły cichy test startu, a test grafiki zaliczył 1487 kontroli. Render atlasów w Blenderze przez MCP trwał 22,94 s. Przechwycenie z gry trwało 7,39 s. [Projekt Blender](C:/AI2D/animations/szakal-szybszy-upadek-20261124/Szakal-wydmowy.blend) · [Podgląd](C:/AI2D/pipeline/runs/szakal-szybszy-upadek-20261124/szakal-szybszy-upadek.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-szybszy-upadek-20261124/report.json)
+
+**24.11.2026 — ugryzienie, upadek i bryła ciała Szakala wydmowego.**
+
+W zamachu szakal przenosi ciężar na tylne łapy, po czym wysuwa przednie łapy i głowę. Żuchwa otwiera się i zamyka osobno. W trakcie upadku najpierw uginają się przednie łapy, potem osiada zad i policzek opiera się przy ziemi. Po zetknięciu z podłożem gra wyświetla tę samą końcową klatkę. Klatka piersiowa zachowuje wypukły obrys i ma cień od spodu. Teksturę tułowia nadal stanowi jedno malowidło.
+
+Sprawdzono 3072 klatki atlasów, trafienie ugryzieniem oraz 96 końcowych póz po zetknięciu z ziemią. Obie kompilacje przeszły cichy test startu, a test grafiki zaliczył 1487 kontroli. Render atlasów w Blenderze przez MCP trwał 22,33 s. Przechwycenie z gry trwało 7,30 s. [Projekt Blender](C:/AI2D/animations/szakal-atak-upadek-20261124/wydanie/Szakal-wydmowy.blend) · [Podgląd](C:/AI2D/pipeline/runs/szakal-atak-upadek-20261124/szakal-atak-upadek.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-atak-upadek-20261124/report.json)
+
+**24.11.2026 — osadzenie ogona i praca łap Szakala wydmowego.**
+
+Nasada ogona jest osadzona w zadzie. Końcówka zatacza łagodny łuk i podąża za biodrami z opóźnieniem. Tor łapy ma zgodną prędkość po obu stronach granicy podparcia. Podczas ugryzienia przednie łapy podążają za wypadem, a przy upadku przednie i tylne łapy uginają się w różnym czasie. Gra korzysta z 24 klatek chodu oraz po 11 klatek ugryzienia i upadku w każdym kierunku. Dla tułowia i karku zachowano jeden malunek.
+
+Sprawdzono 2784 klatki atlasów, 1152 pozy chodu z maską GPU, trafienie ugryzieniem i 96 końcowych póz upadku. Test grafiki zaliczył 1487 kontroli, a obie kompilacje przeszły cichy test startu. Render w Blenderze przez MCP trwał 20,57 s. Przechwycenie sceny z gry trwało 7,27 s. [Projekt Blender](C:/AI2D/animations/szakal-miekki-ruch-20261124/Szakal-wydmowy.blend) · [Podgląd](C:/AI2D/pipeline/runs/szakal-miekki-ruch-20261124/szakal-miekki-ruch.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-miekki-ruch-20261124/report.json)
+
+**24.11.2026 — jedna tekstura tułowia Szakala wydmowego.**
+
+Przy skręcie materiał mieszał osobne malowidło boku z malowidłem piersi lub zadu. Tułów i kark mają teraz jeden malunek ze współrzędnymi prowadzonymi po ciągłej krzywej. Klatka zasłania nasadę karku pod każdym kątem. Sprawdzono 768 póz chodu i porównano alfę 2112 klatek z poprzednimi atlasami. Każdy obrys pozostał identyczny. Nowe atlasy są w obu kompilacjach.
+
+Render w Blenderze przez MCP trwał 15,21 s. Przechwycenie sceny z gry trwało 7,28 s w ukrytym oknie i z wyłączonym dźwiękiem. Kompilacje gracza i DEV przeszły test startu. Test grafiki zaliczył 1487 kontroli. [Projekt Blender](C:/AI2D/animations/szakal-jedna-tekstura-20261124/Szakal-wydmowy.blend) · [Skręt w chodzie](C:/AI2D/pipeline/runs/szakal-jedna-tekstura-20261124/szakal-skret.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-jedna-tekstura-20261124/report.json)
+
+**24.11.2026 — skręt Szakala wydmowego z Blendera przez MCP.**
+
+Płaski rig 2D korzysta z malowidła Krity i wspólnego obrysu tułowia. W każdym kierunku nasady łap pozostają pod tym samym obrysem, a widok od przodu i od tyłu zachowuje tę samą grubość tułowia. Gra wybiera gotowe klatki z 48 kierunków, zachowując fazę kroku w trakcie skrętu. Ugryzienie i upadek na obie strony korzystają z tych samych części. Sprawdzono 2112 klatek eksportu, 768 póz chodu z maską z renderera i 96 niezmiennych końcowych póz ciała. W czterech półprzezroczystych próbkach próg kursora obejmuje piksel, który nie rzuca cienia.
+
+Render atlasów trwał 15,48 s. Przechwycenie z gry trwało 7,13 s w ukrytym oknie i z wyłączonym dźwiękiem. Test grafiki zaliczył 1487 kontroli, a kompilacje gracza i DEV przeszły test startu. [Projekt Blender](C:/AI2D/animations/szakal-blender-mcp-20261124/wydanie/Szakal-wydmowy.blend) · [Podgląd](C:/AI2D/pipeline/runs/szakal-blender-mcp-20261124/szakal-blender.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-blender-mcp-20261124/report.json)
+
+**24.11.2026 — praca tułowia szakala podczas chodu.**
+
+Krzywe Synfiga przenoszą obciążenie z podparcia tylnych łap na podparcie przednich. Różnica pionowego położenia łopatek i bioder zmienia się w cyklu chodu w zakresie 4,64 px, wobec 0 px we wcześniejszej animacji. Największa zmiana między próbkami cyklu wyniosła 0,49 px. Kark i nasada ogona podążają za grzbietem. Tekstura klatki i zadu wchodzi w widok na odpowiednim końcu tułowia w miarę skrętu. Kontrola pełnego obrotu wykazała minimum 1,08 px odstępu między obrysami głowy i tułowia. Sprawdzono 224 połączone pozy chodu oraz 32 końcowe pozy po upadku.
+
+Render krzywych Synfiga trwał 6,25 s. Przechwycenie sceny z gry trwało 7,23 s. Obie wersje przeszły test startu. Test grafiki zaliczył 1488 z 1488 kontroli. [Projekt Synfiga](C:/AI2D/animations/szakal-tulow-chod-20261124/ruch-szakala.sif) · [Podgląd](C:/AI2D/pipeline/runs/szakal-tulow-chod-20261124/szakal-tulow-chod.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-tulow-chod-20261124/report.json)
+
+**24.11.2026 — połączenia części szakala podczas skrętu.**
+
+Klatka zasłania dolną część szyi i nasady kończyn. Górne mocowanie szyi jest punktem wspólnym z głową. Każda łapa ma jeden ciągły pas tekstury, a z geometrii tułowia wynika położenie jej nasady. Kontrola pełnego obrotu w pięciu fazach wykazała co najmniej 1,47 px pionowego odstępu między obrysami głowy i tułowia. Szyja zachowała połączenie z oboma obrysami. W 224 maskach z renderera nie znaleziono odłączonych fragmentów o powierzchni co najmniej siedmiu pikseli. Sprawdzono też ugryzienie i 32 końcowe pozy upadku.
+
+Render krzywych Synfiga trwał 6,02 s. Przechwycenie sceny z gry trwało 6,78 s. Obie kompilacje przeszły test startu, a test grafiki zaliczył 1487 z 1487 kontroli. [Master Krity](C:/AI2D/sprites/szakal-spojne-czesci-20261124/Szakal-czesci.kra) · [Podgląd](C:/AI2D/pipeline/runs/szakal-spojne-czesci-20261124/szakal-spojne-czesci.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-spojne-czesci-20261124/report.json)
+
+**24.11.2026 — nowy malowany rig 2D szakala.**
+
+Tułów ma jeden obrys grzbietu i brzucha rzutowany z kąta obrotu. Malowane tekstury z Krity zmieniają kolor w granicach tej samej geometrii. Synfig dostarcza krzywe kroku, podnoszenia łapy, głowy, ogona, ugryzienia i upadku. Cztery nogi mają stałe długości odcinków i wspólne punkty mocowania. W pomiarze co 3° maksymalna zmiana szerokości wyniosła 2,03 px na tylnym półobrocie i 1,65 px na przednim. W próbach nie wystąpiło chwilowe odwrócenie kierunku zmiany szerokości. Sprawdzono 224 pozy z cieniem i maską kursora, trafienie ugryzieniem i 32 pozy końcowe po upadku.
+
+Render 61 klatek Synfiga trwał 6,03 s. Przechwycenie sceny z gry trwało 6,90 s. Obie wersje przeszły test startu. Test grafiki zaliczył 1485 z 1485 kontroli. [Projekt Synfiga](C:/AI2D/animations/szakal-rig-2d-final-20261124/ruch-szakala.sif) · [Master Krity](C:/AI2D/sprites/szakal-rig-2d-20261124/Czesci-szakala-final.kra) · [Podgląd](C:/AI2D/pipeline/runs/szakal-rig-2d-20261124/gotowe/szakal-nowy-rig.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-rig-2d-20261124/gotowe/report.json)
+
+**24.11.2026 — płynna szerokość szakala przy skręcie.**
+
+Pas tułowia jest dopasowany do gładkiej krzywej szerokości na całym obrocie. Gdy biodro i łopatka zaczynają się nakładać, ich odległość przestaje rozciągać tylny obrys. Porównanie renderów wykazało zwężenie pasa tułowia od tyłu z 22,71 do 20,48 px. Największa zmiana w jednym kroku o 3° na tylnym półobrocie spadła z 2,84 do 2,39 px, a wcześniejsze ponowne poszerzenie o 1,11 px zniknęło w sprawdzonych fazach. Test regresji mierzy pełny obrót w spoczynku i w czterech fazach chodu.
+
+Przechwycenie sceny trwało 6,84 s. Obie wersje przeszły test startu. Test grafiki zaliczył 1484 z 1484 kontroli. [Podgląd](C:/AI2D/pipeline/runs/szakal-plynny-tylny-obrys-20261124/odbior/szakal-plynny-tylny-obrys.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-plynny-tylny-obrys-20261124/odbior/report.json) · [Test grafiki](C:/AI2D/pipeline/runs/szakal-plynny-tylny-obrys-20261124/graphics-tests.txt)
+
+**24.11.2026 — proporcje tułowia szakala podczas skrętu.**
+
+W 64 kątach i 29 pozach renderer dopasowuje odcinek od biodra do łopatki do rzutu długości profilu. Głębokość klatki jest mierzona osobno na pionowych przekrojach tułowia. W porównaniu renderów błąd RMS długości spadł z 3,59 do 0,41 px, a głębokości z 3,00 do 0,58 px. W żadnej z 1856 skorygowanych póz przerwa między nasadą łapy a obrysem tułowia nie przekroczyła 2 px. Pomiar maski wskazania wykazał jedną rozbieżność w 135 650 próbkach pokrycia. Sprawdzono granice kierunków, ugryzienie i 32 końcowe pozy ciała.
+
+Przechwycenie sceny trwało 6,68 s. Obie kompilacje przeszły test startu, a test grafiki zaliczył 1480 z 1480 kontroli. [Podgląd](C:/AI2D/pipeline/runs/szakal-proporcje-tulowia-20261123/odbior/szakal-proporcje-tulowia.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-proporcje-tulowia-20261123/odbior/report.json)
+
+**23.11.2026 — stała skala szakala przy zmianie kierunku.**
+
+Kalibracja wyrównuje położenie tułowia, wysokość sylwetki i podparcie łap w tej samej fazie kroku. W 1408 próbach renderera różnica wysokości środka tułowia między kierunkami spadła z 6,64 do 0,01 px. Maksymalne odchylenie pola obrysu od krzywej projekcji spadło z 22,92% do 14,76%. Szerokość bioder od tyłu wynosi średnio 22,69 px podczas chodu. Renderer odczytuje też starszą kalibrację i zachowuje kotwicę martwego ciała.
+
+Przechwycenie sceny trwało 6,66 s. Obie kompilacje przeszły test startu, a test grafiki zaliczył 1480 z 1480 kontroli. [Podgląd](C:/AI2D/pipeline/runs/szakal-stala-skala-20261123/gotowe/szakal-stala-skala.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-stala-skala-20261123/gotowe/report.json)
+
+**23.11.2026 — sylwetka szakala od tyłu.**
+
+Korekta szerokości zwęża tylny obrys i płynnie zanika przy skręcie do profilu. W spoczynku średnia szerokość w pasie bioder od tyłu zmalała z 32,44 do 22,81 px. Podczas chodu różnica wysokości między kierunkami w tej samej fazie kroku wynosiła najwyżej 2 px w 1408 próbach renderera. Sprawdzono maskę wskazania, ugryzienie i 32 końcowe pozy po upadku.
+
+Przechwycenie sceny z gry trwało 7,28 s. Testy startu obu wersji oraz 1480 kontroli grafiki zakończyły się powodzeniem. [Podgląd](C:/AI2D/pipeline/runs/szakal-smuklejszy-tyl-20261123/szakal-smuklejszy-tyl.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-smuklejszy-tyl-20261123/report.json)
+
+**23.11.2026 — rozmiar szakala podczas skrętu.**
+
+Kalibracja 64 kątów i 29 póz wyrównuje wysokość przy zachowaniu skrótu perspektywicznego. Osobne przekształcenia górnej i dolnej części sylwetki ograniczają wpływ wysuwanej łapy na skalę tułowia. W 1408 próbach renderera największa różnica wysokości przy tej samej fazie kroku spadła z 15 do 2 px. Różnica szerokości tułowia między widokiem od przodu i od tyłu spadła z 7 do 2 px. Ponownie sprawdzono granice kierunków, maskę kursora i 32 końcowe pozy ciała.
+
+Przechwycenie sceny z gry trwało 6,81 s. [Podgląd](C:/AI2D/pipeline/runs/szakal-staly-rozmiar-20261123/szakal-staly-rozmiar.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-staly-rozmiar-20261123/report.json)
+
+**23.11.2026 — ciągły skręt Szakala wydmowego.**
+
+Synfig wyeksportował tułów z ogonem osobno od kończyn. Lokalny model FILM z ComfyUI przygotował pola ruchu dla 1184 par póz. Renderer interpoluje tułów po polu ruchu i obrysie, a każdą z czterech łap prowadzi po wspólnych położeniach stawów. W grze kierunek wynika z ciągłego kąta obrotu na mapie. W 224 pozach pośrednich obrys wskazywania odpowiadał renderowi. W 32 parach przy granicach dawnych widoków największa różnica powyżej progu 22/255 objęła 14 pikseli. Po ugryzieniu i upadku sprawdzono wszystkie kierunki i 32 pozycje ciała.
+
+Render Synfiga trwał 20,59 s, wyznaczenie pól FILM 16,10 s, przechwycenie sceny z gry 6,93 s. [Podgląd](C:/AI2D/pipeline/runs/szakal-plynny-skret-20261123/szakal-plynny-skret.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-plynny-skret-20261123/report.json)
+
+**23.11.2026 — 16 kierunków chodu Szakala wydmowego.**
+
+Cztery nowe widoki z GPT Image po retuszu w Kricie dają osiem dodatkowych kierunków z odbiciami. Projekcja kątów i próg przełączania działają w płaszczyźnie mapy. Synfig wyrenderował 296 dodatkowych klatek dla chodu, spoczynku, ugryzienia i upadku. W spoczynku największa różnica szerokości między sąsiednimi widokami spadła z 46 do 25 pikseli atlasu. Sprawdzono 666 połączonych klatek z atlasów, 224 pozy z GPU i 32 końcowe pozy ciała. Gra pokazała wszystkie 16 kierunków w jednym okrążeniu. [Arkusz i polecenie](../desert/new-enemies/jackal-intermediate-prompt.md)
+
+Render Synfiga trwał 17,76 s. Przechwycenie sceny z gry trwało 6,75 s. Obie wersje przeszły test uruchomienia. Test grafiki zakończył się wynikiem 1480/1480. [Podgląd](C:/AI2D/pipeline/runs/szakal-16-kierunkow-20261123/szakal-skret.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-16-kierunkow-20261123/report.json)
+
+**23.11.2026 — klatkowy chód Szakala wydmowego.**
+
+Synfig składa tułów, cztery niezależne łapy i ogon z istniejącej ilustracji Krity. Gra wybiera pojedynczą klatkę w stałej skali. Próg zmiany widoku stabilizuje kierunek podczas skrętu. Zapisano 370 klatek dla pięciu narysowanych kierunków i trzech odbić w grze. Wszystkie klatki mają połączoną sylwetkę. Górny obrys przy chodzie w danym kierunku przesuwa się najwyżej o trzy piksele atlasu. W 112 ujęciach z GPU maska kursora zgadzała się z renderem. Sprawdzono trafienie i unieruchomienie 16 końcowych póz po upadku.
+
+Render Synfiga trwał 21,76 s. Przechwycenie scen z gry trwało 12,20 s. [Podgląd](C:/AI2D/pipeline/runs/szakal-klatki-20261123/szakal-chod.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-klatki-20261123/report.json)
+
+**23.11.2026 — anatomia chodu szakala.**
+
+Osobne krzywe Synfiga sterują łokciem i nadgarstkiem przedniej łapy oraz kolanem i stawem skokowym tylnej. Szakal stawia tylną łapę przed przednią po tej samej stronie. Ruch nasad i stawów przenoszą segmenty wspólnej siatki malowidła. Próby chodu objęły osiem kierunków i 480 próbek cyklu. Z przodu i z tyłu największy poprzeczny ruch czubka łapy wyniósł 1,11 px, a najmniejszy rozstaw łap w parze 21,53 px. W 32 maskach sylwetka zachowała ciągłość. Sprawdzono także ugryzienie i 16 końcowych póz po upadku. Test grafiki gry zakończył się wynikiem 1480/1480. [Materiał referencyjny University of Minnesota](https://vanat.ahc.umn.edu/mGaits/)
+
+Synfig wyrenderował 61 próbek w 13,15 s. Przechwycenie obu ujęć w grze trwało 11,67 s. [Podgląd](C:/AI2D/pipeline/runs/szakal-anatomia-chodu-20261123/szakal-chod.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-anatomia-chodu-20261123/report.json)
+
+**23.11.2026 — płynniejszy chód i skręt szakala.**
+
+Krzywe Synfiga prowadzą dłuższy cykl kroku, łagodne oderwanie i postawienie łapy oraz przenoszenie ciężaru z ruchem głowy i ogona. Lokalna korekta siatki zachowuje połączenie nóg i tułowia. Dopasowanie punktów głowy i podparcia między sąsiednimi widokami obniżyło średni przeskok mierzonego punktu głowy przy zmianie widoku z 12,27 do 0,72 px.
+
+Sprawdzono 128 póz, kontakt z podłożem po upadku, trafienie ugryzieniem oraz 32 połączone maski sylwetki. Synfig wyrenderował 61 próbek w 11,56 s. Przechwycenie scen w grze trwało 11,52 s. [Podgląd chodu](C:/AI2D/pipeline/runs/szakal-plynny-chod-20261123/szakal-plynny-chod.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-plynny-chod-20261123/report.json)
+
+**23.11.2026 — nowa ilustracja i animacje szakala.**
+
+GPT Image przygotował nową ilustrację z puszystym ogonem, ciemnym grzbietem i fioletową chustą. Retusz w Kricie zachował alfę sylwetek. Łapy wyginają się wraz z malowidłem na wspólnej siatce. Nasady pozostają w tułowiu. Przy zmianie kierunku silnik prowadzi szerokość i środek sylwetki między widokami. Krzywe Synfiga prowadzą podparcie łap, ugryzienie i upadek na bok.
+
+W 32 maskach z gry cała sylwetka pozostała jednym połączonym obszarem. Sprawdzono 128 póz we wszystkich kierunkach, ugryzienie i 16 końcowych póz po upadku. Synfig wyrenderował 61 próbek w 11,18 s. Przechwycenie sceny z gry trwało 6,09 s. [Grafika źródłowa i polecenie](../desert/new-enemies/jackal-repaint-prompt.md) · [Podgląd z gry](C:/AI2D/pipeline/runs/szakal-od-nowa-20261123/szakal-od-nowa.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-od-nowa-20261123/report.json)
+
+**23.11.2026 — animowany rysunek 2D szakala.**
+
+Szakal korzysta z rysunku o wspólnych punktach mocowania łap, grzbietu, ogona i głowy. Silnik wylicza położenie elementów z kierunku, fazy chodu i krzywych Synfiga. Sierść oraz chusta pobierają teksturę ze stałych miejsc atlasu z Krity. Filtrowanie drobnych włosów zależy od skali na ekranie. Ten sam rysunek obsługuje ugryzienie, upadek, ciało, cień i wybór kursorem.
+
+W 128 próbkach skrętu renderer używał nowego rysunku. Wszystkie 16 sprawdzonych masek miało połączoną sylwetkę przy tolerancji 2 px. Sprawdzono rzeczywiste trafienie i 16 końcowych póz ciała w ośmiu kierunkach. Synfig wyrenderował 61 próbek w 11,10 s. Przechwycenie klatek z Morza Piasków trwało 6,14 s. [Podgląd](C:/AI2D/pipeline/runs/szakal-rysowana-animacja-20261123/szakal-nowy-chod.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-rysowana-animacja-20261123/report.json)
+
+**23.11.2026 — stabilna sylwetka szakala w chodzie.**
+
+W 64 widokach wyrównano wysokość i dopasowano szerokość do kąta patrzenia. Ogon w tylnym skręcie ma osobne dopasowanie do tułowia. W 160-pikselowych klatkach zakres wysokości sylwetki spadł z 18 do 4 px, a największy skok dolnego obrysu w tylnym skręcie z 23 do 1 px. Podczas chodu stawy prowadzą łapy bez zmiany długości nóg, a krzywe Synfiga ograniczają kołysanie grzbietu i głowy w rytmie kroku.
+
+Sprawdzono prosty chód, chód przez cztery kierunki, trafienie oraz kontakt ciała z ziemią. Synfig wyrenderował 61 próbek w 9,96 s. Przechwycenie dwóch sekwencji na Morzu Piasków trwało 5,81 s. [Podgląd](C:/AI2D/pipeline/runs/szakal-stabilny-chod-20261123/szakal-chod.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-stabilny-chod-20261123/report.json)
+
+**23.11.2026 — płynniejszy ruch szakala i żniwiarza.**
+
+64 widoki na gatunek zastępują mieszanie sąsiednich sylwetek w grze. Geometria części zmienia się nadal z kątem obrotu. Krzywe Synfiga prowadzą osobne fazy podparcia łap szakala, wybicie do ugryzienia i amortyzację. U żniwiarza krok i zamach angażują kolana, obrót tułowia i całą rękę prowadzącą sierp. Po śmiertelnym ciosie kończyny uginają się przed przechyłem i oparciem ciała o grunt.
+
+Sprawdzono wybór klatki i maskę kursora w 128 próbkach skrętu na gatunek, obrażenia zadawane w rzeczywistej walce i 32 końcowe pozy ciał. Synfig wyrenderował 61 próbek w 10,10 s. Render, odczyt i zapis 188 klatek z Morza Piasków trwał 4,97 s. [Podgląd z gry](C:/AI2D/pipeline/runs/pustynne-bestie-plynny-ruch-20261123/szakal-i-zniwiarz.webp) · [Raport](C:/AI2D/pipeline/runs/pustynne-bestie-plynny-ruch-20261123/report.json)
+
 **23.11.2026 — chód, ataki i upadki pustynnych bestii.**
 
 Przy skręcie Żniwiarz zachowuje pełny napierśnik pod unoszącym się ramieniem. Sierp ma osobny atlas z przezroczystym tłem i porusza się razem z dłonią przy zgięciu łokcia. Usunięto dawną smugę cięcia. Szakal stawia łapy z przesunięciem fazy, a jego głowa pozostaje połączona z karkiem podczas skoku i obrotu. W upadku zwierzę podkurcza łapy. Żniwiarz zgina kończyny i opiera broń przy ciele. Oba tułowie zachowują grubość, a zetknięcie z podłożem wyznacza obrys grafiki.
