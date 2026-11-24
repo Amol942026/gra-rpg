@@ -178,7 +178,7 @@ w ramach tego zadania. Brak procesu w sandboxie nie dowodzi zatrzymania aplikacj
 | Program | Sprawdzona wersja | Lokalizacja i metoda |
 | --- | --- | --- |
 | Krita | 5.3.4.1 | C:\Program Files\Krita (x64)\bin\krita.exe; lokalny krita-codex-mcp 0.2.0 |
-| Blender | 5.2.2 LTS | C:\Program Files\Blender Foundation\Blender 5.2\blender.exe; MCP for Blender przez STDIO, dodatek na localhost:9876 |
+| Blender | 5.3.0 | C:\Program Files\Blender Foundation\Blender 5.3\blender.exe; MCP for Blender 2.3.1 przez STDIO, dodatek na 127.0.0.1:9876 |
 | Synfig | 1.4.5 | C:\Program Files\Synfig\bin\synfig.exe; obsługa starszych źródeł SIF |
 | Laigter | 1.14.0 | C:\AI2D\Tools\Laigter\laigter.exe; CLI bez GUI |
 | LMMS | 1.2.2 | C:\Program Files\LMMS\lmms.exe; XML MMP i render CLI |
@@ -208,10 +208,17 @@ otwartych dokumentów. Skrypt tworzący sprite zapisuje i zamyka własny dokumen
 3. Mapy i animacja:
 
        & $mediaPython 'tools\media\media_pipeline.py' --no-audio maps 'C:\AI2D\sprites\new_crystal.png'
-   W Blenderze łącz płaskie części w rzucie ortograficznym. Skonfigurowany
-   serwer `mcp-for-blender` przez STDIO łączy się z otwartym Blenderem na
-   localhost:9876. Sprawdź połączenie przez `get_scene_info`. Przy Szakalu
-   wydmowym `execute_blender_code` uruchamia `tools/media/jackal_blender.py`
+   W Blenderze łącz płaskie części w rzucie ortograficznym. W Codex serwer
+   `blender` uruchamia lokalny `C:\AI2D\Tools\BlenderMCP\.venv\Scripts\mcp-for-blender.exe`
+   przez STDIO. Dodatek w Blenderze 5.3 uruchamia nasłuch na `127.0.0.1:9876`
+   razem z aplikacją. Wyłączono telemetrię i połączenia zdalne. Gdy Blender jest
+   zamknięty, uruchom aplikację przed wykonaniem operacji. W próbie użyj
+   osobnego projektu i uruchomienie pomocnicze wykonaj z `-noaudio`.
+
+   Sprawdź połączenie przez `get_addon_status` i odczytaj aktywną scenę przez
+   `get_scene_info`. `execute_blender_code` daje dostęp do API `bpy`,
+   a `look` zwraca podgląd. Przy Szakalu wydmowym `execute_blender_code`
+   uruchamia `tools/media/jackal_blender.py`
    z parametrem `JOB` wskazującym JSON z polami `paint` i `output`.
    Zachowuj projekt BLEND, klatki RGBA, kotwicę, zakres ruchu i raport renderu.
 4. Starsze projekty SIF zachowują narzędzia `animate` i `Render-Synfig.ps1`.

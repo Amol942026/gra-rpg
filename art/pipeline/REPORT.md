@@ -1,5 +1,9 @@
 # Raport konfiguracji — 19.10.2026
 
+**24.11.2026 — MCP z Blenderem 5.3.0.**
+
+Zarejestrowano lokalny serwer `blender` w Codex. Osobna instancja Codex App Server odkryła narzędzia, a klient STDIO sprawdził dodatek i odczytał scenę. Przez MCP utworzono płaski emblemat z czterech warstw, dodano klatki kluczowe, zapisano i ponownie otwarto BLEND. Podgląd otrzymano przez `look`. Dwie klatki PNG RGBA potwierdziły ruch o 84 px i zachowanie przezroczystości. Ponowny render po otwarciu projektu trwał 0,60 s i dał piksele identyczne z pierwotnym eksportem. Dodatek działa na `127.0.0.1:9876` z wyłączoną telemetrią. [Próba MCP](C:/AI2D/pipeline/runs/blender-mcp-20261124-172642/report.json) · [Projekt testowy](C:/AI2D/pipeline/runs/blender-mcp-20261124-172642/Test-Blender-MCP.blend)
+
 **24.11.2026 — ciągłe połączenie zadu z tylnymi nogami Szakala wydmowego.**
 
 Dolny zarys miednicy wypełnia płytki prześwit pomiędzy nasadami tylnych nóg. Górna część widocznego uda pobiera malowidło i światło z odpowiadającego punktu na zadzie. Poniżej nasady pozostaje naturalne rozdzielenie nóg. W 312 klatkach od tyłu i pod skosem porównano obszar bezpośrednio przy nasadach. W nowym eksporcie wszystkie 15 wykrytych tam przezroczystych próbek jest wypełnionych. Porównanie 4608 pozycji palców potwierdziło zachowanie przebiegu kroków.
