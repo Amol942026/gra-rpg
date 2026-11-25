@@ -50,7 +50,7 @@ static_assert(int(Cue::SlimeDying)-int(Cue::SlimeVoiceAttack)==3*SporekinType);
 static_assert(int(Cue::Count)-int(Cue::SlimeDying)==CinderhornType+1);
 static_assert(int(Cue::CinderhornFall)-int(Cue::SporekinAttack)+1==3*RegionalEnemyTypeCount);
 inline constexpr int enemyVoiceType(int type){
-    return type==DuneJackalType?1:type==GlassReaperType?ObsidianSentinelType:type;
+    return marshEnemy(type)?marshMotionFamily(type):type==DuneJackalType?1:type==GlassReaperType?ObsidianSentinelType:type;
 }
 inline constexpr Cue enemyGestureCue(int type,int offset,Cue fallback){
     if(type<0||type>=EnemyTypeCount)return fallback;

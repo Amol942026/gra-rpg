@@ -61,6 +61,10 @@ Windows. Przywraca normalny tryb myszy, natywny uchwyt kursora i jego licznik
 widoczności przy wejściu nad okno oraz po zmianie aktywności lub trybu ekranu.
 Nie rysuje własnego kursora, nie przechwytuje myszy ani jej nie centruje.
 
+**Mokradła Cichych Dzwonów** to czwarta kraina. Po zabraniu odłamka ze szczątków Varkhora wróć do Eldrina i wybierz „Przenieś mnie na mokradła”. Grobla prowadzi przez Przystań Przewoźnika i Zatopioną Osadę do Dzwonnicy Topieli. Kręgi na wodzie zapowiadają uderzenie dzwonu. Czwartą część Serca Świtu zabierzesz po walce z ciała Dzwonnika. Do wieży możesz też wrócić przez bramę przy miejscu przybycia.
+
+W menu deweloperskim zakładka **Mokradła** zawiera wszystkie osiem miejsc. Parametry `--start swamp` i `--start swamp-boss` prowadzą odpowiednio na groblę i pod dzwonnicę.
+
 Aktualizacja 29.10.2026: dodano trzecią krainę, **Kalderę Popiołu**.
 Po pokonaniu Żywej Wydmy porozmawiaj z Eldrinem i wybierz podróż do kaldery.
 Nadal można wracać na pustynię. Nowy poziom ma rzeki animowanej lawy,

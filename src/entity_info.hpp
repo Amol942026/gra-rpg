@@ -11,7 +11,10 @@ inline constexpr float VarkhorFirstFissure=.95f,VarkhorEruptionGesture=1.37f;
 constexpr int SlagCrawlerType=VolcanoFirstType,LavaSalamanderType=13,FireImpType=14,EmberDrakeType=17;
 constexpr int AshWraithType=15,ObsidianSentinelType=16;
 constexpr int SporekinType=19,DuneEyeType=20,CinderhornType=21;
-constexpr int DuneJackalType=22,GlassReaperType=23,EnemyTypeCount=24;
+constexpr int DuneJackalType=22,GlassReaperType=23;
+constexpr int PeatToad=24,MarshLeech=25,MarshLight=26,BellKeeper=27,EnemyTypeCount=28;
+constexpr bool marshEnemy(int type){return type>=PeatToad&&type<=BellKeeper;}
+constexpr int marshMotionFamily(int type){return type==PeatToad?0:type==MarshLeech?10:type==MarshLight?15:type==BellKeeper?7:type;};
 constexpr bool newDesertEnemy(int type){return type==DuneJackalType||type==GlassReaperType;}
 constexpr bool smoothVolcanoTurn(int type){
  return type==SlagCrawlerType||type==LavaSalamanderType||type==EmberDrakeType||type==FireImpType||type==AshWraithType||
@@ -20,11 +23,13 @@ constexpr bool smoothVolcanoTurn(int type){
 constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;
 constexpr int DecorationsPerRealm=5,VolcanoLandmarkCount=4;
 constexpr int VolcanoLandmarkStart=VolcanoDecorationStart+DecorationsPerRealm;
-constexpr int PropTypeCount=VolcanoLandmarkStart+VolcanoLandmarkCount;
-inline constexpr bool volcanoLandmark(int type){return type>=VolcanoLandmarkStart&&type<PropTypeCount;}
+constexpr int MarshPropStart=VolcanoLandmarkStart+VolcanoLandmarkCount,PropTypeCount=MarshPropStart+10;
+constexpr int MarshFishingHut=MarshPropStart+2;
+constexpr int MarshFishTrap=MarshPropStart+8,MarshPeatCart=MarshPropStart+9;
+inline constexpr bool volcanoLandmark(int type){return type>=VolcanoLandmarkStart&&type<MarshPropStart;}
 inline constexpr bool volcanoSceneryProp(int type){return type>=LegacyPropTypeCount&&type<ForestDecorationStart;}
 constexpr int RegionalEnemyTypeCount=CinderhornType-SporekinType+1;
-inline constexpr bool regionalEnemy(int type){return type>=SporekinType&&type<EnemyTypeCount;}
+inline constexpr bool regionalEnemy(int type){return type>=SporekinType&&type<=GlassReaperType;}
 constexpr float RegionalEnemyFallTime=.48f;
 enum class DamageType { Physical, Magic };
 struct EnemyInfo {
@@ -63,7 +68,11 @@ inline const EnemyInfo& enemyInfo(int type) {
         {"Oko Wydm","Konstrukt piaskowca",115,1.65f,20,5,6,DamageType::Magic,.64f,62,1.7f,112,2.05f},
         {"Rogacz Żaru","Bestia wulkaniczna",174,1.95f,32,9,7,DamageType::Physical,.75f,95,1.65f,145,1.55f},
         {"Szakal wydmowy","Bestia pustyni",108,2.65f,21,4,2,DamageType::Physical,.64f,57,1.35f,82,1.60f},
-        {"Szklany żniwiarz","Widmo mirażu",147,1.78f,28,8,6,DamageType::Physical,.54f,76,1.55f,115,1.95f}
+        {"Szklany żniwiarz","Widmo mirażu",147,1.78f,28,8,6,DamageType::Physical,.54f,76,1.55f,115,1.95f},
+        {"Ropucha torfowa","Płaz mokradeł",208,2.15f,34,9,7,DamageType::Physical,.76f,111,1.45f,66,1.5f},
+        {"Pijawka denna","Pasożyt moczarów",176,2.85f,30,7,8,DamageType::Physical,.57f,104,1.02f,50,1.35f},
+        {"Błędnik trzcinowy","Bagienny ognik",148,2.05f,36,5,17,DamageType::Magic,.49f,120,2.1f,97,3.6f},
+        {"Dzwonnik Topieli","Strażnik dzwonnicy · boss",1210,1.38f,48,18,15,DamageType::Magic,1.2f,500,2.25f,175,2.65f}
     };
     static_assert(sizeof(entries)/sizeof(entries[0])==EnemyTypeCount);
     return entries[std::clamp(type,0,EnemyTypeCount-1)];
@@ -92,7 +101,12 @@ inline const PropInfo& propInfo(int type) {
         {"Kryształy żaru","Skała wulkaniczna"},{"Zwęglone drzewko","Martwe drewno"},
         {"Skorupa siarki","Naciek wulkaniczny"},{"Kowadło obsydianowej kuźni","Ruina kuźni"},{"Pęknięta brama bazaltowa","Ruina · budowla"},
         {"Lawa poduszkowa","Skała wulkaniczna"},{"Zastygła kaskada","Zastygła lawa"},
-        {"Skamieniały pancerz","Skamieniałość"},{"Latarnia górnicza","Ślad dawnej kopalni"}
+        {"Skamieniały pancerz","Skamieniałość"},{"Latarnia górnicza","Ślad dawnej kopalni"},
+        {"Wierzba rosochata","Drzewo mokradeł"},{"Pałka wodna","Roślinność szuwarowa"},
+        {"Chata na palach","Zatopiona osada"},{"Niemy dzwon","Ruina dzwonnicy"},
+        {"Łódź przewoźnika","Przystań"},{"Suszarnia sieci","Sprzęt rybacki"},
+        {"Koło dawnego młyna","Ruina młyna"},{"Kapliczka wotywna","Miejsce pamięci"},
+        {"Wiklinowy więcierz","Pułapka rybacka"},{"Wózek torfiarza","Wózek do przewozu torfu"}
     };
     static_assert(sizeof(entries)/sizeof(entries[0])==PropTypeCount);
     return entries[std::clamp(type,0,PropTypeCount-1)];
@@ -100,11 +114,11 @@ inline const PropInfo& propInfo(int type) {
 inline bool treeProp(int type){return type==0||type==4||type==5||type==12;}
 inline float propRadius(int type){
     static constexpr float decorations[]={.65f,.32f,.74f,.49f,.35f,.42f,.60f,.32f,.54f,.75f,.56f,.49f,.46f,.59f,.73f,
-                                          .78f,.91f,.69f,.34f};
+                                          .78f,.91f,.69f,.34f,.68f,.25f,1.85f,1.2f,.67f,.54f,.79f,.45f,.47f,.83f};
     static_assert(sizeof(decorations)/sizeof(*decorations)==PropTypeCount-ForestDecorationStart);
     if(type>=ForestDecorationStart&&type<PropTypeCount)return decorations[type-ForestDecorationStart];
     return type==14?.82f:type==15?.45f:type==16?.75f:type==17?.62f:type==13?.78f:type==9?.65f:type==7||type==8?.58f:type==11?.28f:treeProp(type)?.52f:type==6?.27f:.4f;
 }
 }
 
-namespace ember { inline bool enemyBoss(int type){return type==3||type==11||type==18;} }
+namespace ember { inline bool enemyBoss(int type){return type==3||type==11||type==18||type==BellKeeper;} }

@@ -313,6 +313,390 @@ PASS: GPU batch and optimized light-facing geometry retain the complete physical
 PASS: projected silhouette is present and is not clipped
 PASS: overlapping mesh faces produce a single opaque mask without dark seams
 PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: GPU batch and optimized light-facing geometry retain the complete physical shadow silhouette
 PASS: run, sword swing and roll change the projected physical silhouette
 PASS: run, sword swing and roll change the projected physical silhouette
 PASS: run, sword swing and roll change the projected physical silhouette
@@ -359,7 +743,134 @@ PASS: object shadow follows the actual alpha silhouette and matching wind deform
 PASS: projected silhouette is present and is not clipped
 PASS: overlapping mesh faces produce a single opaque mask without dark seams
 PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: object shadow follows the actual alpha silhouette and matching wind deformation
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: marsh contact and cast shadow meet at every painted bearing point
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: real marsh chest shadow meets its base in the closed, open and emptied frames
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: real marsh chest shadow meets its base in the closed, open and emptied frames
+PASS: projected silhouette is present and is not clipped
+PASS: overlapping mesh faces produce a single opaque mask without dark seams
+PASS: real marsh chest shadow meets its base in the closed, open and emptied frames
 PASS: tree shadow sways with its canopy on the same wind field
+PASS: trees and low plants have readable sway and a fixed root
+PASS: trees and low plants have readable sway and a fixed root
+PASS: trees and low plants have readable sway and a fixed root
+PASS: trees and low plants have readable sway and a fixed root
+PASS: trees and low plants have readable sway and a fixed root
+PASS: wind leaves rocks, ruins and charred trunks fixed
 PASS: flying arrow casts its shaft, head and feathers from its physical height
 PASS: each physical tower furnishing has a baked geometry shadow
 PASS: each physical tower furnishing has a baked geometry shadow
@@ -376,102 +887,102 @@ PASS: each physical tower furnishing has a baked geometry shadow
 PASS: each physical tower furnishing has a baked geometry shadow
 PASS: both stairs have geometry shadows for masonry above the floor
 PASS: both stairs have geometry shadows for masonry above the floor
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
-PASS: each fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
+PASS: each legacy fallen body has a cached physical shadow in all eight directions
 PASS: a real forest or desert frame prepares visible shadow casters
 PASS: animated meshes are prepared once for both shadow and body passes
 PASS: drawing the body reuses the existing mesh without preparing a second copy
@@ -488,4 +999,4 @@ PASS: overlapping silhouettes are composed once with restrained opacity
 PASS: shadow darkens an opaque receiver without changing its opacity
 PASS: story chamber renders the hero, mentor and pillars through the same shadow pass
 PASS: levitating hero keeps the shadow on the floor while its physical height changes
-Checks: 490; failures: 0
+Checks: 1001; failures: 0

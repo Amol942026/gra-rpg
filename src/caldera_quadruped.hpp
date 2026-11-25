@@ -261,7 +261,7 @@ struct Mesh {
   }
   return false;
  }
- void paint(Texture2D atlas,Color tint,float opacity,bool solid,Vector2 offset={},Vector2 depthBand={})const{
+ void paint(Texture2D atlas,Color tint,float opacity,bool solid,Vector2 offset={},Vector2 depthBand={},bool castMask=false)const{
   const bool textured=atlas.id&&!solid;
   const unsigned texture=textured?atlas.id:rlGetTextureIdDefault();
   rlCheckRenderBatchLimit(static_cast<int>(triangles.size()*4)+4);
@@ -282,7 +282,11 @@ struct Mesh {
    if(depthBand.y>0)rlVertex3f(v.point.x+offset.x,v.point.y+offset.y,depthBand.x+v.depth*depthBand.y);
    else rlVertex2f(v.point.x+offset.x,v.point.y+offset.y);
   };
-  for(const auto& t:triangles){emit(t.a,t.material);emit(t.b,t.material);emit(t.c,t.material);emit(t.c,t.material);}
+  for(const auto& t:triangles){
+   // The ground pass softens the mask once. The transparent painted fringe is not a caster.
+   if(castMask&&(t.a.color.a<255||t.b.color.a<255||t.c.color.a<255))continue;
+   emit(t.a,t.material);emit(t.b,t.material);emit(t.c,t.material);emit(t.c,t.material);
+  }
   rlEnd();
  }
 };
@@ -663,7 +667,7 @@ inline bool draw(int type,float x,float y,float size,const AnimationState& state
  const auto atlas=materialAtlas(current.dragon);
  if(!shadow&&outline.a)for(Vector2 offset:{Vector2{-1.45f,0},Vector2{1.45f,0},Vector2{0,-1.45f},Vector2{0,1.45f}})
   mesh.paint(atlas,outline,opacity,true,mul(offset,1/size));
- mesh.paint(atlas,WHITE,opacity,shadow);
+ mesh.paint(atlas,WHITE,opacity,shadow,{},{},shadow);
  if(flash&&!shadow)mesh.paint(atlas,Fade(WHITE,.44f),opacity,true);
  rlSetTexture(rlGetTextureIdDefault());
  rlPopMatrix();

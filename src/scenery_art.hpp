@@ -3,8 +3,15 @@
 #include "forest_tree_art.hpp"
 #include "desert_plant_art.hpp"
 
-inline float propArtScale(int type){return forest_tree_art::scale(type)*desert_plant_art::scale(type);}
-inline float propArtSize(const Prop& prop){return prop.size*propArtScale(prop.type);}
+inline float propArtScale(int type){
+ if(type==MarshFishingHut)return 2.04f;
+ return forest_tree_art::scale(type)*desert_plant_art::scale(type);
+}
+inline float propArtSize(const Prop& prop){
+ // Keep doorways at human scale even on the slightly larger cottages in older maps.
+ const float size=prop.type==MarshFishingHut?std::clamp(prop.size,.98f,1.04f):prop.size;
+ return size*propArtScale(prop.type);
+}
 
 // Static detail is baked once at startup; wind still deforms the finished
 // crown texture and the pointer mask follows exactly the same deformation.

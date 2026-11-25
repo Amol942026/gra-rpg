@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\mokradla-20261125-2236\\manifest.json",
+  "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla",
+  "files": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla\\atlas.png",
+      "sha256": "c852ce15abbc22bb01639a757b30a683c032f5700212935122630ebacdf1c5c2",
+      "bytes": 1797511,
+      "role": "scenery-and-creatures"
+    }
+  ],
+  "provenance": {
+    "authoring": "GPT Image, Krita",
+    "source": "Oryginalne projekty Emberfall",
+    "master": "C:/AI2D/sprites/mokradla-20261125/Mokradla.kra"
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false
+}

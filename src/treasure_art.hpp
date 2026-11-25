@@ -1,12 +1,12 @@
 #pragma once
 // Original layered Krita artwork. One atlas upload; no per-frame file I/O.
 namespace treasure_art {
-constexpr int Cell=256,States=3,Realms=3,Width=Cell*States,Height=Cell*Realms;
+constexpr int Cell=256,States=3,Realms=4,Width=Cell*States,Height=Cell*Realms;
 // World position is the center of the base footprint, not its frontmost corner.
 constexpr float Scale=.42f,AnchorX=128,AnchorY=183;
 inline Texture2D atlas{},outline{};
 inline std::array<unsigned char,Width*Height> alpha{};
-inline int realm(const TreasureChest& chest){return chest.location==WorldLocation::Volcano?2:chest.location==WorldLocation::Desert?1:0;}
+inline int realm(const TreasureChest& chest){return chest.location==WorldLocation::Swamp?3:chest.location==WorldLocation::Volcano?2:chest.location==WorldLocation::Desert?1:0;}
 inline int frame(const TreasureChest& chest){
  if(!chest.opened)return 0;
  for(const auto& value:chest.loot)if(!value.empty())return 1;
@@ -16,10 +16,13 @@ inline Rectangle bounds(Vector2 p){return {p.x-AnchorX*Scale,p.y-AnchorY*Scale,C
 inline void make(){
  if(atlas.id)return;
  Image image=LoadImage("assets/sprites/treasure-chests.png");
- if(!image.data||image.width!=Width||image.height!=Height){
+ if(!image.data||image.width!=Width||image.height!=3*Cell){
   if(image.data)UnloadImage(image);
   TraceLog(LOG_WARNING,"TREASURE: Missing or invalid chest atlas");return;
  }
+ Image marshRow=LoadImage(marsh_art::SceneryPath);
+ ImageResizeCanvas(&image,Width,Height,0,0,BLANK);
+ if(marshRow.data){ImageDraw(&image,marshRow,marsh_art::ChestRow,{0,float(3*Cell),float(Width),float(Cell)},WHITE);UnloadImage(marshRow);}
  Color* pixels=LoadImageColors(image);
  for(int i=0;i<Width*Height;i++)alpha[i]=pixels[i].a;
  UnloadImageColors(pixels);atlas=LoadTextureFromImage(image);UnloadImage(image);

@@ -25,7 +25,7 @@
 namespace ember::saves {
 namespace fs=std::filesystem;
 constexpr size_t MaxBytes=4*1024*1024,MaxEntries=8192;
-constexpr int CurrentVersion=33;
+constexpr int CurrentVersion=35;
 struct Error:std::runtime_error {using std::runtime_error::runtime_error;};
 inline void require(bool ok){if(!ok)throw Error("Nieprawidłowy lub niezgodny zapis gry.");}
 struct Snapshot {Game game;IntroSequence intro;TowerSequence tower;std::string date;};
@@ -97,9 +97,9 @@ EF_SAVE(VenomGlob,v.pos,v.velocity,v.remaining,v.damage,v.owner)
 EF_SAVE(LavaFissure,v.pos,v.age,v.delay,v.damage,v.owner,v.struck)
 EF_SAVE(SoundEvent,v.cue,v.x,v.y)
 EF_SAVE(IntroSequence,v.phase,v.line,v.age,v.time,v.revealed,v.arrivalPending)
-inline void visit(Archive& a,TowerSequence& v){a(v.phase,v.line,v.age,v.time,v.returning,v.revealed,v.arrivalPending,v.completionPending,v.offerDesert,v.desertArrivalPending,v.fragments);if(a.version>=9)a(v.offerVolcano,v.travelVolcano);if(a.version>=11)a(v.missingDesertShard,v.missingVolcanoShard);}
+inline void visit(Archive& a,TowerSequence& v){a(v.phase,v.line,v.age,v.time,v.returning,v.revealed,v.arrivalPending,v.completionPending,v.offerDesert,v.desertArrivalPending,v.fragments);if(a.version>=9)a(v.offerVolcano,v.travelVolcano);if(a.version>=11)a(v.missingDesertShard,v.missingVolcanoShard);if(a.version>=34)a(v.offerMarsh,v.travelMarsh,v.missingMarshShard);}
 inline void visit(Archive& a,Game& v){
- if(a.version>=9)a(v.chests);else for(int i=0;i<4;i++)a(v.chests[i]);
+ for(int i=0;i<(a.version>=34?TreasureCount:a.version>=9?6:4);i++)a(v.chests[i]);
  a(v.openedChest,v.rng,v.combatRng,v.player,v.facing,v.animation);
  if(a.version>=22)a(v.developerSession,v.bag);
  else for(auto& item:v.bag)a(item);
@@ -113,6 +113,7 @@ inline void visit(Archive& a,Game& v){
  if(a.version>=7)a(v.merchantArrows);
  if(a.version>=9)a(v.volcanoCreated,v.volcanoBossDead,v.volcanoState,v.volcanoFountainUsed,v.volcanoFountainDrain,v.cinders,v.fissures);
  if(a.reading&&a.version<31)for(auto& b:v.cinders)if(const auto* e=v.findEnemy(b.owner))v.setCinderLaunch(b,*e,v.player);
+ if(a.version>=34)a(v.marshCreated,v.marshBossDead,v.marshState);
  if(a.version>=10)a(v.volcanoSceneryVersion);
  if(a.version>=11)a(v.venomGlobs);
  if(a.version>=12)a(v.worldExpansionVersion);else if(a.reading)v.worldExpansionVersion=0;
@@ -151,7 +152,7 @@ template<class E>inline bool range(E value,int count){return int(value)>=0&&int(
 inline void validateItem(const Item& i){require(range(i.kind,int(Kind::Count))&&i.tier>=0&&i.tier<=100&&i.count>=0&&i.count<=1000000);}
 inline void validateAnimation(const AnimationState& a){require(range(a.direction,8)&&a.phase>=0&&a.phase<=1&&a.runBlend>=0&&a.runBlend<=1&&a.swordStow>=0&&a.swordStow<=1&&a.moveBlend>=0&&a.moveBlend<=1);}
 inline void validatePos(V p){require(p.x>=-10&&p.x<=MapSize+10&&p.y>=-10&&p.y<=MapSize+10);}
-inline void validateGround(const std::vector<Ground>& list,bool unique=true){std::set<int> ids;for(auto& g:list){validateItem(g.value);validatePos(g.pos);require(range(g.location,4)&&g.floor>=0&&g.floor<5&&g.id>=0);if(unique)require(ids.insert(g.id).second);}}
+inline void validateGround(const std::vector<Ground>& list,bool unique=true){std::set<int> ids;for(auto& g:list){validateItem(g.value);validatePos(g.pos);require(range(g.location,5)&&g.floor>=0&&g.floor<5&&g.id>=0);if(unique)require(ids.insert(g.id).second);}}
 inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Prop>& props,const std::vector<Ground>& forage){
  std::set<int> ids;
  for(const auto& e:enemies){require(e.id>=0&&ids.insert(e.id).second&&range(e.behavior,4)&&e.type>=0&&e.type<EnemyTypeCount&&e.hp>=0&&e.maxHp>0&&e.hp<=e.maxHp&&e.sandPrisonCasts>=0);validatePos(e.pos);validatePos(e.home);validateAnimation(e.animation);for(auto& i:e.loot)validateItem(i);}
@@ -181,7 +182,7 @@ inline void validateField(const std::vector<Enemy>& enemies,const std::vector<Pr
  validateGround(forage);
 }
 inline void validate(const Snapshot& s){
- const auto& g=s.game;require(range(g.location,4)&&range(g.fieldLocation,4)&&g.fieldLocation!=WorldLocation::MageTower&&range(g.dawnQuest,3)&&range(g.selectedSpell,int(Spell::Count)));
+ const auto& g=s.game;require(range(g.location,5)&&range(g.fieldLocation,5)&&g.fieldLocation!=WorldLocation::MageTower&&range(g.dawnQuest,3)&&range(g.selectedSpell,int(Spell::Count)));
  require(g.bowDrawTime>=-BowNockDuration&&g.bowDrawTime<=BowDrawDuration);
  require(!g.bowReleaseQueued||(g.bowDrawing&&g.bowDrawTime<=BowMinDrawTime));
  require((g.learnedSpells&~7u)==0&&(g.selectedSpell==Spell::None||g.knowsSpell(g.selectedSpell))&&g.spellCooldownTotal>=FireballCooldown&&g.spellCooldownTotal<=60);
@@ -203,6 +204,7 @@ inline void validate(const Snapshot& s){
  validateGround(g.ground);for(auto& item:g.ground)require(item.id<g.nextGround);
  validateField(g.enemies,g.props,g.forage);validateField(g.forestState.enemies,g.forestState.props,g.forestState.forage);validateField(g.desertState.enemies,g.desertState.props,g.desertState.forage);
  validateField(g.volcanoState.enemies,g.volcanoState.props,g.volcanoState.forage);
+ validateField(g.marshState.enemies,g.marshState.props,g.marshState.forage);require(!g.inMarsh()||g.marshCreated);
  require(!g.inVolcano()||g.volcanoCreated);require(g.cinders.size()<=24&&g.fissures.size()<=12);
  require(g.venomGlobs.size()<=24);for(const auto& p:g.venomGlobs){validatePos(p.pos);require((g.inDesert()||g.testSummon(p.owner))&&std::abs(length(p.velocity)-6)<.01f&&p.remaining>0&&p.remaining<=7&&p.damage>=0&&p.damage<=1000&&std::any_of(g.enemies.begin(),g.enemies.end(),[&](const Enemy& e){return e.id==p.owner&&e.alive&&e.type==10;}));}
  require(g.volcanoSceneryVersion>=0&&g.volcanoSceneryVersion<=VolcanoSceneryRevision);
@@ -256,6 +258,7 @@ inline Snapshot decode(const std::string& bytes){
   if(result.tower.line<oldCount&&result.tower.line>=result.tower.lineCount())result.tower.line=result.tower.lineCount()-1;
  }
  bool movedCircleChest=false;
+ if(version<34&&result.tower.active()&&!result.tower.returning){result.tower.offerMarsh=result.game.canTravelMarsh();}
  if(version<25){
   auto& chest=result.game.chests[ForestCircleChestId];
   if(chest.id==ForestCircleChestId&&chest.location==WorldLocation::Forest&&chest.pos.x==57&&chest.pos.y==57){
@@ -273,6 +276,32 @@ inline Snapshot decode(const std::string& bytes){
  if(version<26)result.game.refreshForestScenery();
  if(version<27)result.game.refreshDesertGroves();
  if(version<33)result.game.restoreDesertReinforcements();
+ if(result.game.marshCreated){
+  auto& g=result.game;
+  const bool current=g.fieldLocation==WorldLocation::Swamp;
+  auto& scenery=current?g.props:g.marshState.props;
+  const auto& occupants=current?g.enemies:g.marshState.enemies;
+  g.spaceMarshHuts(scenery,occupants);
+  if(version<35)g.addMarshWorksites(scenery,occupants,g.inMarsh()?g.player:marsh::Arrival);
+ }
+ // Older marsh saves can place the hero between the former wall and the new porch.
+ if(result.game.inMarsh()){
+  auto& game=result.game;
+  const auto hut=std::find_if(game.props.begin(),game.props.end(),[&](const Prop& p){
+   return p.type==MarshFishingHut&&distance(game.player,p.pos)<propRadius(p.type);
+  });
+  if(hut!=game.props.end()){
+   const V start=game.player;
+   const float outward=std::atan2(start.y-hut->pos.y,start.x-hut->pos.x);
+   for(int step=1;step<=20&&!game.walkable(game.player);step++){
+    for(int i=0;i<16;i++){
+     float a=outward+i*.39269908f;
+     V candidate=start+V{std::cos(a),std::sin(a)}*(.25f*step);
+     if(game.walkable(candidate)){game.player=candidate;break;}
+    }
+   }
+  }
+ }
  if(movedCircleChest&&result.game.location==WorldLocation::Forest&&distance(result.game.player,ForestRitualCircle)<ChestRadius){
   for(V offset:{V{1.5f,0},V{0,1.5f},V{-1.5f,0},V{0,-1.5f}}){
    const V approach=ForestRitualCircle+offset;

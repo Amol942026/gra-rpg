@@ -1,18 +1,25 @@
 {
   "status": "PASS",
-  "source_manifest": "C:\\AI2D\\pipeline\\runs\\caldera-landmarks-20261117-001454\\manifest.json",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\paleta-pustynia-kaldera-20261125-221137\\pack.json",
   "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\caldera-landmarks-20261117",
   "files": [
     {
       "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\caldera-landmarks-20261117\\caldera-landmarks.png",
-      "sha256": "18e6d2c1ce8268773b2b107435f5be9eb062282dc95da8fb62e8c1e40eb91d5a",
-      "bytes": 203787,
+      "sha256": "22bb49a0bd7262387a1f51f757996e0fa9a62679cb66d7378f8b84bd3596672f",
+      "bytes": 190266,
       "role": "caldera-landmark-atlas"
     }
   ],
   "provenance": {
     "style_reference": "Existing Emberfall Caldera scenery",
-    "sources": "C:\\AI2D\\pipeline\\runs\\caldera-landmarks-20261117-001454\\provenance.json"
+    "sources": "C:\\AI2D\\pipeline\\runs\\caldera-landmarks-20261117-001454\\provenance.json",
+    "paleta_pustyni_i_kaldery": {
+      "editing": "Krita 5.3.4, dwie krzywe tonalne i warstwa koloru odbitego od gruntu",
+      "palette_master": "C:\\AI2D\\sprites\\paleta-pustynia-kaldera-20261125-221137\\Palety-krain.kra",
+      "palette_sha256": "608066fe8c516ac8362734e0686ccb6f0f8fdce78782d62086ab203414ec599d",
+      "source": "Istniejące malowane zasoby Emberfall",
+      "scope": "Pustynia i Kaldera. Zachowano kanały alfa i pola lasu."
+    }
   },
   "game_rebuilt": false,
   "runtime_audio_bindings_changed": false

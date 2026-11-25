@@ -124,85 +124,20 @@ inline Vector2 legBend(Vector2 shoulder,Vector2 ankle,bool fore){
  return add(shoulder,add(mul(axis,span),mul(normal,fore?bend:-bend)));
 }
 
-inline SurfacePoint legSocket(const Pose& r,bool fore,int side){
- auto socket=r.mounted(fore?15.1f:-22.1f,side*6.5f,fore?41.f:40.6f);
- socket.depth-=4.2f;
- return socket;
-}
-
 struct SectionJoint {SurfacePoint joint;float radius;};
 
-inline SectionJoint between(SectionJoint a,SectionJoint b,float t){
- return {{mix(a.joint.screen,b.joint.screen,t),mix(a.joint.depth,b.joint.depth,t)},mix(a.radius,b.radius,t)};
-}
-
-template<class Skin>
-inline void legFur(Mesh& m,Skin skin){
- struct Lock {float along,across,length,sweep;};
- constexpr Lock locks[]={
-  {.21f,-.69f,.23f,-.32f},{.25f,.22f,.25f,.32f},{.33f,.74f,.22f,.20f},
-  {.40f,-.14f,.22f,-.36f},{.43f,-.71f,.19f,-.24f},{.53f,.58f,.19f,.32f},
-  {.56f,-.38f,.17f,-.29f},{.61f,.14f,.15f,.37f}
- };
- constexpr float steps[]={0,.32f,.63f,1};
- constexpr float widths[]={.29f,.42f,.39f,.24f};
- constexpr Color tones[]={{65,55,48,255},{142,126,110,255},{126,110,98,255},{92,79,68,255}};
- for(size_t strand=0;strand<std::size(locks);++strand)for(int strandSide:{-1,1}){
-  const auto lock=locks[strand];
-  std::array<SurfacePoint,std::size(steps)> points;
-  for(size_t i=0;i<points.size();++i){
-   const float t=steps[i];
-   const float along=lock.along+(lock.length+.016f*strandSide)*t;
-   const float across=lock.across+lock.sweep*t+strandSide*(.082f+.032f*t)-.19f*t*(1-t);
-   points[i]=skin(along,across);
-  }
-  const auto edge=[&](size_t i){
-   const auto point=points[i];
-   const auto tangent=sub(points[std::min(i+1,points.size()-1)].screen,points[i?i-1:0].screen);
-   const auto normal=mul(Vector2{-tangent.y,tangent.x},widths[i]/std::max(.12f,art::length(tangent)));
-   const float depth=point.depth+.64f+.045f*strand+.072f*strandSide;
-   const Color tint=light(tones[i],1-.09f*strandSide);
-   return std::array<Vertex,2>{{{add(point.screen,normal),{},tint,depth},
-                               {sub(point.screen,normal),{},light(tint,.75f),depth}}};
-  };
-  auto a=edge(0);
-  for(size_t i=1;i<points.size();++i){
-   const auto b=edge(i);
-   m.triangle(a[0],a[1],b[0],art::Paint);m.triangle(a[1],b[1],b[0],art::Paint);
-   a=b;
-  }
- }
-}
-
-// A painted strip is convex at each bend. The center and each edge must
-// contribute their own depth, especially where a leg tucks under the belly.
+// Painted strips for the horns and tail.
 template<size_t N>
 inline void ribbon(Mesh& m,const std::array<SectionJoint,N>& joints,Color pigment,art::Material material,
-                   float flankU=0,bool rounded=false){
- struct Sample {SectionJoint shape;float along;};
- std::array<Sample,3*N-4> samples;
- size_t count=0;
- samples[count++]={joints.front(),0};
- for(size_t i=1;i+1<N;++i){
-  if(rounded){
-   constexpr float corner=.26f;
-   const auto before=between(joints[i-1],joints[i],1-corner);
-   const auto after=between(joints[i],joints[i+1],corner);
-   const auto middle=between(between(before,joints[i],.5f),between(joints[i],after,.5f),.5f);
-   samples[count++]={before,(i-corner)/(N-1)};
-   samples[count++]={middle,float(i)/(N-1)};
-   samples[count++]={after,(i+corner)/(N-1)};
-  }else samples[count++]={joints[i],float(i)/(N-1)};
- }
- samples[count++]={joints.back(),1};
+                   float flankU=0){
  constexpr float lanes[]={-1,-.72f,0,.72f,1};
  constexpr float sheen[]={.76f,.96f,1.12f,.93f,.74f};
  constexpr float curvature[]={0,.65f,.94f,.65f,0};
  const auto section=[&](size_t i){
-  const auto [joint,radius]=samples[i].shape;
-  const auto tangent=sub(samples[std::min(i+1,count-1)].shape.joint.screen,samples[i?i-1:0].shape.joint.screen);
+  const auto [joint,radius]=joints[i];
+  const auto tangent=sub(joints[std::min(i+1,N-1)].joint.screen,joints[i?i-1:0].joint.screen);
   const auto normal=mul(Vector2{-tangent.y,tangent.x},radius/std::max(.08f,art::length(tangent)));
-  const float u=samples[i].along;
+  const float u=float(i)/(N-1);
   std::array<Vertex,std::size(lanes)> strip;
   for(size_t lane=0;lane<strip.size();++lane){
    const float v=lanes[lane];
@@ -213,35 +148,14 @@ inline void ribbon(Mesh& m,const std::array<SectionJoint,N>& joints,Color pigmen
   }
   return strip;
  };
- std::array<std::array<Vertex,std::size(lanes)>,3*N-4> sections;
- sections[0]=section(0);
- for(size_t i=1;i<count;++i){
-  sections[i]=section(i);
-  const auto& a=sections[i-1];const auto& b=sections[i];
+ auto a=section(0);
+ for(size_t i=1;i<N;++i){
+  const auto b=section(i);
   for(size_t lane=0;lane+1<a.size();++lane){
    m.triangle(a[lane],a[lane+1],b[lane],material);
    m.triangle(b[lane],a[lane+1],b[lane+1],material);
   }
- }
- if(rounded){
-  // Sample the same triangles that carry the coat. The roots and tips move
-  // with the bent limb and keep its depth during a turn or a fall.
-  const auto skin=[&](float along,float across){
-   const auto next=std::upper_bound(samples.begin()+1,samples.begin()+count-1,along,
-                                    [](float u,const Sample& s){return u<s.along;});
-   const size_t i=next-samples.begin();
-   const auto laneIt=std::upper_bound(std::begin(lanes)+1,std::end(lanes)-1,across);
-   const size_t j=laneIt-std::begin(lanes)-1;
-   const auto& a=sections[i-1];const auto& b=sections[i];
-   const float u=(along-samples[i-1].along)/(samples[i].along-samples[i-1].along);
-   const float v=(across-lanes[j])/(lanes[j+1]-lanes[j]);
-   const auto interpolate=[](Vertex p,Vertex q,Vertex r,float u,float v){
-    return SurfacePoint{add(p.point,add(mul(sub(q.point,p.point),u),mul(sub(r.point,p.point),v))),
-                        p.depth+u*(q.depth-p.depth)+v*(r.depth-p.depth)};
-   };
-   return u+v<=1?interpolate(a[j],b[j],a[j+1],u,v):interpolate(b[j+1],a[j+1],b[j],1-u,1-v);
-  };
-  legFur(m,skin);
+  a=b;
  }
 }
 
@@ -280,28 +194,92 @@ inline HoofMotion hoofMotion(const Pose& r,bool fore,int side){
          stride.y*r.pace+turn.y*r.pivot*.55f+fold.y*(1+.19f*flank),r.run?0.f:toe.x*r.pace};
 }
 
-inline void drawLeg(Mesh& m,const Pose& r,int axle,int side){
- const bool fore=axle>0;
+// Every leg grows from a cutout in the painted flank. Its first loop shares
+// the actual coat vertices, including their texture coordinates and lighting.
+struct LegSeamPoint {Vertex coat;Vector2 radial;};
+using LegSeam=std::vector<LegSeamPoint>;
+using LegSeams=std::array<LegSeam,4>;
+inline size_t legIndex(bool fore,int side){return (fore?2:0)+(side>0?1:0);}
+inline Vector2 legSpan(bool fore){return fore?Vector2{10.8f,24.5f}:Vector2{-32.f,-17.f};}
+
+inline void drawLeg(Mesh& m,const Pose& r,bool fore,int side,const LegSeam& seam){
  const auto [along,lift,toeAngle]=hoofMotion(r,fore,side);
  const float footLine=fore?17.9f:-20.f,footWidth=fore?12.6f:13.6f;
  const float root=(fore?18.6f:-21.25f)+(r.run?0.f:.085f*along*r.pace);
  const float width=fore?11.9f:10.9f,rootSide=side*width+r.weightShift.x;
  const float hipHeight=(fore?34.5f:34.15f)+r.bob+r.pitch*root+r.weightShift.y*side*width;
- const float reach=footWidth+1.8f+lift*.08f;
- const float out=side*reach;
+ const float out=side*(footWidth+1.8f+lift*.08f);
  const float ankleForward=footLine+along+(fore?.8f:-1.4f),ankleHeight=5.6f+lift*1.18f;
- const auto bend=legBend({root,hipHeight},{ankleForward,ankleHeight},fore);
- const auto socket=legSocket(r,fore,side);
- const auto shoulder=r.project(root,rootSide,hipHeight);
- const auto knee=r.project(bend.x,mix(rootSide,out,.46f),bend.y);
- const auto ankle=r.project(ankleForward,out,ankleHeight);
+ const Vector2 hip{root,hipHeight},ankle{ankleForward,ankleHeight};
+ const auto knee=legBend(hip,ankle,fore);
+ const auto kneeCurve=mix(mix(hip,knee,.89f),mix(knee,ankle,.11f),.5f);
  const float toe=ankleForward+(fore?1.5f:1.9f)-.11f*lift;
  const auto pad=r.project(toe,out,2.1f+lift);
- const SurfacePoint thigh{mix(shoulder.screen,knee.screen,.43f),mix(shoulder.depth,knee.depth,.43f)};
- const Color wool=light(fur,.94f+.08f*r.axes.x*side);
- ribbon(m,std::array<SectionJoint,6>{{{socket,fore?7.1f:6.8f},{shoulder,7.55f},
-                             {thigh,fore?6.15f:6.25f},{knee,fore?4.05f:4.25f},{ankle,2.7f},{pad,2.85f}}},
-        wool,art::DrakeSkin,fore?.624f:.22f,true);
+ // The broad haunch narrows into the hock, the shoulder into the foreleg.
+ struct Section {Vector2 axis;float lateral,radius,thickness,t;};
+ const Section sections[]={
+  {mix(hip,knee,.32f),mix(rootSide,out,.17f),fore?6.15f:7.35f,fore?4.5f:5.4f,.19f},
+  {mix(hip,knee,.72f),mix(rootSide,out,.34f),fore?4.8f:5.9f,fore?3.8f:4.5f,.35f},
+  {kneeCurve,mix(rootSide,out,.46f),fore?4.15f:4.6f,3.6f,.49f},
+  {mix(knee,ankle,.29f),mix(rootSide,out,.62f),3.65f,3.15f,.63f},
+  {mix(knee,ankle,.76f),mix(rootSide,out,.88f),2.85f,2.45f,.82f},
+  {ankle,out,2.7f,2.4f,.92f},
+  {{toe,2.1f+lift},out,2.05f,2.05f,1.f}
+ };
+ std::array<Vector2,std::size(sections)> normals;
+ for(size_t i=0;i<normals.size();++i){
+  const auto v=sub(sections[std::min(i+1,normals.size()-1)].axis,i?sections[i-1].axis:hip);
+  normals[i]=mul(Vector2{-v.y,v.x},1/std::max(.01f,art::length(v)));
+ }
+ const auto column=[&](const LegSeamPoint& edge){
+  std::array<Vertex,std::size(sections)+1> vertices;
+  vertices[0]=edge.coat;
+  const auto [front,outer]=edge.radial;
+  for(size_t i=0;i<std::size(sections);++i){
+   const auto& joint=sections[i];
+   const Vector2 center=add(joint.axis,mul(normals[i],front*joint.radius));
+   const auto point=r.project(center.x,joint.lateral+side*outer*joint.thickness,center.y);
+   const float shade=1.02f+.13f*outer*side*r.roll.x+.10f*front-.065f*joint.t;
+   // Carry the same locks down from each rim point, including the inner leg.
+   const Vector2 uv{edge.coat.uv.x-.055f*joint.t,
+                    mix(edge.coat.uv.y,.95f-.07f*outer,joint.t)};
+   const auto color=light(fur,shade);
+   const float blend=std::min(1.f,2.4f*joint.t);
+   vertices[i+1]={point.screen,uv,ColorLerp(edge.coat.color,color,blend),point.depth};
+  }
+  return vertices;
+ };
+ auto a=column(seam.back());
+ for(size_t i=0;i<seam.size();++i){
+  const auto& edge=seam[i];
+  const auto b=column(edge);
+  for(size_t j=1;j<a.size();++j){
+   m.triangle(a[j-1],b[j-1],a[j],art::DrakeSkin);
+   m.triangle(b[j-1],b[j],a[j],art::DrakeSkin);
+  }
+  // Short guard hairs turn with the coat. Both edges of each lock lie on
+  // the same leg surface, so its width foreshortens naturally in profile.
+  if(edge.radial.y>-.3f&&i%2==0){
+   const size_t start=1+i%3;
+   constexpr float widths[]={.03f,.23f,.16f,.01f};
+   constexpr Color tones[]={{74,64,57,255},{139,123,106,255},{113,99,85,255},{88,76,66,255}};
+   std::array<Vertex,2> previous{};
+   for(size_t k=0;k<std::size(widths);++k){
+    const size_t j=start+k;
+    const float u=.58f+.12f*std::sin(float(i))-.10f*k;
+    const auto hair=[&](float v){
+     return Vertex{mix(a[j].point,b[j].point,v),{},tones[k],mix(a[j].depth,b[j].depth,v)+.09f};
+    };
+    const std::array<Vertex,2> strand{hair(u-widths[k]),hair(u+widths[k])};
+    if(k){
+     m.triangle(previous[0],previous[1],strand[0],art::Paint);
+     m.triangle(strand[0],previous[1],strand[1],art::Paint);
+    }
+    previous=strand;
+   }
+  }
+  a=b;
+ }
  const float widthOnScreen=std::hypot(3.8f*r.axes.x,3.7f*r.axes.y);
  const float pitch=toeAngle*DEG2RAD*r.axes.x;
  const float c=std::cos(pitch),s=std::sin(pitch);
@@ -315,13 +293,13 @@ inline void drawLeg(Mesh& m,const Pose& r,int axle,int side){
  });
 }
 
-inline void drawBody(Mesh& m,const Pose& r){
+inline void drawBody(Mesh& m,const Pose& r,LegSeams& seams){
  struct Section {float forward,width,back,rim,belly,sweep=0;};
  static constexpr Section profile[]={
   {RumpForward,0,35.2f,35.2f,35.2f},{-35.4f,5.5f,40.7f,35.6f,31.4f},{-32,9.5f,45.5f,36.3f,29.0f},
   {-27.4f,12.7f,48.2f,36.2f,27.6f},{-22.5f,13.4f,49.0f,35.6f,27.8f},{-17,11.9f,49.4f,36.1f,31.8f},
   {-12.5f,10.8f,50.3f,36.0f,32.3f},{-7.7f,12.3f,51.0f,35.7f,27.2f},{-2.6f,14.4f,51.5f,34.6f,22.2f},
-  {4.4f,16.6f,52.5f,34.4f,19.2f},{10.8f,17.55f,55.f,35.0f,18.0f},{15.4f,17.1f,56.2f,35.6f,18.4f,.62f},
+  {4.4f,16.6f,52.5f,34.4f,22.5f},{10.8f,17.55f,55.f,35.0f,22.2f},{15.4f,17.1f,56.2f,35.6f,22.4f,.62f},
   {19.8f,16.1f,56.0f,36.8f,21.2f,.71f},{24.5f,13.5f,56.9f,40.6f,27.8f,1.65f},
   {29.5f,10.2f,57.0f,45.6f,35.4f,1.25f},{33.4f,8.7f,56.8f,48.2f,40.4f,.38f},
   {36.4f,8.35f,57.8f,49.5f,42.4f},{39.1f,7.65f,56.55f,48.6f,41.65f},
@@ -378,25 +356,54 @@ inline void drawBody(Mesh& m,const Pose& r){
   const auto point=mix(r.neck(forward,height,neckWeight(s.forward)),r.skull(forward,height),skullWeight);
   return r.mounted(point.x,(s.width*(1+.09f*roundedFlank*arch*arch)+rise)*lateral,point.y+rise*arch);
  };
- const auto ring=[&](Section s){
+ const auto coatVertex=[&](const Section& s,size_t i){
+  const auto [lateral,arch]=ringAxes[i];
+  const float arc=float(std::min(i,around-i))/(around/2);
+  const Vector2 uv{.035f+.93f*(s.forward-RumpForward)/(MuzzleForward-RumpForward),.055f+.88f*arc};
+  const auto surface=coat(s,ringAxes[i],arc,0);
+  const float shade=.88f+.25f*(arch*r.roll.x+lateral*r.roll.y)+.061f*(lateral*r.roll.x-arch*r.roll.y);
+  return Vertex{surface.screen,uv,light(fur,shade),surface.depth};
+ };
+ const auto ring=[&](const Section& s){
   std::array<Vertex,around> result;
-  for(size_t i=0;i<around;++i){
-   const auto [lateral,arch]=ringAxes[i];
-   const float arc=float(std::min(i,around-i))/(around/2);
-   const Vector2 uv{.035f+.93f*(s.forward-RumpForward)/(MuzzleForward-RumpForward),.055f+.88f*arc};
-   const auto surface=coat(s,ringAxes[i],arc,0);
-   const float shade=.88f+.25f*(arch*r.roll.x+lateral*r.roll.y)+.061f*(lateral*r.roll.x-arch*r.roll.y);
-   result[i]={surface.screen,uv,light(fur,shade),surface.depth};
-  }
+  for(size_t i=0;i<around;++i)result[i]=coatVertex(s,i);
   return result;
  };
+ constexpr size_t outer=3,inner=7;
+ for(bool fore:{false,true}){
+  const auto span=legSpan(fore);
+  const auto sectionAt=[&](float x){
+   return std::lower_bound(sections.begin(),sections.end(),x-.001f,
+                           [](const Section& s,float f){return s.forward<f;});
+  };
+  const auto first=sectionAt(span.x),last=sectionAt(span.y);
+  for(int side:{-1,1}){
+   auto& seam=seams[legIndex(fore,side)];
+   seam.clear();
+   const auto append=[&](const Section& s,size_t j){
+    const float x=std::clamp(2*(s.forward-span.x)/(span.y-span.x)-1,-1.f,1.f);
+    const float y=1.f-2.f*float(j-outer)/float(inner-outer);
+    // Map the rectangular rim to an oval limb without crowding its corners.
+    seam.push_back({coatVertex(s,side>0?j:around-j),
+                    {x*std::sqrt(1-.5f*y*y),y*std::sqrt(1-.5f*x*x)}});
+   };
+   for(auto s=first;s!=last;++s)append(*s,outer);
+   for(size_t j=outer;j<inner;++j)append(*last,j);
+   for(auto s=last;s!=first;--s)append(*s,inner);
+   for(size_t j=inner;j>outer;--j)append(*first,j);
+  }
+ }
  const auto face=[&](Vertex a,Vertex b,Vertex c){
   if(art::cross(sub(b.point,a.point),sub(c.point,a.point))>.005f)m.triangle(a,b,c,art::DrakeSkin);
  };
  auto a=ring(sections.front());
  for(size_t section=1;section<sections.size();++section){
   const auto b=ring(sections[section]);
+  const float forward=.5f*(sections[section-1].forward+sections[section].forward);
+  const auto span=legSpan(forward>0);
+  const bool socket=forward>span.x&&forward<span.y;
   for(size_t i=0;i<around;++i){
+   if(socket&&((i>=outer&&i<inner)||(i>=around-inner&&i<around-outer)))continue;
    const auto j=(i+1)%around;
    face(a[i],b[i],b[j]);face(a[i],b[j],a[j]);
   }
@@ -531,11 +538,12 @@ inline void drawTail(Mesh& m,const Pose& r){
 }
 
 inline Rectangle build(Mesh& m,const Pose& r){
- drawBody(m,r);
+ thread_local LegSeams seams;
+ drawBody(m,r,seams);
  const auto body=r.support>0?extent(m):Rectangle{};
  drawTail(m,r);
  for(int side:{-1,1}){
-  for(int axle:{-1,1})drawLeg(m,r,axle,side);
+  for(bool fore:{false,true})drawLeg(m,r,fore,side,seams[legIndex(fore,side)]);
   drawHorn(m,r,side);
  }
  drawHeadDetails(m,r);

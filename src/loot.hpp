@@ -38,6 +38,10 @@ inline const LootTable& enemyLootTable(int type){
   {{{Kind::Gold,18,36},{Kind::RuneStone},{Kind::Crystal,1,2},{Kind::Health},{Kind::BasaltCleaver},{Kind::GuardianBoots},{Kind::CinderhornMail},{Kind::CinderBow},{Kind::ObsidianRoundshield}}},
   {{{Kind::Gold,9,24},{Kind::SandEssence},{Kind::Health},{Kind::CobraBoots},{Kind::OasisSpear},{Kind::MirageBow}}},
   {{{Kind::Gold,14,29},{Kind::Crystal},{Kind::Mana},{Kind::GlassDagger},{Kind::SunTrailSword},{Kind::DuneLamellar},{Kind::MirageSword}}},
+  {{{Kind::Gold,20,42},{Kind::VenomSac},{Kind::Health},{Kind::RootShield}}},
+  {{{Kind::Gold,18,38},{Kind::SlimeGel,1,3},{Kind::VenomRing},{Kind::Health}}},
+  {{{Kind::Gold,26,48},{Kind::Mana,1,2},{Kind::ForestEssence},{Kind::EchoRing}}},
+  {{{Kind::Gold,140,220},{Kind::RuneStone,2,4},{Kind::IronwoodRoundshield},{Kind::EchoRing},{Kind::DawnShard,1,1,5},{Kind::GroveAmulet},{Kind::DawnSpear}}},
  };
  static_assert(sizeof(tables)/sizeof(tables[0])==EnemyTypeCount);
  return tables[std::clamp(type,0,EnemyTypeCount-1)];

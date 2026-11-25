@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "source_manifest": "C:\\AI2D\\pipeline\\runs\\forest-wood-20261115\\pack.json",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\paleta-pustynia-kaldera-20261125-221137\\pack.json",
   "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\realm-decorations-20261114",
   "files": [
     {
       "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\realm-decorations-20261114\\realm-decorations.png",
-      "sha256": "dc043b10b0abd7fb36d366c93a4218ef5e3779e06fc5af94eb4e138bdb9933f7",
-      "bytes": 959075,
+      "sha256": "311d0c30a2410b8ff311438c4e072508f1e7fb2fa53728ace806689cd05b239b",
+      "bytes": 901303,
       "role": "2D terrain decoration atlas"
     }
   ],
@@ -45,6 +45,13 @@
           "sha256": "7b094eeaafcd60300169306a073a25e5e5a518412fa104325ff9926b7115993a"
         }
       ]
+    },
+    "paleta_pustyni_i_kaldery": {
+      "editing": "Krita 5.3.4, dwie krzywe tonalne i warstwa koloru odbitego od gruntu",
+      "palette_master": "C:\\AI2D\\sprites\\paleta-pustynia-kaldera-20261125-221137\\Palety-krain.kra",
+      "palette_sha256": "608066fe8c516ac8362734e0686ccb6f0f8fdce78782d62086ab203414ec599d",
+      "source": "Istniejące malowane zasoby Emberfall",
+      "scope": "Pustynia i Kaldera. Zachowano kanały alfa i pola lasu."
     }
   },
   "game_rebuilt": false,

@@ -29,7 +29,8 @@ inline void ground(){
   if(ability==EnemyAbility::VenomFan){
    if(warning){cone(e.pos,e.abilityDirection,6,.34f,Fade(tint,alpha*.65f),Fade(tint,.7f));for(float angle:{-.28f,0.f,.28f})DrawLineEx(screen(e.pos+e.abilityDirection*.5f),screen(e.pos+rotateAbilityDirection(e.abilityDirection,angle)*6),1.3f,Fade(tint,.55f));}
   }else if(ability==EnemyAbility::CopperWave){
-   scarab_wave_art::draw(e,spec);
+   if(e.type==BellKeeper){float phase=std::clamp((e.abilityAge-spec.windup)/spec.active,0.f,1.f);float radius=warning?CopperWaveOuter*(1-progress)+CopperWaveInner*progress:copperWaveRadius(phase);terrain_surface::ring(e.pos,radius,Fade(rgb(180,218,183),active?.91f:.30f));terrain_surface::ring(e.pos,radius+.11f,Fade(rgb(104,160,143),.55f));}
+   else scarab_wave_art::draw(e,spec);
   }else if(ability==EnemyAbility::ObsidianCleave){
    cleave(e,Fade(tint,alpha),Fade(tint,warning?.8f:active?1.f:.18f));
    if(warning){

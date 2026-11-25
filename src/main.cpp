@@ -288,6 +288,7 @@ void icon(Item i,float x,float y,float s=1,float alpha=1){
 #include "desert_art.hpp"
 #include "caldera_attack_art.hpp"
 #include "volcano_art.hpp"
+#include "marsh_art.hpp"
 #include "actor_art.hpp"
 #include "weapon_icon_bake.hpp"
 #include "gear_icon_bake.hpp"
@@ -332,6 +333,7 @@ void makeArt(){
  inventory_icons::bakeWeapons();
  inventory_icons::bakeGear();
  forest_bush_art::load();forest_tree_art::load();desert_plant_art::load();guardian_art::load();
+ marsh_art::load();marsh_art::prepareFloor();
  treasure_art::make();fountain_art::load();volcano_art::make();volcano_actors::load();regional_enemy_art::load();caldera_attack_art::load();scarab_wave_art::load();
  terrain=render_targets::colorOnly(TerrainCacheWidth,TerrainCacheHeight);BeginTextureMode(terrain);ClearBackground(BLANK);BeginMode2D({{0,0},{0,0},0,TerrainBakeScale});
  const bool paintedForest=terrain_paint::bake(true);
@@ -394,7 +396,7 @@ void main(){
   const int slot=i<LegacyPropTypeCount?scenerySlots[i]:-1;
   const bool desertPlant=desert_plant_art::available(i);
   const bool highResolution=forest_tree_art::slot(i)>=0||desertPlant;
-  const int density=highResolution?3:(i>=ForestPropTypeCount||i==2||(paintedScenery&&slot>=0))?2:1;
+  const int density=i==MarshFishingHut?4:highResolution?3:(i>=ForestPropTypeCount||i==2||(paintedScenery&&slot>=0))?2:1;
   const int width=180*density,height=230*density;
   propArt[i]=LoadRenderTexture(width,height);
   BeginTextureMode(propArt[i]);
@@ -403,7 +405,8 @@ void main(){
   const bool landmark=volcanoLandmark(i)&&paintedLandmarks;
   const bool forestColour=paletteReady&&(i<ForestPropTypeCount||(i>=ForestDecorationStart&&i<DesertDecorationStart));
   if(forestColour)BeginShaderMode(forestPalette);
-  if(desertPlant){
+  if(i>=MarshPropStart){marsh_art::prop(i-MarshPropStart,width,height);}
+  else if(desertPlant){
    desert_plant_art::draw(i,width,height);
   }else if(landmark||(paintedScenery&&slot>=0)||(paintedDecorations&&decoration>=0)){
    // The painted cells already contain the cache's edge coverage.
@@ -464,16 +467,24 @@ void drawWorld(){
  if(game.inTower()){drawTowerWorld();return;}
  clip(0,0,WorldW,H);
  ClearBackground(game.inVolcano()?rgb(43,33,48):game.inDesert()?rgb(163,121,74):rgb(22,44,47));
- if(game.inVolcano())volcano_art::backdrop();
+ if(game.inMarsh())marsh_art::ground();
+ else if(game.inVolcano())volcano_art::backdrop();
  else if(game.inDesert())desert_art::drawCachedBackdrop();
  else{forest_water::draw();forest_water::drawRaisedCrests();forest_cliff::draw();}
  performance.end(RenderStage::Water,true);
  if(game.inDesert())BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
- terrain_surface::draw(game.inVolcano()?volcano_art::terrain.texture:game.inDesert()?desert_art::terrain.texture:terrain.texture);
+ if(!game.inMarsh())terrain_surface::draw(game.inVolcano()?volcano_art::terrain.texture:game.inDesert()?desert_art::terrain.texture:terrain.texture);
  if(game.inDesert()){native_world::endBlendMode();desert_art::oasis_water::draw();desert_art::atmosphere();}
  if(game.inVolcano())volcano_art::flow();
- if(!game.inDesert()&&!game.inVolcano())for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
+ if(game.location==WorldLocation::Forest)for(int i=0;i<32;i++){float x=std::fmod(i*167.3f+game.time*(3+i%3),float(WorldW)),y=std::fmod(i*92.7f+std::sin(game.time*.6f+i)*13,740.f)+90;DrawCircle(int(x),int(y),i%3==0?2:1,Fade(Gold,.15f+.2f*std::sin(game.time+i)));}
  world_shadows::draw();
+ if(game.inMarsh()){
+  for(const auto& prop:game.props)if(prop.type>=MarshPropStart)
+   marsh_art::drawContact(prop.type-MarshPropStart,prop.pos,propArtSize(prop));
+  else if(prop.type==13)marsh_art::drawContact(marsh_footprints::Portal,prop.pos,prop.size);
+  for(const auto& chest:game.chests)if(chest.location==game.location)
+   marsh_art::drawContact(treasure_art::frame(chest)?marsh_footprints::OpenChest:marsh_footprints::ClosedChest,chest.pos,treasure_art::Scale);
+ }
  if(game.inVolcano())for(const auto& prop:game.props)volcano_art::drawPropContact(prop);
  Vector2 pp=screen(game.player);terrain_surface::ring(game.player,.44f,Fade(Gold,.7f));
  drawHoveredTile();
@@ -615,9 +626,10 @@ void minimap(){const Rectangle r=minimapRect();panel(r,Fade(Panel,.92f));
   if(game.towerFloor==0)DrawCircleV(point(MagePosition),3,rgb(198,150,250));
   if(game.stairPresent(1))DrawCircleV(point(TowerStairUp),3,Gold);if(game.stairPresent(-1))DrawCircleV(point(TowerStairDown),3,Blue);DrawCircleV(point(game.player),3,Text);txt(TextFormat("PIĘTRO %d / 5",game.towerFloor+1),r.x+45,r.y+135,14,Gold);return;
  }
- txt(game.inVolcano()?"KALDERA POPIOŁU":game.inDesert()?"MORZE PIASKÓW":"WIELKA KNIEJA",r.x+14,r.y+11,11,Gold);
+ if(game.inMarsh()){txt("MOKRADŁA",r.x+14,r.y+4,11,Gold);txt("CICHYCH DZWONÓW",r.x+14,r.y+19,11,Gold);}
+ else txt(game.inVolcano()?"KALDERA POPIOŁU":game.inDesert()?"MORZE PIASKÓW":"WIELKA KNIEJA",r.x+14,r.y+11,11,Gold);
  auto point=[&](V p){return fieldMinimapPoint(r,p);};
- DrawTexture(game.inVolcano()?volcano_art::minimap:game.inDesert()?desert_art::minimap:minimapTerrain,int(r.x),int(r.y+37),WHITE);
+ DrawTexture(game.inMarsh()?marsh_art::mini:game.inVolcano()?volcano_art::minimap:game.inDesert()?desert_art::minimap:minimapTerrain,int(r.x),int(r.y+37),WHITE);
  for(const auto& e:game.enemies)if(e.alive&&!enemyBoss(e.type))DrawCircleV(point(e.pos),1.25f,rgb(166,90,75));
  drawFieldSiteMarkers(r,game.location);
  for(const auto& c:game.chests)if(c.location==game.location){
@@ -627,13 +639,14 @@ void minimap(){const Rectangle r=minimapRect();panel(r,Fade(Panel,.92f));
   const Vector2 p=point(e.pos);diamond(p.x,p.y,3,3,Gold);
  }
  if(game.inVolcano()){DrawCircleV(point(VolcanoPortal),2.45f,rgb(192,153,240));for(int i=0;i<2;i++)DrawCircleV(point(VolcanoFountains[i]),2,i==0?Blue:rgb(238,123,123));}
+ if(game.inMarsh())DrawCircleV(point(marsh::Portal),2.45f,rgb(192,153,240));
  if(game.inDesert()){DrawCircleV(point(DesertPortal),2.45f,rgb(192,153,240));DrawCircleV(point(DesertOasis),2,Blue);}
  DrawCircleV(point(game.player),3,Text);
 }
 void drawUI(){
  sand_prison::drawStatus();
  txt("EMBERFALL",28,22,34,Text,true);txt("ECHA ZAPOMNIANYCH RUIN",31,66,10,Gold);line(29,92,308,92,Fade(Gold,.35f));
- txt(game.inTower()?TowerFloors[game.towerFloor].name:game.currentRegion(),335,29,20,Text);txt(game.inTower()?TowerFloors[game.towerFloor].theme:game.inVolcano()?"TRZECIA KRAINA / PIEŚŃ KALDERY":game.inDesert()?"DRUGA KRAINA / SZLAK ŻYWEJ WYDMY":"POGRANICZE  /  STREFA DZIKICH",336,56,10,Muted);
+ txt(game.inTower()?TowerFloors[game.towerFloor].name:game.currentRegion(),335,29,20,Text);txt(game.inTower()?TowerFloors[game.towerFloor].theme:game.inMarsh()?"CZWARTA KRAINA / SZLAK DZWONNIKA":game.inVolcano()?"TRZECIA KRAINA / PIEŚŃ KALDERY":game.inDesert()?"DRUGA KRAINA / SZLAK ŻYWEJ WYDMY":"POGRANICZE  /  STREFA DZIKICH",336,56,10,Muted);
  DrawCircle(755,39,3,Green);txt(TextFormat("%d FPS",GetFPS()),766,30,13,Green);
  minimap();
  drawDeveloperSummonHud();
@@ -745,8 +758,8 @@ void drawUI(){
  }
  drawInspectionHud();
  line(1080,880,1400,880,Line);
- if(game.inTower()||game.inVolcano()||game.inDesert()){
-  DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inVolcano()?"WYPRAWA DO KALDERY":"WYPRAWA NA PUSTYNIĘ",1096,885,10,Muted);
+ if(game.inTower()||game.inVolcano()||game.inDesert()||game.inMarsh()){
+  DrawCircle(1085,894,3,Green);txt(game.inTower()?"SCHRONIENIE ELDRINA":game.inMarsh()?"WYPRAWA NA MOKRADŁA":game.inVolcano()?"WYPRAWA DO KALDERY":"WYPRAWA NA PUSTYNIĘ",1096,885,10,Muted);
  }
  txt("v0.47",1370,885,10,Muted);
 }
@@ -754,7 +767,7 @@ struct ItemTooltipText {std::string label,name,stat,description,instruction,valu
 ItemTooltipText itemTooltipText(Item value,Slot source){
  ItemTooltipText text;Kind shape=archetype(value.kind);int slot=gearSlot(value.kind);
  text.color=rarity(value);text.label=rarityName(itemRarity(value));text.name=itemName(value);
- if(value.kind==Kind::DawnShard)text.stat=value.tier>=3?"Artefakt fabularny · część 2 z 5":"Artefakt fabularny · część 1 z 5";
+ if(value.kind==Kind::DawnShard)text.stat="Artefakt fabularny · część "+std::to_string(std::clamp(value.tier-1,1,5))+" z 5";
  else if(slot>=0)text.stat=(slot==0||slot==5?"Atak +":"Pancerz +")+std::to_string(power(value));
  else if(value.kind==Kind::Arrow)text.stat="Amunicja do łuku · jedna na strzał";
  else if(value.kind==Kind::Health)text.stat="Odnawia 50 punktów zdrowia";
@@ -836,6 +849,7 @@ void input(float dt){
  if(!IsWindowFocused()){game.cancelBow();weaponWheelOpen=false;paused=true;dragging={};return;}
  if(IsKeyPressed(KEY_E)&&!game.inTower()&&game.openNearestChest()){dragging={};return;}
  if(IsKeyPressed(KEY_E)&&game.useNearestFountain()){dragging={};return;}
+ if(IsKeyPressed(KEY_E)&&game.inMarsh()&&game.useMarshPortal()){dragging={};nearbyPage=0;return;}
  if(IsKeyPressed(KEY_E)&&game.inVolcano()&&game.useVolcanoPortal()){dragging={};nearbyPage=0;return;}
  if(IsKeyPressed(KEY_E)&&game.inDesert()&&game.useDesertPortal()){dragging={};nearbyPage=0;return;}
  if(IsKeyPressed(KEY_E)&&game.inTower()){nearestTowerInteraction();if(towerStory.active()||towerPanelOpen)return;}
@@ -1170,7 +1184,7 @@ int main(int argc,char**argv) {
 #else
          <<"unavailable"
 #endif
-         <<"\nWorld location: "<<(game.inTower()?"mage-tower":game.inVolcano()?"volcano":game.inDesert()?"desert":"forest")<<"\nBenchmark scenario: "<<(desertBenchmark?"desert":towerBenchmark?"tower":"forest")<<"\nDesert areas visited: "<<desertRegionsVisited
+         <<"\nWorld location: "<<(game.inTower()?"mage-tower":game.inMarsh()?"swamp":game.inVolcano()?"volcano":game.inDesert()?"desert":"forest")<<"\nBenchmark scenario: "<<(desertBenchmark?"desert":towerBenchmark?"tower":"forest")<<"\nDesert areas visited: "<<desertRegionsVisited
          <<"\nSand prisons cast: "<<(game.inDesert()&&game.findEnemy(DesertBossId)?game.findEnemy(DesertBossId)->sandPrisonCasts:0)
          <<"\nTower floor: "<<game.towerFloor+1<<"\nIntro active: "<<intro.active()<<"\nDeveloper error: "<<developerError
          <<"\nMain menu open: "<<welcome<<"\nPause menu open: "<<paused
@@ -1203,7 +1217,7 @@ int main(int argc,char**argv) {
     sync_present::shutdown();
     enemy_death_fx::unload();
     spell_art::unload();inventory_icons::unload();world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
-    hero_portrait::unload();regional_enemy_art::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();scarab_wave_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
+    marsh_art::unload();hero_portrait::unload();regional_enemy_art::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();scarab_wave_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
     actor_art::unloadEdgeCoverage();power_fx::unload();wind_post::unload();forest_water::unload();forest_cliff::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     if(wildMushrooms.id)UnloadTexture(wildMushrooms);
     typography.clear();CloseWindow();return deathPassed&&worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;

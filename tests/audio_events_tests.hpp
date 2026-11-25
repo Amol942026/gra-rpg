@@ -125,8 +125,8 @@ void audioEventTests() {
     std::array<bool,int(Cue::Count)> enemyCues{};
     for(int type=0;type<EnemyTypeCount;type++){
         for(Cue cue:{enemyAttackCue(type),enemyHitCue(type),enemyFallCue(type),enemyDyingCue(type)}){
-            const bool borrowed=type==DuneJackalType||type==GlassReaperType;
-            check(enemyCues[int(cue)]==borrowed,"desert variants share existing voice banks and original enemies keep their cues");
+            const bool borrowed=type==DuneJackalType||type==GlassReaperType||marshEnemy(type);
+            check(enemyCues[int(cue)]==borrowed,"desert variants and marsh species share their designated voice banks");
             if(!borrowed)enemyCues[int(cue)]=true;
         }
         check(enemyAttackSound(enemyAttackCue(type))&&enemyLandingCue(enemyFallCue(type))&&

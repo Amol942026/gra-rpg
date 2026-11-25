@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\mokradla-wiecierz-wozek-20261125-235605\\manifest.json",
+  "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-warsztaty",
+  "files": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-warsztaty\\warsztaty.png",
+      "sha256": "9a2739e08a6917ce6ff7487733090a498b8786bed21231527d2ee14fcd6c5c6b",
+      "bytes": 176256,
+      "role": "marsh-fish-trap-and-peat-cart"
+    }
+  ],
+  "provenance": {
+    "source": "Original Emberfall artwork, two Sunburst designs, local ComfyUI ColorTransfer matched to the settlement and peat, composited and exported in Krita.",
+    "master": "C:\\AI2D\\sprites\\mokradla-wiecierz-wozek-20261125-235605\\Warsztaty.kra",
+    "prompt": "C:\\AI2D\\pipeline\\runs\\mokradla-wiecierz-wozek-20261125-235605\\prompt.txt",
+    "workflow": "C:\\AI2D\\pipeline\\runs\\mokradla-wiecierz-wozek-20261125-235605\\grade.py"
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false
+}

@@ -1,13 +1,13 @@
 #pragma once
 void treasureTests(){
  int common=0,rare=0;std::array<bool,EquipSize> slots{};bool varied=false;
- std::array<std::array<bool,ItemKindCount>,3> weaponsByRealm{};
+ std::array<std::array<bool,ItemKindCount>,TreasureCount/2> weaponsByRealm{};
  auto original=makeTreasure(0);
  for(unsigned seed=0;seed<1000;seed++){
-  auto chests=makeTreasure(seed),same=makeTreasure(seed);int forest=0,desert=0,volcano=0;
+  auto chests=makeTreasure(seed),same=makeTreasure(seed);int forest=0,desert=0,volcano=0,swamp=0;
   for(int c=0;c<TreasureCount;c++){
-   const auto& chest=chests[c];forest+=chest.location==WorldLocation::Forest;desert+=chest.location==WorldLocation::Desert;volcano+=chest.location==WorldLocation::Volcano;
-   check(chest.id==c&&!chest.opened,"six stable chest IDs start closed");
+   const auto& chest=chests[c];forest+=chest.location==WorldLocation::Forest;desert+=chest.location==WorldLocation::Desert;volcano+=chest.location==WorldLocation::Volcano;swamp+=chest.location==WorldLocation::Swamp;
+   check(chest.id==c&&!chest.opened,"stable chest IDs start closed");
    for(int i=0;i<ChestLootSize;i++){
     Item value=chest.loot[i];auto rarity=itemRarity(value);
     check(!value.empty()&&value.count==1&&gearSlot(value.kind)>=0,"every chest guarantees three pieces of equipment");
@@ -19,13 +19,13 @@ void treasureTests(){
     varied|=value.kind!=original[c].loot[i].kind;
    }
   }
-  check(forest==2&&desert==2&&volcano==2,"exactly two treasure chests per field");
+  check(forest==2&&desert==2&&volcano==2&&swamp==2,"exactly two treasure chests per field");
  }
- check(varied&&rare>4050&&rare<4950&&common+rare==18000,"new seeds vary treasure and maintain the 75/25 rarity roll");
+ check(varied&&rare>TreasureCount*ChestLootSize*225&&rare<TreasureCount*ChestLootSize*275&&common+rare==TreasureCount*ChestLootSize*1000,"new seeds vary treasure and maintain the 75/25 rarity roll");
  for(bool seen:slots)check(seen,"treasure can supply every equipment slot");
  for(const auto& realm:weaponsByRealm)for(int id=int(Kind::TrailFalchion);id<=int(Kind::AshBow);id++)
   check(realm[id],"all ten weapons can roll in each realm's treasure pool");
- for(WorldLocation location:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano}){
+ for(WorldLocation location:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano,WorldLocation::Swamp}){
   Game g(9876),control(9876);g.activateField(location);
   int active=0;
   for(const auto& layout:TreasureLayout){

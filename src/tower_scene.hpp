@@ -9,7 +9,7 @@ void startTowerReturn(){if(game.takeTowerReturn()){clearStoryMenus();towerStory.
 bool talkToMage(){
     if(!gameplayInputAllowed()||dragging.place!=Place::None||!game.inTower())return false;
     if(!game.mageReachable()){game.say("Podejdź bliżej Eldrina, aby porozmawiać (E / PPM).");return false;}
-    clearStoryMenus();towerStory.beginTalk(game.canTravelDesert(),game.dawnFragments(),game.canTravelVolcano(),game.dawnShardUnclaimed(WorldLocation::Desert),game.dawnShardUnclaimed(WorldLocation::Volcano));game.sound(Cue::Ui,game.player);return true;
+    clearStoryMenus();towerStory.beginTalk(game.canTravelDesert(),game.dawnFragments(),game.canTravelVolcano(),game.dawnShardUnclaimed(WorldLocation::Desert),game.dawnShardUnclaimed(WorldLocation::Volcano),game.canTravelMarsh(),game.dawnShardUnclaimed(WorldLocation::Swamp));game.sound(Cue::Ui,game.player);return true;
 }
 void towerAction(bool advance,bool skip,float dt,bool focused=true){
     if(!towerStory.active()||!focused)return;
@@ -17,17 +17,19 @@ void towerAction(bool advance,bool skip,float dt,bool focused=true){
     towerStory.update(dt);
     if(towerStory.takeArrival()){game.enterMageTower();game.sound(Cue::TeleportArrival,game.player);mouse={0,0};startupLog.write("First Dawn shard collected: hero returned to Eldrin's tower");}
     if(towerStory.takeDesertArrival()){
-        if(towerStory.travelVolcano?game.travelToVolcano():game.travelToDesert()){dragging={};nearbyPage=0;mouse={0,0};startupLog.write("Eldrin dialogue choice: hero teleported to the desert");}
+        if(towerStory.travelMarsh?game.travelToMarsh():towerStory.travelVolcano?game.travelToVolcano():game.travelToDesert()){dragging={};nearbyPage=0;mouse={0,0};startupLog.write("Eldrin dialogue choice: hero teleported to the chosen realm");}
         else towerStory.enter(TowerPhase::Finished);
     }
     if(towerStory.takeCompletion())game.finishTowerReturn();
 }
+Rectangle marshTravelButton(){return {395,374,650,46};}
 Rectangle volcanoTravelButton(){return {395,430,650,46};}
 Rectangle desertTravelButton(){return {395,487,650,46};}
 Rectangle mageLessonButton(){return {395,544,650,46};}
 Rectangle desertStayButton(){return {395,601,650,46};}
 bool clickMageTravelChoice(){
  if(towerStory.phase!=TowerPhase::Choice)return false;
+ if(inside(marshTravelButton())&&towerStory.offerMarsh&&game.canTravelMarsh()){game.sound(Cue::Spell,game.player);return towerStory.chooseMarsh();}
  if(inside(volcanoTravelButton())&&towerStory.offerVolcano){if(!game.canTravelVolcano())return false;game.sound(Cue::Spell,game.player);return towerStory.chooseVolcano();}
  if(inside(desertTravelButton())){if(!game.canTravelDesert())return false;game.sound(Cue::Spell,game.player);return towerStory.chooseDesert();}
  if(inside(mageLessonButton())&&game.spellLessonsUnlocked()){openSpellLessons();return spellBookOpen&&spellLessonOpen;}
@@ -41,9 +43,10 @@ void towerInput(float dt){
 void drawMageTravelChoice(){
  panel({320,172,800,515},rgb(22,27,39));line(350,199,1090,199,Gold);
  center("ELDRIN — NASTĘPNA WYPRAWA",720,223,27,Text,true);
- center(towerStory.offerVolcano?"KALDERA POPIOŁU":"MORZE PIASKÓW",720,272,24,Gold,true);
- storyWrappedText(mageTravelDescription(game,towerStory.offerVolcano),380,321,680,20,Text);
- center(TextFormat("Odzyskane części Serca Świtu: %d / 5",game.recoveredDawnFragments()),720,towerStory.offerVolcano?402:443,17,Muted);
+ center(towerStory.offerMarsh?"MOKRADŁA CICHYCH DZWONÓW":towerStory.offerVolcano?"KALDERA POPIOŁU":"MORZE PIASKÓW",720,272,24,Gold,true);
+ storyWrappedText(mageTravelDescription(game,towerStory.offerVolcano),380,towerStory.offerMarsh?306:321,680,20,Text);
+ if(towerStory.offerMarsh){Rectangle r=marshTravelButton();panel(r,inside(r)?rgb(57,77,63):rgb(35,52,45));DrawRectangleLinesEx(r,1.5f,Gold);center("Przenieś mnie na mokradła.",720,r.y+12,20,Gold);}
+ else center(TextFormat("Odzyskane części Serca Świtu: %d / 5",game.recoveredDawnFragments()),720,towerStory.offerVolcano?402:443,17,Muted);
  if(towerStory.offerVolcano){Rectangle next=volcanoTravelButton();panel(next,inside(next)?rgb(87,57,48):rgb(56,37,39));DrawRectangleLinesEx(next,1.5f,Gold);center("Przenieś mnie do Kaldery Popiołu.",720,next.y+12,20,Gold);}
  if(towerStory.offerDesert){Rectangle travel=desertTravelButton();panel(travel,inside(travel)?rgb(74,61,41):rgb(49,42,34));DrawRectangleLinesEx(travel,1.5f,Gold);center("Przenieś mnie na pustynię.",720,travel.y+12,20,Gold);}
  if(game.spellLessonsUnlocked()){Rectangle lesson=mageLessonButton();panel(lesson,inside(lesson)?rgb(46,50,71):rgb(30,35,49));DrawRectangleLinesEx(lesson,1.5f,Gold);center("Naucz mnie władać żywiołami.",720,lesson.y+12,20,Gold);}
@@ -69,7 +72,7 @@ void drawTowerChamber(){
     drawStoryMage(930,505,2.7f,t,0);
     if(towerStory.phase==TowerPhase::Opening)intro_art::column({510,539},t,1-storyEase(towerStory.age/TowerSequence::OpeningTime));
     rect(0,0,W,55,rgb(5,8,16));rect(0,860,W,40,rgb(5,8,16));
-    txt("EMBERFALL",79,79,29,Gold,true);txt(game.dawnFragments()>=3?"SERCE ŚWITU / TRZECI BLASK":game.dawnFragments()>=2?"SERCE ŚWITU / DRUGI BLASK":"SERCE ŚWITU / PIERWSZY BLASK",80,121,14,Muted);
+    txt("EMBERFALL",79,79,29,Gold,true);txt(game.dawnFragments()>=4?"SERCE ŚWITU / CZWARTY BLASK":game.dawnFragments()>=3?"SERCE ŚWITU / TRZECI BLASK":game.dawnFragments()>=2?"SERCE ŚWITU / DRUGI BLASK":"SERCE ŚWITU / PIERWSZY BLASK",80,121,14,Muted);
     if(towerStory.phase==TowerPhase::Opening){center("Wieża Eldrina",720,581,27,Text,true);center(dawnReturnSubtitle(game),720,616,16,Muted);}
     drawTowerDialogue();
     if(towerStory.phase==TowerPhase::Opening||towerStory.phase==TowerPhase::Dialogue){
@@ -84,7 +87,7 @@ void drawTowerStoryOverlay(){
         if(towerStory.phase==TowerPhase::Choice){drawMageTravelChoice();return;}
         if(towerStory.phase==TowerPhase::TravelOut||towerStory.phase==TowerPhase::TravelIn){
             Vector2 p=screen(game.player);intro_art::column(p,towerStory.time,towerStory.phase==TowerPhase::TravelOut?storyEase(towerStory.age/.9f):1-storyEase(towerStory.age/1.2f));
-            center(towerStory.phase==TowerPhase::TravelOut?"Eldrin otwiera przejście…":towerStory.travelVolcano?"Kaldera Popiołu":"Morze Piasków",WorldW*.5f,557,26,Gold,true);
+            center(towerStory.phase==TowerPhase::TravelOut?"Eldrin otwiera przejście…":towerStory.travelMarsh?"Mokradła Cichych Dzwonów":towerStory.travelVolcano?"Kaldera Popiołu":"Morze Piasków",WorldW*.5f,557,26,Gold,true);
             if(towerStory.fade()>0)rect(0,0,W,H,Fade(BLACK,towerStory.fade()));return;
         }
         drawTowerDialogue();

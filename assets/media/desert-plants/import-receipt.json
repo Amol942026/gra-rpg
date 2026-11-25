@@ -1,24 +1,24 @@
 {
   "status": "PASS",
-  "source_manifest": "C:\\AI2D\\pipeline\\runs\\desert-plants-20261115\\pack.json",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\paleta-pustynia-kaldera-20261125-221137\\pack.json",
   "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\desert-plants",
   "files": [
     {
       "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\desert-plants\\desert-saguaro.png",
-      "sha256": "c127337af94e71766c543f7fb798b09c21449546c2405633ed96c7e63fbbebf7",
-      "bytes": 258149,
+      "sha256": "cb1ce740e5468edf9a32f6c8c9b1413a200ed10ee1befbb8a505917b1208809d",
+      "bytes": 234929,
       "role": "desert-plant-sprite"
     },
     {
       "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\desert-plants\\desert-opuntia.png",
-      "sha256": "6b2882e1a839f9331a45899548c54ff94947eb8a3c31e8aabce3496cc0730ffd",
-      "bytes": 210074,
+      "sha256": "0fe78e64234f44f093562baba0515aba13b36a4b32b9f5d1891c1a4073dcc184",
+      "bytes": 194136,
       "role": "desert-plant-sprite"
     },
     {
       "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\desert-plants\\desert-palm.png",
-      "sha256": "5d4640e07575045e35cb8ccf5c7bf71252d9f360de0b2e9702d4a110d779807e",
-      "bytes": 331965,
+      "sha256": "57d0b9eaebf5afd5cf8f779fb80d0614732fb02229a8c268d59b3e51a7cecb50",
+      "bytes": 311486,
       "role": "desert-plant-sprite"
     }
   ],
@@ -48,7 +48,14 @@
       540,
       690
     ],
-    "finish": "RGB edge decontamination, transparent crop and rooted canvas composition in Krita 5.3.4.1"
+    "finish": "RGB edge decontamination, transparent crop and rooted canvas composition in Krita 5.3.4.1",
+    "paleta_pustyni_i_kaldery": {
+      "editing": "Krita 5.3.4, dwie krzywe tonalne i warstwa koloru odbitego od gruntu",
+      "palette_master": "C:\\AI2D\\sprites\\paleta-pustynia-kaldera-20261125-221137\\Palety-krain.kra",
+      "palette_sha256": "608066fe8c516ac8362734e0686ccb6f0f8fdce78782d62086ab203414ec599d",
+      "source": "Istniejące malowane zasoby Emberfall",
+      "scope": "Pustynia i Kaldera. Zachowano kanały alfa i pola lasu."
+    }
   },
   "game_rebuilt": false,
   "runtime_audio_bindings_changed": false

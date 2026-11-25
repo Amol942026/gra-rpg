@@ -59,7 +59,7 @@ void volcanoSaveTests(){
   check(saves::encode(old)==saves::encode(migrated),"adding landmarks leaves existing scenery and all other save bytes intact");
  }
  auto legacy=saves::read("art/volcano/fixtures/legacy-v8.efs");
- check(!legacy.game.volcanoCreated&&!legacy.game.volcanoBossDead&&legacy.game.chests.size()==6&&legacy.game.chests[4].location==WorldLocation::Volcano,"real v8 save gains an unexplored third realm and two fresh chests");roundtrip(legacy);
+ check(!legacy.game.volcanoCreated&&!legacy.game.volcanoBossDead&&legacy.game.chests.size()==TreasureCount&&legacy.game.chests[6].location==WorldLocation::Swamp&&!legacy.game.marshCreated&&legacy.game.chests[4].location==WorldLocation::Volcano,"real v8 save gains an unexplored third realm and two fresh chests");roundtrip(legacy);
  auto oldBytes=saves::readBytes("art/volcano/fixtures/legacy-v8.efs");saves::Archive oldFile(true,oldBytes);std::string magic;int version;size_t size;uint64_t hash;oldFile(magic,version,size,hash);
  saves::Archive rawPayload(true,oldBytes.substr(oldFile.at),8);saves::Snapshot raw;rawPayload(raw);auto projected=legacy;
  auto cut=[](auto& a,const auto& b){a.enemies.resize(b.enemies.size());a.props.resize(b.props.size());};

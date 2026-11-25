@@ -58,8 +58,37 @@ inline void sprite(Texture2D texture,Rectangle bounds,Vector2 base,bool inverted
  float top=inverted?1:0,bottom=1-top;
  quad(texture,p,{{{0,top},{0,bottom},{1,bottom},{1,top}}});
 }
+inline void marshSprite(int id,Texture2D texture,Rectangle src,Rectangle local,Vector2 base,float size){
+ if(!texture.id)return;
+ const auto& support=marsh_footprints::profiles[id];
+ const auto uv=[&](float x,float y){return Vector2{(src.x+(x-local.x)*src.width/local.width)/texture.width,
+  (src.y+(y-local.y)*src.height/local.height)/texture.height};};
+ const auto at=[&](float x,float y){
+  auto q=marsh_footprints::castPoint(support,x,y);
+  return Vector2{base.x+(q.x-90)*size,base.y+(q.y-208)*size};
+ };
+ float left=local.x;
+ for(int i=0;i<=support.count;i++){
+  const float right=i==support.count?local.x+local.width:support.feet[i].x;
+  const float a=marsh_footprints::groundRow(support,left),b=marsh_footprints::groundRow(support,right);
+  const auto strip=[&](float tl,float tr,float bl,float br){
+   quad(texture,{{at(left,tl),at(left,bl),at(right,br),at(right,tr)}},
+                {{uv(left,tl),uv(left,bl),uv(right,br),uv(right,tr)}});
+  };
+  strip(local.y,local.y,a,b);
+  strip(a,b,local.y+local.height,local.y+local.height);
+  left=right;
+ }
+}
 inline void prop(const Prop& value){
  Vector2 base=screen(value.pos);Texture2D texture=propArt[value.type].texture;visibleCasters++;
+ if(value.type>=MarshPropStart){
+  marshSprite(value.type-MarshPropStart,texture,{0,float(texture.height),float(texture.width),-float(texture.height)},
+              {0,0,180,230},base,propArtSize(value));return;
+ }
+ if(game.inMarsh()&&value.type==13&&volcano_art::gateFrame().id){
+  marshSprite(marsh_footprints::Portal,volcano_art::gateFrame(),{0,0,360,460},{0,0,180,230},base,value.size);return;
+ }
  if(value.type==13&&volcano_art::gateFrame().id){sprite(volcano_art::gateFrame(),{base.x-90*value.size,base.y-208*value.size,180*value.size,230*value.size},base,false);return;}
  if(volcanoSceneryProp(value.type)){Rectangle s=volcano_art::source(value);auto t=volcano_art::propTexture(value);float x=base.x-90*value.size,y=base.y-208*value.size,w=180*value.size,h=230*value.size;
   quad(t,{{projected({x,y},base.y),projected({x,y+h},base.y),projected({x+w,y+h},base.y),projected({x+w,y},base.y)}},{{{s.x/t.width,s.y/t.height},{s.x/t.width,(s.y+s.height)/t.height},{(s.x+s.width)/t.width,(s.y+s.height)/t.height},{(s.x+s.width)/t.width,s.y/t.height}}});return;}
@@ -182,7 +211,7 @@ inline void prepare(bool chamber=false){
   Vector2 camera=cameraPixels();float x=std::fmod(camera.x,2.f),y=std::fmod(camera.y,2.f);if(x<0)x+=2;if(y<0)y+=2;
   maskOffset={(x+2)/renderScale,(y+2)/renderScale};width+=2;height+=2;
  }
- const bool raised=!chamber&&!game.inTower();
+ const bool raised=!chamber&&!game.inTower()&&!game.inMarsh();
  if(raised){maskOffset.y+=terrain_height::MaxPixels;height+=int(std::ceil(terrain_height::MaxPixels*maskScale*2));}
  if(!mask.id||mask.texture.width!=width||mask.texture.height!=height){
   if(mask.id)UnloadRenderTexture(mask);mask=render_targets::colorOnly(width,height);SetTextureFilter(mask.texture,TEXTURE_FILTER_BILINEAR);
@@ -210,6 +239,13 @@ inline void prepare(bool chamber=false){
    const float size=propArtSize(p);
    if(q.x>-260*size&&q.x<WorldW+115*size&&q.y>-70*size&&q.y<H+12*size)prop(p);
   }
+  if(game.inMarsh())for(const auto& chest:game.chests)if(chest.location==game.location){
+   Vector2 at=screen(chest.pos);if(!near(at,120))continue;
+   int frame=treasure_art::frame(chest);
+   marshSprite(frame?marsh_footprints::OpenChest:marsh_footprints::ClosedChest,treasure_art::atlas,
+    {float(frame*treasure_art::Cell),float(3*treasure_art::Cell),256,256},{-38,25,256,256},at,treasure_art::Scale);
+   visibleCasters++;
+  }
   for(const auto& e:game.enemies){
    Vector2 p=screen(e.pos);
    if(!e.alive)p=corpseDrawPoint(e,p);
@@ -217,6 +253,7 @@ inline void prepare(bool chamber=false){
     if(near(p,270)){legacyCorpseShadow(e,p);visibleCasters++;}
     continue;
    }
+   if(marshEnemy(e.type)){if(near(p,210)){billboard(p.y,[&]{marsh_art::actor(e,p.x,p.y,BLANK,nullptr,true,1,e.alive?-1.f:std::min(1.f,e.deathProgress()/enemy_death::groundContact(e.type)));});visibleCasters++;}continue;}
    if(regionalEnemy(e.type)){
     if(near(p,215)){
      if(e.alive||!paintedCorpseShadow(e,p))
@@ -299,7 +336,7 @@ inline void draw(){
  if(!ready||!softMask.id)return;
  // Filtering happens once at mask resolution, not nine times per world pixel.
  BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
- if(!chamberFrame&&!game.inTower())terrain_surface::draw(softMask.texture,true,maskScale,maskOffset);
+ if(!chamberFrame&&!game.inTower()&&!game.inMarsh())terrain_surface::draw(softMask.texture,true,maskScale,maskOffset);
  else DrawTexturePro(softMask.texture,{0,0,float(softMask.texture.width),-float(softMask.texture.height)},
  {-maskOffset.x,-maskOffset.y,softMask.texture.width/maskScale,softMask.texture.height/maskScale},{0,0},0,WHITE);
  native_world::endBlendMode();

@@ -58,6 +58,14 @@ inline constexpr FieldSite FieldSites[]={
  {"volcano-red-overlook","Czerwony Próg",WorldLocation::Volcano,{70,30}},
  {"volcano-southern-cinders","Południowe Pogorzelisko",WorldLocation::Volcano,{12,90}},
  {"volcano-slag-bridge","Most nad Żużlem",WorldLocation::Volcano,{65,114}},
+ {"swamp","Grobla Powrotu",WorldLocation::Swamp,marsh::Arrival},
+ {"swamp-ferry","Przystań Przewoźnika",WorldLocation::Swamp,marsh::Ferry},
+ {"swamp-reeds","Szepczące Szuwary",WorldLocation::Swamp,marsh::Reedbed},
+ {"swamp-isle","Wyspa Wotywna",WorldLocation::Swamp,marsh::Isle},
+ {"swamp-village","Zatopiona Osada",WorldLocation::Swamp,marsh::Village},
+ {"swamp-mill","Martwy Młyn",WorldLocation::Swamp,marsh::Mill},
+ {"swamp-peat","Torfowe Łąki",WorldLocation::Swamp,marsh::Peat},
+ {"swamp-boss","Dzwonnica Topieli",WorldLocation::Swamp,marsh::Guardian},
 };
 inline const FieldSite& fieldRegion(WorldLocation realm,V p){
  const FieldSite* closest=&FieldSites[0];

@@ -1,0 +1,47 @@
+Build edition: developer
+Frames: 180
+Window: 1920x1080
+Fullscreen: no
+Refresh rate (Hz): 144
+V-sync interval: 2
+Presentation clock: OpenGL V-sync
+DXGI synchronized presents: 0
+Occluded presentations: 0
+Suppressed native swaps: 0
+Actual presentation interval: 2
+Presentation fallback: GPU sharing pixel validation failed (0x80004005)
+Strong cuts performed: 0
+Piercing arrows fired: 0
+Developer mode: 1
+Developer menu open: 0
+Developer destination: swamp-mill
+World location: swamp
+Benchmark scenario: forest
+Desert areas visited: 0
+Sand prisons cast: 0
+Tower floor: 1
+Intro active: 0
+Developer error: 
+Main menu open: 0
+Pause menu open: 0
+Audio device opened: no
+Native canvas: 1728x1080
+Desert background buffer: 0x0
+Hidden background diagnostic: yes
+Window hidden: yes
+Diagnostic loop rate (not foreground FPS): 41.3595
+CPU frame mean (ms): 24.0328
+EndDrawing mean (ms): 0.0545336
+Presentation mean (ms): 8.57143e-05
+CPU frame p95 (ms): 29.5556
+CPU frame p99 (ms): 30.0832
+Frame p95 (ms): 29.6271
+Frame p99 (ms): 30.1478
+Frame max (ms): 329.576
+Frames over 25 ms: 43
+Developer level: 100
+Developer arrows: 100
+Developer health potions: 50
+Developer mana potions: 50
+Developer learned spells: 7
+Developer skill ranks: 1 1 1 1 1 1

@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\mokradla-chata-20261125-231225\\manifest.json",
+  "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-osada",
+  "files": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-osada\\osada.png",
+      "sha256": "4551925e7ab3da11f75b10e8f37ac529e24006d92bbde9f5a00b0adc089f1d99",
+      "bytes": 1802146,
+      "role": "scenery-and-chest-states"
+    }
+  ],
+  "provenance": {
+    "source": "Emberfall, Mokradła i Przystań",
+    "authoring": "GPT Image (Sunburst), ComfyUI ColorTransfer i Krita",
+    "master": "C:/AI2D/sprites/mokradla-chata-20261125-231225/Osada.kra",
+    "workflow": "C:/AI2D/pipeline/runs/mokradla-chata-20261125-231225/kolor.py",
+    "prompt": "C:/AI2D/pipeline/runs/mokradla-chata-20261125-231225/prompt.txt"
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false
+}

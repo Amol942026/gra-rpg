@@ -13,10 +13,12 @@ void roundtrip(const saves::Snapshot& snapshot){auto bytes=saves::encode(snapsho
 #include "spell_learning_save_tests.hpp"
 #include "volcano_save_tests.hpp"
 #include "enemy_ability_save_tests.hpp"
+#include "marsh_campaign_tests.hpp"
 int main(int argc,char** argv){
  if(argc<2||std::string(argv[1])!="--no-audio")return 3;
  try{
   fs::path root=argc>2?fs::path(argv[2]):fs::path("dist")/("qa-save-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
+  marshCampaignTests();
   enemyAbilitySaveTests();
   worldExpansionSaveTests();
   audioSaveTests();
@@ -243,6 +245,25 @@ int main(int argc,char** argv){
          "a restored charged melee swing advances at the new release speed");
   }
   auto envelope=[](saves::Snapshot snapshot,int version){saves::Archive payload(false,{},std::min(version,saves::CurrentVersion));payload(snapshot);saves::Archive file(false);std::string magic="EMBERFALL-SAVE";size_t size=payload.bytes.size();uint64_t hash=saves::checksum(payload.bytes);file(magic,version,size,hash);return file.bytes+payload.bytes;};
+  for(bool stored:{false,true}){
+   saves::Snapshot prior;auto& g=prior.game;g.activateField(WorldLocation::Swamp);g.player={70.5f,123};
+   g.props.erase(std::remove_if(g.props.begin(),g.props.end(),[](const Prop& p){return p.type>=MarshFishTrap;}),g.props.end());
+   if(stored){g.activateField(WorldLocation::Forest);g.player={20,20};}
+   auto restored=saves::decode(envelope(prior,34));auto& field=restored.game;
+   field.activateField(WorldLocation::Swamp);
+   const auto count=[&](int type){return std::count_if(field.props.begin(),field.props.end(),[&](auto p){return p.type==type;});};
+   check(count(MarshFishTrap)==6&&count(MarshPeatCart)==5,"existing active and stored marshes gain the eleven worksite props");
+   if(!stored)check(field.walkable(field.player),"migrated peat cart leaves the saved player's feet clear");
+   auto roundTrip=saves::decode(saves::encode(restored));
+   check(roundTrip.game.props.size()==field.props.size(),"new marsh scenery is not duplicated on reload");
+  }
+  {
+   saves::Snapshot prior;prior.game.dawnQuest=DawnQuest::AtTower;prior.game.collectedFragments=3;
+   prior.game.desertBossDead=prior.game.volcanoBossDead=true;prior.game.enterMageTower();prior.game.player=MagePosition;
+   auto fromV33=saves::decode(envelope(prior,33));
+   check(!fromV33.game.developerSession&&fromV33.game.canTravelMarsh()&&fromV33.game.travelToMarsh(),"existing ordinary campaign at three shards continues directly to the fourth realm");
+   check(fromV33.game.chests[6].location==WorldLocation::Swamp&&!fromV33.game.chests[6].opened,"older saves gain unopened marsh treasure");
+  }
   {
    saves::Snapshot nocking;auto& archer=nocking.game;
    archer.props.clear();archer.enemies.clear();archer.forage.clear();archer.selectWeapon(1);

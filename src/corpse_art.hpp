@@ -6,8 +6,8 @@ namespace fallen_art {
 constexpr int Width=192,Height=128,Density=2,OriginX=96,OriginY=80;
 constexpr int RestWidth=256,RestHeight=176;
 inline constexpr Vector2 RestOrigin{128,112};
-constexpr int Directions=8,ThumbnailDensity=2,ThumbnailColumns=16;
-constexpr int ThumbnailWidth=55*ThumbnailDensity,ThumbnailHeight=42*ThumbnailDensity;
+constexpr int Directions=8,ThumbnailDensity=2,ThumbnailColumns=18;
+constexpr int ThumbnailWidth=55*ThumbnailDensity,ThumbnailHeight=40*ThumbnailDensity;
 inline RenderTexture2D thumbnails{};
 inline void initThumbnails();
 struct Sprite {Texture2D body{},edge{};std::vector<unsigned char> mask;shadow_geometry::Sprite ground;Rectangle footprint{};Vector2 origin{};};
@@ -105,6 +105,7 @@ inline void unload(){
 }
 }
 inline bool restingCorpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr,float opacity=1,bool shadow=false){
+ if(marshEnemy(e.type))return marsh_art::actor(e,x,y,outline,probe,shadow,1,1);
  if(!fallen_art::cachedBody(e.type)){
   if(regionalEnemy(e.type))return regional_enemy_art::rest(e,x,y,outline,probe,shadow,opacity);
   return volcano_actors::rest(e,x,y,outline,probe);
@@ -221,6 +222,7 @@ inline bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const V
  const auto p=corpseDrawPoint(e,{x,y});x=p.x;y=p.y;
  if(e.corpseGrounded())return restingCorpseArt(e,x,y,outline,probe);
  const float progress=e.deathProgress();
+ if(marshEnemy(e.type))return marsh_art::actor(e,x,y,outline,probe,false,1,std::min(1.f,progress/enemy_death::groundContact(e.type)));
  if(regionalEnemy(e.type))return regionalCorpse(e,x,y,outline,probe);
  if(e.type>=VolcanoFirstType)return volcano_actors::death(e,x,y,progress,outline,probe);
  return animatedLegacyCorpse(e,x,y,progress,outline,probe);
