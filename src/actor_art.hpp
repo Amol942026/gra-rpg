@@ -1,5 +1,6 @@
 #pragma once
 #include <type_traits>
+#include "raymath.h"
 #include "sword_pose.hpp"
 #include "hero_motion.hpp"
 #include "hero_bow_motion.hpp"
@@ -22,6 +23,7 @@
 #include "creature_paint.hpp"
 #include "bandit_gait.hpp"
 #include "generated/creature_motion_data.hpp"
+#include "generated/cobra_motion_data.hpp"
 #include "generated/forest_motion_data.hpp"
 #include "generated/wolf_motion_data.hpp"
 extern "C" void (*glfwGetProcAddress(const char*))(void);
@@ -38,6 +40,12 @@ inline float shadowElevation=0;
 inline bool allowSceneDepth=true,sceneDepth=false;
 inline int sceneDepthOrder=0;
 inline float sceneDepthStep=.01f;
+inline RenderTexture2D edgeCoverage{};
+inline void initEdgeCoverage(){
+ edgeCoverage=LoadRenderTexture(448,352);
+ if(edgeCoverage.id)SetTextureFilter(edgeCoverage.texture,TEXTURE_FILTER_BILINEAR);
+}
+inline void unloadEdgeCoverage(){if(edgeCoverage.id)UnloadRenderTexture(edgeCoverage);edgeCoverage={};}
 inline Vector2 reserveSpriteDepth(){
  rlDrawRenderBatchActive();
  if(sceneDepth)return {-.95f+sceneDepthOrder++*sceneDepthStep,sceneDepthStep*.5f};
@@ -73,6 +81,7 @@ struct Face {
     std::array<Vector2,4> uv{};
 };
 inline bool paintCovers(const Face& face,Vector2 uv){
+    if(creature_paint::opaqueCobraTexture(face.textureId))return true;
     if(face.textureId==hero_paint::turn::atlas.id)return hero_paint::turn::opaque(uv,face.color.r);
     return face.textureId==creature_paint::atlas.id?creature_paint::opaque(uv):hero_paint::opaque(uv);
 }
@@ -236,6 +245,7 @@ private:
     float shadowLift=shadowElevation;
     Vector2 hitLean{};
     Vector2 depthMin{1e9f,1e9f},depthMax{-1e9f,-1e9f};
+    bool filterEdges=false;
 public:
     Rig(float px,float py,float size,Direction dir,bool collect=false):x(px),y(py),scale(size),collectShadow(collect||(shadowBuilding&&shadowCasting)) {
         setFacing(int(dir)*PI/4);
@@ -280,6 +290,7 @@ public:
     }
     void setSmoothSurfaces(){smoothSurfaces=true;}
     void setCreatureSurfaces(){smoothSurfaces=true;softBeams=true;}
+    void setEdgeCoverage(){filterEdges=true;}
     void setHitLean(Vector2 lean){hitLean=lean;}
     void setGroundBounded(){groundBounded=true;}
     void setRun(float amount){runLean=std::clamp(amount,0.f,1.f)*.12f;runSin=std::sin(runLean);runCos=std::cos(runLean);}
@@ -348,6 +359,17 @@ public:
         size_t before=faces.size();face(a,b,c,d,ca);
         if(faces.size()!=before){auto& f=faces.back();f.smooth=true;f.vertexColors={ca,cb,cc,cd};}
     }
+    void paintedCreatureQuad(const std::array<P3,4>& points,const std::array<Vector2,4>& uv,
+                             const std::array<float,4>& light,int cell,Color fallback){
+        const auto texture=creature_paint::texture(cell);
+        const Color color=texture?WHITE:fallback;
+        const size_t before=faces.size();
+        surfaceQuad(points[0],points[1],points[2],points[3],shade(color,light[0]),shade(color,light[1]),
+                    shade(color,light[2]),shade(color,light[3]));
+        if(!texture||faces.size()==before)return;
+        auto& f=faces.back();f.textureId=texture;
+        for(int i=0;i<4;i++)f.uv[i]=creature_paint::uv(cell,uv[i].x,uv[i].y);
+    }
     void paintedWeaponFace(const std::array<P3,4>& p,const std::array<Vector2,4>& uv,int cell,Color tint){
         size_t before=faces.size();
         face(p[0],p[1],p[2],p[3],tint);
@@ -361,10 +383,15 @@ public:
         if(faces.size()!=before){auto& f=faces.back();f.textureId=creature_paint::atlas.id;
             f.uv={creature_paint::uv(cell,u0,v0),creature_paint::uv(cell,u1,v0),creature_paint::uv(cell,u1,v1),creature_paint::uv(cell,u0,v1)};}
     }
-    void wrapCreatureFace(int cell,float u0,float v0,float u1,float v1,Color lightA,Color lightB,Color lightC,Color lightD){
-        faces.push_back(faces.back());
+    void wrapCreatureFace(int cell,float u0,float v0,float u1,float v1,Color lightA,Color lightB,Color lightC,Color lightD,bool solid=false){
+        if(solid){
+            // Sample between the first and last texel centers of the atlas cell.
+            constexpr float inset=.5f/creature_paint::Tile;
+            u0=inset+u0*(1-2*inset);u1=inset+u1*(1-2*inset);
+            v0=inset+v0*(1-2*inset);v1=inset+v1*(1-2*inset);
+        }else faces.push_back(faces.back());
         auto& painted=faces.back();
-        painted.textureId=creature_paint::atlas.id;
+        painted.textureId=creature_paint::texture(cell);
         painted.uv={creature_paint::uv(cell,u0,v0),creature_paint::uv(cell,u1,v0),
                     creature_paint::uv(cell,u1,v1),creature_paint::uv(cell,u0,v1)};
         painted.smooth=true;
@@ -448,23 +475,38 @@ public:
         }
     }
     // Continuous skin along a bent path, with shared lighting at each ring.
-    void tube(const std::vector<P3>& path,float width,float depth,Color col,int material=-1,bool twoSidedShadow=false){
+    void tube(const std::vector<P3>& path,float width,float depth,Color col,int material=-1,bool twoSidedShadow=false,
+              const std::vector<float>& ringScale={}){
         if(path.size()<2)return;constexpr int sides=12;
+        const bool tapered=ringScale.size()==path.size();
+        const bool solid=material==creature_paint::CobraCell&&(creature_paint::cobraSkin.id||creature_paint::solidCobraSkin);
         bool savedClosed=closedShadow;
         // At a tight bend the ring frames can twist a quad across the light.
         closedShadow=softBeams&&!twoSidedShadow;
-        int step=softBeams&&scale<1.6f?2:1;
+        int step=softBeams&&scale<1.6f&&!tapered?2:1;
         std::vector<std::array<P3,sides>> points(path.size());std::vector<std::array<Color,sides>> colors(path.size());
         const bool paint=creature_paint::available(material);
         std::vector<std::array<Color,sides>> lights(paint?path.size():0);
         static const auto circle=[](){std::array<P3,sides> result{};for(int i=0;i<sides;i++)result[i]={std::cos(i*2*PI/sides),std::sin(i*2*PI/sides),0};return result;}();
-        for(size_t j=0;j<path.size();j++){
+        P3 previousRight{1,0,0};
+        for(size_t index=0;index<path.size();index++){
+            const size_t j=tapered?path.size()-1-index:index;
+            const float radius=tapered?ringScale[j]:1.f;
             P3 axis=path[std::min(j+1,path.size()-1)]-path[j?j-1:0];float len=std::sqrt(axis.r*axis.r+axis.f*axis.f+axis.z*axis.z);axis=axis*(1/std::max(.001f,len));
             float flat=std::hypot(axis.r,axis.f);P3 u=flat>.001f?P3{axis.f/flat,-axis.r/flat,0}:P3{1,0,0};
+            if(tapered){
+                // Carry the frame from the head towards the tail. Recomputing it
+                // from the ground direction flips the skin at a vertical neck.
+                const float along=previousRight.r*axis.r+previousRight.f*axis.f+previousRight.z*axis.z;
+                const P3 projected=previousRight-axis*along;
+                const float length=std::sqrt(projected.r*projected.r+projected.f*projected.f+projected.z*projected.z);
+                if(length>.001f)u=projected*(1/length);
+                previousRight=u;
+            }
             P3 v{axis.f*u.z-axis.z*u.f,axis.z*u.r-axis.r*u.z,axis.r*u.f-axis.f*u.r};
             for(int i=0;i<sides;i+=step){
                 P3 normal=u*circle[i].r+v*circle[i].f;
-                points[j][i]=path[j]+u*(circle[i].r*width*.5f)+v*(circle[i].f*depth*.5f);
+                points[j][i]=path[j]+u*(circle[i].r*width*.5f*radius)+v*(circle[i].f*depth*.5f*radius);
                 const float lighting=surfaceLight(normal);
                 colors[j][i]=shade(col,lighting);
                 if(paint)lights[j][i]=shade(WHITE,lighting);
@@ -477,12 +519,14 @@ public:
             if(paint&&faces.size()!=before){
                 const float column=float((i+sides*3/4)%sides),segments=float(path.size()-1);
                 wrapCreatureFace(material,column/sides,float(j)/segments,(column+step)/sides,float(j+1)/segments,
-                                 lights[j][i],lights[j][n],lights[j+1][n],lights[j+1][i]);
+                                 lights[j][i],lights[j][n],lights[j+1][n],lights[j+1][i],solid);
             }
         }
         const P3 cap{width,depth,std::min(width,depth)};
-        rounded(path.front(),cap,col,paint?100+material:-1,false,-1,true);
-        rounded(path.back(),cap,col,paint?100+material:-1,false,-1,true);
+        if(!tapered){
+            rounded(path.front(),cap,col,paint?100+material:-1,false,-1,true);
+            rounded(path.back(),cap,col,paint?100+material:-1,false,-1,true);
+        }
         closedShadow=savedClosed;
 
     }
@@ -569,11 +613,12 @@ public:
                 int cell=reverse?reverseCell:paintCell;
                 bool back=reverse||paintBack;
                 bool creature=cell>=100;
-                unsigned paintTexture=creature?(creature_paint::available(cell-100)?creature_paint::atlas.id:0):hero_paint::atlas.id;
+                unsigned paintTexture=creature?creature_paint::texture(cell-100):hero_paint::atlas.id;
                 if(cell>=0&&paintTexture&&(creature||normal.f*(back?-1:1)>.001f)&&faces.size()!=before){
                     // Features and hair paint are transparent. Retain the
                     // original skin/hair under every painted pixel.
-                    faces.push_back(faces.back());
+                    const bool solidSkin=creature_paint::opaqueCobraTexture(paintTexture);
+                    if(!solidSkin)faces.push_back(faces.back());
                     auto& f=faces.back();f.textureId=paintTexture;
                     const P3 unit[]={sphere[j][i],sphere[j][n],sphere[j+1][n],sphere[j+1][i]};
                     for(int k=0;k<4;k++){
@@ -592,6 +637,7 @@ public:
                             else if(std::abs(normal.r)>std::abs(normal.f)){u=unit[k].f;v=unit[k].z;}
                         }
                         u=std::clamp((u+1)*.5f,.00390625f,.99609375f);v=std::clamp((1-v)*.5f,.00390625f,.99609375f);
+                        if(paintTexture==creature_paint::cobraSkin.id)u=.11f+u*.78f;
                         f.uv[k]=creature?creature_paint::uv(cell-100,u,v):hero_paint::uv(cell,u,v);
                         const Color light[]={paintColors[j][i],paintColors[j][n],paintColors[j+1][n],paintColors[j+1][i]};
                         f.vertexColors[k]=light[k];
@@ -758,8 +804,55 @@ public:
         rlEnableScissorTest();rlScissor(left,bottom,std::max(0,right-left),std::max(0,top-bottom));clear(0x00000100);
         rlScissor(previous[0],previous[1],previous[2],previous[3]);if(!clipped)rlDisableScissorTest();
     }
-    void draw(Color outline=BLANK) {
+    bool drawWithEdgeCoverage(Color outline){
+        static const auto get=reinterpret_cast<void(*)(unsigned,int*)>(glfwGetProcAddress("glGetIntegerv"));
+        static const auto enabled=reinterpret_cast<unsigned char(*)(unsigned)>(glfwGetProcAddress("glIsEnabled"));
+        if(!get||!enabled||!edgeCoverage.id||depthMax.x<depthMin.x)return false;
+        const auto projection=rlGetMatrixProjection(),view=rlGetMatrixModelview(),local=rlGetMatrixTransform();
+        if(local.m0!=1||local.m5!=1||local.m1!=0||local.m4!=0||local.m12!=0||local.m13!=0||
+           view.m1!=0||view.m4!=0||projection.m15!=1)return false;
+        int viewport[4];get(0x0BA2,viewport);
+        const float px=projection.m0*viewport[2]*.5f,py=-projection.m5*viewport[3]*.5f;
+        const float sx=px*view.m0,sy=py*view.m5;
+        if(sx<=0||sy<=0)return false;
+        const float tx=(1+projection.m12)*viewport[2]*.5f+px*view.m12;
+        const float ty=(1-projection.m13)*viewport[3]*.5f+py*view.m13;
+        const int margin=outline.a?6:2;
+        const float left=std::floor(depthMin.x*sx+tx)-margin,top=std::floor(depthMin.y*sy+ty)-margin;
+        const int width=int(std::ceil(depthMax.x*sx+tx)-left)+margin;
+        const int height=int(std::ceil(depthMax.y*sy+ty)-top)+margin;
+        if(2*width>edgeCoverage.texture.width||2*height>edgeCoverage.texture.height)return false;
+        const bool clipped=enabled(0x0C11)!=0,world=native_world::drawingWorld,depth=sceneDepth;
+        int scissor[4];if(clipped)get(0x0C10,scissor);
+        const unsigned framebuffer=rlGetActiveFramebuffer();
+        if(framebuffer==edgeCoverage.id)return false;
+
+        // Resolve four coverage samples over just the cobra's pixel-aligned
+        // bounding box. Preserve the world's depth, camera and scissor state.
+        rlDrawRenderBatchActive();rlEnableFramebuffer(edgeCoverage.id);
+        rlViewport(0,0,width*2,height*2);rlEnableScissorTest();rlScissor(0,0,width*2,height*2);
+        ClearBackground(BLANK);
+        rlSetMatrixProjection(MatrixOrtho(0,width*2,height*2,0,0,1));
+        Matrix sampleView=MatrixScale(sx*2,sy*2,1);
+        sampleView.m12=(tx-left)*2;sampleView.m13=(ty-top)*2;
+        rlSetMatrixModelview(sampleView);
+        native_world::beginOpaqueFrame();sceneDepth=false;
+        draw(outline,false);
+        rlDrawRenderBatchActive();
+        sceneDepth=depth;native_world::drawingWorld=world;
+        rlSetMatrixProjection(projection);rlSetMatrixModelview(view);
+        rlEnableFramebuffer(framebuffer);rlViewport(viewport[0],viewport[1],viewport[2],viewport[3]);
+        if(clipped)rlScissor(scissor[0],scissor[1],scissor[2],scissor[3]);else rlDisableScissorTest();
+
+        BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
+        DrawTexturePro(edgeCoverage.texture,{0,0,float(width*2),-float(height*2)},
+                       {(left-tx)/sx,(top-ty)/sy,width/sx,height/sy},{},0,WHITE);
+        native_world::endBlendMode();
+        return true;
+    }
+    void draw(Color outline=BLANK,bool coverage=true) {
         if(!opacity)return;
+        if(coverage&&filterEdges&&scale<1.75f&&drawWithEdgeCoverage(outline))return;
         // In transparent targets material decals must not erase the solid
         // skin's alpha where their texture fades out.
         const bool transparentTarget=smoothSurfaces&&!native_world::drawingWorld;
@@ -962,7 +1055,7 @@ inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const V
  int previous=shadowCacheKey;if(probe&&pickingFromPreparedFrame)shadowCacheKey=100+e.id;
  bool hit=draw(e.type+1,x,y,1,e.animation,e.attackPose(),false,false,Kind::Sword,false,outline,probe,-1,-1,-1,3,false,nullptr,
                e.boulderProgress(),-1,0,-1,PowerStyle::Count,0,-1,e.type==BoarType?e.boarVisualPhase():e.heavyMeleePhase(),lean,
-               nullptr,{},e.type==9&&e.abilityBusy()?e.abilityAge:-1.f);
+               nullptr,{},(e.type==CopperScarabType||e.type==SandCobraType)&&e.abilityBusy()?e.abilityAge:-1.f);
  shadowCacheKey=previous;return hit;
 }
 }

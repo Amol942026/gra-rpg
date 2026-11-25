@@ -175,79 +175,155 @@ inline void scarab(Rig& rig,Pose pose){
  rig.setAttachment(nullptr);
 }
 
+template<size_t N> inline float cobraCurve(const float (&keys)[N],float t){
+ const float frame=std::clamp(t,0.f,1.f)*(N-1);
+ const size_t index=std::min(size_t(frame),N-2);
+ return keys[index]+(keys[index+1]-keys[index])*(frame-index);
+}
+
+struct CobraVertex {P3 point;Vector2 uv;float light;};
+
+inline void cobraPlate(Rig& rig,CobraVertex a,CobraVertex b,CobraVertex c,CobraVertex d,int cell,Color color){
+ rig.paintedCreatureQuad({a.point,b.point,c.point,d.point},{a.uv,b.uv,c.uv,d.uv},
+                         {a.light,b.light,c.light,d.light},cell,color);
+}
+
+inline void cobraHood(Rig& rig,bool flash){
+ constexpr std::array<float,8> Length{14,10,5,-1,-7,-13,-19,-22};
+ constexpr std::array<float,8> Width{5.4f,12.3f,18.7f,22,20.9f,15.7f,8.3f,4.1f};
+ constexpr int Columns=6;
+ using Sheet=std::array<std::array<CobraVertex,Columns+1>,Length.size()>;
+ Sheet front{},back{};
+ for(size_t row=0;row<Length.size();row++)for(int i=0;i<=Columns;i++){
+  const float t=2.f*i/Columns-1,side=t*t;
+  const float r=t*Width[row],f=Length[row],bow=side*3.3f;
+  const float thickness=.63f+1.35f*(1-side);
+  const Vector2 uv{.5f+r/46,(14-f)/36};
+  front[row][i]={{r,f,bow-thickness},uv,.97f+.10f*(1-side)-.055f*t};
+  back[row][i]={{r,f,bow+thickness},uv,.91f+.09f*(1-side)-.048f*t};
+ }
+ const int chest=flash?-1:creature_paint::CobraHoodFront,crown=flash?-1:creature_paint::CobraHoodBack;
+ for(size_t row=0;row+1<Length.size();row++)for(int col=0;col<Columns;col++){
+  cobraPlate(rig,front[row][col],front[row][col+1],front[row+1][col+1],front[row+1][col],
+             chest,flash?Text:rgb(183,118,69));
+  cobraPlate(rig,back[row][col+1],back[row][col],back[row+1][col],back[row+1][col+1],
+             crown,flash?Text:rgb(132,80,51));
+ }
+ const Color rim=flash?Text:rgb(151,96,61);
+ for(size_t row=0;row+1<Length.size();row++){
+  rig.face(back[row][0].point,front[row][0].point,front[row+1][0].point,back[row+1][0].point,rim);
+  rig.face(front[row][Columns].point,back[row][Columns].point,back[row+1][Columns].point,front[row+1][Columns].point,rim);
+ }
+ for(int col=0;col<Columns;col++){
+  rig.face(front.front()[col].point,back.front()[col].point,back.front()[col+1].point,front.front()[col+1].point,rim);
+  rig.face(back.back()[col].point,front.back()[col].point,front.back()[col+1].point,back.back()[col+1].point,rim);
+ }
+}
+
+inline void cobraSkull(Rig& rig,const hero_motion::Transform& attachment,bool flash){
+ struct Profile {float f,width,center,height;};
+ constexpr Profile Rings[]{{-10,1.2f,1.4f,1.6f},{-7.3f,6.4f,1.9f,4.3f},{-2,9.4f,2,5.4f},
+                           {3.8f,8.3f,1.8f,4.5f},{8.3f,6.4f,1.05f,3.3f},{11.8f,4.9f,.65f,2.5f},
+                           {13.4f,2.8f,.65f,1.5f}};
+ constexpr int Sides=12;
+ static const auto circle=[](){
+  std::array<Vector2,Sides> ring{};
+  for(int i=0;i<Sides;i++)ring[i]={std::cos(i*2*PI/Sides),-std::sin(i*2*PI/Sides)};
+  return ring;
+ }();
+ std::array<std::array<CobraVertex,Sides>,std::size(Rings)> vertices{};
+ for(size_t row=0;row<std::size(Rings);row++)for(int i=0;i<Sides;i++){
+  const auto shape=Rings[row];const auto p=circle[i];
+  const auto n=hero_motion::rotate(attachment.q,{p.x,0,p.y});
+  vertices[row][i]={{p.x*shape.width,shape.f,shape.center+p.y*shape.height},
+                    {float((i+9)%Sides)/Sides,(shape.f-Rings[0].f)/23.4f},
+                    .29f+.74f*rig.surfaceLight({n.x,n.y,n.z})};
+ }
+ const int plate=flash?-1:creature_paint::CobraHead;
+ const Color brass=flash?Text:rgb(180,113,66);
+ for(size_t row=0;row+1<std::size(Rings);row++)for(int i=0;i<Sides;i++){
+  const int next=(i+1)%Sides;
+  auto b=vertices[row][next],c=vertices[row+1][next];
+  b.uv.x=c.uv.x=vertices[row][i].uv.x+1.f/Sides;
+  cobraPlate(rig,vertices[row][i],b,c,vertices[row+1][i],plate,brass);
+ }
+ for(int i=0;i<Sides;i++){
+  const int next=(i+1)%Sides;
+  const P3 snout{0,Rings[std::size(Rings)-1].f,.65f},nape{0,Rings[0].f,1.4f};
+  rig.face(vertices.back()[i].point,vertices.back()[next].point,snout,snout,brass,.88f);
+  rig.face(vertices.front()[next].point,vertices.front()[i].point,nape,nape,brass,.74f);
+ }
+}
+
 inline void cobra(Rig& rig,Pose pose){
- const Color gold=pose.flash?Text:rgb(182,136,69),scales=pose.flash?Text:rgb(153,112,61),belly=rgb(224,186,113);
- const Color dark=rgb(101,70,43),ivory=rgb(232,214,163);
+ rig.setEdgeCoverage();
+ const Color scales=pose.flash?Text:rgb(136,83,51),belly=rgb(198,144,92);
+ const Color dark=rgb(69,37,30),ivory=rgb(235,209,168);
  const auto p=[&](float r,float f,float z){return pose.point(r,f,z);};
  const auto mix=[](P3 a,P3 b,float t){return a*(1-t)+b*t;};
- const float walk=pose.stride(),strike=pose.attack*(1-pose.fold),body=pose.lower(.16f,.91f);
+ const float walk=pose.stride(),body=pose.lower(.16f,.91f);
+ const float strike=(pose.special>=0?cobraCurve(cobra_curve_data::cast,pose.special/enemyAbilityProfile(SandCobraType).duration()):pose.attack)*(1-pose.fold);
  const float phase=pose.state.phase;
- const float wave=desert_motion::sample(phase).sway*walk;
- std::vector<P3> coil;
- coil.reserve(30);
- for(int i=0;i<=29;i++){
-  const float t=i/29.f,angle=.28f+t*PI*1.94f;
+ const auto sway=[&](float offset){
+  const float cycle=phase-offset;
+  return cobraCurve(cobra_curve_data::sway,cycle-std::floor(cycle));
+ };
+ std::vector<P3> spine;
+ std::vector<float> widths;
+ constexpr int trunkRings=25,neckRings=8;
+ spine.reserve(trunkRings+neckRings+1);
+ widths.reserve(trunkRings+neckRings+1);
+ for(int i=0;i<trunkRings;i++){
+  const float t=float(i)/(trunkRings-1),angle=.38f+t*PI*1.75f;
   const float r=8.5f+16.5f*t,f=8+13*t;
-  const P3 raised{std::cos(angle)*(23-8*t),std::sin(angle)*(19-8*t)-9,3.1f+7.9f*t};
   const float back=1-t;
-  const float lateral=desert_motion::sample(phase-back*.88f).sway*(2.8f+17.2f*back);
-  const P3 slither{lateral,-8-56*back,3.1f+7.9f*t*t*t};
-  coil.push_back(mix(mix(raised,slither,walk),p(std::cos(angle)*r,std::sin(angle)*f-13,3.1f+5.3f*t),body));
+  const P3 coiled{std::cos(angle)*(23-8*t),std::sin(angle)*(19-8*t)-9,2.4f+7.f*t};
+  const auto raised=mix(coiled,{0,-8-24*back,2.4f+7.f*t},enemy_death::window(t,.71f,1));
+  const P3 slither{sway(back*.73f)*(.8f+7.7f*back),-8-56*back,2.4f+7.f*t*t};
+  spine.push_back(mix(mix(raised,slither,walk),p(std::cos(angle)*r,std::sin(angle)*f-13,2.f+6.8f*t),body));
+  widths.push_back(enemy_death::window(t,0,.72f)*.95f);
  }
- for(int i=0;i<8;i++){
-  const float width=3.0f+.87f*i;
-  rig.tapered(coil[i],coil[i+1],width,width*.89f,scales,(width+.87f)/width,10);
+ const P3 neckBase=spine.back();
+ for(int i=1;i<=neckRings;i++){
+  const float n=float(i)/neckRings,fold=pose.lower(.27f-.17f*n,.93f-.09f*n);
+  const float idle=std::sin(pose.state.idleTime*1.5f)*.55f*(1-body);
+  const P3 raised{neckBase.r*(1-n)+n*(idle+sway(0)*walk*.4f+pose.recoil*pose.side*9),
+                  -8+16*n+strike*n*n*24,9.4f+n*60+strike*n*n*3};
+  const P3 settled=p(24+11*n-28*n*n,-14+n*58,8.8f+5*std::sin(n*PI)-2.3f*n);
+  spine.push_back(mix(raised,settled,fold));
+  widths.push_back(.95f+.17f*std::sin(n*PI));
  }
- const std::vector<P3> outer(coil.begin()+8,coil.end());
- rig.tube(outer,12.3f,12.5f,scales,10,true);
- const P3 tail=coil.front()-coil[1];
- const P3 tailTip=coil.front()+mix(P3{-4,3,-1.4f},
-     tail*(5/std::max(.75f,std::hypot(tail.r,tail.f)))+P3{0,0,-1.3f},walk);
- rig.spike(coil.front(),mix(tailTip,p(4.2f,-11,1.55f),body),2.7f,2.f,dark);
- for(int i=9;i<=29;i+=2){
-  const auto root=coil[i];const auto next=coil[i<29?i+1:i-1];
-  const P3 delta=next-root;
-  const float length=std::max(1.f,std::hypot(delta.r,delta.f));
-  const P3 across{delta.f/length,-delta.r/length,0};
-  rig.tube({root+across*4.3f+P3{0,0,3.6f},root+P3{0,0,6.1f},root-across*4.3f+P3{0,0,3.6f}},.98f,.83f,shade(gold,i%4==1?1.05f:.79f));
- }
- const std::array<P3,6> settled{{coil.back(),p(25,3,11),p(24,16,12.5f),p(17,26,12),p(10,37,8.7f),p(7,44,6.5f)}};
- std::vector<P3> neck{coil.back()};
- for(int i=1;i<=5;i++){
-  const float n=i/5.f,fold=pose.lower(.27f-.17f*n,.93f-.09f*n);
-  const float sway=std::sin(pose.state.idleTime*1.5f+i*.12f)*2*(1-body);
-  const P3 raised{sway+wave*(1.65f-n*.95f)+n*pose.recoil*pose.side*9,
-                  4+wave*2.5f+strike*n*24,11+n*59};
-  neck.push_back(mix(raised,settled[i],fold));
- }
- rig.tube(neck,15.4f,13.0f,gold,10,true);
- for(int i=0;i<4;i++){
-  const auto root=neck[i+1];const auto forward=neck[i+2]-root;
-  const P3 across{forward.f,-forward.r,0};const float k=7.f/std::max(1.f,std::hypot(across.r,across.f));
-  rig.tapered(root+across*k+P3{0,0,.2f},root+across*k*.82f+forward*.72f+P3{0,0,-.2f},2.8f,1.3f,belly,.76f);
- }
+ const auto upperNeck=spine.back();
+ const auto collar=spine[spine.size()-3];
+ spine.push_back(upperNeck+P3{0,3,3});
+ widths.push_back(0);
+ const int skin=(creature_paint::cobraSkin.id||creature_paint::solidCobraSkin)&&!pose.flash?creature_paint::CobraCell:-1;
+ rig.tube(spine,13.2f,12.4f,scales,skin,true,widths);
  const float hoodFold=pose.lower(.18f,.88f);
- const auto hoodCenter=mix(P3{neck[4].r*pose.side,neck[4].f-2,neck[4].z-7},P3{14.5f,29.7f,11.4f},hoodFold);
+ const auto hoodCenter=mix(P3{collar.r*pose.side,collar.f-2,collar.z-4},P3{14.5f,29.7f,11.4f},hoodFold);
  const auto hood=pose.tilt(hoodCenter,47*hoodFold,-25*hoodFold,74*(1-hoodFold));
  rig.setAttachment(&hood);
- rig.rounded({-8.8f,-2.2f,.2f},{25,28.4f,12.3f},scales,110);
- rig.rounded({7.9f,-2,-.7f},{22.2f,27.6f,10.4f},gold,110);
- for(float side:{-1.f,1.f}){
-  rig.tube({{side*9,6.4f,3.4f},{side*15,1.4f,3.3f},{side*13,-5,3.6f},{side*9,-8,3.5f}},1.5f,1.0f,shade(dark,.91f));
-  rig.tube({{side*10,4,4.2f},{side*12.9f,.5f,4.1f},{side*11.2f,-3.2f,4.4f}},.83f,.8f,ivory);
- }
+ cobraHood(rig,pose.flash);
  rig.setAttachment(nullptr);
  const float headFold=pose.lower(.10f,.84f);
- const auto headCenter=mix(P3{neck.back().r*pose.side,neck.back().f+8+strike*9,neck.back().z+6},P3{6.7f,43.2f,8.15f},headFold);
+ const auto headCenter=mix(P3{upperNeck.r*pose.side,upperNeck.f+6+strike*3,upperNeck.z+6},P3{6.7f,43.2f,8.15f},headFold);
  const auto head=pose.tilt(headCenter,37*headFold,-22*headFold,10*(1-headFold));
  rig.setAttachment(&head);
- rig.rounded({0,0,1.1f},{20,22,13.8f},gold,110);
- rig.rounded({0,6,-3},{16.1f,13.2f,6.7f},belly);
- rig.tube({{-6,2.5f,-1.5f},{-6.5f,8.2f,-1.4f},{0,12,-1.3f},{6.5f,8.2f,-1.4f},{6,2.5f,-1.5f}},.76f,.75f,dark);
+ cobraSkull(rig,head,pose.flash);
+ rig.rounded({0,5.6f,-2.8f},{15.8f,15.6f,5.7f},belly,
+             pose.flash?-1:100+creature_paint::CobraJaw,false,-1,true);
+ rig.tube({{-7.3f,1.8f,-1.3f},{-7.1f,5.6f,-1.5f},{-5.5f,10.2f,-1.4f},
+           {0,13,-1.2f},{5.5f,10.2f,-1.4f},{7.1f,5.6f,-1.5f},{7.3f,1.8f,-1.3f}},1.1f,.8f,dark);
  for(float side:{-1.f,1.f}){
-  rig.tapered({side*4.4f,5.4f,5.9f},{side*7.2f,2.7f,5.6f},1.16f,1.f,dark);
-  if(headFold<1)rig.rounded({side*6,5.5f,5.4f},{3.2f,2.1f,2.8f*(1-headFold)},rgb(222,157,66));
-  rig.spike({side*4.8f,8.2f,-1},{side*5.1f,9.2f,-4.45f},1.9f,1.70f,ivory);
+  rig.rounded({side*3.85f,11.5f,2.4f},{1.7f,1.7f,1.2f},dark);
+  rig.tapered({side*5.5f,7.4f,4.8f},{side*7.9f,3.5f,4.8f},1.85f,1.36f,rgb(118,65,40),1.03f);
+  const float eyeOpen=1-headFold;
+  if(eyeOpen>.01f){
+   rig.rounded({side*7.45f,5.2f,3.75f},{3.6f,4.8f,3.35f*eyeOpen},dark);
+   rig.rounded({side*8.35f,5.4f,3.78f},{2.55f,3.65f,2.45f*eyeOpen},rgb(242,176,64));
+   rig.rounded({side*9.17f,5.7f,3.85f},{1.13f,1.05f,2.45f*eyeOpen},rgb(47,27,22));
+  }
+  rig.spike({side*4.7f,9.7f,-1.24f},{side*4.9f,10.4f,-4.35f},1.8f,1.55f,ivory);
  }
  rig.setAttachment(nullptr);
 }
@@ -326,5 +402,5 @@ inline void buildDesertDeath(Rig& rig,const Enemy& e,float progress){
  const float fold=enemy_death::window(time,.06f,.89f);
  const float recoil=.45f*enemy_death::window(time,0,.21f)*(1-enemy_death::window(time,.24f,.58f));
  desert_fallen_art::drawPose(rig,e.type,{float(e.deathSide()),time,fold,recoil,e.deathMotion,std::max(0.f,e.deathAttack),
-                                       false,e.type==CopperScarabType?e.deathSpecial:-1.f});
+                                       false,(e.type==CopperScarabType||e.type==SandCobraType)?e.deathSpecial:-1.f});
 }
