@@ -71,7 +71,7 @@ inline constexpr int jackalOrder[8][6]={
  {2,5,3,1,4,0},{5,4,0,2,3,1},{4,5,0,3,1,2},{4,5,0,1,3,2}
 };
 inline constexpr int reaperOrder[8][6]={
- {1,4,2,3,0,5},{2,4,1,3,0,5},{1,2,3,0,4,5},{1,5,2,3,0,4},
+ {1,4,2,3,0,5},{2,4,1,3,0,5},{2,1,3,0,4,5},{1,5,2,3,0,4},
  {2,5,1,3,0,4},{4,1,3,2,0,5},{4,1,2,3,0,5},{4,1,3,2,0,5}
 };
 inline Artwork jackal{"assets/desert/jackal-turn/",dune_jackal_turn_atlas::PageCount,
@@ -80,6 +80,17 @@ inline Artwork jackal{"assets/desert/jackal-turn/",dune_jackal_turn_atlas::PageC
 inline Artwork reaper{"assets/desert/reaper-turn/",glass_reaper_turn_atlas::PageCount,
  [](int view,int part,int){return glass_reaper_turn_atlas::tiles[view][part];},
  glass_reaper_turn_atlas::authoredPart,reaperOrder};
+inline constexpr float ReaperFloor=143.5f,ReaperHeight=117.f;
+struct ReaperProjection {
+ float floor=ReaperFloor,scale=1.f;
+ std::array<float,2> soles{{ReaperFloor,ReaperFloor}};
+ std::array<Vector2,2> shoulders{};
+};
+inline std::array<ReaperProjection,glass_reaper_turn_atlas::Count> reaperProjection{};
+inline float reaperY(int frame,float y){
+ const auto& shape=reaperProjection[frame];
+ return .8f*(ReaperFloor+(y-shape.floor)*shape.scale);
+}
 static_assert(dune_jackal_turn_atlas::Count==glass_reaper_turn_atlas::Count);
 static_assert(dune_jackal_turn_atlas::Count%8==0);
 inline bool singleDirectionalPaint(const Artwork& art){return &art==&jackal||&art==&reaper;}
@@ -99,7 +110,12 @@ inline Part interpolate(const Part& a,const Part& b,float t){
  const auto at=[t](float start,float end){return mix(start,end,t);};
  return {{at(a.pivot.x,b.pivot.x),at(a.pivot.y,b.pivot.y)},
          {at(a.shift.x,b.shift.x),at(a.shift.y,b.shift.y)},at(a.angle,b.angle),
-         at(a.scaleX,b.scaleX),at(a.scaleY,b.scaleY),at(a.elbow,b.elbow)};
+         at(a.scaleX,b.scaleX),at(a.scaleY,b.scaleY),at(a.elbow,b.elbow),
+         {at(a.kneeShift.x,b.kneeShift.x),at(a.kneeShift.y,b.kneeShift.y)},
+         {at(a.footShift.x,b.footShift.x),at(a.footShift.y,b.footShift.y)},
+         at(a.footPitch,b.footPitch),at(a.footWeight,b.footWeight),
+         at(a.overhead,b.overhead),at(a.wristCounterturn,b.wristCounterturn),
+         at(a.restingFootTurn,b.restingFootTurn)};
 }
 struct View {
  int base=0,sample=0;
@@ -247,10 +263,28 @@ inline SwordJoint impElbow(View view,int part,float angle){
  const float length=std::hypot(axis.x,axis.y);
  return {center,{axis.x/length,axis.y/length},angle*DEG2RAD};
 }
+template<std::size_t N>
+inline Vector2 reaperAnchor(View view,const short (&points)[8][N][2],int point){
+ constexpr int Steps=glass_reaper_turn_atlas::Count/8;
+ const auto at=[&](int frame){
+  const int from=frame/Steps;
+  const float t=float(frame%Steps)/Steps;
+  const auto& a=points[from][point];
+  const auto& b=points[(from+1)%8][point];
+  return Vector2{.8f*mix(a[0],b[0],t),reaperY(frame,mix(a[1],b[1],t))};
+ };
+ const auto a=at(view.sample),b=at(view.nextSample());
+ return {mix(a.x,b.x,view.mix),mix(a.y,b.y,view.mix)};
+}
 inline Vector2 reaperJoint(View view,int joint){
- const auto& a=glass_reaper_turn_atlas::joints[view.base][joint];
- const auto& b=glass_reaper_turn_atlas::joints[view.nextBase()][joint];
- return {.8f*mix(a[0],b[0],view.t),.8f*mix(a[1],b[1],view.t)};
+ const auto a=glass_reaper_turn_atlas::armJoints[view.sample][joint];
+ const auto b=glass_reaper_turn_atlas::armJoints[view.nextSample()][joint];
+ return {.8f*mix(a[0],b[0],view.mix),mix(reaperY(view.sample,a[1]),reaperY(view.nextSample(),b[1]),view.mix)};
+}
+inline Vector2 reaperShoulder(View view,int part){
+ const auto a=reaperProjection[view.sample].shoulders[part-4];
+ const auto b=reaperProjection[view.nextSample()].shoulders[part-4];
+ return {mix(a.x,b.x,view.mix),mix(a.y,b.y,view.mix)};
 }
 inline SwordJoint reaperElbow(View view,int part,float angle){
  const int row=2*(part-4);
@@ -261,7 +295,8 @@ inline SwordJoint reaperElbow(View view,int part,float angle){
 }
 struct Locations {
  int uv0,uv1,axisU,axisV,guide0,guide1,order0,order1,lighting,phase,page1,material,flow,flowView;
- int jointBox,jointAxis,impNode,edgeJaw,shellAngle,solidLayerOrder;
+ int jointBox,jointAxis,impNode,edgeJaw,shellAngle,solidLayerOrder,legU,legV,legSplit,reaperCoat,reaperShoulders;
+ int heldInk,heldU,heldV,heldActive,forearmU,forearmV,forearmSplit;
 };
 inline Locations loc{};
 inline void unloadCelPages(Artwork& art){
@@ -303,6 +338,13 @@ uniform int order0[6],order1[6];
 uniform vec3 phase;
 uniform vec4 jointBox[6];
 uniform vec3 jointAxis[6];
+uniform vec3 legU[4],legV[4],legSplit[4];
+uniform vec3 reaperCoat;
+uniform vec4 reaperShoulders[2];
+uniform sampler2D heldInk;
+uniform vec3 heldU,heldV;
+uniform int heldActive;
+uniform vec3 forearmU,forearmV,forearmSplit;
 uniform int solidLayerOrder;
 vec2 unbend(vec2 uv,vec4 box,vec3 axis){
     vec2 q=(uv-box.xy)*box.zw;
@@ -324,6 +366,17 @@ vec4 pigment(vec4 tile,vec2 uv) {
         coords=(floor(px)+smoothstep(vec2(.13),vec2(.87),fract(px))+.5)/dim;
     }
     return tile.x>=1.0?texture(page1,coords):texture(texture0,coords);
+}
+vec4 reaperPigment(vec4 tile,vec2 uv){
+    vec4 soft=pigment(tile,uv);
+    if(soft.a<.78)return soft;
+    vec2 dims=vec2(textureSize(texture0,0));
+    vec2 px=(tile.xy+uv*tile.zw)*dims-.5;
+    vec2 crisp=(floor(px)+smoothstep(vec2(.07),vec2(.93),fract(px))+.5)/dims;
+    vec4 detail=texture(texture0,crisp);
+    float weight=.90*smoothstep(.78,.98,min(soft.a,detail.a));
+    soft.rgb=mix(soft.rgb,detail.rgb*soft.a/max(.001,detail.a),weight);
+    return soft;
 }
 vec4 directPaint(int part,vec2 at,float t){
     vec4 a=pigment(uv0[part],at),b=pigment(uv1[part],at);
@@ -351,11 +404,23 @@ vec4 registeredTexel(vec4 tile,vec2 uv){
     vec2 inside=clamp(at,top+.5,top+size-.5);
     vec4 paint=texture(texture0,inside/dim);
     paint.a=(255.*paint.a-128.)/12.-length(at-inside);
+    if(impNode==-6 && paint.a>.65){
+        vec2 pos=inside-.5;
+        vec2 crisp=floor(pos)+smoothstep(vec2(.07),vec2(.93),fract(pos))+.5;
+        paint.rgb=mix(paint.rgb,texture(texture0,crisp/dim).rgb,.9*smoothstep(.65,1.6,paint.a));
+    }
     return paint;
 }
 vec4 registeredPaint(int part,vec2 uv,vec2 a,vec2 b,float turn){
     vec4 one=registeredTexel(uv0[part],a),two=registeredTexel(uv1[part],b);
     float coverage=clamp(.5+mix(one.a,two.a,turn),0.,1.);
+    if(impNode==-6){
+        // These samples follow the same transported paint. Prefer a valid
+        // surface when the changing contour exposes an edge.
+        float left=(1.-turn)*clamp(1.+one.a,.04,1.);
+        float right=turn*clamp(1.+two.a,.04,1.);
+        return vec4(mix(one.rgb,two.rgb,right/(left+right))*coverage,coverage);
+    }
     // The edge follows the registered shape. One painting supplies the brush
     // detail at a time, including when the head passes in front of a wing.
     float seam=clamp(.50+.36*(uv.y-.5)+.24*(uv.x-.5),.12,.88);
@@ -375,6 +440,34 @@ vec4 impPaint(vec2 at,int part){
     if(paint.a>0.)paint*=smoothstep(.08,.92,paint.a)/paint.a;
     return paint;
 }
+vec4 overLayer(vec4 top,vec4 below){
+    return top+below*(1.-top.a);
+}
+vec4 reaperLayers(vec4 layers[6],int drawOrder[6],float coat,float shoulder){
+    vec4 normal=vec4(0),seated=vec4(0),coatNormal=vec4(0),coatSeated=vec4(0);
+    int nearLeg=1;
+    for(int i=0;i<6;i++){
+        int part=drawOrder[i];
+        if(part==1||part==2)nearLeg=part;
+    }
+    vec4 legs=overLayer(layers[nearLeg],layers[3-nearLeg]);
+    for(int i=0;i<6;i++){
+        int part=drawOrder[i];
+        vec4 layer=layers[part];
+        normal=overLayer(layer,normal);
+        if(part==3)seated=overLayer(layers[5],seated);
+        if(part!=5)seated=overLayer(layer,seated);
+        if(coat<=0.||part==1||part==2)continue;
+        coatNormal=overLayer(layer,coatNormal);
+        if(part==3)coatSeated=overLayer(layers[5],coatSeated);
+        if(part!=5)coatSeated=overLayer(layer,coatSeated);
+        if(part==3){
+            coatNormal=overLayer(legs,coatNormal);
+            coatSeated=overLayer(legs,coatSeated);
+        }
+    }
+    return mix(mix(normal,seated,shoulder),mix(coatNormal,coatSeated,shoulder),coat);
+}
 void main() {
     // Detached pieces address one painted layer in its original coordinates.
     // A whole actor uses the regular untagged six-layer composition.
@@ -383,12 +476,34 @@ void main() {
     bool shadow=x>800.0,mask=x>300.0;
     vec3 point=vec3(x-(shadow?1024.0:mask?512.0:0.0),fragTexCoord.y,1.0);
     vec4 layers[6];
+    float coat=0.;
     for(int i=0;i<6;i++){
         layers[i]=vec4(0.0);
         if(group>0 && i!=group-1)continue;
-        vec2 at=vec2(dot(axisU[i],point),dot(axisV[i],point));
+        vec3 samplePoint=point;
+        if(i>=4){
+            vec4 shoulder=reaperShoulders[i-4];
+            if(shoulder.z!=0.){
+                vec2 d=point.xy-shoulder.xy;
+                float a=-shoulder.z*smoothstep(shoulder.w,shoulder.w+8.5,length(d));
+                float c=cos(a),s=sin(a);
+                samplePoint.xy=shoulder.xy+vec2(c*d.x-s*d.y,s*d.x+c*d.y);
+            }
+        }
+        vec2 at=vec2(dot(axisU[i],samplePoint),dot(axisV[i],samplePoint));
+        if(i==5&&dot(forearmSplit,point)>0.)
+            at=vec2(dot(forearmU,point),dot(forearmV,point));
+        if(i==1||i==2){
+            int shin=2*(i-1),boot=shin+1;
+            if(dot(legSplit[boot],point)>0.)
+                at=vec2(dot(legU[boot],point),dot(legV[boot],point));
+            else if(dot(legSplit[shin],point)>0.)
+                at=vec2(dot(legU[shin],point),dot(legV[shin],point));
+        }
         if(jointAxis[i].z!=0.)at=unbend(at,jointBox[i],jointAxis[i]);
         if(any(lessThan(at,vec2(0))) || any(greaterThan(at,vec2(1))))continue;
+        if(i==3&&!mask&&!shadow)
+            coat=reaperCoat.y*smoothstep(reaperCoat.x-.025,reaperCoat.x+.025,at.y);
         vec2 a=at,b=at;
         bool shell=i==3&&shellAngle>=0.;
         if(!shell && impNode!=-4 && flowView>=0 && phase.x>0. && phase.x<1.){
@@ -407,6 +522,7 @@ void main() {
             paint.rgb*=paint.a;
         }
         else if(impNode==-5)paint=directPaint(i,at,phase.x);
+        else if(impNode==-6)paint=mask||shadow?pigment(uv0[i],at):reaperPigment(uv0[i],at);
         else if(impNode==-3)paint=pigment(uv0[i],at);
         else if(impNode>=0)paint=impPaint(at,i);
         else if(impNode==-2)paint=phase.x<.5?pigment(uv0[i],a):pigment(uv1[i],b);
@@ -437,6 +553,25 @@ void main() {
     vec4 left=vec4(0),right=vec4(0);
     vec4 mixed;
     if(group>0)mixed=layers[group-1];
+    else if(impNode==-6&&solidLayerOrder==0){
+        if(heldActive!=0){
+            vec2 grip=vec2(dot(heldU,point),dot(heldV,point));
+            if(all(greaterThanEqual(grip,vec2(0)))&&all(lessThanEqual(grip,vec2(1)))){
+                vec4 held=texture(heldInk,grip);
+                held.rgb*=held.a;
+                layers[5]=overLayer(layers[5],held);
+            }
+        }
+        // The pauldron remains under the cuirass while the forearm can
+        // pass in front. The moving seam resolves occlusion on one silhouette.
+        vec4 socket=reaperShoulders[1];
+        float shoulder=1.-smoothstep(socket.w+1.,socket.w+2.,length(point.xy-socket.xy));
+        float seam=clamp(.5+point.x/90.,.22,.78);
+        float reveal=smoothstep(seam-.009,seam+.009,phase.y);
+        if(reveal<=0.)mixed=reaperLayers(layers,order0,coat,shoulder);
+        else if(reveal>=1.)mixed=reaperLayers(layers,order1,coat,shoulder);
+        else mixed=mix(reaperLayers(layers,order0,coat,shoulder),reaperLayers(layers,order1,coat,shoulder),reveal);
+    }
     else{
         for(int i=0;i<6;i++){
             vec4 a=layers[order0[i]];
@@ -455,6 +590,24 @@ void main() {
             orderMix=smoothstep(crossAt-.045,crossAt+.045,phase.y);
         }
         mixed=impNode==-5||solidLayerOrder!=0?left:mix(left,right,orderMix);
+        if(coat>0.){
+            // The belt covers the hip sockets. The lower cloth goes behind
+            // the legs, so it cannot hide a moving shin or boot.
+            vec4 behind=vec4(0);
+            for(int i=0;i<6;i++){
+                int part=order0[i];
+                if(part==1||part==2)continue;
+                vec4 layer=layers[part];
+                behind=layer+behind*(1.-layer.a);
+                if(part==3){
+                    int nearLeg=int(reaperCoat.z);
+                    vec4 farPaint=layers[3-nearLeg],nearPaint=layers[nearLeg];
+                    behind=farPaint+behind*(1.-farPaint.a);
+                    behind=nearPaint+behind*(1.-nearPaint.a);
+                }
+            }
+            mixed=mix(mixed,behind,coat);
+        }
     }
     if(shadow){
         if(mixed.a<.62)discard;
@@ -470,7 +623,10 @@ void main() {
   loc={location("uv0[0]"),location("uv1[0]"),location("axisU[0]"),location("axisV[0]"),
        location("guide0[0]"),location("guide1[0]"),location("order0[0]"),location("order1[0]"),
        location("lighting[0]"),location("phase"),location("page1"),location("material"),
-       location("turnFlow"),location("flowView"),location("jointBox[0]"),location("jointAxis[0]"),location("impNode"),location("edgeJaw"),location("shellAngle"),location("solidLayerOrder")};
+       location("turnFlow"),location("flowView"),location("jointBox[0]"),location("jointAxis[0]"),location("impNode"),location("edgeJaw"),location("shellAngle"),location("solidLayerOrder"),
+       location("legU[0]"),location("legV[0]"),location("legSplit[0]"),location("reaperCoat"),location("reaperShoulders[0]"),
+       location("heldInk"),location("heldU"),location("heldV"),location("heldActive"),
+       location("forearmU"),location("forearmV"),location("forearmSplit")};
  }
 }
 inline void calibrateRegisteredViews(Artwork& art){
@@ -516,8 +672,9 @@ inline void loadRegisteredPaint(Artwork& art){
  Image ink=LoadImage((folder+"turn-ink.png").c_str()),map=LoadImage((folder+"turn-flow.png").c_str());
  auto& page=art.pages[0];
  const int rows=&art==&drake?14:6;
+ const int directions=&art==&reaper?glass_reaper_turn_atlas::Count:32;
  if(ink.data&&map.data&&ink.width==page.color.width&&ink.height==page.color.height&&
-    map.width==32*32&&map.height==rows*32){
+    map.width==directions*32&&map.height==rows*32){
   ImageFormat(&ink,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
   ImageFormat(&map,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
   const auto paint=LoadTextureFromImage(ink),flow=LoadTextureFromImage(map);
@@ -639,6 +796,56 @@ inline void loadContactContours(Artwork& art){
   }
  }
 }
+inline void calibrateReaper(){
+ if(!reaper.ready())return;
+ for(int frame=0;frame<glass_reaper_turn_atlas::Count;frame++){
+  const auto edge=[&](int part,bool top){
+   const auto tile=reaper.tile(frame,part,0);
+   const auto& page=reaper.pages[tile.page];
+   for(int i=0;i<tile.h;i++){
+    const int y=top?i:tile.h-1-i;
+    const auto* row=page.alpha.data()+(tile.y+y)*page.color.width+tile.x;
+    if(std::any_of(row,row+tile.w,[](unsigned char value){return value>=125;}))
+     return tile.oy+y+.5f;
+   }
+   return tile.oy+tile.h*.5f;
+  };
+  auto& projection=reaperProjection[frame];
+  projection.soles={edge(1,false),edge(2,false)};
+  projection.floor=std::max(projection.soles[0],projection.soles[1]);
+  projection.scale=ReaperHeight/std::max(1.f,projection.floor-edge(0,true));
+  const auto chest=reaper.tile(frame,3,0);
+  const auto alpha=[&](Tile tile,int x,int y){
+   x-=tile.ox;y-=tile.oy;
+   const auto& page=reaper.pages[tile.page];
+   return x>=0&&x<tile.w&&y>=0&&y<tile.h?
+          int(page.alpha[(tile.y+y)*page.color.width+tile.x+x]):0;
+  };
+  constexpr int steps=glass_reaper_turn_atlas::Count/8;
+  const auto& pivots=glass_reaper_turn_atlas::pivots;
+  const int base=frame/steps;
+  const float t=float(frame%steps)/steps;
+  for(int p:{4,5}){
+   const float x=mix(pivots[base][p][0],pivots[(base+1)%8][p][0],t);
+   const float y=mix(pivots[base][p][1],pivots[(base+1)%8][p][1],t);
+   const auto arm=reaper.tile(frame,p,0);
+   Vector2 socket{x,y};
+   float best=0;
+   // Seat the joint inside the painted intersection of arm and breastplate.
+   for(int row=int(y)-5;row<=int(y)+6;row++)for(int col=int(x)-8;col<=int(x)+8;col++){
+    if(std::min(alpha(arm,col,row),alpha(chest,col,row))<148)continue;
+    float support=0;
+    for(int dy=-3;dy<=3;dy++)for(int dx=-3;dx<=3;dx++)
+     support+=std::max(0,std::min(alpha(arm,col+dx,row+dy),alpha(chest,col+dx,row+dy))-118)*
+              (4-std::max(std::abs(dx),std::abs(dy)));
+    const float dx=col+.5f-x,dy=row+.5f-y;
+    const float score=support/(1.f+.02f*(dx*dx+dy*dy));
+    if(score>best){socket={col+.5f,row+.5f};best=score;}
+   }
+   projection.shoulders[p-4]={.8f*socket.x,reaperY(frame,socket.y)};
+  }
+ }
+}
 inline void load(){
  loadProgram();
  if(!caldera_puppets::ready(caldera_puppets::Imp)){loadPages(imp);loadImpCels();}
@@ -647,8 +854,11 @@ inline void load(){
   loadPages(jackal);
   loadContactContours(jackal);
  }
+ const bool reaperLoaded=reaper.ready();
  loadPages(reaper);
+ if(!reaperLoaded)calibrateReaper();
  loadContactContours(reaper);
+ if(!reaperLoaded&&filtered()&&reaper.ready())loadRegisteredPaint(reaper);
 }
 inline Vector4 textureRect(const Artwork& art,const Tile& t){
  const auto& page=art.pages[t.page].color;
@@ -706,7 +916,7 @@ inline Vector2 displacement(const Artwork& art,int view,int part,float u,float v
  return flowSample(art.vectors,art.flow.width,impMap?48:32,view,part,u,v,right,impMap?255.f:384.f);
 }
 inline float turnCoverage(const Artwork& art,View angle,int part,int jaw,float u,float v){
- if(singleDirectionalPaint(art))return coverage(art,art.tile(angle.nearestSample(),part,jaw),u,v);
+ if(singleDirectionalPaint(art)&&!art.signedEdges)return coverage(art,art.tile(angle.nearestSample(),part,jaw),u,v);
  if(art.directCels()){
   const DirectionCels cells(angle);
   const auto alpha=[&](int index){
@@ -775,7 +985,9 @@ inline Vector2 footTip(const Artwork& art,View view,int part){
  const auto tip=[&](int frame){
   const auto tile=art.tile(frame,part,0);
   const auto& contour=art.contactContours[frame*6+part];
-  return Vector2{.8f*(tile.ox+tile.w*(contour[22].x+contour[23].x)*.5f),.8f*(tile.oy+tile.h)};
+  const float y=&art==&reaper&&part>=1&&part<=2?
+       reaperY(frame,reaperProjection[frame].soles[part-1]):.8f*(tile.oy+tile.h);
+  return Vector2{.8f*(tile.ox+tile.w*(contour[22].x+contour[23].x)*.5f),y};
  };
  const auto a=tip(view.sample),b=tip(view.nextSample());
  return {mix(a.x,b.x,view.mix),mix(a.y,b.y,view.mix)};
@@ -796,15 +1008,164 @@ inline SwordJoint jackalKnee(View view,int part,Vector2 hip,Vector2 foot,float a
  const float length=std::max(1.f,std::hypot(shin.x,shin.y));
  return {center,{shin.x/length,shin.y/length},angle*DEG2RAD};
 }
+inline float cross2(Vector2 a,Vector2 b){return a.x*b.y-a.y*b.x;}
+inline Vector2 unit2(Vector2 v){
+ const float length=std::max(.001f,std::hypot(v.x,v.y));
+ return {v.x/length,v.y/length};
+}
+
+struct SickleArmProjection {
+ Vector2 sourceElbow{},elbow{},sourceAcross{},across{},sourceAxis[2]{},axis[2]{};
+ Vector3 split{};
+ bool active=false;
+
+ Vector2 map(Vector2 source,int section=-1)const{
+  const Vector2 q{source.x-sourceElbow.x,source.y-sourceElbow.y};
+  if(section<0)section=cross2(q,sourceAcross)>=0?1:0;
+  const float inv=1/cross2(sourceAxis[section],sourceAcross);
+  const float along=cross2(q,sourceAcross)*inv,width=cross2(sourceAxis[section],q)*inv;
+  return {elbow.x+axis[section].x*along+across.x*width,elbow.y+axis[section].y*along+across.y*width};
+ }
+ void rows(Rectangle box,int section,Vector3& u,Vector3& v)const{
+  const auto forward=axis[section],source=sourceAxis[section];
+  const float inv=1/cross2(forward,across);
+  const Vector2 g{across.y*inv,-across.x*inv},h{-forward.y*inv,forward.x*inv};
+  const Vector2 x{source.x*g.x+sourceAcross.x*h.x,source.x*g.y+sourceAcross.x*h.y};
+  const Vector2 y{source.y*g.x+sourceAcross.y*h.x,source.y*g.y+sourceAcross.y*h.y};
+  u={x.x/box.width,x.y/box.width,(sourceElbow.x-box.x-x.x*elbow.x-x.y*elbow.y)/box.width};
+  v={y.x/box.height,y.y/box.height,(sourceElbow.y-box.y-y.x*elbow.x-y.y*elbow.y)/box.height};
+ }
+};
+
+inline SickleArmProjection projectSickleArm(View view,const Part& part){
+ SickleArmProjection result{};
+ const auto joint=reaperJoint(view,2),grip=reaperJoint(view,3);
+ const Vector2 base{part.pivot.x+part.shift.x-64,part.pivot.y+part.shift.y-115};
+ const Vector2 segments[]={{joint.x-part.pivot.x,joint.y-part.pivot.y},{grip.x-joint.x,grip.y-joint.y}};
+ for(int i=0;i<2;i++){
+  const auto bone=segments[i];
+  const float length=std::max(.01f,std::hypot(bone.x,bone.y));
+  const float angle=(part.angle+i*part.elbow)*DEG2RAD;
+  const float c=std::cos(angle),s=std::sin(angle);
+  result.sourceAxis[i]=unit2(bone);
+  result.axis[i]={(c*bone.x*part.scaleX-s*bone.y*part.scaleY)/length,
+                  (s*bone.x*part.scaleX+c*bone.y*part.scaleY)/length};
+ }
+ const auto right=[](Vector2 a,Vector2 b){
+  a=unit2(a);b=unit2(b);
+  const auto axis=unit2({a.x+b.x,a.y+b.y});
+  return Vector2{-axis.y,axis.x};
+ };
+ result.sourceElbow=joint;
+ const float span=std::hypot(segments[0].x,segments[0].y);
+ result.elbow={base.x+span*result.axis[0].x,base.y+span*result.axis[0].y};
+ result.sourceAcross=right(result.sourceAxis[0],result.sourceAxis[1]);
+ result.across=right(result.axis[0],result.axis[1]);
+ result.split={result.across.y,-result.across.x,
+              -result.across.y*result.elbow.x+result.across.x*result.elbow.y};
+ result.active=cross2(result.axis[0],result.across)>.10f&&cross2(result.axis[1],result.across)>.10f&&
+               cross2(result.sourceAxis[0],result.sourceAcross)>.10f&&cross2(result.sourceAxis[1],result.sourceAcross)>.10f;
+ return result;
+}
+
+// The thigh, shin and boot meet at shared cross-sections. Each pixel still
+// samples the same painting, including through both joint boundaries.
+struct LegProjection {
+ Vector2 sourceKnee{},sourceAxis{},knee{},ankle{},across{},axis[3]{};
+ float ankleFromKnee=0;
+ Vector3 split[2]{};
+ bool active=false;
+
+ Vector2 map(Vector2 source,int section=-1)const{
+  const Vector2 q{source.x-sourceKnee.x,source.y-sourceKnee.y};
+  float along=q.x*sourceAxis.x+q.y*sourceAxis.y;
+  const float width=cross2(sourceAxis,q);
+  if(section<0)section=along<0?0:along<ankleFromKnee?1:2;
+  const auto direction=axis[section];
+  const auto base=section==2?ankle:knee;
+  if(section==2)along-=ankleFromKnee;
+  return {base.x+direction.x*along+across.x*width,base.y+direction.y*along+across.y*width};
+ }
+
+ void rows(Rectangle box,int section,Vector3& u,Vector3& v)const{
+  const auto direction=axis[section];
+  const float inverse=1/cross2(direction,across);
+  const Vector2 along{across.y*inverse,-across.x*inverse};
+  const Vector2 width{-direction.y*inverse,direction.x*inverse};
+  const Vector2 gx{sourceAxis.x*along.x-sourceAxis.y*width.x,sourceAxis.x*along.y-sourceAxis.y*width.y};
+  const Vector2 gy{sourceAxis.y*along.x+sourceAxis.x*width.x,sourceAxis.y*along.y+sourceAxis.x*width.y};
+  const auto target=section==2?ankle:knee;
+  const float shift=section==2?ankleFromKnee:0.f;
+  u={gx.x/box.width,gx.y/box.width,(sourceKnee.x+shift*sourceAxis.x-box.x-gx.x*target.x-gx.y*target.y)/box.width};
+  v={gy.x/box.height,gy.y/box.height,(sourceKnee.y+shift*sourceAxis.y-box.y-gy.x*target.x-gy.y*target.y)/box.height};
+ }
+};
+
+inline Vector2 rigidPartPoint(const Part& part,const SwordJoint& joint,Vector2 source){
+ const auto point=joint.map(source,false);
+ const float angle=part.angle*DEG2RAD,c=std::cos(angle),s=std::sin(angle);
+ const float dx=(point.x-part.pivot.x)*part.scaleX,dy=(point.y-part.pivot.y)*part.scaleY;
+ return {part.pivot.x+part.shift.x-64+c*dx-s*dy,part.pivot.y+part.shift.y-115+s*dx+c*dy};
+}
+
+inline LegProjection reaperLeg(View view,int slot,const Part& part,const SwordJoint& bend){
+ LegProjection result{};
+ const auto foot=footTip(reaper,view,slot);
+ const auto source=reaperKnee(part.pivot,foot,0);
+ const auto hip=rigidPartPoint(part,{},part.pivot);
+ auto knee=rigidPartPoint(part,{},source.center);
+ auto boot=rigidPartPoint(part,bend,foot);
+ knee.x+=part.kneeShift.x;knee.y+=part.kneeShift.y;
+ boot.x+=part.footShift.x;boot.y+=part.footShift.y;
+ const Vector2 upper{knee.x-hip.x,knee.y-hip.y},lower{boot.x-knee.x,boot.y-knee.y};
+ const float length=std::max(1.f,std::hypot(foot.x-part.pivot.x,foot.y-part.pivot.y));
+ constexpr float Thigh=.47f,Shin=.37f,Boot=1-Thigh-Shin;
+ const auto a=unit2(upper),b=unit2(lower);
+ const auto along=unit2({a.x+b.x,a.y+b.y});
+ const float width=std::sqrt(part.scaleX*part.scaleY);
+ const float bootAngle=(part.angle+part.footPitch)*DEG2RAD;
+ const float c=std::cos(bootAngle),s=std::sin(bootAngle);
+ const Vector2 bootAxis{source.axis.x*c-source.axis.y*s,source.axis.x*s+source.axis.y*c};
+ Vector2 restingAnkle{knee.x+lower.x*(Shin/(1-Thigh)),knee.y+lower.y*(Shin/(1-Thigh))};
+ if(part.restingFootTurn!=0){
+  const float a=part.restingFootTurn*DEG2RAD,c=std::cos(a),s=std::sin(a);
+  const float dx=restingAnkle.x-boot.x,dy=restingAnkle.y-boot.y;
+  restingAnkle={boot.x+c*dx-s*dy,boot.y+s*dx+c*dy};
+ }
+ const Vector2 walkingAnkle{boot.x-bootAxis.x*length*Boot*width,boot.y-bootAxis.y*length*Boot*width};
+ const auto depth=unit2({mix(along.x,bootAxis.x,part.footWeight),mix(along.y,bootAxis.y,part.footWeight)});
+ result.knee=knee;
+ result.ankle={mix(restingAnkle.x,walkingAnkle.x,part.footWeight),mix(restingAnkle.y,walkingAnkle.y,part.footWeight)};
+ result.sourceKnee=source.center;
+ result.sourceAxis=source.axis;
+ result.ankleFromKnee=length*Shin;
+ result.across={-depth.y*width,depth.x*width};
+ result.axis[0]={upper.x/(length*Thigh),upper.y/(length*Thigh)};
+ result.axis[1]={(result.ankle.x-knee.x)/(length*Shin),(result.ankle.y-knee.y)/(length*Shin)};
+ result.axis[2]={(boot.x-result.ankle.x)/(length*Boot),(boot.y-result.ankle.y)/(length*Boot)};
+ result.split[0]={depth.x,depth.y,-depth.x*knee.x-depth.y*knee.y};
+ result.split[1]={depth.x,depth.y,-depth.x*result.ankle.x-depth.y*result.ankle.y};
+ result.active=std::all_of(std::begin(result.axis),std::end(result.axis),
+                            [&](Vector2 axis){return cross2(axis,result.across)>.02f;});
+ return result;
+}
+
 struct Rig {
  const Artwork& art;
  View angle;
  int jaw;
  float materialWeight=0;
  SwordJoint joints[6]{};
+ LegProjection legs[2]{};
+ SickleArmProjection sickleArm{};
  Rectangle box{},partBox[6]{};
  Vector4 uv0[6],uv1[6],guide0[6],guide1[6];
  Vector3 axisU[6],axisV[6],lighting[6];
+ Vector3 lowerLegU[4]{},lowerLegV[4]{},legSplit[4]{},coat{};
+ Vector4 shoulders[2]{};
+ Texture2D held{};
+ Vector3 heldU{},heldV{};
+ Vector3 forearmU{},forearmV{};
  int order0[6],order1[6];
  const std::array<Part,6>& parts;
  Rig(const Artwork& artwork,View view,int gape,const std::array<Part,6>& pose,Color corpse,float flank,float action=-1):
@@ -818,7 +1179,7 @@ struct Rig {
    const auto& layers=&art==&drake?drake_direction_cels::order[cell]:crawler_direction_cels::order[cell];
    std::copy_n(layers,6,order0);
    std::copy_n(layers,6,order1);
-  }else if(singleDirectionalPaint(art)){
+  }else if(singleDirectionalPaint(art)&&!art.signedEdges){
    order(art,view.nearestBase(),order0,action);
    std::copy_n(order0,6,order1);
   }else{
@@ -829,8 +1190,24 @@ struct Rig {
    const auto blend=[&](float a,float b){return mix(a,b,view.mix)*unit;};
    auto& bounds=partBox[p];
    bounds={blend(a.ox,b.ox),blend(a.oy,b.oy),blend(a.w,b.w),blend(a.h,b.h)};
+   if(&art==&reaper&&p<3&&!art.signedEdges){
+    // Move the center continuously, while the selected painting keeps the
+    // width and floor registration it was rendered at.
+    const int frame=view.nearestSample();
+    const auto current=art.tile(frame,p,jaw);
+    const float center=blend(a.ox+a.w*.5f,b.ox+b.w*.5f);
+    bounds.width=.8f*current.w;
+    bounds.x=center-bounds.width*.5f;
+    bounds.y=reaperY(frame,current.oy);
+    bounds.height=reaperY(frame,current.oy+current.h)-bounds.y;
+   }else if(&art==&reaper){
+    // The cutouts follow the same angular interpolation,
+    // even when a different painting supplies the texels.
+    bounds.y=mix(reaperY(view.sample,a.oy),reaperY(view.nextSample(),b.oy),view.mix);
+    bounds.height=mix(reaperY(view.sample,a.oy+a.h),reaperY(view.nextSample(),b.oy+b.h),view.mix)-bounds.y;
+   }
    const bool donor=&art==&imp && art.flow.id;
-   const auto first=singleDirectionalPaint(art)?art.tile(view.nearestSample(),p,jaw):
+   const auto first=singleDirectionalPaint(art)&&!art.signedEdges?art.tile(view.nearestSample(),p,jaw):
                     donor?art.tile(view.base*4,p,jaw):a;
    uv0[p]=textureRect(art,first);
    uv1[p]=textureRect(art,donor?art.tile(view.nextBase()*4,p,jaw):b);
@@ -860,8 +1237,17 @@ struct Rig {
    const float c=std::cos(k.angle*DEG2RAD),s=std::sin(k.angle*DEG2RAD);
    const float px=k.pivot.x+k.shift.x-64,py=k.pivot.y+k.shift.y-115;
    const float uw=bounds.width*k.scaleX,vh=bounds.height*k.scaleY;
-   axisU[p]={c/uw,s/uw,(k.pivot.x-bounds.x)/bounds.width-(c*px+s*py)/uw};
-   axisV[p]={-s/vh,c/vh,(k.pivot.y-bounds.y)/bounds.height+(s*px-c*py)/vh};
+   const bool rooted=&art==&reaper&&p>=4&&filtered();
+   const float basis=(rooted?parts[3].angle:k.angle)*DEG2RAD;
+   const float bc=rooted?std::cos(basis):c,bs=rooted?std::sin(basis):s;
+   if(rooted){
+    const float front=p==5?std::max(0.f,std::sin(heading(view))):0.f;
+    // The right pauldron sits on the breastplate in frontal views. Start
+    // the arm's independent swing below its whole plate.
+    shoulders[p-4]={px,py,k.angle*DEG2RAD-basis,5.5f+3.5f*front*front};
+   }
+   axisU[p]={bc/uw,bs/uw,(k.pivot.x-bounds.x)/bounds.width-(bc*px+bs*py)/uw};
+   axisV[p]={-bs/vh,bc/vh,(k.pivot.y-bounds.y)/bounds.height+(bs*px-bc*py)/vh};
    Rectangle envelope=bounds;
    if(k.elbow!=0&&(p>=4||(singleDirectionalPaint(art)&&(p==1||p==2)))&&filtered()){
     auto& joint=joints[p];
@@ -873,10 +1259,51 @@ struct Rig {
     const float radius=std::hypot(rx,ry);
     envelope={joint.center.x-radius,joint.center.y-radius,2*radius,2*radius};
    }
-   for(float x:{envelope.x,envelope.x+envelope.width})for(float y:{envelope.y,envelope.y+envelope.height}){
-    const float dx=(x-k.pivot.x)*k.scaleX,dy=(y-k.pivot.y)*k.scaleY;
-    const float xx=px+c*dx-s*dy,yy=py+s*dx+c*dy;
-    left=std::min(left,xx);right=std::max(right,xx);top=std::min(top,yy);bottom=std::max(bottom,yy);
+   const auto extend=[&](Vector2 at){
+    left=std::min(left,at.x);right=std::max(right,at.x);
+    top=std::min(top,at.y);bottom=std::max(bottom,at.y);
+   };
+   if(rooted&&shoulders[p-4].z!=0){
+    const float radius=shoulders[p-4].w+8.5f;
+    extend({px-radius,py-radius});
+    extend({px+radius,py+radius});
+   }
+   if(&art==&reaper&&p>=1&&p<=2&&filtered()){
+    auto& leg=legs[p-1];
+    leg=reaperLeg(view,p,k,joints[p]);
+    if(leg.active){
+     joints[p]={};
+     leg.rows(bounds,0,axisU[p],axisV[p]);
+     const int shin=2*(p-1);
+     for(int section=0;section<2;section++){
+      leg.rows(bounds,section+1,lowerLegU[shin+section],lowerLegV[shin+section]);
+      legSplit[shin+section]=leg.split[section];
+     }
+    }
+   }
+   if(&art==&reaper&&p==5&&k.overhead!=0&&filtered()){
+    sickleArm=projectSickleArm(view,k);
+    if(sickleArm.active){
+     joints[p]={};
+     shoulders[1].z=0;
+     sickleArm.rows(bounds,0,axisU[p],axisV[p]);
+     sickleArm.rows(bounds,1,forearmU,forearmV);
+    }
+   }
+   if(p==5&&sickleArm.active){
+    for(float x:{bounds.x,bounds.x+bounds.width})for(float y:{bounds.y,bounds.y+bounds.height}){
+     extend(sickleArm.map({x,y},0));
+     extend(sickleArm.map({x,y},1));
+    }
+   }else if(p>=1&&p<=2&&legs[p-1].active){
+    for(float x:{bounds.x,bounds.x+bounds.width})for(float y:{bounds.y,bounds.y+bounds.height}){
+     for(int section=0;section<3;section++)extend(legs[p-1].map({x,y},section));
+    }
+   }else{
+    for(float x:{envelope.x,envelope.x+envelope.width})for(float y:{envelope.y,envelope.y+envelope.height}){
+     const float dx=(x-k.pivot.x)*k.scaleX,dy=(y-k.pivot.y)*k.scaleY;
+     extend({px+c*dx-s*dy,py+s*dx+c*dy});
+    }
    }
    const auto shade=[&](int key){
     const int authored=art.authoredPart(key,p);
@@ -886,13 +1313,64 @@ struct Rig {
    const float l=mix(shade(view.base),shade(view.nextBase()),view.t)/255.f;
    lighting[p]={l*corpse.r,l*corpse.g,l*corpse.b};
   }
+  if(&art==&reaper){
+   const int nearLeg=std::find(order0,order0+6,1)>std::find(order0,order0+6,2)?1:2;
+   const auto& trunkBox=partBox[3];
+   coat={(parts[3].pivot.y+8.f-trunkBox.y)/trunkBox.height,
+         std::max(parts[1].footWeight,parts[2].footWeight),float(nearLeg)};
+  }
   box={left,top,right-left,bottom-top};
+ }
+ void hold(Texture2D texture,Vector2 pivot,Vector2 grip,Vector2 size,float degrees){
+  held=texture;
+  const float c=std::cos(degrees*DEG2RAD),s=std::sin(degrees*DEG2RAD);
+  heldU={c/size.x,s/size.x,grip.x-(c*pivot.x+s*pivot.y)/size.x};
+  heldV={-s/size.y,c/size.y,grip.y+(s*pivot.x-c*pivot.y)/size.y};
+  float left=box.x,top=box.y,right=box.x+box.width,bottom=box.y+box.height;
+  for(float u:{0.f,1.f})for(float v:{0.f,1.f}){
+   const float dx=(u-grip.x)*size.x,dy=(v-grip.y)*size.y;
+   const float x=pivot.x+c*dx-s*dy,y=pivot.y+s*dx+c*dy;
+   left=std::min(left,x);right=std::max(right,x);
+   top=std::min(top,y);bottom=std::max(bottom,y);
+  }
+  box={left,top,right-left,bottom-top};
+ }
+ // The shoulder follows the torso at the socket. The arm's additional twist
+ // reaches full strength below it. Radius stays invariant in both directions.
+ Vector2 shoulderPoint(int part,Vector2 point,bool inverse)const{
+  if(part<4||shoulders[part-4].z==0)return point;
+  const auto socket=shoulders[part-4];
+  const float x=point.x-socket.x,y=point.y-socket.y;
+  const float t=std::clamp((std::hypot(x,y)-socket.w)/8.5f,0.f,1.f);
+  const float rot=(inverse?-socket.z:socket.z)*t*t*(3-2*t);
+  const float c=std::cos(rot),s=std::sin(rot);
+  return {socket.x+c*x-s*y,socket.y+s*x+c*y};
+ }
+ Vector2 partPoint(int part,Vector2 point)const{
+  if(part==5&&sickleArm.active)return sickleArm.map(point);
+  if(part>=1&&part<=2&&legs[part-1].active)return legs[part-1].map(point);
+  if(part>=4&&shoulders[part-4].z!=0){
+   auto rooted=parts[part];
+   rooted.angle=parts[3].angle;
+   return shoulderPoint(part,rigidPartPoint(rooted,joints[part],point),false);
+  }
+  return rigidPartPoint(parts[part],joints[part],point);
+ }
+ bool inFrontOf(int part,int other)const{
+  return std::find(order0,order0+6,part)>std::find(order0,order0+6,other);
  }
  bool hit(Vector2 q)const{
   float uncovered=1;
   for(int p=0;p<6;p++){
-   auto dot=[&](Vector3 axis){return q.x*axis.x+q.y*axis.y+axis.z;};
+   const auto point=shoulderPoint(p,q,true);
+   auto dot=[&](Vector3 axis){return point.x*axis.x+point.y*axis.y+axis.z;};
    float u=dot(axisU[p]),v=dot(axisV[p]);
+   if(p==5&&dot(sickleArm.split)>0){u=dot(forearmU);v=dot(forearmV);}
+   if(p>=1&&p<=2){
+    const int shin=2*(p-1),boot=shin+1;
+    const int section=dot(legSplit[boot])>0?boot:dot(legSplit[shin])>0?shin:-1;
+    if(section>=0){u=dot(lowerLegU[section]);v=dot(lowerLegV[section]);}
+   }
    if(joints[p].angle!=0){
     const auto& joint=joints[p];
     const auto& box=partBox[p];
@@ -917,6 +1395,24 @@ struct Rig {
   }
   auto send=[](int loc,const void* ptr,int type){SetShaderValueV(program,loc,ptr,type,6);};
   send(loc.jointAxis,axes,SHADER_UNIFORM_VEC3);send(loc.jointBox,boxes,SHADER_UNIFORM_VEC4);
+  SetShaderValueV(program,loc.legU,lowerLegU,SHADER_UNIFORM_VEC3,4);
+  SetShaderValueV(program,loc.legV,lowerLegV,SHADER_UNIFORM_VEC3,4);
+  SetShaderValueV(program,loc.legSplit,legSplit,SHADER_UNIFORM_VEC3,4);
+  SetShaderValue(program,loc.reaperCoat,&coat,SHADER_UNIFORM_VEC3);
+  SetShaderValueV(program,loc.reaperShoulders,shoulders,SHADER_UNIFORM_VEC4,2);
+  const Vector3 armSplit=sickleArm.active?sickleArm.split:Vector3{};
+  SetShaderValue(program,loc.forearmSplit,&armSplit,SHADER_UNIFORM_VEC3);
+  if(sickleArm.active){
+   SetShaderValue(program,loc.forearmU,&forearmU,SHADER_UNIFORM_VEC3);
+   SetShaderValue(program,loc.forearmV,&forearmV,SHADER_UNIFORM_VEC3);
+  }
+  const int heldActive=held.id!=0;
+  SetShaderValue(program,loc.heldActive,&heldActive,SHADER_UNIFORM_INT);
+  if(heldActive){
+   SetShaderValueTexture(program,loc.heldInk,held);
+   SetShaderValue(program,loc.heldU,&heldU,SHADER_UNIFORM_VEC3);
+   SetShaderValue(program,loc.heldV,&heldV,SHADER_UNIFORM_VEC3);
+  }
   send(loc.uv0,uv0,SHADER_UNIFORM_VEC4);send(loc.uv1,uv1,SHADER_UNIFORM_VEC4);
   send(loc.axisU,axisU,SHADER_UNIFORM_VEC3);send(loc.axisV,axisV,SHADER_UNIFORM_VEC3);
   send(loc.order0,order0,SHADER_UNIFORM_INT);send(loc.order1,order1,SHADER_UNIFORM_INT);
@@ -927,12 +1423,12 @@ struct Rig {
   if(art.directCels()&&art.cels[1].color.id)SetShaderValueTexture(program,loc.page1,art.cels[1].color);
   else if(art.pageCount>1)SetShaderValueTexture(program,loc.page1,art.pages[1].color);
   const bool deform=&art==&imp&&continuousImp();
-  const int impNode=art.directCels()?-5:singleDirectionalPaint(art)?-3:&art!=&imp?-1:
+  const int impNode=&art==&reaper?-6:art.directCels()?-5:singleDirectionalPaint(art)?-3:&art!=&imp?-1:
                     deform?-4:impCels.color.id?-3:art.flow.id?angle.base*5+angle.sample%4:-2;
   SetShaderValue(program,loc.impNode,&impNode,SHADER_UNIFORM_INT);
   const int edgeJaw=art.signedEdges?jaw+1:0;
   SetShaderValue(program,loc.edgeJaw,&edgeJaw,SHADER_UNIFORM_INT);
-  const int solidOrder=singleDirectionalPaint(art);
+  const int solidOrder=singleDirectionalPaint(art)&&!art.signedEdges;
   SetShaderValue(program,loc.solidLayerOrder,&solidOrder,SHADER_UNIFORM_INT);
   const float shell=rigidShell(art,3)?angle.t:-1;
   SetShaderValue(program,loc.shellAngle,&shell,SHADER_UNIFORM_FLOAT);

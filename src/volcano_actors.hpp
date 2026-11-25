@@ -13,6 +13,8 @@
 #include "generated/desert_reaper_turn_atlas.hpp"
 #include "generated/desert_enemy_motion.hpp"
 #include "generated/reaper_sickle_motion.hpp"
+#include "generated/reaper_motion.hpp"
+#include "grounded_gait.hpp"
 #include "generated/jackal_rig_motion.hpp"
 #include "generated/cinderhorn_synfig.hpp"
 #include "generated/cinderhorn_fall_synfig.hpp"
@@ -289,7 +291,14 @@ inline fire_imp_motion::Key impMotion(const fire_imp_motion::Key* keys,float pha
          sample(a.tail,b.tail),sample(a.guard,b.guard),sample(a.cast,b.cast),sample(a.reach,b.reach),sample(a.ember,b.ember)};
 }
 
-struct Part {Vector2 pivot,shift;float angle=0,scaleX=1,scaleY=1,elbow=0;};
+struct Part {
+ Vector2 pivot,shift;
+ float angle=0,scaleX=1,scaleY=1,elbow=0;
+ Vector2 kneeShift{},footShift{};
+ float footPitch=0,footWeight=0;
+ float overhead=0,wristCounterturn=0;
+ float restingFootTurn=0;
+};
 #include "varkhor_punch_arm.hpp"
 inline varkhor_motion::Key bossMotion(float phase,const varkhor_motion::Key (&clip)[61]){
  const float frame=std::clamp(phase,0.f,1.f)*60;

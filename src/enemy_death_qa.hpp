@@ -388,24 +388,43 @@ inline bool runEnemyDeathQA(){
          "a wide strip of the fallen cinderhorn's flank reaches the floor");
   }
   if(type==3&&side==1)guardianStoneIslands=std::max(guardianStoneIslands,detachedPieces(last));
-  const auto approaching=snapshot(samplePose(fallen,contact-.04f),false);
+  Enemy grounded=fallen;
+  grounded.deathElapsed=enemy_death::groundContactTime(type);
+  const auto contactPixels=snapshot(grounded,false);
+  const auto contactOutline=snapshot(grounded,false,false,Gold);
+  const bool legSettle=type==GlassReaperType;
+  const auto bodyForFit=[&](const Enemy& pose){
+   if(!legSettle)return snapshot(pose,false);
+   // The detached blade is tracked separately from the body's ground fit.
+   auto& blade=volcano_actors::desert_enemy_art::sickle;
+   const auto saved=blade;
+   blade={};
+   auto pixels=snapshot(pose,false);
+   blade=saved;
+   return pixels;
+  };
+  const auto approaching=bodyForFit(samplePose(fallen,contact-.04f));
+  const auto reaperContact=legSettle?bodyForFit(grounded):std::vector<std::uint32_t>{};
+  const auto& reference=legSettle?reaperContact:last;
   const auto approachBounds=bounds(approaching);
-  const float lateOverlap=overlap(approaching,last);
-  const bool fitted=lateOverlap>=.83f&&std::equal(restBounds.begin(),restBounds.end(),approachBounds.begin(),
+  const auto contactBounds=legSettle?bounds(reference):restBounds;
+  const float lateOverlap=overlap(approaching,reference);
+  const bool fitted=lateOverlap>=.83f&&std::equal(contactBounds.begin(),contactBounds.end(),approachBounds.begin(),
       [](int rest,int active){return std::abs(rest-active)<=4;});
   if(!fitted){
    report<<"Late fit "<<type<<'/'<<direction<<" overlap "<<lateOverlap<<" edge shifts";
-   for(int i=0;i<4;i++)report<<' '<<approachBounds[i]-restBounds[i];
+   for(int i=0;i<4;i++)report<<' '<<approachBounds[i]-contactBounds[i];
    report<<'\n';
   }
   check(fitted,type,direction,"the last part of the movement is fitted to the corpse size and ground anchor");
   {
-   Enemy grounded=fallen;
-   grounded.deathElapsed=enemy_death::groundContactTime(type);
-   const auto contactPixels=snapshot(grounded,false);
-   const auto contactOutline=snapshot(grounded,false,false,Gold);
-   check(contactPixels==last&&contactOutline==snapshot(samplePose(fallen,1),false,false,Gold),
-         type,direction,"ground contact already shows the final RGBA silhouette with or without hover");
+   const auto settledOutline=snapshot(samplePose(fallen,1),false,false,Gold);
+   if(legSettle){
+    const auto change=imageChange(contactPixels,last);
+    check(contactPixels!=last&&contactOutline!=settledOutline&&change.coverage<.18f,
+          type,direction,"the reaper's legs relax slightly from contact into the resting pose");
+   }else check(contactPixels==last&&contactOutline==settledOutline,
+              type,direction,"ground contact already shows the final RGBA silhouette with or without hover");
    arena.enemies.assign(1,grounded);
    bool fixed=true;
    while(arena.enemies.front().dying()){
@@ -413,9 +432,11 @@ inline bool runEnemyDeathQA(){
     const auto& pose=arena.enemies.front();
     const auto point=corpseDrawPoint(pose,anchor);
     const auto pixels=snapshot(pose,false);
-    fixed=fixed&&point.x==atRest.x&&point.y==atRest.y&&pixels==contactPixels;
+    const bool legsStillSettling=legSettle&&volcano_actors::desert_enemy_art::reaperLegSettlePhase(pose)<1;
+    fixed=fixed&&point.x==atRest.x&&point.y==atRest.y&&(legsStillSettling||pixels==last);
    }
-   check(fixed,type,direction,"every grounded 60 Hz sample preserves the contact pixels and anchor");
+   check(fixed,type,direction,legSettle?"the reaper keeps its ground anchor and stays still after its legs settle":
+                                       "every grounded 60 Hz sample preserves the contact pixels and anchor");
   }
   for(float rate:{30.f,60.f,120.f}){
    const float finalPose=1-1/(rate*enemy_death::duration(type));

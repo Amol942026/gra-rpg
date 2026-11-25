@@ -6,7 +6,8 @@
 namespace ember::desert_motion {
 inline constexpr float ScarabStride=16.f;
 inline constexpr float CobraWavelength=77.f;
-inline constexpr float JackalCycle=54.f,ReaperCycle=37.f;
+inline constexpr float JackalCycle=54.f,ReaperCycle=48.f;
+inline constexpr float ReaperTurnRate=5.8f;
 inline constexpr float PaintedFacings[]={0,.4636476f,1.5707963f,2.677945f,3.14159265f,3.6052403f,4.712389f,5.8195377f};
 inline constexpr float DuneDustDuration=.64f;
 inline constexpr unsigned DuneDustGrains=320;

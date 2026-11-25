@@ -1,6 +1,7 @@
 """Assemble the painted jackal and reaper, with editable OpenRaster layers and directional atlases."""
 
 import argparse
+from functools import lru_cache
 import io
 import math
 from pathlib import Path
@@ -10,7 +11,8 @@ from xml.etree import ElementTree as ET
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageOps
-from scipy.ndimage import binary_dilation, distance_transform_edt, label
+from scipy.interpolate import PchipInterpolator
+from scipy.ndimage import binary_dilation, distance_transform_edt, gaussian_filter1d, label, map_coordinates
 
 from ember_drake_turn import Paint, inbetween
 from slag_crawler_paint import atlas
@@ -55,8 +57,9 @@ REAPER = (
      ((88,46),(96,43),(105,56),(115,74),(107,80),(98,67),(88,56)), (93,47),
      ((69,40),(81,43),(74,57),(70,73),(64,81),(65,107),(48,109),(48,80),(55,68),(64,49)), (73,47)),
     (((70,16),(94,16),(94,37),(85,47),(75,44),(70,35)), (83,42),
-     ((57,84),(76,87),(72,114),(75,146),(55,146),(57,112)), (70,86),
+     # In the frontal painting the reaper's left leg is on screen right.
      ((88,87),(101,86),(111,147),(91,147),(91,120)), (93,86),
+     ((57,84),(76,87),(72,114),(75,146),(55,146),(57,112)), (70,86),
      ((68,42),(75,46),(68,56),(65,71),(58,83),(53,82),(55,69),(61,55)), (66,45),
      ((92,44),(97,42),(110,55),(119,78),(111,94),(102,82),(104,76),(96,62)), (98,47)),
     (((59,16),(86,16),(88,36),(81,44),(64,42)), (73,38),
@@ -102,7 +105,7 @@ REAPER_JOINTS = (
 ORDERS = {
     "jackal": ((1,4,3,2,5,0),(1,4,3,2,5,0),(1,2,3,4,5,0),(2,5,3,1,4,0),
                (2,5,3,1,4,0),(5,4,0,2,3,1),(4,5,0,3,1,2),(4,5,0,1,3,2)),
-    "reaper": ((1,4,2,3,0,5),(2,4,1,3,0,5),(1,2,3,0,4,5),(1,5,2,3,0,4),
+    "reaper": ((1,4,2,3,0,5),(2,4,1,3,0,5),(2,1,3,0,4,5),(1,5,2,3,0,4),
                (2,5,1,3,0,4),(4,1,3,2,0,5),(4,1,2,3,0,5),(4,1,3,2,0,5)),
 }
 
@@ -150,6 +153,15 @@ def key_panels(path, who):
         yield remove_specks(frame, 7)
 
 
+@lru_cache(maxsize=4)
+def reaper_sleeve_mask(view):
+    path = Path(__file__).resolve().parents[2] / "art/desert/new-enemies/reaper-sleeve-mask.png"
+    x, y = (view % 2) * CELL, (view // 2) * CELL
+    with Image.open(path) as sheet:
+        tile = sheet.getchannel("A").crop((x, y, x+CELL, y+CELL))
+    return np.asarray(tile.filter(ImageFilter.GaussianBlur(.55)), dtype=np.float32) / 255
+
+
 def split(frame, who, view):
     annotations = (JACKAL if who == "jackal" else REAPER)[view]
     shape = list(zip(annotations[::2], annotations[1::2]))
@@ -188,6 +200,10 @@ def split(frame, who, view):
     adjusted = [np.minimum(1, mask*1.38) for mask in masks]
     core=REAPER_TRUNK[view] if who=="reaper" else JACKAL_NECK[view]
     trunk=np.maximum(unused*1.68,feather_polygons(frame.size,core)*1.4)
+    if who=="reaper":
+        # Erase sleeve pigment left over in the residual trunk layer.
+        # The articulated arm already carries all the exposed sleeve paint.
+        trunk=np.minimum(1,trunk)*(1-reaper_sleeve_mask(view))
     adjusted.insert(3,np.minimum(1,trunk))
     pieces = []
     for alpha in adjusted:
@@ -378,8 +394,59 @@ def jackal_tail_pair(part, key):
     return result
 
 
+class ReaperArmTurn:
+    """Register the painted arm in a common shoulder–elbow–grip coordinate system."""
+
+    joints = np.array([0., .48, .88, 1.])
+    rows = np.unique(np.r_[np.linspace(0, 1, 65), joints])
+    yy, xx = np.mgrid[:CELL, :CELL].astype(float)
+
+    def __init__(self, keys, painted, part):
+        self.paint = [row[part] for row in painted]
+        guides = []
+        for direction, ref in enumerate(self.paint):
+            _, points = keys[direction]
+            elbow_y = points[6+2*(part-4)][1]
+            grip_y = points[7+2*(part-4)][1]
+            solid = np.asarray(ref.image.getchannel("A")) >= 120
+            rows = np.flatnonzero(solid.any(axis=1))
+            lo, hi = [np.array([edge(np.flatnonzero(solid[y])) for y in rows], float)
+                      for edge in (np.min, np.max)]
+            first, last = rows[0], rows[-1]
+            elbow_y = np.clip(elbow_y, first+4, last-6)
+            grip_y = np.clip(grip_y, elbow_y+3, last-3)
+            y = np.interp(self.rows, self.joints, (first-.5, elbow_y, grip_y, last+.5))
+            left = np.interp(y, rows, gaussian_filter1d(lo, .8))-.5
+            right = np.interp(y, rows, gaussian_filter1d(hi, .8))+.5
+            guides.append(np.array([y, left, right]))
+        self.guides = np.array(guides)
+        looped = np.concatenate((self.guides[-2:], self.guides, self.guides[:3]))
+        self.turn = PchipInterpolator(np.arange(-2, 11), looped, axis=0)
+
+    def paint_view(self, angle):
+        y, left, right = self.turn(angle)
+        row = np.interp(self.yy[:, 0], y, self.rows)
+        lo = np.interp(row, self.rows, left)[:, None]
+        hi = np.interp(row, self.rows, right)[:, None]
+        cross = np.clip((self.xx-lo)/np.maximum(1., hi-lo), 0, 1)
+        donor = int(math.floor(angle+.5)) % 8
+        dy, dlo, dhi = self.guides[donor]
+        sample_y = np.broadcast_to(np.interp(row, self.rows, dy)[:, None], cross.shape)
+        sample_x = np.interp(row, self.rows, dlo)[:, None]+cross*np.interp(row, self.rows, dhi-dlo)[:, None]
+        rgb = np.stack([map_coordinates(self.paint[donor].color[..., channel], [sample_y, sample_x],
+                                        order=3, mode="nearest") for channel in range(3)], axis=-1)
+        edge = np.minimum.reduce((self.xx-lo, hi-self.xx, self.yy-y[0], y[-1]-self.yy))
+        alpha = np.clip(.5+edge, 0, 1)
+        arm = Image.fromarray(np.uint8(np.rint(np.dstack((np.clip(rgb, 0, 255), alpha*255)))))
+        anchors = [(np.interp(v, self.rows, (left+right)*.5), np.interp(v, self.rows, y))
+                   for v in self.joints[1:3]]
+        return arm, anchors
+
+
 def bake(keys, who, work, output, header):
     painted = [[Paint(part) for part in parts] for parts, _ in keys]
+    arms = [ReaperArmTurn(keys, painted, p) for p in (4, 5)] if who == "reaper" else []
+    arm_joints = []
     tail_pairs = ({k:jackal_tail_pair(keys[k][0][3],k) for k in (0,4,5,7)}
                   if who == "jackal" else {})
     views = []
@@ -387,14 +454,22 @@ def bake(keys, who, work, output, header):
     for k in range(8):
         for n in range(TURN_STEPS):
             t = n / TURN_STEPS
-            parts = keys[k][0] if n == 0 else [
-                inbetween(a, b, t, one_paint=True)
-                for a, b in zip(painted[k], painted[(k+1)%8])]
+            parts = list(keys[k][0])
+            if n:
+                for p in range(4 if arms else len(parts)):
+                    parts[p] = inbetween(painted[k][p], painted[(k+1)%8][p], t,
+                                         one_paint=who=="jackal", whole_paint=who=="reaper")
             if n and tail_pairs and k in (4,7):
                 near, far = tail_pairs[k],tail_pairs[(k+1)%8]
                 trunk, tail = (inbetween(a,b,t,one_paint=True) for a,b in zip(near,far))
                 tail.alpha_composite(trunk)
                 parts[3] = tail
+            if arms:
+                joints = []
+                for p, arm in enumerate(arms, 4):
+                    parts[p], anchors = arm.paint_view(k+t)
+                    joints.extend(anchors)
+                arm_joints.append(joints)
             parts = [one_surface(p) for p in parts]
             if who == "jackal":
                 angle = TURN_ANGLES[k]*(1-t) + TURN_ANGLES[k+1]*t
@@ -421,8 +496,15 @@ def bake(keys, who, work, output, header):
         for _, points in keys:
             lines.append(" {"+",".join("{%d,%d}" % (x,y) for x,y in points[6:])+"},")
         lines.append("};")
+        lines.append("inline constexpr float armJoints[Count][4][2]={")
+        for joints in arm_joints:
+            lines.append(" {"+",".join("{%.4ff,%.4ff}" % (x, y) for x, y in joints)+"},")
+        lines.append("};")
     lines.append("}")
     header.write_text("\n".join(lines)+"\n")
+    if who == "reaper":
+        from caldera_crisp_turn import pack
+        pack(output/"parts-0.png", header, output)
 
 
 def main():

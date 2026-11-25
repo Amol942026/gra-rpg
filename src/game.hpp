@@ -1074,7 +1074,7 @@ struct Game {
    else if(e.type==CinderhornType)cinderhorn_gait::advance(e.animation,gait.x,gait.y,dt,faceMovement,e.boarRush>0);
    else if(e.type==DuneJackalType)desert_motion::advanceJackal(e.animation,gait.x,gait.y,dt,faceMovement);
    else if(e.type==GlassReaperType)desert_motion::advance(e.animation,gait.x,gait.y,dt,faceMovement,
-        desert_motion::ReaperCycle,7.4f);
+        desert_motion::ReaperCycle,desert_motion::ReaperTurnRate);
    else if(e.type==BoarType)forest_boar_motion::advance(e.animation,gait.x,gait.y,dt,
        forest_boar_motion::phase(e.boarVisualPhase()),faceMovement);
    else if(e.type==3)guardian_gait::advance(e.animation,gait.x,gait.y,dt,faceMovement);

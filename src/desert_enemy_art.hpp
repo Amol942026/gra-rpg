@@ -64,7 +64,7 @@ inline SickleMotion sickleMotion(const AnimationState& state,float attack){
  using namespace ember::reaper_sickle_motion;
  const float weight=walkingWeight(state,attack);
  const auto sample=[&](const float (&walking)[61],const float (&striking)[61]){
-  return weight*curve(walking,loop(state.phase))+(attack>=0?curve(striking,attack):0.f);
+  return attack>=0?curve(striking,attack):weight*curve(walking,loop(state.phase));
  };
  return {sample(walk_shoulder,attack_shoulder),sample(walk_elbow,attack_elbow),
          sample(walk_wrist,attack_wrist),sample(walk_roll,attack_roll)};
@@ -81,6 +81,15 @@ inline void carry(Part& limb,const Part& parent,float transfer){
  limb.shift={(parent.shift.x+at.x-local.x)*transfer,(parent.shift.y+at.y-local.y)*transfer};
 }
 
+inline void seatReaperShoulder(Part& arm,const Part& trunk,int part,float heading){
+ carry(arm,trunk,1);
+ const float front=std::max(0.f,std::sin(heading));
+ const float inset=(part==4?-2.f:2.f)*front*front*front*front;
+ const auto local=rotated({inset*trunk.scaleX,0},trunk.angle);
+ arm.shift.x+=local.x;
+ arm.shift.y+=local.y;
+}
+
 inline void step(Part& limb,const turn_art::Artwork& art,const turn_art::View& view,int slot,
                  Vector2 target){
  const auto foot=turn_art::footTip(art,view,slot);
@@ -90,6 +99,47 @@ inline void step(Part& limb,const turn_art::Artwork& art,const turn_art::View& v
  limb.angle=std::atan2(rest.x*goal.y-rest.y*goal.x,rest.x*goal.x+rest.y*goal.y)*RAD2DEG;
  const float length=std::clamp(std::hypot(goal.x,goal.y)/std::max(1.f,std::hypot(rest.x,rest.y)),.78f,1.15f);
  limb.scaleX=limb.scaleY=length;
+}
+
+inline constexpr float ReaperScale=1.05f;
+
+inline void reaperStride(Part& leg,turn_art::View view,int slot,Vector2 travel,
+                         float forward,float lift,float bend,float toe,float gait,Vector2 target){
+ const auto foot=turn_art::footTip(turn_art::reaper,view,slot);
+ const float span=std::hypot(foot.x-leg.pivot.x,foot.y-leg.pivot.y);
+ const float reach=span*std::cos(bend*.5f*DEG2RAD);
+ const float hip=lift+std::sqrt(std::max(0.f,reach*reach-forward*forward));
+ const auto knee=grounded_gait::knee(forward,hip,lift,span*.5f);
+ const float ahead=knee.forward-.5f*forward;
+ const float raised=knee.height-.5f*(hip+lift);
+ const Vector2 delta{target.x-leg.shift.x,target.y-leg.shift.y};
+ leg.kneeShift={.47f*delta.x+travel.x*ahead,.47f*delta.y+travel.y*ahead-raised};
+ leg.footShift=delta;
+ leg.footPitch=toe*std::cos(turn_art::heading(view));
+ leg.footWeight=std::min(1.f,2*gait);
+}
+
+inline void reaperAttackLeg(Part& leg,turn_art::View view,int slot,Vector2 offset,
+                            float headingX,float toe){
+ const auto foot=turn_art::footTip(turn_art::reaper,view,slot);
+ const auto rest=turn_art::reaperKnee(leg.pivot,foot,0);
+ const float length=std::hypot(foot.x-leg.pivot.x,foot.y-leg.pivot.y);
+ const float thigh=.47f*length,shin=.37f*length;
+ const auto boot=rotated(rest.axis,toe);
+ const Vector2 delta{offset.x-leg.shift.x,offset.y-leg.shift.y};
+ const Vector2 toAnkle{foot.x-leg.pivot.x+delta.x-.16f*length*boot.x,
+                       foot.y-leg.pivot.y+delta.y-.16f*length*boot.y};
+ const float distance=std::max(.01f,std::hypot(toAnkle.x,toAnkle.y));
+ const float reach=std::clamp(distance,thigh-shin+.01f,thigh+shin);
+ const float along=(thigh*thigh-shin*shin+reach*reach)/(2*reach);
+ // The bend follows the strike plane, so a head-on knee cannot kick sideways.
+ const float forwardBend=std::sqrt(std::max(0.f,thigh*thigh-along*along))*headingX;
+ const Vector2 knee{toAnkle.x*(along/reach)+toAnkle.y*(forwardBend/distance),
+                    toAnkle.y*(along/reach)-toAnkle.x*(forwardBend/distance)};
+ leg.kneeShift={leg.pivot.x+knee.x-rest.center.x,leg.pivot.y+knee.y-rest.center.y};
+ leg.footShift=delta;
+ leg.footPitch=toe;
+ leg.footWeight=1;
 }
 
 inline void jackalStep(Part& limb,const turn_art::View& view,int slot,Vector2 target){
@@ -126,10 +176,18 @@ inline std::array<Part,6> livingPose(const turn_art::Artwork& art,const turn_art
  const Vector2 travel=hasTravel?Vector2{state.travelAxis.x,state.travelAxis.y*ActorGroundSquash}:
                                Vector2{headingOnGround.x,headingOnGround.y*ActorGroundSquash};
  const float gait=walkingWeight(state,attack);
+ float stanceInset=0;
+ if(!jackal&&gait>0){
+  const float left=turn_art::footTip(art,view,1).x,right=turn_art::footTip(art,view,2).x;
+  const float front=headingOnGround.y*headingOnGround.y;
+  stanceInset=.5f*(left-right)*(1-ember::reaper_motion::StanceWidth)*front*gait;
+ }
  const float walk=state.phase, wave=2*PI*walk;
  const float breathe=std::sin(state.idleTime*(jackal?4.6f:2.8f))*(1-gait);
- float bodyY=.62f*breathe+gait*(jackal?1.65f*curve(jackal_weight,walk):1.5f+2.8f*std::cos(2*wave-.72f));
- float dash=0,crouch=0,neck=0,sweep=0,twist=0,air=0;
+ const auto bodyWalk=jackal?ember::reaper_motion::Walk{}:ember::reaper_motion::sampleWalk(walk);
+ const auto cut=jackal||attack<0?ember::reaper_motion::Attack{}:ember::reaper_motion::sampleAttack(attack);
+ float bodyY=.62f*breathe+gait*(jackal?1.65f*curve(jackal_weight,walk):bodyWalk.drop);
+ float dash=0,crouch=0,neck=0,air=0;
  if(attack>=0){
   if(jackal){
    crouch=curve(jackal_crouch,attack);
@@ -138,10 +196,7 @@ inline std::array<Part,6> livingPose(const turn_art::Artwork& art,const turn_art
    air=curve(jackal_land,attack);
    bodyY+=8.3f*crouch-13.1f*air;
   }else{
-   crouch=curve(reaper_crouch,attack);
-   sweep=curve(reaper_sickle,attack);
-   twist=curve(reaper_turn,attack);
-   bodyY+=7.6f*crouch-2.9f*twist;
+   bodyY+=cut.drop;
   }
  }
  std::array<Part,6> parts{};
@@ -151,90 +206,164 @@ inline std::array<Part,6> livingPose(const turn_art::Artwork& art,const turn_art
    const auto& b=dune_jackal_turn_atlas::pivots[view.nextSample()][p];
    parts[p].pivot={.8f*turn_art::mix(a[0],b[0],view.mix),.8f*turn_art::mix(a[1],b[1],view.mix)};
   }else{
-   const auto& a=glass_reaper_turn_atlas::pivots[view.base][p];
-   const auto& b=glass_reaper_turn_atlas::pivots[view.nextBase()][p];
-   parts[p].pivot={.8f*turn_art::mix(a[0],b[0],view.t),.8f*turn_art::mix(a[1],b[1],view.t)};
+   parts[p].pivot=p>=4?turn_art::reaperShoulder(view,p):
+                       turn_art::reaperAnchor(view,glass_reaper_turn_atlas::pivots,p);
   }
  }
  auto& trunk=parts[3];
  const float swingSide=std::tanh(facing.x*2.7f)*.81f+.19f*std::abs(facing.y);
  const float balance=jackal?curve(jackal_balance,walk):0;
- const float pitch=gait*(jackal?2.1f*balance:3.4f*std::sin(2*wave-.44f));
- const float sway=jackal?.67f*balance:1.9f*std::sin(wave-.35f);
- trunk.shift={facing.x*(dash*7.3f-crouch*2.7f-hit*3+twist*4.6f)+gait*sway,
-              bodyY+facing.y*(dash*3.4f+twist*3)+hit*1.9f};
- trunk.angle=facing.x*(pitch+neck*7.f)+twist*10.f*swingSide-state.turnLean*gait*(jackal?1.2f:4.f);
+ const float pitch=gait*(jackal?2.1f*balance:bodyWalk.pitch);
+ const float sway=jackal?.67f*balance:bodyWalk.shift;
+ trunk.shift={facing.x*(dash*7.3f-crouch*2.7f-hit*3+cut.shift)+gait*sway,
+              bodyY+facing.y*(dash*3.4f+cut.shift*.52f)+hit*1.9f};
+ trunk.angle=facing.x*(pitch+neck*7.f)+cut.pitch*swingSide-state.turnLean*gait*(jackal?1.2f:1.4f);
  auto& head=parts[0];
  carry(head,trunk,1);
- const float counter=jackal?.95f*balance:4.5f*std::sin(2*wave+.28f);
- head.angle=trunk.angle*.63f+facing.x*(neck*12-gait*counter)-twist*5.3f*swingSide;
+ head.angle=trunk.angle*.63f+facing.x*(neck*12+gait*(jackal?-.95f*balance:bodyWalk.head))+
+            cut.head*swingSide;
  head.shift.x+=facing.x*dash*2.9f;
- head.shift.y+=neck*1.8f-gait*(jackal?.35f: .9f)*std::sin(wave-.52f);
+ head.shift.y+=neck*1.8f-gait*(jackal?.35f:.32f)*std::sin(wave-.52f);
  for(const int p:{1,2,4,5}){
   auto& limb=parts[p];
   const bool left=p==1||p==4;
   if(jackal||p<3){
    constexpr float pawPhase[]={0,.50f,0,0,.77f,.27f};
    const float phase=loop(walk+(jackal?pawPhase[p]:(left?0.f:.5f)));
-   const float reach=curve(jackal?jackal_stride:reaper_stride,phase)*gait*
-                     (jackal?desert_motion::JackalCycle*.30f:desert_motion::ReaperCycle*19/60);
-   const float lift=curve(jackal?jackal_lift:reaper_lift,phase)*gait*(jackal?(p>=4?7.4f:6.3f):9.7f);
+   const auto foot=jackal?ember::reaper_motion::Step{}:ember::reaper_motion::sampleStep(phase);
+   const float reach=(jackal?curve(jackal_stride,phase)*desert_motion::JackalCycle*.30f:
+                            foot.reach*desert_motion::ReaperCycle/ReaperScale)*gait;
+   const float lift=(jackal?curve(jackal_lift,phase):foot.lift)*gait*(jackal?(p>=4?7.4f:6.3f):9.7f);
    carry(limb,trunk,1);
-   const float plant=jackal?dash*(p>=4?12.f:-4.6f):p==2?std::max(0.f,twist)*11.f:-std::max(0.f,twist)*2.3f;
-   const float kick=jackal?air*(p>=4?12.5f:9.8f):0.f;
-   const Vector2 target{travel.x*reach+facing.x*plant,travel.y*reach-lift+facing.y*plant*.52f-kick};
-   if(jackal)jackalStep(limb,view,p,target);
-   else{
-    limb.elbow=-(lift*3.6f+crouch*(left?15.f:24.f))*swingSide;
-    step(limb,art,view,p,target);
+   if(jackal){
+    const float plant=dash*(p>=4?12.f:-4.6f),kick=air*(p>=4?12.5f:9.8f);
+    jackalStep(limb,view,p,{travel.x*reach+facing.x*plant,
+                           travel.y*reach-lift+facing.y*plant*.52f-kick});
+    continue;
+   }
+   const Vector2 walkTarget{travel.x*reach+(left?-stanceInset:stanceInset),travel.y*reach-lift};
+   const bool segmented=turn_art::filtered();
+   auto striking=limb;
+   if(segmented)reaperStride(limb,view,p,travel,reach,lift,foot.knee*gait,foot.toe*gait,gait,walkTarget);
+   else step(limb,art,view,p,walkTarget);
+   if(attack>=0){
+    // The leg opposite the weapon arm leads, while the rear foot supports the push.
+    const Vector2 offset=left?Vector2{headingOnGround.x*cut.lead_reach,
+      headingOnGround.y*ActorGroundSquash*cut.lead_reach-cut.lead_lift}:Vector2{};
+    const float toe=(left?cut.lead_toe:cut.rear_toe)*headingOnGround.x;
+    if(segmented)reaperAttackLeg(striking,view,p,offset,headingOnGround.x,toe);
+    else step(striking,art,view,p,offset);
+    const float weight=enemy_death::ease(attack/.14f)*(1-enemy_death::ease((attack-.94f)/.06f));
+    limb=turn_art::interpolate(limb,striking,weight);
    }
    continue;
   }
-  const float stride=std::sin(wave+(left?PI:0.f)-.68f)*gait;
-  carry(limb,trunk,1);
-  limb.angle=trunk.angle+(left?stride*(11+16*std::abs(facing.x))+twist*24.f:weapon.shoulder*swingSide);
-  limb.elbow=left?-9*gait-stride*7+twist*21.f:weapon.elbow*swingSide;
-  if(!left)limb.shift.y+=std::max(0.f,sweep)*facing.y*4.6f-4.f*std::max(0.f,-sweep);
+  seatReaperShoulder(limb,trunk,p,heading);
+  const float armProjection=attack<0?facing.x:swingSide;
+  limb.angle=trunk.angle+armProjection*(left?gait*bodyWalk.free_arm+cut.free_arm:weapon.shoulder);
+  limb.elbow=armProjection*(left?gait*bodyWalk.free_elbow+cut.free_elbow:weapon.elbow);
+  if(p==5&&attack>=0){
+   // The right hand rises on the target side before the downward cut.
+   const float winding=facing.x+.65f*facing.y>=0?1.f:-1.f;
+   limb.overhead=winding;
+   // Each painted view starts with a different resting bend. Play the lift
+   // from the Blender rig's neutral axes and return to the existing strike.
+   const auto joint=turn_art::reaperJoint(view,2),palm=turn_art::reaperJoint(view,3);
+   const float upperRest=std::atan2(limb.pivot.x-joint.x,joint.y-limb.pivot.y)*RAD2DEG;
+   const float lowerRest=std::atan2(joint.x-palm.x,palm.y-joint.y)*RAD2DEG;
+   const float align=enemy_death::ease(attack/.19f)*(1-enemy_death::ease((attack-.40f)/.05f));
+   const float shoulderOffset=winding*(limb.pivot.x+limb.shift.x-trunk.pivot.x-trunk.shift.x);
+   const float opening=align*enemy_death::ease((attack-.24f)/.12f);
+   const float forwardPitch=opening*std::clamp(-shoulderOffset*2.8f,0.f,29.f)*std::abs(facing.x);
+   limb.wristCounterturn=-winding*forwardPitch;
+   limb.angle=trunk.angle+std::remainder(winding*(weapon.shoulder+forwardPitch),360.f)-align*upperRest;
+   limb.elbow=winding*weapon.elbow-align*(lowerRest-upperRest);
+  }
  }
  return parts;
 }
 
 inline std::array<Part,6> collapsePose(const turn_art::Artwork& art,const turn_art::View& view,
                                        const AnimationState& state,float attack,float hit,float fall,float side,
-                                       SickleMotion weapon={}){
+                                       SickleMotion weapon,const ember::reaper_motion::Fall& death){
  const bool jackal=&art==&turn_art::jackal;
  auto pose=livingPose(art,view,state,attack,hit,weapon);
  auto rest=livingPose(art,view,AnimationState{},-1,0);
- const float fold=curve(jackal?jackal_fold:reaper_fold,fall);
- const float drop=std::max(0.f,curve(jackal?jackal_drop:reaper_drop,fall));
- const float buckle=curve(jackal?jackal_buckle:reaper_buckle,fall);
+ if(!jackal){
+  auto& chest=rest[3];
+  chest.shift={side*death.hip_shift,death.hip_drop};
+  chest.angle=side*death.chest_pitch;
+  chest.scaleX=1+death.chest_width;
+  chest.scaleY=1+death.chest_length;
+  const Part pelvis=chest;
+  chest.angle+=side*death.back_arch;
+  const auto& order=turn_art::reaperOrder[view.nearestBase()];
+  const auto above=[&](int a,int b){
+   return std::find(std::begin(order),std::end(order),a)>std::find(std::begin(order),std::end(order),b);
+  };
+  const float shoulderSpan=rest[4].pivot.x-rest[5].pivot.x;
+  const float spread=death.arm_spread*std::clamp(shoulderSpan/10.f,-1.f,1.f);
+  for(int p:{0,1,2,4,5}){
+   auto& limb=rest[p];
+   if(p>=4)seatReaperShoulder(limb,chest,p,turn_art::heading(view));
+   else carry(limb,p==0?chest:pelvis,1);
+   if(p==0){
+    limb.angle=side*(death.head_tilt+.25f*death.back_arch);
+    limb.shift.y+=2.25f*death.blend;
+   }else if(p<3){
+    const bool top=above(p,3-p);
+    limb.angle=side*(top?death.leg_top:death.leg_low);
+    limb.elbow=side*(top?death.knee_top:death.knee_low);
+    limb.scaleY=1-death.ground*(top?.13f:.05f);
+   }else{
+    const bool top=above(p,9-p);
+    limb.angle=side*(top?death.arm_top:death.arm_low)+(p==4?-spread:spread);
+    limb.elbow=side*(top?death.elbow_top:death.elbow_low);
+    limb.scaleY=1-death.ground*(top?.04f:.09f);
+    if(p==4&&death.left_arm_settle>0){
+     const float settle=death.left_arm_settle;
+     limb.elbow=turn_art::mix(limb.elbow,side*8.f,settle);
+     const auto palm=turn_art::reaperJoint(view,1);
+     const auto elbow=turn_art::filtered()?turn_art::reaperElbow(view,p,limb.elbow):turn_art::SwordJoint{};
+     const auto bent=elbow.map(palm,false);
+     const float restAngle=std::atan2((bent.y-limb.pivot.y)*limb.scaleY,
+                                     (bent.x-limb.pivot.x)*limb.scaleX);
+     // Aim the relaxed hand down in the ground projection, independent of
+     // the body roll. The socket stays seated in the same pauldron.
+     const auto aim=rotated({-side,.48f},-side*death.roll);
+     const float groundAngle=std::atan2(aim.y/(1-.025f*death.ground),aim.x);
+     limb.angle+=settle*std::remainder((groundAngle-restAngle)*RAD2DEG-limb.angle,360.f);
+    }
+   }
+  }
+  const float winding=pose[5].overhead;
+  for(int p=0;p<6;p++)pose[p]=turn_art::interpolate(pose[p],rest[p],death.blend);
+  pose[5].overhead=winding;
+  return pose;
+ }
+ const float fold=curve(jackal_fold,fall);
+ const float drop=std::max(0.f,curve(jackal_drop,fall));
+ const float buckle=curve(jackal_buckle,fall);
  const float heading=turn_art::heading(view);
  const float fore=std::cos(heading),depth=std::abs(std::sin(heading));
  const float pawSide=std::clamp(1.7f*fore,-1.f,1.f);
  const float tuck=pawSide+side*(1-std::abs(pawSide));
  auto& trunk=rest[3];
- trunk.shift={side*drop*(jackal?3.f:6.f),buckle*(jackal?6.f:10.f)};
+ trunk.shift={side*drop*3.f,buckle*6.f};
  trunk.scaleX=1+.025f*drop;
  trunk.scaleY=1-.02f*drop;
- trunk.angle=jackal?tuck*(buckle*12.f+drop*3.f):side*(buckle*10.f-drop*7.f);
+ trunk.angle=tuck*(buckle*12.f+drop*3.f);
  for(int p=0;p<6;p++){
   auto& limb=rest[p];
   if(p!=3)carry(limb,trunk,1);
   if(p==0){
-   limb.angle+=(jackal?tuck:side)*(buckle*9.f+drop*(jackal?12.f:15.f));
-   limb.shift.y+=buckle*(jackal?6.f:4.f)+drop*(jackal?3.f+6.f*depth:2.f);
+   limb.angle+=tuck*(buckle*9.f+drop*12.f);
+   limb.shift.y+=buckle*6.f+drop*(3.f+6.f*depth);
   }else if(p!=3){
    const bool near=p==2||p==5;
-   const float sign=near?1.f:-1.f;
-   if(jackal){
-    limb.angle+=tuck*(p<3?-1.f:1.f)*(drop*(near?55.f:72.f)+buckle*(p<3?10.f:53.f));
-    limb.scaleY*=1-drop*(near?.15f:.26f)-buckle*(p<3?.04f:.20f);
-    limb.shift.y-=drop*(near?3.f:6.f);
-   }else{
-    limb.angle+=side*(p<3?sign*(drop*24.f+buckle*(near?37.f:22.f)):sign*drop*23.f+buckle*17.f);
-    limb.scaleY*=1-drop*.06f-buckle*(p<3?.15f:0.f);
-    limb.elbow=side*(p<3?-(drop*(near?26.f:39.f)+buckle*46.f):drop*(near?-26.f:32.f)+buckle*16.f);
-   }
+   limb.angle+=tuck*(p<3?-1.f:1.f)*(drop*(near?55.f:72.f)+buckle*(p<3?10.f:53.f));
+   limb.scaleY*=1-drop*(near?.15f:.26f)-buckle*(p<3?.04f:.20f);
+   limb.shift.y-=drop*(near?3.f:6.f);
   }
   pose[p]=turn_art::interpolate(pose[p],limb,fold);
  }
@@ -251,29 +380,14 @@ inline constexpr Vector2 Grip{48,32};
 inline WeaponPose weaponPose(const turn_art::Rig& rig,SickleMotion motion,float fold){
  const auto& arm=rig.parts[5];
  const auto& elbow=rig.joints[5];
- auto paintedPalm=turn_art::reaperJoint(rig.angle,3);
- const auto& glove=rig.partBox[5];
- const auto covered=[&](Vector2 point){
-  return turn_art::turnCoverage(rig.art,rig.angle,5,0,(point.x-glove.x)/glove.width,(point.y-glove.y)/glove.height);
- };
- if(covered(paintedPalm)<.57f){
-  Vector2 total{};
-  float weights=0;
-  for(float dy:{-6.f,-3.f,0.f,3.f,6.f})for(float dx:{-6.f,-3.f,0.f,3.f,6.f}){
-   const Vector2 candidate{paintedPalm.x+dx,paintedPalm.y+dy};
-   const float weight=std::max(0.f,covered(candidate)-.57f)/(1+dx*dx+dy*dy);
-   weights+=weight;total.x+=weight*candidate.x;total.y+=weight*candidate.y;
-  }
-  if(weights>0)paintedPalm={total.x/weights,total.y/weights};
- }
- const auto palm=elbow.map(paintedPalm,false);
- const auto local=rotated({(palm.x-arm.pivot.x)*arm.scaleX,(palm.y-arm.pivot.y)*arm.scaleY},arm.angle);
+ const auto paintedPalm=turn_art::reaperJoint(rig.angle,3);
  const float facing=std::cos(turn_art::heading(rig.angle));
- const float wrist=motion.wrist*(facing*.81f+.19f)*(1-fold);
+ const float wristProjection=arm.overhead!=0?arm.overhead:facing*.81f+.19f;
+ const float wrist=(motion.wrist*wristProjection+arm.wristCounterturn)*(1-fold);
  const float width=.39f*(.86f+.14f*std::abs(facing))*(1-.37f*std::clamp(motion.roll*(1-fold),0.f,1.f));
- return {{arm.pivot.x+arm.shift.x+local.x-64,arm.pivot.y+arm.shift.y+local.y-115},
-         arm.angle+elbow.angle*RAD2DEG+19*facing+wrist,
-         width,facing>-.16f};
+ return {rig.partPoint(5,paintedPalm),
+         arm.angle+(rig.sickleArm.active?arm.elbow:elbow.angle*RAD2DEG)+19*facing+wrist,
+         width,rig.inFrontOf(5,3)};
 }
 inline constexpr float SickleHeightScale=.39f;
 inline void paintWeapon(WeaponPose weapon,Color tint,bool mask,bool shadow,Vector2 offset={}){
@@ -290,7 +404,150 @@ inline void paintWeapon(WeaponPose weapon,Color tint,bool mask,bool shadow,Vecto
 inline bool hitWeapon(WeaponPose weapon,Vector2 q){
  const auto local=rotated({q.x-weapon.palm.x,q.y-weapon.palm.y},-weapon.angle);
  const float x=local.x/weapon.width+Grip.x,y=local.y/SickleHeightScale+Grip.y;
- return x>=0&&x<96&&y>=0&&y<96&&sickleAlpha[int(y)*96+int(x)]>=111;
+ if(x<0||x>=96||y<0||y>=96)return false;
+ const float u=std::clamp(x-.5f,0.f,95.f),v=std::clamp(y-.5f,0.f,95.f);
+ const int i=int(u),j=int(v),right=std::min(i+1,95),bottom=std::min(j+1,95);
+ const float top=turn_art::mix(sickleAlpha[j*96+i],sickleAlpha[j*96+right],u-i);
+ const float lower=turn_art::mix(sickleAlpha[bottom*96+i],sickleAlpha[bottom*96+right],u-i);
+ return turn_art::mix(top,lower,v-j)>=111;
+}
+
+struct FallProjection {
+ float hip,rotation,squash,fit=0;
+ Vector2 point(Vector2 local)const{
+  const auto q=rotated({local.x,(local.y-hip)*squash},rotation);
+  return {q.x,q.y+hip+fit};
+ }
+ Vector2 local(Vector2 screen)const{
+  const auto q=rotated({screen.x,screen.y-fit-hip},-rotation);
+  return {q.x,q.y/squash+hip};
+ }
+};
+
+inline float fitFallingBody(const turn_art::Rig& rig,const FallProjection& projection,
+                            float blend,float settle){
+ if(blend<=0&&settle<=0)return 0;
+ float bottom=-1e6f;
+ const int frame=rig.angle.nearestSample();
+ for(int p=0;p<6;++p){
+  const auto rect=rig.partBox[p];
+  for(const auto point:rig.art.contactContours[frame*6+p]){
+   const auto local=rig.partPoint(p,{rect.x+point.x*rect.width,rect.y+point.y*rect.height});
+   bottom=std::max(bottom,projection.point(local).y);
+  }
+ }
+ return (1.4f-bottom)*(bottom>1.4f?blend:enemy_death::ease(settle));
+}
+
+struct DroppedSickle {
+ WeaponPose pose;
+ float squash;
+};
+inline constexpr float GroundSickleSquash=.55f;
+
+inline WeaponPose projectedSickle(const turn_art::Rig& rig,SickleMotion motion,float fold,
+                                  const FallProjection& projection){
+ auto held=weaponPose(rig,motion,fold);
+ held.palm=projection.point(held.palm);
+ held.angle+=projection.rotation;
+ return held;
+}
+
+inline WeaponPose sickleLanding(const turn_art::Rig& corpse,const FallProjection& projection,
+                                 SickleMotion motion,float side){
+ const auto palm=projectedSickle(corpse,motion,1,projection).palm;
+ const float angle=side>0?82.f:-98.f;
+ WeaponPose best{};
+ int mostVisible=-1;
+ for(const auto offset:{Vector2{-side*7.5f,8.5f},{-side*10.5f,10.3f},{side*6.f,12.4f}}){
+  for(float turn:{0.f,-45.f,45.f,-90.f,90.f,180.f}){
+   const WeaponPose candidate{{palm.x+offset.x,palm.y+offset.y},angle+turn,.39f,true};
+   const float c=std::cos(candidate.angle*DEG2RAD),s=std::sin(candidate.angle*DEG2RAD);
+   int visible=0;
+   for(int y=14;y<94;y+=4)for(int x=10;x<78;x+=4){
+    if(sickleAlpha[y*96+x]<174)continue;
+    const float u=(x-Grip.x)*candidate.width,v=(y-Grip.y)*SickleHeightScale;
+    const Vector2 screen{candidate.palm.x+c*u-s*v,
+                         candidate.palm.y+(s*u+c*v)*GroundSickleSquash};
+    if(!corpse.hit(projection.local(screen))&&++visible>=14)return candidate;
+   }
+   if(visible>mostVisible){mostVisible=visible;best=candidate;}
+  }
+ }
+ return best;
+}
+
+inline WeaponPose reaperFallGrip(turn_art::View view,const AnimationState& state,float attack,
+                                 float hit,float side,SickleMotion motion,float phase,bool restingWeapon=false){
+ const auto pose=ember::reaper_motion::sampleFall(phase);
+ const auto parts=collapsePose(turn_art::reaper,view,state,attack,hit,phase,side,motion,pose);
+ const turn_art::Rig rig(turn_art::reaper,view,0,parts,WHITE,side,attack);
+ FallProjection projection{-44.f,side*pose.roll,1-.025f*pose.ground};
+ projection.fit=fitFallingBody(rig,projection,pose.blend,pose.ground);
+ return restingWeapon?sickleLanding(rig,projection,motion,side):
+                      projectedSickle(rig,motion,pose.blend,projection);
+}
+
+inline DroppedSickle fallingSickle(turn_art::View view,const AnimationState& state,float attack,
+                                  float hit,float side,SickleMotion motion,float phase,
+                                  const turn_art::Rig& current,const FallProjection& projection){
+ using namespace ember::reaper_motion;
+ const auto ground=phase>=1?sickleLanding(current,projection,motion,side):
+                            reaperFallGrip(view,state,attack,hit,side,motion,1,true);
+ if(phase>=1)return {ground,GroundSickleSquash};
+
+ // Carry the grip's momentum through release in the same screen projection.
+ constexpr float Delta=1.f/120,Flight=1-SickleRelease;
+ const auto hand=reaperFallGrip(view,state,attack,hit,side,motion,SickleRelease);
+ const auto previous=reaperFallGrip(view,state,attack,hit,side,motion,SickleRelease-Delta);
+ const float t=std::clamp((phase-SickleRelease)/Flight,0.f,1.f);
+ const auto drift=[t](float distance,float velocity){
+  // Limit the initial velocity to avoid doubling back before contact.
+  const float limit=distance*1.8f;
+  const float start=std::clamp(velocity,std::min(0.f,limit),std::max(0.f,limit));
+  return distance*t+(start-distance)*t*(1-t)*(1-t);
+ };
+ const float dx=ground.palm.x-hand.palm.x,dy=ground.palm.y-hand.palm.y;
+ const float vx=(hand.palm.x-previous.palm.x)*(Flight/Delta);
+ const float vy=std::clamp((hand.palm.y-previous.palm.y)*(Flight/Delta),
+                          -2.5f,.70f*std::max(0.f,dy));
+ const float spin=std::remainder(ground.angle-hand.angle,360.f);
+ const float angular=std::remainder(hand.angle-previous.angle,360.f)*(Flight/Delta);
+ const float flatten=enemy_death::window(t,.45f,1.f);
+ return {{{hand.palm.x+drift(dx,vx),hand.palm.y+vy*t+(dy-vy)*t*t},
+           hand.angle+drift(spin,angular),turn_art::mix(hand.width,ground.width,flatten),true},
+          turn_art::mix(1.f,GroundSickleSquash,flatten)};
+}
+
+inline void paintDroppedSickle(DroppedSickle dropped,Vector2 origin,float size,Color color,
+                               bool mask,bool shadow){
+ rlPushMatrix();
+ rlTranslatef(origin.x+size*dropped.pose.palm.x,origin.y+size*dropped.pose.palm.y,0);
+ rlScalef(size,size*dropped.squash,1);
+ dropped.pose.palm={};
+ paintWeapon(dropped.pose,color,mask,shadow);
+ rlPopMatrix();
+}
+
+inline void relaxReaperLegs(std::array<Part,6>& parts,turn_art::View view,
+                            const ember::reaper_motion::LegSettle& motion){
+ const auto soleX=[&](int p){
+  const auto& leg=parts[p];
+  const auto sole=turn_art::footTip(turn_art::reaper,view,p);
+  const auto knee=turn_art::filtered()?turn_art::reaperKnee(leg.pivot,sole,leg.elbow):turn_art::SwordJoint{};
+  return turn_art::rigidPartPoint(leg,knee,sole).x;
+ };
+ const float outward=soleX(1)>=soleX(2)?1.f:-1.f;
+ parts[1].angle-=outward*motion.leg_splay;
+ parts[2].angle+=outward*motion.leg_splay;
+ parts[1].restingFootTurn=-outward*motion.boot_turn;
+ parts[2].restingFootTurn=outward*motion.boot_turn;
+}
+
+inline float reaperLegSettlePhase(const Enemy& e){
+ if(!e.dying())return 1.f;
+ return std::clamp((e.deathElapsed-enemy_death::groundContactTime(e.type))/
+                    ember::reaper_motion::LegSettleSeconds,0.f,1.f);
 }
 
 inline bool draw(const Enemy& e,float x,float y,Color outline,const Vector2* probe,bool shadow,
@@ -314,81 +571,84 @@ inline bool draw(const Enemy& e,float x,float y,Color outline,const Vector2* pro
  const float attack=fallen?e.deathAction:e.volcanoAction();
  const auto view=turn_art::view(state,art);
  const float side=e.deathScreenSide()?float(e.deathScreenSide()):std::cos(turn_art::heading(view))>=0?1.f:-1.f;
- const float drop=fallen?curve(jackal?jackal_drop:reaper_drop,fall):0;
+ const auto death=fallen&&!jackal?ember::reaper_motion::sampleFall(fall):ember::reaper_motion::Fall{};
+ const float drop=fallen&&jackal?curve(jackal_drop,fall):death.ground;
  const float hit=std::clamp((fallen?e.deathFlash:e.flash)/.16f,0.f,1.f);
  const auto motion=jackal?SickleMotion{}:sickleMotion(state,attack);
- const auto parts=fallen?collapsePose(art,view,state,attack,hit,fall,side,motion):
+ const auto parts=fallen?collapsePose(art,view,state,attack,hit,fall,side,motion,death):
                          livingPose(art,view,state,attack,hit,motion);
- turn_art::Rig rig(art,view,0,parts,WHITE,side,attack);
- const float roll=fallen?curve(jackal?jackal_roll:reaper_roll,fall):0;
+ turn_art::Rig contactRig(art,view,0,parts,WHITE,side,attack);
+ const float roll=fallen&&jackal?curve(jackal_roll,fall):death.roll;
  const float heading=turn_art::heading(view);
  const float endOn=std::abs(std::sin(heading));
  const float profile=std::clamp(std::cos(heading)*2.f,-1.f,1.f);
  const float jackalFlank=profile+side*(1-std::abs(profile));
- const float rotation=roll*(jackal?jackalFlank*(22.f+26.f*endOn):side*68.f);
+ const float rotation=roll*(jackal?jackalFlank*(22.f+26.f*endOn):side);
  const float sy=1-std::max(0.f,drop)*(jackal?.07f:.025f);
  const float hip=jackal?-29.f:-44.f;
- const auto project=[&](float px,float py){
-  const auto q=rotated({px,(py-hip)*sy},rotation);
-  return Vector2{q.x,q.y+hip};
- };
- float fit=0;
- if(drop>0){
-  float bottom=-1e6f;
-  for(int p=0;p<6;p++){
-   const auto& k=parts[p];
-   const auto& rect=rig.partBox[p];
-   const auto support=[&](int frame){
-    float edge=-1e6f;
-    for(const auto point:art.contactContours[frame*6+p]){
-     Vector2 center{rect.x+point.x*rect.width,rect.y+point.y*rect.height};
-     center=rig.joints[p].map(center,false);
-     const auto offset=rotated({(center.x-k.pivot.x)*k.scaleX,(center.y-k.pivot.y)*k.scaleY},k.angle);
-     const auto q=project(k.pivot.x+k.shift.x-64+offset.x,k.pivot.y+k.shift.y-115+offset.y);
-     edge=std::max(edge,q.y);
-    }
-    return edge;
-   };
-   bottom=std::max(bottom,support(view.nearestSample()));
-  }
-  const float settle=std::clamp((drop-.08f)*1.39f,0.f,1.f);
-  fit=(1.4f-bottom)*(bottom>1.4f?1.f:settle*settle*(3-2*settle));
+ FallProjection projection{hip,rotation,sy};
+ if(fallen&&(drop>0||(!jackal&&death.blend>0))){
+  const float settle=jackal?std::clamp((drop-.08f)*1.39f,0.f,1.f):death.ground;
+  projection.fit=fitFallingBody(contactRig,projection,jackal?1.f:death.blend,settle);
  }
- const float size=scale*(jackal?1.f:1.05f);
+ const float size=scale*(jackal?1.f:ReaperScale);
  const bool armed=!jackal&&sickle.id;
- const float fold=fallen?curve(reaper_fold,fall):0;
- auto weapon=armed?weaponPose(rig,motion,fold):WeaponPose{};
- if(armed&&fallen){
-  const float groundAngle=(side>0?63.f:-117.f)-rotation;
-  const float settle=fold*std::max(0.f,drop);
-  weapon.angle+=std::remainder(groundAngle-weapon.angle,360.f)*settle;
+ const bool released=armed&&fallen&&fall>=ember::reaper_motion::SickleRelease;
+ const bool holding=armed&&!released;
+ const auto weapon=holding?weaponPose(contactRig,motion,death.blend):WeaponPose{};
+ const auto dropped=released?fallingSickle(view,state,attack,hit,side,motion,fall,contactRig,projection):
+                             DroppedSickle{};
+ std::array<Part,6> relaxedParts;
+ std::optional<turn_art::Rig> relaxedRig;
+ if(!jackal&&fall>=1){
+  const float settle=reaperLegSettlePhase(e);
+  if(settle>0){
+   // The body and sickle keep their contact registration while the legs relax.
+   relaxedParts=parts;
+   relaxReaperLegs(relaxedParts,view,ember::reaper_motion::sampleLegSettle(settle));
+   relaxedRig.emplace(art,view,0,relaxedParts,WHITE,side,attack);
+  }
  }
+ auto& rig=relaxedRig?*relaxedRig:contactRig;
+ const bool heldInRig=holding&&turn_art::filtered()&&art.signedEdges;
+ if(heldInRig)
+  rig.hold(sickle,weapon.palm,{Grip.x/96,Grip.y/96},{96*weapon.width,96*SickleHeightScale},weapon.angle);
  if(probe){
-  const auto point=rotated({(probe->x-x)/size,(probe->y-y)/size-fit-hip},-rotation);
-  const Vector2 q{point.x,point.y/sy+hip};
-  return opacity>=.43f&&(rig.hit(q)||(armed&&hitWeapon(weapon,q)));
+  if(opacity<.43f)return false;
+  const Vector2 screen{(probe->x-x)/size,(probe->y-y)/size};
+  if(released){
+   const float height=dropped.pose.palm.y+(screen.y-dropped.pose.palm.y)/dropped.squash;
+   if(hitWeapon(dropped.pose,{screen.x,height}))return true;
+  }
+  const auto q=projection.local(screen);
+  return rig.hit(q)||(holding&&hitWeapon(weapon,q));
  }
  rlPushMatrix();
- rlTranslatef(x,y+size*(hip+fit),0);
+ rlTranslatef(x,y+size*(hip+projection.fit),0);
  rlScalef(size,size,1);
  rlRotatef(rotation,0,0,1);
  rlScalef(1,sy,1);
  rlTranslatef(0,-hip,0);
  constexpr std::array<Vector2,4> rim{{{1.4f,0},{-1.4f,0},{0,1.4f},{0,-1.4f}}};
- if(armed&&outline.a&&!shadow)for(auto q:rim)paintWeapon(weapon,Fade(outline,opacity),true,false,q);
+ if(holding&&!heldInRig&&outline.a&&!shadow)for(auto q:rim)paintWeapon(weapon,Fade(outline,opacity),true,false,q);
  if(outline.a&&!shadow){
   rig.begin({},0);
   for(auto q:rim)rig.paint(true,Fade(outline,opacity),q.x,q.y);
   if(turn_art::filtered())EndShaderMode();
  }
- const unsigned char shade=static_cast<unsigned char>(255-std::max(0.f,drop)*18);
+ const unsigned char shade=static_cast<unsigned char>(255-std::max(0.f,drop)*(jackal?18:9));
  const Color tint=shadow?WHITE:Color{255,shade,shade,255};
- if(armed&&!weapon.front)paintWeapon(weapon,Fade(tint,opacity),false,shadow);
+ if(holding&&!heldInRig&&!weapon.front)paintWeapon(weapon,Fade(tint,opacity),false,shadow);
  rig.begin({},0);
  rig.paint(shadow,Fade(tint,opacity),0,0,shadow);
  if(turn_art::filtered())EndShaderMode();
- if(armed&&weapon.front)paintWeapon(weapon,Fade(tint,opacity),false,shadow);
+ if(holding&&!heldInRig&&weapon.front)paintWeapon(weapon,Fade(tint,opacity),false,shadow);
  rlPopMatrix();
+ if(released){
+  if(outline.a&&!shadow)for(auto q:rim)
+   paintDroppedSickle(dropped,{x+size*q.x,y+size*q.y},size,Fade(outline,opacity),true,false);
+  paintDroppedSickle(dropped,{x,y},size,Fade(tint,opacity),false,shadow);
+ }
  return false;
 }
 }

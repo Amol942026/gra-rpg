@@ -1,4 +1,5 @@
-﻿param([switch]$Test, [switch]$Player)
+﻿[CmdletBinding()]
+param([switch]$Test)
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 $compiler = Join-Path $PSScriptRoot 'tools\w64devkit\bin\g++.exe'
@@ -10,7 +11,7 @@ if (!(Test-Path -LiteralPath "$raylib\include\raylib.h")) {
     throw 'Brak raylib 5.5. Zobacz README.md.'
 }
 $env:PATH = (Split-Path -Parent $compiler) + ';' + $env:PATH
-$outputDirectory = if ($Player) { 'dist\player' } else { 'dist' }
+$outputDirectory = 'dist'
 New-Item -ItemType Directory -Force $outputDirectory | Out-Null
 $resourceObject = Join-Path $outputDirectory 'resources.o'
 $gameExecutable = Join-Path $outputDirectory 'Emberfall.exe'
@@ -18,7 +19,6 @@ $resourceCompiler = Join-Path (Split-Path -Parent $compiler) 'windres.exe'
 & $resourceCompiler '-Iresources' 'resources\Emberfall.rc' '-O' 'coff' '-o' $resourceObject
 if ($LASTEXITCODE -ne 0) { throw 'Kompilacja manifestu DPI nie powiodła się.' }
 $gameArguments = @('-std=c++17', '-O2', '-DNDEBUG', '-Wall', '-Wextra', '-Wno-misleading-indentation', '-Wno-narrowing', "-I$raylib\include", "-L$raylib\lib", '-lraylib', '-lopengl32', '-lgdi32', '-lwinmm', '-ldwmapi', '-ld3d11', '-ldxgi', '-ld3dcompiler', '-Wl,--wrap=glfwSwapBuffers', '-static')
-if ($Player) { $gameArguments += '-DEMBERFALL_PLAYER_BUILD=1' }
 & $compiler 'src\main.cpp' 'src\sync_present.cpp' $resourceObject @gameArguments '-mwindows' '-o' $gameExecutable
 if ($LASTEXITCODE -ne 0) { throw 'Kompilacja gry nie powiodła się.' }
 # Keep identical assets untouched, including PNGs held by a preview window.
@@ -34,8 +34,7 @@ foreach ($sourceAsset in Get-ChildItem -LiteralPath $sourceAssetRoot -File -Recu
 }
 # Like assets, identical documents may be mapped by an open preview. Leave them
 # in place instead of needlessly rewriting the same bytes and failing the build.
-$runtimeFiles = @('Uruchom.bat','LOOT.md','LICENSES.md')
-if (!$Player) { $runtimeFiles += 'README.md' }
+$runtimeFiles = @('Uruchom.bat','LOOT.md','LICENSES.md','README.md')
 foreach ($fileName in $runtimeFiles) {
     $targetFile = Join-Path $outputDirectory $fileName
     if ((Test-Path -LiteralPath $targetFile) -and
@@ -51,12 +50,5 @@ if ($Test) {
     if ($LASTEXITCODE -ne 0) { throw 'Kompilacja testów zapisu nie powiodła się.' }
     & '.\dist\save_game_tests.exe' '--no-audio'
     if ($LASTEXITCODE -ne 0) { throw 'Testy zapisu i odczytu nie przeszły.' }
-}
-if ($Player -and $Test) {
-    $qaExecutable = Join-Path $outputDirectory 'player_build_qa.exe'
-    & $compiler 'tests\player_build_qa.cpp' 'src\sync_present.cpp' $resourceObject @gameArguments '-o' $qaExecutable
-    if ($LASTEXITCODE -ne 0) { throw 'Kompilacja testu wersji gracza nie powiodła się.' }
-    & (Join-Path $PSScriptRoot $qaExecutable) '--no-audio'
-    if ($LASTEXITCODE -ne 0) { throw 'Test wersji gracza nie przeszedł.' }
 }
 Write-Host ('Gotowe: ' + $gameExecutable)

@@ -186,7 +186,7 @@ ZIP pozostaje kompilacją dla gracza bez trybu developerskiego. Postęp i złoto
 
 Archiwum **Emberfall-Windows-x64.zip** zawiera osobną wersję gry dla gracza: bez przycisku DEV, menu F3, zestawu testowego i wyboru miejsca startu przez parametry. Parametry sesji developerskich i diagnostyki scen nie są obsługiwane w tej kompilacji. Gra rozpoczyna się menu głównym, a Nowa gra uruchamia pełny prolog. ZIP zawiera wyłącznie grę, zasoby, zwykły launcher oraz instrukcje i licencje.
 
-**Lokalne kompilacje.** Zwykłe uruchomienie **build.ps1** buduje wersję developerską w **dist/Emberfall.exe**. **build.ps1 -Player** buduje wersję gracza w **dist/player/Emberfall.exe**. **build.ps1 -Player -Test** sprawdza mechanikę gry i interfejs wersji gracza bez dźwięku.
+Powyższy opis dotyczy archiwalnego wydania. Aktualną wersję ze zwykłą rozgrywką i trybem deweloperskim uruchamia `dist/Emberfall.exe`.
 
 ## Wersja 0.40 — cienie sylwetek
 
@@ -568,6 +568,8 @@ Bohater, szlam, wilk, szkielet i strażnik mają po osiem kierunków: E, SE, S, 
 ## Uruchomienie
 
 Kliknij dwukrotnie **Uruchom.bat** w Eksploratorze Windows albo uruchom **dist/Emberfall.exe**. Gra zaczyna się menu głównym. Nowa gra uruchamia prolog; Enter, Spacja lub LPM przyspieszają dialog, przycisk POMIŃ go pomija, a Escape otwiera menu pauzy. Folder `assets` musi pozostać obok pliku EXE. Cały folder `dist` jest przenośną wersją gry.
+
+`build.ps1` buduje jeden plik `dist/Emberfall.exe`. W menu głównym wybierz **Nowa gra** albo **Wczytaj grę**, aby zagrać w zwykłą wyprawę. Przycisk **Tryb deweloperski** i skrót **F3** otwierają wybór sesji testowej w tym samym programie.
 
 ## Sterowanie
 

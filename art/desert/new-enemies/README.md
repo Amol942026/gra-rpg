@@ -4,6 +4,8 @@ Szakal ma płowy grzbiet, ciemną pręgę, płócienną obrożę i przysiad prze
 
 Bazowe widoki z GPT Image zapisano w plikach `*-source.png`. Sześcioczęściowy atlas kierunków Żniwiarza oraz starszy atlas awaryjny Szakala odtwarza `tools/media/desert_enemy_paint.py`. Pliki `*-krita.png` są eksportami pociągnięć pędzla Krity.
 
+Eksport Żniwiarza używa OpenCV do dopasowania obrysów i detali pancerza. `parts-0.png` przechowuje bazowy rysunek RGBA. `turn-ink.png` zawiera kolor z dopasowanych ujęć i obrys, a `turn-flow.png` prowadzi obrys między sąsiednimi klatkami.
+
 Ilustracja szakala pochodzi z [GPT Image](jackal-repaint-prompt.md). Projekt Krity z przypiętym retuszem to `C:/AI2D/sprites/szakal-od-nowa-20261123/Szakal-wydmowy-final.kra`. W grze `jackal_rig.hpp` rzutuje wspólny obrys tułowia i stawy z płynnego kąta. Każda łapa ma własną fazę, a zgięcie wynika z dwóch odcinków o stałych długościach. Spoczynek, ugryzienie i upadek korzystają ze wspólnych mocowań części. Ten sam rysunek służy do koloru, cienia i wskazywania kursorem.
 
 `tools/media/jackal_painted_rig.py` zapisuje krzywe w Synfigu i wyodrębnia malowane tekstury w atlasie `rig-paint.png` o wymiarach 480 × 1280. Łopatki i biodra przenoszą ciężar w fazach podparcia swoich łap, a grzbiet przekazuje ten ruch do szyi i nasady ogona. Gdy postać skręca, tekstury klatki i zadu pojawiają się na odpowiednim końcu tułowia. Każdą łapę pokrywa ciągła siatka tekstury z zaokrąglonym przejściem przez staw. Projekt Synfiga jest w `C:/AI2D/animations/szakal-tulow-chod-20261124`, a dwadzieścia cztery warstwy tekstur w `C:/AI2D/sprites/szakal-spojne-czesci-20261124/Szakal-czesci.kra`.
@@ -27,3 +29,9 @@ W każdym z sześciu sektorów pustyni znajduje się po jednym osobniku każdego
 ## Sierp Szklanego Żniwiarza
 
 Ilustracja 2D i krzywe barku, łokcia, nadgarstka oraz obrotu ostrza są w projekcie `C:/AI2D/animations/zniwiarz-sierp-20261124/Sierp-Szklanego-Zniwiarza.blend`. Generator `tools/media/reaper_sickle_blender.py` eksportuje obraz RGBA i próbki krzywych używane przez renderer. Sierp nadal obraca się wokół punktu chwytu. Ostrze lekko kołysze się przy chodzie, obraca w trakcie zamachu i wyhamowuje po cięciu.
+
+## Materiały i postawa Szklanego Żniwiarza
+
+Arkusz `reaper-materials.png` powstał z polecenia przygotowania czterech próbek materiału na bazie istniejącej ilustracji. Sunburst przygotował matowe pustynne szkło o cienkich żyłkach, młotkowany brąz z patyną, ciemny granatowy splot i przetartą skórę. Lokalny Real-ESRGAN w ComfyUI przeliczył próbki, a Krita dodała refleksy na hełmie i napierśniku. `tools/media/reaper_refinish.py` zachowuje przezroczystość i kotwice atlasu.
+
+Projekt `C:/AI2D/animations/zniwiarz-material-i-ruch-20261124/Szklany-Zniwiarz.blend` zawiera płaskie warstwy i krzywe chodu, cięcia i upadku. `tools/media/reaper_blender.py` eksportuje krzywe do renderera. Po zetknięciu z ziemią klatka upadku staje się pozą ciała. Próbki zweryfikowano dla ośmiu kierunków i obu stron upadku.

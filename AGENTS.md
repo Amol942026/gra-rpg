@@ -14,7 +14,7 @@ Edytuj ten plik po polsku. Przed zadaniem związanym z mediami przeczytaj `art/p
 - Raportuj osobno czas ukończenia renderu. Ukryte lub zminimalizowane okno oraz eksport w 60 Hz nie dowodzą wyświetlanego FPS ani płynności na pierwszym planie.
 - Podglądy przeciwników przechwytuj z renderera gry w scenie rozgrywki. Łącz animacje w jeden krótki, wykadrowany obraz bez napisów, w najmniejszym czytelnym rozmiarze. Zmianę kierunku pokazuj podczas chodu.
 - AVG CyberCapture analizuje przy uruchomieniu świeże kompilacje gry i pomocnicze EXE. Grupuj zmiany przed kompilacją, korzystaj z istniejących narzędzi QA i łącz powiązane próby w jednym uruchomieniu, gdy dany test na to pozwala. Przy ostrzeżeniu sprawdź nazwę zdarzenia i ścieżkę w dzienniku AVG.
-- Nie twórz ani nie aktualizuj `Emberfall-Windows-x64.zip` i `Emberfall-DEV-Windows-x64.zip`. Testuj gotowe kompilacje z `dist/` i `dist/player/`. Pomocnicze EXE i kopie robocze do testów przygotowuj w `dist/qa-local/`. Raporty i podglądy zapisuj w `C:\AI2D\pipeline\runs`.
+- Nie twórz ani nie aktualizuj `Emberfall-Windows-x64.zip` i `Emberfall-DEV-Windows-x64.zip`. Buduj i testuj jeden plik `dist/Emberfall.exe` ze zwykłą rozgrywką i wbudowanym trybem deweloperskim. Pomocnicze EXE i kopie robocze do testów przygotowuj w `dist/qa-local/`. Raporty i podglądy zapisuj w `C:\AI2D\pipeline\runs`.
 
 ## Produkcja mediów
 

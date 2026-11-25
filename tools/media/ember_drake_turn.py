@@ -368,7 +368,7 @@ def skull_between(a, b, first, nextkey, t):
     return sharp
 
 
-def inbetween(a, b, t, film=None, *, retain_detail=False, one_paint=False):
+def inbetween(a, b, t, film=None, *, retain_detail=False, one_paint=False, whole_paint=False):
     def lerp(left, right):
         return (1 - t) * left + t * right
 
@@ -384,13 +384,22 @@ def inbetween(a, b, t, film=None, *, retain_detail=False, one_paint=False):
             + u * np.interp(v, SAMPLES, ref.right - ref.left)[:, None]
         )
         y = np.broadcast_to(np.interp(v, SAMPLES, ref.y)[:, None], u.shape)
-        return sample(ref.color, x, y), sample(ref.distance, x, y)
+        return x, y, sample(ref.distance, x, y)
 
-    rgb0, sd0 = reference(a)
-    rgb1, sd1 = reference(b)
+    x0, y0, sd0 = reference(a)
+    x1, y1, sd1 = reference(b)
     distance = lerp(sd0, sd1)
     alpha = np.clip(distance + 0.5, 0, 1)
     alpha[(GRID_Y < height[0]) | (GRID_Y > height[-1])] = 0
+    if whole_paint:
+        # Keep every mark on a part in the same painting and resample its
+        # pigment once. The signed silhouette still follows both views.
+        donor, x, y = (a, x0, y0) if t < .5 else (b, x1, y1)
+        rgb = np.stack([nd.map_coordinates(donor.color[..., index], [y, x], order=3, mode="nearest")
+                        for index in range(3)], axis=-1)
+        return Image.fromarray(np.uint8(np.rint(np.dstack((np.clip(rgb, 0, 255), 255 * alpha)))))
+    rgb0 = sample(a.color, x0, y0)
+    rgb1 = sample(b.color, x1, y1)
     if one_paint:
         # The contour travels continuously. A moving seam reveals one set of
         # brush marks at a time, so fur, ears and straps never have two edges.

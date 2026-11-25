@@ -138,11 +138,10 @@ inline void contactShadow(Vector2 p,Rectangle base,float coverage){
  DrawTriangleFan(fan.data(),int(fan.size()),Fade(WHITE,coverage));
 }
 inline Rectangle paintedGroundFootprint(const Enemy& e){
- if(newDesertEnemy(e.type)){
-  const bool jackal=e.type==DuneJackalType;
-  const float half=jackal?28.f:37.f;
-  const float offset=jackal?0.f:float(e.deathScreenSide())*15.f;
-  return {offset-half,-7,2*half,13};
+ if(e.type==DuneJackalType)return {-28,-7,56,13};
+ if(e.type==GlassReaperType){
+  const float offset=float(e.deathScreenSide())*9.f;
+  return {offset-38.f,-17,76,20};
  }
  if(e.type==CinderhornType)return regional_enemy_art::cinderhornFootprint(e);
  if(e.type==SporekinType)return regional_enemy_art::sporekinFootprint(e);

@@ -1,7 +1,8 @@
-param([switch]$NoBuild)
+param([switch]$NoBuild, [string]$LegacyDirectory)
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
-if (!$NoBuild) { & (Join-Path $PSScriptRoot 'build.ps1') -Player }
+if (!$LegacyDirectory) { throw 'Podaj katalog archiwalnej kompilacji przez -LegacyDirectory.' }
+$legacy = (Resolve-Path -LiteralPath $LegacyDirectory).Path
 Add-Type -AssemblyName System.IO.Compression,System.IO.Compression.FileSystem
 $packagePath = Join-Path $PSScriptRoot 'Emberfall-Windows-x64.zip'
 $temporaryPackage = Join-Path $PSScriptRoot ('Emberfall-package-' + [guid]::NewGuid().ToString('N') + '.zip')
@@ -9,12 +10,11 @@ $versionManifest = [IO.File]::ReadAllText((Join-Path $PSScriptRoot 'resources/Em
 $releaseVersion = [regex]::Match($versionManifest, 'assemblyIdentity version="([0-9]+\.[0-9]+)').Groups[1].Value
 $archive = [IO.Compression.ZipFile]::Open($temporaryPackage, [IO.Compression.ZipArchiveMode]::Create)
 try {
-    foreach ($entry in @(@('dist/player/Emberfall.exe','Emberfall.exe'), @('Uruchom.bat','Uruchom.bat'), @('LICENSES.md','LICENSES.md'), @('LOOT.md','LOOT.md'))) {
-        [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $PSScriptRoot $entry[0]), ('Emberfall/' + $entry[1]), [IO.Compression.CompressionLevel]::Optimal) | Out-Null
+    foreach ($file in @('Emberfall.exe','Uruchom.bat','LICENSES.md','LOOT.md')) {
+        [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, (Join-Path $legacy $file), ('Emberfall/' + $file), [IO.Compression.CompressionLevel]::Optimal) | Out-Null
     }
-    # Package the canonical asset manifest. A reused build directory may also
-    # contain obsolete diagnostic receipts or resources from earlier versions.
-    $assetDirectory = Join-Path $PSScriptRoot 'assets'
+    # Use the assets shipped with the historical executable.
+    $assetDirectory = Join-Path $legacy 'assets'
     foreach ($assetFile in Get-ChildItem -LiteralPath $assetDirectory -File -Recurse) {
         $relativeAsset = $assetFile.FullName.Substring($assetDirectory.Length + 1).Replace('\','/')
         [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $assetFile.FullName, ('Emberfall/assets/' + $relativeAsset), [IO.Compression.CompressionLevel]::Optimal) | Out-Null
