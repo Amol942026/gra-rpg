@@ -328,7 +328,7 @@ void makeArt(){
  if(plants.data)UnloadImage(plants);
  tree_wind::init();forest_water::init();wind_post::load();
  world_shadows::init();
- hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();menu_scene::load();
+ hero_paint::load();creature_paint::load();actor_art::prepareCreatureBatch();actor_art::initEdgeCoverage();menu_scene::load();
  inventory_icons::bakeWeapons();
  inventory_icons::bakeGear();
  forest_bush_art::load();forest_tree_art::load();desert_plant_art::load();guardian_art::load();
@@ -1204,7 +1204,7 @@ int main(int argc,char**argv) {
     enemy_death_fx::unload();
     spell_art::unload();inventory_icons::unload();world_shadows::unload();actor_art::finishShadowFrame();fallen_art::unload();unloadHoverArt();unloadSkillArt();unloadTowerRoomArt();tower_stairs::unload();tower_furniture::unload();desert_art::unload();sand_prison::unload();treasure_art::unload();
     hero_portrait::unload();regional_enemy_art::unload();volcano_actors::unload();volcano_art::unload();caldera_attack_art::unload();scarab_wave_art::unload();fountain_art::unload();guardian_art::unload();menu_scene::unload();actor_art::unloadCreatureBatch();hero_paint::unload();creature_paint::unload();for(auto& t:propArt)UnloadRenderTexture(t);
-    power_fx::unload();wind_post::unload();forest_water::unload();forest_cliff::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
+    actor_art::unloadEdgeCoverage();power_fx::unload();wind_post::unload();forest_water::unload();forest_cliff::unload();terrain_surface::unload();unloadPausedWorld();UnloadRenderTexture(terrain);UnloadTexture(minimapTerrain);if(canvas.id)UnloadRenderTexture(canvas);if(worldCanvas.id)UnloadRenderTexture(worldCanvas);
     if(wildMushrooms.id)UnloadTexture(wildMushrooms);
     typography.clear();CloseWindow();return deathPassed&&worldMotionPassed&&labelsPassed&&swingPassed&&tradePassed&&shadowPassed&&desertPassed&&towerArtPassed&&stairsPassed&&combatPassed&&developerPassed&&towerFloorsPassed&&towerPassed&&introPassed&&audioPassed&&inspectionPassed&&crowdPassed&&progressionPassed&&controlsPassed&&corpsePassed&&patrolPassed&&environmentPassed&&presentationPassed&&motionPassed&&pointerPassed&&performancePassed&&refreshPassed&&forestPassed&&graphicsPassed&&mushroomPassed&&bowPassed&&skillsPassed?0:2;
 }

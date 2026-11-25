@@ -47,11 +47,11 @@ constexpr float GuardianPunchWindup=36.f/60,GuardianPunchRecovery=22.f/60;
 constexpr float TreantSwingWindup=47.f/60,TreantSwingRecovery=25.f/60;
 inline constexpr float meleeWindup(int type){
  return type==3?GuardianPunchWindup:type==7?TreantSwingWindup:type==FireImpType?.66f:
-        type==DuneJackalType?.54f:type==GlassReaperType?.68f:.42f;
+        type==DuneJackalType?.47f:type==GlassReaperType?.68f:.42f;
 }
 inline constexpr float meleeRecovery(int type){
  return type==3?GuardianPunchRecovery:type==7?TreantSwingRecovery:
-        type==DuneJackalType?.34f:type==GlassReaperType?.42f:.22f;
+        type==DuneJackalType?.30f:type==GlassReaperType?.42f:.22f;
 }
 constexpr float BoarChargeFirstDelay=.65f,BoarChargeCooldown=4.5f,BoarChargeWindup=.55f;
 constexpr float BoarChargeDuration=.7f,BoarChargeRecovery=.6f,BoarChargeSpeed=9.5f;
@@ -705,7 +705,7 @@ struct Game {
   }else{
    e.deathAction=e.type==BoarType?e.boarVisualPhase():newDesertEnemy(e.type)?e.volcanoAction():
                  regionalEnemy(e.type)?e.abilityAction():e.heavyMeleePhase();
-   e.deathSpecial=e.type==9&&e.abilityBusy()?e.abilityAge:e.boulderProgress();
+   e.deathSpecial=(e.type==CopperScarabType||e.type==SandCobraType)&&e.abilityBusy()?e.abilityAge:e.boulderProgress();
   }
   if(e.type==CinderhornType&&e.chargeBusy()){
    using namespace forest_boar_motion;

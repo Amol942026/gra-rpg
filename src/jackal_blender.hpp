@@ -13,10 +13,12 @@ struct Page {
 };
 inline std::array<Page,Facings/PerPage> pages{};
 inline Shader silhouette{};
+namespace turn { inline void load();inline void unload(); }
 
 inline bool ready(){return pages.back().texture.id!=0;}
 
 inline void unload(){
+ turn::unload();
  for(auto& page:pages){
   if(page.texture.id)UnloadTexture(page.texture);
   page={};
@@ -53,15 +55,18 @@ uniform sampler2D texture0;
 out vec4 finalColor;
 void main(){finalColor=vec4(fragColor.rgb,fragColor.a*texture(texture0,fragTexCoord).a);}
 )GLSL");
+ turn::load();
 }
 
 struct Frame {int facing,index;};
-inline Frame select(const Enemy& enemy,float fall){
- const auto& a=fall>=0&&enemy.deathMotion.facingInitialized?enemy.deathMotion:enemy.animation;
+inline float facingCoordinate(const AnimationState& a){
  const float heading=a.facingInitialized?a.facingAngle:int(a.direction)*PI/4;
  const auto direction=actorFacing(heading);
- const float yaw=std::atan2(direction.y,direction.x);
- const int facing=(int(std::lround(yaw*Facings/(2*PI)))+Facings)%Facings;
+ return std::atan2(direction.y,direction.x)*Facings/(2*PI);
+}
+inline Frame select(const Enemy& enemy,float fall){
+ const auto& a=fall>=0&&enemy.deathMotion.facingInitialized?enemy.deathMotion:enemy.animation;
+ const int facing=(int(std::lround(facingCoordinate(a)))+Facings)%Facings;
  const auto scrub=[](float t,int length){
   return int(std::lround(std::clamp(t,0.f,1.f)*(length-1)));
  };
@@ -89,6 +94,8 @@ inline float coverage(const Page& page,Rectangle source,float x,float y){
  return high+(low-high)*v;
 }
 
+#include "jackal_blender_turn.hpp"
+
 inline bool draw(const Enemy& enemy,float x,float y,Color outline,const Vector2* probe,
                  bool shadow,float scale,float opacity,float fall){
  if(opacity<=0)return false;
@@ -96,6 +103,14 @@ inline bool draw(const Enemy& enemy,float x,float y,Color outline,const Vector2*
  const auto& page=pages[frame.facing/PerPage];
  const auto source=tile(frame);
  const Rectangle dest{x-AnchorX*scale,y-AnchorY*scale,Width*scale,Height*scale};
+ if(!shadow&&frame.index<Walk&&turn::ready()){
+  const auto pair=turn::between(enemy.animation,frame.index);
+  if(pair.amount>.001f&&pair.amount<.999f){
+   if(probe)return opacity>=.43f&&turn::cover(pair,{(probe->x-dest.x)/scale,(probe->y-dest.y)/scale})>=105;
+   turn::draw(pair,dest,outline,opacity);
+   return false;
+  }
+ }
  if(probe)return opacity>=.43f&&coverage(page,source,(probe->x-dest.x)/scale,(probe->y-dest.y)/scale)>=105;
  if(outline.a&&!shadow&&silhouette.id&&silhouette.id!=rlGetShaderIdDefault()){
   Color color=outline;color.a=static_cast<unsigned char>(outline.a*opacity);

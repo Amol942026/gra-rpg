@@ -42,11 +42,13 @@ def pulse(phase, start, peak, hold, end):
 
 
 def step_phase(phase, fore, side):
-    return (phase+(.5 if side > 0 else 0)+(.75 if fore else 0))%1
+    # On each side the hind paw lands before the front paw. The pairs take
+    # turns carrying the weight halfway around the cycle.
+    return (phase+(.5 if side > 0 else 0)+(.79 if fore else 0))%1
 
 
 def foot_loading(phase, fore, side):
-    return pulse(step_phase(phase,fore,side),0,.087,.125,.30)
+    return pulse(step_phase(phase,fore,side),0,.13,.19,.40)
 
 
 def angle_distance(a, b):
@@ -172,17 +174,19 @@ class Pose:
         self.neck_arc = (3.6*head_snap-2.8*self.load,4.2*self.load-4.9*head_lift-2.2*head_snap)
         self.step_angle = math.tau*phase
         weight = 2*self.step_angle
-        self.hip = .92*math.sin(weight-.36)+.14*math.sin(weight*2-.9) if self.walking else 0
-        self.shoulder = 1.14*math.sin(weight+2.20)+.12*math.sin(weight*2+.6) if self.walking else 0
+        self.hip = .72*math.sin(weight-.38) if self.walking else 0
+        self.shoulder = .92*math.sin(weight+1.83) if self.walking else 0
         # Keep the supporting toe at ground height while the body settles
         # onto each paw. The shoulders take their load after the hips.
         self.hip_load = 0
         if self.walking:
             self.hip_load = sum(foot_loading(phase,False,side) for side in (-1,1))
             shoulder_load = sum(foot_loading(phase,True,side) for side in (-1,1))
-            self.hip += 2.95*self.hip_load
-            self.shoulder += 2.25*shoulder_load
-        self.head_float = .65*self.shoulder+.48*math.sin(weight+1.32) if self.walking else 0
+            self.hip += 2.0*self.hip_load
+            self.shoulder += 1.8*shoulder_load
+            self.head_reach += .76*math.sin(weight-.83)
+            self.head_pitch += .052*math.sin(weight-1.12)
+        self.head_float = .40*self.shoulder+.47*math.sin(weight+.59) if self.walking else 0
         self.hip += 2.2*self.load-.75*self.release+1.4*self.hind_fold*(1-self.drop)
         self.shoulder += 3.65*self.load-1.65*self.release+2.1*self.brace
         self.shoulder += 4.4*self.fore_fold*(1-self.drop)
@@ -211,15 +215,22 @@ def coordinates(sample, count):
     return sample/(count-1)
 
 
-def weighted_joint(start, wrist, upper, lower, sign):
-    dx, dy = wrist[0]-start[0], wrist[1]-start[1]
-    length = max(.01, math.hypot(dx, dy))
-    distance = min(upper+lower-.05, max(abs(upper-lower)+.05, length))
-    ux, uy = dx/length, dy/length
+def leg_joint(start, ankle, fore):
+    # Retain the endpoint: a planted paw is stationary in world space.
+    # The shoulder or haunch absorbs reach changes near full extension.
+    upper, lower = (16.2,20.3) if fore else (13.8,16.4)
+    maximum_bend = 53 if fore else 76
+    dx, dy = ankle[0]-start[0], ankle[1]-start[1]
+    distance = max(.01,math.hypot(dx,dy))
+    def chord(degrees):
+        return math.sqrt(upper*upper+lower*lower+2*upper*lower*math.cos(math.radians(degrees)))
+    reach = min(chord(7),max(chord(maximum_bend),distance))
+    ratio = distance/reach
+    upper,lower = upper*ratio,lower*ratio
+    ux, uy = dx/distance, dy/distance
     along = (upper*upper - lower*lower + distance*distance)/(2*distance)
-    outward = math.sqrt(max(0, upper*upper-along*along))*sign
-    return (start[0]+ux*along-uy*outward, start[1]+uy*along+ux*outward), (
-        start[0]+ux*distance, start[1]+uy*distance)
+    outward = math.sqrt(max(0,upper*upper-along*along))*(-1 if fore else 1)
+    return start[0]+ux*along-uy*outward,start[1]+uy*along+ux*outward
 
 
 def step(phase, fore, side):
@@ -227,14 +238,16 @@ def step(phase, fore, side):
     stance = .64 if fore else .62
     amplitude = WALK_DISTANCE*stance*.5
     if phase < stance:
-        return amplitude-WALK_DISTANCE*phase, 0
+        return amplitude-WALK_DISTANCE*phase,0.,0.
     flight = (phase-stance)/(1-stance)
     # Match the planted foot's speed at both ends of the swing.
     tangent = -WALK_DISTANCE*(1-stance)
     stride = (lerp(-amplitude,amplitude,smooth(0,1,flight))
               + tangent*flight*(1-flight)*(1-2*flight))
-    lift = math.sin(math.pi*flight)**2 * lerp(1.13,.87,flight)*(7.3 if fore else 6.8)
-    return stride,lift
+    arc = math.sin(math.pi*flight)**2
+    lift = arc*lerp(1.18,.82,flight)*(6.4 if fore else 6.8)
+    pitch = .43*arc*math.cos(math.pi*flight)
+    return stride,lift,pitch
 
 
 def torso_slice(torso, x, inset):
@@ -305,29 +318,38 @@ def bite_paw(phase, fore, side):
             3.55*push+.75*gather, .68*push-.30*reset)
 
 
-def part_leg(out, p, fore, side, torso):
+def leg_axes(p, fore, side):
     along, across, high = p.sockets(fore, side)
     transfer = p.shoulder if fore else p.hip
-    stride, lift = step(p.phase, fore, side) if p.walking else (0,0)
-    ankle_lift, pitch = 0,0
+    stride,lift,pitch,ankle_load = 0.,0.,0.,0.
     if p.walking:
-        ankle_lift = (1.15 if fore else 1.55)*foot_loading(p.phase,fore,side)
+        stride,lift,pitch = step(p.phase,fore,side)
+        ankle_load = (.68 if fore else .95)*foot_loading(p.phase,fore,side)
     if p.biting:
-        stride,lift,ankle_lift,pitch = bite_paw(p.phase,fore,side)
+        stride,lift,ankle_load,pitch = bite_paw(p.phase,fore,side)
     fold = p.fore_fold if fore else p.hind_fold
-    foot_along = along+stride+(1 if fore else -3)
+    foot_along = along+stride+(.45 if fore else -1.85)
     foot_along = lerp(foot_along,along+(-9 if fore else 10),fold)
     lift += fold*(6+3*side*p.side)
-    foot_across = across+side*(1.2+min(2.1,.17*lift) if p.biting else 1.2)+p.side*p.roll*5
+    foot_across = across+side*((1.3 if fore else .78)+min(1.18,.14*lift))+p.side*p.roll*5
+    # Hind limbs have a raised hock behind the pads. The front carpus stays
+    # lower, while the scapula rotates a little to gain forward reach.
+    socket = along+(2.65 if fore else 2.3)*stride/17.3 if p.walking else along
     actual_height = high-transfer-4*p.crouch+p.air
-    flex, wrist = weighted_joint((along,actual_height),(foot_along-2.2,4.3+lift+ankle_lift),
-                                 16.6 if fore else 19,22.8 if fore else 22.5,
-                                 -1 if fore else 1)
-    joint = leg_socket(torso,p,fore,along,across,high,transfer)
-    mid = p.point(flex[0],lerp(across,foot_across,.45),flex[1],p.air)
-    ankle = p.point(wrist[0],foot_across,wrist[1],p.air)
-    toe_x, toe_y = p.ground(wrist[0]+2.8+p.drive,foot_across)
-    toe = (toe_x+5*p.side*p.roll,toe_y-lift-1.2+fold*(4+1.8*side*p.side))
+    back = (1.5 if fore else 5.8)+1.35*pitch
+    height = (3.7 if fore else 10.15)+lift+ankle_load+1.6*pitch
+    ankle = (foot_along-back,height)
+    knee = leg_joint((socket,actual_height),ankle,fore)
+    return (socket,across,high,transfer,actual_height),knee,ankle,(foot_along,foot_across,lift),pitch,fold
+
+
+def part_leg(out, p, fore, side, torso):
+    (socket,across,high,transfer,_),knee,wr,(along,lateral,lift),pitch,fold = leg_axes(p,fore,side)
+    joint = leg_socket(torso,p,fore,socket,across,high,transfer)
+    mid = p.point(knee[0],lerp(across,lateral,.42),knee[1],p.air)
+    ankle = p.point(wr[0],lateral,wr[1],p.air)
+    toe_x,toe_y = p.ground(along+p.drive,lateral)
+    toe = (toe_x+5*p.side*p.roll,toe_y-lift-1.2-p.air+fold*(4+1.8*side*p.side))
     # As the flank lands, the bent elbows and the hocks lie alongside it.
     # Give the two pairs different reach so they remain legible in the corpse.
     near = side*p.side
@@ -340,7 +362,8 @@ def part_leg(out, p, fore, side, torso):
     mid = (lerp(mid[0],joint[0]+elbow[0],lay),lerp(mid[1],rest_y+elbow[1]-.8,lay))
     toe = (lerp(toe[0],joint[0]+laid_foot[0],lay),lerp(toe[1],rest_y+laid_foot[1]+1.6,lay))
     ankle = (lerp(ankle[0],toe[0]-p.c*3.1,lay),lerp(ankle[1],toe[1]-2.3,lay))
-    cap = (toe[0]+1.8*p.c*math.cos(pitch),toe[1]+.8*p.s+1.8*math.sin(pitch))
+    pad = p.ground(2.15*math.cos(pitch),0)
+    cap = (toe[0]+pad[0],toe[1]+pad[1]+1.8*math.sin(pitch))
     upper_blend = .33 if fore else lerp(.44,.33,p.roll)
     knots = [
         (*joint,4.55 if fore else lerp(4.85,5.35,p.roll)),

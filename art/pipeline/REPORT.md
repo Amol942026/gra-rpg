@@ -1,5 +1,55 @@
 # Raport konfiguracji — 19.10.2026
 
+**25.11.2026 — szybsze ugryzienie Szakala wydmowego.**
+
+Przygotowanie ugryzienia trwa 0,47 s, a powrót do pozycji bojowej 0,30 s. Łączny czas skrócił się o 110 ms. Przy kroku symulacji 60 Hz trafienie nastąpiło po 29 krokach, w pozie kontaktu szczęk, a powrót zajął 18 kroków. Test potwierdził jednorazowe obrażenia i wyświetlenie wszystkich 15 póz ugryzienia.
+
+Przechwycenie z renderera gry trwało 1,31 s. W ukrytym oknie bez dźwięku sprawdzono też 180 klatek po starcie na pustyni. Wdrożony `dist/Emberfall.exe` ma sumę SHA-256 zgodną z plikiem użytym w teście. [Podgląd](C:/AI2D/pipeline/runs/szakal-szybszy-atak-20261125/szakal-szybszy-atak.webp) · [Raport](C:/AI2D/pipeline/runs/szakal-szybszy-atak-20261125/report.json)
+
+**25.11.2026 — płynniejsze skręcanie Szakala wydmowego.**
+
+Renderer wyznacza widok pośredni z dwóch sąsiednich klatek tej samej fazy chodu. Mapa przesunięć jest wyliczona z odpowiadających sobie punktów płaskiego modelu Blendera. Dzięki temu położenie łap zmienia się razem z obrysem. Zaznaczanie kursorem używa tego samego obrysu.
+
+W czterech próbach największa zmiana maski między kolejnymi klatkami zmalała o 89–90%. Sprawdzono między innymi przejście między stronami atlasu i zawinięcie kierunku przez 360°. Zaznaczanie zgodziło się z odczytem GPU w 66 660 próbkach. Wydobycie geometrii w Blenderze trwało 4,81 s, przechwycenie z gry 1,54 s. [Podgląd](C:/AI2D/pipeline/runs/szakal-plynny-skret-20261125/szakal-plynny-skret.webp) · [Pomiary](C:/AI2D/pipeline/runs/szakal-plynny-skret-20261125/preview.json)
+
+Test grafiki zaliczył 1487 kontroli w ukrytym oknie i bez dźwięku. Sumy SHA-256 wdrożonego pliku `Emberfall.exe` i mapy ruchu zgadzają się ze sprawdzonymi plikami. [Raport wdrożenia](C:/AI2D/pipeline/runs/szakal-plynny-skret-20261125/report.json)
+
+**25.11.2026 — naturalniejszy chód Szakala wydmowego.**
+
+Punkt podparcia łapy i rozwiązanie stawu są wyznaczane osobno. Przedni łokieć zgina się o maksymalnie 53° w cyklu chodu zamiast 101°. Tylna kończyna ma wyżej ustawiony staw skokowy, a przednie łapy podążają za tylnymi po tej samej stronie z płynniejszym przeniesieniem obciążenia. W 1814 próbkach podparcia współrzędna łapy względem podłoża pozostawała stała wzdłuż kierunku ruchu.
+
+Blender przez MCP wyrenderował 12 atlasów w 57,09 s. Sprawdzono 3072 klatki RGBA i 1152 pozy chodu w 48 kierunkach. Gra potwierdziła obrót podczas chodu, trafienie ugryzieniem i osiadanie ciała po upadku. Przechwycenie scen z gry trwało 6,57 s. Test grafiki zaliczył 1487 kontroli w ukrytym oknie i bez dźwięku. [Podgląd](C:/AI2D/pipeline/runs/szakal-naturalny-chod-20261125/szakal-wydmowy.webp) · [Projekt Blender](C:/AI2D/animations/szakal-naturalny-chod-20261125/Szakal-wydmowy.blend) · [Raport](C:/AI2D/pipeline/runs/szakal-naturalny-chod-20261125/report.json)
+
+**25.11.2026 — model głowy i kaptura Kobry piaskowej.**
+
+Głowa ma zwężający się profil pyska z tarczkami czołowymi, nozdrzami, osobną żuchwą oraz bursztynowymi oczami z pionową źrenicą. Łukowaty kaptur ma ciągły obrys, żebra i dwa odrębne malowania. Nowy atlas 512 × 512 zawiera przód i tył kaptura, tarczki głowy i żuchwę, z ośmiopikselowym marginesem wokół pól.
+
+Przechwycenie 282 klatek z gry trwało 4,75 s. Bezstratny eksport i kontrola zgodności pikseli trwały 14,48 s. Podgląd obejmuje pełzanie, obrót o 360°, wyrzut jadu i upadek. [Podgląd](C:/AI2D/pipeline/runs/kobra-model-20261125/kobra-piaskowa.webp) · [Źródło Krity](C:/AI2D/sprites/cobra-anatomy-20261125/kobra-glowa-kaptur.kra) · [Weryfikacja atlasu](C:/AI2D/pipeline/runs/kobra-model-20261125/compare.json)
+
+Pustynny poziom zaliczył 152 kontrole w ukrytym oknie i bez dźwięku. Wdrożona kompilacja i obie tekstury mają sumy SHA-256 zgodne z testowanymi plikami. [Test pustyni](C:/AI2D/pipeline/runs/kobra-model-20261125/desert-tests.txt) · [Wdrożenie](C:/AI2D/pipeline/runs/kobra-model-20261125/deployment.json)
+
+**25.11.2026 — relief i ostrość łusek Kobry piaskowej.**
+
+Tekstura 512 × 512 ma osobne warstwy cieni między łuskami, refleksów i tarczek brzusznych. W Kricie zagęszczono tarczki w zakresie UV faktycznie widocznym na wydłużonej szyi. Mapy normalnych i odbić z Laigtera wypalono w gotowym kolorze. Tekstura korzysta z mipmap i filtrowania anizotropowego 4×. W próbce szyi z silnika wzrost lokalnego kontrastu między rzędami wyniósł 66%, przy pikselowo identycznej masce wygładzonego obrysu.
+
+Test pustyni zaliczył 152 kontrole w ukrytym oknie i bez dźwięku. Przechwycenie 282 klatek trwało 5,42 s. Bezstratny eksport i kontrola pikseli trwały 15,56 s. [Podgląd](C:/AI2D/pipeline/runs/kobra-relief-20261125/kobra-piaskowa.webp) · [Źródło Krity](C:/AI2D/sprites/cobra-relief-release-20261125/kobra-relief-final.kra) · [Wypalenie światła](C:/AI2D/pipeline/runs/kobra-relief-20261125/relief-release.json) · [Odbiór](C:/AI2D/pipeline/runs/kobra-relief-20261125/deployment.json)
+
+**25.11.2026 — tekstura i wygładzenie obrysu Kobry piaskowej.**
+
+Przywrócono zachodzące na siebie łuski z oryginalnego materiału ComfyUI, z korektą barwy, pasm grzbietu i tarczek brzusznych w Kricie. Głowa i kaptur korzystają z tej samej tekstury 256 × 256. Rozłożenie wzoru uwzględnia wydłużoną szyję, a dziewięć poziomów mipmap ogranicza migotanie łusek przy obrocie. Renderer pobiera cztery próbki na piksel w obszarze kobry. Test brzegów wykazał 140 pikseli o częściowej przezroczystości przy zachowaniu powierzchni sylwetki.
+
+Przechwycenie 282 klatek trwało 6,03 s, a bezstratny eksport z porównaniem pikseli 16,22 s. [Podgląd](C:/AI2D/pipeline/runs/kobra-luski-20261125/kobra-piaskowa.webp) · [Raport przechwycenia](C:/AI2D/pipeline/runs/kobra-luski-20261125/report.json) · [Źródło Krity](C:/AI2D/sprites/cobra-scales-fit-20261125/kobra-skora.kra)
+
+Test pustyni ukończył 152 kontrole w ukrytym oknie i bez dźwięku. Sumy SHA-256 wdrożonej gry i tekstury zgadzają się ze sprawdzoną kompilacją i eksportem. [Test pustyni](C:/AI2D/pipeline/runs/kobra-luski-20261125/desert-tests.txt) · [Wdrożenie](C:/AI2D/pipeline/runs/kobra-luski-20261125/deployment.json)
+
+**25.11.2026 — ostrość i ruch Kobry piaskowej.**
+
+Łuski mają większy, czytelniejszy wzór namalowany w Kricie na bazie dotychczasowego materiału z ComfyUI. Ciągła siatka prowadzi teksturę od szyi do końca ogona. Układ współrzędnych tekstury zachowuje orientację, gdy szyja przechodzi przez pion. Krzywe opracowane w Blenderze ograniczają wychylenie głowy przy pełzaniu i łączą pozycje cofnięcia, wyrzutu jadu i powrotu.
+
+Przechwycenie 282 klatek z renderera gry trwało 4,82 s. Bezstratny eksport i porównanie z oryginalnymi pikselami trwały 15,92 s. Próba obejmowała pełny obrót podczas pełzania, trzy pociski jadu, trafienie oraz upadek i spoczynek. Pozostałe pola atlasu mają te same piksele. [Podgląd](C:/AI2D/pipeline/runs/kobra-ostrosc-20261125/kobra-piaskowa.webp) · [Raport przechwycenia](C:/AI2D/pipeline/runs/kobra-ostrosc-20261125/report.json) · [Krzywe Blendera](C:/AI2D/animations/cobra-motion-20261125/kobra-krzywe.blend) · [Projekt Krity](C:/AI2D/sprites/cobra-skin-20261125/kobra-luski.kra)
+
+Kompilacja zaliczyła 152 kontrole pustynnego poziomu. Wdrożony `dist/Emberfall.exe` ukończył 180 klatek w trybie deweloperskim na pustyni z ukrytym oknem i bez urządzenia audio. [Testy pustyni](C:/AI2D/pipeline/runs/kobra-ostrosc-20261125/desert-tests.txt) · [Wdrożenie](C:/AI2D/pipeline/runs/kobra-ostrosc-20261125/deployment.json)
+
 **24.11.2026 — MCP z Blenderem 5.3.0.**
 
 Zarejestrowano lokalny serwer `blender` w Codex. Osobna instancja Codex App Server odkryła narzędzia, a klient STDIO sprawdził dodatek i odczytał scenę. Przez MCP utworzono płaski emblemat z czterech warstw, dodano klatki kluczowe, zapisano i ponownie otwarto BLEND. Podgląd otrzymano przez `look`. Dwie klatki PNG RGBA potwierdziły ruch o 84 px i zachowanie przezroczystości. Ponowny render po otwarciu projektu trwał 0,60 s i dał piksele identyczne z pierwotnym eksportem. Dodatek działa na `127.0.0.1:9876` z wyłączoną telemetrią. [Próba MCP](C:/AI2D/pipeline/runs/blender-mcp-20261124-172642/report.json) · [Projekt testowy](C:/AI2D/pipeline/runs/blender-mcp-20261124-172642/Test-Blender-MCP.blend)
