@@ -109,14 +109,14 @@ void buildDesert(){
  addRealmDecorations(WorldLocation::Desert);
 }
 bool activateField(WorldLocation next){
- if(next!=WorldLocation::Forest&&next!=WorldLocation::Desert&&next!=WorldLocation::Volcano)return false;
+ if(next!=WorldLocation::Forest&&next!=WorldLocation::Desert&&next!=WorldLocation::Volcano&&next!=WorldLocation::Swamp)return false;
  if(location!=next){settleEnemyDeaths();cancelBoulderAttacks();}
  if(next!=fieldLocation){
   auto& saved=storedField(fieldLocation);
   saved.enemies=std::move(enemies);saved.props=std::move(props);saved.forage=std::move(forage);
   auto& restore=storedField(next);
   enemies=std::move(restore.enemies);props=std::move(restore.props);forage=std::move(restore.forage);
-  fieldLocation=next;if(next==WorldLocation::Desert&&!desertCreated)buildDesert();if(next==WorldLocation::Volcano&&!volcanoCreated)buildVolcano();
+  fieldLocation=next;if(next==WorldLocation::Desert&&!desertCreated)buildDesert();if(next==WorldLocation::Volcano&&!volcanoCreated)buildVolcano();if(next==WorldLocation::Swamp&&!marshCreated)buildMarsh();
  }
  if(location!=next){clearSandPrison();duneDust.clear();closeCorpse();}location=next;towerFloor=0;refreshVolcanoScenery();return true;
 }

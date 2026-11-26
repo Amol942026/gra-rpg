@@ -47,11 +47,11 @@ constexpr float GuardianPunchWindup=36.f/60,GuardianPunchRecovery=22.f/60;
 constexpr float TreantSwingWindup=47.f/60,TreantSwingRecovery=25.f/60;
 inline constexpr float meleeWindup(int type){
  return type==3?GuardianPunchWindup:type==7?TreantSwingWindup:type==FireImpType?.66f:
-        type==DuneJackalType?.47f:type==GlassReaperType?.68f:.42f;
+        type==DuneJackalType?.47f:type==GlassReaperType?.68f:type==BellKeeper?.78f:type==MarshLeech?.24f:.42f;
 }
 inline constexpr float meleeRecovery(int type){
  return type==3?GuardianPunchRecovery:type==7?TreantSwingRecovery:
-        type==DuneJackalType?.30f:type==GlassReaperType?.42f:.22f;
+        type==DuneJackalType?.30f:type==GlassReaperType?.42f:type==BellKeeper?.47f:.22f;
 }
 constexpr float BoarChargeFirstDelay=.65f,BoarChargeCooldown=4.5f,BoarChargeWindup=.55f;
 constexpr float BoarChargeDuration=.7f,BoarChargeRecovery=.6f,BoarChargeSpeed=9.5f;
@@ -106,7 +106,8 @@ inline constexpr float EnemyHitRecovery=.18f;
 #include "tower_layout.hpp"
 #include "desert_layout.hpp"
 #include "volcano_layout.hpp"
-enum class WorldLocation {Forest,MageTower,Desert,Volcano};
+enum class WorldLocation {Forest,MageTower,Desert,Volcano,Swamp};
+#include "marsh_layout.hpp"
 #include "field_sites.hpp"
 #include "treasure.hpp"
 #include "terrain_height.hpp"
@@ -240,10 +241,10 @@ struct Effect { V pos; std::string text; float life; int color; bool damageNumbe
 enum class ImpactMaterial {Spark,Stone,Bark,Slime,Bone,Sand,Shell,Ember,Fur,Armor};
 inline constexpr ImpactMaterial impactMaterial(int type){
  switch(type){
- case 0:return ImpactMaterial::Slime;
+ case MarshLeech:case PeatToad:case 0:return ImpactMaterial::Slime;
  case 2:return ImpactMaterial::Bone;
  case 3:case 12:case 16:return ImpactMaterial::Stone;
- case 7:case SporekinType:return ImpactMaterial::Bark;
+ case BellKeeper:case 7:case SporekinType:return ImpactMaterial::Bark;
  case DesertBossType:case DuneEyeType:return ImpactMaterial::Sand;
  case 5:case 8:case 9:case 10:case 13:return ImpactMaterial::Shell;
  case 14:case 15:case 17:case 18:case CinderhornType:return ImpactMaterial::Ember;
@@ -400,7 +401,8 @@ struct Game {
  WorldLocation location=WorldLocation::Forest;DawnQuest dawnQuest=DawnQuest::Seeking;
  int towerFloor=0,towerRuneMask=0;std::int64_t gold=0;
  bool towerReturnPending=false,desertBossDead=false,desertCreated=false;int collectedFragments=0;
- WorldLocation fieldLocation=WorldLocation::Forest;FieldState forestState,desertState,volcanoState;
+ WorldLocation fieldLocation=WorldLocation::Forest;FieldState forestState,desertState,volcanoState,marshState;
+ bool marshCreated=false,marshBossDead=false;
  bool volcanoCreated=false,volcanoBossDead=false;
  int volcanoSceneryVersion=0;
  std::vector<CinderBolt> cinders;std::vector<LavaFissure> fissures;
@@ -412,19 +414,21 @@ struct Game {
  // Read-only narrative facts: defeating a guardian and taking its shard are
  // separate events. Inspect both the active field and saved off-screen corpses.
  bool dawnShardUnclaimed(WorldLocation realm)const{
-  const auto& bodies=realm==fieldLocation?enemies:realm==WorldLocation::Forest?forestState.enemies:realm==WorldLocation::Desert?desertState.enemies:volcanoState.enemies;
-  int guardian=realm==WorldLocation::Forest?3:realm==WorldLocation::Desert?DesertBossType:VolcanoBossType;
+  const auto& bodies=realm==fieldLocation?enemies:realm==WorldLocation::Forest?forestState.enemies:realm==WorldLocation::Desert?desertState.enemies:realm==WorldLocation::Swamp?marshState.enemies:volcanoState.enemies;
+  int guardian=realm==WorldLocation::Forest?3:realm==WorldLocation::Desert?DesertBossType:realm==WorldLocation::Swamp?BellKeeper:VolcanoBossType;
   for(const auto& body:bodies)if(body.type==guardian&&!body.alive)for(const auto& value:body.loot)if(value.kind==Kind::DawnShard&&!value.empty())return true;
   return false;
  }
- bool recoveredDawnPart(int index)const{return index>=0&&index<dawnFragments()&&(index>=3||!dawnShardUnclaimed(index==0?WorldLocation::Forest:index==1?WorldLocation::Desert:WorldLocation::Volcano));}
+ bool recoveredDawnPart(int index)const{return index>=0&&index<dawnFragments()&&(index>=4||!dawnShardUnclaimed(index==0?WorldLocation::Forest:index==1?WorldLocation::Desert:index==2?WorldLocation::Volcano:WorldLocation::Swamp));}
  int recoveredDawnFragments()const{int count=0;for(int i=0;i<dawnFragments();i++)count+=recoveredDawnPart(i);return count;}
  bool inDesert()const{return location==WorldLocation::Desert;}
+ bool inMarsh()const{return location==WorldLocation::Swamp;}
  bool inVolcano()const{return location==WorldLocation::Volcano;}
  const char* currentRegion()const{return fieldRegion(location,player).name;}
  #include "realm_decorations.hpp"
  #include "volcano_system.hpp"
  #include "desert_system.hpp"
+ #include "marsh_system.hpp"
  #include "regional_enemy_spawns.hpp"
  bool mageReachable()const{return inTower()&&towerFloor==0&&!dead()&&!allocationRequired&&!storyBlocked()&&distance(player,MagePosition)<=MageTalkRange;}
  bool takeTowerReturn(){bool pending=towerReturnPending;towerReturnPending=false;return pending;}
@@ -583,10 +587,10 @@ struct Game {
  bool newDawnFragment(Slot source,Item value)const{
   const Enemy* body=source.place==Place::Corpse?findCorpse(source.owner):nullptr;
   return value.kind==Kind::DawnShard&&!value.empty()&&body&&
-   ((location==WorldLocation::Forest&&body->type==3&&dawnFragments()<1)||(inDesert()&&body->type==DesertBossType&&dawnFragments()<2)||(inVolcano()&&body->type==VolcanoBossType&&dawnFragments()<3));
+   ((location==WorldLocation::Forest&&body->type==3&&dawnFragments()<1)||(inDesert()&&body->type==DesertBossType&&dawnFragments()<2)||(inVolcano()&&body->type==VolcanoBossType&&dawnFragments()<3)||(inMarsh()&&body->type==BellKeeper&&dawnFragments()<4));
  }
  void completeDawnFragmentPickup(){
-  collectedFragments=inVolcano()?3:inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inVolcano()?"Trzecia część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");
+  collectedFragments=inMarsh()?4:inVolcano()?3:inDesert()?2:1;dawnQuest=DawnQuest::Returning;towerReturnPending=true;cancelBow();say(inMarsh()?"Czwarta część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży…":inVolcano()?"Trzecia część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":inDesert()?"Druga część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...":"Pierwsza część Serca Świtu odzyskana. Eldrin przywołuje cię do wieży...");
  }
  bool transfer(Slot from,Slot to){
   if(dead()||allocationRequired||storyBlocked()||(from.place==to.place&&from.index==to.index&&from.owner==to.owner)||to.place==Place::Corpse||to.place==Place::Forage||to.place==Place::Chest)return false;
@@ -674,7 +678,7 @@ struct Game {
   for(int i=0;i<int(bag.size());i++)if(bag[i].kind==k&&!bag[i].empty())return use({Place::Bag,i});
   say("Brak mikstury w plecaku.");return false;
  }
- bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inVolcano()&&(volcanoLava(p)||nearVolcanoFountain(p)))return false;if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<MapWalkMin||p.y<MapWalkMin||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
+ bool walkable(V p)const{if(inTower())return towerWalkable(p,towerFloor);if(inMarsh()&&marsh::deep(p))return false;if(inVolcano()&&(volcanoLava(p)||nearVolcanoFountain(p)))return false;if(inDesert()&&(desertWater(p)||nearDesertFountain(p)))return false;if(p.x<MapWalkMin||p.y<MapWalkMin||p.x>MapWalkMax||p.y>MapWalkMax)return false;for(const auto& c:chests)if(c.location==location&&distance(p,c.pos)<ChestRadius)return false;for(auto&q:props){float radius=propRadius(q.type);if(!outsideCircleBounds(p-q.pos,radius)&&distance(p,q.pos)<radius)return false;}return true;}
  float elevation(V p)const{return terrain_height::height(location,p);}
  float surfaceDistance(V a,V b)const{return terrain_height::surfaceDistance(location,a,b);}
  void move(V delta,bool turn=true,terrain_height::Travel travel=terrain_height::Travel::Surface){
@@ -787,6 +791,7 @@ struct Game {
   if(testSummon(e.id)){for(auto& drop:e.loot)if(drop.kind==Kind::DawnShard)drop={};}
   else if(e.type==3){bossDead=true;say("Kamienny Strażnik pokonany! PPM na ciele: łup i część Serca Świtu.");}
   else if(e.type==DesertBossType){if(!desertBossDead)merchantArrows=MerchantArrowCapacity;desertBossDead=true;say("Żywa Wydma rozsypała się! PPM: łup i druga część Serca Świtu.");}
+  else if(e.type==BellKeeper){marshBossDead=true;say("Dzwonnik Topieli pokonany. Zbierz czwartą część Serca z jego szczątków.");}
   else if(e.type==VolcanoBossType){volcanoBossDead=true;say("Varkhor pokonany! PPM na ciele: trzecia część Serca Świtu.");}
   while(xp>=experienceForLevel(level)){xp-=experienceForLevel(level);level++;attributePoints+=PointsPerLevel;skillPoints+=SkillPointsPerLevel;allocationRequired=true;cancelBow();hp=float(maxHp());mana=float(maxMana());manaRegenTime=0;sound(Cue::LevelUp,player);effects.push_back({player,"NOWY POZIOM",2,3});}
  }
@@ -880,7 +885,7 @@ struct Game {
     e.recoil=e.recoil*std::exp(-10.f*step);
     if(e.chargeBusy())advanceCharge(e,step,heroFrom+(heroEnd-heroFrom)*(float(sub)/steps),heroFrom+(heroEnd-heroFrom)*(float(sub+1)/steps),wasRolling,rollElapsed+sub*step);
     else e.pos=e.pos+terrain_height::step(location,e.pos,(desired[i]+e.recoil)*step);
-    if(inVolcano()&&volcanoLava(e.pos,e.radius()))e.pos=beforeStep;
+    if((inMarsh()&&marsh::deep(e.pos,e.radius()))||(inVolcano()&&volcanoLava(e.pos,e.radius())))e.pos=beforeStep;
     constrainEnemy(e);
    }
    // Resolve the whole crowd, including stationary/winding-up enemies. Recheck

@@ -11,9 +11,9 @@ using Track=std::array<Mark,6>;
 #include "generated/enemy_death_data.hpp"
 
 namespace ember::enemy_death {
-static_assert(std::size(data::tracks)==EnemyTypeCount);
+static_assert(std::size(data::tracks)==PeatToad);
 inline constexpr float durationScale(int type){return type==DuneJackalType?.70f:1.f;}
-inline float duration(int type){return data::tracks[type].back().frame*durationScale(type)/data::framesPerSecond;}
+inline float duration(int type){return data::tracks[marshMotionFamily(type)].back().frame*durationScale(type)/data::framesPerSecond;}
 inline float endTime(int type){
  if(type==StoneGuardianType)return data::guardianSmoke.back().frame/data::framesPerSecond;
  return type==VolcanoBossType?float(varkhor_ash_motion::AirFrames)/varkhor_ash_motion::FramesPerSecond:duration(type);
@@ -29,9 +29,9 @@ inline Key sampleTrack(const Track& track,float frame){
  return {a.collapse+(b.collapse-a.collapse)*t,a.recoil+(b.recoil-a.recoil)*t,a.settle+(b.settle-a.settle)*t};
 }
 inline Key sample(int type,float progress){
- const auto& track=data::tracks[type];
+ const auto& track=data::tracks[marshMotionFamily(type)];
  return sampleTrack(track,progress*track.back().frame);
 }
-inline float groundContact(int type){const auto& track=data::tracks[type];return float(track[3].frame)/track.back().frame;}
-inline float groundContactTime(int type){return data::tracks[type][3].frame*durationScale(type)/data::framesPerSecond;}
+inline float groundContact(int type){const auto& track=data::tracks[marshMotionFamily(type)];return float(track[3].frame)/track.back().frame;}
+inline float groundContactTime(int type){return data::tracks[marshMotionFamily(type)][3].frame*durationScale(type)/data::framesPerSecond;}
 }

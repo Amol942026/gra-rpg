@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\mokradla-20261125-2236\\torf.json",
+  "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-torf",
+  "files": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-torf\\torf.png",
+      "sha256": "a5ad3d9b80985c6909eed377cd0178e220c492d413ba0a8d140f67ba20bc7f75",
+      "bytes": 309534,
+      "role": "peat-detail"
+    }
+  ],
+  "provenance": {
+    "recipe": "C:/AI2D/pipeline/runs/mokradla-20261125-2236/comfy-peat.py",
+    "source": "Emberfall forest-ground i forest-path",
+    "workflow": "Lokalne węzły ComfyUI UpscaleModelLoader i ImageUpscaleWithModel, RealESRGAN_x2plus"
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false
+}

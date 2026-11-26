@@ -35,10 +35,10 @@ void rollTests() {
     Game runWall=emptyArena();runWall.props.push_back({{15.7f,15},0,1});
     for(int i=0;i<20;i++)runWall.update(.05f,{1,0},false,true);
     check(runWall.walkable(runWall.player)&&runWall.player.x<15.7f,"running respects terrain collisions");
-    const float speeds[]={1.85f,2.6f,1.85f,1.35f,2.25f,2.8f,1.85f,1.45f,2.35f,2.1f,2.7f,1.45f,1.9f,2.9f,2.35f,1.75f,1.65f,2.65f,1.3f,2.2f,1.65f,1.95f,2.65f,1.78f};
+    const float speeds[]={1.85f,2.6f,1.85f,1.35f,2.25f,2.8f,1.85f,1.45f,2.35f,2.1f,2.7f,1.45f,1.9f,2.9f,2.35f,1.75f,1.65f,2.65f,1.3f,2.2f,1.65f,1.95f,2.65f,1.78f,2.15f,2.85f,2.05f,1.38f};
     static_assert(sizeof(speeds)/sizeof(speeds[0])==EnemyTypeCount);
     for(int type=0;type<EnemyTypeCount;type++){
-        Game g=emptyArena();g.player={20,15};
+        Game g=emptyArena();g.player={21,15};
         g.enemies.push_back({0,type,{15,15},{15,15},100,100});
         g.enemies.back().boulderCd=BoulderCooldown; // Isolate chase speed from the boss's stationary throw windup.
         g.enemies.back().boarChargeCd=BoarChargeCooldown; // Measure ordinary chase, not the new rush.
@@ -72,7 +72,7 @@ void rollTests() {
     check(!control.rolling()&&!control.startRoll({1,0}),"death stops roll and prevents another");
 
     for(int type=0;type<PropTypeCount;type++){
-        Game wall=emptyArena();wall.player={14,15};wall.props.push_back({{15,15},type,1});
+        Game wall=emptyArena();wall.player={15-std::max(1.f,propRadius(type)+.3f),15};wall.props.push_back({{15,15},type,1});
         wall.startRoll({1,0});bool valid=true;
         for(int i=0;i<8;i++){wall.update(.05f,{},false);valid=valid&&wall.walkable(wall.player);}
         check(valid&&wall.player.x<15,"roll cannot tunnel through any scenery type");

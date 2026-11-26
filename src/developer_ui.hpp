@@ -7,8 +7,8 @@ void drawDeveloperSummonHud(){}
 bool developerSummonHudHit(Vector2){return false;}
 bool clickDeveloperSummonHud(){return false;}
 #else
-constexpr WorldLocation DeveloperTabs[]={WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano,WorldLocation::MageTower};
-constexpr const char* DeveloperTabNames[]={"Wielka Knieja","Morze Piasków","Kaldera Popiołu","Wieża Eldrina"};
+constexpr WorldLocation DeveloperTabs[]={WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano,WorldLocation::Swamp,WorldLocation::MageTower};
+constexpr const char* DeveloperTabNames[]={"Wielka Knieja","Morze Piasków","Kaldera Popiołu","Mokradła","Wieża Eldrina"};
 WorldLocation developerTab=WorldLocation::Forest;
 bool developerSummonMenu=false;
 int developerSummonPage=0;
@@ -31,7 +31,7 @@ constexpr Rectangle developerSummonHudRect(){
 Rectangle developerSummonCard(int slot){return {180.f+(slot%3)*367,222.f+(slot/3)*51,346,44};}
 Rectangle developerSummonPageButton(bool next){return {next?969.f:180.f,659,133,34};}
 Rectangle developerSummonReturn(){return {533.5f,677,373,42};}
-Rectangle developerTabRect(int index){return {180.f+index*274,194,258,38};}
+Rectangle developerTabRect(int index){return {180.f+index*218,194,207,38};}
 Rectangle developerCard(int index){
  if(DeveloperDestinations[index].location!=developerTab)return {-1,-1,0,0};
  int visible=0;

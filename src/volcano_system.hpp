@@ -1,5 +1,5 @@
 // Included inside Game; native third-field state and local combat.
-FieldState& storedField(WorldLocation realm){return realm==WorldLocation::Volcano?volcanoState:realm==WorldLocation::Desert?desertState:forestState;}
+FieldState& storedField(WorldLocation realm){return realm==WorldLocation::Swamp?marshState:realm==WorldLocation::Volcano?volcanoState:realm==WorldLocation::Desert?desertState:forestState;}
 static bool retiredVolcanoBridgeProp(const Prop& p){
  // These two silhouettes covered the deck of the first crossing.
  return (p.type==17&&distance(p.pos,{30.58011f,50.88041f})<.02f)||

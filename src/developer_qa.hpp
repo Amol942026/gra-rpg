@@ -62,10 +62,11 @@ bool runDeveloperQA(){
  const auto decorationStart=GetTime();
  for(const auto& group:{std::pair{WorldLocation::Forest,ForestDecorationStart},
                         std::pair{WorldLocation::Desert,DesertDecorationStart},
-                        std::pair{WorldLocation::Volcano,VolcanoDecorationStart}}){
+                        std::pair{WorldLocation::Volcano,VolcanoDecorationStart},
+                        std::pair{WorldLocation::Swamp,MarshPropStart}}){
   game=Game{};game.activateField(group.first);game.messageTime=0;
   welcome=paused=help=false;
-  const int limit=group.first==WorldLocation::Volcano?PropTypeCount:group.second+DecorationsPerRealm;
+  const int limit=group.first==WorldLocation::Swamp?PropTypeCount:group.first==WorldLocation::Volcano?MarshPropStart:group.second+DecorationsPerRealm;
   for(int type=group.second;type<limit;type++){
    const auto found=std::find_if(game.props.begin(),game.props.end(),[&](const Prop& prop){return prop.type==type;});
    check(found!=game.props.end(),"new decoration is present in its native realm");

@@ -101,25 +101,43 @@ int main(int argc,char** argv){
         <<",\"min_height\":"<<lowHeight<<",\"max_height\":"<<highHeight
         <<",\"width_east\":"<<east<<",\"width_west\":"<<west<<"}";
  }
- int jointFailures=0,jointChecks=0;
+ int jointFailures=0,jointChecks=0,visibleSeamVertices=0;
  {
   using namespace volcano_actors::cinderhorn_turn;
-  volcano_actors::cinderhorn_turn::Mesh body;
+  volcano_actors::cinderhorn_turn::Mesh body,leg;
+  LegSeams seams;
+  auto shares=[](const volcano_actors::cinderhorn_turn::Mesh& mesh,const volcano_actors::cinderhorn_turn::Vertex& root){
+   const auto equal=[&](const volcano_actors::cinderhorn_turn::Vertex& v){
+    return v.point.x==root.point.x&&v.point.y==root.point.y&&v.depth==root.depth&&
+           v.uv.x==root.uv.x&&v.uv.y==root.uv.y&&ColorIsEqual(v.color,root.color);
+   };
+   return std::any_of(mesh.triangles.begin(),mesh.triangles.end(),[&](const auto& triangle){
+    return equal(triangle.a)||equal(triangle.b)||equal(triangle.c);
+   });
+  };
   for(int mode=0;mode<3;mode++)for(int degree=0;degree<360;degree+=15)for(int sample=0;sample<20;sample++){
    Enemy e=enemy(degree,mode!=1);
    e.animation.phase=sample/20.f;
    if(mode==1)e.boarWindup=CinderhornCharge.windup*(1-e.animation.phase);
    if(mode==2)e.boarRush=.1f;
    const auto r=pose(e);
-   body.triangles.clear();drawBody(body,r);
+   body.triangles.clear();drawBody(body,r,seams);
    const auto check=[&](Vector2 socket){++jointChecks;jointFailures+=!body.includes(socket);};
-   for(int side:{-1,1})for(const bool fore:{false,true})check(legSocket(r,fore,side).screen);
+   if(sample%4==0)for(int side:{-1,1})for(bool fore:{false,true}){
+    const auto& seam=seams[legIndex(fore,side)];
+    leg.triangles.clear();
+    drawLeg(leg,r,fore,side,seam);
+    for(const auto& root:seam){
+     ++jointChecks;jointFailures+=!shares(leg,root.coat);
+     visibleSeamVertices+=shares(body,root.coat);
+    }
+   }
    check(r.face(PollForward,0,PollHeight).screen);
    check(r.face(43.3f,0,46.3f).screen);
   }
  }
- failures+=jointFailures;
- report<<",\n  \"joint_checks\":"<<jointChecks<<",\n  \"joint_failures\":"<<jointFailures;
+ failures+=jointFailures+(visibleSeamVertices<jointChecks/4);
+ report<<",\n  \"joint_checks\":"<<jointChecks<<",\n  \"visible_shared_vertices\":"<<visibleSeamVertices<<",\n  \"joint_failures\":"<<jointFailures;
  int hoofChecks=0;
  float greatestHoofDrift=0;
  for(int direction=0;direction<360;direction+=45){

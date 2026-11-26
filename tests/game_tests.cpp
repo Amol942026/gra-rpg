@@ -125,7 +125,7 @@ int main(){
   for(int type=0;type<EnemyTypeCount;type++){
    Game chase;chase.props.clear();chase.enemies.clear();
    chase.enemies.push_back({0,type,{15,15},{15,15},100,100});
-   chase.player=V{15,15}+normalized(directions[d])*3;
+   chase.player=V{15,15}+normalized(directions[d])*std::max(3.f,enemyInfo(type).attackReach+.8f);
    chase.update(.05f,{},false);
    check(chase.enemies[0].animation.moving&&int(chase.enemies[0].animation.direction)==d,"every enemy type faces its actual chase direction");
    chase.player={1.6f,1.6f};chase.update(.05f,{},false);

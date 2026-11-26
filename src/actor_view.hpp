@@ -91,6 +91,21 @@ void monster(Enemy& e,float x,float y) {
         }
         if(sand)ellipseOutline(origin.x,origin.y,6+radius,(6+radius)*.34f,Fade(rgb(98,225,207),(1-age)*.73f));
     }
+    if(e.type==MarshLight&&(e.windup>0||e.strike>0)&&!actor_art::shadowBuilding){
+        Vector2 flame{x,y-49},target=screen(game.player);target.y-=38;
+        const Color glow=rgb(186,213,123);
+        if(e.windup>0){float t=1-e.windup/meleeWindup(e.type);DrawCircleV(flame,3+6*t,Fade(glow,.25f+t*.4f));}
+        else{
+            const float t=std::clamp(1-e.strike/meleeRecovery(e.type),0.f,1.f);
+            const float dx=target.x-flame.x,dy=target.y-flame.y;
+            const float limit=std::min(1.f,190.f/std::max(1.f,std::hypot(dx,dy)));
+            Vector2 prev=flame;
+            for(int i=1;i<=10;i++){
+                const float u=i*.1f;Vector2 next{flame.x+dx*limit*u,flame.y+dy*limit*u+5*std::sin(11*u-7*t)*std::sin(PI*u)};
+                DrawLineEx(prev,next,2.5f,Fade(glow,(1-t)*.86f));prev=next;
+            }
+        }
+    }
     guardian_art::held(e);
     if(e.hp<e.maxHp&&!underMouse)enemyVitals(e,{x,y},false);
 }

@@ -31,7 +31,7 @@ bool runShadowQA(){
   AnimationState state;state.direction=Direction(d);state.moving=true;state.phase=.17f;
   auto cast=[&]{
    auto draw=[&]{actor_art::draw(species,135,85,1,state,0,species==0,species==0);};
-   if(regionalEnemy(species-1))world_shadows::billboard(85,draw);
+   if(regionalEnemy(species-1)||marshEnemy(species-1))world_shadows::billboard(85,draw);
    else draw();
   };
   begin();shadow_geometry::beginBatch();cast();shadow_geometry::flushBatch(world_shadows::maskShader);Image im=end();valid(im);
@@ -69,13 +69,50 @@ bool runShadowQA(){
   for(int y=4;y<source.height-4;y+=11)for(int x=4;x<source.width-4;x+=11)if(art[y*source.width+x].a>240){
    float sy=(y+.5f)*230/source.height,sx=(x+.5f)*180/source.width;
    Vector2 base=screen(prop.pos);float bend=tree_wind::moves(type)?treeShift(prop,sy,game.time):0;
-   Vector2 q=world_shadows::projected({base.x+(sx-90+bend)*size,base.y+(sy-208)*size},base.y);bool found=false;
+   Vector2 q=world_shadows::projected({base.x+(sx-90+bend)*size,base.y+(sy-208)*size},base.y);
+   if(type>=MarshPropStart){
+    auto point=marsh_footprints::castPoint(marsh_footprints::profiles[type-MarshPropStart],sx,sy);
+    q={base.x+(point.x-90)*size,base.y+(point.y-208)*size};
+   }
+   bool found=false;
    if(q.x<2||q.x>=Width-2||q.y<2||q.y>=Height-2)continue;
    for(int dy=-1;dy<=1;dy++)for(int dx=-1;dx<=1;dx++)found|=shadow[(int(q.y)+dy)*Width+int(q.x)+dx].a>150;
    compared++;matched+=found;
   }
   check(compared>8&&matched>=compared*.98f,"object shadow follows the actual alpha silhouette and matching wind deformation");
   UnloadImageColors(art);UnloadImageColors(shadow);UnloadImage(source);UnloadImage(im);
+ }
+ {
+  Image contact=LoadImageFromTexture(marsh_art::contacts);
+  for(int id=0;id<int(std::size(marsh_footprints::profiles));id++){
+   const auto& profile=marsh_footprints::profiles[id];bool meets=contact.data!=nullptr;
+   for(int i=0;i<profile.count&&meets;i++){
+    const auto& foot=profile.feet[i];const auto q=marsh_footprints::castPoint(profile,foot.x,foot.y);
+    const int x=int((id%marsh_art::ContactColumns*marsh_art::ContactWidth+foot.x-marsh_art::ContactLeft)*marsh_art::ContactDensity);
+    const int y=int((id/marsh_art::ContactColumns*marsh_art::ContactHeight+foot.y-marsh_art::ContactTop)*marsh_art::ContactDensity);
+    meets=q.x==foot.x&&q.y==foot.y&&GetImageColor(contact,x,y).a>=170;
+   }
+   check(meets,"marsh contact and cast shadow meet at every painted bearing point");
+  }
+  if(contact.data)UnloadImage(contact);
+ }
+ for(int frame=0;frame<treasure_art::States;frame++){
+  const int id=frame?marsh_footprints::OpenChest:marsh_footprints::ClosedChest;
+  constexpr Vector2 base{170,130};
+  begin();
+  world_shadows::marshSprite(id,treasure_art::atlas,{float(frame*256),768,256,256},
+                            {-38,25,256,256},base,treasure_art::Scale);
+  Image im=end();valid(im);
+  bool touches=true;const auto& p=marsh_footprints::profiles[id];
+  for(int i=0;i<p.count;i++){
+   const int x=int(base.x+(p.feet[i].x-90)*treasure_art::Scale);
+   const int y=int(base.y+(p.feet[i].y-208)*treasure_art::Scale);
+   bool ink=false;
+   for(int dy=-3;dy<=2;dy++)for(int dx=-2;dx<=2;dx++)ink|=GetImageColor(im,x+dx,y+dy).a>200;
+   touches&=ink;
+  }
+  check(touches,"real marsh chest shadow meets its base in the closed, open and emptied frames");
+  UnloadImage(im);
  }
  Prop windTree{toWorld({120,85}),4,1};game.time=0;begin();world_shadows::prop(windTree);Image first=end();
  game.time=2.5f;begin();world_shadows::prop(windTree);Image second=end();

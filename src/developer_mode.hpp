@@ -23,6 +23,7 @@ inline constexpr auto DeveloperDestinations=[] {
 inline constexpr int DeveloperDestinationCount=int(DeveloperDestinations.size());
 inline int developerDestination(std::string id){
  for(char& c:id)c=char(std::tolower(static_cast<unsigned char>(c)));
+ if(id=="bagna")id="swamp";
  if(id=="tower")id="tower-1";if(id=="boss")id="ruins";
  if(id=="kaldera"||id=="caldera")id="volcano";if(id=="varkhor")id="volcano-boss";
  for(int i=0;i<DeveloperDestinationCount;i++)if(id==DeveloperDestinations[i].id)return i;return -1;
@@ -165,7 +166,7 @@ inline bool developerStart(Game& current,int destination,bool reset,unsigned see
  if(destination<0||destination>=DeveloperDestinationCount)return false;
  Game candidate=reset?Game(seed):current;const auto& target=DeveloperDestinations[destination];
  if(target.location==WorldLocation::MageTower){candidate.enterMageTower();candidate.towerFloor=target.floor;candidate.dawnQuest=DawnQuest::AtTower;}
- else{candidate.activateField(target.location);candidate.towerFloor=0;if(target.location==WorldLocation::Desert||target.location==WorldLocation::Volcano){candidate.collectedFragments=std::max(target.location==WorldLocation::Volcano?2:1,candidate.collectedFragments);candidate.dawnQuest=DawnQuest::AtTower;if(target.location==WorldLocation::Volcano)candidate.desertBossDead=true;}if(candidate.storyBlocked())candidate.dawnQuest=DawnQuest::AtTower;}
+ else{candidate.activateField(target.location);candidate.towerFloor=0;if(target.location==WorldLocation::Swamp){candidate.collectedFragments=std::max(3,candidate.collectedFragments);candidate.desertBossDead=candidate.volcanoBossDead=true;candidate.dawnQuest=DawnQuest::AtTower;}if(target.location==WorldLocation::Desert||target.location==WorldLocation::Volcano){candidate.collectedFragments=std::max(target.location==WorldLocation::Volcano?2:1,candidate.collectedFragments);candidate.dawnQuest=DawnQuest::AtTower;if(target.location==WorldLocation::Volcano)candidate.desertBossDead=true;}if(candidate.storyBlocked())candidate.dawnQuest=DawnQuest::AtTower;}
  bool found=false;V spawn{};
  const FieldSite* site=target.location==WorldLocation::MageTower?nullptr:&fieldRegion(target.location,target.spawn);
  for(int ring=0;ring<=16&&!found;ring++)for(int angle=0;angle<(ring?24:1);angle++){

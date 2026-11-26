@@ -68,7 +68,7 @@ inline void unload(){
 }
 
 inline void draw(){
- if(game.inTower())return;
+ if(game.inTower()||game.inMarsh())return;
  const size_t index=game.inVolcano()?2:game.inDesert()?1:0;
  const Texture2D mask=masks[index];
  if(!mask.id)return;

@@ -1,7 +1,7 @@
 {
   "authoring": "GPT Image sprite sources composed and exported with Krita 5.3.4.1",
   "master": "C:\\AI2D\\sprites\\forest-wood-20261115\\treasure-chests.kra",
-  "sha256": "fd1c0935b8bb98694a887a833e5663fbda1438f9a370d82a5981e9fe7414d42e",
+  "sha256": "b9888b32f6f45bc8e67acedbd4450e3e1c87da8602eaedc1da36d76ce7e97da8",
   "size": [
     768,
     768
@@ -45,5 +45,12 @@
         "sha256": "3931f474385fc8f503c6085694bac91f8b7eb4567df7cc5bf6000cf74008a3ec"
       }
     ]
+  },
+  "paleta_pustyni_i_kaldery": {
+    "editing": "Krita 5.3.4, dwie krzywe tonalne i warstwa koloru odbitego od gruntu",
+    "palette_master": "C:\\AI2D\\sprites\\paleta-pustynia-kaldera-20261125-221137\\Palety-krain.kra",
+    "palette_sha256": "608066fe8c516ac8362734e0686ccb6f0f8fdce78782d62086ab203414ec599d",
+    "source": "Istniejące malowane zasoby Emberfall",
+    "scope": "Pustynia i Kaldera. Zachowano kanały alfa i pola lasu."
   }
 }

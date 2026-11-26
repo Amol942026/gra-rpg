@@ -62,6 +62,11 @@ void verifyJackalTurn(Check check,std::ostream& report){
 bool runGraphicsQA(){
  fs::create_directories("qa-v21");std::ofstream report("qa-v21/graphics-tests.txt");int checks=0,failures=0;
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
+ check(marsh_art::floorReady,"marsh terrain shader compiles and binds shoreline, peat, map size and time on this GPU");
+ check(marsh_art::scenery.id&&marsh_art::scenery.width==1800&&marsh_art::scenery.height==1380&&
+       propArt[MarshFishingHut].texture.width==720&&propArt[MarshFishingHut].texture.height==920&&
+       std::any_of(propMasks[MarshFishingHut].begin(),propMasks[MarshFishingHut].end(),[](auto pixel){return pixel!=0;}),
+       "fishing hut has its high-resolution scenery cell and a selectable silhouette");
  check(!audioSystem.available,"graphics diagnostic opens no audio device");
  verifySprintArt(check);
  verifyFallenArt(check);
@@ -469,7 +474,7 @@ bool runGraphicsQA(){
    Enemy e{800+type,type,{},{},100,100};e.animation.direction=Direction::SW;e.animation.moving=true;e.animation.phase=.29f;
    verifyOutline([&](Color c){actor_art::drawEnemy(e,192,267,c);},"enemy outline hugs the animated silhouette");
   }
-  for(auto realm:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano})for(int state=0;state<3;state++){
+  for(auto realm:{WorldLocation::Forest,WorldLocation::Desert,WorldLocation::Volcano,WorldLocation::Swamp})for(int state=0;state<3;state++){
    TreasureChest chest{};chest.location=realm;chest.opened=state>0;if(state==1)chest.loot[0]=item(Kind::Gold);
    verifyOutline([&](Color c){treasure_art::draw(chest,{192,179},c);},"chest outline uses the lid and contents of its current state");
   }

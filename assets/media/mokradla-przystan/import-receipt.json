@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "source_manifest": "C:\\AI2D\\pipeline\\runs\\mokradla-20261125-2236\\przystan-manifest.json",
+  "destination": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-przystan",
+  "files": [
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-przystan\\przystan-obiekty.png",
+      "sha256": "0df32c3a1e3d7648be410b6ac2a5ab31afde33314885360068229717e3757bd2",
+      "bytes": 418980,
+      "role": "scenery"
+    },
+    {
+      "path": "C:\\Users\\Amol\\Documents\\GitHub\\gra-rpg\\assets\\media\\mokradla-przystan\\przystan-skrzynie.png",
+      "sha256": "cad0ba1f0d65afffde88740f455e0c4673d2cfb20fd85ecc4e6c397ed9a0d7f3",
+      "bytes": 188484,
+      "role": "treasure-chest-states"
+    }
+  ],
+  "provenance": {
+    "authoring": "GPT Image, Krita",
+    "master": "C:\\AI2D\\sprites\\mokradla-20261125\\Przystan.kra"
+  },
+  "game_rebuilt": false,
+  "runtime_audio_bindings_changed": false
+}

@@ -1,76 +1,76 @@
 {
   "status": "PASS",
-  "destination": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender",
+  "destination": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender",
   "source_manifest": "C:\\AI2D\\pipeline\\runs\\szakal-naturalny-chod-20261125\\assets.json",
   "files": [
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-00.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-00.png",
       "sha256": "21f7d797bcf6a7fa726bdf466109da8feb59ad38b24ac011ba71020b8202bbad",
       "bytes": 2767548,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-01.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-01.png",
       "sha256": "6bf9bf217ec0418c1c6499fc6a0cf255554f5a1c8ea702cf7791f2977f7b252a",
       "bytes": 2643218,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-02.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-02.png",
       "sha256": "c9f34a0e059a40d9b8675d4727a9bd6a3cb1477d459453d362559cca31933f02",
       "bytes": 2303162,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-03.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-03.png",
       "sha256": "ae82acc8d30ec3a3645f540e86f5237c216c5ab2c1db02c908393c9f17192094",
       "bytes": 2192847,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-04.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-04.png",
       "sha256": "2bf395182f28a6fd31e76d7a548da817cb2c804444e0523e84b1df0c7faf3789",
       "bytes": 2546110,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-05.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-05.png",
       "sha256": "e78a7272cf5796ff15df48ec70c4608f62d8551082cde9f574877cd4e13e7b16",
       "bytes": 2755044,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-06.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-06.png",
       "sha256": "2dabd53c62c089be7eab8f1aa6bb04ade7990f0bb5263d4638771a14f9383237",
       "bytes": 2805369,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-07.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-07.png",
       "sha256": "cc946ff331fb6ed2dcb96898d4cc694a00e80fd31b7d209ed60c9d40f6b35cb1",
       "bytes": 2743816,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-08.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-08.png",
       "sha256": "bf331089fc0534d7ecaa1e601c2bd08592f73a71bae71f2be7e67f0dc0d9cb86",
       "bytes": 2410774,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-09.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-09.png",
       "sha256": "d89bf01201d28fce73f488844001e191b8de32fc89ab348bdf04005c18ca08a6",
       "bytes": 2335108,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-10.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-10.png",
       "sha256": "7db7697c611a0b7bc225a3e10e75c1c9452412993bc7cc1c2ec6568882a104ee",
       "bytes": 2669366,
       "role": "atlas klatek RGBA"
     },
     {
-      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\dist\\assets\\desert\\jackal-blender\\jackal-11.png",
+      "path": "C:\\Users\\Amadeusz\\Documents\\GitHub\\gra-rpg\\assets\\desert\\jackal-blender\\jackal-11.png",
       "sha256": "3dc61bda0fc70f64005bbcae7cd3aa9e220a817e8e72b6640fa0d9ccf675ebb9",
       "bytes": 2808856,
       "role": "atlas klatek RGBA"

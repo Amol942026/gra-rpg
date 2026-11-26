@@ -3,16 +3,17 @@
 // the poses; these profiles only schedule their anticipation/action/recovery.
 enum class EnemyAbility {None,VenomFan,CopperWave,ObsidianCleave,EmberBreath};
 struct EnemyAbilityProfile {const char* name;float windup,active,recovery,cooldown,minRange,maxRange,damageScale;DamageType damageType;float duration()const{return windup+active+recovery;}};
-inline EnemyAbility enemyAbility(int type){return type==10?EnemyAbility::VenomFan:type==9?EnemyAbility::CopperWave:type==16?EnemyAbility::ObsidianCleave:type==17?EnemyAbility::EmberBreath:EnemyAbility::None;}
+inline EnemyAbility enemyAbility(int type){return type==BellKeeper?EnemyAbility::CopperWave:type==10?EnemyAbility::VenomFan:type==9?EnemyAbility::CopperWave:type==16?EnemyAbility::ObsidianCleave:type==17?EnemyAbility::EmberBreath:EnemyAbility::None;}
 inline const EnemyAbilityProfile& enemyAbilityProfile(int type){
  static constexpr std::array<EnemyAbilityProfile,5> values={{{"",0,0,0,3,0,0,0,DamageType::Physical},
   {"Jadowity wachlarz",.75f,.15f,.55f,6.2f,.75f,6.f,1.1f,DamageType::Magic},
   {"Miedziana fala",.85f,.7f,.7f,7.2f,.75f,3.3f,1.25f,DamageType::Physical},
   {"Rozłupujący cios",1.05f,.18f,.85f,7.8f,.75f,5.2f,1.55f,DamageType::Physical},
   {"Żarowy oddech",.95f,1.05f,.65f,7.5f,.75f,5.2f,1.05f,DamageType::Magic}}};
- return values[int(enemyAbility(type))];
+ static constexpr EnemyAbilityProfile toll{"Głos zatopionego dzwonu",1.15f,.85f,.65f,6.5f,.75f,3.4f,1.32f,DamageType::Magic};
+ return type==BellKeeper?toll:values[int(enemyAbility(type))];
 }
-inline bool enemyAbilityRealm(int type,WorldLocation realm){return (type==9||type==10)?realm==WorldLocation::Desert:(type==16||type==17)&&realm==WorldLocation::Volcano;}
+inline bool enemyAbilityRealm(int type,WorldLocation realm){return type==BellKeeper?realm==WorldLocation::Swamp:(type==9||type==10)?realm==WorldLocation::Desert:(type==16||type==17)&&realm==WorldLocation::Volcano;}
 inline V rotateAbilityDirection(V p,float angle){float c=std::cos(angle),s=std::sin(angle);return {p.x*c-p.y*s,p.x*s+p.y*c};}
 inline bool insideEnemyCleave(V relative,V direction){float along=relative.x*direction.x+relative.y*direction.y,side=relative.x*direction.y-relative.y*direction.x;return along>=.3f&&along<=5.2f&&std::abs(side)<=.72f;}
 inline bool insideEmberBreath(V relative,V direction){float radius=length(relative);return radius<=4.8f&&(radius<.15f||relative.x*direction.x+relative.y*direction.y>=radius*.819152f);}

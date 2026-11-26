@@ -7,7 +7,7 @@ inline constexpr int Cells=(MapSize+8)*2,Nodes=Cells+1;
 struct Vertex{V world;Vector2 flat,raised,uv;Color light;};
 struct Cell{int index;Rectangle bounds;};
 struct Surface{std::vector<Vertex> vertices;std::vector<Cell> cells;unsigned texture=0;float maxRise=0;};
-inline std::array<Surface,4> surfaces;
+inline std::array<Surface,5> surfaces;
 inline Shader lighting{};
 inline void ring(V center,float radius,Color color){
  static const auto circle=[](){std::array<V,32> points{};for(int i=0;i<32;i++){float a=i*2*PI/32;points[i]={std::cos(a),std::sin(a)};}return points;}();

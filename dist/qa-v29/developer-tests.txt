@@ -1,4 +1,83 @@
+PASS: every named field site renders at its real minimap position and all four quarters are marked
+PASS: each marker picks its real field site and blank minimap space clears the hover
+PASS: a hovered minimap marker never targets the world
+PASS: every named field site renders at its real minimap position and all four quarters are marked
+PASS: each marker picks its real field site and blank minimap space clears the hover
+PASS: a hovered minimap marker never targets the world
+PASS: every named field site renders at its real minimap position and all four quarters are marked
+PASS: each marker picks its real field site and blank minimap space clears the hover
+PASS: a hovered minimap marker never targets the world
+PASS: Caldera contact shadow has a world prop
+PASS: Caldera contact darkens the ground directly under the rock and fades away
+PASS: Caldera contact shadow has a world prop
+PASS: Caldera contact darkens the ground directly under the rock and fades away
+PASS: Caldera contact shadow has a world prop
+PASS: Caldera contact darkens the ground directly under the rock and fades away
+PASS: Caldera contact shadow has a world prop
+PASS: Caldera contact darkens the ground directly under the rock and fades away
+PASS: Caldera contact shadow has a world prop
+PASS: Caldera contact darkens the ground directly under the rock and fades away
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+PASS: new decoration is present in its native realm
+PASS: new decoration has a real GPU silhouette and mouse mask
+Decoration render and export: 9.79971 s
 PASS: developer tests open no audio device
+PASS: ordinary play cannot open the summon panel
 PASS: opening developer picker during prologue blocks world input without prematurely replacing normal play
 PASS: developer picker blocks spells, combat and inventory handlers
 PASS: developer picker renders at each supported interface scale
@@ -7,53 +86,412 @@ PASS: developer picker renders at each supported interface scale
 PASS: developer screen reaches real presentation at current window size
 PASS: cancel returns to same paused prologue without modifying the expedition
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
 PASS: each location card selects its actual destination without starting accidentally
-PASS: destination name and hint fit card without clipping
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: each location card selects its actual destination without starting accidentally
+PASS: destination fits without clipping
+PASS: developer screen reaches real presentation at current window size
+PASS: developer screen reaches real presentation at current window size
 PASS: start button skips prologue and return scene and makes the selected observatory playable
-PASS: new test session receives safe position and optional kit
+PASS: new test session receives safe position, level 100, all unlocks and supplies
 PASS: developer screen reaches real presentation at current window size
-PASS: visible DEV HUD button cannot leak its click into a world attack
-PASS: move button preserves character and possessions while switching straight to alchemy
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: all equipment kinds are available in DEV
+PASS: catalogue uses as many 25-slot pages as needed
+PASS: next arrow maps each visible cell to the next page
+PASS: next arrow maps each visible cell to the next page
+PASS: next arrow maps each visible cell to the next page
+PASS: next arrow maps each visible cell to the next page
+PASS: next arrow maps each visible cell to the next page
+PASS: next arrow stops at the last page
+PASS: developer screen reaches real presentation at current window size
+PASS: previous arrow returns a page
+PASS: a later-page cell contains gear
+PASS: double click equips the item on the visible later page
+PASS: weapon wheel also allows backpack paging
+PASS: former DEV HUD area is usable world space
+PASS: move button preserves gear and higher ranks while enabling the developer loadout
 PASS: developer start can immediately use ordinary cauldron interaction
-PASS: kit materials work with the real alchemy mechanic
+PASS: ordinary alchemy works with materials obtained in a developer session
 PASS: developer screen reaches real presentation at current window size
-PASS: fresh boss session without kit resets character and creates living guardian immediately
+PASS: merchant interaction opens the actual trade panel
+PASS: merchant opens the next DEV backpack page
+PASS: merchant selects the item on that page
+PASS: double click sells the item on the visible later page
+PASS: fresh boss session grants the standard test character and a living guardian
+PASS: developer weapon wheel and real Z handler activate the new skill
+PASS: developer weapon wheel and real Z handler activate the new skill
+PASS: developer weapon wheel and real Z handler activate the new skill
+PASS: real menu load refreshes developer unlocks and supplies while keeping saved position and higher ranks
+PASS: loading a DEV save created before the addition grants every new shield and helmet once
 PASS: boss start is nearby without spawning inside his body or a pillar
 PASS: developer screen reaches real presentation at current window size
-PASS: death restart reuses same developer destination and skips prologue
+PASS: far caldera warp and world HUD use the same site name
+PASS: visible DEV summon button intercepts world pointer
+PASS: developer screen reaches real presentation at current window size
+PASS: a single gameplay HUD click opens the summon panel without starting a world attack
+PASS: developer screen reaches real presentation at current window size
+Summon menu render and export: 0.211931 s
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: full enemy name fits the summon card
+PASS: clicking each named card creates the correct enemy in the world
+PASS: return button resumes combat after a summon
+PASS: an enemy summoned through the HUD chases and hits the hero when play resumes
+PASS: developer screen reaches real presentation at current window size
+Summoned enemy hit render and export: 0.351297 s
+PASS: the DEV HUD button can reopen the panel after combat resumes
+PASS: developer screen reaches real presentation at current window size
+PASS: forest fixture contains an authored wolf
+PASS: HUD summoning adds a wolf to the ongoing encounter
+PASS: authored and summoned wolves keep stable movement and facing during attacks
+Mixed fight max step: 0.0433357 world units
+Mixed fight max attack turn: 0.187789 degrees per simulation step
+PASS: developer screen reaches real presentation at current window size
+Mixed fight render and export: 0.378705 s
+PASS: direct save menu opens during an enemy windup
+PASS: battle save writes an ordinary slot, without creating a checkpoint
+PASS: developer screen reaches real presentation at current window size
+PASS: field load goes through confirmation
+PASS: battle save restores the exact position, enemy windup and area
+PASS: a lethal attack during a real developer session leaves its health unchanged
+PASS: death restart restores the developer character at the same destination
 PASS: invalid developer selection does not close picker or replace the game
 PASS: developer screen reaches real presentation at current window size
-PASS: normal-game button removes test state and restarts untouched normal prologue
+PASS: former normal-game button area has no action
 PASS: developer start interrupts an active return cutscene without leaving ghost dialogue or blocked movement
 PASS: developer screen reaches real presentation at current window size
 PASS: small-window pointer correctly chooses the requested tower floor
-Checks: 58; failures: 0
+PASS: return to main menu clears the developer session and its protection
+PASS: normal play has no backpack paging controls
+PASS: the DEV summon button leaves the same area playable in ordinary mode
+PASS: a new expedition from the title uses normal resources and rules
+PASS: start a silent scene for the copper scarab
+PASS: scarab material and wave crest are loaded by the real renderer
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: each scarab corpse direction and flank has a detailed body and a ground shadow
+PASS: developer screen reaches real presentation at current window size
+PASS: copper scarab coils up during the warning
+PASS: developer screen reaches real presentation at current window size
+PASS: wave reaches the player once at the familiar radius
+PASS: developer screen reaches real presentation at current window size
+PASS: death begins in the current casting pose
+PASS: the shell rolls and sheds weight before landing
+PASS: developer screen reaches real presentation at current window size
+PASS: settled copper scarab uses a pickable corpse with the new shell
+PASS: developer screen reaches real presentation at current window size
+Copper scarab render and export (four views): 0.655479 s
+Checks: 489; failures: 0
