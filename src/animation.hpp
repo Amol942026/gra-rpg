@@ -7,6 +7,7 @@
 namespace ember {
 // Clockwise screen directions, not the axes of the isometric map.
 enum class Direction { E, SE, S, SW, W, NW, N, NE };
+enum class TurnPlane { Screen, Ground };
 constexpr float AnimationPi = 3.14159265358979323846f;
 inline constexpr float ActorGroundSquash=.52f;
 struct ActorFacing {float x,y;};
@@ -93,7 +94,35 @@ struct AnimationState {
         const float lean=std::clamp(step/(maxTurnRate*dt),-1.f,1.f);
         turnLean+=(lean-turnLean)*(1-std::exp(-12.f*dt));
     }
-    void advance(float dx, float dy, float dt, bool sprint = false, bool faceMovement = true,bool allowStow=true,float maxTurnRate=0) {
+    void advanceGroundFacing(float dt,float maxTurnRate) {
+        if(dt<=0 || maxTurnRate<=0 || !facingInitialized)return;
+        // The drawings are spaced around the ground plane. A constant rate in
+        // screen space skips side views and lingers on views from the front.
+        const auto groundAngle=[](float screen){
+            return std::atan2(std::sin(screen)/ActorGroundSquash,std::cos(screen));
+        };
+        float yaw=groundAngle(facingAngle);
+        const float target=groundAngle(targetAngle);
+        float speed=turnLean*maxTurnRate;
+        const float acceleration=maxTurnRate*10.f;
+        const int steps=std::max(1,int(std::ceil(dt*120.f)));
+        const float step=dt/steps;
+        for(int i=0;i<steps;i++){
+            float gap=std::remainder(target-yaw,2*AnimationPi);
+            if(std::abs(gap)>AnimationPi-.04f && std::abs(speed)>.1f && gap*speed<0)
+                gap-=std::copysign(2*AnimationPi,gap);
+            const float desired=std::clamp(gap*9.f,-maxTurnRate,maxTurnRate);
+            const float next=speed+std::clamp(desired-speed,-acceleration*step,acceleration*step);
+            const float travel=(speed+next)*.5f*step;
+            if(gap*travel>=0 && std::abs(travel)>=std::abs(gap)){
+                yaw=target; speed=0.f; break;
+            }
+            yaw+=travel; speed=next;
+        }
+        facingAngle=std::atan2(std::sin(yaw)*ActorGroundSquash,std::cos(yaw));
+        turnLean=speed/maxTurnRate;
+    }
+    void advance(float dx, float dy, float dt, bool sprint = false, bool faceMovement = true,bool allowStow=true,float maxTurnRate=0,TurnPlane plane=TurnPlane::Screen) {
         float travelled = std::hypot(dx, dy);
         moving = travelled > 0.00001f;
         idleTime += dt;
@@ -111,7 +140,8 @@ struct AnimationState {
             }
             phase = std::fmod(phase + travelled * (0.38f-0.07f*pace.average), 1.0f);
         }
-        advanceFacing(std::max(0.f,dt),maxTurnRate);
+        if(plane==TurnPlane::Ground)advanceGroundFacing(dt,maxTurnRate);
+        else advanceFacing(std::max(0.f,dt),maxTurnRate);
     }
     int walkFrame() const { return moving ? int(phase * 8) % 8 : 0; }
 };

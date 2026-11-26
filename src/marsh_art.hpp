@@ -1,8 +1,7 @@
 #pragma once
-#include "generated/marsh_motion.hpp"
+#include "marsh_actor_art.hpp"
 #include "marsh_footprints.hpp"
 namespace marsh_art {
-constexpr char AtlasPath[]="assets/media/mokradla/atlas.png";
 constexpr char SceneryPath[]="assets/media/mokradla-osada/osada.png";
 constexpr char WorksitePath[]="assets/media/mokradla-warsztaty/warsztaty.png";
 // Cells share a ground anchor at 208 / 230 of their height. The hut uses double density.
@@ -11,7 +10,7 @@ constexpr Rectangle SceneryCells[]={{720,0,360,460},{1080,0,360,460},{0,0,720,92
 constexpr int FirstWorksite=MarshFishTrap-MarshPropStart;
 static_assert(std::size(SceneryCells)==PropTypeCount-MarshPropStart);
 constexpr Rectangle ChestRow={360,920,768,256};
-inline Texture2D atlas{},mini{},land{},peat{},scenery{},worksites{};
+inline Texture2D mini{},land{},peat{},scenery{},worksites{};
 inline Texture2D contacts{};
 constexpr int ContactWidth=200,ContactHeight=116,ContactLeft=-10,ContactTop=124;
 constexpr int ContactDensity=2,ContactColumns=4;
@@ -79,9 +78,6 @@ inline void seatScenery(Image& im,int first,int limit){
 inline Shader floorShader{};
 inline int originLoc=-1,timeLoc=-1,detailLoc=-1;
 inline bool floorReady=false;
-constexpr int Cell=448;
-inline std::array<Rectangle,8> cells{};
-inline std::vector<unsigned char> alpha;
 inline Texture2D loadScenery(const char* path,int width,int height,int first,int limit){
  Texture2D texture{};
  Image objects=LoadImage(path);
@@ -95,59 +91,10 @@ inline void load(){
  scenery=loadScenery(SceneryPath,1800,1380,0,FirstWorksite);
  worksites=loadScenery(WorksitePath,720,460,FirstWorksite,int(std::size(SceneryCells)));
  prepareContacts();
- Image im=LoadImage(AtlasPath);
- if(im.data&&im.width==Cell*4&&im.height==Cell*2){
-  atlas=LoadTextureFromImage(im);SetTextureFilter(atlas,TEXTURE_FILTER_BILINEAR);
-  Color* px=LoadImageColors(im);alpha.resize(im.width*im.height);
-  for(int i=0;i<im.width*im.height;i++)alpha[i]=px[i].a;
-  UnloadImageColors(px);
-  for(int i=4;i<8;i++){
-   const int left=(i%4)*Cell,top=(i/4)*Cell;
-   int x0=Cell,y0=Cell,x1=0,y1=0;
-   for(int y=0;y<Cell;y++)for(int x=0;x<Cell;x++)if(alpha[(top+y)*im.width+left+x]>24){
-    x0=std::min(x0,x);y0=std::min(y0,y);x1=std::max(x1,x);y1=std::max(y1,y);}
-   if(x1>=x0)cells[i]={float(left+x0),float(top+y0),float(x1-x0+1),float(y1-y0+1)};
-  }
- }
- if(im.data)UnloadImage(im);
+ loadActors();
 }
 inline void prop(int design,int w,int h){
  DrawTexturePro(design<FirstWorksite?scenery:worksites,SceneryCells[design],{0,0,float(w),float(h)},{},0,WHITE);
-}
-inline bool actor(const Enemy& e,float x,float y,Color edge,const Vector2* probe,bool shadow=false,float scale=1,float fall=-1){
- int species=e.type-PeatToad;Rectangle src=cells[4+species];if(!atlas.id||!src.width)return false;
- const bool right=std::cos(int(e.animation.direction)*PI/4)>.01f;
- const float sign=right?1.f:-1.f;
- const bool attack=e.windup>0||e.strike>0;
- int clip=fall>=0?2:attack?1:0;
- float t=fall>=0?fall:attack?(e.windup>0?.5f*(1-e.windup/meleeWindup(e.type)):.5f+.5f*(1-e.strike/meleeRecovery(e.type))):e.animation.moving?e.animation.phase:0;
- float u=std::clamp(t,0.f,1.f)*16;
- int first=std::min(15,int(u));
- const auto& a=marsh_motion::Clips[clip][species][first];
- const auto& b=marsh_motion::Clips[clip][species][first+1];
- const auto lerp=[&](float v,float w){return v+(w-v)*(u-first);};
- const float size=enemyInfo(e.type).visualHeight*scale*.92f;
- float w=size*(src.width/src.height)*lerp(a.width,b.width),h=size*lerp(a.height,b.height);
- float bob=lerp(a.y,b.y),tilt=lerp(a.angle,b.angle);
- if(fall<0&&species==2)bob+=4+2*std::sin(e.animation.idleTime*2);
- x+=sign*lerp(a.x,b.x)*scale;
- const float rotation=tilt*sign*(fall>=0?e.deathSide():1),rad=rotation*PI/180;
- Vector2 pivot={w*.5f,h};
- y-=bob*scale;
- const float depth=fall>=0?1-.45f*enemy_death::ease(fall):1.f;
- if(fall>=0){x-=std::sin(rad)*h*.5f;y-=std::abs(std::sin(rad))*w*.5f*depth;}
- if(probe){
-  float dx=probe->x-x,dy=(probe->y-y)/depth;
-  float u=(dx*std::cos(rad)+dy*std::sin(rad)+pivot.x)/w,v=(-dx*std::sin(rad)+dy*std::cos(rad)+pivot.y)/h;
-  if(u<0||u>=1||v<0||v>=1)return false;
-  int px=int(src.x)+(right?int(src.width)-1-int(u*src.width):int(u*src.width));
-  return alpha[(int(src.y)+int(v*src.height))*atlas.width+px]>32;
- }
- if(right)src.width=-src.width;
- if(fall>=0){rlPushMatrix();rlTranslatef(0,y,0);rlScalef(1,depth,1);rlTranslatef(0,-y,0);}
- Rectangle dst{x,y,w,h};
- if(edge.a&&!shadow){for(Vector2 off:std::array<Vector2,4>{{{-2,0},{2,0},{0,-2},{0,2}}}){dst.x=x+off.x;dst.y=y+off.y;DrawTexturePro(atlas,src,dst,pivot,rotation,edge);}dst.x=x;dst.y=y;}
- DrawTexturePro(atlas,src,dst,pivot,rotation,shadow?WHITE:fall>=0?Color{180,182,160,255}:WHITE);if(fall>=0)rlPopMatrix();return false;
 }
 inline void prepareFloor(){
  constexpr int n=512;
@@ -205,5 +152,5 @@ inline void ground(){
  BeginShaderMode(floorShader);SetShaderValueTexture(floorShader,detailLoc,peat);
  DrawTexturePro(land,{0,0,float(land.width),float(land.height)},{0,0,WorldW,H},{},0,WHITE);EndShaderMode();
 }
-inline void unload(){for(auto tex:{atlas,land,mini,peat,scenery,worksites,contacts})if(tex.id)UnloadTexture(tex);if(floorShader.id&&floorShader.id!=rlGetShaderIdDefault())UnloadShader(floorShader);floorReady=false;alpha.clear();}
+inline void unload(){unloadActors();for(auto tex:{land,mini,peat,scenery,worksites,contacts})if(tex.id)UnloadTexture(tex);if(floorShader.id&&floorShader.id!=rlGetShaderIdDefault())UnloadShader(floorShader);floorReady=false;}
 }

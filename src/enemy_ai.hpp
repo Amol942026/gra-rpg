@@ -14,7 +14,7 @@ bool canSeePlayer(const Enemy& e)const{
 }
 static void faceEnemyTowards(Enemy& e,V aim){
  if(length(aim)<=.05f)return;
- e.animation.faceAim(aim.x,aim.y,smoothVolcanoTurn(e.type));
+ e.animation.faceAim(aim.x,aim.y,smoothEnemyTurn(e.type));
 }
 bool enemyPositionClear(V p,float radius)const{
  if(inVolcano()&&(volcanoLava(p,radius)||nearVolcanoFountain(p,radius)))return false;

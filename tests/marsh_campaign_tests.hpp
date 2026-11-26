@@ -54,9 +54,18 @@ void marshCampaignTests(){
  const float hpBefore=g.hp;
  for(int i=0;i<121;i++)g.advanceEnemyAbility(*keeper,1.f/60,keeper->pos,g.player,false,0);
  check(g.hp<hpBefore,"the resonant wave hits at its expanding edge");
- g.developerSession=true;g.player=keeper->pos;g.hit(*keeper,10000);
+ g.developerSession=true;g.player=keeper->pos;
+ const float finalHeading=.37f;
+ keeper->animation.facingInitialized=true;
+ keeper->animation.facingAngle=keeper->animation.targetAngle=finalHeading;
+ keeper->animation.direction=directionAtScreenAngle(finalHeading);
+ g.hit(*keeper,10000);
  check(g.marshBossDead&&g.dawnFragments()==3&&g.openCorpse(boss)&&g.quickTransfer({Place::Corpse,QuestLootSlot,boss}),"only looting the keeper awards the fourth shard");
  check(g.dawnFragments()==4&&g.takeTowerReturn(),"fourth tower return");
+ const auto afterFall=saves::decode(saves::encode(session));
+ const auto* body=afterFall.game.findCorpse(boss);
+ check(body&&body->animation.facingInitialized&&std::abs(body->animation.facingAngle-finalHeading)<.001f,
+       "a fallen marsh keeper retains an intermediate facing after loading");
  g.enterMageTower();g.finishTowerReturn();g.player=MagePosition;
  check(g.travelToMarsh()&&g.findCorpse(boss)&&g.findCorpse(boss)->loot[QuestLootSlot].empty(),"the keeper and its shard never respawn");
 }

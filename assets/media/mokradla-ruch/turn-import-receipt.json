@@ -1,0 +1,672 @@
+{
+  "render": {
+    "version": "5.3.0",
+    "master": "C:\\AI2D\\animations\\mokradla-kierunki-20261126\\Mokradla-kierunki.blend",
+    "views": [
+      "N",
+      "NW",
+      "W",
+      "SW",
+      "S"
+    ],
+    "frames": 1280,
+    "raster": "fixed 4x4 subpixel coverage",
+    "sheets": [
+      {
+        "species": 0,
+        "view": 2,
+        "seconds": 0.584
+      },
+      {
+        "species": 0,
+        "view": 3,
+        "seconds": 0.61
+      },
+      {
+        "species": 0,
+        "view": 4,
+        "seconds": 0.6
+      },
+      {
+        "species": 0,
+        "view": 1,
+        "seconds": 0.609
+      },
+      {
+        "species": 0,
+        "view": 0,
+        "seconds": 0.599
+      },
+      {
+        "species": 1,
+        "view": 2,
+        "seconds": 0.683
+      },
+      {
+        "species": 1,
+        "view": 3,
+        "seconds": 0.546
+      },
+      {
+        "species": 1,
+        "view": 4,
+        "seconds": 0.448
+      },
+      {
+        "species": 1,
+        "view": 1,
+        "seconds": 0.502
+      },
+      {
+        "species": 1,
+        "view": 0,
+        "seconds": 0.415
+      },
+      {
+        "species": 3,
+        "view": 2,
+        "seconds": 1.212
+      },
+      {
+        "species": 3,
+        "view": 3,
+        "seconds": 1.316
+      },
+      {
+        "species": 3,
+        "view": 4,
+        "seconds": 1.34
+      },
+      {
+        "species": 3,
+        "view": 1,
+        "seconds": 1.208
+      },
+      {
+        "species": 3,
+        "view": 0,
+        "seconds": 0.94
+      },
+      {
+        "species": 2,
+        "view": 2,
+        "seconds": 0.492
+      },
+      {
+        "species": 2,
+        "view": 3,
+        "seconds": 0.563
+      },
+      {
+        "species": 2,
+        "view": 4,
+        "seconds": 0.552
+      },
+      {
+        "species": 2,
+        "view": 1,
+        "seconds": 0.637
+      },
+      {
+        "species": 2,
+        "view": 0,
+        "seconds": 0.526
+      }
+    ],
+    "render_seconds": 15.072
+  },
+  "authorship": "Original Emberfall painted swamp creatures, directional paintings and local Blender shape-key animation",
+  "source_files": [
+    {
+      "file": "assets/media/mokradla/atlas.png",
+      "sha256": "c852ce15abbc22bb01639a757b30a683c032f5700212935122630ebacdf1c5c2"
+    },
+    {
+      "file": "art/creatures/marsh-turn/0-back.png",
+      "sha256": "ecad04faed6b979bc9d2b231179d55b160f8e5edeec26be0d0d1c5842574ceeb"
+    },
+    {
+      "file": "art/creatures/marsh-turn/0-backquarter.png",
+      "sha256": "55d2f850cf22e2f234a3246cadafa3f203cf77a984b4620401b58b646cabea0b"
+    },
+    {
+      "file": "art/creatures/marsh-turn/0-front.png",
+      "sha256": "a0467e60d5b30d8179e11ac7b7abe774689dd766f220146d1382427235587319"
+    },
+    {
+      "file": "art/creatures/marsh-turn/0-side.png",
+      "sha256": "02642d75aa5a26ac05e3ae3d193bf8558f7c237dc10221f95894527ec583c7a1"
+    },
+    {
+      "file": "art/creatures/marsh-turn/1-back.png",
+      "sha256": "a507b0d60582e83032df77102acb1f98a985504ceed7d0bcee036afa1ae34ff1"
+    },
+    {
+      "file": "art/creatures/marsh-turn/1-backquarter.png",
+      "sha256": "2a74e132bd82a94258530f02dc94e075d5432a8ace582f5e8d5254b4321d0a33"
+    },
+    {
+      "file": "art/creatures/marsh-turn/1-front.png",
+      "sha256": "240f37a475c14a58c8aec582d0a96770f868e90be61863eff22285b9aa38001c"
+    },
+    {
+      "file": "art/creatures/marsh-turn/1-side.png",
+      "sha256": "5e38e948ea9cee1903e3ee93a45cf1b84c1511260562811fa860bb5a5e929e4e"
+    },
+    {
+      "file": "art/creatures/marsh-turn/2-back.png",
+      "sha256": "941d84f7df35bd8aa2e20616bc317804140950ce68ef53923e5962cea5c5bb5c"
+    },
+    {
+      "file": "art/creatures/marsh-turn/2-backquarter.png",
+      "sha256": "78deaff7d1505faef400a68a6e43ce740f3a2a4ac4c63f0e9515ff357d333d46"
+    },
+    {
+      "file": "art/creatures/marsh-turn/2-front.png",
+      "sha256": "17ee891d049a09d0b5253724f66e3d4f87c6aa48fbb4d06713f60006d600437e"
+    },
+    {
+      "file": "art/creatures/marsh-turn/2-side.png",
+      "sha256": "7164b4a1e5e43f5534354108f8c6cfe5dee4ee870895eb78f333152a4a614dff"
+    },
+    {
+      "file": "art/creatures/marsh-turn/3-back.png",
+      "sha256": "ca6ed29b7fbdaae593d1fc4bd8cc38f98ab1411a16e0ae841a17b37e309d51a8"
+    },
+    {
+      "file": "art/creatures/marsh-turn/3-backquarter.png",
+      "sha256": "a4dae3fe79478dbc013b6499ce8e82484c881f03fe82e2ed2e8f853457f61d59"
+    },
+    {
+      "file": "art/creatures/marsh-turn/3-front.png",
+      "sha256": "a242d81d9a0a2df9219148ac94cf5a187b5641848a99929e0c2ec90914a309d2"
+    },
+    {
+      "file": "art/creatures/marsh-turn/3-side.png",
+      "sha256": "738e56e58c414b6282286fbee5d81ca59da4b06f1dcc59d9c41e37e6a622d334"
+    }
+  ],
+  "cell_dimensions": [
+    [
+      140,
+      100,
+      70,
+      92,
+      77
+    ],
+    [
+      164,
+      96,
+      82,
+      89,
+      66
+    ],
+    [
+      120,
+      120,
+      60,
+      112,
+      98
+    ],
+    [
+      204,
+      164,
+      102,
+      159,
+      145
+    ]
+  ],
+  "views": [
+    "N",
+    "NW",
+    "W",
+    "SW",
+    "S"
+  ],
+  "final_frames": 1280,
+  "files": [
+    {
+      "file": "turn-0-0.png",
+      "sha256": "a74aa77d713782dcc29d6921076228aea55ff086072b04ee62622ef1a340bc48",
+      "bytes": 929290
+    },
+    {
+      "file": "turn-0-1.png",
+      "sha256": "96810690065db5f59ea777d6b868725a3b83c375fbefa592b0ee8eb92e0f514c",
+      "bytes": 945132
+    },
+    {
+      "file": "turn-0-2.png",
+      "sha256": "10184a5886b4a52c001cfa0520a3af221f4dd6eab837d088f2f3963410e58dbd",
+      "bytes": 1381489
+    },
+    {
+      "file": "turn-0-3.png",
+      "sha256": "9baa17ae1e60c0d9f24fe578bb404aa225c9893ec0a058a363cc5227b995692e",
+      "bytes": 1118942
+    },
+    {
+      "file": "turn-0-4.png",
+      "sha256": "aa044c56abca790f0ac1e382402151ed4d712e911010eaf347fb5b671e8b9a63",
+      "bytes": 1059635
+    },
+    {
+      "file": "turn-1-0.png",
+      "sha256": "1c485d614b39af12f8289266475546a65172d72b4e4c05784ef2d9d1b056dc4d",
+      "bytes": 621703
+    },
+    {
+      "file": "turn-1-1.png",
+      "sha256": "fad571c4e5efe6cc5df21f274ba417bf48cc730fe981e17b212c74dda88d351b",
+      "bytes": 699551
+    },
+    {
+      "file": "turn-1-2.png",
+      "sha256": "273c42fbcd3c3e016ee36e7a26af26c2ad8d1f1bbb9f23bc78fbf1b4d3f83287",
+      "bytes": 1105654
+    },
+    {
+      "file": "turn-1-3.png",
+      "sha256": "c49dff196027f8ffa947faf0aca89596e77e19cc10118b9551cc2eb644433eb0",
+      "bytes": 847363
+    },
+    {
+      "file": "turn-1-4.png",
+      "sha256": "9d28c86bb57d65df8d0bfe53bda3dfbb286b09b22adc98636ee6eca03b789f69",
+      "bytes": 621284
+    },
+    {
+      "file": "turn-2-0.png",
+      "sha256": "63bf5aa6a582eeed6b2f777cb49bfc60b8653cd2fbfdbb1b7d97bb54f5648839",
+      "bytes": 644155
+    },
+    {
+      "file": "turn-2-1.png",
+      "sha256": "ab250cb50df38417bf9b4cb884f81dc48311348bc1ba5816f9f46023af9246d7",
+      "bytes": 785699
+    },
+    {
+      "file": "turn-2-2.png",
+      "sha256": "9799393b5a24c0ab25eeeee82a20d07e5757cf5a274ee73e1534f2220ff2027c",
+      "bytes": 888725
+    },
+    {
+      "file": "turn-2-3.png",
+      "sha256": "2aff9410ab40bf06e638407c3e1f15d188f26956fff75d9546188e577c2b2844",
+      "bytes": 673620
+    },
+    {
+      "file": "turn-2-4.png",
+      "sha256": "718e78c4757ce13bfc79b72acf606e50d5ed3f5540e8639282b6b2c4fa3d1e46",
+      "bytes": 789678
+    },
+    {
+      "file": "turn-3-0.png",
+      "sha256": "18b2039232c94703b2674a7ce6d294f9342320840e8f0d7607d3c13401bb2c41",
+      "bytes": 2830367
+    },
+    {
+      "file": "turn-3-1.png",
+      "sha256": "ce43e4924a6da91cad90c92c6538cea0b94fe38ed49c6b46c90950a377b1aa21",
+      "bytes": 2854368
+    },
+    {
+      "file": "turn-3-2.png",
+      "sha256": "15f2b62d9b36c7efbc79618968e55b47d8f3b9246d0023bb9ff8e704a15c8520",
+      "bytes": 2634861
+    },
+    {
+      "file": "turn-3-3.png",
+      "sha256": "7a9cbd5bdc4b2e4163279cd0bcb4fdb7eefb99d022aa641c21a36690b6dca5ab",
+      "bytes": 2856605
+    },
+    {
+      "file": "turn-3-4.png",
+      "sha256": "b69d51b88701ed043f0c743ea21b890b9312e155f74843ddc51798126194b735",
+      "bytes": 2923810
+    }
+  ],
+  "tests": [
+    {
+      "species": 0,
+      "view": 0,
+      "margin": 6,
+      "rest_and_corpse": [
+        {
+          "height": 77,
+          "width": 84,
+          "solid": 3930
+        },
+        {
+          "height": 77,
+          "width": 83,
+          "solid": 3321
+        }
+      ]
+    },
+    {
+      "species": 0,
+      "view": 1,
+      "margin": 6,
+      "rest_and_corpse": [
+        {
+          "height": 77,
+          "width": 86,
+          "solid": 4004
+        },
+        {
+          "height": 67,
+          "width": 100,
+          "solid": 3651
+        }
+      ]
+    },
+    {
+      "species": 0,
+      "view": 2,
+      "margin": 3,
+      "rest_and_corpse": [
+        {
+          "height": 77,
+          "width": 118,
+          "solid": 6185
+        },
+        {
+          "height": 89,
+          "width": 116,
+          "solid": 5570
+        }
+      ]
+    },
+    {
+      "species": 0,
+      "view": 3,
+      "margin": 6,
+      "rest_and_corpse": [
+        {
+          "height": 77,
+          "width": 101,
+          "solid": 5010
+        },
+        {
+          "height": 78,
+          "width": 106,
+          "solid": 4625
+        }
+      ]
+    },
+    {
+      "species": 0,
+      "view": 4,
+      "margin": 6,
+      "rest_and_corpse": [
+        {
+          "height": 77,
+          "width": 96,
+          "solid": 4481
+        },
+        {
+          "height": 77,
+          "width": 89,
+          "solid": 4047
+        }
+      ]
+    },
+    {
+      "species": 1,
+      "view": 0,
+      "margin": 4,
+      "rest_and_corpse": [
+        {
+          "height": 76,
+          "width": 54,
+          "solid": 2640
+        },
+        {
+          "height": 59,
+          "width": 66,
+          "solid": 2365
+        }
+      ]
+    },
+    {
+      "species": 1,
+      "view": 1,
+      "margin": 5,
+      "rest_and_corpse": [
+        {
+          "height": 66,
+          "width": 84,
+          "solid": 3072
+        },
+        {
+          "height": 58,
+          "width": 67,
+          "solid": 2319
+        }
+      ]
+    },
+    {
+      "species": 1,
+      "view": 2,
+      "margin": 3,
+      "rest_and_corpse": [
+        {
+          "height": 66,
+          "width": 128,
+          "solid": 4975
+        },
+        {
+          "height": 58,
+          "width": 116,
+          "solid": 4333
+        }
+      ]
+    },
+    {
+      "species": 1,
+      "view": 3,
+      "margin": 5,
+      "rest_and_corpse": [
+        {
+          "height": 67,
+          "width": 103,
+          "solid": 3806
+        },
+        {
+          "height": 73,
+          "width": 96,
+          "solid": 4046
+        }
+      ]
+    },
+    {
+      "species": 1,
+      "view": 4,
+      "margin": 5,
+      "rest_and_corpse": [
+        {
+          "height": 66,
+          "width": 68,
+          "solid": 2507
+        },
+        {
+          "height": 73,
+          "width": 72,
+          "solid": 3123
+        }
+      ]
+    },
+    {
+      "species": 2,
+      "view": 0,
+      "margin": 5,
+      "rest_and_corpse": [
+        {
+          "height": 99,
+          "width": 57,
+          "solid": 1783
+        },
+        {
+          "height": 45,
+          "width": 74,
+          "solid": 1579
+        }
+      ]
+    },
+    {
+      "species": 2,
+      "view": 1,
+      "margin": 6,
+      "rest_and_corpse": [
+        {
+          "height": 99,
+          "width": 68,
+          "solid": 2352
+        },
+        {
+          "height": 54,
+          "width": 79,
+          "solid": 2002
+        }
+      ]
+    },
+    {
+      "species": 2,
+      "view": 2,
+      "margin": 4,
+      "rest_and_corpse": [
+        {
+          "height": 99,
+          "width": 82,
+          "solid": 2643
+        },
+        {
+          "height": 58,
+          "width": 85,
+          "solid": 2137
+        }
+      ]
+    },
+    {
+      "species": 2,
+      "view": 3,
+      "margin": 4,
+      "rest_and_corpse": [
+        {
+          "height": 100,
+          "width": 65,
+          "solid": 2075
+        },
+        {
+          "height": 53,
+          "width": 78,
+          "solid": 1776
+        }
+      ]
+    },
+    {
+      "species": 2,
+      "view": 4,
+      "margin": 5,
+      "rest_and_corpse": [
+        {
+          "height": 99,
+          "width": 66,
+          "solid": 2289
+        },
+        {
+          "height": 59,
+          "width": 73,
+          "solid": 1945
+        }
+      ]
+    },
+    {
+      "species": 3,
+      "view": 0,
+      "margin": 3,
+      "rest_and_corpse": [
+        {
+          "height": 146,
+          "width": 132,
+          "solid": 12142
+        },
+        {
+          "height": 112,
+          "width": 146,
+          "solid": 9594
+        }
+      ]
+    },
+    {
+      "species": 3,
+      "view": 1,
+      "margin": 3,
+      "rest_and_corpse": [
+        {
+          "height": 146,
+          "width": 132,
+          "solid": 12343
+        },
+        {
+          "height": 120,
+          "width": 160,
+          "solid": 9722
+        }
+      ]
+    },
+    {
+      "species": 3,
+      "view": 2,
+      "margin": 3,
+      "rest_and_corpse": [
+        {
+          "height": 146,
+          "width": 122,
+          "solid": 11868
+        },
+        {
+          "height": 131,
+          "width": 158,
+          "solid": 9271
+        }
+      ]
+    },
+    {
+      "species": 3,
+      "view": 3,
+      "margin": 3,
+      "rest_and_corpse": [
+        {
+          "height": 146,
+          "width": 142,
+          "solid": 13668
+        },
+        {
+          "height": 135,
+          "width": 168,
+          "solid": 10830
+        }
+      ]
+    },
+    {
+      "species": 3,
+      "view": 4,
+      "margin": 3,
+      "rest_and_corpse": [
+        {
+          "height": 146,
+          "width": 134,
+          "solid": 12954
+        },
+        {
+          "height": 133,
+          "width": 147,
+          "solid": 10403
+        }
+      ]
+    }
+  ],
+  "texture_bytes": 99328000
+}

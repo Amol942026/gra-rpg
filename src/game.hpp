@@ -102,6 +102,10 @@ inline float distance(V a,V b){return length(a-b);}
 inline V normalized(V v){float n=length(v);return n>.001f?v*(1/n):V{};}
 inline constexpr float EnemyImpactLife=.24f;
 inline constexpr float EnemyHitRecovery=.18f;
+inline constexpr float enemyHitRecovery(int type){
+ constexpr float marshHurt[]={.30f,.26f,.32f,.36f};
+ return marshEnemy(type)?marshHurt[type-PeatToad]:EnemyHitRecovery;
+}
 #include "forest_layout.hpp"
 #include "tower_layout.hpp"
 #include "desert_layout.hpp"
@@ -176,7 +180,7 @@ struct Enemy {
  }
  V hitLean()const{
   if(!alive||flash<=0)return {};
-  const float age=std::clamp(1-flash/EnemyHitRecovery,0.f,1.f);
+  const float age=std::clamp(1-flash/enemyHitRecovery(type),0.f,1.f);
   const bool heavy=type==3||type==11||type==18;
   const float strength=(heavy?.058f:.105f)*(1-age)*std::cos(age*AnimationPi*1.65f);
   const V projected=normalized({(hitDirection.x-hitDirection.y)*2,hitDirection.x+hitDirection.y});
@@ -771,7 +775,7 @@ struct Game {
   // Multiply the armor-reduced normal hit, so a critical is exactly +150%.
   amount=damageAfterArmor(amount,type==DamageType::Magic?e.magicDefense():e.defense())*(critical?CriticalMultiplier:1.f);
   const float previousFlash=e.flash;
-  e.hp-=amount;e.flash=EnemyHitRecovery;
+  e.hp-=amount;e.flash=enemyHitRecovery(e.type);
   float lift=0;for(const auto& effect:effects)if(effect.damageNumber&&distance(effect.pos,e.pos)<.1f)lift=std::max(lift,effect.height-enemyInfo(e.type).visualHeight+24);
   effects.push_back({e.pos,std::to_string(int(std::round(amount))),critical?1.25f:.95f,0,true,critical,enemyInfo(e.type).visualHeight+18+std::min(lift,90.f)});
   sound(enemyHitCue(e.type),e.pos);
@@ -1010,6 +1014,12 @@ struct Game {
   updateVenomGlobs(dt,before,wasRolling,rollElapsed);
   std::vector<V> oldPositions,desired(enemies.size());oldPositions.reserve(enemies.size());
   for(size_t i=0;i<enemies.size();i++){auto& e=enemies[i];oldPositions.push_back(e.pos);tick(e.flash);tick(e.attack);tick(e.strike);if(!e.alive){e.animation.moving=false;continue;}float d=distance(player,e.pos);
+   if(marshEnemy(e.type)&&!e.animation.facingInitialized){
+    // Start a first patrol or chase from the bearing already visible at rest.
+    const float yaw=int(e.animation.direction)*AnimationPi/4;
+    e.animation.facingAngle=e.animation.targetAngle=std::atan2(std::sin(yaw)*ActorGroundSquash,std::cos(yaw));
+    e.animation.facingInitialized=true;
+   }
    tick(e.sandCastPulse);
    const bool visible=canSeePlayer(e);
    // Combat time, including ordinary attack windups, advances this independent cooldown.
@@ -1075,7 +1085,13 @@ struct Game {
    const bool faceMovement=stepping&&!chasing&&!planted&&!e.chargeBusy();
    if(chasing&&!planted&&!e.chargeBusy())faceEnemyTowards(e,player-e.pos);
    if(e.windup>0&&e.type!=VolcanoBossType&&((e.type!=3&&e.type!=7)||e.windup>.12f))faceEnemyTowards(e,player-e.pos);
-   if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType)advanceVolcanoAnimation(e,gait,dt,faceMovement);
+   if(marshEnemy(e.type)){
+    // Ground-plane pixels covered in a complete cycle of the painted limbs or tendrils.
+    constexpr float cycle[]={26.f,23.f,35.f,48.f};
+    constexpr float groundTurnRate[]={3.45f,3.8f,3.2f,2.8f};
+    const int species=e.type-PeatToad;
+    desert_motion::advance(e.animation,gait.x,gait.y,dt,faceMovement,cycle[species],groundTurnRate[species],TurnPlane::Ground);
+   }else if(e.type>=VolcanoFirstType&&e.type<=VolcanoBossType)advanceVolcanoAnimation(e,gait,dt,faceMovement);
    else if(e.type==CinderhornType)cinderhorn_gait::advance(e.animation,gait.x,gait.y,dt,faceMovement,e.boarRush>0);
    else if(e.type==DuneJackalType)desert_motion::advanceJackal(e.animation,gait.x,gait.y,dt,faceMovement);
    else if(e.type==GlassReaperType)desert_motion::advance(e.animation,gait.x,gait.y,dt,faceMovement,

@@ -45,10 +45,12 @@ void combatPressTests() {
               "all enemy types spark and visibly lean on a normal player strike");
         check(feedback.combatImpacts[0].material==impactMaterial(type),"hit particles retain the struck enemy material");
         const V initial=target.hitLean();
-        for(int tick=0;tick<4;tick++)feedback.update(.025f,{},false);
+        const float halfReaction=enemyHitRecovery(type)*.5f;
+        for(int tick=0;tick<4;tick++)feedback.update(halfReaction/4,{},false);
         check(length(target.hitLean())>0&&target.hitLean().x*initial.x<0&&distance(target.pos,point)<.001f,
               "hit reaction returns through a counter-sway without changing world position");
-        for(int tick=0;tick<7;tick++)feedback.update(.025f,{},false);
+        const float finish=std::max(EnemyImpactLife,enemyHitRecovery(type))+.025f;
+        for(int tick=0;tick<8;tick++)feedback.update((finish-halfReaction)/8,{},false);
         check(feedback.combatImpacts.empty()&&length(target.hitLean())==0,"impact particles and reaction expire");
     }
     check(impactMaterial(0)==ImpactMaterial::Slime&&impactMaterial(3)==ImpactMaterial::Stone&&

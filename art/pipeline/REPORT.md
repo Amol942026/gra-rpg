@@ -1,5 +1,47 @@
 # Raport konfiguracji — 19.10.2026
 
+**26.11.2026 — zasłanianie części ciała przeciwników Mokradeł podczas obrotu**
+
+W Blenderze łapy i boki ropuchy zachodzą pod grzbiet, kolejne pierścienie pijawki zasłaniają dalsze segmenty, wici Błędnika chowają się za latarnią, a płaszcz Dzwonnika przykrywa dalsze ramię i dzwon. Każda z 73 malowanych części zachowuje kształt. W klatkach pośrednich gra wybiera kolor widocznej części na podstawie trzech dodatkowych próbek kąta między sąsiednimi ujęciami. Maski są wczytywane do pamięci graficznej razem z atlasami. [Projekt Blendera](C:/AI2D/animations/mokradla-przeslanianie-20261126/Mokradła-128.blend) · [Odbudowa zasobów](../creatures/marsh-turn/README.md)
+
+Przy 512 ustawieniach kierunku test wykrył niezamierzone przecięcie warstw w 425 ujęciach poprzedniej wersji i w żadnym ujęciu po poprawce. Drugi test obejmował 11 relacji anatomicznych, w tym kolejność płaszcza, naramiennika i ramienia. Render kierunków i masek w Blenderze trwał 27,94 s, kompilacja atlasów ruchu i przesłon 24,39 s, a przechwycenie 1720 klatek w ukrytej grze bez dźwięku 89,14 s. [Pomiary zasłaniania](C:/AI2D/pipeline/runs/mokradla-przeslanianie-20261126/layers/result.json) · [Obrót w grze](C:/AI2D/pipeline/runs/mokradla-przeslanianie-20261126/qa/final/mokradla-obrot-w-grze.webp)
+
+**26.11.2026 — proporcje ciał podczas obrotu na Mokradłach**
+
+Każde ze 128 ujęć kierunkowych korzysta ze stałych rozmiarów malowanych części. Stawy prowadzą ich położenie oraz obrót. Eksport Blendera sprawdza kształt wszystkich 73 części. W chodzie pijawki kolejne pierścienie zginają się wzdłuż grzbietu. U ropuchy, Błędnika i Dzwonnika animacja rozdziela ruch łap lub wici od pracy tułowia. [Źródło kierunków](C:/AI2D/animations/mokradla-stabilny-obrot-20261126/Mokradła-128.blend) · [Źródło ruchu](C:/AI2D/animations/mokradla-stabilny-obrot-20261126/Mokradla-stabilne-akcje-final.blend)
+
+Render 512 rysunków w Blenderze trwał 22,84 s. Wypieczenie siatek animacji zajęło 26,80 s, a przechwycenie 1720 klatek w ukrytej grze bez dźwięku 87,31 s. Podczas obrotu w chodzie mediana lokalnej zmiany proporcji w okolicy dzwonu spadła z 14,4% do 4,8%, latarni z 7,7% do 4,4%, pyska ropuchy z 14,8% do 11,3%, a pośrodku pancerza pijawki z 14,7% do 10,0%. Pomiar obrazu obejmuje również odsłanianie części ciała, szczególnie przy przyssawce pijawki. Zęby na rysunku zachowują wzajemny rozstaw. Osobno sprawdzono zgodność wskazań kursora z widocznym obrysem w 568 520 punktach. [Obrót w chodzie](C:/AI2D/pipeline/runs/mokradla-stabilny-obrot-20261126/qa/final/mokradla-obrot-w-grze.webp) · [Pełne pomiary](C:/AI2D/pipeline/runs/mokradla-stabilny-obrot-20261126/qa/final/runtime-stability.json)
+
+**26.11.2026 — 128 kierunków przeciwników Mokradeł**
+
+Pełny obrót Ropuchy torfowej, Pijawki dennej, Błędnika trzcinowego i Dzwonnika Topieli ma po 128 osobnych ujęć co 2,8125°. W projekcie Blendera 73 malowane części mają własne pozycje i kolejność zasłaniania. Podczas skręcania gra zachowuje fazę kroku i płynnie rozpędza i wyhamowuje obrót na płaszczyźnie gruntu. W teście nagłej zmiany celu przy 60 krokach symulacji na sekundę największy obrót w jednym kroku wyniósł 3,63° wobec wcześniejszych 10,63°. Wszystkie cztery łapy ropuchy zachowują tożsamość przy zmianie podparcia.
+
+Wypalenie 512 kierunkowych rysunków zajęło 19,47 s w Blenderze. Siatki chodu, ataku, trafienia i upadku korzystają z 16 kluczy każdej akcji oraz interpolacji w czasie. [Kierunki w Blenderze](C:/AI2D/animations/mokradla-128-20261126/Mokradła-128.blend) · [Edytowalne akcje](C:/AI2D/animations/mokradla-128-20261126/Mokradla-128-akcje.blend) · [Odbudowa materiałów](../creatures/marsh-turn/README.md)
+
+W ukrytym rendererze bez dźwięku przechwycenie chodu z pełnym skrętem, ataku, trafienia i upadku trwało 93,78 s. Zbadano po 256 kątów każdego gatunku w czterech akcjach, a osobno wartości po obu stronach każdego rysunku i połowy odstępu do następnego. W połowie odstępu mediany kontrastu krawędzi dla czterech gatunków wyniosły od 99,1% do 99,8% w porównaniu z sąsiednimi rysunkami. W najtrudniejszym przejściu Dzwonnika miara przeskoku widocznej powierzchni spadła z 7 do 2 px. [Podgląd z gry](C:/AI2D/pipeline/runs/mokradla-pelny-obrot-20261126/qa/accepted/mokradla-obrot-w-grze.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-pelny-obrot-20261126/report.json)
+
+**26.11.2026 — ostrość animacji podczas skręcania na Mokradłach.**
+
+Podczas skrętu gra prowadzi detale między odpowiadającymi sobie punktami dwóch rysunków. Drugi rysunek odsłania się miejscowo, np. kiedy pysk zasłania dalsze oko. Poprzednia wersja nakładała półprzezroczyste sylwetki na całej powierzchni. Ponowne wypalenie 1280 klatek w Blenderze zajęło 15,07 s. Wszystkie 60 porównań wspólnej pozy początkowej chodu, ataku, trafienia i śmierci dało identyczne wartości RGBA.
+
+Przechwycenie 1055 klatek sceny rozgrywki w ukrytym oknie bez dźwięku trwało 56,90 s. W 880 klatkach chodu korekta podparcia nie powodowała pionowych przeskoków tułowia. Przy podporach krawędź ciała znajdowała się najwyżej jeden piksel od cienia. We wszystkich 164 526 porównaniach wybór kursorem zgadzał się z renderowaną sylwetką. [Podgląd](C:/AI2D/pipeline/runs/mokradla-ostry-obrot-20261126/qa/mokradla-ostry-obrot.webp) · [Raport i pomiary](C:/AI2D/pipeline/runs/mokradla-ostry-obrot-20261126/report.json)
+
+**26.11.2026 — płynne skręty i upadki na Mokradłach.**
+
+Ropucha, Pijawka, Błędnik i Dzwonnik mają po pięć malowanych widoków. Trzy boczne widoki mają prawe odpowiedniki. Podczas skrętu gra wyznacza położenie pomiędzy sąsiednimi sylwetkami dla bieżącej fazy chodu, ataku, trafienia lub upadku. Śmierć utrwala kierunek postaci. Ropucha podkurcza łapę i zamyka oczy, pijawka zwija ogon, a Błędnik składa wici i przygasa. Dzwonnik osuwa się na bok ze zgiętymi kończynami.
+
+Blender 5.3 wyrenderował 1280 klatek w 61,86 s. W projekcie ponownie otwarto 20 scen z kluczami kształtu i spakowanymi teksturami. Źródła i sposób odbudowy znajdują się w [katalogu rysunków kierunkowych](../creatures/marsh-turn/README.md). [Projekt Blender](C:/AI2D/animations/mokradla-kierunki-20261126/Mokradla-kierunki.blend) · [Projekt Krita](C:/AI2D/sprites/mokradla-kierunki-20261126/Mokradla-obroty.kra)
+
+W ukrytym rendererze gry, bez dźwięku, przechwycenie trwało 21,01 s. Dla każdego z czterech gatunków i każdej z czterech akcji sprawdzono 128 kątów. Największa zmiana obrysu między sąsiednimi kątami zmalała o 67–92% względem wcześniejszej animacji. W ujęciu bocznym ciała mają po upadku od 38% do 61% więcej wysokości. W 530 klatkach sceny cień stykał się z postacią. [Podgląd obrotu i upadku](C:/AI2D/pipeline/runs/mokradla-kierunki-20261126/qa/mokradla-obrot-i-upadek.webp) · [Pomiary](C:/AI2D/pipeline/runs/mokradla-kierunki-20261126/qa/preview.json)
+
+**26.11.2026 — przeciwnicy Mokradeł Cichych Dzwonów.**
+
+Ropucha torfowa porusza łapami, Pijawka denna wydłuża i skraca tułów, Błędnik trzcinowy ciągnie za sobą pędy, a Dzwonnik Topieli przenosi ciężar między korzeniami. Każdy ma cztery klipy po 16 póz. Chód zależy od przebytej drogi. Zwykły atak i fala dzwonu mają pozę kontaktu, a promień Błędnika zaczyna się w jasnym rdzeniu aktualnej klatki. Ranny przeciwnik reaguje na trafienie, po śmierci pozostaje w ostatniej pozie upadku.
+
+Blender 5.3 wyrenderował 256 póz w 17,13 s. Ponowne otwarcie potwierdziło cztery edytowalne sceny z teksturami spakowanymi w projekcie. Narzędzia `tools/media/marsh_actor_blender.py` i `tools/media/marsh_actor_pack.py` tworzą atlasy oraz punkty podparcia i rdzenia używane przez grę. Cień, obrys pod kursorem i ciało korzystają z tej samej klatki i odbicia. [Projekt Blender](C:/AI2D/animations/mokradla-ruch-20261126-wydanie/Mokradla-bestie.blend)
+
+Przechwycenie sceny rozgrywki w ukrytym oknie bez dźwięku trwało 11,69 s. We wszystkich kadrach czterech akcji każdego gatunku cień stykał się z sylwetką, a jej dół pozostawał w odległości najwyżej jednego piksela od punktu osadzenia. Gra potwierdziła obrażenia i utrzymanie pozy po upadku. [Podgląd animacji](C:/AI2D/pipeline/runs/mokradla-animacje-20261126/qa/mokradla-chod-atak-trafienie-upadek.webp) · [Raport](C:/AI2D/pipeline/runs/mokradla-animacje-20261126/report.json)
+
 **25.11.2026 — szybsze ugryzienie Szakala wydmowego.**
 
 Przygotowanie ugryzienia trwa 0,47 s, a powrót do pozycji bojowej 0,30 s. Łączny czas skrócił się o 110 ms. Przy kroku symulacji 60 Hz trafienie nastąpiło po 29 krokach, w pozie kontaktu szczęk, a powrót zajął 18 kroków. Test potwierdził jednorazowe obrażenia i wyświetlenie wszystkich 15 póz ugryzienia.

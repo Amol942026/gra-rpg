@@ -166,6 +166,36 @@ inline void contactShadow(Vector2 p,Rectangle base,float coverage){
  }
  DrawTriangleFan(fan.data(),int(fan.size()),Fade(WHITE,coverage));
 }
+inline void marshActorShadow(const Enemy& enemy,Vector2 base){
+ const auto pose=marsh_art::actorFrame(enemy,marsh_art::fallPhase(enemy));
+ if(marsh_art::rigs[pose.species].marks.empty())return;
+ const auto& mesh=marsh_art::surface(pose);
+ const auto& feet=mesh.feet;
+ const float scale=marsh_art::actorScale(pose.species);
+ const float leftY=feet[0].rx>0?feet[0].y:feet[1].y,rightY=feet[1].rx>0?feet[1].y:feet[0].y;
+ constexpr float standingRelief[]={.65f,.42f,.69f,.82f};
+ const float fall=pose.clip==marsh_actor_frames::Death?pose.phase:0.f;
+ const float relief=standingRelief[pose.species]*(1-.54f*fall);
+ // Project the very same articulated outline used for drawing and picking. The
+ // near/far feet sit at different depths even when one leg crosses the other.
+ marsh_art::beginInk(pose,2);
+ marsh_art::drawSurface(pose,mesh,WHITE,[&](Vector2 v){
+  const float t=std::clamp((v.x-feet[0].x)/std::max(1.f,feet[1].x-feet[0].x),0.f,1.f);
+  const float elevation=std::max(0.f,marsh_art::interpolate(leftY,rightY,t)-v.y);
+  return Vector2{base.x+scale*(v.x+shadow_math::LightX*elevation*relief),
+                 base.y+scale*(v.y+elevation*(1+shadow_math::LightY*relief))};
+ });
+ EndShaderMode();BeginShaderMode(maskShader);
+ for(const auto& foot:feet){
+  if(foot.rx<=0)continue;
+  // The lantern often rests on a single filament. Keep its contact visible after the
+  // half-resolution mask is softened, centered on that frame's actual touching tip.
+  const bool filament=enemy.type==MarshLight;
+  const float rx=std::max(filament?3.6f:1.7f,foot.rx*scale*1.25f);
+  const float ry=std::max(filament?2.65f:1.35f,rx*.40f);
+  contactShadow(base,{foot.x*scale-rx,foot.y*scale-ry,2*rx,2*ry},.86f);
+ }
+}
 inline Rectangle paintedGroundFootprint(const Enemy& e){
  if(e.type==DuneJackalType)return {-28,-7,56,13};
  if(e.type==GlassReaperType){
@@ -253,7 +283,7 @@ inline void prepare(bool chamber=false){
     if(near(p,270)){legacyCorpseShadow(e,p);visibleCasters++;}
     continue;
    }
-   if(marshEnemy(e.type)){if(near(p,210)){billboard(p.y,[&]{marsh_art::actor(e,p.x,p.y,BLANK,nullptr,true,1,e.alive?-1.f:std::min(1.f,e.deathProgress()/enemy_death::groundContact(e.type)));});visibleCasters++;}continue;}
+   if(marshEnemy(e.type)){if(near(p,210)){marshActorShadow(e,p);visibleCasters++;}continue;}
    if(regionalEnemy(e.type)){
     if(near(p,215)){
      if(e.alive||!paintedCorpseShadow(e,p))

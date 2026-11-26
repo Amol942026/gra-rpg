@@ -27,7 +27,9 @@ void enemyDeathTests(){
   check(held,"the authored body pose is held from ground impact onward");
   const float contact=enemy_death::groundContactTime(type);
   const float restingTime=enemy_death::duration(type)-contact;
-  const int transformationFrames=type==StoneGuardianType?16:marshMotionFamily(type)==AshWraithType?24:
+  constexpr int marshContactFrames[]={26,25,30,42};
+  const int transformationFrames=marshEnemy(type)?marshContactFrames[type-PeatToad]:
+                                 type==StoneGuardianType?16:type==AshWraithType?24:
                                  type==FireImpType?23:type==9||type==ObsidianSentinelType?25:
                                  type==VolcanoBossType?39:type==DuneJackalType?23:type==GlassReaperType?27:0;
   const float expectedScale=type==DuneJackalType?.70f:1.f;

@@ -2,7 +2,7 @@
 // Included within Game. No random draws: loot and combat-critical RNG streams
 // remain independent of ability timing, particles and terrain projection.
 static void faceEnemyAbility(Enemy& e){
- const V d=e.abilityDirection;e.animation.faceAim(d.x,d.y,smoothVolcanoTurn(e.type));
+ const V d=e.abilityDirection;e.animation.faceAim(d.x,d.y,smoothEnemyTurn(e.type));
 }
 void cancelEnemyAbilities(){
  venomGlobs.clear();for(auto& e:enemies){if(e.abilityAge>=0)e.abilityCd=std::max(e.abilityCd,1.2f);e.abilityAge=-1;e.abilityMask=0;e.abilityDirection={};}

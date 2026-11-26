@@ -1,0 +1,94 @@
+{
+  "source": "assets/media/mokradla/atlas.png",
+  "source_sha256": "c852ce15abbc22bb01639a757b30a683c032f5700212935122630ebacdf1c5c2",
+  "master": "C:\\AI2D\\animations\\mokradla-ruch-20261126-wydanie\\Mokradla-bestie.blend",
+  "renderer": "Blender Cycles / painted 2D grids",
+  "provenance": "Original Emberfall marsh atlas, locally articulated and rendered in Blender",
+  "atlas_files": [
+    {
+      "file": "actor-0.png",
+      "bytes": 1769283,
+      "sha256": "849f2c0379484b1a2f5b48ae5e75a51f19a91c1e6873cca5b242dbd79abfe525"
+    },
+    {
+      "file": "actor-1.png",
+      "bytes": 1479660,
+      "sha256": "557bd8e9f31d00d1db6597916bb2f40016688aa015818809bd4c308c4c5a66f4"
+    },
+    {
+      "file": "actor-2.png",
+      "bytes": 1250954,
+      "sha256": "eff94c9f34b87fb41f53b6bc69ef65918ffe9551498ff759c9a32826a8391ff2"
+    },
+    {
+      "file": "actor-3.png",
+      "bytes": 2672352,
+      "sha256": "87c604c24ae719b8ab6b3cbb30bd69880152f6d19dea642638d2d1dad9f39766"
+    }
+  ],
+  "cell": [
+    176,
+    184
+  ],
+  "ground_anchor": [
+    88,
+    159
+  ],
+  "rest_height": [
+    99.0,
+    89.0,
+    130.0,
+    142.0
+  ],
+  "actions": [
+    "walk",
+    "attack",
+    "hurt",
+    "death"
+  ],
+  "frames_per_action": 16,
+  "checks": [
+    {
+      "species": 0,
+      "minimum_cell_margin": 14,
+      "max_contact_error_px": 1.0
+    },
+    {
+      "species": 1,
+      "minimum_cell_margin": 2,
+      "max_contact_error_px": 2.0
+    },
+    {
+      "species": 2,
+      "minimum_cell_margin": 18,
+      "max_contact_error_px": 2.0
+    },
+    {
+      "species": 3,
+      "minimum_cell_margin": 2,
+      "max_contact_error_px": 2.0
+    }
+  ],
+  "render": {
+    "software": "5.3.0",
+    "seconds": [
+      4.163,
+      4.086,
+      4.084,
+      4.8
+    ],
+    "total_render_seconds": 17.133,
+    "species": [
+      "Ropucha torfowa",
+      "Pijawka denna",
+      "Błędnik trzcinowy",
+      "Dzwonnik Topieli"
+    ],
+    "clips": [
+      "Chód",
+      "Atak",
+      "Trafienie",
+      "Upadek"
+    ]
+  }
+}

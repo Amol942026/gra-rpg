@@ -154,7 +154,7 @@ inline bool summonDeveloperEnemy(Game& game,int type){
     }))continue;
    Enemy enemy{id,type,pos,pos,info.health,info.health};
    const V toward=game.player-pos;
-   if(smoothVolcanoTurn(type))enemy.animation.faceAim(toward.x,toward.y,true);
+   if(smoothEnemyTurn(type))enemy.animation.faceAim(toward.x,toward.y,true);
    else enemy.animation.face(toward.x,toward.y);
    enemy.behavior=EnemyBehavior::Chase;
    game.enemies.push_back(enemy);

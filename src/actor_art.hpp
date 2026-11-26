@@ -934,7 +934,11 @@ inline bool draw(int species,float x,float y,float size,const AnimationState& st
                  Color outline=BLANK,const Vector2* probe=nullptr,float roll=-1,float swingProgress=-1,float bowDraw=-1,int quiverArrows=3,bool empowered=false,const std::array<Item,6>* equipment=nullptr,float guardianThrow=-1,float knockdown=-1,float fallR=0,float fallF=-1,
                  PowerStyle power=PowerStyle::Count,float powerAge=0,float windup=-1,float enemyMelee=-1,Vector2 hitLean={},
                  Silhouette* fallbackSilhouette=nullptr,HeroReaction reaction={},float special=-1,float bowRelease=-1,float bowPreparation=1.f) {
-    if(marshEnemy(species-1)){Enemy e{};e.type=species-1;e.animation=state;e.strike=attack>0?.14f:0;return marsh_art::actor(e,x,y,outline,probe,shadowBuilding,size);}
+    if(marshEnemy(species-1)){
+        Enemy e{};e.type=species-1;e.animation=state;e.flash=flash?enemyHitRecovery(e.type)*.7f:0;
+        e.strike=attack>0?meleeRecovery(e.type)*.7f:0;
+        return marsh_art::actor(e,x,y,outline,probe,shadowBuilding,size);
+    }
     if(regionalEnemy(species-1)){
         if(shadowBuilding&&!shadowCasting)return false;
         Enemy e{};e.type=species-1;e.animation=state;e.strike=attack>0?.14f:0;e.flash=flash?.1f:0;
@@ -1041,7 +1045,7 @@ template<class Draw> bool drawHitSprite(float y,Vector2 lean,const Vector2* prob
 inline bool drawEnemy(const Enemy& e,float x,float y,Color outline=BLANK,const Vector2* probe=nullptr){
  const V impulse=e.hitLean();
  const Vector2 lean{impulse.x,impulse.y};
- if(marshEnemy(e.type))return drawHitSprite(y,lean,probe,[&](const Vector2* point){return marsh_art::actor(e,x,y,outline,point,shadowBuilding);});
+ if(marshEnemy(e.type))return marsh_art::actor(e,x,y,outline,probe,shadowBuilding);
  if(regionalEnemy(e.type))return drawHitSprite(y,lean,probe,[&](const Vector2* point){
   return regional_enemy_art::draw(e,x,y,outline,point,shadowBuilding);
  });

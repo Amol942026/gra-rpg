@@ -1,6 +1,101 @@
 #pragma once
 #include "sprint_qa.hpp"
 #include "fallen_qa.hpp"
+#include <set>
+
+template<class Check>
+void verifyMarshActors(Check check){
+ bool walk=true,attack=true,hurt=true,death=true,turn=true,still=true;
+ for(int type=PeatToad;type<=BellKeeper;type++){
+  const auto species=type-PeatToad;
+  Enemy e{};e.type=type;e.alive=true;
+  e.animation.moving=true;e.animation.moveBlend=1.f;e.animation.phase=.5f;
+  auto frame=marsh_art::actorFrame(e);
+  walk&=frame.species==species&&frame.clip==marsh_actor_frames::Walk&&frame.frame>0;
+  e.windup=meleeWindup(type)*.5f;
+  frame=marsh_art::actorFrame(e);
+  attack&=frame.clip==marsh_actor_frames::Attack&&frame.frame>0;
+  e.windup=0;e.flash=enemyHitRecovery(type)*.5f;
+  frame=marsh_art::actorFrame(e);
+  hurt&=frame.clip==marsh_actor_frames::Hurt&&frame.frame>0;
+  e.alive=false;e.flash=0;
+  const auto falling=marsh_art::actorFrame(e,.35f),resting=marsh_art::actorFrame(e,1.f);
+  death&=falling.clip==marsh_actor_frames::Death&&resting.clip==falling.clip&&resting.frame>falling.frame;
+  // Probe on both sides of the eastern wrap as well as between each pair of cels.
+  for(int bearing=0;bearing<marsh_art::Facings;bearing++){
+   const float angle=(bearing+.375f)*2*PI/marsh_art::Facings;
+   const float projected=std::atan2(std::sin(angle)*ActorGroundSquash,std::cos(angle));
+   e.alive=true;e.animation.facingInitialized=true;e.animation.facingAngle=projected;
+   const auto pose=marsh_art::actorFrame(e);
+   turn&=pose.bearing==bearing&&std::abs(pose.residual-.375f)<.001f;
+   e.alive=false;e.deathMotion=e.animation;e.animation.facingAngle+=PI/2;
+   const auto body=marsh_art::actorFrame(e,1.f);
+   still&=body.bearing==pose.bearing&&std::abs(body.residual-pose.residual)<.001f&&body.frame==marsh_actor_frames::Frames-1;
+  }
+ }
+ check(marsh_art::ready(),"all marsh directional paintings and deformation data are resident");
+ bool artwork=true,selection=true;
+ for(int s=0;s<4;s++){
+  const auto& painting=marsh_art::paintings[s];
+  const int count=int(painting.views.size());
+  if(count!=marsh_art::ViewCount){artwork=selection=false;continue;}
+  const int w=marsh_turn_frames::CellW[s],h=marsh_turn_frames::CellH[s];
+  std::set<uint64_t> drawings;
+  for(int i=0;i<int(painting.pages.size());i++){
+   Image image=LoadImageFromTexture(painting.pages[i].texture);
+   if(!image.data||image.format!=PIXELFORMAT_UNCOMPRESSED_R8G8B8A8){
+    artwork=false;if(image.data)UnloadImage(image);continue;
+   }
+   const auto* rgba=static_cast<const Color*>(image.data);
+   for(int j=0;j<count;j++){
+    const auto& rect=painting.views[j];
+    if(rect.page!=i)continue;
+    uint64_t hash=1469598103934665603ull;
+    int solid=0;
+    for(int y=0;y<h;y++)for(int x=0;x<w;x++){
+     const int tx=x-rect.left,ty=y-rect.top;
+     Color px{};
+     if(tx>=0&&ty>=0&&tx<rect.w&&ty<rect.h){
+      px=rgba[(rect.y+ty)*image.width+rect.x+tx];
+      if(tx==0||ty==0||tx==rect.w-1||ty==rect.h-1)artwork&=px.a==0;
+     }
+     solid+=px.a>=64;
+     const uint32_t visible=px.a>=32?(uint32_t(px.r)<<24|uint32_t(px.g)<<16|uint32_t(px.b)<<8|px.a):0;
+     hash=(hash^visible)*1099511628211ull;
+    }
+    artwork&=solid>=100;
+    drawings.insert(hash);
+    // Points immediately on either side of the centre use the same exposure.
+    for(const float fraction:{-.45f,.45f}){
+     Enemy e{};e.type=PeatToad+s;e.alive=true;e.animation.facingInitialized=true;
+     const float angle=(j+fraction)*2*PI/count;
+     e.animation.facingAngle=std::atan2(std::sin(angle)*ActorGroundSquash,std::cos(angle));
+     selection&=marsh_art::viewIndex(marsh_art::actorFrame(e))==j;
+    }
+   }
+   UnloadImage(image);
+  }
+  artwork&=drawings.size()==count;
+ }
+ check(artwork,"each marsh creature has 512 distinct visible paintings with isolated atlas edges");
+ check(selection,"body, picking and shadow select the same single exposure at all 512 headings");
+ check(turn,"marsh creatures follow continuous headings through all 128 cels including the wrap to east");
+ check(still,"marsh corpses retain their continuous heading through the final pose");
+ check(walk,"each marsh creature advances its walking clip");
+ check(attack,"each marsh creature selects attack poses during its windup");
+ check(hurt,"each marsh creature selects recoil poses after taking damage");
+ check(death,"each marsh creature reaches the final pose of its death clip");
+ Enemy keeper{};keeper.type=BellKeeper;
+ const auto& toll=enemyAbilityProfile(BellKeeper);
+ keeper.abilityAge=.1f*toll.windup;
+ const auto lift=marsh_art::actorFrame(keeper);
+ keeper.abilityAge=toll.windup;
+ const auto ring=marsh_art::actorFrame(keeper);
+ keeper.abilityAge=toll.duration()-.01f;
+ const auto lower=marsh_art::actorFrame(keeper);
+ check(lift.clip==marsh_actor_frames::Attack&&ring.clip==lift.clip&&lower.clip==lift.clip&&
+       lift.frame<ring.frame&&ring.frame<lower.frame,"the keeper swings the bell through the release of its wave");
+}
 
 template<class Check>
 void verifyJackalTurn(Check check,std::ostream& report){
@@ -70,6 +165,7 @@ bool runGraphicsQA(){
  check(!audioSystem.available,"graphics diagnostic opens no audio device");
  verifySprintArt(check);
  verifyFallenArt(check);
+ verifyMarshActors(check);
  verifyJackalTurn(check,report);
  {
   const double started=GetTime();

@@ -167,7 +167,7 @@ WorldHover pickWorld(Vector2 point) {
             const bool newRig=caldera_quadruped::handles(e.type);
             const float height=newRig?caldera_quadruped::hoverAbove(e.type):enemyInfo(e.type).visualHeight+(raisedBlade?46.f:0.f);
             const float low=newRig?caldera_quadruped::HoverBelow:raisedBlade?45.f:14.f;
-            if(regionalEnemy(e.type)||CheckCollisionPointRec(point,{p.x-half,p.y-height,half*2,height+low})){
+            if(marshEnemy(e.type)||regionalEnemy(e.type)||CheckCollisionPointRec(point,{p.x-half,p.y-height,half*2,height+low})){
                 touched=actor_art::drawEnemy(e,p.x,p.y,BLANK,&point);
             }
         }else if(it->type==4){
@@ -177,7 +177,7 @@ WorldHover pickWorld(Vector2 point) {
             float height=!e.corpseGrounded()?enemyInfo(e.type).visualHeight+28:enemyBoss(e.type)?115.f:92.f;
             const Rectangle area=e.corpseGrounded()&&fallen_art::cachedBody(e.type)?cachedCorpseBounds(e,p):
                 Rectangle{p.x-half,p.y-height,half*2,height+52};
-            if(regionalEnemy(e.type)||CheckCollisionPointRec(point,area))touched=corpseArt(e,p.x,p.y,BLANK,&point);
+            if(marshEnemy(e.type)||regionalEnemy(e.type)||CheckCollisionPointRec(point,area))touched=corpseArt(e,p.x,p.y,BLANK,&point);
         }else{
             position=game.player;Vector2 p=screen(position);
             if(CheckCollisionPointRec(point,{p.x-112,p.y-140,224,182})){

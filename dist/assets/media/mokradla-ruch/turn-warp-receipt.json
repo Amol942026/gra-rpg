@@ -1,0 +1,362 @@
+{
+  "grid": 32,
+  "pose_columns": 64,
+  "clockwise_sectors": 8,
+  "pitch_pixels": 0.75,
+  "coordinates": "Cell-edge coordinates, screen oriented, (0,0) at top left. F locates the endpoints from midpoint M: A=M-F/2, B=M+F/2.",
+  "red_green": "F=(RG*255-128)*0.75",
+  "blue": "continuous surface replacement threshold",
+  "alpha": "low-frequency change in luminance from A to B, byte minus 128",
+  "source_geometry_sha256": "896cd1ef1686a47d7e683a05598918c63b2574d92c0142dc72ce652fc341a5f3",
+  "source_atlases": [
+    {
+      "file": "turn-0-0.png",
+      "sha256": "a74aa77d713782dcc29d6921076228aea55ff086072b04ee62622ef1a340bc48",
+      "bytes": 929290
+    },
+    {
+      "file": "turn-0-1.png",
+      "sha256": "96810690065db5f59ea777d6b868725a3b83c375fbefa592b0ee8eb92e0f514c",
+      "bytes": 945132
+    },
+    {
+      "file": "turn-0-2.png",
+      "sha256": "10184a5886b4a52c001cfa0520a3af221f4dd6eab837d088f2f3963410e58dbd",
+      "bytes": 1381489
+    },
+    {
+      "file": "turn-0-3.png",
+      "sha256": "9baa17ae1e60c0d9f24fe578bb404aa225c9893ec0a058a363cc5227b995692e",
+      "bytes": 1118942
+    },
+    {
+      "file": "turn-0-4.png",
+      "sha256": "aa044c56abca790f0ac1e382402151ed4d712e911010eaf347fb5b671e8b9a63",
+      "bytes": 1059635
+    },
+    {
+      "file": "turn-1-0.png",
+      "sha256": "1c485d614b39af12f8289266475546a65172d72b4e4c05784ef2d9d1b056dc4d",
+      "bytes": 621703
+    },
+    {
+      "file": "turn-1-1.png",
+      "sha256": "fad571c4e5efe6cc5df21f274ba417bf48cc730fe981e17b212c74dda88d351b",
+      "bytes": 699551
+    },
+    {
+      "file": "turn-1-2.png",
+      "sha256": "273c42fbcd3c3e016ee36e7a26af26c2ad8d1f1bbb9f23bc78fbf1b4d3f83287",
+      "bytes": 1105654
+    },
+    {
+      "file": "turn-1-3.png",
+      "sha256": "c49dff196027f8ffa947faf0aca89596e77e19cc10118b9551cc2eb644433eb0",
+      "bytes": 847363
+    },
+    {
+      "file": "turn-1-4.png",
+      "sha256": "9d28c86bb57d65df8d0bfe53bda3dfbb286b09b22adc98636ee6eca03b789f69",
+      "bytes": 621284
+    },
+    {
+      "file": "turn-2-0.png",
+      "sha256": "63bf5aa6a582eeed6b2f777cb49bfc60b8653cd2fbfdbb1b7d97bb54f5648839",
+      "bytes": 644155
+    },
+    {
+      "file": "turn-2-1.png",
+      "sha256": "ab250cb50df38417bf9b4cb884f81dc48311348bc1ba5816f9f46023af9246d7",
+      "bytes": 785699
+    },
+    {
+      "file": "turn-2-2.png",
+      "sha256": "9799393b5a24c0ab25eeeee82a20d07e5757cf5a274ee73e1534f2220ff2027c",
+      "bytes": 888725
+    },
+    {
+      "file": "turn-2-3.png",
+      "sha256": "2aff9410ab40bf06e638407c3e1f15d188f26956fff75d9546188e577c2b2844",
+      "bytes": 673620
+    },
+    {
+      "file": "turn-2-4.png",
+      "sha256": "718e78c4757ce13bfc79b72acf606e50d5ed3f5540e8639282b6b2c4fa3d1e46",
+      "bytes": 789678
+    },
+    {
+      "file": "turn-3-0.png",
+      "sha256": "18b2039232c94703b2674a7ce6d294f9342320840e8f0d7607d3c13401bb2c41",
+      "bytes": 2830367
+    },
+    {
+      "file": "turn-3-1.png",
+      "sha256": "ce43e4924a6da91cad90c92c6538cea0b94fe38ed49c6b46c90950a377b1aa21",
+      "bytes": 2854368
+    },
+    {
+      "file": "turn-3-2.png",
+      "sha256": "15f2b62d9b36c7efbc79618968e55b47d8f3b9246d0023bb9ff8e704a15c8520",
+      "bytes": 2634861
+    },
+    {
+      "file": "turn-3-3.png",
+      "sha256": "7a9cbd5bdc4b2e4163279cd0bcb4fdb7eefb99d022aa641c21a36690b6dca5ab",
+      "bytes": 2856605
+    },
+    {
+      "file": "turn-3-4.png",
+      "sha256": "b69d51b88701ed043f0c743ea21b890b9312e155f74843ddc51798126194b735",
+      "bytes": 2923810
+    }
+  ],
+  "seconds": 19.463,
+  "registrations": [
+    {
+      "species": 0,
+      "sector": 0,
+      "p90_fit_residual_before_constraints_px": 6.095,
+      "largest_velocity_gradient": 1.4569,
+      "min_jacobian": 0.3261
+    },
+    {
+      "species": 0,
+      "sector": 1,
+      "p90_fit_residual_before_constraints_px": 63.533,
+      "largest_velocity_gradient": 1.4365,
+      "min_jacobian": 0.2689
+    },
+    {
+      "species": 0,
+      "sector": 2,
+      "p90_fit_residual_before_constraints_px": 63.318,
+      "largest_velocity_gradient": 1.4286,
+      "min_jacobian": 0.2982
+    },
+    {
+      "species": 0,
+      "sector": 3,
+      "p90_fit_residual_before_constraints_px": 6.458,
+      "largest_velocity_gradient": 1.3688,
+      "min_jacobian": 0.3315
+    },
+    {
+      "species": 0,
+      "sector": 4,
+      "p90_fit_residual_before_constraints_px": 48.655,
+      "largest_velocity_gradient": 1.4286,
+      "min_jacobian": 0.3164
+    },
+    {
+      "species": 0,
+      "sector": 5,
+      "p90_fit_residual_before_constraints_px": 14.247,
+      "largest_velocity_gradient": 1.3942,
+      "min_jacobian": 0.3122
+    },
+    {
+      "species": 0,
+      "sector": 6,
+      "p90_fit_residual_before_constraints_px": 17.211,
+      "largest_velocity_gradient": 1.41,
+      "min_jacobian": 0.3191
+    },
+    {
+      "species": 0,
+      "sector": 7,
+      "p90_fit_residual_before_constraints_px": 48.293,
+      "largest_velocity_gradient": 1.4584,
+      "min_jacobian": 0.3214
+    },
+    {
+      "species": 1,
+      "sector": 0,
+      "p90_fit_residual_before_constraints_px": 5.607,
+      "largest_velocity_gradient": 1.4798,
+      "min_jacobian": 0.3633
+    },
+    {
+      "species": 1,
+      "sector": 1,
+      "p90_fit_residual_before_constraints_px": 52.711,
+      "largest_velocity_gradient": 1.4309,
+      "min_jacobian": 0.3523
+    },
+    {
+      "species": 1,
+      "sector": 2,
+      "p90_fit_residual_before_constraints_px": 12.868,
+      "largest_velocity_gradient": 1.4027,
+      "min_jacobian": 0.3182
+    },
+    {
+      "species": 1,
+      "sector": 3,
+      "p90_fit_residual_before_constraints_px": 5.871,
+      "largest_velocity_gradient": 1.4821,
+      "min_jacobian": 0.3449
+    },
+    {
+      "species": 1,
+      "sector": 4,
+      "p90_fit_residual_before_constraints_px": 25.952,
+      "largest_velocity_gradient": 1.3868,
+      "min_jacobian": 0.3144
+    },
+    {
+      "species": 1,
+      "sector": 5,
+      "p90_fit_residual_before_constraints_px": 36.693,
+      "largest_velocity_gradient": 1.4274,
+      "min_jacobian": 0.3109
+    },
+    {
+      "species": 1,
+      "sector": 6,
+      "p90_fit_residual_before_constraints_px": 16.598,
+      "largest_velocity_gradient": 1.4309,
+      "min_jacobian": 0.3195
+    },
+    {
+      "species": 1,
+      "sector": 7,
+      "p90_fit_residual_before_constraints_px": 26.449,
+      "largest_velocity_gradient": 1.4131,
+      "min_jacobian": 0.3144
+    },
+    {
+      "species": 2,
+      "sector": 0,
+      "p90_fit_residual_before_constraints_px": 5.475,
+      "largest_velocity_gradient": 1.2997,
+      "min_jacobian": 0.5187
+    },
+    {
+      "species": 2,
+      "sector": 1,
+      "p90_fit_residual_before_constraints_px": 11.068,
+      "largest_velocity_gradient": 1.4825,
+      "min_jacobian": 0.2565
+    },
+    {
+      "species": 2,
+      "sector": 2,
+      "p90_fit_residual_before_constraints_px": 6.699,
+      "largest_velocity_gradient": 0.9688,
+      "min_jacobian": 0.5625
+    },
+    {
+      "species": 2,
+      "sector": 3,
+      "p90_fit_residual_before_constraints_px": 5.308,
+      "largest_velocity_gradient": 1.2997,
+      "min_jacobian": 0.5187
+    },
+    {
+      "species": 2,
+      "sector": 4,
+      "p90_fit_residual_before_constraints_px": 4.691,
+      "largest_velocity_gradient": 1.1047,
+      "min_jacobian": 0.5656
+    },
+    {
+      "species": 2,
+      "sector": 5,
+      "p90_fit_residual_before_constraints_px": 3.962,
+      "largest_velocity_gradient": 0.7174,
+      "min_jacobian": 0.6313
+    },
+    {
+      "species": 2,
+      "sector": 6,
+      "p90_fit_residual_before_constraints_px": 11.392,
+      "largest_velocity_gradient": 1.4385,
+      "min_jacobian": 0.3158
+    },
+    {
+      "species": 2,
+      "sector": 7,
+      "p90_fit_residual_before_constraints_px": 5.451,
+      "largest_velocity_gradient": 1.0493,
+      "min_jacobian": 0.6125
+    },
+    {
+      "species": 3,
+      "sector": 0,
+      "p90_fit_residual_before_constraints_px": 19.945,
+      "largest_velocity_gradient": 1.3183,
+      "min_jacobian": 0.3916
+    },
+    {
+      "species": 3,
+      "sector": 1,
+      "p90_fit_residual_before_constraints_px": 43.984,
+      "largest_velocity_gradient": 1.3365,
+      "min_jacobian": 0.3978
+    },
+    {
+      "species": 3,
+      "sector": 2,
+      "p90_fit_residual_before_constraints_px": 16.528,
+      "largest_velocity_gradient": 1.2781,
+      "min_jacobian": 0.4301
+    },
+    {
+      "species": 3,
+      "sector": 3,
+      "p90_fit_residual_before_constraints_px": 19.793,
+      "largest_velocity_gradient": 1.2814,
+      "min_jacobian": 0.3754
+    },
+    {
+      "species": 3,
+      "sector": 4,
+      "p90_fit_residual_before_constraints_px": 13.032,
+      "largest_velocity_gradient": 1.3359,
+      "min_jacobian": 0.3508
+    },
+    {
+      "species": 3,
+      "sector": 5,
+      "p90_fit_residual_before_constraints_px": 21.53,
+      "largest_velocity_gradient": 1.1965,
+      "min_jacobian": 0.5827
+    },
+    {
+      "species": 3,
+      "sector": 6,
+      "p90_fit_residual_before_constraints_px": 32.137,
+      "largest_velocity_gradient": 1.3459,
+      "min_jacobian": 0.4499
+    },
+    {
+      "species": 3,
+      "sector": 7,
+      "p90_fit_residual_before_constraints_px": 13.233,
+      "largest_velocity_gradient": 1.295,
+      "min_jacobian": 0.3777
+    }
+  ],
+  "files": [
+    {
+      "file": "turn-warp-0.png",
+      "size": 650988,
+      "sha256": "1ec0ab293004b53e84c0ce448a090def787b0ed6dc904958d2c7f69b07bd4144"
+    },
+    {
+      "file": "turn-warp-1.png",
+      "size": 572430,
+      "sha256": "a6724c15b00097bb709393464d1f5bbc6e817e8bdece6a47d5a2f9ccc2eb4e81"
+    },
+    {
+      "file": "turn-warp-2.png",
+      "size": 554197,
+      "sha256": "ed2e24cd24fb27061f09f2c0f628c28d605d05ea4ba9fb8abbdf1fa8797b273a"
+    },
+    {
+      "file": "turn-warp-3.png",
+      "size": 767157,
+      "sha256": "4fa6aedd172bcca7de7c72b71973117acc7085acb24d7ffd3701882dbd4e540f"
+    }
+  ]
+}

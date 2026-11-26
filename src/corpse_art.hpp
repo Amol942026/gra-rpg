@@ -222,7 +222,7 @@ inline bool corpseArt(const Enemy& e,float x,float y,Color outline=BLANK,const V
  const auto p=corpseDrawPoint(e,{x,y});x=p.x;y=p.y;
  if(e.corpseGrounded())return restingCorpseArt(e,x,y,outline,probe);
  const float progress=e.deathProgress();
- if(marshEnemy(e.type))return marsh_art::actor(e,x,y,outline,probe,false,1,std::min(1.f,progress/enemy_death::groundContact(e.type)));
+ if(marshEnemy(e.type))return marsh_art::actor(e,x,y,outline,probe,false,1,marsh_art::fallPhase(e));
  if(regionalEnemy(e.type))return regionalCorpse(e,x,y,outline,probe);
  if(e.type>=VolcanoFirstType)return volcano_actors::death(e,x,y,progress,outline,probe);
  return animatedLegacyCorpse(e,x,y,progress,outline,probe);

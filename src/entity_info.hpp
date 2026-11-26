@@ -16,9 +16,9 @@ constexpr int PeatToad=24,MarshLeech=25,MarshLight=26,BellKeeper=27,EnemyTypeCou
 constexpr bool marshEnemy(int type){return type>=PeatToad&&type<=BellKeeper;}
 constexpr int marshMotionFamily(int type){return type==PeatToad?0:type==MarshLeech?10:type==MarshLight?15:type==BellKeeper?7:type;};
 constexpr bool newDesertEnemy(int type){return type==DuneJackalType||type==GlassReaperType;}
-constexpr bool smoothVolcanoTurn(int type){
+constexpr bool smoothEnemyTurn(int type){
  return type==SlagCrawlerType||type==LavaSalamanderType||type==EmberDrakeType||type==FireImpType||type==AshWraithType||
-        type==ObsidianSentinelType||type==CinderhornType||newDesertEnemy(type);
+        type==ObsidianSentinelType||type==CinderhornType||newDesertEnemy(type)||marshEnemy(type);
 }
 constexpr int ForestDecorationStart=18,DesertDecorationStart=23,VolcanoDecorationStart=28;
 constexpr int DecorationsPerRealm=5,VolcanoLandmarkCount=4;

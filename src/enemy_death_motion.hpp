@@ -12,8 +12,16 @@ using Track=std::array<Mark,6>;
 
 namespace ember::enemy_death {
 static_assert(std::size(data::tracks)==PeatToad);
+// The final Blender pose lands on the fourth mark. Keep six ticks for the settling effects.
+inline constexpr Track marshFall(int contact){
+ return {{{0,0,0,0},{2,.045f,1,0},{contact/2,.4f,.14f,0},{contact,1,0,0},
+          {contact+3,1,0,0},{contact+6,1,0,0}}};
+}
+inline constexpr Track marshTracks[]={marshFall(26),marshFall(25),marshFall(30),marshFall(42)};
+static_assert(std::size(marshTracks)==BellKeeper-PeatToad+1);
+inline constexpr const Track& trackFor(int type){return marshEnemy(type)?marshTracks[type-PeatToad]:data::tracks[type];}
 inline constexpr float durationScale(int type){return type==DuneJackalType?.70f:1.f;}
-inline float duration(int type){return data::tracks[marshMotionFamily(type)].back().frame*durationScale(type)/data::framesPerSecond;}
+inline float duration(int type){return trackFor(type).back().frame*durationScale(type)/data::framesPerSecond;}
 inline float endTime(int type){
  if(type==StoneGuardianType)return data::guardianSmoke.back().frame/data::framesPerSecond;
  return type==VolcanoBossType?float(varkhor_ash_motion::AirFrames)/varkhor_ash_motion::FramesPerSecond:duration(type);
@@ -29,9 +37,9 @@ inline Key sampleTrack(const Track& track,float frame){
  return {a.collapse+(b.collapse-a.collapse)*t,a.recoil+(b.recoil-a.recoil)*t,a.settle+(b.settle-a.settle)*t};
 }
 inline Key sample(int type,float progress){
- const auto& track=data::tracks[marshMotionFamily(type)];
+ const auto& track=trackFor(type);
  return sampleTrack(track,progress*track.back().frame);
 }
-inline float groundContact(int type){const auto& track=data::tracks[marshMotionFamily(type)];return float(track[3].frame)/track.back().frame;}
-inline float groundContactTime(int type){return data::tracks[marshMotionFamily(type)][3].frame*durationScale(type)/data::framesPerSecond;}
+inline float groundContact(int type){const auto& track=trackFor(type);return float(track[3].frame)/track.back().frame;}
+inline float groundContactTime(int type){return trackFor(type)[3].frame*durationScale(type)/data::framesPerSecond;}
 }

@@ -1,0 +1,104 @@
+{
+  "facings": 128,
+  "phase_keys_per_action": 16,
+  "mesh_vertices": 169,
+  "species": [
+    {
+      "species": 0,
+      "tangent": "parts",
+      "decoded_geometry_sha256": "91290d2eb3b4b44f2c90c5e20f6e454a735c4d2145957b5944ca3d9cfa9c76fe",
+      "sources": {
+        "neutral-0-0.png": "830e054084423e554bdc7eceb196909f74be3352c5e248eb75ea4a56fdf77ff3",
+        "neutral-0-1.png": "06740e3e05d6cac9cc7698f93fbb1558f5f39af6e5b7874ea0c1ccf15f5dee1a",
+        "landmarks.json": "a1bd1300d08fd9f890fe72583e77cbeb576ab5119e2815fd9983e46bb9286eb7",
+        "yaw-raw-0.npz": "4977b2055a1b5d467ecb15ada4243176b0a04e23e497003f96ccc7c86cde65dd",
+        "visibility-0.npz": "32c6b061eaaaa94d9fc66e542316cce1da9be492df3ce3a4d08a823074d0ea5e"
+      },
+      "range_px": [
+        -46.4375,
+        56.625
+      ],
+      "files": {
+        "motion-0.png": "6a9c910a887d14ab310c48d3de528f490d5d674512ca4971fdc0348cbc602c2c",
+        "support-0.bin": "40854fc5b806d69e0879183a85124e70e85cebf5ceaca99948f56873ad7d3afb",
+        "flow-0-0.png": "7829784ca148074348028efafa0b755399dd7a2c9dcb0530c20b28298ffb8626",
+        "flow-0-1.png": "90ed953f7977ab058c40cd9db7bc28c77e2e5d4c1d2bad08b79fe02e7026e74d",
+        "cover-0-0.png": "ebf5c058b08bafa1655d62f164e50c7b96b2947cc1e14da2eba256744230ac99",
+        "cover-0-1.png": "a9b1176e14587e224b6e450483d65244d2c633ae9196fbf0b4d55a6617fb8c61"
+      }
+    },
+    {
+      "species": 1,
+      "tangent": "parts",
+      "decoded_geometry_sha256": "2753532f6716248b2216f16034b3bc94a9228d19c0fa85d7a375172ce32ce98b",
+      "sources": {
+        "neutral-1-0.png": "2c16a717814ebcf3ed1749f27033d9d36e2d4a5e1f43429e081895d2af7bd684",
+        "neutral-1-1.png": "f414ed1a03e6e7eba60add39610ba7d4fed26926682fa3ef664d333c3d06b2ad",
+        "landmarks.json": "a1bd1300d08fd9f890fe72583e77cbeb576ab5119e2815fd9983e46bb9286eb7",
+        "yaw-raw-1.npz": "9e11b29e95212f417c4e26cf5adc9cc2d7c6d7b8511b9117595cfda2320b29e5",
+        "visibility-1.npz": "1a78c714a036761a64c71852219873844bb82a9f3004b11df115aa9e6590de33"
+      },
+      "range_px": [
+        -73.5625,
+        70.5625
+      ],
+      "files": {
+        "motion-1.png": "6d6646e4f9d3291a80942ba27a61e3f8aa75c10e144178ecc2bb674c14f04333",
+        "support-1.bin": "f1874a38e6e7107a7203185c9a34ddda28b756a06a27c67e68a915865e166bda",
+        "flow-1-0.png": "7343999731f6512473adc04b24cf4c67bef7d9fb15c47d6f33e0e0540c8d55fe",
+        "flow-1-1.png": "ea40a818a8ab021be9a4a498a76b53f27489edc55838ca068d6149d082d8bd21",
+        "cover-1-0.png": "5326d499febcae210a4e3f714b4c6ec7e66b2daa3eb4797eb268db0a06da164a",
+        "cover-1-1.png": "ec0cb917af86ee1aaa72765772bdcb8bbc2822dbb299a85db30b0d6ff72cf522"
+      }
+    },
+    {
+      "species": 2,
+      "tangent": "parts",
+      "decoded_geometry_sha256": "6d0f290eb1588b5972c248636040856e1f9f8d9c46cd816fd706c222a7f4106a",
+      "sources": {
+        "neutral-2-0.png": "4061045f565cf29fcea1011cee101fdcdee5ecfc6a99e3bd285318a65d16536e",
+        "neutral-2-1.png": "2a463848f1f90166ac49fc114db872f9908ec667d52ea9cab3ec41a5370b6555",
+        "landmarks.json": "a1bd1300d08fd9f890fe72583e77cbeb576ab5119e2815fd9983e46bb9286eb7",
+        "yaw-raw-2.npz": "8bfefcf543b52773fa8999fb5f9bfeae42126cae5113163443e05da9f57a8909",
+        "visibility-2.npz": "af207c16fe87f0116fb6c7cb480c4066a531c53023e9e9910916c1fff6f00c61"
+      },
+      "range_px": [
+        -80.375,
+        114.5
+      ],
+      "files": {
+        "motion-2.png": "4aebdd8649120130dfc66235d7b4ca130cce85fb0418e856c3a43d11e17b06d6",
+        "support-2.bin": "26039c1668080460932649c0c51707ad0fc3f73b4f3ca79147d8a7cf7273420d",
+        "flow-2-0.png": "ebcf2ac2f8e036edca8e0e5656f43c982720cb0ec465396d60d3d67d6e8a6621",
+        "flow-2-1.png": "0b2375334c662b41ac4b836d27e34e46ef6698896da282ecab03ef6a2db6de74",
+        "cover-2-0.png": "28045d4a858cee85fa68e020f4f5ada47772b6d4768d3813a09b9352e92f2811",
+        "cover-2-1.png": "7d7dd7092b6e26ef1343cf0a90d446a2111b4f843c5a173f199ffd97fdfebced"
+      }
+    },
+    {
+      "species": 3,
+      "tangent": "parts",
+      "decoded_geometry_sha256": "db2f6536e255f08055d2e89aa38624e2eec38ef33db006f7e5028e115f11e907",
+      "sources": {
+        "neutral-3-0.png": "60105c3de23324c109bf05132e974c15e689af4d70d0dfbdadbaf9c868d9461d",
+        "neutral-3-1.png": "d13b6e4543eed4f2fdc331ac0356c5a57173bfe0fbbf508b6112ff8351e21f05",
+        "landmarks.json": "a1bd1300d08fd9f890fe72583e77cbeb576ab5119e2815fd9983e46bb9286eb7",
+        "yaw-raw-3.npz": "1bdff04701468140e246aa14c65bdf7927627eae37df11bc0da28faef4ed71b2",
+        "visibility-3.npz": "6ff52015447cbd162963bd799264520d280d2cb6f298b2ec102397d91e8384c1"
+      },
+      "range_px": [
+        -122.25,
+        161.0
+      ],
+      "files": {
+        "motion-3.png": "5df7917937db44401ea3b9d8f69b786deb9a9a400413090a37cef7686f331044",
+        "support-3.bin": "92a2d2bb0fa3f7e144f989198f1d936d8a27b323e4577035b0703d23acbc2ab4",
+        "flow-3-0.png": "cf465acff154864a5d46231c40f38715ebb20cea8f8e26faa85ccc5fdfc496e0",
+        "flow-3-1.png": "97db7eee676999a6d1d6b69e1c00653e53f4fe7b6aa9fd117a55553352422f19",
+        "cover-3-0.png": "d69e04cb64e0bb91976e3a663db4deb8a84d8b207de12bd02f7b478407c1ca22",
+        "cover-3-1.png": "2a6e7bcd143c2eea09611d9c63e1dccad34be0f32ada88cfa536ac4857743e85"
+      }
+    }
+  ],
+  "seconds": 24.391
+}

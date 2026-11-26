@@ -92,7 +92,11 @@ void monster(Enemy& e,float x,float y) {
         if(sand)ellipseOutline(origin.x,origin.y,6+radius,(6+radius)*.34f,Fade(rgb(98,225,207),(1-age)*.73f));
     }
     if(e.type==MarshLight&&(e.windup>0||e.strike>0)&&!actor_art::shadowBuilding){
-        Vector2 flame{x,y-49},target=screen(game.player);target.y-=38;
+        const auto pose=marsh_art::actorFrame(e);
+        const auto core=marsh_art::lightCore(pose);
+        const float size=marsh_art::actorScale(pose.species);
+        Vector2 flame{x+core.x*size,y+core.y*size};
+        Vector2 target=screen(game.player);target.y-=38;
         const Color glow=rgb(186,213,123);
         if(e.windup>0){float t=1-e.windup/meleeWindup(e.type);DrawCircleV(flame,3+6*t,Fade(glow,.25f+t*.4f));}
         else{

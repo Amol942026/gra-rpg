@@ -113,6 +113,33 @@ int main(){
  check(!g.attack(),"attack cooldown");g.learnedSpells=spellBit(Spell::Fireball);g.selectedSpell=Spell::Fireball;g.mana=100;check(g.spell(),"spell cast");check(g.mana==90,"spell mana cost");check(!g.spell(),"spell cooldown");
  g.hp=0;check(!g.use({Place::Bag,0}),"dead cannot consume");check(!g.attack(),"dead cannot attack");
  Game a,b;for(int i=0;i<60;i++)a.update(1.f/60,{1,0},false);for(int i=0;i<120;i++)b.update(1.f/120,{1,0},false);check(distance(a.player,b.player)<.002f,"movement independent of frame rate");
+ for(int type=PeatToad;type<=BellKeeper;type++){
+  float reference=-1;
+  Game first;first.props.clear();first.enemies.clear();first.player={12,18};
+  first.enemies.push_back({0,type,{15,15},{15,15},100,100});
+  first.enemies.front().animation.direction=Direction::NE;
+  first.update(1.f/60,{},false);
+  const auto opening=actorFacing(first.enemies.front().animation.facingAngle);
+  check(std::abs(std::remainder(std::atan2(opening.y,opening.x)+AnimationPi/4,2*AnimationPi))<.01f,
+        "a newly alert marsh enemy turns from its visible resting pose");
+  for(int fps:{30,60,120})for(float target:{0.f,AnimationPi*.5f}){
+   Game scene;scene.props.clear();scene.enemies.clear();
+   const V at{15,15};
+   scene.player=at+(target==0?V{2,-2}:V{2,2});
+   scene.enemies.push_back({0,type,at,at,100,100});
+   auto& e=scene.enemies.front();
+   e.windup=.8f; e.abilityCd=10;
+   const float start=target+1.6f;
+   e.animation.facingAngle=std::atan2(std::sin(start)*ActorGroundSquash,std::cos(start));
+   e.animation.facingInitialized=true;
+   for(int i=0;i<fps/5;i++)scene.update(1.f/fps,{},false);
+   const auto axis=actorFacing(e.animation.facingAngle);
+   const float travelled=std::remainder(start-std::atan2(axis.y,axis.x),2*AnimationPi);
+   if(reference<0)reference=travelled;
+   check(travelled>.25f&&travelled<.8f&&std::abs(travelled-reference)<.01f,
+         "marsh enemy turns through equal ground bearings in equal time, including across the angle seam");
+  }
+ }
  Game c;c.bag[10]=item(Kind::Health,0,98);c.bag[11]=item(Kind::Health,0,8);check(c.transfer({Place::Bag,11},{Place::Bag,10}),"partial stack");check(c.bag[10].count==99&&c.bag[11].count==7,"stack limit preserves remainder");
  c.player=c.enemies.back().pos;c.enemies.back().hp=1;c.learnedSpells=spellBit(Spell::Fireball);c.selectedSpell=Spell::Fireball;c.spell();c.update(.01f,{},false);check(c.bossDead,"boss objective");
  const V directions[8]={{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1}};

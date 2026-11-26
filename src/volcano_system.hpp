@@ -167,7 +167,7 @@ static void advanceVolcanoAnimation(Enemy& e,V movement,float dt,bool faceMoveme
  const float phase=e.animation.phase;
  const float previousAngle=e.animation.facingAngle;
  const bool plantedTurn=(e.type==SlagCrawlerType||e.type==FireImpType)&&e.animation.facingInitialized;
- const float maxTurnRate=smoothVolcanoTurn(e.type)?7.f:0.f;
+ const float maxTurnRate=smoothEnemyTurn(e.type)?7.f:0.f;
  e.animation.advance(movement.x,movement.y,dt,false,faceMovement,true,maxTurnRate);
  if(plantedTurn){
   const float arc=std::abs(std::remainder(e.animation.facingAngle-previousAngle,2*AnimationPi));
