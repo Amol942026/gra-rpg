@@ -1,0 +1,136 @@
+{
+  "species": [
+    0,
+    3
+  ],
+  "previous_direction_keys": 8,
+  "direction_keys": 24,
+  "added_paintings_per_species": 8,
+  "bilateral_completion": true,
+  "direction_spacing_deg": 15,
+  "runtime_directions": 512,
+  "masters": [
+    {
+      "path": "C:\\AI2D\\sprites\\mokradla-gestsze-kierunki-20261127-000904\\Ropucha-dodatkowe-kierunki.kra",
+      "sha256": "6a330543a5a7fcd6e5c1c1577151ec3781f2466b930661148c6432294b5f2571"
+    },
+    {
+      "path": "C:\\AI2D\\sprites\\mokradla-gestsze-kierunki-20261127-000904\\Dzwonnik-dodatkowe-kierunki.kra",
+      "sha256": "a648fbd9e87abc9a150e39c08281a36a16602242714e7ac4a569eb34913e39d9"
+    }
+  ],
+  "comparisons": {
+    "before": {
+      "0": {
+        "max_area_step_percent": 0.6567486524581909,
+        "area_steps_p99_percent": 0.6524386405944824,
+        "worst_heading": 475,
+        "max_lateral_center_jump_px": 0.29484300813484765,
+        "max_pigment_jump_levels": 1.8033890141498263,
+        "p99_pigment_jump_levels": 1.7258548627712673
+      },
+      "3": {
+        "max_area_step_percent": 0.7458745241165161,
+        "area_steps_p99_percent": 0.7065161466598511,
+        "worst_heading": 32,
+        "max_lateral_center_jump_px": 0.4038421071351621,
+        "max_pigment_jump_levels": 2.433896145269194,
+        "p99_pigment_jump_levels": 2.3385910989707197
+      }
+    },
+    "after": {
+      "0": {
+        "max_area_step_percent": 0.656554639339447,
+        "area_steps_p99_percent": 0.6527111530303955,
+        "worst_heading": 290,
+        "max_lateral_center_jump_px": 0.36685658400867993,
+        "max_pigment_jump_levels": 1.9299567063975873,
+        "p99_pigment_jump_levels": 1.8033773841213605
+      },
+      "3": {
+        "max_area_step_percent": 0.7121633887290955,
+        "area_steps_p99_percent": 0.7052167057991028,
+        "worst_heading": 29,
+        "max_lateral_center_jump_px": 0.3928381562477483,
+        "max_pigment_jump_levels": 2.449569420620964,
+        "p99_pigment_jump_levels": 2.384174799595597
+      }
+    }
+  },
+  "surface_registration": {
+    "source": "ComfyUI FILM",
+    "species": {
+      "0": {
+        "angles": [
+          0,
+          15,
+          30,
+          45,
+          60,
+          75,
+          90,
+          105,
+          120,
+          135,
+          150,
+          165,
+          180,
+          195,
+          210,
+          225,
+          240,
+          255,
+          270,
+          285,
+          300,
+          315,
+          330,
+          345
+        ],
+        "visible_frames": 512
+      },
+      "3": {
+        "angles": [
+          0,
+          15,
+          30,
+          45,
+          60,
+          75,
+          90,
+          105,
+          120,
+          135,
+          150,
+          165,
+          180,
+          195,
+          210,
+          225,
+          240,
+          255,
+          270,
+          285,
+          300,
+          315,
+          330,
+          345
+        ],
+        "visible_frames": 512
+      }
+    },
+    "seconds": 28.021454800036736,
+    "model_sha256": "f226e51375dc839d4b40e5c3d63da560dd1ea1c962364ec78f5adf2d05db05c0",
+    "local_contrast": "Landmark-local contrast on the bell and the eye"
+  },
+  "color_surface": {
+    "method": "silhouette-fitted body, isolated bell on independent pivot",
+    "keeper-bell_sha256": "6b6769bd3931a725a19d1e040f6121b4b049a72e282c1ee7df8727a82c74e2db",
+    "project": "C:\\AI2D\\animations\\mokradla-sztywny-rig-20261127-015006\\Mokradla-sztywny-rig.blend"
+  },
+  "layered_turn": {
+    "toad": "one torso and four feet",
+    "keeper": "one cloak and two sleeves",
+    "project": "C:/AI2D/animations/mokradla-czesci-2d-20261127-023415/Mokradla-czesci-2d.blend"
+  }
+}

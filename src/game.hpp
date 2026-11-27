@@ -1087,7 +1087,7 @@ struct Game {
    if(e.windup>0&&e.type!=VolcanoBossType&&((e.type!=3&&e.type!=7)||e.windup>.12f))faceEnemyTowards(e,player-e.pos);
    if(marshEnemy(e.type)){
     // Ground-plane pixels covered in a complete cycle of the painted limbs or tendrils.
-    constexpr float cycle[]={26.f,23.f,35.f,48.f};
+    constexpr float cycle[]={57.f,23.f,35.f,83.f};
     constexpr float groundTurnRate[]={3.45f,3.8f,3.2f,2.8f};
     const int species=e.type-PeatToad;
     desert_motion::advance(e.animation,gait.x,gait.y,dt,faceMovement,cycle[species],groundTurnRate[species],TurnPlane::Ground);

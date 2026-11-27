@@ -1,0 +1,21 @@
+{
+  "project": "C:\\AI2D\\animations\\mokradla-sztywny-rig-20261127-015006\\Mokradla-sztywny-rig.blend",
+  "details": {
+    "0": {
+      "outline_acceleration_before": 0.9005815386772156,
+      "outline_acceleration_after": 0.24149678647518158,
+      "top_range_pixels": 0,
+      "rigid_torso_poses": 6144,
+      "min_triangle": 0.3550000000000008,
+      "project": "C:/AI2D/animations/mokradla-czesci-2d-20261127-023415/Mokradla-czesci-2d.blend"
+    },
+    "3": {
+      "outline_acceleration_before": 0.43266284465789795,
+      "outline_acceleration_after": 0.4284785985946655,
+      "top_range_pixels": 3,
+      "rigid_torso_poses": 6144,
+      "min_triangle": 0.354297435437589,
+      "project": "C:/AI2D/animations/mokradla-czesci-2d-20261127-023415/Mokradla-czesci-2d.blend"
+    }
+  }
+}

@@ -8,13 +8,13 @@ Presentation clock: OpenGL V-sync
 DXGI synchronized presents: 0
 Occluded presentations: 0
 Suppressed native swaps: 0
-Actual presentation interval: 2
-Presentation fallback: GPU sharing pixel validation failed (0x80004005)
+Actual presentation interval: 0
+Presentation fallback: Native OpenGL presentation
 Strong cuts performed: 0
 Piercing arrows fired: 0
 Developer mode: 1
 Developer menu open: 0
-Developer destination: swamp-mill
+Developer destination: swamp-ferry
 World location: swamp
 Benchmark scenario: forest
 Desert areas visited: 0
@@ -29,16 +29,16 @@ Native canvas: 1728x1080
 Desert background buffer: 0x0
 Hidden background diagnostic: yes
 Window hidden: yes
-Diagnostic loop rate (not foreground FPS): 41.3595
-CPU frame mean (ms): 24.0328
-EndDrawing mean (ms): 0.0545336
-Presentation mean (ms): 8.57143e-05
-CPU frame p95 (ms): 29.5556
-CPU frame p99 (ms): 30.0832
-Frame p95 (ms): 29.6271
-Frame p99 (ms): 30.1478
-Frame max (ms): 329.576
-Frames over 25 ms: 43
+Diagnostic loop rate (not foreground FPS): 36.388
+CPU frame mean (ms): 27.5094
+EndDrawing mean (ms): 0.0374361
+Presentation mean (ms): 0.000105882
+CPU frame p95 (ms): 31.4133
+CPU frame p99 (ms): 31.8934
+Frame p95 (ms): 31.4493
+Frame p99 (ms): 31.9568
+Frame max (ms): 335.522
+Frames over 25 ms: 67
 Developer level: 100
 Developer arrows: 100
 Developer health potions: 50

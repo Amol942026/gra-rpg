@@ -1074,7 +1074,7 @@ int main(int argc,char**argv) {
     if(introQA)introPassed=runIntroQA();
     if(bowQA)bowPassed=runBowQA();
     if(mushroomQA)mushroomPassed=runMushroomQA();
-    if(graphicsQA)graphicsPassed=runGraphicsQA();
+    if(graphicsQA)graphicsPassed=runGraphicsQA(backgroundTest&&noAudio?std::getenv("EMBERFALL_MARSH_REVIEW"):nullptr);
     if(forestQA)forestPassed=runForestQA();
     if(refreshQA)refreshPassed=runRefreshQA();
     if(pointerQA)pointerPassed=runPointerQA();

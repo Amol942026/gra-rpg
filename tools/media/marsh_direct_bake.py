@@ -1,5 +1,7 @@
 """Render complete paintings at 512 angles. No motion interpolation in the pigment."""
 import json
+import math
+import struct
 import numpy as np
 import gpu
 
@@ -80,3 +82,62 @@ def export(painter,rig,s,poses,brushes,export_dir,shader,save_png,bearings=None)
         (export_dir/'bell-centers.json').write_text(json.dumps(
             {'space':'full native cell pixels, top left origin, x right, y down','centers':bell}),encoding='utf8')
     return marks,dy,stack
+
+
+WALK_FRAMES=12
+WALK_MARGIN=12
+
+
+def export_walk(painter,rig,s,neutral,ground,brushes,output,shader,save_png):
+    w,h,ax,ay=rig.SIZE[s]
+    uv,_,tris=painter.strip_mesh(rig)
+    margin=WALK_MARGIN
+    w+=2*margin;h+=2*margin;ax+=margin;ay+=margin
+    # These are small game cels; four samples per axis preserve contact edges.
+    sub=4
+    buffer=painter.target(w*sub,h*sub)
+    folder=output/'walk'/str(s)
+    folder.mkdir(exist_ok=True,parents=True)
+    marks=[]
+    with buffer[0].bind():
+        gpu.state.viewport_set(0,0,w*sub,h*sub)
+        for bearing in range(128):
+            for step in range(WALK_FRAMES):
+                pose=rig.frame(s,bearing,step/WALK_FRAMES)
+                raw=painter.render_frame(rig,neutral,s,bearing,ground,shader,brushes,tris,uv,
+                                         buffer,sub,margin,fractional=pose)
+                frame=resolve(raw,h,w,sub)
+                a=frame[...,3]
+                if a[:2].any() or a[-2:].any() or a[:,:2].any() or a[:,-2:].any():
+                    raise ValueError(f"Clipped walk cel {s}/{bearing}/{step}")
+                save_png(folder/f'{bearing*WALK_FRAMES+step:04}.png',frame)
+                # Sample actual paint where the two supporting limbs meet the bog.
+                grounded=sorted(pose.feet,key=lambda foot:(
+                    round(pose.iso*foot[0][2]-foot[0][1]/pose.sy,2),
+                    -foot[0][1]))[:2]
+                contacts=[]
+                for (x,y,depth),radius in grounded:
+                    gy=pose.iso*depth*pose.sy+ground[bearing]+ay
+                    cx=x+ax
+                    l=max(0,round(cx-radius));r=min(w,round(cx+radius)+1)
+                    top=max(0,math.floor(gy-7));end=min(h,math.ceil(gy+8))
+                    py,px=np.where(a[top:end,l:r]>120)
+                    if len(py):
+                        low=py.max()
+                        contacts.extend([px[py>=low-1].mean()+l+.5-ax,top+low+.5-ay,radius])
+                    else:
+                        contacts.extend([x,y+ground[bearing],0.])
+                if contacts[0]>contacts[3]:
+                    contacts=contacts[3:]+contacts[:3]
+                light=pose.land['core']
+                marks.append([*contacts,light[0],light[1]+ground[bearing]])
+    data=np.rint(np.asarray(marks)*16).astype('<i2')
+    (output/f'walk-support-{s}.bin').write_bytes(
+        struct.pack('<4sHH',b'MWS1',s,len(marks))+data.tobytes())
+    # The editable shot shows a full turn while continuously cycling the gait.
+    poses=[rig.frame(s,i*2,(i%WALK_FRAMES)/WALK_FRAMES) for i in range(64)]
+    stacks=[painter.layer_stack(pose) for pose in poses]
+    scene=painter.planar_master(rig,poses,s,brushes,output,ground[::2],stacks)
+    scene.name=scene.name.replace('Obrót 64','Chód ze skrętem')
+    scene.render.fps=24
+    return scene

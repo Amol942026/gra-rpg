@@ -1,0 +1,166 @@
+[
+  {
+    "species": 0,
+    "frames": 1536,
+    "sources_sha256": "1ca33250bfdb178e3851bb27d8b4539c4da6fc8aa6c34562c8b329aa07b4f58d",
+    "pages": [
+      {
+        "file": "walk-0-0.png",
+        "size": [
+          2048,
+          2010
+        ],
+        "sha256": "7cd052e65e5d1f16e1d7ed6c1e776ccc11d2a47198a532aa5256f5bb2209c1f1"
+      },
+      {
+        "file": "walk-0-1.png",
+        "size": [
+          2044,
+          2041
+        ],
+        "sha256": "4a2b16c0be663893d86f6956eac9e898ecc23b44c1a7e821e9fcb12095167522"
+      },
+      {
+        "file": "walk-0-2.png",
+        "size": [
+          2034,
+          267
+        ],
+        "sha256": "2b003e9d35538fadcf286787e3184b6a24ecd4cf8ba017b994cd18883c31f9c0"
+      }
+    ],
+    "index_sha256": "8177e37a577c9e83ca573fe7bb225284b718d9d068fdb1a05e6bd52231c747e8",
+    "support_sha256": "d1a49d97f48ae78ae4818d927ad262eafc190de36a5a3ce7f94b08013b42b1c3"
+  },
+  {
+    "species": 1,
+    "frames": 1536,
+    "sources_sha256": "5b77b250a21c80c23106953df2f6cabc89ec6f50f9ad41024a974bdc3793e7be",
+    "pages": [
+      {
+        "file": "walk-1-0.png",
+        "size": [
+          2047,
+          2042
+        ],
+        "sha256": "fba760fb8b8595d2f6d7f5a1635dadf01585b6470141a9384fc3446b0dbaa6c3"
+      },
+      {
+        "file": "walk-1-1.png",
+        "size": [
+          2046,
+          2036
+        ],
+        "sha256": "1b0b010d4a384532463e320cdb917170b4d78ff0ae774ed7583515f5f7536e64"
+      },
+      {
+        "file": "walk-1-2.png",
+        "size": [
+          2042,
+          2031
+        ],
+        "sha256": "edb4f3a4cfed17ae7478e288f663fe0de4b61787311fe74791f80790ecd0de2f"
+      },
+      {
+        "file": "walk-1-3.png",
+        "size": [
+          1969,
+          167
+        ],
+        "sha256": "f5ea03ef8f0a74b892030d2cb274c72db60f017816e29356d453ef12d96db2f3"
+      }
+    ],
+    "index_sha256": "da756feb6d7e332fc897f7e84e96202e6caa949f83ba3fc65cb68c0197e01e2d",
+    "support_sha256": "c4679135f69d5d3dedfefea5fa4de25a1c977917780d2b5b799f4d5ab195ded0"
+  },
+  {
+    "species": 2,
+    "frames": 1536,
+    "sources_sha256": "d741ccd279732f1594f89ef223f5b6606de2b52fbab2920494b832b8b464322b",
+    "pages": [
+      {
+        "file": "walk-2-0.png",
+        "size": [
+          2048,
+          2040
+        ],
+        "sha256": "7bab8e0bdc14a14607e8373038f16235fa747f75633ef43e9f1d218ff72df057"
+      },
+      {
+        "file": "walk-2-1.png",
+        "size": [
+          2048,
+          1975
+        ],
+        "sha256": "6c50f8826852a3765f1e2ffbc6d402953665a5efbea6df50aebe436daf9552e2"
+      },
+      {
+        "file": "walk-2-2.png",
+        "size": [
+          2042,
+          2017
+        ],
+        "sha256": "7f77d232f9375f3d1c7df29b50395d1d0aba55cbb88ca4871d6c5d5341c70f37"
+      }
+    ],
+    "index_sha256": "3f410cb1ee014a6822262e9874f959b6d87d3942c0cf090b8dcb563af3c3b694",
+    "support_sha256": "d245cdfedccdc22ced4a0e6a6066541b9d14d7f00c9e9398ab927cf70ea0de82"
+  },
+  {
+    "species": 3,
+    "frames": 1536,
+    "sources_sha256": "a3c7214359a88aa49d0b63997ea4a70324ee86f5937da77de8e1e274b5b11a1e",
+    "pages": [
+      {
+        "file": "walk-3-0.png",
+        "size": [
+          2042,
+          2036
+        ],
+        "sha256": "d14097f30a2c128b91fd0d18b8947abffc552692d71553aa6f7a1bcb2103f2b8"
+      },
+      {
+        "file": "walk-3-1.png",
+        "size": [
+          2048,
+          2014
+        ],
+        "sha256": "2b1cdad92953e632b4d8ff3a367444498184927b4a5f0833f49633c4b53c716c"
+      },
+      {
+        "file": "walk-3-2.png",
+        "size": [
+          2044,
+          1997
+        ],
+        "sha256": "5e78dc3ad7b2f078f1e6ac1b7c850945671544057f8de06b073fb6131debc36e"
+      },
+      {
+        "file": "walk-3-3.png",
+        "size": [
+          2041,
+          1981
+        ],
+        "sha256": "614eab4b7f94b866e58df765783f1fd2f04d570ab5a88d95d8b8a9f37fde437e"
+      },
+      {
+        "file": "walk-3-4.png",
+        "size": [
+          2048,
+          1966
+        ],
+        "sha256": "b423050cd845ea12a70d8d0c3bad74ddfbc3bb1c99de97286811f3607ebf64a2"
+      },
+      {
+        "file": "walk-3-5.png",
+        "size": [
+          2034,
+          419
+        ],
+        "sha256": "404d0430a29f06aabcec0b81d41b7bf0185dabd9786578a1066f8c029a6ead6b"
+      }
+    ],
+    "index_sha256": "201664c1940e02d7edd99c3953b085ae94bb3c54bc9568b0829a8b2a50bd512c",
+    "support_sha256": "839cca0cb9e4d78001fa710878cc2918e524f4c8a62a53bc6e1ee74f03c2f413"
+  }
+]

@@ -21,6 +21,11 @@ próbką techniczną, nie obowiązkowym wzorcem wszystkich przyszłych postaci.
 - Dla chodu/biegu oceniaj kontakt stóp, rytm, tułów, ramiona i płaszcz.
   Miecz podczas biegu jest schowany; przy ataku dobyty. Dla ataków sprawdzaj
   pełny zasięg broni i brak obcięcia na krawędzi klatki.
+- W rigach 2D prowadź tułów jako sztywną część. Ogranicz deformację do stawów
+  i miękkich elementów stroju. Zawieszony przedmiot ma własny punkt obrotu,
+  śledzi ruch postaci i chowa się za warstwą, która go przysłania.
+- Przy odbiorze wykonaj skręt ze stałą fazą kroku oraz krok przy stałym
+  kierunku. Sprawdź rozmiar tułowia, ruch przedmiotu i kontakt stóp w obu próbach.
 - Pętle mają wirtualny punkt końcowy równy początkowi, poza eksportowaną
   sekwencją. Sprawdzaj także przejście ostatnia -> pierwsza klatka.
 

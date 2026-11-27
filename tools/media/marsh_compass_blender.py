@@ -74,6 +74,31 @@ def clipped_material(base):
     return mat,plane.inputs[1]
 
 
+def turning_material(base,section):
+    mat=base.copy()
+    tree=mat.node_tree
+    nodes,wire=tree.nodes,tree.links.new
+    def scalar(op,a,b=0.):
+        n=nodes.new("ShaderNodeMath");n.operation=op
+        for value,target in zip((a,b),n.inputs):
+            if isinstance(value,(int,float)):target.default_value=value
+            else:wire(value,target)
+        return n.outputs[0]
+    uv=nodes.new("ShaderNodeTexCoord")
+    split=nodes.new("ShaderNodeSeparateXYZ")
+    wire(uv.outputs["UV"],split.inputs[0])
+    shift=nodes.new("ShaderNodeValue");shift.label="Kierunek tułowia"
+    arch=scalar("ARCSINE",scalar("SUBTRACT",scalar("MULTIPLY",split.outputs["X"],2.),1.))
+    turn=scalar("ADD",scalar("MULTIPLY",arch,1/math.tau),shift.outputs[0])
+    u=scalar("ADD",scalar("MULTIPLY",scalar("FRACT",scalar("ADD",turn,.5)),.5),.25)
+    v=scalar("ADD",scalar("MULTIPLY",split.outputs["Y"],section[1]),section[0])
+    point=nodes.new("ShaderNodeCombineXYZ")
+    wire(u,point.inputs["X"]);wire(v,point.inputs["Y"])
+    tex=next(node for node in nodes if node.type=="TEX_IMAGE")
+    wire(point.outputs[0],tex.inputs["Vector"])
+    return mat,shift.outputs[0]
+
+
 def program():
     vary=gpu.types.GPUStageInterfaceInfo("marsh_compass_pigment")
     vary.smooth("VEC2","uv");vary.smooth("VEC2","vel")
@@ -82,14 +107,23 @@ def program():
     info.vertex_out(vary);info.sampler(0,"FLOAT_2D","paint");info.push_constant("FLOAT","light")
     info.push_constant("FLOAT","partId")
     info.push_constant("VEC3","clipLine")
+    info.push_constant("VEC3","wrapPaint")
     info.fragment_out(0,"VEC4","outPaint");info.fragment_out(1,"VEC4","outMotion")
     info.vertex_source("void main(){uv=brush;vel=delta;gl_Position=vec4(point,1.);}")
     info.fragment_source("""
         void main(){
             if(dot(vec3(uv,1.),clipLine)<0.)discard;
-            vec4 pigment=textureLod(paint,uv,0.);
+            vec2 brushUV=uv;
+            float relief=1.;
+            if(wrapPaint.z>0.){
+                float x=2.*uv.x-1.;
+                float arc=asin(clamp(x,-1.,1.))/6.283185307;
+                brushUV=vec2(.25+.5*fract(wrapPaint.x+arc+.5),wrapPaint.y+uv.y*wrapPaint.z);
+                relief=.74+.25*sqrt(max(0.,1.-x*x))+.08*uv.y;
+            }
+            vec4 pigment=textureLod(paint,brushUV,0.);
             if(pigment.a<.25)discard;
-            outPaint=vec4(clamp(pigment.rgb*light,0.,1.),1.);
+            outPaint=vec4(clamp(pigment.rgb*light*relief,0.,1.),1.);
             outMotion=vec4(clamp(.5+vel/16.,0.,1.),partId/255.,1.);
         }
     """)
@@ -120,6 +154,12 @@ def verify_rigid_turn(poses):
         if len(pose.parts)!=len(references):
             raise ValueError(f"Missing part at bearing {bearing}")
         for piece,(label,paint,coordinates) in zip(pose.parts,references):
+            if piece.wrap is not None:
+                xwidth=np.diff(piece.xy[:,:,0],axis=1)
+                if ((piece.label,piece.paint)!=(label,paint) or
+                        abs(piece.wrap[0]-bearing/128)>.0001 or not np.all(xwidth>0)):
+                    raise ValueError(f"Invalid directional torso: {label}, bearing {bearing}")
+                continue
             if paint==piece.paint=="keeper-yoke":
                 # The fixed end points project closer together in the front
                 # view. Only length may change; the beam has constant width.
@@ -181,6 +221,9 @@ def planar_master(rig,poses,s,paints,output,ground,stack):
         if clipped:
             material,mask=clipped_material(base)
             obj.material_slots[0].link="OBJECT";obj.material_slots[0].material=material
+        if part.wrap is not None:
+            material,shift=turning_material(base,part.wrap[1:])
+            obj.material_slots[0].link="OBJECT";obj.material_slots[0].material=material
         if dual:
             under=bpy.data.objects.new(name+" | pod spodem",mesh);scene.collection.objects.link(under)
         for step,row in enumerate(stack):
@@ -204,6 +247,8 @@ def planar_master(rig,poses,s,paints,output,ground,stack):
         # The absolute blocks and keyed ink-order are editable independently.
         for i in range(count):
             p=poses[i].parts[j]
+            if p.wrap is not None:
+                shift.default_value=p.wrap[0];shift.keyframe_insert(data_path="default_value",frame=i+1)
             block=obj.shape_key_add(name=f"{i:03d} | {i*360/count:.4f}°",from_mix=False)
             xyz[:,:2]=(p.xy.reshape(-1,2)+[0.,ground[i]])*[1,-1]
             block.data.foreach_set("co",xyz.ravel());block.interpolation="KEY_LINEAR"
@@ -211,6 +256,8 @@ def planar_master(rig,poses,s,paints,output,ground,stack):
         keys.eval_time=keys.key_blocks[1].frame;keys.keyframe_insert(data_path="eval_time",frame=1)
         keys.eval_time=keys.key_blocks[-1].frame;keys.keyframe_insert(data_path="eval_time",frame=count)
         interpolation(keys.animation_data.action,"LINEAR")
+        if part.wrap is not None:
+            interpolation(material.node_tree.animation_data.action,"LINEAR")
     scene.frame_set(1)
     return scene
 
@@ -236,6 +283,7 @@ def render_frame(rig, poses,s,i,dy,shader,brushes,triangles,uv,buffer,sub,margin
         else:
             vel=np.zeros_like(pos)
         shader.uniform_sampler("paint",brushes[part.paint][1]);shader.uniform_float("light",part.shade)
+        shader.uniform_float("wrapPaint",part.wrap or (0.,0.,0.))
         shader.uniform_float("partId",float(j+1))
         front,back,line=stack[j]
         # Linear clipping attains its extrema at the corners of the UV card.
@@ -379,7 +427,7 @@ def atlas(rig,s,poses,brushes,output,export,shader,save_png):
     return marks,dy,stack
 
 
-def run(repo,output,export,select=(0,1,2,3),make_master=True,direct=False,bearings=None):
+def run(repo,output,export,select=(0,1,2,3),make_master=True,direct=False,bearings=None,walk=False):
     repo,output,export=Path(repo),Path(output),Path(export)
     output.mkdir(parents=True,exist_ok=True);export.mkdir(parents=True,exist_ok=True)
     rig=load_script(repo,"marsh_compass_rig")
@@ -411,6 +459,8 @@ def run(repo,output,export,select=(0,1,2,3),make_master=True,direct=False,bearin
                 painter=SimpleNamespace(**globals())
                 sheets=load_script(repo,"marsh_direct_bake")
                 marks[s],ground,stack=sheets.export(painter,rig,s,poses,brushes,export,shader,save_png,bearings)
+                if walk:
+                    scenes.append(sheets.export_walk(painter,rig,s,poses,ground,brushes,export,shader,save_png))
             else:
                 marks[s],ground,stack=atlas(rig,s,poses,brushes,output,export,shader,save_png)
             seconds[s]=round(time.perf_counter()-then,3)
@@ -421,8 +471,8 @@ def run(repo,output,export,select=(0,1,2,3),make_master=True,direct=False,bearin
                     poses=[rig.frame(s,p) for p in positions]
                     ground=np.interp(positions,np.arange(128),ground,period=128)
                 scenes.append(planar_master(rig,poses,s,brushes,output,ground,stack))
-        if make_master:
-            stem="Mokradła-512" if direct else "Mokradła-128"
+        if scenes:
+            stem="Mokradla-chod" if walk else "Mokradła-512" if direct else "Mokradła-128"
             if len(select)!=4:stem+="-"+"-".join(map(str,select))
             bpy.data.libraries.write(str(output/(stem+".blend")),set(scenes),compress=True,fake_user=True)
         marks_file.write_text(json.dumps(marks,separators=(",",":")),encoding="utf-8")

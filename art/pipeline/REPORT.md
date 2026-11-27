@@ -1,5 +1,95 @@
 # Raport konfiguracji — 19.10.2026
 
+**27.11.2026 — obrót Ropuchy i rękawów Dzwonnika z osobnych części 2D**
+
+Ropucha ma korpus o stałej wysokości i cztery łapy osadzone względem niego. W teście 512 kierunków skoki szerokości obrysu korpusu spadły o 73%. Dzwonnik ma dwa osobne rękawy osadzone w barkach. Pomiar bocznego obrysu na wysokości rękawów poprawił się o około 1%. W obu przypadkach zweryfikowano geometrię 6144 poz.
+
+Eksport w Blenderze przez MCP trwał 8,45 s. Przechwycenie 372 klatek z renderera gry trwało 16,18 s. Zaliczono 1651 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-czesci-2d-20261127-023415/Mokradla-czesci-2d.blend) · [Chód i skręt w grze](C:/AI2D/pipeline/runs/mokradla-czesci-2d-20261127-023415/Mokradla-czesci-2d.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-czesci-2d-20261127-023415/report.json)
+
+**27.11.2026 — zgodny skręt dzwonu i stabilniejszy tułów Ropuchy**
+
+Ruch dzwonu jest rzutowany względem przodu i boku Dzwonnika. Krawędź zasłaniania ma stałe położenie w układzie płaszcza. Test porównuje to samo wychylenie z przodu i z profilu. Ropucha korzysta z zamkniętej krzywej środka i szerokości przekroju tułowia. W kontroli 512 kierunków skoki szerokości spadły o około 47%. Pole całej sylwetki zmieniło się od −5,1% do +6,0% względem poprzednich klatek. Kontrola geometrii objęła 6144 pozy sztywnego tułowia.
+
+Eksport w Blenderze przez MCP trwał 8,31 s, a przechwycenie 372 klatek z ukrytego renderera bez dźwięku 16,18 s. Zaliczono 1651 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-zgodny-skret-20261127-022557/Mokradla-zgodny-skret.blend) · [Chód i obrót przy zatrzymanym kroku](C:/AI2D/pipeline/runs/mokradla-zgodny-skret-20261127-022557/Mokradla-zgodny-skret.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-zgodny-skret-20261127-022557/report.json)
+
+**27.11.2026 — barki, łokcie i przesunięcie dzwonu Dzwonnika**
+
+Ramię i przedramię mają własne osie obrotu. Przedramię śledzi łokieć przeniesiony razem z ramieniem. W dwóch półkrokach na wprost punkt na rękawie przesuwa się o 11,64 piksela, a test zachowuje szerokość i wysokość klatki. Wygładzenie krzywej obrysu rękawów zmniejszyło skoki podczas skrętu o około 20%. W próbie ze stałym kierunkiem dzwon przesuwa się przy kroku w bok i w pionie. Osobny tor prowadzi go w bok i wyżej podczas zamachu.
+
+Eksport w Blenderze przez MCP trwał 8,12 s, a przechwycenie 372 klatek z ukrytego renderera bez dźwięku 16,31 s. Zaliczono 1650 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/dzwonnik-barki-i-dzwon-20261127-020454/Dzwonnik-barki-i-dzwon-final.blend) · [Krok i zamach w grze](C:/AI2D/pipeline/runs/dzwonnik-barki-i-dzwon-20261127-020454/Dzwonnik-krok-i-zamach.webp) · [Wyniki](C:/AI2D/pipeline/runs/dzwonnik-barki-i-dzwon-20261127-020454/report.json)
+
+**27.11.2026 — sztywny tułów i osobny ruch dzwonu**
+
+Rig obu przeciwników prowadzi środek tułowia jako sztywną część, a odkształcenie kończyn wygasa w stawach. Eksport sprawdził stałe wymiary tułowia w 12 288 pozach chodu, ataku i reakcji na trafienie. Dopasowanie obrysu do zamkniętej krzywej skrętu zmniejszyło skoki jego szerokości o około 30% u Ropuchy i 51% u Dzwonnika. Dzwon ma osobną teksturę. W silniku kołysze się wokół zawieszenia w rytm kroku, unosi w zamachu i chowa za płaszczem. Kontrole geometrii i ruchu dzwonu są częścią eksportu i testów gry.
+
+Eksport w Blenderze przez MCP trwał 7,46 s, a przechwycenie 372 klatek z ukrytego renderera gry bez dźwięku 16,40 s. Zaliczono 1649 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-sztywny-rig-20261127-015006/Mokradla-sztywny-rig.blend) · [Chód i atak w grze](C:/AI2D/pipeline/runs/mokradla-sztywny-rig-20261127-015006/Mokradla-krok-i-dzwon.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-sztywny-rig-20261127-015006/report.json)
+
+**27.11.2026 — przestrzenny dzwon i dopasowanie tekstury przy skręcie**
+
+Zasięg tekstury korpusu dopasowano do lewej i prawej krawędzi sylwetki. Przed zmianą skrajny obszar tekstury powtarzał się w najgorszym ujęciu na 11,2% widocznych pikseli Ropuchy i 10,3% Dzwonnika. Po zmianie kontrola 1024 klatek wykazała zero widocznych powtórzeń tego rodzaju. Dzwon wypieczono jako osobny kształt 2D z owalnym rantem i ciemnym otworem. Od przodu i z ukosa miał 26–27 pikseli szerokości, a od tyłu był całkowicie zasłonięty. W tej samej próbie skrętu mediana kontrastu detali zmieniła się o około −1% u Ropuchy i −4% u Dzwonnika.
+
+Eksport w Blenderze przez MCP trwał 6,85 s, a przechwycenie 312 klatek w ukrytym rendererze bez dźwięku 13,64 s. Zaliczono 1646 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-dzwon-przestrzen-20261127-013601/Mokradla-przestrzenny-dzwon.blend) · [Chód i skręt w grze](C:/AI2D/pipeline/runs/mokradla-dzwon-przestrzen-20261127-013601/Mokradla-dzwon-chod.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-dzwon-przestrzen-20261127-013601/report.json)
+
+**27.11.2026 — jedna tekstura w każdej klatce skrętu Ropuchy i Dzwonnika**
+
+Kolor klatek pośrednich pochodzi z jednej tekstury powstałej z ośmiu namalowanych widoków. ComfyUI FILM wyznacza dopasowanie obrysu. Dzwon zajmuje jedno miejsce na przedzie tekstury. Dla 1024 klatek odtworzono RGB z samej tekstury z maksymalną różnicą jednego poziomu kwantyzacji. Sprawdzono alfę sylwetek oraz podparcie w chodzie. W przechwyconych klatkach kontrast detali był większy o 64% u Ropuchy i 53% u Dzwonnika. Zmienność względem tego kontrastu wzrosła o 8% i 2%.
+
+Eksport Blendera przez MCP trwał 6,81 s. Przechwycenie 312 klatek w ukrytym rendererze gry bez dźwięku zajęło 13,77 s. Zaliczono 1646 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-jedna-tekstura-20261127-012254/Mokradla-jedna-tekstura-final.blend) · [Skręt w trakcie chodu](C:/AI2D/pipeline/runs/mokradla-jedna-tekstura-20261127-012254/Mokradla-jedna-tekstura.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-jedna-tekstura-20261127-012254/report.json)
+
+**27.11.2026 — czytelniejsza faktura Ropuchy i Dzwonnika w trakcie skrętu**
+
+Szczegóły skóry i kory wypieczono na wspólnej powierzchni z namalowanych widoków. Każdy fragment faktury korzysta głównie z najbliższego ujęcia, a jego kontrast przy samym brzegu sylwetki maleje. W tej samej próbie skrętu w silniku mediana kontrastu drobnych detali wzrosła o 80% u Ropuchy i 93% u Dzwonnika. Zmienność detali względem ich kontrastu wzrosła odpowiednio o 8% i 5%. Sprawdzono alfę 1024 sylwetek i zgodność geometrii chodu z poprzednim eksportem.
+
+Eksport w Blenderze przez MCP trwał 7,13 s, a przechwycenie 312 klatek w ukrytym rendererze gry bez dźwięku 13,55 s. Zaliczono 1646 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-ostry-pigment-20261127-010724/Mokradla-ostry-pigment.blend) · [Chód i skręt w grze](C:/AI2D/pipeline/runs/mokradla-ostry-pigment-20261127-010724/Ostry-chod-Mokradel.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-ostry-pigment-20261127-010724/report.json)
+
+**27.11.2026 — stabilniejsze podparcie Ropuchy i Dzwonnika przy skręcie**
+
+Punkt podparcia w chodzie wyznacza cały obszar łapy lub stopy przy podłożu. W Blenderze dopasowano zamknięte krzywe przebiegu podpór, barków i głowy. Największy ruch punktu podparcia między sąsiednimi pozycjami skrętu spadł z 6,50 do 3,75 piksela u Ropuchy i z 4,75 do 1,69 piksela u Dzwonnika. W porównaniu obrotu z zamrożoną fazą kroku nadal widać drobną zmianę obrysu Ropuchy. Próbę z inną interpolacją rysunków odrzucono po pomiarze obrysu.
+
+Eksport w Blenderze przez MCP trwał 7,14 s. Przechwycenie 312 klatek z ukrytego renderera bez dźwięku zajęło 13,85 s. Zaliczono 1646 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-ciagly-skret-20261127-005424/Mokradla-ciagly-krok.blend) · [Chód w grze](C:/AI2D/pipeline/runs/mokradla-ciagly-skret-20261127-005424/Mokradla-ciagly-krok.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-ciagly-skret-20261127-005424/report.json)
+
+**27.11.2026 — Ropucha torfowa i Dzwonnik Topieli, obrót wspólnej powierzchni**
+
+Lokalny ComfyUI FILM wyznacza przesunięcia w obu kierunkach między istniejącymi ujęciami. Większe formy podążają za tymi przesunięciami, a kolor powierzchni przesuwa się po jednym zamkniętym pasie 2D. Retusz kontrastu jest ograniczony do widocznego oka i dzwonu. W powtórzonej próbie skrętu w silniku skok detali między klatkami spadł o 15% u Ropuchy i 24% u Dzwonnika. Szybko zmienny składnik detalu spadł odpowiednio o 3% i 19%. Faktura w obrębie tułowia jest łagodniejsza.
+
+Eksport w Blenderze przez MCP trwał 6,99 s, a przechwycenie 312 klatek z ukrytego renderera gry bez dźwięku 13,73 s. Zaliczono 1646 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-przeplyw-20261127-003043/Mokradla-wspolna-powierzchnia-retusz.blend) · [Chód i skręt w grze](C:/AI2D/pipeline/runs/mokradla-przeplyw-20261127-003043/Mokradla-chod.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-przeplyw-20261127-003043/report.json)
+
+**27.11.2026 — 24 ujęcia kierunkowe Ropuchy torfowej i Dzwonnika Topieli**
+
+Porównano chód Szakala z pustyni i Rogacza z Kaldery. Ropucha i Dzwonnik zyskali po osiem osobno namalowanych sylwetek z Sunburst, dopasowanych kolorystycznie w ComfyUI i zapisanych jako osobne warstwy w Kricie. Rysunki i ich odbicia zwiększyły liczbę kluczowych widoków z 8 do 24 na postać. Widoki są rozstawione co 15° i zachowują skalę oraz podparcie. W próbie w silniku przy zatrzymanej fazie kroku migotanie drobnych szczegółów na tułowiu zmalało o 21,6% u Ropuchy i o 11,4% u Dzwonnika. Drobna faktura została przy tym złagodzona. [Ropucha w Kricie](C:/AI2D/sprites/mokradla-gestsze-kierunki-20261127-000904/Ropucha-dodatkowe-kierunki.kra) · [Dzwonnik w Kricie](C:/AI2D/sprites/mokradla-gestsze-kierunki-20261127-000904/Dzwonnik-dodatkowe-kierunki.kra)
+
+Eksport 1024 klatek i 16384 póz siatki w Blenderze przez MCP trwał 7,46 s. Przechwycenie 312 klatek w ukrytym rendererze gry bez dźwięku trwało 17,11 s. Zaliczono 1646 kontroli grafiki, 1001 kontroli cieni oraz cichy start Mokradeł. [Projekt Blendera](C:/AI2D/animations/mokradla-gestsze-kierunki-20261127-000904/Mokradla-24-kierunki.blend) · [Podgląd chodu w grze](C:/AI2D/pipeline/runs/mokradla-gestsze-kierunki-20261127-000904/Ropucha-Dzwonnik-chod.webp) · [Raport](C:/AI2D/pipeline/runs/mokradla-gestsze-kierunki-20261127-000904/report.json)
+
+**27.11.2026 — stabilizacja pigmentu Ropuchy i Dzwonnika przy skręcie**
+
+Drobne plamy skóry i kory filtruje się kątowo po zarejestrowaniu odpowiadających sobie miejsc na sylwetce. Największe formy zachowały odpowiednio 95,4% i 95,8% kontrastu. Alfa wszystkich 1024 ustawień kierunkowych i binarne dane ruchu mają identyczne wartości. W rendererze gry, przy zamrożonej fazie kroku, pomiar w obrębie tułowia wykazał spadek szybko zmiennego składnika detalu o 33,8% u Ropuchy i 31,2% u Dzwonnika.
+
+Eksport w Blenderze przez MCP zajął 7,04 s, a przechwycenie 312 klatek z ukrytej gry bez dźwięku 14,54 s. Zaliczono 1646 kontroli grafiki, 1001 kontroli cieni i cichy start Mokradeł. [Projekt w Blenderze](C:/AI2D/animations/mokradla-stabilny-pigment-20261126-235539/Mokradla-stabilny-pigment.blend) · [Bezstratny podgląd z gry](C:/AI2D/pipeline/runs/mokradla-stabilny-pigment-20261126-235539/Ropucha-Dzwonnik-stabilny-obrot.webp) · [Porównanie](C:/AI2D/pipeline/runs/mokradla-stabilny-pigment-20261126-235539/report.json)
+
+**26.11.2026 — płynny krok i skręt Ropuchy oraz Dzwonnika**
+
+Krok interpoluje 16 kluczy jednej siatki według drogi przebytej na ziemi. Podpory i kołysanie sprawdzono osobno przy stałym kierunku. Skręt używa ciągłej krzywej obszaru sylwetki, punktu ciężkości i położenia oka lub dzwonu. Największe zmiany pola obrysu między sąsiednimi z 512 kierunków spadły z 1,85% do 0,66% u Ropuchy i z 1,93% do 0,71% u Dzwonnika. W dwóch niezależnych próbach z silnika wszystkie 60 klatek dla każdej postaci różniło się od siebie.
+
+Finalny eksport w Blenderze przez MCP trwał 6,91 s. Przechwycenie 312 klatek chodu, kontroli kierunku i kontroli kroku z ukrytej gry bez dźwięku zajęło 16,56 s. Test grafiki zaliczył 1646 kontroli, test cieni 1001, a test logiki 588936. Cichy start Mokradeł doszedł do prezentacji gry. [Projekt Blender](C:/AI2D/animations/mokradla-plynny-chod-20261126-234116/Ropucha-i-Dzwonnik-final.blend) · [Skręt podczas chodu](C:/AI2D/pipeline/runs/mokradla-plynny-chod-20261126-234116/Plynny-chod-Ropuchy-i-Dzwonnika.webp) · [Pomiary](C:/AI2D/pipeline/runs/mokradla-plynny-chod-20261126-234116/report.json)
+
+**26.11.2026 — nowe modele Ropuchy torfowej i Dzwonnika Topieli**
+
+Zastąpiono rysunki obu postaci nowymi pełnymi sylwetkami kierunkowymi. Pozowanie do chodu, ataku, trafienia i śmierci prowadzi jedna siatka na sylwetkę. Sunburst przygotował rysunki, ComfyUI dopasował paletę do torfu, a [Ropucha w Kricie](C:/AI2D/sprites/mokradla-nowe-modele-20261126-232659/Ropucha.kra), [Dzwonnik w Kricie](C:/AI2D/sprites/mokradla-nowe-modele-20261126-232659/Dzwonnik.kra) oraz [projekt animacji w Blenderze](C:/AI2D/animations/mokradla-nowe-modele-20261126-232659/Ropucha-i-Dzwonnik-final.blend) zachowują edytowalne źródła.
+
+Sprawdzono 3072 klatki chodu i 16384 pozy siatki obu postaci. Żadna poza nie odwraca trójkątów. Czas renderu w Blenderze wraz z poprawką upadku to 57,15 s. Przechwycenie 168 klatek z ukrytej gry bez dźwięku zajęło 9,72 s. Na finalnych zasobach zaliczono 1645 kontroli grafiki i 1001 kontroli cieni. [Podgląd z gry](C:/AI2D/pipeline/runs/mokradla-nowe-modele-20261126-232659/Ropucha-Dzwonnik-animacje.webp) · [Raport](C:/AI2D/pipeline/runs/mokradla-nowe-modele-20261126-232659/report.json)
+
+**26.11.2026 — obrót tułowia Ropuchy i Dzwonnika**
+
+Obrót odsłania osobno malowany grzbiet, boki i przód tułowia. Skrót sylwetki i położenia głowy, barków oraz bioder korzystają z tego samego kąta. Edytowalne materiały, siatki i klucze chodu zapisano w [projekcie Blendera](C:/AI2D/animations/mokradla-obrot-tulowia-20261126-231701/Mokradla-chod-0-3.blend).
+
+Sprawdzono wszystkie 3072 klatki chodu obu przeciwników oraz ich widoki spoczynkowe. Render w Blenderze trwał 85,80 s, przechwycenie 96 klatek w ukrytym rendererze gry bez dźwięku 4,52 s. Zaliczono 1645 kontroli grafiki i 1001 kontroli cieni. [Obrót podczas chodu](C:/AI2D/pipeline/runs/mokradla-obrot-tulowia-20261126-231701/Ropucha-i-Dzwonnik-obrot.webp) · [Raport](C:/AI2D/pipeline/runs/mokradla-obrot-tulowia-20261126-231701/report.json)
+
+**26.11.2026 — ruch stawów przeciwników Mokradeł podczas skrętu**
+
+Gra wybiera jedną kompletną klatkę chodu z 128 kierunków i 12 faz kroku. W Blenderze osadzono łapy Ropuchy w stawach, poruszono pierścieniami Pijawki wzdłuż jednej osi, wsunięto nasady wici Błędnika pod latarnię i przedłużono obie warstwy rękawa Dzwonnika przy łokciu. Klatka wyznacza kolor, kształt cienia i obrys pod kursorem. Źródła ruchu to [Ropucha i Pijawka](C:/AI2D/animations/mokradla-spojny-ruch-20261126-230218/Mokradla-chod.blend) oraz [Błędnik i Dzwonnik](C:/AI2D/animations/mokradla-spojny-ruch-20261126-230218/Mokradla-chod-2-3.blend).
+
+Przez MCP Blendera wypalono i sprawdzono 6144 końcowe klatki chodu. Render wraz z dodatkową próbą dwóch gatunków trwał 266,48 s. Przechwycenie 96 klatek w ukrytej grze bez dźwięku trwało 5,98 s. Na finalnych atlasach zaliczono 1645 kontroli grafiki i 1001 kontroli cieni. [Próba chodu z gry](C:/AI2D/pipeline/runs/mokradla-spojny-ruch-20261126-230218/Chod-przeciwnikow-Mokradel.webp) · [Wyniki](C:/AI2D/pipeline/runs/mokradla-spojny-ruch-20261126-230218/report.json)
+
 **26.11.2026 — zasłanianie części ciała przeciwników Mokradeł podczas obrotu**
 
 W Blenderze łapy i boki ropuchy zachodzą pod grzbiet, kolejne pierścienie pijawki zasłaniają dalsze segmenty, wici Błędnika chowają się za latarnią, a płaszcz Dzwonnika przykrywa dalsze ramię i dzwon. Każda z 73 malowanych części zachowuje kształt. W klatkach pośrednich gra wybiera kolor widocznej części na podstawie trzech dodatkowych próbek kąta między sąsiednimi ujęciami. Maski są wczytywane do pamięci graficznej razem z atlasami. [Projekt Blendera](C:/AI2D/animations/mokradla-przeslanianie-20261126/Mokradła-128.blend) · [Odbudowa zasobów](../creatures/marsh-turn/README.md)

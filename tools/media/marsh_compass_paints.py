@@ -65,6 +65,53 @@ def filter_dorsal_skin(brush):
     return result
 
 
+def torso_paint(repo, out):
+    """Paint a periodic 2D strip in the order flank, chest, flank, back."""
+    import numpy as np
+    artwork=repo/"art/creatures/marsh-turn"
+    cuts={
+        "toad-wrap":(0,("side",(.36,.28,.65,.62)),("front",(.35,.48,.65,.74)),("back",(.36,.20,.67,.63))),
+        "keeper-wrap":(3,("side",(.52,.25,.70,.47)),("front",(.43,.30,.59,.62)),("back",(.37,.21,.52,.48))),
+    }
+    for name,(species,flank,chest,back) in cuts.items():
+        def fragment(spec):
+            heading,box=spec
+            with Image.open(artwork/f"{species}-{heading}.png") as source:
+                x0,y0,x1,y1=box
+                area=source.convert("RGBA").crop((round(x0*source.width),round(y0*source.height),
+                                                  round(x1*source.width),round(y1*source.height)))
+            if area.getchannel("A").getextrema()[0]<240:
+                raise ValueError(f"Transparent source in torso strip {species}/{heading}")
+            return np.asarray(area.convert("RGB").resize((256,192),Image.Resampling.LANCZOS),dtype='f4')
+        side=fragment(flank)
+        front=fragment(chest)
+        if species==0:
+            # The front-facing toad still has a warty crown. The pale
+            # throat appears towards the bottom where the snout overlaps it.
+            t=np.clip((np.arange(front.shape[0],dtype='f4')/front.shape[0]-.23)/.35,0,1)
+            t=(t*t*(3-2*t))[:,None,None]
+            front=side*.95*(1-t)+front*t
+        patterns=(side,front,side[:,::-1],fragment(back))
+        sheet=np.empty((192,1024,3),dtype='f4')
+        for x in range(sheet.shape[1]):
+            angle=x/256.
+            sector=math.floor(angle+.5)
+            local=angle-sector
+            u=min(255,round((local+.5)*255))
+            paint=patterns[sector%4][:,u]
+            # Weld the edges in texture space. This stationary seam follows the body.
+            t=max(0.,(abs(local)-.38)/.12)
+            mix=.5*t*t*(3-2*t)
+            if mix:
+                near=patterns[(sector+(1 if local>0 else -1))%4]
+                paint=paint*(1-mix)+near[:,255-u]*mix
+            sheet[:,x]=paint
+        pixels=np.rint(sheet).clip(0,255).astype('u1')
+        # A padded copy at each end gives the bake and Blender identical seam filtering.
+        periodic=np.concatenate((pixels,pixels),axis=1)
+        Image.fromarray(periodic).save(out/f"{name}.png")
+
+
 def cut(repo, out):
     out.mkdir(parents=True, exist_ok=True)
     for name, species, direction, polygon in pieces():
@@ -80,6 +127,7 @@ def cut(repo, out):
         if name=="toad-back":
             brush=filter_dorsal_skin(brush)
         brush.save(out / (name+".png"))
+    torso_paint(repo,out)
     # A stripped root cut from the keeper's own bark, with bound ends. Sample
     # the interior along the sloping root so a second hand is not painted on it.
     root = Image.open(out / "keeper-upper.png").convert("RGBA")

@@ -1,0 +1,34 @@
+{
+  "master": "C:/AI2D/animations/mokradla-stabilny-pigment-20261126-235539/Mokradla-stabilny-pigment.blend",
+  "method": "Angular filtering of registered high-frequency pigment and identical alpha silhouettes",
+  "measurements": {
+    "0": {
+      "previous": {
+        "temporal_rms": 5.711614608764648,
+        "key_ink_rms": 8.905805587768555,
+        "key_medium_contrast": 6.782460689544678
+      },
+      "current": {
+        "temporal_rms": 3.444380044937134,
+        "key_ink_rms": 6.68183708190918,
+        "key_medium_contrast": 6.467147350311279
+      },
+      "temporal_reduction": 0.39695160110214256,
+      "medium_contrast_ratio": 0.9535104803895935
+    },
+    "3": {
+      "previous": {
+        "temporal_rms": 7.324674606323242,
+        "key_ink_rms": 10.18072509765625,
+        "key_medium_contrast": 9.05353832244873
+      },
+      "current": {
+        "temporal_rms": 4.784200668334961,
+        "key_ink_rms": 8.183717727661133,
+        "key_medium_contrast": 8.675765037536621
+      },
+      "temporal_reduction": 0.34683778796059306,
+      "medium_contrast_ratio": 0.9582734096374894
+    }
+  }
+}

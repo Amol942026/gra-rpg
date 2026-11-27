@@ -52,17 +52,75 @@ inline int viewIndex(const ActorFrame& pose){
  const int index=int(std::lround((pose.bearing+pose.residual)*(count/Facings)));
  return (index+count)%count;
 }
+inline int walkingIndex(const ActorFrame& pose){
+ if(meshGait(pose.species)||pose.clip!=clips::Walk||pose.gaitWeight<.025f||
+    walkingPaintings[pose.species].views.empty())return -1;
+ // Settle towards the nearest neutral step as movement fades.
+ const float gait=pose.gaitPhase-std::round(pose.gaitPhase);
+ const int step=(int(std::lround(gait*pose.gaitWeight*WalkFrames))+WalkFrames)%WalkFrames;
+ return pose.bearing*WalkFrames+step;
+}
+inline const Painting& viewPainting(const ActorFrame& pose){
+ return walkingIndex(pose)>=0?walkingPaintings[pose.species]:paintings[pose.species];
+}
 inline const ViewRect& viewRect(const ActorFrame& pose){
- return paintings[pose.species].views[viewIndex(pose)];
+ const int walk=walkingIndex(pose);
+ return walk>=0?walkingPaintings[pose.species].views[walk]:paintings[pose.species].views[viewIndex(pose)];
+}
+struct KeeperBellPose {
+ Vector4 sprite;
+ float cloakX;
+};
+inline KeeperBellPose keeperBellPose(const ActorFrame& pose){
+ const float yaw=(pose.bearing+pose.residual)*(2*PI/Facings);
+ const float forward=std::sin(yaw),across=std::cos(yaw);
+ const float face=std::clamp((forward+.56f)/1.04f,0.f,1.f);
+ const float visible=face*face*(3-2*face);
+ const float step=pose.gaitPhase*2*PI;
+ const float stride=pose.gaitWeight;
+ float sideTilt=.19f*std::sin(step-.55f)*stride;
+ float forwardTilt=.08f*std::cos(step-.55f)*stride;
+ float sideTravel=5.5f*std::sin(step-.30f)*stride;
+ float forwardTravel=1.6f*std::cos(step-.30f)*stride;
+ float lift=2.8f*std::sin(step-.60f)*stride;
+ if(pose.clip==clips::Attack||pose.clip==clips::Hurt){
+  const float t=pose.phase,arc=std::sin(PI*t);
+  if(pose.clip==clips::Attack){
+   sideTilt+=.63f*arc*std::cos(2*PI*(t-.52f));
+   forwardTilt+=.23f*arc*std::sin(2*PI*t);
+   sideTravel+=8.5f*arc*std::sin(PI*(t-.16f));
+   forwardTravel+=4.f*arc*arc;
+   lift+=12.2f*arc*arc;
+  }else sideTilt+=.36f*arc*std::sin(4*PI*t);
+ }
+ // Convert the hanger's local motion to the same oblique view as the keeper.
+ const Vector2 right{forward,-ActorGroundSquash*across};
+ const Vector2 depth{across,ActorGroundSquash*forward};
+ const float rimX=right.x*std::sin(sideTilt)+depth.x*std::sin(forwardTilt);
+ const float rimY=std::cos(sideTilt)*std::cos(forwardTilt)+
+                  right.y*std::sin(sideTilt)+depth.y*std::sin(forwardTilt);
+ const float hangerX=102+24*across;
+ return {{hangerX+right.x*sideTravel+depth.x*forwardTravel,
+          44+1.4f*forward-lift+right.y*sideTravel+depth.y*forwardTravel,
+          std::atan2(-rimX,rimY),std::copysign(visible,across)}, hangerX};
 }
 inline void beginInk(const ActorFrame& pose,int mode){
  const auto& rect=viewRect(pose);
- const auto& texture=paintings[pose.species].pages[rect.page].texture;
+ const auto& texture=viewPainting(pose).pages[rect.page].texture;
  const Vector4 limits{(rect.x+.5f)/texture.width,(rect.y+.5f)/texture.height,
                       (rect.x+rect.w-.5f)/texture.width,(rect.y+rect.h-.5f)/texture.height};
  BeginShaderMode(bodyInk);
  SetShaderValue(bodyInk,inkLimits,&limits,SHADER_UNIFORM_VEC4);
  SetShaderValue(bodyInk,inkMode,&mode,SHADER_UNIFORM_INT);
+ const bool hasBell=mode==0&&pose.species==3&&bellInk.id;
+ const KeeperBellPose metal=hasBell?keeperBellPose(pose):KeeperBellPose{};
+ SetShaderValue(bodyInk,inkBellPose,&metal.sprite,SHADER_UNIFORM_VEC4);
+ if(hasBell&&metal.sprite.w!=0.f){
+  const Vector2 origin{float(rect.x)-rect.left,float(rect.y)-rect.top};
+  SetShaderValue(bodyInk,inkOrigin,&origin,SHADER_UNIFORM_VEC2);
+  SetShaderValue(bodyInk,inkCloakX,&metal.cloakX,SHADER_UNIFORM_FLOAT);
+  SetShaderValueTexture(bodyInk,inkBell,bellInk);
+ }
 }
 struct Sample {int a,b;float t;};
 inline Sample sampleAt(clips::Clip clip,float phase){
@@ -82,8 +140,25 @@ inline Surface buildSurface(const ActorFrame& p){
  Surface mesh{};
  const int s=p.species,w=turn::CellW[s],h=turn::CellH[s];
  const auto& rig=rigs[s];
+ const int walk=walkingIndex(p);
+ if(walk>=0){
+  const auto& marks=walkingMarks[s][walk];
+  mesh.light={marks.light[0]/16.f,marks.light[1]/16.f};
+  for(int i=0;i<2;i++){
+   const auto& f=marks.foot[i];
+   mesh.feet[i]={f[0]/16.f,f[1]/16.f,f[2]/16.f};
+  }
+  mesh.bounds={-float(turn::AnchorX[s]+WalkMargin),-float(turn::AnchorY[s]+WalkMargin),
+               float(w+2*WalkMargin),float(h+2*WalkMargin)};
+  for(int row=0;row<Side;row++)for(int col=0;col<Side;col++)
+   mesh.vertex[row*Side+col]={mesh.bounds.x+col*mesh.bounds.width/Divisions,
+                             mesh.bounds.y+row*mesh.bounds.height/Divisions};
+  return mesh;
+ }
  const int near=p.bearing,far=(near+(p.residual>=0?1:-1)+Facings)%Facings;
- const float yawMix=std::abs(p.residual);
+ // The keeper's fall chooses one side at contact. Its locked heading cannot
+ // interpolate between the left and right falls in the two axial views.
+ const float yawMix=s==3&&p.clip==clips::Death?0.f:std::abs(p.residual);
  const auto gait=sampleAt(clips::Walk,p.gaitPhase),action=sampleAt(p.clip,p.phase);
  // An action begins and ends on its neutral key. Carry the underlying stride
  // through those boundaries, and use the same weights for the feet and lamp.
@@ -95,9 +170,13 @@ inline Surface buildSurface(const ActorFrame& p){
   for(int i=0;i<count;i++)if(keys[i]==key){weights[i]+=weight;return;}
   keys[count]=key;weights[count++]=weight;
  };
- if(p.clip==clips::Walk)add(0,1-p.gaitWeight);
- else {add(action.a,1-action.t);add(action.b,action.t);add(0,-p.gaitWeight);}
- add(gait.a,(1-gait.t)*p.gaitWeight);add(gait.b,gait.t*p.gaitWeight);
+ // The connected gait has a separate neutral stance, at the first attack key.
+ const int neutral=meshGait(s)?clips::Frames:0;
+ if(p.clip==clips::Walk)add(neutral,meshGait(s)?1-p.gaitWeight:1.f);
+ else {add(action.a,1-action.t);add(action.b,action.t);add(neutral,-p.gaitWeight);}
+ if(meshGait(s)||p.clip!=clips::Walk){
+  add(gait.a,(1-gait.t)*p.gaitWeight);add(gait.b,gait.t*p.gaitWeight);
+ }
  // Interpolate physical joint positions separately from the registered pigment.
  for(int i=0;i<count;i++){
   const auto* a=&rig.offsets[(near*Poses+keys[i])*Vertices];
@@ -147,7 +226,7 @@ inline std::array<clips::Foot,2> supports(const ActorFrame& p){return rigs[p.spe
 inline Vector2 lightCore(const ActorFrame& p){return rigs[p.species].marks.empty()?Vector2{}:surface(p).light;}
 inline float registeredAlpha(const ActorFrame& pose,float x,float y){
  const auto& rect=viewRect(pose);
- const auto& page=paintings[pose.species].pages[rect.page];
+ const auto& page=viewPainting(pose).pages[rect.page];
  x=std::clamp(x-rect.left-.5f,0.f,float(rect.w-1));
  y=std::clamp(y-rect.top-.5f,0.f,float(rect.h-1));
  const int ix=int(x),iy=int(y),jx=std::min(ix+1,rect.w-1),jy=std::min(iy+1,rect.h-1);
@@ -156,6 +235,10 @@ inline float registeredAlpha(const ActorFrame& pose,float x,float y){
 }
 inline bool hit(const ActorFrame& pose,const Surface& mesh,Vector2 point){
  if(!CheckCollisionPointRec(point,mesh.bounds))return false;
+ if(walkingIndex(pose)>=0){
+  const float coverage=registeredAlpha(pose,point.x-mesh.bounds.x,point.y-mesh.bounds.y);
+  return coverage*coverage>=8.f/255;
+ }
  auto inTriangle=[&](int a,int b,int c){
   const auto va=mesh.vertex[a],vb=mesh.vertex[b],vc=mesh.vertex[c];
   const float bx=vb.x-va.x,by=vb.y-va.y,cx=vc.x-va.x,cy=vc.y-va.y,det=bx*cy-by*cx;
@@ -181,8 +264,9 @@ inline bool hit(const ActorFrame& pose,const Surface& mesh,Vector2 point){
 }
 template<class Project>inline void drawSurface(const ActorFrame& p,const Surface& mesh,Color tint,Project project){
  const auto& rect=viewRect(p);
- const auto& texture=paintings[p.species].pages[rect.page].texture;
- const float w=turn::CellW[p.species],h=turn::CellH[p.species];
+ const auto& texture=viewPainting(p).pages[rect.page].texture;
+ const float pad=walkingIndex(p)>=0?2*WalkMargin:0;
+ const float w=turn::CellW[p.species]+pad,h=turn::CellH[p.species]+pad;
  std::array<Vector2,Vertices> points;
  std::array<float,Side> us,vs;
  for(int i=0;i<Side;i++){

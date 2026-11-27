@@ -1,0 +1,82 @@
+[
+  {
+    "species": 0,
+    "frames": 512,
+    "sources_sha256": "060aa3150d72f4941491acb96b5c4c9f1c919724393a0f296167104d256520e3",
+    "pages": [
+      {
+        "file": "views-0-0.png",
+        "size": [
+          2047,
+          1770
+        ],
+        "sha256": "8ec775c985393e017ca4223b460501eb173408856e45a71e85437c5da6503d26"
+      }
+    ],
+    "index_sha256": "3a36f96b9e16e97eb4707fa1616add583b30a702f7c7a60db4d035b82492cb31"
+  },
+  {
+    "species": 1,
+    "frames": 512,
+    "sources_sha256": "3150d5c2764bafac68ed7d420a14788c3d69ec2804e17287b0f9ab345d7a3067",
+    "pages": [
+      {
+        "file": "views-1-0.png",
+        "size": [
+          2044,
+          2011
+        ],
+        "sha256": "d0ee5e2e8a87c6ee87d2055c2bedaca16f6affb9874eb29dce339ad8ac3597c0"
+      },
+      {
+        "file": "views-1-1.png",
+        "size": [
+          1535,
+          54
+        ],
+        "sha256": "1d63a5d0f9cd342d64cac58d5ccb74bde47f496e465a1af240ca024ee0c96425"
+      }
+    ],
+    "index_sha256": "c73f10677ea0e27b25d9d40cebd9d0f2634d55903318ae55b9f9fe6658695684"
+  },
+  {
+    "species": 2,
+    "frames": 512,
+    "sources_sha256": "e0e2f511309fb8e9bc12c08273f73eeab16f3bd62922c3dc85920521ad4b8d40",
+    "pages": [
+      {
+        "file": "views-2-0.png",
+        "size": [
+          2044,
+          1978
+        ],
+        "sha256": "c1365f53b265286b08c60677dc0d6c554d345da302320b88664fb35d59d93fcd"
+      }
+    ],
+    "index_sha256": "c780c704322f74f19d21401af2a964bf229ea6dd82ac06a9e55b2a385bf01287"
+  },
+  {
+    "species": 3,
+    "frames": 512,
+    "sources_sha256": "c32602a147c74654a7eb3ad1510331f85d44a6ecfbc4d1bf812f644bdab7c750",
+    "pages": [
+      {
+        "file": "views-3-0.png",
+        "size": [
+          2048,
+          2006
+        ],
+        "sha256": "c58c1f1616f1109963616ae2aad51fde8033e0fb11072b53212c02ac80270664"
+      },
+      {
+        "file": "views-3-1.png",
+        "size": [
+          2045,
+          1278
+        ],
+        "sha256": "46ebe999ad8cea087fefbd0b8c136f1f9b75f08627f12047872e8483a7c48f23"
+      }
+    ],
+    "index_sha256": "279c91b29c3e58d2de7c6366dd8e2f6334feb09de47f7f40ca10588de9372d64"
+  }
+]

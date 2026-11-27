@@ -1,0 +1,28 @@
+{
+  "source": "New Emberfall paintings from Sunburst; palette ComfyUI; directional KRA in Krita; deformation and animation exported through Blender MCP.",
+  "masters": {
+    "Ropucha": {
+      "kra": "C:\\AI2D\\sprites\\mokradla-nowe-modele-20261126-232659\\Ropucha.kra",
+      "source_sha256": "c14864f2dbb60013d78850305b3d18eef47a26ffe30a50327fdca0fc858a49f3"
+    },
+    "Dzwonnik": {
+      "kra": "C:\\AI2D\\sprites\\mokradla-nowe-modele-20261126-232659\\Dzwonnik.kra",
+      "source_sha256": "46569ed0a4897d95b1acf1fc6a70c0cdbaa95f09a9bd1dd30896f09461611d9b"
+    }
+  },
+  "blender": "C:\\AI2D\\animations\\mokradla-nowe-modele-20261126-232659\\Ropucha-i-Dzwonnik-final.blend",
+  "geometry": {
+    "Ropucha": {
+      "walk_frames": 1536,
+      "largest_secondary_by_p99_px": 0.0,
+      "largest_secondary_px": 4,
+      "smallest_triangle_area_relative_to_rest": 0.37933482142857106
+    },
+    "Dzwonnik": {
+      "walk_frames": 1536,
+      "largest_secondary_by_p99_px": 0.0,
+      "largest_secondary_px": 0,
+      "smallest_triangle_area_relative_to_rest": 0.29002645265423216
+    }
+  }
+}

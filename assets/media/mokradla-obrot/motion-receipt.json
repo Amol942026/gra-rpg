@@ -5,26 +5,13 @@
   "species": [
     {
       "species": 0,
-      "tangent": "parts",
-      "decoded_geometry_sha256": "91290d2eb3b4b44f2c90c5e20f6e454a735c4d2145957b5944ca3d9cfa9c76fe",
-      "sources": {
-        "neutral-0-0.png": "830e054084423e554bdc7eceb196909f74be3352c5e248eb75ea4a56fdf77ff3",
-        "neutral-0-1.png": "06740e3e05d6cac9cc7698f93fbb1558f5f39af6e5b7874ea0c1ccf15f5dee1a",
-        "landmarks.json": "a1bd1300d08fd9f890fe72583e77cbeb576ab5119e2815fd9983e46bb9286eb7",
-        "yaw-raw-0.npz": "4977b2055a1b5d467ecb15ada4243176b0a04e23e497003f96ccc7c86cde65dd",
-        "visibility-0.npz": "32c6b061eaaaa94d9fc66e542316cce1da9be492df3ce3a4d08a823074d0ea5e"
-      },
-      "range_px": [
-        -46.4375,
-        56.625
-      ],
+      "basis": "fixed-height torso and attached painted limb pieces",
+      "decoded_geometry_sha256": "749ce6ea4dcb721489d59857834a9c61a7d7bf20ee3cf2ea042fbc4cef602a71",
       "files": {
-        "motion-0.png": "6a9c910a887d14ab310c48d3de528f490d5d674512ca4971fdc0348cbc602c2c",
-        "support-0.bin": "40854fc5b806d69e0879183a85124e70e85cebf5ceaca99948f56873ad7d3afb",
-        "flow-0-0.png": "7829784ca148074348028efafa0b755399dd7a2c9dcb0530c20b28298ffb8626",
-        "flow-0-1.png": "90ed953f7977ab058c40cd9db7bc28c77e2e5d4c1d2bad08b79fe02e7026e74d",
-        "cover-0-0.png": "ebf5c058b08bafa1655d62f164e50c7b96b2947cc1e14da2eba256744230ac99",
-        "cover-0-1.png": "a9b1176e14587e224b6e450483d65244d2c633ae9196fbf0b4d55a6617fb8c61"
+        "motion-0.png": "471bebf5b8235a2a015b2cff852c15082da6f3bd350e9aba3c4e1bd8464dcd73",
+        "support-0.bin": "fcbb59fc93ed3b483e002289cea0d38813cc95c87fb306eb553b56e2f9519737",
+        "neutral-0-0.png": "57530c0c73aa039c65f3137a62f61b37992f80dab3e6ed80954e2843ec297027",
+        "neutral-0-1.png": "7f1b0aa65e96765d55548d0c46532bcccb165b60850399c75ba6815498e924aa"
       }
     },
     {
@@ -77,26 +64,13 @@
     },
     {
       "species": 3,
-      "tangent": "parts",
-      "decoded_geometry_sha256": "db2f6536e255f08055d2e89aa38624e2eec38ef33db006f7e5028e115f11e907",
-      "sources": {
-        "neutral-3-0.png": "60105c3de23324c109bf05132e974c15e689af4d70d0dfbdadbaf9c868d9461d",
-        "neutral-3-1.png": "d13b6e4543eed4f2fdc331ac0356c5a57173bfe0fbbf508b6112ff8351e21f05",
-        "landmarks.json": "a1bd1300d08fd9f890fe72583e77cbeb576ab5119e2815fd9983e46bb9286eb7",
-        "yaw-raw-3.npz": "1bdff04701468140e246aa14c65bdf7927627eae37df11bc0da28faef4ed71b2",
-        "visibility-3.npz": "6ff52015447cbd162963bd799264520d280d2cb6f298b2ec102397d91e8384c1"
-      },
-      "range_px": [
-        -122.25,
-        161.0
-      ],
+      "basis": "fixed-height torso and attached painted limb pieces",
+      "decoded_geometry_sha256": "a7cc488af44a2519c45fd7583bc464c398ddf5bd9b017c0a1c0a28616b7d26d8",
       "files": {
-        "motion-3.png": "5df7917937db44401ea3b9d8f69b786deb9a9a400413090a37cef7686f331044",
-        "support-3.bin": "92a2d2bb0fa3f7e144f989198f1d936d8a27b323e4577035b0703d23acbc2ab4",
-        "flow-3-0.png": "cf465acff154864a5d46231c40f38715ebb20cea8f8e26faa85ccc5fdfc496e0",
-        "flow-3-1.png": "97db7eee676999a6d1d6b69e1c00653e53f4fe7b6aa9fd117a55553352422f19",
-        "cover-3-0.png": "d69e04cb64e0bb91976e3a663db4deb8a84d8b207de12bd02f7b478407c1ca22",
-        "cover-3-1.png": "2a6e7bcd143c2eea09611d9c63e1dccad34be0f32ada88cfa536ac4857743e85"
+        "motion-3.png": "f007ce079e37cadefddac09ad824f3b898dddef70b454d9859849b936b80861d",
+        "support-3.bin": "d34b63a55ba08debe7b362a7ee269381def7cfb3b1df86245e5637abb48fdd55",
+        "neutral-3-0.png": "4f93506e71f7108f0f179ed67aedb86de098d9b6e8c3a854fed38c5f53d74b15",
+        "neutral-3-1.png": "fb153d3f800b0ed40188eec3c52811efc76a3ac58b079e9f814587497962734f"
       }
     }
   ],

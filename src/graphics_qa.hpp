@@ -79,6 +79,86 @@ void verifyMarshActors(Check check){
  }
  check(artwork,"each marsh creature has 512 distinct visible paintings with isolated atlas edges");
  check(selection,"body, picking and shadow select the same single exposure at all 512 headings");
+ bool walkCels=true;
+ for(int s=0;s<4;s++){
+  if(marsh_art::meshGait(s))continue;
+  for(int bearing=0;bearing<marsh_art::Facings;bearing++)
+   for(int step=0;step<marsh_art::WalkFrames;step++){
+    const float phase=float(step)/marsh_art::WalkFrames;
+    const marsh_art::ActorFrame pose{s,bearing,marsh_actor_frames::Walk,0,.2f,phase,phase,1.f};
+    if(marsh_art::walkingIndex(pose)!=bearing*marsh_art::WalkFrames+step){walkCels=false;continue;}
+    const auto& rect=marsh_art::viewRect(pose);
+    const auto surface=marsh_art::buildSurface(pose);
+    const auto& page=marsh_art::viewPainting(pose).pages[rect.page];
+    int solid=0;
+    for(int y=0;y<rect.h;y+=3)for(int x=0;x<rect.w;x+=3){
+     // The actor, its shadow and the cursor all read this single composed cel.
+     if(page.alpha[(rect.y+y)*page.texture.width+rect.x+x]<192)continue;
+     solid++;
+     const Vector2 q{surface.bounds.x+rect.left+x+.5f,surface.bounds.y+rect.top+y+.5f};
+     walkCels&=marsh_art::hit(pose,surface,q);
+    }
+    walkCels&=solid>=30;
+   }
+ }
+ check(walkCels,"leech and wisp use a coherent painted walk cel including cursor coverage");
+ bool smoothGait=true;
+ for(int s:{0,3})for(int b=0;b<marsh_art::Facings;b+=4){
+  constexpr float phase=.274f,delta=.012f;
+  using namespace marsh_art;
+  const auto at=[&](float x,float weight){return buildSurface(
+   {s,b,marsh_actor_frames::Walk,0,.219f,x,x,weight});};
+  auto left=at(phase-delta,1),mid=at(phase,1),right=at(phase+delta,1);
+  auto end=at(.99999f,1),begin=at(0,1),rest=at(0,0),settling=at(phase,.00001f);
+  float movement=0,seam=0,idle=0,error=0;
+  for(int j=0;j<Vertices;j++){
+   const auto a=left.vertex[j],m=mid.vertex[j],c=right.vertex[j];
+   movement=std::max(movement,std::hypot(c.x-a.x,c.y-a.y));
+   error=std::max(error,std::hypot(a.x+c.x-2*m.x,a.y+c.y-2*m.y));
+   seam=std::max(seam,std::hypot(end.vertex[j].x-begin.vertex[j].x,end.vertex[j].y-begin.vertex[j].y));
+   idle=std::max(idle,std::hypot(rest.vertex[j].x-settling.vertex[j].x,rest.vertex[j].y-settling.vertex[j].y));
+  }
+  smoothGait&=movement>.015f&&error<.02f&&seam<.02f&&idle<.01f;
+ }
+ check(smoothGait,"toad and keeper interpolate the stride, its loop and the transition to a planted stance");
+ bool rigidCore=true;
+ for(int s:{0,3})for(int b=0;b<marsh_art::Facings;b+=4)
+  for(auto clip:{marsh_actor_frames::Walk,marsh_actor_frames::Attack,marsh_actor_frames::Hurt})
+   for(float phase:{.13f,.32f,.55f,.81f}){
+    using namespace marsh_art;
+    const auto pose=buildSurface({s,b,clip,0,.31f,phase,.43f,.65f});
+    const auto corner=pose.vertex[3*Side+5],end=pose.vertex[6*Side+7];
+    rigidCore&=std::abs(end.x-corner.x-2.f*turn::CellW[s]/Divisions)<.001f&&
+               std::abs(end.y-corner.y-3.f*turn::CellH[s]/Divisions)<.001f;
+   }
+ check(rigidCore,"toad and keeper preserve torso width and height while the limbs move");
+ const auto armAt=[](float phase){
+  return marsh_art::buildSurface({3,32,marsh_actor_frames::Walk,0,0,phase,phase,1.f});
+ };
+ const auto firstArm=armAt(.25f),secondArm=armAt(.75f);
+ constexpr int cuff=8*marsh_art::Side+3, chest=4*marsh_art::Side+6;
+ const auto armTravel=std::hypot(firstArm.vertex[cuff].x-secondArm.vertex[cuff].x,
+                                 firstArm.vertex[cuff].y-secondArm.vertex[cuff].y);
+ check(armTravel>4.f&&std::abs(firstArm.vertex[chest].x-secondArm.vertex[chest].x)<.001f,
+       "keeper flexes a sleeve independently of the chest at a fixed bearing");
+ const auto bellAt=[](int bearing,marsh_actor_frames::Clip clip,float phase,float gait,float weight){
+  return marsh_art::keeperBellPose({3,bearing,clip,0,0,phase,gait,weight});
+ };
+ const auto leftBell=bellAt(32,marsh_actor_frames::Walk,.25f,.25f,1.f).sprite;
+ const auto rightBell=bellAt(32,marsh_actor_frames::Walk,.75f,.75f,1.f).sprite;
+ const auto restBell=bellAt(32,marsh_actor_frames::Walk,0,0,0).sprite;
+ const auto attackBell=bellAt(32,marsh_actor_frames::Attack,.55f,0,0).sprite;
+ const auto hiddenBell=bellAt(96,marsh_actor_frames::Walk,.25f,.25f,1.f).sprite;
+ const auto profileNear=bellAt(0,marsh_actor_frames::Walk,.25f,.25f,1.f);
+ const auto profileFar=bellAt(0,marsh_actor_frames::Walk,.75f,.75f,1.f);
+ check(std::abs(profileNear.sprite.x-profileFar.sprite.x)<2.f&&
+       std::abs(profileNear.sprite.z)<std::abs(leftBell.z)&&profileNear.cloakX==profileFar.cloakX,
+       "keeper's bell projects the same local swing with the body and keeps the cloak edge fixed");
+ check(marsh_art::bellInk.id&&marsh_art::bellInk.width==36&&marsh_art::bellInk.height==42&&
+       std::abs(leftBell.z-rightBell.z)>.28f&&std::abs(leftBell.x-rightBell.x)>9.f&&
+       std::abs(leftBell.y-rightBell.y)>4.f&&std::abs(restBell.z)<.001f&&
+       std::abs(attackBell.z)>.5f&&attackBell.x>restBell.x+5.f&&attackBell.y<restBell.y-9.f&&hiddenBell.w==0.f,
+       "keeper's bell changes position during the stride and cast and is occluded from behind");
  check(turn,"marsh creatures follow continuous headings through all 128 cels including the wrap to east");
  check(still,"marsh corpses retain their continuous heading through the final pose");
  check(walk,"each marsh creature advances its walking clip");
@@ -154,7 +234,65 @@ void verifyJackalTurn(Check check,std::ostream& report){
  report<<"Jackal sampled walking frames: "<<sampled<<'\n';
 }
 
-bool runGraphicsQA(){
+inline bool captureMarshRig(const fs::path& output){
+ game=Game(12593);
+ game.activateField(WorldLocation::Swamp);
+ welcome=paused=help=false;intro={};towerStory={};
+ game.player=marsh::Ferry+V{5,3};
+ game.messageTime=0;
+ mouse={-9900,-9900};hovered={};
+ prepareCanvas(1.f);
+ game.props.erase(std::remove_if(game.props.begin(),game.props.end(),[](const Prop& prop){
+  const auto at=screen(prop.pos);
+  return at.x>303&&at.x<805&&at.y>196&&at.y<675;
+ }),game.props.end());
+ constexpr const char* names[]={"review","kontrola-skret","kontrola-krok","atak"};
+ const Vector2 centers[]={{386,451},{664,469}};
+ if(!marsh_art::ready())return false;
+ auto target=LoadRenderTexture(WorldW,H);
+ if(!target.id)return false;
+ const double start=GetTime();
+ bool passed=true;
+ for(int pass=0;pass<4&&passed;pass++){
+  fs::create_directories(output/names[pass]);
+  const int frames=pass==0?192:60;
+  const bool casting=pass==3;
+  for(int frame=0;frame<frames&&passed;frame++){
+   game.enemies.clear();
+   game.time=1.28f;
+   for(int i=0;i<2;i++){
+    const float orbit=frame*2*PI/frames;
+    const float yaw=casting?1.28f:pass==2?i*PI*.5f:orbit+i*PI;
+    const float radius=i?53.f:56.f;
+    Vector2 at=centers[i];
+    if(pass==0){at.x+=radius*std::sin(yaw);at.y-=radius*std::cos(yaw)*ActorGroundSquash;}
+    const V point=toWorld(at);
+    Enemy actor{500+i,i?BellKeeper:PeatToad,point,point,100,100};
+    auto& motion=actor.animation;
+    motion.facingInitialized=motion.motionInitialized=true;
+    motion.moving=!casting;
+    motion.phase=pass==1?.24f:pass==2?float(frame)/frames:std::fmod(orbit*radius/(i?83.f:57.f),1.f);
+    motion.moveBlend=casting?0.f:1.f;
+    motion.facingAngle=std::atan2(std::sin(yaw)*ActorGroundSquash,std::cos(yaw));
+    if(casting&&i)actor.abilityAge=enemyAbilityProfile(BellKeeper).duration()*frame/frames;
+    game.enemies.push_back(actor);
+   }
+   prepareLiveWorld();
+   BeginTextureMode(target);ClearBackground(Ink);BeginMode2D({{0,0},{0,0},0,1});
+   native_world::beginOpaqueFrame();drawWorld();native_world::finishOpaqueBackground();actor_art::finishShadowFrame();
+   EndMode2D();EndTextureMode();
+   Image image=LoadImageFromTexture(target.texture);
+   ImageFlipVertical(&image);ImageCrop(&image,{242,262,586,279});
+   passed=ExportImage(image,(output/names[pass]/TextFormat("%03d.png",frame)).string().c_str());
+   UnloadImage(image);
+  }
+ }
+ std::ofstream(output/"review-seconds.txt")<<GetTime()-start;
+ UnloadRenderTexture(target);
+ return passed;
+}
+
+bool runGraphicsQA(const char* marshReview=nullptr){
  fs::create_directories("qa-v21");std::ofstream report("qa-v21/graphics-tests.txt");int checks=0,failures=0;
  auto check=[&](bool ok,const char* label){checks++;failures+=!ok;report<<(ok?"PASS: ":"FAIL: ")<<label<<'\n';report.flush();};
  check(marsh_art::floorReady,"marsh terrain shader compiles and binds shoreline, peat, map size and time on this GPU");
@@ -864,6 +1002,8 @@ bool runGraphicsQA(){
   check(opaque>25&&clipped==0,"detailed item icon is visible and fits inside backpack bounds");
   UnloadImageColors(pixels);UnloadImage(im);UnloadRenderTexture(itemSample);
  }
+ if(marshReview&&*marshReview)
+  check(captureMarshRig(fs::path(marshReview)),"captured walking, turning and bell casting directly in the world renderer");
  game=Game{};welcome=help=paused=audioOpen=statsOpen=skillsOpen=spellBookOpen=false;mouse={0,0};dragging={};refreshDisplayLayout();
  game.messageTime=0;renderScene();BeginDrawing();presentCanvas();Image actual=presentedImage();ExportImage(actual,"qa-v21/detailed-forest.png");ExportImage(actual,"qa-v24/hero/forest.png");UnloadImage(actual);EndDrawing();finishFramePacing();
  report<<"Checks: "<<checks<<"; failures: "<<failures<<'\n';return failures==0;
